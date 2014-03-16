@@ -1,0 +1,99 @@
+.icon-blank {
+    background: url('../Image/icons/blank.gif') no-repeat center center;
+}
+
+.icon-add {
+    background: url('../Image/icons/edit_add.png') no-repeat center center;
+}
+
+.icon-edit {
+    background: url('../Image/icons/pencil.png') no-repeat center center;
+}
+
+.icon-remove {
+    background: url('../Image/icons/edit_remove.png') no-repeat center center;
+}
+
+.icon-save {
+    background: url('../Image/icons/filesave.png') no-repeat center center;
+}
+
+.icon-cut {
+    background: url('../Image/icons/cut.png') no-repeat center center;
+}
+
+.icon-ok {
+    background: url('../Image/icons/ok.png') no-repeat center center;
+}
+
+.icon-no {
+    background: url('../Image/icons/no.png') no-repeat center center;
+}
+
+.icon-cancel {
+    background: url('../Image/icons/cancel.png') no-repeat center center;
+}
+
+.icon-reload {
+    background: url('../Image/icons/reload.png') no-repeat center center;
+}
+
+.icon-search {
+    background: url('../Image/icons/search.png') no-repeat center center;
+}
+
+.icon-print {
+    background: url('../Image/icons/print.png') no-repeat center center;
+}
+
+.icon-help {
+    background: url('../Image/icons/help.png') no-repeat center center;
+}
+
+.icon-undo {
+    background: url('../Image/icons/undo.png') no-repeat center center;
+}
+
+.icon-redo {
+    background: url('../Image/icons/redo.png') no-repeat center center;
+}
+
+.icon-back {
+    background: url('../Image/icons/back.png') no-repeat center center;
+}
+
+.icon-sum {
+    background: url('../Image/icons/sum.png') no-repeat center center;
+}
+
+.icon-tip {
+    background: url('../Image/icons/tip.png') no-repeat center center;
+}
+
+.icon-mini-add {
+    background: url('../Image/icons/mini_add.png') no-repeat center center;
+}
+
+.icon-mini-edit {
+    background: url('../Image/icons/mini_edit.png') no-repeat center center;
+}
+
+.icon-mini-refresh {
+    background: url('../Image/icons/mini_refresh.png') no-repeat center center;
+}
+
+.icon-Delete {
+    background: url('../Image/icons/cross.png') no-repeat center center;
+}
+
+.icon-App {
+    background: url('../Image/icons/application.png') no-repeat center center;
+}
+
+.icon-Section {
+    background: url('../Image/icons/Section.png') no-repeat center center;
+}
+
+.icon-Node {
+    background: url('../Image/icons/node.png') no-repeat center center;
+}

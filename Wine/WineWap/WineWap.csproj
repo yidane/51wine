@@ -1,0 +1,193 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{FE338E52-F434-4555-8583-80EB255825C0}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WineWap</RootNamespace>
+    <AssemblyName>WineWap</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <TargetFrameworkProfile />
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.4.5.6\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="GetWineData.asmx" />
+    <Content Include="Global.asax" />
+    <Content Include="HtmlPage1.html" />
+    <Content Include="Image\0493cbad2dc545d298d615ef340d3dfa.jpg" />
+    <Content Include="Image\075675274fbe439dba87e9bdab15d761.jpg" />
+    <Content Include="Image\1409c656a94a4895b8cfc6d3a4484f67.jpg" />
+    <Content Include="Image\1b23ca7316084e4abf4e7e66198f6d05.jpg" />
+    <Content Include="Image\1ea8821329224fadade9d0c2d189c199.jpg" />
+    <Content Include="Image\2265013ee9dc454a9c6e51d3b5793f25.jpg" />
+    <Content Include="Image\260237c7971a459e99a4a18c1fa5d17c.jpg" />
+    <Content Include="Image\2bd55484a3c04712a1bf887b8e0ce1d3.jpg" />
+    <Content Include="Image\2e743a3db071427bbfc303474791db6c.jpg" />
+    <Content Include="Image\3e2005965adc44adac6d417815a9b34c.jpg" />
+    <Content Include="Image\472327127abc4ba3aadbb0a9609f7b3a.jpg" />
+    <Content Include="Image\50ce922abe1b4623bd352990a46862c8.jpg" />
+    <Content Include="Image\5694b08c743641278f7631a7c3cd7e31.jpg" />
+    <Content Include="Image\569fb4bb55b74f8f9d7b72209fdee50e.jpg" />
+    <Content Include="Image\5890712f1f60418c961c384ba65769b2.jpg" />
+    <Content Include="Image\63bac9fec50d40418f771b2ac606f1bd.jpg" />
+    <Content Include="Image\67b1135221604d1492a6e04aece4e5d2.jpg" />
+    <Content Include="Image\684ba8bea42f4887b10e5ed56cec3158.jpg" />
+    <Content Include="Image\717a080abec34eddb2e54c9b3c130b28.jpg" />
+    <Content Include="Image\742018fdfd8f4313a0789362ad093308.jpg" />
+    <Content Include="Image\80251743bb9541cfbcf561b4ec6a8b7f.jpg" />
+    <Content Include="Image\8afaf304931749efa5d058bdce5c09a1.jpg" />
+    <Content Include="Image\8f9d355a79ab4bd9a7d961810d4bae97.jpg" />
+    <Content Include="Image\8fd687edfada491f818a46ea62a1bfe6.jpg" />
+    <Content Include="Image\935f34121d134afcb3b63b5aa657b082.jpg" />
+    <Content Include="Image\9b917cb3451d4b73807ec8abbeabdfe7.jpg" />
+    <Content Include="Image\9d46f3426d1e473b9793b4f420681b22.jpg" />
+    <Content Include="Image\b0035535bf4b44c5875d118966c8b0c5.jpg" />
+    <Content Include="Image\b1b9f796f2074f878777c61f98e4e5ee.jpg" />
+    <Content Include="Image\baijiu.jpg" />
+    <Content Include="Image\bb2c76ccef674e868071721c4ed77797.jpg" />
+    <Content Include="Image\bec34ea0358d497f9d6b512f29fbb729.jpg" />
+    <Content Include="Image\c4949857d3764ff2866858ed3ca65b62.jpg" />
+    <Content Include="Image\c55f479307514fca96aeee18d36b8591.jpg" />
+    <Content Include="Image\d3d33e14ef864581bf40fbd3919c68ee.jpg" />
+    <Content Include="Image\d7661c88bb0c48f991fddfd797d665cc.jpg" />
+    <Content Include="Image\d8d82d9896eb41158790df5e78ed50bf.jpg" />
+    <Content Include="Image\db6caa890f1540e4a49028b6de80b97b.jpg" />
+    <Content Include="Image\ece8e1a5e77449edaf1c6381802d6b0e.jpg" />
+    <Content Include="Image\f894c35a5761452caddc300c866363f3.jpg" />
+    <Content Include="Image\f91e86d53f7d44e4ba58acdc319dea78.jpg" />
+    <Content Include="Image\fb282ed8c6594e0b8db206a1c125b1be.jpg" />
+    <Content Include="Image\putaojiu.jpg" />
+    <Content Include="Image\yangjiu.jpg" />
+    <Content Include="index.html" />
+    <Content Include="Javascript\base.js" />
+    <Content Include="Javascript\jquery-1.6.2.min.js" />
+    <Content Include="Javascript\jquery.autocomplete.js" />
+    <Content Include="Javascript\jquery.flexslider-min.js" />
+    <Content Include="Javascript\jquery.mobile-1.4.1.min.js" />
+    <Content Include="Javascript\jquery.touchScroll.js" />
+    <Content Include="Javascript\m_code.js" />
+    <Content Include="Javascript\slides.min.jquery.js" />
+    <Content Include="Styles\flexslider.css" />
+    <Content Include="Styles\foot.css" />
+    <Content Include="Styles\home.css" />
+    <Content Include="Styles\jquery.mobile-1.4.1.min.css" />
+    <Content Include="Styles\jx\category.css" />
+    <Content Include="Styles\jx\foot.css" />
+    <Content Include="Styles\jx\head.css" />
+    <Content Include="Styles\jx\reset.css" />
+    <Content Include="Styles\reset.css" />
+    <Content Include="tt.html" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="WineList.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="class\GrapManager.cs" />
+    <Compile Include="class\WineDataCache.cs" />
+    <Compile Include="class\WineManager.cs" />
+    <Compile Include="GetWineData.asmx.cs">
+      <DependentUpon>GetWineData.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\PublishProfiles\1.pubxml" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup />
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:49679/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

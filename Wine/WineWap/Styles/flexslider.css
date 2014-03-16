@@ -1,0 +1,108 @@
+.flex-container a:active {
+	
+}
+.flexslider a:active {
+	
+}
+.flex-container a:focus {
+	
+}
+.flexslider a:focus {
+	
+}
+.slides {
+	list-style: none; margin: 0px; padding: 0px;
+}
+.flex-control-nav {
+	list-style: none; margin: 0px; padding: 0px;
+}
+.flex-direction-nav {
+	list-style: none; margin: 0px; padding: 0px;
+}
+.flexslider {
+	margin: 0px; padding: 0px;
+}
+.flexslider .slides > li {
+	-webkit-backface-visibility: hidden;
+}
+.flexslider .slides img {
+	display: block; max-width: 100%;
+}
+.flex-pauseplay span {
+	text-transform: capitalize;
+}
+.slides::after {
+	height: 0px; line-height: 0; clear: both; display: block; visibility: hidden; content: ".";
+}
+html[xmlns] .slides {
+	display: block;
+}
+* html .slides {
+	height: 1%;
+}
+.no-js .slides > li:first-child {
+	display: block;
+}
+.flexslider {
+	background: rgb(255, 255, 255); border-radius: 5px; position: relative; -ms-zoom: 1; -webkit-border-radius: 5px; -moz-border-radius: 5px; -o-border-radius: 5px;
+}
+.flexslider .slides {
+	-ms-zoom: 1;
+}
+.flexslider .slides > li {
+	position: relative;
+}
+.flex-container {
+	position: relative; -ms-zoom: 1;
+}
+.flex-caption {
+	-ms-zoom: 1;
+}
+.flex-caption {
+	background: rgba(0, 0, 0, 0.5); margin: 0px; padding: 2%; left: 0px; width: 96%; bottom: 0px; color: rgb(255, 255, 255); line-height: 18px; font-size: 14px; position: absolute; text-shadow: 0px -1px 0px rgba(0,0,0,0.3);
+}
+.flex-direction-nav {
+	height: 0px;
+}
+.flex-direction-nav li a {
+	margin: -13px 0px 0px; top: 50%; width: 26px; height: 26px; text-indent: -999em; display: block; position: absolute; cursor: pointer;
+}
+.flex-direction-nav li .next {
+	background-position: -30px 0px; right: 0px;
+}
+.flex-direction-nav li .prev {
+	left: 0px;
+}
+.flex-direction-nav li .disabled {
+	cursor: default; opacity: 0.3;
+}
+.flex-control-nav {
+	width: 100%; text-align: center; bottom: -2px; position: absolute;
+}
+.flex-control-nav li {
+	margin: 0px 0px 0px 10px; display: inline-block; -ms-zoom: 1;
+}
+.flex-control-nav li:first-child {
+	margin: 0px;
+}
+.flex-control-nav li a {
+	border-radius: 50%; width: 10px; height: 10px; text-indent: -999em; display: block; cursor: pointer; background-color: rgb(178, 174, 171);
+}
+.flex-control-nav li a:hover {
+	background-position: 0px -13px;
+}
+.flex-control-nav li a.active {
+	background-position: 0px -26px; cursor: default; background-color: rgb(214, 0, 8);
+}
+@media all and (max-width:640px)
+{
+.flexslider .slides img {
+	width: 320px; height: 140px; overflow: hidden;
+}
+}
+@media all and (min-width:641px)
+{
+.flexslider .slides img {
+	width: 640px; height: 280px; overflow: hidden;
+}
+}

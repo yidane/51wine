@@ -1,0 +1,111 @@
+body {
+	color: rgb(99, 99, 99);
+}
+a {
+	color: rgb(99, 99, 99);
+}
+.foot i {
+	background: url("/images/icon/foot.png") no-repeat; vertical-align: top; display: inline-block;
+}
+.foot a {
+	display: inline-block;
+}
+.foot .jump {
+	padding-bottom: 20px; background-color: rgb(249, 249, 249) !important;
+}
+@media all and (max-width:640px)
+{
+.foot .nav {
+	margin: 0px auto; width: 300px;
+}
+.foot .version {
+	margin: 0px auto; width: 300px;
+}
+.foot .nav a {
+	width: 70px; margin-right: 6px;
+}
+.foot .nav a.home {
+	margin-right: 7px;
+}
+.foot .nav a.cart {
+	margin-right: 0px; margin-left: 1px;
+}
+}
+@media all and (min-width:641px)
+{
+.foot .nav {
+	margin: 0px auto; width: 470px;
+}
+.foot .nav a {
+	width: 110px; margin-right: 10px;
+}
+.foot .nav a.cart {
+	margin-right: 0px;
+}
+}
+.foot .bottom {
+	padding: 0px; height: 36px; text-align: inherit; line-height: 36px; border-top-color: currentColor; border-bottom-color: rgb(202, 202, 202); border-top-width: medium; border-bottom-width: 1px; border-top-style: none; border-bottom-style: solid; background-image: none; background-attachment: scroll; background-repeat: repeat; background-size: auto; background-origin: padding-box; background-clip: border-box; background-color: rgb(234, 234, 234) !important; -webkit-box-shadow: none;
+}
+.foot .bottom .inner {
+	margin: 0px auto; border: currentColor; width: 300px; overflow: hidden; position: inherit;
+}
+.foot .bottom a {
+	width: 70px; height: 36px; line-height: 36px;
+}
+.foot .bottom .back {
+	padding: 0px 5px; text-align: left; margin-top: 0px; margin-bottom: 0px; margin-left: 0px; float: none;
+}
+.foot .bottom .download {
+	width: 125px; padding-left: 10px; background-color: transparent;
+}
+.foot .bottom i {
+	height: 18px;
+}
+.foot .bottom .btn-back i {
+	margin: 9px 5px auto 10px; width: 11px;
+}
+.foot .bottom .download i {
+	background-position: -16px 0px; margin: 9px auto auto 8px; width: 18px;
+}
+.foot .bottom .btn-top i {
+	background-position: -39px 0px; margin: 13px auto auto 5px; width: 18px;
+}
+.foot .nav {
+	padding-top: 10px; margin-bottom: 7px;
+}
+.foot .nav a {
+	padding: 0px; border-radius: 0px; height: 30px; text-align: center; line-height: 30px; margin-bottom: 0px; float: left; display: inline-block; position: inherit; background-color: rgb(220, 220, 220) !important;
+}
+.foot .nav a.cart {
+	top: 0px; right: 0px; position: relative;
+}
+.foot .nav .cart .ctip {
+	margin: 0px; padding: 3px; border-radius: 25px; border: currentColor; top: -9px; right: 5px; color: white; line-height: 9px; font-family: sans-serif; font-size: 9px; font-weight: bold; position: absolute; box-shadow: none; background-color: red;
+}
+.foot .nav i {
+	margin: 9px 5px auto auto; width: 14px; height: 14px;
+}
+.foot .nav .home i {
+	background-position: 0px -24px;
+}
+.foot .nav .category i {
+	background-position: -18px -24px;
+}
+.foot .nav .user i {
+	background-position: -37px -24px; height: 15px; margin-top: 7px;
+}
+.foot .nav .cart i {
+	background-position: -56px -24px;
+}
+.foot .version {
+	text-align: center; margin-bottom: 8px;
+}
+.foot .version a {
+	margin-right: 20px;
+}
+.foot .version .pc {
+	margin-right: 0px;
+}
+.foot .recommend {
+	text-align: center;
+}

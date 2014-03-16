@@ -1,0 +1,271 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{A43E8017-7D52-4090-AEA6-3C5969191A2A}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WineWeb</RootNamespace>
+    <AssemblyName>WineWeb</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <TargetFrameworkProfile />
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.4.5.6\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.4.0.20710.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.4.0.20710.0\lib\net40\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.4.0.20710.0\lib\net40\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="admin\addGoods.aspx" />
+    <Content Include="Config\UserMenu.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Image\1.png" />
+    <Content Include="Image\10.png" />
+    <Content Include="Image\2.png" />
+    <Content Include="Image\3.png" />
+    <Content Include="Image\4.png" />
+    <Content Include="Image\5.png" />
+    <Content Include="Image\bg_repeat.png" />
+    <Content Include="Image\button.gif" />
+    <Content Include="Image\clock.png" />
+    <Content Include="Image\cog.png" />
+    <Content Include="Image\config.png" />
+    <Content Include="Image\eye.png" />
+    <Content Include="Image\icons\application.png" />
+    <Content Include="Image\icons\back.png" />
+    <Content Include="Image\icons\blank.gif" />
+    <Content Include="Image\icons\cancel.png" />
+    <Content Include="Image\icons\cross.png" />
+    <Content Include="Image\icons\cut.png" />
+    <Content Include="Image\icons\edit_add.png" />
+    <Content Include="Image\icons\edit_remove.png" />
+    <Content Include="Image\icons\filesave.png" />
+    <Content Include="Image\icons\help.png" />
+    <Content Include="Image\icons\mini_add.png" />
+    <Content Include="Image\icons\mini_edit.png" />
+    <Content Include="Image\icons\mini_refresh.png" />
+    <Content Include="Image\icons\no.png" />
+    <Content Include="Image\icons\node.png" />
+    <Content Include="Image\icons\ok.png" />
+    <Content Include="Image\icons\pencil.png" />
+    <Content Include="Image\icons\print.png" />
+    <Content Include="Image\icons\redo.png" />
+    <Content Include="Image\icons\reload.png" />
+    <Content Include="Image\icons\search.png" />
+    <Content Include="Image\icons\Section.png" />
+    <Content Include="Image\icons\sum.png" />
+    <Content Include="Image\icons\tip.png" />
+    <Content Include="Image\icons\undo.png" />
+    <Content Include="Image\login_bg.gif" />
+    <Content Include="Image\logo.png" />
+    <Content Include="Image\n4.png" />
+    <Content Include="Image\org.png" />
+    <Content Include="Image\tab_delete_ico.png" />
+    <Content Include="Index.aspx" />
+    <Content Include="Javascript\easyui-lang-zh_CN.js" />
+    <Content Include="Javascript\index.js" />
+    <Content Include="Javascript\jquery.easyui.min.js" />
+    <Content Include="Javascript\jquery.min.js" />
+    <Content Include="Login.aspx" />
+    <Content Include="Services\UserService.asmx" />
+    <Content Include="Style\gray\accordion.css" />
+    <Content Include="Style\gray\calendar.css" />
+    <Content Include="Style\gray\combo.css" />
+    <Content Include="Style\gray\combobox.css" />
+    <Content Include="Style\gray\datagrid.css" />
+    <Content Include="Style\gray\datebox.css" />
+    <Content Include="Style\gray\dialog.css" />
+    <Content Include="Style\gray\easyui.css" />
+    <Content Include="Style\gray\images\accordion_arrows.png" />
+    <Content Include="Style\gray\images\blank.gif" />
+    <Content Include="Style\gray\images\calendar_arrows.png" />
+    <Content Include="Style\gray\images\combo_arrow.png" />
+    <Content Include="Style\gray\images\datagrid_icons.png" />
+    <Content Include="Style\gray\images\datebox_arrow.png" />
+    <Content Include="Style\gray\images\layout_arrows.png" />
+    <Content Include="Style\gray\images\linkbutton_bg.png" />
+    <Content Include="Style\gray\images\loading.gif" />
+    <Content Include="Style\gray\images\menu_arrows.png" />
+    <Content Include="Style\gray\images\messager_icons.png" />
+    <Content Include="Style\gray\images\pagination_icons.png" />
+    <Content Include="Style\gray\images\panel_tools.png" />
+    <Content Include="Style\gray\images\searchbox_button.png" />
+    <Content Include="Style\gray\images\slider_handle.png" />
+    <Content Include="Style\gray\images\spinner_arrows.png" />
+    <Content Include="Style\gray\images\tabs_icons.png" />
+    <Content Include="Style\gray\images\tree_icons.png" />
+    <Content Include="Style\gray\images\validatebox_warning.png" />
+    <Content Include="Style\gray\layout.css" />
+    <Content Include="Style\gray\linkbutton.css" />
+    <Content Include="Style\gray\menu.css" />
+    <Content Include="Style\gray\menubutton.css" />
+    <Content Include="Style\gray\messager.css" />
+    <Content Include="Style\gray\pagination.css" />
+    <Content Include="Style\gray\panel.css" />
+    <Content Include="Style\gray\progressbar.css" />
+    <Content Include="Style\gray\propertygrid.css" />
+    <Content Include="Style\gray\searchbox.css" />
+    <Content Include="Style\gray\slider.css" />
+    <Content Include="Style\gray\spinner.css" />
+    <Content Include="Style\gray\splitbutton.css" />
+    <Content Include="Style\gray\tabs.css" />
+    <Content Include="Style\gray\tooltip.css" />
+    <Content Include="Style\gray\tree.css" />
+    <Content Include="Style\gray\validatebox.css" />
+    <Content Include="Style\gray\window.css" />
+    <Content Include="Style\icon.css" />
+    <Content Include="Style\index.css" />
+    <Content Include="WeixinWebAPI\PostMessage.aspx" />
+    <Content Include="WeixinWebAPI\Test.aspx" />
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="admin\addGoods.aspx.cs">
+      <DependentUpon>addGoods.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\addGoods.aspx.designer.cs">
+      <DependentUpon>addGoods.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Index.aspx.cs">
+      <DependentUpon>Index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Index.aspx.designer.cs">
+      <DependentUpon>Index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Services\UserService.asmx.cs">
+      <DependentUpon>UserService.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="WeixinWebAPI\PostMessage.aspx.cs">
+      <DependentUpon>PostMessage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WeixinWebAPI\PostMessage.aspx.designer.cs">
+      <DependentUpon>PostMessage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WeixinWebAPI\Test.aspx.cs">
+      <DependentUpon>Test.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WeixinWebAPI\Test.aspx.designer.cs">
+      <DependentUpon>Test.aspx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Weixin\Weixin.csproj">
+      <Project>{66caf6cc-8f19-4971-bf91-7d8e182e1491}</Project>
+      <Name>Weixin</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:59613/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

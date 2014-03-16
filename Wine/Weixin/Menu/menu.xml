@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<MenuList>
+  <Menu>
+    <type>click</type>
+    <name>今日优惠</name>
+    <key>jryh</key>
+    <sub_button></sub_button>
+  </Menu>
+  <Menu>
+    <type>click</type>
+    <name>最近活动</name>
+    <key>zjhd</key>
+    <sub_button></sub_button>
+  </Menu>
+  <Menu>
+    <type></type>
+    <name>分类浏览</name>
+    <key></key>
+    <sub_button>
+      <Menu>
+        <type>view</type>
+        <name>白酒</name>
+        <key>bj</key>
+        <url>http://www.baidu.com</url>
+        <sub_button></sub_button>
+      </Menu>
+      <Menu>
+        <type>view</type>
+        <name>啤酒</name>
+        <key>pj</key>
+        <url>http://www.baidu.com</url>
+        <sub_button></sub_button>
+      </Menu>
+      <Menu>
+        <type>view</type>
+        <name>葡萄酒</name>
+        <key>bj</key>
+        <url>http://www.baidu.com</url>
+        <sub_button></sub_button>
+      </Menu>
+    </sub_button>
+  </Menu>
+</MenuList>
