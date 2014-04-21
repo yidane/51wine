@@ -231,9 +231,9 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="..\Weixin\Weixin.csproj">
+    <ProjectReference Include="..\Weixin\Wine.Weixin.csproj">
       <Project>{66caf6cc-8f19-4971-bf91-7d8e182e1491}</Project>
-      <Name>Weixin</Name>
+      <Name>Wine.Weixin</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
