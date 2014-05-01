@@ -1,0 +1,373 @@
+﻿@charset "utf-8";
+
+body {
+    background-color: #f9f9f9!important;
+}
+/*购物车为空begin*/
+.null img {
+    display: block;
+    width: 102px;
+    height: 102px;
+    margin: 100px auto 20px;
+}
+
+.null p {
+    text-align: center;
+    font-size: 18px;
+}
+
+.null a {
+    display: block;
+    width: 60%;
+    height: 40px;
+    margin: 20px auto 30px;
+    background-color: #ea5a52;
+    color: #fff;
+    font-size: 16px;
+    line-height: 40px;
+    text-align: center;
+    border-radius: 7px;
+}
+/*购物车为空end*/
+
+/*购买统计begin*/
+.cart .account {
+    height: 45px;
+    border-bottom: 1px solid #cacacc;
+}
+
+.account .num {
+    float: left;
+    display: inline-block;
+}
+
+.account .location {
+    float: right;
+    display: inline-block;
+}
+
+.account span {
+    vertical-align: top;
+    display: inline-block;
+    margin-top: 13px;
+    font-size: 15px;
+}
+
+.num .all {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    border: 1px solid #d12914;
+    border-radius: 3px;
+    margin: 13px 10px auto 12px;
+}
+
+    .num .all.on, .list .single.on {
+        background: url(/images/icon/cart-icons.png) no-repeat -30px 0;
+    }
+
+.location select {
+    width: 82px;
+    height: 25px;
+    margin-top: 10px;
+    padding: 2px 0;
+    outline: none;
+    margin-right: 3px;
+    font-family: 微软雅黑;
+}
+/*购买统计end*/
+
+/*购物车商品列表begin*/
+.list {
+    width: 90%;
+    margin: 0 auto 20px;
+}
+
+    .list li {
+        height: 80px;
+        position: relative;
+        top: 0;
+        left: 0;
+        overflow: hidden;
+        border-bottom: 1px solid #dcdcdc;
+    }
+    /*类型1：普通商品begin*/
+    .list .single {
+        float: left;
+        display: inline-block;
+        width: 18px;
+        height: 18px;
+        border: 1px solid #d8d8d8;
+        border-radius: 3px;
+        margin-top: 30px;
+    }
+
+    .list .img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 90%;
+        height: 80px;
+        margin-left: 30px;
+    }
+
+        .list .img img {
+            width: 60px;
+            height: 60px;
+            margin-top: 10px;
+        }
+
+    .list .info {
+        float: left;
+        display: inline-block;
+        width: 45%;
+        overflow: hidden;
+        margin-left: 80px;
+        margin-top: 8px;
+    }
+
+.info .name {
+    height: 42px;
+    overflow: hidden;
+}
+
+.info .edit {
+    position: relative;
+    top: 0;
+    left: 0;
+    z-index: 9;
+    float: left;
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.edit input {
+    float: left;
+    display: inline-block;
+    outline: none;
+}
+
+.edit .minus, .edit .plus {
+    width: 15px;
+    height: 20px;
+    border: 1px solid #d9d9db;
+}
+
+.edit .number {
+    width: 40px;
+    height: 20px;
+    text-align: center;
+    border-top: 1px solid #d9d9db;
+    border-bottom: 1px solid #d9d9db;
+}
+
+.list .promo {
+    margin-top: 20px;
+    float: right;
+    display: inline-block;
+    text-align: right;
+}
+
+.promo .jx {
+    color: #e9473d;
+    font-size: 16px;
+}
+
+.promo .market {
+    color: #a5a5a5;
+    font-size: 12px;
+    text-decoration: line-through;
+}
+
+.tags {
+    margin-top: -10px;
+    width: 50px;
+    height: 20px;
+    overflow: hidden;
+}
+
+.tag {
+    width: 20px;
+    height: 20px;
+    float: right;
+    display: inline-block;
+    vertical-align: top;
+    margin: 0 2px;
+    border-radius: 5px;
+    color: #fff;
+    text-align: center;
+}
+/*类型1：普通商品end*/
+
+/*类型2：特殊活动商品begin*/
+.title {
+    display: block;
+    width: 100%;
+    height: 30px;
+    background-color: #f7dcd5;
+    color: #eb8573;
+    text-align: center;
+    line-height: 30px;
+}
+
+.ad-arrow {
+    float: right;
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    background: url(/images/icon/cart-icons.png) no-repeat -30px -20px;
+}
+
+.list .jjg {
+    height: 110px;
+}
+
+    .list .jjg .img {
+        top: 30px;
+    }
+
+.title .tip {
+    color: #686a6d;
+    float: left;
+    display: inline-block;
+    margin-left: 10px;
+}
+
+.list .db {
+    border-bottom: none;
+}
+
+.list #db {
+    position: relative;
+    top: 0;
+    left: 0;
+    border-bottom: 1px solid #dcdcdc;
+}
+
+#db .info {
+    margin-left: 100px;
+    margin-top: 20px;
+}
+
+#db {
+    position: relative;
+    top: 0;
+    left: 0;
+}
+
+    #db .frame-tick {
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        top: 50%;
+        left: 0;
+    }
+
+    #db .single {
+        margin-top: 0;
+        position: absolute;
+        top: -50%;
+        left: 0;
+        z-index: 9;
+    }
+
+    #db .frame-price {
+        width: 70px;
+        height: 80px;
+        position: absolute;
+        top: 50%;
+        right: 0;
+    }
+
+    #db .edit {
+        position: absolute;
+        width: 65px;
+        right: 0;
+        top: -40%;
+        z-index: 9;
+    }
+
+        #db .edit .number {
+            width: 30px;
+        }
+
+    #db .promo {
+        position: absolute;
+        width: 75px;
+        right: 0;
+        top: -25%;
+    }
+
+#zp .info {
+    margin-top: 15px;
+}
+
+#zp .zeng {
+    margin-top: 30px;
+    float: left;
+}
+
+.lack {
+    color: #e9473d;
+}
+
+#normal .lack {
+    float: left;
+    display: inline-block;
+}
+/*类型2：特殊活动商品end*/
+/*购物车商品列表end*/
+
+/*编辑购物车begin*/
+.delete {
+    display: block;
+    margin-top: 10px;
+}
+
+    .delete span {
+        width: 14px;
+        height: 17px;
+        background: url(/images/icon/base-icon.png) no-repeat -97px -82px;
+        vertical-align: top;
+        margin-top: 2px;
+        margin-right: 7px;
+        display: inline-block;
+    }
+/*编辑购物车end*/
+
+/*商品结算begin*/
+.cash {
+    padding: 10px 20px 20px;
+    border-top: 1px solid #f2f2f2;
+    position: relative;
+    top: 0;
+    left: 0;
+}
+
+    .cash .total {
+        color: #e7493c;
+    }
+
+.total strong {
+    font-size: 18px;
+}
+
+.cash .actual, .cash .coin {
+    color: #69696b;
+}
+
+.cash .pay-btn {
+    width: 88px;
+    height: 24px;
+    border: 1px solid #ed7065;
+    color: #ed7065;
+    font-family: 微软雅黑;
+    line-height: 24px;
+    text-align: center;
+    background-color: #fff;
+    border-radius: 15px;
+    position: absolute;
+    top: 30px;
+    right: 15px;
+}
+/*商品结算end*/

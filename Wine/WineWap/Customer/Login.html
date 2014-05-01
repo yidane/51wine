@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="telephone=no" name="format-detection" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="viewport" content="width=320, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title></title>
+    <link href="../Styles/reset.css" rel="stylesheet" />
+    <link href="../Styles/register.css" rel="stylesheet" />
+    <link href="../Styles/header.css" rel="stylesheet" />
+    <link href="../Styles/foot.css" rel="stylesheet" />
+    <script src="../Javascript/jquery-1.6.2.min.js"></script>
+    <script src="../Javascript/base.js"></script>
+    <!--<script src="../Javascript/jquery.mobile-1.4.1.min.js"></script>-->
+</head>
+<body>
+    <div class="header" id="header">
+        <a class="back" href="javascript:history.back();"></a>
+        <span class="headline">登录</span>
+    </div>
+    <section class="signup">
+        <div class="form">
+            <form method="post" action="" onsubmit="return false;">
+                <ul>
+                    <li>
+                        <input class='tipInput' tiptext='用户名/手机号' type="text" placeholder="" value="" name="loginName" />
+                    </li>
+                    <li>
+                        <input class='password' tar='password' type="text" value="密码" />
+                        <input id='password' type="password" value="" name="password" style='display: none' />
+                    </li>
+                    <li>
+                        <input id='btn_enter' type="submit" class="btn" value="登录" /></li>
+                </ul>
+            </form>
+        </div>
+        <script type='text/javascript'>
+            $(function () {
+                $("#btn_enter").click(function (e) {
+                    e.preventDefault();
+                    var loginName = $("input[name=loginName]").val();
+                    var password = $("input[name=password]").val();
+                    if (loginName == $("input[name=loginName]").attr('tiptext') || loginName == '') {
+                        alert("用户名/手机号不能为空");
+                        return false;
+                    }
+                    if (password == $("input[name=password]").attr('tiptext') || password == '') {
+                        alert("密码不能为空");
+                        return false;
+                    }
+                    $.post(url = '../Services/CustomerService.asmx/Login', data = { accountType: 1, loginName: loginName, password: password }, callback = function (data) {
+                        if (data.IsSucceed) {
+                            var url = getQueryString("url");
+                            document.location.href = url;
+                        } else {
+                            alert(data.ErrorMessage);
+                        }
+                    }, 'JSON')
+                })
+            });
+        </script>
+    </section>
+</body>
+</html>

@@ -13,7 +13,8 @@ namespace WineWeb
 {
     public partial class PostMessage : System.Web.UI.Page
     {
-        string Token = Util.AccessToken;
+        string Token = "";
+        //string Token = Util.AccessToken;
         protected void Page_Load(object sender, EventArgs e)
         {
             string postStr = "";

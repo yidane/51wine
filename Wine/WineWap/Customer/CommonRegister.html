@@ -1,0 +1,87 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="telephone=no" name="format-detection" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="viewport" content="width=320, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title></title>
+    <link href="../Styles/reset.css" rel="stylesheet" />
+    <link href="../Styles/register.css" rel="stylesheet" />
+    <link href="../Styles/header.css" rel="stylesheet" />
+    <link href="../Styles/foot.css" rel="stylesheet" />
+    <script src="../Javascript/jquery-1.6.2.min.js"></script>
+    <script src="../Javascript/base.js"></script>
+    <!--<script src="../Javascript/jquery.mobile-1.4.1.min.js"></script>-->
+</head>
+<body>
+    <div class="header" id="header">
+        <a class="back" href="javascript:history.back();"></a>
+        <span class="headline">注册</span>
+    </div>
+    <section class="signup">
+        <div class="form">
+            <form method="post" action="" onsubmit="return false;">
+                <ul>
+                    <li>
+                        <input class='tipInput' tiptext='用户名/手机号' type="text" placeholder="" value="" name="loginName" />
+                    </li>
+                    <li>
+                        <input class='tipInput' tiptext='昵称' type="text" placeholder="" value="" name="nickName" />
+                    </li>
+                    <li>
+                        <input class='password' tar='password' type="text" value="密码" />
+                        <input id='password' type="password" value="" name="password" style='display: none' />
+                    </li>
+                    <li>
+                        <input class='password' tar='password2' type="text" value="再次输入密码" />
+                        <input id='password2' type="password" value="" name="password2" style='display: none' />
+                    </li>
+                    <li>
+                        <input id='btn_enter' type="submit" class="btn" value="注册" /></li>
+                </ul>
+            </form>
+        </div>
+        <script type='text/javascript'>
+            $(function () {
+                $("#btn_enter").click(function (e) {
+
+                    e.preventDefault();
+                    var loginName = $("input[name=loginName]").val();
+                    var nickName = $("input[name=nickName]").val();
+                    var pw1 = $("input[name=password]").val();
+                    var pw2 = $("input[name=password2]").val();
+                    if (loginName == $("input[name=loginName]").attr('tiptext') || loginName == '') {
+                        alert("用户名/手机号不能为空");
+                        return false;
+                    }
+                    if (nickName == $("input[name=nickName]").attr('tiptext') || nickName == '') {
+                        alert("昵称");
+                        return false;
+                    }
+                    if (pw1 == $("input[name=password]").attr('tiptext') || pw1 == '') {
+                        alert("密码不能为空");
+                        return false;
+                    }
+                    if (pw2 == $("input[name=password2]").attr('tiptext') || pw2 == '') {
+                        alert("再次输入密码");
+                        return false;
+                    }
+                    if (pw1 != pw2) {
+                        alert("两次密码输入不一致");
+                        return false;
+                    }
+                    $.post(url = '../Services/CustomerService.asmx/CommonRegister', data = { loginName: loginName, nickName: nickName, password: pw1, password2: pw2 }, callback = function (data) {
+                        if (data.IsSucceed) {
+                            var ss = getQueryString("name");
+                        } else {
+                            alert(data.ErrorMessage);
+                        }
+                    }, 'JSON')
+                })
+            });
+        </script>
+    </section>
+</body>
+</html>

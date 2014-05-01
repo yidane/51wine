@@ -1,0 +1,178 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="telephone=no" name="format-detection" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="viewport" content="width=320, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link rel="apple-touch-icon-precomposed" href="/images/apple-touch-icon.png" />
+    <title></title>
+    <link href="../Styles/reset.css" rel="stylesheet" />
+    <link href="../Styles/header.css" rel="stylesheet" />
+    <link href="../Styles/foot.css" rel="stylesheet" />
+    <link href="../Styles/productdetail.css" rel="stylesheet" />
+    <link href="../Styles/flexslider.css" rel="stylesheet" />
+    <script src="../Javascript/jquery-1.6.2.min.js"></script>
+    <script src="../Javascript/jquery.flexslider-min.js"></script>
+    <script src="../Javascript/slides.min.jquery.js"></script>
+</head>
+<body>
+    <div class="header" id="header">
+        <a class="back" href="javascript:history.back();"></a>
+        <span class="headline">酒品详情</span>
+        <a class="search" href="/search?r=search"></a>
+    </div>
+    <section class="sp">
+        <div class="product-intro">
+            <div id="cont_show">
+                <script type="text/javascript">
+                    function getQueryString(name) {
+                        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+                        var r = window.location.search.substr(1).match(reg);
+                        if (r != null) return unescape(r[2]); return null;
+                    }
+
+                    $(function () {
+                        $.ajax({
+                            type: "POST",
+                            url: "../Services/MarketService.asmx/QueryWineDetail",
+                            data: { id: getQueryString("id") },
+                            dataType: "json",
+                            success: function (data, flag) {
+                                if (data.IsSucceed) {
+                                    $("#name").html(data.Result.GoodsName);
+                                    $("#img").html("<img src=\"" + data.Result.Pictureurl + "\" />");
+                                    $("#price").html("活动价&nbsp;&nbsp;&nbsp;<strong>&yen;" + data.Result.CurrentPrice + "</strong>");
+                                    $("#marketPrice").html("<strong>&yen;" + data.Result.HistoryPrice + "</strong>");
+                                }
+                                else {
+
+                                }
+                            },
+                            error: function (e, d, s) {
+                            }
+                        });
+
+                        $('.flexslider').flexslider({
+                            animation: "slide",
+                            slideDirection: "horizontal"
+                        });
+                    });
+
+                    function Buy() {
+                        $.ajax({
+                            type: "POST",
+                            url: "../Services/CustomerService.asmx/HasLogin",
+                            dataType: "json",
+                            success: function (data, flag) {
+                                if (data.Result) {
+
+                                }
+                                else {
+                                    var newUrl = "../Customer/Login.html?Url=" + document.location.href;
+                                    document.location.href = newUrl;
+                                }
+                            },
+                            error: function (e, d, s) {
+                            }
+                        });
+                    }
+                </script>
+
+                <div class="show">
+                    <div class="icon">
+                        <a class="no-collect" href="javascript:void();" title="" target="" id='collect'></a>
+                    </div>
+                    <div class="flexslider">
+                        <ul class="slides">
+                            <li class="on" id="img"></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="pro-info">
+                    <p class="pro-name" id="name"></p>
+                    <div class="price clearfix">
+                        <p class="jx-price" id="price"></p>
+                        <p class="market-price" id="marketPrice"></p>
+                    </div>
+                    <div class="goods_number clearfix">
+                        <p class="name">数&nbsp;&nbsp;&nbsp;量</p>
+                        <div class="addForm">
+                            <input type="button" value="-" class="btn" onclick="chgNum(-1);" />
+                            <input type="text" id='prosum' name="prosum" id="" value="1" class="text" />
+                            <input type="button" value="+" class="btn" onclick="chgNum(1);" />
+                        </div>
+                    </div>
+                    <div class='goods_number clearfix'>
+                        <p class="name">配送至</p>
+                        <select name="province" id="select_area">
+                            <option value="2" selected>北京</option>
+                            <option value="3">安徽省</option>
+                            <option value="4">福建省</option>
+                            <option value="5">甘肃省</option>
+                            <option value="6">广东省</option>
+                            <option value="7">广西省</option>
+                            <option value="8">贵州省</option>
+                            <option value="9">海南省</option>
+                            <option value="10">河北省</option>
+                            <option value="11">河南省</option>
+                            <option value="12">黑龙江省</option>
+                            <option value="13">湖北省</option>
+                            <option value="14">湖南省</option>
+                            <option value="15">吉林省</option>
+                            <option value="16">江苏省</option>
+                            <option value="17">江西省</option>
+                            <option value="18">辽宁省</option>
+                            <option value="19">内蒙古省</option>
+                            <option value="20">宁夏</option>
+                            <option value="21">青海省</option>
+                            <option value="22">山东省</option>
+                            <option value="23">山西省</option>
+                            <option value="24">陕西省</option>
+                            <option value="25">上海</option>
+                            <option value="26">四川省</option>
+                            <option value="27">天津</option>
+                            <option value="28">西藏</option>
+                            <option value="29">新疆</option>
+                            <option value="30">云南省</option>
+                            <option value="31">浙江省</option>
+                            <option value="32">重庆</option>
+                            <option value="33">香港</option>
+                            <option value="34">澳门</option>
+                            <option value="35">台湾</option>
+                        </select>
+                        <span id="msg">现货</span>
+                    </div>
+                    <div class="div_but1 clearfix" id='btn2'>
+                        <div class="buy" onclick="chgNum('')">
+                            <a class='ljgm1' name="goods_buy" href="javascript:void()" onclick="Buy()">
+                                <i></i>
+                                立即购买
+                            </a>
+                        </div>
+                        <!--<div class="cart">
+                            <a class='add1' name="goods_cart" href="javascript:void()">
+                                <i></i>
+                                加入购物车
+                            </a>
+                        </div>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script type="text/javascript">
+        function chgNum(a) {
+            var prosum = $("#prosum");
+            var p = parseInt(prosum.val());
+            if (a == 1) {
+                if (p < 1730) prosum.val(++p);
+            }
+            else {
+                if (p > 1) prosum.val(--p);
+            }
+        }
+    </script>
+</body>
+</html>

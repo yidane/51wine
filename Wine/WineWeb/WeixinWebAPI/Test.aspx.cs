@@ -18,23 +18,23 @@ namespace Weixin
 
         protected void btnCreateMenu_Click(object sender, EventArgs e)
         {
-            MenuManager oWeixinManager = new MenuManager();
-            var result = oWeixinManager.CreateMenu();
-            Response.Write(Newtonsoft.Json.JsonConvert.SerializeObject(result));
+            //MenuManager oWeixinManager = new MenuManager();
+            //var result = oWeixinManager.CreateMenu();
+            //Response.Write(Newtonsoft.Json.JsonConvert.SerializeObject(result));
         }
 
         protected void btnDeleteMenu_Click(object sender, EventArgs e)
         {
-            MenuManager oWeixinManager = new MenuManager();
-            var result = oWeixinManager.DeleteMenu();
-            Response.Write(Newtonsoft.Json.JsonConvert.SerializeObject(result));
+            //MenuManager oWeixinManager = new MenuManager();
+            //var result = oWeixinManager.DeleteMenu();
+            //Response.Write(Newtonsoft.Json.JsonConvert.SerializeObject(result));
         }
 
         protected void btnSearchMenu_Click(object sender, EventArgs e)
         {
-            MenuManager oWeixinManager = new MenuManager();
-            var result = oWeixinManager.SearchMenu();
-            Response.Write(Newtonsoft.Json.JsonConvert.SerializeObject(result));
+            //MenuManager oWeixinManager = new MenuManager();
+            //var result = oWeixinManager.SearchMenu();
+            //Response.Write(Newtonsoft.Json.JsonConvert.SerializeObject(result));
         }
     }
 }

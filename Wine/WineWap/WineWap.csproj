@@ -14,7 +14,7 @@
     <RootNamespace>WineWap</RootNamespace>
     <AssemblyName>WineWap</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <UseIISExpress>true</UseIISExpress>
+    <UseIISExpress>false</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -33,6 +33,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -41,11 +42,12 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.4.5.6\lib\net40\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\Libs\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.DynamicData" />
@@ -54,9 +56,9 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
@@ -64,9 +66,14 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="GetWineData.asmx" />
+    <Content Include="Customer\CustomerCenter.html" />
+    <Content Include="Customer\Login.html" />
     <Content Include="Global.asax" />
-    <Content Include="HtmlPage1.html" />
+    <Content Include="Market\Cart.html" />
+    <Content Include="Market\Order.html" />
+    <Content Include="Styles\cart.css" />
+    <Content Include="Styles\productdetail.css" />
+    <Content Include="test\HtmlPage1.html" />
     <Content Include="Image\0493cbad2dc545d298d615ef340d3dfa.jpg" />
     <Content Include="Image\075675274fbe439dba87e9bdab15d761.jpg" />
     <Content Include="Image\1409c656a94a4895b8cfc6d3a4484f67.jpg" />
@@ -111,7 +118,7 @@
     <Content Include="Image\fb282ed8c6594e0b8db206a1c125b1be.jpg" />
     <Content Include="Image\putaojiu.jpg" />
     <Content Include="Image\yangjiu.jpg" />
-    <Content Include="index.html" />
+    <Content Include="test\index.html" />
     <Content Include="Javascript\base.js" />
     <Content Include="Javascript\jquery-1.6.2.min.js" />
     <Content Include="Javascript\jquery.autocomplete.js" />
@@ -120,33 +127,41 @@
     <Content Include="Javascript\jquery.touchScroll.js" />
     <Content Include="Javascript\m_code.js" />
     <Content Include="Javascript\slides.min.jquery.js" />
+    <Content Include="Customer\CommonRegister.html" />
+    <Content Include="Customer\MyOrder.html" />
+    <Content Include="Market\WineDetail.html" />
+    <Content Include="Services\CustomerService.asmx" />
+    <Content Include="Services\MarketService.asmx" />
     <Content Include="Styles\flexslider.css" />
     <Content Include="Styles\foot.css" />
+    <Content Include="Styles\header.css" />
     <Content Include="Styles\home.css" />
     <Content Include="Styles\jquery.mobile-1.4.1.min.css" />
     <Content Include="Styles\jx\category.css" />
     <Content Include="Styles\jx\foot.css" />
     <Content Include="Styles\jx\head.css" />
     <Content Include="Styles\jx\reset.css" />
+    <Content Include="Styles\register.css" />
     <Content Include="Styles\reset.css" />
-    <Content Include="tt.html" />
+    <Content Include="test\tt.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="WineList.html" />
+    <Content Include="Market\WineList.html" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="class\GrapManager.cs" />
-    <Compile Include="class\WineDataCache.cs" />
-    <Compile Include="class\WineManager.cs" />
-    <Compile Include="GetWineData.asmx.cs">
-      <DependentUpon>GetWineData.asmx</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\CustomerService.asmx.cs">
+      <DependentUpon>CustomerService.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Services\MarketService.asmx.cs">
+      <DependentUpon>MarketService.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\PublishProfiles\1.pubxml" />
@@ -156,6 +171,20 @@
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Wine.Infrastructure\Wine.Infrastructure.csproj">
+      <Project>{9f9d0413-26e1-4f65-a4c1-ce31a07d0e75}</Project>
+      <Name>Wine.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Wine.WebServices\Wine.WebServices.csproj">
+      <Project>{08e32bbd-b81c-496c-92df-c2bb6d7a3b3c}</Project>
+      <Name>Wine.WebServices</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Wine\Wine.csproj">
+      <Project>{6f9d3d29-469c-468b-8920-681ea791ff73}</Project>
+      <Name>Wine</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup>
@@ -171,9 +200,9 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerPort>61270</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:49679/</IISUrl>
+          <IISUrl>http://localhost/WineWap</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

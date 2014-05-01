@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Web;
+using Wine;
 
 namespace Weixin.Menu
 {
@@ -14,20 +15,20 @@ namespace Weixin.Menu
         {
             string posturl = string.Format("https://api.weixin.qq.com/cgi-bin/menu/create?access_token={0}", m_Token);
             string postData = Menu.CreateTestMenu();
-            var result = Util.HttpPost(posturl, postData);
+            var result = HttpHelper.HttpPost(posturl, postData);
             return result;
         }
 
         public HttpResult DeleteMenu()
         {
             string getUrl = string.Format("https://api.weixin.qq.com/cgi-bin/menu/delete?access_token={0}", m_Token);
-            return Util.HttpGet(getUrl);
+            return HttpHelper.HttpGet(getUrl);
         }
 
         public HttpResult SearchMenu()
         {
             string getUrl = string.Format("https://api.weixin.qq.com/cgi-bin/menu/get?access_token={0}", m_Token);
-            return Util.HttpGet(getUrl);
+            return HttpHelper.HttpGet(getUrl);
         }
     }
 }

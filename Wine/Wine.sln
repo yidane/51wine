@@ -11,9 +11,19 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wine.Infrastructure", "Wine
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wine.WindowsService", "Wine.WindowsService\Wine.WindowsService.csproj", "{421F4920-0FBF-415D-B067-277B81A7693E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wine.WebFacade", "Wine.WebFacade\Wine.WebFacade.csproj", "{827FB944-B5F9-4027-9C83-8F69BC6C2A64}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wine", "Wine\Wine.csproj", "{6F9D3D29-469C-468B-8920-681EA791FF73}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wine.WebServices", "Wine.WebServices\Wine.WebServices.csproj", "{08E32BBD-B81C-496C-92DF-C2BB6D7A3B3C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wine.WineData", "Wine.WineData\Wine.WineData.csproj", "{B6446C77-D78D-46C5-827C-C1A20C7D07C4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WineUnitTestProject", "WineUnitTestProject\WineUnitTestProject.csproj", "{9C04DC73-1E2F-4588-8ED5-8FEB7962FB8C}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 6
+		SccNumberOfProjects = 11
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs20
 		SccLocalPath0 = .
@@ -32,6 +42,21 @@ Global
 		SccProjectUniqueName5 = Wine.WindowsService\\Wine.WindowsService.csproj
 		SccProjectName5 = Wine.WindowsService
 		SccLocalPath5 = Wine.WindowsService
+		SccProjectUniqueName6 = Wine\\Wine.csproj
+		SccProjectName6 = Wine
+		SccLocalPath6 = Wine
+		SccProjectUniqueName7 = Wine.WebServices\\Wine.WebServices.csproj
+		SccProjectName7 = Wine.WebServices
+		SccLocalPath7 = Wine.WebServices
+		SccProjectUniqueName8 = Wine.WineData\\Wine.WineData.csproj
+		SccProjectName8 = Wine.WineData
+		SccLocalPath8 = Wine.WineData
+		SccProjectUniqueName9 = Wine.WebFacade\\Wine.WebFacade.csproj
+		SccProjectName9 = Wine.WebFacade
+		SccLocalPath9 = Wine.WebFacade
+		SccProjectUniqueName10 = WineUnitTestProject\\WineUnitTestProject.csproj
+		SccProjectName10 = WineUnitTestProject
+		SccLocalPath10 = WineUnitTestProject
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -58,6 +83,26 @@ Global
 		{421F4920-0FBF-415D-B067-277B81A7693E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{421F4920-0FBF-415D-B067-277B81A7693E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{421F4920-0FBF-415D-B067-277B81A7693E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{827FB944-B5F9-4027-9C83-8F69BC6C2A64}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{827FB944-B5F9-4027-9C83-8F69BC6C2A64}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{827FB944-B5F9-4027-9C83-8F69BC6C2A64}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{827FB944-B5F9-4027-9C83-8F69BC6C2A64}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F9D3D29-469C-468B-8920-681EA791FF73}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F9D3D29-469C-468B-8920-681EA791FF73}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F9D3D29-469C-468B-8920-681EA791FF73}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F9D3D29-469C-468B-8920-681EA791FF73}.Release|Any CPU.Build.0 = Release|Any CPU
+		{08E32BBD-B81C-496C-92DF-C2BB6D7A3B3C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08E32BBD-B81C-496C-92DF-C2BB6D7A3B3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08E32BBD-B81C-496C-92DF-C2BB6D7A3B3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08E32BBD-B81C-496C-92DF-C2BB6D7A3B3C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6446C77-D78D-46C5-827C-C1A20C7D07C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6446C77-D78D-46C5-827C-C1A20C7D07C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6446C77-D78D-46C5-827C-C1A20C7D07C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6446C77-D78D-46C5-827C-C1A20C7D07C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C04DC73-1E2F-4588-8ED5-8FEB7962FB8C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C04DC73-1E2F-4588-8ED5-8FEB7962FB8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C04DC73-1E2F-4588-8ED5-8FEB7962FB8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C04DC73-1E2F-4588-8ED5-8FEB7962FB8C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

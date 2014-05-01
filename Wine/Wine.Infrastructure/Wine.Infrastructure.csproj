@@ -9,12 +9,13 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Wine.Infrastructure</RootNamespace>
     <AssemblyName>Wine.Infrastructure</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>
     <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -43,9 +44,35 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="0 Entity\Customer.cs" />
+    <Compile Include="BLL\Commodity\GoodsBLL.cs" />
+    <Compile Include="BLL\Commodity\GoodsType.cs" />
+    <Compile Include="BLL\Commodity\SpecialPriceTypeBLL.cs" />
+    <Compile Include="BLL\User\CustomerBLL.cs" />
+    <Compile Include="DAO\Commodity\GoodsDAO.cs" />
+    <Compile Include="DAO\Commodity\SpecialPriceTypeDAO.cs" />
+    <Compile Include="DAO\User\CustomerDAO.cs" />
+    <Compile Include="DAO\Commodity\GoodsTypeDAO.cs" />
+    <Compile Include="Model\User\Customer.cs" />
+    <Compile Include="DAO\BaseDAO.cs" />
+    <Compile Include="Model\User\CustomerConsigneeInfo.cs" />
+    <Compile Include="Model\Deliver\DeliverRegion.cs" />
+    <Compile Include="Model\Commodity\Goods.cs" />
+    <Compile Include="Model\Commodity\GoodsType.cs" />
+    <Compile Include="Model\Commodity\SpecialPriceType.cs" />
+    <Compile Include="Model\Orders\Order.cs" />
+    <Compile Include="Model\Orders\OrderDetail.cs" />
+    <Compile Include="Model\Orders\OrderType.cs" />
+    <Compile Include="Model\Orders\OrderWorkFlow.cs" />
+    <Compile Include="Model\Orders\OrderWorkFlowRule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Wine\Wine.csproj">
+      <Project>{6f9d3d29-469c-468b-8920-681ea791ff73}</Project>
+      <Name>Wine</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -1,0 +1,198 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="telephone=no" name="format-detection" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="viewport" content="width=320, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title></title>
+    <link href="../Styles/cart.css" rel="stylesheet" />
+    <link href="../Styles/foot.css" rel="stylesheet" />
+    <link href="../Styles/header.css" rel="stylesheet" />
+    <link href="../Styles/reset.css" rel="stylesheet" />
+    <script src="../Javascript/jquery-1.6.2.min.js"></script>
+    <link href="../Styles/register.css" rel="stylesheet" />
+</head>
+<body>
+    <style>
+        .txt {
+            width: 98%;
+            padding-left: 2%;
+            height: 35px;
+            display: block;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            line-height: 35px;
+            color: #a0a0a0;
+        }
+    </style>
+    <div class="header" id="header">
+        <span class="headline">购物车</span>
+    </div>
+
+    <section>
+        <div class="cart">
+            <!-- 购买统计begin -->
+            <div class="account clearfix">
+                <div class="num">
+                    <a class="all" href="javascript:void(0)"></a>
+                    <span>共5件商品</span>
+                </div>
+            </div>
+            <!-- 购买统计end -->
+            <div class="list">
+                <!-- 购物车商品列表begin -->
+                <!-- 类型1：普通/加价购商品begin -->
+                <ul id="normal">
+                    <li class=" clearfix">
+                        <a class="single" href="javascript:void(0)" sku="_19"></a>
+                        <a class="img" href="http://m.jiuxian.com/goods/view/19">
+                            <img src="http://img10.jiuxian.com/2013/1002/5b8b324c103549c981ad9c530fed9d9e7.jpg" /></a>
+                        <div class="info">
+                            <p class="name">法国酒星干红葡萄酒</p>
+                            <div class="choose clearfix">
+                                <div class="edit clearfix">
+                                    <input class="minus" value="-" type="button" />
+                                    <input class="number" name='number' value="1" type="text" />
+                                    <input class="plus" value="+" type="button" />
+                                    <input type="hidden" name="sku" value="_19" />
+                                    <input type="hidden" name="stock" value="674" />
+                                </div>
+                                <p class="lack">有货</p>
+                            </div>
+                        </div>
+                        <div class="promo">
+                            <div class="tags clearfix">
+                                <span class="tag" style="background-color: #20b5eb">降</span>
+                            </div>
+                            <p class="jx">&yen;29</p>
+                            <p class="market">&yen;142</p>
+                        </div>
+                    </li>
+                </ul>
+                <!-- 类型1：普通/加价购商品end -->
+
+                <!-- 编辑购物车begin -->
+                <a class="delete" href="javascript:void(0)"><span></span>删除所选</a>
+                <!-- 编辑购物车end -->
+            </div>
+            <!-- 购物车商品列表end -->
+
+            <div>
+                <ul>
+                    <li>
+                        <input class='txt' tiptext='详细地址' type="text" placeholder="" value="" name="loginName" />
+                    </li>
+                    <li>
+                        <input class='txt' tiptext='邮编' type="text" placeholder="" value="" name="password" />
+                    </li>
+                    <li>
+                        <input class='txt' tiptext='联系手机' type="text" placeholder="" value="" name="password" />
+                    </li>
+                </ul>
+            </div>
+
+            <!-- 商品结算begin -->
+            <div class="cash">
+                <p class="total">总计：<strong>&yen;359</strong></p>
+                <input type="button" class="pay-btn" value="结算" onclick="submit_order()" />
+            </div>
+            <!-- 商品结算end -->
+        </div>
+    </section>
+    <script type="text/javascript">
+        function submit_order() {
+            var url = "http://m.jiuxian.com/cart/clear_wuhuo_gifts";
+            var have_out_gifts = "0";
+            if (have_out_gifts == 0) {
+                window.location = '/order/add';
+            } else {
+                if (confirm("是否删除无货赠品?")) {
+                    $.get(url, { stockout_gifts: have_out_gifts }, function (data) {
+                        if (data == 1) {
+                            window.location = '/order/add';
+                        } else {
+                            alert(data);
+                        }
+                    }, 'TEXT');
+                } else {
+                    //alert(have_out_gifts);
+                    $.get(url, { stockout_gifts: 0 }, function () { }, 'JSON');
+                    return false;
+                }
+            }
+        }
+        $(function () {
+            $('.num .all').toggle(
+                function () { $(this).addClass('on'); $('.list .single').addClass('on'); },
+                function () { $(this).removeClass('on'); $('.list .single').removeClass('on'); }
+            );
+            $('.list .single').toggle(
+                function () { $(this).addClass('on'); },
+                function () { $(this).removeClass('on'); }
+            );
+            var url = "http://m.jiuxian.com/cart/ajax_update";
+            var url2 = "http://m.jiuxian.com/cart/ajax_remove";
+            function cart_update() {
+                var num = "";
+                var rowid = "";
+                $("input[name=number]").each(function () {
+                    num += $(this).val() + ",";
+                })
+                $("input[name=sku]").each(function () {
+                    rowid += $(this).val() + ",";
+                });
+                var s = rowid.substring(0, rowid.length - 1);
+                var n = num.substring(0, num.length - 1);
+                $.get(url, { sku: s, number: n }, function (data) {
+                    if (data.success == 1) {
+                        window.location = '/cart';
+                    }
+                }, 'JSON');
+            }
+            $('.number').blur(function () {
+                cart_update();
+            })
+
+            $('.delete').click(function () {
+                var sku = "";
+                var selectedRows = $('.single');
+                selectedRows.each(function () {
+                    if ($(this).hasClass('on') && $(this).attr('sku') != null) {
+                        sku += $(this).attr('sku') + ",";
+                    }
+                })
+                var s = sku.substring(0, sku.length - 1);
+                $.get(url2, { sku: s }, function (data) {
+                    if (data.success == 1) {
+                        window.location = '/cart';
+                    }
+                }, 'JSON');
+            });
+        });
+
+        $(".edit .minus,.edit .plus").click(function () {
+            var t = $(this).val();
+            var $n = $(this).parent().parent().find(".number");
+            var $v = $n.val();
+            var $stock = $(this).parent().parent().find("input[name=stock]").val();
+            if (t == '-') {
+                if ($v > 1) {
+                    $n.val($v - 1);
+                }
+                else {
+                    $n.val('1');
+                }
+            }
+            else {
+                if (parseInt($v) + 1 > $stock) {
+                    alert("此商品已无货");
+                    return false;
+                }
+                $n.val(parseInt($v) + 1);
+            }
+        });
+    </script>
+</body>
+</html>
