@@ -1,0 +1,351 @@
+﻿@charset "utf-8";
+
+body {
+    background-color: #eee;
+}
+/*订单创建成功页--提示区域begin*/
+.order-creat {
+    width: 91%;
+    margin: 0 auto;
+}
+/*.info{margin-bottom:20px;position:relative;height:270px;}*/
+.info h2 {
+    padding-top: 37px;
+    margin-bottom: 26px;
+    font-size: 18px;
+    text-align: center;
+}
+
+.info .id {
+    margin-bottom: 10px;
+}
+
+    .info .id a {
+        color: #0003f6;
+    }
+
+.info .date {
+    margin-bottom: 17px;
+}
+
+.info .pay-btn {
+    float: right;
+    display: inline-block;
+    margin-bottom: 15px;
+    font-weight: bold;
+    width: 80px;
+    height: 25px;
+    background-color: #e84c3d;
+    line-height: 25px;
+    text-align: center;
+    color: #fff;
+}
+
+.jump .check {
+    text-align: right;
+    margin-bottom: 20px;
+}
+
+.jump .continue {
+    text-align: right;
+    margin-bottom: 14px;
+}
+
+    .jump .continue a {
+        color: #0003f6;
+    }
+/*订单创建成功页--提示区域end*/
+
+/*提交订单页--信息begin*/
+.order-submit {
+    width: 320px;
+    margin: 0 auto;
+    padding-top: 16px;
+}
+
+    .order-submit .choose {
+        width: 300px;
+        margin: 0 auto 10px;
+        color: #333;
+    }
+
+        .order-submit .choose.list {
+            margin-bottom: 20px;
+        }
+
+.choose h2 {
+    font-size: 16px;
+    margin-bottom: 6px;
+}
+
+.choose .content {
+    display: block;
+    width: 300px;
+    background-color: #fff;
+    overflow: hidden;
+    position: relative;
+    top: 0;
+    left: 0;
+}
+
+.content .text {
+    width: 250px;
+    margin: 15px 0 15px 15px;
+    overflow: hidden;
+    float: left;
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+}
+
+.text i {
+    font-style: normal;
+    margin-right: 10px;
+}
+
+.content .arrow {
+    width: 7px;
+    height: 13px;
+    background: url(/images/icon/base-icon.png) no-repeat -106px -25px;
+    vertical-align: top;
+    position: absolute;
+    top: 43%;
+    right: 15px;
+}
+
+.fapiao .content .line1 {
+    display: block;
+    margin-bottom: 3px;
+    overflow: hidden;
+}
+
+.fapiao .content .line2 {
+    display: block;
+    height: 21px;
+    overflow: hidden;
+}
+
+.tip textarea {
+    width: 268px;
+    height: 34px;
+    padding: 7px 15px;
+    color: #999;
+    font-family: 微软雅黑;
+}
+
+.list ul {
+    width: 300px;
+}
+
+.list li {
+    width: 100%;
+    height: 69px;
+    border-bottom: 1px solid #ededed;
+    overflow: hidden;
+    position: relative;
+    top: 0;
+    left: 0;
+    background-color: #fff;
+}
+
+    .list li img {
+        width: 60px;
+        height: 60px;
+        margin: 4px 7px;
+        float: left;
+        display: inline-block;
+        *display: inline;
+        *zoom: 1;
+    }
+
+    .list li .name {
+        color: #999;
+        width: 150px;
+        height: 36px;
+        font-size: 12px;
+        margin-top: 8px;
+        margin-bottom: 3px;
+        overflow: hidden;
+        float: left;
+        display: inline-block;
+    }
+
+    .list li .info {
+        margin-top: 12px;
+        margin-right: 5px;
+        float: right;
+        display: inline-block;
+        *display: inline;
+        *zoom: 1;
+    }
+
+.info .num {
+    text-align: right;
+    color: #777;
+}
+
+.num .price {
+    color: #e84c3d;
+    margin-left: 13px;
+}
+
+.tag-zeng {
+    position: absolute;
+    bottom: 3px;
+    left: 75px;
+    display: block;
+    width: 20px;
+    height: 20px;
+    background-color: #e84c3d;
+    border-radius: 5px;
+    color: #fff;
+    text-align: center;
+}
+
+.list .db {
+    position: relative;
+    top: 0;
+    left: 0;
+    border-bottom: 1px solid #ededed;
+}
+
+    .list .db li {
+        border-bottom: none;
+    }
+
+.db .frame {
+    position: absolute;
+    top: 50%;
+    right: 5px;
+    width: 68px;
+    height: 42px;
+}
+
+    .db .frame .info {
+        position: absolute;
+        top: -50%;
+        right: 0;
+        width: 68px;
+        height: 42px;
+        z-index: 2;
+        text-align: right;
+    }
+
+.list .all {
+    display: block;
+    width: 100%;
+    height: 51px;
+    line-height: 51px;
+    text-align: center;
+    color: #333;
+    background-color: #fff;
+}
+
+    .list .all i {
+        width: 13px;
+        height: 7px;
+        background: url(/images/icon/base-icon.png) no-repeat -18px 0;
+        vertical-align: top;
+        margin-top: 24px;
+        margin-left: 11px;
+        display: inline-block;
+        *display: inline;
+        *zoom: 1;
+    }
+
+.list li.hide {
+    display: none;
+}
+/*提交订单页--信息end*/
+
+/*提交订单页--结算begin*/
+.order-submit .checkout {
+    background-color: #ffedd9;
+    width: 286px;
+    padding: 0 7px;
+    margin: 0 auto 17px;
+}
+
+.checkout .line {
+    border-bottom: 1px dotted #bfb2a3;
+    line-height: 50px;
+    padding-left: 10px;
+    overflow: hidden;
+}
+
+    .checkout .line.decrease {
+        min-height: 50px;
+        max-height: 200px;
+    }
+
+    .checkout .line.count {
+        height: 50px;
+    }
+
+    .checkout .line.total {
+        height: 50px;
+        border-bottom: 0;
+    }
+
+.line .data {
+    height: 50px;
+    color: #4a4a4a;
+    float: left;
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+}
+
+.count.line .data, .total.line .data {
+    width: 138px;
+}
+
+.decrease.line .data {
+    min-width: 138px;
+    white-space: nowrap;
+}
+
+.count.line .data1 {
+    overflow: visible;
+    white-space: nowrap;
+}
+
+.total.line .data1 {
+    width: 100%;
+}
+
+.data strong {
+    font-weight: normal;
+    color: #d43925;
+}
+
+.data i {
+    color: #d43925;
+    width: 10px;
+    text-align: center;
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+}
+
+.data .title {
+    width: 75px;
+    text-align: right;
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+}
+
+.submit {
+    display: block;
+    width: 300px;
+    height: 38px;
+    margin: 0 auto 20px;
+    background-color: #e84c3d;
+    color: #fff;
+    line-height: 38px;
+    text-align: center;
+    letter-spacing: 2px;
+    font-family: 微软雅黑;
+}
+/*提交订单页--结算end*/

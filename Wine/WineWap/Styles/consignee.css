@@ -1,0 +1,226 @@
+﻿@charset "utf-8";
+
+body {
+    background-color: #eee;
+}
+/*收货地址begin*/
+.add {
+    width: 320px;
+    margin: 0 auto;
+}
+
+.null {
+    padding-top: 55px;
+}
+
+    .null p {
+        width: 288px;
+        margin: 0 auto 60px;
+        font-size: 18px;
+        color: #000;
+    }
+
+.btn {
+    color: #fff;
+    background-color: #e84c3d;
+    width: 300px;
+    height: 38px;
+    margin: 0 auto 30px;
+    font-size: 17px;
+    font-family: 微软雅黑;
+    line-height: 38px;
+    text-align: center;
+    display: block;
+}
+
+.add .add-list, .hongbao .ticket {
+    padding-top: 24px;
+    width: 300px;
+    margin: 0 auto;
+}
+
+.add-list .title, .ticket .title {
+    margin-bottom: 6px;
+}
+
+    .add-list .title h2, .ticket .title h2 {
+        font-size: 16px;
+        color: #333;
+        float: left;
+        display: inline-block;
+        *display: inline;
+        *zoom: 1;
+    }
+
+    .add-list .title a, .ticket .title a {
+        font-size: 16px;
+        color: #2273e8;
+        float: right;
+        display: inline-block;
+        *display: inline;
+        *zoom: 1;
+    }
+
+.add-list .list {
+    width: 300px;
+    margin: 0 auto 30px;
+}
+
+    .add-list .list li {
+        background-color: #fff;
+        margin-bottom: 20px;
+        position: relative;
+        top: 0;
+        left: 0;
+    }
+
+    .add-list .list .arrow {
+        width: 7px;
+        height: 13px;
+        background: url(/images/icon/base-icon.png) no-repeat -106px -25px;
+        position: absolute;
+        right: 15px;
+        top: 43%;
+    }
+
+    .add-list .list p {
+        width: 250px;
+        margin: 15px 0 15px 15px;
+        float: left;
+        display: inline-block;
+        *display: inline;
+        *zoom: 1;
+    }
+/*收货地址end*/
+
+/*支付方式begin*/
+.payment, .fapiao {
+    width: 300px;
+    margin: 0 auto;
+    padding-top: 16px;
+}
+
+    .payment h2, .fapiao h2 {
+        font-size: 16px;
+        color: #333;
+        margin-bottom: 6px;
+    }
+
+.choose {
+    margin-bottom: 43px;
+}
+
+    .choose li {
+        width: 300px;
+        height: 50px;
+        border-bottom: 1px solid #ededed;
+        line-height: 52px;
+        color: #333;
+        background-color: #fff;
+    }
+
+        .choose li i {
+            width: 16px;
+            height: 16px;
+            border: 1px solid #d9d9d9;
+            vertical-align: top;
+            margin: 17px 8px auto 14px;
+            display: inline-block;
+            *display: inline;
+            *zoom: 1;
+        }
+
+            .choose li i.on {
+                background: url(/images/icon/base-icon.png) no-repeat -125px -165px;
+                display: inline-block;
+                *display: inline;
+                *zoom: 1;
+            }
+/*支付方式end*/
+
+/*发票begin*/
+.fapiao .choose1 .company {
+    width: 185px;
+    height: 28px;
+    border: 1px solid #ededed;
+    margin-left: 13px;
+    margin-top: 10px;
+    vertical-align: top;
+    line-height: 28px;
+    color: #a5a5a5;
+    font-size: 13px;
+    padding-left: 15px;
+}
+
+.fapiao .choose1 {
+    margin-bottom: 11px;
+}
+
+.fapiao .choose2 {
+    margin-bottom: 20px;
+}
+/*发票end*/
+
+/*红包begin*/
+.hongbao .select {
+}
+
+.select div {
+    height: 50px;
+    line-height: 50px;
+    background-color: #fff;
+    margin-bottom: 15px;
+    padding-left: 15px;
+}
+
+    .select div.pwd {
+        height: 130px;
+        margin-bottom: 25px;
+    }
+
+        .select div.pwd .pwd-area {
+            margin-bottom: 0;
+        }
+
+.select .pwd .forget {
+    display: block;
+    line-height: 21px;
+    padding-left: 19px;
+    text-decoration: underline;
+}
+
+.select div.rest {
+    margin-bottom: 0;
+}
+
+.select .name {
+    /*	width: 75px;*/
+    text-align: right;
+    float: left;
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+}
+
+.select .tip {
+    text-align: center;
+    margin-left: -15px;
+    font-weight: bold;
+    line-height: 40px;
+}
+
+.rest input, .select select, .pwd input {
+    width: 150px;
+    height: 25px;
+    margin-left: 10px;
+    margin-top: 13px;
+    float: left;
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+}
+
+.rest input, .pwd input {
+    border: 1px solid #c7c6c8!important;
+}
+/*红包end*/

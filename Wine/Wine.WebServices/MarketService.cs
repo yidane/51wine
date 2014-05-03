@@ -4,7 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Wine.Infrastructure.Model.Commodity;
+using Wine.Infrastructure.Model.Orders;
 using Wine.WebFacade.Commodity;
+using Wine.WebFacade.Orders;
 
 namespace Wine.WebServices
 {
@@ -20,6 +22,11 @@ namespace Wine.WebServices
         public Goods QueryGoodsDetail(int id)
         {
             return new GoodsFacade().QueryGood(id);
+        }
+
+        public bool CommitOrder(Order order)
+        {
+            return new OrderFacade().CommitOrder(order);
         }
     }
 }

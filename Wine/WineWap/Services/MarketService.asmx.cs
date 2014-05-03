@@ -6,6 +6,8 @@ using System.Web;
 using System.Web.Services;
 using Wine.WebServices;
 using Wine.Infrastructure.Model.Commodity;
+using Wine.Infrastructure.Model.Orders;
+using Wine.Infrastructure.Model.User;
 
 namespace WineWap.Services
 {
@@ -81,6 +83,99 @@ namespace WineWap.Services
 
             Context.Response.ContentType = "json";
             Context.Response.Write(outputString);
+        }
+
+        [WebMethod(EnableSession = true)]
+        public void AddToCart(int goodsId, int count)
+        {
+            Session["GoodsID"] = goodsId;
+            Session["Count"] = count;
+
+            Context.Response.ContentType = "json";
+            Context.Response.Write(new WebServiceResult<object>(true, true).ToString());
+        }
+
+        [WebMethod(EnableSession = true)]
+        public void CreateOrder()
+        {
+            string outPutString = string.Empty;
+            try
+            {
+                Goods selectGoods = null;
+                int selectGoodsCount = 0;
+                if (Session["GoodsID"] != null)
+                    selectGoods = new Wine.WebServices.MarketService().QueryGoodsDetail(Convert.ToInt32(Session["GoodsID"]));
+
+                if (Session["Count"] != null)
+                    selectGoodsCount = Convert.ToInt32(Session["Count"]);
+
+                var result = new
+                {
+                    Name = selectGoods != null ? selectGoods.GoodsName : string.Empty,
+                    Price = selectGoods != null ? selectGoods.CurrentPrice : 0,
+                    MarketPrice = selectGoods != null ? selectGoods.HistoryPrice : 0,
+                    ImageUrl = selectGoods != null ? selectGoods.Pictureurl : string.Empty,
+                    Count = selectGoodsCount
+                };
+
+                outPutString = new WebServiceResult<object>(true, result).ToString();
+            }
+            catch (Exception ex)
+            {
+                outPutString = new WebServiceResult<object>(false, null, ex.Message).ToString();
+            }
+
+            Context.Response.ContentType = "json";
+            Context.Response.Write(outPutString);
+        }
+
+        [WebMethod(EnableSession = true)]
+        public void CommitOrder(int consigneeID, string customerRemarks)
+        {
+            Context.Response.ContentType = "json";
+            try
+            {
+                var selectConsignee = new Wine.WebServices.CustomerService().QueryCustomerConsigneeInfo(Session["LoginUser"], consigneeID);
+                if (Session["LoginUser"] != null && selectConsignee != null)
+                {
+                    Order newOrder = new Order();
+                    newOrder.OrderNO = DateTime.Now.ToLongDateString();
+                    newOrder.OrderOwnerID = (Session["LoginUser"] as Customer).CustomerID;
+                    newOrder.OrderStatus = 0;
+                    newOrder.OrderType = 1;
+                    newOrder.Adress = selectConsignee.Adress;
+                    newOrder.ConsigneeMobile = selectConsignee.ConsigneeMobile;
+                    newOrder.ConsigneeUserName = selectConsignee.ConsigneeUserName;
+                    newOrder.CustomerConsigneeInfoID = selectConsignee.CustomerConsigneeInfoID;
+                    newOrder.CustomerRemarks = customerRemarks;
+                    newOrder.DeliverRegionID = selectConsignee.DeliverRegionID;
+
+                    var goodsID = (int)Session["GoodsID"];
+                    var count = (int)Session["Count"];
+
+                    var selectGoods = new Wine.WebServices.MarketService().QueryGoodsDetail(goodsID);
+                    var detail = new OrderDetail();
+                    detail.GoodsCount = count;
+                    detail.GoodsID = goodsID;
+                    detail.GoodsName = selectGoods.GoodsName;
+                    detail.GoodsPrice = selectGoods.CurrentPrice;
+
+                    newOrder.Details = new List<OrderDetail>();
+                    newOrder.Details.Add(detail);
+                    newOrder.TotalPrice = detail.GoodsPrice * detail.GoodsCount;
+
+                    var result = new Wine.WebServices.MarketService().CommitOrder(newOrder);
+                    Context.Response.Write(new WebServiceResult<object>(true, result).ToString());
+                }
+                else
+                {
+                    Context.Response.Write(new WebServiceResult<object>(false, null, "登录已过期").ToString());
+                }
+            }
+            catch (Exception ex)
+            {
+                Context.Response.Write(new WebServiceResult<object>(false, ex.Message).ToString());
+            }
         }
     }
 }

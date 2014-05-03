@@ -33,10 +33,18 @@
                     </li>
                     <li>
                         <input id='btn_enter' type="submit" class="btn" value="登录" /></li>
+                    <li>
+                        <input id='btn_Register' type="submit" class="btn" value="注册" /></li>
                 </ul>
             </form>
         </div>
         <script type='text/javascript'>
+            function getQueryString(name) {
+                var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+                var r = window.location.search.substr(1).match(reg);
+                if (r != null) return unescape(r[2]); return null;
+            }
+
             $(function () {
                 $("#btn_enter").click(function (e) {
                     e.preventDefault();
@@ -53,12 +61,28 @@
                     $.post(url = '../Services/CustomerService.asmx/Login', data = { accountType: 1, loginName: loginName, password: password }, callback = function (data) {
                         if (data.IsSucceed) {
                             var url = getQueryString("url");
-                            document.location.href = url;
+                            if (url != null && url != "") {
+                                document.location.href = url;
+                            }
+                            else {
+                                document.location.href = "CustomerCenter.html";
+                            }
                         } else {
                             alert(data.ErrorMessage);
                         }
                     }, 'JSON')
-                })
+                });
+
+                $("#btn_Register").click(function (e) {
+                    var url = getQueryString("url");
+                    if (url != null && url != "") {
+                        var newUrl = "CommonRegister.html?Url=" + url;
+                        document.location.href = newUrl;
+                    }
+                    else {
+                        document.location.href = "CommonRegister.html";
+                    }
+                });
             });
         </script>
     </section>

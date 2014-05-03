@@ -12,10 +12,12 @@
     <link href="../Styles/header.css" rel="stylesheet" />
     <link href="../Styles/foot.css" rel="stylesheet" />
     <link href="../Styles/productdetail.css" rel="stylesheet" />
+    <link href="../Styles/themes/default/easyui.css" rel="stylesheet" />
     <link href="../Styles/flexslider.css" rel="stylesheet" />
     <script src="../Javascript/jquery-1.6.2.min.js"></script>
     <script src="../Javascript/jquery.flexslider-min.js"></script>
     <script src="../Javascript/slides.min.jquery.js"></script>
+    <script src="../Javascript/jquery.easyui.min.js"></script>
 </head>
 <body>
     <div class="header" id="header">
@@ -54,6 +56,20 @@
                             }
                         });
 
+                        $.ajax({
+                            url: "../Services/CommonService.asmx/QueryDeliverRegion",
+                            cache: false,
+                            success: function (data) {
+                                if (data.IsSucceed) {
+                                    $('#area').combobox({
+                                        valueField: 'RegionID',
+                                        textField: 'RegionName'
+                                    });
+                                    $("#area").combobox("loadData", data.Result);
+                                }
+                            }
+                        });
+
                         $('.flexslider').flexslider({
                             animation: "slide",
                             slideDirection: "horizontal"
@@ -66,12 +82,32 @@
                             url: "../Services/CustomerService.asmx/HasLogin",
                             dataType: "json",
                             success: function (data, flag) {
-                                if (data.Result) {
-
+                                if (data.IsSucceed) {
+                                    if (data.Result.HasLogin) {
+                                        $.ajax({
+                                            type: "POST",
+                                            url: "../Services/MarketService.asmx/AddToCart",
+                                            data: { goodsId: getQueryString("id"), count: parseInt($("#prosum").val()) },
+                                            dataType: "json",
+                                            success: function (cartData, flag) {
+                                                if (cartData.IsSucceed) {
+                                                    if (cartData.Result) {
+                                                        document.location.href = "Order.html";
+                                                    }
+                                                }
+                                                else {
+                                                    alert(cartData.ErrorMessage);
+                                                }
+                                            }
+                                        })
+                                    }
+                                    else {
+                                        var newUrl = "../Customer/Login.html?Url=" + document.location.href;
+                                        document.location.href = newUrl;
+                                    }
                                 }
                                 else {
-                                    var newUrl = "../Customer/Login.html?Url=" + document.location.href;
-                                    document.location.href = newUrl;
+                                    alert(data.ErrorMessage);
                                 }
                             },
                             error: function (e, d, s) {
@@ -106,57 +142,16 @@
                     </div>
                     <div class='goods_number clearfix'>
                         <p class="name">配送至</p>
-                        <select name="province" id="select_area">
-                            <option value="2" selected>北京</option>
-                            <option value="3">安徽省</option>
-                            <option value="4">福建省</option>
-                            <option value="5">甘肃省</option>
-                            <option value="6">广东省</option>
-                            <option value="7">广西省</option>
-                            <option value="8">贵州省</option>
-                            <option value="9">海南省</option>
-                            <option value="10">河北省</option>
-                            <option value="11">河南省</option>
-                            <option value="12">黑龙江省</option>
-                            <option value="13">湖北省</option>
-                            <option value="14">湖南省</option>
-                            <option value="15">吉林省</option>
-                            <option value="16">江苏省</option>
-                            <option value="17">江西省</option>
-                            <option value="18">辽宁省</option>
-                            <option value="19">内蒙古省</option>
-                            <option value="20">宁夏</option>
-                            <option value="21">青海省</option>
-                            <option value="22">山东省</option>
-                            <option value="23">山西省</option>
-                            <option value="24">陕西省</option>
-                            <option value="25">上海</option>
-                            <option value="26">四川省</option>
-                            <option value="27">天津</option>
-                            <option value="28">西藏</option>
-                            <option value="29">新疆</option>
-                            <option value="30">云南省</option>
-                            <option value="31">浙江省</option>
-                            <option value="32">重庆</option>
-                            <option value="33">香港</option>
-                            <option value="34">澳门</option>
-                            <option value="35">台湾</option>
-                        </select>
+                        <select id="area" style="width: 100%"></select>
                         <span id="msg">现货</span>
                     </div>
                     <div class="div_but1 clearfix" id='btn2'>
-                        <div class="buy" onclick="chgNum('')">
+                        <div class="buy">
                             <a class='ljgm1' name="goods_buy" href="javascript:void()" onclick="Buy()">
                                 <i></i>
                                 立即购买
                             </a>
                         </div>
-                        <!--<div class="cart">
-                            <a class='add1' name="goods_cart" href="javascript:void()">
-                                <i></i>
-                                加入购物车
-                            </a>
-                        </div>-->
                     </div>
                 </div>
             </div>
@@ -167,7 +162,7 @@
             var prosum = $("#prosum");
             var p = parseInt(prosum.val());
             if (a == 1) {
-                if (p < 1730) prosum.val(++p);
+                if (p < 100) prosum.val(++p);
             }
             else {
                 if (p > 1) prosum.val(--p);

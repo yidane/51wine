@@ -47,7 +47,10 @@
     <Compile Include="Commodity\GoodsFacade.cs" />
     <Compile Include="Commodity\GoodsTypeFacade.cs" />
     <Compile Include="Commodity\SpecialPriceTypeFacade.cs" />
-    <Compile Include="Customer\CustomerFacade.cs" />
+    <Compile Include="Orders\OrderFacade.cs" />
+    <Compile Include="User\CustomerConsigneeFacade.cs" />
+    <Compile Include="User\CustomerFacade.cs" />
+    <Compile Include="Deliver\DeliverRegionFacade.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

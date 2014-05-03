@@ -61,12 +61,65 @@ namespace WineWap.Services
         }
 
         [WebMethod(EnableSession = true)]
+        public void LogOut()
+        {
+            Session["LoginUser"] = null;
+            Session["RecentlyConsignee"] = null;
+            Session["GoodsID"] = null;
+            Session["Count"] = null;
+
+            Context.Response.ContentType = "json";
+            Context.Response.Write(new WebServiceResult<object>(true, true).ToString());
+        }
+
+        [WebMethod(EnableSession = true)]
         public void HasLogin()
         {
             var hasLogin = Session["LoginUser"] != null;
-            var outputString = new WebServiceResult<object>(true, hasLogin);
+            var result = new
+            {
+                HasLogin = hasLogin,
+                User = hasLogin ? (Session["LoginUser"] as Customer) : null
+            };
+            var outputString = new WebServiceResult<object>(true, result);
             Context.Response.ContentType = "json";
             Context.Response.Write(outputString);
+        }
+
+        [WebMethod(EnableSession = true)]
+        public void AddConsignee(int regionID, string adress, string consigneeUserName, string mobile)
+        {
+            Context.Response.ContentType = "json";
+            Context.Response.Write(new Wine.WebServices.CustomerService().AddConsignee(Session["LoginUser"], regionID, adress, consigneeUserName, mobile));
+        }
+
+        [WebMethod(EnableSession = true)]
+        public void SetRecentlyConsignee(int consigneeID)
+        {
+            Session["RecentlyConsignee"] = new Wine.WebServices.CustomerService().QueryCustomerConsigneeInfo(Session["LoginUser"], consigneeID);
+            Context.Response.ContentType = "json";
+            Context.Response.Write(new WebServiceResult<object>(true, true).ToString());
+        }
+
+        [WebMethod(EnableSession = true)]
+        public void QueryAllConsignee()
+        {
+            Context.Response.ContentType = "json";
+            Context.Response.Write(new Wine.WebServices.CustomerService().QueryAllConsignee(Session["LoginUser"]));
+        }
+
+        [WebMethod(EnableSession = true)]
+        public void QueryRecentlyConsignee()
+        {
+            Context.Response.ContentType = "json";
+            if (Session["RecentlyConsignee"] != null)
+            {
+                Context.Response.Write(new WebServiceResult<object>(true, Session["RecentlyConsignee"] as CustomerConsigneeInfo).ToString());
+            }
+            else
+            {
+                Context.Response.Write(new Wine.WebServices.CustomerService().QueryRecentConsignee(Session["LoginUser"]));
+            }
         }
     }
 }

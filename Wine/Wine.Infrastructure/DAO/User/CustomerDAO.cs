@@ -71,12 +71,12 @@ namespace Wine.Infrastructure.DAO.User
         public Customer Login(int accountType, string loginName, string password)
         {
             var sqlparams = new List<SqlParameter>();
-            sqlparams.Add(new SqlParameter("@AccountType", SqlDbType.Int, accountType));
+            sqlparams.Add(new SqlParameter("@AccountType", accountType));
             sqlparams.Add(new SqlParameter("@LoginName", loginName));
             sqlparams.Add(new SqlParameter("@Password", password));
 
             var dt = SqlHelper.ExecuteDataTable(ConfigManager.DBConnection, CommandType.StoredProcedure, "USP_Customer_Login", sqlparams.ToArray());
-            if (dt != null & dt.Rows.Count > 0)
+            if (dt != null && dt.Rows.Count > 0)
                 return dt.ToList<Customer>()[0];
 
             return null;

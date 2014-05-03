@@ -14,7 +14,7 @@ namespace Wine.Infrastructure.Model.User
         /// <summary>
         /// 流水号
         /// </summary>
-        public int ID { get; set; }
+        public int CustomerConsigneeInfoID { get; set; }
 
         /// <summary>
         /// 客户ID
@@ -34,7 +34,7 @@ namespace Wine.Infrastructure.Model.User
         /// <summary>
         ///配送区域
         /// </summary>
-        public int Region { get; set; }
+        public int DeliverRegionID { get; set; }
 
         /// <summary>
         /// 配送详细地址

@@ -2,7 +2,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="telephone=no" name="format-detection" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="viewport" content="width=320, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title></title>
+    <link href="../Styles/reset.css" rel="stylesheet" />
+    <link href="../Styles/header.css" rel="stylesheet" />
+    <link href="../Styles/foot.css" rel="stylesheet" />
+    <link href="../Styles/Order.css" rel="stylesheet" />
+    <script src="../Javascript/jquery-1.6.2.min.js"></script>
 </head>
 <body>
     <div class="header" id="header">
@@ -13,14 +22,13 @@
     <section>
         <div class="order-submit">
             <!-- 订单信息begin -->
-            <form action="http://m.jiuxian.com/order/create_order" name='form' method='post' onsubmit='return check_form()' accept-charset="utf-8">
+            <form>
                 <div class="choose add">
                     <h2>收货地址</h2>
-                    <a class="content clearfix" href="/address/index/1">
-                        <span class="text"><i>北京-北京市-海淀区北京科技大学</i><br />
-                            <i>北科大</i><i>18910062020</i></span>
-                        <input type="hidden" name="addr_id" value="105003973">
-                        <!-- 有收货地址的，显示最近一次使用过的地址 -->
+                    <a class="content clearfix" href="../Customer/CustomerConsigneeList.html">
+                        <span class="text"><i id="address"></i>
+                            <br />
+                            <i id="consigneeName"></i><i id="mobile"></i></span>
                         <span class="arrow"></span>
                     </a>
                 </div>
@@ -28,146 +36,106 @@
                     <h2>配送方式</h2>
                     <a class="content clearfix">
                         <span class="text">快递运输</span>
-
-                        <input type="hidden" name="shipping_name" value="快递" />
-
-                        <input type="hidden" name="shipping" value="16" />
                     </a>
                 </div>
                 <div class="choose pay">
                     <h2>支付方式</h2>
-                    <a class="content clearfix" href="/order_inner/payment_list">
+                    <a class="content clearfix">
                         <span class="text">货到付款 				
-				<input type="hidden" name="payment" value="100">
-                            <input type="hidden" name="pay_name" value="货到付款">
+				<input type="hidden" name="payment" value="100" />
+                            <input type="hidden" name="pay_name" value="货到付款" />
                         </span>
                         <span class="arrow"></span>
                     </a>
                 </div>
                 <div class="choose fapiao">
                     <h2>发票信息</h2>
-                    <a class="content clearfix" href="/order_inner/nav_list">
+                    <a class="content clearfix">
                         <span class="text">
                             <span class="line1">发票类型：个人</span>
                             <span class="line2">发票内容：酒水</span>
-                            <input type="hidden" name='inv_type' value="1">
-                            <input type="hidden" name='inv_payee' value="个人">
-                            <input type="hidden" name='inv_content' value="酒水">
                         </span>
                         <span class="arrow"></span>
                     </a>
                 </div>
-                <div class="choose hongbao">
-                    <h2>优惠方式</h2>
-                    <a class="content clearfix" href="/order_inner/favourable">
-                        <span class="text">点击选择优惠方式</span>
-                        <input type="hidden" name="bonus_id" value="">
-                        <input type="hidden" name="use_cash_money" value="">
-                        <input type="hidden" name="pay_password" id="pay_pwd" value="" />
-                        <span class="arrow"></span>
-
-                    </a>
+                <div class="choose list">
+                    <h2>商品清单</h2>
+                    <ul>
+                        <li class="show clearfix">
+                            <img id="imgUrl" />
+                            <p class="name" id="name"></p>
+                            <div class="info">
+                                <p class="price" id="price"></p>
+                                <p class="num" id="count"></p>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
                 <div class="choose tip">
                     <h2>订单备注</h2>
                     <textarea class="tipInput" tiptext="备注限制在100字以内" value="" name="postscript"></textarea>
                 </div>
-                <div class="choose list">
-                    <h2>商品清单</h2>
-                    <!-- 普通商品begin -->
-                    <ul>
-                        <li class="show clearfix">
-                            <img src="http://img10.jiuxian.com/2013/1002/5b8b324c103549c981ad9c530fed9d9e7.jpg" />
-                            <p class="name"><a href="http://m.jiuxian.com/goods/view/19">法国酒星干红葡萄酒</a></p>
-                            <div class="info">
-                                <p class="price">&yen;&nbsp;29</p>
-                                <p class="num">x&nbsp;1</p>
-
-                            </div>
-
-                        </li>
-                    </ul>
-                    <!-- 普通商品end -->
-                    <!-- 打包商品end -->
-                    <ul>
-                        <li class="show clearfix">
-                            <img src="http://img10.jiuxian.com/2013/1220/313e3e5493a842dda1c00a0e580c04947.jpg" />
-                            <p class="name"><a href="http://m.jiuxian.com/goods/view/13433">43°五粮液金世豪情500ml</a></p>
-                            <div class="info">
-                                <p class="price">&yen;&nbsp;79</p>
-                                <p class="num">x&nbsp;2</p>
-
-                            </div>
-
-                        </li>
-                    </ul>
-                    <!-- 普通商品end -->
-                    <!-- 打包商品end -->
-                    <ul>
-                        <li class="show clearfix">
-                            <img src="http://img10.jiuxian.com/2014/0408/9e38624ef5d64ca1a6cd6335cc66e9007.jpg" />
-                            <p class="name"><a href="http://m.jiuxian.com/goods/view/14595">法国波尔多罗思柴尔德男爵木桐嘉棣干红葡萄酒</a></p>
-                            <div class="info">
-                                <p class="price">&yen;&nbsp;86</p>
-                                <p class="num">x&nbsp;2</p>
-
-                            </div>
-
-                        </li>
-                    </ul>
-                    <!-- 普通商品end -->
-                    <!-- 打包商品end -->
-
-                </div>
-                <!-- 订单信息end -->
-
-                <!-- 结算begin -->
                 <div class="checkout">
                     <div class="count line clearfix">
-                        <p class="data data1"><span class="title">商品金额：</span><i></i><span>&yen;&nbsp;359.00</span></p>
+                        <p class="data data1"><span class="title">商品金额：</span><i></i><span id="goodsPrice">&yen;&nbsp;359.00</span></p>
                     </div>
                     <div class="decrease line clearfix">
-                        <p class="data data1"><span class="title">运费：</span><strong>&yen;&nbsp;0</strong></p>
-                        <p class="data data1"><span class="title">折扣：</span><strong>&yen;&nbsp;0</strong></p>
-                        <p class="data data1"><span class="title">优惠：</span><strong>&yen;&nbsp;0</strong></p>
-                        <p class="data data1"><span class="title">返现：</span><strong>&yen;&nbsp;0</strong></p>
-                        <p class="data data1"><span class="title">余额：</span><strong>&yen;&nbsp;0</strong></p>
-                        <p class="data data1"><span class="title">牛币：</span><strong>&yen;&nbsp;0</strong></p>
+                        <p class="data data1"><span class="title">运费：</span><strong>&yen;&nbsp;10</strong></p>
+                        <p class="data data1"><span class="title">优惠：</span><strong id="reducePrice"></strong></p>
                     </div>
                     <div class="total line clearfix">
-                        <p class="data data1"><span class="title">应付总额：</span><i></i><strong>&yen;&nbsp;359.00</strong></p>
+                        <p class="data data1"><span class="title">应付总额：</span><i></i><strong id="TotalPrice"></strong></p>
                     </div>
                 </div>
-                <!-- 结算end -->
-                <input type="hidden" name="bonus_code" value="">
-                <input type="submit" name="" value="提交订单" class="submit" />
+                <input type="button" name="" value="提交订单" class="submit" onclick="SummitOrder()" />
             </form>
         </div>
     </section>
 
     <script type="text/javascript">
-        $(function () {
-            $('.list .all').click(function () {
-                $('.list li.hide').fadeIn(400);
-                $(this).hide();
-            })
+        var CustomerConsigneeInfoID = -1;
+        $(document).ready(function () {
+            //初始化收货人
+            $.ajax({
+                url: "../Services/CustomerService.asmx/QueryRecentlyConsignee",
+                success: function (data) {
+                    if (data.IsSucceed) {
+                        $("#address").html(data.Result.Adress);
+                        $("#consigneeName").html(data.Result.ConsigneeUserName);
+                        $("#mobile").html(data.Result.ConsigneeMobile);
+                        CustomerConsigneeInfoID = data.Result.CustomerConsigneeInfoID;
+                    }
+                    else {
+                        $("#address").html("添加送货地址");
+                        $("#consigneeName").html("");
+                        $("#mobile").html("");
+                        $("#consigneeID").val(-1);
+                    }
+                }
+            });
+
+            //初始化选定商品
+            $.ajax({
+                url: "../Services/MarketService.asmx/CreateOrder",
+                success: function (data) {
+                    if (data.IsSucceed) {
+                        $("#imgUrl").attr("src", data.Result.ImageUrl);
+                        $("#name").html(data.Result.Name);
+                        $("#price").html("&yen;&nbsp;" + data.Result.Price);
+                        $("#count").html("x" + data.Result.Count);
+                        $("#goodsPrice").html("&yen;&nbsp;" + data.Result.Price);
+                        $("#reducePrice").html("&yen;&nbsp;" + ((data.Result.MarketPrice - data.Result.Price) * data.Result.Count));
+                        $("#TotalPrice").html("&yen;&nbsp;" + (data.Result.Price * data.Result.Count + 10));
+                    }
+                    else {
+                        alert(data.ErrorMessage);
+                    }
+                }
+            });
         });
+
         function check_form() {
             var ly = $("textarea[name='postscript']");
-            /*if(use_money>0){
-            var pwd = $("input[name='pay_pwd']").val();
-            var is_usemoney = $("select[name='money']").val();
-            if(is_usemoney==2){
-                if(pwd.length>5 && pwd.length<=20){}else{
-                    alert('密码长度6-20位,请填写正确密码');
-                    return false;
-                }
-                if(is_usemoney==2 && pwd==''){
-                    alert('使用返现和余额支付，必须输入支付密码');
-                    return false;
-                }
-            }		
-        }	*/
             if (ly.val() == '备注限制在100字以内') {
                 ly.val('');
             } else if (ly.val().length > 100) {
@@ -176,11 +144,19 @@
             }
             return true;
         }
-        function cap_y() {
-            var url = "/user/get_captcha/";
-            $.post(url, { act: 'order_add' }, function (data) {
-                $("#yzm").html(data.result);
-            }, 'JSON');
+
+        function SummitOrder() {
+            var consigneeID = parseInt($("#consigneeID").val());
+            if (check_form()) {
+                var remark = $("textarea[name='postscript']").val();
+                $.post(url = '../Services/MarketService.asmx/CommitOrder', data = { consigneeID: CustomerConsigneeInfoID, customerRemarks: remark }, callback = function (data) {
+                    if (data.IsSucceed && data.Result) {
+                        document.location.href = "../Customer/CustomerCenter.html";
+                    } else {
+                        alert(data.ErrorMessage);
+                    }
+                }, 'JSON')
+            }
         }
 
     </script>

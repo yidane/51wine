@@ -74,7 +74,13 @@
                     }
                     $.post(url = '../Services/CustomerService.asmx/CommonRegister', data = { loginName: loginName, nickName: nickName, password: pw1, password2: pw2 }, callback = function (data) {
                         if (data.IsSucceed) {
-                            var ss = getQueryString("name");
+                            var url = getQueryString("url");
+                            if (url != null && url != "") {
+                                document.location.href = url;
+                            }
+                            else {
+                                document.location.href = "CustomerCenter.html";
+                            }
                         } else {
                             alert(data.ErrorMessage);
                         }

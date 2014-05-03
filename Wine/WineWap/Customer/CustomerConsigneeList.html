@@ -1,0 +1,83 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="telephone=no" name="format-detection" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="viewport" content="width=320, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title></title>
+    <link href="../Styles/foot.css" rel="stylesheet" />
+    <link href="../Styles/header.css" rel="stylesheet" />
+    <link href="../Styles/reset.css" rel="stylesheet" />
+    <link href="../Styles/consignee.css" rel="stylesheet" />
+    <script src="../Javascript/jquery-1.6.2.min.js"></script>
+</head>
+<body>
+    <div class="header" id="header">
+        <span class="headline">收货人信息</span>
+    </div>
+
+    <section>
+        <div class="add">
+            <div class="add-list">
+                <div class="title clearfix">
+                    <h2>选择收货地址</h2>
+                    <a href="CustomerConsignee.html">添加新地址</a>
+                </div>
+                <ul class="list" id="consigneeList">
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <script type="text/javascript">
+        function getQueryString(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return unescape(r[2]); return null;
+        }
+
+        $(document).ready(function () {
+            $.ajax({
+                url: "../Services/CustomerService.asmx/QueryAllConsignee",
+                cache: false,
+                success: function (data) {
+                    if (data.IsSucceed) {
+                        if (data.Result != null) {
+                            $(data.Result).each(function (e, n) {
+                                var html = "<li class='clearfix' onclick='AddressClick(" + n.CustomerConsigneeInfoID + ")'><p>" + n.Adress + "&nbsp;&nbsp;" + n.ConsigneeUserName + "&nbsp;&nbsp;" + n.ConsigneeMobile + "</p><span class='arrow'></span></li>";
+                                $("#consigneeList").append(html);
+                            });
+                        }
+                    }
+                    else {
+                        alert(data.ErrorMessage);
+                    }
+                }
+            });
+        });
+
+        function AddressClick(consigneeID) {
+            var url = getQueryString("url");
+            if (url != null && url != "") {
+                $.ajax({
+                    url: "../Services/CustomerService.asmx/QueryAllConsignee",
+                    cache: false,
+                    success: function (data) {
+                        if (data.IsSucceed && data.Result) {
+                            document.location.href = url;
+                        }
+                        else {
+                            alert(data.ErrorMessage);
+                        }
+                    }
+                });
+            } else {
+                document.location.href = "CustomerConsignee.html?ConsigneeID=" + consigneeID;
+            }
+        }
+    </script>
+
+</body>
+</html>

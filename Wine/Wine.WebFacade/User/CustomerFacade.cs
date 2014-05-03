@@ -7,7 +7,7 @@ using Wine.Infrastructure.Model;
 using Wine.Infrastructure.BLL;
 using Wine.Infrastructure.Model.User;
 
-namespace Wine.WebFacade
+namespace Wine.WebFacade.User
 {
     public class CustomerFacade
     {

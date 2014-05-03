@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Wine.Infrastructure.Model;
 using Wine.Infrastructure.Model.User;
 using Wine.Util;
+using Wine.WebFacade.User;
 
 namespace Wine.WebServices
 {
@@ -31,7 +32,7 @@ namespace Wine.WebServices
                 //判断两次密码输入是否相同
                 if (string.Equals(password1.Trim(), password2.Trim()))
                 {
-                    customer = new Wine.WebFacade.CustomerFacade().CustomerRegister(
+                    customer = new Wine.WebFacade.User.CustomerFacade().CustomerRegister(
                                                                                                                            new Customer()
                                                                                                                            {
                                                                                                                                LoginName = loginName.Trim(),
@@ -74,11 +75,91 @@ namespace Wine.WebServices
         /// <returns></returns>
         public Customer LoginIn(int accountType, string loginName, string password)
         {
-            return new Wine.WebFacade.CustomerFacade().CustomerLogin(accountType, loginName, EncryptionHelper.Encrypt(password));
+            return new Wine.WebFacade.User.CustomerFacade().CustomerLogin(accountType, loginName, EncryptionHelper.Encrypt(password));
         }
         #endregion
 
         #region 账户信息
+
+        #region 收货人信息
+
+        public string AddConsignee(object customerSession, int regionID, string adress, string consigneeUserName, string mobile)
+        {
+            try
+            {
+                if (customerSession == null)
+                    return new WebServiceResult<object>(false, null, "登录已超时").ToString();
+                var customer = customerSession as Customer;
+
+                CustomerConsigneeInfo newCustomerConsigneeInfo = new CustomerConsigneeInfo();
+                newCustomerConsigneeInfo.CustomerID = customer.CustomerID;
+                newCustomerConsigneeInfo.ConsigneeUserName = consigneeUserName;
+                newCustomerConsigneeInfo.ConsigneeMobile = mobile;
+                newCustomerConsigneeInfo.Adress = adress;
+                newCustomerConsigneeInfo.DeliverRegionID = regionID;
+                newCustomerConsigneeInfo.Email = string.Empty;
+
+                var result = new CustomerConsigneeFacade().Insert(newCustomerConsigneeInfo);
+                var isSucceed = (result != null && result.CustomerConsigneeInfoID > 0);
+                return new WebServiceResult<object>(isSucceed, result).ToString();
+            }
+            catch (Exception ex)
+            {
+                return new WebServiceResult<object>(false, null, ex.Message).ToString();
+            }
+        }
+
+        public CustomerConsigneeInfo QueryCustomerConsigneeInfo(object customerSession, int consigneeInfoID)
+        {
+            try
+            {
+                if (customerSession == null)
+                    return null;
+                var customer = customerSession as Customer;
+
+                return new CustomerConsigneeFacade().QueryCustomerConsigneeInfo(customer, consigneeInfoID);
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        public string QueryRecentConsignee(object customerSession)
+        {
+            try
+            {
+                if (customerSession == null)
+                    return new WebServiceResult<object>(false, null, "登录已超时").ToString();
+                var customer = customerSession as Customer;
+
+                var result = new CustomerConsigneeFacade().QueryRecentlyCustomerConsigneeInfo(customer);
+                return new WebServiceResult<object>(true, result).ToString();
+            }
+            catch (Exception ex)
+            {
+                return new WebServiceResult<object>(false, null, ex.Message).ToString();
+            }
+        }
+
+        public string QueryAllConsignee(object customerSession)
+        {
+            try
+            {
+                if (customerSession == null)
+                    return new WebServiceResult<object>(false, null, "登录已超时").ToString();
+                var customer = customerSession as Customer;
+
+                var result = new CustomerConsigneeFacade().Query(customer);
+                var isSucceed = (result != null && result.Count > 0);
+                return new WebServiceResult<object>(isSucceed, result).ToString();
+            }
+            catch (Exception ex)
+            {
+                return new WebServiceResult<object>(false, null, ex.Message).ToString();
+            }
+        }
+        #endregion
 
         #endregion
     }

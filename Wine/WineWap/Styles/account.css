@@ -1,0 +1,229 @@
+﻿@charset "utf-8";
+
+body {
+    background-color: #eee;
+}
+/*商品兑换页begin*/
+.form {
+    padding-top: 10px;
+    width: 90%;
+    margin: 0 auto;
+}
+
+    .form #bonus, .form #btn_enter {
+        display: block;
+        width: 100%;
+        height: 35px;
+        line-height: 35px;
+        margin: 0 auto 20px;
+        padding-left: 10px;
+    }
+
+    .form #bonus {
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        color: #a0a0a0;
+    }
+
+    .form #btn_enter {
+        background-color: #e84c3d;
+        color: #fff;
+        font-family: 微软雅黑;
+        text-align: center;
+    }
+/*商品兑换页end*/
+
+/*我的红包页begin*/
+.m_cat {
+    padding-top: 20px;
+}
+
+    .m_cat li {
+        width: 90%;
+        height: auto;
+        padding-left: 10px;
+        line-height: 36px;
+        margin: 0 auto 10px;
+        border: 1px solid #ddd;
+        background-color: #fff;
+    }
+
+.btn.btnBuy {
+    display: block;
+    width: 90%;
+    height: 35px;
+    padding-left: 10px;
+    margin: 0 auto 20px;
+    background-color: #e84c3d;
+    color: #fff;
+    text-align: center;
+    line-height: 35px;
+}
+/*我的红包页end*/
+
+/*添加红包页begin*/
+.form #bonus_sn {
+    width: 95%;
+    height: 35px;
+    border: 1px solid #ccc;
+    padding-left: 10px;
+    margin: 0 auto 15px;
+}
+
+.form .add.btn {
+    width: 100px;
+    font-family: 微软雅黑;
+    letter-spacing: 2px;
+    line-height: 30px;
+    background-color: #e84c3d;
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+.form #bonus_text {
+    width: 95%;
+    height: 35px;
+    line-height: 35px;
+    border: 1px solid #ccc;
+    margin-bottom: 15px;
+    overflow: hidden;
+}
+
+    .form #bonus_text input {
+        width: 100%;
+        height: 100%;
+        padding-left: 15px;
+    }
+/*添加红包页end*/
+
+/*信息提示页begin*/
+.choose {
+    width: 95%;
+    margin: 0 auto;
+}
+
+    .choose h2 {
+        font-size: 18px;
+        padding-top: 25px;
+        padding-bottom: 11px;
+        font-weight: normal;
+        border-bottom: 1px solid #ccc;
+    }
+
+    .choose .tip {
+        line-height: 37px;
+        font-size: 14px;
+        margin: 18px auto;
+    }
+/*信息提示页end*/
+
+/*收货地址列表begin*/
+.addrlist {
+    width: 90%;
+    padding: 15px 0;
+    margin: 0 auto;
+}
+
+    .addrlist li {
+        padding: 10px;
+        min-height: 110px;
+        border-bottom: 1px solid #dcdcdc;
+    }
+
+        .addrlist li p {
+            margin-top: 13px;
+            margin-left: 20px;
+        }
+
+.btn_addr_new {
+    width: 95%;
+    height: 35px;
+    margin: 20px auto;
+    background-color: #e84c3d;
+    color: #fff;
+    line-height: 35px;
+    text-align: center;
+    font-weight: bold;
+}
+/*收货地址列表end*/
+
+/*添加新地址begin*/
+.form .frame {
+    margin-bottom: 15px;
+}
+
+.frame p {
+    margin-bottom: 5px;
+}
+
+.frame input {
+    width: 98%;
+    height: 35px;
+    padding-left: 2%;
+    border: 1px solid #c3c3c3!important;
+    line-height: 35px;
+}
+
+.area select {
+    width: 80px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 14px;
+    float: left;
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+    height: 22px;
+    line-height: 18px;
+    padding: 2px 0;
+    outline: none;
+}
+
+.form .submit .btn {
+    background-color: #e84c3d;
+    color: #fff;
+    font-family: 微软雅黑;
+    font-weight: bold;
+    border: none!important;
+}
+
+/*添加新地址end*/
+
+/*翻页begin*/
+.page {
+    width: 265px;
+    height: 30px;
+    margin: 20px auto;
+    text-align: center;
+}
+
+    .page a.perv_page {
+        float: left;
+    }
+
+    .page a.next_page {
+        float: right;
+    }
+
+    .page a {
+        width: 85px;
+        height: 30px;
+        display: inline-block;
+        background-color: #3598dc;
+        height: 30px;
+        line-height: 30px;
+        color: #fff;
+        font-size: 16px;
+        text-align: center;
+        border-radius: 2px;
+    }
+
+    .page .cur_page {
+        display: inline-block;
+        width: 56px;
+        height: 28px;
+        line-height: 28px;
+        background-color: #f3f3f3;
+        border: 1px solid #c9c9c9;
+    }
+/*翻页end*/

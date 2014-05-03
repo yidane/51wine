@@ -21,20 +21,30 @@ namespace Wine.Infrastructure.Model.Orders
         /// </summary>
         public string OrderNO { get; set; }
 
+        /// <summary>
+        /// 订单类型
+        /// </summary>
         public int OrderType { get; set; }
+
+        /// <summary>
+        /// 订单状态
+        /// </summary>
+        public int OrderStatus { get; set; }
+
+        /// <summary>
+        /// 订单拥有者
+        /// </summary>
+        public int OrderOwnerID { get; set; }
 
         /// <summary>
         /// 订单商品详细
         /// </summary>
         public List<OrderDetail> Details { get; set; }
-        /// <summary>
-        /// 订单拥有者
-        /// </summary>
-        public Customer OrderOwner { get; set; }
+
         /// <summary>
         /// 总价
         /// </summary>
-        public float TotalPrice { get; set; }
+        public decimal TotalPrice { get; set; }
 
         /// <summary>
         /// 顾客配送地址ID
@@ -54,17 +64,12 @@ namespace Wine.Infrastructure.Model.Orders
         /// <summary>
         ///配送区域
         /// </summary>
-        public int Region { get; set; }
+        public int DeliverRegionID { get; set; }
 
         /// <summary>
         /// 配送详细地址
         /// </summary>
         public string Adress { get; set; }
-
-        /// <summary>
-        /// 邮箱
-        /// </summary>
-        public string Email { get; set; }
 
         /// <summary>
         /// 顾客备注

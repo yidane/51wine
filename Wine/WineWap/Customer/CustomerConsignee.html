@@ -1,0 +1,114 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="telephone=no" name="format-detection" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="viewport" content="width=320, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title></title>
+    <link href="../Styles/header.css" rel="stylesheet" />
+    <link href="../Styles/foot.css" rel="stylesheet" />
+    <link href="../Styles/reset.css" rel="stylesheet" />
+    <link href="../Styles/account.css" rel="stylesheet" />
+    <link href="../Styles/themes/default/easyui.css" rel="stylesheet" />
+    <script src="../Javascript/jquery-1.6.2.min.js"></script>
+    <script src="../Javascript/jquery.easyui.min.js"></script>
+</head>
+<body>
+    <div class="header" id="header">
+        <a class="back" href="javascript:history.back();"></a>
+        <span class="headline">新增收货地址</span>
+        <a class="search" href="/search?r=search"></a>
+    </div>
+    <section>
+        <div class="form clearfix">
+            <form>
+                <div class="frame area">
+                    <p>地区</p>
+                    <select id="area" style="width: 100%"></select>
+                </div>
+                <div class="frame street">
+                    <p>详细地址</p>
+                    <input type="text" name="address" value="" />
+                </div>
+                <div class="frame customer">
+                    <p>收货人</p>
+                    <input type="text" name="consignee" value="" placeholder="" />
+                </div>
+                <div class="frame phone">
+                    <p>手机号码</p>
+                    <input type="text" name="mobile" value="" placeholder="" />
+                </div>
+                <div class="frame submit">
+                    <input type="button" name="" value="立即添加" class="btn" onclick="SaveAddress()" />
+                </div>
+            </form>
+        </div>
+        <!-- end signup_form-->
+
+
+        <script type="text/javascript">
+            function getQueryString(name) {
+                var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+                var r = window.location.search.substr(1).match(reg);
+                if (r != null) return unescape(r[2]); return null;
+            }
+
+            $(document).ready(function () {
+                $.ajax({
+                    url: "../Services/CommonService.asmx/QueryDeliverRegion",
+                    cache: false,
+                    success: function (data) {
+                        if (data.IsSucceed) {
+                            $('#area').combobox({
+                                valueField: 'RegionID',
+                                textField: 'RegionName'
+                            });
+                            $("#area").combobox("loadData", data.Result);
+                        }
+                    }
+                });
+
+                var consigneeID = getQueryString("ConsigneeID");
+                if (consigneeID != null && consigneeID != "") {
+                    //再次绑定，提供删除更新入口
+                }
+            });
+
+
+            function SaveAddress() {
+                var area = $('#area').combobox("getValue");
+                var adress = $('input[name=address]').val();
+                var consignee = $('input[name=consignee]').val();
+                var mobile = $('input[name=mobile]').val();
+                if (area == '' || area == null) {
+                    alert('地区不能为空')
+                    return false;
+                }
+                if (adress == '' || adress == null) {
+                    alert('详细地址不能为空！')
+                    return false;
+                }
+                if (consignee == '' || consignee == null) {
+                    alert('收货人不能为空！')
+                    return false;
+                }
+                if (mobile == '' || mobile == null) {
+                    alert('手机号不能为空！')
+                    return false;
+                }
+
+                $.post(url = '../Services/CustomerService.asmx/AddConsignee', data = { regionID: area, adress: adress, consigneeUserName: consignee, mobile: mobile }, callback = function (data) {
+                    if (data.IsSucceed) {
+                        var url = getQueryString("url");
+                        document.location.href = url;
+                    } else {
+                        alert(data.ErrorMessage);
+                    }
+                }, 'JSON')
+            }
+        </script>
+    </section>
+</body>
+</html>

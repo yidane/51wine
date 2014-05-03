@@ -47,9 +47,16 @@
     <Compile Include="BLL\Commodity\GoodsBLL.cs" />
     <Compile Include="BLL\Commodity\GoodsType.cs" />
     <Compile Include="BLL\Commodity\SpecialPriceTypeBLL.cs" />
+    <Compile Include="BLL\Deliver\DeliverRegionBLL.cs" />
+    <Compile Include="BLL\Ordes\OrderBLL.cs" />
     <Compile Include="BLL\User\CustomerBLL.cs" />
+    <Compile Include="BLL\User\CustomerConsigneeInfoBLL.cs" />
     <Compile Include="DAO\Commodity\GoodsDAO.cs" />
     <Compile Include="DAO\Commodity\SpecialPriceTypeDAO.cs" />
+    <Compile Include="DAO\Deliver\DeliverRegionDAO.cs" />
+    <Compile Include="DAO\Orders\OrderDAO.cs" />
+    <Compile Include="DAO\Orders\OrderDetailDAO.cs" />
+    <Compile Include="DAO\User\CustomerConsigneeInfoDAO.cs" />
     <Compile Include="DAO\User\CustomerDAO.cs" />
     <Compile Include="DAO\Commodity\GoodsTypeDAO.cs" />
     <Compile Include="Model\User\Customer.cs" />
