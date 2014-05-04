@@ -83,10 +83,11 @@ namespace Wine.WebServices
 
         #region 收货人信息
 
-        public string AddConsignee(object customerSession, int regionID, string adress, string consigneeUserName, string mobile)
+        public string AddConsignee(object customerSession, out object consigneeSession, int regionID, string adress, string consigneeUserName, string mobile)
         {
             try
             {
+                consigneeSession = null;
                 if (customerSession == null)
                     return new WebServiceResult<object>(false, null, "登录已超时").ToString();
                 var customer = customerSession as Customer;
@@ -100,11 +101,14 @@ namespace Wine.WebServices
                 newCustomerConsigneeInfo.Email = string.Empty;
 
                 var result = new CustomerConsigneeFacade().Insert(newCustomerConsigneeInfo);
-                var isSucceed = (result != null && result.CustomerConsigneeInfoID > 0);
-                return new WebServiceResult<object>(isSucceed, result).ToString();
+
+                consigneeSession = result;
+
+                return new WebServiceResult<object>(true, result).ToString();
             }
             catch (Exception ex)
             {
+                consigneeSession = null;
                 return new WebServiceResult<object>(false, null, ex.Message).ToString();
             }
         }
@@ -151,8 +155,7 @@ namespace Wine.WebServices
                 var customer = customerSession as Customer;
 
                 var result = new CustomerConsigneeFacade().Query(customer);
-                var isSucceed = (result != null && result.Count > 0);
-                return new WebServiceResult<object>(isSucceed, result).ToString();
+                return new WebServiceResult<object>(true, result).ToString();
             }
             catch (Exception ex)
             {

@@ -42,6 +42,7 @@ namespace Wine.Infrastructure.DAO.Orders
                         sqlparamsDetail.Add(new SqlParameter("@GoodsName", detail.GoodsName));
                         sqlparamsDetail.Add(new SqlParameter("@GoodPrice", detail.GoodsPrice));
                         sqlparamsDetail.Add(new SqlParameter("@GoodsCount", detail.GoodsCount));
+                        sqlparamsDetail.Add(new SqlParameter("@PictureUrl", detail.PictureUrl));
                         SqlHelper.ExecuteNonQuery(tran, "USP_DeliverOrderDetail_Insert", sqlparamsDetail.ToArray());
                     }
 
@@ -71,5 +72,26 @@ namespace Wine.Infrastructure.DAO.Orders
             throw new NotImplementedException();
         }
         #endregion
+
+        public List<Order> QueryMyOrder(int customerId)
+        {
+            var sqlparams = new List<SqlParameter>();
+            sqlparams.Add(new SqlParameter("@CustomerID", customerId));
+            var result = SqlHelper.ExecuteDataTable(this.DBConnection, "USP_Deliver_QueryMyOrderList", sqlparams.ToArray());
+
+            if (result != null && result.Rows.Count > 0)
+            {
+                var orderList = result.ToList<Order>();
+                var orderDetailList = result.ToList<OrderDetail>();
+
+                foreach (Order order in orderList)
+                {
+                    order.Details = orderDetailList.FindAll(detail => int.Equals(order.OrderID, detail.OrderID));
+                }
+
+                return orderList;
+            }
+            return null;
+        }
     }
 }

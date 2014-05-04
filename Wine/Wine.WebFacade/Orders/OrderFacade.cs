@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Wine.Infrastructure.Model.Orders;
 using Wine.Infrastructure.BLL.Ordes;
+using Wine.Infrastructure.Model.User;
 
 namespace Wine.WebFacade.Orders
 {
@@ -12,6 +13,11 @@ namespace Wine.WebFacade.Orders
         public bool CommitOrder(Order order)
         {
             return new OrderBLL().CreateNewOrder(order);
+        }
+
+        public List<Order> QueryMyOrder(Customer customer)
+        {
+            return new OrderBLL().QueryMyOrder(customer);
         }
     }
 }

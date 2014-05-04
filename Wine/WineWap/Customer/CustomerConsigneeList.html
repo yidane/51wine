@@ -23,7 +23,7 @@
             <div class="add-list">
                 <div class="title clearfix">
                     <h2>选择收货地址</h2>
-                    <a href="CustomerConsignee.html">添加新地址</a>
+                    <a onclick="AddNewConsignee()" style="cursor: pointer">添加新地址</a>
                 </div>
                 <ul class="list" id="consigneeList">
                 </ul>
@@ -46,7 +46,7 @@
                     if (data.IsSucceed) {
                         if (data.Result != null) {
                             $(data.Result).each(function (e, n) {
-                                var html = "<li class='clearfix' onclick='AddressClick(" + n.CustomerConsigneeInfoID + ")'><p>" + n.Adress + "&nbsp;&nbsp;" + n.ConsigneeUserName + "&nbsp;&nbsp;" + n.ConsigneeMobile + "</p><span class='arrow'></span></li>";
+                                var html = "<li class='clearfix' onclick='AddressClick(" + n.CustomerConsigneeInfoID + ")' style='cursor: pointer'><p>" + n.Adress + "&nbsp;&nbsp;" + n.ConsigneeUserName + "&nbsp;&nbsp;" + n.ConsigneeMobile + "</p><span class='arrow'></span></li>";
                                 $("#consigneeList").append(html);
                             });
                         }
@@ -58,11 +58,25 @@
             });
         });
 
+        function AddNewConsignee() {
+            var url = getQueryString("Url");
+            var newUrl = "../Customer/CustomerConsignee.html?Url=";
+            if (url != null && url != "") {
+                newUrl = newUrl + url;
+            }
+            else {
+                newUrl = "../Customer/CustomerConsignee.html?Url=" + document.location.href;
+            }
+
+            document.location.href = newUrl;
+        }
+
         function AddressClick(consigneeID) {
             var url = getQueryString("url");
             if (url != null && url != "") {
                 $.ajax({
-                    url: "../Services/CustomerService.asmx/QueryAllConsignee",
+                    url: "../Services/CustomerService.asmx/SetRecentlyConsignee",
+                    data: { consigneeID: consigneeID },
                     cache: false,
                     success: function (data) {
                         if (data.IsSucceed && data.Result) {
@@ -78,6 +92,5 @@
             }
         }
     </script>
-
 </body>
 </html>

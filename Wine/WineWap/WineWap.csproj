@@ -79,6 +79,7 @@
     <Content Include="Styles\cart.css" />
     <Content Include="Styles\consignee.css" />
     <Content Include="Styles\Order.css" />
+    <Content Include="Styles\Orderlist.css" />
     <Content Include="Styles\productdetail.css" />
     <Content Include="Styles\themes\black\accordion.css" />
     <Content Include="Styles\themes\black\calendar.css" />

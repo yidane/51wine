@@ -89,8 +89,16 @@ namespace WineWap.Services
         [WebMethod(EnableSession = true)]
         public void AddConsignee(int regionID, string adress, string consigneeUserName, string mobile)
         {
+            object newConsignee = null;
             Context.Response.ContentType = "json";
-            Context.Response.Write(new Wine.WebServices.CustomerService().AddConsignee(Session["LoginUser"], regionID, adress, consigneeUserName, mobile));
+            var outputString = new Wine.WebServices.CustomerService().AddConsignee(Session["LoginUser"], out newConsignee, regionID, adress, consigneeUserName, mobile);
+
+            if (newConsignee != null)
+            {
+                Session["RecentlyConsignee"] = newConsignee;
+            }
+
+            Context.Response.Write(outputString);
         }
 
         [WebMethod(EnableSession = true)]

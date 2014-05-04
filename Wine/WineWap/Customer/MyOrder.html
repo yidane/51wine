@@ -7,7 +7,34 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
     <meta name="viewport" content="width=320, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title></title>
+    <link href="../Styles/header.css" rel="stylesheet" />
+    <link href="../Styles/foot.css" rel="stylesheet" />
+    <link href="../Styles/reset.css" rel="stylesheet" />
+    <link href="../Styles/Orderlist.css" rel="stylesheet" />
+    <script src="../Javascript/jquery-1.6.2.min.js"></script>
 </head>
 <body>
+    <div class="header" id="header">
+        <span class="headline">我的订单</span>
+    </div>
+    <section>
+        <div class="pending-order">
+            <ul class="list" id="orderList">
+            </ul>
+        </div>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $.ajax({
+                    url: "../Services/MarketService.asmx/QueryMyOrder",
+                    cache: false,
+                    success: function (data) {
+                        if (data.IsSucceed && data.Result != null) {
+                            $("#orderList").append(data.Result);
+                        }
+                    }
+                });
+            })
+        </script>
+    </section>
 </body>
 </html>

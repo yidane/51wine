@@ -37,6 +37,11 @@ namespace Wine.Infrastructure.Model.Orders
         public decimal GoodsPrice { get; set; }
 
         /// <summary>
+        /// 图链接
+        /// </summary>
+        public string PictureUrl { get; set; }
+
+        /// <summary>
         /// 购买数量
         /// </summary>
         public int GoodsCount { get; set; }

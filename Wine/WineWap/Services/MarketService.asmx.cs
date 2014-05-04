@@ -64,7 +64,7 @@ namespace WineWap.Services
             //outHtmlBuilder.Append("</div>");
             outHtmlBuilder.Append("</div>");
             outHtmlBuilder.Append("</li>");
-            return string.Format(outHtmlBuilder.ToString(), goods.GoodsID, goods.Pictureurl, goods.GoodsName, goods.CurrentPrice, goods.HistoryPrice, 0);
+            return string.Format(outHtmlBuilder.ToString(), goods.GoodsID, goods.Pictureurl, goods.GoodsName, goods.CurrentPrice.ToString("0.00"), goods.HistoryPrice.ToString("0.00"), 0);
         }
 
         [WebMethod(EnableSession = true)]
@@ -139,7 +139,7 @@ namespace WineWap.Services
                 if (Session["LoginUser"] != null && selectConsignee != null)
                 {
                     Order newOrder = new Order();
-                    newOrder.OrderNO = DateTime.Now.ToLongDateString();
+                    newOrder.OrderNO = DateTime.Now.ToFileTime().ToString();
                     newOrder.OrderOwnerID = (Session["LoginUser"] as Customer).CustomerID;
                     newOrder.OrderStatus = 0;
                     newOrder.OrderType = 1;
@@ -159,6 +159,7 @@ namespace WineWap.Services
                     detail.GoodsID = goodsID;
                     detail.GoodsName = selectGoods.GoodsName;
                     detail.GoodsPrice = selectGoods.CurrentPrice;
+                    detail.PictureUrl = selectGoods.Pictureurl;
 
                     newOrder.Details = new List<OrderDetail>();
                     newOrder.Details.Add(detail);
@@ -176,6 +177,13 @@ namespace WineWap.Services
             {
                 Context.Response.Write(new WebServiceResult<object>(false, ex.Message).ToString());
             }
+        }
+
+        [WebMethod(EnableSession = true)]
+        public void QueryMyOrder()
+        {
+            Context.Response.ContentType = "json";
+            Context.Response.Write(new Wine.WebServices.MarketService().QueryMyOrder(Session["LoginUser"]));
         }
     }
 }

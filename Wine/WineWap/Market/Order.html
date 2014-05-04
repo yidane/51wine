@@ -25,7 +25,7 @@
             <form>
                 <div class="choose add">
                     <h2>收货地址</h2>
-                    <a class="content clearfix" href="../Customer/CustomerConsigneeList.html">
+                    <a class="content clearfix" onclick="ChooseConsignee()" style="cursor: pointer">
                         <span class="text"><i id="address"></i>
                             <br />
                             <i id="consigneeName"></i><i id="mobile"></i></span>
@@ -99,7 +99,7 @@
             $.ajax({
                 url: "../Services/CustomerService.asmx/QueryRecentlyConsignee",
                 success: function (data) {
-                    if (data.IsSucceed) {
+                    if (data.IsSucceed && data.Result != null) {
                         $("#address").html(data.Result.Adress);
                         $("#consigneeName").html(data.Result.ConsigneeUserName);
                         $("#mobile").html(data.Result.ConsigneeMobile);
@@ -133,6 +133,11 @@
                 }
             });
         });
+
+        function ChooseConsignee() {
+            var newUrl = "../Customer/CustomerConsigneeList.html?Url=" + document.location.href;
+            document.location.href = newUrl;
+        }
 
         function check_form() {
             var ly = $("textarea[name='postscript']");

@@ -75,5 +75,10 @@ namespace Wine.Infrastructure.Model.Orders
         /// 顾客备注
         /// </summary>
         public string CustomerRemarks { get; set; }
+
+        /// <summary>
+        /// 下单时间
+        /// </summary>
+        public DateTime OrderTime { get; set; }
     }
 }

@@ -102,7 +102,12 @@
                 $.post(url = '../Services/CustomerService.asmx/AddConsignee', data = { regionID: area, adress: adress, consigneeUserName: consignee, mobile: mobile }, callback = function (data) {
                     if (data.IsSucceed) {
                         var url = getQueryString("url");
-                        document.location.href = url;
+                        if (url != null) {
+                            document.location.href = url;
+                        }
+                        else {
+                            document.location.href = "CustomerConsigneeList.html";
+                        }
                     } else {
                         alert(data.ErrorMessage);
                     }
