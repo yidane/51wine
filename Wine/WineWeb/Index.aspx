@@ -13,11 +13,11 @@
         <div id="Container">
             <div id="Header">
                 <div id="Logo">
-                    <img src="Image/logo.png" alt="" />
+                    <img src="Image/logo1.png" alt="" />
                 </div>
                 <div id="Headermenu">
                     <ul>
-                        <li><a id="A1" href="javascript:void(0);" runat="server"><span class="n4"></span>安全退出</a></li>
+                        <li><a id="A1" href="Logout.aspx" runat="server"><span class="n4"></span>安全退出</a></li>
                     </ul>
                 </div>
             </div>
@@ -40,13 +40,12 @@
             </div>
             <div id="Footer">
                 <div style="width: 42%; text-align: left; float: left;">
-                    &nbsp;<a href="javascript:void()">技术支持：中石油办公管理项目组</a>
+                    &nbsp;<a href="javascript:void()"></a>
                     <span class="south-separator"></span>
-                    &nbsp;<a title="" target="_blank" href="javascript:void()">问题反馈</a>
                     <span class="south-separator"></span>
                 </div>
                 <div style="width: 16%; text-align: left; float: left;">
-                    <a href="javascript:void()">CopyRight © 2013-2013</a>
+                    CopyRight © 2014-2014
                 </div>
                 <div style="width: 42%; text-align: right; float: left;">
                 </div>

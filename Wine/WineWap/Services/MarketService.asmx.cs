@@ -55,16 +55,16 @@ namespace WineWap.Services
             outHtmlBuilder.Append("<span class=\"name\"><a href=\"WineDetail.html?id={0}\">{2}</a></span>");
             outHtmlBuilder.Append("</div>");
             outHtmlBuilder.Append("<div class=\"price clearfix\">");
-            outHtmlBuilder.Append("<p class='jx-price'>{3}</p>");
-            outHtmlBuilder.Append("<p class=\"market-price\"><S>{4}</S></p>");
-            outHtmlBuilder.Append("<p class=\"count\">{5}</p>");
+            outHtmlBuilder.Append("<p class='jx-price'>&yen;&nbsp;{3}</p>");
+            outHtmlBuilder.Append("<p class=\"market-price\"><S>&yen;&nbsp;{4}</S></p>");
+            outHtmlBuilder.Append("<p class=\"count\">{5}折</p>");
             outHtmlBuilder.Append("</div>");
             //outHtmlBuilder.Append("<div class=\"judge\">");
             //outHtmlBuilder.Append("<span class=\"score\">5分</span><span class=\"article\">0人评论</span>");
             //outHtmlBuilder.Append("</div>");
             outHtmlBuilder.Append("</div>");
             outHtmlBuilder.Append("</li>");
-            return string.Format(outHtmlBuilder.ToString(), goods.GoodsID, goods.Pictureurl, goods.GoodsName, goods.CurrentPrice.ToString("0.00"), goods.HistoryPrice.ToString("0.00"), 0);
+            return string.Format(outHtmlBuilder.ToString(), goods.GoodsID, goods.Pictureurl, goods.GoodsName, goods.CurrentPrice.ToString("0.00"), goods.HistoryPrice.ToString("0.00"), (10 * goods.CurrentPrice / goods.HistoryPrice).ToString("0.0"));
         }
 
         [WebMethod(EnableSession = true)]

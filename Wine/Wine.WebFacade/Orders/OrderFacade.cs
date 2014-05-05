@@ -19,5 +19,15 @@ namespace Wine.WebFacade.Orders
         {
             return new OrderBLL().QueryMyOrder(customer);
         }
+
+        public List<Order> QueryAllOrderByPage(int pageIndex, int pageSize)
+        {
+            return new OrderBLL().QueryAllOrderByPage(pageIndex, pageSize);
+        }
+
+        public bool CloseOrder(int customerID, int orderID)
+        {
+            return new OrderBLL().CloseOrder(customerID, orderID);
+        }
     }
 }

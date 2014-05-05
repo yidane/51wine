@@ -129,6 +129,8 @@
     <Content Include="Javascript\jquery.easyui.min.js" />
     <Content Include="Javascript\jquery.min.js" />
     <Content Include="Login.aspx" />
+    <Content Include="Logout.aspx" />
+    <Content Include="Services\MarketService.asmx" />
     <Content Include="Services\UserService.asmx" />
     <Content Include="Style\gray\accordion.css" />
     <Content Include="Style\gray\calendar.css" />
@@ -177,8 +179,7 @@
     <Content Include="Style\gray\window.css" />
     <Content Include="Style\icon.css" />
     <Content Include="Style\index.css" />
-    <Content Include="WeixinWebAPI\PostMessage.aspx" />
-    <Content Include="WeixinWebAPI\Test.aspx" />
+    <Content Include="SystemView\OrderList.html" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -203,27 +204,25 @@
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Logout.aspx.cs">
+      <DependentUpon>Logout.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Logout.aspx.designer.cs">
+      <DependentUpon>Logout.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Services\MarketService.asmx.cs">
+      <DependentUpon>MarketService.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Services\UserService.asmx.cs">
       <DependentUpon>UserService.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="WeixinWebAPI\PostMessage.aspx.cs">
-      <DependentUpon>PostMessage.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WeixinWebAPI\PostMessage.aspx.designer.cs">
-      <DependentUpon>PostMessage.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WeixinWebAPI\Test.aspx.cs">
-      <DependentUpon>Test.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WeixinWebAPI\Test.aspx.designer.cs">
-      <DependentUpon>Test.aspx</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Properties\PublishProfiles\wineweb.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -233,9 +232,13 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="..\Weixin\Wine.Weixin.csproj">
-      <Project>{66caf6cc-8f19-4971-bf91-7d8e182e1491}</Project>
-      <Name>Wine.Weixin</Name>
+    <ProjectReference Include="..\Wine.Infrastructure\Wine.Infrastructure.csproj">
+      <Project>{9f9d0413-26e1-4f65-a4c1-ce31a07d0e75}</Project>
+      <Name>Wine.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Wine.WebFacade\Wine.WebFacade.csproj">
+      <Project>{827fb944-b5f9-4027-9c83-8f69bc6c2a64}</Project>
+      <Name>Wine.WebFacade</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
@@ -251,7 +254,7 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerPort>43910</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:59613/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>

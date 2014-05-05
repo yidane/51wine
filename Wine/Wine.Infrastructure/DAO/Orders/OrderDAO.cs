@@ -77,7 +77,7 @@ namespace Wine.Infrastructure.DAO.Orders
         {
             var sqlparams = new List<SqlParameter>();
             sqlparams.Add(new SqlParameter("@CustomerID", customerId));
-            var result = SqlHelper.ExecuteDataTable(this.DBConnection, "USP_Deliver_QueryMyOrderList", sqlparams.ToArray());
+            var result = SqlHelper.ExecuteDataTable(this.DBConnection, "USP_DeliverOrder_QueryMyOrderList", sqlparams.ToArray());
 
             if (result != null && result.Rows.Count > 0)
             {
@@ -92,6 +92,39 @@ namespace Wine.Infrastructure.DAO.Orders
                 return orderList;
             }
             return null;
+        }
+
+        public List<Order> QueryAllOrderByPage(int pageIndex, int pageSize)
+        {
+            var sqlparams = new List<SqlParameter>();
+            sqlparams.Add(new SqlParameter("@PageIndex", pageIndex));
+            sqlparams.Add(new SqlParameter("@PageSize", pageSize));
+
+            var result = SqlHelper.ExecuteDataTable(this.DBConnection, "USP_DeliverOrder_QueryAllByPage", sqlparams.ToArray());
+
+            if (result != null && result.Rows.Count > 0)
+            {
+                var orderList = result.ToList<Order>();
+                var orderDetailList = result.ToList<OrderDetail>();
+
+                foreach (Order order in orderList)
+                {
+                    order.Details = orderDetailList.FindAll(detail => int.Equals(order.OrderID, detail.OrderID));
+                }
+
+                return orderList;
+            }
+            return null;
+        }
+
+        public bool CloseOrder(int customerID, int orderID)
+        {
+            var sqlparams = new List<SqlParameter>();
+            sqlparams.Add(new SqlParameter("@CustomerID", customerID));
+            sqlparams.Add(new SqlParameter("@OrderID", orderID));
+
+            var result = SqlHelper.ExecuteScalar(this.DBConnection, "USP_DeliverOrder_CloseOrder", sqlparams.ToArray());
+            return Convert.ToBoolean(result);
         }
     }
 }

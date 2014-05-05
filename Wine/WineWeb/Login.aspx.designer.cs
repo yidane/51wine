@@ -22,22 +22,22 @@ namespace WineWeb {
         protected global::System.Web.UI.HtmlControls.HtmlForm Form1;
         
         /// <summary>
-        /// LoginName 控件。
+        /// txtLoginName 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox LoginName;
+        protected global::System.Web.UI.WebControls.TextBox txtLoginName;
         
         /// <summary>
-        /// Password 控件。
+        /// txtPassword 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Password;
+        protected global::System.Web.UI.WebControls.TextBox txtPassword;
         
         /// <summary>
         /// LoginIn 控件。

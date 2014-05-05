@@ -1,0 +1,104 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <link href="../Style/icon.css" rel="stylesheet" />
+    <link href="../Style/gray/easyui.css" rel="stylesheet" />
+    <script src="../Javascript/jquery.min.js"></script>
+    <script src="../Javascript/jquery.easyui.min.js"></script>
+    <script src="../Javascript/easyui-lang-zh_CN.js"></script>
+</head>
+<body class="easyui-layout">
+    <div data-options="region:'center',title:'订单列表'">
+        <table id="dgLog" class="easyui-datagrid">
+            <thead>
+                <tr>
+                    <th data-options="field:'op',align:'center',formatter:formatOperate">操作</th>
+                    <th data-options="field:'OrderStatus',width:100,align:'center',formatter:formatStatus">订单总价</th>
+                    <th data-options="field:'Adress',width:200,align:'left',halign:'center'">订单地址</th>
+                    <th data-options="field:'ConsigneeUserName',width:100,align:'left',halign:'center'">收货人</th>
+                    <th data-options="field:'ConsigneeMobile',width:100,align:'left'">联系电话</th>
+                    <th data-options="field:'GoodsName',width:50,align:'center'">酒品名称</th>
+                    <th data-options="field:'GoodsPrice',width:50,align:'right'">购买价格</th>
+                    <th data-options="field:'GoodsCount',width:50,align:'left'">购买数量</th>
+                    <th data-options="field:'TotalPrice',width:50,align:'right'">订单总价</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#dgLog').datagrid({
+                url: '../Services/MarketService.asmx/QueryOrderList',
+                toolbar: '#toolbar',
+                idField: "LogID",
+                fitColumns: true,
+                pagination: true,
+                rownumbers: true,
+                striped: true,
+                pageNumber: 1,
+                pageSize: 10,
+                singleSelect: true
+            });
+        });
+
+        function formatOperate(val, row) {
+            if (row.OrderStatus == 0) {
+                var op = '<a href="javascript:void(0)" onclick="CloseOrder(' + row.CustomerID + "," + row.OrderID + ')">结单</a>';
+                return op;
+            }
+            return "";
+        }
+
+        function formatStatus(val, row) {
+            if (val == 0) {
+                return "未完结";
+            }
+            else {
+                return "已完结";
+            }
+        }
+
+        function CloseOrder(customerId, id) {
+            $.messager.confirm("提示", "您确定对该订单结单？", function (r) {
+                if (r) {
+                    $.ajax({
+                        url: "../Services/MarketService.asmx/CloseOrder",
+                        dataType: "json",
+                        data: { customerId: customerId, orderId: id },
+                        type: "post",
+                        async: false,
+                        success: function (result) {
+                            var loadedData = $("#dgLog").datagrid("getData");
+                            var newData = {};
+                            if (loadedData && loadedData.rows) {
+                                $(loadedData.rows).each(function (index, obj) {
+                                    if (id == obj.OrderID) {
+                                        obj.OrderStatus = 1;
+                                        return;
+                                    }
+                                });
+                            }
+                            $("#dgLog").datagrid("loadData", loadedData);
+
+                            if (result.IsSucceed) {
+                                $.messager.show({
+                                    title: '操作提示',
+                                    msg: "结单成功",
+                                    showType: 'show'
+                                });
+                            }
+                            else {
+                                $.messager.alert("操作提示", "结单失败,请重新操作", "error");
+                            }
+                        },
+                        error: function (a, b, c) { }
+                    });
+                }
+            });
+        }
+    </script>
+</body>
+</html>

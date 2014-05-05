@@ -19,5 +19,15 @@ namespace Wine.Infrastructure.BLL.Ordes
         {
             return new OrderDAO().QueryMyOrder(customer.CustomerID);
         }
+
+        public List<Order> QueryAllOrderByPage(int pageIndex, int pageSize)
+        {
+            return new OrderDAO().QueryAllOrderByPage(pageIndex, pageSize);
+        }
+
+        public bool CloseOrder(int customerId, int orderID)
+        {
+            return new OrderDAO().CloseOrder(customerId, orderID);
+        }
     }
 }

@@ -7,14 +7,12 @@ using System.Web.UI.WebControls;
 
 namespace WineWeb
 {
-    public partial class Index : System.Web.UI.Page
+    public partial class Logout : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["LoginUser"] == null)
-            {
-                Response.Redirect("Login.aspx");
-            }
+            Session.Clear();
+            Response.Redirect("Login.aspx");
         }
     }
 }

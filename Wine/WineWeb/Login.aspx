@@ -119,14 +119,14 @@
     <form id="Form1" runat="server">
         <div class="loginBox">
             <div class="login">
-                <div class="title">某某管理系统</div>
+                <div class="title">51酒订单管理</div>
                 <div class="author">
                     <div class="autInput">
                         <p class="mb05">
-                            <label>用户：</label><asp:TextBox ID="LoginName" runat="server"></asp:TextBox>
+                            <label>用户：</label><asp:TextBox ID="txtLoginName" runat="server"></asp:TextBox>
                         </p>
                         <p>
-                            <label>密码：</label><asp:TextBox ID="Password" TextMode="Password" runat="server"></asp:TextBox>
+                            <label>密码：</label><asp:TextBox ID="txtPassword" TextMode="Password" runat="server"></asp:TextBox>
                         </p>
                     </div>
                     <div class="autBtn">
@@ -137,10 +137,7 @@
         </div>
     </form>
     <script src="Script/jquery.min.js" type="text/javascript"></script>
-    <script type="text/javascript">
-        function LoginIn() {
-            document.location.href = "Index.aspx"
-        }
-    </script>
+
+
 </body>
 </html>
