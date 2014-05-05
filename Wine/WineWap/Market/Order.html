@@ -125,7 +125,7 @@
                         $("#count").html("x" + data.Result.Count);
                         $("#goodsPrice").html("&yen;&nbsp;" + data.Result.Price);
                         $("#reducePrice").html("&yen;&nbsp;" + ((data.Result.MarketPrice - data.Result.Price) * data.Result.Count));
-                        $("#TotalPrice").html("&yen;&nbsp;" + (data.Result.Price * data.Result.Count + 10));
+                        $("#TotalPrice").html("&yen;&nbsp;" + (data.Result.Price * data.Result.Count));
                     }
                     else {
                         alert(data.ErrorMessage);
