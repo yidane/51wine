@@ -39,6 +39,7 @@
             // 
             // serviceInstaller1
             // 
+            this.serviceInstaller1.Description = "51Wine 自动从页面抓取数据服务";
             this.serviceInstaller1.ServiceName = "AutoGrapWineData";
             // 
             // ProjectInstaller

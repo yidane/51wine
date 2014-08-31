@@ -25,11 +25,11 @@
             <form method="post" action="" onsubmit="return false;">
                 <ul>
                     <li>
-                        <input class='tipInput' tiptext='用户名/手机号' type="text" placeholder="" value="" name="loginName" />
+                        <input class='tipInput' tiptext='用户名/手机号' type="text" placeholder="用户名必须输入" required="required" value="" name="loginName" />
                     </li>
                     <li>
                         <input class='password' tar='password' type="text" value="密码" />
-                        <input id='password' type="password" value="" name="password" style='display: none' />
+                        <input id='password' type="password" value="" name="password" placeholder="密码必须输入" required="required" style='display: none' />
                     </li>
                     <li>
                         <input id='btn_enter' type="submit" class="btn" value="登录" /></li>

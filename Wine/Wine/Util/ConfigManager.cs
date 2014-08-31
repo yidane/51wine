@@ -25,5 +25,10 @@ namespace Wine.Util
                 return m_DBConnection;
             }
         }
+
+        public static string WapSiteUrl
+        {
+            get { return System.Configuration.ConfigurationManager.AppSettings["WapSiteUrl"]; }
+        }
     }
 }

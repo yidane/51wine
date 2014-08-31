@@ -94,12 +94,11 @@
                                                     if (cartData.Result) {
                                                         document.location.href = "Order.html";
                                                     }
-                                                }
-                                                else {
+                                                } else {
                                                     alert(cartData.ErrorMessage);
                                                 }
                                             }
-                                        })
+                                        });
                                     }
                                     else {
                                         var newUrl = "../Customer/Login.html?Url=" + document.location.href;
@@ -132,31 +131,18 @@
                         <p class="jx-price" id="price"></p>
                         <p class="market-price" id="marketPrice"></p>
                     </div>
-                    <div class="goods_number clearfix">
-                        <p class="name">数&nbsp;&nbsp;&nbsp;量</p>
-                        <div class="addForm">
-                            <input type="button" value="-" class="btn" onclick="chgNum(-1);" />
-                            <input type="text" id='prosum' name="prosum" id="" value="1" class="text" />
-                            <input type="button" value="+" class="btn" onclick="chgNum(1);" />
-                        </div>
-                    </div>
-                    <div class='goods_number clearfix'>
-                        <p class="name">配送至</p>
-                        <select id="area" style="width: 100%"></select>
-                        <span id="msg">现货</span>
-                    </div>
-                    <div class="div_but1 clearfix" id='btn2'>
-                        <div class="buy">
-                            <a class='ljgm1' name="goods_buy" href="javascript:void()" onclick="Buy()">
-                                <i></i>
-                                立即购买
-                            </a>
-                        </div>
+                    <div class="price clearfix">
+                        <p class="jx-price">
+                            <a href="tel:0355-8888519"><strong>定酒热线  0355-8888519</strong></a>
+                        </p>
+                        <p class="jx-price">提示：我们的工作时间是8:00(早)--19:00(晚)</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+    <div class="footer">
+    </div>
     <script type="text/javascript">
         function chgNum(a) {
             var prosum = $("#prosum");
