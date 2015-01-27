@@ -30,5 +30,22 @@ namespace Wine.Util
         {
             get { return System.Configuration.ConfigurationManager.AppSettings["WapSiteUrl"]; }
         }
+
+        private static int _Interval = 60 * 60 * 1000;
+        public static int Interval
+        {
+            get
+            {
+                if (_Interval == 60 * 60 * 1000)
+                {
+                    var interval = 0;
+                    var intervalString = System.Configuration.ConfigurationManager.AppSettings["Interval"];
+                    if (int.TryParse(intervalString, out interval))
+                        _Interval = interval;
+                }
+
+                return _Interval;
+            }
+        }
     }
 }

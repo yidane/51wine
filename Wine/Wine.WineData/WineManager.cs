@@ -5,6 +5,7 @@ using System.Text;
 using System.Xml;
 using Wine.Infrastructure.Model.Commodity;
 using Wine.WebFacade.Commodity;
+using System.IO;
 
 namespace Wine.Data
 {
@@ -106,6 +107,7 @@ namespace Wine.Data
             return data;
         }
 
+        //[Obsolete("分析应该是51网站有什么特别的设置。在没有检测到从自身页面跳转时候，会自己跳转一次。")]
         private List<string> GetDataByPage(int page, GoodsType goodsType, string className)
         {
             WebClient oWebClient = new WebClient();
@@ -120,6 +122,37 @@ namespace Wine.Data
             });
 
             return htmlOutput;
+        }
+
+        private List<string> GetDataByPageNew(int page, GoodsType goodsType, string className)
+        {
+            //先请求一次
+            var httpWebRequest = (HttpWebRequest)HttpWebRequest.Create(goodsType.MoreDataUrl);
+            httpWebRequest.Referer = goodsType.MoreDataUrl;
+            httpWebRequest.Method = "GET";
+            httpWebRequest.AllowAutoRedirect = true;
+            httpWebRequest.CookieContainer = new CookieContainer();
+            var response = (HttpWebResponse)httpWebRequest.GetResponse();
+            var stream = response.GetResponseStream();
+
+            
+
+            Encoding encode = System.Text.Encoding.GetEncoding("utf-8");
+            StreamReader streamReader = new StreamReader(stream, encode);
+
+            var cc = httpWebRequest.CookieContainer.GetCookies(response.ResponseUri);
+
+            string html = streamReader.ReadToEnd();
+            var htmlData = GrapManager.GetElementsByClass(html, className);
+            var htmlOutput = new List<string>();
+            htmlData.ForEach(delegate(string divData)
+            {
+                htmlOutput.Add(GrapManager.TransUrl("", divData));
+            });
+
+            return htmlOutput;
+
+
         }
         #endregion
     }

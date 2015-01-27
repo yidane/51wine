@@ -26,7 +26,7 @@ namespace Wine.WindowsService
             {
                 //启动轮询服务
                 _mTimer = _mTimer ?? new Timer();
-                _mTimer.Interval = 5 * 60 * 1000;
+                _mTimer.Interval = ConfigManager.Interval;
                 _mTimer.Elapsed += timer_Elapsed;
                 _mTimer.Start();
                 //IIS启动时候就开始轮询
