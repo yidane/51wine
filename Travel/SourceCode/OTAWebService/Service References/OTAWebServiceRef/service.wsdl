@@ -1,0 +1,1052 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="GetProducts">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="merchantCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="parameters" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="signature" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetProductsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetProductsResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="OrderOccupies">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="merchantCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="postOrder" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="signature" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="OrderOccupiesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="OrderOccupiesResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="testSignture">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="merchantCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="parames" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="parames1" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="parmes2" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="parmes3" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="merchantKey" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="testSigntureResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="testSigntureResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ChangeOrderEdit">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="merchantCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="postOrder" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="signature" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ChangeOrderEditResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ChangeOrderEditResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAllOrderStatus">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="merchantCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="postOrder" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="signature" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="BusinessType" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="parkCode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAllOrderStatusResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAllOrderStatusResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="testOrderOccupiesJson">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="merchantCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="date" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="mkey" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="testOrderOccupiesJsonResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="testOrderOccupiesJsonResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetQuotaInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="parkCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="otaCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="date" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="parameters" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="signature" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetQuotaInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetQuotaInfoResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="OrderFinish">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="otaCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="otaOrderNO" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="platformSend" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="parameters" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="signature" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="OrderFinishResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="OrderFinishResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="OrderRelease">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="otaCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="otaOrderNO" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="parameters" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="signature" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="OrderReleaseResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="OrderReleaseResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAccountInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="merchantCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="signature" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAccountInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAccountInfoResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RepeatMess">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="merchantCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="signature" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="parkSend" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="conditions" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="postOrder" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RepeatMessResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RepeatMessResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="string" nillable="true" type="s:string" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetProductsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetProducts" />
+  </wsdl:message>
+  <wsdl:message name="GetProductsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetProductsResponse" />
+  </wsdl:message>
+  <wsdl:message name="OrderOccupiesSoapIn">
+    <wsdl:part name="parameters" element="tns:OrderOccupies" />
+  </wsdl:message>
+  <wsdl:message name="OrderOccupiesSoapOut">
+    <wsdl:part name="parameters" element="tns:OrderOccupiesResponse" />
+  </wsdl:message>
+  <wsdl:message name="testSigntureSoapIn">
+    <wsdl:part name="parameters" element="tns:testSignture" />
+  </wsdl:message>
+  <wsdl:message name="testSigntureSoapOut">
+    <wsdl:part name="parameters" element="tns:testSigntureResponse" />
+  </wsdl:message>
+  <wsdl:message name="ChangeOrderEditSoapIn">
+    <wsdl:part name="parameters" element="tns:ChangeOrderEdit" />
+  </wsdl:message>
+  <wsdl:message name="ChangeOrderEditSoapOut">
+    <wsdl:part name="parameters" element="tns:ChangeOrderEditResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAllOrderStatusSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAllOrderStatus" />
+  </wsdl:message>
+  <wsdl:message name="GetAllOrderStatusSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAllOrderStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="testOrderOccupiesJsonSoapIn">
+    <wsdl:part name="parameters" element="tns:testOrderOccupiesJson" />
+  </wsdl:message>
+  <wsdl:message name="testOrderOccupiesJsonSoapOut">
+    <wsdl:part name="parameters" element="tns:testOrderOccupiesJsonResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetQuotaInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:GetQuotaInfo" />
+  </wsdl:message>
+  <wsdl:message name="GetQuotaInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:GetQuotaInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="OrderFinishSoapIn">
+    <wsdl:part name="parameters" element="tns:OrderFinish" />
+  </wsdl:message>
+  <wsdl:message name="OrderFinishSoapOut">
+    <wsdl:part name="parameters" element="tns:OrderFinishResponse" />
+  </wsdl:message>
+  <wsdl:message name="OrderReleaseSoapIn">
+    <wsdl:part name="parameters" element="tns:OrderRelease" />
+  </wsdl:message>
+  <wsdl:message name="OrderReleaseSoapOut">
+    <wsdl:part name="parameters" element="tns:OrderReleaseResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAccountInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAccountInfo" />
+  </wsdl:message>
+  <wsdl:message name="GetAccountInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAccountInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="RepeatMessSoapIn">
+    <wsdl:part name="parameters" element="tns:RepeatMess" />
+  </wsdl:message>
+  <wsdl:message name="RepeatMessSoapOut">
+    <wsdl:part name="parameters" element="tns:RepeatMessResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetProductsHttpGetIn">
+    <wsdl:part name="merchantCode" type="s:string" />
+    <wsdl:part name="parameters" type="s:string" />
+    <wsdl:part name="signature" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetProductsHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="OrderOccupiesHttpGetIn">
+    <wsdl:part name="merchantCode" type="s:string" />
+    <wsdl:part name="postOrder" type="s:string" />
+    <wsdl:part name="signature" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="OrderOccupiesHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="testSigntureHttpGetIn">
+    <wsdl:part name="merchantCode" type="s:string" />
+    <wsdl:part name="parames" type="s:string" />
+    <wsdl:part name="parames1" type="s:string" />
+    <wsdl:part name="parmes2" type="s:string" />
+    <wsdl:part name="parmes3" type="s:string" />
+    <wsdl:part name="merchantKey" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="testSigntureHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ChangeOrderEditHttpGetIn">
+    <wsdl:part name="merchantCode" type="s:string" />
+    <wsdl:part name="postOrder" type="s:string" />
+    <wsdl:part name="signature" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ChangeOrderEditHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAllOrderStatusHttpGetIn">
+    <wsdl:part name="merchantCode" type="s:string" />
+    <wsdl:part name="postOrder" type="s:string" />
+    <wsdl:part name="signature" type="s:string" />
+    <wsdl:part name="BusinessType" type="s:string" />
+    <wsdl:part name="parkCode" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAllOrderStatusHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="testOrderOccupiesJsonHttpGetIn">
+    <wsdl:part name="merchantCode" type="s:string" />
+    <wsdl:part name="date" type="s:string" />
+    <wsdl:part name="mkey" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="testOrderOccupiesJsonHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetQuotaInfoHttpGetIn">
+    <wsdl:part name="parkCode" type="s:string" />
+    <wsdl:part name="otaCode" type="s:string" />
+    <wsdl:part name="date" type="s:string" />
+    <wsdl:part name="parameters" type="s:string" />
+    <wsdl:part name="signature" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetQuotaInfoHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="OrderFinishHttpGetIn">
+    <wsdl:part name="otaCode" type="s:string" />
+    <wsdl:part name="otaOrderNO" type="s:string" />
+    <wsdl:part name="platformSend" type="s:string" />
+    <wsdl:part name="parameters" type="s:string" />
+    <wsdl:part name="signature" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="OrderFinishHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="OrderReleaseHttpGetIn">
+    <wsdl:part name="otaCode" type="s:string" />
+    <wsdl:part name="otaOrderNO" type="s:string" />
+    <wsdl:part name="parameters" type="s:string" />
+    <wsdl:part name="signature" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="OrderReleaseHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAccountInfoHttpGetIn">
+    <wsdl:part name="merchantCode" type="s:string" />
+    <wsdl:part name="signature" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAccountInfoHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="RepeatMessHttpGetIn">
+    <wsdl:part name="merchantCode" type="s:string" />
+    <wsdl:part name="signature" type="s:string" />
+    <wsdl:part name="parkSend" type="s:string" />
+    <wsdl:part name="conditions" type="s:string" />
+    <wsdl:part name="postOrder" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="RepeatMessHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetProductsHttpPostIn">
+    <wsdl:part name="merchantCode" type="s:string" />
+    <wsdl:part name="parameters" type="s:string" />
+    <wsdl:part name="signature" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetProductsHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="OrderOccupiesHttpPostIn">
+    <wsdl:part name="merchantCode" type="s:string" />
+    <wsdl:part name="postOrder" type="s:string" />
+    <wsdl:part name="signature" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="OrderOccupiesHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="testSigntureHttpPostIn">
+    <wsdl:part name="merchantCode" type="s:string" />
+    <wsdl:part name="parames" type="s:string" />
+    <wsdl:part name="parames1" type="s:string" />
+    <wsdl:part name="parmes2" type="s:string" />
+    <wsdl:part name="parmes3" type="s:string" />
+    <wsdl:part name="merchantKey" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="testSigntureHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ChangeOrderEditHttpPostIn">
+    <wsdl:part name="merchantCode" type="s:string" />
+    <wsdl:part name="postOrder" type="s:string" />
+    <wsdl:part name="signature" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ChangeOrderEditHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAllOrderStatusHttpPostIn">
+    <wsdl:part name="merchantCode" type="s:string" />
+    <wsdl:part name="postOrder" type="s:string" />
+    <wsdl:part name="signature" type="s:string" />
+    <wsdl:part name="BusinessType" type="s:string" />
+    <wsdl:part name="parkCode" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAllOrderStatusHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="testOrderOccupiesJsonHttpPostIn">
+    <wsdl:part name="merchantCode" type="s:string" />
+    <wsdl:part name="date" type="s:string" />
+    <wsdl:part name="mkey" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="testOrderOccupiesJsonHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetQuotaInfoHttpPostIn">
+    <wsdl:part name="parkCode" type="s:string" />
+    <wsdl:part name="otaCode" type="s:string" />
+    <wsdl:part name="date" type="s:string" />
+    <wsdl:part name="parameters" type="s:string" />
+    <wsdl:part name="signature" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetQuotaInfoHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="OrderFinishHttpPostIn">
+    <wsdl:part name="otaCode" type="s:string" />
+    <wsdl:part name="otaOrderNO" type="s:string" />
+    <wsdl:part name="platformSend" type="s:string" />
+    <wsdl:part name="parameters" type="s:string" />
+    <wsdl:part name="signature" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="OrderFinishHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="OrderReleaseHttpPostIn">
+    <wsdl:part name="otaCode" type="s:string" />
+    <wsdl:part name="otaOrderNO" type="s:string" />
+    <wsdl:part name="parameters" type="s:string" />
+    <wsdl:part name="signature" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="OrderReleaseHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAccountInfoHttpPostIn">
+    <wsdl:part name="merchantCode" type="s:string" />
+    <wsdl:part name="signature" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAccountInfoHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="RepeatMessHttpPostIn">
+    <wsdl:part name="merchantCode" type="s:string" />
+    <wsdl:part name="signature" type="s:string" />
+    <wsdl:part name="parkSend" type="s:string" />
+    <wsdl:part name="conditions" type="s:string" />
+    <wsdl:part name="postOrder" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="RepeatMessHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:portType name="ServiceSoap">
+    <wsdl:operation name="GetProducts">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">ota获取某日产品信息</wsdl:documentation>
+      <wsdl:input message="tns:GetProductsSoapIn" />
+      <wsdl:output message="tns:GetProductsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="OrderOccupies">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">ota回传订单--占用</wsdl:documentation>
+      <wsdl:input message="tns:OrderOccupiesSoapIn" />
+      <wsdl:output message="tns:OrderOccupiesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="testSignture">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取测试签名</wsdl:documentation>
+      <wsdl:input message="tns:testSigntureSoapIn" />
+      <wsdl:output message="tns:testSigntureSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ChangeOrderEdit">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">ota改签订单</wsdl:documentation>
+      <wsdl:input message="tns:ChangeOrderEditSoapIn" />
+      <wsdl:output message="tns:ChangeOrderEditSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllOrderStatus">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取订单的状态</wsdl:documentation>
+      <wsdl:input message="tns:GetAllOrderStatusSoapIn" />
+      <wsdl:output message="tns:GetAllOrderStatusSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="testOrderOccupiesJson">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">后去测试回传订单json</wsdl:documentation>
+      <wsdl:input message="tns:testOrderOccupiesJsonSoapIn" />
+      <wsdl:output message="tns:testOrderOccupiesJsonSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetQuotaInfo">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">ota查询某日某景区对自己的配额信息</wsdl:documentation>
+      <wsdl:input message="tns:GetQuotaInfoSoapIn" />
+      <wsdl:output message="tns:GetQuotaInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="OrderFinish">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">OTA订单完成</wsdl:documentation>
+      <wsdl:input message="tns:OrderFinishSoapIn" />
+      <wsdl:output message="tns:OrderFinishSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="OrderRelease">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">OTA订单释放</wsdl:documentation>
+      <wsdl:input message="tns:OrderReleaseSoapIn" />
+      <wsdl:output message="tns:OrderReleaseSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountInfo">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">合作者获取自己账户信息</wsdl:documentation>
+      <wsdl:input message="tns:GetAccountInfoSoapIn" />
+      <wsdl:output message="tns:GetAccountInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RepeatMess">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">OTA合作者进行短信重发</wsdl:documentation>
+      <wsdl:input message="tns:RepeatMessSoapIn" />
+      <wsdl:output message="tns:RepeatMessSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="ServiceHttpGet">
+    <wsdl:operation name="GetProducts">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">ota获取某日产品信息</wsdl:documentation>
+      <wsdl:input message="tns:GetProductsHttpGetIn" />
+      <wsdl:output message="tns:GetProductsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="OrderOccupies">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">ota回传订单--占用</wsdl:documentation>
+      <wsdl:input message="tns:OrderOccupiesHttpGetIn" />
+      <wsdl:output message="tns:OrderOccupiesHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="testSignture">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取测试签名</wsdl:documentation>
+      <wsdl:input message="tns:testSigntureHttpGetIn" />
+      <wsdl:output message="tns:testSigntureHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ChangeOrderEdit">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">ota改签订单</wsdl:documentation>
+      <wsdl:input message="tns:ChangeOrderEditHttpGetIn" />
+      <wsdl:output message="tns:ChangeOrderEditHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllOrderStatus">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取订单的状态</wsdl:documentation>
+      <wsdl:input message="tns:GetAllOrderStatusHttpGetIn" />
+      <wsdl:output message="tns:GetAllOrderStatusHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="testOrderOccupiesJson">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">后去测试回传订单json</wsdl:documentation>
+      <wsdl:input message="tns:testOrderOccupiesJsonHttpGetIn" />
+      <wsdl:output message="tns:testOrderOccupiesJsonHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetQuotaInfo">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">ota查询某日某景区对自己的配额信息</wsdl:documentation>
+      <wsdl:input message="tns:GetQuotaInfoHttpGetIn" />
+      <wsdl:output message="tns:GetQuotaInfoHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="OrderFinish">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">OTA订单完成</wsdl:documentation>
+      <wsdl:input message="tns:OrderFinishHttpGetIn" />
+      <wsdl:output message="tns:OrderFinishHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="OrderRelease">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">OTA订单释放</wsdl:documentation>
+      <wsdl:input message="tns:OrderReleaseHttpGetIn" />
+      <wsdl:output message="tns:OrderReleaseHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountInfo">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">合作者获取自己账户信息</wsdl:documentation>
+      <wsdl:input message="tns:GetAccountInfoHttpGetIn" />
+      <wsdl:output message="tns:GetAccountInfoHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RepeatMess">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">OTA合作者进行短信重发</wsdl:documentation>
+      <wsdl:input message="tns:RepeatMessHttpGetIn" />
+      <wsdl:output message="tns:RepeatMessHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="ServiceHttpPost">
+    <wsdl:operation name="GetProducts">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">ota获取某日产品信息</wsdl:documentation>
+      <wsdl:input message="tns:GetProductsHttpPostIn" />
+      <wsdl:output message="tns:GetProductsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="OrderOccupies">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">ota回传订单--占用</wsdl:documentation>
+      <wsdl:input message="tns:OrderOccupiesHttpPostIn" />
+      <wsdl:output message="tns:OrderOccupiesHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="testSignture">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取测试签名</wsdl:documentation>
+      <wsdl:input message="tns:testSigntureHttpPostIn" />
+      <wsdl:output message="tns:testSigntureHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ChangeOrderEdit">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">ota改签订单</wsdl:documentation>
+      <wsdl:input message="tns:ChangeOrderEditHttpPostIn" />
+      <wsdl:output message="tns:ChangeOrderEditHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllOrderStatus">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取订单的状态</wsdl:documentation>
+      <wsdl:input message="tns:GetAllOrderStatusHttpPostIn" />
+      <wsdl:output message="tns:GetAllOrderStatusHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="testOrderOccupiesJson">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">后去测试回传订单json</wsdl:documentation>
+      <wsdl:input message="tns:testOrderOccupiesJsonHttpPostIn" />
+      <wsdl:output message="tns:testOrderOccupiesJsonHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetQuotaInfo">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">ota查询某日某景区对自己的配额信息</wsdl:documentation>
+      <wsdl:input message="tns:GetQuotaInfoHttpPostIn" />
+      <wsdl:output message="tns:GetQuotaInfoHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="OrderFinish">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">OTA订单完成</wsdl:documentation>
+      <wsdl:input message="tns:OrderFinishHttpPostIn" />
+      <wsdl:output message="tns:OrderFinishHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="OrderRelease">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">OTA订单释放</wsdl:documentation>
+      <wsdl:input message="tns:OrderReleaseHttpPostIn" />
+      <wsdl:output message="tns:OrderReleaseHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountInfo">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">合作者获取自己账户信息</wsdl:documentation>
+      <wsdl:input message="tns:GetAccountInfoHttpPostIn" />
+      <wsdl:output message="tns:GetAccountInfoHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RepeatMess">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">OTA合作者进行短信重发</wsdl:documentation>
+      <wsdl:input message="tns:RepeatMessHttpPostIn" />
+      <wsdl:output message="tns:RepeatMessHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ServiceSoap" type="tns:ServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetProducts">
+      <soap:operation soapAction="http://tempuri.org/GetProducts" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OrderOccupies">
+      <soap:operation soapAction="http://tempuri.org/OrderOccupies" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="testSignture">
+      <soap:operation soapAction="http://tempuri.org/testSignture" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangeOrderEdit">
+      <soap:operation soapAction="http://tempuri.org/ChangeOrderEdit" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllOrderStatus">
+      <soap:operation soapAction="http://tempuri.org/GetAllOrderStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="testOrderOccupiesJson">
+      <soap:operation soapAction="http://tempuri.org/testOrderOccupiesJson" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetQuotaInfo">
+      <soap:operation soapAction="http://tempuri.org/GetQuotaInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OrderFinish">
+      <soap:operation soapAction="http://tempuri.org/OrderFinish" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OrderRelease">
+      <soap:operation soapAction="http://tempuri.org/OrderRelease" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountInfo">
+      <soap:operation soapAction="http://tempuri.org/GetAccountInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RepeatMess">
+      <soap:operation soapAction="http://tempuri.org/RepeatMess" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ServiceSoap12" type="tns:ServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetProducts">
+      <soap12:operation soapAction="http://tempuri.org/GetProducts" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OrderOccupies">
+      <soap12:operation soapAction="http://tempuri.org/OrderOccupies" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="testSignture">
+      <soap12:operation soapAction="http://tempuri.org/testSignture" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangeOrderEdit">
+      <soap12:operation soapAction="http://tempuri.org/ChangeOrderEdit" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllOrderStatus">
+      <soap12:operation soapAction="http://tempuri.org/GetAllOrderStatus" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="testOrderOccupiesJson">
+      <soap12:operation soapAction="http://tempuri.org/testOrderOccupiesJson" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetQuotaInfo">
+      <soap12:operation soapAction="http://tempuri.org/GetQuotaInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OrderFinish">
+      <soap12:operation soapAction="http://tempuri.org/OrderFinish" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OrderRelease">
+      <soap12:operation soapAction="http://tempuri.org/OrderRelease" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountInfo">
+      <soap12:operation soapAction="http://tempuri.org/GetAccountInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RepeatMess">
+      <soap12:operation soapAction="http://tempuri.org/RepeatMess" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ServiceHttpGet" type="tns:ServiceHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="GetProducts">
+      <http:operation location="/GetProducts" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OrderOccupies">
+      <http:operation location="/OrderOccupies" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="testSignture">
+      <http:operation location="/testSignture" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangeOrderEdit">
+      <http:operation location="/ChangeOrderEdit" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllOrderStatus">
+      <http:operation location="/GetAllOrderStatus" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="testOrderOccupiesJson">
+      <http:operation location="/testOrderOccupiesJson" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetQuotaInfo">
+      <http:operation location="/GetQuotaInfo" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OrderFinish">
+      <http:operation location="/OrderFinish" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OrderRelease">
+      <http:operation location="/OrderRelease" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountInfo">
+      <http:operation location="/GetAccountInfo" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RepeatMess">
+      <http:operation location="/RepeatMess" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ServiceHttpPost" type="tns:ServiceHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="GetProducts">
+      <http:operation location="/GetProducts" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OrderOccupies">
+      <http:operation location="/OrderOccupies" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="testSignture">
+      <http:operation location="/testSignture" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangeOrderEdit">
+      <http:operation location="/ChangeOrderEdit" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllOrderStatus">
+      <http:operation location="/GetAllOrderStatus" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="testOrderOccupiesJson">
+      <http:operation location="/testOrderOccupiesJson" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetQuotaInfo">
+      <http:operation location="/GetQuotaInfo" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OrderFinish">
+      <http:operation location="/OrderFinish" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OrderRelease">
+      <http:operation location="/OrderRelease" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountInfo">
+      <http:operation location="/GetAccountInfo" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RepeatMess">
+      <http:operation location="/RepeatMess" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Service">
+    <wsdl:port name="ServiceSoap" binding="tns:ServiceSoap">
+      <soap:address location="http://223.223.179.17:8090/service.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ServiceSoap12" binding="tns:ServiceSoap12">
+      <soap12:address location="http://223.223.179.17:8090/service.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ServiceHttpGet" binding="tns:ServiceHttpGet">
+      <http:address location="http://223.223.179.17:8090/service.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ServiceHttpPost" binding="tns:ServiceHttpPost">
+      <http:address location="http://223.223.179.17:8090/service.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

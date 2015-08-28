@@ -1,0 +1,174 @@
+﻿<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <title>门票预订</title>
+    <link rel="stylesheet" href="TicketList.css" />
+    <link href="styles/swiper.min.css" rel="stylesheet" />
+    <script src="javaScripts/zepto.min.js"></script>
+    <style>
+        .tabs {
+            border: 0px;
+        }
+
+            .tabs .tab-navs {
+                border: none;
+                display: -webkit-box;
+                display: -webkit-flex;
+                display: -ms-flexbox;
+                display: flex;
+                padding: 3px 0;
+            }
+
+                .tabs .tab-navs a {
+                    display: block;
+                    -webkit-box-flex: 1;
+                    -webkit-flex: 1;
+                    -ms-flex: 1;
+                    flex: 1;
+                    line-height: 30px;
+                    cursor: pointer;
+                    text-align: center;
+                    border-left: 1px solid #d3dde3;
+                    font-size: 1.125em;
+                    font-weight: normal;
+                    color: #2a70be;
+                }
+
+                    .tabs .tab-navs a:first-child {
+                        border-left: none;
+                    }
+
+                    .tabs .tab-navs a.active {
+                        height: 30px;
+                        background-color: #f3f5f6;
+                        border-bottom: 2px solid #c71585;
+                        color: #c71585;
+                    }
+
+        .content-slide {
+            display: block;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="tab tabs">
+        <div class="tab-navs">
+            <a href="javascript:;" class="active">全部</a>
+            <a href="javascript:;">门票</a>
+            <a href="javascript:;">车票</a>
+        </div>
+        <div id="tabs-container" class="swiper-container">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <div class="content-slide">
+                        <div class="tab-pane active">
+                            <div class="panel panel-default">
+                                <div class="panel-bd">
+                                    <a href="TicketDetail.html" class="thumb thumb-active">
+                                        <div class="thumb-cover pull-left">
+                                            <div class="thumb-cnt">
+                                                <p class="title text-yellow">￥220元(一进门票)</p>
+                                                <div class="clearfix">
+                                                    <div class="about">
+                                                        <div><span class="text-white">景区门票，成人票</span></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="panel-bd">
+                                    <a href="TicketDetail.html" class="thumb thumb-active">
+                                        <div class="thumb-cover pull-left">
+                                            <div class="thumb-cnt">
+                                                <p class="title text-yellow">￥290元(二进门票)</p>
+                                                <div class="clearfix">
+                                                    <div class="about">
+                                                        <div><span class="text-white">景区门票，成人票</span></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="content-slide">
+                        <div class="tab-pane">
+                            <div class="panel panel-default">
+                                <div class="panel-bd">
+                                    <a href="TicketDetail.html" class="thumb thumb-active">
+                                        <div class="thumb-cover pull-left">
+                                            <div class="thumb-cnt">
+                                                <p class="title text-yellow">￥220元(一进门票)</p>
+                                                <div class="clearfix">
+                                                    <div class="about">
+                                                        <div><span class="text-white">景区门票，成人票</span></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="content-slide">
+                        <div class="tab-pane">
+                            <div class="panel panel-default">
+                                <div class="panel-bd">
+                                    <a href="TicketDetail.html" class="thumb thumb-active">
+                                        <div class="thumb-cover pull-left">
+                                            <div class="thumb-cnt">
+                                                <p class="title text-yellow">￥80元(全价车票)</p>
+                                                <div class="clearfix">
+                                                    <div class="about">
+                                                        <div><span class="text-white">景区车票</span></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="javaScripts/swiper.min.js"></script>
+    <script>
+        $(function() {
+            var tabsSwiper = new Swiper('.swiper-container', {
+                speed: 500,
+                onSlideChangeStart: function () {
+                    $(".tab-navs a.active").removeClass('active');
+                    $(".tab-navs a").eq(tabsSwiper.activeIndex).addClass('active');
+
+                    $(".tab-pane .active").removeClass('active');
+                    $(".tab-pane").eq(tabsSwiper.activeIndex).addClass('active');
+                }
+            });
+            $(".tab-navs a").on('touchstart mousedown', function (e) {
+                e.preventDefault();
+                $(".tab-navs .active").removeClass('active');
+                $(this).addClass('active');
+                tabsSwiper.slideTo($(this).index());
+            });
+            $(".tab-navs a").click(function (e) {
+                e.preventDefault();
+            });
+        });
+    </script>
+</body>
+</html>

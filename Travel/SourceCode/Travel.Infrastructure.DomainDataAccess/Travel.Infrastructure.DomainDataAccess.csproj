@@ -1,0 +1,161 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{47F144AA-B49D-4DB2-80D3-59B05F8680E6}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Travel.Infrastructure.DomainDataAccess</RootNamespace>
+    <AssemblyName>Travel.Infrastructure.DomainDataAccess</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\EntityFramework.6.1.3\lib\net40\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\EntityFramework.6.1.3\lib\net40\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Coupon\CouponRepository.cs" />
+    <Compile Include="Coupon\Entitys\Coupon.cs" />
+    <Compile Include="Coupon\Entitys\CouponState.cs" />
+    <Compile Include="Coupon\Entitys\CouponType.cs" />
+    <Compile Include="Coupon\Entitys\CouponUsage.cs" />
+    <Compile Include="Migrations\201508250929118_TicketUpate.cs" />
+    <Compile Include="Migrations\201508250929118_TicketUpate.Designer.cs">
+      <DependentUpon>201508250929118_TicketUpate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201508260647322_UserInfo.cs" />
+    <Compile Include="Migrations\201508260647322_UserInfo.Designer.cs">
+      <DependentUpon>201508260647322_UserInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201508270155567_Coupon.cs" />
+    <Compile Include="Migrations\201508270155567_Coupon.Designer.cs">
+      <DependentUpon>201508270155567_Coupon.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201508270638446_Coupon1.cs" />
+    <Compile Include="Migrations\201508270638446_Coupon1.Designer.cs">
+      <DependentUpon>201508270638446_Coupon1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201508270648133_CouponUsage.cs" />
+    <Compile Include="Migrations\201508270648133_CouponUsage.Designer.cs">
+      <DependentUpon>201508270648133_CouponUsage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201508270657050_Coupon2.cs" />
+    <Compile Include="Migrations\201508270657050_Coupon2.Designer.cs">
+      <DependentUpon>201508270657050_Coupon2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201508270700443_Coupon3.cs" />
+    <Compile Include="Migrations\201508270700443_Coupon3.Designer.cs">
+      <DependentUpon>201508270700443_Coupon3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201508280748405_DateTicket.cs" />
+    <Compile Include="Migrations\201508280748405_DateTicket.Designer.cs">
+      <DependentUpon>201508280748405_DateTicket.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201508280915420_dateticketentityupdate2.cs" />
+    <Compile Include="Migrations\201508280915420_dateticketentityupdate2.Designer.cs">
+      <DependentUpon>201508280915420_dateticketentityupdate2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Order\DateTicketEntity.cs" />
+    <Compile Include="Order\OrderDetailEntity.cs" />
+    <Compile Include="Order\OrderEntity.cs" />
+    <Compile Include="Order\TicketCategoryEntity.cs" />
+    <Compile Include="Order\TicketEntity.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TravelDBContext.cs" />
+    <Compile Include="User\Entitys\UserGroup.cs" />
+    <Compile Include="User\Entitys\UserInfo.cs" />
+    <Compile Include="User\UserRepository.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Travel.Infrastructure.WeiXin\Travel.Infrastructure.WeiXin.csproj">
+      <Project>{37afc00a-8d40-45df-98e8-3e671dd420fb}</Project>
+      <Name>Travel.Infrastructure.WeiXin</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201508250929118_TicketUpate.resx">
+      <DependentUpon>201508250929118_TicketUpate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508260647322_UserInfo.resx">
+      <DependentUpon>201508260647322_UserInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508270155567_Coupon.resx">
+      <DependentUpon>201508270155567_Coupon.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508270638446_Coupon1.resx">
+      <DependentUpon>201508270638446_Coupon1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508270648133_CouponUsage.resx">
+      <DependentUpon>201508270648133_CouponUsage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508270657050_Coupon2.resx">
+      <DependentUpon>201508270657050_Coupon2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508270700443_Coupon3.resx">
+      <DependentUpon>201508270700443_Coupon3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508280748405_DateTicket.resx">
+      <DependentUpon>201508280748405_DateTicket.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508280915420_dateticketentityupdate2.resx">
+      <DependentUpon>201508280915420_dateticketentityupdate2.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,583 @@
+﻿.dl_btn-close, .dl_ico-logo, .dl_ico-download,
+.dl_ico-download-bg, .dl_ico-tel,
+.dl_banner, .dl_ico-banner{display:inline-block;background-image:url(http://pic.c-ctrip.com/distribution/jhpage/mobile-mask.png?141017);background-repeat:no-repeat;background-size:320px 195px;}
+.dl_btn-close{width:30px;height:30px;background-position:-155px 5px;}
+.dl_ico-logo{width:34px;height:34px;background-position:-84px 0;}
+.dl_ico-download{width:13px;height:13px;background-position:-69px 0;}
+.dl_ico-download-bg{width:24px;height:24px;background-position:-16px 0;}
+.dl_ico-tel{width:24px;height:24px;background-position:-43px 0;}
+.dl_ico-banner{width:320px;height:35px;background-position:0 -160px;}
+
+.cui-mask{z-index:2000;position:fixed;top:0;left:0;right:0;bottom:0;height:100%;width:100%;background-color:rgba(0,0,0,.5)}
+.dl_panel, .dl_panel-bg{z-index:2002;position:fixed;bottom:0;left:0;right:0;width:100%;}
+.dl_panel{height:44px;background-color:rgba(0,0,0,.85);}
+.dl_panel .dl_btn-close{position:absolute;top:0;left:0;}
+.dl_panel .dl_cnt{margin:6px 0 0 26px;font-size:13px;color:#fff;}
+.dl_cnt .dl_ico-logo{float:left;margin-right:6px;}
+.dl_cnt p{line-height:1.0}
+.dl_cnt .dl_txt-i{font-style:italic;}
+.dl_cnt .dl_txt-bg{margin-left:2px;font-size:21px;}
+.dl_btn-download, .dl_btn-tel,
+.dl_btn-actdetail{border-radius:4px;text-align:center;color:#fff;}
+.dl_panel .dl_btn-download{position:absolute;right:10px;top:7px;width:62px;height:30px;line-height:30px;background-color:#FF9B00;}
+.dl_btn-download .dl_ico-download{margin-right:2px;vertical-align: -2px;}
+.dl_panel-bg{background-color:#fff;}
+.dl_panel-bg .dl_banner{display:block;width:100%;height:119px;background-color:#0882E4;background-position:center -37px;}
+.dl_panel-bg .dl_banner-mob{width:142px;height:210px;margin:-160px 0 0;background:url(http://pic.c-ctrip.com/distribution/jhpage/mobile-mask-banner.png?141017) no-repeat;background-size:142px 210px;}
+.dl_panel-bg .dl_ico-banner{display:block;width:100%;margin:-87px auto 0;background-repeat:repeat-x;}
+.dl_panel-bg .dl_btn-close{position:absolute;right:0;top:0;background-position:-120px 9px;}
+.dl_panel-bg .dl_btn-wrap{padding:8px 0;background-color:#fff;}
+.dl_btn-wrap a{display:block;width:202px;height:44px;margin:5px auto;line-height:44px;font-size:20px;}
+.dl_btn-wrap .dl_btn-download{background-color:#FF9B00;}
+.dl_btn-wrap .dl_btn-tel{background-color:#0882E4;}
+.dl_btn-wrap .dl_ico-download-bg,
+.dl_btn-wrap .dl_ico-tel{vertical-align:-4px;}
+
+.dl_panel2 .dl_btn-close-bg{position:absolute;top:0;right:0;display:block;width:34px;height:44px;background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAMAAABF0y+mAAAAJFBMVEX////7+/v9/f38/Pz///////8AAAD7+/v9/f38/Pz5+fn///8Qx3UMAAAAB3RSTlMGrqerA1QAkV5UdwAAAINJREFUeNpt0DsOxDAMA1H6JzvR/e+7cCEQgyzbV3EUs6/4s9VnaLZ8rbY329TILKVlDq3HSnuWAgoLBRR20Uq7aKUVWm2FVpvRWma07l1mtJYVWs+1YwPuixuI72wl2DlQsZlrGP0dKhpVNKpoVNGosn1Vtq+qw6BdajZqk0KjjDoUP38iFa1PkZEuAAAAAElFTkSuQmCC) center center no-repeat;background-size: 14px 14px;}
+.dl_panel2 .dl_cnt{margin-left:4px;}
+.dl_panel2 .dl_btn-download{right:44px;}
+.dl_panel21 .dl_btn-download{right:34px;width:38px;}
+.dl_panel21 .dl_btn-tel{right:76px;width:62px;background-color:#017AE2;}
+
+/*hongbao*/
+.reg_rule-wrap{background-image:url(http://pic.c-ctrip.com/distribution/newuser/act_bg.png);background-color:#ca1947;}
+.reg_main{padding-top:15px;}
+.reg_main .reg_main-img{display:block;width: 216px;margin:0 auto;}
+.reg_condition{margin:0 5%;padding-bottom:10px;color:#fff;}
+.reg_cond-header{margin:10px 0;text-align:center;}
+.reg_cond-header p{font-size:.8125rem;}
+.reg_cond-header small{font-size:.625rem;}
+.reg_cond-item{position:relative;margin-top:5px;padding-left:20px;font-size:.625rem;color:#ffcccc;}
+.reg_cond-item span{position:absolute;left:6px;}
+.reg_btn-wrap{margin:10px;height:80px}
+.reg_btn-wrap .reg_btn-main{display:block;width:60%;margin:0 auto;height:40px;line-height:40px;color:#ca1947;font-size:1.125rem;text-align:center;background-color:#ffcc33;border-radius:4px;}
+    
+/*register*/
+.dl_ico-hongbao, .dl_ico-actdetail{display:inline-block;background-image:url(http://pic.c-ctrip.com/distribution/newuser/mobile-mask.png);background-repeat:no-repeat;background-size:26px 90px;}
+.dl_btn-regclose{width:20px;height:20px;padding:0 20px 20px 0;background-position:left -70px;}
+.dl_ico-hongbao{float:left;width:40px;height:40px;background-position:5px top;}
+.dl_ico-actdetail{width:13px;height:13px;margin-left:4px;background-position:left -44px;vertical-align:-1px;}
+.dl_panel-reg .dl_cnt p{line-height:1.3}
+.dl_panel .dl_btn-actdetail{position:absolute;right:10px;top:7px;padding:0 5px 0 10px;height:30px;line-height:30px;background-color:#FF9B00;}
+
+@charset "utf-8";
+@-webkit-keyframes roll {
+	from {-webkit-transform: rotate(0deg); }
+	to {-webkit-transform: rotate(360deg); }
+}
+@-moz-keyframes roll {
+	from {-moz-transform: rotate(0deg); }
+	to {-moz-transform: rotate(360deg); }
+}
+@-ms-keyframes roll {
+	from {-ms-transform: rotate(0deg); }
+	to {-ms-transform: rotate(360deg); }
+}
+@-o-keyframes roll {
+	from {-o-transform: rotate(0deg); }
+	to {-o-transform: rotate(360deg); }
+}
+@keyframes roll {
+	from {transform: rotate(0deg); }
+	to {transform: rotate(360deg); }
+}
+.pop_ad_layer,
+.pop_ad_layer div,
+.pop_ad_layer h2,
+.pop_ad_layer p {margin:0;font-family:Arial, Roboto, 'Droid Sans', 'Hiragino Sans GB', "Microsoft YaHei", 'Simsun', STXihei, 'sans-serif';}
+.pop_ad_layer {width:100%;overflow:hidden;background-color:#FFFFFF;z-index:99;}
+.pop_btn{width:68px;height:30px;overflow:hidden;line-height:32px;text-align:center;text-decoration:none;font-size:13px;color:#FFFFFF;background-color:#FF9B00;border-radius:3px;}
+.pop_dl{height:30px;overflow:hidden;padding:0 25px 0 10px;line-height:32px;font-size:13px;text-decoration:none;color:#FFFFFF;background-color:#FF9B00;border-radius:3px;}
+.pop_dl:after {position:absolute;top:9px;right:-8px;width:26px;height:26px;overflow:hidden;line-height:999em;font-size:0;content:"";background:url(http://pic.c-ctrip.com/h5/marketing/app_popup_layer/ico_download.png) no-repeat 0 0;-webkit-transform:scale(.5);transform:scale(.5);-webkit-transform-origin:0 0;transform-origin:0 0;}
+.pop_btn_tel{width:72px;height:56px;overflow:hidden;line-height:999em;font-size:0;background:#FFFFFF url(http://pic.c-ctrip.com/h5/marketing/app_popup_layer/ico_tel.png) center center no-repeat;border:2px solid #CACACA;border-radius:6px;-webkit-transform:scale(.5);transform:scale(.5);-webkit-transform-origin:0 0;transform-origin:0 0;}
+.loading i {position: relative;display: inline-block;width:24px;height: 24px;margin-right:5px;vertical-align:middle;background:url(http://pic.c-ctrip.com/h5/marketing/common/loading_48.png) no-repeat;background-size: 48px 24px;background-position:-24px 0;}
+.loading i:after {content: "";position:absolute;top:0px;left:0px;width:24px;height: 24px;background:url(http://pic.c-ctrip.com/h5/marketing/common/loading_48.png) no-repeat;background-size:48px 24px;-webkit-animation: roll 1s linear infinite;-moz-animation: roll 1s linear infinite;-ms-animation: roll 1s linear infinite;-o-animation: roll 1s linear infinite;animation: roll 1s linear infinite;}
+.loading span {display:inline-block;height:24px;line-height:26px;vertical-align:middle;}
+/*===== 顶部样式 =====*/
+.pop_top_ad {position:relative;-webkit-box-sizing: border-box;box-sizing: border-box;height:44px;width: 100%;overflow:hidden;padding:7px 122px 0 65px;}
+.pop_top_ad .pop_close,
+.pop_top_ad .pop_logo {position:absolute;top:0;left:1px;width:44px;height:88px;overflow:hidden;line-height:999em;font-size:0;background:url(http://pic.c-ctrip.com/h5/marketing/app_popup_layer/ico_close.png) no-repeat center center;-webkit-transform:scale(.5);transform:scale(.5);-webkit-transform-origin:0 0;transform-origin:0 0;}
+.pop_top_ad .pop_logo {top:5px;left:25px;width:66px;height:66px;background-image:url(http://pic.c-ctrip.com/h5/marketing/app_popup_layer/logo.png);background-color:#1272DF;border-radius:10px;}
+.pop_top_ad p {line-height:1.1;font-size:10px;color:#333333;}
+.pop_top_ad p.pop_discount {font-size:12px;color:#FF6600;}
+.pop_top_ad p.pop_discount strong {padding:0 1px 0 2px;font-weight:bold;font-size:19px;}
+.pop_top_ad p.pop_discount em {font-style:normal;font-size:10px;}
+.pop_top_ad .pop_btn {position:absolute;top:7px;right:10px;}
+.pop_top_ad .pop_btn_tel {position:absolute;top:7px;right:45px;}
+.pop_top_ad .pop_dl {position:absolute;top:7px;right:10px;}
+.pop_top_ad .loading {position:absolute;top:0;left:0;width:100%;padding-top:12px;font-size:12px;text-align:center;color:#666666;}
+
+/*===== 底部样式 =====*/
+.pop_ad_layer_b {position:fixed;left:0;bottom:50px;background-color:rgba(0,0,0,.85);}
+.pop_bottom_ad {position:relative;-webkit-box-sizing: border-box;box-sizing: border-box;height:54px;width: 100%;padding:12px 0 0 65px;}
+.pop_bottom_ad .pop_arrow_l,
+.pop_bottom_ad .pop_logo {position:absolute;top:6px;left:1px;width:44px;height:88px;overflow:hidden;line-height:999em;font-size:0;background:url(http://pic.c-ctrip.com/h5/marketing/app_popup_layer/ico_arrow_left.png) no-repeat center center;-webkit-transform:scale(.5);transform:scale(.5);-webkit-transform-origin:0 0;transform-origin:0 0;}
+.pop_bottom_ad .pop_logo {top:10px;left:25px;width:66px;height:66px;background-image:url(http://pic.c-ctrip.com/h5/marketing/app_popup_layer/logo.png);background-color:#1272DF;border-radius:10px;}
+.pop_bottom_ad p {line-height:1.1;font-size:10px;color:#FFFFFF;}
+.pop_bottom_ad p.pop_discount {font-size:12px;}
+.pop_bottom_ad p.pop_discount strong {padding:0 1px 0 2px;line-height:1.2;font-weight:bold;font-size:19px;}
+.pop_bottom_ad p.pop_discount em {font-style:normal;font-size:10px;}
+.pop_bottom_ad p.pop_discount .pop_discount_train {display:block;padding:6px 0;}
+.pop_bottom_ad .pop_btn {position:absolute;top:12px;right:10px;}
+.pop_bottom_ad .pop_btn_tel {position: absolute;top: 12px;right:45px;background-image:url(http://pic.c-ctrip.com/h5/marketing/app_popup_layer/ico_bottom_tel.png);}
+.pop_bottom_ad .pop_dl {position:absolute;top: 12px;right: 10px;}
+.pop_bottom_ad .loading {position:absolute;left:0;width:100%;padding-top:5px;font-size:12px;text-align:center;color:#FFFFFF;}
+.pop_bottom_ad .loading i,
+.pop_bottom_ad .loading i:after{background-image:url(http://pic.c-ctrip.com/h5/marketing/common/loading_48w.png)}
+/*.pop_ad_layer_close {left:-27px;width:54px;height:54px;overflow:hidden;border-radius:50%;}
+.pop_ad_layer_close .pop_arrow_l {top:22px;left:33px;width:22px;height:22px;background-image:url(http://pic.c-ctrip.com/h5/marketing/app_popup_layer/ico_arrow_right.png);}*/
+.pop_ad_layer_close {left:-10px;width:60px;height:54px;overflow:hidden;border-radius:10px;box-shadow:0 1px 1px rgba(0,0,0,.4)}
+.pop_ad_layer_close:after {content:"";position:absolute;top:0;right:14%;width:57%;height:100%;background:url(http://webresource.c-ctrip.com/ResUnionOnline/R7/h5mask/Image/ico_clps.png) no-repeat center center;background-size:contain;-webkit-transform:scale(1);transform:scale(1);}
+
+
+/*下载中间页*/
+.app_dl-main{overflow-y: auto;-webkit-overflow-scrolling: touch;}
+.app_dl-header{width: 100%;height: 265px;padding-top: 20px;text-align: center;background: rgba(0,0,0,0) url(http://pic.ctrip.com/h5/marketing/app_download/dl_bg@1x.jpg) no-repeat;background-size: 100% 285px;background-image: -webkit-image-set(url(http://pic.ctrip.com/h5/marketing/app_download/dl_bg@2x.jpg) 2x,url(http://pic.ctrip.com/h5/marketing/app_download/dl_bg@1x.jpg) 1x);background-image: -moz-image-set(url(http://pic.ctrip.com/h5/marketing/app_download/dl_bg@2x.jpg) 2x,url(http://pic.ctrip.com/h5/marketing/app_download/dl_bg@1x.jpg) 1x);background-image: -ms-image-set(url(http://pic.ctrip.com/h5/marketing/app_download/dl_bg@2x.jpg) 2x,url(http://pic.ctrip.com/h5/marketing/app_download/dl_bg@1x.jpg) 1x);background-image: -o-image-set(url(http://pic.ctrip.com/h5/marketing/app_download/dl_bg@2x.jpg) 2x,url(http://pic.ctrip.com/h5/marketing/app_download/dl_bg@1x.jpg) 1x);}
+.app_dl-header .header-logo{width: 89px;height: 119px;margin: 0 auto;background: rgba(0,0,0,0) url(http://pic.ctrip.com/h5/marketing/app_download/logo_big@1x.png) no-repeat;background-size: 100%;background-image: -webkit-image-set(url(http://pic.ctrip.com/h5/marketing/app_download/logo_big@2x.png) 2x,url(http://pic.ctrip.com/h5/marketing/app_download/logo_big@1x.png) 1x);background-image: -moz-image-set(url(http://pic.ctrip.com/h5/marketing/app_download/logo_big@2x.png) 2x,url(http://pic.ctrip.com/h5/marketing/app_download/logo_big@1x.png) 1x);background-image: -ms-image-set(url(http://pic.ctrip.com/h5/marketing/app_download/logo_big@2x.png) 2x,url(http://pic.ctrip.com/h5/marketing/app_download/logo_big@1x.png) 1x);background-image: -o-image-set(url(http://pic.ctrip.com/h5/marketing/app_download/logo_big@2x.png) 2x,url(http://pic.ctrip.com/h5/marketing/app_download/logo_big@1x.png) 1x);}
+.app_dl-header .header-slogan{width: 225px;margin: 10px auto 0;position: relative;color: #fff;font-size: 20px;text-shadow: 0 1px 1px rgba(0,0,0,.15);}
+.app_dl-header .header-slogan .slogan-info{display: block;width: 124px;line-height: 30px;}
+.app_dl-header .header-slogan .slogan-info.info-l1{letter-spacing: 4px;text-indent: 2px;}
+.app_dl-header .header-slogan .slogan-em{position: absolute;top: 0;right: -6px;line-height: 1;font-size: 60px;letter-spacing: -2px;}
+.app_dl-header .header-slogan .slogan-em i{display: inline-block;text-indent: -10px;-webkit-transform: scale(.6,1);transform: scale(.6,1);}
+.app_dl-header .btn-dl{display: inline-block;width: 220px;height: 44px;line-height: 44px;margin-top: 10px;border-radius: 4px;color: #fff;font-size: 22px;background-color: #ff9a14;}
+.app_dl-list .list-item{padding: 15px;border-bottom: 1px dotted #ccc;}
+.app_dl-list .list-item:last-child{border-bottom: 1px solid #ccc;}
+.list-item .list-item-cont{position: relative;width: 320px;margin: 0 auto;}
+.list-item .list-item-cont p{padding-left: 40px;font-size: 18px;color: #0073cb;}
+.list-item .list-item-cont span{padding-left: 40px;font-size: 12px;color: #666;}
+.list-item-cont .ico-item{position: absolute;top: 10px;left: 0;width: 30px;height: 30px;background: rgba(0,0,0,0) url(http://pic.ctrip.com/h5/marketing/app_download/un_promote_h5@1x.png) no-repeat;background-size: 30px 190px;background-image: -webkit-image-set(url(http://pic.ctrip.com/h5/marketing/app_download/un_promote_h5@2x.png) 2x,url(http://pic.ctrip.com/h5/marketing/app_download/un_promote_h5@1x.png) 1x);background-image: -moz-image-set(url(http://pic.ctrip.com/h5/marketing/app_download/un_promote_h5@2x.png) 2x,url(http://pic.ctrip.com/h5/marketing/app_download/un_promote_h5@1x.png) 1x);background-image: -ms-image-set(url(http://pic.ctrip.com/h5/marketing/app_download/un_promote_h5@2x.png) 2x,url(http://pic.ctrip.com/h5/marketing/app_download/un_promote_h5@1x.png) 1x);background-image: -o-image-set(url(http://pic.ctrip.com/h5/marketing/app_download/un_promote_h5@2x.png) 2x,url(http://pic.ctrip.com/h5/marketing/app_download/un_promote_h5@1x.png) 1x);}
+.ico-item.i-discount{background-position: 0 0;}
+.ico-item.i-fan{background-position: 0 -40px;}
+.ico-item.i-trip{background-position: 0 -80px;}
+.ico-item.i-jifen{background-position: 0 -120px;}
+.ico-item.i-apple{background-position: 0 -160px;}
+.app_dl-footer{color: #999;text-align: center;line-height: 40px;}
+.mask{position: fixed;height: 100%;width: 100%;top: 0;left: 0;background-color: rgba(0,0,0,.7);z-index: 10;}
+.mask .arrow{position: absolute;top: 15px;right: 80px;width: 113px;height: 139px;background: url(http://m.ctrip.com/webapp/mkt/spread/webresource/images/mask_arrow.png) no-repeat;-webkit-background-size: 100%;background-size: 100%;}
+.mask p{position: absolute;top: 140px;right: 180px;font-weight: bold;font-size: 18px;text-align: center;color: #fff;text-align: left;}
+@media only screen and (min-width: 375px){
+	.list-item .list-item-cont{width: 330px;}
+	.list-item .list-item-cont span{font-size: 14px;}
+}
+
+/* 微信浮层 */
+@media screen and (max-width: 374px) {
+	.wxfloat_main{font-size:16px}
+}
+@media screen and (min-width: 375px) and (max-width: 413px) {
+	.wxfloat_main{font-size:18px}
+}
+@media screen and (min-width: 414px) {
+	.wxfloat_main{font-size:20px}
+}
+.wxfloat_main{position:fixed;left:0;bottom:0;width:100%;padding-bottom:31.25%;z-index:9000}
+.wxfloat_main .wxfloat_main_cntr{position:absolute;left:0;bottom:0;width:100%;height:100%;background:rgba(239,239,239,.9);border-top:1px solid rgba(219,219,219,.9);box-sizing:border-box}
+.wxfloat_main .main_button{float:left;margin-top:2%;width:14%;height:46%}
+.wxfloat_main .main_button .arrow_icon{margin-left:41%;width:18%;height:100%;background:url(http://webresource.c-ctrip.com/ResUnionOnline/R7/h5mask/Image/wx_arw_expd.png) no-repeat center center;background-size:contain}
+.wxfloat_main .download_wrapper{margin:2% 5% 0 14%}
+.wxfloat_main .download_container{position:relative;padding-bottom:17.6%;border-radius:5px;box-shadow:0 -4px 0 0 #e47c15 inset;background-color:#ff9a14;overflow:hidden}
+.wxfloat_main .download_container:active{-webkit-transform:scale(1.02,1.02);transform:scale(1.02,1.02)}
+.wxfloat_main .download_container .app_icon{position:absolute;left:2.2%;top:0;width:12%;height:96%;background:url(http://webresource.c-ctrip.com/ResUnionOnline/R7/h5mask/Image/wx_icon_ctrip.png) no-repeat center center;background-size:contain}
+.wxfloat_main .download_container .dld_content{position:absolute;left:0;top:48%;width:100%;text-align:center;font-size:100%;color:#fff;-webkit-transform:translateY(-50%);-ms-transform:translateY(-50%);transform:translateY(-50%)}
+.wxfloat_main .info_wrapper{position:relative;margin-top:3.5%;padding-bottom:11.5%;box-sizing:border-box;border:1px solid #ccc;border-radius:8px;background-color:#fff}
+.wxfloat_main .info_wrapper .arrow_icon{position:absolute;left:0;top:-20%;width:100%;height:20%;background:url(http://webresource.c-ctrip.com/ResUnionOnline/R7/h5mask/Image/wx_arw_hint.png) no-repeat center bottom;background-size:contain}
+.wxfloat_main .info_wrapper .info_content{position:absolute;left:0;top:45%;width:100%;font-size:80%;text-align:center;color:#666;-webkit-transform:translateY(-50%);-ms-transform:translateY(-50%);transform:translateY(-50%)}
+.wxfloat_main .info_wrapper .info_content em{font-weight:bold;color:#ff9a14}
+.wxfloat_main .info_wrapper .info_content span{font-size:150%;font-weight:bold;padding:0 .5%;color:#ff9a14}
+.wxfloat_main .download_wrapper .hand_icon{position:absolute;right:8%;top:14%;width:11%;height:50%;background:url(http://webresource.c-ctrip.com/ResUnionOnline/R7/h5mask/Image/wx_icon_hand.png) no-repeat;background-size:contain}
+.wxfloat_sidebtn{display:none;position:fixed;left:0;bottom:0;width:9%;padding-bottom:31.25%;z-index:9001}
+.wxfloat_sidebtn .wxfloat_sidebtn_cntr{position:absolute;right:0%;top:7%;height:46%;width:200%;background:rgba(0,0,0,0.5);border-radius:0 5px 5px 0}
+.wxfloat_sidebtn .wxfloat_sidebtn_cntr:after{content:"";position:absolute;right:16%;top:0;width:14%;height:100%;background:url(http://webresource.c-ctrip.com/ResUnionOnline/R7/h5mask/Image/wx_arw_clps.png) no-repeat center center;background-size:contain}
+.wxfloat_main_in {
+	-webkit-animation: wxfloat_main_in ease .5s both;
+	animation: wxfloat_main_in ease .5s both
+}
+.wxfloat_main_out {
+	-webkit-animation: wxfloat_main_out ease .5s both;
+	animation: wxfloat_main_out ease .5s both
+}
+@-webkit-keyframes wxfloat_main_in {
+	from {-webkit-transform:translateX(-100%)}
+}
+@keyframes wxfloat_main_in {
+	from {transform:translateX(-100%)}
+}
+@-webkit-keyframes wxfloat_main_out {
+	to {-webkit-transform:translateX(-100%)}
+}
+@keyframes wxfloat_main_out {
+	to {transform:translateX(-100%)}
+}
+.wxfloat_sidebtn_in {
+	-webkit-animation: wxfloat_sidebtn_in .5s ease-out both;
+	animation: wxfloat_sidebtn_in .5s ease-out both;
+}
+.wxfloat_sidebtn_out {
+	-webkit-animation: wxfloat_sidebtn_out .3s ease-out both;
+	animation: wxfloat_sidebtn_out .3s ease-out both;
+}
+@-webkit-keyframes wxfloat_sidebtn_in {
+	0% {-webkit-transform:translateX(-100%)}
+	25% {-webkit-transform:translateX(30%)}
+	50% {-webkit-transform:translateX(-20%)}
+	75% {-webkit-transform:translateX(10%)}
+	100% {-webkit-transform:translateX(0)}
+}
+@keyframes wxfloat_sidebtn_in {
+	0% {transform:translateX(-100%)}
+	25% {transform:translateX(30%)}
+	50% {transform:translateX(-20%)}
+	75% {transform:translateX(10%)}
+	100% {transform:translateX(0)}
+}
+@-webkit-keyframes wxfloat_sidebtn_out {
+	0% {-webkit-transform:translateX(0)}
+	20% {-webkit-transform:translateX(20%)}
+	100% {-webkit-transform:translateX(-100%)}
+}
+@keyframes wxfloat_sidebtn_out {
+	0% {transform:translateX(0)}
+	20% {transform:translateX(20%)}
+	100% {transform:translateX(-100%)}
+}
+
+
+/*百度酒店浮层*/
+.bdfloat{position:fixed;left:0;top:0;width:100%;height:100%;background:rgba(0,0,0,0.8);font-family:"Microsoft YaHei","Hiragino Sans GB",Arial,"Lucida Grande",Verdana;overflow:hidden;z-index:9999}
+@media screen and (max-width: 374px) {
+	.bdfloat{font-size:24px}
+	.bdfloat .ltr_cross{width:7%;padding-bottom:7%}
+}
+@media screen and (min-width: 375px) and (max-width: 413px) {
+	.bdfloat{font-size:26px}
+	.bdfloat .ltr_cross{width:6.5%;padding-bottom:6.5%}
+}
+@media screen and (min-width: 414px) {
+	.bdfloat{font-size:28px}
+	.bdfloat .ltr_cross{width:6%;padding-bottom:6%}
+}
+.bdfloat .cc{position:absolute;left:50%;top:50%;-webkit-transform:translate(-50%,-50%);-ms-transform:translate(-50%,-50%);transform:translate(-50%,-50%)}
+.bdfloat .letter_back{position:absolute;left:0;bottom:0;width:100%;padding-bottom:61.3%}
+.bdfloat svg{position:absolute;left:0;bottom:0;width:100%;height:100%}
+.bdfloat .letter_wrap{position:absolute;left:5%;bottom:0;width:90%;padding-bottom:120%}
+.bdfloat .ltr_clouds{position:absolute;left:3%;top:0;width:94%;-webkit-animation-delay:1.2s;animation-delay:1.2s;-webkit-animation-duration:.4s;animation-duration:.4s}
+.bdfloat .ltr_birds{position:absolute;left:7%;top:-1%;width:82%;-webkit-animation-delay:1.6s;animation-delay:1.6s;-webkit-animation-duration:.4s;animation-duration:.4s}
+.bdfloat .ltr_content{position:absolute;left:0;bottom:8%;width:100%;height:80%;background:#fffaec;background:-webkit-linear-gradient(#fffaec 65%,#ede0bf 90%);background:linear-gradient(#fffaec 65%,#ede0bf 90%);border-radius:5%;box-shadow:0 0 4px rgba(0,0,0,0.4);-webkit-animation-delay:.2s;animation-delay:.2s}
+.bdfloat .ltr_title{display:block;margin:17% auto 0;width:80%}
+.bdfloat .ltr_tips{position:relative;margin:12% auto 0;width:80%;height:11%;font-size:60%;color:#565454}
+.bdfloat .ltr_tips span{display:block;width:100%;text-align:center}
+.bdfloat .ltr_join{position:relative;margin:auto;width:78%;height:15%;background-color:#db0a28;font-size:100%;color:#ffe529;border-radius:5px}
+.bdfloat .ltr_join span{display:block;width:100%;text-align:center}
+.bdfloat .ltr_dolphin{position:absolute;left:36.5%;top:1%;width:27%;padding-bottom:27%;background:url(http://pic.c-ctrip.com/h5/marketing/sale_act_201502/ltr_dolphin.png) no-repeat;background-size:100% 100%;-webkit-animation-delay:.8s;animation-delay:.8s}
+.bdfloat .ltr_cross{position:absolute;right:0;top:-7%;background:url(http://pic.c-ctrip.com/h5/marketing/sale_act_201502/ltr_cross.png) no-repeat;background-size:100% 100%;-webkit-animation-delay:2s;animation-delay:2s}
+.bdfloat .letter_front{position:absolute;left:0;bottom:0;width:100%;padding-bottom:36%;background:url(http://pic.c-ctrip.com/h5/marketing/sale_act_201502/ltr_front.png) no-repeat;background-size:100% 100%}
+.bdfloat .ltr_tel{position:absolute;left:20%;top:40%;width:60%;height:32%;border:1px solid #e98679;border-radius:10px}
+.bdfloat .ltr_tel .ltr_info{width:50%}
+.fadeIn{-webkit-animation:fadeIn .6s ease-out both;animation:fadeIn .6s ease-out both}
+@-webkit-keyframes fadeIn {
+	from{opacity:0}
+}
+@keyframes fadeIn {
+	from{opacity:0}
+}
+.fadeInUp {
+	-webkit-animation: fadeInUp .6s ease-out both;
+	animation: fadeInUp .6s ease-out both;
+}
+@-webkit-keyframes fadeInUp {
+	from{-webkit-transform:translateY(100%);opacity:0;}
+}
+@keyframes fadeInUp {
+	from{transform:translateY(100%);opacity:0;}
+}
+
+/*机票16号浮层*/
+.fa_pop_wrap{position: fixed;top: 0;left: 0;height: 100%;width: 100%;background-color: rgba(0,0,0,.5);z-index: 2000;}
+.fa_pop_inner{position: fixed;bottom: 0;left: 0;width: 100%;z-index: 2002;}
+.fa_bg_wrap{position: relative;}
+.fa_pop_inner .close_btn{position: absolute;top: 25%;right:0;width: 44px;height: 44px;}
+.fa_pop_inner .close_btn:before,.fa_pop_inner .close_btn:after{content: "";position: absolute;top: 15px;right: 5px;width: 20px;height: 1px;background-color: #93cfff;}
+.fa_pop_inner .close_btn:before {-webkit-transform: rotate(45deg);transform: rotate(45deg);}
+.fa_pop_inner .close_btn:after {-webkit-transform: rotate(-45deg);transform: rotate(-45deg);}
+.fa_pop_inner img{display: block;width: 100%;}
+.download_btn_wrap{padding: 20px 60px 25px;background-color: #fff;}
+.download_btn{display:block;line-height: 44px;background-color: #ff9b00;font-size: 20px;color: #fff;text-align: center;border-radius: 2px;}
+.download_icon{position: relative;display: inline-block;width: 20px;height: 20px;border:2px #fff solid;border-radius: 50%;vertical-align: -5px;margin-right: 8px}
+.download_icon:before,.download_icon:after{content: "";position: absolute;left: 50%;-webkit-transform:translateX(-50%);transform:translateX(-50%);}
+.download_icon:before{top: -2px;width:6px;height: 12px;background-color: #fff;border-left: 1px #ff9b00 solid;border-right: 1px #ff9b00 solid;}
+.download_icon:after{top: 10px;border-top: 7px #fff solid;border-left: 7px transparent dashed;border-right: 7px transparent dashed;width: 0;height: 0;}
+
+/*新客礼包*/
+.fl_mask{z-index:9000;position:fixed;top:0;left:0;right:0;bottom:0;height:100%;width:100%;background-color:rgba(0,0,0,.5)}
+.fl_panel{z-index:9001;position:fixed;bottom:0;left:0;right:0;width:100%}
+.fl_panel .fl_close,.fl_panel .fl_dl_ico,.fl_panel .fl_cloud{display:inline-block;background-image:url(http://webresource.c-ctrip.com/ResUnionOnline/R7/h5mask/Image/mbl_sprite.png);background-repeat:no-repeat;background-size:320px 75px}
+.fl_panel .fl_banner{display:block;height:119px;background-color:#0882e4;background-image:url(http://webresource.c-ctrip.com/ResUnionOnline/R7/h5mask/Image/mbl_bg.jpg);background-size:cover;border-top:1px solid #69afea;box-shadow:0 0 6px rgba(0,0,0,0.3)}
+.fl_panel .fl_slogan{margin:17px 25px 0 145px;background:url(http://webresource.c-ctrip.com/ResUnionOnline/R7/h5mask/Image/mbl_slogan.png) center center no-repeat;background-size:contain;height:54px}
+.fl_panel .fl_people{width:160px;height:210px;margin:-160px 0 0 -5px;background:url(http://webresource.c-ctrip.com/ResUnionOnline/R7/h5mask/Image/mbl_people.png) no-repeat;background-size:contain}
+.fl_panel .fl_cloud{display:block;width:100%;margin:-87px auto 0;background-repeat:repeat-x;height:35px;background-position:0 -40px}
+.fl_panel .fl_close{position:absolute;right:0;top:0;width:30px;height:30px;background-position:-120px 9px}
+.fl_panel .fl_btns{padding:8px 0 12px;background-color:#fff}
+.fl_panel .fl_btns a{display:block;width:202px;height:44px;margin:5px auto;line-height:44px;font-size:20px}
+.fl_panel .fl_btns .fl_dl_btn{background-color:#ff9b00;border-radius:4px;text-align:center;color:#fff}
+.fl_panel .fl_btns .fl_dl_ico{width:24px;height:24px;background-position:-16px 0;vertical-align:-5px;margin-right:5px}
+
+/*火车票浮层*/
+/* trains float */
+.trains_float_mask{position:fixed;width:100%;height:100%;background:rgba(0,0,0,0.8);z-index:9998}
+.trains_float_wrap{position:relative;font-family:"Microsoft YaHei","Hiragino Sans GB",Arial,"Lucida Grande",Verdana;z-index:9999}
+@media screen and (max-width: 374px) {
+	.trains_float{font-size:22px}
+}
+@media screen and (min-width: 375px) and (max-width: 413px) {
+	.trains_float{font-size: 26px}
+}
+@media screen and (min-width: 414px) {
+	.trains_float{font-size:28px}
+}
+.trains_float_wrap .cc{position:absolute;left:50%;top:50%;-webkit-transform:translate(-50%,-50%);-ms-transform:translate(-50%,-50%);transform:translate(-50%,-50%)}
+.trains_float_wrap .letter_back{position:fixed;left:0;bottom:0;width:100%;padding-bottom:52.5%;background:url(http://webresource.c-ctrip.com/ResUnionOnline/R7/h5mask/Image/train/ltr_back.png) no-repeat top center;background-size:cover}
+.trains_float_wrap .letter_wrap{position:fixed;left:5%;bottom:0;width:90%;height:0;padding-bottom:118%}
+.trains_float_wrap .ltr_mutn_bg{position:absolute;left:8%;top:14%;width:83%;-webkit-animation-delay:1.8s;animation-delay:1.8s;-webkit-animation-duration:.5s;animation-duration:.5s}
+.trains_float_wrap .ltr_earth{position:absolute;left:5%;top:21.5%;width:90%;-webkit-animation-delay:.8s;animation-delay:.8s;-webkit-animation-duration:.4s;animation-duration:.4s}
+.trains_float_wrap .ltr_train{opacity:0;position:absolute;left:16%;-webkit-animation:train .6s both 1.4s;animation:train .6s both 1.4s}
+@-webkit-keyframes train {
+	0%{opacity:0;top:19.5%;width:20%;}
+	100%{opacity:1;top:16%;width:49%;}
+}
+@keyframes train {
+	0%{opacity:0;top:19.5%;width:20%;}
+	100%{opacity:1;top:16%;width:49%;}
+}
+.trains_float_wrap .ltr_mutn_lt{position:absolute;left:1%;top:22.2%;width:18%;-webkit-animation-delay:1.2s;animation-delay:1.2s;-webkit-animation-duration:.5s;animation-duration:.5s}
+.trains_float_wrap .ltr_mutn_rt{position:absolute;right:0;top:20%;width:35%;-webkit-animation-delay:1.6s;animation-delay:1.6s;-webkit-animation-duration:.5s;animation-duration:.5s}
+.trains_float_wrap .ltr_cloud_lt{position:absolute;left:31%;top:9%;width:12%;opacity:.5;-webkit-animation-delay:2.2s;animation-delay:2.2s;-webkit-animation-duration:.4s;animation-duration:.4s}
+.trains_float_wrap .ltr_cloud_rt{position:absolute;left:83%;top:17%;width:8%;opacity:.5;-webkit-animation-delay:2s;animation-delay:2s;-webkit-animation-duration:.4s;animation-duration:.4s}
+.trains_float_wrap .ltr_content{position:absolute;left:0;bottom:0;width:100%;height:68%;background:#fffaec;background:-webkit-linear-gradient(#fffaec 55%,#ede0bf 80%);background:linear-gradient(#fffaec 55%,#ede0bf 80%);border-radius:5%;-webkit-animation:trainsInUp .4s ease-out both .2s;animation:trainsInUp .4s ease-out both .2s}
+@-webkit-keyframes trainsInUp {
+	from{-webkit-transform:translateY(100%);}
+}
+@keyframes trainsInUp {
+	from{transform:translateY(100%);}
+}
+.trains_float_wrap .ltr_title{position:relative;margin:10.5% auto 0;width:100%;height:0;padding-bottom:22%;}
+.trains_float_wrap .ltr_ttl_main{position:absolute;left:0;top:20%;width:100%;font-size:90%;font-size:6vw;color:#811318;}
+.trains_float_wrap .ltr_ttl_sub{position:absolute;left:0;top:70%;width:100%;font-size:120%;font-size:8vw;font-weight:bold;color:#d40b31;}
+.trains_float_wrap .ltr_title span{width:100%;text-align:center;}
+.trains_float_wrap .ltr_join{position:relative;margin:4% auto 0;width:78%;height:18%;background-color:#db0a28;border-radius:5px}
+.trains_float_wrap .ltr_join span{display:block;width:100%;text-align:center;font-size:95%;font-size:6.5vw;color:#ffe529;}
+.trains_float_wrap .ltr_cross{position:absolute;right:0;top:0;height:0;width:11%;padding-bottom:11%;-webkit-animation-delay:2.6s;animation-delay:2.6s}
+.trains_float_wrap .ltr_cross:before,.trains_float_wrap .ltr_cross:after{content:"";position:absolute;left:0;top:50%;width:100%;padding-bottom:3%;background:#999;}
+.trains_float_wrap .ltr_cross:before{-webkit-transform:translateY(-50%) rotate(45deg);transform:translateY(-50%) rotate(45deg);}
+.trains_float_wrap .ltr_cross:after{-webkit-transform:translateY(-50%) rotate(-45deg);transform:translateY(-50%) rotate(-45deg);}
+.trains_float_wrap .letter_front{position:fixed;left:0;bottom:0;width:100%;padding-bottom:28%;background:url(http://webresource.c-ctrip.com/ResUnionOnline/R7/h5mask/Image/train/ltr_front.png) no-repeat top center;background-size:cover}
+.trainsfadeIn{
+	-webkit-animation:trainsfadeIn .6s ease both;
+	animation:trainsfadeIn .6s ease both;
+}
+@-webkit-keyframes trainsfadeIn {
+	from{opacity:0}
+}
+@keyframes trainsfadeIn {
+	from{opacity:0}
+}
+.trainsfadeInUp {
+	-webkit-animation: trainsfadeInUp .6s ease-out both;
+	animation: trainsfadeInUp .6s ease-out both;
+}
+@-webkit-keyframes trainsfadeInUp {
+	from{-webkit-transform:translateY(100%);opacity:0;}
+}
+@keyframes trainsfadeInUp {
+	from{transform:translateY(100%);opacity:0;}
+}
+.trainsfadeInLeft {
+	-webkit-animation: trainsfadeInLeft 0.8s ease-out both;
+	animation: trainsfadeInLeft 0.8s ease-out both;
+}
+@-webkit-keyframes trainsfadeInLeft {
+	from{-webkit-transform:translateX(40%);opacity:0;}
+}
+@keyframes trainsfadeInLeft {
+	from{transform:translateX(40%);opacity:0;}
+}
+.trainsfadeInRight {
+	-webkit-animation: trainsfadeInRight 0.8s ease-out both;
+	animation: trainsfadeInRight 0.8s ease-out both;
+}
+@-webkit-keyframes trainsfadeInRight {
+	from{-webkit-transform:translateX(-40%);opacity:0;}
+}
+@keyframes trainsfadeInRight {
+	from{transform:translateX(-40%);opacity:0;}
+}
+
+
+
+/*大礼包６个浮层*/
+.gift_flt_mask{z-index:9000;position:fixed;top:0;left:0;bottom:0;height:100%;width:100%;background-color:rgba(0,0,0,.5);font-family:"Heiti SC","Microsoft YaHei","Hiragino Sans GB",Arial,"Lucida Grande",Verdana;}
+@media screen and (max-width: 374px) {
+	.gift_flt_mask{font-size:16px}
+}
+@media screen and (min-width: 375px) and (max-width: 413px) {
+	.gift_flt_mask{font-size:18px}
+}
+@media screen and (min-width: 414px) {
+	.gift_flt_mask{font-size:20px}
+}
+.gift_flt_wrap{z-index:9001;position:fixed;left:50%;top:50%;width:74%;padding-bottom:105%;-webkit-transform:translate(-50%,-50%);transform:translate(-50%,-50%);}
+.gift_flt_wrap .slgn_wrap{position:absolute;left:0;top:0;width:100%;padding-bottom:36%;}
+.gift_flt_wrap .slgn_icon{position:absolute;left:6%;top:0;width:35%;height:100%;background:url(http://webresource.c-ctrip.com/ResUnionOnline/R7/h5mask/Image/giftbag/gift_float_pnc.png) no-repeat center center / contain;}
+.gift_flt_wrap .slgn_words{position:absolute;left:44%;top:7%;width:55%;height:88%;background:url(http://webresource.c-ctrip.com/ResUnionOnline/R7/h5mask/Image/giftbag/gift_float_all.png) no-repeat left center / contain;}
+.gift_flt_wrap .flt_avt{position:absolute;left:0;top:0;bottom:0;width:100%;margin-top:38%;box-sizing:border-box;background:url(http://webresource.c-ctrip.com/ResUnionOnline/R7/h5mask/Image/giftbag/gift_float_avt.png) no-repeat bottom center / contain;}
+.gift_flt_wrap .flt_btn{position:absolute;left:18.7%;top:76%;width:63%;height:13%;background:#fff;border-radius:5px;background:-webkit-linear-gradient(#ffff6b,#ffc935);background:linear-gradient(#ffff6b,#ffc935);}
+.gift_flt_wrap .flt_btn span{position:absolute;left:0;top:50%;width:100%;text-align:center;font-size:100%;font-weight:bold;color:#c02626;-webkit-transform:translateY(-50%);transform:translateY(-50%);}
+.gift_flt_wrap .flt_close{position:absolute;right:-12%;top:-3%;font:200% Simsun;color:#d0d0d0;line-height:1.1}
+/* vacation */
+.gift_flt_wrap .slgn_icon_vcn{left:6%;}
+.gift_flt_wrap .slgn_words_vcn{left:45%;top:15%;height:85%;background:url(http://webresource.c-ctrip.com/ResUnionOnline/R7/h5mask/Image/giftbag/gift_float_vcn.png) no-repeat left center / contain;}
+/* bus */
+.gift_flt_wrap .slgn_icon_bus{left:6%;}
+.gift_flt_wrap .slgn_words_bus{left:45%;top:13%;height:85%;background:url(http://webresource.c-ctrip.com/ResUnionOnline/R7/h5mask/Image/giftbag/gift_float_bus.png) no-repeat left center / contain;}
+/* flight */
+.gift_flt_wrap .slgn_icon_flt{left:6%;}
+.gift_flt_wrap .slgn_words_flt{left:45%;top:13%;height:85%;background:url(http://webresource.c-ctrip.com/ResUnionOnline/R7/h5mask/Image/giftbag/gift_float_flt.png) no-repeat left center / contain;}
+/* ticket */
+.gift_flt_wrap .slgn_icon_tkt{left:6%;}
+.gift_flt_wrap .slgn_words_tkt{left:45%;top:13%;height:85%;background:url(http://webresource.c-ctrip.com/ResUnionOnline/R7/h5mask/Image/giftbag/gift_float_tkt.png) no-repeat left center / contain;}
+/* hotel */
+.gift_flt_wrap .slgn_icon_htl{left:11%;}
+.gift_flt_wrap .slgn_words_htl{left:51%;top:13%;width:49%;height:85%;background:url(http://webresource.c-ctrip.com/ResUnionOnline/R7/h5mask/Image/giftbag/gift_float_htl.png) no-repeat left center / contain;}
+
+/*门票浮层*/
+.fl_panel .tkt_slogan{margin:17px 20px 0 155px;background:url(http://webresource.c-ctrip.com/ResUnionOnline/R7/h5mask/Image/tkt_slogan.png) center center no-repeat;background-size:contain;height:54px}
+.fl_panel .tkt_phone{width:142px;height:210px;margin:-160px 0 0 12px;background:url(http://webresource.c-ctrip.com/ResUnionOnline/R7/h5mask/Image/tkt_phone.png) no-repeat;background-size:142px 210px}
+
+/*攻略浮层样式*/
+.storeybg {
+  background: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 888;
+}
+.seo-storey {
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+}
+.seo-storey .storeymain {
+  width: 100%;
+  height: auto;
+  position: absolute;
+  bottom: 0;
+}
+.seo-storey .storeymain .storeybox {
+  display: block;
+  width: 100%;
+  height: auto;
+  position: relative;
+}
+.seo-storey .storeymain .storeybox .downloads {
+  width: 100%;
+  height: 100px;
+  display: block;
+  position: absolute;
+  bottom: 0;
+}
+.seo-storey .storeymain .storeybox .downloads.d2 {
+  bottom: 30px;
+}
+.seo-storey .storeymain .storeybox img {
+  width: 100%;
+  height: 100%;
+}
+.seo-storey .storeymain .storeybox .close-btn {
+  background: url("img/i_close.png") no-repeat;
+  background-size: 18px auto;
+  width: 18px;
+  height: 18px;
+  display: inline-block;
+  position: absolute;
+}
+.seo-storey .storeymain .storeybox .close-btn.c1 {
+  top: 25%;
+  right: 15px;
+}
+.seo-storey .storeymain .storeybox .close-btn.c2 {
+  top: 10%;
+  right: 20px;
+}
+.seo-storey-center {
+  position: fixed;
+  top: 20%;
+  bottom: 0;
+  left: 10%;
+  right: 0;
+  z-index: 999;
+  text-align: center;
+  width: 80%;
+  height: 60%;
+}
+.seo-storey-center .storeymain {
+  width: 100%;
+  position: absolute;
+  top: 40%;
+  margin-top: -50%;
+}
+.seo-storey-center .storeymain .storeybox {
+  position: relative;
+}
+.seo-storey-center .storeymain .storeybox .downloads {
+  width: 100%;
+  height: 100px;
+  display: block;
+  position: absolute;
+  bottom: 0;
+}
+.seo-storey-center .storeymain .storeybox .close-btn {
+  background: url("http://webresource.c-ctrip.com/ResUnionOnline/R7/h5mask/Image/you/i_close_2.png") no-repeat;
+  background-size: 18px auto;
+  width: 18px;
+  height: 18px;
+  display: inline-block;
+  position: absolute;
+  top: 10px;
+  right: 12%;
+}
+.seo-storey-center img {
+  width: 100%;
+  height: auto;
+}
+
+/*攻略浮层样式结束*/
+
+/*500礼包浮层*/
+@media screen and (max-width: 374px) {
+	.gift500_flt_wrap{font-size:19px}
+}
+@media screen and (min-width: 375px) and (max-width: 413px) {
+	.gift500_flt_wrap{font-size:23px}
+}
+@media screen and (min-width: 414px) {
+	.gift500_flt_wrap{font-size:25px}
+}
+@media screen and (max-width: 414px) {
+	.gift500_flt_wrap{font-size:6vw}
+}
+
+@media screen and (min-width: 414px) {
+	.gift500_flt_lft{display:block}
+	.gift500_flt_rgt{display:block}
+}
+.gift_flt_all{height:302px}
+.gift_flt_vcn{height:289px}
+.gift_flt_car{height:289px}
+.gift_flt_htl{height:289px}
+.gift_flt_tcn{height:300px}
+.gift_flt_tkt{height:300px}

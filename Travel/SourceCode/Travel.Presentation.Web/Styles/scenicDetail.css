@@ -1,0 +1,279 @@
+﻿html, body {
+    margin: 0;
+    padding: 0;
+}
+
+.bg {
+    background: url(../images/mmodel-speech-album-detail-default-bg.png) no-repeat;
+    background-size: 100%;
+}
+
+.speech-process {
+    left: 0px;
+    margin-top: -150px;
+    overflow: hidden;
+    position: absolute;
+    width: 100%;
+    top: 50%;
+}
+
+.play-audio, .playing {
+    -moz-border-radius: 30px;
+    -webkit-border-radius: 30px;
+    background: #fff;
+    border-radius: 30px;
+    color: #666;
+    float: right;
+    font-size: 14px;
+    line-height: 20px;
+    margin: 20px 20px 10px 0px;
+    padding: 5px 18px;
+    text-decoration: none;
+}
+
+    .play-audio:before {
+        content: "";
+        border: 5px solid;
+        border-color: #fff #fff #fff #666;
+        display: inline-block;
+        height: 0px;
+        width: 0px;
+    }
+
+.playing-icon {
+    background: #666;
+    display: inline-block;
+    height: 10px;
+    margin-right: 10px;
+    position: relative;
+    width: 3px;
+}
+
+    .playing-icon:before {
+        content: "";
+        background: #666;
+        display: inline-block;
+        height: 10px;
+        left: 5px;
+        position: absolute;
+        width: 3px;
+    }
+
+.process-bar {
+    background: rgba(0, 0, 0, 0.25);
+    ;
+    height: 2px;
+    margin-top: 60px;
+    position: relative;
+}
+
+.position {
+    -moz-border-radius: 30px;
+    -webkit-border-radius: 30px;
+    background: #fff;
+    border-radius: 30px;
+    color: #fc3200;
+    display: block;
+    font-size: 14px;
+    left: 20px;
+    line-height: 20px;
+    padding: 5px 16px;
+    position: absolute;
+    min-width: 30px;
+    text-align: center;
+    top: -42px;
+}
+
+    .position:after {
+        display: block;
+        content: "";
+        width: 0px;
+        height: 0px;
+        border: 5px solid;
+        border-color: #fff transparent transparent transparent;
+        position: absolute;
+        left: 14px;
+        top: 30px;
+    }
+
+.process-bar:after {
+    -moz-border-radius: 7px;
+    -webkit-border-radius: 7px;
+    background: #fff;
+    border-radius: 7px;
+    border: 2px solid #666;
+    content: "";
+    display: block;
+    height: 6px;
+    left: 40px;
+    margin-left: -6px;
+    position: absolute;
+    top: -4px;
+    width: 6px;
+}
+
+#scroller {
+    position: absolute;
+    z-index: 1;
+    width: 2000%;
+    height: 120px;
+}
+
+.speech-list-wrap {
+    width: 100%;
+    height: 215px;
+    overflow: hidden;
+}
+
+    .speech-list-wrap ul {
+        display: inline-block;
+        margin: 15px 0px 20px 10px;
+        padding: 10px;
+    }
+
+        .speech-list-wrap ul li {
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            background: #fff;
+            border-radius: 5px;
+            float: left;
+            margin-right: 10px;
+            padding: 35px 5px 35px 35px;
+            position: relative;
+        }
+
+            .speech-list-wrap ul li:first-child {
+                padding: 35px;
+            }
+
+                .speech-list-wrap ul li:first-child:before {
+                    display: block;
+                    position: absolute;
+                    top: 24px;
+                    left: 10px;
+                    content: "";
+                    width: 19px;
+                    height: 17px;
+                    background: url(../images/mmodel-speech-album-detail-colon.png) no-repeat;
+                }
+
+                .speech-list-wrap ul li:first-child:after, .album-desc-wrap:after {
+                    display: block;
+                    position: absolute;
+                    content: "";
+                    width: 22px;
+                    height: 4px;
+                    background: url(../images/mmodel-speech-album-detail-ellipsis.png) no-repeat;
+                }
+
+                .speech-list-wrap ul li:first-child:after {
+                    bottom: 24px;
+                    right: 36px;
+                }
+
+.album-desc-wrap:after {
+    bottom: -10px;
+    right: 35px;
+}
+
+.speech-list-wrap ul li:first-child p {
+    line-height: 30px;
+    font-size: 14px;
+    width: 210px;
+    overflow: hidden;
+    height: 120px;
+}
+
+.album-desc-wrap {
+    font-size: 14px;
+    width: 210px;
+    height: 120px;
+    position: relative;
+    padding-right: 35px;
+    float: left;
+}
+
+    .album-desc-wrap .title {
+        color: #fc3200;
+        font-weight: bold;
+        display: block;
+        border-bottom: 1px solid #9bc2c9;
+        padding-bottom: 8px;
+    }
+
+    .album-desc-wrap .desc {
+        height: 96px;
+        overflow: hidden;
+        line-height: 30px;
+    }
+
+.speech-list-wrap li img {
+    float: left;
+    margin-left: 5px;
+    margin-top: -30px;
+}
+
+.back {
+    -moz-border-radius: 40px;
+    -webkit-border-radius: 40px;
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: 40px;
+    bottom: 0px;
+    display: block;
+    height: 40px;
+    left: 0px;
+    margin: 0px 0px 10px 20px;
+    position: absolute;
+    width: 40px;
+}
+
+    .back:before {
+        -webkit-transform: rotate(-45deg);
+        -moz-transform: rotate(-45deg);
+        -o-transform: rotate(-45deg);
+        -ms-transform: rotate(-45deg);
+        border: solid #fff;
+        border-width: 4px 0px 0px 4px;
+        content: "";
+        display: block;
+        height: 15px;
+        margin: 10px 0px 0px 14px;
+        transform: rotate(-45deg);
+        width: 15px;
+    }
+
+.dilog {
+    position: relative;
+    display: none;
+    background-color: #fff;
+    height: 100%;
+    width: 100%;
+}
+
+    .dilog .album-desc-wrap {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+    }
+
+        .dilog .album-desc-wrap .title {
+            padding: 15px;
+            font-size: 20px;
+        }
+
+        .dilog .album-desc-wrap .desc {
+            height: 100%;
+            font-size: 16px;
+            overflow: hidden;
+            overflow-y: auto;
+            padding: 15px;
+            display: block;
+        }
+
+        .dilog .album-desc-wrap:after {
+            background-image: none;
+        }
+
+.full-wd {
+width:100%;
+}

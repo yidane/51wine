@@ -1,0 +1,367 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{ECA74918-F911-4505-AD51-B4E1C0AE6808}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Travel.Presentation.Web</RootNamespace>
+    <AssemblyName>Travel.Presentation.Web</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <UseGlobalApplicationHostFile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\EntityFramework.6.1.3\lib\net40\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\EntityFramework.6.1.3\lib\net40\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="audios\end.mp3" />
+    <Content Include="audios\shake.wav" />
+    <Content Include="bower_components\font-awesome\css\font-awesome.css" />
+    <Content Include="bower_components\font-awesome\css\font-awesome.min.css" />
+    <Content Include="bower_components\font-awesome\fonts\fontawesome-webfont.svg" />
+    <Content Include="Coupons\couponDetail.html" />
+    <Content Include="Coupons\MyCoupons.html" />
+    <Content Include="Coupons\styles\aimbase.min.css" />
+    <Content Include="Coupons\styles\mine_detail.min.css" />
+    <Content Include="Coupons\styles\mine_list.min.css" />
+    <Content Include="Coupons\styles\mobile_reset.min.css" />
+    <Content Include="Coupons\styles\myCoupons.css" />
+    <Content Include="Coupons\styles\reset.css" />
+    <Content Include="Coupons\styles\ticket.css" />
+    <Content Include="Global.asax" />
+    <Content Include="images\1.jpg" />
+    <Content Include="images\2.jpg" />
+    <Content Include="images\3.jpg" />
+    <Content Include="images\4.jpg" />
+    <Content Include="images\5.jpg" />
+    <Content Include="images\arrow.png" />
+    <Content Include="images\avatar1.png" />
+    <Content Include="images\avatar2.png" />
+    <Content Include="images\img_coupondetail_bannerbottom_640x4.png" />
+    <Content Include="images\logo.png" />
+    <Content Include="images\logo_with_name.png" />
+    <Content Include="images\qrbg.jpg" />
+    <Content Include="images\qrcode\gongzhonghao.jpg" />
+    <Content Include="images\scenic\coupons_bg.png" />
+    <Content Include="images\scenic\img_coupondetail_bannerbottom_640x4.png" />
+    <Content Include="images\scenic\img_coupondetail_overdue_207x160.png" />
+    <Content Include="images\scenic\img_coupondetail_used_207x160.png" />
+    <Content Include="images\scenic\img_mycard_border_useless_6x208.png" />
+    <Content Include="images\scenic\img_mycard_stamp_overdue_130x120.png" />
+    <Content Include="images\scenic\img_mycard_stamp_used_130x120.png" />
+    <Content Include="images\shenxian.jpg" />
+    <Content Include="images\wolong.jpg" />
+    <Content Include="images\yueliang.jpg" />
+    <Content Include="images\back.jpg" />
+    <Content Include="images\bgcj.png" />
+    <Content Include="images\bj.png" />
+    <Content Include="images\btn01_arrow.png" />
+    <Content Include="images\caidai.png" />
+    <Content Include="images\cj.png" />
+    <Content Include="images\coupon.jpg" />
+    <Content Include="images\coupon_background.png" />
+    <Content Include="images\gift.png" />
+    <Content Include="images\gp_icons.png" />
+    <Content Include="images\hand.png" />
+    <Content Include="images\index-bg1.jpg" />
+    <Content Include="images\index-bg1.png" />
+    <Content Include="images\intro-background.jpg" />
+    <Content Include="images\mmodel-speech-album-detail-colon.png" />
+    <Content Include="images\mmodel-speech-album-detail-default-bg.png" />
+    <Content Include="images\mmodel-speech-album-detail-ellipsis.png" />
+    <Content Include="images\money.png" />
+    <Content Include="images\monster.jpg" />
+    <Content Include="images\monster.png" />
+    <Content Include="images\monster_transparent.png" />
+    <Content Include="images\part4.jpg" />
+    <Content Include="images\pic.jpg" />
+    <Content Include="images\qrcode.png" />
+    <Content Include="images\s.png" />
+    <Content Include="images\scenic1.png" />
+    <Content Include="images\scenic2.jpg" />
+    <Content Include="images\scenic2.png" />
+    <Content Include="images\scenic3.png" />
+    <Content Include="images\scenic4.jpg" />
+    <Content Include="images\scenic4.png" />
+    <Content Include="images\scenic\coupons_bg-fail.png" />
+    <Content Include="images\scenic\get-coupons.png" />
+    <Content Include="images\scenic\gq.png" />
+    <Content Include="images\scenic\sy.png" />
+    <Content Include="images\shake-hand.png" />
+    <Content Include="images\shake_background.png" />
+    <Content Include="images\star.png" />
+    <Content Include="images\ticket_background.png" />
+    <Content Include="images\scenic\yhico.png" />
+    <Content Include="images\友谊峰.png" />
+    <Content Include="images\喀纳斯河.png" />
+    <Content Include="images\图瓦村.png" />
+    <Content Include="images\白湖.png" />
+    <Content Include="images\禾木草原.png" />
+    <Content Include="javaScripts\H5FullscreenPage.js" />
+    <Content Include="javaScripts\jquery-2.1.4.min.js" />
+    <Content Include="javaScripts\jquery-tmpl.js" />
+    <Content Include="javaScripts\jquery.Jcrop.min.js" />
+    <Content Include="javaScripts\jquery.url.js" />
+    <Content Include="javaScripts\json2.js" />
+    <Content Include="javaScripts\jweixin-1.0.0.js" />
+    <Content Include="javaScripts\knockout-3.2.0.debug.js" />
+    <Content Include="javaScripts\pre-loader.js" />
+    <Content Include="js\couponDetail-vm.js" />
+    <Content Include="js\jquery-1.8.2.min.js" />
+    <Content Include="js\jquery.easing.1.3.js" />
+    <Content Include="javaScripts\knockout-3.3.0.js" />
+    <Content Include="js\myCoupons-vm.js" />
+    <Content Include="js\oAuth2.js" />
+    <Content Include="js\page_scroll_bx.js" />
+    <Content Include="js\scenicDetail-vm.js" />
+    <Content Include="js\shakeLuckyMoney-vm.js" />
+    <Content Include="js\mobilePhoneShake.min.js" />
+    <Content Include="Message\MessageHelper.aspx" />
+    <Content Include="music\music.mp3" />
+    <Content Include="order\ApplyRefund.html" />
+    <Content Include="Photo\MakePhoto.html" />
+    <Content Include="Photo\Scripts\photo.js" />
+    <Content Include="Photo\Scripts\WeiXinSdk.js" />
+    <Content Include="Photo\ShowPhoto.html" />
+    <Content Include="QuickEntry.html" />
+    <Content Include="scenicDetail.html" />
+    <Content Include="shakeLuckyMoney.html" />
+    <Content Include="luckyMoney.html" />
+    <Content Include="Styles\jquery.Jcrop.css" />
+    <Content Include="Styles\mod.css" />
+    <Content Include="Styles\monster.css" />
+    <Content Include="Styles\reset.css" />
+    <Content Include="Styles\reset1.css" />
+    <Content Include="Styles\scenicDetail.css" />
+    <Content Include="Styles\shakecoupons.css" />
+    <Content Include="javaScripts\swiper.min.js" />
+    <Content Include="javaScripts\template.js" />
+    <Content Include="javaScripts\vi.js" />
+    <Content Include="javaScripts\zepto.min.js" />
+    <Content Include="js\detail.js" />
+    <Content Include="js\lizard.seed.js" />
+    <Content Include="js\main.js" />
+    <Content Include="js\require.config.js" />
+    <Content Include="js\ui.scroll.js" />
+    <Content Include="js\ui.scroll.layer.js" />
+    <Content Include="js\ui.warning404.js" />
+    <Content Include="js\_mubt.min.js" />
+    <Content Include="order\MyOrderList.html" />
+    <Content Include="order\OrderDetail.html" />
+    <Content Include="order\script\common\common.js" />
+    <Content Include="order\script\common\jsRender.min.js" />
+    <Content Include="order\script\common\jquery.pageItem.js" />
+    <Content Include="order\script\common\main.js" />
+    <Content Include="order\style\css\style.css" />
+    <Content Include="Styles\H5FullscreenPage.css" />
+    <Content Include="Styles\normalize.css" />
+    <Content Include="Styles\page-animation.css" />
+    <Content Include="Styles\style.css" />
+    <Content Include="Styles\swiper.min.css" />
+    <Content Include="TicketDetail.html" />
+    <Content Include="TicketImages\1.jpg" />
+    <Content Include="TicketImages\2.jpg" />
+    <Content Include="TicketImages\3.jpg" />
+    <Content Include="TicketImages\coupons_bg.png" />
+    <Content Include="TicketList.aspx" />
+    <Content Include="Styles\TicketList.css" />
+    <Content Include="TicketList.html" />
+    <Content Include="Ticket\BookingTicket.html" />
+    <Content Include="Web.config" />
+    <Content Include="introduction.html" />
+    <Content Include="WebService\CouponWebService.asmx" />
+    <Content Include="WebService\MonsterService.asmx" />
+    <Content Include="WebService\TicketWebService.asmx" />
+    <Content Include="WebService\WeChatWebService.asmx" />
+    <Content Include="weixin.css" />
+    <Content Include="WXAPI\css\style.css" />
+    <Content Include="WXAPI\getOpenId.aspx" />
+    <Content Include="WXAPI\jssdk.html" />
+    <Content Include="WXAPI\js\demo.js" />
+    <Content Include="WXAPI\js\getWeChatOpenId.js" />
+    <Content Include="WXAPI\js\zepto.min.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Main.Master.cs">
+      <DependentUpon>Main.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Main.Master.designer.cs">
+      <DependentUpon>Main.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Message\MessageHelper.aspx.cs">
+      <DependentUpon>MessageHelper.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Message\MessageHelper.aspx.designer.cs">
+      <DependentUpon>MessageHelper.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TicketList.aspx.cs">
+      <DependentUpon>TicketList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TicketList.aspx.designer.cs">
+      <DependentUpon>TicketList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WXAPI\getOpenId.aspx.cs">
+      <DependentUpon>getOpenId.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WXAPI\getOpenId.aspx.designer.cs">
+      <DependentUpon>getOpenId.aspx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="js\concat" />
+    <Content Include="Main.Master" />
+    <Content Include="packages.config" />
+    <Content Include="bower_components\font-awesome\fonts\fontawesome-webfont.eot" />
+    <Content Include="bower_components\font-awesome\fonts\fontawesome-webfont.ttf" />
+    <Content Include="bower_components\font-awesome\fonts\fontawesome-webfont.woff" />
+    <Content Include="bower_components\font-awesome\fonts\fontawesome-webfont.woff2" />
+    <Content Include="bower_components\font-awesome\fonts\FontAwesome.otf" />
+    <Content Include="bower_components\font-awesome\less\animated.less" />
+    <Content Include="bower_components\font-awesome\less\bordered-pulled.less" />
+    <Content Include="bower_components\font-awesome\less\core.less" />
+    <Content Include="bower_components\font-awesome\less\fixed-width.less" />
+    <Content Include="bower_components\font-awesome\less\font-awesome.less" />
+    <Content Include="bower_components\font-awesome\less\icons.less" />
+    <Content Include="bower_components\font-awesome\less\larger.less" />
+    <Content Include="bower_components\font-awesome\less\list.less" />
+    <Content Include="bower_components\font-awesome\less\mixins.less" />
+    <Content Include="bower_components\font-awesome\less\path.less" />
+    <Content Include="bower_components\font-awesome\less\rotated-flipped.less" />
+    <Content Include="bower_components\font-awesome\less\stacked.less" />
+    <Content Include="bower_components\font-awesome\less\variables.less" />
+    <Content Include="bower_components\font-awesome\scss\font-awesome.scss" />
+    <Content Include="bower_components\font-awesome\scss\_animated.scss" />
+    <Content Include="bower_components\font-awesome\scss\_bordered-pulled.scss" />
+    <Content Include="bower_components\font-awesome\scss\_core.scss" />
+    <Content Include="bower_components\font-awesome\scss\_fixed-width.scss" />
+    <Content Include="bower_components\font-awesome\scss\_icons.scss" />
+    <Content Include="bower_components\font-awesome\scss\_larger.scss" />
+    <Content Include="bower_components\font-awesome\scss\_list.scss" />
+    <Content Include="bower_components\font-awesome\scss\_mixins.scss" />
+    <Content Include="bower_components\font-awesome\scss\_path.scss" />
+    <Content Include="bower_components\font-awesome\scss\_rotated-flipped.scss" />
+    <Content Include="bower_components\font-awesome\scss\_stacked.scss" />
+    <Content Include="bower_components\font-awesome\scss\_variables.scss" />
+    <None Include="Properties\PublishProfiles\jin.pubxml" />
+    <None Include="Properties\PublishProfiles\Travel.pubxml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Travel.Application.DomainModules\Travel.Application.DomainModules.csproj">
+      <Project>{a4eb3c6e-748d-4e16-ab48-43704bbdba24}</Project>
+      <Name>Travel.Application.DomainModules</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Travel.Infrastructure.CommonFunctions\Travel.Infrastructure.CommonFunctions.csproj">
+      <Project>{bb26e33b-85de-464b-83a2-109794a2c00a}</Project>
+      <Name>Travel.Infrastructure.CommonFunctions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Travel.Infrastructure.CommonFunctions\Travel.Infrastructure.CommonFunctions.csproj">
+      <Project>{bb26e33b-85de-464b-83a2-109794a2c00a}</Project>
+      <Name>Travel.Infrastructure.CommonFunctions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Travel.Infrastructure.WeiXin\Travel.Infrastructure.WeiXin.csproj">
+      <Project>{37afc00a-8d40-45df-98e8-3e671dd420fb}</Project>
+      <Name>Travel.Infrastructure.WeiXin</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Travel.Services.WebService\Travel.Services.WebService.csproj">
+      <Project>{dbf9d085-d5a5-495b-9554-bb0bb8a7dd85}</Project>
+      <Name>Travel.Services.WebService</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:23911/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

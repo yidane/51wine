@@ -1,0 +1,183 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1-Layers", "1-Layers", "{425A19B3-1A1F-4E3B-BA6A-38EFAF29DE2C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.1-Presentation", "1.1-Presentation", "{9A502FC4-6851-433D-ADDA-D9D5A22CA0F8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.2-Services", "1.2-Services", "{EEC6859A-5B2F-42F2-ABD9-EEDCA8B2CDCA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.3-Application", "1.3-Application", "{B85EF38F-4533-4682-B994-8D3EAAFA12F4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.4-Infrastructure", "1.4-Infrastructure", "{3AB1A28A-A16B-48C3-BA1E-863BFF3E8167}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.4.1-WeiXin", "1.4.1-WeiXin", "{C0ADD916-7AFF-44A1-8EC5-9D77619F23CF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Travel.Infrastructure.WeiXin", "SourceCode\Travel.Infrastructure.WeiXin\Travel.Infrastructure.WeiXin.csproj", "{37AFC00A-8D40-45DF-98E8-3E671DD420FB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2-Test", "2-Test", "{4BCFD133-8B80-4BA5-A07A-B6BA7473A23A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.1.1-Web", "1.1.1-Web", "{A2B279C1-F73F-4D6C-AB28-EDCF691139F2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Travel.Presentation.Web", "SourceCode\Travel.Presentation.Web\Travel.Presentation.Web.csproj", "{ECA74918-F911-4505-AD51-B4E1C0AE6808}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Travel.Infrastructure.WeiXin.Test", "SourceCode\Travel.Infrastructure.WeiXin.Test\Travel.Infrastructure.WeiXin.Test.csproj", "{42953974-A8C2-4BCF-9AE8-0192D51F8930}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.4.2-DomainDataAccess", "1.4.2-DomainDataAccess", "{A9F025B9-85EB-431E-8720-AEE2F6926FF3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Travel.Infrastructure.DomainDataAccess", "SourceCode\Travel.Infrastructure.DomainDataAccess\Travel.Infrastructure.DomainDataAccess.csproj", "{47F144AA-B49D-4DB2-80D3-59B05F8680E6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.4.3-CommonFunctions", "1.4.3-CommonFunctions", "{5DF2C90A-0B0F-41E9-AB73-313B5859A125}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Travel.Infrastructure.CommonFunctions", "SourceCode\Travel.Infrastructure.CommonFunctions\Travel.Infrastructure.CommonFunctions.csproj", "{BB26E33B-85DE-464B-83A2-109794A2C00A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Travel.Services.WebService", "SourceCode\Travel.Services.WebService\Travel.Services.WebService.csproj", "{DBF9D085-D5A5-495B-9554-BB0BB8A7DD85}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A4EB3C6E-748D-4E16-AB48-43704BBDBA24} = {A4EB3C6E-748D-4E16-AB48-43704BBDBA24}
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.3.1-DomainModules", "1.3.1-DomainModules", "{2E873623-66F9-42B0-99CB-3AEF18E78986}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Travel.Application.DomainModules", "SourceCode\Travel.Application.DomainModules\Travel.Application.DomainModules.csproj", "{A4EB3C6E-748D-4E16-AB48-43704BBDBA24}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.2.1-WebService", "1.2.1-WebService", "{474D6734-08F8-436E-9C1D-88E9FC848BF0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.4.4-OTAWebService", "1.4.4-OTAWebService", "{4FD4FD86-DF12-4ED8-BF15-FE3890D2D97D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Travel.Application.OrderUnitTest", "SourceCode\UnitTests\Travel.Application.OrderUnitTest\Travel.Application.OrderUnitTest.csproj", "{BCB4E708-2B14-4A61-A7D8-AFF380536A4A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Travel.Infrastructure.OTAWebService", "SourceCode\Travel.Infrastructure.OTAWebService\Travel.Infrastructure.OTAWebService.csproj", "{EC23F688-74AD-4BD7-81A6-B02E2CEC4572}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Travel.Infrastructure.OTAWebService.Test", "SourceCode\UnitTests\Travel.Infrastructure.OTAWebService.Test\Travel.Infrastructure.OTAWebService.Test.csproj", "{D49B96A4-2D99-4994-B1DC-9F83AD377131}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Travel.Infrastructure.UnitTest", "SourceCode\UnitTests\Travel.Infrastructure.UnitTest\Travel.Infrastructure.UnitTest.csproj", "{53623AEE-6B46-4B24-AF94-4D57868143F1}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 11
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://10.27.99.168:8080/tfs/thirdpartycollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = SourceCode\\Travel.Infrastructure.WeiXin\\Travel.Infrastructure.WeiXin.csproj
+		SccProjectTopLevelParentUniqueName1 = Travel.sln
+		SccProjectName1 = SourceCode/Travel.Infrastructure.WeiXin
+		SccLocalPath1 = SourceCode\\Travel.Infrastructure.WeiXin
+		SccProjectUniqueName2 = SourceCode\\Travel.Presentation.Web\\Travel.Presentation.Web.csproj
+		SccProjectTopLevelParentUniqueName2 = Travel.sln
+		SccProjectName2 = SourceCode/Travel.Presentation.Web
+		SccLocalPath2 = SourceCode\\Travel.Presentation.Web
+		SccProjectUniqueName3 = SourceCode\\Travel.Infrastructure.WeiXin.Test\\Travel.Infrastructure.WeiXin.Test.csproj
+		SccProjectTopLevelParentUniqueName3 = Travel.sln
+		SccProjectName3 = SourceCode/Travel.Infrastructure.WeiXin.Test
+		SccLocalPath3 = SourceCode\\Travel.Infrastructure.WeiXin.Test
+		SccProjectUniqueName4 = SourceCode\\Travel.Infrastructure.DomainDataAccess\\Travel.Infrastructure.DomainDataAccess.csproj
+		SccProjectTopLevelParentUniqueName4 = Travel.sln
+		SccProjectName4 = SourceCode/Travel.Infrastructure.DomainDataAccess
+		SccLocalPath4 = SourceCode\\Travel.Infrastructure.DomainDataAccess
+		SccProjectUniqueName5 = SourceCode\\Travel.Infrastructure.CommonFunctions\\Travel.Infrastructure.CommonFunctions.csproj
+		SccProjectTopLevelParentUniqueName5 = Travel.sln
+		SccProjectName5 = SourceCode/Travel.Infrastructure.CommonFunctions
+		SccLocalPath5 = SourceCode\\Travel.Infrastructure.CommonFunctions
+		SccProjectUniqueName6 = SourceCode\\Travel.Services.WebService\\Travel.Services.WebService.csproj
+		SccProjectTopLevelParentUniqueName6 = Travel.sln
+		SccProjectName6 = SourceCode/Travel.Services.WebService
+		SccLocalPath6 = SourceCode\\Travel.Services.WebService
+		SccProjectUniqueName7 = SourceCode\\Travel.Application.DomainModules\\Travel.Application.DomainModules.csproj
+		SccProjectTopLevelParentUniqueName7 = Travel.sln
+		SccProjectName7 = SourceCode/Travel.Application.DomainModules
+		SccLocalPath7 = SourceCode\\Travel.Application.DomainModules
+		SccProjectUniqueName8 = SourceCode\\UnitTests\\Travel.Application.OrderUnitTest\\Travel.Application.OrderUnitTest.csproj
+		SccProjectName8 = SourceCode/UnitTests/Travel.Application.OrderUnitTest
+		SccLocalPath8 = SourceCode\\UnitTests\\Travel.Application.OrderUnitTest
+		SccProjectUniqueName9 = SourceCode\\Travel.Infrastructure.OTAWebService\\Travel.Infrastructure.OTAWebService.csproj
+		SccProjectTopLevelParentUniqueName9 = Travel.sln
+		SccProjectName9 = SourceCode/Travel.Infrastructure.OTAWebService
+		SccLocalPath9 = SourceCode\\Travel.Infrastructure.OTAWebService
+		SccProjectUniqueName10 = SourceCode\\UnitTests\\Travel.Infrastructure.OTAWebService.Test\\Travel.Infrastructure.OTAWebService.Test.csproj
+		SccProjectTopLevelParentUniqueName10 = Travel.sln
+		SccProjectName10 = SourceCode/UnitTests/Travel.Infrastructure.OTAWebService.Test
+		SccLocalPath10 = SourceCode\\UnitTests\\Travel.Infrastructure.OTAWebService.Test
+				SccProjectUniqueName11 = SourceCode\\UnitTests\\Travel.Infrastructure.UnitTest\\Travel.Infrastructure.UnitTest.csproj
+		SccProjectTopLevelParentUniqueName11 = Travel.sln
+		SccProjectName11 = SourceCode/UnitTests/Travel.Infrastructure.UnitTest
+		SccLocalPath11 = SourceCode\\UnitTests\\Travel.Infrastructure.UnitTest
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{37AFC00A-8D40-45DF-98E8-3E671DD420FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37AFC00A-8D40-45DF-98E8-3E671DD420FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37AFC00A-8D40-45DF-98E8-3E671DD420FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37AFC00A-8D40-45DF-98E8-3E671DD420FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ECA74918-F911-4505-AD51-B4E1C0AE6808}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ECA74918-F911-4505-AD51-B4E1C0AE6808}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ECA74918-F911-4505-AD51-B4E1C0AE6808}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ECA74918-F911-4505-AD51-B4E1C0AE6808}.Release|Any CPU.Build.0 = Release|Any CPU
+		{42953974-A8C2-4BCF-9AE8-0192D51F8930}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42953974-A8C2-4BCF-9AE8-0192D51F8930}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42953974-A8C2-4BCF-9AE8-0192D51F8930}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42953974-A8C2-4BCF-9AE8-0192D51F8930}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47F144AA-B49D-4DB2-80D3-59B05F8680E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47F144AA-B49D-4DB2-80D3-59B05F8680E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47F144AA-B49D-4DB2-80D3-59B05F8680E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47F144AA-B49D-4DB2-80D3-59B05F8680E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB26E33B-85DE-464B-83A2-109794A2C00A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB26E33B-85DE-464B-83A2-109794A2C00A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB26E33B-85DE-464B-83A2-109794A2C00A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB26E33B-85DE-464B-83A2-109794A2C00A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DBF9D085-D5A5-495B-9554-BB0BB8A7DD85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DBF9D085-D5A5-495B-9554-BB0BB8A7DD85}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DBF9D085-D5A5-495B-9554-BB0BB8A7DD85}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DBF9D085-D5A5-495B-9554-BB0BB8A7DD85}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A4EB3C6E-748D-4E16-AB48-43704BBDBA24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4EB3C6E-748D-4E16-AB48-43704BBDBA24}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4EB3C6E-748D-4E16-AB48-43704BBDBA24}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4EB3C6E-748D-4E16-AB48-43704BBDBA24}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BCB4E708-2B14-4A61-A7D8-AFF380536A4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BCB4E708-2B14-4A61-A7D8-AFF380536A4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BCB4E708-2B14-4A61-A7D8-AFF380536A4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BCB4E708-2B14-4A61-A7D8-AFF380536A4A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC23F688-74AD-4BD7-81A6-B02E2CEC4572}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC23F688-74AD-4BD7-81A6-B02E2CEC4572}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC23F688-74AD-4BD7-81A6-B02E2CEC4572}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC23F688-74AD-4BD7-81A6-B02E2CEC4572}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D49B96A4-2D99-4994-B1DC-9F83AD377131}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D49B96A4-2D99-4994-B1DC-9F83AD377131}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D49B96A4-2D99-4994-B1DC-9F83AD377131}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D49B96A4-2D99-4994-B1DC-9F83AD377131}.Release|Any CPU.Build.0 = Release|Any CPU
+				{53623AEE-6B46-4B24-AF94-4D57868143F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53623AEE-6B46-4B24-AF94-4D57868143F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53623AEE-6B46-4B24-AF94-4D57868143F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53623AEE-6B46-4B24-AF94-4D57868143F1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{9A502FC4-6851-433D-ADDA-D9D5A22CA0F8} = {425A19B3-1A1F-4E3B-BA6A-38EFAF29DE2C}
+		{EEC6859A-5B2F-42F2-ABD9-EEDCA8B2CDCA} = {425A19B3-1A1F-4E3B-BA6A-38EFAF29DE2C}
+		{B85EF38F-4533-4682-B994-8D3EAAFA12F4} = {425A19B3-1A1F-4E3B-BA6A-38EFAF29DE2C}
+		{3AB1A28A-A16B-48C3-BA1E-863BFF3E8167} = {425A19B3-1A1F-4E3B-BA6A-38EFAF29DE2C}
+		{A2B279C1-F73F-4D6C-AB28-EDCF691139F2} = {9A502FC4-6851-433D-ADDA-D9D5A22CA0F8}
+		{474D6734-08F8-436E-9C1D-88E9FC848BF0} = {EEC6859A-5B2F-42F2-ABD9-EEDCA8B2CDCA}
+		{2E873623-66F9-42B0-99CB-3AEF18E78986} = {B85EF38F-4533-4682-B994-8D3EAAFA12F4}
+		{C0ADD916-7AFF-44A1-8EC5-9D77619F23CF} = {3AB1A28A-A16B-48C3-BA1E-863BFF3E8167}
+		{A9F025B9-85EB-431E-8720-AEE2F6926FF3} = {3AB1A28A-A16B-48C3-BA1E-863BFF3E8167}
+		{5DF2C90A-0B0F-41E9-AB73-313B5859A125} = {3AB1A28A-A16B-48C3-BA1E-863BFF3E8167}
+		{4FD4FD86-DF12-4ED8-BF15-FE3890D2D97D} = {3AB1A28A-A16B-48C3-BA1E-863BFF3E8167}
+		{37AFC00A-8D40-45DF-98E8-3E671DD420FB} = {C0ADD916-7AFF-44A1-8EC5-9D77619F23CF}
+		{42953974-A8C2-4BCF-9AE8-0192D51F8930} = {4BCFD133-8B80-4BA5-A07A-B6BA7473A23A}
+		{D49B96A4-2D99-4994-B1DC-9F83AD377131} = {4BCFD133-8B80-4BA5-A07A-B6BA7473A23A}
+		{ECA74918-F911-4505-AD51-B4E1C0AE6808} = {A2B279C1-F73F-4D6C-AB28-EDCF691139F2}
+		{47F144AA-B49D-4DB2-80D3-59B05F8680E6} = {A9F025B9-85EB-431E-8720-AEE2F6926FF3}
+		{BB26E33B-85DE-464B-83A2-109794A2C00A} = {5DF2C90A-0B0F-41E9-AB73-313B5859A125}
+		{DBF9D085-D5A5-495B-9554-BB0BB8A7DD85} = {474D6734-08F8-436E-9C1D-88E9FC848BF0}
+		{A4EB3C6E-748D-4E16-AB48-43704BBDBA24} = {2E873623-66F9-42B0-99CB-3AEF18E78986}
+		{EC23F688-74AD-4BD7-81A6-B02E2CEC4572} = {4FD4FD86-DF12-4ED8-BF15-FE3890D2D97D}
+				{474D6734-08F8-436E-9C1D-88E9FC848BF0} = {EEC6859A-5B2F-42F2-ABD9-EEDCA8B2CDCA}
+		{BCB4E708-2B14-4A61-A7D8-AFF380536A4A} = {2E873623-66F9-42B0-99CB-3AEF18E78986}
+		{53623AEE-6B46-4B24-AF94-4D57868143F1} = {A9F025B9-85EB-431E-8720-AEE2F6926FF3}
+	EndGlobalSection
+EndGlobal

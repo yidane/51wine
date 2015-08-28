@@ -1,0 +1,404 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta content="telephone=no" name="format-detection" />
+    <title>沈园</title>
+    <link href="Styles/reset1.css" rel="stylesheet" />
+    <link href="Styles/scenicDetail.css" rel="stylesheet" />
+</head>
+<body class="bg">
+
+
+    <div class="speech-process">
+        <a href="javascript:void(0);" class="play-audio" style="display:none;">语音</a> <a href="javascript:void(0);"
+                                                                                         class="playing"
+                                                                                         style="display:none;">
+            <span class="playing-icon"></span>播放中
+        </a>
+
+        <div class="process-bar"><span class="position">沈园</span></div>
+        <div class="speech-list-wrap" id="wrap">
+            <div id="scroller">
+                <ul data-bind="with:data"  class="full-wd">
+                    <li class="lists">
+
+                        <p class="desc" data-bind="text:page_desc"></p>
+                    </li>
+                    <!-- ko foreach:lists -->
+                    <li class="lists">
+                        <div class="album-desc-wrap">
+                            <span class="title" data-bind="text:title"></span>
+
+                            <p class="desc" data-bind="text:desc"></p>
+                        </div>
+                        <audio preload="auto" data-bind="attr:{'id':'audio'+ $index, 'src':audio_src}"></audio>
+                        <!-- ko foreach:images -->
+                        <img border="0" width="260" height="180" data-bind="attr:{'src':image_src}" />
+                        <!--/ko-->
+                    </li>
+                    <!--/ko-->
+
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div class="dilog">
+            <div class="album-desc-wrap">
+                <span class="title">沈园</span>
+
+                <p class="desc">
+                    沈园又名沈氏园，位于浙江省绍兴市区东南的洋河弄，原系沈氏私家花园，故名。清乾隆《绍兴府志》引旧志记载：“在府城禹迹寺南会稽地，宋时池台极盛。”这“池台”指的就是沈园。公元1151年，陆游与唐琬在此引发的《钗头凤》故事，更使沈园名传千古。
+                </p>
+            </div>
+        </div>
+        <div class="dilog" style="">
+            <div class="album-desc-wrap">
+                <span class="title">断云石</span>
+
+                <p class="desc">断云石在沈园入口处，“断云”（谐音“断缘”）此石中间断开，但依依不愿分离，向人们诉说陆游和唐琬的爱情悲剧，点明沈园的主题。</p>
+            </div>
+        </div>
+    </div>
+
+
+    <!--<div class="speech-process">-->
+    <!--<a href="javascript:void(0);" class="play-audio" style="display:none;">语音</a> <a href="javascript:void(0);"-->
+    <!--class="playing"-->
+    <!--style="display:none;"><span-->
+    <!--class="playing-icon"></span>播放中</a>-->
+    <!--<div class="process-bar"><span class="position">沈园</span></div>-->
+    <!--<div class="speech-list-wrap" id="wrap">-->
+    <!--<div id="scroller">-->
+    <!--<ul>-->
+    <!--<li class="lists">-->
+    <!--<p class="desc">-->
+    <!--沈园又名沈氏园，位于浙江省绍兴市区东南的洋河弄，原系沈氏私家花园，故名。清乾隆《绍兴府志》引旧志记载：“在府城禹迹寺南会稽地，宋时池台极盛。”这“池台”指的就是沈园。公元1151年，陆游与唐琬在此引发的《钗头凤》故事，更使沈园名传千古。</p>-->
+    <!--</li>-->
+    <!--<li class="lists">-->
+    <!--<div class="album-desc-wrap">-->
+    <!--<span class="title">断云石</span>-->
+    <!--<p class="desc">断云石在沈园入口处，“断云”（谐音“断缘”）此石中间断开，但依依不愿分离，向人们诉说陆游和唐琬的爱情悲剧，点明沈园的主题。</p>-->
+    <!--</div>-->
+    <!--<audio preload="none" id="audio0"-->
+    <!--src="http://wxcdn.shaoxingtour.cn/data/voices/2014-09-24/54228c6c15ae8.mp3"></audio>-->
+    <!--<img border="0" width="260" height="180"-->
+    <!--src="http://wxcdn.shaoxingtour.cn/data/imgs/2014-09-24/360200/54228c6958da1.jpg"/>-->
+    <!--</li>-->
+    <!--<li class="lists">-->
+    <!--<div class="album-desc-wrap">-->
+    <!--<span class="title">六朝井亭</span>-->
+    <!--<p class="desc">-->
+    <!--六朝井亭是唐、五代、宋、明、清的亭阁、砖井、池塘和假山等建筑遗址多处，是沈园悠久历史的实物见证。“六朝井亭”亭内有古井一口，此井亭中间可以望到天空，亭顶中空，可以使井承天露，象征诗人覆水欲收的意愿。中空“承天光”，解决雨水活性和采光。从中体现人们向往婚姻光明自由的愿望。</p>-->
+    <!--</div>-->
+    <!--<audio preload="none" id="audio1"-->
+    <!--src="http://wxcdn.shaoxingtour.cn/data/voices/2014-09-24/54228cd420df0.mp3"></audio>-->
+    <!--<img border="0" width="260" height="180"-->
+    <!--src="http://wxcdn.shaoxingtour.cn/data/imgs/2014-09-24/360200/54228cce8f928.jpg"/>-->
+    <!--<img border="0" width="260" height="180"-->
+    <!--src="http://wxcdn.shaoxingtour.cn/data/imgs/2014-09-24/360200/54228cd0d10ab.jpg"/>-->
+    <!--</li>-->
+    <!--<li class="lists">-->
+    <!--<div class="album-desc-wrap">-->
+    <!--<span class="title">孤鹤轩</span>-->
+    <!--<p class="desc">-->
+    <!--亦称“孤鹤哀鸣”处，是陆放翁的自喻。伟大爱国诗人陆游因南宋朝廷昏庸，壮志难以实现，发出孤鹤的哀鸣，以孤鹤自喻，隐喻诗人在人生中痛失伴侣，事业上报国无门、爱民有罪、屡遭贬职的坎坷一生。亭内有“亭池”遗址，1985年考古发掘时在此发现唐亭阁和明代的假山、鱼池遗址。“孤鹤轩”匾额分为内外两块，内匾分内外两块，内匾额由著名书画家、文物鉴定家谢稚柳题写，亭外由大康敬书。</p>-->
+    <!--</div>-->
+    <!--<audio preload="none" id="audio2"-->
+    <!--src="http://wxcdn.shaoxingtour.cn/data/voices/2014-09-24/54228cf04b23b.mp3"></audio>-->
+    <!--<img border="0" width="260" height="180"-->
+    <!--src="http://wxcdn.shaoxingtour.cn/data/imgs/2014-09-24/360200/54228ce9881e2.jpg"/>-->
+    <!--<img border="0" width="260" height="180"-->
+    <!--src="http://wxcdn.shaoxingtour.cn/data/imgs/2014-09-24/360200/54228ceb90b7d.jpg"/>-->
+    <!--</li>-->
+    <!--<li class="lists">-->
+    <!--<div class="album-desc-wrap">-->
+    <!--<span class="title">《钗头凤》题壁</span>-->
+    <!--<p class="desc">陆游的一阙《钗头凤》成为千古绝唱，唐琬和词夫妻之情犹锁壁间。《钗头凤》一阙上青天，牵动相思的人儿泪涟涟。沈园因此成为千古名园。</p>-->
+    <!--</div>-->
+    <!--<audio preload="none" id="audio3"-->
+    <!--src="http://wxcdn.shaoxingtour.cn/data/voices/2014-09-24/54228f2a370e0.mp3"></audio>-->
+    <!--<img border="0" width="260" height="180"-->
+    <!--src="http://wxcdn.shaoxingtour.cn/data/imgs/2014-09-24/360200/54228d04b8fee.jpg"/>-->
+    <!--</li>-->
+    <!--<li class="lists">-->
+    <!--<div class="album-desc-wrap">-->
+    <!--<span class="title">葫芦池</span>-->
+    <!--<p class="desc">-->
+    <!--此间曾是陆游与唐琬相见之处。宋代原状保留到今。原为荷花池，因其形状如葫芦，民间俗称葫芦池。陆游有诗句：“伤心桥下春波绿，曾是惊鸿照影来。”描述唐琬的秀丽姿态与池水相映成影，仿佛看到了池中的倩影，倍感伤痛。</p>-->
+    <!--</div>-->
+    <!--<audio preload="none" id="audio4"-->
+    <!--src="http://wxcdn.shaoxingtour.cn/data/voices/2014-09-24/54228fa448456.mp3"></audio>-->
+    <!--<img border="0" width="260" height="180"-->
+    <!--src="http://wxcdn.shaoxingtour.cn/data/imgs/2014-09-24/360200/54228f46a17f3.jpg"/>-->
+    <!--</li>-->
+    <!--<li class="lists">-->
+    <!--<div class="album-desc-wrap">-->
+    <!--<span class="title">双桂堂</span>-->
+    <!--<p class="desc">是一处仿宋庭院建筑，屋宇两楹，古雅幽静。天井内植有两棵桂树，一棵金桂，一棵银桂，故称“双桂堂”。“-->
+    <!--双桂堂”三字是著名书法家沙孟海题写。也是沈园之夜堂会表演的场所。</p>-->
+    <!--</div>-->
+    <!--<audio preload="none" id="audio5"-->
+    <!--src="http://wxcdn.shaoxingtour.cn/data/voices/2014-09-24/54228fc842b5e.mp3"></audio>-->
+    <!--<img border="0" width="260" height="180"-->
+    <!--src="http://wxcdn.shaoxingtour.cn/data/imgs/2014-09-24/360200/54228fb8a35f4.jpg"/>-->
+    <!--</li>-->
+    <!--<li class="lists">-->
+    <!--<div class="album-desc-wrap">-->
+    <!--<span class="title">陆游纪念馆</span>-->
+    <!--<p class="desc">-->
+    <!--陆游纪念馆是沈园新景，位于沈园古迹区南侧。由陆游史迹陈列（安丰堂）、碑廊、务观堂和雕塑等组成。馆内展出大量手迹、照片、画幅、善本、拓片、实物模型等，反映了陆游爱国忧民和作为一代文豪的辉煌成就。展览分四个部分。第一部分：内忧外患，赤诚报国；第二部分：励精图治，勤政爱民；第三部分：热爱家乡，探迹揽胜；第四部分：婚姻悲剧，抱恨终生。</p>-->
+    <!--</div>-->
+    <!--<audio preload="none" id="audio6"-->
+    <!--src="http://wxcdn.shaoxingtour.cn/data/voices/2014-09-24/54228ff2e6e13.mp3"></audio>-->
+    <!--<img border="0" width="260" height="180"-->
+    <!--src="http://wxcdn.shaoxingtour.cn/data/imgs/2014-09-24/360200/54228fe741a28.jpg"/>-->
+    <!--</li>-->
+    <!--<li class="lists">-->
+    <!--<div class="album-desc-wrap">-->
+    <!--<span class="title">东苑</span>-->
+    <!--<p class="desc">-->
+    <!--又称情侣园，是陆游和唐琬凄美爱情故事在现代人中的延伸。全苑景象更显江南特色园林，绮丽而不失端庄，含蓄而更添情韵，表现“鹊桥传情”的主题，是有情人抒发爱情的佳地。</p>-->
+    <!--</div>-->
+    <!--<audio preload="none" id="audio7"-->
+    <!--src="http://wxcdn.shaoxingtour.cn/data/voices/2014-09-24/5422902ed5e5d.mp3"></audio>-->
+    <!--<img border="0" width="260" height="180"-->
+    <!--src="http://wxcdn.shaoxingtour.cn/data/imgs/2014-09-24/360200/5422900683db5.jpg"/>-->
+    <!--</li>-->
+    <!--<li class="lists">-->
+    <!--<div class="album-desc-wrap">-->
+    <!--<span class="title">沈园之夜</span>-->
+    <!--<p class="desc">《沈园之夜》是目前绍兴唯一的夜游景点，有“码头恭迎、市井夜市、开园仪式、诗境游园、乡饮酒礼 礼饼献瑞、开戏鸣锣-->
+    <!--”等具体活动情景。提供家丁恭候、宋币换购、管家迎客、侍女讲解、品饼饮酒、民乐伴奏、堂会表演七项服务。游客可以在参与了宋代大户人家的开园仪式后，在侍女陪同下游园，欣赏风情大戏，醉在花前月下、灯影酒香之中，感受南宋爱国诗人陆游与表妹唐婉凄美的爱情故事。欣赏堂会表演《沈园情》，感受浓郁的绍兴地方文化。</p>-->
+    <!--</div>-->
+    <!--<audio preload="none" id="audio8" src="http://wxcdn.shaoxingtour.cn"></audio>-->
+    <!--<img border="0" width="260" height="180"-->
+    <!--src="http://wxcdn.shaoxingtour.cn/data/imgs/2014-09-24/360200/54229047e7580.jpg"/>-->
+    <!--<img border="0" width="260" height="180"-->
+    <!--src="http://wxcdn.shaoxingtour.cn/data/imgs/2014-09-24/360200/5422904a45379.jpg"/>-->
+    <!--<img border="0" width="260" height="180"-->
+    <!--src="http://wxcdn.shaoxingtour.cn/data/imgs/2014-09-24/360200/5422904c67cf9.jpg"/>-->
+    <!--<img border="0" width="260" height="180"-->
+    <!--src="http://wxcdn.shaoxingtour.cn/data/imgs/2014-09-24/360200/5422904e5a248.jpg"/>-->
+    <!--</li>-->
+    <!--</ul>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--<div>-->
+    <!--<div class="dilog" style="">-->
+    <!--<div class="album-desc-wrap">-->
+    <!--<span class="title">沈园</span>-->
+    <!--<p class="desc">-->
+    <!--沈园又名沈氏园，位于浙江省绍兴市区东南的洋河弄，原系沈氏私家花园，故名。清乾隆《绍兴府志》引旧志记载：“在府城禹迹寺南会稽地，宋时池台极盛。”这“池台”指的就是沈园。公元1151年，陆游与唐琬在此引发的《钗头凤》故事，更使沈园名传千古。</p>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--<div class="dilog" style="">-->
+    <!--<div class="album-desc-wrap">-->
+    <!--<span class="title">断云石</span>-->
+    <!--<p class="desc">断云石在沈园入口处，“断云”（谐音“断缘”）此石中间断开，但依依不愿分离，向人们诉说陆游和唐琬的爱情悲剧，点明沈园的主题。</p>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--<div class="dilog" style="">-->
+    <!--<div class="album-desc-wrap">-->
+    <!--<span class="title">六朝井亭</span>-->
+    <!--<p class="desc">-->
+    <!--六朝井亭是唐、五代、宋、明、清的亭阁、砖井、池塘和假山等建筑遗址多处，是沈园悠久历史的实物见证。“六朝井亭”亭内有古井一口，此井亭中间可以望到天空，亭顶中空，可以使井承天露，象征诗人覆水欲收的意愿。中空“承天光”，解决雨水活性和采光。从中体现人们向往婚姻光明自由的愿望。</p>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--<div class="dilog" style="">-->
+    <!--<div class="album-desc-wrap">-->
+    <!--<span class="title">孤鹤轩</span>-->
+    <!--<p class="desc">-->
+    <!--亦称“孤鹤哀鸣”处，是陆放翁的自喻。伟大爱国诗人陆游因南宋朝廷昏庸，壮志难以实现，发出孤鹤的哀鸣，以孤鹤自喻，隐喻诗人在人生中痛失伴侣，事业上报国无门、爱民有罪、屡遭贬职的坎坷一生。亭内有“亭池”遗址，1985年考古发掘时在此发现唐亭阁和明代的假山、鱼池遗址。“孤鹤轩”匾额分为内外两块，内匾分内外两块，内匾额由著名书画家、文物鉴定家谢稚柳题写，亭外由大康敬书。</p>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--<div class="dilog" style="">-->
+    <!--<div class="album-desc-wrap">-->
+    <!--<span class="title">《钗头凤》题壁</span>-->
+    <!--<p class="desc">陆游的一阙《钗头凤》成为千古绝唱，唐琬和词夫妻之情犹锁壁间。《钗头凤》一阙上青天，牵动相思的人儿泪涟涟。沈园因此成为千古名园。</p>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--<div class="dilog" style="">-->
+    <!--<div class="album-desc-wrap">-->
+    <!--<span class="title">葫芦池</span>-->
+    <!--<p class="desc">-->
+    <!--此间曾是陆游与唐琬相见之处。宋代原状保留到今。原为荷花池，因其形状如葫芦，民间俗称葫芦池。陆游有诗句：“伤心桥下春波绿，曾是惊鸿照影来。”描述唐琬的秀丽姿态与池水相映成影，仿佛看到了池中的倩影，倍感伤痛。</p>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--<div class="dilog" style="">-->
+    <!--<div class="album-desc-wrap">-->
+    <!--<span class="title">双桂堂</span>-->
+    <!--<p class="desc">是一处仿宋庭院建筑，屋宇两楹，古雅幽静。天井内植有两棵桂树，一棵金桂，一棵银桂，故称“双桂堂”。“ 双桂堂”三字是著名书法家沙孟海题写。也是沈园之夜堂会表演的场所。</p>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--<div class="dilog" style="">-->
+    <!--<div class="album-desc-wrap">-->
+    <!--<span class="title">陆游纪念馆</span>-->
+    <!--<p class="desc">-->
+    <!--陆游纪念馆是沈园新景，位于沈园古迹区南侧。由陆游史迹陈列（安丰堂）、碑廊、务观堂和雕塑等组成。馆内展出大量手迹、照片、画幅、善本、拓片、实物模型等，反映了陆游爱国忧民和作为一代文豪的辉煌成就。展览分四个部分。第一部分：内忧外患，赤诚报国；第二部分：励精图治，勤政爱民；第三部分：热爱家乡，探迹揽胜；第四部分：婚姻悲剧，抱恨终生。</p>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--<div class="dilog" style="">-->
+    <!--<div class="album-desc-wrap">-->
+    <!--<span class="title">东苑</span>-->
+    <!--<p class="desc">又称情侣园，是陆游和唐琬凄美爱情故事在现代人中的延伸。全苑景象更显江南特色园林，绮丽而不失端庄，含蓄而更添情韵，表现“鹊桥传情”的主题，是有情人抒发爱情的佳地。</p>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--<div class="dilog" style="">-->
+    <!--<div class="album-desc-wrap">-->
+    <!--<span class="title">沈园之夜</span>-->
+    <!--<p class="desc">《沈园之夜》是目前绍兴唯一的夜游景点，有“码头恭迎、市井夜市、开园仪式、诗境游园、乡饮酒礼 礼饼献瑞、开戏鸣锣-->
+    <!--”等具体活动情景。提供家丁恭候、宋币换购、管家迎客、侍女讲解、品饼饮酒、民乐伴奏、堂会表演七项服务。游客可以在参与了宋代大户人家的开园仪式后，在侍女陪同下游园，欣赏风情大戏，醉在花前月下、灯影酒香之中，感受南宋爱国诗人陆游与表妹唐婉凄美的爱情故事。欣赏堂会表演《沈园情》，感受浓郁的绍兴地方文化。</p>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+    <a href="javascript:history.back();" class="back"></a>
+
+    <script type="text/javascript" src="http://wxcdn.shaoxingtour.cn/Public/js/jquery.min.js"></script>
+    <script type="text/javascript" src="http://wxcdn.shaoxingtour.cn/Public/js/iscroll-probe.js"></script>
+    <script type='text/javascript'
+            src='http://wxcdn.shaoxingtour.cn/Public/js/simplemodal/js/jquery.simplemodal.js'></script>
+    <script src="javaScripts/knockout-3.2.0.debug.js"></script>
+    <!--<script src="javaScripts/knockout-3.3.0.js"></script>-->
+    <script src="js/scenicDetail-vm.js"></script>
+    <script type="text/javascript">
+
+
+        var data = {
+            page_title: '沈园',
+            page_desc: '沈园又名沈氏园，位于浙江省绍兴市区东南的洋河弄，原系沈氏私家花园，故名。清乾隆《绍兴府志》引旧志记载：“在府城禹迹寺南会稽地，宋时池台极盛。”这“池台”指的就是沈园。公元1151年，陆游与唐琬在此引发的《钗头凤》故事，更使沈园名传千古。',
+            lists: [
+                {
+                    title: '断云石',
+                    desc: '断云石在沈园入口处，“断云”（谐音“断缘”）此石中间断开，但依依不愿分离，向人们诉说陆游和唐琬的爱情悲剧，点明沈园的主题。',
+                    audio_src: 'http://wxcdn.shaoxingtour.cn/data/voices/2014-09-24/54228c6c15ae8.mp3',
+                    images: [{
+                        image_src: 'http://wxcdn.shaoxingtour.cn/data/imgs/2014-09-24/360200/54228c6958da1.jpg'
+                    }]
+                },
+                {
+                    title: '六朝井亭',
+                    desc: ' 六朝井亭是唐、五代、宋、明、清的亭阁、砖井、池塘和假山等建筑遗址多处，是沈园悠久历史的实物见证。“六朝井亭”亭内有古井一口，此井亭中间可以望到天空，亭顶中空，可以使井承天露，象征诗人覆水欲收的意愿。中空“承天光”，解决雨水活性和采光。从中体现人们向往婚姻光明自由的愿望。',
+                    audio_src: 'http://wxcdn.shaoxingtour.cn/data/voices/2014-09-24/54228cd420df0.mp3',
+                    images: [{
+                        image_src: 'http://wxcdn.shaoxingtour.cn/data/imgs/2014-09-24/360200/54228cce8f928.jpg'
+                    },
+                        {
+                            image_src: 'http://wxcdn.shaoxingtour.cn/data/imgs/2014-09-24/360200/54228cd0d10ab.jpg'
+                        }]
+                },
+            ]
+        };
+
+
+        var vm = new ScenicDetailViewModel(data);
+        ko.applyBindings(vm);
+
+        var position;
+        var arr = new Array();
+        var title = new Array();
+        var t1 = null;
+        var play;
+        function myclick() {
+            if (t1 == null) {
+                t1 = new Date().getTime();
+            } else {
+                var t2 = new Date().getTime();
+                if (t2 - t1 < 500) {
+                    t1 = t2;
+                    return;
+                } else {
+                    t1 = t2;
+                }
+            }
+            $.modal.close();
+        }
+        var p;
+        function updatePosition() {
+            var x = -this.x;
+            for (var i = 0; i < arr.length; i++) {
+                var rarr = arr[i + 1] ? arr[i + 1] : Number.POSITIVE_INFINITY;
+                if (arr[i] < x && x < rarr) {
+                    if (p == i) return false;
+                    p = i;
+                    $(".position").html(title[p]);
+
+                    $(".play-audio").show();
+
+                    $(".playing").hide();
+                    break;
+                }
+            }
+        }
+        $(function () {
+            $("li").click(function () {
+                myclick();
+                var index = $(this).index();
+                //if (index == 0) return false;
+                $(".dilog").eq(index).modal();
+            });
+
+            $(".dilog").click(function () {
+                myclick();
+            });
+
+            $(".lists:not(:first)").each(function (index) {
+                arr[index] = $(this).position().left;
+
+                title[index] = $(this).find(".title").html();
+            });
+
+            $(".play-audio").click(function () {
+                if (play) {
+                    var playaudio = document.getElementById('audio' + play);
+                    playaudio.pause();
+                }
+                var audio = document.getElementById('audio' + p);
+                play = p;
+                audio.addEventListener('ended', function () {
+                    $(".play-audio").show();
+                    $(".playing").hide();
+                }, false);
+                audio.play();
+                $(".play-audio").hide();
+                $(".playing").show();
+            });
+
+            $(".playing").click(function () {
+                var playaudio = document.getElementById('audio' + play);
+                playaudio.pause();
+                $(".play-audio").show();
+                $(".playing").hide();
+            });
+
+            var w = 30;
+            $("#scroller .lists").each(function () {
+                w += $(this).width() + 55;
+            });
+            $("#scroller").css("width", w);
+
+            myScroll = new IScroll('#wrap', {
+                probeType: 3,
+                mouseWheel: true,
+                eventPassthrough: true,
+                scrollX: true,
+                scrollY: false,
+                preventDefault: false,
+                checkDOMChanges: true,
+                click: true
+            });
+            myScroll.on('scrollEnd', updatePosition);
+            myScroll.refresh();
+        })
+        document.addEventListener('touchmove', function (e) {
+            e.preventDefault();
+        }, false);
+
+
+    </script>
+</body>
+</html>

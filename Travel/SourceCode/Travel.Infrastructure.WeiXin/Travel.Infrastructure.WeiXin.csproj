@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{37AFC00A-8D40-45DF-98E8-3E671DD420FB}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Travel.Infrastructure.WeiXin</RootNamespace>
+    <AssemblyName>Travel.Infrastructure.WeiXin</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="HtmlAgilityPack">
+      <HintPath>..\..\CommonDLL\HtmlAgilityPack.dll</HintPath>
+    </Reference>
+    <Reference Include="JuraScriptLibrary">
+      <HintPath>..\..\CommonDLL\JuraScriptLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="Jurassic">
+      <HintPath>..\..\CommonDLL\Jurassic.dll</HintPath>
+    </Reference>
+    <Reference Include="LitJson">
+      <HintPath>..\..\CommonDLL\LitJson.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\CommonDLL\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Advanced\HttpService.cs" />
+    <Compile Include="Advanced\Pay\JsApiPay.cs" />
+    <Compile Include="Advanced\Pay\Model\UnifiedOrderRequest.cs" />
+    <Compile Include="Advanced\Pay\Model\UnifiedOrderResult.cs" />
+    <Compile Include="Advanced\Pay\WxPayApi.cs" />
+    <Compile Include="Advanced\Pay\WxPayConfig.cs" />
+    <Compile Include="Advanced\Pay\WxPayData.cs" />
+    <Compile Include="Advanced\Pay\WxPayHelper.cs" />
+    <Compile Include="Common\Credential.cs" />
+    <Compile Include="Common\EntrySign.cs" />
+    <Compile Include="Common\HttpHelper.cs" />
+    <Compile Include="Common\OAuth2\AccessToken.cs" />
+    <Compile Include="Common\Ticket\CardTicket.cs" />
+    <Compile Include="Common\Ticket\ConfigTicket.cs" />
+    <Compile Include="Common\MenuHelper.cs" />
+    <Compile Include="Common\SellerContext.cs" />
+    <Compile Include="Common\SellerObtainer.cs" />
+    <Compile Include="Common\Ticket\Ticket.cs" />
+    <Compile Include="Common\UserContext.cs" />
+    <Compile Include="Common\WeChatAccountManager.cs" />
+    <Compile Include="Config\WeChatUrlManager.cs" />
+    <Compile Include="Advanced\WxPayException.cs" />
+    <Compile Include="Extra\Crawler.cs" />
+    <Compile Include="Extra\HttpHelper.cs" />
+    <Compile Include="Extra\LoginRet.cs" />
+    <Compile Include="Extra\MsgSendResult.cs" />
+    <Compile Include="Extra\ResultPerPage.cs" />
+    <Compile Include="Extra\SendMsgType.cs" />
+    <Compile Include="Extra\WxGroup.cs" />
+    <Compile Include="Extra\WxUser.cs" />
+    <Compile Include="Extra\WxUserInfo.cs" />
+    <Compile Include="Log\LogManager.cs" />
+    <Compile Include="Message\IMessageHandler.cs" />
+    <Compile Include="Message\Message.cs" />
+    <Compile Include="Message\MessageHelper.cs" />
+    <Compile Include="Message\MessageType.cs" />
+    <Compile Include="Message\ReceiveMessage.cs" />
+    <Compile Include="Message\ReceiveMessageSub.cs" />
+    <Compile Include="Message\RepMsgDataSub.cs" />
+    <Compile Include="Message\ResponseMessage.cs" />
+    <Compile Include="Message\ResponseMessageSub.cs" />
+    <Compile Include="Plugin\HelpPlugin.cs" />
+    <Compile Include="Plugin\Invoker.cs" />
+    <Compile Include="Plugin\InvokerContext.cs" />
+    <Compile Include="Plugin\MenuKeyPlugin.cs" />
+    <Compile Include="Plugin\Plugin.cs" />
+    <Compile Include="Plugin\PluginContext.cs" />
+    <Compile Include="Plugin\TextPlugin.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="User\UserInfo.cs" />
+    <Compile Include="User\UserInfoHelper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Travel.Infrastructure.CommonFunctions\Travel.Infrastructure.CommonFunctions.csproj">
+      <Project>{bb26e33b-85de-464b-83a2-109794a2c00a}</Project>
+      <Name>Travel.Infrastructure.CommonFunctions</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

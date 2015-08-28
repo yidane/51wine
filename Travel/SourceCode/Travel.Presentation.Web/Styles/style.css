@@ -1,0 +1,55 @@
+
+.index {
+    background: url("../images/index-bg1.png") no-repeat 60% 30%;
+    height: auto;
+    min-height: 100%;
+    -webkit-box-orient: vertical;
+    box-orient: vertical;
+}
+
+.index-info {
+    padding: 2% 2% 2% 2%;
+    color: rgb(153, 153, 153);
+    line-height: 150%;
+    clear: both;
+    font-size: 16px;
+    text-align:justify;
+}
+
+
+.head {
+    padding: 20px 0px; -webkit-box-flex: 2;
+}
+.logo {
+    background: url("../images/logo.png") no-repeat; width: 163px; height: 78px; margin-right: 5%; float: right;
+}
+
+
+
+.scenic-spot {
+    padding: 2%; -webkit-box-flex: 3;
+}
+.scenic-spot li {
+    margin: 1%; width: 47%; height: 40%; display: inline-block; position: relative;
+}
+.scenic-spot li a em {
+    border-radius: 5px; height: 150px; display: block; opacity: 0.5; background-color: rgb(255, 255, 255);
+}
+.scenic-spot li a:hover em {
+    opacity: 0.8;
+}
+
+.scenic-spot-title {
+left: 0px; top: 120px; width: 100%; text-align: center; color: rgb(0, 0, 0); position: absolute; z-index: 1;
+    font-size:16px;
+}
+
+.annular {
+    top: 8px; width: 100%; position: absolute; z-index: 1;
+}
+.annular-round {
+    margin: 0px auto; border-radius: 50%; width: 103px; height: 103px; position: relative;
+}
+.annular-round span {
+    border-radius: 50%; border: 2px solid rgb(255, 255, 255); border-image: none; left: 1px; top: 1px; width: 97px; height: 97px; display: block; position: absolute;
+}

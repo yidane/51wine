@@ -1,0 +1,147 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <title>与湖怪合影</title>
+    <link href="../Styles/monster.css" rel="stylesheet" />
+    <style type="text/css">
+        .avatar-box1 .face {
+            position: absolute;
+            top: -57px;
+            left: 0;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+        }
+
+        .avatar-box2 .face {
+            position: absolute;
+            top: -97px;
+            left: 20px;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+        }
+    </style>
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+</head>
+<body>
+    <div style="display:none">
+        <img src="../images/wolong.jpg" />
+        <img src="../images/shenxian.jpg" />
+        <img src="../images/yueliang.jpg" />
+        <img src="../images/monster.png" />
+    </div>
+    <div id="loading">
+        <div class="loader spin"></div>
+    </div>
+    <div class="slideshow" style="display:none;">
+        <span />
+    </div>
+    <div class="container">
+        <img src="../images/monster.png" alt="" class="monster monster-transform" />
+        <div class="btn_box">
+            <a href="MakePhoto.html" id="btn_replay" class="btn btn-small pull-left">在玩一次</a>
+            <a id="introduce" href="http://mp.weixin.qq.com/s?__biz=MzI4NzAzNzAzOQ==&mid=210966530&idx=1&sn=d486f78d6adb827d6ca00965c5cfa670&scene=0#rd" class="btn btn-small pull-right">景点介绍</a>
+        </div>
+        <div class="avatar-box shake">
+            <img class="face" />
+        </div>
+    </div>
+    <script src="../javaScripts/zepto.min.js"></script>
+    <script>
+        document.onreadystatechange = loading;
+        function loading() {
+            if (document.readyState == "complete") {
+                setTimeout(function () {
+                    loaded();
+                }, 600);
+            }
+            setTimeout(function () {
+                loaded();
+            }, 8000);
+
+            function loaded() {
+                $("#loading").hide();
+                $(".container").show();
+                $(".slideshow").show();
+            }
+        }
+    </script>
+    <script src="Scripts/WeiXinSdk.js"></script>
+    <script type="text/javascript">
+        function getQueryString(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return (r[2]); return null;
+        }
+        var ui = {
+            scenics: [{
+                name: '卧龙湾',
+                cls: 'wolong',
+                url: 'http://mp.weixin.qq.com/s?__biz=MzI4NzAzNzAzOQ==&mid=210966530&idx=1&sn=d486f78d6adb827d6ca00965c5cfa670&scene=0#rd'
+            }, {
+                name: '月亮湾',
+                cls: 'yueliang',
+                url: 'http://mp.weixin.qq.com/s?__biz=MzI4NzAzNzAzOQ==&mid=210966482&idx=1&sn=5f86a93076d345cf21deb832b1ee5940&scene=0#rd'
+            }, {
+                name: '神仙湾',
+                cls: 'shenxian',
+                url: 'http://mp.weixin.qq.com/s?__biz=MzI4NzAzNzAzOQ==&mid=210966556&idx=1&sn=6fba054bf1f93c8a49461a26a67c14bc&scene=0#rd'
+            }
+            ],
+            cartoon: ['avatar-box1', 'avatar-box2'],
+            getRandom: function (seed) {
+                return Math.round(Math.random() * seed);
+            },
+            setScenic: function (i) {
+                var scenic = ui.scenics[i];
+                $('.slideshow>span').addClass(scenic.cls).attr('alt', scenic.name);
+                $('#introduce').attr('href', scenic.url);
+            },
+            setCartoon: function (i) {
+                $('.avatar-box').addClass(ui.cartoon[i]);
+            },
+            setPhoto: function (img) {
+                $('.face').attr('src', 'images/' + img + '.jpg');
+            },
+            getParams: function () {
+                return {
+                    img: getQueryString('img'),
+                    scenic: getQueryString('scenic'),
+                    cartoon: getQueryString('cartoon'),
+                    share: getQueryString('share')
+                };
+            },
+            init: function () {
+                var param = this.getParams();
+                ui.setCartoon(param.cartoon == null ? 0 : param.cartoon);
+                ui.setScenic(param.scenic == null ? 0 : param.scenic);
+                ui.setPhoto(param.img);
+
+                if (param.share) {
+                    $("#btn_replay").text('我也要玩');
+                }
+
+                wxsdk.initWxConfig(false);
+                var shareMsg = {
+                    title: "~~~啊啊啊啊，湖怪出现了，小伙伴们速速来合影！！！", // 分享标题
+                    link: document.location.href + "&share=1", // 分享链接
+                    imgUrl: "http://www.cloudorg.com.cn/travel/photo/images/" + param.img + ".jpg", // 分享图标
+                }
+
+                wxsdk.shareMessage(shareMsg);
+                wxsdk.hideAllNonBaseMenuItem();
+                if (!param.share) {
+                    wxsdk.showShareMenu();
+                }
+            }
+        }
+
+        $(function () {
+            ui.init();
+        });
+    </script>
+</body>
+</html>

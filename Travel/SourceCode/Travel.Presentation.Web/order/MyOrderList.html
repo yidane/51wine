@@ -1,0 +1,91 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link rel="stylesheet" href="style/css/style.css" />
+
+    <script src="http://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <script src="script/common/main.js"></script>
+    <script src="script/common/common.js"></script>
+    <script src="script/common/jquery.pageItem.js"></script>
+    <script src="script/common/jsRender.min.js"></script>
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+    <meta content="telephone=no" name="format-detection" />
+    <meta content="email=no" name="format-detection" />
+    <title>我的订单</title>
+</head>
+<body>
+    <div class="ticket">
+        <section>
+            <ul class="ticket-tab" id="tab">
+                <li class="active"><a href="MyOrderList.html?payStatus=payed">已付款</a></li>
+                <li><a href="MyOrderList.html?payStatus=wait_pay">退票</a></li>
+            </ul>
+        </section>
+        <section>
+            <div class="tab-content" id="order_list">
+            </div>
+        </section>
+    </div>
+
+    <script id="ResultTemplateOrder" type="text/x-jsrender">
+        <div class="tab-pane active" style="margin-bottom: 10px; border-bottom: solid; border-width: 1px; border-color: #E0EEEE">
+            <ul class="ticket-list">
+                <li style="background-color: #E0EEEE">
+                    <span class="mark">单</span>
+                    <h4 class="order-number">订单号:{{:OrderNo}}</h4>
+                </li>
+                <li class="order" style="background-color: #E0EEEE; border-top: 0px">
+                    <a href="orderDetail.html?orderId={{:OrderID}}">
+                        <div class="img">
+                            <img src="{{:TicketImageUrl}}" alt="" />
+                        </div>
+                        <div class="order-info">
+                            <h4 style="font-weight: bold;">{{:TicketName}}</h4>
+                            <br />
+                            <!--                        <span class="ticket-attribute">状态：{{:OrderStatusName}}
+                    </span>-->
+                            <span class="ticket-attribute">时间段：{{:LastUseDate}}</span>
+                        </div>
+                        <div class="num">
+                            <div><em class="money"><i>￥</i>{{:TicketPrice}}</em></div>
+                            <div>X</div>
+                            <div>{{:TicketCount}}</div>
+
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <div class="toal-price w-4">
+                        总价：<em class="money"><i>￥</i>{{:TicketTotalPrice}}</em>
+                    </div>
+                    <div class="w-6 btn-right">
+                        <a href="ApplyRefund.html" class="btn btn-default" style="margin-right: 10px">申请退票</a>
+                        <!--<a href="{{:OperateUrl}}" class="btn btn-success">再次购买</a>-->
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+    </script>
+
+    <script>
+
+     
+        var data = [{ OrderNo: 'WX123456789', OrderID: 123, TicketImageUrl: '../TicketImages/1.jpg', TicketName: '喀纳斯景区门票(半票)', OrderStatusName: '已使用', LastUseDate: '2015-08-19', TicketPrice: 120, TicketCount: 1, TicketTotalPrice: 120, OperateUrl: '', OperateName: '查看' },
+                        { OrderNo: 'WX123456789', OrderID: 123, TicketImageUrl: '../TicketImages/2.jpg', TicketName: '喀纳斯景区门票', OrderStatusName: '已使用', TicketPrice: 120, LastUseDate: '2015-08-19', TicketCount: 1, TicketTotalPrice: 120, OperateUrl: '', OperateName: '查看' },
+                        { OrderNo: 'WX123456789', OrderID: 123, TicketImageUrl: '../TicketImages/2.jpg', TicketName: '喀纳斯景区门票', OrderStatusName: '已使用', TicketPrice: 120, LastUseDate: '2015-08-19', TicketCount: 1, TicketTotalPrice: 120, OperateUrl: '', OperateName: '查看' },
+                        { OrderNo: 'WX123456789', OrderID: 123, TicketImageUrl: '../TicketImages/2.jpg', TicketName: '喀纳斯景区门票', OrderStatusName: '已使用', TicketPrice: 120, LastUseDate: '2015-08-19', TicketCount: 1, TicketTotalPrice: 120, OperateUrl: '', OperateName: '查看' }];
+
+        var template = $.templates("#ResultTemplateOrder");
+        var htmlOutput = template.render(data);
+        $("#order_list").html(htmlOutput);
+    </script>
+
+</body>
+</html>

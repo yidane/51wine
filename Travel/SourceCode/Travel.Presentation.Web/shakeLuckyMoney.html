@@ -1,0 +1,210 @@
+﻿<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>摇一摇得红包</title>
+    <meta name="keywords" content="摇一摇得红包">
+    <meta name="description" content="摇一摇得红包">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta name="format-detection" content="telephone=no, email=no" />
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <link href="styles/page-animation.css" rel="stylesheet" />
+    <link href="styles/shakecoupons.css" rel="stylesheet" />
+    <style>
+       
+
+        .fullpage {
+            height: 100%;
+            width: 100%;
+            /*background-image: url(images/shake_background.png);
+            background-size: 100%;*/
+        }
+
+        .money {
+            position: absolute;
+            bottom: 15%;
+            left: 50%;
+            margin-left: -95px;
+            -webkit-animation: bounceInDown 2.5s ease-out 0s both;
+            animation: bounceInDown 2.5s ease-out 0s both;
+        }
+
+        .item-hidden {
+            display: none;
+        }
+
+        .gift {
+            width: 170px;
+            height: 210px;
+            background: url(images/gift.png) no-repeat;
+            animation: hand_move infinite 2s;
+            -webkit-animation: hand_move infinite 2s;
+        }
+
+        .div-gift {
+            height: 100%;
+            width: 100%;
+            background: url("images/back.jpg") no-repeat scroll 0 0 / 100% auto #ff6543;
+            padding-top: 45.6%;
+            position: relative;
+            font-size: 1rem;
+            font-family: "微软雅黑",arial,"宋体",sans-serif;
+            -webkit-animation: bounceInDown 1.5s ease-out 0s both;
+            animation: bounceInDown 1.5s ease-out 0s both;
+        }
+
+        .shake-back {
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            z-index: 10;
+        }
+
+
+
+        .media, .media-body {
+            overflow: hidden;
+            zoom: 1;
+        }
+
+        .media-body {
+            width: 100%;
+            font-size: 13px;
+            text-align: left;
+        }
+
+        .media-body, .media-left, .media-right {
+            display: table-cell;
+            vertical-align: top;
+        }
+
+        .media-left, .media > .pull-left {
+            padding-right: 10px;
+        }
+
+        .media-object {
+            display: block;
+        }
+
+        .media-heading {
+            margin-top: 0;
+            margin-bottom: 5px;
+        }
+
+
+       
+    </style>
+</head>
+<body>
+
+    <div class="fullpage" data-bind="visible:$root.coupon()==null"
+         style="background-color:#313E4F">
+        <img src="images/shake_background.png" class="shake-back" />
+        <div class="hand" data-bind="visible:$root.stage()=='hand'"></div>
+
+        <div class="money" data-bind="visible:$root.stage()=='money'" style="display:none">
+            <div class="gift " data-bind="click:$root.getRandomCoupon">
+
+            </div>
+        </div>
+        <!--<div class="botton main-center top-zIndex" id="botton" data-bind="click:$root.afterShake">马上领取</div>-->
+        <AUDIO id="musicBox" src="audios/shake.wav" preload="metadata"></AUDIO>
+        <AUDIO id="endMp3" src="audios/end.mp3" preload="metadata"></AUDIO>
+    </div>
+    <div class="div-gift" data-bind="visible:coupon" style="display:none">
+        <div class="main">
+            <div class="redEnvelope">
+                <div class="normalPart">
+                    <div class="moneyWrapper" data-bind="with:coupon">
+                        <p data-bind="text: couponType"></p>
+                        <span id="money" ><span>￥</span>   <!-- ko text:subTitle --><!-- /ko--></span>
+                       
+                    </div>
+                  
+                    <form>
+                        <!--<div id="hasPhone" style="display: none;">-->
+                        <!--<span id="phoneNum">18311300760</span>-->
+                        <!--<a class="change" href="javascript:;">修改</a>-->
+                        <!--</div>-->
+                        <!--<input id="phoneText" name="phone" type="text" placeholder="输入手机号，赢取大礼">-->
+                        <div class="media">
+                            <div class="media-left" data-bind="with:user" >
+
+                                <img class="media-object" 
+                               data-bind="attr:{'src':headimgurl}"       style="width: 64px; height: 64px;">
+
+
+
+                            </div>
+                            <div class="media-body"  >
+                                <h5 class="media-heading">
+                                    <!-- ko text:user()?user().nickname:'' --><!--/ko-->                                   
+                                    <small class="text-time" data-bind="  text:coupon()? coupon().getTime:''"></small>
+                                </h5>
+                                恭喜您获得 <!-- ko text:coupon()?coupon().title:'' --><!--/ko-->。
+                            </div>
+                        </div>
+                        <div style="margin-top: 10px;">
+                            <input id="receiveBtn" type="button" value="立即领取"
+                                   data-bind="click:receiveCoupon">
+
+                        </div>
+                    </form>
+                </div>
+                <div id="debug" style="display:none"></div>
+                <div class="successPart" style="display:none" id="successPart">
+                    <div class="resultWrapper">
+                        <p id="result" class="result">ajax成功与否返回的message</p>
+                        <div class="resultDetail">
+                            <span id="rtje">15</span>元代金券已放入账号
+                            <p id="successPhoneNumer"></p>
+                        </div>
+                        <input id="seeMoney" class="clickable" value="查看新人红包" type="button" onclick="window.location.href='../hyzx.php?ac=djq'">
+                        <p class="tip">同一个用户仅限领取一次新人红包</p>
+                    </div>
+                </div>
+
+            </div>
+            <p class="ruleLinkWrapper item-hidden"><a id="ruleLink" href="javascript:;">活动详情&gt;</a></p>
+        </div>
+    </div>
+    <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <script type="text/javascript" src="js/mobilePhoneShake.min.js"></script>
+
+
+    <script src="javaScripts/jquery-2.1.4.min.js"></script>
+    <script src="javaScripts/jquery.url.js"></script>
+    <script src="javaScripts/knockout-3.3.0.js"></script>
+    <script src="js/shakeLuckyMoney-vm.js"></script>
+    <script>
+        var access_code = "";
+         access_code = $.url.param("code");
+        if (!access_code) {
+            var fromurl = location.href;
+            var url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxdd6127bdb5e7611c&redirect_uri='
+                + encodeURIComponent(fromurl) +
+                '&response_type=code&scope=snsapi_base&state=STATE%23wechat_redirect&connect_redirect=1#wechat_redirect';
+            location.href = url;
+        }
+
+        var $domParm = {
+            $musicBox: $('#musicBox'),
+            $endMp3: $('#endMp3'),
+            $hand: $('.hand'),
+            $money: $('.money'),
+            $receiveBtn: $('#receiveBtn')
+        };
+        var param = {
+            access_code: access_code
+        };
+        var luckyMoneyVM = new LuckyMoneyViewModel($domParm, param);
+
+        ko.applyBindings(luckyMoneyVM);
+
+
+    </script>
+
+</body>
+</html>

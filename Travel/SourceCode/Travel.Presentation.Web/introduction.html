@@ -1,0 +1,394 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+
+    <meta charset="utf-8">
+    <meta id="eqMobileViewport" name="viewport" content="width=device-width,
+          initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="format-detection" content="email=no">
+    <title>景区介绍</title>
+    <link href="styles/style.css" rel="stylesheet" type="text/css">
+    <!--<link href="styles/swiper.min.css" rel="stylesheet" type="text/css">-->
+    <link href="styles/H5FullscreenPage.css" rel="stylesheet" />
+    <link href="styles/page-animation.css" rel="stylesheet" type="text/css">
+    <link href="styles/reset.css" rel="stylesheet" type="text/css">
+    <link href="styles/mod.css" rel="stylesheet" type="text/css">
+    <style type="text/css">
+        html, body {
+            margin: 0;
+            width: 100%;
+            height: 100%;
+            font-family: arial;
+            text-align: center;
+        }
+    </style>
+
+
+    <style type="text/css">
+        * {
+            margin: 0;
+            outline: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: rgba(0,0,0,0);
+        }
+
+        article, aside, dialog, footer, header, section, footer, nav, figure, menu {
+            display: block;
+        }
+
+        a {
+            text-decoration: none;
+            -webkit-tap-highlight-color: rgba(0,0,0,.35);
+        }
+
+        html {
+            height: 100%;
+            -webkit-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+        }
+
+        body {
+            /*background-color: #000;*/
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            min-height: 100%;
+            font-weight: 300;
+            font-family: 'Microsoft Yahei',Tahoma,Helvetica,Arial,sans-serif;
+            font-size: 62.5%;
+            line-height: 1.231;
+            -webkit-touch-callout: none;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-box-align: stretch;
+            position: relative;
+        }
+
+
+        ul, li {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            margin: 0;
+            padding: 0;
+            font-weight: 400;
+        }
+
+        .clr:after {
+            content: "";
+            display: block;
+            height: 0;
+            clear: both;
+            visibility: hidden;
+        }
+
+        .clr {
+            *zoom: 1;
+        }
+
+        @-webkit-keyframes rollIn {
+            0% {
+                opacity: 0;
+                -webkit-transform: translate3d(-100%,0,0) rotate3d(0,0,1,-120deg);
+                transform: translate3d(-100%,0,0) rotate3d(0,0,1,-120deg);
+            }
+
+            100% {
+                opacity: 1;
+                -webkit-transform: none;
+                transform: none;
+            }
+        }
+
+        .wapper {
+            width: 100%;
+            height: 100%;
+            background-color: #000;
+            position: relative;
+            cursor: pointer;
+            overflow-x: hidden;
+            overflow-y: hidden;
+            -webkit-user-select: none;
+        }
+
+        .main-page {
+            border: 0;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-position: top center;
+            background-size: cover;
+            box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            display: -webkit-box;
+            display: none;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            z-index: 0;
+            -webkit-transform-origin: center center;
+            background: #fff;
+        }
+
+        .area {
+            position: absolute;
+            top: 0;
+            text-align: left;
+            width: 100%;
+            height: 100%;
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+            overflow: hidden;
+        }
+
+            .area > li {
+                color: #676767;
+                line-height: 1;
+                background: 0;
+                position: absolute;
+                list-style: none !important;
+                margin: 0 !important;
+                padding: 0;
+                -webkit-transition: padding .5s;
+                -moz-transition: padding .5s;
+                transition: padding .5s;
+                min-height: 24px;
+                min-width: 24px;
+                width: 100%;
+                -webkit-user-select: none;
+            }
+
+                .area > li .element-box {
+                    width: 100%;
+                    height: 100%;
+                    overflow: hidden;
+                }
+
+        .element-box-image {
+            opacity: 1;
+            color: rgb(103, 103, 103);
+            border: 8px solid #fff;
+            padding-bottom: 0px;
+            padding-top: 0px;
+            line-height: 1;
+            border-radius: 0px;
+            box-shadow: rgba(0, 0, 0, 0.2) 3px 5px 0px;
+        }
+
+        .area > li .element-box-contents {
+            width: 100%;
+            height: 100%;
+        }
+
+        .area > li .element-box,
+        .area > li .element-box-contents {
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            -moz-box-sizing: border-box;
+        }
+
+        .current {
+            display: block;
+        }
+
+        #wrapper-background {
+            width: 100%;
+            height: 100%;
+            /*background-color: rgb(230, 233, 238);*/
+             background: url("images/intro-background.jpg") no-repeat;
+        }
+
+        @media screen and (max-height: 490px) {
+            .index-info {
+                font-size: 12px;
+            }
+        }
+
+        @media screen and (max-height: 550px) and (min-height:490px) {
+            .index-info {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+
+
+    <div class="p-index main" id="con">
+        <!--上下滚动 start-->
+
+        <section class="m-page ">
+
+            <section class="index m-img">
+
+                <ul class="scenic-spot">
+                    <li class="part animation-rollIn">
+                        <a href="http://mp.weixin.qq.com/s?__biz=MzI4NzAzNzAzOQ==&mid=210966530&idx=1&sn=d486f78d6adb827d6ca00965c5cfa670&scene=0#rd">
+
+                            <div class="annular">
+                                <img class="annular-round" src="images/scenic1.png" />
+                            </div>
+                            <div class="scenic-spot-title">卧龙湾</div>
+                            <em></em>
+                        </a>
+                    </li>
+                    <li class="part animation-bounceInDown">
+                        <a href="http://mp.weixin.qq.com/s?__biz=MzI4NzAzNzAzOQ==&mid=210966482&idx=1&sn=5f86a93076d345cf21deb832b1ee5940&scene=0#rd">
+
+                            <div class="annular">
+                                <img class="annular-round" src="images/scenic2.png" />
+                            </div>
+                            <div class="scenic-spot-title">月亮湾</div>
+                            <em></em>
+
+                        </a>
+                    </li>
+                    <li class="part animation-fadeIn">
+                        <a href="http://mp.weixin.qq.com/s?__biz=MzI4NzAzNzAzOQ==&mid=210966556&idx=1&sn=6fba054bf1f93c8a49461a26a67c14bc&scene=0#rd">
+                            <div class="annular">
+                                <img class="annular-round" src="images/scenic3.png" />
+                            </div>
+                            <div class="scenic-spot-title">神仙湾</div>
+                            <em></em>
+                        </a>
+                    </li>
+                    <li class="part animation-lightSpeedIn">
+                        <a href="http://mp.weixin.qq.com/s?__biz=MzI4NzAzNzAzOQ==&mid=210966576&idx=1&sn=676a8fd11409ce61984861679171d972&scene=0#rd">
+                            <div class="annular">
+                                <img class="annular-round" src="images/scenic4.png" />
+                            </div>
+                            <div class="scenic-spot-title">观鱼台</div>
+                            <em></em>
+                        </a>
+                    </li>
+                </ul>
+                <div class="head">
+                    <p class="index-info"><span style="font-size: 16px; font-weight: bold;">喀纳斯</span>，一个美丽富饶、神秘莫测的地方，在这里壮观的冰川映衬着宁静的湖水、茫茫的草原包容着幽深的原始森林。神秘的湖怪、古朴的土瓦人、变换的湖水、眩人的风景会让人痴迷。生活在都市的你，可以适时的停下脚步，背上背包，在这片净土上和自己的心来一次徒步之旅。</p>
+                </div>
+            </section>
+        </section>
+
+        <section class="m-page hide">
+            <section class="main-page current m-img">
+                <div id="wrapper-background"></div>
+                <ul class="area">
+                    <li style="width: 24px; height: 486px; left: 0; top: 0; z-index: 2; display:none;">
+                        <div class="element-box" style="top: 0; left: 0; z-index: 2; line-height: 1; color: #676767; border: 0 solid #000; padding-bottom: 0; padding-top: 0; border-radius: 0; box-shadow: rgba(0, 0, 0, 0.498039) 0 0 0; background-color: #d9bd93;">
+                        </div>
+                    </li>
+                    <li style="width: 207px; height: 156px; left: 15px; top: 12px; z-index: 4; -webkit-transform: rotateZ(7deg); transform: rotateZ(7deg);">
+                        <div class="part element-box element-box-image" style="top: 12px; left: 15px; z-index: 4; -webkit-animation: rollIn 3s ease 0s 1 both; animation: rollIn 3s ease 0s 1 both;">
+                            <div class="element-box-contents">
+                                <a href="http://mp.weixin.qq.com/s?__biz=MzI4NzAzNzAzOQ==&mid=210966530&idx=1&sn=d486f78d6adb827d6ca00965c5cfa670&scene=0#rd">
+
+
+                                    <img alt="" src="images/喀纳斯河.png" style="width: 207px; height: 140px; margin-top: 0; ">
+                                </a>
+
+                            </div>
+                        </div>
+                    </li>
+                    <li style="width: 187px; height: 141px; left: 122px; top: 116px; z-index: 3; -webkit-transform: rotateZ(349deg); transform: rotateZ(349deg);">
+                        <div class="part element-box element-box-image" style="top: 116px; left: 122px; z-index: 3; -webkit-animation: rollIn 3s ease 1s 1 both; animation: rollIn 3s ease 1s 1 both;">
+                            <div class="element-box-contents">
+                                <a href="http://mp.weixin.qq.com/s?__biz=MzI4NzAzNzAzOQ==&mid=210966482&idx=1&sn=5f86a93076d345cf21deb832b1ee5940&scene=0#rd">
+
+                                    <img alt="" src="images/图瓦村.png" style="width: 188px; height: 125px; margin-top: 0; ">
+                                </a>
+
+                            </div>
+                        </div>
+                    </li>
+                    <li style="width: 143px; height: 108px; left: 47px; top: 220px; z-index: 5; -webkit-transform: rotateZ(330deg); transform: rotateZ(330deg);">
+                        <div class="part element-box element-box-image" style="top: 220px; left: 47px; z-index: 5; -webkit-animation: rollIn 3s ease 2s 1 both; animation: rollIn 3s ease 2s 1 both;">
+                            <div class="element-box-contents">
+                                <a href="http://mp.weixin.qq.com/s?__biz=MzI4NzAzNzAzOQ==&mid=210966556&idx=1&sn=6fba054bf1f93c8a49461a26a67c14bc&scene=0#rd">
+                                    <img alt="" src="images/白湖.png" style="width: 128px; height: 92px; margin-top: 0; ">
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                    <li style="width: 131px; height: 99px; left: 172px; top: 258px; z-index: 6; -webkit-transform: rotateZ(30deg); transform: rotateZ(30deg);">
+                        <div class="part element-box element-box-image" style="top: 259px; left: 173px; z-index: 6; -webkit-animation: rollIn 3s ease 2s 1 both; animation: rollIn 3s ease 2s 1 both;">
+                            <div class="element-box-contents">
+                                <a href="http://mp.weixin.qq.com/s?__biz=MzIzNTA0NjkyNg==&mid=207803434&idx=1&sn=280a852146cf3989c4300e215787ed7e&scene=0#rd">
+                                    <img alt="" src="images/part4.jpg" style="width: 115px; height: 86px; margin-top: -1.5px; margin-left: 0;">
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                    <li style="width: 155px; height: 117px; left: 54px; top: 357px; z-index: 7;">
+                        <div class="part element-box element-box-image" style="top: 358px; left: 55px; z-index: 7; -webkit-animation: rollIn 3s ease 2s 1 both; animation: rollIn 3s ease 2s 1 both;">
+                            <div class="element-box-contents">
+                                <a href="http://mp.weixin.qq.com/s?__biz=MzI4NzAzNzAzOQ==&mid=210966576&idx=1&sn=676a8fd11409ce61984861679171d972&scene=0#rd">
+                                    <img alt="" src="images/友谊峰.png" style="width: 207px; height: 140px; margin-top: 0;">
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+        </section>
+
+
+        <section class='u-arrow'>
+            <img src="images/btn01_arrow.png" />
+        </section>
+        <!--上下滚动代码 end-->
+        <!--<audio autoplay loop>
+            <source src="music/music.mp3" />
+        </audio>-->
+    </div>
+
+
+    <!--<script type="text/javascript" src="javaScripts/zepto.min.js"></script>-->
+    <script src="javaScripts/jquery-2.1.4.min.js"></script> 
+    <script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
+    <script type="text/javascript" src="js/page_scroll_bx.js?v=1.3"></script>
+
+
+    <script type="text/javascript">
+        function renderPage() {
+            var f = 1,
+                e,
+                g = $(document).width(),
+                h = $(document).height();
+            g / h >= 320 / 486 ? (f = h / 486) : (f = g / 320, e = (h / f - 486) / 2);
+            e && $(".area").css({
+                marginTop: e
+            });
+            $("#eqMobileViewport").attr("content", "width=320, initial-scale=" + f + ", maximum-scale=" + f + ", user-scalable=no");
+        }
+
+        $(function () {
+            renderPage();
+
+            //H5FullscreenPage.init({
+            //    'type': 2, useMusic: false, 'pageShow': function (dom) {
+
+            //        if ($(dom).find(".item-toggle-hidden").hasClass("item-hidden")) {
+            //            $(dom).find(".item-toggle-hidden").removeClass("item-hidden");
+            //        }
+
+            //    }, 'pageHide': function (dom) {
+
+            //        if (!$(dom).find(".item-toggle-hidden").hasClass("item-hidden")) {
+            //            $(dom).find(".item-toggle-hidden").addClass("item-hidden");
+            //        }
+            //    }
+            //});
+        });
+
+
+
+
+    </script>
+</body>
+</html>
