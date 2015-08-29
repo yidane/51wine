@@ -387,7 +387,7 @@ namespace Travel.Infrastructure.WeiXin.Advanced.Pay
 
             inputObj.SetValue("appid", WxPayConfig.APPID);//公众账号ID
             inputObj.SetValue("mch_id", WxPayConfig.MCHID);//商户号
-            //inputObj.SetValue("spbill_create_ip", WxPayConfig.IP);//终端ip	  	    
+            inputObj.SetValue("spbill_create_ip", WxPayConfig.IP);//终端ip	  	    
             inputObj.SetValue("nonce_str", WxPayHelper.GenerateNonceStr());//随机字符串
 
             //签名

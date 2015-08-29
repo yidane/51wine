@@ -14,7 +14,7 @@ namespace Travel.Infrastructure.WeiXin.Test
             JsApiPay jsApiPay = new JsApiPay();
             UnifiedOrderRequest unifiedOrderRequest = new UnifiedOrderRequest();
             unifiedOrderRequest.body = "yidane Test body";
-            unifiedOrderRequest.openid = "obzTswxzFzzzdWdAKf2mWx3CrpXk";
+            unifiedOrderRequest.openid = "obzTsw5qxlbwGYYZJC9b-91J-X1Y";
             unifiedOrderRequest.attach = "attach test";
             unifiedOrderRequest.total_fee = 1;
             unifiedOrderRequest.goods_tag = "goods_tag test";
@@ -22,7 +22,7 @@ namespace Travel.Infrastructure.WeiXin.Test
             unifiedOrderRequest.time_expire = DateTime.Now.AddMinutes(20).ToString("yyyyMMddHHmmss");
 
 
-            jsApiPay.GetUnifiedOrderResult(unifiedOrderRequest);
+            var result = jsApiPay.GetUnifiedOrderResult(unifiedOrderRequest);
 
             Assert.IsTrue(true);
         }

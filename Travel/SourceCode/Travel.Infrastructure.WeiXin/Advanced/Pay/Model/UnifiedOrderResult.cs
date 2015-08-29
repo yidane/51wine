@@ -115,12 +115,12 @@ namespace Travel.Infrastructure.WeiXin.Advanced.Pay.Model
 
         public UnifiedOrderResult()
         {
-            
+
         }
 
         public UnifiedOrderResult(string xmlDocumentString)
         {
-            throw new Exception(xmlDocumentString);
+            //throw new Exception(xmlDocumentString);
             var document = new XmlDocument();
             document.LoadXml(xmlDocumentString);
             Init(document);
@@ -137,6 +137,21 @@ namespace Travel.Infrastructure.WeiXin.Advanced.Pay.Model
                     propertyInfo.SetValue(this, node.InnerText, null);
                 }
             }
+        }
+
+        public string GetJsApiParameters()
+        {
+            var jsApiParam = new WxPayData();
+            //jsApiParam.SetValue("appId", this.appid);
+            jsApiParam.SetValue("timeStamp", WxPayHelper.GenerateTimeStamp());
+            jsApiParam.SetValue("nonceStr", WxPayHelper.GenerateNonceStr());
+            jsApiParam.SetValue("package", "prepay_id=" + this.prepay_id);
+            jsApiParam.SetValue("signType", "MD5");
+            jsApiParam.SetValue("paySign", jsApiParam.MakeSign());
+
+            string parameters = jsApiParam.ToJson();
+
+            return parameters;
         }
     }
 

@@ -135,12 +135,13 @@
     </div>
 </body>
 
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 <script src="javaScripts/zepto.min.js"></script>
 <script src="javaScripts/json2.js"></script>
 <script src="javaScripts/template.js"></script>
 <script src="javaScripts/swiper.min.js"></script>
 <script src="javaScripts/vi.js"></script>
-<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+
 
 <script type="text/javascript">
     VI.assets_url = 'http://longmen.qqdyw.cn'; VI.base_url = 'http://longmen.qqdyw.cn'; VI.curr_site_url = 'http://longmen.qqdyw.cn/plugins/goods/front';
@@ -155,10 +156,10 @@
 
     $(document).ready(function () {
         $.ajax({
-            url: "../WebService/WeChatWebService.asmx/WeChatConfigInit",
+            url: "WebService/WeChatWebService.asmx/WeChatConfigInit",
             type: "post",
             dataType: "json",
-            data: { url: 'http://www.cloudorg.com.cn/travel/WXAPI/TicketDetail.html' },
+            data: { url: document.location.href },
             success: function (result) {
                 if (result.IsSuccess) {
                     wx.config({
@@ -168,23 +169,18 @@
                         nonceStr: result.Data.nonceStr,
                         signature: result.Data.signature,
                         jsApiList: [
-                            'checkJsApi',
-                            'onMenuShareTimeline',
+                            'chooseWXPay',
+                            'getNetworkType',
                             'onMenuShareAppMessage',
+                            'onMenuShareTimeline',
                             'onMenuShareQQ',
-                            'hideMenuItems',
-                            'chooseImage',
-                            'previewImage',
-                            'uploadImage',
-                            'downloadImage',
-                            'hideAllNonBaseMenuItem',
-                            'hideMenuItems',
-                            'showMenuItems',
-                            'hideOptionMenu',
-                            'chooseWXPay'
+                            'hideOptionMenu'
                         ]
                     });
                     wx.ready(function () {
+                        alert("hideOptionMenu");
+                        wx.hideOptionMenu();
+
                         wx.onMenuShareAppMessage({
                             title: window.share.title,
                             desc: window.share.desc,
@@ -211,10 +207,13 @@
                         });
 
                         wx.error(function (res) {
-                            alert(res.errMsg);
+                            //alert(res.errMsg);
                         });
                     });
                 }
+            },
+            error: function () {
+                alert("Init error");
             }
         });
     });

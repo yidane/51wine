@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Xml;
+using LitJson;
 using Travel.Infrastructure.WeiXin.Log;
 
 namespace Travel.Infrastructure.WeiXin.Advanced.Pay
@@ -173,9 +174,8 @@ namespace Travel.Infrastructure.WeiXin.Advanced.Pay
         /// <returns>json串数据</returns>
         public string ToJson()
         {
-            //string jsonStr = JsonMapper.ToJson(m_values);
-            //return jsonStr;
-            return "";
+            string jsonStr = JsonMapper.ToJson(m_values);
+            return jsonStr;
         }
 
         /// <summary>
