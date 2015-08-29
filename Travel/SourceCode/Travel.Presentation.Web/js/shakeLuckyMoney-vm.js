@@ -134,6 +134,9 @@ var LuckyMoneyViewModel = function ($domParam, param) {
                        self.$DomParm().$endMp3[0].play();
                    }, 1000);
                }
+               else {
+                   alert(json.Message);
+               }
            }).fail(
            function (jqxhr, textStatus, error) {
                var err = textStatus + ", " + error;

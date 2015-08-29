@@ -68,7 +68,12 @@ namespace Travel.Services.WebService
             }
             catch (Exception ex)
             {
-                Context.Response.Write(AjaxResult.Error(ex.Message));
+                var s = "";
+                if (ex.InnerException != null)
+                {
+                    s = ex.InnerException.Message;
+                }
+                Context.Response.Write(AjaxResult.Error(s));
             }
         }
 
