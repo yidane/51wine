@@ -20,15 +20,7 @@ namespace Travel.Infrastructure.DomainDataAccess.Coupon.Entitys
 
         public DateTime EndTime { get; set; }
 
-        [DefaultValue(0)]
-        public CouponState State { get; set; }
-
-      
-
-        /// <summary>
-        /// 使用时间
-        /// </summary>
-        public DateTime? UsedTime { get; set; }
+       
 
         public string Extend1 { get; set; }
         public string Extend2 { get; set; }

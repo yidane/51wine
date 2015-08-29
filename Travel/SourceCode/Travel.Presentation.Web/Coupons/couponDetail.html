@@ -106,10 +106,10 @@
     //}
     var openId = "";
     openId = $.url.param("openId");
-    var couponId= $.url.param("couponId");
+    var couponUsageId = $.url.param("couponUsageId");
     var param = {
        // access_code: access_code,
-        couponId: couponId,
+        couponUsageId: couponUsageId,
         openId: openId
     };  
     var detailVM=new DetailViewModel(null,param);

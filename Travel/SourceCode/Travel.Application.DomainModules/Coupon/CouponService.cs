@@ -5,6 +5,7 @@ using System.Text;
 using Travel.Application.DomainModules.Coupon.DTOS;
 using Travel.Application.DomainModules.WeChat.DTOS;
 using Travel.Infrastructure.DomainDataAccess.Coupon;
+using Travel.Infrastructure.DomainDataAccess.Coupon.Entitys;
 using Travel.Infrastructure.DomainDataAccess.User;
 using Travel.Infrastructure.DomainDataAccess.User.Entitys;
 using Travel.Infrastructure.WeiXin.Extra;
@@ -21,12 +22,12 @@ namespace Travel.Application.DomainModules.Coupon
             _userRepository = new UserRepository();
         }
 
-        public CouponDTO GetCoupon(string openId,Guid couponId) {
+        public CouponDTO GetCoupon(string openId,Guid couponUsageId) {
             CouponDTO result = null;
 
             if (!string.IsNullOrEmpty(openId))
             {
-                var coupon = _repository.GetCouponByUser(couponId, openId);
+                var coupon = _repository.GetCouponByUser(couponUsageId, openId);
                 if (coupon!=null) {
                     result = TransformCoupon(coupon);
                 }
@@ -34,7 +35,8 @@ namespace Travel.Application.DomainModules.Coupon
 
             return result;
         }
-     
+
+       
 
         public CouponListDTO GetCouponList(UserInfoDTO wxUser)
         {
@@ -61,12 +63,14 @@ namespace Travel.Application.DomainModules.Coupon
                 if ( expiredList!=null) {
                     result.ExpiredCoupons = expiredList.Select(p => new CouponDTO()
                     {
-                        title = p.Title,
-                        subTitle = p.SubTitle,
-                        beginTime = p.BeginTime.ToString("yyyy-MM-dd"),
+                        title = p.Coupon.Title,
+                        subTitle = p.Coupon.SubTitle,
+                        beginTime = p.Coupon.BeginTime.ToString("yyyy-MM-dd"),
                         couponId = p.CouponId,
-                        couponType = p.Type.CouponTypeName,
-                        endTime = p.EndTime.ToString("yyyy-MM-dd")
+
+                        couponType = p.Coupon.Type.CouponTypeName,
+                        endTime = p.Coupon.EndTime.ToString("yyyy-MM-dd"),
+                        couponUsageId = p.CouponUsageId
                     }).ToList();
                 }
 
@@ -75,12 +79,13 @@ namespace Travel.Application.DomainModules.Coupon
                 {
                     result.UnExpiredCoupons = unExpiredList.Select(p => new CouponDTO()
                     {
-                        title = p.Title,
-                        subTitle = p.SubTitle,
-                        beginTime = p.BeginTime.ToString("yyyy-MM-dd"),
+                        title = p.Coupon.Title,
+                        subTitle = p.Coupon.SubTitle,
+                        beginTime = p.Coupon.BeginTime.ToString("yyyy-MM-dd"),
                         couponId = p.CouponId,
-                        couponType = p.Type.CouponTypeName,
-                        endTime = p.EndTime.ToString("yyyy-MM-dd")
+                        couponType = p.Coupon.Type.CouponTypeName,
+                        endTime = p.Coupon.EndTime.ToString("yyyy-MM-dd"),
+                        couponUsageId=p.CouponUsageId
                     }).ToList();
                 }
                 var usedList = _repository.GetUsedCoupons(user);
@@ -88,14 +93,15 @@ namespace Travel.Application.DomainModules.Coupon
                 {
                     result.UsedCoupons=usedList.Select(p => new CouponDTO()
                     {
-                        title = p.Title,
-                        subTitle = p.SubTitle,
-                        beginTime = p.BeginTime.ToString("yyyy-MM-dd"),
+                        title = p.Coupon.Title,
+                        subTitle = p.Coupon.SubTitle,
+                        beginTime = p.Coupon.BeginTime.ToString("yyyy-MM-dd"),
                         couponId = p.CouponId,
-                        couponType = p.Type.CouponTypeName,
-                        endTime = p.EndTime.ToString("yyyy-MM-dd"),
+                        couponType = p.Coupon.Type.CouponTypeName,
+                        endTime = p.Coupon.EndTime.ToString("yyyy-MM-dd"),
                         usedTime= p.UsedTime == null ? string.Empty
-                        : p.UsedTime.Value.ToString("yyyy-MM-dd")
+                        : p.UsedTime.Value.ToString("yyyy-MM-dd"),
+                        couponUsageId = p.CouponUsageId
                     }).ToList();
                 }
 
@@ -203,9 +209,33 @@ namespace Travel.Application.DomainModules.Coupon
                     beginTime = coupon.BeginTime.ToString("yyyy-MM-dd"),
                     endTime = coupon.EndTime.ToString("yyyy-MM-dd"),
                     getTime = DateTime.Now.ToString("yyyy-MM-dd"),
-                    couponType = coupon.Type.CouponTypeName,
-                    status=coupon.State,
-                    usedTime= coupon.UsedTime==null?string.Empty:coupon.UsedTime.Value.ToString("yyyy-MM-dd")
+                    couponType = coupon.Type.CouponTypeName 
+                   
+                };
+            }
+
+            return result;
+        }
+
+        private CouponDTO TransformCoupon(CouponUsage coupon)
+        {
+            CouponDTO result = null;
+
+            if (coupon != null)
+            {
+                result = new CouponDTO()
+                {
+                    couponId = coupon.CouponId,
+                    //openId = user.OpenId,
+                    title = coupon.Coupon.Title,
+                    subTitle = coupon.Coupon.SubTitle,
+                    beginTime = coupon.Coupon.BeginTime.ToString("yyyy-MM-dd"),
+                    endTime = coupon.Coupon.EndTime.ToString("yyyy-MM-dd"),
+                    getTime = DateTime.Now.ToString("yyyy-MM-dd"),
+                    couponType = coupon.Coupon.Type.CouponTypeName,
+                    status = coupon.State,
+                    usedTime = coupon.UsedTime == null ? string.Empty : 
+                    coupon.UsedTime.Value.ToString("yyyy-MM-dd")
                 };
             }
 

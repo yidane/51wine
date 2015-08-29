@@ -77,18 +77,17 @@ namespace Travel.Infrastructure.DomainDataAccess.Coupon
            
         }
 
-        public Entitys.Coupon GetCouponByUser(Guid couponId, string openid)
+        public Entitys.CouponUsage GetCouponByUser(Guid couponUsageId, string openid)
         {
-            Entitys.Coupon result = null;
+            Entitys.CouponUsage result = null;
             var db = new TravelDBContext();
             //using (var db = new TravelDBContext())
             //{
 
            
            
-            var coupon = db.Coupon.Where(item => item.CouponId == couponId)
-                .Join(db.CouponUsage.Where(item => item.OpenId == openid)
-                , c => c.CouponId, u => u.CouponId, (c, u) => c).FirstOrDefault();
+            var coupon = db.CouponUsage.Where(item => item.CouponUsageId == couponUsageId && item.OpenId == openid)
+              .FirstOrDefault();
             result = coupon;
 
             //}
@@ -97,39 +96,45 @@ namespace Travel.Infrastructure.DomainDataAccess.Coupon
             return result;
         }
 
-        public List<Entitys.Coupon> GetUnExpiredCoupons(UserInfo user)
+        public List<Entitys.CouponUsage> GetUnExpiredCoupons(UserInfo user)
         {
-            List<Entitys.Coupon> result = null;
+            List<Entitys.CouponUsage> result = null;
             var db = new TravelDBContext();
             //using (var db = new TravelDBContext())
             //{
                 var typeId = Guid.Parse("63313E55-A213-4B38-AF64-E6F2ABF68E56");
                 var nowTime = DateTime.Now;
-                var coupons = db.Coupon.Where(item => item.State== CouponState.NotUsed &&
-                item.EndTime >= nowTime
-                &&item.Type.CouponTypeId== typeId)
-                .Join(db.CouponUsage.Where(item => item.OpenId == user.openid)
-                , c => c.CouponId, u => u.CouponId, (c, u) => c);
-                result = coupons.ToList();
+            var coupons = db.CouponUsage.Where(item => item.State == CouponState.NotUsed &&
+          item.Coupon.Type.CouponTypeId == typeId&& item.Coupon.EndTime >= nowTime
+          );
+            //var coupons = db.Coupon.Where(item => item.State== CouponState.NotUsed &&
+            //item.EndTime >= nowTime
+            //&&item.Type.CouponTypeId== typeId)
+            //.Join(db.CouponUsage.Where(item => item.OpenId == user.openid)
+            //, c => c.CouponId, u => u.CouponId, (c, u) => c);
+            //result = coupons.ToList();
 
             //}
-         
+
 
             return result;
         }
 
-        public List<Entitys.Coupon> GetExpiredCoupons(UserInfo user)
+        public List<Entitys.CouponUsage> GetExpiredCoupons(UserInfo user)
         {
-            List<Entitys.Coupon> result =null;
+            List<Entitys.CouponUsage> result =null;
             var db = new TravelDBContext();
             //using (var db = new TravelDBContext())
             //{
                 var typeId = Guid.Parse("63313E55-A213-4B38-AF64-E6F2ABF68E56");
                 var nowTime = DateTime.Now;
-                var coupons = db.Coupon.Where(item => item.State == CouponState.NotUsed &&
-                item.EndTime < nowTime
-                && item.Type.CouponTypeId == typeId).Join(db.CouponUsage.Where(item => item.OpenId == user.openid)
-                , c => c.CouponId, u => u.CouponId, (c, u) => c);
+            var coupons = db.CouponUsage.Where(item => item.State == CouponState.NotUsed &&
+            item.Coupon.Type.CouponTypeId==typeId
+            );
+            //var coupons = db.Coupon.Where(item => item.State == CouponState.NotUsed &&
+            //    item.EndTime < nowTime
+            //    && item.Type.CouponTypeId == typeId).Join(db.CouponUsage.Where(item => item.OpenId == user.openid)
+            //    , c => c.CouponId, u => u.CouponId, (c, u) => c);
             result = coupons.ToList();
 
             //}
@@ -137,19 +142,22 @@ namespace Travel.Infrastructure.DomainDataAccess.Coupon
             return result;
         }
 
-        public List<Entitys.Coupon> GetUsedCoupons(UserInfo user)
+        public List<Entitys.CouponUsage> GetUsedCoupons(UserInfo user)
         {
-            List<Entitys.Coupon> result = null;
+            List<Entitys.CouponUsage> result = null;
             var db = new TravelDBContext();
             //using (var db = new TravelDBContext())
             //{
             var typeId = Guid.Parse("63313E55-A213-4B38-AF64-E6F2ABF68E56");
             var nowTime = DateTime.Now;
-            result = db.Coupon.Where(item => item.State == CouponState.Used && 
-            item.Type.CouponTypeId == typeId).Join(db.CouponUsage.Where(item => item.OpenId == user.openid)
-                , c => c.CouponId, u => u.CouponId, (c, u) => c).ToList();
-            
+            var coupons = db.CouponUsage.Where(item => item.State == CouponState.Used &&
+         item.Coupon.Type.CouponTypeId == typeId 
+         );
+            //result = db.Coupon.Where(item => item.State == CouponState.Used && 
+            //item.Type.CouponTypeId == typeId).Join(db.CouponUsage.Where(item => item.OpenId == user.openid)
+            //    , c => c.CouponId, u => u.CouponId, (c, u) => c).ToList();
 
+            result = coupons.ToList();
             //}
 
             return result;
@@ -221,14 +229,14 @@ namespace Travel.Infrastructure.DomainDataAccess.Coupon
         {
             using (var db = new TravelDBContext())
             {
-                var usages = db.CouponUsage.Where(p => p.CouponId == id && p.OpenId == openId);
+                var usage = db.CouponUsage.FirstOrDefault(p => p.CouponUsageId == id && p.OpenId == openId);
                 
-                if (usages != null&& usages.Any())
+                if (usage != null)
                 {
-                    var coupon = db.Coupon.Find(id);
-                    coupon.State = CouponState.Used;
-                    coupon.UsedTime = DateTime.Now;
-                    db.Entry(coupon).State = System.Data.Entity.EntityState.Modified;
+
+                    usage.State = CouponState.Used;
+                    usage.UsedTime = DateTime.Now;
+                    db.Entry(usage).State = System.Data.Entity.EntityState.Modified;
                    // db.Coupon.Attach(coupon);
                     db.SaveChanges();
                 }

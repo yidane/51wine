@@ -9,6 +9,7 @@ namespace Travel.Application.DomainModules.Coupon.DTOS
 
         public Guid couponId { get; set; }
         //public string openId { get; set; }
+        public Guid couponUsageId { get; set; }
 
         public string getTime { get; set; }
        

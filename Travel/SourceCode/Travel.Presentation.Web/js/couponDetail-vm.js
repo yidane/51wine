@@ -38,7 +38,7 @@ var DetailViewModel=function ($domParam, param) {
         $.getJSON("../WebService/CouponWebService.asmx/GetCoupon",
             {
                 openId: self.param().openId,
-                couponId:self.param().couponId
+                couponUsageId:self.param().couponUsageId
             })
             .done(function (json) {
                 if (json.IsSuccess) {
@@ -93,7 +93,7 @@ var DetailViewModel=function ($domParam, param) {
         $.getJSON("../WebService/CouponWebService.asmx/UseCoupon",
            {
                openId: self.param().openId,
-               couponId: self.param().couponId
+               couponUsageId: self.param().couponUsageId
            })
            .done(function (json) {
                if (json.IsSuccess) {
