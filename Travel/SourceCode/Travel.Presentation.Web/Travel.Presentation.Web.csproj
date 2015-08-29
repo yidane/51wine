@@ -72,6 +72,11 @@
   <ItemGroup>
     <Content Include="audios\end.mp3" />
     <Content Include="audios\shake.wav" />
+    <Content Include="css\demo.css" />
+    <Content Include="css\layout-simple.css" />
+    <Content Include="css\normalize.css" />
+    <Content Include="js\classie.js" />
+    <Content Include="SlidingHeaderLayout.html" />
     <Content Include="testqrcode.html" />
     <Content Include="bower_components\font-awesome\css\font-awesome.css" />
     <Content Include="bower_components\font-awesome\css\font-awesome.min.css" />
@@ -107,6 +112,7 @@
     <Content Include="images\scenic\img_mycard_stamp_overdue_130x120.png" />
     <Content Include="images\scenic\img_mycard_stamp_used_130x120.png" />
     <Content Include="images\shenxian.jpg" />
+    <Content Include="images\t.png" />
     <Content Include="images\wolong.jpg" />
     <Content Include="images\yueliang.jpg" />
     <Content Include="images\back.jpg" />
@@ -230,6 +236,7 @@
     <Content Include="Ticket\BookingTicket.html" />
     <Content Include="Web.config" />
     <Content Include="introduction.html" />
+    <Content Include="WebForm1.aspx" />
     <Content Include="WebService\CouponWebService.asmx" />
     <Content Include="WebService\MonsterService.asmx" />
     <Content Include="WebService\TicketWebService.asmx" />
@@ -267,6 +274,13 @@
     </Compile>
     <Compile Include="TicketList.aspx.designer.cs">
       <DependentUpon>TicketList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebForm1.aspx.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForm1.aspx.designer.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
     </Compile>
     <Compile Include="WXAPI\getOpenId.aspx.cs">
       <DependentUpon>getOpenId.aspx</DependentUpon>
