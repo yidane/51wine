@@ -19,7 +19,7 @@ namespace Travel.Infrastructure.WeiXin.Advanced.Pay
         */
         public const string APPID = "wxdd6127bdb5e7611c";
         public const string MCHID = "1266087601";
-        public const string KEY = "BA5FEB72F57C401BB5A6463DE66464CD";
+        public const string KEY = "4A5E7B87F3324A6DA22E55FDC12150B6";
         public const string APPSECRET = "78fb32f17d30a6ade836319283ccf118";
 
         //=======【证书路径设置】===================================== 
@@ -38,7 +38,7 @@ namespace Travel.Infrastructure.WeiXin.Advanced.Pay
         //=======【商户系统后台机器IP】===================================== 
         /* 此参数可手动配置也可在程序中自动获取
         */
-        public const string IP = "8.8.8.8";
+        public const string IP = "219.234.2.189";
 
 
         //=======【代理服务器设置】===================================
