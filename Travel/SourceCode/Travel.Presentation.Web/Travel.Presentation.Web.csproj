@@ -72,6 +72,7 @@
   <ItemGroup>
     <Content Include="audios\end.mp3" />
     <Content Include="audios\shake.wav" />
+    <Content Include="testqrcode.html" />
     <Content Include="bower_components\font-awesome\css\font-awesome.css" />
     <Content Include="bower_components\font-awesome\css\font-awesome.min.css" />
     <Content Include="bower_components\font-awesome\fonts\fontawesome-webfont.svg" />
@@ -181,6 +182,10 @@
     <Content Include="Photo\ShowPhoto.html" />
     <Content Include="QuickEntry.html" />
     <Content Include="scenicDetail.html" />
+    <Content Include="Scripts\jquery.qrcode.js" />
+    <Content Include="Scripts\jquery.qrcode.min.js" />
+    <Content Include="Scripts\qrcode.js" />
+    <Content Include="Scripts\qrcode.min.js" />
     <Content Include="shakeLuckyMoney.html" />
     <Content Include="luckyMoney.html" />
     <Content Include="Styles\jquery.Jcrop.css" />
@@ -308,6 +313,8 @@
     <Content Include="bower_components\font-awesome\scss\_variables.scss" />
     <None Include="Properties\PublishProfiles\jin.pubxml" />
     <None Include="Properties\PublishProfiles\Travel.pubxml" />
+    <Content Include="Scripts\qrcode.min.js.map" />
+    <Content Include="Scripts\jquery.qrcode.min.js.map" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Travel.Application.DomainModules\Travel.Application.DomainModules.csproj">

@@ -35,87 +35,99 @@
         <div id="loading"></div>
         <div id="loadingTips">100%</div>
     </div>
-    <div id="main-container" style="opacity: 1;">
-        <div id="banner" style="background-color: rgba(247,195,10,1);" data-bind="with:coupon">
-            <a href="MyCoupons.html" class="icon-box fa fa-angle-left fl"
-               id="icon-list" data-bind="click:btnGoback"></a>
+    <div class="qrcode" id="qrcode1">
+        </div>
 
-            <div class="banner-logo"
-                 style="background-image:
+        <div id="main-container" style="opacity: 1;">
+            <div data-bind="with:coupon">
+                <div id="banner" style="background-color: rgba(247,195,10,1);">
+                    <a href="javascript:void(0);" class="icon-box fa fa-angle-left fl"
+                       id="icon-list" data-bind="click:$root.btnGobackClick"></a>
+
+                    <div class="banner-logo"
+                         style="background-image:
      url(../images/logo.png)"></div>
-            <h1 class="banner-title" data-bind="text:title" ></h1>
+                    <h1 class="banner-title" data-bind="text:title"></h1>
 
-            <p class="banner-detail">门票优惠券</p>
-            <span class="banner-time" data-bind="text:'有效期'+ beginTime+'到'+endTime"></span>
-            <span class="banner-bottom"></span>
-        </div>
-        <div id="qrcode-container">
-            <img class="qrcode"
-                 src="http://www.yokapp.com/tools/api/qrcode?size=5&amp;level=1&amp;text=http%3A%2F%2Fwww.yokapp.com%2Fmaocoupon%2F54743b4cd8246ba5461bfdbe%2Fverify%2F34-14405720375008"
-                 alt="">
-            <span class="qrcode-num">34-14405720375008</span>
+                    <p class="banner-detail">门票优惠券</p>
+                    <span class="banner-time" data-bind="text:'有效期'+ beginTime+'到'+endTime"></span>
+                    <span class="banner-bottom"></span>
+                </div>
+                <div id="qrcode-container">
+                    <!--<img class="qrcode"
+                     src="http://www.yokapp.com/tools/api/qrcode?size=5&amp;level=1&amp;text=http%3A%2F%2Fwww.yokapp.com%2Fmaocoupon%2F54743b4cd8246ba5461bfdbe%2Fverify%2F34-14405720375008"
+                     alt="">-->
+                    <div class="qrcode img" id="qrcode" style="margin:0 auto">
 
-            <p class="qrcode-tips">使用时请出示二维码</p>
-            <span class="qrcode-stamp  stamp" style="display: none;"
-                  data-bind="css: profitStatus,visible:profitStatus()!=''"
-                  ></span>
+                    </div>
+                    <span class="qrcode-num" data-bind="text:couponId"></span>
 
-        </div>
-        <article id="rule-container">
-            <header>
-                <h2 class="rule-title">使用规则</h2>
-            </header>
-            <div class="rule-detail">
-                <p style="white-space: normal;">1.出示此优惠券供景区扫描</p>
+                    <p class="qrcode-tips">使用时请出示二维码</p>
+                    <span class="qrcode-stamp  stamp" style="display: none;"
+                          data-bind="css:$parent.profitStatus,visible:$parent.profitStatus()!=''"></span>
 
-                <p style="white-space: normal;">2.优惠券过期作废、使用后作废&nbsp;</p>
-
-                <p><br></p>
+                </div>
             </div>
-        </article>
-        <div id="confirm-cover" class="confirm-cover" style="display: none;">
-            <div class="confirm-cover-main" on>
-                <h2 class="confirm-cover-title">请在商家指导下使用</h2>
+            <article id="rule-container">
+                <header>
+                    <h2 class="rule-title">使用规则</h2>
+                </header>
+                <div class="rule-detail">
+                    <p style="white-space: normal;">1.出示此优惠券供景区扫描</p>
 
-                <p class="confirm-cover-text">确定后此券将失效</p>
-                <a id="btn-cancel" href="javascript:void(0);" class="btn"
-                    data-bind="click:btnCancelClick.bind($data, $('#confirm-cover'),$('.confirm-cover-main'))">取消</a>
-                <a id="btn-sure" href="javascript:void(0);" class="btn" 
-                    data-bind="click:btnSureClick.bind($data, $('#confirm-cover') )">确定</a>
+                    <p style="white-space: normal;">2.优惠券过期作废、使用后作废&nbsp;</p>
+
+                    <p><br></p>
+                </div>
+            </article>
+            <div id="confirm-cover" class="confirm-cover" style="display: none;">
+                <div class="confirm-cover-main" on>
+                    <h2 class="confirm-cover-title">请在商家指导下使用</h2>
+
+                    <p class="confirm-cover-text">确定后此券将失效</p>
+                    <a id="btn-cancel" href="javascript:void(0);" class="btn"
+                       data-bind="click:btnCancelClick.bind($data, $('#confirm-cover'),$('.confirm-cover-main'))">取消</a>
+                    <a id="btn-sure" href="javascript:void(0);" class="btn"
+                       data-bind="click:btnSureClick.bind($data, $('#confirm-cover') )">确定</a>
+                </div>
             </div>
+            <a id="btn-use" class="btn" href="javascript:;" style="display:none"
+               data-bind="click:btnUseClick.bind($data, $('#confirm-cover'),$('.confirm-cover-main')),visible:profitStatus()==''">使用</a>
         </div>
-        <a id="btn-use" class="btn" href="javascript:;" style="display:none" 
-           data-bind="click:btnUseClick.bind($data, $('#confirm-cover'),$('.confirm-cover-main')),visible:profitStatus()==''">使用</a>
-    </div>
-    <script src="../javaScripts/jquery-2.1.4.min.js"></script>
-    <script src="../javaScripts/jquery.url.js"></script>
-    <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+        <script src="../javaScripts/jquery-2.1.4.min.js"></script>
+        <script src="../javaScripts/jquery.url.js"></script>
+        <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+        <script src="../Scripts/jquery.qrcode.min.js"></script>
+        <script src="../Scripts/qrcode.min.js"></script>
+        <script src="../javaScripts/pre-loader.js"></script>
+        <script src="../javaScripts/knockout-3.2.0.debug.js"></script>
+        <script src="../js/couponDetail-vm.js"></script>
+        <script>
+            //var access_code = "";
+            // access_code = $.url.param("code");
+            //if (!access_code) {
+            //    var fromurl = location.href;
+            //    var url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxdd6127bdb5e7611c&redirect_uri='
+            //        + encodeURIComponent(fromurl) +
+            //        '&response_type=code&scope=snsapi_base&state=STATE%23wechat_redirect&connect_redirect=1#wechat_redirect';
+            //    location.href = url;
+            //}
+            var openId = "";
+            openId = $.url.param("openId");
+            var couponUsageId = $.url.param("couponUsageId");
+            var param = {
+                // access_code: access_code,
+                couponUsageId: couponUsageId,
+                openId: openId
+            };
+            var $doms = {
+                $qrcode: $("#qrcode1")
+            };
+            
+            var detailVM = new DetailViewModel($doms, param);
+            ko.applyBindings(detailVM);
+        </script>
 
-    <script src="../javaScripts/pre-loader.js"></script>
-    <script src="../javaScripts/knockout-3.2.0.debug.js"></script>
-    <script src="../js/couponDetail-vm.js"></script>
-<script>
-    //var access_code = "";
-    // access_code = $.url.param("code");
-    //if (!access_code) {
-    //    var fromurl = location.href;
-    //    var url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxdd6127bdb5e7611c&redirect_uri='
-    //        + encodeURIComponent(fromurl) +
-    //        '&response_type=code&scope=snsapi_base&state=STATE%23wechat_redirect&connect_redirect=1#wechat_redirect';
-    //    location.href = url;
-    //}
-    var openId = "";
-    openId = $.url.param("openId");
-    var couponUsageId = $.url.param("couponUsageId");
-    var param = {
-       // access_code: access_code,
-        couponUsageId: couponUsageId,
-        openId: openId
-    };  
-    var detailVM=new DetailViewModel(null,param);
-    ko.applyBindings(detailVM);
-</script>
-   
 
 
 </body>

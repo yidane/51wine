@@ -44,6 +44,8 @@ var DetailViewModel=function ($domParam, param) {
                 if (json.IsSuccess) {
                     self.coupon(json.Data.coupon);
                     self.couponStatus(json.Data.coupon.status);
+                    self.$DomParm().$qrcode.qrcode({ width: 130, height: 130, text: json.Data.coupon.couponId });
+                    $("#qrcode").append(self.$DomParm().$qrcode);
                    // self.param().openId = json.Data.user.openid;
                 }
             }).fail(
@@ -108,7 +110,7 @@ var DetailViewModel=function ($domParam, param) {
         
     };
 
-    this.btnGoback = function () {
+    this.btnGobackClick = function () {
         window.history.back();
     };
 
