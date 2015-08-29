@@ -104,7 +104,8 @@ namespace Travel.Infrastructure.DomainDataAccess.Coupon
             //{
              //   var typeId = Guid.Parse("63313E55-A213-4B38-AF64-E6F2ABF68E56");
                 var nowTime = DateTime.Now;
-            var coupons = db.CouponUsage.Where(item => item.State == CouponState.NotUsed &&
+            var coupons = db.CouponUsage.Where(item => item.State == CouponState.NotUsed
+             && item.OpenId == user.openid &&
            item.Coupon.EndTime >= nowTime
           );
             result = coupons.ToList();
@@ -129,8 +130,9 @@ namespace Travel.Infrastructure.DomainDataAccess.Coupon
             //{
              //   var typeId = Guid.Parse("63313E55-A213-4B38-AF64-E6F2ABF68E56");
                 var nowTime = DateTime.Now;
-            var coupons = db.CouponUsage.Where(item => item.State == CouponState.NotUsed &&
-             item.Coupon.EndTime < nowTime
+            var coupons = db.CouponUsage.Where(item => item.State == CouponState.NotUsed
+             && item.OpenId == user.openid
+            &&  item.Coupon.EndTime < nowTime
             );
             //var coupons = db.Coupon.Where(item => item.State == CouponState.NotUsed &&
             //    item.EndTime < nowTime
@@ -152,6 +154,7 @@ namespace Travel.Infrastructure.DomainDataAccess.Coupon
            // var typeId = Guid.Parse("63313E55-A213-4B38-AF64-E6F2ABF68E56");
             var nowTime = DateTime.Now;
             var coupons = db.CouponUsage.Where(item => item.State == CouponState.Used 
+            &&item.OpenId==user.openid
          );
             //result = db.Coupon.Where(item => item.State == CouponState.Used && 
             //item.Type.CouponTypeId == typeId).Join(db.CouponUsage.Where(item => item.OpenId == user.openid)

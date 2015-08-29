@@ -105,11 +105,12 @@ var DetailViewModel=function ($domParam, param) {
                var err = textStatus + ", " + error;
                console.log("Request Failed: " + err);
            });
-
-
-      
-
-
+        
     };
+
+    this.btnGoback = function () {
+        window.history.back();
+    };
+
     this.getCoupon();
 };
