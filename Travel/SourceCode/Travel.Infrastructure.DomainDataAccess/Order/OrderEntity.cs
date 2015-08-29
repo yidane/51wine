@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Data.Entity;
+    using System.Data.Entity.Core.Metadata.Edm;
     using System.Data.Entity.Migrations;
     using System.Linq;
 
@@ -102,10 +103,14 @@
 
         public static OrderEntity GetOrderByOrderId(string orderId)
         {
+            OrderEntity order = null;
+
             using (var db = new TravelDBContext())
             {
-                return db.Order.FirstOrDefault(item => item.OrderCode.Equals(orderId));
+                order = db.Order.Include(item => item.Tickets).Include(item => item.OrderDetails).FirstOrDefault(item => item.OrderCode.Equals(orderId));
             }
+
+            return order;
         }
 
         public decimal TotalFee()

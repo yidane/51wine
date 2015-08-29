@@ -12,8 +12,8 @@ namespace Travel.Application.DomainModules.Order.Core
     /// The wx payment.
     /// </summary>
     public class WXPayment : Payment
-    {        
-        public WXPayment(object paymentResponse)
+    {
+        public WXPayment(PaymentNotify paymentResponse)
             : base(paymentResponse)
         {
             this.PaymentOperate = new WXPaymentOperate();
@@ -35,31 +35,24 @@ namespace Travel.Application.DomainModules.Order.Core
         /// <param name="e"></param>
         private void WXPayment_PrePayment(object sender, EventArgs e)
         {
-            if (this.IsPaymentNotifyParamtersCorrect())
+            if (this.OrderObj != null)
             {
-                if (this.OrderObj != null)
+                if (this.OrderObj.OrderStatus.Equals(Order.OrderStatus_PayComplete))
                 {
-                    if (this.OrderObj.OrderStatus.Equals(Order.OrderStatus_PayComplete))
-                    {
-                        this.IsPaymentInfoProcessed = true;
-                    }
-                    else if (this.OrderObj.OrderStatus.Equals(Order.OrderStatus_WaitPay))
-                    {
-                        this.IsPaymentInfoProcessed = false;
-                    }
-                    else
-                    {
-                        throw new InvalidOperationException("prepayment");
-                    }
+                    this.IsPaymentInfoProcessed = true;
+                }
+                else if (this.OrderObj.OrderStatus.Equals(Order.OrderStatus_WaitPay))
+                {
+                    this.IsPaymentInfoProcessed = false;
                 }
                 else
                 {
-                    throw new ArgumentNullException("order");
+                    throw new InvalidOperationException("prepayment");
                 }
             }
             else
             {
-                throw new ArgumentNullException("prepayment");
+                throw new ArgumentNullException("order");
             }
         }
 
@@ -67,11 +60,7 @@ namespace Travel.Application.DomainModules.Order.Core
         /// 验证微信支付通知的参数是否正确
         /// </summary>
         /// <returns></returns>
-        private bool IsPaymentNotifyParamtersCorrect()
-        {
-            // todo:通过PaymentResponse完成微信通知参数的验证
-            return true;
-        }
+
 
 
         /// <summary>
@@ -81,16 +70,17 @@ namespace Travel.Application.DomainModules.Order.Core
         /// <param name="e"></param>
         private void WXPayment_PaymentComplete(object sender, EventArgs e)
         {
-            // todo:通过PaymentOperate完成与微信支付的回执
-            if (this.IsProcessPaymentInfoSuccess)
-            {
+            var turnbackTemplate = "{{'return_code':'{0}', 'return_msg':'{1}'}}";
 
+            if (this.IsPaymentInfoProcessed || this.IsProcessPaymentInfoSuccess)
+            {
+                this.WXTurnbackResult = string.Format(turnbackTemplate, "SUCCESS", "OK");
             }
             else
             {
-
+                this.WXTurnbackResult = string.Format(turnbackTemplate, "FALL", "参数格式校验错误或签名失败");
             }
-        }        
+        }
 
         /// <summary>
         /// 支付完成后，通知OTA接口购票成功并且获取二维码
@@ -99,6 +89,7 @@ namespace Travel.Application.DomainModules.Order.Core
         /// <param name="e"></param>
         private void WXPayment_AfterPaymentComplete(object sender, EventArgs e)
         {
+            //todo: 此事件单独抛出异常并进行处理，不应影响支付相关操作的结果
             if (this.OrderObj != null)
             {
                 var myOrder = OrderEntity.GetOrderByOrderId(OrderObj.OrderCode);
@@ -107,7 +98,7 @@ namespace Travel.Application.DomainModules.Order.Core
 
                 orderOperate.OrderFinish();
             }
-            
+
         }
     }
 }

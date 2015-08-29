@@ -188,7 +188,7 @@ namespace Travel.Application.DomainModules.Order.Core
             }
             catch (Exception)
             {
-                
+                // todo:针对不同事件报出的异常进行不同的异常处理
                 throw;
             }            
         }                

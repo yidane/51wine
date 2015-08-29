@@ -14,19 +14,19 @@ namespace Travel.Application.DomainModules.Order.Core
 
     public class Payment
     {
-        internal dynamic PaymentResponse;
+        internal PaymentNotify PaymentResponse;
 
         internal OrderEntity OrderObj;
 
         internal IPaymentOperate PaymentOperate;
 
-        internal bool IsPaymentResponseCorrect;
-
         internal bool IsPaymentInfoProcessed;
 
         internal bool IsProcessPaymentInfoSuccess;
 
-        public Payment(object paymentResponse)
+        internal string WXTurnbackResult;
+
+        public Payment(PaymentNotify paymentResponse)
         {
             // todo: PaymentResponse需要明确的对象及属性
             this.PaymentResponse = paymentResponse;
@@ -47,7 +47,7 @@ namespace Travel.Application.DomainModules.Order.Core
                 return this._events ?? (this._events = new EventHandlerList());
             }
         }
-        
+
         internal static readonly object EventPrePayment = new Object();
 
         internal static readonly object EventPaymentComplete = new Object();
@@ -132,7 +132,8 @@ namespace Travel.Application.DomainModules.Order.Core
         {
             try
             {
-                if (this.IsPaymentResponseCorrect)
+                if (this.PaymentResponse.return_code.ToUpper().Equals("SUCCESS") 
+                    && this.PaymentResponse.result_code.ToUpper().Equals("SUCCESS"))
                 {
                     lock (orderLock)
                     {
@@ -143,11 +144,7 @@ namespace Travel.Application.DomainModules.Order.Core
                             this.ProcessPayment();
                         }
                     }
-                }
-                else
-                {
-                    
-                }                        
+                }           
             }
             catch (Exception)
             {
@@ -156,11 +153,21 @@ namespace Travel.Application.DomainModules.Order.Core
 
             this.OnPaymentComplete(EventArgs.Empty);
 
-            if (!this.IsPaymentInfoProcessed)
+
+            try
             {
-                this.OnAfterPaymentComplete(EventArgs.Empty);
+                if (!this.IsPaymentInfoProcessed && this.IsProcessPaymentInfoSuccess)
+                {
+                    this.OnAfterPaymentComplete(EventArgs.Empty);
+                }
             }
-        }        
+            catch (Exception)
+            {
+                
+                throw;
+            }
+            
+        }
 
         protected void ProcessPayment()
         {
@@ -178,9 +185,9 @@ namespace Travel.Application.DomainModules.Order.Core
                     {
                         dateTicket.CurrentStatus = Order.DateTicketStatus_PayComplete;
                         dateTickets.Add(dateTicket);
-                    }                    
-                }  
-              
+                    }
+                }
+
                 this.OrderObj.ModifyOrder();
                 DateTicketEntity.Update(dateTickets);
 
@@ -188,7 +195,7 @@ namespace Travel.Application.DomainModules.Order.Core
             }
             else
             {
-                throw new ArgumentNullException("Order","订单不存在");
+                throw new ArgumentNullException("Order", "订单不存在");
             }
         }
     }

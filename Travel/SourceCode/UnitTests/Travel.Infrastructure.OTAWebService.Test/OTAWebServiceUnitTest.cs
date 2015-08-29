@@ -43,7 +43,7 @@ namespace Travel.Infrastructure.OTAWebService.Test
         [TestMethod]
         public void GetProductsTest()
         {
-            var request = new GetProductRequest(DateTime.Now);
+            var request = new GetProductRequest(DateTime.Now.Date.AddDays(1));
             var result = new OTAServiceManager().GetProducts(request);
             Assert.IsTrue(result.IsTrue);
         }
@@ -57,9 +57,9 @@ namespace Travel.Infrastructure.OTAWebService.Test
             postOrder.Edittype = null;
 
             Order order = new Order();
-            order.OrderNO = "C20150204168858964";
+            order.OrderNO = "C2015082918445468857387";
             order.LinkName = "测试";
-            order.LinkPhone = "18910063051";
+            order.LinkPhone = "18910063001";
             order.LinkICNO = "";
             order.CreateTime = DateTime.Now.ToString();
             postOrder.Order = order;
@@ -69,7 +69,7 @@ namespace Travel.Infrastructure.OTAWebService.Test
                 {
                     new Detail()
                         {
-                            OrderNO = "C20150204168858964",
+                            OrderNO = "C2015082918445468857387",
                             ItemID = "1",
                             ProductCode = "berj001",
                             ProductID = 57882,
@@ -143,7 +143,7 @@ namespace Travel.Infrastructure.OTAWebService.Test
         {
             var request = new OrderFinishRequest()
                 {
-                    OtaOrderNO = "C20150204168858962"
+                    OtaOrderNO = "C2015082918113819136574"
                 };
 
             var result = new OTAServiceManager().OrderFinish(request);
@@ -158,7 +158,7 @@ namespace Travel.Infrastructure.OTAWebService.Test
                 {
                     PostOrder = new List<OrderNoCode>()
                         {
-                            new OrderNoCode() {OrderCode = "4842095914699807217"},
+                            new OrderNoCode() {OrderCode = "C2015082918113819136574"},
                             //new OrderNoCode(){OrderCode = "C20150825168858961"}
                         }
                 };

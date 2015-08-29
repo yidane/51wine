@@ -19,8 +19,11 @@ namespace Travel.Application.DomainModules.Order.Core
                     item => item.TicketCategoryId.Equals(order.Tickets.FirstOrDefault().TicketCategoryId));
             var orderRequest = new UnifiedOrderRequest()
                                    {
+                                       openid = order.OpenId,
                                        body = ticket.TicketName,
                                        detail = ticket.Price.ToString(),
+                                       attach = "1",
+                                       goods_tag = "1",
                                        total_fee = Decimal.ToInt32(order.TotalFee() * 100)
                                    };
             var WXPaymentService = new JsApiPay();
@@ -28,9 +31,13 @@ namespace Travel.Application.DomainModules.Order.Core
             return WXPaymentService.GetUnifiedOrderResult(orderRequest);
         }
 
-        public void GetPaymentCompleteInfomation(object paymentComplete)
+        public string GetPaymentCompleteInfomation(PaymentNotify paymentComplete)
         {
-            throw new NotImplementedException();
+            var wxPay = new WXPayment(paymentComplete);
+
+            wxPay.ProcessPaymentMain();
+
+            return wxPay.WXTurnbackResult;
         }
     }
 }

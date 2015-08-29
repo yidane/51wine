@@ -96,6 +96,10 @@
       <Project>{47f144aa-b49d-4db2-80d3-59b05f8680e6}</Project>
       <Name>Travel.Infrastructure.DomainDataAccess</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Travel.Infrastructure.WeiXin\Travel.Infrastructure.WeiXin.csproj">
+      <Project>{37afc00a-8d40-45df-98e8-3e671dd420fb}</Project>
+      <Name>Travel.Infrastructure.WeiXin</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

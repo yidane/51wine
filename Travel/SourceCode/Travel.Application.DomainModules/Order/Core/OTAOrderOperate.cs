@@ -10,6 +10,8 @@ namespace Travel.Application.DomainModules.Order.Core
     using Travel.Application.DomainModules.Order.Core.Interface;
     using Travel.Infrastructure.DomainDataAccess.Order;
     using Travel.Infrastructure.OTAWebService;
+    using Travel.Infrastructure.OTAWebService.Response;
+
     using OTARequest = Travel.Infrastructure.OTAWebService.Request;
 
     public class OTAOrderOperate:IOrderOperate
@@ -29,7 +31,7 @@ namespace Travel.Application.DomainModules.Order.Core
         /// </summary>
         /// <param name="order"></param>
         /// <returns></returns>
-        public bool OrderOccupies()
+        public OTAResult<OrderOccupiesResponse> OrderOccupies()
         {
             var otaOrderRequest = new OTARequest.OrderOccupiesRequest();
             var otaDetail = new List<OTARequest.Detail>();
@@ -40,7 +42,7 @@ namespace Travel.Application.DomainModules.Order.Core
                                    };
             var otaOrder = new OTARequest.Order()
                                {
-                                   OrderNO = this.MainOrder.OrderObj.OrderId.ToString(),
+                                   OrderNO = this.MainOrder.OrderObj.OrderCode,
                                    LinkName = this.MainOrder.OrderObj.ContactPersonName,
                                    LinkPhone = this.MainOrder.OrderObj.MobilePhoneNumber,
                                    LinkICNO = this.MainOrder.OrderObj.IdentityCardNumber,
@@ -83,14 +85,11 @@ namespace Travel.Application.DomainModules.Order.Core
                 otaPostOrder.Details = otaDetail;
                 otaOrderRequest.postOrder = otaPostOrder;
 
-                //todo: 返回值需对象化
-                var result = this._serviceManager.OrderOccupies(otaOrderRequest);
-
-                return true;
+                return this._serviceManager.OrderOccupies(otaOrderRequest);
             }
             else
             {
-                return false;                
+                return new OTAResult<OrderOccupiesResponse> { IsTrue = false };                
             }
         }
 
@@ -109,25 +108,25 @@ namespace Travel.Application.DomainModules.Order.Core
             var result = this._serviceManager.OrderFinish(orderFinish);
 
             if (result.IsTrue)
-            {                
-                foreach (var ticket in this.MainOrder.OrderObj.Tickets)
+            {
+                if (result.ResultData.Count == this.MainOrder.OrderObj.Tickets.Count)
                 {
-                    var responseTicket = result.ResultData.FirstOrDefault(item => item.ProductID.Equals(ticket.TicketId));
+                    var arrTickets = this.MainOrder.OrderObj.Tickets.ToArray();
+                    for (int i = 0; i < this.MainOrder.OrderObj.Tickets.Count; i++)
+                    {
+                        arrTickets[i].ECode = result.ResultData[i].ECode;
+                        arrTickets[i].TicketStatus = Order.TicketStatus_WaitUse;
+                    }
 
-                    // 门票二维码
-                    if (responseTicket != null)
-                    {
-                        ticket.ECode = responseTicket.ECode;
-                    }
-                    else
-                    {
-                        throw new ArgumentNullException("responseTicket");
-                    }
+                    this.MainOrder.OrderObj.Tickets = arrTickets.ToList();
+                    // 更改订单状态为
+                    this.MainOrder.OrderObj.OrderStatus = Order.OrderStatus_WaitUse;
+                    this.MainOrder.OrderObj.ModifyOrder();
                 }
-
-                // 更改订单状态为
-                this.MainOrder.OrderObj.OrderStatus = Order.OrderStatus_WaitUse;
-                this.MainOrder.OrderObj.ModifyOrder();
+                else
+                {
+                    throw new Exception();
+                }
             }
             else
             {

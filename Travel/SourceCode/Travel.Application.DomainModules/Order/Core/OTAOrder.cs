@@ -16,6 +16,8 @@ namespace Travel.Application.DomainModules.Order.Core
 
         public string PrepayId;
 
+        public UnifiedOrderResult UnifiedOrderResult;
+
         public OTAOrder(OrderRequestEntity orderRequest)
             : base(orderRequest)
         {
@@ -76,7 +78,7 @@ namespace Travel.Application.DomainModules.Order.Core
         {
             var oatLockOrderResult = this._orderOperate.OrderOccupies();
 
-            if (oatLockOrderResult)
+            if (oatLockOrderResult.IsTrue)
             {
                 // 修改订单状态为待支付，票的状态为待支付
                 OrderObj.OrderStatus = OrderStatus_WaitPay;
@@ -86,6 +88,10 @@ namespace Travel.Application.DomainModules.Order.Core
                 }
 
                 OrderObj.ModifyOrder();
+            }
+            else
+            {
+                throw new InvalidOperationException("CreateOrderComplete");
             }
         }
 
@@ -98,6 +104,7 @@ namespace Travel.Application.DomainModules.Order.Core
             {
                 this.PaymentType = result.trade_type;
                 this.PrepayId = result.prepay_id;
+                this.UnifiedOrderResult = result;
             }
         }
 
