@@ -76,7 +76,7 @@
     <Content Include="css\layout-simple.css" />
     <Content Include="css\normalize.css" />
     <Content Include="js\classie.js" />
-    <Content Include="SlidingHeaderLayout.html" />
+    <Content Include="introductiontest.html" />
     <Content Include="testqrcode.html" />
     <Content Include="bower_components\font-awesome\css\font-awesome.css" />
     <Content Include="bower_components\font-awesome\css\font-awesome.min.css" />
