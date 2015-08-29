@@ -139,20 +139,39 @@ namespace Travel.Infrastructure.WeiXin.Advanced.Pay.Model
             }
         }
 
-        public string GetJsApiParameters()
+        public JsAPIParameter GetJsApiParameters()
         {
             var jsApiParam = new WxPayData();
-            //jsApiParam.SetValue("appId", this.appid);
+            jsApiParam.SetValue("appId", this.appid);
             jsApiParam.SetValue("timeStamp", WxPayHelper.GenerateTimeStamp());
             jsApiParam.SetValue("nonceStr", WxPayHelper.GenerateNonceStr());
             jsApiParam.SetValue("package", "prepay_id=" + this.prepay_id);
             jsApiParam.SetValue("signType", "MD5");
             jsApiParam.SetValue("paySign", jsApiParam.MakeSign());
 
-            string parameters = jsApiParam.ToJson();
-
-            return parameters;
+            return new JsAPIParameter()
+                {
+                    appId = jsApiParam.GetValue("appId").ToString(),
+                    timeStamp = jsApiParam.GetValue("timeStamp").ToString(),
+                    nonceStr = jsApiParam.GetValue("nonceStr").ToString(),
+                    package = jsApiParam.GetValue("package").ToString(),
+                    paySign = jsApiParam.GetValue("paySign").ToString()
+                };
         }
+    }
+
+    public class JsAPIParameter
+    {
+        public string appId { get; set; }
+        public string timeStamp { get; set; }
+        public string nonceStr { get; set; }
+        public string package { get; set; }
+        public string signType
+        {
+            get { return "MD5"; }
+        }
+
+        public string paySign { get; set; }
     }
 
     public class Err_Code

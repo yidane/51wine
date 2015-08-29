@@ -112,7 +112,13 @@ namespace Travel.Infrastructure.WeiXin.Advanced.Pay.Model
         /// <remarks>订单生成时间，格式为yyyyMMddHHmmss，如2009年12月25日9点10分10秒表示为20091225091010。其他详见时间规则</remarks>
         /// </summary>
         [Require(false, "")]
-        public string time_start { get; set; }
+        public string time_start
+        {
+            get
+            {
+                return DateTime.Now.ToString("yyyyMMddHHmmss");
+            }
+        }
 
         /// <summary>
         /// 交易结束时间 （必填）
@@ -120,7 +126,10 @@ namespace Travel.Infrastructure.WeiXin.Advanced.Pay.Model
         /// <remarks>订单失效时间，格式为yyyyMMddHHmmss，如2009年12月27日9点10分10秒表示为20091227091010。其他详见时间规则 注意：最短失效时间间隔必须大于5分钟</remarks>
         /// </summary>
         [Require(true, "")]
-        public string time_expire { get; set; }
+        public string time_expire
+        {
+            get { return DateTime.Now.AddMinutes(10).ToString("yyyyMMddHHmmss"); }
+        }
 
         /// <summary>
         /// 商品标记 （选填）

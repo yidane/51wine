@@ -8,6 +8,7 @@ using System.Web.Services;
 using Travel.Application.DomainModules.Order.Core;
 using Travel.Application.DomainModules.Order.Entity;
 using Travel.Application.DomainModules.WeChat;
+using Travel.Application.DomainModules.WeChat.DTOS;
 using Travel.Infrastructure.CommonFunctions.Ajax;
 using Travel.Infrastructure.WeiXin.Advanced.Pay;
 using Travel.Infrastructure.WeiXin.Advanced.Pay.Model;
@@ -16,40 +17,55 @@ namespace Travel.Services.WebService
 {
     public class TicketWebService : BaseWebService
     {
-        [WebMethod]
+        [WebMethod(EnableSession = true)]
         public void CreateOrder(string code, string ticketId, int ticketCount, string couponId, int couponCount, string orderNo, string contractName, string contractPhone, string contractIdCard)
         {
             try
             {
-                ///var accessToken = new WeChatService().GetAccessToken(code);
-                //if (!string.IsNullOrEmpty(accessToken.openid))
+                AccessTokenDTO accessToken = null;
+                var openID = string.Empty;
+                if (Session["OpenID"] == null)
                 {
-                    //var orderRequestEntity = new OrderRequestEntity()
-                    //    {
-                    //        OpenId = accessToken.openid,
-                    //        TicketCategory = Guid.NewGuid().ToString(),
-                    //        Count = ticketCount,
-                    //        CouponId = Guid.NewGuid().ToString(),
-                    //        ContactPersonName = contractName,
-                    //        MobilePhoneNumber = contractPhone,
-                    //        IdentityCardNumber = contractIdCard
-                    //    };
+                    accessToken = new WeChatService().GetAccessToken(code);
+                    if (accessToken != null && !string.IsNullOrEmpty(accessToken.openid))
+                    {
+                        Session["OpenID"] = accessToken.openid;
+                        openID = accessToken.openid;
+                    }
+                }
+                else
+                {
+                    openID = Session["OpenID"].ToString();
+                }
 
-                    //var otaOrder = new OTAOrder(orderRequestEntity);
+                if (!string.IsNullOrEmpty(openID))
+                {
+                    var orderRequestEntity = new OrderRequestEntity()
+                        {
+                            OpenId = openID,
+                            TicketCategory = Guid.NewGuid().ToString(),
+                            Count = ticketCount,
+                            CouponId = Guid.NewGuid().ToString(),
+                            ContactPersonName = contractName,
+                            MobilePhoneNumber = contractPhone,
+                            IdentityCardNumber = contractIdCard
+                        };
+
+                    var otaOrder = new OTAOrder(orderRequestEntity);
 
                     JsApiPay jsApiPay = new JsApiPay();
                     UnifiedOrderRequest unifiedOrderRequest = new UnifiedOrderRequest();
                     unifiedOrderRequest.body = "yidane Test body";
-                    unifiedOrderRequest.openid = "obzTswxzFzzzdWdAKf2mWx3CrpXk";
-                    //unifiedOrderRequest.openid = accessToken.openid;
+                    //unifiedOrderRequest.openid = "obzTsw5qxlbwGYYZJC9b-91J-X1Y"; //Zidane
+                    unifiedOrderRequest.openid = openID;
+                    //unifiedOrderRequest.openid = "obzTswxzFzzzdWdAKf2mWx3CrpXk"; //xqfgbc
                     unifiedOrderRequest.attach = "attach test";
                     unifiedOrderRequest.total_fee = 1;
                     unifiedOrderRequest.goods_tag = "goods_tag test";
-                    unifiedOrderRequest.time_start = DateTime.Now.ToString("yyyyMMddHHmmss");
-                    unifiedOrderRequest.time_expire = DateTime.Now.AddMinutes(10).ToString("yyyyMMddHHmmss");
 
                     var result = jsApiPay.GetUnifiedOrderResult(unifiedOrderRequest);
 
+                    otaOrder.CreateOrderMain();
 
                     //UnifiedOrderResult result = new UnifiedOrderResult();
                     //result.return_code = "SUCCESS";
@@ -62,16 +78,17 @@ namespace Travel.Services.WebService
                     //result.prepay_id = "prepay_id=wx20150828204046a93fc0882f0359646391";
                     //result.trade_type = "JSAPI";
 
-                    //otaOrder.CreateOrderMain();
 
                     var jsParameter = result.GetJsApiParameters();
 
+                    //throw new Exception(AjaxResult.Success(jsParameter).ToString());
+
                     Context.Response.Write(AjaxResult.Success(jsParameter));
                 }
-                //else
-                //{
-                //    throw new Exception("无效参数Code");
-                //}
+                else
+                {
+                    throw new Exception("获取OpenID失败");
+                }
             }
             catch (Exception exception)
             {

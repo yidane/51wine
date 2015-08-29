@@ -1137,7 +1137,6 @@ VPay.prototype.order = function () {
     var zPayBtn = $('#payBtn');
     zPayBtn.addClass('z-btn-top');
 
-    alert("CreateOrder before");
     VI.ajax({
         type: "post",
         url: 'WebService/TicketWebService.asmx/CreateOrder',
@@ -1145,30 +1144,20 @@ VPay.prototype.order = function () {
         data: { code: GetQueryString('code'), ticketId: options.gid, ticketCount: zNumVal, couponId: 0, couponCount: 0, orderNo: options.orid, contractName: zNameVal, contractPhone: zPhoneVal, contractIdCard: zIDCardVal },
         success: function (result) {
             if (result.IsSuccess) {
-                alert(result.Data);
-
-                var pp = JSON.parse(result.Data);
-                alert(pp);
-
                 wx.chooseWXPay({
-                    timestamp: pp.timeStamp, // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
-                    nonceStr: pp.nonceStr, // 支付签名随机串，不长于 32 位
-                    package: pp.package, // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=***）
+                    timestamp: result.Data.timeStamp, // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
+                    nonceStr: result.Data.nonceStr, // 支付签名随机串，不长于 32 位
+                    package: result.Data.package, // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=***）
                     signType: 'SHA1', // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
-                    paySign: pp.paySign, // 支付签名
+                    paySign: result.Data.paySign, // 支付签名
                     success: function (res) {
-                        // 支付成功后的回调函数
                         alert("Pay Succeed");
+                    },
+                    fail: function (err) {
+                        alert("fail");
+                        alert(JSON.stringify(err));
                     }
                 });
-
-                //WeixinJSBridge.invoke(
-                //   'getBrandWCPayRequest',
-                //    JSON.parse(result.Data),//josn串
-                //    function (res) {
-                //        alert(res.err_code + res.err_desc + res.err_msg);
-                //    }
-                //    );
 
                 setTimeout(function () {
                     This.isLoading = 0;

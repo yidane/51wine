@@ -240,7 +240,6 @@
     <Content Include="Ticket\BookingTicket.html" />
     <Content Include="Web.config" />
     <Content Include="introduction.html" />
-    <Content Include="WebForm1.aspx" />
     <Content Include="WebService\CouponWebService.asmx" />
     <Content Include="WebService\MonsterService.asmx" />
     <Content Include="WebService\TicketWebService.asmx" />
@@ -278,13 +277,6 @@
     </Compile>
     <Compile Include="TicketList.aspx.designer.cs">
       <DependentUpon>TicketList.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="WebForm1.aspx.cs">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebForm1.aspx.designer.cs">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
     </Compile>
     <Compile Include="WXAPI\getOpenId.aspx.cs">
       <DependentUpon>getOpenId.aspx</DependentUpon>
