@@ -84,7 +84,7 @@
                     data-bind="click:btnSureClick.bind($data, $('#confirm-cover') )">确定</a>
             </div>
         </div>
-        <a id="btn-use" class="btn" href="javascript:;" 
+        <a id="btn-use" class="btn" href="javascript:;" style="display:none" 
            data-bind="click:btnUseClick.bind($data, $('#confirm-cover'),$('.confirm-cover-main')),visible:profitStatus()==''">使用</a>
     </div>
     <script src="../javaScripts/jquery-2.1.4.min.js"></script>
@@ -95,7 +95,7 @@
     <script src="../javaScripts/knockout-3.2.0.debug.js"></script>
     <script src="../js/couponDetail-vm.js"></script>
 <script>
-    var access_code = "";
+    //var access_code = "";
     // access_code = $.url.param("code");
     //if (!access_code) {
     //    var fromurl = location.href;
@@ -104,10 +104,13 @@
     //        '&response_type=code&scope=snsapi_base&state=STATE%23wechat_redirect&connect_redirect=1#wechat_redirect';
     //    location.href = url;
     //}
+    var openId = "";
+    openId = $.url.param("openId");
     var couponId= $.url.param("couponId");
     var param = {
-        access_code: access_code,
-        couponId:couponId
+       // access_code: access_code,
+        couponId: couponId,
+        openId: openId
     };  
     var detailVM=new DetailViewModel(null,param);
     ko.applyBindings(detailVM);

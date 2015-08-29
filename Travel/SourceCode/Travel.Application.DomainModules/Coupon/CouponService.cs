@@ -21,12 +21,12 @@ namespace Travel.Application.DomainModules.Coupon
             _userRepository = new UserRepository();
         }
 
-        public CouponDTO GetCoupon(UserInfoDTO wxUser,Guid couponId) {
+        public CouponDTO GetCoupon(string openId,Guid couponId) {
             CouponDTO result = null;
 
-            if (wxUser != null)
+            if (!string.IsNullOrEmpty(openId))
             {
-                var coupon = _repository.GetCouponByUser(couponId, wxUser.openid);
+                var coupon = _repository.GetCouponByUser(couponId, openId);
                 if (coupon!=null) {
                     result = TransformCoupon(coupon);
                 }
@@ -90,11 +90,12 @@ namespace Travel.Application.DomainModules.Coupon
                     {
                         title = p.Title,
                         subTitle = p.SubTitle,
-                       // beginTime = p.BeginTime.ToString("yyyy-MM-dd"),
+                        beginTime = p.BeginTime.ToString("yyyy-MM-dd"),
                         couponId = p.CouponId,
                         couponType = p.Type.CouponTypeName,
-                       // endTime = p.EndTime.ToString("yyyy-MM-dd"),
-                        usedTime=p.UsedTime.Value.ToString("yyyy-MM-dd")
+                        endTime = p.EndTime.ToString("yyyy-MM-dd"),
+                        usedTime= p.UsedTime == null ? string.Empty
+                        : p.UsedTime.Value.ToString("yyyy-MM-dd")
                     }).ToList();
                 }
 

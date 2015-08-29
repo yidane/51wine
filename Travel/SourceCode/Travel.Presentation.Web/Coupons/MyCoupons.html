@@ -75,7 +75,7 @@
                         </div>
                         <p class="coupons-handle" >
                             <!-- ko text:'有效期：'+ beginTime +' 至 '+endTime --><!-- /ko-->
-                            <a class="fr used" data-bind="attr:{href:'couponDetail.html?couponId='+couponId}">详情</a>
+                            <a class="fr used" data-bind="attr:{href:'couponDetail.html?openId='+$root.openId()+'&couponId='+couponId}">详情</a>
                         </p>
                     
                      
@@ -106,7 +106,7 @@
                                 </div>
                                 <p class="coupons-handle" >
                                     <!-- ko text:'有效期：'+ beginTime +' 至 '+endTime --><!-- /ko-->
-                                    <a class="coupons-a" data-bind="attr:{href:'couponDetail.html?couponId='+couponId}+'&type=used'">详情</a>
+                                    <a class="fr used" data-bind="attr:{href:'couponDetail.html?openId='+$root.openId()+'&couponId='+couponId+'&type=used'}">详情</a>
                                 </p>
                                 <i class="status-used i-status"></i>
                        
@@ -133,7 +133,7 @@
                         </div>
                         <p class="coupons-handle">
                             <!-- ko text:'有效期：'+ beginTime +' 至 '+endTime --><!-- /ko-->
-                            <a class="coupons-a" data-bind="attr:{href:'couponDetail.html?couponId='+couponId+'&type=expired'}">详情</a>
+                            <a class="fr used" data-bind="attr:{href:'couponDetail.html?openId='+$root.openId()+'&couponId='+couponId+'&type=expired'}">详情</a>
                         </p>
                         <i class="status-expired i-status"></i>
                   
@@ -165,14 +165,14 @@
         //$("html").css("fontSize", (winWidth / 640) * 20 + "px");
 
         var access_code = "";
-        //var access_code = $.url.param("code");
-        //if (!access_code) {
-        //    var fromurl = location.href;
-        //    var url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxdd6127bdb5e7611c&redirect_uri='
-        //        + encodeURIComponent(fromurl) +
-        //        '&response_type=code&scope=snsapi_base&state=STATE%23wechat_redirect&connect_redirect=1#wechat_redirect';
-        //    location.href = url;
-        //}
+         access_code = $.url.param("code");
+         if (!access_code) {
+             var fromurl = location.href;
+             var url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxdd6127bdb5e7611c&redirect_uri='
+                 + encodeURIComponent(fromurl) +
+                 '&response_type=code&scope=snsapi_base&state=STATE%23wechat_redirect&connect_redirect=1#wechat_redirect';
+             location.href = url;
+         }
 
         var param = {
             access_code: access_code

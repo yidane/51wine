@@ -227,7 +227,9 @@ namespace Travel.Infrastructure.DomainDataAccess.Coupon
                 {
                     var coupon = db.Coupon.Find(id);
                     coupon.State = CouponState.Used;
-                    db.Coupon.Attach(coupon);
+                    coupon.UsedTime = DateTime.Now;
+                    db.Entry(coupon).State = System.Data.Entity.EntityState.Modified;
+                   // db.Coupon.Attach(coupon);
                     db.SaveChanges();
                 }
             }

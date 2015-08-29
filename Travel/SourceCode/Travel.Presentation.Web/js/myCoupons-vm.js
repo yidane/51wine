@@ -3,6 +3,8 @@ var MyCouponsViewModel= function ($domParam, param) {
   var self=this;
     this.$DomParm = ko.observable($domParam);
     this.param = ko.observable(param);
+   // this.user = ko.observable();
+    this.openId = ko.observable("");
     this.expiredCoupons=ko.observableArray();
     this.unExpiredCoupons=ko.observableArray();
     this.usedCoupons=ko.observableArray();
@@ -12,9 +14,10 @@ var MyCouponsViewModel= function ($domParam, param) {
         $.getJSON("../WebService/CouponWebService.asmx/GetCouponList", {access_code:self.param().access_code})
             .done(function (json) {
                 if (json.IsSuccess) {
-                    self.expiredCoupons(json.Data.ExpiredCoupons);
-                    self.unExpiredCoupons(json.Data.UnExpiredCoupons);
-                    self.usedCoupons(json.Data.UsedCoupons);
+                    self.expiredCoupons(json.Data.lists.ExpiredCoupons);
+                    self.unExpiredCoupons(json.Data.lists.UnExpiredCoupons);
+                    self.usedCoupons(json.Data.lists.UsedCoupons);
+                    self.openId(json.Data.user.openid);
                 }
             }).fail(
             function (jqxhr, textStatus, error) {

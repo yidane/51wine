@@ -37,13 +37,14 @@ var DetailViewModel=function ($domParam, param) {
     this.getCoupon=function(){
         $.getJSON("../WebService/CouponWebService.asmx/GetCoupon",
             {
-                access_code:self.param().access_code,
+                openId: self.param().openId,
                 couponId:self.param().couponId
             })
             .done(function (json) {
                 if (json.IsSuccess) {
-                    self.coupon(json.Data);
-                    self.status(json.Data.status);
+                    self.coupon(json.Data.coupon);
+                    self.couponStatus(json.Data.coupon.status);
+                   // self.param().openId = json.Data.user.openid;
                 }
             }).fail(
             function (jqxhr, textStatus, error) {
@@ -89,8 +90,24 @@ var DetailViewModel=function ($domParam, param) {
     };
 
     this.btnSureClick = function ($confirm, data, event) {
-        $confirm.css("background-color", "rgba(0,0,0,0)").hide();
-        self.couponStatus(1);
+        $.getJSON("../WebService/CouponWebService.asmx/UseCoupon",
+           {
+               openId: self.param().openId,
+               couponId: self.param().couponId
+           })
+           .done(function (json) {
+               if (json.IsSuccess) {
+                   $confirm.css("background-color", "rgba(0,0,0,0)").hide();
+                   self.couponStatus(1);
+               }
+           }).fail(
+           function (jqxhr, textStatus, error) {
+               var err = textStatus + ", " + error;
+               console.log("Request Failed: " + err);
+           });
+
+
+      
 
 
     };

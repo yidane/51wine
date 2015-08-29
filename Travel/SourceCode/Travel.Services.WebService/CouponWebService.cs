@@ -141,8 +141,12 @@ namespace Travel.Services.WebService
                 var service = new CouponService();
 
                 var dto = service.GetCouponList(user);
+                var data = new {
+                    lists= dto,
+                    user=user
+                };
                 
-                Context.Response.Write(AjaxResult.Success(dto));
+                Context.Response.Write(AjaxResult.Success(data));
 
 
             }
@@ -158,31 +162,31 @@ namespace Travel.Services.WebService
         /// <param name="access_code"></param>
         /// <param name="couponId"></param>
         [WebMethod]
-        public void GetCoupon(string access_code, string couponId)
+        public void GetCoupon(string openId, string couponId)
         {
             try
             {
 
 
                 //string strWXUser=Context.Request.QueryString[""];
-                UserInfoDTO user = null;
-                if (!string.IsNullOrEmpty(access_code))
-                {
-                    var weChatService = new WeChatService();
-                    var tokenResult = weChatService.GetAccessToken(access_code);
-                    user = weChatService.GetUserInfo(tokenResult.openid);
-                }
-                else
-                {
-                    var url = "http://wx.qlogo.cn/mmopen/g3MonUZtNHkdmzicIlibx6iaFqAc56vxLSUfpb6n5WKSYVY0ChQKkiaJSgQ1dZuTOgvLLrhJbERQQ4eMsv84eavHiaiceqxibJxCfHe/0";
-                    url = url.Substring(0, url.LastIndexOf("/")) + "/64";
-                    user = new UserInfoDTO()
-                    {
-                        openid = "testid",
-                        nickname = "金小西",
-                        headimgurl = url
-                    };
-                }
+                //UserInfoDTO user = null;
+                //if (!string.IsNullOrEmpty(access_code))
+                //{
+                //    var weChatService = new WeChatService();
+                //    var tokenResult = weChatService.GetAccessToken(access_code);
+                //    user = weChatService.GetUserInfo(tokenResult.openid);
+                //}
+                //else
+                //{
+                //    var url = "http://wx.qlogo.cn/mmopen/g3MonUZtNHkdmzicIlibx6iaFqAc56vxLSUfpb6n5WKSYVY0ChQKkiaJSgQ1dZuTOgvLLrhJbERQQ4eMsv84eavHiaiceqxibJxCfHe/0";
+                //    url = url.Substring(0, url.LastIndexOf("/")) + "/64";
+                //    user = new UserInfoDTO()
+                //    {
+                //        openid = "testid",
+                //        nickname = "金小西",
+                //        headimgurl = url
+                //    };
+                //}
                 //var user = weChatService.GetUserInfo(openId);
                 var service = new CouponService();
                 Guid id;
@@ -190,8 +194,12 @@ namespace Travel.Services.WebService
                 {
                     throw new Exception("指定的优惠券不正确!");
                 }
-                var coupon = service.GetCoupon(user, id);
-                Context.Response.Write(AjaxResult.Success(coupon));
+                var coupon = service.GetCoupon(openId, id);
+                var data = new {
+                    coupon=coupon
+                   // user=user
+                };
+                Context.Response.Write(AjaxResult.Success(data));
 
 
             }

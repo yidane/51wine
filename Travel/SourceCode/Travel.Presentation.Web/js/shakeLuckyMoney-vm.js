@@ -169,7 +169,7 @@ var LuckyMoneyViewModel = function ($domParam, param) {
                     self.$DomParm().$receiveBtn.val("领取成功!");
                     self.$DomParm().$receiveBtn.attr("disabled", "disabled");
                     setTimeout(function () {
-                        var url = 'Coupons/MyCoupons.html';
+                        var url = 'Coupons/MyCoupons.html?code=' + self.param().access_code;
                         window.location.href = url;
                     }, 1000);
                 }
