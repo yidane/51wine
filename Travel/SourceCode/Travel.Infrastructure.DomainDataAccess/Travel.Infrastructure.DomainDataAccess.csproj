@@ -96,6 +96,10 @@
     <Compile Include="Migrations\201508280915420_dateticketentityupdate2.Designer.cs">
       <DependentUpon>201508280915420_dateticketentityupdate2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201508290535185_Coupon4.cs" />
+    <Compile Include="Migrations\201508290535185_Coupon4.Designer.cs">
+      <DependentUpon>201508290535185_Coupon4.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Order\DateTicketEntity.cs" />
     <Compile Include="Order\OrderDetailEntity.cs" />
@@ -150,6 +154,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201508280915420_dateticketentityupdate2.resx">
       <DependentUpon>201508280915420_dateticketentityupdate2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508290535185_Coupon4.resx">
+      <DependentUpon>201508290535185_Coupon4.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
