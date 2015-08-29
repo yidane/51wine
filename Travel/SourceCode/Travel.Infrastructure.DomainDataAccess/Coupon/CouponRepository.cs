@@ -102,11 +102,12 @@ namespace Travel.Infrastructure.DomainDataAccess.Coupon
             var db = new TravelDBContext();
             //using (var db = new TravelDBContext())
             //{
-                var typeId = Guid.Parse("63313E55-A213-4B38-AF64-E6F2ABF68E56");
+             //   var typeId = Guid.Parse("63313E55-A213-4B38-AF64-E6F2ABF68E56");
                 var nowTime = DateTime.Now;
             var coupons = db.CouponUsage.Where(item => item.State == CouponState.NotUsed &&
-          item.Coupon.Type.CouponTypeId == typeId&& item.Coupon.EndTime >= nowTime
+           item.Coupon.EndTime >= nowTime
           );
+            result = coupons.ToList();
             //var coupons = db.Coupon.Where(item => item.State== CouponState.NotUsed &&
             //item.EndTime >= nowTime
             //&&item.Type.CouponTypeId== typeId)
@@ -126,10 +127,10 @@ namespace Travel.Infrastructure.DomainDataAccess.Coupon
             var db = new TravelDBContext();
             //using (var db = new TravelDBContext())
             //{
-                var typeId = Guid.Parse("63313E55-A213-4B38-AF64-E6F2ABF68E56");
+             //   var typeId = Guid.Parse("63313E55-A213-4B38-AF64-E6F2ABF68E56");
                 var nowTime = DateTime.Now;
             var coupons = db.CouponUsage.Where(item => item.State == CouponState.NotUsed &&
-            item.Coupon.Type.CouponTypeId==typeId
+             item.Coupon.EndTime < nowTime
             );
             //var coupons = db.Coupon.Where(item => item.State == CouponState.NotUsed &&
             //    item.EndTime < nowTime
@@ -148,10 +149,9 @@ namespace Travel.Infrastructure.DomainDataAccess.Coupon
             var db = new TravelDBContext();
             //using (var db = new TravelDBContext())
             //{
-            var typeId = Guid.Parse("63313E55-A213-4B38-AF64-E6F2ABF68E56");
+           // var typeId = Guid.Parse("63313E55-A213-4B38-AF64-E6F2ABF68E56");
             var nowTime = DateTime.Now;
-            var coupons = db.CouponUsage.Where(item => item.State == CouponState.Used &&
-         item.Coupon.Type.CouponTypeId == typeId 
+            var coupons = db.CouponUsage.Where(item => item.State == CouponState.Used 
          );
             //result = db.Coupon.Where(item => item.State == CouponState.Used && 
             //item.Type.CouponTypeId == typeId).Join(db.CouponUsage.Where(item => item.OpenId == user.openid)

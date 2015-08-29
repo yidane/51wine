@@ -210,7 +210,7 @@ namespace Travel.Services.WebService
         }
 
         [WebMethod]
-        public void UseCoupon(string openId, string couponId) {
+        public void UseCoupon(string openId, string couponUsageId) {
             try
             {
 
@@ -219,7 +219,7 @@ namespace Travel.Services.WebService
                 //var user = weChatService.GetUserInfo(openId);
                 var service = new CouponService();
                 Guid id;
-                if (!Guid.TryParse(couponId, out id))
+                if (!Guid.TryParse(couponUsageId, out id))
                 {
                     throw new Exception("指定的优惠券不正确!");
                 }

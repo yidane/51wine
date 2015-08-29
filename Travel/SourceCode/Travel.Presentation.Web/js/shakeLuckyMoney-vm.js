@@ -85,7 +85,7 @@ var LuckyMoneyViewModel = function ($domParam, param) {
 
     this.initShake = function () {
         var yy = new mobilePhoneShake({
-            speed: 2000,//阀值，值越小，能检测到摇动的手机摆动幅度越小
+            speed:1000,//阀值，值越小，能检测到摇动的手机摆动幅度越小
             callback: function (x, y, z) {//将设备放置在水平表面，屏幕向上，则其x,y,z信息如下：{x: 0,y: 0,z: 9.81};
                 self.afterShake();
                 self.shakeObj().stop();
