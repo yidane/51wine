@@ -19,8 +19,14 @@
 <body>
     <div id="container" class="container">
         <header class="intro">
-            <img class="intro__image" src="images/yueliang.jpg" alt="Iceland galcier" />
-            <div class="intro__content">
+            <img class="intro__image" src="images/导览背景.png" alt="喀纳斯" />
+            <div class="intro__round"></div>
+            <button class='trigger'>
+                        <img src="images/btn01_arrow.png" />
+                    </button>
+            <!-- /intro__content -->
+        </header>
+        <div class="intro__content">
                 <!--<h1 class="intro__title">喀纳斯</h1>-->
                 <div class="intro__subtitle">
                     <!--<div class="codrops-links">
@@ -34,9 +40,7 @@
 								<a class="demos__item" href="layout-multi.html">Multi</a>-->
                         </div>
                     </div>
-                    <button class='trigger'>
-                        <img src="images/btn01_arrow.png" />
-                    </button>
+                    
                     <!--<button class="trigger">
                         <svg width="100%" height="100%" viewBox="0 0 60 60" preserveAspectRatio="none">
                             <g class="icon icon--grid">
@@ -54,11 +58,9 @@
                     </button>-->
                 </div>
             </div>
-            <!-- /intro__content -->
-        </header>
         <!-- /intro -->
         <section class="items-wrap">
-            <a href="http://mp.weixin.qq.com/s?__biz=MzI4NzAzNzAzOQ==&mid=210966530&idx=1&sn=d486f78d6adb827d6ca00965c5cfa670&scene=0#rd" class="item" target="_blank">
+            <a href="Guide/wolongwan.html" class="item">
                 <div class="item_content">
                     <div class="annular">
                 <img class="item__image" src="images/scenic1.png" alt="卧龙湾" />
@@ -67,7 +69,7 @@
                     <em></em>
                     </div>
             </a>
-            <a href="http://mp.weixin.qq.com/s?__biz=MzI4NzAzNzAzOQ==&mid=210966482&idx=1&sn=5f86a93076d345cf21deb832b1ee5940&scene=0#rd" class="item" target="_blank">
+            <a href="Guide/yueliangwan.html" class="item">
                 <div class="item_content">
                     <div class="annular">
                 <img class="item__image" src="images/scenic2.png" alt="月亮湾" />
@@ -76,7 +78,7 @@
                     <em></em>
                     </div>
             </a>
-            <a href="http://mp.weixin.qq.com/s?__biz=MzI4NzAzNzAzOQ==&mid=210966556&idx=1&sn=6fba054bf1f93c8a49461a26a67c14bc&scene=0#rd" class="item" target="_blank">
+            <a href="Guide/shenxianwan.html" class="item">
                 <div class="item_content">
                     <div class="annular">
                 <img class="item__image" src="images/scenic3.png" alt="神仙湾" />
@@ -85,7 +87,7 @@
                     <em></em>
                     </div>
             </a>
-            <a href="http://mp.weixin.qq.com/s?__biz=MzI4NzAzNzAzOQ==&mid=210966576&idx=1&sn=676a8fd11409ce61984861679171d972&scene=0#rd" class="item" target="_blank">
+            <a href="Guide/guanyutai.html" class="item">
                 <div class="item_content">
                     <div class="annular">
                 <img class="item__image" src="images/scenic4.png" alt="观鱼台" />
@@ -158,18 +160,6 @@
                 window.scrollTo(0, 0);
             }
 
-            function renderPage() {
-                var f = 1,
-                    e,
-                    g = $(document).width(),
-                    h = $(document).height();
-                g / h >= 320 / 486 ? (f = h / 486) : (f = g / 320, e = (h / f - 486) / 2);
-                e && $("items-wrap").css({
-                    marginTop: e
-                });
-                toggleContent();
-                //$("#eqMobileViewport").attr("content", "width=320, initial-scale=" + f + ", maximum-scale=" + f + ", user-scalable=no");
-            }
 
             // reset scrolling position
             document.body.scrollTop = document.documentElement.scrollTop = 0;
@@ -180,7 +170,7 @@
             trigger.addEventListener('click', toggleContent);
 
             // For Demo purposes only (prevent jump on click)
-            [].slice.call(document.querySelectorAll('.items-wrap a')).forEach(function (el) { el.onclick = function () { return false; } });
+            //[].slice.call(document.querySelectorAll('.items-wrap a')).forEach(function (el) { el.onclick = function () { return false; } });
         })();
     </script>
 </body>
