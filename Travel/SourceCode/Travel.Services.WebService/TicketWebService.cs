@@ -69,7 +69,7 @@ namespace Travel.Services.WebService
                     JsApiPay jsApiPay = new JsApiPay();
                     UnifiedOrderRequest unifiedOrderRequest = new UnifiedOrderRequest();
                     unifiedOrderRequest.body = "yidane Test body";
-                    unifiedOrderRequest.openid = "obzTsw5qxlbwGYYZJC9b-91J-X1Y";
+                    unifiedOrderRequest.openid = openID;
                     unifiedOrderRequest.attach = "attach test";
                     unifiedOrderRequest.total_fee = 1;
                     unifiedOrderRequest.goods_tag = "goods_tag test";
