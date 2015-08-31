@@ -1,75 +1,80 @@
 ﻿<!DOCTYPE html>
 <html lang="en" class="no-js">
-	<head>
-		<meta charset="UTF-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Sliding Header Grid Layout</title>
-		<meta name="description" content="A simple grid layout with an initial fullscreen intro" />
-		<meta name="keywords" content="fullscreen image, grid layout, flexbox grid, transition" />
-		<meta name="author" content="Codrops" />
-		<link rel="shortcut icon" href="../favicon.ico">
-		<link rel="stylesheet" type="text/css" href="css/normalize.css" />
-		<link rel="stylesheet" type="text/css" href="css/demo.css" />
-		<link rel="stylesheet" type="text/css" href="css/layout-simple.css" />
-		<!--[if IE]>
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sliding Header Grid Layout</title>
+    <meta name="description" content="A simple grid layout with an initial fullscreen intro" />
+    <meta name="keywords" content="fullscreen image, grid layout, flexbox grid, transition" />
+    <meta name="author" content="Codrops" />
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" type="text/css" href="css/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="css/demo.css" />
+    <link rel="stylesheet" type="text/css" href="css/layout-simple.css" />
+    <!--[if IE]>
 		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
-	</head>
-	<body>
-		<div id="container" class="container">
-			<header class="intro">
-				<img class="intro__image" src="images/yueliang.jpg" alt="Iceland galcier"/>
-				<div class="intro__content">
-					<h1 class="intro__title">喀纳斯</h1>
-					<div class="intro__subtitle">
-						<div class="codrops-links">
+</head>
+<body>
+    <div id="container" class="container">
+        <header class="intro">
+            <img class="intro__image" src="images/yueliang.jpg" alt="Iceland galcier" />
+            <div class="intro__content">
+                <h1 class="intro__title">喀纳斯</h1>
+                <div class="intro__subtitle">
+                    <!--<div class="codrops-links">
 							<a class="codrops-icon codrops-icon--prev" href="http://tympanus.net/Development/ElasticSVGElements/" title="Previous Demo"><span>Previous Demo</span></a>
 							<a class="codrops-icon codrops-icon--drop" href="http://tympanus.net/codrops/?p=21934" title="Back to the a"><span>Back to the Codrops a</span></a>
-						</div>
-						<div class="intro__description">
-							一个美丽富饶、神秘莫测的地方，在这里壮观的冰川映衬着宁静的湖水、茫茫的草原包容着幽深的原始森林。神秘的湖怪、古朴的土瓦人、变换的湖水、眩人的风景会让人痴迷。生活在都市的你，可以适时的停下脚步，背上背包，在这片净土上和自己的心来一次徒步之旅。<!-- <a href="http://instagram.com/danrubin/">Dan Rubin</a>.-->
-							<div class="demos">
-								<!--<a class="demos__item demos__item--current" href="index.html">Simple</a>
+						</div>-->
+                    <div class="intro__description">
+                        一个美丽富饶、神秘莫测的地方，在这里壮观的冰川映衬着宁静的湖水、茫茫的草原包容着幽深的原始森林。神秘的湖怪、古朴的土瓦人、变换的湖水、眩人的风景会让人痴迷。生活在都市的你，可以适时的停下脚步，背上背包，在这片净土上和自己的心来一次徒步之旅。<!-- <a href="http://instagram.com/danrubin/">Dan Rubin</a>.-->
+                        <div class="demos">
+                            <!--<a class="demos__item demos__item--current" href="index.html">Simple</a>
 								<a class="demos__item" href="layout-multi.html">Multi</a>-->
-							</div>
-						</div>
-						<button class="trigger">
-							<svg width="100%" height="100%" viewBox="0 0 60 60" preserveAspectRatio="none">
-								<g class="icon icon--grid">
-									<rect x="32.5" y="5.5" width="22" height="22"/>
-									<rect x="4.5" y="5.5" width="22" height="22"/>
-									<rect x="32.5" y="33.5" width="22" height="22"/>
-									<rect x="4.5" y="33.5" width="22" height="22"/>
-								</g>
-								<g class="icon icon--cross">
-									<line x1="4.5" y1="55.5" x2="54.953" y2="5.046"/>
-									<line x1="54.953" y1="55.5" x2="4.5" y2="5.047"/>
-								</g>
-							</svg>
-							<span>View content</span>
-						</button>
-					</div>
-				</div><!-- /intro__content -->
-			</header><!-- /intro -->
-			<section class="items-wrap">
-                <a href="#" class="item">
-					<img class="item__image" src="images/scenic1.png" alt="item02"/>
-					<h2 class="item__title">卧龙湾</h2>
-				</a>
-				<a href="#" class="item">
-					<img class="item__image" src="images/scenic2.png" alt="item03"/>
-					<h2 class="item__title">月亮湾</h2>
-				</a>
-				<a href="#" class="item">
-					<img class="item__image" src="images/scenic3.png" alt="item01"/>
-					<h2 class="item__title">神仙湾</h2>
-				</a>
-				<a href="#" class="item">
-					<img class="item__image" src="images/scenic4.png" alt="item04"/>
-					<h2 class="item__title">观鱼台</h2>
-				</a>
-				<!--<a href="#" class="item">
+                        </div>
+                    </div>
+                    <button class='trigger'>
+                        <img src="images/btn01_arrow.png" />
+                    </button>
+                    <!--<button class="trigger">
+                        <svg width="100%" height="100%" viewBox="0 0 60 60" preserveAspectRatio="none">
+                            <g class="icon icon--grid">
+                                <rect x="32.5" y="5.5" width="22" height="22" />
+                                <rect x="4.5" y="5.5" width="22" height="22" />
+                                <rect x="32.5" y="33.5" width="22" height="22" />
+                                <rect x="4.5" y="33.5" width="22" height="22" />
+                            </g>
+                            <g class="icon icon--cross">
+                                <line x1="4.5" y1="55.5" x2="54.953" y2="5.046" />
+                                <line x1="54.953" y1="55.5" x2="4.5" y2="5.047" />
+                            </g>
+                        </svg>
+                        <span>View content</span>
+                    </button>-->
+                </div>
+            </div>
+            <!-- /intro__content -->
+        </header>
+        <!-- /intro -->
+        <section class="items-wrap">
+            <a href="#" class="item">
+                <img class="item__image" src="images/scenic1.png" alt="item02" />
+                <h2 class="item__title">卧龙湾</h2>
+            </a>
+            <a href="#" class="item">
+                <img class="item__image" src="images/scenic2.png" alt="item03" />
+                <h2 class="item__title">月亮湾</h2>
+            </a>
+            <a href="#" class="item">
+                <img class="item__image" src="images/scenic3.png" alt="item01" />
+                <h2 class="item__title">神仙湾</h2>
+            </a>
+            <a href="#" class="item">
+                <img class="item__image" src="images/scenic4.png" alt="item04" />
+                <h2 class="item__title">观鱼台</h2>
+            </a>
+            <!--<a href="#" class="item">
 					<img class="item__image" src="img/item05.jpg" alt="item05"/>
 					<h2 class="item__title">Awe-inspiring</h2>
 				</a>
@@ -101,47 +106,62 @@
 					<img class="item__image" src="img/item12.jpg" alt="item12"/>
 					<h2 class="item__title">Refreshing</h2>
 				</a>-->
-			</section>
-			<!--<section class="related">
+        </section>
+        <!--<section class="related">
 				<p>If you enjoyed this demo you might also like:</p>
 				<a href="http://tympanus.net/Development/DraggableDualViewSlideshow/">Draggable Dual-View Slideshow</a><br />
 				<a href="http://tympanus.net/Tutorials/PagePreloadingEffect/">Page Preloading Effect</a>
 			</section>-->
-		</div><!-- /container -->
-		<script src="js/classie.js"></script>
-		<script>
-		    (function () {
-		        var container = document.getElementById('container'),
-					trigger = container.querySelector('button.trigger');
+    </div>
+    <!-- /container -->
+    <script src="js/classie.js"></script>
+    <script type="text/javascript" src="js/page_scroll_bx.js?v=1.3"></script>
+    <script>
+        (function () {
+            var container = document.getElementById('container'),
+                trigger = container.querySelector('button.trigger');
 
-		        function toggleContent() {
-		            if (classie.has(container, 'container--open')) {
-		                classie.remove(container, 'container--open');
-		                classie.remove(trigger, 'trigger--active');
-		                window.addEventListener('scroll', noscroll);
-		            }
-		            else {
-		                classie.add(container, 'container--open');
-		                classie.add(trigger, 'trigger--active');
-		                window.removeEventListener('scroll', noscroll);
-		            }
-		        }
+            function toggleContent() {
+                if (classie.has(container, 'container--open')) {
+                    classie.remove(container, 'container--open');
+                    classie.remove(trigger, 'trigger--active');
+                    window.addEventListener('scroll', noscroll);
+                }
+                else {
+                    classie.add(container, 'container--open');
+                    classie.add(trigger, 'trigger--active');
+                    window.removeEventListener('scroll', noscroll);
+                }
+            }
 
-		        function noscroll() {
-		            window.scrollTo(0, 0);
-		        }
+            function noscroll() {
+                window.scrollTo(0, 0);
+            }
 
-		        // reset scrolling position
-		        document.body.scrollTop = document.documentElement.scrollTop = 0;
+            function renderPage() {
+                var f = 1,
+                    e,
+                    g = $(document).width(),
+                    h = $(document).height();
+                g / h >= 320 / 486 ? (f = h / 486) : (f = g / 320, e = (h / f - 486) / 2);
+                e && $("items-wrap").css({
+                    marginTop: e
+                });
+                toggleContent();
+                //$("#eqMobileViewport").attr("content", "width=320, initial-scale=" + f + ", maximum-scale=" + f + ", user-scalable=no");
+            }
 
-		        // disable scrolling
-		        window.addEventListener('scroll', noscroll);
+            // reset scrolling position
+            document.body.scrollTop = document.documentElement.scrollTop = 0;
 
-		        trigger.addEventListener('click', toggleContent);
+            // disable scrolling
+            window.addEventListener('scroll', noscroll);
 
-		        // For Demo purposes only (prevent jump on click)
-		        [].slice.call(document.querySelectorAll('.items-wrap a')).forEach(function (el) { el.onclick = function () { return false; } });
-		    })();
-		</script>
-	</body>
+            trigger.addEventListener('click', toggleContent);
+
+            // For Demo purposes only (prevent jump on click)
+            [].slice.call(document.querySelectorAll('.items-wrap a')).forEach(function (el) { el.onclick = function () { return false; } });
+        })();
+    </script>
+</body>
 </html>

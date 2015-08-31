@@ -9,8 +9,11 @@
     transition: transform 0.6s;
     -webkit-transition-timing-function: cubic-bezier(0.7, 0, 0.3, 1);
     transition-timing-function: cubic-bezier(0.7, 0, 0.3, 1);
-    background-image: url(../images/m.png);
+    /*background-image: url(../images/m1.png);
     background-repeat:no-repeat;
+    filter:"progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale')";
+   -moz-background-size:100% 100%;
+   background-size:100% 100%;*/
 }
 
 .container--open {
@@ -131,7 +134,7 @@
     display: flex;
     -webkit-flex-wrap: wrap;
     flex-wrap: wrap;
-    padding: 250px 5px 0;
+    padding: 260px 5px 0;
 }
 
     .items-wrap::after {
@@ -161,9 +164,10 @@
     overflow: hidden;
     height: 22vw;
     outline: none;
-    border: 5px solid #2a2e39;
-    border-width: 0 5px 10px;
-    background: #2a2e39;
+    background: rgba(0,0,0,0);
+    border: 5px solid rgba(0,0,0,0);
+    border-width: 5px 5px 10px;
+    /*background: #2a2e39;*/
 }
 
 .item__image {
@@ -238,3 +242,25 @@
 		font-size: 2em;
 	}
 }*/
+
+.trigger { position: fixed; bottom: 10px; left:50%;z-index: 150; width: 10rem; height: 14px; margin-left: -5rem; }
+.trigger img { position: absolute; top: 50%; left: 50%; margin: -7px 0 0 -14px; width: 24px; height: 14px; background-position: 0 -82px;
+	-webkit-animation: start 1.5s infinite ease-in-out;
+	   -moz-animation: start 1.5s infinite ease-in-out;
+	        animation: start 1.5s infinite ease-in-out;
+}
+@-webkit-keyframes start {
+	0%,30% {opacity: 0;-webkit-transform: translate(0,10px);}
+	60% {opacity: 1;-webkit-transform: translate(0,0);}
+	100% {opacity: 0;-webkit-transform: translate(0,-8px);}
+}
+@-moz-keyframes start {
+	0%,30% {opacity: 0;-moz-transform: translate(0,10px);}
+	60% {opacity: 1;-moz-transform: translate(0,0);}
+	100% {opacity: 0;-moz-transform: translate(0,-8px);}
+}
+@keyframes start {
+	0%,30% {opacity: 0;transform: translate(0,10px);}
+	60% {opacity: 1;transform: translate(0,0);}
+	100% {opacity: 0;transform: translate(0,-8px);}
+}

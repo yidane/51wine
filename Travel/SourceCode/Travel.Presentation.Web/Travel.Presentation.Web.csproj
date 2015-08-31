@@ -76,6 +76,7 @@
     <Content Include="css\layout-simple.css" />
     <Content Include="css\normalize.css" />
     <Content Include="images\m.png" />
+    <Content Include="images\m1.png" />
     <Content Include="images\背景1.png" />
     <Content Include="images\背景2.png" />
     <Content Include="images\背景3.png" />
