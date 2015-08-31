@@ -81,18 +81,25 @@
     color: #FFF;
 }
 
-.i-status{
+.i-status {
     float: right;
-
-    width: 110px;
+    width: 109px;
     position: absolute;
-    height: 93px;
-    top: 0px;
-    right: 0px;
+    height: 83px;
+    top: 1px;
+    right: -8px;
 }
 .time-status{ position: absolute; width: 5.5rem; height: 4.7rem;  background-size: cover; background-repeat: no-repeat; top:0.7rem; right:4rem;}
-.status-used{background-image: url(../../images/scenic/sy.png);}
-.status-expired{background-image: url(../../images/scenic/gq.png);}
+.status-used {
+    background-image: url(../../images/scenic/img_coupondetail_used_207x160.png);
+    background-size: 90%;
+    background-repeat: no-repeat;
+}
+.status-expired{
+ background-image: url(../../images/scenic/img_coupondetail_overdue_207x160.png);
+    background-size: 90%;
+    background-repeat: no-repeat;    
+}
 .top{ height: 4rem; padding: 1rem;}
 .top .price{ font-size: 40px; margin-right: 2rem; margin-left: 1.5rem;}
 .top .price em{ font-size: 30px;}
