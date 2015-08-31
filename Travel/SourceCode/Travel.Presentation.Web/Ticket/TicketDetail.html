@@ -8,15 +8,15 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>喀纳斯湖</title>
-    <link href="styles/swiper.min.css" rel="stylesheet" />
-    <script src="javaScripts/zepto.min.js"></script>
-    <script src="js/oAuth2.js"></script>
+    <link href="../styles/swiper.min.css" rel="stylesheet" />
+    <script src="../javaScripts/zepto.min.js"></script>
+    <script src="../js/oAuth2.js"></script>
     <style type="text/css">
         .swiper-wrapper .swiper-slide:nth-child(n+2) {
             margin-left: 0;
         }
     </style>
-    <link href="styles/normalize.css" rel="stylesheet" />
+    <link href="../styles/normalize.css" rel="stylesheet" />
 </head>
 <body>
 
@@ -26,13 +26,13 @@
                 <div class="swiper-container gpd-ablum">
                     <div class="swiper-wrapper">
                         <div class="swiper-slide">
-                            <img class="" src="TicketImages/1.jpg">
+                            <img class="" src="../TicketImages/1.jpg">
                         </div>
                         <div class="swiper-slide">
-                            <img class="" src="TicketImages/2.jpg">
+                            <img class="" src="../TicketImages/2.jpg">
                         </div>
                         <div class="swiper-slide">
-                            <img class="" src="TicketImages/3.jpg">
+                            <img class="" src="../TicketImages/3.jpg">
                         </div>
                     </div>
                     <div class="swiper-pagination"></div>
@@ -136,11 +136,11 @@
 </body>
 
 <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
-<script src="javaScripts/zepto.min.js"></script>
-<script src="javaScripts/json2.js"></script>
-<script src="javaScripts/template.js"></script>
-<script src="javaScripts/swiper.min.js"></script>
-<script src="javaScripts/vi.js"></script>
+<script src="../javaScripts/zepto.min.js"></script>
+<script src="../javaScripts/json2.js"></script>
+<script src="../javaScripts/template.js"></script>
+<script src="../javaScripts/swiper.min.js"></script>
+<script src="../javaScripts/vi.js"></script>
 
 
 <script type="text/javascript">
@@ -156,7 +156,7 @@
 
     $(document).ready(function () {
         $.ajax({
-            url: "WebService/WeChatWebService.asmx/WeChatConfigInit",
+            url: "../WebService/WeChatWebService.asmx/WeChatConfigInit",
             type: "post",
             dataType: "json",
             data: { url: document.location.href },
@@ -178,40 +178,41 @@
                         ]
                     });
                     wx.ready(function () {
-                        wx.hideOptionMenu();
+                        //wx.hideOptionMenu();
 
-                        wx.onMenuShareAppMessage({
-                            title: window.share.title,
-                            desc: window.share.desc,
-                            link: window.share.link,
-                            imgUrl: window.share.imgUrl,
-                            success: function () {
-                                //成功回调
-                                window.share.appcallback();
+                        //wx.onMenuShareAppMessage({
+                        //    title: window.share.title,
+                        //    desc: window.share.desc,
+                        //    link: window.share.link,
+                        //    imgUrl: window.share.imgUrl,
+                        //    success: function () {
+                        //        //成功回调
+                        //        window.share.appcallback();
 
-                            }
-                        });
+                        //    }
+                        //});
 
-                        wx.onMenuShareTimeline({
-                            title: window.share.title,
-                            link: window.share.link,
-                            imgUrl: window.share.imgUrl
-                        });
+                        //wx.onMenuShareTimeline({
+                        //    title: window.share.title,
+                        //    link: window.share.link,
+                        //    imgUrl: window.share.imgUrl
+                        //});
 
-                        wx.onMenuShareQQ({
-                            title: window.share.title,
-                            desc: window.share.desc,
-                            link: window.share.link,
-                            imgUrl: window.share.imgUrl
-                        });
+                        //wx.onMenuShareQQ({
+                        //    title: window.share.title,
+                        //    desc: window.share.desc,
+                        //    link: window.share.link,
+                        //    imgUrl: window.share.imgUrl
+                        //});
 
-                        wx.error(function (res) {
-                            alert(res.errMsg);
-                        });
+                        //wx.error(function (res) {
+                        //    alert(res.err_code + "______" + res.err_desc + "______" + res.err_msg);
+                        //});
                     });
                 }
             },
             error: function () {
+
             }
         });
     });

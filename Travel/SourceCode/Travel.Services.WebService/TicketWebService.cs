@@ -40,19 +40,19 @@ namespace Travel.Services.WebService
 
                 if (!string.IsNullOrEmpty(openID))
                 {
-                    var orderRequestEntity = new OrderRequestEntity()
-                        {
-                            OpenId = openID,
-                            TicketCategory = "956BFF5E-AA6A-454E-8F46-BD4175235C9E",
-                            TicketName = "布尔津测试门票",
-                            Count = ticketCount,
-                            CouponId = string.Empty,
-                            ContactPersonName = contractName,
-                            MobilePhoneNumber = contractPhone,
-                            IdentityCardNumber = contractIdCard
-                        };
+                    //var orderRequestEntity = new OrderRequestEntity()
+                    //    {
+                    //        OpenId = openID,
+                    //        TicketCategory = "956BFF5E-AA6A-454E-8F46-BD4175235C9E",
+                    //        TicketName = "布尔津测试门票",
+                    //        Count = ticketCount,
+                    //        CouponId = string.Empty,
+                    //        ContactPersonName = contractName,
+                    //        MobilePhoneNumber = contractPhone,
+                    //        IdentityCardNumber = contractIdCard
+                    //    };
 
-                    var otaOrder = new OTAOrder(orderRequestEntity);
+                    //var otaOrder = new OTAOrder(orderRequestEntity);
 
                     //JsApiPay jsApiPay = new JsApiPay();
                     //UnifiedOrderRequest unifiedOrderRequest = new UnifiedOrderRequest();
@@ -66,8 +66,21 @@ namespace Travel.Services.WebService
 
                     //var result = jsApiPay.GetUnifiedOrderResult(unifiedOrderRequest);
 
-                    otaOrder.CreateOrderMain();
-                    var jsParameter = otaOrder.UnifiedOrderResult.GetJsApiParameters();
+                    JsApiPay jsApiPay = new JsApiPay();
+                    UnifiedOrderRequest unifiedOrderRequest = new UnifiedOrderRequest();
+                    unifiedOrderRequest.body = "yidane Test body";
+                    unifiedOrderRequest.openid = "obzTsw5qxlbwGYYZJC9b-91J-X1Y";
+                    unifiedOrderRequest.attach = "attach test";
+                    unifiedOrderRequest.total_fee = 1;
+                    unifiedOrderRequest.goods_tag = "goods_tag test";
+                    //unifiedOrderRequest.time_start = DateTime.Now.ToString("yyyyMMddHHmmss");
+                    //unifiedOrderRequest.time_expire = DateTime.Now.AddMinutes(20).ToString("yyyyMMddHHmmss");
+
+
+                    var result = jsApiPay.GetUnifiedOrderResult(unifiedOrderRequest);
+
+                    //otaOrder.CreateOrderMain();
+                    //var jsParameter = otaOrder.UnifiedOrderResult.GetJsApiParameters();
 
                     //UnifiedOrderResult result = new UnifiedOrderResult();
                     //result.return_code = "SUCCESS";
@@ -81,7 +94,7 @@ namespace Travel.Services.WebService
                     //result.trade_type = "JSAPI";
 
 
-                    //var jsParameter = result.GetJsApiParameters();
+                    var jsParameter = result.GetJsApiParameters();
 
                     //throw new Exception(AjaxResult.Success(jsParameter).ToString());
 

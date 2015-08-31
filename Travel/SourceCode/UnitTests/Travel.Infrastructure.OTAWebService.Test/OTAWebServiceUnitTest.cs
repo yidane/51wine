@@ -8,6 +8,8 @@ namespace Travel.Infrastructure.OTAWebService.Test
     [TestClass]
     public class OTAWebServiceUnitTest
     {
+        private string OrderNo = "C2015082918445468857314";
+
         [TestMethod]
         public void TestSignture()
         {
@@ -57,7 +59,7 @@ namespace Travel.Infrastructure.OTAWebService.Test
             postOrder.Edittype = null;
 
             Order order = new Order();
-            order.OrderNO = "C2015082918445468857387";
+            order.OrderNO = OrderNo;
             order.LinkName = "测试";
             order.LinkPhone = "18910063001";
             order.LinkICNO = "";
@@ -69,7 +71,7 @@ namespace Travel.Infrastructure.OTAWebService.Test
                 {
                     new Detail()
                         {
-                            OrderNO = "C2015082918445468857387",
+                            OrderNO = OrderNo,
                             ItemID = "1",
                             ProductCode = "berj001",
                             ProductID = 57882,
@@ -86,7 +88,7 @@ namespace Travel.Infrastructure.OTAWebService.Test
 
             var result = new OTAServiceManager().OrderOccupies(request);
 
-            Assert.IsTrue(true);
+            Assert.IsTrue(result.IsTrue);
         }
 
         [TestMethod]
@@ -99,7 +101,7 @@ namespace Travel.Infrastructure.OTAWebService.Test
             postOrder.Edittype = null;
 
             Order order = new Order();
-            order.OrderNO = "C20150204168858915";
+            order.OrderNO = OrderNo;
             order.LinkName = "测试";
             order.LinkPhone = "18910063051";
             order.LinkICNO = "";
@@ -111,7 +113,7 @@ namespace Travel.Infrastructure.OTAWebService.Test
                 {
                     new Detail()
                         {
-                            OrderNO = "C20150204168858915",
+                            OrderNO = OrderNo,
                             ItemID = "1",
                             ProductCode = "berj001",
                             ProductID = 57882,
@@ -130,7 +132,7 @@ namespace Travel.Infrastructure.OTAWebService.Test
 
             var orderReleaseRequest = new OrderReleaseRequest()
                 {
-                    OtaOrderNO = "C20150204168858915"
+                    OtaOrderNO = OrderNo
                 };
 
             var result1 = new OTAServiceManager().OrderRelease(orderReleaseRequest);
@@ -143,7 +145,7 @@ namespace Travel.Infrastructure.OTAWebService.Test
         {
             var request = new OrderFinishRequest()
                 {
-                    OtaOrderNO = "C2015082918113819136574"
+                    OtaOrderNO = OrderNo
                 };
 
             var result = new OTAServiceManager().OrderFinish(request);
@@ -158,7 +160,7 @@ namespace Travel.Infrastructure.OTAWebService.Test
                 {
                     PostOrder = new List<OrderNoCode>()
                         {
-                            new OrderNoCode() {OrderCode = "513874262975"},
+                            new OrderNoCode() {OrderCode = "C2015082918113819136574"},
                             //new OrderNoCode(){OrderCode = "C20150825168858961"}
                         }
                 };
@@ -177,13 +179,15 @@ namespace Travel.Infrastructure.OTAWebService.Test
         public void ChangeOrderEditTest()
         {
             var request = new ChangeOrderEditRequest();
-            var editPostOrder = new EditPostOrder();
-            editPostOrder.Ptime = DateTime.Now.ToString();
-            editPostOrder.Edittype = "2";
-            editPostOrder.Order = new EditOrder() { OrderNo = "C20150204168858962" };
-            editPostOrder.Details = new List<EditOrderDetail>()
+            var editPostOrder = new EditPostOrder
                 {
-                    new EditOrderDetail(){Starttime = "2015-08-27",ProductCode = "550697966055"}
+                    Ptime = DateTime.Now.ToString(),
+                    Edittype = "2",
+                    Order = new EditOrder() { OrderNo = OrderNo },
+                    Details = new List<EditOrderDetail>()
+                {
+                            new EditOrderDetail() {Starttime = "2015-08-25", ProductCode = "465688405091"}
+                        }
                 };
             request.PostOrder = editPostOrder;
 

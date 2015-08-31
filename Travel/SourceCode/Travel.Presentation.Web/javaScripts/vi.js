@@ -1139,25 +1139,41 @@ VPay.prototype.order = function () {
 
     VI.ajax({
         type: "post",
-        url: 'WebService/TicketWebService.asmx/CreateOrder',
+        url: '../WebService/TicketWebService.asmx/CreateOrder',
         dataType: 'json',
         data: { code: GetQueryString('code'), ticketId: options.gid, ticketCount: zNumVal, couponId: 0, couponCount: 0, orderNo: options.orid, contractName: zNameVal, contractPhone: zPhoneVal, contractIdCard: zIDCardVal },
         success: function (result) {
             if (result.IsSuccess) {
+                alert(result.IsSuccess);
                 wx.chooseWXPay({
                     timestamp: result.Data.timeStamp, // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
                     nonceStr: result.Data.nonceStr, // 支付签名随机串，不长于 32 位
                     package: result.Data.package, // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=***）
-                    signType: 'SHA1', // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
+                    signType: 'MD5', // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
                     paySign: result.Data.paySign, // 支付签名
                     success: function (res) {
+                        alert(res.err_code + "______" + res.err_desc + "______" + res.err_msg);
                         alert("Pay Succeed");
                     },
-                    fail: function (err) {
-                        alert("fail");
-                        alert(JSON.stringify(err));
+                    fail: function (res) {
+                        alert(JSON.stringify(res));
                     }
                 });
+
+
+                //WeixinJSBridge.invoke('getBrandWCPayRequest',
+                //{
+                //    timestamp: result.Data.timeStamp, // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
+                //    nonceStr: result.Data.nonceStr, // 支付签名随机串，不长于 32 位
+                //    package: result.Data.package, // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=***）
+                //    signType: 'SHA1', // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
+                //    paySign: result.Data.paySign
+                //},
+                //function (res) {
+                //    if (res.err_msg == 'get_brand_wcpay_request:ok') {
+                //        alert(res.err_code + "______" + res.err_desc + "______" + res.err_msg);
+                //    }
+                //});
 
                 setTimeout(function () {
                     This.isLoading = 0;
