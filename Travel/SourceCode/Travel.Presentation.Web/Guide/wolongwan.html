@@ -1,0 +1,214 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <title>卧龙湾</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            font-size: 62.5%;
+            -webkit-text-size-adjust: 100%;
+            text-size-adjust: 100%;
+        }
+
+        body {
+        }
+
+        .bg {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+
+            .bg span {
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                top: 0;
+                left: 0;
+                color: transparent;
+                background-image: url(images/bg.png);
+                background-size: cover;
+                background-position: 50% 50%;
+                background-repeat: no-repeat;
+                z-index: 0;
+            }
+
+        .progress {
+            width: 100%;
+            position: relative;
+        }
+
+            .progress img {
+                width: 100%;
+            }
+
+        .container {
+            padding: 15px;
+        }
+
+        .caption {
+            height: 40px;
+            overflow: hidden;
+            position: relative;
+        }
+
+            .caption .listen {
+                position: absolute;
+                right: 0;
+                top: 0;
+                width: 40px;
+                height: 40px;
+                background: url(images/listen.png) 0 0 no-repeat;
+                background-size: 40px 40px;
+            }
+
+            .caption .title {
+                line-height: 30px;
+                margin-top: 5px;
+                padding: 0 10px;
+                font-size: 1.625rem;
+                font-weight: bold;
+                color: #fff;
+                border-left: 4px solid #f00;
+            }
+
+        .imgbox {
+            width: 100%;
+            position: relative;
+            margin: 15px 0 30px;
+            height: 220px;
+        }
+
+        .box-item {
+            width: 100%;
+            height: 100%;
+            border: 2px solid #fff;
+            border-radius: 6px;
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            position: absolute;
+            opacity: 0.6;
+        }
+
+        .imgbox .box-item:nth-child(1) {
+            left: -10px;
+            top: 0;
+        }
+
+        .imgbox .box-item:nth-child(2) {
+            left: -5px;
+            top: 5px;
+        }
+
+        .imgbox .box-item:nth-child(3) {
+            left: 0;
+            top: 10px;
+        }
+
+        .imgbox .box-item:nth-child(4) {
+            left: 5px;
+            top: 15px;
+        }
+
+        .imgbox .box-item:last-child {
+            opacity: 1;
+        }
+
+        .imgbox img {
+            width: 100%;
+            height: 100%;
+            border-radius: 6px;
+        }
+
+        .produce {
+            position: relative;
+            line-height: 1.5;
+            font-size: 1.2rem;
+            color: #D4D2FF;
+            padding:10px;
+        }
+
+            .produce .border-left-top {
+                position: absolute;
+                width: 60px;
+                height: 60px;
+                top: 0;
+                left: -2px;
+                background:url(images/border-left-top.png) 0 0 no-repeat;
+            }
+            .produce .border-right-bottom {
+                position: absolute;
+                width: 60px;
+                height: 60px;
+                right: 0;
+                bottom: -2px;
+                background:url(images/border-right-bottom.png) 0 0 no-repeat;
+            }
+
+        @media screen and (min-width: 375px) {
+            .imgbox {
+                height: 260px;
+            }
+        }
+
+        @media screen and (min-width: 414px) {
+            .imgbox {
+                height: 290px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <audio src="../audios/yinyue.mp3" autoplay="autoplay" loop="loop"></audio>
+    <div class="bg">
+        <span></span>
+    </div>
+    <div class="container">
+        <div class="progress">
+            <img src="images/step.png" alt="">
+        </div>
+        <div class="caption">
+            <div class="listen"></div>
+            <div class="title">卧龙湾</div>
+        </div>
+        <div class="imgbox">
+            <div class="box-item">
+                <img src="images/wl.png" alt="">
+            </div>
+            <div class="box-item">
+                <img src="images/wl.png" alt="">
+            </div>
+            <div class="box-item">
+                <img src="images/wl.png" alt="">
+            </div>
+            <div class="box-item">
+                <img src="images/wl.png" alt="">
+            </div>
+        </div>
+        <div class="produce">
+            <span class="border-left-top"></span>
+            <span class="border-right-bottom"></span>
+            卧龙湾，是由喀纳斯河在此长期侧蚀冲刷而形成一连串岸线曲折的
+            河湾组成。河流在此，流速减缓， 卧龙湾风光卧龙湾风光(15张)
+            水面柔波浮动。在Ω形河湾两侧发育两个半岛状平台，河曲上为
+            月牙形平台。河湾内发育两个小心滩，像两个巨大的脚印。传说是
+            神仙也难以抗拒美景的诱惑，下凡赏景时所留。下游为卧龙湾平台，
+            长800米，宽450米，面积3.6万平方米。登上东侧公路旁海拔1500米
+            处的侧碛平台，俯视Ω形河曲全景，恰似一条蛟龙盘卧嬉水，卧龙
+            湾由此得名。
+        </div>
+    </div>
+
+</body>
+</html>
