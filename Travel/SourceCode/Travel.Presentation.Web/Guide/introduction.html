@@ -15,16 +15,6 @@
     <link href="../styles/page-animation.css" rel="stylesheet" type="text/css">
     <link href="../styles/reset.css" rel="stylesheet" type="text/css">
     <link href="../styles/mod.css" rel="stylesheet" type="text/css">
-    <style type="text/css">
-        html, body {
-            margin: 0;
-            width: 100%;
-            height: 100%;
-            font-family: arial;
-            text-align: center;
-        }
-    </style>
-
 
     <style type="text/css">
         * {
@@ -50,7 +40,6 @@
         }
 
         body {
-            /*background-color: #000;*/
             margin: 0;
             padding: 0;
             width: 100%;
@@ -65,13 +54,12 @@
             -webkit-box-orient: vertical;
             -webkit-box-align: stretch;
             position: relative;
+            text-align:center;
         }
 
 
         ul, li {
             list-style: none;
-            margin: 0;
-            padding: 0;
         }
 
         .main-page {
@@ -90,25 +78,37 @@
             -webkit-transform-origin: center center;
             background: #fff;
         }
+
         #wrapper-background {
             width: 100%;
             height: 100%;
             background: url("images/intro-bg.png") no-repeat;
-            background-size:cover;
+            background-size: cover;
         }
 
-        #kanasi{
-            width:228px;
-            height:270px;
-            position:absolute;
-            left:0;
-            top:20px;
+        #kanasi {
+            width: 228px;
+            height: 270px;
+            position: absolute;
+            left: 0;
+            top: 20px;
         }
 
-        #kanasi>img{
-            width:100%;
-            height:100%;
+            #kanasi > img {
+                width: 100%;
+                height: 100%;
+            }
+
+        .bg {width: 100%;
+            height: 100%;
+            background: url("images/bg.png") no-repeat;
+            background-size: cover;
         }
+
+        .bg .index-info{
+            color:#fafafa;
+        }
+
 
         @media screen and (max-height: 490px) {
             .index-info {
@@ -139,7 +139,7 @@
         </section>
 
         <section class="m-page">
-            <section class="index m-img">
+            <section class=" bg m-img">
                 <div class="head">
                     <p class="index-info"><span style="font-size: 16px; font-weight: bold;">喀纳斯</span>，一个美丽富饶、神秘莫测的地方，在这里壮观的冰川映衬着宁静的湖水、茫茫的草原包容着幽深的原始森林。神秘的湖怪、古朴的土瓦人、变换的湖水、眩人的风景会让人痴迷。生活在都市的你，可以适时的停下脚步，背上背包，在这片净土上和自己的心来一次徒步之旅。</p>
                 </div>
@@ -147,7 +147,7 @@
                     <li class="part">
                         <a href="wolongwan.html">
                             <div class="annular">
-                                <img class="annular-round" src="../images/scenic1.png" />
+                                <img class="annular-round" src="images/scenic1.jpg" />
                             </div>
                             <div class="scenic-spot-title">卧龙湾</div>
                             <em></em>
@@ -157,7 +157,7 @@
                         <a href="yueliangwan.html">
 
                             <div class="annular">
-                                <img class="annular-round" src="../images/scenic2.png" />
+                                <img class="annular-round" src="images/scenic2.jpg" />
                             </div>
                             <div class="scenic-spot-title">月亮湾</div>
                             <em></em>
@@ -167,7 +167,7 @@
                     <li class="part">
                         <a href="shenxianwan.html">
                             <div class="annular">
-                                <img class="annular-round" src="../images/scenic3.png" />
+                                <img class="annular-round" src="images/scenic3.jpg" />
                             </div>
                             <div class="scenic-spot-title">神仙湾</div>
                             <em></em>
@@ -176,7 +176,7 @@
                     <li class="part">
                         <a href="guanyutai.html">
                             <div class="annular">
-                                <img class="annular-round" src="../images/scenic4.png" />
+                                <img class="annular-round" src="images/scenic4.jpg" />
                             </div>
                             <div class="scenic-spot-title">观鱼台</div>
                             <em></em>

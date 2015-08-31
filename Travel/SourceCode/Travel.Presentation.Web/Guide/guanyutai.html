@@ -175,7 +175,7 @@
     </style>
 </head>
 <body>
-    <audio src="../audios/yinyue.mp3" autoplay="autoplay" loop="loop"></audio>
+    <!--<audio src="../audios/yinyue.mp3" autoplay="autoplay" loop="loop"></audio>-->
     <div class="bg">
         <span></span>
     </div>
@@ -184,7 +184,7 @@
             <img src="images/step.png" alt="">
         </div>
         <div class="caption">
-            <div class="listen"></div>
+            <div class="listen" onclick="music.pause"></div>
             <div class="title">观鱼台</div>
         </div>
         <div class="imgbox">
@@ -211,6 +211,23 @@
             <p>        自古以来，凡名胜古迹总有文人墨客留下诗词曲赋和题字，观鱼台也是如此。“观鱼台”匾额是由著名文化学者余秋雨先生题写的。而观鱼台是深圳市园林景观设计大师吴肇钊先生设计而成。台内的两则赋，分别由吴肇钊和著名作家尔泰撰写，观美景，赏美文。可谓两全其美。</p>
         </div>
     </div>
-
+    <script type="text/javascript">
+        var music = {
+            play: function () {
+                if (!music.player) {
+                    music.player = new Audio();
+                    music.player.src = '../audios/yinyue.mp3';
+                    music.player.loop = true;
+                }
+                music.player && music.player.play();
+            },
+            pause: function () {
+                if (music.player) {
+                    music.player.pause();
+                }
+            }
+        }
+        music.play();
+    </script>
 </body>
 </html>

@@ -85,6 +85,10 @@
     <Content Include="Guide\images\intro-bg.png" />
     <Content Include="Guide\images\kanasi.png" />
     <Content Include="Guide\images\listen.png" />
+    <Content Include="Guide\images\scenic1.jpg" />
+    <Content Include="Guide\images\scenic2.jpg" />
+    <Content Include="Guide\images\scenic3.jpg" />
+    <Content Include="Guide\images\scenic4.jpg" />
     <Content Include="Guide\images\step.png" />
     <Content Include="Guide\images\sx.png" />
     <Content Include="Guide\images\wl.png" />

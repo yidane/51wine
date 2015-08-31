@@ -175,7 +175,7 @@
     </style>
 </head>
 <body>
-    <audio src="../audios/yinyue.mp3" autoplay="autoplay" loop="loop"></audio>
+    <!--<audio src="../audios/yinyue.mp3" autoplay="autoplay" loop="loop"></audio>-->
     <div class="bg">
         <span></span>
     </div>
@@ -213,5 +213,23 @@
         </div>
     </div>
 
+    <script type="text/javascript">
+        var music = {
+            play: function () {
+                if (!music.player) {
+                    music.player = new Audio();
+                    music.player.src = '../audios/yinyue.mp3';
+                    music.player.loop = true;
+                }
+                music.player && music.player.play();
+            },
+            pause: function () {
+                if (music.player) {
+                    music.player.pause();
+                }
+            }
+        }
+        music.play();
+    </script>
 </body>
 </html>
