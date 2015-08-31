@@ -65,20 +65,20 @@
         <div data-bind="visible:selectedType()=='unExpired'">
             <ul class="coupons-list" data-bind="foreach:unExpiredCoupons ,visible:unExpiredCoupons().length>0" style="display: none;">
                 <li class="clearfix fadeInRight">
-                   
-                        <div class="top clearfix">
-                            <span class="price fl"><em>￥</em>   <!-- ko text:subTitle --><!-- /ko--></span>
-                            <div class="info">
-                                <h3 data-bind="text:title"></h3>
-                                <!--<p>满50元可使用</p>-->
-                            </div>
+
+                    <div class="top clearfix">
+                        <span class="price fl"><em>￥</em>   <!-- ko text:subTitle --><!-- /ko--></span>
+                        <div class="info">
+                            <h3 data-bind="text:title"></h3>
+                            <!--<p>满50元可使用</p>-->
                         </div>
-                        <p class="coupons-handle" >
-                            <!-- ko text:'有效期：'+ beginTime +' 至 '+endTime --><!-- /ko-->
-                            <a class="fr used" data-bind="attr:{href:'couponDetail.html?openId='+$root.openId()+'&couponUsageId='+couponUsageId}">详情</a>
-                        </p>
-                    
-                     
+                    </div>
+                    <p class="coupons-handle">
+                        <!-- ko text:'有效期：'+ beginTime +' 至 '+endTime --><!-- /ko-->
+                        <a class="fr used" data-bind="attr:{href:'couponDetail.html?openId='+$root.openId()+'&couponUsageId='+couponUsageId}">详情</a>
+                    </p>
+
+
                 </li>
 
             </ul>
@@ -92,24 +92,24 @@
 
         <div data-bind="visible:selectedType()=='used'" style="display: none;">
             <ul class="coupons-list" data-bind="foreach:usedCoupons ,visible:usedCoupons().length>0"
-                 style="display: none;">
+                style="display: none;">
                 <li class="clearfix fadeInRight">
- 
-                         
-                             
-                                <div class="top clearfix">
-                                    <span class="price fl"><em>￥</em>   <!-- ko text:subTitle --><!-- /ko--></span>
-                                    <div class="info">
-                                        <h3 data-bind="text:title"></h3>
-                                        <!--<p>满50元可使用</p>-->
-                                    </div>
-                                </div>
-                                <p class="coupons-handle" >
-                                    <!-- ko text:'有效期：'+ beginTime +' 至 '+endTime --><!-- /ko-->
-                                    <a class="fr used" data-bind="attr:{href:'couponDetail.html?openId='+$root.openId()+'&couponUsageId='+couponUsageId+'&type=used'}">详情</a>
-                                </p>
-                                <i class="status-used i-status"></i>
-                       
+
+
+
+                    <div class="top clearfix">
+                        <span class="price fl"><em>￥</em>   <!-- ko text:subTitle --><!-- /ko--></span>
+                        <div class="info">
+                            <h3 data-bind="text:title"></h3>
+                            <!--<p>满50元可使用</p>-->
+                        </div>
+                    </div>
+                    <p class="coupons-handle">
+                        <!-- ko text:'有效期：'+ beginTime +' 至 '+endTime --><!-- /ko-->
+                        <a class="fr used" data-bind="attr:{href:'couponDetail.html?openId='+$root.openId()+'&code='+$root.param().access_code+'&couponUsageId='+couponUsageId+'&type=used'}">详情</a>
+                    </p>
+                    <i class="status-used i-status"></i>
+
                 </li>
 
             </ul>
@@ -123,21 +123,21 @@
         <div data-bind="visible:selectedType()=='expired'" style="display: none;">
             <ul class="coupons-list" data-bind="foreach:expiredCoupons ,visible:expiredCoupons().length>0" style="display: none;">
                 <li class="fail clearfix fadeInRight">
-                    
-                        <div class="top clearfix">
-                            <span class="price fl"><em>￥</em>   <!-- ko text:subTitle --><!-- /ko--></span>
-                            <div class="info">
-                                <h3 data-bind="text:title"></h3>
-                                <!--<p>满50元可使用</p>-->
-                            </div>
+
+                    <div class="top clearfix">
+                        <span class="price fl"><em>￥</em>   <!-- ko text:subTitle --><!-- /ko--></span>
+                        <div class="info">
+                            <h3 data-bind="text:title"></h3>
+                            <!--<p>满50元可使用</p>-->
                         </div>
-                        <p class="coupons-handle">
-                            <!-- ko text:'有效期：'+ beginTime +' 至 '+endTime --><!-- /ko-->
-                            <a class="fr used" data-bind="attr:{href:'couponDetail.html?openId='+$root.openId()+'&couponUsageId='+couponUsageId+'&type=expired'}">详情</a>
-                        </p>
-                        <i class="status-expired i-status"></i>
-                  
-                    
+                    </div>
+                    <p class="coupons-handle">
+                        <!-- ko text:'有效期：'+ beginTime +' 至 '+endTime --><!-- /ko-->
+                        <a class="fr used" data-bind="attr:{href:'couponDetail.html?openId='+$root.openId()+'&couponUsageId='+couponUsageId+'&type=expired'}">详情</a>
+                    </p>
+                    <i class="status-expired i-status"></i>
+
+
                 </li>
 
             </ul>
@@ -160,48 +160,49 @@
     <script src="../order/script/common/main.js"></script>
     <script src="../js/myCoupons-vm.js"></script>
     <script>
-        //根据页面尺寸显示格式
-        //var winWidth = $(window).width() > 640 ? 640 : $(window).width();
-        //$("html").css("fontSize", (winWidth / 640) * 20 + "px");
+    //根据页面尺寸显示格式
+    //var winWidth = $(window).width() > 640 ? 640 : $(window).width();
+    //$("html").css("fontSize", (winWidth / 640) * 20 + "px");
 
-        var access_code = "";
-         access_code = $.url.param("code");
-         if (!access_code) {
-             var fromurl = location.href;
-             var url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxdd6127bdb5e7611c&redirect_uri='
-                 + encodeURIComponent(fromurl) +
-                 '&response_type=code&scope=snsapi_base&state=STATE%23wechat_redirect&connect_redirect=1#wechat_redirect';
-             location.href = url;
-         }
+    var access_code = "";
+    access_code = $.url.param("code");
+    if (!access_code) {
+        var fromurl = location.href;
+        var url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxdd6127bdb5e7611c&redirect_uri='
+                + encodeURIComponent(fromurl) +
+                '&response_type=code&scope=snsapi_base&state=STATE%23wechat_redirect&connect_redirect=1#wechat_redirect';
+        location.href = url;
+    }
 
-        var param = {
-            access_code: access_code
-        };
+    var param = {
+        access_code: access_code
+    };
 
-        var imagesArray = new Array(10).join(',').split(',');
-        //imagesArray = imagesArray.map(function (el, i) {
-        //    return 'http://dummyimage.com/600x400/000/' + (255 - i) + '?' + +new Date();
-        //});
+    var imagesArray = new Array(10).join(',').split(',');
+    //imagesArray = imagesArray.map(function (el, i) {
+    //    return 'http://dummyimage.com/600x400/000/' + (255 - i) + '?' + +new Date();
+    //});
 
-        new preLoader(imagesArray, {
-            onProgress: function (src, element, index) {
+    new preLoader(imagesArray, {
+        onProgress: function (src, element, index) {
 
-                var percent = Math.floor((100 / this.queue.length) * this.completed.length);
+            var percent = Math.floor((100 / this.queue.length) * this.completed.length);
 
-                // update the progress element
-                $("#loadingTips").text(percent + '%');
+            // update the progress element
+            $("#loadingTips").text(percent + '%');
 
 
-            },
-            onComplete: function (loaded, errors) {
-                var myCouponsVM = new MyCouponsViewModel(null, param);
-                ko.applyBindings(myCouponsVM);
-               
+        },
+        onComplete: function (loaded, errors) {
+            var myCouponsVM = new MyCouponsViewModel(null, param);
+            ko.applyBindings(myCouponsVM);
+            $("#div_content").show();
+            $('#loadingBox').hide();
 
-            }
-        });
+        }
+    });
 
-     
+
 
     </script>
 </body>

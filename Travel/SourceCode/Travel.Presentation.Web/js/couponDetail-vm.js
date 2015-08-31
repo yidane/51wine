@@ -111,7 +111,9 @@ var DetailViewModel=function ($domParam, param) {
     };
 
     this.btnGobackClick = function () {
-        window.history.back();
+        window.location.href='MyCoupons.html?code='+self.param().access_code;
+       // window.location.href='https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxdd6127bdb5e7611c&redirect_uri=http%3A%2F%2Fwww.cloudorg.com.cn%2Ftravel%2FCoupons%2FMyCoupons.html&response_type=code&scope=snsapi_base&state=STATE%23wechat_redirect&connect_redirect=1#wechat_redirect';
+        //window.history.back();
     };
 
     this.getCoupon();

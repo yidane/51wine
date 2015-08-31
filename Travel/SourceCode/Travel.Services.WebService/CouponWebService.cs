@@ -214,6 +214,12 @@ namespace Travel.Services.WebService
             }
         }
 
+
+        /// <summary>
+        /// 使用优惠券
+        /// </summary>
+        /// <param name="openId"></param>
+        /// <param name="couponUsageId"></param>
         [WebMethod]
         public void UseCoupon(string openId, string couponUsageId) {
             try
