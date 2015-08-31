@@ -158,7 +158,7 @@ namespace Travel.Infrastructure.OTAWebService.Test
                 {
                     PostOrder = new List<OrderNoCode>()
                         {
-                            new OrderNoCode() {OrderCode = "C2015082918113819136574"},
+                            new OrderNoCode() {OrderCode = "513874262975"},
                             //new OrderNoCode(){OrderCode = "C20150825168858961"}
                         }
                 };

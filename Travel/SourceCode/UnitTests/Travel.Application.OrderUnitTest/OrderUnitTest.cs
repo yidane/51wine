@@ -24,7 +24,7 @@ namespace Travel.Application.OrderUnitTest
             this.OrderRequest = new OrderRequestEntity()
                                {
                                    OpenId = "obzTswxzFzzzdWdAKf2mWx3CrpXk",
-                                   TicketCategory = "956BFF5E-AA6A-454E-8F46-BD4175235C9E",
+                                   TicketCategory = "BC4FEFE8-8214-41DD-8FE8-1B16394B77B3",
                                    TicketName = "布尔津测试门票",
                                    Count = 1,
                                    CouponId = string.Empty,
@@ -43,7 +43,7 @@ namespace Travel.Application.OrderUnitTest
                                          mch_id = "100000100",
                                          nonce_str = "5d2b6c2a8db53831f7eda20af46e531c",
                                          openid = "obzTswxzFzzzdWdAKf2mWx3CrpXk",
-                                         out_trade_no = "C2015082920020045701619",
+                                         out_trade_no = "C2015083023343215329574",
                                          result_code = "SUCCESS",
                                          return_code = "SUCCESS",
                                          sign = "B552ED6B279343CB493C5DD0D78AB241",

@@ -19,6 +19,11 @@
         public string OrderCode { get; set; }
 
         /// <summary>
+        /// 微信订单号
+        /// </summary>
+        public string WXOrderCode { get; set; }
+
+        /// <summary>
         /// 创建时间
         /// </summary>
         public DateTime CreateTime { get; set; }

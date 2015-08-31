@@ -21,6 +21,8 @@ namespace Travel.Application.DomainModules.Order.Core
 
         private EventHandlerList _events;
 
+        #region 状态
+
         /// <summary>
         /// 初始订单状态
         /// </summary>
@@ -59,6 +61,8 @@ namespace Travel.Application.DomainModules.Order.Core
         /// 已退票
         /// </summary>
         public const string TicketStatus_Refunded = "TS30005";
+
+        #endregion
 
         /// <summary>
         /// 购票的详情类型
@@ -284,6 +288,7 @@ namespace Travel.Application.DomainModules.Order.Core
                          {
                              OrderId = Guid.NewGuid(),
                              OrderCode = this.CreateOrderCode(),
+                             WXOrderCode = string.Empty,
                              CreateTime = DateTime.Now,
                              OpenId = this.OrderRequest.OpenId,
                              ContactPersonName = this.OrderRequest.ContactPersonName,
