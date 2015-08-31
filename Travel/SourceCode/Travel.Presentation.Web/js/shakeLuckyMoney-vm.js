@@ -18,6 +18,7 @@ var LuckyMoneyViewModel = function ($domParam, param) {
     this.init = function () {
         self.initWeChat(false);
         self.initShake();
+        self.param().onAfterLoadData();
     };
     this.initWeChat = function (debug) {
         $.getJSON('WebService/WeChatWebService.asmx/WeChatConfigInit', { url: document.location.href })

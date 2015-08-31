@@ -21,7 +21,7 @@
             width: 100%;
             height: 100%;
             text-align: center;
-            background-color: #333333;
+            background-color: #313E4F;
         }
 
         #loading {
@@ -147,7 +147,7 @@
 
                 </div>
             </div>
-            <!--<div class="botton main-center top-zIndex" id="botton" data-bind="click:$root.afterShake">马上领取</div>-->
+            <div class="botton main-center top-zIndex" id="botton" data-bind="click:$root.afterShake">马上领取</div>
             <AUDIO id="musicBox" src="audios/shake.wav" preload="metadata"></AUDIO>
             <AUDIO id="endMp3" src="audios/end.mp3" preload="metadata"></AUDIO>
         </div>
@@ -235,7 +235,7 @@
 
     var imagesArray = ['http://www.cloudorg.com.cn/travel/images/shake_background.png',
         'http://www.cloudorg.com.cn/travel/images/hand.png',
-        'http://www.cloudorg.com.cn/travel/images/back.jpg',
+        'http://www.cloudorg.com.cn/travel/images/back.jpg'
     ];
 
     new preLoader(imagesArray, {
@@ -258,13 +258,17 @@
                 $receiveBtn: $('#receiveBtn')
             };
             var param = {
-                access_code: access_code
+                access_code: access_code,
+                onAfterLoadData:function(){
+                    $("#div_content").show();
+                    $('#loadingBox').hide();
+                }
             };
             var luckyMoneyVM = new LuckyMoneyViewModel($domParm, param);
 
             ko.applyBindings(luckyMoneyVM);
 
-            $("#div_content").show();
+
 
         }
     });
