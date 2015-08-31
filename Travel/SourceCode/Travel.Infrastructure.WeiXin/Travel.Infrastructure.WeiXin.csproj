@@ -71,6 +71,8 @@
     <Compile Include="Advanced\HttpService.cs" />
     <Compile Include="Advanced\Pay\JsApiPay.cs" />
     <Compile Include="Advanced\Pay\Model\PaymentNotify.cs" />
+    <Compile Include="Advanced\Pay\Model\RefundOrderRequest.cs" />
+    <Compile Include="Advanced\Pay\Model\RefundOrderResponse.cs" />
     <Compile Include="Advanced\Pay\Model\UnifiedOrderRequest.cs" />
     <Compile Include="Advanced\Pay\Model\UnifiedOrderResult.cs" />
     <Compile Include="Advanced\Pay\WxPayApi.cs" />

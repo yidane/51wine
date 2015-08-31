@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Xml;
 
 namespace Travel.Infrastructure.WeiXin.Advanced.Pay.Model
 {
@@ -110,7 +111,7 @@ namespace Travel.Infrastructure.WeiXin.Advanced.Pay.Model
         /// <summary>
         /// 现金支付金额
         /// </summary>
-        public string cash_fee { get; set; }
+        public int cash_fee { get; set; }
 
         /// <summary>
         /// cash_fee_type
@@ -128,14 +129,9 @@ namespace Travel.Infrastructure.WeiXin.Advanced.Pay.Model
         public int coupon_count { get; set; }
 
         /// <summary>
-        /// 代金券或立减优惠ID,coupon_id_$n,n为下标
-        /// </summary>
-        public string[] coupon_ids { get; set; }
-
-        /// <summary>
         /// 单个代金券或立减优惠支付金额
         /// </summary>
-        public string[] coupon_fees { get; set; }
+        public List<Coupon> CouponList { get; set; }
 
         /// <summary>
         /// 微信支付订单号
@@ -156,5 +152,96 @@ namespace Travel.Infrastructure.WeiXin.Advanced.Pay.Model
         /// 支付完成时间
         /// </summary>
         public string time_end { get; set; }
+
+        public PaymentNotify()
+        {
+
+        }
+
+        public PaymentNotify(string notifyMessage)
+        {
+            var xmlDocument = new XmlDocument();
+            xmlDocument.LoadXml(notifyMessage);
+            InitPaymentNotify(xmlDocument);
+        }
+
+        public PaymentNotify(XmlDocument xmlDocument)
+        {
+            InitPaymentNotify(xmlDocument);
+        }
+
+        private void InitPaymentNotify(XmlDocument xmlDocument)
+        {
+            var return_codeNode = xmlDocument.SelectSingleNode("xml/return_code");
+            var return_msgNode = xmlDocument.SelectSingleNode("xml/return_msg");
+
+            if (return_codeNode != null)
+                return_code = return_codeNode.InnerText;
+
+            if (return_msgNode != null)
+                return_msg = return_msgNode.InnerText;
+
+            if (string.Equals(return_code, "SUCCESS"))
+            {
+                appid = GetNodeInnerText(xmlDocument, "appid");
+                mch_id = GetNodeInnerText(xmlDocument, "mch_id");
+                device_info = GetNodeInnerText(xmlDocument, "device_info");
+                nonce_str = GetNodeInnerText(xmlDocument, "nonce_str");
+                sign = GetNodeInnerText(xmlDocument, "sign");
+                result_code = GetNodeInnerText(xmlDocument, "result_code");
+                err_code = GetNodeInnerText(xmlDocument, "xmlDocument");
+                err_code_des = GetNodeInnerText(xmlDocument, "err_code_des");
+                openid = GetNodeInnerText(xmlDocument, "openid");
+                is_subscribe = GetNodeInnerText(xmlDocument, "is_subscribe");
+                trade_type = GetNodeInnerText(xmlDocument, "trade_type");
+                bank_type = GetNodeInnerText(xmlDocument, "bank_type");
+                total_fee = int.Parse(GetNodeInnerText(xmlDocument, "total_fee"));
+                fee_type = GetNodeInnerText(xmlDocument, "fee_type");
+                cash_fee = int.Parse(GetNodeInnerText(xmlDocument, "cash_fee"));
+                cash_fee_type = GetNodeInnerText(xmlDocument, "cash_fee_type");
+                var couponfee = GetNodeInnerText(xmlDocument, "coupon_fee");
+                coupon_fee = string.IsNullOrEmpty(couponfee) ? 0 : int.Parse(couponfee);
+                var couponCount = GetNodeInnerText(xmlDocument, "coupon_count");
+                coupon_count = string.IsNullOrEmpty(couponCount) ? 0 : int.Parse(couponCount);
+
+                var id = 0;
+                var coupon_id = GetNodeInnerText(xmlDocument, "coupon_id_0");
+                var coupon_id_fee = GetNodeInnerText(xmlDocument, "coupon_fee_0");
+                CouponList = new List<Coupon>();
+                while (!string.IsNullOrEmpty(coupon_id) && !string.IsNullOrEmpty(coupon_id_fee))
+                {
+                    CouponList.Add(new Coupon(coupon_id, coupon_id_fee));
+                    id = id + 1;
+                    coupon_id = GetNodeInnerText(xmlDocument, string.Format("coupon_id_{0}", id));
+                    coupon_id_fee = GetNodeInnerText(xmlDocument, string.Format("coupon_fee_{0}", id));
+                }
+
+                transaction_id = GetNodeInnerText(xmlDocument, "transaction_id");
+                out_trade_no = GetNodeInnerText(xmlDocument, "out_trade_no");
+                attach = GetNodeInnerText(xmlDocument, "attach");
+                time_end = GetNodeInnerText(xmlDocument, "time_end");
+            }
+        }
+
+        private string GetNodeInnerText(XmlDocument xmlDocument, string nodeName)
+        {
+            var node = xmlDocument.SelectSingleNode(string.Format("xml/{0}", nodeName));
+            return node != null ? node.InnerText : string.Empty;
+        }
+    }
+
+    /// <summary>
+    ///  代金券或立减优惠ID
+    /// </summary>
+    public class Coupon
+    {
+        public string coupon_id { get; set; }
+        public int coupon_fee { get; set; }
+
+        public Coupon(string coupon_id, string coupon_id_fee)
+        {
+            this.coupon_id = coupon_id;
+            this.coupon_fee = int.Parse(coupon_id_fee);
+        }
     }
 }
