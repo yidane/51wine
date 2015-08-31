@@ -82,11 +82,14 @@
     <Content Include="Guide\images\border-left-top.png" />
     <Content Include="Guide\images\border-right-bottom.png" />
     <Content Include="Guide\images\gy.png" />
+    <Content Include="Guide\images\intro-bg.png" />
+    <Content Include="Guide\images\kanasi.png" />
     <Content Include="Guide\images\listen.png" />
     <Content Include="Guide\images\step.png" />
     <Content Include="Guide\images\sx.png" />
     <Content Include="Guide\images\wl.png" />
     <Content Include="Guide\images\yl.png" />
+    <Content Include="Guide\introduction.html" />
     <Content Include="Guide\shenxianwan.html" />
     <Content Include="Guide\wolongwan.html" />
     <Content Include="Guide\yueliangwan.html" />
