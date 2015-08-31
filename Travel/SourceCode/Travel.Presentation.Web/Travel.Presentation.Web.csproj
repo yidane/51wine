@@ -92,6 +92,14 @@
     <Content Include="Guide\yueliangwan.html" />
     <Content Include="images\m.png" />
     <Content Include="images\m1.png" />
+    <Content Include="images\ticket1.jpg" />
+    <Content Include="images\ticket2.jpg" />
+    <Content Include="images\ticket3.jpg" />
+    <Content Include="images\ticket4.jpg" />
+    <Content Include="images\ticket5.jpg" />
+    <Content Include="images\ticket6.jpg" />
+    <Content Include="images\ticket7.jpg" />
+    <Content Include="images\ticket8.jpg" />
     <Content Include="images\导览背景.png" />
     <Content Include="images\文字名称.png" />
     <Content Include="images\背景1.png" />
