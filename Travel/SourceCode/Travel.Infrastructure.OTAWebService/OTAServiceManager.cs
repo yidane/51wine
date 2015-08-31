@@ -24,12 +24,12 @@ namespace Travel.Infrastructure.OTAWebService
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        public OTAResult<ChangeOrderEditResponse> ChangeOrderEdit(ChangeOrderEditRequest request)
+        public OTAResult<List<ChangeOrderEditResponse>> ChangeOrderEdit(ChangeOrderEditRequest request)
         {
             var signture = OTAConfigManager.GetSignature(OTAConfigManager.MerchantCode, OTAConfigManager.MerchantKey, request.PostOrder.ToString());
             var result = m_ServiceSoapClient.ChangeOrderEdit(OTAConfigManager.MerchantCode, request.PostOrder.ToString(), signture);
 
-            return OTAResult<ChangeOrderEditResponse>.CreateInstance(result);
+            return OTAResult<List<ChangeOrderEditResponse>>.CreateInstance(result);
         }
 
         /// <summary>

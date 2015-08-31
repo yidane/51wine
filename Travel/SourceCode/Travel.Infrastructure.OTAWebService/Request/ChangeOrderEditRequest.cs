@@ -39,17 +39,33 @@ namespace Travel.Infrastructure.OTAWebService.Request
 
         public override string ToString()
         {
-            var request = new
+            if (Count > 0)
             {
-                Ptime = Ptime,
-                Order = JSONHelper.Serialize(Order),
-                Details = JSONHelper.Serialize(Details),
-                Edittype = Edittype,
-                Type = Type,
-                Count = Count
-            };
+                var request = new
+                {
+                    Ptime = Ptime,
+                    Order = JSONHelper.Serialize(Order),
+                    Details = JSONHelper.Serialize(Details),
+                    Edittype = Edittype,
+                    Type = Type,
+                    Count = Count
+                };
 
-            return JSONHelper.Serialize(request);
+                return JSONHelper.Serialize(request);
+            }
+            else
+            {
+                var request = new
+                {
+                    Ptime = Ptime,
+                    Order = JSONHelper.Serialize(Order),
+                    Details = JSONHelper.Serialize(Details),
+                    Edittype = Edittype,
+                    Type = Type
+                };
+
+                return JSONHelper.Serialize(request);
+            }
         }
     }
 
