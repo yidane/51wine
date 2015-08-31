@@ -1,0 +1,215 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+
+    <meta charset="utf-8">
+    <meta id="eqMobileViewport" name="viewport" content="width=device-width,
+          initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="format-detection" content="email=no">
+    <title>景区介绍</title>
+    <link href="../styles/style.css" rel="stylesheet" type="text/css">
+    <link href="../styles/H5FullscreenPage.css" rel="stylesheet" />
+    <link href="../styles/page-animation.css" rel="stylesheet" type="text/css">
+    <link href="../styles/reset.css" rel="stylesheet" type="text/css">
+    <link href="../styles/mod.css" rel="stylesheet" type="text/css">
+    <style type="text/css">
+        html, body {
+            margin: 0;
+            width: 100%;
+            height: 100%;
+            font-family: arial;
+            text-align: center;
+        }
+    </style>
+
+
+    <style type="text/css">
+        * {
+            margin: 0;
+            outline: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: rgba(0,0,0,0);
+        }
+
+        article, aside, dialog, footer, header, section, footer, nav, figure, menu {
+            display: block;
+        }
+
+        a {
+            text-decoration: none;
+            -webkit-tap-highlight-color: rgba(0,0,0,.35);
+        }
+
+        html {
+            height: 100%;
+            -webkit-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+        }
+
+        body {
+            /*background-color: #000;*/
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            min-height: 100%;
+            font-weight: 300;
+            font-family: 'Microsoft Yahei',Tahoma,Helvetica,Arial,sans-serif;
+            font-size: 62.5%;
+            line-height: 1.231;
+            -webkit-touch-callout: none;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-box-align: stretch;
+            position: relative;
+        }
+
+
+        ul, li {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .main-page {
+            border: 0;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-position: top center;
+            background-size: cover;
+            box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            z-index: 0;
+            -webkit-transform-origin: center center;
+            background: #fff;
+        }
+        #wrapper-background {
+            width: 100%;
+            height: 100%;
+            background: url("images/intro-bg.png") no-repeat;
+            background-size:cover;
+        }
+
+        #kanasi{
+            width:228px;
+            height:270px;
+            position:absolute;
+            left:0;
+            top:20px;
+        }
+
+        #kanasi>img{
+            width:100%;
+            height:100%;
+        }
+
+        @media screen and (max-height: 490px) {
+            .index-info {
+                font-size: 12px;
+            }
+        }
+
+        @media screen and (max-height: 550px) and (min-height:490px) {
+            .index-info {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+
+
+    <div class="p-index main" id="con">
+        <!--上下滚动 start-->
+        <section class="m-page hide">
+            <section class="main-page current m-img">
+                <div id="wrapper-background"></div>
+                <div id="kanasi">
+                    <img src="images/kanasi.png" />
+                </div>
+            </section>
+        </section>
+
+        <section class="m-page">
+            <section class="index m-img">
+                <div class="head">
+                    <p class="index-info"><span style="font-size: 16px; font-weight: bold;">喀纳斯</span>，一个美丽富饶、神秘莫测的地方，在这里壮观的冰川映衬着宁静的湖水、茫茫的草原包容着幽深的原始森林。神秘的湖怪、古朴的土瓦人、变换的湖水、眩人的风景会让人痴迷。生活在都市的你，可以适时的停下脚步，背上背包，在这片净土上和自己的心来一次徒步之旅。</p>
+                </div>
+                <ul class="scenic-spot">
+                    <li class="part">
+                        <a href="wolongwan.html">
+                            <div class="annular">
+                                <img class="annular-round" src="../images/scenic1.png" />
+                            </div>
+                            <div class="scenic-spot-title">卧龙湾</div>
+                            <em></em>
+                        </a>
+                    </li>
+                    <li class="part">
+                        <a href="yueliangwan.html">
+
+                            <div class="annular">
+                                <img class="annular-round" src="../images/scenic2.png" />
+                            </div>
+                            <div class="scenic-spot-title">月亮湾</div>
+                            <em></em>
+
+                        </a>
+                    </li>
+                    <li class="part">
+                        <a href="shenxianwan.html">
+                            <div class="annular">
+                                <img class="annular-round" src="../images/scenic3.png" />
+                            </div>
+                            <div class="scenic-spot-title">神仙湾</div>
+                            <em></em>
+                        </a>
+                    </li>
+                    <li class="part">
+                        <a href="guanyutai.html">
+                            <div class="annular">
+                                <img class="annular-round" src="../images/scenic4.png" />
+                            </div>
+                            <div class="scenic-spot-title">观鱼台</div>
+                            <em></em>
+                        </a>
+                    </li>
+                </ul>
+            </section>
+        </section><section class='u-arrow'>
+            <img src="../images/btn01_arrow.png" />
+        </section>
+    </div>
+
+    <script src="../javaScripts/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="../js/jquery.easing.1.3.js"></script>
+    <script type="text/javascript" src="../js/page_scroll_bx.js?v=1.3"></script>
+
+
+    <script type="text/javascript">
+        function renderPage() {
+            var f = 1,
+                e,
+                g = $(document).width(),
+                h = $(document).height();
+            g / h >= 320 / 486 ? (f = h / 486) : (f = g / 320, e = (h / f - 486) / 2);
+            e && $(".area").css({
+                marginTop: e
+            });
+            $("#eqMobileViewport").attr("content", "width=320, initial-scale=" + f + ", maximum-scale=" + f + ", user-scalable=no");
+        }
+
+        $(function () {
+            renderPage();
+        });
+    </script>
+</body>
+</html>
