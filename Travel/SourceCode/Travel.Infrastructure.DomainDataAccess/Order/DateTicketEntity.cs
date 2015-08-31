@@ -78,7 +78,7 @@ namespace Travel.Infrastructure.DomainDataAccess.Order
                         item =>
                             item.SearchDateTime >= now
                             && item.SearchDateTime < tomorrow
-                            && item.CurrentStatus.Equals("DTS10001")
+                            && item.CurrentStatus.Equals(OrderStatus.DateTicketStatus_Init)
                             && item.TicketName.Equals(ticketName))
                     .OrderBy(item => item.DateTicketId)
                     .Take(nomber).ToList();

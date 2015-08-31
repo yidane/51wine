@@ -9,6 +9,7 @@ namespace Travel.Application.OrderUnitTest
 
     using Travel.Application.DomainModules.Order.Core;
     using Travel.Application.DomainModules.Order.Entity;
+    using Travel.Infrastructure.DomainDataAccess.Order;
     using Travel.Infrastructure.WeiXin.Advanced.Pay.Model;
 
     [TestFixture]
@@ -18,6 +19,8 @@ namespace Travel.Application.OrderUnitTest
 
         public PaymentNotify PaymentNotify;
 
+        public ICollection<TicketEntity> refundTickets;
+        
         [SetUp]
         public void Init()
         {
@@ -43,7 +46,7 @@ namespace Travel.Application.OrderUnitTest
                                          mch_id = "100000100",
                                          nonce_str = "5d2b6c2a8db53831f7eda20af46e531c",
                                          openid = "obzTswxzFzzzdWdAKf2mWx3CrpXk",
-                                         out_trade_no = "C2015083023343215329574",
+                                         out_trade_no = "C2015083121212304037132",
                                          result_code = "SUCCESS",
                                          return_code = "SUCCESS",
                                          sign = "B552ED6B279343CB493C5DD0D78AB241",
@@ -52,6 +55,10 @@ namespace Travel.Application.OrderUnitTest
                                          trade_type = "JSAPI",
                                          transaction_id = "1409811653"
                                      };
+
+            this.refundTickets =
+                TicketEntity.GetTicketsByOrderId(Guid.Parse("C7942BBE-0C7F-4DE2-AEFF-998DC38C4E3C"))
+                .Where(item => item.TicketCode.Equals("57882")).ToList();
         }
 
         [Test]
@@ -71,12 +78,13 @@ namespace Travel.Application.OrderUnitTest
         }
 
         [Test]
-        public void fdfd()
+        public void SubmitRefundRequest_RefundOrder_ReturnAddRefundToRefundQueue()
         {
-            
-
-            
-            var sbv = string.Format("{{'return_code':'{0}', 'return_msg':'{1}'}}", "FALL", "参数格式校验错误或签名失败");
+            if (refundTickets != null && refundTickets.Any())
+            {
+                var order = OrderEntity.GetOrderByOrderId(refundTickets.First().OrderId.ToString());
+                var otaOrder = new OTAOrder(order);
+            }
             
         }
     }

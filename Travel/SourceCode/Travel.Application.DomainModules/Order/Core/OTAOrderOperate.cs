@@ -5,6 +5,7 @@ using System.Text;
 
 namespace Travel.Application.DomainModules.Order.Core
 {
+    using System.Diagnostics;
     using System.Globalization;
 
     using Travel.Application.DomainModules.Order.Core.Interface;
@@ -115,12 +116,13 @@ namespace Travel.Application.DomainModules.Order.Core
                     for (int i = 0; i < this.MainOrder.OrderObj.Tickets.Count; i++)
                     {
                         arrTickets[i].ECode = result.ResultData[i].ECode;
-                        arrTickets[i].TicketStatus = Order.TicketStatus_WaitUse;
+                        arrTickets[i].TicketStatus = OrderStatus.TicketStatus_WaitUse;
+                        arrTickets[i].LatestModifyTime = DateTime.Now;
                     }
 
                     this.MainOrder.OrderObj.Tickets = arrTickets.ToList();
                     // 更改订单状态为
-                    this.MainOrder.OrderObj.OrderStatus = Order.OrderStatus_WaitUse;
+                    this.MainOrder.OrderObj.OrderStatus = OrderStatus.OrderStatus_WaitUse;
                     this.MainOrder.OrderObj.ModifyOrder();
                 }
                 else
@@ -134,9 +136,35 @@ namespace Travel.Application.DomainModules.Order.Core
             }
         }
 
-        public bool ChangeOrderEdit()
+        public OTAResult<List<ChangeOrderEditResponse>> ChangeOrderEdit(ICollection<TicketEntity> refundTickets)
         {
-            throw new NotImplementedException();
+            var changeRequest = new OTARequest.ChangeOrderEditRequest();
+            var postOrder = new OTARequest.EditPostOrder()
+                                {
+                                    Ptime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
+                                    Edittype = "2",
+                                    Count = refundTickets.Count
+                                };
+            var order = new OTARequest.EditOrder()
+                            {
+                                OrderNo = MainOrder.OrderObj.OrderCode
+                            };
+            var orderDetails = new List<OTARequest.EditOrderDetail>();
+
+            foreach (var ticket in refundTickets)
+            {
+                orderDetails.Add(new OTARequest.EditOrderDetail()
+                                     {
+                                         ProductCode = ticket.ECode,
+                                         Starttime = string.Empty
+                                     });
+            }
+
+            postOrder.Order = order;
+            postOrder.Details = orderDetails;
+            changeRequest.PostOrder = postOrder;
+
+            return this._serviceManager.ChangeOrderEdit(changeRequest);
         }
     }
 }

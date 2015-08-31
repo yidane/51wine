@@ -48,6 +48,10 @@
 
         public virtual DbSet<DateTicketEntity> DateTicket { get; set; }
 
+        public virtual DbSet<RefundOrderQueueEntity> RefundOrderQueue { get; set; }
+
+        public virtual DbSet<RefundOrderEntity> RefundOrder { get; set; }
+
     }
 
     //public class MyEntity

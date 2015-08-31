@@ -37,11 +37,11 @@ namespace Travel.Application.DomainModules.Order.Core
         {
             if (this.OrderObj != null)
             {
-                if (this.OrderObj.OrderStatus.Equals(Order.OrderStatus_PayComplete))
+                if (this.OrderObj.OrderStatus.Equals(OrderStatus.OrderStatus_PayComplete))
                 {
                     this.IsPaymentInfoProcessed = true;
                 }
-                else if (this.OrderObj.OrderStatus.Equals(Order.OrderStatus_WaitPay))
+                else if (this.OrderObj.OrderStatus.Equals(OrderStatus.OrderStatus_WaitPay))
                 {
                     this.IsPaymentInfoProcessed = false;
                 }

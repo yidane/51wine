@@ -24,7 +24,7 @@ namespace Travel.Application.DomainModules.Order.Core
                                        detail = ticket.Price.ToString(),
                                        attach = "1",
                                        goods_tag = "1",
-                                       total_fee = Decimal.ToInt32(order.TotalFee() * 100)
+                                       total_fee = Decimal.ToInt32(order.GetCategoryTotalFee(Guid.Parse("{CE7B7E52-3811-44B6-AF9A-7562E0A773D2}")) * 100)
                                    };
             var WXPaymentService = new JsApiPay();
 
@@ -38,6 +38,11 @@ namespace Travel.Application.DomainModules.Order.Core
             wxPay.ProcessPaymentMain();
 
             return wxPay.WXTurnbackResult;
+        }
+
+        public RefundOrderResponse RefundPay(RefundOrderRequest refundOrder)
+        {
+            return new JsApiPay().Refund(refundOrder);
         }
     }
 }

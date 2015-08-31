@@ -10,8 +10,6 @@ namespace Travel.Application.DomainModules.Order.Core.Interface
 
     public interface IPaymentOperate
     {
-        //Order MainOrder { get; set; }
-
         /// <summary>
         /// 本地订单生成后，向微信支付提交预支付请求
         /// </summary>
@@ -25,5 +23,12 @@ namespace Travel.Application.DomainModules.Order.Core.Interface
         /// <param name="paymentComplete"></param>
         /// <returns>处理是否成功</returns>
         string GetPaymentCompleteInfomation(PaymentNotify paymentComplete);
+
+        /// <summary>
+        /// 申请退款
+        /// </summary>
+        /// <param name="refundOrder"></param>
+        /// <returns></returns>
+        RefundOrderResponse RefundPay(RefundOrderRequest refundOrder);
     }
 }

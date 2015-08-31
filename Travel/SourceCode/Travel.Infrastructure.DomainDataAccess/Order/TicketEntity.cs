@@ -1,8 +1,15 @@
 ﻿namespace Travel.Infrastructure.DomainDataAccess.Order
 {
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Data.Entity;
+    using System.Data.Entity.Migrations;
+    using System.Diagnostics;
+    using System.Linq;
+
+    using Travel.Infrastructure.DomainDataAccess.Migrations;
 
     public class TicketEntity
     {
@@ -14,6 +21,13 @@
         [ForeignKey("OrderId")]
         public virtual OrderEntity Order { get; set; }
 
+        public Guid? RefundOrderId { get; set; }
+
+        public Guid? RefundOrderDetailId { get; set; }
+
+        [Required]
+        public Guid OrderDetailId { get; set; }
+
         /// <summary>
         /// 票种Id
         /// </summary>
@@ -24,6 +38,9 @@
         /// </summary>
         [Required, MaxLength(50)]
         public string TicketCode { get; set; }
+
+        [Required]
+        public decimal Price { get; set; }
 
         /// <summary>
         /// 票状态
@@ -50,5 +67,32 @@
         /// 游玩结束时间
         /// </summary>
         public DateTime TicketEndTime { get; set; }
+
+        public void ModifyTicket()
+        {
+            using (var db = new TravelDBContext())
+            {
+                db.Ticket.Attach(this);
+                db.Entry(this).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+        }
+
+        public static void ModifyTickets(ICollection<TicketEntity> tickets)
+        {
+            using (var db = new TravelDBContext())
+            {
+                db.Ticket.AddOrUpdate(tickets.ToArray());
+                db.SaveChanges();
+            }
+        }
+
+        public static ICollection<TicketEntity> GetTicketsByOrderId(Guid orderId)
+        {
+            using (var db = new TravelDBContext())
+            {
+                return db.Ticket.Where(item => item.OrderId.Equals(orderId)).ToList();
+            }
+        }
     }
 }

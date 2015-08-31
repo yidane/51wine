@@ -18,6 +18,6 @@ namespace Travel.Application.DomainModules.Order.Core.Interface
 
         void OrderFinish();
 
-        bool ChangeOrderEdit();
+        OTAResult<List<ChangeOrderEditResponse>> ChangeOrderEdit(ICollection<TicketEntity> refundTickets);
     }
 }

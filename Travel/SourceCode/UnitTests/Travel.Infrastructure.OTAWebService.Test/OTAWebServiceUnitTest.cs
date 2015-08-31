@@ -74,7 +74,7 @@ namespace Travel.Infrastructure.OTAWebService.Test
                             OrderNO = OrderNo,
                             ItemID = "1",
                             ProductCode = "berj001",
-                            ProductID = 57882,
+                            ProductID = 57963,
                             ProductName = "布尔津测试门票",
                             ProductPrice = 100,
                             ProductCount = 1,

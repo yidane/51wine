@@ -112,19 +112,34 @@
 
             using (var db = new TravelDBContext())
             {
-                order = db.Order.Include(item => item.Tickets).Include(item => item.OrderDetails).FirstOrDefault(item => item.OrderCode.Equals(orderId));
+                order = db.Order.Include(item => item.Tickets)
+                    .Include(item => item.OrderDetails)
+                    .FirstOrDefault(item => item.OrderCode.Equals(orderId));
             }
 
             return order;
         }
 
-        public decimal TotalFee()
+        public decimal GetCategoryTotalFee(Guid orderDetailCategory)
         {
             var orderDetail_Create =
                 this.OrderDetails.Where(
-                    item => item.OrderDetailCategoryId.Equals(Guid.Parse("{CE7B7E52-3811-44B6-AF9A-7562E0A773D2}")));
+                    item => item.OrderDetailCategoryId.Equals(orderDetailCategory));            
 
             return orderDetail_Create.Sum(detail => detail.TotalPrice);
+        }
+
+        public decimal TotalFee()
+        {
+            var tickets = TicketEntity.GetTicketsByOrderId(this.OrderId);
+            var refundTickets =
+                tickets.Where(
+                    item =>
+                    item.TicketStatus.Equals(Order.OrderStatus.TicketStatus_Refund_Audit)
+                    || item.TicketStatus.Equals(Order.OrderStatus.TicketStatus_Refund_RefundPayProcessing)
+                    || item.TicketStatus.Equals(Order.OrderStatus.TicketStatus_Refund_Complete));
+
+            return tickets.Sum(item => item.Price) - refundTickets.Sum(item => item.Price);
         }
     }
 }

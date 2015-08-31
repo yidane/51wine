@@ -5,6 +5,8 @@ using System.Text;
 
 namespace Travel.Application.DomainModules.Order.Core
 {
+    using System.Globalization;
+
     using Travel.Application.DomainModules.Order.Core.Interface;
     using Travel.Application.DomainModules.Order.Entity;
     using Travel.Infrastructure.DomainDataAccess.Order;
@@ -29,7 +31,10 @@ namespace Travel.Application.DomainModules.Order.Core
         public OTAOrder(OrderEntity order)
             : base(order)
         {
-        }
+            this._orderOperate = new OTAOrderOperate(this);
+            this._paymentOperate = new WXPaymentOperate();
+            this.RefundPayComplete += this.OTAOrder_RefundPayComplete;
+        }        
 
         /// <summary>
         /// 全局锁变量
@@ -51,7 +56,7 @@ namespace Travel.Application.DomainModules.Order.Core
                     {
                         foreach (var item in this.DateTicketList)
                         {
-                            item.CurrentStatus = DateTicketStatus_Lock;
+                            item.CurrentStatus = OrderStatus.DateTicketStatus_Lock;
                         }
 
                         DateTicketEntity.Update(this.DateTicketList);
@@ -81,10 +86,10 @@ namespace Travel.Application.DomainModules.Order.Core
             if (oatLockOrderResult.IsTrue)
             {
                 // 修改订单状态为待支付，票的状态为待支付
-                OrderObj.OrderStatus = OrderStatus_WaitPay;
+                OrderObj.OrderStatus = OrderStatus.OrderStatus_WaitPay;
                 foreach (var ticket in OrderObj.Tickets)
                 {
-                    ticket.TicketStatus = TicketStatus_WaitPay;
+                    ticket.TicketStatus = OrderStatus.TicketStatus_WaitPay;
                 }
 
                 OrderObj.ModifyOrder();
@@ -119,17 +124,126 @@ namespace Travel.Application.DomainModules.Order.Core
                         return true;
                     }
                     else
-                    {                        
+                    {
                         throw new InvalidOperationException("PaymentResponse.Result_Code");
                     }
                 }
                 else
-                {                    
+                {
                     throw new InvalidOperationException("PaymentResponse.Return_Code");
                 }
             }
 
             return false;
         }
+
+
+        #region 退票请求处理
+
+        private static object refundOrderLock = new object();
+
+        /// <summary>
+        /// 退票请求处理
+        /// </summary>
+        /// <param name="tickets"></param>
+        protected override void ProcessRefund(ICollection<TicketEntity> tickets)
+        {
+            var editResult = this._orderOperate.ChangeOrderEdit(tickets);
+            var refundOrders = new List<RefundOrderQueueEntity>();
+
+            if (editResult.IsTrue)
+            {
+                foreach (var ticketResponse in editResult.ResultData)
+                {                    
+                    if (ticketResponse.IsSucceed)
+                    {
+                        refundOrders.Add(new RefundOrderQueueEntity()
+                                             {
+                                                 QueueId = Guid.NewGuid(),
+                                                 OrderId = this.OrderObj.OrderId,
+                                                 ECode = ticketResponse.ProductCode,
+                                                 CreateTime = DateTime.Now,
+                                                 RefundQueueStatus = OrderStatus.RefundOrderQueueStatus_Init
+                                             });
+                    }
+                    else
+                    {
+                        refundOrders.Clear();
+                        break;
+                    }
+                }
+
+                if (refundOrders != null && refundOrders.Any())
+                {
+                    // 获取退票列表，检查是否有将要提交的退票申请重复的申请，没有则修改票状态，并加入退票队列
+                    lock (refundOrderLock)
+                    {
+                        var queue = RefundOrderQueueEntity.RefundOrderQueue;
+                        var isRefundOrderExists = false;
+
+                        foreach (var refundOrder in refundOrders)
+                        {
+                            if (queue.Any(item => item.ECode.Equals(refundOrder.ECode)))
+                            {
+                                isRefundOrderExists = true;
+                                break;
+                            }
+                        }
+
+                        if (!isRefundOrderExists)
+                        {
+                            foreach (var ticket in tickets)
+                            {
+                                ticket.TicketStatus = OrderStatus.TicketStatus_Refund_Audit;
+                                ticket.LatestModifyTime = DateTime.Now;
+                            }
+
+                            TicketEntity.ModifyTickets(tickets);
+                            RefundOrderQueueEntity.AddRefundOrders(refundOrders);
+                        }
+                        else
+                        {
+                            throw new InvalidOperationException("Refund ECode Exists");
+                        }
+                    }
+                }
+                else
+                {
+                    throw new InvalidOperationException("Refund");
+                }
+            }
+            else
+            {
+                throw new InvalidOperationException("Refund");
+            }
+        }
+
+        #endregion
+
+        #region 退款处理
+
+        void OTAOrder_RefundPayComplete(object sender, EventArgs e)
+        {
+            var eventArg = e as RefundEventArgs;
+            var refundRequest = new RefundOrderRequest();
+
+            if (eventArg != null)
+            {
+                var refundFee = TicketEntity.GetTicketsByOrderId(this.OrderObj.OrderId)
+                        .Where(item => item.RefundOrderId.Equals(eventArg.refundOrder.RefundOrderId))
+                        .Sum(item => item.Price);
+
+                refundRequest.transaction_id = this.OrderObj.WXOrderCode;
+                refundRequest.out_trade_no = this.OrderObj.OrderCode;
+                refundRequest.out_refund_no = eventArg.refundOrder.RefundOrderCode;
+                refundRequest.total_fee = int.Parse((this.OrderObj.TotalFee() * 100).ToString(CultureInfo.InvariantCulture));
+                refundRequest.refund_fee = int.Parse((refundFee * 100).ToString(CultureInfo.InvariantCulture));
+
+                // todo: 处理返回值 
+                var refundResponse = this._paymentOperate.RefundPay(refundRequest);
+            }
+        }
+
+        #endregion
     }
 }

@@ -175,16 +175,16 @@ namespace Travel.Application.DomainModules.Order.Core
             {
                 var dateTickets = new List<DateTicketEntity>();
 
-                this.OrderObj.OrderStatus = Order.OrderStatus_PayComplete;
+                this.OrderObj.OrderStatus = OrderStatus.OrderStatus_PayComplete;
                 this.OrderObj.WXOrderCode = this.PaymentResponse.transaction_id;
                 foreach (var ticket in this.OrderObj.Tickets)
                 {
-                    ticket.TicketStatus = Order.TicketStatus_PayComplete;
+                    ticket.TicketStatus = OrderStatus.TicketStatus_PayComplete;
 
                     var dateTicket = DateTicketEntity.GetDateTicketByTicketId(ticket.TicketId);
                     if (dateTicket != null)
                     {
-                        dateTicket.CurrentStatus = Order.DateTicketStatus_PayComplete;
+                        dateTicket.CurrentStatus = OrderStatus.DateTicketStatus_PayComplete;
                         dateTickets.Add(dateTicket);
                     }
                 }

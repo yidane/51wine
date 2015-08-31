@@ -104,10 +104,21 @@
     <Compile Include="Migrations\201508310126545_OrderUpdate1.Designer.cs">
       <DependentUpon>201508310126545_OrderUpdate1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201508311301020_OrderUpdate.cs" />
+    <Compile Include="Migrations\201508311301020_OrderUpdate.Designer.cs">
+      <DependentUpon>201508311301020_OrderUpdate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201508311313550_OrderUpdate2.cs" />
+    <Compile Include="Migrations\201508311313550_OrderUpdate2.Designer.cs">
+      <DependentUpon>201508311313550_OrderUpdate2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Order\DateTicketEntity.cs" />
     <Compile Include="Order\OrderDetailEntity.cs" />
     <Compile Include="Order\OrderEntity.cs" />
+    <Compile Include="Order\OrderStatus.cs" />
+    <Compile Include="Order\RefundOrderEntity.cs" />
+    <Compile Include="Order\RefundOrderQueueEntity.cs" />
     <Compile Include="Order\TicketCategoryEntity.cs" />
     <Compile Include="Order\TicketEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -164,6 +175,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201508310126545_OrderUpdate1.resx">
       <DependentUpon>201508310126545_OrderUpdate1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508311301020_OrderUpdate.resx">
+      <DependentUpon>201508311301020_OrderUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508311313550_OrderUpdate2.resx">
+      <DependentUpon>201508311313550_OrderUpdate2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -49,5 +49,19 @@
         /// 总价
         /// </summary>
         public decimal TotalPrice { get; set; }
+
+        public decimal TotalFee()
+        {
+            return this.SingleTicketPrice * this.Count;
+        }
+
+        public void Add()
+        {
+            using (var db = new TravelDBContext())
+            {
+                db.OrderDetail.Add(this);
+                db.SaveChanges();
+            }
+        }
     }
 }

@@ -6,8 +6,11 @@ using System.Text;
 
 namespace Travel.Application.DomainModules.Order.Core
 {
+    using System.Collections.Specialized;
     using System.Data;
     using System.Globalization;
+    using System.Transactions;
+
     using Travel.Application.DomainModules.Order.Core.Interface;
     using Travel.Application.DomainModules.Order.Entity;
     using Travel.Infrastructure.DomainDataAccess.Order;
@@ -19,60 +22,7 @@ namespace Travel.Application.DomainModules.Order.Core
 
         protected IPaymentOperate _paymentOperate;
 
-        private EventHandlerList _events;
-
-        #region 状态
-
-        /// <summary>
-        /// 初始订单状态
-        /// </summary>
-        public const string OrderStatus_Init = "OS20001";
-        public const string OrderStatus_WaitPay = "OS20002";
-        public const string OrderStatus_PayComplete = "OS20003";
-        public const string OrderStatus_WaitRefund = "OS20004";
-        public const string OrderStatus_WaitUse = "OS20005";
-        public const string DateTicketStatus_Init = "DTS10001";
-        public const string DateTicketStatus_Lock = "DTS10002";
-        public const string DateTicketStatus_PayComplete = "DTS10003";
-        public const string TicketStatus_Init = "TS30001";
-
-        /// <summary>
-        /// 待付款
-        /// </summary>
-        public const string TicketStatus_WaitPay = "TS30006";
-
-
-        /// <summary>
-        /// 已付款
-        /// </summary>
-        public const string TicketStatus_PayComplete = "TS30002";
-
-        /// <summary>
-        /// 待使用
-        /// </summary>
-        public const string TicketStatus_WaitUse = "TS30003";
-
-        /// <summary>
-        /// 待退票
-        /// </summary>
-        public const string TicketStatus_WaitRefund = "TS30004";
-
-        /// <summary>
-        /// 已退票
-        /// </summary>
-        public const string TicketStatus_Refunded = "TS30005";
-
-        #endregion
-
-        /// <summary>
-        /// 购票的详情类型
-        /// </summary>
-        public const string OrderDetailCategory_Create = "{CE7B7E52-3811-44B6-AF9A-7562E0A773D2}";
-
-        /// <summary>
-        /// 退票的详情类型
-        /// </summary>
-        public const string OrderDetailCategory_Refund = "{2A09F347-480A-4AF3-95AE-480984262DD0}";
+        private EventHandlerList _events;        
 
         public OrderRequestEntity OrderRequest;
 
@@ -82,8 +32,8 @@ namespace Travel.Application.DomainModules.Order.Core
 
         internal static readonly object EventPreValidate = new Object();
         internal static readonly object EventPreCreateOrder = new Object();
-        internal static readonly object EventCreateOrderComplete = new Object();
-        
+        internal static readonly object EventCreateOrderComplete = new Object();   
+        internal static readonly object EvnetRefundPayComplete=new object();
 
         public Order(OrderRequestEntity orderRequest)
         {
@@ -145,7 +95,20 @@ namespace Travel.Application.DomainModules.Order.Core
             {
                 this.Events.RemoveHandler(EventCreateOrderComplete, value);
             }
-        }        
+        }
+
+        public event EventHandler RefundPayComplete
+        {
+            add
+            {
+                this.Events.AddHandler(EvnetRefundPayComplete, value);
+            }
+
+            remove
+            {
+                this.Events.RemoveHandler(EvnetRefundPayComplete, value);
+            }
+        }
 
         protected virtual void OnPreValidate(EventArgs e)
         {
@@ -172,7 +135,25 @@ namespace Travel.Application.DomainModules.Order.Core
             {
                 handler(this, e);
             }
-        }        
+        }
+
+        public class RefundEventArgs :EventArgs
+        {
+            public OrderDetailEntity orderDetail { get; set; }
+
+            public RefundOrderEntity refundOrder { get; set; }
+
+            public ICollection<TicketEntity> tickets { get; set; }
+        }
+
+        protected virtual void OnRefundPayComplete(EventArgs e)
+        {
+            var handler = (EventHandler)this.Events[EvnetRefundPayComplete];
+            if (handler != null)
+            {
+                handler(this, e);
+            }
+        }
 
         #endregion
 
@@ -258,9 +239,13 @@ namespace Travel.Application.DomainModules.Order.Core
                                     {
                                         TicketId = dateTicket.DateTicketId,
                                         OrderId = this.OrderObj.OrderId,
+                                        RefundOrderId = default(Guid?),
+                                        RefundOrderDetailId = default(Guid?),
+                                        OrderDetailId = this.OrderObj.OrderDetails.First().OrderDetailId,
                                         TicketCategoryId = ticketCategory.TicketCategoryId,
                                         TicketCode = dateTicket.TicketCode,
-                                        TicketStatus = TicketStatus_Init,
+                                        Price = dateTicket.TicketPrice,
+                                        TicketStatus = OrderStatus.TicketStatus_Init,
                                         ECode = string.Empty,
                                         CreateTime = DateTime.Now,
                                         LatestModifyTime = DateTime.Now,
@@ -294,7 +279,7 @@ namespace Travel.Application.DomainModules.Order.Core
                              ContactPersonName = this.OrderRequest.ContactPersonName,
                              MobilePhoneNumber = this.OrderRequest.MobilePhoneNumber,
                              IdentityCardNumber = this.OrderRequest.IdentityCardNumber,
-                             OrderStatus = OrderStatus_Init,
+                             OrderStatus = OrderStatus.OrderStatus_Init,
                              HasCoupon = !string.IsNullOrEmpty(this.OrderRequest.CouponId),
                              CouponId = string.IsNullOrEmpty(this.OrderRequest.CouponId) ? default(Guid?) : Guid.Parse(this.OrderRequest.CouponId),
                              OrderDetails = new List<OrderDetailEntity>(),
@@ -320,7 +305,7 @@ namespace Travel.Application.DomainModules.Order.Core
                                    {
                                        OrderDetailId = Guid.NewGuid(),
                                        OrderId = this.OrderObj.OrderId,
-                                       OrderDetailCategoryId = Guid.Parse(OrderDetailCategory_Create),
+                                       OrderDetailCategoryId = Guid.Parse(OrderStatus.OrderDetailCategory_Create),
                                        TicketCategoryId =
                                            Guid.Parse(
                                                this.OrderRequest
@@ -365,6 +350,117 @@ namespace Travel.Application.DomainModules.Order.Core
         protected virtual void OrderComfirm()
         {
             throw new NotImplementedException();
+        }
+
+        #endregion
+
+        #region 退票请求处理
+
+        /// <summary>
+        /// 退票请求处理
+        /// </summary>
+        /// <param name="tickets">此参数必须通过ECode从数据库查询得到</param>
+        public void ProcessRefundRequestMain(IList<TicketEntity> tickets)
+        {
+            if (this.IsRefundRequestCorrect(tickets))
+            {
+                this.ProcessRefund(tickets);
+            }
+        }
+
+        protected virtual void ProcessRefund(ICollection<TicketEntity> tickets)
+        {
+            throw new InvalidOperationException();
+        }
+
+        /// <summary>
+        /// 判断申请退票操作的票的状态是否正确
+        /// </summary>
+        /// <param name="tickets"></param>
+        /// <returns></returns>
+        private bool IsRefundRequestCorrect(IEnumerable<TicketEntity> tickets)
+        {
+            var canTicketRefund = false;
+
+            foreach (var ticket in tickets)
+            {
+                canTicketRefund = ticket.TicketStatus.Equals(OrderStatus.TicketStatus_WaitUse);
+
+                if (!canTicketRefund)
+                {
+                    break;
+                }
+            }
+
+            return canTicketRefund;
+        }
+
+        #endregion
+
+        #region 退款处理
+
+        /// <summary>
+        /// 处理退款
+        /// </summary>
+        /// <param name="tickets">所有tickets必须是同一个订单的</param>
+        public void ProcessRefundPayment(ICollection<TicketEntity> tickets)
+        {
+            if (this.OrderObj != null)
+            {
+                var orderDetail = new OrderDetailEntity()
+                                      {
+                                          OrderDetailId = Guid.NewGuid(),
+                                          OrderDetailCategoryId = Guid.Parse(OrderStatus.OrderDetailCategory_Refund),
+                                          OrderId = this.OrderObj.OrderId,
+                                          TicketCategoryId = tickets.First().TicketCategoryId,
+                                          Count = tickets.Count,
+                                          SingleTicketPrice = tickets.First().Price,
+                                          IsDiscount = false,
+                                          DiscountCategoryId = default(Guid?)
+                                      };
+                orderDetail.TotalPrice = orderDetail.TotalFee();
+
+                var refundOrder = new RefundOrderEntity()
+                                      {
+                                          RefundOrderId = Guid.NewGuid(),
+                                          OrderId = this.OrderObj.OrderId,
+                                          RefundOrderCode = this.CreateRefundOrderCode(),
+                                          WXRefundOrderCode = string.Empty,
+                                          CreateTime = DateTime.Now,
+                                          RefundStatus = OrderStatus.RefundOrderStatus_Init,
+                                          LatestModifyTime = DateTime.Now,
+                                          OperatorName = "后台管理员"
+                                      };
+
+                foreach (var refundTicket in tickets)
+                {
+                    refundTicket.RefundOrderId = refundOrder.RefundOrderId;
+                    refundTicket.RefundOrderDetailId = orderDetail.OrderDetailId;
+                    refundTicket.TicketStatus = OrderStatus.TicketStatus_Refund_RefundPayProcessing;
+                    refundTicket.LatestModifyTime = DateTime.Now;
+                }
+
+                using (var scope = new TransactionScope())
+                {                                        
+                    refundOrder.Add();
+                    orderDetail.Add();
+                    TicketEntity.ModifyTickets(tickets);
+                    
+                    scope.Complete();
+                }
+
+
+                var eventArgs = new RefundEventArgs();
+                eventArgs.orderDetail = orderDetail;
+                eventArgs.refundOrder = refundOrder;
+                eventArgs.tickets = tickets;
+                this.OnRefundPayComplete(eventArgs);
+            }
+        }
+
+        protected string CreateRefundOrderCode()
+        {
+            return "T" + DateTime.Now.ToString("yyyyMMddHHmmssffff") + this.GetRandom();
         }
 
         #endregion
