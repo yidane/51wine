@@ -14,103 +14,237 @@
             margin-left: 0;
         }
     </style>
+
+    <style>
+        body {
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-size: 14px;
+            line-height: 1.42857143;
+            color: #333;
+            background-color: #999999;
+            background-repeat: repeat-y;
+            background-size: 100% auto;
+            background-image: url(../img/yyhc_bg.jpg);
+        }
+
+        * {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        .ticket {
+            margin-right: 8rem;
+            height: 100%;
+            width: 99%;
+            border: 0;
+        }
+
+            .ticket section {
+                background-color: white;
+            }
+
+        .full-w {
+            width: 100%;
+        }
+
+        .silde-background {
+            background: url(../images/bg2.jpg) 100% no-repeat;
+        }
+
+        .silde-center {
+            margin-bottom: 30px;
+            margin-top: 25px;
+            text-align: center;
+        }
+
+        .img-border {
+            border: 10px;
+            border-color: #6666FF;
+            border-style: solid;
+        }
+
+        .text-uppercase {
+            text-transform: uppercase;
+        }
+
+        p {
+            margin: 10px;
+        }
+
+        b, strong {
+            font-weight: 700;
+        }
+
+        .text-danger {
+            color: #a94442;
+        }
+
+        .text-success {
+            color: #3c763d;
+        }
+
+        .text-muted {
+            color: #777;
+        }
+
+        .text-right {
+            text-align: right;
+        }
+
+        .pull-left {
+            float: left !important;
+        }
+
+        .pull-right {
+            float: right !important;
+        }
+
+        .item-pullleft {
+            margin-right: 10px;
+        }
+
+
+        .btn-primary {
+            color: #fff;
+            background-color: #337ab7;
+            border-color: #2e6da4;
+        }
+
+        .btn-no-border-radius {
+            border-radius: 0;
+        }
+
+        .gpd-item {
+            padding: 10px 0;
+        }
+
+        .gpd-item-title {
+            font-size: 18px;
+            position: relative;
+            border-bottom: 1px solid #d7c38c;
+            padding-bottom: 6px;
+            padding-bottom: 6px;
+        }
+
+        .gp-icons {
+            background-image: url(../images/gp_icons.png);
+            background-size: 320px auto;
+        }
+
+        .gpd-up-icon {
+            width: 44px;
+            height: 32px;
+            position: absolute;
+            right: 0;
+            top: -2px;
+            background-position: -34px -41px;
+        }
+
+        .gdp-curr .gpd-up-icon {
+            background-position: -34px 3px;
+        }
+
+        .gpd-content {
+            display: none;
+        }
+
+        .gdp-curr .gpd-content {
+            display: block;
+        }
+    </style>
     <link href="../styles/normalize.css" rel="stylesheet" />
 </head>
 <body>
-
-    <div id="container" class="container">
-        <div class="row">
-            <section>
-                <div class="swiper-container gpd-ablum">
-                    <div class="swiper-wrapper">
-                        <div class="swiper-slide">
-                            <img class="" src="../images/ticket1.jpg">
-                        </div>
-                        <div class="swiper-slide">
-                            <img class="" src="../images/ticket2.jpg">
-                        </div>
-                        <div class="swiper-slide">
-                            <img class="" src="../images/ticket3.jpg">
-                        </div>
-                        <div class="swiper-slide">
-                            <img class="" src="../images/ticket4.jpg">
-                        </div>
-                        <div class="swiper-slide">
-                            <img class="" src="../images/ticket5.jpg">
-                        </div>
-                        <div class="swiper-slide">
-                            <img class="" src="../images/ticket6.jpg">
-                        </div>
+    <div class="ticket">
+        <section>
+            <div class="swiper-container gpd-ablum">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <img class="" src="../images/ticket1.jpg">
                     </div>
-                    <div class="swiper-pagination"></div>
+                    <div class="swiper-slide">
+                        <img class="" src="../images/ticket2.jpg">
+                    </div>
+                    <div class="swiper-slide">
+                        <img class="" src="../images/ticket3.jpg">
+                    </div>
+                    <div class="swiper-slide">
+                        <img class="" src="../images/ticket4.jpg">
+                    </div>
+                    <div class="swiper-slide">
+                        <img class="" src="../images/ticket5.jpg">
+                    </div>
+                    <div class="swiper-slide">
+                        <img class="" src="../images/ticket6.jpg">
+                    </div>
                 </div>
-            </section>
+                <div class="swiper-pagination"></div>
+            </div>
+        </section>
 
-            <div class="gpd-ticket">
-                <span><strong>￥120元</strong></span>
-                <a id="payBtn" href="javascript:GotoConfirm();">立即购票</a>
-            </div>
+        <section class="gpd-ticket">
+            <span><strong>￥120元</strong></span>
+            <a id="payBtn" href="javascript:GotoConfirm();">立即购票</a>
+        </section>
 
-            <hr style="border: 1px dotted; width: 100%; margin: auto" />
-            <div class="info-ticket">
-                <p>
-                    【本套票为半价票，1.2米以下的儿童以及65~70岁老人适用，仅包含入园门票，车票需单独购买；<!--购买后凭二维码电子票直接扫码入园-->】
-                </p>
+        <hr style="border: 1px dotted; width: 100%; margin: auto" />
+        <section class="info-ticket">
+            <p>
+                【本套票为半价票，1.2米以下的儿童以及65~70岁老人适用，仅包含入园门票，车票需单独购买；<!--购买后凭二维码电子票直接扫码入园-->】
+            </p>
+        </section>
+        <div class="segmentation"></div>
+        <!--详情-->
+        <section class="gpd-item">
+            <div class="gpd-item-title">
+                <img class="detailicon-ticket" src="../images/introduction.png" />景区介绍<div class="gp-icons gpd-up-icon"></div>
             </div>
-            <div class="segmentation"></div>
-            <!--详情-->
-            <div class="gpd-item">
-                <div class="gpd-item-title gpd-item-title-1">
-                    <img class="detailicon-ticket" src="../images/introduction.png" />景区介绍<div class="gp-icons gpd-up-icon gpd-up-icon-1"></div>
-                    <div class="line-title"></div>
-                </div>
-                <div class="gpd-content">
-                    <p>喀纳斯湖位于新疆维吾尔族自治区阿勒泰地区布尔津县境内北部，北起卡勒玛虚，南至何乌特，东接铁外壳，西到阿尔圭萨拉。纬48°81′46″，东经87°04′10″，距布尔津县城150公里，面积45.75k㎡，平均水深120米，最深处达到188.5米，蓄水量达53.8亿立方米，是一个坐落在阿尔泰深山密林中的高山湖泊。</p>
-                </div>
+            <div class="gpd-content">
+                <p>喀纳斯湖位于新疆维吾尔族自治区阿勒泰地区布尔津县境内北部，北起卡勒玛虚，南至何乌特，东接铁外壳，西到阿尔圭萨拉。纬48°81′46″，东经87°04′10″，距布尔津县城150公里，面积45.75k㎡，平均水深120米，最深处达到188.5米，蓄水量达53.8亿立方米，是一个坐落在阿尔泰深山密林中的高山湖泊。</p>
             </div>
+        </section>
 
-            <div class="gpd-item ">
-                <div class="gpd-item-title gpd-item-title-1">
-                    <img class="detailicon-ticket" src="../images/info.png" />使用须知<div class="gp-icons gpd-up-icon gpd-up-icon-1"></div>
-                    <div class="line-title"></div>
-                </div>
-                <div class="gpd-content">
-                    <p>【取票方式】</p>
-                    <p>喀纳斯景区内所有景点，注：家房屋需单独购票</p>
-                    <p><span>【购票条件】</span></p>
-                    <p>特惠半价票，适用于1.2米以下的儿童以及65-70岁老人</p>
-                    <p>【入园】</p>
-                    <p>微信购票后凭电子票二维码扫码入园</p>
-                    <p>【发票】</p>
-                    <p>微信购票暂不支持开具发票，敬请期待后续优化</p>
-                </div>
+        <section class="gpd-item">
+            <div class="gpd-item-title">
+                <img class="detailicon-ticket" src="../images/info.png" />使用须知<div class="gp-icons gpd-up-icon"></div>
             </div>
+            <div class="gpd-content">
+                <p>【取票方式】</p>
+                <p>喀纳斯景区内所有景点，注：家房屋需单独购票</p>
+                <p><span>【购票条件】</span></p>
+                <p>特惠半价票，适用于1.2米以下的儿童以及65-70岁老人</p>
+                <p>【入园】</p>
+                <p>微信购票后凭电子票二维码扫码入园</p>
+                <p>【发票】</p>
+                <p>微信购票暂不支持开具发票，敬请期待后续优化</p>
+            </div>
+        </section>
 
-            <div class="gpd-item ">
-                <div class="gpd-item-title gpd-item-title-1">
-                    <img class="detailicon-ticket" src="../images/undo.png" />退票规则<div class="gp-icons gpd-up-icon gpd-up-icon-1"></div>
-                    <div class="line-title"></div>
-                </div>
-                <div class="gpd-content">
-                    <p>1、支付成功后，可在票据有效期内申请退票，过期则视为作废不予受理退票</p>
-                    <p>2、可在我的订单中申请退票，申请后会先审核</p>
-                    <p>3、工作人员会在1~2个工作日内处理您的退票申请</p>
-                    <p>4、审核通过后，支付款额会自动退回微信钱包</p>
-                    <p>5、微信门票一经扫码入园后，不予退票，如二进票入园一次后即不予退票</p>
-                </div>
+        <section class="gpd-item ">
+            <div class="gpd-item-title">
+                <img class="detailicon-ticket" src="../images/undo.png" />退票规则<div class="gp-icons gpd-up-icon"></div>
             </div>
-            <div class="gpd-item ">
-                <div class="gpd-item-title">
-                    <img class="detailicon-ticket" src="../images/time.png" />票有效期 <span style="float: right">2015-08-01-2015-12-31</span>
-                    <div class="line-title"></div>
-                </div>
+            <div class="gpd-content">
+                <p>1、支付成功后，可在票据有效期内申请退票，过期则视为作废不予受理退票</p>
+                <p>2、可在我的订单中申请退票，申请后会先审核</p>
+                <p>3、工作人员会在1~2个工作日内处理您的退票申请</p>
+                <p>4、审核通过后，支付款额会自动退回微信钱包</p>
+                <p>5、微信门票一经扫码入园后，不予退票，如二进票入园一次后即不予退票</p>
             </div>
-            <div class="segmentation"></div>
-            <div class="gpd-phone call-phone">
-                <div class="gpd-form-group gpd-phone-label">
-                    <img class="detailicon-ticket" src="../images/tel.png" /><a class="yyd-item yyd-tel" href="tel:010-65984561" style="text-align: center">咨询电话 010-65984561</a>
-                    <div class="line-title"></div>
-                </div>
+        </section>
+
+        <section class="gpd-item ">
+            <div class="gpd-item-title">
+                <img class="detailicon-ticket" src="../images/time.png" />票有效期 <span style="float: right">2015-08-01-2015-12-31</span>
+                <div class="line-title"></div>
+            </div>
+        </section>
+
+        <div class="segmentation"></div>
+        <div class="gpd-phone">
+            <div class="gpd-form-group gpd-phone-label">
+                <img class="detailicon-ticket" src="../images/tel.png" /><a class="yyd-item yyd-tel" href="tel:010-65984561" style="text-align: center">咨询电话 010-65984561</a>
             </div>
         </div>
     </div>
@@ -124,9 +258,24 @@
     $(document).ready(function () {
 
     });
-    
+
     function GotoConfirm() {
         document.location.href = "TicketConfirm.html";
     }
+
+    var swiper = new Swiper('.swiper-container', {
+        autoplay: 3000,
+        loop: true,
+        pagination: '.swiper-pagination',
+    });
+
+    Zepto(function ($) {
+        $(".gp-icons.gpd-up-icon").click(function () {
+            var zThis = $(this);
+            var zThisParent = zThis.parents(".gpd-item");
+            zThisParent.toggleClass("gdp-curr");
+            zThisParent.siblings(".gpd-item").removeClass("gdp-curr");
+        });
+    });
 </script>
 </html>
