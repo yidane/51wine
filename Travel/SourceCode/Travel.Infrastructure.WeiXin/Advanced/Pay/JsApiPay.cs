@@ -91,5 +91,21 @@ namespace Travel.Infrastructure.WeiXin.Advanced.Pay
             var result = WxPayApi.Refund(payData);
             return new RefundOrderResponse(result);
         }
+
+        public bool QueryOrder(string transaction_id)
+        {
+            WxPayData req = new WxPayData();
+            req.SetValue("transaction_id", transaction_id);
+            WxPayData res = WxPayApi.OrderQuery(req);
+            if (res.GetValue("return_code").ToString() == "SUCCESS" &&
+                res.GetValue("result_code").ToString() == "SUCCESS")
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }

@@ -197,7 +197,10 @@ namespace Travel.Infrastructure.WeiXin.Advanced.Pay.Model
                 bank_type = GetNodeInnerText(xmlDocument, "bank_type");
                 total_fee = int.Parse(GetNodeInnerText(xmlDocument, "total_fee"));
                 fee_type = GetNodeInnerText(xmlDocument, "fee_type");
-                cash_fee = int.Parse(GetNodeInnerText(xmlDocument, "cash_fee"));
+
+                var cash_fee_text = GetNodeInnerText(xmlDocument, "cash_fee");
+                if (!string.IsNullOrEmpty(cash_fee_text))
+                    cash_fee = int.Parse(cash_fee_text);
                 cash_fee_type = GetNodeInnerText(xmlDocument, "cash_fee_type");
                 var couponfee = GetNodeInnerText(xmlDocument, "coupon_fee");
                 coupon_fee = string.IsNullOrEmpty(couponfee) ? 0 : int.Parse(couponfee);
@@ -227,6 +230,61 @@ namespace Travel.Infrastructure.WeiXin.Advanced.Pay.Model
         {
             var node = xmlDocument.SelectSingleNode(string.Format("xml/{0}", nodeName));
             return node != null ? node.InnerText : string.Empty;
+        }
+
+        public string Report(out bool isSucceed)
+        {
+            isSucceed = false;
+            if (string.Equals(return_code, "SUCCESS", StringComparison.CurrentCultureIgnoreCase))
+            {
+                //检查支付结果中transaction_id是否存在
+                if (string.IsNullOrEmpty(transaction_id))
+                {
+                    //若transaction_id不存在，则立即返回结果给微信支付后台
+                    var res = new WxPayData();
+                    res.SetValue("return_code", "FAIL");
+                    res.SetValue("return_msg", "支付结果中微信订单号不存在");
+
+                    return res.ToXml();
+                }
+
+                //查询订单，判断订单真实性
+                if (!new JsApiPay().QueryOrder(transaction_id))
+                {
+                    //若订单查询失败，则立即返回结果给微信支付后台
+                    var res = new WxPayData();
+                    res.SetValue("return_code", "FAIL");
+                    res.SetValue("return_msg", "订单查询失败");
+
+                    return res.ToXml();
+                }
+                else
+                {
+                    //查询订单成功
+                    var res = new WxPayData();
+                    res.SetValue("return_code", "SUCCESS");
+                    res.SetValue("return_msg", "OK");
+
+                    isSucceed = true;
+                    return res.ToXml();
+                }
+            }
+            else
+            {
+                var res = new WxPayData();
+                res.SetValue("return_code", "FAIL");
+                res.SetValue("return_msg", "统一下单失败");
+                return res.ToXml();
+            }
+        }
+
+        public static string ReportError(string message)
+        {
+            var res = new WxPayData();
+            res.SetValue("return_code", "FAIL");
+            res.SetValue("return_msg", message);
+
+            return res.ToXml();
         }
     }
 
