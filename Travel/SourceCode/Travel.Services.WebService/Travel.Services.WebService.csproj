@@ -81,6 +81,9 @@
     <Compile Include="TicketWebService.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="UserWebService.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="WeChatWebService.cs">
       <SubType>Component</SubType>
     </Compile>

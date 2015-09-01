@@ -1109,7 +1109,7 @@ VPay.prototype.pay = function () {
 VPay.prototype.order = function () {
 
     var This = this,
-		options = this.opt;
+        options = this.opt;
 
     var ticketId = '956BFF5E-AA6A-454E-8F46-BD4175235C9E';
     var ticketName = '布尔津测试门票';
@@ -1117,21 +1117,38 @@ VPay.prototype.order = function () {
     //参数校验
     var zName = $('#name');
     var zNameVal = zName.val();
-    if (zNameVal == "") { VI.goBottom(); return VI.alert('姓名不能为空！'); }
+    if (zNameVal == "") {
+        VI.goBottom();
+        return VI.alert('姓名不能为空！');
+    }
     var zPhone = $('#phone');
     var zPhoneVal = zPhone.val();
-    if (zPhoneVal == "") { VI.goBottom(); return VI.alert('电话不能为空！'); }
-    if (!(VI.regPhone.test(zPhoneVal))) { VI.goBottom(); return VI.alert('电话号码错误！'); }
+    if (zPhoneVal == "") {
+        VI.goBottom();
+        return VI.alert('电话不能为空！');
+    }
+    if (!(VI.regPhone.test(zPhoneVal))) {
+        VI.goBottom();
+        return VI.alert('电话号码错误！');
+    }
 
     var zIDCard = $('#idcard');
     var zIDCardVal = zIDCard.val();
-    if (zIDCardVal == "") { VI.goBottom(); return VI.alert('身份证不能为空！'); }
-    if (!VI.idCard(zIDCardVal)) { VI.goBottom(); return VI.alert('身份证号错误！'); }
+    if (zIDCardVal == "") {
+        VI.goBottom();
+        return VI.alert('身份证不能为空！');
+    }
+    if (!VI.idCard(zIDCardVal)) {
+        VI.goBottom();
+        return VI.alert('身份证号错误！');
+    }
 
     var zNum = $('#ticketNum');
     var zNumVal = parseInt(zNum.val());
-    if (zNumVal <= 0) { VI.goBottom(); return VI.alert('购票数量不能为空！'); }
-
+    if (zNumVal <= 0) {
+        VI.goBottom();
+        return VI.alert('购票数量不能为空！');
+    }
 
     if (This.isLoading == 1) return;
 
@@ -1153,39 +1170,31 @@ VPay.prototype.order = function () {
                     signType: 'MD5', // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
                     paySign: result.Data.paySign, // 支付签名
                     success: function (res) {
-                        alert("Pay Succeed");
+
+                        This.isLoading = 0;
+                        //保存联系人信息
+                        VI.ajax({
+                            type: "post",
+                            url: '../WebService/TicketWebService.asmx/CreateOrder',
+                            dataType: 'json',
+                            data: { code: GetQueryString('code'), userName: zNameVal, mobile: zPhoneVal, idCard: zIDCardVal }
+                        });
+
+                        document.location.href = "../order/MyOrderList.html";
                     },
                     fail: function (res) {
                         alert(JSON.stringify(res));
+                    },
+                    complete: function (res) {
+                        This.isLoading = 0;
+                        zPayBtn.removeClass('z-btn-top');
                     }
                 });
-
-
-                //WeixinJSBridge.invoke('getBrandWCPayRequest',
-                //{
-                //    timestamp: result.Data.timeStamp, // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
-                //    nonceStr: result.Data.nonceStr, // 支付签名随机串，不长于 32 位
-                //    package: result.Data.package, // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=***）
-                //    signType: 'SHA1', // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
-                //    paySign: result.Data.paySign
-                //},
-                //function (res) {
-                //    if (res.err_msg == 'get_brand_wcpay_request:ok') {
-                //        alert(res.err_code + "______" + res.err_desc + "______" + res.err_msg);
-                //    }
-                //});
-
-                setTimeout(function () {
-                    This.isLoading = 0;
-                    zPayBtn.removeClass('z-btn-top');
-                }, 3000);
             } else {
                 alert(result.Message);
                 This.isLoading = 0;
                 zPayBtn.removeClass('z-btn-top');
             }
-
-
         },
         error: function (request, text, error) {
             alert(error);
@@ -1193,8 +1202,7 @@ VPay.prototype.order = function () {
             zPayBtn.removeClass('z-btn-top');
         },
     });
-
-}
+};
 
 
 function VOrder(options) {

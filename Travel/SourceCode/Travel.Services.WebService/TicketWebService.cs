@@ -22,23 +22,7 @@ namespace Travel.Services.WebService
         {
             try
             {
-                Session["OpenID"] = "obzTsw5qxlbwGYYZJC9b-91J-X1Y";
-
-                AccessTokenDTO accessToken = null;
-                var openID = string.Empty;
-                if (Session["OpenID"] == null)
-                {
-                    accessToken = new WeChatService().GetAccessToken(code);
-                    if (accessToken != null && !string.IsNullOrEmpty(accessToken.openid))
-                    {
-                        Session["OpenID"] = accessToken.openid;
-                        openID = accessToken.openid;
-                    }
-                }
-                else
-                {
-                    openID = Session["OpenID"].ToString();
-                }
+                var openID = GetOpenIDByCodeID(code);
 
                 if (!string.IsNullOrEmpty(openID))
                 {
@@ -86,6 +70,12 @@ namespace Travel.Services.WebService
             {
                 Context.Response.Write(AjaxResult.Error(exception.Message));
             }
+        }
+
+        [WebMethod(EnableSession = true)]
+        public void RefundOrder(string code)
+        {
+            //在支付失败或者支付有问题时候，从OTA中取消订单占用，撤销微信订单
         }
     }
 }

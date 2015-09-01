@@ -88,15 +88,15 @@
                     </div>
                     <div class="gpd-form-group-right">
                         <label class="gpd-left">姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名<span class="gpd-red">*</span></label>
-                        <input type="text" id="name" name="name" value="易必浩" />
+                        <input type="text" id="name" name="name" value="" />
                     </div>
                     <div class="gpd-form-group-right">
                         <label class="gpd-left">手机号码<span class="gpd-red">*</span></label>
-                        <input type="tel" id="phone" name="phone" value="18910063051" maxlength="11" />
+                        <input type="tel" id="phone" name="phone" value="" maxlength="11" />
                     </div>
                     <div class="gpd-form-group-right">
                         <label class="gpd-left">身份证号<span class="gpd-red">*</span></label>
-                        <input type="text" id="idcard" name="idcard" value="420921198603095113" />
+                        <input type="text" id="idcard" name="idcard" value="" />
                     </div>
                 </div>
 
@@ -132,6 +132,22 @@
     };
 
     $(document).ready(function () {
+        $.ajax({
+            url: "../WebService/UserWebService.asmx/GetContract",
+            type: "post",
+            dataType: "json",
+            data: { code: GetQueryString("code") },
+            success: function (result) {
+                if (result.IsSuccess) {
+                    if (result.Data.HasValue) {
+                        $("#name").val(result.Data.Value.UserName);
+                        $("#phone").val(result.Data.Value.Mobile);
+                        $("#idcard").val(result.Data.Value.IdCard);
+                    }
+                }
+            }
+        });
+
         $.ajax({
             url: "../WebService/WeChatWebService.asmx/WeChatConfigInit",
             type: "post",
@@ -229,9 +245,5 @@
     window.share.desc = "喀纳斯湖欢迎您!";
 
 </script>
-
-
-
-
 <script type="text/javascript" src="http://tajs.qq.com/stats?sId=46683389" charset="UTF-8"></script>
 </html>

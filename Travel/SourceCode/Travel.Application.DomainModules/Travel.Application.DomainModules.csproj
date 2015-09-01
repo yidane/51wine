@@ -65,6 +65,8 @@
     <Compile Include="Order\Entity\OrderRequestEntity.cs" />
     <Compile Include="Order\Service\OrderService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="User\DTO\UserContractInfo.cs" />
+    <Compile Include="User\UserService.cs" />
     <Compile Include="WeChat\DTOS\AccessTokenDTO.cs" />
     <Compile Include="WeChat\DTOS\CardTicketDTO.cs" />
     <Compile Include="WeChat\DTOS\SignatureDTO.cs" />

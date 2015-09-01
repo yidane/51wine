@@ -33,9 +33,13 @@
         // public virtual DbSet<MyEntity> MyEntities { get; set; }
 
         public virtual DbSet<Coupon.Entitys.Coupon> Coupon { get; set; }
-         public virtual DbSet<CouponType> CouponType { get; set; }
+
+        public virtual DbSet<CouponType> CouponType { get; set; }
+
         public virtual DbSet<UserGroup> UserGroup { get; set; }
+
         public virtual DbSet<UserInfo> UserInfo { get; set; }
+
         public virtual DbSet<CouponUsage> CouponUsage { get; set; }
 
         public virtual DbSet<OrderEntity> Order { get; set; }
@@ -52,6 +56,7 @@
 
         public virtual DbSet<RefundOrderEntity> RefundOrder { get; set; }
 
+        public virtual DbSet<UserContracts> UserContract { get; set; }
     }
 
     //public class MyEntity
