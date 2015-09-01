@@ -1,17 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Services;
 using Travel.Infrastructure.CommonFunctions;
+using Travel.Infrastructure.CommonFunctions.Ajax;
+using Travel.Application.DomainModules.Order.DTOs;
+using Travel.Application.DomainModules.Order.Service;
+using Travel.Infrastructure.DomainDataAccess.Order;
 
-namespace Travel.Presentation.Web.WebService
+namespace Travel.Services.WebService
 {
-    using Travel.Application.DomainModules.Order.DTOs;
-    using Travel.Application.DomainModules.Order.Service;
-    using Travel.Infrastructure.DomainDataAccess.Order;
-    using Travel.Services.WebService;
-
     /// <summary>
     /// OrderWebService 的摘要说明
     /// </summary>
@@ -26,19 +24,35 @@ namespace Travel.Presentation.Web.WebService
             return JSONHelper.ObjectToJson<List<TicketCategoryDTO>>(categories.ToList());
         }
 
-        public string MyOrders(string openId)
+        [WebMethod(EnableSession = true)]
+        public void GetMyOrders(string code)
         {
-            if (!string.IsNullOrEmpty(openId))
+            try
             {
-                var orders = new OrderService().MyOrders(openId);
+                var openId = GetOpenIDByCodeID(code);
+                var orderList = new OrderService().MyOrders(openId);
 
-                return JSONHelper.ObjectToJson<List<OrderDTO>>(orders.ToList());
+                Context.Response.Write(AjaxResult.Success(orderList));
             }
-            else
+            catch (Exception exception)
             {
-                return string.Empty;
+                Context.Response.Write(AjaxResult.Error(exception.Message));
             }
         }
+
+        //public string MyOrders(string openId)
+        //{
+        //    if (!string.IsNullOrEmpty(openId))
+        //    {
+        //        var orders = new OrderService().MyOrders(openId);
+
+        //        return JSONHelper.ObjectToJson<List<OrderDTO>>(orders.ToList());
+        //    }
+        //    else
+        //    {
+        //        return string.Empty;
+        //    }
+        //}
 
         public string MyTickets(string orderId)
         {
