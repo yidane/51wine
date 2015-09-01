@@ -74,13 +74,7 @@ namespace Travel.Infrastructure.WeiXin.Advanced.Pay.Model
         /// <remarks>商户系统内部的订单号,32个字符内、可包含字母, 其他说明见商户订单号 https://pay.weixin.qq.com/wiki/doc/api/jsapi.php?chapter=4_2</remarks>
         /// </summary>
         [Require(true, "")]
-        public string out_trade_no
-        {
-            get
-            {
-                return WxPayHelper.GenerateOutTradeNo();
-            }
-        }
+        public string out_trade_no { get; set; }
 
         /// <summary>
         /// 货币类型 （选填）
