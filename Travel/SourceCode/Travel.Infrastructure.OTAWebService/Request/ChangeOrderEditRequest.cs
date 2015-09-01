@@ -46,6 +46,7 @@ namespace Travel.Infrastructure.OTAWebService.Request
                     Ptime = Ptime,
                     Order = JSONHelper.Serialize(Order),
                     Details = JSONHelper.Serialize(Details),
+                    parkCode = parkCode,
                     Edittype = Edittype,
                     Type = Type,
                     Count = Count
@@ -60,6 +61,7 @@ namespace Travel.Infrastructure.OTAWebService.Request
                     Ptime = Ptime,
                     Order = JSONHelper.Serialize(Order),
                     Details = JSONHelper.Serialize(Details),
+                    parkCode = parkCode,
                     Edittype = Edittype,
                     Type = Type
                 };
