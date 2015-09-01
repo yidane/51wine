@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>喀纳斯湖</title>
+    <title>订票信息</title>
     <link href="../styles/swiper.min.css" rel="stylesheet" />
     <script src="../javaScripts/zepto.min.js"></script>
     <script src="../js/oAuth2.js"></script>
@@ -49,21 +49,22 @@
             </section>
 
             <div class="gpd-ticket">
-                <span style="font-size: 2em; color: #FF9A14; line-height:50px; margin-left:10px;"><strong>120&nbsp;元</strong></span>
-                <a id="payBtn" href="javascript:void(0);" style="float: right; width: 100px; height: 30px; display: inline-block; background: #FF9A14; text-align: center; line-height: 30px; color: white; font-weight: bold; font-size: 1.17em; margin-right:10px; margin-top:10px; border-radius: 8px;"><strong>微信支付</strong></a>
+                <span><strong>￥120元</strong></span>
+                <a id="payBtn" href="javascript:void(0);">微信支付</a>
             </div>
 
             <hr style="border: 1px dotted; width: 100%; margin: auto" />
-            <div>
-                <p style="margin-left: 7px; margin-right: 7px">
+            <div class="info-ticket">
+                <p>
                     【本套票为半价票，1.2米以下的儿童以及65~70岁老人适用，仅包含入园门票，车票需单独购买；<!--购买后凭二维码电子票直接扫码入园-->】
                 </p>
             </div>
-            <div style="background-color: #CCCCCC; width: 96%; height: 10px; margin: auto"></div>
+            <div class="segmentation"></div>
             <!--详情-->
             <div class="gpd-item">
                 <div class="gpd-item-title gpd-item-title-1">
-                    景区介绍<div class="gp-icons gpd-up-icon gpd-up-icon-1"></div>
+                    <img class="detailicon-ticket" src="../images/introduction.png" />景区介绍<div class="gp-icons gpd-up-icon gpd-up-icon-1"></div>
+                    <div class="line-title"></div>
                 </div>
                 <div class="gpd-content">
                     <p>喀纳斯湖位于新疆维吾尔族自治区阿勒泰地区布尔津县境内北部，北起卡勒玛虚，南至何乌特，东接铁外壳，西到阿尔圭萨拉。纬48°81′46″，东经87°04′10″，距布尔津县城150公里，面积45.75k㎡，平均水深120米，最深处达到188.5米，蓄水量达53.8亿立方米，是一个坐落在阿尔泰深山密林中的高山湖泊。</p>
@@ -72,7 +73,8 @@
 
             <div class="gpd-item ">
                 <div class="gpd-item-title gpd-item-title-1">
-                    使用须知<div class="gp-icons gpd-up-icon gpd-up-icon-1"></div>
+                    <img class="detailicon-ticket" src="../images/info.png" />使用须知<div class="gp-icons gpd-up-icon gpd-up-icon-1"></div>
+                    <div class="line-title"></div>
                 </div>
                 <div class="gpd-content">
                     <p>【取票方式】</p>
@@ -88,7 +90,8 @@
 
             <div class="gpd-item ">
                 <div class="gpd-item-title gpd-item-title-1">
-                    退票规则<div class="gp-icons gpd-up-icon gpd-up-icon-1"></div>
+                    <img class="detailicon-ticket" src="../images/undo.png" />退票规则<div class="gp-icons gpd-up-icon gpd-up-icon-1"></div>
+                    <div class="line-title"></div>
                 </div>
                 <div class="gpd-content">
                     <p>1、支付成功后，可在票据有效期内申请退票，过期则视为作废不予受理退票</p>
@@ -100,12 +103,13 @@
             </div>
             <div class="gpd-item ">
                 <div class="gpd-item-title">
-                    退票规则 <span style="float: right">2015-08-01-2015-12-31</span>
+                    <img class="detailicon-ticket" src="../images/time.png" />票有效期 <span style="float: right">2015-08-01-2015-12-31</span>
+                    <div class="line-title"></div>
                 </div>
             </div>
-
+            <div class="segmentation"></div>
             <!--订购信息-->
-            <div class="gpd-order">
+            <!--<div class="gpd-order">
                 <div class="gpd-order-title">
                     <div style="background-color: #CCCCCC; width: 100%; height: 4em; line-height: 4em; overflow: hidden; text-indent: 20px">
                         订票信息
@@ -134,12 +138,14 @@
                     </div>
                 </div>
 
-                <div class="gpd-phone call-phone">
+                
+            </div>-->
+            <div class="gpd-phone call-phone">
                     <div class="gpd-form-group gpd-phone-label">
-                        <a class="yyd-item yyd-tel" href="tel:010-65984561" style="text-align: center">咨询电话 010-65984561</a>
+                        <img class="detailicon-ticket" src="../images/tel.png" /><a class="yyd-item yyd-tel" href="tel:010-65984561" style="text-align: center">咨询电话 010-65984561</a>
+                        <div class="line-title"></div>
                     </div>
                 </div>
-            </div>
         </div>
     </div>
 </body>

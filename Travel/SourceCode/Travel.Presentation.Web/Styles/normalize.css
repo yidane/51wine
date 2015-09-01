@@ -1696,7 +1696,8 @@ pre {
 }
 
 .gp-icons {
-    background: url(../images/gp_icons.png);
+    background: url(../images/gp_icons1.png);
+    opacity:0.6;
     background-size: 320px auto;
 }
 
@@ -1710,13 +1711,13 @@ pre {
 }
 
 .gpd-ticket {
-    position:fixed;
-    bottom:0px;
-    height:50px;
-    width:100%;
-    z-index:9999;
-    background-image:url(../images/ticket.png);
-    background-repeat:repeat-x;
+    position: fixed;
+    bottom: 0px;
+    height: 50px;
+    width: 100%;
+    z-index: 9999;
+    background-image: url(../images/ticket.png);
+    background-repeat: repeat-x;
     /*background-color:#a6a6a6;*/
     /*padding: 20px 10px;*/
 }
@@ -1726,15 +1727,24 @@ pre {
         min-height: 89px;
     }
 
+    .gpd-ticket span {
+        font-size: 1.8em;
+        font-family:SimHei;
+        color: #fff;
+        line-height: 50px;
+        margin-left: 10px;
+    }
+
 .gpd-item {
     padding: 10px;
 }
 
 .gpd-item-title {
-    font-size: 18px;
+    font-size: 16px;
+    font-family: SimHei;
     position: relative;
-    border-bottom: 1px solid #d7c38c;
-    padding-bottom: 6px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 2px;
     margin-bottom: 10px;
 }
 
@@ -1748,11 +1758,16 @@ pre {
 }
 
 .gpd-item p {
+    font-size: 1rem;
+    color: #808080;
+    margin-left: 2rem;
+    margin-right: 2rem;
     margin-bottom: 4px;
 }
 
 .gpd-content {
     display: none;
+    border-bottom: 1px solid #ccc;
 }
 
 .gdp-curr .gpd-content {
@@ -1785,9 +1800,9 @@ pre {
 
 .gpd-form-group {
     position: relative;
-    padding-left: 80px;
+    padding-left: 30%;
     margin-bottom: 18px;
-    font-size: 16px;
+    font-size: 14px;
     height: 36px;
 }
 
@@ -1857,6 +1872,7 @@ pre {
     padding: 0 14px;
     line-height: 36px;
     margin-top: 10px;
+    margin-bottom: 50px;
 }
 
     .gpd-phone .gpd-form-group label {
@@ -1864,7 +1880,7 @@ pre {
     }
 
     .gpd-phone .gpd-form-group {
-        margin-bottom: 10px;
+        margin-bottom: 20px;
     }
 
 .gpd-phone-icon {
@@ -2630,6 +2646,51 @@ a.gpo-gate-order-a {
     }
 
 
+#payBtn {
+    float: right;
+    width: 100px;
+    height: 30px;
+    display: inline-block;
+    background: #44b549;
+    text-align: center;
+    line-height: 30px;
+    color: white;
+    /*font-weight: bold;*/
+    font-size: 1.3em;
+    font-family:"Microsoft YaHei";
+    margin-right: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+}
+
+.info-ticket p {
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    font-family: SimHei;
+}
+
+.segmentation {
+    background-color: #CCCCCC;
+    width: 100%;
+    height: 10px;
+    margin: auto;
+}
+
+.detailicon-ticket {
+    height: 30px;
+    width: 30px;
+    margin: auto 10px;
+}
+
+/*.line-title {
+    height: 2px;
+    bottom:0px;
+    background-image:url(../images/xx.png);
+    background-repeat:repeat-x;
+}*/
+
 @media screen and (min-width: 321px) {
     .yyl-item-l {
         height: 136px;
@@ -2654,7 +2715,11 @@ a.gpo-gate-order-a {
     /*.swiper-container-horizontal>.swiper-pagination {top: 300px;}*/
 }
 
-
+@media screen and (max-width:600px) {
+    .gpd-form-group {
+        padding-left: 15%;
+    }
+}
 
 
 
