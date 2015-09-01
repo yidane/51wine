@@ -19,7 +19,7 @@ namespace Travel.Application.OrderUnitTest
 
         public PaymentNotify PaymentNotify;
 
-        public ICollection<TicketEntity> refundTickets;
+        public IList<TicketEntity> refundTickets;
         
         [SetUp]
         public void Init()
@@ -46,7 +46,7 @@ namespace Travel.Application.OrderUnitTest
                                          mch_id = "100000100",
                                          nonce_str = "5d2b6c2a8db53831f7eda20af46e531c",
                                          openid = "obzTswxzFzzzdWdAKf2mWx3CrpXk",
-                                         out_trade_no = "C2015083121212304037132",
+                                         out_trade_no = "C2015090114025321236791",
                                          result_code = "SUCCESS",
                                          return_code = "SUCCESS",
                                          sign = "B552ED6B279343CB493C5DD0D78AB241",
@@ -57,8 +57,8 @@ namespace Travel.Application.OrderUnitTest
                                      };
 
             this.refundTickets =
-                TicketEntity.GetTicketsByOrderId(Guid.Parse("C7942BBE-0C7F-4DE2-AEFF-998DC38C4E3C"))
-                .Where(item => item.TicketCode.Equals("57882")).ToList();
+                TicketEntity.GetTicketsByOrderId(Guid.Parse("1D580DEE-2E6D-4323-AB40-984FCD4901D5"))
+                .Where(item => item.TicketId.Equals(57882)).ToList();
         }
 
         [Test]
@@ -82,10 +82,23 @@ namespace Travel.Application.OrderUnitTest
         {
             if (refundTickets != null && refundTickets.Any())
             {
-                var order = OrderEntity.GetOrderByOrderId(refundTickets.First().OrderId.ToString());
+                var order = OrderEntity.GetOrderByOrderId(refundTickets.First().OrderId);
                 var otaOrder = new OTAOrder(order);
+
+                otaOrder.ProcessRefundRequestMain(this.refundTickets);
+            }            
+        }
+
+        [Test]
+        public void RefundPay_RefundOrder_ReturnWXComfirmRefundPayRequest()
+        {
+            if (refundTickets != null && refundTickets.Any())
+            {
+                var order = OrderEntity.GetOrderByOrderId(refundTickets.First().OrderId);
+                var otaOrder = new OTAOrder(order);
+
+                otaOrder.ProcessRefundPayment(refundTickets);
             }
-            
         }
     }
 }

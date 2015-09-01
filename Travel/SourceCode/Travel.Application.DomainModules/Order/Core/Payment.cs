@@ -137,7 +137,7 @@ namespace Travel.Application.DomainModules.Order.Core
                 {
                     lock (orderLock)
                     {
-                        this.OrderObj = OrderEntity.GetOrderByOrderId(this.PaymentResponse.out_trade_no);
+                        this.OrderObj = OrderEntity.GetOrderByOrderCode(this.PaymentResponse.out_trade_no);
                         this.OnPrePayment(EventArgs.Empty);
                         if (!this.IsPaymentInfoProcessed)
                         {
@@ -180,6 +180,7 @@ namespace Travel.Application.DomainModules.Order.Core
                 foreach (var ticket in this.OrderObj.Tickets)
                 {
                     ticket.TicketStatus = OrderStatus.TicketStatus_PayComplete;
+                    ticket.LatestModifyTime = DateTime.Now;
 
                     var dateTicket = DateTicketEntity.GetDateTicketByTicketId(ticket.TicketId);
                     if (dateTicket != null)

@@ -106,7 +106,7 @@
             }
         }
 
-        public static OrderEntity GetOrderByOrderId(string orderId)
+        public static OrderEntity GetOrderByOrderCode(string orderCode)
         {
             OrderEntity order = null;
 
@@ -114,10 +114,20 @@
             {
                 order = db.Order.Include(item => item.Tickets)
                     .Include(item => item.OrderDetails)
-                    .FirstOrDefault(item => item.OrderCode.Equals(orderId));
+                    .FirstOrDefault(item => item.OrderCode.Equals(orderCode));
             }
 
             return order;
+        }
+
+        public static OrderEntity GetOrderByOrderId(Guid orderId)
+        {
+            using (var db = new TravelDBContext())
+            {
+                return db.Order.Include(item => item.Tickets)
+                    .Include(item => item.OrderDetails)
+                    .FirstOrDefault(item => item.OrderId.Equals(orderId));
+            }
         }
 
         public decimal GetCategoryTotalFee(Guid orderDetailCategory)
@@ -132,14 +142,15 @@
         public decimal TotalFee()
         {
             var tickets = TicketEntity.GetTicketsByOrderId(this.OrderId);
-            var refundTickets =
-                tickets.Where(
-                    item =>
-                    item.TicketStatus.Equals(Order.OrderStatus.TicketStatus_Refund_Audit)
-                    || item.TicketStatus.Equals(Order.OrderStatus.TicketStatus_Refund_RefundPayProcessing)
-                    || item.TicketStatus.Equals(Order.OrderStatus.TicketStatus_Refund_Complete));
+            //var refundTickets =
+            //    tickets.Where(
+            //        item =>
+            //        item.TicketStatus.Equals(Order.OrderStatus.TicketStatus_Refund_Audit)
+            //        || item.TicketStatus.Equals(Order.OrderStatus.TicketStatus_Refund_RefundPayProcessing)
+            //        || item.TicketStatus.Equals(Order.OrderStatus.TicketStatus_Refund_Complete));
 
-            return tickets.Sum(item => item.Price) - refundTickets.Sum(item => item.Price);
+            return tickets.Where(item => item.TicketStatus.Equals(Order.OrderStatus.TicketStatus_WaitUse))
+                .Sum(item => item.Price);
         }
     }
 }

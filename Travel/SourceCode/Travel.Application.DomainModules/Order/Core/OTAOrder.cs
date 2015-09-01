@@ -10,6 +10,7 @@ namespace Travel.Application.DomainModules.Order.Core
     using Travel.Application.DomainModules.Order.Core.Interface;
     using Travel.Application.DomainModules.Order.Entity;
     using Travel.Infrastructure.DomainDataAccess.Order;
+    using Travel.Infrastructure.OTAWebService.Response;
     using Travel.Infrastructure.WeiXin.Advanced.Pay.Model;
 
     public class OTAOrder : Order
@@ -151,6 +152,18 @@ namespace Travel.Application.DomainModules.Order.Core
             var editResult = this._orderOperate.ChangeOrderEdit(tickets);
             var refundOrders = new List<RefundOrderQueueEntity>();
 
+#if DEBUG
+            //editResult.IsTrue = true;
+            //editResult.ResultData = new List<ChangeOrderEditResponse>()
+            //                          {
+            //                              new ChangeOrderEditResponse()
+            //                                  {
+            //                                      IsSucceed = true,
+            //                                      ProductCode = "530267905188"
+            //                                  }
+            //                          };
+#endif
+
             if (editResult.IsTrue)
             {
                 foreach (var ticketResponse in editResult.ResultData)
@@ -236,8 +249,8 @@ namespace Travel.Application.DomainModules.Order.Core
                 refundRequest.transaction_id = this.OrderObj.WXOrderCode;
                 refundRequest.out_trade_no = this.OrderObj.OrderCode;
                 refundRequest.out_refund_no = eventArg.refundOrder.RefundOrderCode;
-                refundRequest.total_fee = int.Parse((this.OrderObj.TotalFee() * 100).ToString(CultureInfo.InvariantCulture));
-                refundRequest.refund_fee = int.Parse((refundFee * 100).ToString(CultureInfo.InvariantCulture));
+                refundRequest.total_fee = Decimal.ToInt32(this.OrderObj.TotalFee() * 100);
+                refundRequest.refund_fee = Decimal.ToInt32(refundFee * 100);
 
                 // todo: 处理返回值 
                 var refundResponse = this._paymentOperate.RefundPay(refundRequest);

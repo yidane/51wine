@@ -92,7 +92,7 @@ namespace Travel.Application.DomainModules.Order.Core
             //todo: 此事件单独抛出异常并进行处理，不应影响支付相关操作的结果
             if (this.OrderObj != null)
             {
-                var myOrder = OrderEntity.GetOrderByOrderId(OrderObj.OrderCode);
+                var myOrder = OrderEntity.GetOrderByOrderCode(OrderObj.OrderCode);
                 var order = new OTAOrder(myOrder);
                 var orderOperate = new OTAOrderOperate(order);
 
