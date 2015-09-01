@@ -168,7 +168,7 @@
         {
             using (var db = new TravelDBContext())
             {
-                return db.Order.Where(item => item.OpenId.Equals(openId)).ToList();
+                return db.Order.Include(item =>item.Tickets).Include(item => item.OrderDetails).Where(item => item.OpenId.Equals(openId)).ToList();
             }
         }
     }

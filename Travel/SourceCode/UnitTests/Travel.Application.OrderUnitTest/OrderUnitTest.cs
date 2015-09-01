@@ -14,6 +14,7 @@ namespace Travel.Application.OrderUnitTest
     using Travel.Application.DomainModules.Order.Service;
     using Travel.Infrastructure.DomainDataAccess.Order;
     using Travel.Infrastructure.WeiXin.Advanced.Pay.Model;
+    using Travel.Services.WebService;
 
     [TestFixture]
     public class OrderUnitTest
@@ -30,7 +31,7 @@ namespace Travel.Application.OrderUnitTest
             this.OrderRequest = new OrderRequestEntity()
                                {
                                    OpenId = "obzTswxzFzzzdWdAKf2mWx3CrpXk",
-                                   TicketCategory = "BC4FEFE8-8214-41DD-8FE8-1B16394B77B3",
+                                   TicketCategory = "956BFF5E-AA6A-454E-8F46-BD4175235C9E",
                                    TicketName = "布尔津测试门票",
                                    Count = 1,
                                    CouponId = string.Empty,
@@ -148,6 +149,14 @@ namespace Travel.Application.OrderUnitTest
             {
                 var d = group.ToList();
             }
+        }
+
+        [Test]
+        public void webservice()
+        {
+            var service = new OrderWebService();
+
+            service.MyOrders("obzTswxzFzzzdWdAKf2mWx3CrpXk");
         }
     }
 }

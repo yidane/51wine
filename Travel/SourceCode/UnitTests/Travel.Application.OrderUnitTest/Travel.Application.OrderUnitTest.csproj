@@ -100,6 +100,10 @@
       <Project>{37afc00a-8d40-45df-98e8-3e671dd420fb}</Project>
       <Name>Travel.Infrastructure.WeiXin</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Travel.Services.WebService\Travel.Services.WebService.csproj">
+      <Project>{dbf9d085-d5a5-495b-9554-bb0bb8a7dd85}</Project>
+      <Name>Travel.Services.WebService</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
