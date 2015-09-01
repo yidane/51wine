@@ -50,7 +50,7 @@ namespace Travel.Application.OrderUnitTest
                                          mch_id = "100000100",
                                          nonce_str = "5d2b6c2a8db53831f7eda20af46e531c",
                                          openid = "obzTswxzFzzzdWdAKf2mWx3CrpXk",
-                                         out_trade_no = "C2015090202490309963836",
+                                         out_trade_no = "C2015090204471208755383",
                                          result_code = "SUCCESS",
                                          return_code = "SUCCESS",
                                          sign = "B552ED6B279343CB493C5DD0D78AB241",
@@ -61,7 +61,7 @@ namespace Travel.Application.OrderUnitTest
                                      };
 
             this.refundTickets =
-                TicketEntity.GetTicketsByOrderId(Guid.Parse("35D7650B-21C1-45CD-B15D-2203857B7977"))
+                TicketEntity.GetTicketsByOrderId(Guid.Parse("92F3F83F-4C89-40B0-A25F-C83CFBEF3B0D"))
                 .Where(item => item.TicketId.Equals(57882)).ToList();
         }
 
