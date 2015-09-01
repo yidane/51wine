@@ -17,9 +17,6 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>订票信息</title>
-    <link href="../styles/swiper.min.css" rel="stylesheet" />
-    <script src="../javaScripts/zepto.min.js"></script>
-    <script src="../js/oAuth2.js"></script>
     <style type="text/css">
         .swiper-wrapper .swiper-slide:nth-child(n+2) {
             margin-left: 0;
@@ -58,7 +55,7 @@
             </section>
 
             <div class="gpd-ticket">
-                <a id="confirmPayBtn" href="javascript:void(0);">微信支付</a>
+                <a id="payBtn" href="javascript:void(0);">微信支付</a>
             </div>
             <!--订购信息-->
             <div class="gpd-order">
@@ -113,7 +110,9 @@
 </body>
 
 <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<link href="../styles/swiper.min.css" rel="stylesheet" />
 <script src="../javaScripts/zepto.min.js"></script>
+<script src="../js/oAuth2.js"></script>
 <script src="../javaScripts/json2.js"></script>
 <script src="../javaScripts/template.js"></script>
 <script src="../javaScripts/swiper.min.js"></script>
