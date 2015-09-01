@@ -126,37 +126,29 @@
 
                 .trigger .icon rect {
                     stroke: #dbdbdb;
-                    /*fill: none;*/
                     stroke-width: 2px;
-                
-                        -webkit-animation: fadeIn 4s 0s infinite ease-in-out both; fadeIn 4s 0s infinite ease-in-out both;
-                        animation: fadeIn 4s 0s infinite ease-in-out both;
-                    }
-
-                    /*.trigger .icon rect:nth-child(2), .trigger .icon rect:nth-child(3) {
-                        -webkit-animation: fadeIn 2s 0s infinite ease-in-out both;
-                        animation: fadeIn 2s 0s infinite ease-in-out both;
-                    }
-
-                    .trigger .icon rect:nth-child(1), .trigger .icon rect:nth-child(4) {
-                        -webkit-animation: fadeOut 2s 0s infinite ease-in-out both;
-                        animation: fadeOut 2s 0s infinite ease-in-out both;
-                    }*/
+                    -webkit-animation: fadeIn 4s 0s infinite ease-in-out both;
+                    animation: fadeIn 4s 0s infinite ease-in-out both;
+                }
 
 
         @-webkit-keyframes fadeIn {
             0% {
                 fill: rgba(0,0,0,0);
             }
+
             25% {
                 fill: rgba(0,0,0,0.25);
             }
+
             50% {
                 fill: rgba(0,0,0,0.5);
             }
+
             75% {
                 fill: rgba(0,0,0,0.25);
             }
+
             100% {
                 fill: rgba(0,0,0,0);
             }
@@ -166,15 +158,19 @@
             0% {
                 fill: rgba(0,0,0,0);
             }
+
             25% {
                 fill: rgba(0,0,0,0.25);
             }
+
             50% {
                 fill: rgba(0,0,0,0.5);
             }
+
             75% {
                 fill: rgba(0,0,0,0.25);
             }
+
             100% {
                 fill: rgba(0,0,0,0);
             }
@@ -356,12 +352,12 @@
 
         $(function () {
             renderViewport();
-            //var timer = setTimeout(showPage, 10000);
+            var timer = setTimeout(showPage, 10000);
             $(".trigger").on('click', function () {
                 if (timer) {
                     clearTimeout(timer);
                 }
-                //showPage();
+                showPage();
             });
         });
     </script>
