@@ -48,6 +48,16 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Travel.Application.DomainModules\Travel.Application.DomainModules.csproj">
+      <Project>{a4eb3c6e-748d-4e16-ab48-43704bbdba24}</Project>
+      <Name>Travel.Application.DomainModules</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Travel.Infrastructure.DomainDataAccess\Travel.Infrastructure.DomainDataAccess.csproj">
+      <Project>{47f144aa-b49d-4db2-80d3-59b05f8680e6}</Project>
+      <Name>Travel.Infrastructure.DomainDataAccess</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

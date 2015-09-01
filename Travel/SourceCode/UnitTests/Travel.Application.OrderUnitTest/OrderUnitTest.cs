@@ -5,10 +5,13 @@ using System.Web;
 
 namespace Travel.Application.OrderUnitTest
 {
+    using System.Text.RegularExpressions;
+
     using NUnit.Framework;
 
     using Travel.Application.DomainModules.Order.Core;
     using Travel.Application.DomainModules.Order.Entity;
+    using Travel.Application.DomainModules.Order.Service;
     using Travel.Infrastructure.DomainDataAccess.Order;
     using Travel.Infrastructure.WeiXin.Advanced.Pay.Model;
 
@@ -46,7 +49,7 @@ namespace Travel.Application.OrderUnitTest
                                          mch_id = "100000100",
                                          nonce_str = "5d2b6c2a8db53831f7eda20af46e531c",
                                          openid = "obzTswxzFzzzdWdAKf2mWx3CrpXk",
-                                         out_trade_no = "C2015090114025321236791",
+                                         out_trade_no = "C2015090121204252482826",
                                          result_code = "SUCCESS",
                                          return_code = "SUCCESS",
                                          sign = "B552ED6B279343CB493C5DD0D78AB241",
@@ -57,8 +60,8 @@ namespace Travel.Application.OrderUnitTest
                                      };
 
             this.refundTickets =
-                TicketEntity.GetTicketsByOrderId(Guid.Parse("1D580DEE-2E6D-4323-AB40-984FCD4901D5"))
-                .Where(item => item.TicketId.Equals(57882)).ToList();
+                TicketEntity.GetTicketsByOrderId(Guid.Parse("EFDC3E4A-737F-4A3F-8DAE-1ADC36923764"))
+                .Where(item => item.TicketId.Equals(57963)).ToList();
         }
 
         [Test]
@@ -102,9 +105,49 @@ namespace Travel.Application.OrderUnitTest
         }
 
         [Test]
+        public void SearchTicketStatus_Order_Return()
+        {
+            var service = new OrderService();
+
+            service.SearchTicketStatus(100);
+        }
+
+        [Test]
         public void procedureTest()
         {
-            var a = OrderEntity.GetTicketForSearch(1, 10);
+            var t = new List<TicketEntity>()
+                        {
+                            new TicketEntity()
+                              {
+                                  TicketCode = "gb",
+                                  OrderId = Guid.Parse("1D580DEE-2E6D-4323-AB40-984FCD4901D5")
+                              },
+                              new TicketEntity()
+                                  {
+                                      TicketCode = "gbs",
+                                    OrderId = Guid.Parse("1D580DEE-2E6D-4323-AB40-984FCD4901D5")
+                                  },
+                                  new TicketEntity()
+                                      {
+                                          TicketCode = "gbc",
+                                            OrderId = Guid.Parse("1D580DEE-2E6D-4323-AB40-984FCD4901D5")
+                                      },
+                                      new TicketEntity()
+                                          {
+                                              TicketCode = "ss",
+                                                OrderId = Guid.Parse("BC4FEFE8-8214-41DD-8FE8-1B16394B77B3")
+                                          },
+                                           new TicketEntity()
+                                          {
+                                              TicketCode = "ss",
+                                                OrderId = Guid.Parse("BC4FEFE8-8214-41DD-8FE8-1B16394B77B3")
+                                          }
+                        };
+
+            foreach (var group in t.GroupBy(item=>item.OrderId))
+            {
+                var d = group.ToList();
+            }
         }
     }
 }

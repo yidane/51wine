@@ -255,7 +255,8 @@ namespace Travel.Application.DomainModules.Order.Core
                 // todo: 处理返回值 
                 var refundResponse = this._paymentOperate.RefundPay(refundRequest);
 
-                if (true)
+                if (refundResponse.return_code.Equals("SUCCESS")
+                    &&refundResponse.result_code.Equals("SUCCESS"))
                 {
                     foreach (var ticket in eventArg.tickets)
                     {

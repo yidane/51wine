@@ -147,15 +147,8 @@
         public decimal TotalFee()
         {
             var tickets = TicketEntity.GetTicketsByOrderId(this.OrderId);
-            //var refundTickets =
-            //    tickets.Where(
-            //        item =>
-            //        item.TicketStatus.Equals(Order.OrderStatus.TicketStatus_Refund_Audit)
-            //        || item.TicketStatus.Equals(Order.OrderStatus.TicketStatus_Refund_RefundPayProcessing)
-            //        || item.TicketStatus.Equals(Order.OrderStatus.TicketStatus_Refund_Complete));
 
-            return tickets.Where(item => item.TicketStatus.Equals(Order.OrderStatus.TicketStatus_WaitUse))
-                .Sum(item => item.Price);
+            return tickets.Sum(item => item.Price);
         }
 
         public static IList<TicketEntity> GetTicketForSearch(int pageIndex, int pageSize)
