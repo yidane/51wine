@@ -57,9 +57,19 @@ namespace Travel.Infrastructure.DomainDataAccess.Order
         public const string TicketStatus_Refund_RefundPayProcessing = "TS30005";
 
         /// <summary>
+        /// 待退款
+        /// </summary>
+        public const string TicketStatus_Refund_WaitRefundFee = "TS30009";
+
+        /// <summary>
         /// 退票完成
         /// </summary>
         public const string TicketStatus_Refund_Complete = "TS30007";
+
+        /// <summary>
+        /// 已使用
+        /// </summary>
+        public const string TicketStatus_Used = "TS30008";
 
         /// <summary>
         /// 退票队列初始状态

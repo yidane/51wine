@@ -22,6 +22,7 @@ namespace Travel.Application.DomainModules.Order.Core
                                        openid = order.OpenId,
                                        body = ticket.TicketName,
                                        detail = ticket.Price.ToString(),
+                                       out_trade_no = order.OrderCode,
                                        attach = "1",
                                        goods_tag = "1",
                                        total_fee = Decimal.ToInt32(order.GetCategoryTotalFee(Guid.Parse("{CE7B7E52-3811-44B6-AF9A-7562E0A773D2}")) * 100)

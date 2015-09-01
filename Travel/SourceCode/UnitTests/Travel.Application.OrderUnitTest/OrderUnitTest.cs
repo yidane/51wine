@@ -100,5 +100,11 @@ namespace Travel.Application.OrderUnitTest
                 otaOrder.ProcessRefundPayment(refundTickets);
             }
         }
+
+        [Test]
+        public void procedureTest()
+        {
+            var a = OrderEntity.GetTicketForSearch(1, 10);
+        }
     }
 }

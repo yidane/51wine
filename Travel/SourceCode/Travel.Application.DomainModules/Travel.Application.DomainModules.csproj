@@ -63,6 +63,7 @@
     <Compile Include="Order\Core\WXPayment.cs" />
     <Compile Include="Order\Core\WXPaymentOperate.cs" />
     <Compile Include="Order\Entity\OrderRequestEntity.cs" />
+    <Compile Include="Order\Service\OrderService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WeChat\DTOS\AccessTokenDTO.cs" />
     <Compile Include="WeChat\DTOS\CardTicketDTO.cs" />
@@ -90,7 +91,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Order\Core\DomainModel\" />
-    <Folder Include="Order\Service\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

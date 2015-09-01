@@ -3,10 +3,15 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.Data;
+    using System.Data.Common;
     using System.Data.Entity;
     using System.Data.Entity.Core.Metadata.Edm;
     using System.Data.Entity.Migrations;
+    using System.Data.SqlClient;
     using System.Linq;
+
+    using EntityState = System.Data.Entity.EntityState;
 
     public class OrderEntity
     {
@@ -151,6 +156,19 @@
 
             return tickets.Where(item => item.TicketStatus.Equals(Order.OrderStatus.TicketStatus_WaitUse))
                 .Sum(item => item.Price);
+        }
+
+        public static IList<TicketEntity> GetTicketForSearch(int pageIndex, int pageSize)
+        {
+            using (var db = new TravelDBContext())
+            {
+                var param = new List<SqlParameter>()
+                                {
+                                    new SqlParameter(){ParameterName = "@PageIndex", SqlDbType = SqlDbType.Int, Value = pageIndex},
+                                    new SqlParameter(){ParameterName = "@PageSize", SqlDbType = SqlDbType.Int, Value = pageSize}
+                                };
+                 return db.Database.SqlQuery<TicketEntity>("USP_Ticket_GetTicketForSearchStatus @PageIndex, @PageSize", param.ToArray()).ToList();
+            }
         }
     }
 }

@@ -254,6 +254,17 @@ namespace Travel.Application.DomainModules.Order.Core
 
                 // todo: 处理返回值 
                 var refundResponse = this._paymentOperate.RefundPay(refundRequest);
+
+                if (true)
+                {
+                    foreach (var ticket in eventArg.tickets)
+                    {
+                        ticket.TicketStatus = OrderStatus.TicketStatus_Refund_WaitRefundFee;
+                        ticket.LatestModifyTime = DateTime.Now;
+                    }
+
+                    TicketEntity.ModifyTickets(eventArg.tickets);
+                }
             }
         }
 
