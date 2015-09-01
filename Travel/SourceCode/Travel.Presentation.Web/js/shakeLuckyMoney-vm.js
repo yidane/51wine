@@ -18,8 +18,8 @@ var LuckyMoneyViewModel = function ($domParam, param) {
     this.init = function () {
         self.initWeChat(false);
         self.initShake();
-		 //$("#div_content").show();
-                    //$('#loadingBox').hide();
+        //$("#div_content").show();
+        //$('#loadingBox').hide();
         //self.param().onAfterLoadData();
     };
     this.initWeChat = function (debug) {
@@ -39,7 +39,7 @@ var LuckyMoneyViewModel = function ($domParam, param) {
               console.log("Request Failed: " + err);
           });
 
-      
+
 
 
 
@@ -88,7 +88,7 @@ var LuckyMoneyViewModel = function ($domParam, param) {
 
     this.initShake = function () {
         var yy = new mobilePhoneShake({
-            speed:1000,//阀值，值越小，能检测到摇动的手机摆动幅度越小
+            speed: 1000,//阀值，值越小，能检测到摇动的手机摆动幅度越小
             callback: function (x, y, z) {//将设备放置在水平表面，屏幕向上，则其x,y,z信息如下：{x: 0,y: 0,z: 9.81};
                 self.afterShake();
                 self.shakeObj().stop();
@@ -112,7 +112,7 @@ var LuckyMoneyViewModel = function ($domParam, param) {
     this.musicEnded = function () {
         //显影
         // self.stage("money");
-       // alert(1);
+        // alert(1);
         self.getRandomCoupon();
 
 
@@ -126,7 +126,7 @@ var LuckyMoneyViewModel = function ($domParam, param) {
     };
 
     this.getRandomCoupon = function () {
-        $.getJSON("WebService/CouponWebService.asmx/GetRandomCoupon", {access_code: self.param().access_code})
+        $.getJSON("WebService/CouponWebService.asmx/GetRandomCoupon", { access_code: self.param().access_code })
            .done(function (json) {
                if (json.IsSuccess) {
                    self.coupon(json.Data.coupon);
@@ -175,7 +175,7 @@ var LuckyMoneyViewModel = function ($domParam, param) {
                     self.$DomParm().$receiveBtn.val("领取成功!");
                     self.$DomParm().$receiveBtn.attr("disabled", "disabled");
                     setTimeout(function () {
-                        var url = 'Coupons/MyCoupons.html?code=' + self.param().access_code;
+                        var url = 'Coupons/MyCoupons.html';//?code=' + self.param().access_code;
                         window.location.href = url;
                     }, 1000);
                 }
