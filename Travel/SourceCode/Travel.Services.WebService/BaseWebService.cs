@@ -10,24 +10,29 @@ namespace Travel.Services.WebService
     {
         protected string GetOpenIDByCodeID(string code)
         {
+            string openId;
             if (Session == null)
             {
-                return GetOpenIDFromWeChat(code);
+                openId = GetOpenIDFromWeChat(code);
             }
             else
             {
+                Session["OpenId"] = "obzTsw5qxlbwGYYZJC9b-91J-X1Y";
                 if (Session["OpenID"] == null)
                 {
-                    var accessToken = GetOpenIDFromWeChat(code);
-                    Session["OpenID"] = accessToken;
-
-                    return accessToken;
+                    openId = GetOpenIDFromWeChat(code);
+                    Session["OpenID"] = openId;
                 }
                 else
                 {
-                    return Session["OpenID"].ToString();
+                    openId = Session["OpenID"].ToString();
                 }
             }
+
+            if (string.IsNullOrEmpty(openId))
+                throw new Exception("获取OpenID失败");
+
+            return openId;
         }
 
         private string GetOpenIDFromWeChat(string code)
