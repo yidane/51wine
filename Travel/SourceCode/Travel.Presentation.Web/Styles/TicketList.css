@@ -343,12 +343,12 @@ code {
 
     .thumb-active .thumb-cover {
         width: 100%;
-        height: 2rem;
+        height: 2.5rem;
         float: left;
         border-radius: 4px;
         background: rgba(0,0,0,.5);
         display: block;
-        margin-top: 7rem;
+        margin-top: 6.5rem;
     }
 
     .thumb-active .thumb-cnt {
@@ -369,8 +369,8 @@ code {
 }
 
 .thumb-active .title {
-    font-size: 0.85714286rem;
-    margin-left:20%;
+    font-size: 1.2rem;
+    margin-left:10%;
     width:55%;
     font-family:黑体;
     /*font-size: 1.2rem;*/
@@ -378,8 +378,8 @@ code {
 
 .thumb-active .title,
 .thumb-active .info {
-    height: 24px;
-    line-height: 24px;
+    height: 2.5rem;
+    line-height: 2.5rem;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -425,12 +425,16 @@ code {
 
 .thumb-active .about {
     /*width:2.5rem;*/
-    font-size: 0.85714286rem;
+    height:2.5rem;
+    line-height:2.5rem;
+    font-size: 1.2rem;
     font-family:黑体;
 }
 .thumb-active .other {
-    width:0.7rem;
-    font-size: 0.85714286rem;
+    /*width:0.7rem;*/
+    height:2.5rem;
+    line-height:2.5rem;
+    font-size: 1.2rem;
     font-family:黑体;
 }
 .thumb-active .code-img {
@@ -561,7 +565,7 @@ input {
 
     .tabs .container {
         width: 100%;
-        margin: 30px 0;
+        margin: 50px 0;
         float: left;
     }
 
@@ -585,11 +589,11 @@ input {
             -webkit-flex: 1;
             -ms-flex: 1;
             flex: 1;
-            line-height: 30px;
+            line-height: 50px;
             cursor: pointer;
             text-align: center;
             /*border-left: 1px solid #d3dde3;*/
-            font-size: 0.8em;
+            font-size: 1em;
             font-weight: normal;
             color: #000;
             font-family:黑体;
@@ -600,9 +604,9 @@ input {
             }
 
             .tabs .tab-navs a.active {
-                height: 30px;
+                height: 50px;
                 /*background-color: #f3f5f6;*/
-                border-bottom: 4px solid #5D9CEC;
+                border-bottom: 7px solid #5D9CEC;
                 color: #000;
                 /*
                 border-bottom: 2px solid #c71585;
@@ -619,7 +623,7 @@ input {
     display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
-    height: 46px;
+    height: 78px;
     padding: 8px 0;
     background-color: #fff;
 }
@@ -630,7 +634,7 @@ input {
         -webkit-flex: 1;
         -ms-flex: 1;
         flex: 1;
-        line-height: 30px;
+        line-height: 50px;
         cursor: pointer;
         text-align: center;
         border-left: 1px solid #d3dde3;
@@ -643,8 +647,8 @@ input {
         .tab-default .tab-navs li.active a {
             display: inline-block;
             width: 60%;
-            height: 30px;
-            line-height: 28px;
+            height: 50px;
+            line-height: 46px;
             border: 1px solid #ff7f01;
             background-color: #f3f5f6;
         }
