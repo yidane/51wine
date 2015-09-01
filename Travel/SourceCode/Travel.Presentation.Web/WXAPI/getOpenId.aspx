@@ -6,12 +6,13 @@
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <script src="js/zepto.min.js"></script>
-    <script src="js/getWeChatOpenId.js"></script>
+    <%--<script src="js/getWeChatOpenId.js"></script>--%>
     <title></title>
 </head>
 <body>
     <form id="form1" runat="server">
         <div>
+            <asp:Button runat="server" ID="btnRefund" Text="退款" OnClick="btnRefund_Click" />
         </div>
     </form>
 </body>

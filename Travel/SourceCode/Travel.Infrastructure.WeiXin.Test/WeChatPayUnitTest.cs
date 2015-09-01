@@ -104,7 +104,16 @@ namespace Travel.Infrastructure.WeiXin.Test
         [TestMethod]
         public void RefundOrderTest()
         {
+            var refundOrderRequest = new RefundOrderRequest
+                {
+                    out_trade_no = "C2015090118124452021644",
+                    total_fee = 1,
+                    refund_fee = 1,
+                    out_refund_no = WxPayHelper.GenerateOutTradeNo()
+                };
 
+            JsApiPay jsApiPay = new JsApiPay();
+            jsApiPay.Refund(refundOrderRequest);
         }
     }
 }

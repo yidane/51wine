@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Travel.Application.DomainModules.WeChat;
+using Travel.Infrastructure.WeiXin.Advanced.Pay;
+using Travel.Infrastructure.WeiXin.Advanced.Pay.Model;
 
 namespace Travel.Presentation.Web.WXAPI
 {
@@ -28,6 +30,20 @@ namespace Travel.Presentation.Web.WXAPI
             var weChatService = new WeChatService();
             var tokenResult = weChatService.GetAccessToken(code);
             Response.Write(Travel.Infrastructure.CommonFunctions.Ajax.AjaxResult.Success(tokenResult));
+        }
+
+        protected void btnRefund_Click(object sender, EventArgs e)
+        {
+            var refundOrderRequest = new RefundOrderRequest
+            {
+                out_trade_no = "C2015090119021897439869",
+                total_fee = 1,
+                refund_fee = 1,
+                out_refund_no = WxPayHelper.GenerateOutTradeNo()
+            };
+
+            JsApiPay jsApiPay = new JsApiPay();
+            var result = jsApiPay.Refund(refundOrderRequest);
         }
     }
 }

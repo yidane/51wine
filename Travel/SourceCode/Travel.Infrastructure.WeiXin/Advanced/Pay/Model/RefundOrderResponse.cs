@@ -153,6 +153,7 @@ namespace Travel.Infrastructure.WeiXin.Advanced.Pay.Model
         public RefundOrderResponse(string xmlString)
         {
             var xmlDocument = new XmlDocument();
+            xmlDocument.LoadXml(xmlString);
             Init(xmlDocument);
         }
 
