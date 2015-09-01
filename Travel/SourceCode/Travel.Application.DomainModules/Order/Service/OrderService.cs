@@ -170,6 +170,10 @@ namespace Travel.Application.DomainModules.Order.Service
 
                 var resp = service.GetAllOrderStatus(new GetAllOrderStatusRequest() { PostOrder = ECodes });
 
+                this.OrderCompleteProcess(
+                    tickets.Where(item => item.TicketStatus.Equals(OrderStatus.TicketStatus_WaitUse)).ToList(),
+                    resp.ResultData);
+
                 this.RefundProcess(
                     tickets.Where(item => item.TicketStatus.Equals(OrderStatus.TicketStatus_Refund_Audit)).ToList(),
                     resp.ResultData);
@@ -195,11 +199,11 @@ namespace Travel.Application.DomainModules.Order.Service
                 switch (respStatus.OrderStatus)
                 {
                     case "A":
+                    case "P":
                     case "M":
                         changedStatusTickets.Add(ticket);
                         break;
                     case "E":
-                    case "P":
                     default:
                         break;
                 }
@@ -213,6 +217,32 @@ namespace Travel.Application.DomainModules.Order.Service
 
                 otaOrder.ProcessRefundPayment(orderTickets);
             }
+        }
+
+        private void OrderCompleteProcess(IEnumerable<TicketEntity> completeTickets, IList<GetAllOrderStatusResponse> resps)
+        {
+            var changedStatusTickets = new List<TicketEntity>();
+            foreach (var ticket in completeTickets)
+            {
+                var respStatus = resps.FirstOrDefault(item => item.OrderCode.Equals(ticket.ECode));
+
+                switch (respStatus.OrderStatus)
+                {
+                    case "T":
+                    case "O":
+                        changedStatusTickets.Add(ticket);
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            foreach (var ticket in changedStatusTickets)
+            {
+                ticket.TicketStatus = OrderStatus.TicketStatus_Used;
+                ticket.LatestModifyTime = DateTime.Now;
+            }
+            TicketEntity.ModifyTickets(changedStatusTickets);
         }
     }
 }
