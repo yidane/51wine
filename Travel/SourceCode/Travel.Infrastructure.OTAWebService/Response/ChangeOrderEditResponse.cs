@@ -9,7 +9,7 @@ namespace Travel.Infrastructure.OTAWebService.Response
     {
         public DateTime StartTime { get; set; }
         public string ProductCode { get; set; }
-        public bool IsSucceed { get; set; }
+        public bool IsSuccel { get; set; }
         public int CountP { get; set; }
         public int Audit { get; set; }
         public string AuditDesc
