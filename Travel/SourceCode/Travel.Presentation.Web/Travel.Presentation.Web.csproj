@@ -283,6 +283,7 @@
     <Content Include="introduction.html" />
     <Content Include="WebService\CouponWebService.asmx" />
     <Content Include="WebService\MonsterService.asmx" />
+    <Content Include="WebService\OrderWebService.asmx" />
     <Content Include="WebService\TicketWebService.asmx" />
     <Content Include="WebService\UserWebService.asmx" />
     <Content Include="WebService\WeChatWebService.asmx" />

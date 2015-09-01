@@ -163,5 +163,13 @@
                  return db.Database.SqlQuery<TicketEntity>("USP_Ticket_GetTicketForSearchStatus @PageIndex, @PageSize", param.ToArray()).ToList();
             }
         }
+
+        public static IList<OrderEntity> GetMyOrders(string openId)
+        {
+            using (var db = new TravelDBContext())
+            {
+                return db.Order.Where(item => item.OpenId.Equals(openId)).ToList();
+            }
+        }
     }
 }

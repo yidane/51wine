@@ -62,6 +62,8 @@
     <Compile Include="Order\Core\Payment.cs" />
     <Compile Include="Order\Core\WXPayment.cs" />
     <Compile Include="Order\Core\WXPaymentOperate.cs" />
+    <Compile Include="Order\DTOs\OrderDTO.cs" />
+    <Compile Include="Order\DTOs\TicketCategoryDTO.cs" />
     <Compile Include="Order\Entity\OrderRequestEntity.cs" />
     <Compile Include="Order\Service\OrderService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
