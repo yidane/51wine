@@ -4,8 +4,287 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
     <title>与湖怪合影</title>
-    <link href="../Styles/monster.css" rel="stylesheet" />
     <link href="../Styles/jquery.Jcrop.css" rel="stylesheet" />
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul,
+        ol {
+            list-style: none;
+        }
+
+
+        html {
+            width: 100%;
+            height: 100%;
+            text-size-adjust: 100%;
+            font-size: 87.5%;
+        }
+
+        body {
+            width: 100%;
+            height: 100%;
+            font-family: 'Microsoft YaHei', Tahoma, Arial, '\5b8b\4f53', sans-serif;
+            line-height: 1.5;
+            background-color: #000;
+            color: #333;
+        }
+
+        .container {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            display: none;
+        }
+
+        .slideshow, .slideshow:after {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+
+            .slideshow li span {
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                top: 0;
+                left: 0;
+                color: transparent;
+                background-size: cover;
+                background-repeat: no-repeat;
+                opacity: 0;
+                z-index: 0;
+                -webkit-backface-visibility: hidden;
+                -webkit-animation: imageAnimation 18s linear infinite 0s;
+                animation: imageAnimation 18s linear infinite 0s;
+            }
+
+            .slideshow li:nth-child(1) span {
+                background-image: url(images/wolongwan.jpg);
+            }
+
+            .slideshow li:nth-child(2) span {
+                background-image: url(images/shenxianwan.jpg);
+                -webkit-animation-delay: 6s;
+                animation-delay: 6s;
+            }
+
+            .slideshow li:nth-child(3) span {
+                background-image: url(images/yueliangwan.jpg);
+                -webkit-animation-delay: 12s;
+                animation-delay: 12s;
+            }
+
+        @-webkit-keyframes imageAnimation {
+            0% {
+                opacity: 0;
+                -webkit-animation-timing-function: ease-in;
+            }
+
+            8% {
+                opacity: 1;
+                -webkit-animation-timing-function: ease-out;
+            }
+
+            17% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 0;
+            }
+        }
+
+        @keyframes imageAnimation {
+            0% {
+                opacity: 0;
+                -webkit-animation-timing-function: ease-in;
+            }
+
+            8% {
+                opacity: 1;
+                -webkit-animation-timing-function: ease-out;
+            }
+
+            17% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 0;
+            }
+        }
+
+        .monster {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-left: -117.5px;
+            margin-top: -137.5px;
+            width: 235px;
+            height: 275px;
+            background-image: url(images/monster.png);
+            background-size: cover;
+            opacity: 0.8;
+            -webkit-animation: bounceInUp 2.5s ease-out 0s both;
+            animation: bounceInUp 2.5s ease-out 0s both;
+        }
+
+        .message {
+            position: absolute;
+            top: -90px;
+            left: 140px;
+            width: 142px;
+            height: 99px;
+            line-height: 80px;
+            background-image: url(images//message.png);
+            background-size: cover;
+            color:#ff6a00;
+            text-align: center;
+            -webkit-animation: fadeIn 2s ease-in-out 2.6s both;
+            animation: fadeIn 2s ease-in-out 2.6s both;
+        }
+
+
+        .btn_box {
+            position: absolute;
+            width: 80%;
+            height: 40px;
+            line-height: 40px;
+            left: 50%;
+            bottom: 10%;
+            margin-left: -40%;
+            border-radius: 5px;
+            background-color: #44b549;
+            color: #fff;
+            font-size: 16px;
+            text-align: center;
+        }
+
+        @-webkit-keyframes bounceInUp {
+            0%, 60%, 75%, 90%, 100% {
+                -webkit-transition-timing-function: cubic-bezier(0.215, .610, .355, 1.000);
+                transition-timing-function: cubic-bezier(0.215, .610, .355, 1.000);
+            }
+
+            0% {
+                opacity: 0;
+                -webkit-transform: translate3d(0, 3000px, 0);
+                transform: translate3d(0, 3000px, 0);
+            }
+
+            60% {
+                opacity: 1;
+                -webkit-transform: translate3d(0, -25px, 0);
+                transform: translate3d(0, -25px, 0);
+            }
+
+            75% {
+                -webkit-transform: translate3d(0, 10px, 0);
+                transform: translate3d(0, 10px, 0);
+            }
+
+            90% {
+                -webkit-transform: translate3d(0, -5px, 0);
+                transform: translate3d(0, -5px, 0);
+            }
+
+            100% {
+                -webkit-transform: none;
+                transform: none;
+            }
+        }
+
+        @keyframes bounceInUp {
+            0%, 60%, 75%, 90%, 100% {
+                -webkit-transition-timing-function: cubic-bezier(0.215, .610, .355, 1.000);
+                transition-timing-function: cubic-bezier(0.215, .610, .355, 1.000);
+            }
+
+            0% {
+                opacity: 0;
+                -webkit-transform: translate3d(0, 3000px, 0);
+                transform: translate3d(0, 3000px, 0);
+            }
+
+            60% {
+                opacity: 1;
+                -webkit-transform: translate3d(0, -25px, 0);
+                transform: translate3d(0, -25px, 0);
+            }
+
+            75% {
+                -webkit-transform: translate3d(0, 10px, 0);
+                transform: translate3d(0, 10px, 0);
+            }
+
+            90% {
+                -webkit-transform: translate3d(0, -5px, 0);
+                transform: translate3d(0, -5px, 0);
+            }
+
+            100% {
+                -webkit-transform: none;
+                transform: none;
+            }
+        }
+
+        @keyframes fadeIn {
+            0% {
+                transform: scale(0);
+                opacity: 0.0;
+            }
+
+            60% {
+                transform: scale(1.1);
+            }
+
+            80% {
+                transform: scale(0.9);
+                opacity: 1;
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        @-webkit-keyframes fadeIn {
+            0% {
+                -webkit-transform: scale(0);
+                opacity: 0.0;
+            }
+
+            60% {
+                -webkit-transform: scale(1.1);
+            }
+
+            80% {
+                -webkit-transform: scale(0.9);
+                opacity: 1;
+            }
+
+            100% {
+                -webkit-transform: scale(1);
+                opacity: 1;
+            }
+        }
+    </style>
     <style type="text/css">
         #crop_container {
             position: absolute;
@@ -17,6 +296,7 @@
             font-size: 12px;
             z-index: 1001;
             display: none;
+            box-sizing: border-box;
         }
 
         .crop-layer-main {
@@ -57,6 +337,7 @@
             width: 100%;
             height: 300px;
             background: #e2e2e2;
+            box-sizing: border-box;
         }
 
             .crop-layer-body img {
@@ -70,6 +351,7 @@
             width: 100%;
             padding: 10px;
             overflow: hidden;
+            box-sizing: border-box;
         }
 
             .crop-layer-preview .preview-container {
@@ -86,64 +368,91 @@
             }
 
         .crop-layer-buttom .btn {
+            display: block;
             margin-bottom: 5px;
             height: 30px;
             line-height: 30px;
             font-size: 1rem;
             cursor: pointer;
+            text-align: center;
+            background-color: #44b549;
+            color: #fff;
+            border-radius: 6px;
+        }
+    </style>
+    <style type="text/css">
+        #loading {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 10;
+            top: 0;
+            left: 0;
+            background: rgba(0, 0, 0,.1);
+            -webkit-transition: all .8s ease;
+            transition: all .8s ease;
         }
 
-        .pulse {
-            width: 200px;
-            height: 30px;
+        .loader {
+            width: 3px;
+            height: 3px;
             position: absolute;
             left: 50%;
             top: 50%;
-            margin-left: -100px;
-            margin-top: -15px;
-            line-height: 30px;
-            text-align: center;
-            color: #fff;
-            -moz-animation: pulse 1s linear 0s infinite both;
-            -webkit-animation: pulse 1s linear 0s infinite both;
-            animation: pulse 1s linear 0 infinite both;
+            margin-top: -1.5px;
+            margin-left: -1.5px;
+            border-radius: 100%; /* 圆角 */
+            box-shadow: 0 -10px 0 1px #81a8d7, /* 上, 1px 扩展 */
+            10px 0 #81a8d7, /* 右 */
+            0 10px #81a8d7, /* 下 */
+            -10px 0 #81a8d7, /* 左 */
+            -7px -7px 0 .5px #81a8d7, /* 左上, 0.5px扩展 */
+            7px -7px 0 1.5px #81a8d7, /* 右上, 1.5px扩展 */
+            7px 7px #81a8d7, /* 右下 */
+            -7px 7px #81a8d7; /* 左下 */
+            -webkit-transform: rotate(360deg);
+            -webkit-animation: spin 1s linear infinite;
+            transform: rotate(360deg);
+            animation: spin 1s linear infinite;
         }
 
-        @-webkit-keyframes pulse {
-            0%,100% {
-                -webkit-transform: scale3d(1,1,1);
-                transform: scale3d(1,1,1);
+        @-webkit-keyframes spin {
+            from {
+                -webkit-transform: rotate(0deg);
             }
 
-            50% {
-                -webkit-transform: scale3d(1.05,1.05,1.05);
-                transform: scale3d(1.05,1.05,1.05);
+            to {
+                -webkit-transform: rotate(360deg);
             }
         }
 
-        @keyframes pulse {
-            0%,100% {
-                -webkit-transform: scale3d(1,1,1);
-                transform: scale3d(1,1,1);
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
             }
 
-            50% {
-                -webkit-transform: scale3d(1.05,1.05,1.05);
-                transform: scale3d(1.05,1.05,1.05);
+            to {
+                transform: rotate(360deg);
             }
         }
     </style>
-
 </head>
 <body>
     <div id="loading">
-        <div class="loader spin"></div>
+        <div class="loader"></div>
     </div>
-    <div class="container bg">
-        <img src="../images/monster_transparent.png" alt="" class="monster" />
-        <div class="btn_box">
-            <span id="chooseImage" class="btn">上传照片与湖怪合影</span>
+    <div class="container">
+        <ul class="slideshow">
+            <li><span></span></li>
+            <li><span></span></li>
+            <li><span></span></li>
+        </ul>
+        <div class="monster">
+            <span class="message">
+                亲，来合个影吧！
+            </span>
         </div>
+        <span class="btn_box" id="chooseImage">上传照片与湖怪合影</span>
     </div>
     <div id="mask" style="width:100%; height:100%;position:fixed;top:0; left:0; z-index:9999;background:#000;opacity:.7;display:none;">
         <div class="loader spin"></div>

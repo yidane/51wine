@@ -57,8 +57,8 @@
         });
     }
     var showPhoto = function (img) {
-        var url = 'ShowPhoto.html?img={0}&scenic={1}&cartoon={2}';
-        document.location.href = formatString(url, img, getRandom(2), getRandom(1));
+        var url = 'ShowPhoto.html?img={0}&scenic={1}';
+        document.location.href = formatString(url, img, getRandom(2));
     }
 
 

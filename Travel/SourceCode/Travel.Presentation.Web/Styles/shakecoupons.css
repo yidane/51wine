@@ -93,13 +93,14 @@ body {
 
 
 .hand {
-    width: 190px;
-    height: 200px;
-    background: url(../images/hand.png) no-repeat;
+    width: 115.8px;
+    height: 175.8px;
+    background-image: url(../images/hand.png) ;
+    background-size:cover;
     position: absolute;
-    bottom: 25%;
+        bottom: 28%;
     left: 50%;
-    margin-left: -95px;
+    margin-left: -70px;
     -webkit-animation: hand_move infinite 1s;
     animation: hand_move infinite 1s;
 }

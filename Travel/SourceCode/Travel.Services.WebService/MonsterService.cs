@@ -74,7 +74,7 @@ namespace Travel.Services.WebService
         #region 私有方法
         private string GetImagePath(string imageName)
         {
-            string folderName = "photo/images";
+            string folderName = "photo/uploadimages";
             if (!Directory.Exists(WebHelper.MapPath(folderName)))
             {
                 Directory.CreateDirectory(WebHelper.MapPath(folderName));

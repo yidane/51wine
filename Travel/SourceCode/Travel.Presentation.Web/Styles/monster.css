@@ -61,43 +61,6 @@ body {
     box-sizing: border-box;
 }
 
-#loading {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    z-index: 10;
-    top: 0;
-    left: 0;
-    background: rgba(0, 0, 0,.1);
-    -webkit-transition: all .8s ease;
-    transition: all .8s ease;
-}
-
-.loader {
-    width: 3px;
-    height: 3px;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    margin-top: -1.5px;
-    margin-left: -1.5px;
-    border-radius: 100%; /* 圆角 */
-    box-shadow: 0 -10px 0 1px #81a8d7, /* 上, 1px 扩展 */
-    10px 0 #81a8d7, /* 右 */
-    0 10px #81a8d7, /* 下 */
-    -10px 0 #81a8d7, /* 左 */
-    -7px -7px 0 .5px #81a8d7, /* 左上, 0.5px扩展 */
-    7px -7px 0 1.5px #81a8d7, /* 右上, 1.5px扩展 */
-    7px 7px #81a8d7, /* 右下 */
-    -7px 7px #81a8d7; /* 左下 */
-}
-
-.spin {
-    -webkit-transform: rotate(360deg);
-    -webkit-animation: spin 1s linear infinite;
-    transform: rotate(360deg);
-    animation: spin 1s linear infinite;
-}
 
 .container {
     width: 100%;
@@ -107,7 +70,7 @@ body {
 }
 
 .bg {
-    background: url(../images/bj.png) 0 0 no-repeat;
+    /*background: url(../images/bj.png) 0 0 no-repeat;*/
     background-size: cover;
 }
 
@@ -164,7 +127,7 @@ body {
     height: 89.5px;
     top: 33%;
     left: 40%;
-    background-image: url(../images/avatar1.png);
+    /*background-image: url(../images/avatar1.png);*/
 }
 
 .avatar-box2 {
@@ -172,7 +135,7 @@ body {
     height: 134.5px;
     top: 40%;
     left: 3%;
-    background-image: url(../images/avatar2.png);
+    /*background-image: url(../images/avatar2.png);*/
 }
 
 @media screen and (min-width: 360px) {
@@ -225,15 +188,15 @@ body {
     }
 
 .wolong {
-    background-image: url(../images/wolong.jpg);
+    /*background-image: url(../images/wolong.jpg);*/
 }
 
 .yueliang {
-    background-image: url(../images/yueliang.jpg);
+    /*background-image: url(../images/yueliang.jpg);*/
 }
 
 .shenxian {
-    background-image: url(../images/shenxian.jpg);
+    /*background-image: url(../images/shenxian.jpg);*/
 }
 
 
@@ -392,22 +355,4 @@ body {
 }
 
 
-@-webkit-keyframes spin {
-    from {
-        -webkit-transform: rotate(0deg);
-    }
 
-    to {
-        -webkit-transform: rotate(360deg);
-    }
-}
-
-@keyframes spin {
-    from {
-        transform: rotate(0deg);
-    }
-
-    to {
-        transform: rotate(360deg);
-    }
-}
