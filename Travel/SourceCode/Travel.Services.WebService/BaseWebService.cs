@@ -17,7 +17,7 @@ namespace Travel.Services.WebService
             }
             else
             {
-                Session["OpenId"] = "obzTswxzFzzzdWdAKf2mWx3CrpXk";
+                //Session["OpenId"] = "obzTswxzFzzzdWdAKf2mWx3CrpXk";
                 if (Session["OpenID"] == null)
                 {
                     openId = GetOpenIDFromWeChat(code);

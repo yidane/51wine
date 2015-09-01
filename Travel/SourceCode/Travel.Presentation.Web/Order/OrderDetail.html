@@ -164,21 +164,9 @@
         <section>
             <div class="silde-background">
                 <div class="swiper-container gpd-ablum swiper-container-horizontal">
-                    <div class="swiper-wrapper silde-center" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px);">
-                        <div class="swiper-slide swiper-slide-next " data-swiper-slide-index="0">
-                            <img class="img-border" src="../images/qrcode.png">
-                        </div>
-                        <div class="swiper-slide" data-swiper-slide-index="1">
-                            <img class="img-border" src="../images/qrcode.png">
-                        </div>
-                        <div class="swiper-slide" data-swiper-slide-index="2">
-                            <img class="img-border" src="../images/qrcode.png">
-                        </div>
+                    <div class="swiper-wrapper silde-center" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px);" id="swiperContain">
                     </div>
-                    <div class="swiper-pagination">
-                        <span class="swiper-pagination-bullet swiper-pagination-bullet-active"></span>
-                        <span class="swiper-pagination-bullet"></span>
-                        <span class="swiper-pagination-bullet"></span>
+                    <div class="swiper-pagination" id="swiperFooter">
                     </div>
                 </div>
             </div>
@@ -249,13 +237,13 @@
             </div>
             <div class="gpd-content">
 
-                <p>微信订单号：167869226</p>
+                <p>微信订单号：<span id="weChatOrderNo"></span></p>
 
-                <p>购买手机号：15910662233</p>
+                <p>购买手机号：<span id="payPhone"></span></p>
 
-                <p>提交时间：2015-08-26 12:00</p>
-                <p>数量：2</p>
-                <p>总价：220</p>
+                <p>提交时间：<span id="payTime2"></span></p>
+                <p>数量：<span id="count2"></span></p>
+                <p>总价：<span id="total2"></span></p>
             </div>
         </section>
 
@@ -327,16 +315,33 @@
                 data: { orderId: GetQueryString("orderId") },
                 success: function (result) {
                     if (result.IsSuccess) {
-                        if (result.Data.HasValue) {
-                            $("#name").val(result.Data.UserName);
-                            $("#phone").val(result.Data.Mobile);
-                            $("#idcard").val(result.Data.IdCard);
-                            $("#contractAll").val(result.Data.UserName + "    " + result.Data.Mobile + "  " + result.Data.IdCard);
-                            $("#singlePrice").val(result.Data.SinglePrice);
-                            $("#count").val(result.Data.Count);
-                            $("#payTime").val(result.Data.PayTime);
-                            $("#orderNo").val(result.Data.OrderNo);
+                        $("#name").html(result.Data.UserName);
+                        $("#phone").html(result.Data.Mobile);
+                        $("#payPhone").html(result.Data.Mobile);
+                        $("#weChatOrderNo").html(result.Data.OrderCode);
+                        $("#idcard").html(result.Data.IdCard);
+                        $("#contractAll").html(result.Data.UserName + "    " + result.Data.Mobile + "  " + result.Data.IdCard);
+                        $("#singlePrice").html(result.Data.SinglePrice);
+                        $("#count").html(result.Data.Count);
+                        $("#count2").html(result.Data.Count);
+                        $("#payTime").html(result.Data.PayTime);
+                        $("#payTime2").html(result.Data.PayTime);
+                        $("#orderNo").html(result.Data.OrderNo);
+
+                        var ercodeHtml = "";
+                        var ercodefoothtml = "";
+                        for (var i = 0; i < result.Data.TicketCodeList.length; i++) {
+                            if (i == 0) {
+                                ercodeHtml = ercodeHtml + "<div class='swiper-slide swiper-slide-next' data-swiper-slide-index='0'><img class='img-border' src='../WebService/ErCodeHandler.ashx?key=" + result.Data.TicketCodeList[i] + "'></div>";
+                                ercodefoothtml = ercodefoothtml + "<span class='swiper-pagination-bullet swiper-pagination-bullet-active'></span>";
+                            } else {
+                                ercodeHtml = ercodeHtml + "<div class='swiper-slide' data-swiper-slide-index='0'><img class='img-border' src='../images/qrcode.png'></div>";
+                                ercodefoothtml = ercodefoothtml + "<span class='swiper-pagination-bullet'></span>";
+                            }
                         }
+
+                        $("#swiperContain").html(ercodeHtml);
+                        $("#swiperFooter").html(ercodefoothtml);
                     }
                 }
             });
