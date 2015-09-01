@@ -174,7 +174,7 @@ namespace Travel.Infrastructure.WeiXin.Advanced.Pay.Model
             if (return_msgNode != null)
                 return_msg = return_msgNode.InnerText;
 
-            if (result_code != null)
+            if (result_codeNode != null)
                 this.result_code = result_codeNode.InnerText;
 
             if (string.Equals(result_code, "SUCCESS"))
