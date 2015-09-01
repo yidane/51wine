@@ -70,7 +70,12 @@
                 height: 40px;
                 background: url(images/listen.png) 0 0 no-repeat;
                 background-size: 40px 40px;
+                cursor: pointer;
             }
+
+                .caption .listen.close {
+                    background-image: url(images/listen_close.png);
+                }
 
             .caption .title {
                 line-height: 30px;
@@ -139,9 +144,9 @@
             padding: 10px;
         }
 
-        .produce p{
-           white-space: pre-wrap;
-        }
+            .produce p {
+                white-space: pre-wrap;
+            }
 
             .produce .border-left-top {
                 position: absolute;
@@ -204,15 +209,10 @@
         <div class="produce">
             <span class="border-left-top"></span>
             <span class="border-right-bottom"></span>
-            <p>        喀纳斯景区的代表性景点之一的卧龙湾。因河湾中有一酷似龙形的河心洲而得名。</p>
-            <p>        按其形状，本地人也叫它卡赞湖--“锅底湖”。卧龙湾（锅底湖）海拔1325米，喀纳斯河在此段穿流于古冰川U形谷底的冰川堆积物中，本来是普通的一段河湾，若干年前，卧龙湾（锅底湖）下方的左岸支沟暴发了泥石流，右岸发生了多处坍塌，泥石流和坍塌的堆积物使局部河道淤塞变窄，使得上方河面变宽，水流变缓，泥砂在河中及岸边堆积形成河洲，造就了绮丽的卧龙湾景色。</p>
-            <p>        在卧龙湾下方，现在还能看到扇形的古泥石流堆积物，前缘缓，后缘陡。堆积物中大小石块和泥砂混杂，其中有直径达数米的巨大岩块，具有典型的泥石流沉积特征。目前这个泥石流扇上已生长了茂密的白桦林，说明该泥石流已基本稳定。</p>
-            <p>        最有趣的是，造就卧龙湾的泥石流和坍塌事件几乎是同时发生的，这说明很可能与一次大地震有关。那么地震是什么时候发生的呢，沿着木栈道行走，进入卧龙湾下方泥石流堆积的森林里，将会找到答案 。</p>
-            <p>        河洲的形状很怪异，是不是很像一只长着翅膀的恐龙，也就是翼龙，民间传说这就是喀纳斯湖怪的原型，说有一只湖怪忍受不了湖底的寂寞，擅自从河口游出，想到河下游去看看。可是，当它游到锅底湖时，就被牢牢困住了。相传锅底湖专门用来阻止湖怪游到下游，危及百姓，湖怪都恐惧锅底湖，因为湖怪也是肉长的，一旦进入“锅底”，不是被煮熟了，就是被烹炸了，那命运就可想而知了。</p>
-            <p>        大家再仔细看看，还有什么新发现？对了，这还是一只公湖怪呢！</p>
+            <p>        卧龙湾，平均海拔1350米。是喀纳斯河在此长期侧蚀冲刷形成。卧龙湾水面平静，柔波浮动，水色碧绿，面积约9万平方米，河湾中心是一块植物茂盛的沙洲，酷似一条静卧在水中的翼龙，卧龙湾因此得名。河曲两侧，生长着郁郁葱葱的森林。山坡上针叶阔叶原始森林密布，森林之上是层峦叠嶂的山峰；河曲东西两岸的半岛状平台是开阔平坦的绿茸茸的大草坪，一户蒙古族图万人居住于此，充分诠释了人与自然和谐相处的景象。</p>
         </div>
     </div>
-
+    <script src="../javaScripts/zepto.min.js"></script>
     <script type="text/javascript">
         var music = {
             play: function () {
@@ -229,7 +229,20 @@
                 }
             }
         }
-        music.play();
+        $(function () {
+            music.play();
+            $('.listen').on('click', function () {
+                var $this = $(this);
+                if ($this.hasClass('close')) {
+                    music.play();
+                    $this.removeClass('close');
+                }
+                else {
+                    music.pause();
+                    $this.addClass('close');
+                }
+            });
+        });
     </script>
 </body>
 </html>

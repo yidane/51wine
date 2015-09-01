@@ -70,7 +70,12 @@
                 height: 40px;
                 background: url(images/listen.png) 0 0 no-repeat;
                 background-size: 40px 40px;
+                cursor:pointer;
             }
+
+                .caption .listen.close {
+                    background-image: url(images/listen_close.png);
+                }
 
             .caption .title {
                 line-height: 30px;
@@ -175,7 +180,6 @@
     </style>
 </head>
 <body>
-    <!--<audio src="../audios/yinyue.mp3" autoplay="autoplay" loop="loop"></audio>-->
     <div class="bg">
         <span></span>
     </div>
@@ -204,10 +208,10 @@
         <div class="produce">
             <span class="border-left-top"></span>
             <span class="border-right-bottom"></span>
-            <p>        神仙湾，海拔1327米，由于受下游泥石流和山体崩塌堆积的堰塞，使这里成为喀纳斯河最宽的河段。河水流速缓慢，在这里无论是夏季还是冬季、在早晨或雨后，总有像轻纱一样的云雾缭绕着，让人置身于仙境，因此称之为“神仙湾”。而有太阳的时候，水面上波光粼粼，像一粒粒的珍珠洒在上面，图瓦人说，这些珍珠是成吉思汗没来及藏起来的珍宝。因此，在有太阳的时候，这里的人们称它为“珍珠滩”。有云雾的时候才叫它“神仙湾”，两个名通常是分别使用的。也有人根据这个特点，称它是“阴阳景”、“两幅画”。又有阳光又有云雾时两名并用，这种阴阳同现的情景，也常能见到，堪称绝美的奇景。一个景点两道风景，双名并用，若同时看到，则两全其美。</p>
+            <p>        海拔1327m，喀纳斯河因受到下游泥石流及崩塌堆积的堵塞而变宽，最宽处达700m，是景区内喀纳斯河最宽的河段，河中有数个小岛。此段河谷地势平缓，在河岸地带形成大片沼泽与草甸。每当清晨或者雨后，神仙湾总是雾气升腾，宛若仙境，仿佛神仙出没，因此得名。神仙湾河岸森林茂密，系落叶松和云杉构成的针叶林。树龄最大的西伯利亚落叶松表明森林至少有400年以上的历史。</p>
         </div>
     </div>
-
+    <script src="../javaScripts/zepto.min.js"></script>
     <script type="text/javascript">
         var music = {
             play: function () {
@@ -224,7 +228,20 @@
                 }
             }
         }
-        music.play();
+        $(function () {
+            music.play();
+            $('.listen').on('click', function () {
+                var $this = $(this);
+                if ($this.hasClass('close')) {
+                    music.play();
+                    $this.removeClass('close');
+                }
+                else {
+                    music.pause();
+                    $this.addClass('close');
+                }
+            });
+        });
     </script>
 </body>
 </html>

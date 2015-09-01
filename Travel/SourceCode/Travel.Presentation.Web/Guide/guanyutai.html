@@ -70,7 +70,12 @@
                 height: 40px;
                 background: url(images/listen.png) 0 0 no-repeat;
                 background-size: 40px 40px;
+                cursor:pointer;
             }
+
+                .caption .listen.close {
+                    background-image: url(images/listen_close.png);
+                }
 
             .caption .title {
                 line-height: 30px;
@@ -211,6 +216,7 @@
             <p>        自古以来，凡名胜古迹总有文人墨客留下诗词曲赋和题字，观鱼台也是如此。“观鱼台”匾额是由著名文化学者余秋雨先生题写的。而观鱼台是深圳市园林景观设计大师吴肇钊先生设计而成。台内的两则赋，分别由吴肇钊和著名作家尔泰撰写，观美景，赏美文。可谓两全其美。</p>
         </div>
     </div>
+    <script src="../javaScripts/zepto.min.js"></script>
     <script type="text/javascript">
         var music = {
             play: function () {
@@ -227,7 +233,20 @@
                 }
             }
         }
-        music.play();
+        $(function () {
+            music.play();
+            $('.listen').on('click', function () {
+                var $this = $(this);
+                if ($this.hasClass('close')) {
+                    music.play();
+                    $this.removeClass('close');
+                }
+                else {
+                    music.pause();
+                    $this.addClass('close');
+                }
+            });
+        });
     </script>
 </body>
 </html>
