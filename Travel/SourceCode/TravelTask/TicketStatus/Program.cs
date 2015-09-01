@@ -27,7 +27,7 @@ namespace TicketStatus
         {
             var service = new OrderService();
             Console.WriteLine("开始获取票务状态。");
-            //service.SearchTicketStatus(100);
+            service.SearchTicketStatus(100);
         }
     }
 }

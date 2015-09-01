@@ -28,7 +28,7 @@ namespace Travel.Services.WebService
             {
                 Context.Response.Write(AjaxResult.Error("方法异常"));
             }
-
+            
         }
 
         [WebMethod(EnableSession = true)]
@@ -52,7 +52,7 @@ namespace Travel.Services.WebService
             catch (Exception)
             {
                 Context.Response.Write(AjaxResult.Error("方法异常"));
-            }
+            }            
         }
 
         [WebMethod(EnableSession = true)]
@@ -88,6 +88,32 @@ namespace Travel.Services.WebService
             catch (Exception)
             {
                 Context.Response.Write(AjaxResult.Error("方法异常"));
+            }            
+        }
+
+        [WebMethod]
+        public void RefundTickets(string orderId, int refundTicketNumber)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(orderId) && refundTicketNumber > 0)
+                {
+                    new OrderService().RefundTickets(orderId, refundTicketNumber);
+
+                    Context.Response.Write(AjaxResult.Success("退票成功"));
+                }
+                else
+                {
+                    Context.Response.Write(AjaxResult.Error("订单号或退票数量有误"));
+                }
+            }
+            catch (ArgumentException ex)
+            {
+                Context.Response.Write(AjaxResult.Error(ex.Message));
+            }
+            catch (Exception)
+            {
+                Context.Response.Write(AjaxResult.Error("操作失败"));
             }
         }
     }

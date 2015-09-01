@@ -50,7 +50,7 @@ namespace Travel.Application.OrderUnitTest
                                          mch_id = "100000100",
                                          nonce_str = "5d2b6c2a8db53831f7eda20af46e531c",
                                          openid = "obzTswxzFzzzdWdAKf2mWx3CrpXk",
-                                         out_trade_no = "C2015090121204252482826",
+                                         out_trade_no = "C2015090202490309963836",
                                          result_code = "SUCCESS",
                                          return_code = "SUCCESS",
                                          sign = "B552ED6B279343CB493C5DD0D78AB241",
@@ -61,8 +61,8 @@ namespace Travel.Application.OrderUnitTest
                                      };
 
             this.refundTickets =
-                TicketEntity.GetTicketsByOrderId(Guid.Parse("EFDC3E4A-737F-4A3F-8DAE-1ADC36923764"))
-                .Where(item => item.TicketId.Equals(57963)).ToList();
+                TicketEntity.GetTicketsByOrderId(Guid.Parse("35D7650B-21C1-45CD-B15D-2203857B7977"))
+                .Where(item => item.TicketId.Equals(57882)).ToList();
         }
 
         [Test]
@@ -110,6 +110,7 @@ namespace Travel.Application.OrderUnitTest
         {
             var service = new OrderService();
 
+            //service.RefundTickets("35D7650B-21C1-45CD-B15D-2203857B7977", 1);
             service.SearchTicketStatus(100);
         }
 
@@ -156,6 +157,8 @@ namespace Travel.Application.OrderUnitTest
         {
             var service = new OrderWebService();
 
+            service.MyTickets("1C99E930-D0D6-420E-B279-D3A9C3CE1930");
+            service.TicketCategoryList();
             service.MyOrders("obzTswxzFzzzdWdAKf2mWx3CrpXk");
         }
     }

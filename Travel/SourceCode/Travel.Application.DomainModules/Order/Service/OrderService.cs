@@ -45,7 +45,7 @@ namespace Travel.Application.DomainModules.Order.Service
                                         price = item.Price,
                                         ticketName = item.TicketName,
                                         type = item.Type,
-                                        image = string.Format("url(../images/ticket{0}.jpg)", new Random().Next(1, 8).ToString())
+                                        image = string.Format("url(../images/ticket{0}.jpg)", new Random().Next(1, 8).ToString())                                                                   
                                     }).ToList()
                         });
 
@@ -117,6 +117,40 @@ namespace Travel.Application.DomainModules.Order.Service
             }
 
             return null;
+        }
+
+        public void RefundTickets(string orderId, int refundTicketsNumber)
+        {
+            Guid gOrder;
+
+            if (Guid.TryParse(orderId, out gOrder))
+            {
+                if (!gOrder.Equals(Guid.Empty))
+                {
+                    var order = OrderEntity.GetOrderByOrderId(gOrder);
+                    var otaOrder = new OTAOrder(order);
+                    var refundTickets =
+                            TicketEntity.GetTicketsByOrderId(gOrder)
+                                .Where(item => item.TicketStatus.Equals(OrderStatus.TicketStatus_WaitUse))
+                                .ToList();
+
+                    if (refundTickets.Any())
+                    {
+                        if (refundTickets.Count >= refundTicketsNumber)
+                        {
+                            otaOrder.ProcessRefundRequestMain(refundTickets.Take(refundTicketsNumber).ToList());
+                        }
+                        else
+                        {
+                            throw new ArgumentException("退票张数大于可退张数");
+                        }
+                    }
+                    else
+                    {
+                        throw new ArgumentException("订单中没有可退票");
+                    }
+                }
+            }
         }
 
         public void SearchTicketStatus(int pageSize)
