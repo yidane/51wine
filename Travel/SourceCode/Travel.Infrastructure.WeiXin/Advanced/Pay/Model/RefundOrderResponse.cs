@@ -166,7 +166,7 @@ namespace Travel.Infrastructure.WeiXin.Advanced.Pay.Model
         {
             var return_codeNode = xmlDocument.SelectSingleNode("xml/return_code");
             var return_msgNode = xmlDocument.SelectSingleNode("xml/return_msg");
-            var result_code = xmlDocument.SelectSingleNode("xml/result_code");
+            var result_codeNode = xmlDocument.SelectSingleNode("xml/result_code");
 
             if (return_codeNode != null)
                 return_code = return_codeNode.InnerText;
@@ -175,7 +175,7 @@ namespace Travel.Infrastructure.WeiXin.Advanced.Pay.Model
                 return_msg = return_msgNode.InnerText;
 
             if (result_code != null)
-                result_code = result_code;
+                this.result_code = result_codeNode.InnerText;
 
             if (string.Equals(result_code, "SUCCESS"))
             {
