@@ -28,13 +28,16 @@ namespace Travel.Services.WebService
             {
                 Context.Response.Write(AjaxResult.Error("方法异常"));
             }
-            
+
         }
 
-        public void MyOrders(string openId)
+        [WebMethod(EnableSession = true)]
+        public void MyOrders(string code)
         {
             try
             {
+                var openId = GetOpenIDByCodeID(code);
+
                 if (!string.IsNullOrEmpty(openId))
                 {
                     var orders = new OrderService().MyOrders(openId);
@@ -49,9 +52,24 @@ namespace Travel.Services.WebService
             catch (Exception)
             {
                 Context.Response.Write(AjaxResult.Error("方法异常"));
-            }            
+            }
         }
 
+        [WebMethod(EnableSession = true)]
+        public void GetOrderWithDetailList(string orderId)
+        {
+            try
+            {
+                var result = new OrderService().GetOrderByOrderID(new Guid(orderId));
+                Context.Response.Write(AjaxResult.Success(result));
+            }
+            catch (Exception exception)
+            {
+                Context.Response.Write(AjaxResult.Error(exception.Message));
+            }
+        }
+
+        [WebMethod(EnableSession = true)]
         public void MyTickets(string orderId)
         {
             try
@@ -70,7 +88,7 @@ namespace Travel.Services.WebService
             catch (Exception)
             {
                 Context.Response.Write(AjaxResult.Error("方法异常"));
-            }            
+            }
         }
     }
 }

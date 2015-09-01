@@ -9,6 +9,7 @@
 
     <script src="http://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
     <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <link rel="stylesheet" href="../Styles/TicketList.css" />
     <script src="script/common/main.js"></script>
     <script src="script/common/common.js"></script>
     <script src="script/common/jquery.pageItem.js"></script>
@@ -21,17 +22,63 @@
 </head>
 <body>
     <div class="ticket">
-        <section>
-            <ul class="ticket-tab" id="tab">
-                <li class="active"><a href="MyOrderList.html?payStatus=payed">已付款</a></li>
-                <li><a href="MyOrderList.html?payStatus=wait_pay">退票</a></li>
-            </ul>
-        </section>
+        <div class="tab tabs">
+            <div class="tab-navs">
+                <a href="MyOrderList.html?payStatus=payed" class="active">已付款</a>
+                <a href="MyOrderList.html?payStatus=wait_pay">退票</a>
+            </div>
+        </div>
         <section>
             <div class="tab-content" id="order_list">
             </div>
         </section>
     </div>
+
+    <div class="tab tabs">
+        <div class="tab-navs">
+            <a href="javascript:;" class="active">已付款</a>
+            <a href="javascript:;">退票</a>
+        </div>
+        <div id="tabs-container" class="container swiper-container">
+            <div class="swiper-wrapper" data-bind='foreach: ticketList'>
+                <div class="swiper-slide">
+                    <div class="content-slide">
+                        <div class="tab-pane active">
+                            <div class="panel panel-default" data-bind='foreach: content'>
+                                <div class="panel-bd" data-bind="style: { backgroundImage: image }">
+                                    <a href="TicketDetail.html?ticketType=${ ticketTypeCode }" class="thumb thumb-active">
+                                        <div class="thumb-cover pull-left">
+                                            <div class="thumb-cnt">
+                                                <span class="title text-white">
+                                                    <!--ko text: ticketDescription-->
+                                                    <!--/ko-->
+                                                    <!--ko text: remark-->
+                                                    <!--/ko-->
+                                                    <!--<div class="clearfix">
+                                                    <div class="about">
+                                                        <div></div>
+                                                    </div>
+                                                </div>-->
+                                                </span>
+                                                <span class="other text-white">￥</span><span class="about text-blue"><!--ko text: price--><!--/ko--></span><span class="other text-white">元</span>
+
+                                            </div>
+                                            <div class="mask modal-backdrop"></div>
+                                        </div>
+                                    </a>
+                                    <!--<span class="cheap">省</span>-->
+                                    <span class="recommend"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../javaScripts/zepto.min.js"></script>
+    <script src="../js/oAuth2.js"></script>
 
     <script id="ResultTemplateOrder" type="text/x-jsrender">
         <div class="tab-pane active" style="margin-bottom: 10px; border-bottom: solid; border-width: 1px; border-color: #E0EEEE">
@@ -56,7 +103,6 @@
                             <div><em class="money"><i>￥</i>{{:TicketPrice}}</em></div>
                             <div>X</div>
                             <div>{{:TicketCount}}</div>
-
                         </div>
                     </a>
                 </li>
@@ -75,17 +121,26 @@
     </script>
 
     <script>
+        $(document).ready(function () {
+            $.ajax({
+                type: "post",
+                url: '../WebService/OrderWebService.asmx/MyOrders',
+                dataType: 'json',
+                data: { code: GetQueryString('code') },
+                success: function (result) {
+                    if (result.IsSuccess) {
+                        var data = [];
+                        $(result.Data).each(function (index, obj) {
+                            data.push({ OrderNo: obj.OrderCode, OrderID: 123, TicketImageUrl: '../TicketImages/1.jpg', TicketName: obj.TicketName, LastUseDate: '2015-08-19', TicketPrice: obj.singleTicketPrice, TicketCount: obj.TicketCount, TicketTotalPrice: obj.TotelFee, OperateUrl: '', OperateName: '查看' });
+                        });
 
-     
-        var data = [{ OrderNo: 'WX123456789', OrderID: 123, TicketImageUrl: '../TicketImages/1.jpg', TicketName: '喀纳斯景区门票(半票)', OrderStatusName: '已使用', LastUseDate: '2015-08-19', TicketPrice: 120, TicketCount: 1, TicketTotalPrice: 120, OperateUrl: '', OperateName: '查看' },
-                        { OrderNo: 'WX123456789', OrderID: 123, TicketImageUrl: '../TicketImages/2.jpg', TicketName: '喀纳斯景区门票', OrderStatusName: '已使用', TicketPrice: 120, LastUseDate: '2015-08-19', TicketCount: 1, TicketTotalPrice: 120, OperateUrl: '', OperateName: '查看' },
-                        { OrderNo: 'WX123456789', OrderID: 123, TicketImageUrl: '../TicketImages/2.jpg', TicketName: '喀纳斯景区门票', OrderStatusName: '已使用', TicketPrice: 120, LastUseDate: '2015-08-19', TicketCount: 1, TicketTotalPrice: 120, OperateUrl: '', OperateName: '查看' },
-                        { OrderNo: 'WX123456789', OrderID: 123, TicketImageUrl: '../TicketImages/2.jpg', TicketName: '喀纳斯景区门票', OrderStatusName: '已使用', TicketPrice: 120, LastUseDate: '2015-08-19', TicketCount: 1, TicketTotalPrice: 120, OperateUrl: '', OperateName: '查看' }];
-
-        var template = $.templates("#ResultTemplateOrder");
-        var htmlOutput = template.render(data);
-        $("#order_list").html(htmlOutput);
+                        var template = $.templates("#ResultTemplateOrder");
+                        var htmlOutput = template.render(data);
+                        $("#order_list").html(htmlOutput);
+                    }
+                }
+            });
+        });
     </script>
-
 </body>
 </html>

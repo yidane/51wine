@@ -12,6 +12,7 @@
     <script src="script/common/main.js"></script>
     <script src="script/common/common.js"></script>
     <script src="script/common/jquery.pageItem.js"></script>
+    <script src="../js/oAuth2.js"></script>
     <meta content="yes" name="apple-mobile-web-app-capable" />
     <meta content="black" name="apple-mobile-web-app-status-bar-style" />
     <meta content="telephone=no" name="format-detection" />
@@ -19,28 +20,33 @@
     <title>我的订单</title>
 
     <style>
-
         body {
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 14px;
-    line-height: 1.42857143;
-    color: #333;
-    background-color: #999999;
-    background-repeat: repeat-y;
-    background-size: 100% auto;
-    background-image: url(../img/yyhc_bg.jpg);
-}
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-size: 14px;
+            line-height: 1.42857143;
+            color: #333;
+            background-color: #999999;
+            background-repeat: repeat-y;
+            background-size: 100% auto;
+            background-image: url(../img/yyhc_bg.jpg);
+        }
 
         * {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-}
-        .ticket{ margin-right: 8rem; height:100%;  width: 100%;  }
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        .ticket {
+            margin-right: 8rem;
+            height: 100%;
+            width: 100%;
+        }
 
             .ticket section {
-            background-color:white;
+                background-color: white;
             }
+
         .full-w {
             width: 100%;
         }
@@ -110,51 +116,46 @@
         }
 
         .btn-no-border-radius {
-        border-radius:0;
+            border-radius: 0;
         }
 
         .gpd-item {
-    padding: 10px 0;
-}
+            padding: 10px 0;
+        }
 
-.gpd-item-title {
-    font-size: 18px;
-    position: relative;
-    border-bottom: 1px solid #d7c38c;
-    padding-bottom: 6px;
-    padding-bottom: 6px; 
-}
+        .gpd-item-title {
+            font-size: 18px;
+            position: relative;
+            border-bottom: 1px solid #d7c38c;
+            padding-bottom: 6px;
+            padding-bottom: 6px;
+        }
 
+        .gp-icons {
+            background-image: url(../images/gp_icons.png);
+            background-size: 320px auto;
+        }
 
+        .gpd-up-icon {
+            width: 44px;
+            height: 32px;
+            position: absolute;
+            right: 0;
+            top: -2px;
+            background-position: -34px -41px;
+        }
 
+        .gdp-curr .gpd-up-icon {
+            background-position: -34px 3px;
+        }
 
+        .gpd-content {
+            display: none;
+        }
 
-
-
-.gp-icons {
-    background-image: url(../images/gp_icons.png);
-    background-size: 320px auto;
-}
-.gpd-up-icon {
-    width: 44px;
-    height: 32px;
-    position: absolute;
-    right: 0;
-    top: -2px;
-    background-position: -34px -41px;
-}
-.gdp-curr .gpd-up-icon {
-    background-position: -34px 3px;
-}
-
-.gpd-content {
-    display: none;
-}
-
-.gdp-curr .gpd-content {
-    display: block;
-}
-      
+        .gdp-curr .gpd-content {
+            display: block;
+        }
     </style>
 </head>
 
@@ -162,10 +163,8 @@
     <div class="ticket">
         <section>
             <div class="silde-background">
-
                 <div class="swiper-container gpd-ablum swiper-container-horizontal">
                     <div class="swiper-wrapper silde-center" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px);">
-
                         <div class="swiper-slide swiper-slide-next " data-swiper-slide-index="0">
                             <img class="img-border" src="../images/qrcode.png">
                         </div>
@@ -175,34 +174,22 @@
                         <div class="swiper-slide" data-swiper-slide-index="2">
                             <img class="img-border" src="../images/qrcode.png">
                         </div>
-
                     </div>
                     <div class="swiper-pagination">
-                        <span class="swiper-pagination-bullet"></span>
-                        <span class="swiper-pagination-bullet"></span>
                         <span class="swiper-pagination-bullet swiper-pagination-bullet-active"></span>
+                        <span class="swiper-pagination-bullet"></span>
+                        <span class="swiper-pagination-bullet"></span>
                     </div>
-                    <!--<div class="swiper-button-prev"></div>
-                    <div class="swiper-button-next"></div>-->
                 </div>
-
             </div>
             <div class="full-w">
                 <p class="text-uppercase">门票密码：<span>123456</span><strong class="text-danger pull-right item-pullleft">已使用</strong></p>
-                <!--<div class="deal-tips deal-success">
-                    已退款
-                </div>-->
-                <!--<h2 class="ticket-order-title order-title"><span class="money">&yen;120</span>喀纳斯景区门票</h2>
-                <p class="ticket-order-explain order-explain">
-                    <span class="mark">退</span>默认可退
-                </p>-->
             </div>
-            <div style="border-bottom:10px;border-top:10px; border-style:solid; border-color: #999999;">
+            <div style="border-bottom: 10px; border-top: 10px; border-style: solid; border-color: #999999;">
                 <a href="ApplyRefund.html" class="btn btn-primary full-w btn-no-border-radius">申请退票</a>
             </div>
-
         </section>
-        <section style="display:none">
+        <section style="display: none">
             <ul class="ticket-order-form order-details">
                 <li>
                     <div>
@@ -212,24 +199,24 @@
                         <label for="">有效日期</label><span>08-19</span>
                     </div>
                     <div>
-                        <label for="">单价</label><span class="money">&yen;120</span>
+                        <label for="">单价</label><span class="money" id="singlePrice">&yen;120</span>
                     </div>
                     <div>
-                        <label for="">数量</label><span>1</span>
+                        <label for="">数量</label><span id="count">1</span>
                     </div>
                     <div>
                         <label for="">优惠券</label><span class="money2" style="color: #0280ea; font-size: 1.5rem;"><i>￥</i>0</span>
                     </div>
                 </li>
                 <li>
-                    <label for="">联系人</label><span>易必浩 18910063051 420921198603095113</span>
+                    <label for="">联系人</label><span id="contractAll"></span>
                 </li>
                 <li>
                     <div>
-                        <label for="">交易时间</label><span>2015-08-19 09:33</span>
+                        <label for="">交易时间</label><span id="payTime">2015-08-19 09:33</span>
                     </div>
                     <div>
-                        <label for="">订单号</label><span>WX201508198996112778</span>
+                        <label for="">订单号</label><span id="orderNo">WX201508198996112778</span>
                     </div>
                     <!--<div><label for="">供应商</label>杭州风景管理处</div>-->
                 </li>
@@ -240,7 +227,7 @@
         </section>
 
 
-        <section class="gpd-item " >
+        <section class="gpd-item ">
             <div class="gpd-item-title ">
                 使用须知<div class="gp-icons gpd-up-icon "></div>
             </div>
@@ -261,17 +248,14 @@
                 订单明细<div class="gp-icons gpd-up-icon "></div>
             </div>
             <div class="gpd-content">
-                 
+
                 <p>微信订单号：167869226</p>
-                 
+
                 <p>购买手机号：15910662233</p>
-                
+
                 <p>提交时间：2015-08-26 12:00</p>
                 <p>数量：2</p>
                 <p>总价：220</p>
-                
-                
-              
             </div>
         </section>
 
@@ -287,20 +271,20 @@
                 <p>5、微信门票一经扫码入园后，不予退票，如二进票入园一次后即不予退票</p>
             </div>
         </section>
-        <section class="gpd-item " style="padding-bottom:0;">
+        <section class="gpd-item " style="padding-bottom: 0;">
             <div class="gpd-item-title">
                 退票规则 <span style="float: right">2015-08-01-2015-12-31</span>
             </div>
         </section>
 
-        <section class="gpd-item " style="padding-bottom:0; margin-top:10px; text-align:center;">
+        <section class="gpd-item " style="padding-bottom: 0; margin-top: 10px; text-align: center;">
             <div class="gpd-item-title">
-               电话咨询：010-65984561
+                电话咨询：010-65984561
             </div>
         </section>
 
         <!--订购信息-->
-        <section class="gpd-order" style="display:none;">
+        <section class="gpd-order" style="display: none;">
             <div class="gpd-order-title">
                 <div style="background-color: #CCCCCC; width: 100%; height: 4em; line-height: 4em; overflow: hidden; text-indent: 20px">
                     订票信息
@@ -329,13 +313,34 @@
                 </div>
             </div>
         </section>
-        </div>
+    </div>
     <script src="../javaScripts/swiper.min.js"></script>
 
 
     <script>
 
         $(function () {
+            $.ajax({
+                url: "../WebService/OrderWebService.asmx/GetOrderWithDetailList",
+                type: "post",
+                dataType: "json",
+                data: { orderId: GetQueryString("orderId") },
+                success: function (result) {
+                    if (result.IsSuccess) {
+                        if (result.Data.HasValue) {
+                            $("#name").val(result.Data.UserName);
+                            $("#phone").val(result.Data.Mobile);
+                            $("#idcard").val(result.Data.IdCard);
+                            $("#contractAll").val(result.Data.UserName + "    " + result.Data.Mobile + "  " + result.Data.IdCard);
+                            $("#singlePrice").val(result.Data.SinglePrice);
+                            $("#count").val(result.Data.Count);
+                            $("#payTime").val(result.Data.PayTime);
+                            $("#orderNo").val(result.Data.OrderNo);
+                        }
+                    }
+                }
+            });
+
             $(".gp-icons.gpd-up-icon").click(function () {
                 var zThis = $(this);
                 var zThisParent = zThis.parents(".gpd-item");

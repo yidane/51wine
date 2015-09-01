@@ -29,7 +29,7 @@ namespace Travel.Application.DomainModules.Order.Service
                                                                         price = item.Price,
                                                                         ticketName = item.TicketName,
                                                                         type = item.Type,
-                                                                        image = string.Format("url(../images/ticket{0}.jpg)", new Random().Next(1,8).ToString())
+                                                                        image = string.Format("url(../images/ticket{0}.jpg)", new Random().Next(1, 8).ToString())
                                                                     }).ToList()
                         });
 
@@ -45,7 +45,7 @@ namespace Travel.Application.DomainModules.Order.Service
                                         price = item.Price,
                                         ticketName = item.TicketName,
                                         type = item.Type,
-                                        image = string.Format("url(../images/ticket{0}.jpg)", new Random().Next(1, 8).ToString())                                                                   
+                                        image = string.Format("url(../images/ticket{0}.jpg)", new Random().Next(1, 8).ToString())
                                     }).ToList()
                         });
 
@@ -77,12 +77,31 @@ namespace Travel.Application.DomainModules.Order.Service
                                                     OrderCode = item.OrderCode,
                                                     singleTicketPrice = item.Tickets.First().Price,
                                                     TotelFee = item.TotalFee(),
-                                                    TicketName = TicketCategoryEntity.TodayTicketCategory.FirstOrDefault(i =>i.TicketCategoryId.Equals(item.Tickets.First().TicketCategoryId)).TicketName,
+                                                    TicketCount = item.Tickets.Count,
+                                                    TicketName = TicketCategoryEntity.TodayTicketCategory.FirstOrDefault(i => i.TicketCategoryId.Equals(item.Tickets.First().TicketCategoryId)).TicketName,
                                                     BuyTime = item.Tickets.First().CreateTime.ToString("yyyy-MM-dd")
                                                 }).ToList();
 
-
             return dto;
+        }
+
+        public OrderWithDetailListDTO GetOrderByOrderID(Guid orderId)
+        {
+            var order = OrderEntity.GetOrderByOrderId(orderId);
+            var ticketList = TicketEntity.GetTicketsByOrderId(orderId);
+            var orderWithDetailListDTO = new OrderWithDetailListDTO()
+                {
+                    ContactPersonName = order.ContactPersonName,
+                    MobilePhoneNumber = order.MobilePhoneNumber,
+                    IdentityCardNumber = order.IdentityCardNumber,
+                    OrderCode = order.OrderCode,
+                    OrderId = order.OrderId,
+                    TicketCodeList = ticketList.Select(item => item.ECode).ToList(),
+                    PayTime = order.CreateTime.ToShortDateString(),
+                    SinglePrice = ticketList.First().Price.ToString()
+                };
+
+            return orderWithDetailListDTO;
         }
 
         public IList<TicketEntity> MyTickets(string orderId)
