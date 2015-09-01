@@ -33,7 +33,7 @@ namespace Travel.Infrastructure.WeiXin.Advanced.Pay
         //=======【支付结果通知url】===================================== 
         /* 支付结果通知回调url，用于商户接收支付结果
         */
-        public const string NOTIFY_URL = "http://www.cloudorg.com.cn/travel/Message/MessageNotify";
+        public const string NOTIFY_URL = "http://www.cloudorg.com.cn/travel/message/MessageNotify.aspx";
 
         //=======【商户系统后台机器IP】===================================== 
         /* 此参数可手动配置也可在程序中自动获取

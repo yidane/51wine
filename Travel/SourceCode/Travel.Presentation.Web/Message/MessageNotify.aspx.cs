@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Web;
@@ -31,12 +32,15 @@ namespace Travel.Presentation.Web.Message
                 s.Close();
                 s.Dispose();
 
+                WriteLog(builder.ToString());
+
                 var paymentNotify = new PaymentNotify(builder.ToString());
 
                 bool isSucceed = false;
                 var response = paymentNotify.Report(out isSucceed);
                 if (isSucceed)
                 {
+                    WriteLog("report Success");
                     //后台反馈微信信息
                     var wxPay = new WXPaymentOperate();
                     wxPay.GetPaymentCompleteInfomation(paymentNotify);
@@ -53,10 +57,32 @@ namespace Travel.Presentation.Web.Message
 
         private void ReturnResponse(string response)
         {
+            WriteLog(response);
+
             Response.Clear();
             Response.Write(response);
-            Response.Flush();
-            Response.Close();
+            //Response.Flush();
+            //Response.Close();
+        }
+
+        protected static void WriteLog(string content)
+        {
+            var path = AppDomain.CurrentDomain.BaseDirectory + "log";
+            if (!Directory.Exists(path))//如果日志目录不存在就创建
+            {
+                Directory.CreateDirectory(path);
+            }
+
+            string time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff");//获取当前系统时间
+            string filename = path + "/" + DateTime.Now.ToString("yyyy-MM-dd") + ".txt";//用日期对日志文件命名
+
+            //创建或打开日志文件，向日志文件末尾追加记录
+            StreamWriter mySw = File.AppendText(filename);
+
+            mySw.WriteLine(time + "   |" + content + Environment.NewLine);
+
+            //关闭日志文件
+            mySw.Close();
         }
     }
 }

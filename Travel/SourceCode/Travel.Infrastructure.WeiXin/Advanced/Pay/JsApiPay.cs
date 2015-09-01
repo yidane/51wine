@@ -25,7 +25,7 @@ namespace Travel.Infrastructure.WeiXin.Advanced.Pay
             var data = new WxPayData();
             data.SetValue("body", request.body);
             data.SetValue("attach", request.attach);
-            data.SetValue("out_trade_no", WxPayHelper.GenerateOutTradeNo());
+            data.SetValue("out_trade_no", request.out_trade_no);
             //data.SetValue("total_fee", request.total_fee);
             data.SetValue("total_fee", 1);
             //data.SetValue("time_start", DateTime.Now.ToString("yyyyMMddHHmmss"));
