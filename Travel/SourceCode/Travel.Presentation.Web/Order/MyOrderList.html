@@ -29,52 +29,9 @@
             </div>
         </div>
         <section>
-            <div class="tab-content" id="order_list">
+            <div class="tab-content" style="padding-top: 20px" id="order_list">
             </div>
         </section>
-    </div>
-
-    <div class="tab tabs">
-        <div class="tab-navs">
-            <a href="javascript:;" class="active">已付款</a>
-            <a href="javascript:;">退票</a>
-        </div>
-        <div id="tabs-container" class="container swiper-container">
-            <div class="swiper-wrapper" data-bind='foreach: ticketList'>
-                <div class="swiper-slide">
-                    <div class="content-slide">
-                        <div class="tab-pane active">
-                            <div class="panel panel-default" data-bind='foreach: content'>
-                                <div class="panel-bd" data-bind="style: { backgroundImage: image }">
-                                    <a href="TicketDetail.html?ticketType=${ ticketTypeCode }" class="thumb thumb-active">
-                                        <div class="thumb-cover pull-left">
-                                            <div class="thumb-cnt">
-                                                <span class="title text-white">
-                                                    <!--ko text: ticketDescription-->
-                                                    <!--/ko-->
-                                                    <!--ko text: remark-->
-                                                    <!--/ko-->
-                                                    <!--<div class="clearfix">
-                                                    <div class="about">
-                                                        <div></div>
-                                                    </div>
-                                                </div>-->
-                                                </span>
-                                                <span class="other text-white">￥</span><span class="about text-blue"><!--ko text: price--><!--/ko--></span><span class="other text-white">元</span>
-
-                                            </div>
-                                            <div class="mask modal-backdrop"></div>
-                                        </div>
-                                    </a>
-                                    <!--<span class="cheap">省</span>-->
-                                    <span class="recommend"></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 
     <script src="../javaScripts/zepto.min.js"></script>
@@ -131,7 +88,7 @@
                     if (result.IsSuccess) {
                         var data = [];
                         $(result.Data).each(function (index, obj) {
-                            data.push({ OrderNo: obj.OrderCode, OrderID: 123, TicketImageUrl: '../TicketImages/1.jpg', TicketName: obj.TicketName, LastUseDate: '2015-08-19', TicketPrice: obj.singleTicketPrice, TicketCount: obj.TicketCount, TicketTotalPrice: obj.TotelFee, OperateUrl: '', OperateName: '查看' });
+                            data.push({ OrderNo: obj.OrderCode, OrderID: obj.OrderId, TicketImageUrl: '../TicketImages/1.jpg', TicketName: obj.TicketName, LastUseDate: '2015-08-19', TicketPrice: obj.singleTicketPrice, TicketCount: obj.TicketCount, TicketTotalPrice: obj.TotelFee, OperateUrl: '', OperateName: '查看' });
                         });
 
                         var template = $.templates("#ResultTemplateOrder");
