@@ -1156,6 +1156,16 @@ VPay.prototype.order = function () {
     var zPayBtn = $('#payBtn');
     zPayBtn.addClass('z-btn-top');
 
+    //保存联系人信息
+    VI.ajax({
+        type: "post",
+        url: '../WebService/UserWebService.asmx/SaveContract',
+        dataType: 'json',
+        data: { code: GetQueryString('code'), userName: zNameVal, mobile: zPhoneVal, idCard: zIDCardVal },
+        success: function () {
+        }
+    });
+
     VI.ajax({
         type: "post",
         url: '../WebService/TicketWebService.asmx/CreateOrder',
@@ -1172,13 +1182,6 @@ VPay.prototype.order = function () {
                     success: function (res) {
 
                         This.isLoading = 0;
-                        //保存联系人信息
-                        VI.ajax({
-                            type: "post",
-                            url: '../WebService/TicketWebService.asmx/CreateOrder',
-                            dataType: 'json',
-                            data: { code: GetQueryString('code'), userName: zNameVal, mobile: zPhoneVal, idCard: zIDCardVal }
-                        });
 
                         document.location.href = "../order/MyOrderList.html";
                     },
@@ -1339,63 +1342,6 @@ VOrder.prototype.syncHandler = function (info) {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 VI.statisticData = function (options) {
     var type = options.type;
     var dataId = options.dataId;
@@ -1403,11 +1349,6 @@ VI.statisticData = function (options) {
     var img = new Image();
     img.src = VI.base_url + "/admin/statisticData?type=" + type + "&dataId=" + dataId + "&t=" + date.getTime();
 }
-
-
-
-
-
 
 
 function VPage(options) {
