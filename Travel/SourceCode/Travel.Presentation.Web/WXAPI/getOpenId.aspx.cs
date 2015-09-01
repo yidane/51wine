@@ -36,7 +36,7 @@ namespace Travel.Presentation.Web.WXAPI
         {
             var refundOrderRequest = new RefundOrderRequest
             {
-                out_trade_no = "C2015090119021897439869",
+                out_trade_no = "C2015090204153143034787",
                 total_fee = 1,
                 refund_fee = 1,
                 out_refund_no = WxPayHelper.GenerateOutTradeNo()

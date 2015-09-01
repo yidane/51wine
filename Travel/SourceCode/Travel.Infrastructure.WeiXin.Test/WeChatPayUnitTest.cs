@@ -106,7 +106,7 @@ namespace Travel.Infrastructure.WeiXin.Test
         {
             var refundOrderRequest = new RefundOrderRequest
                 {
-                    out_trade_no = "C2015090118124452021644",
+                    out_trade_no = "C2015090204471208755383",
                     total_fee = 1,
                     refund_fee = 1,
                     out_refund_no = WxPayHelper.GenerateOutTradeNo()
