@@ -1710,7 +1710,15 @@ pre {
 }
 
 .gpd-ticket {
-    padding: 20px 10px;
+    position:fixed;
+    bottom:0px;
+    height:50px;
+    width:100%;
+    z-index:9999;
+    background-image:url(../images/ticket.png);
+    background-repeat:repeat-x;
+    /*background-color:#a6a6a6;*/
+    /*padding: 20px 10px;*/
 }
 
     .gpd-ticket img {
