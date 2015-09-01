@@ -2648,20 +2648,40 @@ a.gpo-gate-order-a {
 
 #payBtn {
     float: right;
-    width: 100px;
+    width: 150px;
     height: 30px;
     display: inline-block;
     background: #44b549;
     text-align: center;
     line-height: 30px;
     color: white;
-    /*font-weight: bold;*/
     font-size: 1.3em;
     font-family:"Microsoft YaHei";
     margin-right: 10px;
     margin-top: 10px;
-    border-radius: 5px;
+    border-radius: 15px;
 }
+#payBtn {
+	color: #fef4e9;
+	border: solid 1px #44b549;
+	background: #44b549;
+	background: -webkit-gradient(linear, left top, left bottom, from(#44b549), to(#61b064));
+	background: -moz-linear-gradient(top,  #44b549,  #61b064);
+	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#44b549', endColorstr='#61b064');
+}
+#payBtn:hover {
+	background: #f47c20;
+	background: -webkit-gradient(linear, left top, left bottom, from(#22b628), to(#14941a));
+	background: -moz-linear-gradient(top,  #22b628,  #14941a);
+	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#22b628', endColorstr='#14941a');
+}
+#payBtn:active {
+	color: #fcd3a5;
+	background: -webkit-gradient(linear, left top, left bottom, from(#61b064), to(#44b549));
+	background: -moz-linear-gradient(top,  #61b064,  #44b549);
+	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#61b064', endColorstr='#44b549');
+}
+
 
 .info-ticket p {
     margin-left: 1.5rem;
