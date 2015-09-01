@@ -89,6 +89,22 @@
             $(".tab-navs a").click(function (e) {
                 e.preventDefault();
             });
+
+            $.ajax({
+                url: "../WebService/OrderWebService.asmx/TicketCategoryList",
+                type: "post",
+                dataType: "json",
+                data: {},
+                success: function (result) {
+                    if (result.IsSuccess) {
+                        if (result.Data.HasValue) {
+                            $("#name").val(result.Data.Value.UserName);
+                            $("#phone").val(result.Data.Value.Mobile);
+                            $("#idcard").val(result.Data.Value.IdCard);
+                        }
+                    }
+                }
+            });
         });
     </script>
     <script type="text/javascript">

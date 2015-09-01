@@ -15,57 +15,62 @@ namespace Travel.Services.WebService
     /// </summary>
     public class OrderWebService : BaseWebService
     {
-
         [WebMethod(EnableSession = true)]
-        public string TicketCategoryList()
-        {
-            var categories = new OrderService().GetTicketCategoryList();
-
-            return JSONHelper.ObjectToJson<List<TicketCategoryDTO>>(categories.ToList());
-        }
-
-        [WebMethod(EnableSession = true)]
-        public void GetMyOrders(string code)
+        public void TicketCategoryList()
         {
             try
             {
-                var openId = GetOpenIDByCodeID(code);
-                var orderList = new OrderService().MyOrders(openId);
+                var categories = new OrderService().GetTicketCategoryList();
 
-                Context.Response.Write(AjaxResult.Success(orderList));
+                Context.Response.Write(AjaxResult.Success(categories));
             }
-            catch (Exception exception)
+            catch (Exception)
             {
-                Context.Response.Write(AjaxResult.Error(exception.Message));
+                Context.Response.Write(AjaxResult.Error("方法异常"));
             }
+            
         }
 
-        //public string MyOrders(string openId)
-        //{
-        //    if (!string.IsNullOrEmpty(openId))
-        //    {
-        //        var orders = new OrderService().MyOrders(openId);
-
-        //        return JSONHelper.ObjectToJson<List<OrderDTO>>(orders.ToList());
-        //    }
-        //    else
-        //    {
-        //        return string.Empty;
-        //    }
-        //}
-
-        public string MyTickets(string orderId)
+        public void MyOrders(string openId)
         {
-            if (!string.IsNullOrEmpty(orderId))
+            try
             {
-                var tickets = new OrderService().MyTickets(orderId);
+                if (!string.IsNullOrEmpty(openId))
+                {
+                    var orders = new OrderService().MyOrders(openId);
 
-                return JSONHelper.ObjectToJson<List<TicketEntity>>(tickets.ToList());
+                    Context.Response.Write(AjaxResult.Success(orders));
+                }
+                else
+                {
+                    Context.Response.Write(AjaxResult.Error("openId不能为空"));
+                }
             }
-            else
+            catch (Exception)
             {
-                return string.Empty;
+                Context.Response.Write(AjaxResult.Error("方法异常"));
+            }            
+        }
+
+        public void MyTickets(string orderId)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(orderId))
+                {
+                    var tickets = new OrderService().MyTickets(orderId);
+
+                    Context.Response.Write(AjaxResult.Success(tickets));
+                }
+                else
+                {
+                    Context.Response.Write(AjaxResult.Error("订单号不能为空"));
+                }
             }
+            catch (Exception)
+            {
+                Context.Response.Write(AjaxResult.Error("方法异常"));
+            }            
         }
     }
 }
