@@ -1111,6 +1111,8 @@ VPay.prototype.order = function () {
     var This = this,
 		options = this.opt;
 
+    var ticketId = '956BFF5E-AA6A-454E-8F46-BD4175235C9E';
+    var ticketName = '布尔津测试门票';
 
     //参数校验
     var zName = $('#name');
@@ -1141,7 +1143,7 @@ VPay.prototype.order = function () {
         type: "post",
         url: '../WebService/TicketWebService.asmx/CreateOrder',
         dataType: 'json',
-        data: { code: GetQueryString('code'), ticketId: options.gid, ticketCount: zNumVal, couponId: 0, couponCount: 0, orderNo: options.orid, contractName: zNameVal, contractPhone: zPhoneVal, contractIdCard: zIDCardVal },
+        data: { code: GetQueryString('code'), ticketCategoryId: ticketId, ticketName: ticketName, ticketCount: zNumVal, couponId: 0, couponCount: 0, orderNo: options.orid, contractName: zNameVal, contractPhone: zPhoneVal, contractIdCard: zIDCardVal },
         success: function (result) {
             if (result.IsSuccess) {
                 alert(result.IsSuccess);

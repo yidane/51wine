@@ -155,7 +155,7 @@ namespace Travel.Application.DomainModules.Order.Core
             {
                 foreach (var ticketResponse in editResult.ResultData)
                 {                    
-                    if (ticketResponse.IsSucceed)
+                    if (ticketResponse.IsSuccel)
                     {
                         refundOrders.Add(new RefundOrderQueueEntity()
                                              {

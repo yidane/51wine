@@ -52,11 +52,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Travel.Infrastructure.OTAWe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Travel.Infrastructure.UnitTest", "SourceCode\UnitTests\Travel.Infrastructure.UnitTest\Travel.Infrastructure.UnitTest.csproj", "{53623AEE-6B46-4B24-AF94-4D57868143F1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Travel.Infrastructure.Ticket.Test", "SourceCode\UnitTests\Travel.Infrastructure.Ticket.Test\Travel.Infrastructure.Ticket.Test.csproj", "{BDEC5F85-6D4E-4B50-9EE3-D14FA6198C7B}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 11
+		SccNumberOfProjects = 13
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = http://10.27.99.168:8080/tfs/thirdpartycollection
+		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs20
 		SccLocalPath0 = .
 		SccProjectUniqueName1 = SourceCode\\Travel.Infrastructure.WeiXin\\Travel.Infrastructure.WeiXin.csproj
 		SccProjectTopLevelParentUniqueName1 = Travel.sln
@@ -87,6 +89,7 @@ Global
 		SccProjectName7 = SourceCode/Travel.Application.DomainModules
 		SccLocalPath7 = SourceCode\\Travel.Application.DomainModules
 		SccProjectUniqueName8 = SourceCode\\UnitTests\\Travel.Application.OrderUnitTest\\Travel.Application.OrderUnitTest.csproj
+		SccProjectTopLevelParentUniqueName8 = Travel.sln
 		SccProjectName8 = SourceCode/UnitTests/Travel.Application.OrderUnitTest
 		SccLocalPath8 = SourceCode\\UnitTests\\Travel.Application.OrderUnitTest
 		SccProjectUniqueName9 = SourceCode\\Travel.Infrastructure.OTAWebService\\Travel.Infrastructure.OTAWebService.csproj
@@ -97,10 +100,14 @@ Global
 		SccProjectTopLevelParentUniqueName10 = Travel.sln
 		SccProjectName10 = SourceCode/UnitTests/Travel.Infrastructure.OTAWebService.Test
 		SccLocalPath10 = SourceCode\\UnitTests\\Travel.Infrastructure.OTAWebService.Test
-				SccProjectUniqueName11 = SourceCode\\UnitTests\\Travel.Infrastructure.UnitTest\\Travel.Infrastructure.UnitTest.csproj
+		SccProjectUniqueName11 = SourceCode\\UnitTests\\Travel.Infrastructure.UnitTest\\Travel.Infrastructure.UnitTest.csproj
 		SccProjectTopLevelParentUniqueName11 = Travel.sln
 		SccProjectName11 = SourceCode/UnitTests/Travel.Infrastructure.UnitTest
 		SccLocalPath11 = SourceCode\\UnitTests\\Travel.Infrastructure.UnitTest
+		SccProjectUniqueName12 = SourceCode\\UnitTests\\Travel.Infrastructure.Ticket.Test\\Travel.Infrastructure.Ticket.Test.csproj
+		SccProjectTopLevelParentUniqueName12 = Travel.sln
+		SccProjectName12 = SourceCode/UnitTests/Travel.Infrastructure.Ticket.Test
+		SccLocalPath12 = SourceCode\\UnitTests\\Travel.Infrastructure.Ticket.Test
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -147,10 +154,14 @@ Global
 		{D49B96A4-2D99-4994-B1DC-9F83AD377131}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D49B96A4-2D99-4994-B1DC-9F83AD377131}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D49B96A4-2D99-4994-B1DC-9F83AD377131}.Release|Any CPU.Build.0 = Release|Any CPU
-				{53623AEE-6B46-4B24-AF94-4D57868143F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53623AEE-6B46-4B24-AF94-4D57868143F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{53623AEE-6B46-4B24-AF94-4D57868143F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{53623AEE-6B46-4B24-AF94-4D57868143F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{53623AEE-6B46-4B24-AF94-4D57868143F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BDEC5F85-6D4E-4B50-9EE3-D14FA6198C7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BDEC5F85-6D4E-4B50-9EE3-D14FA6198C7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BDEC5F85-6D4E-4B50-9EE3-D14FA6198C7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BDEC5F85-6D4E-4B50-9EE3-D14FA6198C7B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -170,14 +181,14 @@ Global
 		{37AFC00A-8D40-45DF-98E8-3E671DD420FB} = {C0ADD916-7AFF-44A1-8EC5-9D77619F23CF}
 		{42953974-A8C2-4BCF-9AE8-0192D51F8930} = {4BCFD133-8B80-4BA5-A07A-B6BA7473A23A}
 		{D49B96A4-2D99-4994-B1DC-9F83AD377131} = {4BCFD133-8B80-4BA5-A07A-B6BA7473A23A}
+		{BDEC5F85-6D4E-4B50-9EE3-D14FA6198C7B} = {4BCFD133-8B80-4BA5-A07A-B6BA7473A23A}
 		{ECA74918-F911-4505-AD51-B4E1C0AE6808} = {A2B279C1-F73F-4D6C-AB28-EDCF691139F2}
 		{47F144AA-B49D-4DB2-80D3-59B05F8680E6} = {A9F025B9-85EB-431E-8720-AEE2F6926FF3}
+		{53623AEE-6B46-4B24-AF94-4D57868143F1} = {A9F025B9-85EB-431E-8720-AEE2F6926FF3}
 		{BB26E33B-85DE-464B-83A2-109794A2C00A} = {5DF2C90A-0B0F-41E9-AB73-313B5859A125}
 		{DBF9D085-D5A5-495B-9554-BB0BB8A7DD85} = {474D6734-08F8-436E-9C1D-88E9FC848BF0}
 		{A4EB3C6E-748D-4E16-AB48-43704BBDBA24} = {2E873623-66F9-42B0-99CB-3AEF18E78986}
-		{EC23F688-74AD-4BD7-81A6-B02E2CEC4572} = {4FD4FD86-DF12-4ED8-BF15-FE3890D2D97D}
-				{474D6734-08F8-436E-9C1D-88E9FC848BF0} = {EEC6859A-5B2F-42F2-ABD9-EEDCA8B2CDCA}
 		{BCB4E708-2B14-4A61-A7D8-AFF380536A4A} = {2E873623-66F9-42B0-99CB-3AEF18E78986}
-		{53623AEE-6B46-4B24-AF94-4D57868143F1} = {A9F025B9-85EB-431E-8720-AEE2F6926FF3}
+		{EC23F688-74AD-4BD7-81A6-B02E2CEC4572} = {4FD4FD86-DF12-4ED8-BF15-FE3890D2D97D}
 	EndGlobalSection
 EndGlobal

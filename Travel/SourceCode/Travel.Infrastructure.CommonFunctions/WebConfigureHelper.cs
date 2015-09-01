@@ -89,10 +89,10 @@ namespace Travel.Infrastructure.CommonFunctions
                     {
                         get
                         {
-                            var mCHID = System.Configuration.ConfigurationManager.AppSettings["MCHID"];
-                            if (string.IsNullOrEmpty(mCHID))
-                                throw new Exception("mCHID尚未配置或配置的值为空");
-                            return mCHID;
+                            var key = System.Configuration.ConfigurationManager.AppSettings["KEY"];
+                            if (string.IsNullOrEmpty(key))
+                                throw new Exception("KEY尚未配置或配置的值为空");
+                            return key;
                         }
                     }
 

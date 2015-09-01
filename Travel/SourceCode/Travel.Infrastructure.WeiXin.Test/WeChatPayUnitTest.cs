@@ -9,7 +9,7 @@ namespace Travel.Infrastructure.WeiXin.Test
     public class WeChatPayUnitTest
     {
         [TestMethod]
-        public void UnifiedGetUnifiedOrderResult()
+        public void GetUnifiedOrderResultTest()
         {
             JsApiPay jsApiPay = new JsApiPay();
             UnifiedOrderRequest unifiedOrderRequest = new UnifiedOrderRequest();
@@ -28,7 +28,7 @@ namespace Travel.Infrastructure.WeiXin.Test
         }
 
         [TestMethod]
-        public void UnifiedGetUnifiedOrderResultCreateParameter()
+        public void GetUnifiedOrderResultCreateParameterTest()
         {
             JsApiPay jsApiPay = new JsApiPay();
             UnifiedOrderRequest unifiedOrderRequest = new UnifiedOrderRequest();
@@ -46,6 +46,12 @@ namespace Travel.Infrastructure.WeiXin.Test
             var p = result.GetJsApiParameters();
 
             Assert.IsTrue(true);
+        }
+
+        [TestMethod]
+        public void RefundOrderTest()
+        {
+            
         }
     }
 }

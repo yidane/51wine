@@ -10,6 +10,6 @@
 namespace Travel.Presentation.Web.Message {
     
     
-    public partial class MessageHelper {
+    public partial class MessageNotify {
     }
 }

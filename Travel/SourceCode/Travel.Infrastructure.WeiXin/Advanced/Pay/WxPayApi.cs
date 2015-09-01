@@ -160,7 +160,7 @@ namespace Travel.Infrastructure.WeiXin.Advanced.Pay
         * @throws WxPayException
         * @return 成功时返回接口调用结果，其他抛异常
         */
-        public static WxPayData Refund(WxPayData inputObj, int timeOut = 6)
+        public static string Refund(WxPayData inputObj, int timeOut = 6)
         {
             string url = "https://api.mch.weixin.qq.com/secapi/pay/refund";
             //检测必填参数
@@ -197,16 +197,7 @@ namespace Travel.Infrastructure.WeiXin.Advanced.Pay
             string response = HttpService.Post(xml, url, true, timeOut);//调用HTTP通信接口提交数据到API
             LogManager.Debug("WxPayApi", "Refund response : " + response);
 
-            var end = DateTime.Now;
-            int timeCost = (int)((end - start).TotalMilliseconds);//获得接口耗时
-
-            //将xml格式的结果转换为对象以返回
-            WxPayData result = new WxPayData();
-            result.FromXml(response);
-
-            ReportCostTime(url, timeCost, result);//测速上报
-
-            return result;
+            return response;
         }
 
 

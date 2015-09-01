@@ -87,7 +87,9 @@ namespace Travel.Infrastructure.WeiXin.Advanced.Pay
         /// <returns></returns>
         public RefundOrderResponse Refund(RefundOrderRequest request)
         {
-            return null;
+            var payData = request.CreatePayData();
+            var result = WxPayApi.Refund(payData);
+            return new RefundOrderResponse(result);
         }
     }
 }

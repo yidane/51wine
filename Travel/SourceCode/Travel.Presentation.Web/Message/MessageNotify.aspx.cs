@@ -7,13 +7,13 @@ using System.Web.UI.WebControls;
 
 namespace Travel.Presentation.Web.Message
 {
-    public partial class MessageHelper : System.Web.UI.Page
+    public partial class MessageNotify : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
             if (string.Equals(Request.HttpMethod, "POST", StringComparison.CurrentCultureIgnoreCase))
             {
-                Response.Write("尹思雯");
+
             }
         }
     }

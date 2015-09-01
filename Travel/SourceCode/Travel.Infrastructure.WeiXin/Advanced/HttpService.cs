@@ -67,7 +67,7 @@ namespace Travel.Infrastructure.WeiXin.Advanced
                 if (isUseCert)
                 {
                     string path = HttpContext.Current.Request.PhysicalApplicationPath;
-                    X509Certificate2 cert = new X509Certificate2(path + WxPayConfig.SSLCERT_PATH, WxPayConfig.SSLCERT_PASSWORD);
+                    var cert = new X509Certificate2(path + WxPayConfig.SSLCERT_PATH, WxPayConfig.SSLCERT_PASSWORD);
                     request.ClientCertificates.Add(cert);
                     LogManager.Debug("WxPayApi", "PostXml used cert");
                 }

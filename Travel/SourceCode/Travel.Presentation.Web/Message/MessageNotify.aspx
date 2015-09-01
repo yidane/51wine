@@ -1,0 +1,1 @@
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="MessageNotify.aspx.cs" Inherits="Travel.Presentation.Web.Message.MessageNotify" %>

@@ -88,5 +88,25 @@ namespace Travel.Infrastructure.WeiXin.Advanced.Pay.Model
         {
             get { return WxPayConfig.MCHID; }
         }
+
+        public WxPayData CreatePayData()
+        {
+            var rtnPayData = new WxPayData();
+            if (!string.IsNullOrEmpty(transaction_id))//微信订单号存在的条件下，则已微信订单号为准
+            {
+                rtnPayData.SetValue("transaction_id", transaction_id);
+            }
+            else//微信订单号不存在，才根据商户订单号去退款
+            {
+                rtnPayData.SetValue("out_trade_no", out_trade_no);
+            }
+
+            rtnPayData.SetValue("total_fee", this.total_fee);//订单总金额
+            rtnPayData.SetValue("refund_fee", this.refund_fee);//退款金额
+            rtnPayData.SetValue("out_refund_no", this.out_refund_no);//随机生成商户退款单号
+            rtnPayData.SetValue("op_user_id", this.op_user_id);//操作员，默认为商户号
+
+            return rtnPayData;
+        }
     }
 }

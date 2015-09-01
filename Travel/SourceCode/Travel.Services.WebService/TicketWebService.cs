@@ -18,10 +18,12 @@ namespace Travel.Services.WebService
     public class TicketWebService : BaseWebService
     {
         [WebMethod(EnableSession = true)]
-        public void CreateOrder(string code, string ticketId, int ticketCount, string couponId, int couponCount, string orderNo, string contractName, string contractPhone, string contractIdCard)
+        public void CreateOrder(string code, string ticketCategoryId, string ticketName, int ticketCount, string couponId, int couponCount, string orderNo, string contractName, string contractPhone, string contractIdCard)
         {
             try
             {
+                Session["OpenID"] = "obzTsw5qxlbwGYYZJC9b-91J-X1Y";
+
                 AccessTokenDTO accessToken = null;
                 var openID = string.Empty;
                 if (Session["OpenID"] == null)
@@ -40,63 +42,38 @@ namespace Travel.Services.WebService
 
                 if (!string.IsNullOrEmpty(openID))
                 {
-                    //var orderRequestEntity = new OrderRequestEntity()
-                    //    {
-                    //        OpenId = openID,
-                    //        TicketCategory = "956BFF5E-AA6A-454E-8F46-BD4175235C9E",
-                    //        TicketName = "布尔津测试门票",
-                    //        Count = ticketCount,
-                    //        CouponId = string.Empty,
-                    //        ContactPersonName = contractName,
-                    //        MobilePhoneNumber = contractPhone,
-                    //        IdentityCardNumber = contractIdCard
-                    //    };
+                    var orderRequestEntity = new OrderRequestEntity()
+                        {
+                            OpenId = openID,
+                            TicketCategory = ticketCategoryId,
+                            TicketName = ticketName,
+                            Count = ticketCount,
+                            CouponId = string.Empty,
+                            ContactPersonName = contractName,
+                            MobilePhoneNumber = contractPhone,
+                            IdentityCardNumber = contractIdCard
+                        };
 
-                    //var otaOrder = new OTAOrder(orderRequestEntity);
+                    var otaOrder = new OTAOrder(orderRequestEntity);
 
-                    //JsApiPay jsApiPay = new JsApiPay();
-                    //UnifiedOrderRequest unifiedOrderRequest = new UnifiedOrderRequest();
-                    //unifiedOrderRequest.body = "yidane Test body";
-                    ////unifiedOrderRequest.openid = "obzTsw5qxlbwGYYZJC9b-91J-X1Y"; //Zidane
-                    //unifiedOrderRequest.openid = openID;
-                    ////unifiedOrderRequest.openid = "obzTswxzFzzzdWdAKf2mWx3CrpXk"; //xqfgbc
-                    //unifiedOrderRequest.attach = "attach test";
-                    //unifiedOrderRequest.total_fee = 1;
-                    //unifiedOrderRequest.goods_tag = "goods_tag test";
+                    otaOrder.CreateOrderMain();
+
+                    var jsParameter = otaOrder.UnifiedOrderResult.GetJsApiParameters();
+
+                    #region Test Code
+                    //var jsApiPay = new JsApiPay();
+                    //var unifiedOrderRequest = new UnifiedOrderRequest
+                    //{
+                    //    body = "yidane Test body",
+                    //    openid = openID,
+                    //    attach = "attach test",
+                    //    total_fee = 1,
+                    //    goods_tag = "goods_tag test"
+                    //};
 
                     //var result = jsApiPay.GetUnifiedOrderResult(unifiedOrderRequest);
-
-                    JsApiPay jsApiPay = new JsApiPay();
-                    UnifiedOrderRequest unifiedOrderRequest = new UnifiedOrderRequest();
-                    unifiedOrderRequest.body = "yidane Test body";
-                    unifiedOrderRequest.openid = openID;
-                    unifiedOrderRequest.attach = "attach test";
-                    unifiedOrderRequest.total_fee = 1;
-                    unifiedOrderRequest.goods_tag = "goods_tag test";
-                    //unifiedOrderRequest.time_start = DateTime.Now.ToString("yyyyMMddHHmmss");
-                    //unifiedOrderRequest.time_expire = DateTime.Now.AddMinutes(20).ToString("yyyyMMddHHmmss");
-
-
-                    var result = jsApiPay.GetUnifiedOrderResult(unifiedOrderRequest);
-
-                    //otaOrder.CreateOrderMain();
-                    //var jsParameter = otaOrder.UnifiedOrderResult.GetJsApiParameters();
-
-                    //UnifiedOrderResult result = new UnifiedOrderResult();
-                    //result.return_code = "SUCCESS";
-                    //result.return_msg = "OK";
-                    //result.appid = "wxdd6127bdb5e7611c";
-                    //result.mch_id = "1266087601";
-                    //result.nonce_str = "vHtgBVFIVNrQpmux";
-                    //result.sign = "11ED616A6FE93377F62F15278612F209";
-                    //result.result_code = "SUCCESS";
-                    //result.prepay_id = "prepay_id=wx20150828204046a93fc0882f0359646391";
-                    //result.trade_type = "JSAPI";
-
-
-                    var jsParameter = result.GetJsApiParameters();
-
-                    //throw new Exception(AjaxResult.Success(jsParameter).ToString());
+                    //var jsParameter = result.GetJsApiParameters();
+                    #endregion
 
                     Context.Response.Write(AjaxResult.Success(jsParameter));
                 }

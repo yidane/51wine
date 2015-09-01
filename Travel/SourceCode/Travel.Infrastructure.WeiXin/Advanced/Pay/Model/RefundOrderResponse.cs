@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Xml;
 
 namespace Travel.Infrastructure.WeiXin.Advanced.Pay.Model
 {
@@ -143,5 +144,58 @@ namespace Travel.Infrastructure.WeiXin.Advanced.Pay.Model
         /// 代金券或立减优惠ID
         /// </summary>
         public string coupon_refund_id { get; set; }
+
+        public RefundOrderResponse()
+        {
+
+        }
+
+        public RefundOrderResponse(string xmlString)
+        {
+            var xmlDocument = new XmlDocument();
+            Init(xmlDocument);
+        }
+
+        public RefundOrderResponse(XmlDocument xmlDocument)
+        {
+            Init(xmlDocument);
+        }
+
+        public void Init(XmlDocument xmlDocument)
+        {
+            var return_codeNode = xmlDocument.SelectSingleNode("xml/return_code");
+            var return_msgNode = xmlDocument.SelectSingleNode("xml/return_msg");
+
+            if (return_codeNode != null)
+                return_code = return_codeNode.InnerText;
+
+            if (return_msgNode != null)
+                return_msg = return_msgNode.InnerText;
+
+            if (string.Equals(return_code, "SUCCESS"))
+            {
+                appid = GetNodeInnerText(xmlDocument, "appid");
+                mch_id = GetNodeInnerText(xmlDocument, "mch_id");
+                device_info = GetNodeInnerText(xmlDocument, "device_info");
+                nonce_str = GetNodeInnerText(xmlDocument, "nonce_str");
+                sign = GetNodeInnerText(xmlDocument, "sign");
+                result_code = GetNodeInnerText(xmlDocument, "result_code");
+                err_code = GetNodeInnerText(xmlDocument, "xmlDocument");
+                err_code_des = GetNodeInnerText(xmlDocument, "err_code_des");
+                total_fee = int.Parse(GetNodeInnerText(xmlDocument, "total_fee"));
+                fee_type = GetNodeInnerText(xmlDocument, "fee_type");
+                cash_fee = int.Parse(GetNodeInnerText(xmlDocument, "cash_fee"));
+                var couponfee = GetNodeInnerText(xmlDocument, "coupon_fee");
+                var couponCount = GetNodeInnerText(xmlDocument, "coupon_count");
+                transaction_id = GetNodeInnerText(xmlDocument, "transaction_id");
+                out_trade_no = GetNodeInnerText(xmlDocument, "out_trade_no");
+            }
+        }
+
+        private string GetNodeInnerText(XmlDocument xmlDocument, string nodeName)
+        {
+            var node = xmlDocument.SelectSingleNode(string.Format("xml/{0}", nodeName));
+            return node != null ? node.InnerText : string.Empty;
+        }
     }
 }

@@ -8,7 +8,7 @@ namespace Travel.Infrastructure.OTAWebService.Test
     [TestClass]
     public class OTAWebServiceUnitTest
     {
-        private string OrderNo = "C2015082918445468857314";
+        private string OrderNo = "C201508291844546885745";
 
         [TestMethod]
         public void TestSignture()
@@ -72,14 +72,14 @@ namespace Travel.Infrastructure.OTAWebService.Test
                     new Detail()
                         {
                             OrderNO = OrderNo,
-                            ItemID = "1",
+                            ItemID = "afee205e-5e63-4020-a26d-d78f3211483f",
                             ProductCode = "berj001",
-                            ProductID = 57963,
+                            ProductID = 57882,
                             ProductName = "布尔津测试门票",
                             ProductPrice = 100,
                             ProductCount = 1,
-                            ProductSDate = "2015-08-25",
-                            ProductEDate = "2015-08-25",
+                            ProductSDate = "2015-09-01",
+                            ProductEDate = "2015-09-01",
                             ProductPackID = 216
                         }
                 };

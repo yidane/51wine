@@ -1,1 +1,0 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="MessageHelper.aspx.cs" Inherits="Travel.Presentation.Web.Message.MessageHelper" %>

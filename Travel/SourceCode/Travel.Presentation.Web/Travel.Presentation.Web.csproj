@@ -217,7 +217,7 @@
     <Content Include="js\scenicDetail-vm.js" />
     <Content Include="js\shakeLuckyMoney-vm.js" />
     <Content Include="js\mobilePhoneShake.min.js" />
-    <Content Include="Message\MessageHelper.aspx" />
+    <Content Include="Message\MessageNotify.aspx" />
     <Content Include="music\music.mp3" />
     <Content Include="order\ApplyRefund.html" />
     <Content Include="Photo\MakePhoto.html" />
@@ -297,12 +297,12 @@
     <Compile Include="Main.Master.designer.cs">
       <DependentUpon>Main.Master</DependentUpon>
     </Compile>
-    <Compile Include="Message\MessageHelper.aspx.cs">
-      <DependentUpon>MessageHelper.aspx</DependentUpon>
+    <Compile Include="Message\MessageNotify.aspx.cs">
+      <DependentUpon>MessageNotify.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Message\MessageHelper.aspx.designer.cs">
-      <DependentUpon>MessageHelper.aspx</DependentUpon>
+    <Compile Include="Message\MessageNotify.aspx.designer.cs">
+      <DependentUpon>MessageNotify.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TicketList.aspx.cs">
@@ -355,6 +355,7 @@
     <Content Include="bower_components\font-awesome\scss\_rotated-flipped.scss" />
     <Content Include="bower_components\font-awesome\scss\_stacked.scss" />
     <Content Include="bower_components\font-awesome\scss\_variables.scss" />
+    <Content Include="cer\apiclient_cert.p12" />
     <None Include="Properties\PublishProfiles\jin.pubxml" />
     <None Include="Properties\PublishProfiles\Travel.pubxml" />
     <Content Include="Scripts\qrcode.min.js.map" />
