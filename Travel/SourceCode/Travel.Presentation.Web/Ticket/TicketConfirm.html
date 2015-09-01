@@ -1,0 +1,226 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>订票信息</title>
+    <link href="../styles/swiper.min.css" rel="stylesheet" />
+    <script src="../javaScripts/zepto.min.js"></script>
+    <script src="../js/oAuth2.js"></script>
+    <style type="text/css">
+        .swiper-wrapper .swiper-slide:nth-child(n+2) {
+            margin-left: 0;
+        }
+    </style>
+    <link href="../styles/normalize.css" rel="stylesheet" />
+</head>
+<body>
+
+    <div id="container" class="container">
+        <div class="row">
+            <section>
+                <div class="swiper-container gpd-ablum">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <img class="" src="../images/ticket1.jpg">
+                        </div>
+                        <div class="swiper-slide">
+                            <img class="" src="../images/ticket2.jpg">
+                        </div>
+                        <div class="swiper-slide">
+                            <img class="" src="../images/ticket3.jpg">
+                        </div>
+                        <div class="swiper-slide">
+                            <img class="" src="../images/ticket4.jpg">
+                        </div>
+                        <div class="swiper-slide">
+                            <img class="" src="../images/ticket5.jpg">
+                        </div>
+                        <div class="swiper-slide">
+                            <img class="" src="../images/ticket6.jpg">
+                        </div>
+                    </div>
+                    <div class="swiper-pagination"></div>
+                </div>
+            </section>
+
+            
+            <!--订购信息-->
+            <div class="gpd-order">
+                <div class="gpd-order-title">
+                    <div style="background-color: #CCCCCC; width: 100%; height: 4em; line-height: 4em; overflow: hidden; text-indent: 20px">
+                        订票信息
+                    </div>
+                </div>
+                <div class="gpd-form">
+                    <div class="gpd-form-group">
+                        <label>数&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;量<span class="gpd-red">*</span></label>
+                        <div class="gpd-num-group">
+                            <em id="ticketNumSub" class="gp-icons gpd-num-subtract num-gray gpd-num-1"></em>
+                            <input type="tel" id="ticketNum" name="ticketNum" value="1" />
+                            <em id="ticketNumAdd" class="gp-icons gpd-num-add gpd-num-1"></em>
+                        </div>
+                    </div>
+                    <div class="gpd-form-group">
+                        <label>姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名<span class="gpd-red">*</span></label>
+                        <input type="text" id="name" name="name" value="易必浩" />
+                    </div>
+                    <div class="gpd-form-group">
+                        <label>手机号码<span class="gpd-red">*</span></label>
+                        <input type="tel" id="phone" name="phone" value="18910063051" maxlength="11" />
+                    </div>
+                    <div class="gpd-form-group">
+                        <label>身份证号<span class="gpd-red">*</span></label>
+                        <input type="text" id="idcard" name="idcard" value="420921198603095113" />
+                    </div>
+                </div>
+
+                
+            </div>
+            <div class="gpd-phone call-phone">
+                    <div class="gpd-form-group gpd-phone-label">
+                        <img class="detailicon-ticket" src="../images/tel.png" /><a class="yyd-item yyd-tel" href="tel:010-65984561" style="text-align: center">咨询电话 010-65984561</a>
+                        <div class="line-title"></div>
+                    </div>
+                </div>
+        </div>
+    </div>
+</body>
+
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script src="../javaScripts/zepto.min.js"></script>
+<script src="../javaScripts/json2.js"></script>
+<script src="../javaScripts/template.js"></script>
+<script src="../javaScripts/swiper.min.js"></script>
+<script src="../javaScripts/vi.js"></script>
+
+
+<script type="text/javascript">
+    VI.assets_url = 'http://longmen.qqdyw.cn'; VI.base_url = 'http://longmen.qqdyw.cn'; VI.curr_site_url = 'http://longmen.qqdyw.cn/plugins/goods/front';
+
+    window.share = {
+        title: '喀纳斯湖',
+        desc: '喀纳斯湖欢迎您！',
+        link: window.location.href,
+        imgUrl: 'http://1251077587.cdn.myqcloud.com/1251077587/lmsk/assets/img/share.png',
+        appcallback: function () { }
+    };
+
+    $(document).ready(function () {
+        $.ajax({
+            url: "../WebService/WeChatWebService.asmx/WeChatConfigInit",
+            type: "post",
+            dataType: "json",
+            data: { url: document.location.href },
+            success: function (result) {
+                if (result.IsSuccess) {
+                    wx.config({
+                        debug: true,
+                        appId: result.Data.appId,
+                        timestamp: result.Data.timestamp,
+                        nonceStr: result.Data.nonceStr,
+                        signature: result.Data.signature,
+                        jsApiList: [
+                            'chooseWXPay',
+                            'getNetworkType',
+                            'onMenuShareAppMessage',
+                            'onMenuShareTimeline',
+                            'onMenuShareQQ',
+                            'hideOptionMenu'
+                        ]
+                    });
+                    wx.ready(function () {
+                        //wx.hideOptionMenu();
+
+                        //wx.onMenuShareAppMessage({
+                        //    title: window.share.title,
+                        //    desc: window.share.desc,
+                        //    link: window.share.link,
+                        //    imgUrl: window.share.imgUrl,
+                        //    success: function () {
+                        //        //成功回调
+                        //        window.share.appcallback();
+
+                        //    }
+                        //});
+
+                        //wx.onMenuShareTimeline({
+                        //    title: window.share.title,
+                        //    link: window.share.link,
+                        //    imgUrl: window.share.imgUrl
+                        //});
+
+                        //wx.onMenuShareQQ({
+                        //    title: window.share.title,
+                        //    desc: window.share.desc,
+                        //    link: window.share.link,
+                        //    imgUrl: window.share.imgUrl
+                        //});
+
+                        //wx.error(function (res) {
+                        //    alert(res.err_code + "______" + res.err_desc + "______" + res.err_msg);
+                        //});
+                    });
+                }
+            },
+            error: function () {
+
+            }
+        });
+    });
+
+</script>
+
+
+
+
+<script type="text/javascript">
+
+    var swiper = new Swiper('.swiper-container', {
+        autoplay: 3000,
+        loop: true,
+        pagination: '.swiper-pagination',
+    });
+
+    Zepto(function ($) {
+        $(".gp-icons.gpd-up-icon").click(function () {
+            var zThis = $(this);
+            var zThisParent = zThis.parents(".gpd-item");
+            zThisParent.toggleClass("gdp-curr");
+            //zThisParent.siblings(".gpd-item").removeClass("gdp-curr");
+        });
+
+
+        var vPay = new VPay({
+            'id': '#payBtn',
+            'price': 120,
+            'max': 5,
+            'orid': '',
+            'gid': '1'
+        });
+    });
+
+    window.share.title = "喀纳斯湖全价票，120元";
+    window.share.desc = "喀纳斯湖欢迎您!";
+
+</script>
+
+
+
+
+<script type="text/javascript" src="http://tajs.qq.com/stats?sId=46683389" charset="UTF-8"></script>
+</html>

@@ -269,6 +269,7 @@
     <Content Include="Styles\page-animation.css" />
     <Content Include="Styles\style.css" />
     <Content Include="Styles\swiper.min.css" />
+    <Content Include="Ticket\TicketConfirm.html" />
     <Content Include="Ticket\TicketDetail.html" />
     <Content Include="TicketImages\1.jpg" />
     <Content Include="TicketImages\2.jpg" />
