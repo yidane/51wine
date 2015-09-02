@@ -69,11 +69,11 @@
             font-style: normal;
             background: #62b900;
             cursor: pointer;
-            color:#fff;
+            color: #fff;
         }
 
         .addon.disable {
-            opacity:0.6;
+            opacity: 0.6;
             /*background: #00ccff;*/
         }
 
@@ -105,13 +105,13 @@
             .ticket-submit span {
                 display: inline-block;
                 height: 4rem;
-                line-height:4rem;
+                line-height: 4rem;
                 width: 10rem;
                 text-align: center;
                 border-radius: 5px;
                 background: #62b900;
-                color:#fff;
-                font-size:1.6rem;
+                color: #fff;
+                font-size: 1.6rem;
             }
     </style>
 </head>
@@ -159,36 +159,40 @@
             singlePrice = getQueryString("SingleTicketPrice");
             orderId = getQueryString("OrderId");
 
-            $(".text-blod.pr").html(singlePrice +"元");
-            $("#plus").on("click", f_plusClick);
-            $("#minus").on("click", f_subClick);
-            $("#btnSubmit").on("click", function () {
-                
-                $.ajax({
-                    type: "post",
-                    url: '../WebService/OrderWebService.asmx/RefundTickets',
-                    dataType: 'json',
-                    data: {
-                        orderId: orderId,
-                        refundTicketNumber: f_getNumber()
-                    },
-                    success: function (result) {
-                        if (result.IsSuccess) {
-                            document.location.href = "MyOrderList.html";
-                        } else {
-                            alert(result.Message);
+            if (singlePrice && orderId) {
+                $(".text-blod.pr").html(singlePrice + "元");
+                $("#plus").on("click", f_plusClick);
+                $("#minus").on("click", f_subClick);
+                $("#btnSubmit").on("click", function () {
+
+                    $.ajax({
+                        type: "post",
+                        url: '../WebService/OrderWebService.asmx/RefundTickets',
+                        dataType: 'json',
+                        data: {
+                            orderId: orderId,
+                            refundTicketNumber: f_getNumber()
+                        },
+                        success: function (result) {
+                            if (result.IsSuccess) {
+                                document.location.href = "MyOrderList.html";
+                            } else {
+                                alert(result.Message);
+                            }
                         }
-                    }                    
+                    });
                 });
-            });
-            $("#number").on("change", f_numberOnChange);
+                $("#number").on("change", f_numberOnChange);
+            } else {
+                alert("缺少必要的页面参数");
+            }
         });
 
         function f_numberOnChange() {
             var num = $("#number");
 
             if (!isNaN(num.val())) {
-                if (parseInt(num.val())<1) {
+                if (parseInt(num.val()) < 1) {
                     num.val(1);
                 }
             } else {
@@ -206,13 +210,13 @@
             } else {
                 num.val(1);
             }
-            
+
             if (num.val() == 1) {
                 $("#minus").addClass("disable");
             } else {
                 $("#minus").removeClass("disable");
             }
-            
+
             f_showMoney();
         }
 
@@ -241,7 +245,7 @@
             var num = $("#number");
 
             if (!isNaN(num.val())) {
-                if (parseInt(num.val())<1) {
+                if (parseInt(num.val()) < 1) {
                     num.val(1);
                     return 1;
                 }
@@ -264,8 +268,8 @@
 
             if (singlePrice) {
                 var totalFee = count * singlePrice;
-                $("#refundTotal").html(totalFee +"元");
-            }            
+                $("#refundTotal").html(totalFee + "元");
+            }
         }
     </script>
 

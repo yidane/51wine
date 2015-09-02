@@ -71,7 +71,8 @@ namespace Travel.Application.DomainModules.Order.Service
         public IList<OrderDTO> MyOrders(string openId)
         {
             var orders = OrderEntity.GetMyOrders(openId);
-            var dto = orders.Select(item => new OrderDTO()
+            var dto = orders.Where(item=>item.OrderStatus.Equals(OrderStatus.OrderStatus_WaitUse))
+                .Select(item => new OrderDTO()
                                                 {
                                                     OrderId = item.OrderId.ToString(),
                                                     OrderCode = item.OrderCode,
