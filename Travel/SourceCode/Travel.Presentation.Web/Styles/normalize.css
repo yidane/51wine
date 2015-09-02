@@ -2724,16 +2724,16 @@ a.gpo-gate-order-a {
 
     #payBtn:hover {
         background: #f47c20;
-        background: -webkit-gradient(linear, left top, left bottom, from(#22b628), to(#14941a));
-        background: -moz-linear-gradient(top, #22b628, #14941a);
-        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#22b628', endColorstr='#14941a');
+        background: -webkit-gradient(linear, left top, left bottom, from(#62b900), to(#62b900));
+        background: -moz-linear-gradient(top, #62b900, #62b900);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#62b900', endColorstr='#62b900');
     }
 
     #payBtn:active {
         color: #fcd3a5;
-        background: -webkit-gradient(linear, left top, left bottom, from(#61b064), to(#44b549));
-        background: -moz-linear-gradient(top, #61b064, #44b549);
-        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#61b064', endColorstr='#44b549');
+        background: -webkit-gradient(linear, left top, left bottom, from(#61b064), to(#62b900));
+        background: -moz-linear-gradient(top, #62b900, #62b900);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#62b900', endColorstr='#62b900');
     }
 
 #confirmPayBtn {
