@@ -252,8 +252,16 @@ namespace Travel.Application.DomainModules.Order.Core
                 refundRequest.total_fee = Decimal.ToInt32(this.OrderObj.TotalFee() * 100);
                 refundRequest.refund_fee = Decimal.ToInt32(refundFee * 100);
 
+#if DEBUG
+                Console.WriteLine(refundRequest.transaction_id + "--" + refundRequest.out_trade_no);
+#endif
+
                 // todo: 处理返回值 
                 var refundResponse = this._paymentOperate.RefundPay(refundRequest);
+
+                #if DEBUG
+                Console.WriteLine(refundResponse.return_code +"---" +refundResponse.result_code +"--" +refundResponse.return_msg);
+#endif
 
                 if (refundResponse.return_code.Equals("SUCCESS")
                     &&refundResponse.result_code.Equals("SUCCESS"))
