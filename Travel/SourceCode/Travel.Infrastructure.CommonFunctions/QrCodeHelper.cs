@@ -19,7 +19,7 @@ namespace Travel.Infrastructure.CommonFunctions
             if (!encoder.TryEncode(text, out qr))
                 throw new Exception("生成二维码失败");
 
-            var render = new GraphicsRenderer(new FixedModuleSize(2, QuietZoneModules.Two));
+            var render = new GraphicsRenderer(new FixedModuleSize(4, QuietZoneModules.Four));
             render.WriteToStream(qr.Matrix, ImageFormat.Png, rtnMemoryStream);
 
             return rtnMemoryStream;

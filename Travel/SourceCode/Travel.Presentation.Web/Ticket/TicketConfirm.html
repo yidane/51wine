@@ -146,7 +146,7 @@
             success: function (result) {
                 if (result.IsSuccess) {
                     wx.config({
-                        debug: true,
+                        debug: false,
                         appId: result.Data.appId,
                         timestamp: result.Data.timestamp,
                         nonceStr: result.Data.nonceStr,
