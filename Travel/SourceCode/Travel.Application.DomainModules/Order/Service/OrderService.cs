@@ -164,6 +164,13 @@ namespace Travel.Application.DomainModules.Order.Service
                 var tickets = OrderEntity.GetTicketForSearch(pageIndex, pageSize);
                 var ECodes = new List<OrderNoCode>();
 
+#if DEBUG
+                foreach (var ticket in tickets)
+                {
+                    Console.WriteLine(ticket.OrderId +" OrderId:" +ticket.OrderId);
+                }
+#endif
+
                 foreach (var ticket in tickets)
                 {
                     ECodes.Add(new OrderNoCode() { OrderCode = ticket.ECode });
@@ -175,9 +182,17 @@ namespace Travel.Application.DomainModules.Order.Service
                     tickets.Where(item => item.TicketStatus.Equals(OrderStatus.TicketStatus_WaitUse)).ToList(),
                     resp.ResultData);
 
+#if DEBUG
+
+                Console.WriteLine("Refund ticket count: " +tickets.Where(item => item.TicketStatus.Equals(OrderStatus.TicketStatus_Refund_Audit)).ToList().Count);
+                
+#endif
+
                 this.RefundProcess(
                     tickets.Where(item => item.TicketStatus.Equals(OrderStatus.TicketStatus_Refund_Audit)).ToList(),
                     resp.ResultData);
+
+
 
                 if (tickets.Count == pageSize)
                 {

@@ -19,7 +19,16 @@ namespace TicketStatus
 
             var service = new OrderService();
             Console.WriteLine("开始获取票务状态。");
-            service.SearchTicketStatus(100);
+            try
+            {
+                service.SearchTicketStatus(100);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                throw;
+            }
+            
             Console.WriteLine("按任意键退出.");
             Console.ReadLine();
             Console.WriteLine("按任意键确认退出.");
