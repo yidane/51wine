@@ -25,10 +25,12 @@ namespace TicketStatus
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex);
-                throw;
+                Console.WriteLine(ex.Message);
+                Console.WriteLine("--------------------------------------------------------------");
+                Console.WriteLine(ex.StackTrace);
+                //throw;
             }
-            
+
             Console.WriteLine("按任意键退出.");
             Console.ReadLine();
             Console.WriteLine("按任意键确认退出.");
