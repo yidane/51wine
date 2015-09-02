@@ -174,7 +174,7 @@
                 <p class="text-uppercase">门票密码：<span>123456</span><strong class="text-danger pull-right item-pullleft">未使用</strong></p>
             </div>
             <div style="border-bottom: 10px; border-top: 10px; border-style: solid; border-color: #62b900;">
-                <a href="ApplyRefund.html" class="btn btn-primary full-w btn-no-border-radius">申请退票</a>
+                <a id="btnRefund" href="ApplyRefund.html" class="btn btn-primary full-w btn-no-border-radius">申请退票</a>
             </div>
         </section>
         <section style="display: none">
@@ -342,6 +342,7 @@
 
                         $("#swiperContain").html(ercodeHtml);
                         $("#swiperFooter").html(ercodefoothtml);
+                        $("#btnRefund").attr("href", "ApplyRefund.html?OrderId=" + GetQueryString("orderId") + "&SingleTicketPrice=" + result.Data.SinglePrice);
                     }
                 }
             });
