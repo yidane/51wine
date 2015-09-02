@@ -81,7 +81,7 @@
                             <img src="{{:TicketImageUrl}}" alt="" />
                         </div>
                         <div class="order-info">
-                            <h4 style="font-weight: bold;font-size:1em;">{{:TicketName}}</h4>
+                            <h4 style="font-weight: bold; font-size: 1em;">{{:TicketName}}</h4>
                             <br />
                             <!--                        <span class="ticket-attribute">状态：{{:OrderStatusName}}
                     </span>-->
@@ -115,6 +115,8 @@
                         var template = $.templates("#ResultTemplateOrder");
                         var htmlOutput = template.render(data);
                         $("#order_list").html(htmlOutput);
+                    } else {
+                        alert(result.Message);
                     }
                 }
             });
