@@ -98,15 +98,24 @@
         }
 
         .ticket-submit {
+            position: fixed;
+            bottom: 0px;
+            height: 50px;
+            width: 100%;
+            z-index: 9999;
+            background-image: url(../images/ticket.png);
+            background-repeat: repeat-x;
             margin-top: 5rem;
             text-align: center;
         }
 
             .ticket-submit span {
+                margin-top: 5px;
+                margin-bottom: 5px;
                 display: inline-block;
-                height: 4rem;
-                line-height: 4rem;
-                width: 10rem;
+                height: 40px;
+                line-height: 40px;
+                width: 8rem;
                 text-align: center;
                 border-radius: 5px;
                 background: #62b900;
@@ -160,7 +169,7 @@
             orderId = getQueryString("OrderId");
 
             if (singlePrice && orderId) {
-                $(".text-blod.pr").html(singlePrice + "元");
+                $(".text-blod.pr").html( parseFloat(singlePrice) + "元");
                 $("#plus").on("click", f_plusClick);
                 $("#minus").on("click", f_subClick);
                 $("#btnSubmit").on("click", function () {
