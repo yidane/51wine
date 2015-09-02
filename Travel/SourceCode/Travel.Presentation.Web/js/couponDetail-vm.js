@@ -1,6 +1,6 @@
 ﻿
-var DetailViewModel=function ($domParam, param) {
-    var self=this;
+var DetailViewModel = function ($domParam, param) {
+    var self = this;
     this.$DomParm = ko.observable($domParam);
     this.param = ko.observable(param);
     this.coupon = ko.observable();
@@ -10,8 +10,7 @@ var DetailViewModel=function ($domParam, param) {
             return self.status();
         },
         write: function (value) {
-            switch (value)
-            {
+            switch (value) {
                 case 0:
                     self.status("unExpired");
                     break;
@@ -21,24 +20,22 @@ var DetailViewModel=function ($domParam, param) {
             }
         },
         owner: this
-    }); 
+    });
     this.profitStatus = ko.pureComputed(function () {
         var result = "";
-        if (self.couponStatus() == "used")
-        {
-            result="stamp-used";
+        if (self.couponStatus() == "used") {
+            result = "stamp-used";
         }
-        else if (self.couponStatus() == "expired")
-        {
-            result="stamp-overdue";
+        else if (self.couponStatus() == "expired") {
+            result = "stamp-overdue";
         }
         return result;
     }, this);
-    this.getCoupon=function(){
+    this.getCoupon = function () {
         $.getJSON("../WebService/CouponWebService.asmx/GetCoupon",
             {
                 openId: self.param().openId,
-                couponUsageId:self.param().couponUsageId
+                couponUsageId: self.param().couponUsageId
             })
             .done(function (json) {
                 if (json.IsSuccess) {
@@ -46,7 +43,7 @@ var DetailViewModel=function ($domParam, param) {
                     self.couponStatus(json.Data.coupon.status);
                     self.$DomParm().$qrcode.qrcode({ width: 130, height: 130, text: json.Data.coupon.couponId });
                     $("#qrcode").append(self.$DomParm().$qrcode);
-                   // self.param().openId = json.Data.user.openid;
+                    // self.param().openId = json.Data.user.openid;
                 }
             }).fail(
             function (jqxhr, textStatus, error) {
@@ -55,7 +52,7 @@ var DetailViewModel=function ($domParam, param) {
             });
     };
 
-    this.btnUseClick=function($confirm,$main){
+    this.btnUseClick = function ($confirm, $main) {
         $main.removeClass("animated bounceOut").addClass("animated bounceIn");
         $confirm.css("background-color", "rgba(0,0,0,.75)").show();
         //s.on("click", function () {
@@ -84,7 +81,7 @@ var DetailViewModel=function ($domParam, param) {
         //})
 
     };
-    this.btnCancelClick=function($confirm,$main){
+    this.btnCancelClick = function ($confirm, $main) {
         $main.removeClass("animated bounceIn").addClass("animated bounceOut").on("webkitAnimationEnd animationend", function () {
             $confirm.css("background-color", "rgba(0,0,0,0)").hide();
         })
@@ -107,12 +104,12 @@ var DetailViewModel=function ($domParam, param) {
                var err = textStatus + ", " + error;
                console.log("Request Failed: " + err);
            });
-        
+
     };
 
     this.btnGobackClick = function () {
-        window.location.href='MyCoupons.html?code='+self.param().access_code;
-       // window.location.href='https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxdd6127bdb5e7611c&redirect_uri=http%3A%2F%2Fwww.cloudorg.com.cn%2Ftravel%2FCoupons%2FMyCoupons.html&response_type=code&scope=snsapi_base&state=STATE%23wechat_redirect&connect_redirect=1#wechat_redirect';
+        window.location.href = 'MyCoupons.html';//?code='+self.param().access_code;
+        // window.location.href='https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxdd6127bdb5e7611c&redirect_uri=http%3A%2F%2Fwww.cloudorg.com.cn%2Ftravel%2FCoupons%2FMyCoupons.html&response_type=code&scope=snsapi_base&state=STATE%23wechat_redirect&connect_redirect=1#wechat_redirect';
         //window.history.back();
     };
 

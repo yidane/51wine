@@ -21,6 +21,32 @@
         body {
             padding-bottom: 36px;
         }
+
+        .bottom_back {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            height: 50px;
+            width: 100%;
+            z-index: 9999;
+            background-image: url(../images/ticket.png);
+            background-repeat: repeat-x;
+        }
+
+        .bottom_back .btn1{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-left: -50px;
+            margin-top: -15px;
+            width: 100px;
+            height: 30px;
+            text-align: center;
+            line-height: 30px;
+            background: #62b900;
+            border-radius: 8px;
+
+        }
     </style>
 
 
@@ -40,7 +66,7 @@
 
     <div id="main-container" style="opacity: 1;">
         <div data-bind="with:coupon">
-            <div id="banner" style="background-color: rgba(247,195,10,1);">
+            <div id="banner" style="background-color: #62b900;">
                 <a href="javascript:void(0);" class="icon-box fa fa-angle-left fl"
                    id="icon-list" data-bind="click:$root.btnGobackClick"></a>
 
@@ -91,8 +117,10 @@
                    data-bind="click:btnSureClick.bind($data, $('#confirm-cover') )">确定</a>
             </div>
         </div>
-        <a id="btn-use" class="btn" href="javascript:;" style="display:none"
-           data-bind="click:btnUseClick.bind($data, $('#confirm-cover'),$('.confirm-cover-main')),visible:profitStatus()==''">使用</a>
+        <section class="bottom_back">
+            <a id="btn-use" class="btn1" href="javascript:;" style="display:none"
+               data-bind="click:btnUseClick.bind($data, $('#confirm-cover'),$('.confirm-cover-main')),visible:profitStatus()==''">使用</a>
+        </section>
     </div>
     <script src="../javaScripts/jquery-2.1.4.min.js"></script>
     <script src="../javaScripts/jquery.url.js"></script>
@@ -103,30 +131,30 @@
     <script src="../javaScripts/knockout-3.2.0.debug.js"></script>
     <script src="../js/couponDetail-vm.js"></script>
     <script>
-            var access_code = "";
-             access_code = $.url.param("code");
-            //if (!access_code) {
-            //    var fromurl = location.href;
-            //    var url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxdd6127bdb5e7611c&redirect_uri='
-            //        + encodeURIComponent(fromurl) +
-            //        '&response_type=code&scope=snsapi_base&state=STATE%23wechat_redirect&connect_redirect=1#wechat_redirect';
-            //    location.href = url;
-            //}
-            var openId = "";
-            openId = $.url.param("openId");
-            var couponUsageId = $.url.param("couponUsageId");
-            var param = {
-                // access_code: access_code,
-                couponUsageId: couponUsageId,
-                access_code:access_code,
-                openId: openId
-            };
-            var $doms = {
-                $qrcode: $("#qrcode1")
-            };
+        var access_code = "";
+        access_code = $.url.param("code");
+        //if (!access_code) {
+        //    var fromurl = location.href;
+        //    var url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxdd6127bdb5e7611c&redirect_uri='
+        //        + encodeURIComponent(fromurl) +
+        //        '&response_type=code&scope=snsapi_base&state=STATE%23wechat_redirect&connect_redirect=1#wechat_redirect';
+        //    location.href = url;
+        //}
+        var openId = "";
+        openId = $.url.param("openId");
+        var couponUsageId = $.url.param("couponUsageId");
+        var param = {
+            // access_code: access_code,
+            couponUsageId: couponUsageId,
+            access_code: access_code,
+            openId: openId
+        };
+        var $doms = {
+            $qrcode: $("#qrcode1")
+        };
 
-            var detailVM = new DetailViewModel($doms, param);
-            ko.applyBindings(detailVM);
+        var detailVM = new DetailViewModel($doms, param);
+        ko.applyBindings(detailVM);
     </script>
 
 

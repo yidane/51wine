@@ -133,8 +133,8 @@
 
 .coupons-tab{ padding: 1rem;}
 .coupons-tab li{ padding: 0.5rem 1rem; width: 33.3%; box-sizing:border-box; text-align: center;}
-.coupons-tab li.active{ border-bottom: 2px solid #ff5959;}
-.coupons-tab li.active a{ color: #ff5959;}
+.coupons-tab li.active{ border-bottom: 2px solid #62b900;}
+.coupons-tab li.active a{ color: #62b900;}
 .coupons-tab li a{ color: #202020; display: block; border-bottom: 1px solid #fff;}
 
 .coupons-details-top{ background: url(../../images/scenic/coupons-details.jpg) no-repeat; background-size: cover; height: 6.5rem; text-align: center; color: #fff; padding-top: 2rem;}

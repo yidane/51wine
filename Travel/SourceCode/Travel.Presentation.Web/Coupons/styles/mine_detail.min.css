@@ -178,16 +178,16 @@ body {
     }
 
 #btn-use {
-    position: fixed;
+    /*position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;
     padding: 7px 0;
     border: none;
-    border-radius: 0;
+    border-radius: 0;*/
     font-size: 16px;
     color: #fff;
-    background-color: rgba(56,177,76,.95);
+    /*background-color: rgba(56,177,76,.95);*/
 }
 
 .confirm-cover {
