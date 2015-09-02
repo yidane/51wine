@@ -1190,14 +1190,14 @@ VPay.prototype.order = function () {
                     }
                 });
             } else {
-                alert("购票失败");
+                alert("已达今日门票配额上限");
                 This.isLoading = 0;
                 zPayBtn.removeClass('z-btn-top');
             }
         },
         error: function (request, text, error) {
             //alert(error);
-            alert("购票失败");
+            alert("已达今日门票配额上限");
             This.isLoading = 0;
             zPayBtn.removeClass('z-btn-top');
         },
