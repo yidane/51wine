@@ -437,6 +437,17 @@ input[type=number] {
 .ticket {
 }
 
+.row {
+    margin-top:-10px;
+    margin-left:-15px;
+    margin-right:-15px;
+    width:110vw;
+    position:fixed;
+}
+.order-content {
+    padding-top:59vw;
+}
+
 .ticket-tab, .ticket-order-tab {
     display: -webkit-box;
     -webkit-box-orient: horizontal;
@@ -568,7 +579,7 @@ input[type=number] {
                 -webkit-box-orient: horizontal;
                 display: box;
                 box-orient: horizontal;
-                width: 100%;
+                width: 80%;
                 color: #333;
                 padding: 0 0.3rem;
                 -webkit-box-sizing: border-box;
@@ -579,16 +590,44 @@ input[type=number] {
 .order-info {
     -webkit-box-flex: 1;
     padding: 0 10px;
+    width:60vw;
 }
 
 .num {
     text-align: center;
-    line-height: 180%;
+    line-height: 100%;
     color: #333;
     display: inline-block;
+    right:0px;
     /*width: 40%;*/
 }
-
+    .num a {
+        display:block !important;
+        margin-top:55px;
+        margin-right:5px;
+        font-size:0.8em;
+        color:#fff !important;
+    }
+.num a {
+	color: #fef4e9;
+	border: solid 1px #44b549;
+	background: #44b549;
+	background: -webkit-gradient(linear, left top, left bottom, from(#44b549), to(#61b064));
+	background: -moz-linear-gradient(top,  #44b549,  #61b064);
+	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#62b900', endColorstr='#61b064');
+}
+.num a:hover {
+	background: #f47c20;
+	background: -webkit-gradient(linear, left top, left bottom, from(#22b628), to(#14941a));
+	background: -moz-linear-gradient(top,  #22b628,  #14941a);
+	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#22b628', endColorstr='#14941a');
+}
+.num a:active {
+	color: #fcd3a5;
+	background: -webkit-gradient(linear, left top, left bottom, from(#61b064), to(#44b549));
+	background: -moz-linear-gradient(top,  #61b064,  #44b549);
+	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#61b064', endColorstr='#62b900');
+}
 .money {
     color: #ff0013;
     font-size: 1.2rem;
@@ -782,7 +821,7 @@ input[type=number] {
     text-align: center;
     line-height: 30px;
     margin-right: 10px;
-    background-color: #00b1f4;
+    background-color: #44b549;
     color: #fff;
     vertical-align: middle;
 }
@@ -2836,4 +2875,10 @@ pre {
     color: #333;
     background-color: #fff;
     border-color: #ccc;
+}
+
+.swiper-container-horizontal > .swiper-pagination {
+    bottom: 10px;
+    transition: 0;
+    -webkit-transition: 0;
 }
