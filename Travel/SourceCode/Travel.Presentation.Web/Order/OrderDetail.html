@@ -18,7 +18,7 @@
     <meta content="telephone=no" name="format-detection" />
     <meta content="email=no" name="format-detection" />
     <title>我的订单</title>
-
+    <link href="../styles/normalize.css" rel="stylesheet" />
     <style>
         body {
             font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -156,6 +156,30 @@
         .gdp-curr .gpd-content {
             display: block;
         }
+
+        #btnRefund {
+            width: 150px;
+            height: 30px;
+            display: inline-block;
+            background: #62b900;
+            text-align: center;
+            line-height: 30px;
+            font-size: 1.3em;
+            font-family: "Microsoft YaHei";
+            color: white;
+            position: fixed;
+            margin-top: 10px;
+            left: 50%;
+            margin-left: -75px;
+            -moz-border-radius: 15px;
+            -webkit-border-radius: 15px;
+            border-radius: 15px;
+            border: solid 1px #62b900;
+            background: #62b900;
+            background: -webkit-gradient(linear, left top, left bottom, from(#62b900), to(#62b900));
+            background: -moz-linear-gradient(top, #62b900, #62b900);
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#62b900', endColorstr='#62b900');
+        }
     </style>
 </head>
 
@@ -171,11 +195,12 @@
                 </div>
             </div>
             <div class="full-w">
-                <p class="text-uppercase">门票密码：<span>123456</span><strong class="text-danger pull-right item-pullleft">未使用</strong></p>
+                <p class="text-uppercase">门票状态：<strong class="text-danger pull-right item-pullleft">未使用</strong></p>
             </div>
-            <div style="border-bottom: 10px; border-top: 10px; border-style: solid; border-color: #62b900;">
-                <a id="btnRefund" href="ApplyRefund.html" class="btn btn-primary full-w btn-no-border-radius">申请退票</a>
-            </div>
+        </section>
+
+        <section class="gpd-ticket">
+            <a id="btnRefund" href="ApplyRefund.html">申请退票</a>
         </section>
         <section style="display: none">
             <ul class="ticket-order-form order-details">
@@ -214,10 +239,9 @@
             </ul>
         </section>
 
-
         <section class="gpd-item ">
-            <div class="gpd-item-title ">
-                使用须知<div class="gp-icons gpd-up-icon "></div>
+            <div class="gpd-item-title">
+                <img class="detailicon-ticket" src="../images/info.png" />使用须知<div class="gp-icons gpd-up-icon"></div>
             </div>
             <div class="gpd-content">
                 <p>【取票方式】</p>
@@ -232,15 +256,12 @@
         </section>
 
         <section class="gpd-item ">
-            <div class="gpd-item-title ">
-                订单明细<div class="gp-icons gpd-up-icon "></div>
+            <div class="gpd-item-title">
+                <img class="detailicon-ticket" src="../images/orderDetail.png" />订单明细<div class="gp-icons gpd-up-icon"></div>
             </div>
             <div class="gpd-content">
-
                 <p>微信订单号：<span id="weChatOrderNo"></span></p>
-
                 <p>购买手机号：<span id="payPhone"></span></p>
-
                 <p>提交时间：<span id="payTime2"></span></p>
                 <p>数量：<span id="count2"></span></p>
                 <p>总价：<span id="total2"></span></p>
@@ -248,8 +269,8 @@
         </section>
 
         <section class="gpd-item ">
-            <div class="gpd-item-title ">
-                退票规则<div class="gp-icons gpd-up-icon "></div>
+            <div class="gpd-item-title">
+                <img class="detailicon-ticket" src="../images/undo.png" />退票规则<div class="gp-icons gpd-up-icon"></div>
             </div>
             <div class="gpd-content">
                 <p>1、支付成功后，可在票据有效期内申请退票，过期则视为作废不予受理退票</p>
@@ -261,13 +282,14 @@
         </section>
         <section class="gpd-item " style="padding-bottom: 0;">
             <div class="gpd-item-title">
-                退票规则 <span style="float: right">2015-08-01-2015-12-31</span>
+                <img class="detailicon-ticket" src="../images/time.png" />票有效期 <span style="float: right">2015-08-01-2015-12-31</span>
+                <div class="line-title"></div>
             </div>
         </section>
 
         <section class="gpd-item " style="padding-bottom: 0; margin-top: 10px; text-align: center;">
             <div class="gpd-item-title">
-                电话咨询：010-65984561
+                电话咨询：010-58677719
             </div>
         </section>
 
