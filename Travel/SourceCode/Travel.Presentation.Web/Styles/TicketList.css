@@ -460,7 +460,8 @@ html {
 }
 
 body {
-    background-color: #fcf9f0;
+    /*background-color: #fcf9f0;*/
+    background-color: #fff;
     color: #333;
 }
 

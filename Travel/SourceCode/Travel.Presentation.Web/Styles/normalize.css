@@ -419,7 +419,8 @@ body {
     font-size: 14px;
     line-height: 1.42857143;
     color: #333;
-    background-color: #fcf9f0;
+    /*background-color: #fcf9f0;*/
+    background-color: #fff;
     background-repeat: repeat-y;
     background-size: 100% auto;
     background-image: url(../img/yyhc_bg.jpg);
