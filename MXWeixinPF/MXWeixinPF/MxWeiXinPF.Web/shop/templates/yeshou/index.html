@@ -1,0 +1,286 @@
+﻿<!DOCTYPE html>
+<!--[if lt IE 7]>    <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="zh-cn" > <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="zh-cn" > <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="zh-cn" ><![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="zh-cn">
+<!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>{$shopconfig.shopName}</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="”apple-mobile-web-app-capable”" content="”yes”" />
+
+    <!-- 加载/shop/templates/yeshou/js/css -->
+    <link type="text/css" rel="stylesheet" href="/shop/templates/yeshou/css/font-awesome.min.css?v=33">
+    <link type="text/css" rel="stylesheet" href="/shop/templates/yeshou/css/wapmain.css?v=224">
+    <script type="text/javascript" src="/shop/templates/yeshou/js/zepto.min.js??v=22"></script>
+
+    <script type="text/javascript">
+        var _hmt = _hmt || [];
+        (function () {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?7c10355ee0f6b21af208947325fd4ad7";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body>
+    <div id="J_Wrappear">
+        <div class="lay-wrap J_MenuBody" id="J_MenuSwipe">
+
+            <!--顶部-->
+            <vt:template id="header" file="_header.html" charset="utf-8" />
+            <!--end顶部-->
+
+            <script>
+                $(document).ready(function () {
+                    initCart();
+                });
+
+                /**重新加载购物车数量和总价**/
+                function initCart() {
+                    $.ajax({
+                        url: '/shop/shopmgr.ashx?myact=pcount&ss=' + Math.random(),
+                        dataType: 'json',
+                        data: { wid: "{$wid}", openid: "{$openid}" },
+                        async: false,
+                        success: function (data) {
+                            if (data.data > 0) {
+                                var num = data.data;
+                                var cart_a_link = $(".m-shop-cart");
+                                if (num != 'undefined') {
+                                    if (cart_a_link.find("i.shop-num").length > 0) {
+                                        cart_a_link.find("i.shop-num").text(num);
+                                    } else {
+                                        cart_a_link.prepend($("<i class=\"shop-num\">" + num + "</i>"));
+                                    }
+                                }
+                            }
+                        }
+                    });
+                }
+            </script>
+
+            <div class="lay- body lay-body1" id="J_MainBody">
+                <div class="home">
+                    <div class="banner-container">
+                        <div class="swiper-wrapper">
+                            <vt:function var="hdp" method="getHdp" type="$this" rows="10" />
+                            <vt:foreach from="$hdp" item="p" index="i"> 
+                            <div class="swiper-slide">
+                                <a href="{$p.bannerLinkUrl}">
+                                    <img src="{$p.bannerPicUrl}" alt="" /></a>
+                            </div> 
+                            </vt:foreach>
+                        </div>
+                        <div class="pagination">
+                        </div>
+                    </div>
+                    <div class="home-group" style="padding-bottom: 0px;">
+                        <div class="favorite-wrap" style="padding: 0px;">
+                            <div class="move-banner favorite1 J_Switch1">
+                                <ul>
+                                    <vt:function var="category" method="getCategory" type="$this" classlayer="1" />
+                                    <vt:foreach from="$category" item="data" index="i">
+                                    <li>
+                                        <div class="pic" style="text-align:center;font-size:13px;line-height:20px;">
+                                            <a href="{$data.link_url}">
+                                                <img src="{$data.ico_url}" alt="{$data.title}" /></a> 
+                                        </div> 
+                                        <p>{$data.title}</p>
+                                    </li> 
+                                    </vt:foreach>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!--精选-->
+                    <div class="home-group" style="padding-top: 0px;">
+                        <div class="til">
+                            <img src="/shop/templates/yeshou/images/selected.jpg" alt="" />
+                        </div>
+                        <div class="container home-select">
+                            <vt:function var="hdp" method="getHotsalet" type="$this" rows="4" />
+                            <vt:foreach from="$hdp" item="p" index="i">
+                            <div class="pro">
+                                <a href="{$p.link_url}">
+                                    <div class="pic">
+                                        <img src="{$p.productpic}" alt="" />
+                                    </div>
+                                    <div class="info">
+                                        <p>
+                                            {$p.productName}
+                                        </p>
+                                        <p>
+                                            {$p.shortDesc}
+                                        </p>
+                                    </div>
+                                </a>
+                            </div> 
+                            </vt:foreach>
+                        </div>
+                    </div>
+                    <!--end精选-->
+
+                    <!--新品-->
+                    <div class="home-group">
+                        <div class="til">
+                            <img src="/shop/templates/yeshou/images/ingredidents.jpg" alt="" />
+                        </div>
+                        <div class="favorite-wrap">
+                            <div class="move-banner favorite J_Switch">
+                                <ul>
+                                    <vt:function var="hdp" method="getLatest" type="$this" rows="116" />
+                                    <vt:foreach from="$hdp" item="p" index="i">
+                                    <li>
+                                        <div class="pic">
+                                            <a href="{$p.link_url}">
+                                                <img src="{$p.productpic}" alt="{$p.productName}" /></a>
+                                        </div>
+                                        <p>
+                                            ￥{$p.salePrice}
+                                        </p>
+                                    </li> 
+                                    </vt:foreach>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!--end新品-->
+
+                    <!--动态-->
+                    <div class="home-group">
+                        <div class="til">
+                            <img src="/shop/templates/yeshou/images/dynamic.jpg" alt="" />
+                        </div>
+                    </div>
+                    <!--end动态-->
+                    <script src="/shop/templates/yeshou/js/idangerous.swiper.min.js?v=Math.Random()"></script>
+                    <script>
+                        /*banner轮播*/
+                        var mySwiper = new Swiper('.banner-container', {
+                            pagination: '.pagination',
+                            loop: false,
+                            grabCursor: true,
+                            paginationClickable: true
+                        });
+                        $('.pagination').eq(0).css({ marginLeft: -$('.pagination').width() / 2 + 'px' });
+                        $('.banner-container').on('swipeLeft', function (e) { e.stopPropagation(); });
+                        $('.banner-container').on('swipeRight', function (e) { e.stopPropagation(); });
+                        /*脚部切换产品*/
+                        (function () {
+                            function Switch(ele) {
+                                this.ele = ele;
+                                this.init();
+                            }
+                            Switch.prototype = {
+                                init: function () {
+                                    var that = this,
+                                            ul = this.ele.find('ul').eq(0),
+                                            li = this.ele.find('li'),
+                                            screenWidth = $('body').width() - 20;
+                                    li.width(screenWidth / 3);
+                                    ul.width(screenWidth / 3 * li.length);
+                                    this.ele.on('swipeLeft', function (e) {
+
+                                        e.stopPropagation();
+                                        var ul = that.ele.find('ul').eq(0), li = that.ele.find('li');
+                                        that.left(li, ul, screenWidth);
+                                    });
+                                    this.ele.on('swipeRight', function (e) {
+                                        e.stopPropagation();
+                                        var ul = that.ele.find('ul').eq(0), li = that.ele.find('li');
+                                        that.right(li, ul, screenWidth);
+                                    });
+                                },
+                                left: function (li, ul, screenWidth) {
+                                    li.eq(0).animate({ marginLeft: -screenWidth / 3 + 'px' }, 400, '', function () {
+                                        ul.append(li.eq(0)), li.eq(0).css({ marginLeft: 0 });
+                                    });
+                                },
+                                right: function (li, ul, screenWidth) {
+                                    li.eq(li.length - 1).css({ marginLeft: -screenWidth / 3 + 'px' }), ul.prepend(li.eq(li.length - 1));
+                                    li.eq(li.length - 1).animate({ marginLeft: 0 }, 400);
+                                }
+                            };
+                            $.fn.switch = function (opt) {
+                                opt = $.extend({}, opt);
+                                this.each(function () {
+                                    return new Switch($(this));
+                                });
+                            }
+                        })();
+                        $('.J_Switch').switch();
+
+
+                        (function () {
+                            function Switch(ele) {
+                                this.ele = ele;
+                                this.init();
+                            }
+                            Switch.prototype = {
+                                init: function () {
+                                    var that = this,
+                                            ul = this.ele.find('ul').eq(0),
+                                            li = this.ele.find('li'),
+                                            screenWidth = $('body').width();
+                                    li.width(screenWidth / 6);
+                                    ul.width("100%");
+                                    this.ele.on('swipeLeft', function (e) { 
+                                        e.stopPropagation();
+                                        var ul = that.ele.find('ul').eq(0), li = that.ele.find('li');
+                                        that.left(li, ul, screenWidth);
+                                    });
+                                    this.ele.on('swipeRight', function (e) {
+                                        e.stopPropagation();
+                                        var ul = that.ele.find('ul').eq(0), li = that.ele.find('li');
+                                        that.right(li, ul, screenWidth);
+                                    });
+                                },
+                                left: function (li, ul, screenWidth) {
+                                    li.eq(0).animate({ marginLeft: -screenWidth / 6.4 + 'px' }, 400, '', function () {
+                                        ul.append(li.eq(0)), li.eq(0).css({ marginLeft: 0 });
+                                    });
+                                },
+                                right: function (li, ul, screenWidth) {
+                                    li.eq(li.length - 1).css({ marginLeft: -screenWidth / 6.4 + 'px' }), ul.prepend(li.eq(li.length - 1));
+                                    li.eq(li.length - 1).animate({ marginLeft: 0 }, 400);
+                                }
+                            };
+                            $.fn.switch = function (opt) {
+                                opt = $.extend({}, opt);
+                                this.each(function () {
+                                    return new Switch($(this));
+                                });
+                            }
+                        })();
+                        $('.J_Switch1').switch();
+                    </script>
+                    <div class="server-phone">客服电话：{$shopconfig.tel}</div>
+                </div>
+            </div>
+        </div>
+        <div class="m-mask J_MenuBody" id="J_Mask"></div>
+        <!--左边菜单-->
+        <vt:template id="_bottom" file="_bottom.html" charset="utf-8" />
+        <!--end左边菜单-->
+        <script type="text/javascript" src="/shop/templates/yeshou/js/main.js?v=Math.Random()"></script>
+        <script type="text/javascript" src="/shop/templates/yeshou/js/idangerous.swiper.min.js?v=Math.Random()"></script>
+        <!-- End Piwik Code -->
+    </div>
+
+    <script type="text/javascript" src="/shop/templates/yeshou/js/jquery-1.11.0.min.js?v=Math.Random()"></script>
+    <script type="text/javascript" src="/shop/templates/yeshou/js/jquery.lazyload.min.js?v=Math.Random()"></script>
+    <script type="text/javascript">
+        jQuery.noConflict();
+        jQuery(".lazy").lazyload({ effect: "fadeIn" });
+    </script>
+</body>
+</html>
+<!--1e2124dd04e11d01b9df2865f85944be-->

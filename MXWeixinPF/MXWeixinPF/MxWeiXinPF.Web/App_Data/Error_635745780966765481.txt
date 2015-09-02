@@ -1,0 +1,2 @@
+MessageHandler中Execute()过程发生错误：必须声明标量变量 "@wid"。
+必须声明标量变量 "@wid"。

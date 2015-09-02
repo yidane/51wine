@@ -1,0 +1,157 @@
+﻿<!DOCTYPE html>
+<!--[if lt IE 7]>    <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="zh-cn" > <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="zh-cn" > <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="zh-cn" ><![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="zh-cn">
+<!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>{$category.title}</title>
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="”apple-mobile-web-app-capable”" content="”yes”" />
+
+    <!-- 加载js/css -->
+    <link type="text/css" rel="stylesheet" href="/shop/templates/yeshou/css/font-awesome.min.css?v=3">
+    <link type="text/css" rel="stylesheet" href="/shop/templates/yeshou/css/wapmain.css?v=5">
+    <script type="text/javascript" src="/shop/templates/yeshou/js/zepto.min.js?v=3"></script>
+    <script>
+         
+        var _hmt = _hmt || [];
+        (function () {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?7c10355ee0f6b21af208947325fd4ad7";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body>
+    <div id="J_Wrappear">
+        <div class="lay-wrap J_MenuBody" id="J_MenuSwipe">
+            
+             <!--顶部-->
+            <vt:template id="header" file="_header.html" charset="utf-8" />
+            <!--end顶部-->
+            <script>
+                $(document).ready(function () {
+                    initCart(); 
+                });
+
+                /**重新加载购物车数量和总价**/
+                function initCart() {
+                    $.ajax({
+                        url: '/shop/shopmgr.ashx?wid={$wid}&openid={$openid}&myact=pcount&ss=' + Math.random(),
+                        dataType: 'json',
+                        async: false,
+                        success: function (data) {
+                            if (data.data > 0) {
+                                var num = data.data;
+                                var cart_a_link = $(".m-shop-cart");
+                                if (num != 'undefined' && parseInt(num) > 0) {
+                                    if (cart_a_link.find("i.shop-num").length > 0) {
+                                        cart_a_link.find("i.shop-num").text(num);
+                                    } else {
+                                        cart_a_link.prepend($("<i class=\"shop-num\">" + num + "</i>"));
+                                    }
+                                }
+                            }  
+                        }
+                    }); 
+                }
+            </script>
+
+            <div class="lay-til J_MenuBody" id="J_SubHead">
+                <div class="header-con">
+                    <i class="arrow-back" onclick="history.go(-1)">
+                        <img src="/shop/templates/yeshou/images/pay_03.png" alt="" /></i>
+                    <h1>{$category.title}</h1>
+                </div>
+            </div>
+            
+            <div class="lay-body" id="J_MainBody">
+                <div class="list">
+                    <!--产品列表-->
+                    <div class="list-con">
+                        <vt:foreach from="$productlist" item="p" index="i">
+                        <div>
+                            <div class="list-con-pic">
+                                <a href="/shop/detail.aspx?wid={$wid}&pid={$p.id}&openid={$openid}"> 
+                                    <img src="{$p.productpic}" data-original="" alt="{$p.shortDesc}" class="lazy" />
+                                </a>
+                            </div>
+                            <div class="list-container">
+                                <p class="list-con-h">{$p.productName}</p>
+                                <p class="list-con-p"><a href="/shop/detail.aspx?wid={$wid}&pid={$p.id}&openid={$openid}">{$p.shortDesc}</a></p>
+                                <div class="list-con-price">  
+                                    <p class="list-con-new">￥{$p.salePrice}</p> 
+                                </div>
+                            </div> 
+                        </div> 
+                        </vt:foreach>
+                    </div>
+
+                    <div class="server-phone">客服电话：{$shopconfig.tel} </div>
+                   
+                </div>
+            </div>
+        </div>
+        <div class="m-mask J_MenuBody" id="J_Mask"></div> 
+
+        <vt:set var="orderby" value="id asc" id="norderby" />
+        <vt:set var="pagesize" value="116" id="npagesize" />
+
+        <!--左边菜单-->
+        <vt:template id="_bottom" file="_bottom.html" charset="utf-8" />
+        <!--end左边菜单-->
+        <script type="text/javascript" src="/shop/templates/yeshou/js/main.js?v=1"></script>
+        <script type="text/javascript" src="/shop/templates/yeshou/js/idangerous.swiper.min.js"></script>
+        <script>
+            function serchItems() {
+                var skeywordVal = document.getElementById('skeyword').value;
+                if (skeywordVal != '') {
+                    window.location.href = "/wap/item/search.htm?searchKeyword=" + skeywordVal;
+                } else {
+                    alert('请输入搜索词');
+                }
+            }
+
+            $("#skeyword").keydown(function (event) {
+                if (event.keyCode == 13) {
+                    serchItems();
+                }
+            });
+        </script> 
+        <noscript>
+            <p>
+                <img src="//www.thebeastshop.com/piwik/piwik.php?idsite=1" style="border: 0;" alt="" /></p>
+        </noscript>
+        <!-- End Piwik Code -->
+    </div>
+    <script type="text/javascript" src="/shop/templates/yeshou/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="/shop/templates/yeshou/js/jquery.lazyload.min.js"></script>
+    <script type="text/javascript">
+        jQuery.noConflict();
+        jQuery(".lazy").lazyload({ effect: "fadeIn" });
+        /**判断浏览器版本**/
+        (function (window) {
+            /*浏览器版本信息*/
+            var ua = navigator.userAgent,
+            vs = parseInt(ua.slice(ua.indexOf('iPhone OS') + 10, ua.indexOf('iPhone OS') + 11)),
+            op = ua.indexOf('Oupeng'),
+            sm9008 = ua.indexOf('N9008V');
+            if (vs < 8 || op > -1 || sm9008) {
+                $('.list-con-pic .u-empty img').length > 0 && $('.list-con-pic .u-empty img').css({ top: '80px' });
+                console.log('亲，手机系统该升级了！');
+            } else {
+                return false;
+            }
+        })(window);
+
+    </script>
+</body>
+</html>
