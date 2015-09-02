@@ -1190,13 +1190,14 @@ VPay.prototype.order = function () {
                     }
                 });
             } else {
-                alert(result.Message);
+                alert("购票失败");
                 This.isLoading = 0;
                 zPayBtn.removeClass('z-btn-top');
             }
         },
         error: function (request, text, error) {
-            alert(error);
+            //alert(error);
+            alert("购票失败");
             This.isLoading = 0;
             zPayBtn.removeClass('z-btn-top');
         },
