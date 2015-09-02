@@ -2883,3 +2883,8 @@ pre {
     transition: 0;
     -webkit-transition: 0;
 }
+
+.swiper-container .swiper-wrapper .swiper-slide img {
+  width: 100%;
+  min-height: 150px;
+}
