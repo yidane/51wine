@@ -67,7 +67,7 @@
             text-align: center;
             font-size: 3rem;
             font-style: normal;
-            background: #6bcd6f;
+            background: #62b900;
             cursor: pointer;
             color:#fff;
         }
@@ -109,7 +109,7 @@
                 width: 10rem;
                 text-align: center;
                 border-radius: 5px;
-                background: #44b549;
+                background: #62b900;
                 color:#fff;
                 font-size:1.6rem;
             }
@@ -122,25 +122,152 @@
             <div class="ticket-detail">
                 <div class="ticket-detail-item noborder">
                     <label>喀纳斯景区门票—半价票</label>
-                    <span class="text-blod pr">110元</span>
+                    <span id="singleTicketPrice" class="text-blod pr"></span>
                 </div>
                 <div class="ticket-detail-item">
                     <label>退票数量</label>
                     <span>
                         <i class="addon disable" id="minus">-</i>
-                        <input value="1" />
+                        <input id="number" value=1 />
                         <i class="addon" id="plus">+</i>
                     </span>
                 </div>
                 <div class="ticket-detail-item">
                     <label>退还总额</label>
-                    <span class="text-red text-blod pr">220元</span>
+                    <span id="refundTotal" class="text-red text-blod pr"></span>
                 </div>
             </div>
         </div>
         <div class="ticket-submit">
-            <span class="text-blod">提 交</span>
+            <span id="btnSubmit" class="text-blod">提 交</span>
         </div>
     </div>
+    <script src="../javaScripts/zepto.min.js"></script>
+
+    <script>
+        var singlePrice = null;
+        var ticketCategory = null;
+        var orderId = null;
+
+        function getQueryString(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return (r[2]); return null;
+        };
+
+        $(document).ready(function () {
+            singlePrice = getQueryString("SingleTicketPrice");
+            orderId = getQueryString("OrderId");
+
+            $(".text-blod.pr").html(singlePrice +"元");
+            $("#plus").on("click", f_plusClick);
+            $("#minus").on("click", f_subClick);
+            $("#btnSubmit").on("click", function () {
+                
+                $.ajax({
+                    type: "post",
+                    url: '../WebService/OrderWebService.asmx/RefundTickets',
+                    dataType: 'json',
+                    data: {
+                        orderId: orderId,
+                        refundTicketNumber: f_getNumber()
+                    },
+                    success: function (result) {
+                        if (result.IsSuccess) {
+                            document.location.href = "MyOrderList.html";
+                        } else {
+                            alert(result.Message);
+                        }
+                    }                    
+                });
+            });
+            $("#number").on("change", f_numberOnChange);
+        });
+
+        function f_numberOnChange() {
+            var num = $("#number");
+
+            if (!isNaN(num.val())) {
+                if (parseInt(num.val())<1) {
+                    num.val(1);
+                }
+            } else {
+                num.val(1);
+            }
+
+            f_showMoney();
+        }
+
+        function f_plusClick() {
+            var num = $("#number");
+
+            if (!isNaN(num.val())) {
+                num.val(parseInt(num.val()) + 1);
+            } else {
+                num.val(1);
+            }
+            
+            if (num.val() == 1) {
+                $("#minus").addClass("disable");
+            } else {
+                $("#minus").removeClass("disable");
+            }
+            
+            f_showMoney();
+        }
+
+        function f_subClick() {
+            var num = $("#number");
+
+            if (!isNaN(num.val())) {
+                var value = parseInt(num.val());
+                if (value > 1) {
+                    num.val(value - 1);
+                }
+            } else {
+                num.val(1);
+            }
+
+            if (num.val() == 1) {
+                $("#minus").addClass("disable");
+            } else {
+                $("#minus").removeClass("disable");
+            }
+
+            f_showMoney();
+        }
+
+        function f_getNumber() {
+            var num = $("#number");
+
+            if (!isNaN(num.val())) {
+                if (parseInt(num.val())<1) {
+                    num.val(1);
+                    return 1;
+                }
+                return parseInt(num.val());
+            } else {
+                num.val(1);
+                return 1;
+            }
+        }
+
+        function f_showMoney() {
+            var num = $("#number");
+            var count = 1;
+
+            if (!isNaN(num.val())) {
+                count = parseInt(num.val());
+            } else {
+                num.val(1);
+            }
+
+            if (singlePrice) {
+                var totalFee = count * singlePrice;
+                $("#refundTotal").html(totalFee +"元");
+            }            
+        }
+    </script>
+
 </body>
 </html>
