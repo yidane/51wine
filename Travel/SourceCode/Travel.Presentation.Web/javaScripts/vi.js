@@ -9,7 +9,6 @@ VI.crs = function () {
 };
 
 VI.src = function () {
-
     $('.crs').each(function (i, o) {
         var zThis = $(o);
 
@@ -28,6 +27,7 @@ VI.src = function () {
                 zThis.width(wWrap + 'px');
             }
         }
+
         zThis.attr('src', zThis.attr('data-src'));
         zThis.removeClass('crs');
     });
@@ -64,7 +64,6 @@ VI.goTop = function (id) {
     } else {
         zTop.hide();
     }
-
 };
 
 VI.alert = function (msg) {
@@ -81,7 +80,6 @@ VI.alert = function (msg) {
     setTimeout(function () {
         zHtml.remove();
     }, 3000);
-
 };
 
 VI.trim = function (str) {
@@ -208,10 +206,7 @@ VI.showTicket = function (options) {
         if (!zBtnRight.hasClass('gpd-btn-disabled')) {
             zHtml.remove();
         }
-
     });
-
-
 };
 
 VI.showOrderTips = function (options) {
@@ -276,13 +271,12 @@ VI.showDialog = function (options) {
 
         options.callback && options.callback();
 
-
         zHtml.remove();
     });
 }
 VI.showShareDialog = function (options) {
 
-    options = $.extend({ text: '赠送您一张龙门石窟景区门票，请尽快领取', tips: 0 }, options);
+    options = $.extend({ text: '赠送您一张喀纳斯门票，请尽快领取', tips: 0 }, options);
 
     var html = '<div class="full-mask full-dialog share-tips">\
 	<div class="alert-wrap alert-single">\
@@ -362,14 +356,12 @@ VI.imagePre = function (options) {
         } else {
             urls.push(o.src);
         }
-
     });
 
     wx.previewImage({
         current: options.curr, // 当前显示图片的http链接
         urls: urls // 需要预览的图片http链接列表
     });
-
 };
 
 VI.goBottom = function () {
@@ -424,7 +416,8 @@ VI.orientation = function (options) {
                 var orientation = window.orientation;
 
                 switch (orientation) {
-                    case 90: case -90:
+                    case 90:
+                    case -90:
                         orientation = 'landscape';
                         break;
                     default:
@@ -442,7 +435,7 @@ VI.orientation = function (options) {
         }
 
         updateOrientation();
-    }
+    };
 
     updateOrientation();
 
@@ -511,11 +504,11 @@ VPlayer.prototype.addPlayer = function () {
 VPlayer.prototype.play = function (zItem) {
 
     var This = this,
-		audioUrl = zItem.attr('audio-url'),
-		auidoId = zItem.attr('id'),
-		duration = 0,
-		lastPos = 0,
-		zParent = zItem.parent();
+        audioUrl = zItem.attr('audio-url'),
+        auidoId = zItem.attr('id'),
+        duration = 0,
+        lastPos = 0,
+        zParent = zItem.parent();
 
     // audioUrl = 'http://longmen.qqdyw.cn' + audioUrl;
 
@@ -531,7 +524,7 @@ VPlayer.prototype.play = function (zItem) {
     //如果正在加载，直接退出
     if (zParent.hasClass('yyl-item-playload')) return;
 
-    $('.yyl-item-playing').removeClass('yyl-item-playing');//删除所有正在播放的效果
+    $('.yyl-item-playing').removeClass('yyl-item-playing'); //删除所有正在播放的效果
     $('.yyl-item-playload').removeClass('yyl-item-playload');
 
     //判断是否已经存在
@@ -564,11 +557,11 @@ VPlayer.prototype.play = function (zItem) {
         // duration = Math.ceil(This.player._duration); //总时间 QQ和Howler不一样
         // var pos = Math.ceil(This.player.pos());//当前时间 QQ和Howler不一样
 
-        duration = Math.ceil(This.player.duration);  //加载的时候为0
+        duration = Math.ceil(This.player.duration); //加载的时候为0
         var pos = Math.ceil(This.player.currentTime); //
 
         var width = 0,
-			maxWidth = 100;
+            maxWidth = 100;
         if (!isNaN(duration)) { //正在加载
             // if(duration == 0) //结束
 
@@ -584,20 +577,20 @@ VPlayer.prototype.play = function (zItem) {
 
             This.progressBar.css('width', width + '%');
 
-            if (width == maxWidth) {//结束播放
+            if (width == maxWidth) { //结束播放
                 zParent.removeClass('yyl-item-playing');
             }
         }
-
 
         This.playerTimer = setTimeout(progressBarFun, 1000);
     };
     progressBarFun();
 
-}
+};
+
 VPlayer.prototype.pauseTimer = function () {
     var This = this,
-		pTimer = null;
+        pTimer = null;
 
     var pauseHandler = function () {
 
@@ -608,7 +601,8 @@ VPlayer.prototype.pauseTimer = function () {
         setTimeout(pauseHandler, 2000);
     }
     pauseHandler();
-}
+};
+
 VPlayer.prototype.pause = function (zItem) {
 
     var This = this;
@@ -618,25 +612,26 @@ VPlayer.prototype.pause = function (zItem) {
     });
 
     This.playerTimer && clearTimeout(This.playerTimer);
-}
+};
 
 function VAlbum(options) {
 
     this.opt = options;
     this.init();
-}
+};
+
 VAlbum.prototype.init = function () {
 
     var This = this,
-		options = this.opt;
+        options = this.opt;
 
     $(options.id).click(function () {
 
         This.showPhoto();
 
     });
+};
 
-}
 VAlbum.prototype.showPhoto = function () {
 
     var This = this,
@@ -830,15 +825,18 @@ function VPay(options) {
 
     this.init();
 }
+
 VPay.prototype.init = function () {
 
     var This = this,
-		options = this.opt;
+        options = this.opt;
 
+    $("#price").html(options.price + "元");
+    $('#gpdMoney').html(options.price);
     var zPay = $(options.id);
     zPay.click(function () {
 
-        This.order();//提交订单
+        This.order(); //提交订单
 
 
         //if (options.refund == 1) {
@@ -855,12 +853,11 @@ VPay.prototype.init = function () {
         This.imgAdd();
     }
 
-
     var zNum = $('#ticketNum'),
-		zMoney = $('#gpdMoney'),
-		zNumSub = $('#ticketNumSub'),
-		zNumAdd = $('#ticketNumAdd'),
-		zMessage = $('#message');
+        zMoney = $('#gpdMoney'),
+        zNumSub = $('#ticketNumSub'),
+        zNumAdd = $('#ticketNumAdd'),
+        zMessage = $('#message');
 
     if (options.max <= 0) {
         zNum.attr('disabled', true);
@@ -892,7 +889,6 @@ VPay.prototype.init = function () {
         var val = zNum.val();
         if (!/^\d+$/.test(val)) {
             val = val.replace(/[^\d]/g, '');
-
         }
 
         if (val == "") val = "1";
@@ -902,7 +898,8 @@ VPay.prototype.init = function () {
         zNum.val(val);
 
         showMoney(val);
-    }
+    };
+
     zNum.keyup(function (e) {
         keyHandler(e);
     }).change(function (e) {
@@ -923,15 +920,14 @@ VPay.prototype.init = function () {
     };
 
 
-
     zNumSub.click(function () {
         changeValue(-1);
     });
     zNumAdd.click(function () {
         changeValue(1);
     });
+};
 
-}
 VPay.prototype.imgAdd = function () {
 
     var This = this,

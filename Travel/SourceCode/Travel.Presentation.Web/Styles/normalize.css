@@ -1697,7 +1697,7 @@ pre {
 
 .gp-icons {
     background: url(../images/gp_icons.png);
-    opacity:0.6;
+    opacity: 0.6;
     background-size: 320px auto;
 }
 
@@ -1729,7 +1729,7 @@ pre {
 
     .gpd-ticket span {
         font-size: 1.8em;
-        font-family:SimHei;
+        font-family: SimHei;
         color: #fff;
         line-height: 50px;
         margin-left: 10px;
@@ -1764,24 +1764,28 @@ pre {
     margin-right: 2rem;
     margin-bottom: 4px;
 }
+
 .gpd-order-content {
     border-bottom: 1px solid #ccc;
 }
+
 .gpd-right {
-        font-size:1.5rem;
-        font-family:SimHei;
-        float:right;
-        bottom:0px;
-        margin-right:2rem;
-        color: #808080;
-    }
+    font-size: 1.5rem;
+    font-family: SimHei;
+    float: right;
+    bottom: 0px;
+    margin-right: 2rem;
+    color: #808080;
+}
+
 .gpd-left {
     font-size: 1.5rem;
-    font-family:SimHei;
+    font-family: SimHei;
     color: #808080;
     margin-left: 0rem;
     margin-bottom: 4px;
 }
+
 .gpd-content {
     display: none;
     border-bottom: 1px solid #ccc;
@@ -1822,6 +1826,7 @@ pre {
     font-size: 14px;
     height: 36px;
 }
+
 .gpd-form-group-right {
     position: relative;
     padding-left: 80px;
@@ -1830,6 +1835,7 @@ pre {
     height: 36px;
     border-bottom: 1px solid #ccc;
 }
+
     .gpd-form-group-right input {
         width: 92%;
         border: 0px solid #bd9f5e;
@@ -1837,8 +1843,9 @@ pre {
         padding: 0 6px;
         /*color: #000;*/
         height: 100%;
-        text-align:right;
+        text-align: right;
     }
+
     .gpd-form-group-right label {
         position: absolute;
         left: 0;
@@ -1847,23 +1854,24 @@ pre {
         margin: auto;
         height: 20px;
     }
-    .gpd-form-group input {
-        width: 100%;
-        border: 1px solid #bd9f5e;
-        border-radius: 6px;
-        padding: 0 6px;
-        color: #000;
-        height: 100%;
-    }
 
-    .gpd-form-group label {
-        position: absolute;
-        left: 0;
-        top: 0;
-        bottom: 0;
-        margin: auto;
-        height: 20px;
-    }
+.gpd-form-group input {
+    width: 100%;
+    border: 1px solid #bd9f5e;
+    border-radius: 6px;
+    padding: 0 6px;
+    color: #000;
+    height: 100%;
+}
+
+.gpd-form-group label {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    height: 20px;
+}
 
 .gpd-red {
     color: #b62301;
@@ -1877,7 +1885,6 @@ pre {
 .gpd-num-group {
     height: 30px;
     text-align: right;
-
 }
 
 .gpd-num-subtract {
@@ -2188,6 +2195,7 @@ img.gpo-qrcode {
     width: 100%;
     padding: 6px 40px;
     color: #fff;
+    z-index: 1000;
 }
 
 .swiper-pagination-bullet {
@@ -2699,31 +2707,35 @@ a.gpo-gate-order-a {
     line-height: 30px;
     color: white;
     font-size: 1.3em;
-    font-family:"Microsoft YaHei";
+    font-family: "Microsoft YaHei";
     margin-right: 10px;
     margin-top: 10px;
     border-radius: 15px;
 }
+
 #payBtn {
-	color: #fef4e9;
-	border: solid 1px #44b549;
-	background: #44b549;
-	background: -webkit-gradient(linear, left top, left bottom, from(#44b549), to(#61b064));
-	background: -moz-linear-gradient(top,  #44b549,  #61b064);
-	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#44b549', endColorstr='#61b064');
+    color: #fef4e9;
+    border: solid 1px #44b549;
+    background: #44b549;
+    background: -webkit-gradient(linear, left top, left bottom, from(#44b549), to(#61b064));
+    background: -moz-linear-gradient(top, #44b549, #61b064);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#44b549', endColorstr='#61b064');
 }
-#payBtn:hover {
-	background: #f47c20;
-	background: -webkit-gradient(linear, left top, left bottom, from(#22b628), to(#14941a));
-	background: -moz-linear-gradient(top,  #22b628,  #14941a);
-	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#22b628', endColorstr='#14941a');
-}
-#payBtn:active {
-	color: #fcd3a5;
-	background: -webkit-gradient(linear, left top, left bottom, from(#61b064), to(#44b549));
-	background: -moz-linear-gradient(top,  #61b064,  #44b549);
-	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#61b064', endColorstr='#44b549');
-}
+
+    #payBtn:hover {
+        background: #f47c20;
+        background: -webkit-gradient(linear, left top, left bottom, from(#22b628), to(#14941a));
+        background: -moz-linear-gradient(top, #22b628, #14941a);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#22b628', endColorstr='#14941a');
+    }
+
+    #payBtn:active {
+        color: #fcd3a5;
+        background: -webkit-gradient(linear, left top, left bottom, from(#61b064), to(#44b549));
+        background: -moz-linear-gradient(top, #61b064, #44b549);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#61b064', endColorstr='#44b549');
+    }
+
 #confirmPayBtn {
     width: 40vw;
     height: 30px;
@@ -2733,31 +2745,35 @@ a.gpo-gate-order-a {
     line-height: 30px;
     color: white;
     font-size: 1.3em;
-    font-family:"Microsoft YaHei";
-    margin-left:30%;
+    font-family: "Microsoft YaHei";
+    margin-left: 30%;
     margin-top: 10px;
     border-radius: 15px;
 }
+
 #confirmPayBtn {
-	color: #fef4e9;
-	border: solid 1px #44b549;
-	background: #44b549;
-	background: -webkit-gradient(linear, left top, left bottom, from(#44b549), to(#61b064));
-	background: -moz-linear-gradient(top,  #44b549,  #61b064);
-	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#44b549', endColorstr='#61b064');
+    color: #fef4e9;
+    border: solid 1px #44b549;
+    background: #44b549;
+    background: -webkit-gradient(linear, left top, left bottom, from(#44b549), to(#61b064));
+    background: -moz-linear-gradient(top, #44b549, #61b064);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#44b549', endColorstr='#61b064');
 }
-#confirmPayBtn:hover {
-	background: #f47c20;
-	background: -webkit-gradient(linear, left top, left bottom, from(#22b628), to(#14941a));
-	background: -moz-linear-gradient(top,  #22b628,  #14941a);
-	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#22b628', endColorstr='#14941a');
-}
-#confirmPayBtn:active {
-	color: #fcd3a5;
-	background: -webkit-gradient(linear, left top, left bottom, from(#61b064), to(#44b549));
-	background: -moz-linear-gradient(top,  #61b064,  #44b549);
-	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#61b064', endColorstr='#44b549');
-}
+
+    #confirmPayBtn:hover {
+        background: #f47c20;
+        background: -webkit-gradient(linear, left top, left bottom, from(#22b628), to(#14941a));
+        background: -moz-linear-gradient(top, #22b628, #14941a);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#22b628', endColorstr='#14941a');
+    }
+
+    #confirmPayBtn:active {
+        color: #fcd3a5;
+        background: -webkit-gradient(linear, left top, left bottom, from(#61b064), to(#44b549));
+        background: -moz-linear-gradient(top, #61b064, #44b549);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#61b064', endColorstr='#44b549');
+    }
+
 .info-ticket p {
     margin-left: 1.5rem;
     margin-right: 1.5rem;
