@@ -152,6 +152,55 @@
         .gdp-curr .gpd-content {
             display: block;
         }
+
+        .lk-mask {
+            position: fixed;
+            width: 250px;
+            background-color: white;
+            left: 50%;
+            top: 50%;
+            margin: -125px;
+            z-index: 1000;
+            -moz-border-radius: 6px; /* Gecko browsers */
+            -webkit-border-radius: 6px; /* Webkit browsers */
+            border-radius: 6px; /* W3C syntax */
+        }
+
+        .ik-btn {
+            width: 80px;
+            height: 20px;
+            text-align: center;
+            background-color: #62b900;
+            -moz-border-radius: 6px; /* Gecko browsers */
+            -webkit-border-radius: 6px; /* Webkit browsers */
+            border-radius: 6px; /* W3C syntax */
+            line-height: 20px;
+            color: #fff;
+            display: inline-block;
+            margin-bottom: 5px;
+            margin-left: 85px;
+        }
+
+        .lk-title {
+            top: 0px;
+            background-color: #90908f;
+            height: 35px;
+            line-height: 35px;
+            font-size: 1.5em;
+            width: 100%;
+            text-align: left;
+            text-indent: 1.5em;
+            color: white;
+            -moz-border-radius: 5px 5px 0px 0px; /* Gecko browsers */
+            -webkit-border-radius: 5px 5px 0px 0px; /* Webkit browsers */
+            border-radius: 5px 5px 0px 0px; /* W3C syntax */
+        }
+
+        .lk-text {
+            color: #fc1e1e;
+            margin-left: 10px;
+            margin-right: 10px;
+        }
     </style>
     <link href="../styles/normalize.css" rel="stylesheet" />
 </head>
@@ -256,7 +305,25 @@
 <script language="javascript">
     //加载票信息
     $(document).ready(function () {
+        var html = '<div class="lk-mask">\
+						<div class="lk-title">提示</div>\
+						<div class="gpd-alert-body alert-p-distance">\
+							<p>优惠票入园前，需持有关证件验证，请诚信购票</p>\
+							<p class="lk-text">因不符合优惠票规定导致无法入园引起的纠纷和损失，由订票人自己承担。</p>\
+						</div>\
+						<div>\
+							<div class="ik-btn">知道了</div>\
+						</div>\
+				</div>';
+        $('.lk-mask').remove();
 
+        var zHtml = $(html);
+
+        $('body').append(zHtml);
+
+        $('.ik-btn').click(function () {
+            $('.lk-mask').hide();
+        });
     });
 
     function GotoConfirm() {
