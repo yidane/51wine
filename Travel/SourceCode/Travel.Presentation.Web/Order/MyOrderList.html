@@ -18,73 +18,80 @@
     <meta content="black" name="apple-mobile-web-app-status-bar-style" />
     <meta content="telephone=no" name="format-detection" />
     <meta content="email=no" name="format-detection" />
+    <link href="../styles/swiper.min.css" rel="stylesheet" />
+    <script src="../javaScripts/swiper.min.js"></script>
     <title>我的订单</title>
-    <style>
-        .btn {
-            float: right;
-            width: 100px;
-            height: 30px;
-            display: inline-block;
-            background: #62b900;
-            text-align: center;
-            line-height: 20px;
-            color: white;
-            font-size: 1em;
-            font-family: "Microsoft YaHei";
-            border-radius: 15px;
-        }
-    </style>
 </head>
 <body>
     <div class="ticket">
-        <div class="tab tabs">
-            <div class="tab-navs">
-                <a href="MyOrderList.html?payStatus=payed" class="active">已付款</a>
-                <a href="MyOrderList.html?payStatus=wait_pay">退票</a>
-            </div>
+        <div class="row">
+            <section>
+                <div class="swiper-container gpd-ablum">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <img class="" src="../images/ticket1.jpg" />
+                        </div>
+                        <div class="swiper-slide">
+                            <img class="" src="../images/ticket2.jpg" />
+                        </div>
+                        <div class="swiper-slide">
+                            <img class="" src="../images/ticket3.jpg" />
+                        </div>
+                        <div class="swiper-slide">
+                            <img class="" src="../images/ticket4.jpg" />
+                        </div>
+                        <div class="swiper-slide">
+                            <img class="" src="../images/ticket5.jpg" />
+                        </div>
+                        <div class="swiper-slide">
+                            <img class="" src="../images/ticket6.jpg" />
+                        </div>
+                    </div>
+                    <div class="swiper-pagination"></div>
+                </div>
+            </section>
         </div>
-        <section>
-            <div class="tab-content" style="padding-top: 60px" id="order_list">
+        <div class="order-content">
+            <div class="tab tabs">
+                <div class="tab-navs">
+                    <a href="MyOrderList.html?payStatus=payed" class="active">已付款</a>
+                    <a href="MyOrderList.html?payStatus=wait_pay">退票</a>
+                </div>
             </div>
-        </section>
+            <section>
+                <div class="tab-content" style="padding-top: 50px" id="order_list">
+                </div>
+            </section>
+        </div>
     </div>
 
     <script src="../javaScripts/zepto.min.js"></script>
     <script src="../js/oAuth2.js"></script>
 
     <script id="ResultTemplateOrder" type="text/x-jsrender">
-        <div class="tab-pane active" style="margin-bottom: 10px; border-bottom: solid; border-width: 1px; border-color: #E0EEEE">
+        <div class="tab-pane active" style="margin-bottom: 10px; border-bottom: solid; border-width: 4px; border-color: #ccc">
             <ul class="ticket-list">
-                <!--                <li style="background-color: #E0EEEE">
+                <!--<li style="background-color: #c4e5c5">
                     <span class="mark">单</span>
                     <h4 class="order-number">订单号:{{:OrderNo}}</h4>
                 </li>-->
-                <li class="order" style="background-color: #E0EEEE; border-top: 0px">
+                <li class="order" style="background-color: #fff; border-top: 0px">
                     <a href="orderDetail.html?orderId={{:OrderID}}">
                         <div class="img">
                             <img src="{{:TicketImageUrl}}" alt="" />
                         </div>
                         <div class="order-info">
-                            <h4 style="font-weight: bold;">{{:TicketName}}</h4>
+                            <h4 style="font-weight: bold;font-size:1em;">{{:TicketName}}</h4>
                             <br />
                             <!--                        <span class="ticket-attribute">状态：{{:OrderStatusName}}
                     </span>-->
-                            <span class="ticket-attribute">时间段：{{:LastUseDate}}</span>
+                            <span class="ticket-attribute">总价：<em class="money"><i>￥</i>{{:TicketTotalPrice}}</em>|数量：{{:TicketCount}}</span>
+
                         </div>
-                        <div class="num">
-                            <div><em class="money"><i>￥</i>{{:TicketPrice}}</em></div>
-                            <div>X</div>
-                            <div>{{:TicketCount}}</div>
-                        </div>
+
                     </a>
-                </li>
-                <li>
-                    <div class="toal-price w-4">
-                        总价：<em class="money"><i>￥</i>{{:TicketTotalPrice}}</em>
-                    </div>
-                    <div class="w-6 btn-right">
-                        <a href="orderDetail.html?orderId={{:OrderID}}" class="btn">使用门票</a>
-                        <!--<a href="{{:OperateUrl}}" class="btn btn-success">再次购买</a>-->
+                    <div class="num">
+                        <a href="ApplyRefund.html" class="btn btn-default" style="margin-right: 10px">使用门票</a>
                     </div>
                 </li>
             </ul>
@@ -112,6 +119,12 @@
                 }
             });
         });
+        var swiper = new Swiper('.swiper-container', {
+            autoplay: 3000,
+            loop: true,
+            pagination: '.swiper-pagination',
+        });
+
     </script>
 </body>
 </html>
