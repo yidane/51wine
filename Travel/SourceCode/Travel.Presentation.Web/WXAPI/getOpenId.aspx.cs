@@ -36,10 +36,11 @@ namespace Travel.Presentation.Web.WXAPI
         {
             var refundOrderRequest = new RefundOrderRequest
             {
-                out_trade_no = "C2015090204153143034787",
-                total_fee = 1,
-                refund_fee = 1,
-                out_refund_no = WxPayHelper.GenerateOutTradeNo()
+                transaction_id = "1003310117201509020772668428",
+                //out_trade_no = "C2015090204153143034787",
+                total_fee =1,
+                refund_fee =1,
+                out_refund_no ="T2015090218440551242147"// WxPayHelper.GenerateOutTradeNo()
             };
 
             JsApiPay jsApiPay = new JsApiPay();
