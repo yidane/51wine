@@ -2715,11 +2715,11 @@ a.gpo-gate-order-a {
 
 #payBtn {
     color: #fef4e9;
-    border: solid 1px #44b549;
-    background: #44b549;
-    background: -webkit-gradient(linear, left top, left bottom, from(#44b549), to(#61b064));
-    background: -moz-linear-gradient(top, #44b549, #61b064);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#44b549', endColorstr='#61b064');
+    border: solid 1px #62b900;
+    background: #62b900;
+    background: -webkit-gradient(linear, left top, left bottom, from(#62b900), to(#62b900));
+    background: -moz-linear-gradient(top, #62b900, #62b900);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#62b900', endColorstr='#62b900');
 }
 
     #payBtn:hover {
