@@ -237,12 +237,16 @@ namespace Travel.Application.DomainModules.Order.Service
                 }
             }
 
-            foreach (var ticket in changedStatusTickets)
+            if (changedStatusTickets.Any())
             {
-                ticket.TicketStatus = OrderStatus.TicketStatus_Used;
-                ticket.LatestModifyTime = DateTime.Now;
+                foreach (var ticket in changedStatusTickets)
+                {
+                    ticket.TicketStatus = OrderStatus.TicketStatus_Used;
+                    ticket.LatestModifyTime = DateTime.Now;
+                }
+                TicketEntity.ModifyTickets(changedStatusTickets);
             }
-            TicketEntity.ModifyTickets(changedStatusTickets);
+            
         }
     }
 }
