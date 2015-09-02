@@ -247,7 +247,7 @@
         <!--详情-->
         <section class="gpd-item">
             <div class="gpd-item-title">
-                <img class="detailicon-ticket" src="../images/introduction.png" />景区介绍<div class="gp-icons gpd-up-icon"></div>
+                <img class="detailicon-ticket" src="../images/introduction.png" />景区介绍<div class="gp-icons gpd-up-icon" id="gp-icons-auto"></div>
             </div>
             <div class="gpd-content">
                 <p>喀纳斯湖位于新疆维吾尔族自治区阿勒泰地区布尔津县境内北部，北起卡勒玛虚，南至何乌特，东接铁外壳，西到阿尔圭萨拉。纬48°81′46″，东经87°04′10″，距布尔津县城150公里，面积45.75k㎡，平均水深120米，最深处达到188.5米，蓄水量达53.8亿立方米，是一个坐落在阿尔泰深山密林中的高山湖泊。</p>
@@ -324,6 +324,11 @@
         $('.ik-btn').click(function () {
             $('.lk-mask').hide();
         });
+
+        var zAuto = $("#gp-icons-auto");
+        var zThisParent = zAuto.parents(".gpd-item");
+        zThisParent.toggleClass("gdp-curr");
+        zThisParent.siblings(".gpd-item").removeClass("gdp-curr");
     });
 
     function GotoConfirm() {
