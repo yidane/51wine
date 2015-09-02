@@ -247,21 +247,22 @@ namespace Travel.Application.DomainModules.Order.Core
                         .Sum(item => item.Price);
 
                 refundRequest.transaction_id = this.OrderObj.WXOrderCode;
-                refundRequest.out_trade_no = this.OrderObj.OrderCode;
+                //refundRequest.out_trade_no = this.OrderObj.OrderCode;
                 refundRequest.out_refund_no = eventArg.refundOrder.RefundOrderCode;
-                refundRequest.total_fee = Decimal.ToInt32(this.OrderObj.TotalFee() * 100);
-                refundRequest.refund_fee = Decimal.ToInt32(refundFee * 100);
 
 #if DEBUG
-                Console.WriteLine(refundRequest.transaction_id + "--" + refundRequest.out_trade_no);
+                refundRequest.total_fee = 1;
+#else
+                refundRequest.total_fee = Decimal.ToInt32(this.OrderObj.TotalFee() * 100);
+#endif
+#if DEBUG
+                refundRequest.refund_fee = 1;
+#else
+                refundRequest.refund_fee = Decimal.ToInt32(refundFee * 100);
 #endif
 
                 // todo: 处理返回值 
                 var refundResponse = this._paymentOperate.RefundPay(refundRequest);
-
-                #if DEBUG
-                Console.WriteLine(refundResponse.return_code +"---" +refundResponse.result_code +"--" +refundResponse.return_msg);
-#endif
 
                 if (refundResponse.return_code.Equals("SUCCESS")
                     &&refundResponse.result_code.Equals("SUCCESS"))
