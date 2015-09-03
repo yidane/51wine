@@ -21,52 +21,128 @@
     <link href="../styles/swiper.min.css" rel="stylesheet" />
     <script src="../javaScripts/swiper.min.js"></script>
     <title>我的订单</title>
+    <style>
+        .ticket-list li {
+            border-bottom: 1px solid #000000;
+        }
+    </style>
 </head>
 <body>
     <div class="ticket">
-        <div class="row">
-            <section>
-                <div class="swiper-container gpd-ablum">
-                    <div class="swiper-wrapper">
-                        <div class="swiper-slide">
-                            <img class="" src="../images/ticket1.jpg" />
-                        </div>
-                        <div class="swiper-slide">
-                            <img class="" src="../images/ticket2.jpg" />
-                        </div>
-                        <div class="swiper-slide">
-                            <img class="" src="../images/ticket3.jpg" />
-                        </div>
-                        <div class="swiper-slide">
-                            <img class="" src="../images/ticket4.jpg" />
-                        </div>
-                        <div class="swiper-slide">
-                            <img class="" src="../images/ticket5.jpg" />
-                        </div>
-                        <div class="swiper-slide">
-                            <img class="" src="../images/ticket6.jpg" />
-                        </div>
-                    </div>
-                    <div class="swiper-pagination"></div>
-                </div>
-            </section>
-        </div>
-        <div class="order-content">
+        <!--<div class="row" style="z-index: 1000">-->
+        <!--<section>-->
+        <!--<div class="swiper-container gpd-ablum">-->
+        <!--<div class="swiper-wrapper">-->
+        <!--<div class="swiper-slide">-->
+        <!--<img class="" src="../images/ticket1.jpg" />-->
+        <!--</div>-->
+        <!--<div class="swiper-slide">-->
+        <!--<img class="" src="../images/ticket2.jpg" />-->
+        <!--</div>-->
+        <!--<div class="swiper-slide">-->
+        <!--<img class="" src="../images/ticket3.jpg" />-->
+        <!--</div>-->
+        <!--<div class="swiper-slide">-->
+        <!--<img class="" src="../images/ticket4.jpg" />-->
+        <!--</div>-->
+        <!--<div class="swiper-slide">-->
+        <!--<img class="" src="../images/ticket5.jpg" />-->
+        <!--</div>-->
+        <!--<div class="swiper-slide">-->
+        <!--<img class="" src="../images/ticket6.jpg" />-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--<div class="swiper-pagination"></div>-->
+        <!--</div>-->
+        <!--</section>-->
+        <!--</div>-->
+        <!--<div class="order-content">-->
+        <div>
             <div class="tab tabs">
                 <div class="tab-navs">
-                    <a href="MyOrderList.html?payStatus=payed" class="active">已付款</a>
-                    <a href="MyOrderList.html?payStatus=wait_pay">退票</a>
+                    <a href="MyOrderList.html?payStatus=payed">已付款</a>
+                    <a href="MyOrderList.html?payStatus=wait_pay" class="active" style="  border-left: 1px;
+  border-style: solid;
+  border-color: #62b900;">退票</a>
                 </div>
             </div>
             <section>
                 <div class="tab-content" style="padding-top: 50px" id="order_list">
+                </div>
+                <div class="tab-content" id="ticket_list">
+                    <div class="tab-pane active" style="margin-bottom: 10px; border-bottom: solid; border-width: 4px; border-color: #ccc">
+                        <ul class="ticket-list" data-bind='foreach: ticketList'>
+                            <li class="order" style="background-color: #fff; border-top: 0px">
+                                <a href="orderDetail.html?orderId={{:OrderID}}">
+                                    <div class="img">
+                                        <img data-bind="attr:{'src':image}" alt="" />
+                                    </div>
+                                    <div class="order-info">
+                                        <h4 style="font-weight: bold; font-size: 1em;">
+                                            <!--ko text: ticketDescription--><!--/ko-->
+                                            <!--ko text: remark--><!--/ko-->
+                                            <!--<div class="clearfix">
+                                                <div class="about">
+                                                    <div></div>
+                                                </div>
+                                            </div>-->
+                                        </h4>
+
+                                        <span class="ticket-attribute">价格：<em class="money"><i>￥</i>  <!--ko text: price--><!--/ko--></em></span>
+
+                                    </div>
+
+                                </a>
+                                <div class="num" style="display: block !important;">
+                                    <a href="ApplyRefund.html" class="btn btn-default" style="margin-right: 10px;margin-top: 25%;" data-bind="text:$parent.ticketState($data)"></a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+
+                    <!--<div class="swiper-wrapper" >-->
+                    <!--<div class="swiper-slide">-->
+                    <!--<div class="content-slide">-->
+                    <!--<div class="tab-pane active">-->
+                    <!--<div class="panel panel-default" data-bind='foreach: ticketList'>-->
+                    <!--<div class="panel-bd" data-bind="style:{ backgroundImage: image}">-->
+                    <!--<a href="TicketDetail.html?ticketType=${ ticketTypeCode }" class="thumb thumb-active">-->
+                    <!--<div class="thumb-cover pull-left">-->
+                    <!--<div class="thumb-cnt">-->
+                    <!--<span class="title text-white" style="width: 40%;">-->
+                    <!--&lt;!&ndash;ko text: ticketDescription&ndash;&gt;&lt;!&ndash;/ko&ndash;&gt;-->
+                    <!--&lt;!&ndash;ko text: remark&ndash;&gt;&lt;!&ndash;/ko&ndash;&gt;-->
+                    <!--&lt;!&ndash;<div class="clearfix">-->
+                    <!--<div class="about">-->
+                    <!--<div></div>-->
+                    <!--</div>-->
+                    <!--</div>&ndash;&gt;-->
+                    <!--</span>-->
+                    <!--<span class="other text-white">￥</span><span class="about text-blue">&lt;!&ndash;ko text: price&ndash;&gt;&lt;!&ndash;/ko&ndash;&gt;</span><span class="other text-white">元</span>-->
+                    <!--<span class="other text-white" data-bind="text:$parent.ticketState($data)" style="float: right;-->
+                    <!--position: absolute;  right: 20px;"></span>-->
+                    <!--</div>-->
+                    <!--<div class="mask modal-backdrop"></div>-->
+                    <!--</div>-->
+                    <!--</a>-->
+                    <!--&lt;!&ndash;<span class="cheap">省</span>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<span class="recommend"  ></span>&ndash;&gt;-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <!--</div>-->
+
                 </div>
             </section>
         </div>
     </div>
 
     <script src="../javaScripts/zepto.min.js"></script>
-    <script src="../js/oAuth2.js"></script>
+    <!--<script src="../js/oAuth2.js"></script>-->
+    <script src="../javaScripts/knockout-3.2.0.debug.js"></script>
 
     <script id="ResultTemplateOrder" type="text/x-jsrender">
         <div class="tab-pane active" style="margin-bottom: 10px; border-bottom: solid; border-width: 4px; border-color: #ccc">
@@ -84,7 +160,7 @@
                             <h4 style="font-weight: bold; font-size: 1em;">{{:TicketName}}</h4>
                             <br />
                             <!--                        <span class="ticket-attribute">状态：{{:OrderStatusName}}
-                    </span>-->
+                            </span>-->
                             <span class="ticket-attribute">总价：<em class="money"><i>￥</i>{{:TicketTotalPrice}}</em>|数量：{{:TicketCount}}</span>
 
                         </div>
@@ -100,32 +176,71 @@
 
     <script>
         $(document).ready(function () {
-            $.ajax({
-                type: "post",
-                url: '../WebService/OrderWebService.asmx/MyOrders',
-                dataType: 'json',
-                data: { code: GetQueryString('code') },
-                success: function (result) {
-                    if (result.IsSuccess) {
-                        var data = [];
-                        $(result.Data).each(function (index, obj) {
-                            data.push({ OrderNo: obj.OrderCode, OrderID: obj.OrderId, TicketImageUrl: '../TicketImages/1.jpg', TicketName: obj.TicketName, LastUseDate: '2015-08-19', TicketPrice: obj.singleTicketPrice, TicketCount: obj.TicketCount, TicketTotalPrice: obj.TotelFee, OperateUrl: '', OperateName: '查看' });
-                        });
-
-                        var template = $.templates("#ResultTemplateOrder");
-                        var htmlOutput = template.render(data);
-                        $("#order_list").html(htmlOutput);
-                    } else {
-                        alert(result.Message);
-                    }
-                }
-            });
+//            $.ajax({
+//                type: "post",
+//                url: '../WebService/OrderWebService.asmx/MyOrders',
+//                dataType: 'json',
+//                data: { code: GetQueryString('code') },
+//                success: function (result) {
+//                    if (result.IsSuccess) {
+//                        var data = [];
+//                        $(result.Data).each(function (index, obj) {
+//                            data.push({ OrderNo: obj.OrderCode, OrderID: obj.OrderId, TicketImageUrl: '../TicketImages/1.jpg', TicketName: obj.TicketName, LastUseDate: '2015-08-19', TicketPrice: obj.singleTicketPrice, TicketCount: obj.TicketCount, TicketTotalPrice: obj.TotelFee, OperateUrl: '', OperateName: '查看' });
+//                        });
+//
+//                        var template = $.templates("#ResultTemplateOrder");
+//                        var htmlOutput = template.render(data);
+//                        $("#order_list").html(htmlOutput);
+//                    } else {
+//                        alert(result.Message);
+//                    }
+//                }
+//            });
         });
         var swiper = new Swiper('.swiper-container', {
             autoplay: 3000,
             loop: true,
             pagination: '.swiper-pagination',
         });
+
+
+        var viewModel = function(){
+            var self=this;
+            this.ticketState=function(data){
+                var stateName='';
+
+                switch (data.state){
+                    case 1:
+                        stateName="审核通过";
+                        break;
+                    case 2:
+                        stateName="已通过";
+                        break;
+                    default :
+                        stateName="待审核";
+
+                };
+
+                return stateName;
+            };
+            this.ticketList= [
+                        { ticketCode: "10001", state:1, price: "265", ticketDescription: "散客票", remark: "一进", category: "1", image: "../images/ticket1.jpg" },
+                        { ticketCode: "10002",state:2, price: "275", ticketDescription: "散客票", remark: "二进", category: "1", image: "../images/ticket2.jpg" },
+                        { ticketCode: "10003",state:3, price: "132.5", ticketDescription: "老年票", remark: "一进", category: "1", image: "../images/ticket3.jpg" },
+                        { ticketCode: "10004",state:1, price: "142.5", ticketDescription: "老年票", remark: "二进", category: "1", image: "../images/ticket4.jpg" },
+                        { ticketCode: "10005",state:2, price: "172.5", ticketDescription: "学生票", remark: "一进", category: "1", image: "../images/ticket5.jpg" },
+                        { ticketCode: "10006",state:3, price: "182.5", ticketDescription: "学生票", remark: "二进", category: "1", image: "../images/ticket6.jpg" },
+                        { ticketCode: "10007",state:3, price: "172.5", ticketDescription: "残疾证票", remark: "一进", category: "1", image: "../images/ticket7.jpg" },
+                        { ticketCode: "10008",state:1, price: "182.5", ticketDescription: "残疾证票", remark: "二进", category: "1", image: "../images/ticket8.jpg" },
+                        { ticketCode: "10009",state:1, price: "185", ticketDescription: "成人票", remark: "不含车票", category: "1", image: "../images/ticket5.jpg" },
+                        { ticketCode: "20001",state:2, price: "80", ticketDescription: "车票", remark: "一乘", category: "1", image: "../images/ticket1.jpg" },
+                        { ticketCode: "20002",state:2, price: "40", ticketDescription: "车票", remark: "一乘", category: "1", image: "../images/ticket2.jpg" },
+                        { ticketCode: "20003",state:1, price: "90", ticketDescription: "车票", remark: "二乘", category: "1", image: "../images/ticket3.jpg" },
+                        { ticketCode: "20004",state:3, price: "50", ticketDescription: "车票", remark: "二乘", category: "1", image: "../images/ticket4.jpg" }
+            ]
+        };
+
+        ko.applyBindings(new viewModel());
     </script>
 </body>
 </html>
