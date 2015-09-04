@@ -225,11 +225,4 @@
         </div>
     </form>
 </body>
-
-     <a href="https://item.taobao.com/item.htm?spm=686.1000925.0.0.6iRlAm&id=520523216527">
-        <span style="color:white;">购买请认证官方销售渠道（淘宝店）https://item.taobao.com/item.htm?spm=686.1000925.0.0.6iRlAm&id=520523216527
-            官方qq 23002807 其他地方购买均为盗版</span>
-    </a>
-
-
 </html>

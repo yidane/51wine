@@ -75,11 +75,11 @@ namespace MxWeiXinPF.Web.api.weixin
                 
                 //本地测试的时候注释掉 ----start -----
 
-                //if (!CheckSignature.Check(signature, timestamp, nonce, Token))
-                //{
-                //    WriteContent("参数错误！");
-                //    return;
-                //}
+                if (!CheckSignature.Check(signature, timestamp, nonce, Token))
+                {
+                    WriteContent("参数错误！");
+                    return;
+                }
                 //本地测试的时候注释掉 ----end -----
 
                 //post method - 当有用户想公众账号发送消息时触发

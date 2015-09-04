@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MxWeiXinPF.Web", "MxWeiXinPF.Web\MxWeiXinPF.Web.csproj", "{6DB1BDD3-4EE3-4259-B459-62F54591995E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MxWeiXinPF.API", "MxWeiXinPF.API\MxWeiXinPF.API.csproj", "{E824FFCC-705E-4CF6-8710-142395937FCB}"
@@ -33,9 +35,44 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "dll", "dll", "{CF6C4727-717
 	EndProjectSection
 EndProject
 Global
-	GlobalSection(SubversionScc) = preSolution
-		Svn-Managed = True
-		Manager = AnkhSVN - Subversion Support for Visual Studio
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 12
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs20
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = MxWeiXinPF.Web\\MxWeiXinPF.Web.csproj
+		SccProjectName1 = MxWeiXinPF.Web
+		SccLocalPath1 = MxWeiXinPF.Web
+		SccProjectUniqueName2 = MxWeiXinPF.API\\MxWeiXinPF.API.csproj
+		SccProjectName2 = MxWeiXinPF.API
+		SccLocalPath2 = MxWeiXinPF.API
+		SccProjectUniqueName3 = MxWeiXinPF.WeiXinComm\\MxWeiXinPF.WeiXinComm.csproj
+		SccProjectName3 = MxWeiXinPF.WeiXinComm
+		SccLocalPath3 = MxWeiXinPF.WeiXinComm
+		SccProjectUniqueName4 = MxWeiXinPF.Templates\\MxWeiXinPF.Templates.csproj
+		SccProjectName4 = MxWeiXinPF.Templates
+		SccLocalPath4 = MxWeiXinPF.Templates
+		SccProjectUniqueName5 = MxWeiXinPF.Common\\MxWeiXinPF.Common.csproj
+		SccProjectName5 = MxWeiXinPF.Common
+		SccLocalPath5 = MxWeiXinPF.Common
+		SccProjectUniqueName6 = VTemplate.Engine\\VTemplate.Engine.csproj
+		SccProjectName6 = VTemplate.Engine
+		SccLocalPath6 = VTemplate.Engine
+		SccProjectUniqueName7 = MxWeiXinPF.BLL\\MxWeiXinPF.BLL.csproj
+		SccProjectName7 = MxWeiXinPF.BLL
+		SccLocalPath7 = MxWeiXinPF.BLL
+		SccProjectUniqueName8 = MxWeiXinPF.DAL\\MxWeiXinPF.DAL.csproj
+		SccProjectName8 = MxWeiXinPF.DAL
+		SccLocalPath8 = MxWeiXinPF.DAL
+		SccProjectUniqueName9 = MxWeiXinPF.Web.UI\\MxWeiXinPF.Web.UI.csproj
+		SccProjectName9 = MxWeiXinPF.Web.UI
+		SccLocalPath9 = MxWeiXinPF.Web.UI
+		SccProjectUniqueName10 = MxWeiXinPF.Model\\MxWeiXinPF.Model.csproj
+		SccProjectName10 = MxWeiXinPF.Model
+		SccLocalPath10 = MxWeiXinPF.Model
+		SccProjectUniqueName11 = MxWeiXinPF.DBUtility\\MxWeiXinPF.DBUtility.csproj
+		SccProjectName11 = MxWeiXinPF.DBUtility
+		SccLocalPath11 = MxWeiXinPF.DBUtility
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -159,5 +196,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(SubversionScc) = preSolution
+		Svn-Managed = True
+		Manager = AnkhSVN - Subversion Support for Visual Studio
 	EndGlobalSection
 EndGlobal
