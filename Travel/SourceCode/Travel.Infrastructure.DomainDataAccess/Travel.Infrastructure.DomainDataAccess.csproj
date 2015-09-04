@@ -116,6 +116,10 @@
     <Compile Include="Migrations\201509011446146_yidane1.Designer.cs">
       <DependentUpon>201509011446146_yidane1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201509040724559_UpdateCoupon.cs" />
+    <Compile Include="Migrations\201509040724559_UpdateCoupon.Designer.cs">
+      <DependentUpon>201509040724559_UpdateCoupon.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Order\DateTicketEntity.cs" />
     <Compile Include="Order\OrderDetailEntity.cs" />
@@ -190,6 +194,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201509011446146_yidane1.resx">
       <DependentUpon>201509011446146_yidane1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509040724559_UpdateCoupon.resx">
+      <DependentUpon>201509040724559_UpdateCoupon.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

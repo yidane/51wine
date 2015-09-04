@@ -21,8 +21,8 @@ namespace Travel.Infrastructure.DomainDataAccess.Coupon.Entitys
         public DateTime EndTime { get; set; }
 
        
-
-        public string Extend1 { get; set; }
+        [DefaultValue(0)]
+        public int StockQuantity { get; set; }
         public string Extend2 { get; set; }
         public string Extend3 { get; set; }
         public string Extend4 { get; set; }

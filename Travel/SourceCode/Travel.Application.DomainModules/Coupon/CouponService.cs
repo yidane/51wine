@@ -119,8 +119,8 @@ namespace Travel.Application.DomainModules.Coupon
         public CouponDTO GetRandomCoupon(UserInfoDTO wxUser)
         {
             CouponDTO result = null;
-            if (HasCoupon())
-            {
+            //if (HasCoupon())
+            //{
                 var availableCoupons = _repository.GetAvailableCoupon();
 
                 if (availableCoupons.Any())
@@ -155,7 +155,7 @@ namespace Travel.Application.DomainModules.Coupon
                     }
                 }
 
-            }
+            //}
 
             return result;
         }
