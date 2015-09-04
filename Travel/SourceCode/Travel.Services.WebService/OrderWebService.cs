@@ -49,9 +49,9 @@ namespace Travel.Services.WebService
                     Context.Response.Write(AjaxResult.Error("openId不能为空"));
                 }
             }
-            catch (Exception)
+            catch (Exception exception)
             {
-                Context.Response.Write(AjaxResult.Error("方法异常"));
+                Context.Response.Write(exception.Message);
             }
         }
 
