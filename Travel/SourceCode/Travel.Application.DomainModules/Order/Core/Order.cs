@@ -377,10 +377,18 @@ namespace Travel.Application.DomainModules.Order.Core
         /// <param name="tickets">此参数必须通过ECode从数据库查询得到</param>
         public void ProcessRefundRequestMain(IList<TicketEntity> tickets)
         {
-            if (this.IsRefundRequestCorrect(tickets))
+            try
             {
-                this.ProcessRefund(tickets);
+                if (this.IsRefundRequestCorrect(tickets))
+                {
+                    this.ProcessRefund(tickets);
+                }
             }
+            catch (OrderOperateFailException orderException)
+            {
+                this.ProcessOrderOperationException(orderException);
+            }
+            
         }
 
         protected virtual void ProcessRefund(ICollection<TicketEntity> tickets)

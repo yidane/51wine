@@ -242,7 +242,7 @@ namespace Travel.Application.DomainModules.Order.Core
             }
             else
             {
-                throw new OrderOperateFailException("更改票务状态失败", OrderOperationStep.OrderChange, "REFUND_RETURN_FAIL");
+                throw new OrderOperateFailException(editResult.ResultMsg, OrderOperationStep.OrderChange, "REFUND_RETURN_FAIL");
             }
         }
 
