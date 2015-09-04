@@ -130,6 +130,7 @@
     <Content Include="introductiontest.html" />
     <Content Include="javaScripts\Moment.js" />
     <Content Include="js\classie.js" />
+    <Content Include="Order\style\css\orderlist.css" />
     <Content Include="Photo\images\message.png" />
     <Content Include="Photo\images\monster.png" />
     <Content Include="Photo\images\shenxianwan.jpg" />
