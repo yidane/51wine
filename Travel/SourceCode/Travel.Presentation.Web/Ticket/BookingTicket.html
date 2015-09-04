@@ -23,7 +23,7 @@
 <body>
 
 
-    <div class="tab tabs">
+    <!--<div class="tab tabs">-->
         <div class="tab-navs">
             <a href="javascript:;" class="active">全部</a>
             <a href="javascript:;">门票</a>
@@ -65,7 +65,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    <!--</div>-->
 
     <script src="../javaScripts/swiper.min.js"></script>
     <script>
@@ -78,6 +78,9 @@
 
                     $(".tab-pane .active").removeClass('active');
                     $(".tab-pane").eq(tabsSwiper.activeIndex).addClass('active');
+                },
+                onSlideChangeEnd: function (swiper) {
+                    swiper.container[0].scrollTop = 0;
                 }
             });
             $(".tab-navs a").on('touchstart mousedown', function (e) {

@@ -461,8 +461,10 @@ html {
 
 body {
     /*background-color: #fcf9f0;*/
+    height: 100%;
     background-color: #fff;
     color: #333;
+    overflow: hidden !important;
 }
 
 a {
@@ -564,13 +566,17 @@ input {
     border: 0px;
 }
 
-    .tabs .container {
+    /*.tabs*/ 
+    .container {
         width: 100%;
-        margin: 50px 0;
+        margin: 50px 0 !important;
         float: left;
+        overflow-x: hidden !important;
+        overflow-y: auto !important;  
     }
 
-    .tabs .tab-navs {
+    /*.tabs*/ 
+    .tab-navs {
         border: none;
         display: -webkit-box;
         display: -webkit-flex;
@@ -584,7 +590,8 @@ input {
         opacity: 0.9;
     }
 
-        .tabs .tab-navs a {
+        /*.tabs*/ 
+        .tab-navs a {
             display: block;
             -webkit-box-flex: 1;
             -webkit-flex: 1;
@@ -600,11 +607,13 @@ input {
             font-family:黑体;
         }
 
-            .tabs .tab-navs a:first-child {
+            /*.tabs*/ 
+            .tab-navs a:first-child {
                 border-left: none;
             }
 
-            .tabs .tab-navs a.active {
+            /*.tabs*/ 
+            .tab-navs a.active {
                 height: 50px;
                 /*background-color: #f3f5f6;*/
                 border-bottom: 3px solid #62b900;
