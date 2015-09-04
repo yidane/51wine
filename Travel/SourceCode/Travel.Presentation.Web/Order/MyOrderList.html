@@ -31,23 +31,23 @@
 <body>
     <div class="personal_center">
         <ul id="myTab0">
-            <li class="active"><a href="MyOrderList.html?payStatus=payed">已付款</a></li>
-            <li class="normal"><a href="MyOrderList.html?payStatus=refund">退票</a></li>
+            <li class="active" id="payed"><a href="MyOrderList.html?payStatus=payed">已付款</a></li>
+            <li class="normal" id="refund"><a href="MyOrderList.html?payStatus=refund">退票</a></li>
         </ul>
         <div class="personal_info">
-            <div class="order_list">
+            <div class="order_list" id="order_list">
             </div>
         </div>
     </div>
 
     <script src="../javaScripts/zepto.min.js"></script>
-    <!--<script src="../js/oAuth2.js"></script>-->
+    <script src="../js/oAuth2.js"></script>
     <script src="../javaScripts/knockout-3.2.0.debug.js"></script>
 
     <script id="ResultTemplateOrder" type="text/x-jsrender">
         <ul>
             <li>
-                <a href="OrderDetail.html">
+                <a href="OrderDetail.html?orderId={{:OrderID}}">
                     <div class="info_01">
                         <h3>{{:TicketName}}</h3>
                         <p>实付<b>￥{{:TicketTotalPrice}}</b>共<b>{{:TicketCount}}</b>件商品</p>
@@ -69,31 +69,75 @@
 
     <script>
         $(document).ready(function () {
-            $.ajax({
-                type: "post",
-                url: '../WebService/OrderWebService.asmx/MyOrders',
-                dataType: 'json',
-                data: { code: GetQueryString('code') },
-                success: function (result) {
-                    if (result.IsSuccess) {
-                        var data = [];
-                        $(result.Data).each(function (index, obj) {
-                            data.push({ OrderNo: obj.OrderCode, OrderID: obj.OrderId, TicketImageUrl: '../TicketImages/1.jpg', TicketName: obj.TicketName, LastUseDate: '2015-08-19', TicketPrice: obj.singleTicketPrice, TicketCount: obj.TicketCount, TicketTotalPrice: obj.TotelFee, OperateUrl: '', OperateName: '查看' });
-                        });
+            var status = GetQueryString('payStatus');
+            if (status == "payed") {
+                $("#payed").removeClass("normal");
+                $("#payed").addClass("active");
+                $("#refund").removeClass("active");
+                $("#refund").addClass("normal");
 
-                        var template = $.templates("#ResultTemplateOrder");
-                        var htmlOutput = template.render(data);
-                        $("#order_list").html(htmlOutput);
-                    } else {
-                        alert(result.Message);
+                GetOrderList();
+            } else if (status == "refund") {
+                $("#refund").removeClass("normal");
+                $("#refund").addClass("active");
+                $("#payed").removeClass("active");
+                $("#payed").addClass("normal");
+
+                MyRefundTickets();
+            } else {
+                $("#payed").removeClass("normal");
+                $("#payed").addClass("active");
+                $("#refund").removeClass("active");
+                $("#refund").addClass("normal");
+
+                GetOrderList();
+            }
+
+            function GetOrderList() {
+                $.ajax({
+                    type: "post",
+                    url: '../WebService/OrderWebService.asmx/MyOrders',
+                    dataType: 'json',
+                    data: { code: GetQueryString('code') },
+                    success: function (result) {
+                        if (result.IsSuccess) {
+                            var data = [];
+                            $(result.Data).each(function (index, obj) {
+                                data.push({ OrderNo: obj.OrderCode, OrderID: obj.OrderId, TicketImageUrl: '../TicketImages/1.jpg', TicketName: obj.TicketName, LastUseDate: '2015-08-19', TicketPrice: obj.singleTicketPrice, TicketCount: obj.TicketCount, TicketTotalPrice: obj.TotelFee, OperateUrl: '', OperateName: '查看' });
+                            });
+
+                            var template = $.templates("#ResultTemplateOrder");
+                            var htmlOutput = template.render(data);
+                            $("#order_list").html(htmlOutput);
+                        } else {
+                            alert(result.Message);
+                        }
                     }
-                }
-            });
-        });
-        var swiper = new Swiper('.swiper-container', {
-            autoplay: 3000,
-            loop: true,
-            pagination: '.swiper-pagination',
+                });
+            }
+
+            function MyRefundTickets() {
+                $.ajax({
+                    type: "post",
+                    url: '../WebService/OrderWebService.asmx/MyRefundTickets',
+                    dataType: 'json',
+                    data: { code: GetQueryString('code') },
+                    success: function (result) {
+                        if (result.IsSuccess) {
+                            var data = [];
+                            $(result.Data).each(function (index, obj) {
+                                data.push({ OrderNo: obj.OrderCode, OrderID: obj.OrderId, TicketImageUrl: '../TicketImages/1.jpg', TicketName: obj.TicketName, LastUseDate: '2015-08-19', TicketPrice: obj.singleTicketPrice, TicketCount: obj.TicketCount, TicketTotalPrice: obj.TotelFee, OperateUrl: '', OperateName: '查看' });
+                            });
+
+                            var template = $.templates("#ResultTemplateOrder");
+                            var htmlOutput = template.render(data);
+                            $("#order_list").html(htmlOutput);
+                        } else {
+                            alert(result.Message);
+                        }
+                    }
+                });
+            }
         });
     </script>
 </body>

@@ -106,6 +106,7 @@
     <Content Include="Guide\yueliangwan.html" />
     <Content Include="images\info.png" />
     <Content Include="images\introduction.png" />
+    <Content Include="images\i_gray_icon.png" />
     <Content Include="images\m.png" />
     <Content Include="images\m1.png" />
     <Content Include="images\tel.png" />
@@ -119,7 +120,9 @@
     <Content Include="images\ticket7.jpg" />
     <Content Include="images\ticket8.jpg" />
     <Content Include="images\time.png" />
+    <Content Include="images\time_gray_icon.png" />
     <Content Include="images\undo.png" />
+    <Content Include="images\wave_blue_icon.svg" />
     <Content Include="images\xx.png" />
     <Content Include="images\导览背景.png" />
     <Content Include="images\文字名称.png" />

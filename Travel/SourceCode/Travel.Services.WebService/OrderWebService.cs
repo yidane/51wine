@@ -28,7 +28,7 @@ namespace Travel.Services.WebService
             {
                 Context.Response.Write(AjaxResult.Error("方法异常"));
             }
-            
+
         }
 
         [WebMethod(EnableSession = true)]
@@ -52,7 +52,7 @@ namespace Travel.Services.WebService
             catch (Exception)
             {
                 Context.Response.Write(AjaxResult.Error("方法异常"));
-            }            
+            }
         }
 
         [WebMethod(EnableSession = true)]
@@ -88,14 +88,15 @@ namespace Travel.Services.WebService
             catch (Exception)
             {
                 Context.Response.Write(AjaxResult.Error("方法异常"));
-            }            
+            }
         }
 
         [WebMethod(EnableSession = true)]
-        public void MyRefundTickets(string openId)
+        public void MyRefundTickets(string code)
         {
             try
             {
+                var openId = GetOpenIDByCodeID(code);
                 if (!string.IsNullOrEmpty(openId))
                 {
                     var tickets = new OrderService().MyRefundTickets(openId);

@@ -8,7 +8,7 @@ namespace Travel.Infrastructure.OTAWebService.Test
     [TestClass]
     public class OTAWebServiceUnitTest
     {
-        private string OrderNo = "C201508291844546885745";
+        private string OrderNo = "C20150829184454628575";
 
         [TestMethod]
         public void TestSignture()
