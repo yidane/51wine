@@ -56,15 +56,14 @@
         }
 
         .silde-center {
-            margin-bottom: 30px;
-            margin-top: 25px;
             text-align: center;
         }
 
         .img-border {
             border: 10px;
-            border-color: #6666FF;
+            border-color: white;
             border-style: solid;
+            padding: 20px;
         }
 
         .text-uppercase {
@@ -202,43 +201,6 @@
         <section class="gpd-ticket">
             <a id="btnRefund" href="ApplyRefund.html">申请退票</a>
         </section>
-        <section style="display: none">
-            <ul class="ticket-order-form order-details">
-                <li>
-                    <div>
-                        <label for="">游玩日期</label><span>2015-08-19</span>
-                    </div>
-                    <div>
-                        <label for="">有效日期</label><span>08-19</span>
-                    </div>
-                    <div>
-                        <label for="">单价</label><span class="money" id="singlePrice">&yen;120</span>
-                    </div>
-                    <div>
-                        <label for="">数量</label><span id="count">1</span>
-                    </div>
-                    <div>
-                        <label for="">优惠券</label><span class="money2" style="color: #0280ea; font-size: 1.5rem;"><i>￥</i>0</span>
-                    </div>
-                </li>
-                <li>
-                    <label for="">联系人</label><span id="contractAll"></span>
-                </li>
-                <li>
-                    <div>
-                        <label for="">交易时间</label><span id="payTime">2015-08-19 09:33</span>
-                    </div>
-                    <div>
-                        <label for="">订单号</label><span id="orderNo">WX201508198996112778</span>
-                    </div>
-                    <!--<div><label for="">供应商</label>杭州风景管理处</div>-->
-                </li>
-                <!--
-                <li>
-                </li>-->
-            </ul>
-        </section>
-
         <section class="gpd-item ">
             <div class="gpd-item-title">
                 <img class="detailicon-ticket" src="../images/info.png" />使用须知<div class="gp-icons gpd-up-icon"></div>
@@ -282,7 +244,7 @@
         </section>
         <section class="gpd-item " style="padding-bottom: 0;">
             <div class="gpd-item-title">
-                <img class="detailicon-ticket" src="../images/time.png" />票有效期 <span style="float: right">2015-08-01-2015-12-31</span>
+                <img class="detailicon-ticket" src="../images/time.png" />票有效期 <span style="float: right">2015-08-01至2015-12-31</span>
                 <div class="line-title"></div>
             </div>
         </section>
@@ -325,10 +287,7 @@
         </section>
     </div>
     <script src="../javaScripts/swiper.min.js"></script>
-
-
     <script>
-
         $(function () {
             $.ajax({
                 url: "../WebService/OrderWebService.asmx/GetOrderWithDetailList",

@@ -285,7 +285,7 @@
 
         <section class="gpd-item ">
             <div class="gpd-item-title">
-                <img class="detailicon-ticket" src="../images/time.png" />票有效期 <span style="float: right">2015-08-01-2015-12-31</span>
+                <img class="detailicon-ticket" src="../images/time.png" />票有效期 <span style="float: right" id="dateRange">2015-08-01至2015-12-31</span>
                 <div class="line-title"></div>
             </div>
         </section>
@@ -301,10 +301,15 @@
 
 <script src="../javaScripts/zepto.min.js"></script>
 <script src="../javaScripts/swiper.min.js"></script>
-
+<script src="../javaScripts/Moment.js"></script>
 <script language="javascript">
     //加载票信息
     $(document).ready(function () {
+        //计算票有效期
+        var currentDate = moment();
+        var nextDate = moment().add(365, 'day');
+        $("#dateRange").html(currentDate.format("YYYY-MM-DD") + "至" + nextDate.format("YYYY-MM-DD"));
+
         var html = '<div class="lk-mask">\
 						<div class="lk-title">提示</div>\
 						<div class="gpd-alert-body alert-p-distance">\

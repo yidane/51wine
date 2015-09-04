@@ -42,7 +42,6 @@ a {
     text-decoration: none;
     /*color: #008cd6;*/
     outline: none;
-
 }
 
 input {
@@ -438,14 +437,15 @@ input[type=number] {
 }
 
 .row {
-    margin-top:-10px;
-    margin-left:-15px;
-    margin-right:-15px;
-    width:110vw;
-    position:fixed;
+    margin-top: -10px;
+    margin-left: -15px;
+    margin-right: -15px;
+    width: 110vw;
+    position: fixed;
 }
+
 .order-content {
-    padding-top:59vw;
+    padding-top: 59vw;
 }
 
 .ticket-tab, .ticket-order-tab {
@@ -468,13 +468,14 @@ input[type=number] {
             font-size: 1rem;
             display: block;
         }
-        .ticket-tab li.active{
+
+        .ticket-tab li.active {
             border-color: #44b549;
         }
 
-        .ticket-tab li.active a {
-            color: #ff0000;
-        }
+            .ticket-tab li.active a {
+                color: #ff0000;
+            }
 
 .ticket-list {
 }
@@ -524,51 +525,51 @@ input[type=number] {
             line-height: 28px;
             /*font-size: 0.8rem;*/
             color: rgb(150,150,150);
-            font-weight:bold;
+            font-weight: bold;
         }
 
         /*.ticket-list li a {
             display: inline-block;
         }*/
 
-            .ticket-list li a.pay {
-                width: 55px;
-                text-align: center;
-                -webkit-box-flex: 1;
-                margin-top: 20%;
+        .ticket-list li a.pay {
+            width: 55px;
+            text-align: center;
+            -webkit-box-flex: 1;
+            margin-top: 20%;
+        }
+
+            .ticket-list li a.pay em {
+                display: block;
+                height: 22px;
+                line-height: 22px;
+                font-size: 1rem;
             }
 
-                .ticket-list li a.pay em {
-                    display: block;
-                    height: 22px;
-                    line-height: 22px;
-                    font-size: 1rem;
+                .ticket-list li a.pay em.act {
+                    background-color: #0090ff;
+                    color: #fff;
+                    border-top-left-radius: 6px;
+                    border-top-right-radius: 6px;
+                    border: 1px solid #0090ff;
+                    border-bottom: none;
                 }
 
-                    .ticket-list li a.pay em.act {
-                        background-color: #0090ff;
-                        color: #fff;
-                        border-top-left-radius: 6px;
-                        border-top-right-radius: 6px;
-                        border: 1px solid #0090ff;
-                        border-bottom: none;
-                    }
+                .ticket-list li a.pay em.info {
+                    background-color: #fff;
+                    color: #0090ff;
+                    border-bottom-left-radius: 6px;
+                    border-bottom-right-radius: 6px;
+                    border: 1px solid #0090ff;
+                    border-top: none;
+                    font-size: 0.7rem;
+                }
 
-                    .ticket-list li a.pay em.info {
-                        background-color: #fff;
-                        color: #0090ff;
-                        border-bottom-left-radius: 6px;
-                        border-bottom-right-radius: 6px;
-                        border: 1px solid #0090ff;
-                        border-top: none;
-                        font-size: 0.7rem;
-                    }
-
-            .ticket-list li a.cancel {
-                width: 40px;
-                height: 28px;
-                line-height: 28px;
-            }
+        .ticket-list li a.cancel {
+            width: 40px;
+            height: 28px;
+            line-height: 28px;
+        }
 
         .ticket-list li.order {
             padding: 0.5rem 0;
@@ -590,46 +591,51 @@ input[type=number] {
 .order-info {
     -webkit-box-flex: 1;
     padding: 0 10px;
-    width:60vw;
+    width: 60vw;
 }
 
 .num {
-    display:none !important;
+    display: none !important;
     text-align: center;
     line-height: 100%;
     color: #333;
     display: inline-block;
-    right:0px;
+    right: 0px;
     /*width: 40%;*/
 }
+
     .num a {
-        display:block !important;
-        margin-top:55px;
-        margin-right:5px;
-        font-size:0.8em;
-        color:#fff !important;
-        border-radius:10px;
+        display: block !important;
+        margin-top: 55px;
+        margin-right: 5px;
+        font-size: 0.8em;
+        color: #fff !important;
+        border-radius: 10px;
     }
-.num a {
-	color: #fef4e9;
-	border: solid 1px #62b900;
-	background: #62b900;
-	background: -webkit-gradient(linear, left top, left bottom, from(#62b900), to(#62b900));
-	background: -moz-linear-gradient(top,  #62b900,  #62b900);
-	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#62b900', endColorstr='#62b900');
-}
-.num a:hover {
-	background: #f47c20;
-	background: -webkit-gradient(linear, left top, left bottom, from(#62b900), to(#62b900));
-	background: -moz-linear-gradient(top,  #62b900,  #62b900);
-	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#62b900', endColorstr='#62b900');
-}
-.num a:active {
-	color: #fcd3a5;
-	background: -webkit-gradient(linear, left top, left bottom, from(#62b900), to(#62b900));
-	background: -moz-linear-gradient(top,  #62b900,  #62b900);
-	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#62b900', endColorstr='#62b900');
-}
+
+    .num a {
+        color: #fef4e9;
+        border: solid 1px #62b900;
+        background: #62b900;
+        background: -webkit-gradient(linear, left top, left bottom, from(#62b900), to(#62b900));
+        background: -moz-linear-gradient(top, #62b900, #62b900);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#62b900', endColorstr='#62b900');
+    }
+
+        .num a:hover {
+            background: #f47c20;
+            background: -webkit-gradient(linear, left top, left bottom, from(#62b900), to(#62b900));
+            background: -moz-linear-gradient(top, #62b900, #62b900);
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#62b900', endColorstr='#62b900');
+        }
+
+        .num a:active {
+            color: #fcd3a5;
+            background: -webkit-gradient(linear, left top, left bottom, from(#62b900), to(#62b900));
+            background: -moz-linear-gradient(top, #62b900, #62b900);
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#62b900', endColorstr='#62b900');
+        }
+
 .money {
     color: #ff0013;
     font-size: 1.2rem;
@@ -2886,6 +2892,6 @@ pre {
 }
 
 .swiper-container .swiper-wrapper .swiper-slide img {
-  width: 100%;
-  min-height: 150px;
+    width: 70%;
+    min-height: 150px;
 }
