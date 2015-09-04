@@ -22,7 +22,7 @@ namespace Travel.Application.DomainModules.Order.Core
 
         protected IPaymentOperate _paymentOperate;
 
-        private EventHandlerList _events;        
+        private EventHandlerList _events;
 
         public OrderRequestEntity OrderRequest;
 
@@ -32,8 +32,8 @@ namespace Travel.Application.DomainModules.Order.Core
 
         internal static readonly object EventPreValidate = new Object();
         internal static readonly object EventPreCreateOrder = new Object();
-        internal static readonly object EventCreateOrderComplete = new Object();   
-        internal static readonly object EvnetRefundPayComplete=new object();
+        internal static readonly object EventCreateOrderComplete = new Object();
+        internal static readonly object EvnetRefundPayComplete = new object();
 
         public Order(OrderRequestEntity orderRequest)
         {
@@ -137,7 +137,7 @@ namespace Travel.Application.DomainModules.Order.Core
             }
         }
 
-        public class RefundEventArgs :EventArgs
+        public class RefundEventArgs : EventArgs
         {
             public OrderDetailEntity orderDetail { get; set; }
 
@@ -169,14 +169,22 @@ namespace Travel.Application.DomainModules.Order.Core
                 this.OnPreValidate(EventArgs.Empty);
                 this.OnPreCreateOrder(EventArgs.Empty);
                 this.ConbinedOrderComponent();
-                this.OnCreateOrderComplete(EventArgs.Empty);                
+                this.OnCreateOrderComplete(EventArgs.Empty);
+            }
+            catch (OrderOperateFailException orderException)
+            {
+                this.ProcessOrderOperationException(orderException);
+            }
+            catch (OrderPaymentFailException orderPaymentException)
+            {
+                this.ProcessOrderPaymentException(orderPaymentException);
             }
             catch (Exception)
             {
                 // todo:针对不同事件报出的异常进行不同的异常处理
                 throw;
-            }            
-        }                
+            }
+        }
 
         /// <summary>
         /// 组合订单各项
@@ -195,7 +203,7 @@ namespace Travel.Application.DomainModules.Order.Core
                 }
                 else
                 {
-                    throw new ArgumentNullException("OrderDetail");
+                    throw new OrderOperateFailException("创建订单明细失败", OrderOperationStep.OrderCreate);
                 }
 
                 var tickets = this.CreateTicket();
@@ -206,15 +214,22 @@ namespace Travel.Application.DomainModules.Order.Core
                 }
                 else
                 {
-                    throw new ArgumentNullException("Ticket");
+                    throw new OrderOperateFailException("创建售出票失败", OrderOperationStep.OrderCreate);
                 }
             }
             else
             {
-                throw new ArgumentNullException("Order");
+                throw new OrderOperateFailException("创建订单主体失败", OrderOperationStep.OrderCreate);
             }
 
-            this.OrderObj.AddOrder();
+            try
+            {
+                this.OrderObj.AddOrder();
+            }
+            catch (Exception)
+            {
+                throw new OrderOperateFailException("订单保存失败", OrderOperationStep.OrderCreate, "SAVEDATA_FAIL");
+            }
         }
 
         /// <summary>
@@ -284,7 +299,7 @@ namespace Travel.Application.DomainModules.Order.Core
                              CouponId = string.IsNullOrEmpty(this.OrderRequest.CouponId) ? default(Guid?) : Guid.Parse(this.OrderRequest.CouponId),
                              OrderDetails = new List<OrderDetailEntity>(),
                              Tickets = new List<TicketEntity>()
-                         };            
+                         };
         }
 
         /// <summary>
@@ -325,7 +340,7 @@ namespace Travel.Application.DomainModules.Order.Core
             {
                 return null;
             }
-        }        
+        }
 
         /// <summary>
         /// 创建订单编码
@@ -343,10 +358,10 @@ namespace Travel.Application.DomainModules.Order.Core
             return myRan.Next(1000, 9998).ToString(CultureInfo.InvariantCulture);
         }
 
-        #endregion        
+        #endregion
 
         #region 订单完成
-        
+
         protected virtual void OrderComfirm()
         {
             throw new NotImplementedException();
@@ -441,26 +456,167 @@ namespace Travel.Application.DomainModules.Order.Core
                 }
 
                 using (var scope = new TransactionScope())
-                {                                        
+                {
                     refundOrder.Add();
                     orderDetail.Add();
                     TicketEntity.ModifyTickets(tickets);
-                    
+
                     scope.Complete();
                 }
 
 
-                var eventArgs = new RefundEventArgs();
-                eventArgs.orderDetail = orderDetail;
-                eventArgs.refundOrder = refundOrder;
-                eventArgs.tickets = tickets;
-                this.OnRefundPayComplete(eventArgs);
+                var eventArgs = new RefundEventArgs
+                                    {
+                                        orderDetail = orderDetail,
+                                        refundOrder = refundOrder,
+                                        tickets = tickets
+                                    };
+
+                try
+                {
+                    this.OnRefundPayComplete(eventArgs);
+                }
+                catch (OrderPaymentFailException orderException)
+                {
+                    orderException.param = new Dictionary<string, object>
+                                               {
+                                                   { "refundOrder", refundOrder },
+                                                   { "orderDetail", orderDetail },
+                                                   { "tickets", tickets }
+                                               };
+                    this.ProcessOrderPaymentException(orderException);
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+
             }
         }
 
         protected string CreateRefundOrderCode()
         {
             return "T" + DateTime.Now.ToString("yyyyMMddHHmmssffff") + this.GetRandom();
+        }
+
+        #endregion
+
+        #region 异常处理流程
+
+        public void ProcessOrderOperationException(OrderOperateFailException orderExcepion)
+        {
+            // todo: 第一步，记录异常日志；第二步，异常处理；第三步，记录处理方式
+            var needProcess = false;
+            var processMethod = string.Empty;
+            var isProcessSuccess = true;
+
+            switch (orderExcepion.OperationStep)
+            {
+                case OrderOperationStep.GetDailyTicket:
+                    if (orderExcepion.ErrorCode.Equals("RESULT_NULL"))
+                    {
+                        OTAOrder.SetDailyTicket();
+                        needProcess = true;
+                        processMethod = "重新获取景区票务数据";
+                    }
+                    break;
+                case OrderOperationStep.OrderOccupy:
+                    this.OrderObj.DeleteOrder();
+                    foreach (var dateTicket in this.DateTicketList)
+                    {
+                        dateTicket.CurrentStatus = OrderStatus.DateTicketStatus_Init;
+                        dateTicket.LatestStatusModifyTime = DateTime.Now;
+                    }
+
+                    DateTicketEntity.Update(this.DateTicketList);
+
+                    needProcess = true;
+                    processMethod = "回滚Order表和DateTicket表中的数据";
+                    break;
+                case OrderOperationStep.OrderCreate:
+                    foreach (var dateTicket in this.DateTicketList)
+                    {
+                        dateTicket.CurrentStatus = OrderStatus.DateTicketStatus_Init;
+                        dateTicket.LatestStatusModifyTime = DateTime.Now;
+                    }
+
+                    DateTicketEntity.Update(this.DateTicketList);
+
+                    needProcess = true;
+                    processMethod = "回滚锁定DateTicket表中的数据";
+                    break;
+                case OrderOperationStep.OrderChange:
+                    break;
+                case OrderOperationStep.GetOrderStatus:
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        public void ProcessOrderPaymentException(OrderPaymentFailException orderException)
+        {
+            var needProcess = false;
+            var processMethod = string.Empty;
+            var isProcessSuccess = true;
+
+            switch (orderException.PaymentStep)
+            {
+                case OrderPaymentStep.UnifiedOrder:
+                    var result = this._orderOperate.OrderRelease();
+
+                    if (result.IsTrue)
+                    {
+                        this.OrderObj.DeleteOrder();
+                        foreach (var dateTicket in this.DateTicketList)
+                        {
+                            dateTicket.CurrentStatus = OrderStatus.DateTicketStatus_Init;
+                            dateTicket.LatestStatusModifyTime = DateTime.Now;
+                        }
+
+                        DateTicketEntity.Update(this.DateTicketList);
+
+                        needProcess = true;
+                        processMethod = "回滚Order表和DateTicket表中的数据";
+                    }
+                    else
+                    {
+                        needProcess = true;
+                        processMethod = "统一下单失败，释放订单失败";
+                        isProcessSuccess = false;
+                    }
+                    break;
+                case OrderPaymentStep.ApplyRefund:
+                    if (orderException.param.ContainsKey("refundOrder")
+                        && orderException.param.ContainsKey("orderDetail")
+                        && orderException.param.ContainsKey("tickets"))
+                    {
+                        var refundOrder = orderException.param["refundOrder"] as RefundOrderEntity;
+                        var orderDetail = orderException.param["orderDetail"] as OrderDetailEntity;
+                        var tickets = orderException.param["tickets"] as ICollection<TicketEntity>;
+
+                        refundOrder.Delete();
+                        orderDetail.Delete();
+                        foreach (var ticket in tickets)
+                        {
+                            ticket.TicketStatus = OrderStatus.TicketStatus_Refund_Audit;
+                            ticket.LatestModifyTime = DateTime.Now;
+                            ticket.RefundOrderId = default(Guid?);
+                            ticket.OrderDetailId = default(Guid);
+                        }
+
+                        TicketEntity.ModifyTickets(tickets);
+                    }
+                    
+                    break;
+                case OrderPaymentStep.PaymentResultNotify:
+                    break;
+                case OrderPaymentStep.RefundQuery:
+                    break;
+                default:
+                    break;
+            }
         }
 
         #endregion

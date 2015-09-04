@@ -11,11 +11,13 @@ namespace Travel.Infrastructure.DomainDataAccess.Order
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     using System.Data.Entity.Migrations;
+    using System.Data.Entity.Migrations.Model;
     using System.Runtime.Remoting.Contexts;
 
     public class DateTicketEntity
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [Column(Order = 1)]
         public int DateTicketId { get; set; }
 
         [MaxLength(50), Required(AllowEmptyStrings = false)]
@@ -43,7 +45,8 @@ namespace Travel.Infrastructure.DomainDataAccess.Order
         /// <summary>
         /// 查询日期
         /// </summary>
-        [Required(AllowEmptyStrings = false)]
+        [Key, Required(AllowEmptyStrings = false)]
+        [Column(Order = 2)]
         public DateTime SearchDateTime { get; set; }
 
         /// <summary>
@@ -90,6 +93,27 @@ namespace Travel.Infrastructure.DomainDataAccess.Order
             using (var db = new TravelDBContext())
             {
                 db.Set<DateTicketEntity>().AddOrUpdate<DateTicketEntity>(item => item.DateTicketId, dateTickets.ToArray());
+                db.SaveChanges();
+            }
+        }
+
+        public static bool IsDateTicketExists(DateTime date)
+        {
+            var now = date.Date;
+            var tomorrow = now.AddDays(1);
+            using (var db = new TravelDBContext())
+            {
+
+                return db.Set<DateTicketEntity>().Any(item => item.SearchDateTime >= now
+                    && item.SearchDateTime < tomorrow);
+            }
+        }
+
+        public static void SetDateTickets(IEnumerable<DateTicketEntity> dateTickets)
+        {            
+            using (var db = new TravelDBContext())
+            {
+                db.Set<DateTicketEntity>().AddRange(dateTickets);
                 db.SaveChanges();
             }
         }

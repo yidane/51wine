@@ -3,6 +3,7 @@
     using System;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Data.Entity;
 
     public class OrderDetailEntity
     {
@@ -60,6 +61,16 @@
             using (var db = new TravelDBContext())
             {
                 db.OrderDetail.Add(this);
+                db.SaveChanges();
+            }
+        }
+
+        public void Delete()
+        {
+            using (var db = new TravelDBContext())
+            {
+                db.OrderDetail.Attach(this);
+                db.Entry(this).State = EntityState.Deleted;
                 db.SaveChanges();
             }
         }

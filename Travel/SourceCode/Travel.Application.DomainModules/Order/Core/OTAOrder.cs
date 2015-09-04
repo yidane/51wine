@@ -6,10 +6,13 @@ using System.Text;
 namespace Travel.Application.DomainModules.Order.Core
 {
     using System.Globalization;
+    using System.Transactions;
 
     using Travel.Application.DomainModules.Order.Core.Interface;
     using Travel.Application.DomainModules.Order.Entity;
+    using Travel.Infrastructure.DomainDataAccess.Migrations;
     using Travel.Infrastructure.DomainDataAccess.Order;
+    using Travel.Infrastructure.OTAWebService;
     using Travel.Infrastructure.OTAWebService.Response;
     using Travel.Infrastructure.WeiXin.Advanced.Pay.Model;
 
@@ -35,7 +38,59 @@ namespace Travel.Application.DomainModules.Order.Core
             this._orderOperate = new OTAOrderOperate(this);
             this._paymentOperate = new WXPaymentOperate();
             this.RefundPayComplete += this.OTAOrder_RefundPayComplete;
-        }        
+        }
+
+        /// <summary>
+        /// 从景区获取当日可售的票
+        /// </summary>
+        public static void SetDailyTicket()
+        {
+            var date = DateTime.Now;
+
+            if (!DateTicketEntity.IsDateTicketExists(date))
+            {
+                var dailyTicketsResponse = OTAOrderOperate.GetDailyTickets(date);
+
+                if (dailyTicketsResponse.IsTrue)
+                {
+                    var dateTickets = dailyTicketsResponse.ResultData.Select(item => new DateTicketEntity()
+                                                                                         {
+                                                                                             DateTicketId = int.Parse(item.ProductID),
+                                                                                             TicketCode = item.ProductCode,
+                                                                                             TicketPackageId = item.ProductPackID,
+                                                                                             TicketName = item.ProductName,
+                                                                                             TicketPrice = item.ProductPrice,
+                                                                                             TicketType = item.ProductType,
+                                                                                             SearchDateTime = date,
+                                                                                             CurrentStatus = OrderStatus.DateTicketStatus_Init,
+                                                                                             LatestStatusModifyTime = date
+                                                                                         });
+
+                    var dailyTicketGroup = dailyTicketsResponse.ResultData.GroupBy(item => item.ProductName);
+                    var ticketCategory = dailyTicketGroup.Select(item => new TicketCategoryEntity()
+                                                                            {
+                                                                                TicketCategoryId = Guid.NewGuid(),
+                                                                                ImplementationDate = date,
+                                                                                TicketPackageId = item.FirstOrDefault().ProductPackID,
+                                                                                TicketType = item.FirstOrDefault().ProductType,
+                                                                                Type = item.FirstOrDefault().ProductName.Contains("车票") ? "cp" : "mp",
+                                                                                Price = item.FirstOrDefault().ProductPrice,
+                                                                                TicketName = item.FirstOrDefault().ProductName
+                                                                            });
+
+                    if (dateTickets.Any() && ticketCategory.Any())
+                    {
+                        using (var scope = new TransactionScope())
+                        {
+                            DateTicketEntity.SetDateTickets(dateTickets);
+                            TicketCategoryEntity.SetTicketCategory(ticketCategory);
+
+                            scope.Complete();
+                        }
+                    }                    
+                }
+            }
+        }
 
         /// <summary>
         /// 全局锁变量
@@ -47,31 +102,31 @@ namespace Travel.Application.DomainModules.Order.Core
         /// </summary>
         private void OTAOrder_OnPreCreateOrder(object sender, EventArgs eventArgs)
         {
-            try
+            lock (ticketLock)
             {
-                lock (ticketLock)
-                {
-                    this.DateTicketList = DateTicketEntity.GetTodayTicketByNomber(this.OrderRequest.Count, this.OrderRequest.TicketName);
+                this.DateTicketList = DateTicketEntity.GetTodayTicketByNomber(this.OrderRequest.Count, this.OrderRequest.TicketName);
 
-                    if (this.DateTicketList != null && this.DateTicketList.Any())
+                if (this.DateTicketList != null && this.DateTicketList.Any())
+                {
+                    if (this.OrderRequest.Count.Equals(this.DateTicketList.Count))
                     {
                         foreach (var item in this.DateTicketList)
                         {
                             item.CurrentStatus = OrderStatus.DateTicketStatus_Lock;
+                            item.LatestStatusModifyTime = DateTime.Now;
                         }
 
                         DateTicketEntity.Update(this.DateTicketList);
                     }
                     else
                     {
-                        throw new ArgumentNullException("dateticketlist");
+                        throw new OrderOperateFailException("余票不足", OrderOperationStep.GetDailyTicket, "NO_ENOUGH_TICKETS");
                     }
                 }
-            }
-            catch (Exception)
-            {
-
-                throw;
+                else
+                {
+                    throw new OrderOperateFailException("无法获取当日可售票", OrderOperationStep.GetDailyTicket, "RESULT_NULL");
+                }
             }
         }
 
@@ -91,13 +146,14 @@ namespace Travel.Application.DomainModules.Order.Core
                 foreach (var ticket in OrderObj.Tickets)
                 {
                     ticket.TicketStatus = OrderStatus.TicketStatus_WaitPay;
+                    ticket.LatestModifyTime = DateTime.Now;
                 }
 
                 OrderObj.ModifyOrder();
             }
             else
             {
-                throw new InvalidOperationException("CreateOrderComplete");
+                throw new OrderOperateFailException("锁定订单错误", OrderOperationStep.OrderOccupy, "RESULT_FAIL");
             }
         }
 
@@ -111,6 +167,10 @@ namespace Travel.Application.DomainModules.Order.Core
                 this.PaymentType = result.trade_type;
                 this.PrepayId = result.prepay_id;
                 this.UnifiedOrderResult = result;
+            }
+            else
+            {
+                throw new OrderPaymentFailException("统一下单操作失败", OrderPaymentStep.UnifiedOrder, "RETURN_NULL");
             }
         }
 
@@ -126,12 +186,12 @@ namespace Travel.Application.DomainModules.Order.Core
                     }
                     else
                     {
-                        throw new InvalidOperationException("PaymentResponse.Result_Code");
+                        throw new OrderPaymentFailException("统一下单操作失败", OrderPaymentStep.UnifiedOrder, "RESULT_FAIL");
                     }
                 }
                 else
                 {
-                    throw new InvalidOperationException("PaymentResponse.Return_Code");
+                    throw new OrderPaymentFailException("统一下单操作失败", OrderPaymentStep.UnifiedOrder, "RETURN_FAIL");
                 }
             }
 
@@ -141,8 +201,6 @@ namespace Travel.Application.DomainModules.Order.Core
 
         #region 退票请求处理
 
-        private static object refundOrderLock = new object();
-
         /// <summary>
         /// 退票请求处理
         /// </summary>
@@ -150,84 +208,41 @@ namespace Travel.Application.DomainModules.Order.Core
         protected override void ProcessRefund(ICollection<TicketEntity> tickets)
         {
             var editResult = this._orderOperate.ChangeOrderEdit(tickets);
-            var refundOrders = new List<RefundOrderQueueEntity>();
-
-#if DEBUG
-            //editResult.IsTrue = true;
-            //editResult.ResultData = new List<ChangeOrderEditResponse>()
-            //                          {
-            //                              new ChangeOrderEditResponse()
-            //                                  {
-            //                                      IsSucceed = true,
-            //                                      ProductCode = "530267905188"
-            //                                  }
-            //                          };
-#endif
+            var failedTickets = new List<TicketEntity>();
 
             if (editResult.IsTrue)
             {
                 foreach (var ticketResponse in editResult.ResultData)
-                {                    
+                {
                     if (ticketResponse.IsSuccel)
                     {
-                        refundOrders.Add(new RefundOrderQueueEntity()
-                                             {
-                                                 QueueId = Guid.NewGuid(),
-                                                 OrderId = this.OrderObj.OrderId,
-                                                 ECode = ticketResponse.ProductCode,
-                                                 CreateTime = DateTime.Now,
-                                                 RefundQueueStatus = OrderStatus.RefundOrderQueueStatus_Init
-                                             });
+                        var ticket = tickets.FirstOrDefault(item => item.ECode.Equals(ticketResponse.ProductCode));
+
+                        if (ticket != null)
+                        {
+                            ticket.TicketStatus = OrderStatus.TicketStatus_Refund_Audit;
+                            ticket.LatestModifyTime = DateTime.Now;
+                        }
                     }
                     else
                     {
-                        refundOrders.Clear();
-                        break;
+                        var failTicket = tickets.FirstOrDefault(item => item.ECode.Equals(ticketResponse.ProductCode));
+
+                        if (failTicket != null)
+                        {
+                            failedTickets.Add(failTicket);
+                        }                        
                     }
                 }
 
-                if (refundOrders != null && refundOrders.Any())
-                {
-                    // 获取退票列表，检查是否有将要提交的退票申请重复的申请，没有则修改票状态，并加入退票队列
-                    lock (refundOrderLock)
-                    {
-                        var queue = RefundOrderQueueEntity.RefundOrderQueue;
-                        var isRefundOrderExists = false;
+                // 将状态发生修改的票会写数据库
+                TicketEntity.ModifyTickets(tickets.Where(item => item.TicketStatus.Equals(OrderStatus.TicketStatus_Refund_Audit)).ToList());
 
-                        foreach (var refundOrder in refundOrders)
-                        {
-                            if (queue.Any(item => item.ECode.Equals(refundOrder.ECode)))
-                            {
-                                isRefundOrderExists = true;
-                                break;
-                            }
-                        }
-
-                        if (!isRefundOrderExists)
-                        {
-                            foreach (var ticket in tickets)
-                            {
-                                ticket.TicketStatus = OrderStatus.TicketStatus_Refund_Audit;
-                                ticket.LatestModifyTime = DateTime.Now;
-                            }
-
-                            TicketEntity.ModifyTickets(tickets);
-                            RefundOrderQueueEntity.AddRefundOrders(refundOrders);
-                        }
-                        else
-                        {
-                            throw new InvalidOperationException("Refund ECode Exists");
-                        }
-                    }
-                }
-                else
-                {
-                    throw new InvalidOperationException("Refund");
-                }
+                // todo: 对更改状态失败的票进行操作
             }
             else
             {
-                throw new InvalidOperationException("Refund");
+                throw new OrderOperateFailException("更改票务状态失败", OrderOperationStep.OrderChange, "REFUND_RETURN_FAIL");
             }
         }
 
@@ -265,7 +280,7 @@ namespace Travel.Application.DomainModules.Order.Core
                 var refundResponse = this._paymentOperate.RefundPay(refundRequest);
 
                 if (refundResponse.return_code.Equals("SUCCESS")
-                    &&refundResponse.result_code.Equals("SUCCESS"))
+                    && refundResponse.result_code.Equals("SUCCESS"))
                 {
                     foreach (var ticket in eventArg.tickets)
                     {
@@ -274,6 +289,10 @@ namespace Travel.Application.DomainModules.Order.Core
                     }
 
                     TicketEntity.ModifyTickets(eventArg.tickets);
+                }
+                else
+                {
+                    throw new OrderPaymentFailException(refundResponse.return_msg, OrderPaymentStep.ApplyRefund, "RESULT_FAIL");
                 }
             }
         }

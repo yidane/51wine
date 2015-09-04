@@ -14,7 +14,7 @@ namespace Travel.Application.DomainModules.Order.Core.Interface
 
         OTAResult<OrderOccupiesResponse> OrderOccupies();
 
-        bool OrderRelease();
+        OTAResult<OrderReleaseResponse> OrderRelease();
 
         void OrderFinish();
 

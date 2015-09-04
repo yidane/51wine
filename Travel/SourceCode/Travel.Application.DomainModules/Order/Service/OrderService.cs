@@ -120,6 +120,29 @@ namespace Travel.Application.DomainModules.Order.Service
             return null;
         }
 
+        public IList<TicketEntity> MyRefundTickets(string openId)
+        {
+            var myOrders =
+                OrderEntity.GetMyOrders(openId)
+                    .Where(
+                        item =>
+                        item.OrderStatus.Equals(OrderStatus.OrderStatus_WaitUse)
+                        || item.OrderStatus.Equals(OrderStatus.OrderStatus_Used));
+
+            var tickets = new List<TicketEntity>();
+            foreach (var order in myOrders)
+            {
+                tickets.AddRange(
+                    order.Tickets.Where(
+                        item => item.TicketStatus.Equals(OrderStatus.TicketStatus_Refund_Audit)
+                        || item.TicketStatus.Equals(OrderStatus.TicketStatus_Refund_RefundPayProcessing)
+                        || item.TicketStatus.Equals(OrderStatus.TicketStatus_Refund_Complete)
+                        || item.TicketStatus.Equals(OrderStatus.TicketStatus_Refund_WaitRefundFee)));
+            }
+
+            return tickets;
+        }
+
         public void RefundTickets(string orderId, int refundTicketsNumber)
         {
             Guid gOrder;
@@ -225,6 +248,7 @@ namespace Travel.Application.DomainModules.Order.Service
                 }
             }
 
+            // todo: 未经过测试
             foreach (var someOrderTickets in changedStatusTickets.GroupBy(item => item.OrderId))
             {
                 var orderTickets = someOrderTickets.ToList();

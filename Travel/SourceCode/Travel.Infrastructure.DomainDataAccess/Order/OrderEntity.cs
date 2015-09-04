@@ -171,5 +171,19 @@
                 return db.Order.Include(item =>item.Tickets).Include(item => item.OrderDetails).Where(item => item.OpenId.Equals(openId)).ToList();
             }
         }
+
+        public void DeleteOrder()
+        {
+            using (var db = new TravelDBContext())
+            {
+                var order = db.Set<OrderEntity>()
+                            .Include(item => item.Tickets)
+                            .Include(item => item.OrderDetails)
+                            .FirstOrDefault(item => item.OrderId.Equals(this.OrderId));
+
+                db.Order.Remove(order);
+                db.SaveChanges();
+            }
+        }
     }
 }

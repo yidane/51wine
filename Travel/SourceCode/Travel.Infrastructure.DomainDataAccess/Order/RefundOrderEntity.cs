@@ -6,6 +6,7 @@ using System.Text;
 namespace Travel.Infrastructure.DomainDataAccess.Order
 {
     using System.ComponentModel.DataAnnotations;
+    using System.Data.Entity;
 
     public class RefundOrderEntity
     {
@@ -38,6 +39,17 @@ namespace Travel.Infrastructure.DomainDataAccess.Order
             using (var db = new TravelDBContext())
             {
                 db.RefundOrder.Add(this);
+                db.SaveChanges();
+            }
+        }
+
+        public void Delete()
+        {
+            using (var db = new TravelDBContext())
+            {
+                db.RefundOrder.Attach(this);
+                db.Entry(this).State = EntityState.Deleted;
+                //db.RefundOrder.Remove(this);
                 db.SaveChanges();
             }
         }

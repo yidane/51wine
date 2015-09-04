@@ -17,6 +17,8 @@ namespace Travel.Infrastructure.DomainDataAccess.Order
     {
         public OrderOperationStep OperationStep;
 
+        public IDictionary<string, object> param;
+
         public string ErrorCode;
         public OrderOperateFailException(string message, OrderOperationStep operationStep)
             : base(message)
@@ -36,6 +38,7 @@ namespace Travel.Infrastructure.DomainDataAccess.Order
     public class OrderPaymentFailException : OrderException
     {
         public OrderPaymentStep PaymentStep;
+        public IDictionary<string, object> param;
 
         public string ErrorCode;
         public OrderPaymentFailException(string message, OrderPaymentStep paymentStep)

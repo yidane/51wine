@@ -27,6 +27,13 @@ namespace Travel.Application.DomainModules.Order.Core
             this.MainOrder = order;            
         }
 
+        public static OTAResult<List<GetProductsResponse>> GetDailyTickets(DateTime date)
+        {
+            var request = new OTARequest.GetProductRequest(date);
+
+            return new OTAServiceManager().GetProducts(request);
+        }
+
         /// <summary>
         /// 订单占用
         /// </summary>
@@ -94,9 +101,11 @@ namespace Travel.Application.DomainModules.Order.Core
             }
         }
 
-        public bool OrderRelease()
+        public OTAResult<OrderReleaseResponse> OrderRelease()
         {
-            throw new NotImplementedException();
+            var request = new OTARequest.OrderReleaseRequest() { OtaOrderNO = this.MainOrder.OrderObj.OrderId.ToString() };
+
+            return new OTAServiceManager().OrderRelease(request);
         }
 
         public void OrderFinish()
@@ -166,5 +175,6 @@ namespace Travel.Application.DomainModules.Order.Core
 
             return this._serviceManager.ChangeOrderEdit(changeRequest);
         }
+
     }
 }

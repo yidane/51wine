@@ -91,6 +91,28 @@ namespace Travel.Services.WebService
             }            
         }
 
+        [WebMethod(EnableSession = true)]
+        public void MyRefundTickets(string openId)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(openId))
+                {
+                    var tickets = new OrderService().MyRefundTickets(openId);
+
+                    Context.Response.Write(AjaxResult.Success(tickets));
+                }
+                else
+                {
+                    Context.Response.Write(AjaxResult.Error("用户不能为空"));
+                }
+            }
+            catch (Exception)
+            {
+                Context.Response.Write(AjaxResult.Error("方法异常"));
+            }
+        }
+
         [WebMethod]
         public void RefundTickets(string orderId, int refundTicketNumber)
         {

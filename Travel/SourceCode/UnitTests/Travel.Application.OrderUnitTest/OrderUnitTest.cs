@@ -31,8 +31,8 @@ namespace Travel.Application.OrderUnitTest
             this.OrderRequest = new OrderRequestEntity()
                                {
                                    OpenId = "obzTswxzFzzzdWdAKf2mWx3CrpXk",
-                                   TicketCategory = "956BFF5E-AA6A-454E-8F46-BD4175235C9E",
-                                   TicketName = "布尔津测试门票",
+                                   TicketCategory = "A8477130-9A14-4BAA-BF47-AF5E2E6ADD3F",
+                                   TicketName = "喀纳斯湖成人",
                                    Count = 1,
                                    CouponId = string.Empty,
                                    ContactPersonName = "龚博",
@@ -50,19 +50,27 @@ namespace Travel.Application.OrderUnitTest
                                          mch_id = "100000100",
                                          nonce_str = "5d2b6c2a8db53831f7eda20af46e531c",
                                          openid = "obzTswxzFzzzdWdAKf2mWx3CrpXk",
-                                         out_trade_no = "C2015090204471208755383",
+                                         out_trade_no = "C2015090418303920906842",
                                          result_code = "SUCCESS",
                                          return_code = "SUCCESS",
                                          sign = "B552ED6B279343CB493C5DD0D78AB241",
                                          time_end = "20150829131540",
-                                         total_fee = 260,
+                                         total_fee = 1,
                                          trade_type = "JSAPI",
                                          transaction_id = "1409811653"
                                      };
 
             this.refundTickets =
-                TicketEntity.GetTicketsByOrderId(Guid.Parse("92F3F83F-4C89-40B0-A25F-C83CFBEF3B0D"))
-                .Where(item => item.TicketId.Equals(57882)).ToList();
+                TicketEntity.GetTicketsByOrderId(Guid.Parse("71C9FC63-9FC9-4B36-91D4-CF26A680A027"))
+                .Where(item => item.TicketId.Equals(57964)).ToList();
+        }
+
+        [Test]
+        public void DeleteOrder()
+        {
+            var order = OrderEntity.GetOrderByOrderId(Guid.Parse("8A665FBC-2155-4485-A301-9471E03C3C4F"));
+
+            order.DeleteOrder();
         }
 
         [Test]

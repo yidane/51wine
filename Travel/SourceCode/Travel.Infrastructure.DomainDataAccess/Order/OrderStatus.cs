@@ -25,6 +25,7 @@ namespace Travel.Infrastructure.DomainDataAccess.Order
         public const string OrderStatus_PayComplete = "OS20003";
         public const string OrderStatus_WaitRefund = "OS20004";
         public const string OrderStatus_WaitUse = "OS20005";
+        public const string OrderStatus_Used = "OS20006";
         public const string DateTicketStatus_Init = "DTS10001";
         public const string DateTicketStatus_Lock = "DTS10002";
         public const string DateTicketStatus_PayComplete = "DTS10003";

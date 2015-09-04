@@ -64,8 +64,8 @@ namespace Travel.Infrastructure.DomainDataAccess.Order
                     {
                         var today = DateTime.Now.Date;
                         var tomorrow = today.AddDays(1);
-                        _ticketCategory = db.TicketCategory.Where(item => item.ImplementationDate >= today 
-                            && item.ImplementationDate <= tomorrow).ToList();
+                        _ticketCategory = db.TicketCategory.Where(item => item.ImplementationDate >= today
+                            && item.ImplementationDate < tomorrow).ToList();
                     }
                 }
 
@@ -73,11 +73,12 @@ namespace Travel.Infrastructure.DomainDataAccess.Order
             }
         }
 
-        public void RefreshTicketCategory()
+        public static void SetTicketCategory(IEnumerable<TicketCategoryEntity> categories)
         {
             using (var db = new TravelDBContext())
             {
-                _ticketCategory = db.TicketCategory.ToList();
+                db.Set<TicketCategoryEntity>().AddRange(categories);
+                db.SaveChanges();
             }
         }
     }
