@@ -56,7 +56,7 @@
                     <div class="info_02">
                         <dl>
                             <dd><b class="i_gray_icon"></b>订单编号 {{:OrderNo}}</dd>
-                            <dd><b class="time_gray_icon"></b>有效期至 2015年12月31日</dd>
+                            <dd><b class="time_gray_icon"></b>有效期至 {{:LastUseDate}}</dd>
                         </dl>
                     </div>
                     <div class="info_03">
@@ -78,7 +78,7 @@
                 <div class="info_02">
                     <dl>
                         <dd><b class="i_gray_icon"></b>订单编号 {{:OrderNo}}</dd>
-                        <dd><b class="time_gray_icon"></b>有效期至 2015年12月31日</dd>
+                        <dd><b class="time_gray_icon"></b>有效期至 {{:LastUseDate}}</dd>
                     </dl>
                 </div>
                 <div class="info_03">
@@ -147,7 +147,7 @@
                         if (result.IsSuccess) {
                             var data = [];
                             $(result.Data).each(function (index, obj) {
-                                data.push({ OrderNo: obj.OrderCode, OrderID: obj.OrderId, TicketImageUrl: '../TicketImages/1.jpg', TicketName: obj.TicketName, LastUseDate: '2015-08-19', TicketPrice: obj.singleTicketPrice, TicketCount: obj.TicketCount, TicketTotalPrice: obj.TotelFee, OperateUrl: '', OperateName: '查看' });
+                                data.push({ OrderNo: obj.OrderCode, TicketName: obj.TicketName, TicketPrice: obj.Price, TicketCount: 1, TicketTotalPrice: obj.Price, LastUseDate: obj.DeadLineDate, TicketStatus: obj.TicketStatus });
                             });
 
                             var template = $.templates("#ResultTemplateTicket");
