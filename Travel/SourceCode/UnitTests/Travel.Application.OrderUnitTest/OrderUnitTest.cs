@@ -31,13 +31,13 @@ namespace Travel.Application.OrderUnitTest
             this.OrderRequest = new OrderRequestEntity()
                                {
                                    OpenId = "obzTswxzFzzzdWdAKf2mWx3CrpXk",
-                                   TicketCategory = "E9D9CBB1-1DED-4671-A451-5D5CA0AD129A",
-                                   TicketName = "喀纳斯湖儿童",
-                                   Count = 1,
+                                   TicketCategory = "B470CDEF-2D77-4AE6-A19E-0A32035F8A8A",
+                                   TicketName = "喀纳斯湖成人",
+                                   Count = 2,
                                    CouponId = string.Empty,
-                                   ContactPersonName = "asd",
+                                   ContactPersonName = "ybh",
                                    MobilePhoneNumber = "11111",
-                                   IdentityCardNumber = "21212121212121"
+                                   IdentityCardNumber = "12345678901"
                                };
 
             this.PaymentNotify = new PaymentNotify()
@@ -118,6 +118,7 @@ namespace Travel.Application.OrderUnitTest
         {
             var service = new OrderService();
 
+            service.MyRefundTickets("obzTswxzFzzzdWdAKf2mWx3CrpXk");
             //service.RefundTickets("35D7650B-21C1-45CD-B15D-2203857B7977", 1);
             service.SearchTicketStatus(100);
         }
@@ -165,9 +166,10 @@ namespace Travel.Application.OrderUnitTest
         {
             var service = new OrderWebService();
 
-            service.MyTickets("1C99E930-D0D6-420E-B279-D3A9C3CE1930");
-            service.TicketCategoryList();
-            service.MyOrders("obzTswxzFzzzdWdAKf2mWx3CrpXk");
+            service.MyRefundTickets("obzTswxzFzzzdWdAKf2mWx3CrpXk");
+            //service.MyTickets("1C99E930-D0D6-420E-B279-D3A9C3CE1930");
+            //service.TicketCategoryList();
+            //service.MyOrders("obzTswxzFzzzdWdAKf2mWx3CrpXk");
         }
     }
 }
