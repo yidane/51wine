@@ -119,8 +119,8 @@ namespace Travel.Application.DomainModules.Coupon
         public CouponDTO GetRandomCoupon(UserInfoDTO wxUser)
         {
             CouponDTO result = null;
-            //if (HasCoupon())
-            //{
+            if (!BeParticipatedInCoupon(wxUser))
+            {
                 var availableCoupons = _repository.GetAvailableCoupon();
 
                 if (availableCoupons.Any())
@@ -155,7 +155,16 @@ namespace Travel.Application.DomainModules.Coupon
                     }
                 }
 
-            //}
+            }
+            else
+            {
+                result = new CouponDTO() {
+                     title="已参与",
+                     subTitle="已参与",
+                     status=  CouponState.BeParticipatedIn
+
+                };
+            }
 
             return result;
         }
@@ -169,6 +178,19 @@ namespace Travel.Application.DomainModules.Coupon
 
                 _repository.AddCouponToUser(openid, coupon);
             }
+        }
+
+        /// <summary>
+        /// 判断是否参与过本次摇奖
+        /// </summary>
+        /// <returns></returns>
+        public bool BeParticipatedInCoupon(UserInfoDTO wxUser)
+        {
+            bool result = false;
+
+            result = _repository.BeParticipatedInCoupon(wxUser.openid);
+
+            return result;
         }
 
 

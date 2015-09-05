@@ -9,6 +9,10 @@
         /// <summary>
         /// 已使用
         /// </summary>
-        Used
+        Used,
+        /// <summary>
+        /// 已参与抽奖
+        /// </summary>
+        BeParticipatedIn
     }
 }

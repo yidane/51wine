@@ -147,7 +147,7 @@
 
                 </div>
             </div>
-            <!--<div class="botton main-center top-zIndex" id="botton" data-bind="click:$root.afterShake">马上领取</div>-->
+            <div class="botton main-center top-zIndex" id="botton" data-bind="click:$root.afterShake">马上领取</div>
             <AUDIO id="musicBox" src="audios/shake.wav" preload="metadata"></AUDIO>
             <AUDIO id="endMp3" src="audios/end.mp3" preload="metadata"></AUDIO>
         </div>
@@ -157,7 +157,10 @@
                     <div class="normalPart">
                         <div class="moneyWrapper" data-bind="with:coupon">
                             <p data-bind="text: couponType"></p>
-                            <span id="money"><span>￥</span>   <!-- ko text:subTitle --><!-- /ko--></span>
+                            <span id="money">
+                                <!--<span>￥</span>-->
+                                <!-- ko text:subTitle --><!-- /ko-->
+                            </span>
 
                         </div>
 
@@ -180,12 +183,15 @@
                                         <!-- ko text:user()?user().nickname:'' --><!--/ko-->
                                         <small class="text-time" data-bind="  text:coupon()? coupon().getTime:''"></small>
                                     </h5>
-                                    恭喜您获得 <!-- ko text:coupon()?coupon().title:'' --><!--/ko-->。
+                                    <span data-bind="visible:coupon()?coupon().status!=2:true">恭喜您获得 <!-- ko text:coupon()?coupon().title:'' --><!--/ko-->。</span>
+                                    <span style="display:none" data-bind="visible:coupon()?coupon().status==2:true">
+                                        感谢您参与本次活动。
+                                    </span>
                                 </div>
                             </div>
                             <div style="margin-top: 10px;">
                                 <input id="receiveBtn" type="button" value="立即领取"
-                                       data-bind="click:receiveCoupon">
+                                       data-bind="click:receiveCoupon, enable:coupon()?coupon().status!=2:false">
 
                             </div>
                         </form>
@@ -222,58 +228,58 @@
     <script src="javaScripts/knockout-3.3.0.js"></script>
     <script src="js/shakeLuckyMoney-vm.js"></script>
     <script>
-    var access_code = "";
-             access_code = $.url.param("code");
-            if (!access_code) {
-                var fromurl = location.href;
-                var url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxdd6127bdb5e7611c&redirect_uri='
-                    + encodeURIComponent(fromurl) +
-                    '&response_type=code&scope=snsapi_base&state=STATE%23wechat_redirect&connect_redirect=1#wechat_redirect';
-               location.href = url;
-            }
-
-
-    var imagesArray = ['http://www.cloudorg.com.cn/travel/images/shake_background.png',
-        'http://www.cloudorg.com.cn/travel/images/hand.png',
-        'http://www.cloudorg.com.cn/travel/images/back.jpg'
-    ];
-
-    new preLoader(imagesArray, {
-        onProgress: function (src, element, index) {
-
-            var percent = Math.floor((100 / this.queue.length) * this.completed.length);
-
-            // update the progress element
-            $("#loadingTips").text(percent + '%');
-
-
-        },
-        onComplete: function (loaded, errors) {
-
-            var $domParm = {
-                $musicBox: $('#musicBox'),
-                $endMp3: $('#endMp3'),
-                $hand: $('.hand'),
-                $money: $('.money'),
-                $receiveBtn: $('#receiveBtn')
-            };
-            var param = {
-                access_code: access_code
-                //,
-                //onAfterLoadData:function(){
-                //    $("#div_content").show();
-                //    $('#loadingBox').hide();
-                // }
-            };
-            var luckyMoneyVM = new LuckyMoneyViewModel($domParm, param);
-
-            ko.applyBindings(luckyMoneyVM);
-
-            $("#div_content").show();
-            $('#loadingBox').hide();
-
+        var access_code = "";
+        access_code = $.url.param("code");
+        if (!access_code) {
+            var fromurl = location.href;
+            var url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxdd6127bdb5e7611c&redirect_uri='
+                + encodeURIComponent(fromurl) +
+                '&response_type=code&scope=snsapi_base&state=STATE%23wechat_redirect&connect_redirect=1#wechat_redirect';
+            location.href = url;
         }
-    });
+
+
+        var imagesArray = ['http://www.cloudorg.com.cn/travel/images/shake_background.png',
+            'http://www.cloudorg.com.cn/travel/images/hand.png',
+            'http://www.cloudorg.com.cn/travel/images/back.jpg'
+        ];
+
+        new preLoader(imagesArray, {
+            onProgress: function (src, element, index) {
+
+                var percent = Math.floor((100 / this.queue.length) * this.completed.length);
+
+                // update the progress element
+                $("#loadingTips").text(percent + '%');
+
+
+            },
+            onComplete: function (loaded, errors) {
+
+                var $domParm = {
+                    $musicBox: $('#musicBox'),
+                    $endMp3: $('#endMp3'),
+                    $hand: $('.hand'),
+                    $money: $('.money'),
+                    $receiveBtn: $('#receiveBtn')
+                };
+                var param = {
+                    access_code: access_code
+                    //,
+                    //onAfterLoadData:function(){
+                    //    $("#div_content").show();
+                    //    $('#loadingBox').hide();
+                    // }
+                };
+                var luckyMoneyVM = new LuckyMoneyViewModel($domParm, param);
+
+                ko.applyBindings(luckyMoneyVM);
+
+                $("#div_content").show();
+                $('#loadingBox').hide();
+
+            }
+        });
 
 
 
