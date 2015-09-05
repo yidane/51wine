@@ -320,7 +320,9 @@
         $("#price").html("￥" + GetQueryString("price") + "元");
 
         var ticketName = GetQueryString("ticketName");
-
+        while (ticketName.indexOf("%") > -1) {
+            ticketName = decodeURI(ticketName);
+        }
         var needTip = false;
         if (ticketName.indexOf("老年") > -1) {
             needTip = true;

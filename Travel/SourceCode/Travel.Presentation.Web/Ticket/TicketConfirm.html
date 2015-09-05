@@ -108,6 +108,12 @@
 <script type="text/javascript">
     VI.assets_url = 'http://longmen.qqdyw.cn'; VI.base_url = 'http://longmen.qqdyw.cn'; VI.curr_site_url = 'http://longmen.qqdyw.cn/plugins/goods/front';
 
+    function GetQueryString(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) return r[2]; return null;
+    }
+
     window.share = {
         title: '喀纳斯湖',
         desc: '喀纳斯湖欢迎您！',
@@ -219,7 +225,7 @@
         while (ticketName.indexOf("%") > -1) {
             ticketName = decodeURI(ticketName);
         }
-        
+
         $("#ticketName").html(ticketName);
 
         var vPay = new VPay({
