@@ -52,7 +52,7 @@
             <div class="gpd-order">
                 <div class="gpd-item ">
                     <div class="gpd-order-content">
-                        <span class="gpd-left" id="ticketName">喀纳斯景区门票-半价票</span>
+                        <span class="gpd-left" id="ticketName"></span>
                         <span class="gpd-right" id="price">元</span>
                     </div>
                 </div>
@@ -215,13 +215,18 @@
             zThisParent.toggleClass("gdp-curr");
         });
 
-        $("#ticketName").html(GetQueryString("ticketName"));
+        var ticketName = GetQueryString("ticketName");
+        while (ticketName.indexOf("%") > -1) {
+            ticketName = decodeURI(ticketName);
+        }
+        
+        $("#ticketName").html(ticketName);
 
         var vPay = new VPay({
             'id': '#confirmPayBtn',
             'price': GetQueryString("price"),
             'max': 10,
-            'ticketName': decodeURI(GetQueryString("ticketName")),
+            'ticketName': ticketName,
             'ticketId': GetQueryString("ticketid"),
             'orid': '',
             'gid': '1'
