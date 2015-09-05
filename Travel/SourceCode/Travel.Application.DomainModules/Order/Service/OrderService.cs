@@ -120,7 +120,7 @@ namespace Travel.Application.DomainModules.Order.Service
             return null;
         }
 
-        public IList<TicketEntity> MyRefundTickets(string openId)
+        public IList<RefundTicketDTO> MyRefundTickets(string openId)
         {
             var myOrders =
                 OrderEntity.GetMyOrders(openId)
@@ -129,7 +129,7 @@ namespace Travel.Application.DomainModules.Order.Service
                         item.OrderStatus.Equals(OrderStatus.OrderStatus_WaitUse)
                         || item.OrderStatus.Equals(OrderStatus.OrderStatus_Used));
 
-            var tickets = new List<TicketEntity>();
+            var tickets = new List<RefundTicketDTO>();
             foreach (var order in myOrders)
             {
                 tickets.AddRange(
@@ -137,7 +137,17 @@ namespace Travel.Application.DomainModules.Order.Service
                         item => item.TicketStatus.Equals(OrderStatus.TicketStatus_Refund_Audit)
                         || item.TicketStatus.Equals(OrderStatus.TicketStatus_Refund_RefundPayProcessing)
                         || item.TicketStatus.Equals(OrderStatus.TicketStatus_Refund_Complete)
-                        || item.TicketStatus.Equals(OrderStatus.TicketStatus_Refund_WaitRefundFee)).ToList());
+                        || item.TicketStatus.Equals(OrderStatus.TicketStatus_Refund_WaitRefundFee))
+                        .Select(item => new RefundTicketDTO
+                                            {
+                                                TicketId = item.TicketId,
+                                                OrderId = item.OrderId.ToString(),
+                                                TicketCategoryId = item.TicketCategoryId.ToString(),
+                                                TicketCode = item.TicketCode,
+                                                Price = item.Price.ToString(),
+                                                TicketStatus = item.TicketStatus,
+                                                ECode = item.ECode
+                                            }).ToList());
             }
 
             return tickets;
