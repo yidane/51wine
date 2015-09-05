@@ -108,6 +108,13 @@ namespace Travel.Application.DomainModules.Order.Core
             return new OTAServiceManager().OrderRelease(request);
         }
 
+        public static OTAResult<OrderReleaseResponse> OrderRelease(string orderId)
+        {
+            var request = new OTARequest.OrderReleaseRequest() { OtaOrderNO = orderId };
+
+            return new OTAServiceManager().OrderRelease(request);
+        }
+
         public void OrderFinish()
         {
             var orderFinish = new OTARequest.OrderFinishRequest()

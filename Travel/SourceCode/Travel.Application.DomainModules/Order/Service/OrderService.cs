@@ -298,5 +298,22 @@ namespace Travel.Application.DomainModules.Order.Service
             }
 
         }
+
+        public void OrderRelease(string orderId)
+        {
+            if (!string.IsNullOrEmpty(orderId))
+            {
+                var result = OTAOrderOperate.OrderRelease(orderId);
+
+                if (!result.IsTrue)
+                {
+                    throw new InvalidOperationException("释放订单错误");
+                }
+            }
+            else
+            {
+                throw new ArgumentNullException("订单号不能为空");
+            }
+        }
     }
 }
