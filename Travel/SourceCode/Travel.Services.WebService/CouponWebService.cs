@@ -17,7 +17,7 @@ namespace Travel.Services.WebService
         /// <summary>
         /// 获取随机优惠券
         /// </summary>
-        [WebMethod]
+        [WebMethod(EnableSession =true)]
         public void GetRandomCoupon(string access_code)
         {
 
@@ -28,9 +28,10 @@ namespace Travel.Services.WebService
                 UserInfoDTO user = null;
                 if (!string.IsNullOrEmpty(access_code))
                 {
+                    var openId = GetOpenIDByCodeID(access_code);
                     var weChatService = new WeChatService();
-                    var tokenResult = weChatService.GetAccessToken(access_code);
-                    user = weChatService.GetUserInfo(tokenResult.openid);
+                    
+                    user = weChatService.GetUserInfo(openId);
                 }
                 else
                 {
@@ -117,7 +118,7 @@ namespace Travel.Services.WebService
         /// 我的优惠券列表
         /// </summary>
         /// <param name="access_code"></param>
-        [WebMethod]
+        [WebMethod(EnableSession = true)]
         public void GetCouponList(string access_code)
         {
             try
@@ -126,9 +127,10 @@ namespace Travel.Services.WebService
                 UserInfoDTO user = null;
                 if (!string.IsNullOrEmpty(access_code))
                 {
+                    var openId = GetOpenIDByCodeID(access_code);
                     var weChatService = new WeChatService();
-                    var tokenResult = weChatService.GetAccessToken(access_code);
-                    user = weChatService.GetUserInfo(tokenResult.openid);
+
+                    user = weChatService.GetUserInfo(openId);
                 }
                 else
                 {
