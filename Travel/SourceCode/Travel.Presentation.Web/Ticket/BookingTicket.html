@@ -36,7 +36,7 @@
                     <div class="tab-pane active">
                         <div class="panel panel-default" data-bind='foreach: content'>
                             <div class="panel-bd" data-bind="style: { backgroundImage: image }">
-                                <a data-bind="attr: { 'href': 'TicketDetail.html?ticketid=' + ticketCategoryId + '&ticketName=' + ticketName + '&price=' + price }" class="thumb-active">
+                                <a data-bind="attr: { 'href': 'TicketDetail.html?ticketid=' + ticketCategoryId + '&ticketName=' + ticketName + '&price=' + price+'&code='+$root.access_code() }" class="thumb-active">
 
                                     <div class="thumb-cover pull-left">
                                         <div class="thumb-cnt">
@@ -59,14 +59,17 @@
         </div>
     </div>
     <!--</div>-->
-
+    <script src="../js/oAuth2.js"></script>
     <script src="../javaScripts/swiper.min.js"></script>
     <script>
+        
         $(function () {
+
             loadTicket();
         });
     </script>
     <script type="text/javascript">
+       
         function loadTicket() {
             $.ajax({
                 type: "post",
@@ -74,6 +77,8 @@
                 dataType: 'json',
                 success: function (result) {
                     if (result.IsSuccess) {
+                       
+                        result.access_code=getCode;
                         ko.applyBindings(result);
                         initSwiper();
                     } else {
@@ -89,8 +94,8 @@
                     $(".tab-navs a.active").removeClass('active');
                     $(".tab-navs a").eq(tabsSwiper.activeIndex).addClass('active');
 
-                    $(".tab-pane .active").removeClass('active');
-                    $(".tab-pane").eq(tabsSwiper.activeIndex).addClass('active');
+                    //$(".tab-pane .active").removeClass('active');
+                    //$(".tab-pane").eq(tabsSwiper.activeIndex).addClass('active');
                 },
                 onSlideChangeEnd: function (swiper) {
                     swiper.container[0].scrollTop = 0;
@@ -106,6 +111,10 @@
             $(".tab-navs a").click(function (e) {
                 e.preventDefault();
             });
+        }
+
+        function getCode(){
+            return access_code;
         }
     </script>
 </body>
