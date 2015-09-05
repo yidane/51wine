@@ -65,21 +65,22 @@
         <div data-bind="visible:selectedType()=='unExpired'">
             <ul class="coupons-list" data-bind="foreach:unExpiredCoupons ,visible:unExpiredCoupons().length>0" style="display: none;">
                 <li class="clearfix fadeInRight">
+                    <a class="coupons-a used" data-bind="attr:{href:'couponDetail.html?openId='+$root.openId()+'&code='+$root.param().access_code+'&couponUsageId='+couponUsageId}">
 
-                    <div class="top clearfix">
-                        <span class="price fl"><em>￥</em>   <!-- ko text:subTitle --><!-- /ko--></span>
-                        <div class="info">
-                            <h3 data-bind="text:title"></h3>
-                            <!--<p>满50元可使用</p>-->
+                        <div class="top clearfix">
+                            <span class="price fl"><em>￥</em>   <!-- ko text:subTitle --><!-- /ko--></span>
+                            <div class="info">
+                                <h3 data-bind="text:title"></h3>
+                                <!--<p>满50元可使用</p>-->
+                            </div>
                         </div>
-                    </div>
-                    <p class="coupons-handle">
-                        <!-- ko text:'有效期：'+ beginTime +' 至 '+endTime --><!-- /ko-->
-                        <a class="fr used" data-bind="attr:{href:'couponDetail.html?openId='+$root.openId()+'&code='+$root.param().access_code+'&couponUsageId='+couponUsageId}">详情</a>
-                    </p>
+                        <p class="coupons-handle">
+                            <!-- ko text:'有效期：'+ beginTime +' 至 '+endTime --><!-- /ko-->
+                            <!--<a class="fr used" data-bind="attr:{href:'couponDetail.html?openId='+$root.openId()+'&code='+$root.param().access_code+'&couponUsageId='+couponUsageId}">详情</a>-->
+                        </p>
+                    </a>
 
-
-                </li>
+</li>
 
             </ul>
             <div data-bind="visible:unExpiredCoupons().length<0">
@@ -123,22 +124,23 @@
         <div data-bind="visible:selectedType()=='expired'" style="display: none;">
             <ul class="coupons-list" data-bind="foreach:expiredCoupons ,visible:expiredCoupons().length>0" style="display: none;">
                 <li class="fail clearfix fadeInRight">
+                    <a class="coupons-a used" data-bind="attr:{href:'couponDetail.html?openId='+$root.openId()+'&code='+$root.param().access_code+'&couponUsageId='+couponUsageId+'&type=expired'}">
 
-                    <div class="top clearfix">
-                        <span class="price fl"><em>￥</em>   <!-- ko text:subTitle --><!-- /ko--></span>
-                        <div class="info">
-                            <h3 data-bind="text:title"></h3>
-                            <!--<p>满50元可使用</p>-->
+                        <div class="top clearfix">
+                            <span class="price fl"><em>￥</em>   <!-- ko text:subTitle --><!-- /ko--></span>
+                            <div class="info">
+                                <h3 data-bind="text:title"></h3>
+                                <!--<p>满50元可使用</p>-->
+                            </div>
                         </div>
-                    </div>
-                    <p class="coupons-handle">
-                        <!-- ko text:'有效期：'+ beginTime +' 至 '+endTime --><!-- /ko-->
-                        <a class="fr used" data-bind="attr:{href:'couponDetail.html?openId='+$root.openId()+'&code='+$root.param().access_code+'&couponUsageId='+couponUsageId+'&type=expired'}">详情</a>
-                    </p>
-                    <i class="status-expired i-status"></i>
+                        <p class="coupons-handle">
+                            <!-- ko text:'有效期：'+ beginTime +' 至 '+endTime --><!-- /ko-->
+                            <!--<a class="fr used" data-bind="attr:{href:'couponDetail.html?openId='+$root.openId()+'&code='+$root.param().access_code+'&couponUsageId='+couponUsageId+'&type=expired'}">详情</a>-->
+                        </p>
+                        <i class="status-expired i-status"></i>
+                    </a>
 
-
-                </li>
+</li>
 
             </ul>
             <div data-bind="visible:expiredCoupons().length<0">
