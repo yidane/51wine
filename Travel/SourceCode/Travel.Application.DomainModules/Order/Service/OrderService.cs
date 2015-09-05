@@ -137,7 +137,7 @@ namespace Travel.Application.DomainModules.Order.Service
                         item => item.TicketStatus.Equals(OrderStatus.TicketStatus_Refund_Audit)
                         || item.TicketStatus.Equals(OrderStatus.TicketStatus_Refund_RefundPayProcessing)
                         || item.TicketStatus.Equals(OrderStatus.TicketStatus_Refund_Complete)
-                        || item.TicketStatus.Equals(OrderStatus.TicketStatus_Refund_WaitRefundFee)));
+                        || item.TicketStatus.Equals(OrderStatus.TicketStatus_Refund_WaitRefundFee)).ToList());
             }
 
             return tickets;
