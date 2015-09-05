@@ -1161,6 +1161,17 @@ VPay.prototype.order = function () {
         dataType: 'json',
         data: { code: GetQueryString('code'), ticketCategoryId: ticketId, ticketName: ticketName, ticketCount: zNumVal, couponId: 0, couponCount: 0, orderNo: options.orid, contractName: zNameVal, contractPhone: zPhoneVal, contractIdCard: zIDCardVal },
         success: function (result) {
+            function OrderRelease(orderId) {
+                VI.ajax({
+                    type: "post",
+                    url: '../WebService/TicketWebService.asmx/OrderRelease',
+                    data: { orderId: orderId },
+                    dataType: 'json',
+                    success: function () {
+                    }
+                });
+            }
+
             if (result.IsSuccess) {
                 wx.chooseWXPay({
                     timestamp: result.Data.timeStamp, // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
@@ -1169,13 +1180,17 @@ VPay.prototype.order = function () {
                     signType: 'MD5', // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
                     paySign: result.Data.paySign, // 支付签名
                     success: function (res) {
-
                         This.isLoading = 0;
-
                         document.location.href = "../order/MyOrderList.html";
                     },
                     fail: function (res) {
+                        OrderRelease(result.Data.orderId);
+                        This.isLoading = 0;
                         alert(JSON.stringify(res));
+                    },
+                    cancel: function (res) {
+                        OrderRelease(result.Data.orderId);
+                        This.isLoading = 0;
                     },
                     complete: function (res) {
                         This.isLoading = 0;

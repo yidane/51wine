@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Services;
 using Travel.Application.DomainModules.Order.Core;
 using Travel.Application.DomainModules.Order.Entity;
+using Travel.Application.DomainModules.Order.Service;
 using Travel.Application.DomainModules.WeChat;
 using Travel.Application.DomainModules.WeChat.DTOS;
 using Travel.Infrastructure.CommonFunctions.Ajax;
@@ -67,7 +68,17 @@ namespace Travel.Services.WebService
                     //var jsParameter = result.GetJsApiParameters();
                     #endregion
 
-                    Context.Response.Write(AjaxResult.Success(jsParameter));
+                    var result = new
+                        {
+                            appId = jsParameter.appId,
+                            timeStamp = jsParameter.timeStamp,
+                            nonceStr = jsParameter.nonceStr,
+                            package = jsParameter.package,
+                            paySign = jsParameter.paySign,
+                            orderId = otaOrder.OrderObj.OrderId
+                        };
+
+                    Context.Response.Write(AjaxResult.Success(result));
                 }
                 else
                 {
@@ -81,9 +92,18 @@ namespace Travel.Services.WebService
         }
 
         [WebMethod(EnableSession = true)]
-        public void RefundOrder(string code)
+        public void OrderRelease(string orderId)
         {
             //在支付失败或者支付有问题时候，从OTA中取消订单占用，撤销微信订单
+            try
+            {
+                var orderService = new OrderService();
+                orderService.OrderRelease(orderId);
+            }
+            catch (Exception exception)
+            {
+
+            }
         }
     }
 }
