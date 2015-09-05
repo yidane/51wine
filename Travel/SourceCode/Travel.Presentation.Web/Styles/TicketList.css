@@ -506,10 +506,10 @@ input {
     text-align: center;
 }
 /*����*/
-.container {
-    /*padding-bottom: 53px;*/
-}
-/*����*/
+/*.container {
+    padding-bottom: 53px;
+}*/
+/*����
 .overdue {
     background-color: #e7e7e7;
     position: relative;
@@ -571,6 +571,8 @@ input {
     .container {
         width: 100%;
         /*margin: 50px 0 0 !important;*/
+        padding-top:50px;
+        box-sizing:padding-box;
         float: left;
         overflow-x: hidden !important;
         overflow-y: auto !important;  

@@ -6,7 +6,6 @@ using System.Web.UI.WebControls;
 using MxWeiXinPF.Common;
 using System.Security.Cryptography;
 using System.Text;
-//1e2124dd04e11d01b9df2865f85944be
 namespace MxWeiXinPF.Web.admin
 {
     public partial class login : System.Web.UI.Page
