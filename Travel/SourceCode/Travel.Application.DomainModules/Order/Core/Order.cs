@@ -493,6 +493,7 @@ namespace Travel.Application.DomainModules.Order.Core
                                                    { "tickets", tickets }
                                                };
                     this.ProcessOrderPaymentException(orderException);
+                    //throw;
                 }
                 catch (Exception)
                 {
