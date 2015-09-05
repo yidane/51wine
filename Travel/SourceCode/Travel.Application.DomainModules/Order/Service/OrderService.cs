@@ -182,7 +182,7 @@ namespace Travel.Application.DomainModules.Order.Service
             return statusName;
         }
 
-        public void RefundTickets(string orderId, int refundTiecketsNumber)
+        public void RefundTickets(string orderId, int refundTicketsNumber)
         {
             Guid gOrder;
 
