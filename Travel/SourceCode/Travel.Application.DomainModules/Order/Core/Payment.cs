@@ -182,7 +182,7 @@ namespace Travel.Application.DomainModules.Order.Core
                     ticket.TicketStatus = OrderStatus.TicketStatus_PayComplete;
                     ticket.LatestModifyTime = DateTime.Now;
 
-                    var dateTicket = DateTicketEntity.GetDateTicketByTicketId(ticket.TicketId);
+                    var dateTicket = DateTicketEntity.GetDateTicketByTicketId(ticket.TicketId, DateTime.Now);
                     if (dateTicket != null)
                     {
                         dateTicket.CurrentStatus = OrderStatus.DateTicketStatus_PayComplete;

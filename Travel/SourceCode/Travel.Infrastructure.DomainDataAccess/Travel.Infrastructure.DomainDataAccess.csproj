@@ -128,6 +128,10 @@
     <Compile Include="Migrations\201509041017546_gbc.Designer.cs">
       <DependentUpon>201509041017546_gbc.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201509050315471_liantiao1.cs" />
+    <Compile Include="Migrations\201509050315471_liantiao1.Designer.cs">
+      <DependentUpon>201509050315471_liantiao1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Order\DateTicketEntity.cs" />
     <Compile Include="Order\OrderDetailEntity.cs" />
@@ -211,6 +215,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201509041017546_gbc.resx">
       <DependentUpon>201509041017546_gbc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509050315471_liantiao1.resx">
+      <DependentUpon>201509050315471_liantiao1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

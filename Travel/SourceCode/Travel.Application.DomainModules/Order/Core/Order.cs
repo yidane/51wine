@@ -611,7 +611,7 @@ namespace Travel.Application.DomainModules.Order.Core
                             ticket.TicketStatus = OrderStatus.TicketStatus_Refund_Audit;
                             ticket.LatestModifyTime = DateTime.Now;
                             ticket.RefundOrderId = default(Guid?);
-                            ticket.OrderDetailId = default(Guid);
+                            ticket.RefundOrderDetailId = default(Guid);
                         }
 
                         TicketEntity.ModifyTickets(tickets);

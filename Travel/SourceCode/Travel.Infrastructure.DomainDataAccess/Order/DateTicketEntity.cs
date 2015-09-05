@@ -63,11 +63,15 @@ namespace Travel.Infrastructure.DomainDataAccess.Order
         public DateTime LatestStatusModifyTime { get; set; }
 
 
-        public static DateTicketEntity GetDateTicketByTicketId(int ticketId)
+        public static DateTicketEntity GetDateTicketByTicketId(int ticketId, DateTime date)
         {
             using (var db = new TravelDBContext())
             {
-                return db.DateTicket.FirstOrDefault(item => item.DateTicketId.Equals(ticketId));
+                var now = DateTime.Now.Date;
+                var tomorrow = now.AddDays(1);
+                return db.DateTicket.FirstOrDefault(item => item.DateTicketId.Equals(ticketId) 
+                    && item.SearchDateTime >= now
+                    && item.SearchDateTime <tomorrow);
             }
         }
 
@@ -92,7 +96,7 @@ namespace Travel.Infrastructure.DomainDataAccess.Order
         {            
             using (var db = new TravelDBContext())
             {
-                db.Set<DateTicketEntity>().AddOrUpdate<DateTicketEntity>(item => item.DateTicketId, dateTickets.ToArray());
+                db.Set<DateTicketEntity>().AddOrUpdate<DateTicketEntity>(dateTickets.ToArray());
                 db.SaveChanges();
             }
         }

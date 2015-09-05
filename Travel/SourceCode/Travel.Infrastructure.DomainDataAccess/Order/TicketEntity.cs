@@ -14,8 +14,10 @@
     public class TicketEntity
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [Column(Order = 1)]
         public int TicketId { get; set; }
 
+        [Key, Column(Order = 2)]
         public Guid OrderId { get; set; }
 
         [ForeignKey("OrderId")]

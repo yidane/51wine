@@ -31,11 +31,11 @@ namespace Travel.Application.OrderUnitTest
             this.OrderRequest = new OrderRequestEntity()
                                {
                                    OpenId = "obzTswxzFzzzdWdAKf2mWx3CrpXk",
-                                   TicketCategory = "A8477130-9A14-4BAA-BF47-AF5E2E6ADD3F",
-                                   TicketName = "喀纳斯湖成人",
+                                   TicketCategory = "E9D9CBB1-1DED-4671-A451-5D5CA0AD129A",
+                                   TicketName = "喀纳斯湖儿童",
                                    Count = 1,
                                    CouponId = string.Empty,
-                                   ContactPersonName = "龚博",
+                                   ContactPersonName = "asd",
                                    MobilePhoneNumber = "11111",
                                    IdentityCardNumber = "21212121212121"
                                };
@@ -50,19 +50,19 @@ namespace Travel.Application.OrderUnitTest
                                          mch_id = "100000100",
                                          nonce_str = "5d2b6c2a8db53831f7eda20af46e531c",
                                          openid = "obzTswxzFzzzdWdAKf2mWx3CrpXk",
-                                         out_trade_no = "C2015090418303920906842",
+                                         out_trade_no = "C2015090513075990448089",
                                          result_code = "SUCCESS",
                                          return_code = "SUCCESS",
                                          sign = "B552ED6B279343CB493C5DD0D78AB241",
-                                         time_end = "20150829131540",
+                                         time_end = "20150929131540",
                                          total_fee = 1,
                                          trade_type = "JSAPI",
-                                         transaction_id = "1409811653"
+                                         transaction_id = "1407611653"
                                      };
 
             this.refundTickets =
-                TicketEntity.GetTicketsByOrderId(Guid.Parse("71C9FC63-9FC9-4B36-91D4-CF26A680A027"))
-                .Where(item => item.TicketId.Equals(57964)).ToList();
+                TicketEntity.GetTicketsByOrderId(Guid.Parse("E9FCC9D6-416B-4751-B2FD-BA4412023F18"))
+                .Where(item => item.TicketId.Equals(57965)).ToList();
         }
 
         [Test]
