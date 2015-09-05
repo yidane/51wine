@@ -31,9 +31,9 @@ namespace Travel.Application.OrderUnitTest
             this.OrderRequest = new OrderRequestEntity()
                                {
                                    OpenId = "obzTswxzFzzzdWdAKf2mWx3CrpXk",
-                                   TicketCategory = "B470CDEF-2D77-4AE6-A19E-0A32035F8A8A",
-                                   TicketName = "喀纳斯湖成人",
-                                   Count = 2,
+                                   TicketCategory = "997E4998-8DD8-4C9A-8EE5-97F3653F843E",
+                                   TicketName = "学生票一进",
+                                   Count = 1,
                                    CouponId = string.Empty,
                                    ContactPersonName = "ybh",
                                    MobilePhoneNumber = "11111",
@@ -61,8 +61,8 @@ namespace Travel.Application.OrderUnitTest
                                      };
 
             this.refundTickets =
-                TicketEntity.GetTicketsByOrderId(Guid.Parse("E9FCC9D6-416B-4751-B2FD-BA4412023F18"))
-                .Where(item => item.TicketId.Equals(57965)).ToList();
+                TicketEntity.GetTicketsByOrderId(Guid.Parse("06DF4D81-E20D-4224-B267-B28EF9E8B8C2"))
+                .Where(item => item.TicketId.Equals(57963)).ToList();
         }
 
         [Test]
@@ -116,6 +116,9 @@ namespace Travel.Application.OrderUnitTest
         [Test]
         public void SearchTicketStatus_Order_Return()
         {
+            var list = TicketCategoryEntity.TodayTicketCategory;
+
+
             var service = new OrderService();
 
             service.MyRefundTickets("obzTswxzFzzzdWdAKf2mWx3CrpXk");
@@ -166,7 +169,7 @@ namespace Travel.Application.OrderUnitTest
         {
             var service = new OrderWebService();
 
-            service.MyRefundTickets("obzTswxzFzzzdWdAKf2mWx3CrpXk");
+            service.MyRefundTickets("obzTsw5qxlbwGYYZJC9b-91J-X1Y");
             //service.MyTickets("1C99E930-D0D6-420E-B279-D3A9C3CE1930");
             //service.TicketCategoryList();
             //service.MyOrders("obzTswxzFzzzdWdAKf2mWx3CrpXk");

@@ -56,9 +56,9 @@ namespace Travel.Infrastructure.DomainDataAccess.Order
         public static IList<TicketCategoryEntity> TodayTicketCategory {
             get
             {
-                //if (_ticketCategory == null || !_ticketCategory.Any() || !DateTime.Now.Date.Equals(currentDate))
-                //{
-                //    currentDate = DateTime.Now.Date;
+                if (_ticketCategory == null || !_ticketCategory.Any() || !DateTime.Now.Date.Equals(currentDate))
+                {
+                    currentDate = DateTime.Now.Date;
 
                     using (var db = new TravelDBContext())
                     {
@@ -67,7 +67,7 @@ namespace Travel.Infrastructure.DomainDataAccess.Order
                         _ticketCategory = db.TicketCategory.Where(item => item.ImplementationDate >= today
                             && item.ImplementationDate < tomorrow).ToList();
                     }
-                //}
+                }
 
                 return _ticketCategory;
             }

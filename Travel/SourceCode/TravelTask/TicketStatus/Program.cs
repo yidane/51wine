@@ -50,7 +50,7 @@ namespace TicketStatus
         {
             var service = new OrderService();
             Console.WriteLine("开始获取票务状态。");
-            try
+            try 
             {
                 service.SearchTicketStatus(100);
             }

@@ -142,6 +142,8 @@ namespace Travel.Application.DomainModules.Order.Service
                                             {
                                                 TicketId = item.TicketId,
                                                 OrderId = item.OrderId.ToString(),
+                                                OrderCode = order.OrderCode,
+                                                DeadLineDate = item.TicketStartTime.ToString("yyyy-MM-dd"),
                                                 TicketCategoryId = item.TicketCategoryId.ToString(),
                                                 TicketName = TicketCategoryEntity.TodayTicketCategory.FirstOrDefault(category =>category.TicketCategoryId.Equals(item.TicketCategoryId)).TicketName,
                                                 TicketCode = item.TicketCode,

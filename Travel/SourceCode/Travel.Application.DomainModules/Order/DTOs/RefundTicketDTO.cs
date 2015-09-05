@@ -11,6 +11,8 @@ namespace Travel.Application.DomainModules.Order.DTOs
 
         public string OrderId { get; set; }
 
+        public string OrderCode { get; set; }
+
         public string TicketName { get; set; }
 
         public string TicketCategoryId { get; set; }
@@ -18,6 +20,8 @@ namespace Travel.Application.DomainModules.Order.DTOs
         public string TicketCode { get; set; }
 
         public string Price { get; set; }
+
+        public string DeadLineDate { get; set; }
 
         public string TicketStatus { get; set; }
 
