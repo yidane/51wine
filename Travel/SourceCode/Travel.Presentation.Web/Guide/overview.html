@@ -193,7 +193,7 @@
         }
 
         .scenic-list {
-            margin:15px 0 10px;
+            margin: 15px 0 10px;
             padding: 2%;
         }
 
@@ -337,6 +337,7 @@
     </div>
     <script src="../javaScripts/jquery-2.1.4.min.js"></script>
     <script type="text/javascript">
+        var hash = document.location.hash;
         function renderViewport() {
             var f = 1,
                 e,
@@ -347,18 +348,27 @@
         }
 
         function showPage() {
+            if (!hash) {
+                document.location.hash = "page2";
+            }
             $(".bg2").addClass("slide-down").show();
         }
 
         $(function () {
             renderViewport();
-            var timer = setTimeout(showPage, 10000);
-            $(".trigger").on('click', function () {
-                if (timer) {
-                    clearTimeout(timer);
-                }
-                showPage();
-            });
+            if (hash == "#page2") {
+                $('.bg1').hide();
+                $('.bg2').show();
+            }
+            else {
+                var timer = setTimeout(showPage, 10000);
+                $(".trigger").on('click', function () {
+                    if (timer) {
+                        clearTimeout(timer);
+                    }
+                    showPage();
+                });
+            }
         });
     </script>
 </body>

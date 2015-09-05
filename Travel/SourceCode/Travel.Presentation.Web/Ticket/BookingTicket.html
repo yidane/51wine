@@ -29,6 +29,7 @@
         <a href="javascript:;">门票</a>
         <a href="javascript:;">车票</a>
     </div>
+    <div style="height:50px;"></div>
     <div id="tabs-container" class="container swiper-container">
         <div class="swiper-wrapper" data-bind='foreach: Data'>
             <div class="swiper-slide">
@@ -37,22 +38,19 @@
                         <div class="panel panel-default" data-bind='foreach: content'>
                             <div class="panel-bd" data-bind="style: { backgroundImage: image }">
                                 <a data-bind="attr: { 'href': 'TicketDetail.html?ticketid=' + ticketCategoryId + '&ticketName=' + ticketName + '&price=' + price }" class="thumb-active">
+
                                     <div class="thumb-cover pull-left">
                                         <div class="thumb-cnt">
                                             <span class="title text-white">
                                                 <!--ko text: ticketName-->
                                                 <!--/ko-->
-                                                <!--<div class="clearfix">
-                                                        <div class="about">
-                                                            <div></div>
-                                                        </div>
-                                                    </div>-->
-                                            </span>
-                                            <span class="other text-white">￥</span><span class="about text-blue"><!--ko text: price--><!--/ko--></span><span class="other text-white">元</span>
+                                                <!--ko text: price-->
+                                                <!--/ko-->
+                                            </span><span class="other text-white">元</span>
                                         </div>
                                         <div class="mask modal-backdrop"></div>
                                     </div>
-                                </a>
+                                </a>、
                                 <!--<span class="cheap">省</span>-->
                                 <span class="recommend"></span>
                             </div>
@@ -67,19 +65,7 @@
     <script src="../javaScripts/swiper.min.js"></script>
     <script>
         $(function () {
-            var tabsSwiper = new Swiper('.swiper-container', {
-                speed: 500,
-                onSlideChangeStart: function () {
-                    $(".tab-navs a.active").removeClass('active');
-                    $(".tab-navs a").eq(tabsSwiper.activeIndex).addClass('active');
 
-                    $(".tab-pane .active").removeClass('active');
-                    $(".tab-pane").eq(tabsSwiper.activeIndex).addClass('active');
-                },
-                onSlideChangeEnd: function (swiper) {
-                    swiper.container[0].scrollTop = 0;
-                }
-            });
             $(".tab-navs a").on('touchstart mousedown', function (e) {
                 e.preventDefault();
                 $(".tab-navs .active").removeClass('active');
@@ -99,6 +85,19 @@
             success: function (result) {
                 if (result.IsSuccess) {
                     ko.applyBindings(result);
+                    var tabsSwiper = new Swiper('.swiper-container', {
+                        speed: 500,
+                        onSlideChangeStart: function () {
+                            $(".tab-navs a.active").removeClass('active');
+                            $(".tab-navs a").eq(tabsSwiper.activeIndex).addClass('active');
+
+                            $(".tab-pane .active").removeClass('active');
+                            $(".tab-pane").eq(tabsSwiper.activeIndex).addClass('active');
+                        },
+                        onSlideChangeEnd: function (swiper) {
+                            swiper.container[0].scrollTop = 0;
+                        }
+                    });
                 } else {
                     alert(result.Message);
                 }

@@ -464,7 +464,7 @@ body {
     height: 100%;
     background-color: #fff;
     color: #333;
-    overflow: hidden !important;
+    /*overflow: hidden !important;*/
 }
 
 a {
@@ -506,7 +506,7 @@ input {
 }
 /*����*/
 .container {
-    padding-bottom: 53px;
+    /*padding-bottom: 53px;*/
 }
 /*����*/
 .overdue {
@@ -569,7 +569,7 @@ input {
     /*.tabs*/ 
     .container {
         width: 100%;
-        margin: 50px 0 !important;
+        /*margin: 50px 0 0 !important;*/
         float: left;
         overflow-x: hidden !important;
         overflow-y: auto !important;  
