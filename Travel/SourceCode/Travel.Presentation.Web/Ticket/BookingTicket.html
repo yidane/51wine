@@ -63,6 +63,39 @@
     <script src="../javaScripts/swiper.min.js"></script>
     <script>
         $(function () {
+            loadTicket();
+        });
+    </script>
+    <script type="text/javascript">
+        function loadTicket() {
+            $.ajax({
+                type: "post",
+                url: '../WebService/OrderWebService.asmx/TicketCategoryList',
+                dataType: 'json',
+                success: function (result) {
+                    if (result.IsSuccess) {
+                        ko.applyBindings(result);
+                        initSwiper();
+                    } else {
+                        alert(result.Message);
+                    }
+                }
+            });
+        }
+        function initSwiper() {
+            var tabsSwiper = new Swiper('.swiper-container', {
+                speed: 500,
+                onSlideChangeStart: function () {
+                    $(".tab-navs a.active").removeClass('active');
+                    $(".tab-navs a").eq(tabsSwiper.activeIndex).addClass('active');
+
+                    $(".tab-pane .active").removeClass('active');
+                    $(".tab-pane").eq(tabsSwiper.activeIndex).addClass('active');
+                },
+                onSlideChangeEnd: function (swiper) {
+                    swiper.container[0].scrollTop = 0;
+                }
+            });
 
             $(".tab-navs a").on('touchstart mousedown', function (e) {
                 e.preventDefault();
@@ -73,34 +106,7 @@
             $(".tab-navs a").click(function (e) {
                 e.preventDefault();
             });
-        });
-    </script>
-    <script type="text/javascript">
-        $.ajax({
-            type: "post",
-            url: '../WebService/OrderWebService.asmx/TicketCategoryList',
-            dataType: 'json',
-            success: function (result) {
-                if (result.IsSuccess) {
-                    ko.applyBindings(result);
-                    var tabsSwiper = new Swiper('.swiper-container', {
-                        speed: 500,
-                        onSlideChangeStart: function () {
-                            $(".tab-navs a.active").removeClass('active');
-                            $(".tab-navs a").eq(tabsSwiper.activeIndex).addClass('active');
-
-                            $(".tab-pane .active").removeClass('active');
-                            $(".tab-pane").eq(tabsSwiper.activeIndex).addClass('active');
-                        },
-                        onSlideChangeEnd: function (swiper) {
-                            swiper.container[0].scrollTop = 0;
-                        }
-                    });
-                } else {
-                    alert(result.Message);
-                }
-            }
-        });
+        }
     </script>
 </body>
 </html>
