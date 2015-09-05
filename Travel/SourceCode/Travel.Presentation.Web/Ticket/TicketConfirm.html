@@ -50,14 +50,9 @@
             </div>
             <!--订购信息-->
             <div class="gpd-order">
-                <!--<div class="gpd-order-title">
-                    <div style="background-color: #CCCCCC; width: 100%; height: 4em; line-height: 4em; overflow: hidden; text-indent: 20px">
-                        订票信息
-                    </div>
-                </div>-->
                 <div class="gpd-item ">
                     <div class="gpd-order-content">
-                        <span class="gpd-left">喀纳斯景区门票-半价票</span>
+                        <span class="gpd-left" id="ticketName">喀纳斯景区门票-半价票</span>
                         <span class="gpd-right" id="price">元</span>
                     </div>
                 </div>
@@ -117,7 +112,7 @@
         title: '喀纳斯湖',
         desc: '喀纳斯湖欢迎您！',
         link: window.location.href,
-        imgUrl: 'http://1251077587.cdn.myqcloud.com/1251077587/lmsk/assets/img/share.png',
+        imgUrl: '',
         appcallback: function () { }
     };
 
@@ -218,14 +213,16 @@
             var zThis = $(this);
             var zThisParent = zThis.parents(".gpd-item");
             zThisParent.toggleClass("gdp-curr");
-            //zThisParent.siblings(".gpd-item").removeClass("gdp-curr");
         });
 
+        $("#ticketName").html(GetQueryString("ticketName"));
 
         var vPay = new VPay({
             'id': '#confirmPayBtn',
-            'price': 20,
-            'max': 5,
+            'price': GetQueryString("price"),
+            'max': 10,
+            'ticketName': GetQueryString("ticketName"),
+            'ticketId': GetQueryString("ticketid"),
             'orid': '',
             'gid': '1'
         });

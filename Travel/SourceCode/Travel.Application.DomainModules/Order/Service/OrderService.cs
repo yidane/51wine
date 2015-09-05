@@ -20,50 +20,50 @@ namespace Travel.Application.DomainModules.Order.Service
             var dto = new List<TicketCategoryDTO>();
 
             dto.Add(new TicketCategoryDTO()
-                        {
-                            category = 1,
-                            content = categories.Select(item => new TicketCategorySub()
-                                                                    {
-                                                                        ticketCategoryId = item.TicketCategoryId.ToString(),
-                                                                        ticketType = "1",
-                                                                        price = item.Price,
-                                                                        ticketName = item.TicketName,
-                                                                        type = item.Type,
-                                                                        image = string.Format("url(../images/ticket{0}.jpg)", new Random().Next(1, 8).ToString())
-                                                                    }).ToList()
-                        });
-
-            dto.Add(new TicketCategoryDTO()
-                        {
-                            category = 2,
-                            content = categories
-                            .Where(item => item.Type.Equals("mp"))
-                            .Select(item => new TicketCategorySub()
                                     {
-                                        ticketCategoryId = item.TicketCategoryId.ToString(),
-                                        ticketType = "2",
-                                        price = item.Price,
-                                        ticketName = item.TicketName,
-                                        type = item.Type,
-                                        image = string.Format("url(../images/ticket{0}.jpg)", new Random().Next(1, 8).ToString())                                                                   
-                                    }).ToList()
-                        });
+                                        category = 1,
+                                        content = categories.Select(item => new TicketCategorySub()
+                                                                                {
+                                                                                    ticketCategoryId = item.TicketCategoryId.ToString(),
+                                                                                    ticketType = "1",
+                                                                                    price = item.Price,
+                                                                                    ticketName = item.TicketName,
+                                                                                    type = item.Type,
+                                                                                    image = string.Format("url(../images/ticket{0}.jpg)", new Random((unchecked((int)DateTime.Now.Ticks + categories.IndexOf(item)))).Next(1, 8).ToString())
+                                                                                }).ToList()
+                                    });
 
             dto.Add(new TicketCategoryDTO()
-            {
-                category = 3,
-                content = categories
-                .Where(item => item.Type.Equals("cp"))
-                .Select(item => new TicketCategorySub()
-                {
-                    ticketCategoryId = item.TicketCategoryId.ToString(),
-                    ticketType = "3",
-                    price = item.Price,
-                    ticketName = item.TicketName,
-                    type = item.Type,
-                    image = string.Format("url(../images/ticket{0}.jpg)", new Random().Next(1, 8).ToString())
-                }).ToList()
-            });
+                                    {
+                                        category = 2,
+                                        content = categories
+                                        .Where(item => item.Type.Equals("mp"))
+                                        .Select(item => new TicketCategorySub()
+                                                {
+                                                    ticketCategoryId = item.TicketCategoryId.ToString(),
+                                                    ticketType = "2",
+                                                    price = item.Price,
+                                                    ticketName = item.TicketName,
+                                                    type = item.Type,
+                                                    image = string.Format("url(../images/ticket{0}.jpg)", new Random((unchecked((int)DateTime.Now.Ticks + categories.IndexOf(item)))).Next(1, 8).ToString())
+                                                }).ToList()
+                                    });
+
+            dto.Add(new TicketCategoryDTO()
+                                    {
+                                        category = 3,
+                                        content = categories
+                                        .Where(item => item.Type.Equals("cp"))
+                                        .Select(item => new TicketCategorySub()
+                                        {
+                                            ticketCategoryId = item.TicketCategoryId.ToString(),
+                                            ticketType = "3",
+                                            price = item.Price,
+                                            ticketName = item.TicketName,
+                                            type = item.Type,
+                                            image = string.Format("url(../images/ticket{0}.jpg)", new Random((unchecked((int)DateTime.Now.Ticks + categories.IndexOf(item)))).Next(1, 8).ToString())
+                                        }).ToList()
+                                    });
 
             return dto;
         }
@@ -71,7 +71,7 @@ namespace Travel.Application.DomainModules.Order.Service
         public IList<OrderDTO> MyOrders(string openId)
         {
             var orders = OrderEntity.GetMyOrders(openId);
-            var dto = orders.Where(item=>item.OrderStatus.Equals(OrderStatus.OrderStatus_WaitUse))
+            var dto = orders.Where(item => item.OrderStatus.Equals(OrderStatus.OrderStatus_WaitUse))
                 .Select(item => new OrderDTO()
                                                 {
                                                     OrderId = item.OrderId.ToString(),
@@ -190,7 +190,7 @@ namespace Travel.Application.DomainModules.Order.Service
 #if DEBUG
                 foreach (var ticket in tickets)
                 {
-                    Console.WriteLine(ticket.OrderId +" OrderId:" +ticket.OrderId);
+                    Console.WriteLine(ticket.OrderId + " OrderId:" + ticket.OrderId);
                 }
 #endif
 
@@ -207,8 +207,8 @@ namespace Travel.Application.DomainModules.Order.Service
 
 #if DEBUG
 
-                Console.WriteLine("Refund ticket count: " +tickets.Where(item => item.TicketStatus.Equals(OrderStatus.TicketStatus_Refund_Audit)).ToList().Count);
-                
+                Console.WriteLine("Refund ticket count: " + tickets.Where(item => item.TicketStatus.Equals(OrderStatus.TicketStatus_Refund_Audit)).ToList().Count);
+
 #endif
 
                 this.RefundProcess(
@@ -286,7 +286,7 @@ namespace Travel.Application.DomainModules.Order.Service
                 }
                 TicketEntity.ModifyTickets(changedStatusTickets);
             }
-            
+
         }
     }
 }

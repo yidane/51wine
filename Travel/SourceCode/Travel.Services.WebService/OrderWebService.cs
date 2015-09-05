@@ -24,11 +24,10 @@ namespace Travel.Services.WebService
 
                 Context.Response.Write(AjaxResult.Success(categories));
             }
-            catch (Exception)
+            catch (Exception exception)
             {
-                Context.Response.Write(AjaxResult.Error("方法异常"));
+                Context.Response.Write(AjaxResult.Error(exception.Message));
             }
-
         }
 
         [WebMethod(EnableSession = true)]
@@ -51,7 +50,7 @@ namespace Travel.Services.WebService
             }
             catch (Exception exception)
             {
-                Context.Response.Write(exception.Message);
+                Context.Response.Write(AjaxResult.Error(exception.Message));
             }
         }
 
@@ -85,9 +84,9 @@ namespace Travel.Services.WebService
                     Context.Response.Write(AjaxResult.Error("订单号不能为空"));
                 }
             }
-            catch (Exception)
+            catch (Exception exception)
             {
-                Context.Response.Write(AjaxResult.Error("方法异常"));
+                Context.Response.Write(AjaxResult.Error(exception.Message));
             }
         }
 
@@ -108,9 +107,9 @@ namespace Travel.Services.WebService
                     Context.Response.Write(AjaxResult.Error("用户不能为空"));
                 }
             }
-            catch (Exception)
+            catch (Exception exception)
             {
-                Context.Response.Write(AjaxResult.Error("方法异常"));
+                Context.Response.Write(AjaxResult.Error(exception.Message));
             }
         }
 
@@ -134,9 +133,9 @@ namespace Travel.Services.WebService
             {
                 Context.Response.Write(AjaxResult.Error(ex.Message));
             }
-            catch (Exception)
+            catch (Exception exception)
             {
-                Context.Response.Write(AjaxResult.Error("操作失败"));
+                Context.Response.Write(AjaxResult.Error(exception.Message));
             }
         }
     }

@@ -18,7 +18,7 @@ namespace Travel.Services.WebService
             else
             {
 #if DEBUG
-                Session["OpenId"] = "obzTsw5qxlbwGYYZJC9b-91J-X1Y";
+                Session["OpenId"] = "obzTswxzFzzzdWdAKf2mWx3CrpXk";
 #endif
                 if (Session["OpenID"] == null)
                 {

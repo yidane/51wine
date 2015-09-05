@@ -24,47 +24,44 @@
 
 
     <!--<div class="tab tabs">-->
-        <div class="tab-navs">
-            <a href="javascript:;" class="active">全部</a>
-            <a href="javascript:;">门票</a>
-            <a href="javascript:;">车票</a>
-        </div>
-        <div id="tabs-container" class="container swiper-container">
-            <div class="swiper-wrapper" data-bind='foreach: ticketList'>
-                <div class="swiper-slide">
-                    <div class="content-slide">
-                        <div class="tab-pane active">
-                            <div class="panel panel-default" data-bind='foreach: content'>
-                                <div class="panel-bd" data-bind="style:{ backgroundImage: image}">
-                                    <a href="TicketDetail.html?ticketType=${ ticketTypeCode }" class="thumb thumb-active">
-                                        <div class="thumb-cover pull-left">
-
-
-                                            <div class="thumb-cnt">
-                                                <span class="title text-white">
-                                                    <!--ko text: ticketDescription--><!--/ko-->
-                                                    <!--ko text: remark--><!--/ko-->
-                                                    <!--<div class="clearfix">
+    <div class="tab-navs">
+        <a href="javascript:;" class="active">全部</a>
+        <a href="javascript:;">门票</a>
+        <a href="javascript:;">车票</a>
+    </div>
+    <div id="tabs-container" class="container swiper-container">
+        <div class="swiper-wrapper" data-bind='foreach: Data'>
+            <div class="swiper-slide">
+                <div class="content-slide">
+                    <div class="tab-pane active">
+                        <div class="panel panel-default" data-bind='foreach: content'>
+                            <div class="panel-bd" data-bind="style: { backgroundImage: image }">
+                                <a data-bind="attr: { 'href': 'TicketDetail.html?ticketid=' + ticketCategoryId + '&ticketName=' + ticketName + '&price=' + price }" class="thumb-active">
+                                    <div class="thumb-cover pull-left">
+                                        <div class="thumb-cnt">
+                                            <span class="title text-white">
+                                                <!--ko text: ticketName-->
+                                                <!--/ko-->
+                                                <!--<div class="clearfix">
                                                         <div class="about">
                                                             <div></div>
                                                         </div>
                                                     </div>-->
-                                                </span>
-                                                <span class="other text-white">￥</span><span class="about text-blue"><!--ko text: price--><!--/ko--></span><span class="other text-white">元</span>
-
-                                            </div>
-                                            <div class="mask modal-backdrop"></div>
+                                            </span>
+                                            <span class="other text-white">￥</span><span class="about text-blue"><!--ko text: price--><!--/ko--></span><span class="other text-white">元</span>
                                         </div>
-                                    </a>
-                                    <!--<span class="cheap">省</span>-->
-                                    <span class="recommend"></span>
-                                </div>
+                                        <div class="mask modal-backdrop"></div>
+                                    </div>
+                                </a>
+                                <!--<span class="cheap">省</span>-->
+                                <span class="recommend"></span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
     <!--</div>-->
 
     <script src="../javaScripts/swiper.min.js"></script>
@@ -95,50 +92,18 @@
         });
     </script>
     <script type="text/javascript">
-        var viewModel = {
-            ticketList: [
-                {
-                    'category': 1,
-                    content: [
-                        { ticketTypeCode: "10001", price: "265", ticketDescription: "散客票", remark: "一进", category: "1", image: "url(../images/ticket1.jpg)" },
-                        { ticketTypeCode: "10002", price: "275", ticketDescription: "散客票", remark: "二进", category: "1", image: "url(../images/ticket2.jpg)" },
-                        { ticketTypeCode: "10003", price: "132.5", ticketDescription: "老年票", remark: "一进", category: "1", image: "url(../images/ticket3.jpg)" },
-                        { ticketTypeCode: "10004", price: "142.5", ticketDescription: "老年票", remark: "二进", category: "1", image: "url(../images/ticket4.jpg)" },
-                        { ticketTypeCode: "10005", price: "172.5", ticketDescription: "学生票", remark: "一进", category: "1", image: "url(../images/ticket5.jpg)" },
-                        { ticketTypeCode: "10006", price: "182.5", ticketDescription: "学生票", remark: "二进", category: "1", image: "url(../images/ticket6.jpg)" },
-                        { ticketTypeCode: "10007", price: "172.5", ticketDescription: "残疾证票", remark: "一进", category: "1", image: "url(../images/ticket7.jpg)" },
-                        { ticketTypeCode: "10008", price: "182.5", ticketDescription: "残疾证票", remark: "二进", category: "1", image: "url(../images/ticket8.jpg)" },
-                        { ticketTypeCode: "10009", price: "185", ticketDescription: "成人票", remark: "不含车票", category: "1", image: "url(../images/ticket5.jpg)" },
-                        { ticketCode: "20001", price: "80", ticketDescription: "车票", remark: "一乘", category: "1", image: "url(../images/ticket1.jpg)" },
-                        { ticketCode: "20002", price: "40", ticketDescription: "车票", remark: "一乘", category: "1", image: "url(../images/ticket2.jpg)" },
-                        { ticketCode: "20003", price: "90", ticketDescription: "车票", remark: "二乘", category: "1", image: "url(../images/ticket3.jpg)" },
-                        { ticketCode: "20004", price: "50", ticketDescription: "车票", remark: "二乘", category: "1", image: "url(../images/ticket4.jpg)" }
-                    ]
-                }, {
-                    'category': 2,
-                    content: [
-                        { ticketTypeCode: "10001", price: "265", ticketDescription: "散客票", remark: "一进", category: "2", image: "url(../images/ticket1.jpg)" },
-                        { ticketTypeCode: "10002", price: "275", ticketDescription: "散客票", remark: "二进", category: "2", image: "url(../images/ticket2.jpg)" },
-                        { ticketTypeCode: "10003", price: "132.5", ticketDescription: "老年票", remark: "一进", category: "2", image: "url(../images/ticket3.jpg)" },
-                        { ticketTypeCode: "10004", price: "142.5", ticketDescription: "老年票", remark: "二进", category: "2", image: "url(../images/ticket4.jpg)" },
-                        { ticketTypeCode: "10005", price: "172.5", ticketDescription: "学生票", remark: "一进", category: "2", image: "url(../images/ticket5.jpg)" },
-                        { ticketTypeCode: "10006", price: "182.5", ticketDescription: "学生票", remark: "二进", category: "2", image: "url(../images/ticket6.jpg)" },
-                        { ticketTypeCode: "10007", price: "172.5", ticketDescription: "残疾证票", remark: "一进", category: "2", image: "url(../images/ticket7.jpg)" },
-                        { ticketTypeCode: "10008", price: "182.5", ticketDescription: "残疾证票", remark: "二进", category: "2", image: "url(../images/ticket8.jpg)" },
-                        { ticketTypeCode: "10009", price: "185", ticketDescription: "成人票", remark: "不含车票", category: "1", image: "url(../images/ticket5.jpg)" }
-                    ]
-                }, {
-                    'category': 3,
-                    content: [{ ticketCode: "20001", price: "80", ticketDescription: "车票", remark: "一乘", category: "3", image: "url(../images/ticket1.jpg)" },
-                    { ticketCode: "20002", price: "40", ticketDescription: "车票", remark: "一乘", category: "3", image: "url(../images/ticket2.jpg)" },
-                    { ticketCode: "20003", price: "90", ticketDescription: "车票", remark: "二乘", category: "3", image: "url(../images/ticket3.jpg)" },
-                    { ticketCode: "20004", price: "50", ticketDescription: "车票", remark: "二乘", category: "3", image: "url(../images/ticket4.jpg)" }]
-
+        $.ajax({
+            type: "post",
+            url: '../WebService/OrderWebService.asmx/TicketCategoryList',
+            dataType: 'json',
+            success: function (result) {
+                if (result.IsSuccess) {
+                    ko.applyBindings(result);
+                } else {
+                    alert(result.Message);
                 }
-            ]
-        };
-
-        ko.applyBindings(viewModel);
+            }
+        });
     </script>
 </body>
 </html>

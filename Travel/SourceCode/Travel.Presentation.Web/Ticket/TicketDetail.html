@@ -233,14 +233,13 @@
         </section>
 
         <section class="gpd-ticket">
-            <span><strong>￥120元</strong></span>
+            <span><strong id="price"></strong></span>
             <a id="payBtn" href="javascript:GotoConfirm();">立即购票</a>
         </section>
 
         <hr style="border: 1px dotted; width: 100%; margin: auto" />
         <section class="info-ticket">
-            <p>
-                【本套票为半价票，1.2米以下的儿童以及65~70岁老人适用，仅包含入园门票，车票需单独购买；<!--购买后凭二维码电子票直接扫码入园-->】
+            <p id="ticketInfo">
             </p>
         </section>
         <div class="segmentation"></div>
@@ -285,7 +284,7 @@
 
         <section class="gpd-item ">
             <div class="gpd-item-title">
-                <img class="detailicon-ticket" src="../images/time.png" />票有效期 <span style="float: right" id="dateRange">2015-08-01至2015-12-31</span>
+                <img class="detailicon-ticket" src="../images/time.png" />票有效期 <span style="float: right" id="dateRange"></span>
                 <div class="line-title"></div>
             </div>
         </section>
@@ -303,6 +302,12 @@
 <script src="../javaScripts/swiper.min.js"></script>
 <script src="../javaScripts/Moment.js"></script>
 <script language="javascript">
+    function GetQueryString(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) return r[2]; return null;
+    }
+
     //加载票信息
     $(document).ready(function () {
         //计算票有效期
@@ -310,7 +315,32 @@
         var nextDate = moment().add(365, 'day');
         $("#dateRange").html(currentDate.format("YYYY-MM-DD") + "至" + nextDate.format("YYYY-MM-DD"));
 
-        var html = '<div class="lk-mask">\
+        //获取票价
+        $("#price").html("￥" + GetQueryString("price") + "元");
+
+        var ticketName = GetQueryString("ticketName");
+
+        var needTip = false;
+        if (ticketName.indexOf("老年") > -1) {
+            needTip = true;
+            $("#ticketInfo").html("【本套票为半价票，1.2米以下的儿童以及65~70岁老人适用，仅包含入园门票，车票需单独购买】");
+        }
+        else if (ticketName.indexOf("儿童") > -1) {
+            needTip = true;
+            $("#ticketInfo").html("【本套票为半价票，1.2米以下的儿童以及65~70岁老人适用，仅包含入园门票，车票需单独购买】");
+        }
+        else if (ticketName.indexOf("学生") > -1) {
+            needTip = true;
+            $("#ticketInfo").html("【本套票为学生优惠票，仅包含入园门票，车票需单独购买；购买后凭学生证及二维码电子票直接扫码入园】");
+        }
+        else if (ticketName.indexOf("残疾") > -1) {
+            needTip = true;
+            $("#ticketInfo").html("【本套票为残疾人优惠票，仅包含入园门票，车票需单独购买；购买后凭残疾证及二维码电子票直接扫码入园】");
+        }
+
+        //判断是否需要弹出消息
+        if (needTip) {
+            var html = '<div class="lk-mask">\
 						<div class="lk-title">提示</div>\
 						<div class="gpd-alert-body alert-p-distance">\
 							<p>优惠票入园前，需持有关证件验证，请诚信购票</p>\
@@ -320,15 +350,16 @@
 							<div class="ik-btn">知道了</div>\
 						</div>\
 				</div>';
-        $('.lk-mask').remove();
+            $('.lk-mask').remove();
 
-        var zHtml = $(html);
+            var zHtml = $(html);
 
-        $('body').append(zHtml);
+            $('body').append(zHtml);
 
-        $('.ik-btn').click(function () {
-            $('.lk-mask').hide();
-        });
+            $('.ik-btn').click(function () {
+                $('.lk-mask').hide();
+            });
+        }
 
         var zAuto = $("#gp-icons-auto");
         var zThisParent = zAuto.parents(".gpd-item");
@@ -337,7 +368,7 @@
     });
 
     function GotoConfirm() {
-        document.location.href = "TicketConfirm.html";
+        document.location.href = "TicketConfirm.html" + document.location.search;
     }
 
     var swiper = new Swiper('.swiper-container', {

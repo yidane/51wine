@@ -8,7 +8,7 @@ namespace Travel.Infrastructure.OTAWebService.Test
     [TestClass]
     public class OTAWebServiceUnitTest
     {
-        private string OrderNo = "C20150829184454628575";
+        private string OrderNo = "C2015090420320750851515";
 
         [TestMethod]
         public void TestSignture()
@@ -160,7 +160,7 @@ namespace Travel.Infrastructure.OTAWebService.Test
                 {
                     PostOrder = new List<OrderNoCode>()
                         {
-                            new OrderNoCode() {OrderCode = "C2015082918113819136574"},
+                            new OrderNoCode() {OrderCode = "466015815025"},
                             //new OrderNoCode(){OrderCode = "C20150825168858961"}
                         }
                 };
@@ -186,7 +186,7 @@ namespace Travel.Infrastructure.OTAWebService.Test
                     Order = new EditOrder() { OrderNo = OrderNo },
                     Details = new List<EditOrderDetail>()
                 {
-                            new EditOrderDetail() {Starttime = "2015-08-25", ProductCode = "465688405091"}
+                            new EditOrderDetail() {Starttime = "2015-08-25", ProductCode = "485083175822"}
                         }
                 };
             request.PostOrder = editPostOrder;

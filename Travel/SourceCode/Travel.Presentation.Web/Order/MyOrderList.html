@@ -35,7 +35,7 @@
             <li class="normal" id="refund"><a href="MyOrderList.html?payStatus=refund">退票</a></li>
         </ul>
         <div class="personal_info">
-            <div class="order_list" id="order_list">
+            <div class="order_list" id="ResultList">
             </div>
         </div>
     </div>
@@ -63,6 +63,27 @@
                         <span>已付款</span>
                     </div>
                 </a>
+            </li>
+        </ul>
+    </script>
+
+    <script id="ResultTemplateTicket" type="text/x-jsrender">
+        <ul>
+            <li>
+                <div class="info_01">
+                    <h3>{{:TicketName}}</h3>
+                    <p>实付<b>￥{{:TicketTotalPrice}}</b>共<b>{{:TicketCount}}</b>件商品</p>
+                    <span class="wave_blue_icon"></span>
+                </div>
+                <div class="info_02">
+                    <dl>
+                        <dd><b class="i_gray_icon"></b>订单编号 {{:OrderNo}}</dd>
+                        <dd><b class="time_gray_icon"></b>有效期至 2015年12月31日</dd>
+                    </dl>
+                </div>
+                <div class="info_03">
+                    <span>已付款</span>
+                </div>
             </li>
         </ul>
     </script>
@@ -108,7 +129,7 @@
 
                             var template = $.templates("#ResultTemplateOrder");
                             var htmlOutput = template.render(data);
-                            $("#order_list").html(htmlOutput);
+                            $("#ResultList").html(htmlOutput);
                         } else {
                             alert(result.Message);
                         }
@@ -129,9 +150,9 @@
                                 data.push({ OrderNo: obj.OrderCode, OrderID: obj.OrderId, TicketImageUrl: '../TicketImages/1.jpg', TicketName: obj.TicketName, LastUseDate: '2015-08-19', TicketPrice: obj.singleTicketPrice, TicketCount: obj.TicketCount, TicketTotalPrice: obj.TotelFee, OperateUrl: '', OperateName: '查看' });
                             });
 
-                            var template = $.templates("#ResultTemplateOrder");
+                            var template = $.templates("#ResultTemplateTicket");
                             var htmlOutput = template.render(data);
-                            $("#order_list").html(htmlOutput);
+                            $("#ResultList").html(htmlOutput);
                         } else {
                             alert(result.Message);
                         }

@@ -142,10 +142,8 @@ VI.idCard = function (str) {
         for (var i = 0; i < pi.length; i++) {
             if (pi[i] == p2) {
                 return true;
-            }
-            ;
-        }
-        ;
+            };
+        };
 
         return false;
     };
@@ -919,7 +917,6 @@ VPay.prototype.init = function () {
         showMoney(val);
     };
 
-
     zNumSub.click(function () {
         changeValue(-1);
     });
@@ -956,7 +953,6 @@ VPay.prototype.imgAdd = function () {
                     var zTmpImg = $('<img src="' + localIds[i] + '" class="rfd-img-item rfd-img-pre">');
                     zImageWrap.before(zTmpImg);
                     upImgs.push({ id: localIds[i], img: zTmpImg });
-
                 }
                 count = count + size;
                 if (count >= maxSum) {
@@ -964,11 +960,8 @@ VPay.prototype.imgAdd = function () {
                     zImage.addClass("hide");
                 }
                 downloadImg(upImgs);
-
             }
-
         });
-
     });
 
     function downloadImg(imgAry) {
@@ -1107,8 +1100,8 @@ VPay.prototype.order = function () {
     var This = this,
         options = this.opt;
 
-    var ticketId = '956BFF5E-AA6A-454E-8F46-BD4175235C9E';
-    var ticketName = '布尔津测试门票';
+    var ticketId = This.options.ticketId;
+    var ticketName = This.options.ticketName;
 
     //参数校验
     var zName = $('#name');
