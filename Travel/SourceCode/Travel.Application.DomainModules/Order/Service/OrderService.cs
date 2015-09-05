@@ -143,6 +143,7 @@ namespace Travel.Application.DomainModules.Order.Service
                                                 TicketId = item.TicketId,
                                                 OrderId = item.OrderId.ToString(),
                                                 TicketCategoryId = item.TicketCategoryId.ToString(),
+                                                TicketName = TicketCategoryEntity.TodayTicketCategory.FirstOrDefault(category =>category.TicketCategoryId.Equals(item.TicketCategoryId)).TicketName,
                                                 TicketCode = item.TicketCode,
                                                 Price = item.Price.ToString(),
                                                 TicketStatus = item.TicketStatus,
