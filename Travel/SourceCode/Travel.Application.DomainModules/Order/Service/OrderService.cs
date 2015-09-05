@@ -148,7 +148,7 @@ namespace Travel.Application.DomainModules.Order.Service
                                                 TicketName = TicketCategoryEntity.TodayTicketCategory.FirstOrDefault(category =>category.TicketCategoryId.Equals(item.TicketCategoryId)).TicketName,
                                                 TicketCode = item.TicketCode,
                                                 Price = item.Price.ToString(),
-                                                TicketStatus = item.TicketStatus,
+                                                TicketStatus = this.getTicketStatus(item.TicketStatus),
                                                 ECode = item.ECode
                                             }).ToList());
             }
@@ -156,7 +156,33 @@ namespace Travel.Application.DomainModules.Order.Service
             return tickets;
         }
 
-        public void RefundTickets(string orderId, int refundTicketsNumber)
+        private string getTicketStatus(string statusCode)
+        {
+            var statusName = string.Empty;
+
+            switch (statusCode)
+            {
+                case OrderStatus.TicketStatus_Refund_Audit:
+                    statusName = "退票审核中";
+                    break;
+                case OrderStatus.TicketStatus_Refund_RefundPayProcessing:
+                    statusName = "退款受理中";
+                    break;
+                case OrderStatus.TicketStatus_Refund_WaitRefundFee:
+                    statusName = "等待退款";
+                    break;
+                case OrderStatus.TicketStatus_Refund_Complete:
+                    statusName = "退票完成";
+                    break;
+                default:
+                    statusName = "退票失败";
+                    break;
+            }
+
+            return statusName;
+        }
+
+        public void RefundTickets(string orderId, int refundTiecketsNumber)
         {
             Guid gOrder;
 
