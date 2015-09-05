@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Travel.Application.DomainModules.Order.Core;
 using Travel.Application.DomainModules.Order.Entity;
+using Travel.Application.DomainModules.Order.Service;
 
 namespace Travel.Infrastructure.Ticket.Test
 {
@@ -30,6 +31,16 @@ namespace Travel.Infrastructure.Ticket.Test
             var jsParameter = otaOrder.UnifiedOrderResult.GetJsApiParameters();
 
             Assert.IsTrue(jsParameter != null);
+        }
+
+        [TestMethod]
+        public void SearchTicketStatus_Order_Return()
+        {
+            var service = new OrderService();
+
+            service.MyRefundTickets("obzTswxzFzzzdWdAKf2mWx3CrpXk");
+            //service.RefundTickets("35D7650B-21C1-45CD-B15D-2203857B7977", 1);
+            service.SearchTicketStatus(100);
         }
     }
 }

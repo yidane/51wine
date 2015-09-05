@@ -24,6 +24,11 @@ namespace Travel.Services.WebService
             {
                 var openID = GetOpenIDByCodeID(code);
 
+                while (ticketName.Contains("%"))
+                {
+                    ticketName = HttpUtility.UrlDecode(ticketName);
+                }
+
                 if (!string.IsNullOrEmpty(openID))
                 {
                     var orderRequestEntity = new OrderRequestEntity()
@@ -41,6 +46,9 @@ namespace Travel.Services.WebService
                     var otaOrder = new OTAOrder(orderRequestEntity);
 
                     otaOrder.CreateOrderMain();
+
+                    if (otaOrder.UnifiedOrderResult == null)
+                        throw new Exception("门票已达今日限额");
 
                     var jsParameter = otaOrder.UnifiedOrderResult.GetJsApiParameters();
 

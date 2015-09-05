@@ -1100,8 +1100,8 @@ VPay.prototype.order = function () {
     var This = this,
         options = this.opt;
 
-    var ticketId = This.options.ticketId;
-    var ticketName = This.options.ticketName;
+    var ticketId = options.ticketId;
+    var ticketName = options.ticketName;
 
     //参数校验
     var zName = $('#name');
@@ -1183,14 +1183,15 @@ VPay.prototype.order = function () {
                     }
                 });
             } else {
-                alert("已达今日门票配额上限");
+                alert(result.Message);
+                //alert("已达今日门票配额上限");
                 This.isLoading = 0;
                 zPayBtn.removeClass('z-btn-top');
             }
         },
         error: function (request, text, error) {
-            //alert(error);
-            alert("已达今日门票配额上限");
+            alert(error);
+            //alert("已达今日门票配额上限");
             This.isLoading = 0;
             zPayBtn.removeClass('z-btn-top');
         },

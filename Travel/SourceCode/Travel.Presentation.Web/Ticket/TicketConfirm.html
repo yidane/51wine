@@ -221,7 +221,7 @@
             'id': '#confirmPayBtn',
             'price': GetQueryString("price"),
             'max': 10,
-            'ticketName': GetQueryString("ticketName"),
+            'ticketName': decodeURI(GetQueryString("ticketName")),
             'ticketId': GetQueryString("ticketid"),
             'orid': '',
             'gid': '1'
