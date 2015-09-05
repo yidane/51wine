@@ -82,9 +82,8 @@ var DetailViewModel = function ($domParam, param) {
 
     };
     this.btnCancelClick = function ($confirm, $main) {
-        $main.removeClass("animated bounceIn").addClass("animated bounceOut").on("webkitAnimationEnd animationend", function () {
-            $confirm.css("background-color", "rgba(0,0,0,0)").hide();
-        })
+        $main.removeClass("animated bounceIn").addClass("animated bounceOut");
+            
 
     };
 

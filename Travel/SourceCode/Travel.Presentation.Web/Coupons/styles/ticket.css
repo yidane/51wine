@@ -70,8 +70,8 @@
 .succ-ex2 a{ display: block; color: #f46f6f;}
 
 .coupons-list{ padding: 1rem;}
-.coupons-list li{ background: url(../../TicketImages/coupons_bg.png) no-repeat; background-size: cover; height: 9.4rem; color: #fff; margin-bottom: 1rem; position: relative;}
-.coupons-list li.fail{ background-image: url(../../images/scenic/coupons_bg-fail.png);}
+.coupons-list li{ background: url(../../TicketImages/coupons_bg.png) 100% no-repeat; background-size: cover; height: 9.4rem; color: #fff; margin-bottom: 1rem; position: relative;}
+.coupons-list li.fail{ background: url(../../images/scenic/coupons_bg-fail.png) 100% no-repeat;}
 
 .coupons-a{
     color: #FFF;
