@@ -325,7 +325,8 @@ body .pgwModal .pm-body {
 }
 
 .div-expired {
-    background:url(../images/活动结束.png) 100% no-repeat;
+    background:url(../images/活动结束.png)  no-repeat;
+    background-size: cover;
     height: 100%;
     width: 100%;
 
