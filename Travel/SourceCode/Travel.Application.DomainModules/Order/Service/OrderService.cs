@@ -90,10 +90,14 @@ namespace Travel.Application.DomainModules.Order.Service
         {
             var orders = OrderEntity.GetMyOrders(openId);
             var dto = new List<OrderDTO>();
+            List<OrderDTO> sortList = null;
 
-            if (orders.Any(item => item.OrderStatus.Equals(OrderStatus.OrderStatus_WaitUse)))
+            if (orders.Any(item => item.OrderStatus.Equals(OrderStatus.OrderStatus_WaitUse)
+                || item.OrderStatus.Equals(OrderStatus.OrderStatus_Used)))
             {
-                dto = orders.Where(item => item.OrderStatus.Equals(OrderStatus.OrderStatus_WaitUse))
+                sortList=new List<OrderDTO>();
+                dto = orders.Where(item => item.OrderStatus.Equals(OrderStatus.OrderStatus_WaitUse)
+                                            || item.OrderStatus.Equals(OrderStatus.OrderStatus_Used))
                         .Select(item => new OrderDTO()
                         {
                             OrderId = item.OrderId.ToString(),
@@ -102,11 +106,59 @@ namespace Travel.Application.DomainModules.Order.Service
                             TotelFee = item.TotalFee(),
                             TicketCount = item.Tickets.Count,
                             TicketName = TicketCategoryEntity.GetTicketNameByTicketCategoryId(item.Tickets.First().TicketCategoryId),
-                            BuyTime = item.Tickets.First().CreateTime.ToString("yyyy-MM-dd")
-                        }).ToList();
+                            BuyTime = item.Tickets.First().CreateTime.ToString("yyyy-MM-dd"),
+                            OrderStatus = this.GetOrderStatus(item),
+                            hasRefundTicket = item.Tickets.Any(this.RefundStatus()),
+                            RefundType = this.GetRefundType(item) }).ToList();
+                sortList.InsertRange(sortList.Count, dto.Where(item => item.OrderStatus.Equals("未使用")));
+                sortList.InsertRange(sortList.Count, dto.Where(item => item.OrderStatus.Equals("已过期")));
+                sortList.InsertRange(sortList.Count, dto.Where(item => item.OrderStatus.Equals("已使用")));
+                sortList.InsertRange(sortList.Count, dto.Where(item => item.OrderStatus.Equals(string.Empty)));
             }
-            
-            return dto;
+
+            return sortList;
+        }
+
+        private string GetOrderStatus(OrderEntity order)
+        {
+            if (order.OrderStatus.Equals(OrderStatus.OrderStatus_WaitUse))
+            {
+                return "未使用";
+            }
+            else if (!order.OrderStatus.Equals(OrderStatus.OrderStatus_Used) && order.CreateTime.AddYears(1).Date < DateTime.Now.Date)
+            {
+                return "已过期";
+            }
+            else if (order.OrderStatus.Equals(OrderStatus.OrderStatus_Used))
+            {
+                return "已使用";
+            }
+            else
+            {
+                return string.Empty;
+            }
+        }
+
+        private Func<TicketEntity, bool> RefundStatus()
+        {
+            return
+                ticket =>
+                    ticket.TicketStatus.Equals(OrderStatus.TicketStatus_Refund_Audit)
+                    || ticket.TicketStatus.Equals(OrderStatus.TicketStatus_Refund_RefundPayProcessing)
+                    || ticket.TicketStatus.Equals(OrderStatus.TicketStatus_Refund_WaitRefundFee)
+                    || ticket.TicketStatus.Equals(OrderStatus.TicketStatus_Refund_Complete);
+        }
+
+        private string GetRefundType(OrderEntity order)
+        {
+            if (order.Tickets.Any(this.RefundStatus()))
+            {
+                return order.Tickets.Count(this.RefundStatus()).Equals(order.Tickets.Count) ? "全部退票" : "部分退票";
+            }
+            else
+            {
+                return string.Empty;
+            }
         }
 
         /// <summary>
