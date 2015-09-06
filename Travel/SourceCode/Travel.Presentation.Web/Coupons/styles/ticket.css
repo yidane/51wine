@@ -101,8 +101,8 @@
     background-repeat: no-repeat;    
 }
 .top{ height: 4rem; padding: 1rem;}
-.top .price{ font-size: 40px; margin-right: 2rem; margin-left: 1.5rem;}
-.top .price em{ font-size: 30px;}
+.top .price{ font-size: 2.5rem; margin-right: 2rem; margin-left: 1.5rem;}
+.top .price em{ font-size: 1.5rem;}
 .top h3{ font-size: 16px;}
 .top p{ margin-top: 1rem; font-size: 14px; text-align: center;}
 .info{ margin-left: 6rem;}
