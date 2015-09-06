@@ -40,6 +40,7 @@ namespace Travel.Application.DomainModules.Order.Core
             this.RefundPayComplete += this.OTAOrder_RefundPayComplete;
         }
 
+        private static object dailyTicketLock = new object();
         /// <summary>
         /// 从景区获取当日可售的票
         /// </summary>
@@ -47,49 +48,54 @@ namespace Travel.Application.DomainModules.Order.Core
         {
             var date = DateTime.Now;
 
-            if (!DateTicketEntity.IsDateTicketExists(date))
+            lock (dailyTicketLock)
             {
-                var dailyTicketsResponse = OTAOrderOperate.GetDailyTickets(date);
 
-                if (dailyTicketsResponse.IsTrue)
+                if (!DateTicketEntity.IsDateTicketExists(date))
                 {
-                    var dateTickets = dailyTicketsResponse.ResultData.Select(item => new DateTicketEntity()
-                                                                                         {
-                                                                                             DateTicketId = int.Parse(item.ProductID),
-                                                                                             TicketCode = item.ProductCode,
-                                                                                             TicketPackageId = item.ProductPackID,
-                                                                                             TicketName = item.ProductName,
-                                                                                             TicketPrice = item.ProductPrice,
-                                                                                             TicketType = item.ProductType,
-                                                                                             SearchDateTime = date,
-                                                                                             CurrentStatus = OrderStatus.DateTicketStatus_Init,
-                                                                                             LatestStatusModifyTime = date
-                                                                                         });
+                    var dailyTicketsResponse = OTAOrderOperate.GetDailyTickets(date);
 
-                    var dailyTicketGroup = dailyTicketsResponse.ResultData.GroupBy(item => item.ProductName);
-                    var ticketCategory = dailyTicketGroup.Select(item => new TicketCategoryEntity()
-                                                                            {
-                                                                                TicketCategoryId = Guid.NewGuid(),
-                                                                                ImplementationDate = date,
-                                                                                TicketPackageId = item.FirstOrDefault().ProductPackID,
-                                                                                TicketType = item.FirstOrDefault().ProductType,
-                                                                                Type = item.FirstOrDefault().ProductName.Contains("车票") 
-                                                                                        && !item.FirstOrDefault().ProductName.Contains("+") ? "cp" : "mp",
-                                                                                Price = item.FirstOrDefault().ProductPrice,
-                                                                                TicketName = item.FirstOrDefault().ProductName
-                                                                            });
-
-                    if (dateTickets.Any() && ticketCategory.Any())
+                    if (dailyTicketsResponse.IsTrue)
                     {
-                        using (var scope = new TransactionScope())
-                        {
-                            DateTicketEntity.SetDateTickets(dateTickets);
-                            TicketCategoryEntity.SetTicketCategory(ticketCategory);
+                        var dateTickets = dailyTicketsResponse.ResultData.Select(item => new DateTicketEntity()
+                                                                                             {
+                                                                                                 DateTicketId = int.Parse(item.ProductID),
+                                                                                                 TicketCode = item.ProductCode,
+                                                                                                 TicketPackageId = item.ProductPackID,
+                                                                                                 TicketName = item.ProductName,
+                                                                                                 TicketPrice = item.ProductPrice,
+                                                                                                 TicketType = item.ProductType,
+                                                                                                 SearchDateTime = date,
+                                                                                                 CurrentStatus = OrderStatus.DateTicketStatus_Init,
+                                                                                                 LatestStatusModifyTime = date
+                                                                                             });
 
-                            scope.Complete();
+                        var dailyTicketGroup = dailyTicketsResponse.ResultData.GroupBy(item => item.ProductName);
+                        var ticketCategory = dailyTicketGroup.Select(item => new TicketCategoryEntity()
+                                                                                {
+                                                                                    TicketCategoryId = Guid.NewGuid(),
+                                                                                    ImplementationDate = date,
+                                                                                    TicketPackageId = item.FirstOrDefault().ProductPackID,
+                                                                                    TicketType = item.FirstOrDefault().ProductType,
+                                                                                    Type = item.FirstOrDefault().ProductName.Contains("车票")
+                                                                                            && !item.FirstOrDefault().ProductName.Contains("+") ? "cp" : "mp",
+                                                                                    Price = item.FirstOrDefault().ProductPrice,
+                                                                                    TicketName = item.FirstOrDefault().ProductName
+                                                                                });
+
+                        if (dateTickets.Any() && ticketCategory.Any())
+                        {
+                            using (var scope = new TransactionScope())
+                            {
+                                DateTicketEntity.SetDateTickets(dateTickets);
+                                TicketCategoryEntity.SetTicketCategory(ticketCategory);
+
+                                scope.Complete();
+                            }
                         }
-                    }                    
+                    }
                 }
+
             }
         }
 
@@ -232,7 +238,7 @@ namespace Travel.Application.DomainModules.Order.Core
                         if (failTicket != null)
                         {
                             failedTickets.Add(failTicket);
-                        }                        
+                        }
                     }
                 }
 
