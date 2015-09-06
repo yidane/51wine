@@ -131,7 +131,7 @@
 .btn{ width: 12rem; height: 3.5rem; line-height: 3.5rem; display: block; margin: 0 auto; text-align: center; color: #fff; border-radius: 5px; background-color: #d98750; font-size: 16px; box-shadow: 0 2px 2px rgba(171,101,52,1);}
 .btn-used{ background-color: #a7a7a7;}
 
-.coupons-tab{ padding: 1rem;}
+.coupons-tab{ padding: 0.1rem 1rem 0 1rem;}
 .coupons-tab li{ padding: 0.5rem 1rem; width: 33.3%; box-sizing:border-box; text-align: center;}
 .coupons-tab li.active{ border-bottom: 2px solid #62b900;}
 .coupons-tab li.active a{ color: #62b900;}
