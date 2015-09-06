@@ -157,6 +157,7 @@ var LuckyMoneyViewModel = function ($domParam, param) {
                    //alert(json.Data.openId);
                    setTimeout(function () {
                        self.$DomParm().$endMp3[0].play();
+                       self.jumpToMyCoupons(2000);
                    }, 1000);
                }
                else {
@@ -198,17 +199,20 @@ var LuckyMoneyViewModel = function ($domParam, param) {
                     self.couponStatus(4);
                     //self.$DomParm().$receiveBtn.val("领取成功!");
                     //self.$DomParm().$receiveBtn.attr("disabled", "disabled");
-                    setTimeout(function () {
-                        var url = 'Coupons/MyCoupons.html';//?code=' + self.param().access_code;
-                        window.location.href = url;
-                    }, 1000);
+                  self.jumpToMyCoupons(1000);
                 }
             }).fail(
             function (jqxhr, textStatus, error) {
                 var err = textStatus + ", " + error;
                 console.log("Request Failed: " + err);
             });
-    }
+    };
+    this.jumpToMyCoupons=function(time){
+        setTimeout(function () {
+            var url = 'Coupons/MyCoupons.html';//?code=' + self.param().access_code;
+            window.location.href = url;
+        }, time);
+    };
 
     //最后执行初始化
     self.init();
