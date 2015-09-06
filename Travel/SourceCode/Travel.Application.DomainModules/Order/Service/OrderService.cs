@@ -5,6 +5,8 @@ using System.Text;
 
 namespace Travel.Application.DomainModules.Order.Service
 {
+    using System.Security.Cryptography.X509Certificates;
+
     using Travel.Application.DomainModules.Order.Core;
     using Travel.Application.DomainModules.Order.DTOs;
     using Travel.Infrastructure.DomainDataAccess.Order;
@@ -177,12 +179,22 @@ namespace Travel.Application.DomainModules.Order.Service
                     IdentityCardNumber = order.IdentityCardNumber,
                     OrderCode = order.OrderCode,
                     OrderId = order.OrderId,
-                    TicketCodeList = ticketList.Select(item => item.ECode).ToList(),
+                    TicketCodeList = this.GetTicketCodeWithOrder(ticketList).ToList(),
                     PayTime = order.CreateTime.ToShortDateString(),
                     SinglePrice = ticketList.First().Price.ToString()
                 };
 
             return orderWithDetailListDTO;
+        }
+
+        private IList<string> GetTicketCodeWithOrder(ICollection<TicketEntity> tickets)
+        {
+            var sortList = new List<string>();
+
+            sortList.InsertRange(sortList.Count, tickets.Except(tickets.Where(this.RefundStatus())).Select(item => item.ECode));
+            sortList.InsertRange(sortList.Count, tickets.Where(this.RefundStatus()).Select(item => item.ECode));
+
+            return sortList;
         }
 
         public IList<TicketEntity> MyTickets(string orderId)
@@ -193,7 +205,7 @@ namespace Travel.Application.DomainModules.Order.Service
             {
                 if (!gOrder.Equals(Guid.Empty))
                 {
-                    return TicketEntity.GetTicketsByOrderId(gOrder).ToList();
+                    return TicketEntity.GetTicketsByOrderId(gOrder).Where(this.RefundStatus()).ToList();
                 }
             }
 

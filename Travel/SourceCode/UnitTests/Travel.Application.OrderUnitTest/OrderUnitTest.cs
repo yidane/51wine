@@ -154,7 +154,7 @@ namespace Travel.Application.OrderUnitTest
 
 
             var service = new OrderService();
-
+            service.GetOrderByOrderID(Guid.Parse("789E2BDC-EB44-4855-AEB1-660C57973217"));
             var category = service.GetTicketCategoryList();
 
             var first = category.FirstOrDefault().content[0];
