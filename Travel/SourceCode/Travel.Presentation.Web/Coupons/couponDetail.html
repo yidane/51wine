@@ -152,9 +152,9 @@
         var $doms = {
             $qrcode: $("#qrcode1")
         };
-        $('.confirm-cover-main').on("webkitAnimationEnd animationend", function () {
-            $('#confirm-cover').css("background-color", "rgba(0,0,0,0)").hide();
-        });
+        //$('.confirm-cover-main').on("webkitAnimationEnd animationend", function () {
+        //    $('#confirm-cover').css("background-color", "rgba(0,0,0,0)").hide();
+        //});
         var detailVM = new DetailViewModel($doms, param);
         ko.applyBindings(detailVM);
     </script>
