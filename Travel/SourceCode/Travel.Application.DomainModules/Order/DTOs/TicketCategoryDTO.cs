@@ -25,5 +25,7 @@ namespace Travel.Application.DomainModules.Order.DTOs
         public string type { get; set; }
 
         public string image { get; set; }
+
+        public bool canUse { get; set; }
     }
 }

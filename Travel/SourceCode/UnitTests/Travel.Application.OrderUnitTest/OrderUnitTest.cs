@@ -114,6 +114,40 @@ namespace Travel.Application.OrderUnitTest
         }
 
         [Test]
+        public void DailyFirstBuyTecket_BuyTicket_ReturnNULL()
+        {
+            var list = TicketCategoryEntity.TodayTicketCategory;
+
+
+            var service = new OrderService();
+
+            var category = service.GetTicketCategoryList();
+
+            var first = category.FirstOrDefault().content[0];
+            this.OrderRequest.TicketCategory = first.ticketCategoryId;
+            this.OrderRequest.TicketName = first.ticketName;
+            var otaOrder = new OTAOrder(this.OrderRequest);
+
+            otaOrder.CreateOrderMain();
+        }
+
+        [Test]
+        public void DailyFirstRefundTecket_RefundTicket_ReturnNULL()
+        {
+            var list = TicketCategoryEntity.TodayTicketCategory;
+
+
+            var service = new OrderService();
+
+            var orders = service.MyOrders("obzTswxzFzzzdWdAKf2mWx3CrpXk");
+
+            if (orders.Any())
+            {
+                service.RefundTickets(orders[1].OrderId, 1);
+            }            
+        }
+
+        [Test]
         public void SearchTicketStatus_Order_Return()
         {
             var list = TicketCategoryEntity.TodayTicketCategory;
@@ -121,16 +155,26 @@ namespace Travel.Application.OrderUnitTest
 
             var service = new OrderService();
 
-            service.MyRefundTickets("obzTswxzFzzzdWdAKf2mWx3CrpXk");
-            service.GetTicketCategoryList();
+            var category = service.GetTicketCategoryList();
 
-            service.MyOrders("obzTswxzFzzzdWdAKf2mWx3CrpXk");
+            var first = category.FirstOrDefault().content[0];
+            this.OrderRequest.TicketCategory = first.ticketCategoryId;
+            this.OrderRequest.TicketName = first.ticketName;
+            var otaOrder = new OTAOrder(this.OrderRequest);
+
+            otaOrder.CreateOrderMain();
+
+
+            //service.MyRefundTickets("obzTswxzFzzzdWdAKf2mWx3CrpXk");
+            //service.GetTicketCategoryList();
+
+            //service.MyOrders("obzTswxzFzzzdWdAKf2mWx3CrpXk");
 
             
 
-            service.MyRefundTickets("obzTswxzFzzzdWdAKf2mWx3CrpXk");
-            //service.RefundTickets("35D7650B-21C1-45CD-B15D-2203857B7977", 1);
-            service.SearchTicketStatus(100);
+            //service.MyRefundTickets("obzTswxzFzzzdWdAKf2mWx3CrpXk");
+            ////service.RefundTickets("35D7650B-21C1-45CD-B15D-2203857B7977", 1);
+            //service.SearchTicketStatus(100);
         }
 
         [Test]

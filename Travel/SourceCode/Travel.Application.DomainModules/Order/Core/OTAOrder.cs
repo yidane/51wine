@@ -73,7 +73,8 @@ namespace Travel.Application.DomainModules.Order.Core
                                                                                 ImplementationDate = date,
                                                                                 TicketPackageId = item.FirstOrDefault().ProductPackID,
                                                                                 TicketType = item.FirstOrDefault().ProductType,
-                                                                                Type = item.FirstOrDefault().ProductName.Contains("车票") ? "cp" : "mp",
+                                                                                Type = item.FirstOrDefault().ProductName.Contains("车票") 
+                                                                                        && !item.FirstOrDefault().ProductName.Contains("+") ? "cp" : "mp",
                                                                                 Price = item.FirstOrDefault().ProductPrice,
                                                                                 TicketName = item.FirstOrDefault().ProductName
                                                                             });

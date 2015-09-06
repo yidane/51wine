@@ -14,6 +14,10 @@ namespace Travel.Application.DomainModules.Order.Service
 
     public class OrderService
     {
+        /// <summary>
+        /// 获取可售票列表
+        /// </summary>
+        /// <returns></returns>
         public IList<TicketCategoryDTO> GetTicketCategoryList()
         {
             var categories = TicketCategoryEntity.TodayTicketCategory;
@@ -34,6 +38,7 @@ namespace Travel.Application.DomainModules.Order.Service
                                                                                     ticketType = "1",
                                                                                     price = item.Price,
                                                                                     ticketName = item.TicketName,
+                                                                                    canUse = item.TicketName.Contains("一进") && item.TicketName.Contains("车票"),
                                                                                     type = item.Type,
                                                                                     image = string.Format("url(../images/ticket{0}.jpg)", new Random((unchecked((int)DateTime.Now.Ticks + categories.IndexOf(item)))).Next(1, 8).ToString())
                                                                                 }).ToList()
@@ -50,6 +55,7 @@ namespace Travel.Application.DomainModules.Order.Service
                                                     ticketType = "2",
                                                     price = item.Price,
                                                     ticketName = item.TicketName,
+                                                    canUse = item.TicketName.Contains("一进") && item.TicketName.Contains("车票"),
                                                     type = item.Type,
                                                     image = string.Format("url(../images/ticket{0}.jpg)", new Random((unchecked((int)DateTime.Now.Ticks + categories.IndexOf(item)))).Next(1, 8).ToString())
                                                 }).ToList()
@@ -66,6 +72,7 @@ namespace Travel.Application.DomainModules.Order.Service
                                             ticketType = "3",
                                             price = item.Price,
                                             ticketName = item.TicketName,
+                                            canUse = item.TicketName.Contains("一进") && item.TicketName.Contains("车票"),
                                             type = item.Type,
                                             image = string.Format("url(../images/ticket{0}.jpg)", new Random((unchecked((int)DateTime.Now.Ticks + categories.IndexOf(item)))).Next(1, 8).ToString())
                                         }).ToList()
@@ -74,6 +81,11 @@ namespace Travel.Application.DomainModules.Order.Service
             return dto;
         }
 
+        /// <summary>
+        /// 获取我的订单列表
+        /// </summary>
+        /// <param name="openId"></param>
+        /// <returns></returns>
         public IList<OrderDTO> MyOrders(string openId)
         {
             var orders = OrderEntity.GetMyOrders(openId);
@@ -97,6 +109,11 @@ namespace Travel.Application.DomainModules.Order.Service
             return dto;
         }
 
+        /// <summary>
+        /// 获取订单详情
+        /// </summary>
+        /// <param name="orderId"></param>
+        /// <returns></returns>
         public OrderWithDetailListDTO GetOrderByOrderID(Guid orderId)
         {
             var order = OrderEntity.GetOrderByOrderId(orderId);
