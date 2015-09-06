@@ -121,6 +121,7 @@ namespace Travel.Application.OrderUnitTest
 
             var service = new OrderService();
 
+            service.MyRefundTickets("obzTswxzFzzzdWdAKf2mWx3CrpXk");
             service.GetTicketCategoryList();
 
             service.MyOrders("obzTswxzFzzzdWdAKf2mWx3CrpXk");

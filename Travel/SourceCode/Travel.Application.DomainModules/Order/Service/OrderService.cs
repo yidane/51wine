@@ -156,7 +156,7 @@ namespace Travel.Application.DomainModules.Order.Service
                                                 OrderCode = order.OrderCode,
                                                 DeadLineDate = item.TicketStartTime.ToString("yyyy-MM-dd"),
                                                 TicketCategoryId = item.TicketCategoryId.ToString(),
-                                                TicketName = TicketCategoryEntity.TodayTicketCategory.FirstOrDefault(category =>category.TicketCategoryId.Equals(item.TicketCategoryId)).TicketName,
+                                                TicketName = TicketCategoryEntity.GetTicketNameByTicketCategoryId(item.TicketCategoryId),
                                                 TicketCode = item.TicketCode,
                                                 Price = item.Price.ToString(),
                                                 TicketStatus = this.getTicketStatus(item.TicketStatus),
