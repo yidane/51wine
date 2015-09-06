@@ -147,7 +147,7 @@
 
                 </div>
             </div>
-            <!--<div class="botton main-center top-zIndex" id="botton" data-bind="click:$root.afterShake">马上领取</div>-->
+            <div class="botton main-center top-zIndex" id="botton" data-bind="click:$root.afterShake">马上领取</div>
             <AUDIO id="musicBox" src="audios/shake.wav" preload="metadata"></AUDIO>
             <AUDIO id="endMp3" src="audios/end.mp3" preload="metadata"></AUDIO>
         </div>
@@ -191,7 +191,7 @@
                             </div>
                             <div style="margin-top: 10px;">
                                 <input id="receiveBtn" type="button" value="立即领取"
-                                       data-bind="click:receiveCoupon, enable:coupon()?coupon().status!=2:false">
+                                       data-bind="click:receiveCoupon, enable:$root.couponStatus()=='立即领取',value:$root.couponStatus()">
 
                             </div>
                         </form>
@@ -229,14 +229,14 @@
     <script src="js/shakeLuckyMoney-vm.js"></script>
     <script>
         var access_code = "";
-        access_code = $.url.param("code");
-        if (!access_code) {
-            var fromurl = location.href;
-            var url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxdd6127bdb5e7611c&redirect_uri='
-                + encodeURIComponent(fromurl) +
-                '&response_type=code&scope=snsapi_base&state=STATE%23wechat_redirect&connect_redirect=1#wechat_redirect';
-            location.href = url;
-        }
+        //access_code = $.url.param("code");
+        //if (!access_code) {
+        //    var fromurl = location.href;
+        //    var url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxdd6127bdb5e7611c&redirect_uri='
+        //        + encodeURIComponent(fromurl) +
+        //        '&response_type=code&scope=snsapi_base&state=STATE%23wechat_redirect&connect_redirect=1#wechat_redirect';
+        //    location.href = url;
+        //}
 
 
         var imagesArray = ['http://www.cloudorg.com.cn/travel/images/shake_background.png',

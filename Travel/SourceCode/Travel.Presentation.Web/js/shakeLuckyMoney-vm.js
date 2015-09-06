@@ -10,6 +10,26 @@ var LuckyMoneyViewModel = function ($domParam, param) {
     this.stage = ko.observable("hand");
     this.coupon = ko.observable();
     this.user = ko.observable();
+    this.status = ko.observable("立即领取");
+    this.couponStatus = ko.pureComputed({
+        read: function () {
+            return self.status();
+        },
+        write: function (value) {
+            switch (value) {
+                case 2:
+                    self.status("已参与");
+                    break;
+                case 3:
+                    self.status("立即领取");
+                    break;
+                case 4:
+                    self.status("领取成功");
+                    break;
+            }
+        },
+        owner: this
+    });
 
     this.wxConfig = ko.observable();
     this.jsApiList = ko.observableArray(["hideAllNonBaseMenuItem", "showMenuItems", "onMenuShareAppMessage", "addCard"]);
@@ -61,7 +81,8 @@ var LuckyMoneyViewModel = function ($domParam, param) {
 
         });
         wx.error(function (res) {
-            alert(res);
+            console.log(res);
+            //alert(res);
 
         });
     };
@@ -130,6 +151,7 @@ var LuckyMoneyViewModel = function ($domParam, param) {
            .done(function (json) {
                if (json.IsSuccess) {
                    self.coupon(json.Data.coupon);
+                   self.couponStatus(json.Data.coupon.status);
                    self.user(json.Data.user);
                    //alert(json.Data);
                    //alert(json.Data.openId);
@@ -138,7 +160,8 @@ var LuckyMoneyViewModel = function ($domParam, param) {
                    }, 1000);
                }
                else {
-                   alert(json.Message);
+                   console.log(json.Message);
+                  // alert(json.Message);
                }
            }).fail(
            function (jqxhr, textStatus, error) {
@@ -172,8 +195,9 @@ var LuckyMoneyViewModel = function ($domParam, param) {
         })
             .done(function (json) {
                 if (json.IsSuccess) {
-                    self.$DomParm().$receiveBtn.val("领取成功!");
-                    self.$DomParm().$receiveBtn.attr("disabled", "disabled");
+                    self.couponStatus(4);
+                    //self.$DomParm().$receiveBtn.val("领取成功!");
+                    //self.$DomParm().$receiveBtn.attr("disabled", "disabled");
                     setTimeout(function () {
                         var url = 'Coupons/MyCoupons.html';//?code=' + self.param().access_code;
                         window.location.href = url;

@@ -13,6 +13,14 @@
         /// <summary>
         /// 已参与抽奖
         /// </summary>
-        BeParticipatedIn
+        BeParticipatedIn,
+        /// <summary>
+        /// 未领取
+        /// </summary>
+        NotReceived,
+        /// <summary>
+        /// 已领取
+        /// </summary>
+        HasReceived
     }
 }

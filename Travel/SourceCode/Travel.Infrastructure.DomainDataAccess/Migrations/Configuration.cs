@@ -3,7 +3,7 @@ namespace Travel.Infrastructure.DomainDataAccess.Migrations
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
-    using System.Linq;
+    using System.Linq; 
 
     internal sealed class Configuration : DbMigrationsConfiguration<Travel.Infrastructure.DomainDataAccess.TravelDBContext>
     {
@@ -26,12 +26,13 @@ namespace Travel.Infrastructure.DomainDataAccess.Migrations
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
-            //var youhuiquan = new Coupon.Entitys.CouponType()
+             
+            //var youhuiquan = new DomainDataAccess.Coupon.Entitys.CouponType()
             //{
-            //    CouponTypeId = Guid.NewGuid(),
+            //    CouponTypeId = Guid.Parse("63313E55-A213-4B38-AF64-E6F2ABF68E56"),
             //    CouponTypeName = "优惠券"
             //};
-            //var xianjinquan = new Coupon.Entitys.CouponType()
+            //var xianjinquan = new DomainDataAccess.Coupon.Entitys.CouponType()
             //{
             //    CouponTypeId = Guid.NewGuid(),
             //    CouponTypeName = "现金券"
@@ -39,7 +40,7 @@ namespace Travel.Infrastructure.DomainDataAccess.Migrations
 
             //context.CouponType.AddOrUpdate(p => p.CouponTypeId, youhuiquan, xianjinquan
             //);
-            //context.Coupon.AddOrUpdate(p => p.CouponId, new Coupon.Entitys.Coupon()
+            //context.Coupon.AddOrUpdate(p => p.CouponId, new DomainDataAccess.Coupon.Entitys.Coupon()
             //{
             //    CouponId = Guid.NewGuid(),
             //    Title = "10元优惠券",
@@ -48,7 +49,7 @@ namespace Travel.Infrastructure.DomainDataAccess.Migrations
             //    EndTime = DateTime.Parse("2015-08-30"),
             //    Type = youhuiquan
             //},
-            //new Coupon.Entitys.Coupon()
+            //new DomainDataAccess.Coupon.Entitys.Coupon()
             //{
             //    CouponId = Guid.NewGuid(),
             //    Title = "20元优惠券",
@@ -57,7 +58,7 @@ namespace Travel.Infrastructure.DomainDataAccess.Migrations
             //    EndTime = DateTime.Parse("2015-08-24"),
             //    Type = youhuiquan
             //},
-            //new Coupon.Entitys.Coupon()
+            //new DomainDataAccess.Coupon.Entitys.Coupon()
             //{
             //    CouponId = Guid.NewGuid(),
             //    Title = "30元现金券",

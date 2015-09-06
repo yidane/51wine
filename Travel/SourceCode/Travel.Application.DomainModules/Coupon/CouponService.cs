@@ -149,9 +149,20 @@ namespace Travel.Application.DomainModules.Coupon
                         };
                         _userRepository.SaveUser(user);
 
-                        //  _repository.AddCouponToUser(user, coupon);
+                        //摇到就立即领取,如空优惠券
+                        if (coupon.ShakeToReceive)
+                        {
+                            AddCouponToUser(user.openid, coupon.CouponId);
+                            result = TransformCoupon(coupon,  CouponState.HasReceived);
+                        }
+                        else
+                        {
+                            result = TransformCoupon(coupon);
 
-                        result = TransformCoupon(coupon);
+                        }
+
+
+
                     }
                 }
 
@@ -160,7 +171,7 @@ namespace Travel.Application.DomainModules.Coupon
             {
                 result = new CouponDTO() {
                      title="已参与",
-                     subTitle="已参与",
+                     subTitle="感谢参与",
                      status=  CouponState.BeParticipatedIn
 
                 };
@@ -211,12 +222,14 @@ namespace Travel.Application.DomainModules.Coupon
 
 
         /// <summary>
-        /// 获取指定优惠券
+        /// 获取指定优惠券,默认未领取
         /// </summary>
         /// <param name="openId"></param>
         /// <param name="coupon"></param>
         /// <returns></returns>
-        private CouponDTO TransformCoupon(Infrastructure.DomainDataAccess.Coupon.Entitys.Coupon coupon)
+        private CouponDTO TransformCoupon(Infrastructure.DomainDataAccess.Coupon.Entitys.Coupon coupon
+
+                ,CouponState status = CouponState.NotReceived)
         {
             CouponDTO result = null;
 
@@ -231,8 +244,9 @@ namespace Travel.Application.DomainModules.Coupon
                     beginTime = coupon.BeginTime.ToString("yyyy-MM-dd"),
                     endTime = coupon.EndTime.ToString("yyyy-MM-dd"),
                     getTime = DateTime.Now.ToString("yyyy-MM-dd"),
-                    couponType = coupon.Type.CouponTypeName 
-                   
+                    couponType = coupon.Type.CouponTypeName ,
+                    status= status
+
                 };
             }
 

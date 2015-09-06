@@ -20,10 +20,16 @@ namespace Travel.Infrastructure.DomainDataAccess.Coupon.Entitys
 
         public DateTime EndTime { get; set; }
 
-       
+       /// <summary>
+       /// 库存数量
+       /// </summary>
         [DefaultValue(0)]
         public int StockQuantity { get; set; }
-        public string Extend2 { get; set; }
+        /// <summary>
+        /// 摇到就领取(无需点击领取)
+        /// </summary>
+        [DefaultValue(false)]
+        public bool ShakeToReceive { get; set; }
         public string Extend3 { get; set; }
         public string Extend4 { get; set; }
 
