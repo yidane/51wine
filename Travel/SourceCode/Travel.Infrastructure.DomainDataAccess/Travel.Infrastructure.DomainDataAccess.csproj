@@ -150,6 +150,10 @@
     <Compile Include="User\UserRepository.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Travel.Infrastructure.OTAWebService\Travel.Infrastructure.OTAWebService.csproj">
+      <Project>{ec23f688-74ad-4bd7-81a6-b02e2cec4572}</Project>
+      <Name>Travel.Infrastructure.OTAWebService</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Travel.Infrastructure.WeiXin\Travel.Infrastructure.WeiXin.csproj">
       <Project>{37afc00a-8d40-45df-98e8-3e671dd420fb}</Project>
       <Name>Travel.Infrastructure.WeiXin</Name>

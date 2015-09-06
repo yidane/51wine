@@ -19,6 +19,12 @@ namespace Travel.Application.DomainModules.Order.Service
             var categories = TicketCategoryEntity.TodayTicketCategory;
             var dto = new List<TicketCategoryDTO>();
 
+            if (!categories.Any())
+            {
+                OTAOrder.SetDailyTicket();
+                categories = TicketCategoryEntity.TodayTicketCategory;
+            }
+
             dto.Add(new TicketCategoryDTO()
                                     {
                                         category = 1,
