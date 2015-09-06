@@ -147,7 +147,7 @@
 
                 </div>
             </div>
-            <div class="botton main-center top-zIndex" id="botton" data-bind="click:$root.afterShake">马上领取</div>
+            <!--<div class="botton main-center top-zIndex" id="botton" data-bind="click:$root.afterShake">马上领取</div>-->
             <AUDIO id="musicBox" src="audios/shake.wav" preload="metadata"></AUDIO>
             <AUDIO id="endMp3" src="audios/end.mp3" preload="metadata"></AUDIO>
         </div>
@@ -230,20 +230,21 @@
     <script src="js/shakeLuckyMoney-vm.js"></script>
     <script>
         var access_code = "";
-        //access_code = $.url.param("code");
-        //if (!access_code) {
-        //    var fromurl = location.href;
-        //    var url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxdd6127bdb5e7611c&redirect_uri='
-        //        + encodeURIComponent(fromurl) +
-        //        '&response_type=code&scope=snsapi_base&state=STATE%23wechat_redirect&connect_redirect=1#wechat_redirect';
-        //    location.href = url;
-        //}
+        access_code = $.url.param("code");
+        if (!access_code) {
+            var fromurl = location.href;
+            var url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxdd6127bdb5e7611c&redirect_uri='
+                + encodeURIComponent(fromurl) +
+                '&response_type=code&scope=snsapi_base&state=STATE%23wechat_redirect&connect_redirect=1#wechat_redirect';
+            location.href = url;
+        }
 
 
         var imagesArray = ['http://www.cloudorg.com.cn/travel/images/shake_background.png',
             'http://www.cloudorg.com.cn/travel/images/hand.png',
             'http://www.cloudorg.com.cn/travel/images/back.jpg',
-        'http://www.cloudorg.com.cn/travel/images/coupon.jpg'
+        'http://www.cloudorg.com.cn/travel/images/coupon.jpg',
+        'http://www.cloudorg.com.cn/travel/images/活动结束.png'
         ];
 
         new preLoader(imagesArray, {
