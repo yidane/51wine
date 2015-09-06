@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Travel.Infrastructure.CommonFunctions;
 
 namespace Travel.Infrastructure.WeiXin.Advanced.Pay
 {
-    /**
-    * 	配置账号信息
-    */
     public class WxPayConfig
     {
         //=======【基本信息设置】=====================================
@@ -17,34 +11,123 @@ namespace Travel.Infrastructure.WeiXin.Advanced.Pay
         * KEY：商户支付密钥，参考开户邮件设置（必须配置）
         * APPSECRET：公众帐号secert（仅JSAPI支付的时候需要配置）
         */
-        public const string APPID = "wxdd6127bdb5e7611c";
-        public const string MCHID = "1266087601";
-        public const string KEY = "4A5E7B87F3324A6DA22E55FDC12150B6";
-        public const string APPSECRET = "78fb32f17d30a6ade836319283ccf118";
+
+        /// <summary>
+        /// 公众号AppID
+        /// </summary>
+        public static string APPID
+        {
+            get
+            {
+                return WebConfigureHelper.Appsettings.WeChatSetting.WeChatAccount.AppID;
+            }
+        }
+
+        /// <summary>
+        /// 公众号密码
+        /// </summary>
+        public static string APPSECRET
+        {
+            get
+            {
+                return WebConfigureHelper.Appsettings.WeChatSetting.WeChatAccount.AppSecret;
+            }
+        }
+
+        /// <summary>
+        /// 商户号
+        /// </summary>
+        public static string MCHID
+        {
+            get
+            {
+                return WebConfigureHelper.Appsettings.WeChatSetting.WeChatPay.MCHID;
+            }
+        }
+
+        /// <summary>
+        /// 商户支付密码
+        /// </summary>
+        public static string KEY
+        {
+            get
+            {
+                return WebConfigureHelper.Appsettings.WeChatSetting.WeChatPay.KEY;
+                return "4A5E7B87F3324A6DA22E55FDC12150B6";
+            }
+        }
 
         //=======【证书路径设置】===================================== 
         /* 证书路径,注意应该填写绝对路径（仅退款、撤销订单时需要）
         */
-        public const string SSLCERT_PATH = "cer/apiclient_cert.p12";
-        public const string SSLCERT_PASSWORD = "1266087601";
+        public static string SSLCERT_PATH
+        {
+            get
+            {
+                return WebConfigureHelper.Appsettings.WeChatSetting.WeChatPay.SSLCERT_PATH;
+            }
+        }
 
+        public static string SSLCERT_PASSWORD
+        {
+            get
+            {
+                return WebConfigureHelper.Appsettings.WeChatSetting.WeChatPay.SSLCERT_PASSWORD;
+            }
+        }
 
+        /// <summary>
+        /// 微信请求过期时间
+        /// </summary>
+        public int UnifiedOrderTimeOut
+        {
+            get
+            {
+                return WebConfigureHelper.Appsettings.WeChatSetting.WeChatPay.UnifiedOrderTimeOut;
+            }
+        }
+
+        /// <summary>
+        /// 微信下单订单失效时间
+        /// </summary>
+        public int UnifiedOrderTimeExpire
+        {
+            get
+            {
+                return WebConfigureHelper.Appsettings.WeChatSetting.WeChatPay.UnifiedOrderTimeExpire;
+            }
+        }
 
         //=======【支付结果通知url】===================================== 
         /* 支付结果通知回调url，用于商户接收支付结果
         */
-        public const string NOTIFY_URL = "http://www.cloudorg.com.cn/travel/message/MessageNotify.aspx";
+        public static string NOTIFY_URL
+        {
+            get
+            {
+                return WebConfigureHelper.Appsettings.WeChatSetting.WeChatPay.UnifiedOrderNotifyUrl;
+            }
+        }
 
         //=======【商户系统后台机器IP】===================================== 
         /* 此参数可手动配置也可在程序中自动获取
         */
-        public const string IP = "219.234.2.189";
+        public static string IP
+        {
+            get
+            {
+                return "219.234.2.189";
+            }
+        }
 
 
         //=======【代理服务器设置】===================================
         /* 默认IP和端口号分别为0.0.0.0和0，此时不开启代理（如有需要才设置）
         */
-        public const string PROXY_URL = "proxy1.bj.petrochina:8080";
+        public static string PROXY_URL
+        {
+            get { return "proxy1.bj.petrochina:8080"; }
+        }
 
         //=======【上报信息配置】===================================
         /* 测速上报等级，0.关闭上报; 1.仅错误时上报; 2.全量上报

@@ -11,8 +11,7 @@ namespace Travel.Infrastructure.OTAWebService
         {
             get
             {
-                //return WebConfigureHelper.Appsettings.OTAConfigSetting.OTAServiceUrl;
-                return "http://223.223.179.17:8090/service.asmx";
+                return WebConfigureHelper.Appsettings.OTAConfigSetting.OTAServiceUrl;
             }
         }
 
@@ -20,19 +19,24 @@ namespace Travel.Infrastructure.OTAWebService
         {
             get
             {
-                return "weixin.qq.com";
+                return WebConfigureHelper.Appsettings.OTAConfigSetting.MerchantCode;
             }
         }
 
         public static string MerchantKey
         {
-            get { return "25ED9785746E41E9A832A2AFFDF6BF54"; }
+            get
+            {
+                return WebConfigureHelper.Appsettings.OTAConfigSetting.MerchantKey;
+            }
         }
 
         public static string ParkCode
         {
-            //get { return "BERJPARK"; }
-            get { return "gspf"; }
+            get
+            {
+                return WebConfigureHelper.Appsettings.OTAConfigSetting.ParkCode;
+            }
         }
 
         /// <summary>

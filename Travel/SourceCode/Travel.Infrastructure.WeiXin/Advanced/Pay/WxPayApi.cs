@@ -339,7 +339,7 @@ namespace Travel.Infrastructure.WeiXin.Advanced.Pay
         * @throws WxPayException
         * @return 成功时返回，其他抛异常
         */
-        public static UnifiedOrderResult UnifiedOrder(WxPayData inputObj, int timeOut = 6)
+        public static UnifiedOrderResult UnifiedOrder(WxPayData inputObj)
         {
             string url = "https://api.mch.weixin.qq.com/pay/unifiedorder";
             //检测必填参数
@@ -387,6 +387,7 @@ namespace Travel.Infrastructure.WeiXin.Advanced.Pay
 
             var start = DateTime.Now;
 
+            var timeOut = 6;
             LogManager.Debug("WxPayApi", "UnfiedOrder request : " + xml);
             var response = HttpService.Post(xml, url, false, timeOut);
             LogManager.Debug("WxPayApi", "UnfiedOrder response : " + response);

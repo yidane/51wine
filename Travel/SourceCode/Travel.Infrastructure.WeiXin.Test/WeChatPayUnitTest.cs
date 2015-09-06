@@ -19,6 +19,7 @@ namespace Travel.Infrastructure.WeiXin.Test
                 {
                     body = "yidane Test body",
                     openid = "obzTsw5qxlbwGYYZJC9b-91J-X1Y",
+                    out_trade_no = WxPayHelper.GenerateOutTradeNo(),
                     attach = "attach test",
                     total_fee = 1,
                     goods_tag = "goods_tag test"
@@ -40,6 +41,7 @@ namespace Travel.Infrastructure.WeiXin.Test
                 {
                     body = "yidane Test body",
                     openid = "obzTsw5qxlbwGYYZJC9b-91J-X1Y",
+                    out_trade_no = WxPayHelper.GenerateOutTradeNo(),
                     attach = "attach test",
                     total_fee = 1,
                     goods_tag = "goods_tag test"
@@ -107,7 +109,7 @@ namespace Travel.Infrastructure.WeiXin.Test
             var refundOrderRequest = new RefundOrderRequest
                 {
                     transaction_id = "1007750117201509020771798876",
-                   // out_trade_no = "C2015090204471208755383",
+                    // out_trade_no = "C2015090204471208755383",
                     total_fee = 1,
                     refund_fee = 1,
                     out_refund_no = WxPayHelper.GenerateOutTradeNo()

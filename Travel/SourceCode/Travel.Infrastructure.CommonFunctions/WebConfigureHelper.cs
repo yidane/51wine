@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Travel.Infrastructure.CommonFunctions
 {
@@ -40,13 +37,13 @@ namespace Travel.Infrastructure.CommonFunctions
                     /// <summary>
                     /// 公众号AppID
                     /// </summary>
-                    public string AppID
+                    public static string AppID
                     {
                         get
                         {
-                            var appId = System.Configuration.ConfigurationManager.AppSettings["AppID"];
+                            var appId = System.Configuration.ConfigurationManager.AppSettings["WeixinAppId"];
                             if (string.IsNullOrEmpty(appId))
-                                throw new Exception("AppID尚未配置或配置的值为空");
+                                throw new Exception("WeixinAppId尚未配置或配置的值为空");
                             return appId;
                         }
                     }
@@ -54,13 +51,13 @@ namespace Travel.Infrastructure.CommonFunctions
                     /// <summary>
                     /// 公众号密码
                     /// </summary>
-                    public string AppSecret
+                    public static string AppSecret
                     {
                         get
                         {
-                            var appSecret = System.Configuration.ConfigurationManager.AppSettings["AppSecret"];
+                            var appSecret = System.Configuration.ConfigurationManager.AppSettings["WeixinSecret"];
                             if (string.IsNullOrEmpty(appSecret))
-                                throw new Exception("AppSecret尚未配置或配置的值为空");
+                                throw new Exception("WeixinSecret尚未配置或配置的值为空");
                             return appSecret;
                         }
                     }
@@ -71,7 +68,7 @@ namespace Travel.Infrastructure.CommonFunctions
                     /// <summary>
                     /// 商户号
                     /// </summary>
-                    public string MCHID
+                    public static string MCHID
                     {
                         get
                         {
@@ -85,7 +82,7 @@ namespace Travel.Infrastructure.CommonFunctions
                     /// <summary>
                     /// 商户支付密码
                     /// </summary>
-                    public string KEY
+                    public static string KEY
                     {
                         get
                         {
@@ -99,7 +96,7 @@ namespace Travel.Infrastructure.CommonFunctions
                     /// <summary>
                     /// 统一下单时候订单失效时间，单位（分钟）
                     /// </summary>
-                    public int UnifiedOrderTimeExpire
+                    public static int UnifiedOrderTimeExpire
                     {
                         get
                         {
@@ -116,7 +113,7 @@ namespace Travel.Infrastructure.CommonFunctions
                     /// <summary>
                     /// 统一下单操作过期时间，单位（秒）
                     /// </summary>
-                    public int UnifiedOrderTimeOut
+                    public static int UnifiedOrderTimeOut
                     {
                         get
                         {
@@ -133,7 +130,7 @@ namespace Travel.Infrastructure.CommonFunctions
                     /// <summary>
                     /// 微信下单异步通知url
                     /// </summary>
-                    public string UnifiedOrderNotifyUrl
+                    public static string UnifiedOrderNotifyUrl
                     {
                         get
                         {
@@ -147,7 +144,7 @@ namespace Travel.Infrastructure.CommonFunctions
                     /// <summary>
                     /// 证书路径
                     /// </summary>
-                    public string SSLCERT_PATH
+                    public static string SSLCERT_PATH
                     {
                         get
                         {
@@ -161,7 +158,7 @@ namespace Travel.Infrastructure.CommonFunctions
                     /// <summary>
                     /// 证书密码
                     /// </summary>
-                    public string SSLCERT_PASSWORD
+                    public static string SSLCERT_PASSWORD
                     {
                         get
                         {
@@ -216,6 +213,8 @@ namespace Travel.Infrastructure.CommonFunctions
                 {
                     get
                     {
+
+
                         var parkCode = System.Configuration.ConfigurationManager.AppSettings["ParkCode"];
                         if (string.IsNullOrEmpty(parkCode))
                             throw new Exception("ParkCode尚未配置或配置的值为空");
@@ -223,6 +222,11 @@ namespace Travel.Infrastructure.CommonFunctions
                     }
                 }
             }
+        }
+
+        private string ReadAppConfig()
+        {
+            return string.Empty;
         }
     }
 }
