@@ -264,8 +264,8 @@ namespace Travel.Application.DomainModules.Order.Core
                                         ECode = string.Empty,
                                         CreateTime = DateTime.Now,
                                         LatestModifyTime = DateTime.Now,
-                                        TicketStartTime = DateTime.Now.AddMonths(8),
-                                        TicketEndTime = DateTime.Now.AddMonths(8)
+                                        TicketStartTime = DateTime.Now,
+                                        TicketEndTime = DateTime.Now.AddYears(1)
                                     });
                     }
                     else

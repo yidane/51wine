@@ -31,8 +31,8 @@ namespace Travel.Application.OrderUnitTest
             this.OrderRequest = new OrderRequestEntity()
                                {
                                    OpenId = "obzTswxzFzzzdWdAKf2mWx3CrpXk",
-                                   TicketCategory = "997E4998-8DD8-4C9A-8EE5-97F3653F843E",
-                                   TicketName = "学生票一进",
+                                   TicketCategory = "EC9CDD60-DE30-47A1-8025-1FB301F35825",
+                                   TicketName = "布尔津测试门票",
                                    Count = 1,
                                    CouponId = string.Empty,
                                    ContactPersonName = "ybh",

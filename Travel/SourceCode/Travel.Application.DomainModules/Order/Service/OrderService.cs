@@ -133,37 +133,42 @@ namespace Travel.Application.DomainModules.Order.Service
 
         public IList<RefundTicketDTO> MyRefundTickets(string openId)
         {
-            var myOrders =
+            var tickets = new List<RefundTicketDTO>();
+
+            if (!string.IsNullOrEmpty(openId))
+            {
+                var myOrders =
                 OrderEntity.GetMyOrders(openId)
                     .Where(
                         item =>
                         item.OrderStatus.Equals(OrderStatus.OrderStatus_WaitUse)
                         || item.OrderStatus.Equals(OrderStatus.OrderStatus_Used));
 
-            var tickets = new List<RefundTicketDTO>();
-            foreach (var order in myOrders)
-            {
-                tickets.AddRange(
-                    order.Tickets.Where(
-                        item => item.TicketStatus.Equals(OrderStatus.TicketStatus_Refund_Audit)
-                        || item.TicketStatus.Equals(OrderStatus.TicketStatus_Refund_RefundPayProcessing)
-                        || item.TicketStatus.Equals(OrderStatus.TicketStatus_Refund_Complete)
-                        || item.TicketStatus.Equals(OrderStatus.TicketStatus_Refund_WaitRefundFee))
-                        .Select(item => new RefundTicketDTO
-                                            {
-                                                TicketId = item.TicketId,
-                                                OrderId = item.OrderId.ToString(),
-                                                OrderCode = order.OrderCode,
-                                                DeadLineDate = item.TicketStartTime.ToString("yyyy-MM-dd"),
-                                                TicketCategoryId = item.TicketCategoryId.ToString(),
-                                                TicketName = TicketCategoryEntity.GetTicketNameByTicketCategoryId(item.TicketCategoryId),
-                                                TicketCode = item.TicketCode,
-                                                Price = item.Price.ToString(),
-                                                TicketStatus = this.getTicketStatus(item.TicketStatus),
-                                                ECode = item.ECode
-                                            }).ToList());
-            }
 
+                foreach (var order in myOrders)
+                {
+                    tickets.AddRange(
+                        order.Tickets.Where(
+                            item => item.TicketStatus.Equals(OrderStatus.TicketStatus_Refund_Audit)
+                            || item.TicketStatus.Equals(OrderStatus.TicketStatus_Refund_RefundPayProcessing)
+                            || item.TicketStatus.Equals(OrderStatus.TicketStatus_Refund_Complete)
+                            || item.TicketStatus.Equals(OrderStatus.TicketStatus_Refund_WaitRefundFee))
+                            .Select(item => new RefundTicketDTO
+                            {
+                                TicketId = item.TicketId,
+                                OrderId = item.OrderId.ToString(),
+                                OrderCode = order.OrderCode,
+                                DeadLineDate = item.TicketStartTime.ToString("yyyy-MM-dd"),
+                                TicketCategoryId = item.TicketCategoryId.ToString(),
+                                TicketName = TicketCategoryEntity.GetTicketNameByTicketCategoryId(item.TicketCategoryId),
+                                TicketCode = item.TicketCode,
+                                Price = item.Price.ToString(),
+                                TicketStatus = this.getTicketStatus(item.TicketStatus),
+                                ECode = item.ECode
+                            }).ToList());
+                }
+            }
+            
             return tickets;
         }
 
