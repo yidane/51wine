@@ -30,6 +30,7 @@ var LuckyMoneyViewModel = function ($domParam, param) {
         },
         owner: this
     });
+    this.expired=ko.observable();
 
     this.wxConfig = ko.observable();
     this.jsApiList = ko.observableArray(["hideAllNonBaseMenuItem", "showMenuItems", "onMenuShareAppMessage", "addCard"]);
@@ -151,13 +152,27 @@ var LuckyMoneyViewModel = function ($domParam, param) {
            .done(function (json) {
                if (json.IsSuccess) {
                    self.coupon(json.Data.coupon);
-                   self.couponStatus(json.Data.coupon.status);
+                   if(json.Data.coupon)
+                   {
+                       self.couponStatus(json.Data.coupon.status);
+                       if(json.Data.coupon.status!=3)
+                       {
+
+                               self.jumpToMyCoupons(3000);
+
+                       }
+                   }
+                   else
+                   {
+                       self.expired(1);
+                   }
+
                    self.user(json.Data.user);
                    //alert(json.Data);
                    //alert(json.Data.openId);
                    setTimeout(function () {
                        self.$DomParm().$endMp3[0].play();
-                       self.jumpToMyCoupons(2000);
+
                    }, 1000);
                }
                else {

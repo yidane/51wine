@@ -210,8 +210,7 @@ body {
 }
 
 #receiveBtn {
-    background-color: #63B901;
-    box-shadow: 0 0.3rem 0 #4C8F02;
+    box-shadow: 0 0.3rem 0 #b80b00;
     border: none;
 }
 #receiveBtn:disabled
@@ -323,6 +322,16 @@ body .pgwModal .pm-body {
     font-size: 13px;
     margin-left: 10px;
     color: #333333;
+}
+
+.div-expired {
+    background:url(../images/活动结束.png) 100% no-repeat;
+    height: 100%;
+    width: 100%;
+
+
+    -webkit-animation: bounceInDown 1.5s ease-out 0s both;
+    animation: bounceInDown 1.5s ease-out 0s both;
 }
 
 @media screen and (max-width:320px) {

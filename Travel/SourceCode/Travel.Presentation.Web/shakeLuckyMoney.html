@@ -136,7 +136,7 @@
     </div>
 
     <div id="div_content" style="height: 100%;width:100%; display:none">
-        <div class="fullpage" data-bind="visible:$root.coupon()==null"
+        <div class="fullpage" data-bind="visible:$root.user()==null"
              style="background-color:#313E4F">
             <img src="images/shake_background.png" class="shake-back" />
 
@@ -147,10 +147,11 @@
 
                 </div>
             </div>
-            <!--<div class="botton main-center top-zIndex" id="botton" data-bind="click:$root.afterShake">马上领取</div>-->
+            <div class="botton main-center top-zIndex" id="botton" data-bind="click:$root.afterShake">马上领取</div>
             <AUDIO id="musicBox" src="audios/shake.wav" preload="metadata"></AUDIO>
             <AUDIO id="endMp3" src="audios/end.mp3" preload="metadata"></AUDIO>
         </div>
+        <div class="div-expired" data-bind="visible:$root.expired()!=null" style="display:none"></div>
         <div class="div-gift" data-bind="visible:coupon" style="display:none">
             <div class="main">
                 <div class="redEnvelope">
@@ -229,14 +230,14 @@
     <script src="js/shakeLuckyMoney-vm.js"></script>
     <script>
         var access_code = "";
-        access_code = $.url.param("code");
-        if (!access_code) {
-            var fromurl = location.href;
-            var url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxdd6127bdb5e7611c&redirect_uri='
-                + encodeURIComponent(fromurl) +
-                '&response_type=code&scope=snsapi_base&state=STATE%23wechat_redirect&connect_redirect=1#wechat_redirect';
-            location.href = url;
-        }
+        //access_code = $.url.param("code");
+        //if (!access_code) {
+        //    var fromurl = location.href;
+        //    var url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxdd6127bdb5e7611c&redirect_uri='
+        //        + encodeURIComponent(fromurl) +
+        //        '&response_type=code&scope=snsapi_base&state=STATE%23wechat_redirect&connect_redirect=1#wechat_redirect';
+        //    location.href = url;
+        //}
 
 
         var imagesArray = ['http://www.cloudorg.com.cn/travel/images/shake_background.png',

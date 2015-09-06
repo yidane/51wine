@@ -224,6 +224,7 @@ namespace Travel.Infrastructure.DomainDataAccess.Coupon
             //result = coupons.Any();
             return result;
         }
+
         /// <summary>
         /// 获取现有可用的优惠券
         /// </summary>
