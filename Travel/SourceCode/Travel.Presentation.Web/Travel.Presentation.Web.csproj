@@ -388,6 +388,7 @@
     <Content Include="bower_components\font-awesome\scss\_variables.scss" />
     <Content Include="cer\apiclient_cert.p12" />
     <None Include="Properties\PublishProfiles\jin.pubxml" />
+    <None Include="Properties\PublishProfiles\JXiaoX.pubxml" />
     <None Include="Properties\PublishProfiles\Travel.pubxml" />
     <Content Include="Scripts\qrcode.min.js.map" />
     <Content Include="Scripts\jquery.qrcode.min.js.map" />
