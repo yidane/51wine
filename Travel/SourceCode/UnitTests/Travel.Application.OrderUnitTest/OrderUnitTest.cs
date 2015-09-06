@@ -123,6 +123,10 @@ namespace Travel.Application.OrderUnitTest
 
             service.GetTicketCategoryList();
 
+            service.MyOrders("obzTswxzFzzzdWdAKf2mWx3CrpXk");
+
+            
+
             service.MyRefundTickets("obzTswxzFzzzdWdAKf2mWx3CrpXk");
             //service.RefundTickets("35D7650B-21C1-45CD-B15D-2203857B7977", 1);
             service.SearchTicketStatus(100);

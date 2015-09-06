@@ -73,6 +73,23 @@ namespace Travel.Infrastructure.DomainDataAccess.Order
             }
         }
 
+        public static string GetTicketNameByTicketCategoryId(Guid categoryId)
+        {
+            using (var db = new TravelDBContext())
+            {
+                var category = db.TicketCategory.FirstOrDefault(item => item.TicketCategoryId.Equals(categoryId));
+
+                if (category != null)
+                {
+                    return category.TicketName;
+                }
+                else
+                {
+                    return string.Empty;
+                }
+            }
+        }
+
         public static void SetTicketCategory(IEnumerable<TicketCategoryEntity> categories)
         {
             using (var db = new TravelDBContext())

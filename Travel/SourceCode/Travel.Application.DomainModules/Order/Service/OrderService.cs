@@ -77,18 +77,23 @@ namespace Travel.Application.DomainModules.Order.Service
         public IList<OrderDTO> MyOrders(string openId)
         {
             var orders = OrderEntity.GetMyOrders(openId);
-            var dto = orders.Where(item => item.OrderStatus.Equals(OrderStatus.OrderStatus_WaitUse))
-                .Select(item => new OrderDTO()
-                                                {
-                                                    OrderId = item.OrderId.ToString(),
-                                                    OrderCode = item.OrderCode,
-                                                    singleTicketPrice = item.Tickets.First().Price,
-                                                    TotelFee = item.TotalFee(),
-                                                    TicketCount = item.Tickets.Count,
-                                                    TicketName = TicketCategoryEntity.TodayTicketCategory.FirstOrDefault(i => i.TicketCategoryId.Equals(item.Tickets.First().TicketCategoryId)).TicketName,
-                                                    BuyTime = item.Tickets.First().CreateTime.ToString("yyyy-MM-dd")
-                                                }).ToList();
+            var dto = new List<OrderDTO>();
 
+            if (orders.Any(item => item.OrderStatus.Equals(OrderStatus.OrderStatus_WaitUse)))
+            {
+                dto = orders.Where(item => item.OrderStatus.Equals(OrderStatus.OrderStatus_WaitUse))
+                        .Select(item => new OrderDTO()
+                        {
+                            OrderId = item.OrderId.ToString(),
+                            OrderCode = item.OrderCode,
+                            singleTicketPrice = item.Tickets.First().Price,
+                            TotelFee = item.TotalFee(),
+                            TicketCount = item.Tickets.Count,
+                            TicketName = TicketCategoryEntity.GetTicketNameByTicketCategoryId(item.Tickets.First().TicketCategoryId),
+                            BuyTime = item.Tickets.First().CreateTime.ToString("yyyy-MM-dd")
+                        }).ToList();
+            }
+            
             return dto;
         }
 
