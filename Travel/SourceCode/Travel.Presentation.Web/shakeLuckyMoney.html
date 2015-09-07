@@ -227,17 +227,18 @@
     <script type="text/javascript" src="js/mobilePhoneShake.min.js"></script>
     <script src="javaScripts/pre-loader.js"></script>
     <script src="javaScripts/knockout-3.3.0.js"></script>
+    <script src="js/oAuth2.js"></script>
     <script src="js/shakeLuckyMoney-vm.js"></script>
     <script>
-        var access_code = "";
-        access_code = $.url.param("code");
-        if (!access_code) {
-            var fromurl = location.href;
-            var url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx4986bb37d9c48302&redirect_uri='
-                + encodeURIComponent(fromurl) +
-                '&response_type=code&scope=snsapi_base&state=STATE%23wechat_redirect&connect_redirect=1#wechat_redirect';
-            location.href = url;
-        }
+        //var access_code = "";
+        //access_code = $.url.param("code");
+        //if (!access_code) {
+        //    var fromurl = location.href;
+        //    var url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxdd6127bdb5e7611c&redirect_uri='
+        //        + encodeURIComponent(fromurl) +
+        //        '&response_type=code&scope=snsapi_base&state=STATE%23wechat_redirect&connect_redirect=1#wechat_redirect';
+        //    location.href = url;
+        //}
 
 
         var imagesArray = ['http://www.cloudorg.com.cn/travel/images/shake_background.png',
