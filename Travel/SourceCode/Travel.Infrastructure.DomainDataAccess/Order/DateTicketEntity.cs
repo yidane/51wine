@@ -79,16 +79,27 @@ namespace Travel.Infrastructure.DomainDataAccess.Order
         {
             var now = DateTime.Now.Date;
             var tomorrow = now.AddDays(1);
+
+            // todo: 修改订票方式
+            //using (var db = new TravelDBContext())
+            //{
+            //    return db.DateTicket.Where(
+            //            item =>
+            //                item.SearchDateTime >= now
+            //                && item.SearchDateTime < tomorrow
+            //                && item.CurrentStatus.Equals(OrderStatus.DateTicketStatus_Init)
+            //                && item.TicketName.Equals(ticketName))
+            //        .OrderBy(item => item.DateTicketId)
+            //        .Take(nomber).ToList();
+            //}
+
             using (var db = new TravelDBContext())
             {
                 return db.DateTicket.Where(
                         item =>
                             item.SearchDateTime >= now
                             && item.SearchDateTime < tomorrow
-                            && item.CurrentStatus.Equals(OrderStatus.DateTicketStatus_Init)
-                            && item.TicketName.Equals(ticketName))
-                    .OrderBy(item => item.DateTicketId)
-                    .Take(nomber).ToList();
+                            && item.TicketName.Equals(ticketName)).ToList();
             }
         }
 

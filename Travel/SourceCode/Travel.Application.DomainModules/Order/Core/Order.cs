@@ -240,40 +240,78 @@ namespace Travel.Application.DomainModules.Order.Core
         {
             var tickets = new List<TicketEntity>();
 
+            // todo: 修改订票规则
+            //if (this.DateTicketList.Any())
+            //{
+            //    foreach (var dateTicket in this.DateTicketList)
+            //    {
+            //        var ticketCategory =
+            //            TicketCategoryEntity.TodayTicketCategory.FirstOrDefault(
+            //                item => item.TicketName.Equals(this.OrderRequest.TicketName));
+
+            //        if (ticketCategory != null)
+            //        {
+            //            tickets.Add(new TicketEntity()
+            //                        {
+            //                            TicketId = dateTicket.DateTicketId,
+            //                            OrderId = this.OrderObj.OrderId,
+            //                            RefundOrderId = default(Guid?),
+            //                            RefundOrderDetailId = default(Guid?),
+            //                            OrderDetailId = this.OrderObj.OrderDetails.First().OrderDetailId,
+            //                            TicketCategoryId = ticketCategory.TicketCategoryId,
+            //                            TicketCode = dateTicket.TicketCode,
+            //                            Price = dateTicket.TicketPrice,
+            //                            TicketStatus = OrderStatus.TicketStatus_Init,
+            //                            ECode = string.Empty,
+            //                            CreateTime = DateTime.Now,
+            //                            LatestModifyTime = DateTime.Now,
+            //                            TicketStartTime = DateTime.Parse("2015-10-01"),// DateTime.Now,
+            //                            TicketEndTime = DateTime.Now.AddYears(1)
+            //                        });
+            //        }
+            //        else
+            //        {
+            //            tickets.Clear();
+            //            break;
+            //        }
+            //    }
+            //}
+
             if (this.DateTicketList.Any())
             {
-                foreach (var dateTicket in this.DateTicketList)
-                {
-                    var ticketCategory =
+                var ticketCategory =
                         TicketCategoryEntity.TodayTicketCategory.FirstOrDefault(
                             item => item.TicketName.Equals(this.OrderRequest.TicketName));
 
+                for (int i = 0; i < this.OrderRequest.Count; i++)
+                {
                     if (ticketCategory != null)
                     {
                         tickets.Add(new TicketEntity()
-                                    {
-                                        TicketId = dateTicket.DateTicketId,
-                                        OrderId = this.OrderObj.OrderId,
-                                        RefundOrderId = default(Guid?),
-                                        RefundOrderDetailId = default(Guid?),
-                                        OrderDetailId = this.OrderObj.OrderDetails.First().OrderDetailId,
-                                        TicketCategoryId = ticketCategory.TicketCategoryId,
-                                        TicketCode = dateTicket.TicketCode,
-                                        Price = dateTicket.TicketPrice,
-                                        TicketStatus = OrderStatus.TicketStatus_Init,
-                                        ECode = string.Empty,
-                                        CreateTime = DateTime.Now,
-                                        LatestModifyTime = DateTime.Now,
-                                        TicketStartTime = DateTime.Parse("2015-10-01"),// DateTime.Now,
-                                        TicketEndTime = DateTime.Now.AddYears(1)
-                                    });
+                        {
+                            TicketId = new Random((unchecked((int)DateTime.Now.Ticks + i))).Next(1000000, 9999999),
+                            OrderId = this.OrderObj.OrderId,
+                            RefundOrderId = default(Guid?),
+                            RefundOrderDetailId = default(Guid?),
+                            OrderDetailId = this.OrderObj.OrderDetails.First().OrderDetailId,
+                            TicketCategoryId = ticketCategory.TicketCategoryId,
+                            TicketCode = DateTicketList.FirstOrDefault().TicketCode,
+                            TicketProductId = DateTicketList.FirstOrDefault().DateTicketId,
+                            Price = DateTicketList.FirstOrDefault().TicketPrice,
+                            TicketStatus = OrderStatus.TicketStatus_Init,
+                            ECode = string.Empty,
+                            CreateTime = DateTime.Now,
+                            LatestModifyTime = DateTime.Now,
+                            TicketStartTime = DateTime.Now,
+                            TicketEndTime = DateTime.Now.AddYears(1)
+                        });
                     }
                     else
                     {
                         tickets.Clear();
                         break;
                     }
-                }
+                }                
             }
 
             return tickets;

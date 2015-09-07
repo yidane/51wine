@@ -59,26 +59,46 @@ namespace Travel.Application.DomainModules.Order.Core
 
             foreach (var ticket in this.MainOrder.OrderObj.Tickets)
             {
-                var dateTicket = this.MainOrder.DateTicketList.FirstOrDefault(item => item.DateTicketId == ticket.TicketId);
+                // todo: 修改订单规则
+                //var dateTicket = this.MainOrder.DateTicketList.FirstOrDefault(item => item.DateTicketId == ticket.TicketId);
+
+                var dateTicket = this.MainOrder.DateTicketList.FirstOrDefault();
                 var orderDetail = this.MainOrder.OrderObj.OrderDetails.FirstOrDefault();
 
                 if (dateTicket != null && orderDetail != null)
                 {
+                    // todo: 修改订单规则
+                    //otaDetail.Add(new OTARequest.Detail()
+                    //             {
+                    //                 OrderNO = otaOrder.OrderNO,
+                    //                 ItemID = orderDetail.OrderDetailId.ToString(),
+                    //                 ProductCode = ticket.TicketCode,
+                    //                 ProductID = ticket.TicketId,
+                    //                 ProductPackID = dateTicket.TicketPackageId,
+                    //                 ProductName = dateTicket.TicketName,
+                    //                 ProductPrice = dateTicket.TicketPrice,
+                    //                 ProductCount = 1,
+                    //                 ProductEDate = ticket.TicketEndTime.ToString("yyyy-MM-dd"),
+                    //                 ProductSDate = ticket.TicketStartTime.ToString("yyyy-MM-dd"),
+                    //                 ItemType = string.Empty,
+                    //                 ECode = string.Empty
+                    //             });
+
                     otaDetail.Add(new OTARequest.Detail()
-                                 {
-                                     OrderNO = otaOrder.OrderNO,
-                                     ItemID = orderDetail.OrderDetailId.ToString(),
-                                     ProductCode = ticket.TicketCode,
-                                     ProductID = ticket.TicketId,
-                                     ProductPackID = dateTicket.TicketPackageId,
-                                     ProductName = dateTicket.TicketName,
-                                     ProductPrice = dateTicket.TicketPrice,
-                                     ProductCount = 1,
-                                     ProductEDate = ticket.TicketEndTime.ToString("yyyy-MM-dd"),
-                                     ProductSDate = ticket.TicketStartTime.ToString("yyyy-MM-dd"),
-                                     ItemType = string.Empty,
-                                     ECode = string.Empty
-                                 });
+                    {
+                        OrderNO = otaOrder.OrderNO,
+                        ItemID = ticket.TicketId.ToString(),
+                        ProductCode = ticket.TicketCode,
+                        ProductID = ticket.TicketProductId,
+                        ProductPackID = dateTicket.TicketPackageId,
+                        ProductName = dateTicket.TicketName,
+                        ProductPrice = dateTicket.TicketPrice,
+                        ProductCount = 1,
+                        ProductEDate = ticket.TicketEndTime.ToString("yyyy-MM-dd"),
+                        ProductSDate = ticket.TicketStartTime.ToString("yyyy-MM-dd"),
+                        ItemType = string.Empty,
+                        ECode = string.Empty
+                    });
                 }
                 else
                 {
