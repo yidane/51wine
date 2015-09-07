@@ -96,6 +96,10 @@
     <Content Include="Guide\images\scenic_name.png" />
     <Content Include="Guide\images\stamp.png" />
     <Content Include="Guide\images\step.png" />
+    <Content Include="Guide\images\step1.png" />
+    <Content Include="Guide\images\step2.png" />
+    <Content Include="Guide\images\step3.png" />
+    <Content Include="Guide\images\step4.png" />
     <Content Include="Guide\images\sx.png" />
     <Content Include="Guide\images\wl.png" />
     <Content Include="Guide\images\yl.png" />

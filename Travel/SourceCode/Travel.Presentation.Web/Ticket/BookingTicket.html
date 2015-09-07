@@ -5,71 +5,68 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
     <title>门票预订</title>
     <link rel="stylesheet" href="../Styles/TicketList.css" />
-    <!--<link href="../styles/swiper.min.css" rel="stylesheet" />-->
+    <link href="../styles/swiper.min.css" rel="stylesheet" />
     <script src="../javaScripts/zepto.min.js"></script>
     <script src="../javaScripts/knockout-3.3.0.js"></script>
-    <style>
-        .modal-backdrop {
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
-            /*z-index: 1000;*/
-            background-color: gray;
-            opacity: 0.4;
-        }
-    </style>
 </head>
 <body>
-
-
-    <!--<div class="tab tabs">-->
-    <div class="tab-navs">
-        <a href="javascript:;" class="active">全部</a>
-        <a href="javascript:;">门票</a>
-        <a href="javascript:;">车票</a>
-    </div>
-    <div id="tabs-container" class="swiper-container container">
-        <div class="swiper-wrapper" data-bind='foreach: Data'>
-            <div class="swiper-slide">
-                <div class="content-slide">
-                    <div class="tab-pane active">
-                        <div class="panel panel-default" data-bind='foreach: content'>
-                            <div class="panel-bd" data-bind="style: { backgroundImage: image }">
-                                <a data-bind="attr: { 'href': 'TicketDetail.html?ticketid=' + ticketCategoryId + '&ticketName=' + ticketName + '&price=' + price+'&code='+$root.access_code() }" class="thumb-active">
-
-                                    <div class="thumb-cover pull-left">
-                                        <div class="thumb-cnt">
-                                            <span class="title text-white">
-                                                <!--ko text: ticketName-->
-                                                <!--/ko-->
-                                                <!--ko text: price-->
-                                                <!--/ko-->
-                                            </span><span class="other text-white">元</span>
-                                        </div>
-                                        <div class="mask modal-backdrop"></div>
-                                    </div>
-                                </a>
+    <div class="container">
+        <ul class="tab-navs">
+            <li class="active">全部</li>
+            <li>门票</li>
+            <li>车票</li>
+        </ul>
+        <div id="tabs-container" class="swiper-container tabs-container">
+            <div class="swiper-wrapper" data-bind='foreach: Data'>
+                <div class="swiper-slide">
+                    <ul class="ticket-list" data-bind='foreach: content'>
+                        <!-- ko if: canUse === false -->
+                        <li>
+                            <div class="ticket-detail" data-bind="style:{backgroundImage:image}">
+                                <span class="title">
+                                    <!--ko text: ticketName-->
+                                    <!--/ko-->
+                                    <span class="price">
+                                        <!--ko text: price-->
+                                        <!--/ko-->元
+                                    </span>
+                                </span>
                                 <span class="recommend"></span>
                             </div>
-                        </div>
-                    </div>
+                            <div class="tip"><span>敬请期待</span></div>
+                        </li>
+                        <!-- /ko -->
+                        <!-- ko if: canUse === true -->
+                        <li data-bind="style:{backgroundImage:image}">
+                            <a data-bind="attr: { 'href': 'TicketDetail.html?ticketid=' + ticketCategoryId + '&ticketName=' + ticketName + '&price=' + price+'&code='+$root.access_code }">
+                                <div class="ticket-detail">
+                                    <span class="title">
+                                        <!--ko text: ticketName-->
+                                        <!--/ko-->
+                                    </span>
+                                    <span class="price">
+                                        <!--ko text: price-->
+                                        <!--/ko-->元
+                                    </span>
+                                </div>
+                                <span class="recommend"></span>
+                            </a>
+                        </li>
+                        <!-- /ko -->
+                    </ul>
                 </div>
             </div>
         </div>
     </div>
-    <!--</div>-->
     <script src="../js/oAuth2.js"></script>
     <script src="../javaScripts/swiper.min.js"></script>
     <script>
-        
         $(function () {
 
             loadTicket();
         });
     </script>
     <script type="text/javascript">
-       
         function loadTicket() {
             $.ajax({
                 type: "post",
@@ -77,8 +74,8 @@
                 dataType: 'json',
                 success: function (result) {
                     if (result.IsSuccess) {
-                       
-                        result.access_code=getCode;
+
+                        result.access_code = getCode();
                         ko.applyBindings(result);
                         initSwiper();
                     } else {
@@ -87,18 +84,20 @@
                 }
             });
         }
+
         function initSwiper() {
             var tabsSwiper = new Swiper('.swiper-container', {
                 speed: 500,
                 onSlideChangeStart: function () {
-                    $(".tab-navs a.active").removeClass('active');
-                    $(".tab-navs a").eq(tabsSwiper.activeIndex).addClass('active');
-
-                    //$(".tab-pane .active").removeClass('active');
-                    //$(".tab-pane").eq(tabsSwiper.activeIndex).addClass('active');
+                    $(".tab-navs li.active").removeClass('active');
+                    $(".tab-navs li").eq(tabsSwiper.activeIndex).addClass('active');
                 },
                 onSlideChangeEnd: function (swiper) {
-                    swiper.container[0].scrollTop = 0;
+                    var scrollingElement = document.documentElement;
+                    if (document.scrollingElement) {
+                        scrollingElement = document.scrollingElement;
+                    }
+                    scrollingElement.scrollTop = 0;
                 }
             });
 
@@ -113,7 +112,7 @@
             });
         }
 
-        function getCode(){
+        function getCode() {
             return access_code;
         }
     </script>
