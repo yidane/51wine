@@ -230,7 +230,11 @@
     <script src="js/oAuth2.js"></script>
     <script src="js/shakeLuckyMoney-vm.js"></script>
     <script>
-
+        function getBaseUrl() {
+            var re = new RegExp(/^.*\//);
+            return re.exec(window.location.href);
+        }
+      //  var access_code = '';
 
         var baseurl = getBaseUrl();
 
@@ -278,7 +282,7 @@
             }
         });
 
-
+      
 
        
 

@@ -15,7 +15,7 @@ namespace Travel.Infrastructure.WeiXin.Test
         public void GetCoupon_ReturnRandomCoupon_ByOpenID()
         {
             //随机数量是1
-            string openId = "testid";
+            string openId = "obzTsw3oHcJPbZ8X3mCUnGuCFDOY";
             var service= new CouponService();
             var user = new UserInfoDTO() {
                 openid=openId,

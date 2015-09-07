@@ -38,7 +38,7 @@ namespace Travel.Services.WebService
                     var url = "http://wx.qlogo.cn/mmopen/g3MonUZtNHkdmzicIlibx6iaFqAc56vxLSUfpb6n5WKSYVY0ChQKkiaJSgQ1dZuTOgvLLrhJbERQQ4eMsv84eavHiaiceqxibJxCfHe/0";
                     url = url.Substring(0, url.LastIndexOf("/") ) + "/64";
                     user = new UserInfoDTO() {
-                        openid="testid",
+                        openid= "obzTsw_PZU5Q5NZqixFi6lB2YHkI",
                         nickname="金小西",
                         headimgurl= url
                     };

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Travel.Infrastructure.DomainDataAccess.Coupon.Entitys;
 using Travel.Infrastructure.DomainDataAccess.User;
+using System.Transactions;
 
 namespace Travel.Infrastructure.DomainDataAccess.Coupon
 {
@@ -11,6 +12,8 @@ namespace Travel.Infrastructure.DomainDataAccess.Coupon
     {
         //private static List<CouponType> _testCouponType = new List<CouponType>();
         //private static List<Entitys.Coupon> _testCoupon = new List<Entitys.Coupon>();
+
+        private static object obj = new object();
         public CouponRepository()
         {
 
@@ -177,7 +180,7 @@ namespace Travel.Infrastructure.DomainDataAccess.Coupon
             using (var db = new TravelDBContext())
             {
                 var nowTime = DateTime.Now;
-                var coupons =GetAvailableCoupon();
+                var coupons = GetAvailableCoupon();
                 result = coupons.Any();
 
             }
@@ -203,20 +206,20 @@ namespace Travel.Infrastructure.DomainDataAccess.Coupon
                 item.BeginTime <= nowTime &&
                 item.EndTime >= nowTime);
 
-                if (coupon!=null)
+                if (coupon != null)
                 {
                     var usage = db.CouponUsage.FirstOrDefault(item =>
                  item.ReceivedTime >= coupon.BeginTime &&
                  item.ReceivedTime <= coupon.EndTime && item.OpenId
                  == openId);
-                    if (usage!=null)
+                    if (usage != null)
                     {
                         result = true;
                     }
                 }
 
-                
-                 
+
+
 
             }
             //var nowTime = DateTime.Now;
@@ -231,57 +234,109 @@ namespace Travel.Infrastructure.DomainDataAccess.Coupon
         /// <returns></returns>
         public List<Entitys.Coupon> GetAvailableCoupon()
         {
-            List<Entitys.Coupon> result = null;
+            List<Entitys.Coupon> result = new List<Entitys.Coupon>();
             var db = new TravelDBContext();
-            //using (var db = new TravelDBContext())
+
+            //using (TransactionScope scope = new TransactionScope(TransactionScopeOption.Required,
+            //      new TransactionOptions { IsolationLevel = IsolationLevel.RepeatableRead }))
             //{
-            var nowTime = DateTime.Now;
-            //获取现有优惠券
-           
-            var coupons = db.Coupon.Where(item =>
-            item.BeginTime <= nowTime &&
-            item.EndTime >= nowTime);
 
-            //获取优惠券使用数量
-            //todo:方法有问题，返回的是空值
+                //using (var db = new TravelDBContext())
+                //{
+                var nowTime = DateTime.Now;
+                //获取现有优惠券
 
-            //var dt =  from couponUsage in db.CouponUsage
-            //    join coupon in coupons on couponUsage.CouponId equals coupon.CouponId
-            //        into cu
-            //    from u in cu.DefaultIfEmpty()
-            //    select new
-            //    {
-            //        CouponId = u.CouponId,
-            //        OpenId = couponUsage.OpenId
-            //    };
-           
+                var coupons = db.Coupon.Where(item =>
+                item.BeginTime <= nowTime &&
+                item.EndTime >= nowTime);
 
 
-            var usageCount = db.CouponUsage
-            .Join(coupons, u => u.CouponId,
-            c => c.CouponId, (u, c) => u).GroupBy(u => u.CouponId)
-            .Select(u => new
-            {
-                CouponId = u.Key,
-                Count = u.Count()==null?0:u.Count()
-            });
+                //获取优惠券使用数量
+                //todo:方法有问题，返回的是空值
 
-            var da = from c in coupons
-                join u in usageCount on c.CouponId equals u.CouponId
-                    into cu
-                from cu1 in cu.DefaultIfEmpty()
-                 //    where c.StockQuantity > (cu1.Count == null ? 0 : cu1.Count)
-                select c;
+                //var dt =  from couponUsage in db.CouponUsage
+                //    join coupon in coupons on couponUsage.CouponId equals coupon.CouponId
+                //        into cu
+                //    from u in cu.DefaultIfEmpty()
+                //    select new
+                //    {
+                //        CouponId = u.CouponId,
+                //        OpenId = couponUsage.OpenId
+                //    };
 
-            result = da.ToList();
 
-//            result = coupons.Join(usageCount, c => c.CouponId,
-//                u => u.CouponId, (c, u) => new { c = c, u = u })
-//                .Where(item => item.c.StockQuantity > item.u.Count)
-//                .Select(item => item.c).ToList();
+
+                var usageCount = db.CouponUsage
+                .Join(coupons, u => u.CouponId,
+                c => c.CouponId, (u, c) => u).GroupBy(u => u.CouponId)
+                .Select(u => new
+                {
+                    CouponId = u.Key,
+                    Count = u.Count() == null ? 0 : u.Count()
+                });
+
+                var da = from c in coupons
+                         join u in usageCount on c.CouponId equals u.CouponId
+                             into cu
+                         from cu1 in cu.DefaultIfEmpty()
+                         where c.StockQuantity > (cu1.Count == null ? 0 : cu1.Count)
+                         select new CouponWithCount()
+                         {
+                             Count = c.StockQuantity - (cu1.Count == null ? 0 : cu1.Count),
+                             Coupon = c
+                         };
+                foreach (var cc in da)
+                {
+                    for (int i = 0; i < cc.Count; i++)
+                    {
+                        result.Add(cc.Coupon);
+                    }
+                }
+            //    scope.Complete();
+            //}
+
+            //result = da.ToList();
+
+            //            result = coupons.Join(usageCount, c => c.CouponId,
+            //                u => u.CouponId, (c, u) => new { c = c, u = u })
+            //                .Where(item => item.c.StockQuantity > item.u.Count)
+            //                .Select(item => item.c).ToList();
             //}
             //var nowTime = DateTime.Now;
             //result = _testCoupon.Where(item => item.BeginTime <= nowTime && item.EndTime >= nowTime).ToList();
+
+            return result;
+        }
+
+
+        /// <summary>
+        /// 随机优惠券
+        /// </summary>
+        /// <param name="availableCoupons"></param>
+        /// <returns></returns>
+        public Entitys.Coupon GetRandomCoupon(List<Entitys.Coupon> availableCoupons)
+        {
+            Entitys.Coupon result = null;
+
+
+            //lock (obj)
+            //{
+            //取随机数
+            Random r = new Random();
+            int i = r.Next(0, availableCoupons.Count);
+
+
+            //using (var db = new TravelDBContext())
+            //{
+            //    //得到随机的优惠券
+            //    result = availableCoupons[i];
+            //    result.Type = db.CouponType.Find(result.CouponTypeId);
+            //}
+            result = availableCoupons[i];
+            //}
+
+
+
 
             return result;
         }
@@ -293,20 +348,23 @@ namespace Travel.Infrastructure.DomainDataAccess.Coupon
         /// <param name="coupon"></param>
         public void AddCouponToUser(string openid, Entitys.Coupon coupon)
         {
-
-            using (var db = new TravelDBContext())
+            using (TransactionScope scope = new TransactionScope(TransactionScopeOption.Required,
+                  new TransactionOptions { IsolationLevel = IsolationLevel.ReadCommitted }))
             {
-                var usage = new CouponUsage()
+                using (var db = new TravelDBContext())
                 {
-                    CouponUsageId = Guid.NewGuid(),
-                    CouponId = coupon.CouponId,
-                    OpenId = openid,
-                    ReceivedTime = DateTime.Now
-                };
-                db.CouponUsage.Add(usage);
-                db.SaveChanges();
+                    var usage = new CouponUsage()
+                    {
+                        CouponUsageId = Guid.NewGuid(),
+                        CouponId = coupon.CouponId,
+                        OpenId = openid,
+                        ReceivedTime = DateTime.Now
+                    };
+                    db.CouponUsage.Add(usage);
+                    db.SaveChanges();
+                }
+                scope.Complete();
             }
-
 
         }
 
@@ -328,25 +386,7 @@ namespace Travel.Infrastructure.DomainDataAccess.Coupon
             }
         }
 
-        public Entitys.Coupon GetRandomCoupon(List<Entitys.Coupon> availableCoupons)
-        {
-            Entitys.Coupon result = null;
-            //取随机数
-            Random r = new Random();
-            int i = r.Next(0, availableCoupons.Count);
 
-
-            //using (var db = new TravelDBContext())
-            //{
-            //    //得到随机的优惠券
-            //    result = availableCoupons[i];
-            //    result.Type = db.CouponType.Find(result.CouponTypeId);
-            //}
-            result = availableCoupons[i];
-
-
-            return result;
-        }
 
         public Entitys.Coupon GetCoupon(Guid couponId)
         {

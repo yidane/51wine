@@ -48,6 +48,7 @@
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -60,6 +61,7 @@
     <Compile Include="Coupon\Entitys\CouponState.cs" />
     <Compile Include="Coupon\Entitys\CouponType.cs" />
     <Compile Include="Coupon\Entitys\CouponUsage.cs" />
+    <Compile Include="Coupon\Entitys\CouponWithCount.cs" />
     <Compile Include="Migrations\201508250929118_TicketUpate.cs" />
     <Compile Include="Migrations\201508250929118_TicketUpate.Designer.cs">
       <DependentUpon>201508250929118_TicketUpate.cs</DependentUpon>
@@ -135,6 +137,10 @@
     <Compile Include="Migrations\201509060245326_CouponUpdate2.cs" />
     <Compile Include="Migrations\201509060245326_CouponUpdate2.Designer.cs">
       <DependentUpon>201509060245326_CouponUpdate2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509070824446_updatedatabase1.cs" />
+    <Compile Include="Migrations\201509070824446_updatedatabase1.Designer.cs">
+      <DependentUpon>201509070824446_updatedatabase1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Order\DateTicketEntity.cs" />
@@ -229,6 +235,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201509060245326_CouponUpdate2.resx">
       <DependentUpon>201509060245326_CouponUpdate2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509070824446_updatedatabase1.resx">
+      <DependentUpon>201509070824446_updatedatabase1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Transactions;
 using Travel.Application.DomainModules.Coupon.DTOS;
 using Travel.Application.DomainModules.WeChat.DTOS;
 using Travel.Infrastructure.DomainDataAccess.Coupon;
@@ -22,13 +23,15 @@ namespace Travel.Application.DomainModules.Coupon
             _userRepository = new UserRepository();
         }
 
-        public CouponDTO GetCoupon(string openId,Guid couponUsageId) {
+        public CouponDTO GetCoupon(string openId, Guid couponUsageId)
+        {
             CouponDTO result = null;
 
             if (!string.IsNullOrEmpty(openId))
             {
                 var coupon = _repository.GetCouponByUser(couponUsageId, openId);
-                if (coupon!=null) {
+                if (coupon != null)
+                {
                     result = TransformCoupon(coupon);
                 }
             }
@@ -36,13 +39,14 @@ namespace Travel.Application.DomainModules.Coupon
             return result;
         }
 
-       
+
 
         public CouponListDTO GetCouponList(UserInfoDTO wxUser)
         {
             CouponListDTO result = null;
 
-            if (wxUser != null) {
+            if (wxUser != null)
+            {
                 var user = new UserInfo()
                 {
                     openid = wxUser.openid,
@@ -58,9 +62,10 @@ namespace Travel.Application.DomainModules.Coupon
                     city = wxUser.country,
                     country = wxUser.country
                 };
-                result = new CouponListDTO() ;
+                result = new CouponListDTO();
                 var expiredList = _repository.GetExpiredCoupons(user);
-                if ( expiredList!=null) {
+                if (expiredList != null)
+                {
                     result.ExpiredCoupons = expiredList.Select(p => new CouponDTO()
                     {
                         title = p.Coupon.Title,
@@ -85,13 +90,13 @@ namespace Travel.Application.DomainModules.Coupon
                         couponId = p.CouponId,
                         couponType = p.Coupon.Type.CouponTypeName,
                         endTime = p.Coupon.EndTime.ToString("yyyy-MM-dd"),
-                        couponUsageId=p.CouponUsageId
+                        couponUsageId = p.CouponUsageId
                     }).ToList();
                 }
                 var usedList = _repository.GetUsedCoupons(user);
                 if (usedList != null)
                 {
-                    result.UsedCoupons=usedList.Select(p => new CouponDTO()
+                    result.UsedCoupons = usedList.Select(p => new CouponDTO()
                     {
                         title = p.Coupon.Title,
                         subTitle = p.Coupon.SubTitle,
@@ -99,13 +104,13 @@ namespace Travel.Application.DomainModules.Coupon
                         couponId = p.CouponId,
                         couponType = p.Coupon.Type.CouponTypeName,
                         endTime = p.Coupon.EndTime.ToString("yyyy-MM-dd"),
-                        usedTime= p.UsedTime == null ? string.Empty
-                        : p.UsedTime.Value.ToString("yyyy-MM-dd"),
+                        usedTime = p.UsedTime == null ? string.Empty
+                          : p.UsedTime.Value.ToString("yyyy-MM-dd"),
                         couponUsageId = p.CouponUsageId
                     }).ToList();
                 }
 
-               
+
             }
 
             return result;
@@ -121,6 +126,9 @@ namespace Travel.Application.DomainModules.Coupon
             CouponDTO result = null;
             if (!BeParticipatedInCoupon(wxUser))
             {
+
+
+
                 var availableCoupons = _repository.GetAvailableCoupon();
 
                 if (availableCoupons.Any())
@@ -153,7 +161,7 @@ namespace Travel.Application.DomainModules.Coupon
                         if (coupon.ShakeToReceive)
                         {
                             AddCouponToUser(user.openid, coupon.CouponId);
-                            result = TransformCoupon(coupon,  CouponState.HasReceived);
+                            result = TransformCoupon(coupon, CouponState.HasReceived);
                         }
                         else
                         {
@@ -166,13 +174,15 @@ namespace Travel.Application.DomainModules.Coupon
                     }
                 }
 
+
             }
             else
             {
-                result = new CouponDTO() {
-                     title="已参与",
-                     subTitle="感谢参与",
-                     status=  CouponState.BeParticipatedIn
+                result = new CouponDTO()
+                {
+                    title = "已参与",
+                    subTitle = "感谢参与",
+                    status = CouponState.BeParticipatedIn
 
                 };
             }
@@ -182,9 +192,9 @@ namespace Travel.Application.DomainModules.Coupon
 
         public void AddCouponToUser(string openid, Guid couponId)
         {
-            if (couponId != null &&! string.IsNullOrEmpty(openid))
+            if (couponId != null && !string.IsNullOrEmpty(openid))
             {
-               
+
                 var coupon = _repository.GetCoupon(couponId);
 
                 _repository.AddCouponToUser(openid, coupon);
@@ -229,7 +239,7 @@ namespace Travel.Application.DomainModules.Coupon
         /// <returns></returns>
         private CouponDTO TransformCoupon(Infrastructure.DomainDataAccess.Coupon.Entitys.Coupon coupon
 
-                ,CouponState status = CouponState.NotReceived)
+                , CouponState status = CouponState.NotReceived)
         {
             CouponDTO result = null;
 
@@ -244,8 +254,8 @@ namespace Travel.Application.DomainModules.Coupon
                     beginTime = coupon.BeginTime.ToString("yyyy-MM-dd"),
                     endTime = coupon.EndTime.ToString("yyyy-MM-dd"),
                     getTime = DateTime.Now.ToString("yyyy-MM-dd"),
-                    couponType = coupon.Type.CouponTypeName ,
-                    status= status
+                    couponType = coupon.Type.CouponTypeName,
+                    status = status
 
                 };
             }
@@ -270,7 +280,7 @@ namespace Travel.Application.DomainModules.Coupon
                     getTime = DateTime.Now.ToString("yyyy-MM-dd"),
                     couponType = coupon.Coupon.Type.CouponTypeName,
                     status = coupon.State,
-                    usedTime = coupon.UsedTime == null ? string.Empty : 
+                    usedTime = coupon.UsedTime == null ? string.Empty :
                     coupon.UsedTime.Value.ToString("yyyy-MM-dd")
                 };
             }
@@ -282,7 +292,7 @@ namespace Travel.Application.DomainModules.Coupon
         {
             if (!string.IsNullOrEmpty(openId))
             {
-                _repository.UseCoupon(openId,id);
+                _repository.UseCoupon(openId, id);
             }
         }
     }
