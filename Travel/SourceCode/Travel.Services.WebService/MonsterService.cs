@@ -39,9 +39,9 @@ namespace Travel.Services.WebService
 
                 result = AjaxResult.Success(new { imgName = imageName, imgUrl = WebHelper.MapUrl(imagePath) });
             }
-            catch
+            catch (Exception ex)
             {
-                result = AjaxResult.Error("下载图片失败");
+                result = AjaxResult.Error(ex.Message);
             }
 
             HttpContext.Current.Response.Write(result);
@@ -63,9 +63,9 @@ namespace Travel.Services.WebService
                 cuted.Save(cutPath, ImageFormat.Jpeg);
                 result = AjaxResult.Success(cutImageName);
             }
-            catch
+            catch (Exception ex)
             {
-                result = AjaxResult.Error("失败啦！");
+                result = AjaxResult.Error(ex.Message);
             }
 
             HttpContext.Current.Response.Write(result);

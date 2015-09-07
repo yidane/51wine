@@ -32,7 +32,7 @@
                     showPhoto(res.Data);
                 }
                 else {
-                    alert('上传图片失败,请重新上传。');
+                    alert(res.Message);
                     ui.hideMask();
                 }
             },
@@ -152,7 +152,7 @@
             setSelect: [x, y, x2, y2],
             onChange: function (c) {
                 setPreview(c);
-                setCoordinate(c)
+                setCoordinate(c);
             },
             onSelect: function (c) {
                 setPreview(c);
@@ -181,7 +181,8 @@
                     showCrop(res.Data);
                 }
                 else {
-                    alert('上传图片失败,请重新上传。');
+                    alert(res.Message);
+                    ui.hideMask();
                 }
             },
             error: function (a, b, c) {
@@ -189,8 +190,6 @@
             }
         });
     }
-
-    //downImageFromServer('vaAjt_2j3Z7RKYz5tMqSGRiCPNyo1iHIO4cqgdtEFQ5zzopYrh3L2uxqdcfnqt85');
 })(jQuery);
 
 function getRandom(seed) {
@@ -211,6 +210,7 @@ function formatString() {
 
     return str;
 };
+
 $(function () {
     wxsdk.initWxConfig(false);
     $("#chooseImage").on('click', mk.chooseImage);
