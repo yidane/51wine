@@ -38,3 +38,9 @@ function GetQueryString(name) {
     var r = window.location.search.substr(1).match(reg);
     if (r != null) return r[2]; return null;
 }
+
+//获取网站根路径,如www.cloudorg.com.cn/travel/
+function getBaseUrl() {
+    var re = new RegExp(/^.*\//);
+    return re.exec(window.location.href);
+}

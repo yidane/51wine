@@ -190,29 +190,15 @@
     <script src="../js/oAuth2.js"></script>
     <script src="../js/myCoupons-vm.js"></script>
     <script>
-    //根据页面尺寸显示格式
-    //var winWidth = $(window).width() > 640 ? 640 : $(window).width();
-    //$("html").css("fontSize", (winWidth / 640) * 20 + "px");
 
-    //var access_code = "";
-    //    access_code = $.url.param("code");
-    //    if (!access_code) {
-    //        var fromurl = location.href;
-    //        var url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxdd6127bdb5e7611c&redirect_uri='
-    //                + encodeURIComponent(fromurl) +
-    //                '&response_type=code&scope=snsapi_base&state=STATE%23wechat_redirect&connect_redirect=1#wechat_redirect';
-    //        location.href = url;
-    //    }
 
     var param = {
         access_code: access_code
     };
-
-    var imagesArray = ['http://www.cloudorg.com.cn/travel/TicketImages/coupons_bg.png',
-    'http://www.cloudorg.com.cn/travel/images/scenic/img_coupondetail_used_207x160.png'];
-    //imagesArray = imagesArray.map(function (el, i) {
-    //    return 'http://dummyimage.com/600x400/000/' + (255 - i) + '?' + +new Date();
-    //});
+    var baseurl = getBaseUrl();
+    var imagesArray = [baseurl + 'TicketImages/coupons_bg.png',
+    baseurl + 'images/scenic/img_coupondetail_used_207x160.png'];
+   
 
     new preLoader(imagesArray, {
         onProgress: function (src, element, index) {
@@ -233,7 +219,7 @@
         }
     });
 
-
+    
 
     </script>
 </body>
