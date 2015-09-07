@@ -233,7 +233,7 @@
         access_code = $.url.param("code");
         if (!access_code) {
             var fromurl = location.href;
-            var url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxdd6127bdb5e7611c&redirect_uri='
+            var url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx4986bb37d9c48302&redirect_uri='
                 + encodeURIComponent(fromurl) +
                 '&response_type=code&scope=snsapi_base&state=STATE%23wechat_redirect&connect_redirect=1#wechat_redirect';
             location.href = url;
