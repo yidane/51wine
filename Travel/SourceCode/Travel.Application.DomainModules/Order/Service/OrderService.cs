@@ -40,7 +40,7 @@ namespace Travel.Application.DomainModules.Order.Service
                                                                                     ticketType = "1",
                                                                                     price = item.Price,
                                                                                     ticketName = item.TicketName,
-                                                                                    canUse = item.TicketName.Contains("一进") && item.TicketName.Contains("车票"),
+                                                                                    canUse = true,
                                                                                     type = item.Type,
                                                                                     image = string.Format("url(../images/ticket{0}.jpg)", new Random((unchecked((int)DateTime.Now.Ticks + categories.IndexOf(item)))).Next(1, 8).ToString())
                                                                                 }).ToList()
@@ -57,7 +57,7 @@ namespace Travel.Application.DomainModules.Order.Service
                                                     ticketType = "2",
                                                     price = item.Price,
                                                     ticketName = item.TicketName,
-                                                    canUse = item.TicketName.Contains("一进") && item.TicketName.Contains("车票"),
+                                                    canUse = true,
                                                     type = item.Type,
                                                     image = string.Format("url(../images/ticket{0}.jpg)", new Random((unchecked((int)DateTime.Now.Ticks + categories.IndexOf(item)))).Next(1, 8).ToString())
                                                 }).ToList()
@@ -74,7 +74,7 @@ namespace Travel.Application.DomainModules.Order.Service
                                             ticketType = "3",
                                             price = item.Price,
                                             ticketName = item.TicketName,
-                                            canUse = item.TicketName.Contains("一进") && item.TicketName.Contains("车票"),
+                                            canUse = true,
                                             type = item.Type,
                                             image = string.Format("url(../images/ticket{0}.jpg)", new Random((unchecked((int)DateTime.Now.Ticks + categories.IndexOf(item)))).Next(1, 8).ToString())
                                         }).ToList()
