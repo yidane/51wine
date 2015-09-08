@@ -3,12 +3,6 @@
     padding: 0;
 }
 
-img {
-    border: none;
-    vertical-align: top;
-}
-
-
 html {
     overflow: auto;
     font-family: "Helvetica Neue", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", "黑体", Arial, sans-serif;
