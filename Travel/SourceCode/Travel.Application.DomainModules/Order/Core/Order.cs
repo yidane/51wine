@@ -9,6 +9,7 @@ namespace Travel.Application.DomainModules.Order.Core
     using System.Collections.Specialized;
     using System.Data;
     using System.Globalization;
+    using System.IO;
     using System.Security.Cryptography;
     using System.Transactions;
 
@@ -525,6 +526,7 @@ namespace Travel.Application.DomainModules.Order.Core
                 }
                 catch (OrderPaymentFailException orderException)
                 {
+                    WriteLog(orderException.Message);
                     orderException.param = new Dictionary<string, object>
                                                {
                                                    { "refundOrder", refundOrder },
@@ -536,6 +538,7 @@ namespace Travel.Application.DomainModules.Order.Core
                 }
                 catch (WxPayException ex)
                 {
+                    WriteLog(ex.Message);
                     var orderException = new OrderPaymentFailException("无法在制定的路径中找到秘钥", OrderPaymentStep.ApplyRefund, "CRYPTOGRAPHY_ERROR");
                     orderException.param = new Dictionary<string, object>
                                                {
@@ -552,6 +555,26 @@ namespace Travel.Application.DomainModules.Order.Core
                 }
 
             }
+        }
+
+        protected static void WriteLog(string content)
+        {
+            var path = AppDomain.CurrentDomain.BaseDirectory + "log";
+            if (!Directory.Exists(path))//如果日志目录不存在就创建
+            {
+                Directory.CreateDirectory(path);
+            }
+
+            string time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff");//获取当前系统时间
+            string filename = path + "/" + DateTime.Now.ToString("yyyy-MM-dd") + ".txt";//用日期对日志文件命名
+
+            //创建或打开日志文件，向日志文件末尾追加记录
+            StreamWriter mySw = File.AppendText(filename);
+
+            mySw.WriteLine(time + "   |" + content + Environment.NewLine);
+
+            //关闭日志文件
+            mySw.Close();
         }
 
         protected string CreateRefundOrderCode()
