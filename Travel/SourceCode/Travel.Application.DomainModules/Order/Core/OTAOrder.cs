@@ -15,6 +15,7 @@ namespace Travel.Application.DomainModules.Order.Core
     using Travel.Infrastructure.OTAWebService;
     using Travel.Infrastructure.OTAWebService.Response;
     using Travel.Infrastructure.WeiXin.Advanced.Pay.Model;
+    using Travel.Infrastructure.WeiXin.Log;
 
     public class OTAOrder : Order
     {
@@ -282,7 +283,8 @@ namespace Travel.Application.DomainModules.Order.Core
 
                 // todo: 处理返回值 
                 var refundResponse = this._paymentOperate.RefundPay(refundRequest);
-
+                LogManager.path = "d:\\";
+                LogManager.Error("RefundResponse", refundResponse.return_msg);
                 if (refundResponse.return_code.Equals("SUCCESS")
                     && refundResponse.result_code.Equals("SUCCESS"))
                 {
