@@ -1,0 +1,240 @@
+﻿<!DOCTYPE html>
+<!--[if lt IE 7]>    <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="zh-cn" > <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="zh-cn" > <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="zh-cn" ><![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="zh-cn">
+<!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>新增收货地址</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="”apple-mobile-web-app-capable”" content="”yes”" />
+
+    <!-- 加载js/css -->
+    <link type="text/css" rel="stylesheet" href="/shop/templates/yeshou/css/font-awesome.min.css?v=3">
+    <link type="text/css" rel="stylesheet" href="/shop/templates/yeshou/css/wapmain.css?v=5">
+    <script type="text/javascript" src="/shop/templates/yeshou/js/zepto.min.js?v=3"></script>
+    <script src="../../../scripts/jquery/jquery-2.1.0.min.js"></script>
+    <script>
+        var _hmt = _hmt || [];
+        (function () {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?7c10355ee0f6b21af208947325fd4ad7";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+   
+</head>
+<body>
+    <div id="J_Wrappear">
+        <div class="lay-wrap J_MenuBody" id="J_MenuSwipe">
+            <!--顶部-->
+            <vt:template id="header" file="_header.html" charset="utf-8" />
+            <!--end顶部-->
+            <script>
+                $(document).ready(function () {
+                    initCart();
+                });
+
+                /**重新加载购物车数量和总价**/
+                function initCart() {
+                    $.ajax({
+                        url: '/shop/shopmgr.ashx?myact=pcount',
+                        dataType: 'json',
+                        data: { wid: "{$wid}", openid: "{$openid}" },
+                        async: false,
+                        success: function (data) {
+                            if (data.data > 0) {
+                                var num = data.data;
+                                var cart_a_link = $(".m-shop-cart");
+                                if (num != 'undefined') {
+                                    if (cart_a_link.find("i.shop-num").length > 0) {
+                                        cart_a_link.find("i.shop-num").text(num);
+                                    } else {
+                                        cart_a_link.prepend($("<i class=\"shop-num\">" + num + "</i>"));
+                                    }
+                                }
+                            }
+                        }
+                    });
+                }
+            </script>
+
+            <div class="lay-til J_MenuBody" id="J_SubHead">
+                <div class="header-con">
+                    <i class="arrow-back" onclick="history.go(-1)">
+                        <img src="/shop/templates/yeshou/images/pay_03.png" alt="" /></i>
+                    <h1>添加收货地址</h1>
+                </div>
+            </div>
+            <div class="lay-body" id="J_MainBody">
+                <div class="create-addr">
+                    <form method="post" action="editaddr.aspx?myact=editAddr" onsubmit="return addAddressOp()" id="ctl00">
+                        <input type="hidden" value="{$openid}" id="openid" name="openid">
+                        <input type="hidden" value="{$wid}" id="wid" name="wid">
+                        <input type="hidden" value="{$frompage}" id="frompage" name="frompage">
+                        <div class="m-form">
+                            <input type="text" class="m-full-txt" placeholder="收货人" id="addressUserName" value="{$addrinfo.contractPerson}" name="name" />
+                        </div>
+                        <div class="m-form create-phone">
+                            <input type="text" class="m-full-txt create-phone-number J_Phone" id="mobile" value="{$addrinfo.tel}" name="mobile" placeholder="手机号" />
+                        </div>
+                        <div class="m-form create-choose">
+                            <span id="sprovince" data-url="/shop/shopmgr.ashx?myact=getCity">
+                                <select name="pvid" id="province" class="create-choose">
+                                    <option value="-1">选择省</option>
+                                </select>
+                            </span>
+                            <span id="scity" data-url="/shop/shopmgr.ashx?myact=getArea">
+                                <select name="ctid" id="city" class="create-choose">
+                                    <option value="-1">选择市</option>
+                                </select>
+                            </span>
+                            <span>
+                                <select name="regionId" id="regionId" class="create-choose">
+                                    <option value="-1">选择区</option>
+                                </select>
+                            </span>
+                        </div>
+                         
+                        <div class="m-form">
+                            <input type="text" class="m-full-txt" name="address" id="street" placeholder="请输入街道地址" value="{$addrinfo.addrDetail}" />
+                        </div>
+                        <div class="login-btn clearfix">
+                            <input type="submit" id="J_Save" value="保存地址" style="-webkit-appearance: none;" />
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="m-mask J_MenuBody" id="J_Mask"></div>
+        <!--顶部-->
+        <vt:template id="_bottom" file="_bottom.html" charset="utf-8" />
+        <!--end顶部-->
+        <script type="text/javascript" src="/shop/templates/yeshou/js/main.js?v=1"></script>
+        <script type="text/javascript" src="/shop/templates/yeshou/js/idangerous.swiper.min.js"></script>
+        <script src="/shop/templates/default/js/zepto.min.js"></script>
+        <script>
+
+            $(function () {
+                $("#province").val("{$addrinfo.province}");
+                $("#city").val("{$addrinfo.city}");
+                $("#regionId").val("{$addrinfo.area}");
+
+                console.log("{$addrinfo.province}");
+                console.log("{$addrinfo.city}");
+                console.log("{$addrinfo.area}");
+            });
+
+            mobile.o2ocn.address.init();
+            function serchItems() {
+                var skeywordVal = document.getElementById('skeyword').value;
+                if (skeywordVal != '') {
+                    window.location.href = "/wap/item/search.htm?searchKeyword=" + skeywordVal;
+                } else {
+                    alert('请输入搜索词');
+                }
+            }
+
+            $("#skeyword").keydown(function (event) {
+                if (event.keyCode == 13) {
+                    serchItems();
+                }
+            });
+        </script>
+        <!-- Piwik -->
+
+        <noscript>
+            <p>
+                <img src="//www.thebeastshop.com/piwik/piwik.php?idsite=1" style="border: 0;" alt="" />
+            </p>
+        </noscript>
+        <!-- End Piwik Code -->
+    </div>
+</body>
+<script>
+    //验证手机号  
+    function is_mobile(mobile) {
+        if (mobile == "") {
+            return false;
+        } else {
+            if (! /^0{0,1}(1[0-9][0-9])[0-9]{8}$/.test(mobile)) {
+                return false;
+            }
+            return true;
+        }
+    }
+
+    //验证email的合法性  
+    function is_email(email) {
+        if (email == "") {
+            return false;
+        } else {
+            if (! /^[\w\-\.]+@[\w\-\.]+(\.\w+)+$/.test(email)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    function addAddressOp() {
+        var op = "";
+
+        var addressUserName = $('#addressUserName').val();
+        var province_id = $('#province').val();
+        var city_id = $('#city').val();
+        var area_id = $('#regionId').val();
+        var street = $('#street').val();
+        var mobile = $('#mobile').val();
+
+        if (addressUserName == null || addressUserName == '') {
+            alert('请填写收货人姓名');
+            return false;
+        }
+        if (province_id == null || province_id == '') {
+            alert('请选择省份');
+            return false;
+        }
+        if (city_id == null || city_id == '') {
+            alert('请选择城市');
+            return false;
+        }
+        if (area_id == null || area_id == '') {
+            alert('请选择地区');
+            return false;
+        }
+        if (street == null || street == '') {
+            alert('请填写收货详细街道地址');
+            return false;
+        }
+
+        if (mobile == null || mobile == '') {
+            alert('请填写手机号');
+            return false;
+        } else {
+            if (!is_mobile(mobile)) {
+                alert('手机号格式不对，请重新输入');
+                return false;
+            }
+        }
+        return true;
+    }
+    /**判断浏览器版本**/
+    (function (window) {
+        var ua = navigator.userAgent, vs = parseInt(ua.slice(ua.indexOf('iPhone OS') + 10, ua.indexOf('iPhone OS') + 11));
+        if (vs < 8) {
+            $('.lay-head,.lay-til').css({ position: 'absolute' });
+        } else {
+            return false;
+        }
+    })(window);
+</script>
+
+</html>

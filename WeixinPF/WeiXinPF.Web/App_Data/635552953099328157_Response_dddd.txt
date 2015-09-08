@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xml>
+  <ToUserName><![CDATA[dddd]]></ToUserName>
+  <FromUserName><![CDATA[gh_79cb1bc14e8f]]></FromUserName>
+  <CreateTime>1419669709</CreateTime>
+  <MsgType><![CDATA[news]]></MsgType>
+  <ArticleCount>1</ArticleCount>
+  <Articles>
+    <item>
+      <Title><![CDATA[图文标题2]]></Title>
+      <Description><![CDATA[]]></Description>
+      <PicUrl><![CDATA[http://localhost:850/upload/201412/27/201412271609149351.jpg]]></PicUrl>
+      <Url><![CDATA[http://localhost:850/weixin/wqiche/index.aspx?wid=5&token=1419669708&openid=dddd&wxref=mp.weixin.qq.com]]></Url>
+    </item>
+  </Articles>
+</xml>

@@ -1,0 +1,145 @@
+﻿<!DOCTYPE html>
+<!--[if lt IE 7]>    <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="zh-cn" > <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="zh-cn" > <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="zh-cn" ><![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="zh-cn">
+<!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>订单详情</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="”apple-mobile-web-app-capable”" content="”yes”" />
+
+    <!-- 加载js/css -->
+    <link type="text/css" rel="stylesheet" href="/shop/templates/yeshou/css/style_1.css">
+    <link type="text/css" rel="stylesheet" href="/shop/templates/yeshou/css/member.css">
+    <link type="text/css" rel="stylesheet" href="/shop/templates/yeshou/css/font-awesome.min.css?v=3">
+    <link type="text/css" rel="stylesheet" href="/shop/templates/yeshou/css/wapmain.css?v=5">
+    <script type="text/javascript" src="/shop/templates/yeshou/js/zepto.min.js?v=3"></script>
+    <script>
+        var _hmt = _hmt || [];
+        (function () {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?7c10355ee0f6b21af208947325fd4ad7";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body>
+    <div id="J_Wrappear">
+        <div class="lay-wrap J_MenuBody" id="J_MenuSwipe">
+            <!--顶部-->
+            <vt:template id="header" file="_header.html" charset="utf-8" />
+            <!--end顶部-->
+            <script>
+                $(document).ready(function () {
+                    initCart();
+                }); 
+                /**重新加载购物车数量和总价**/
+                function initCart() {
+                    $.ajax({
+                        url: '/shop/shopmgr.ashx?wid={$wid}&openid={$openid}&myact=pcount&ss=' + Math.random(),
+                        dataType: 'json',
+                        async: false,
+                        success: function (data) {
+                            if (data.data > 0) {
+                                var num = data.data;
+                                var cart_a_link = $(".m-shop-cart");
+                                if (num != 'undefined' && parseInt(num) > 0) {
+                                    if (cart_a_link.find("i.shop-num").length > 0) {
+                                        cart_a_link.find("i.shop-num").text(num);
+                                    } else {
+                                        cart_a_link.prepend($("<i class=\"shop-num\">" + num + "</i>"));
+                                    }
+                                }
+                            }
+                        }
+                    });
+                } 
+            </script> 
+            <div class="lay-til J_MenuBody" id="J_SubHead">
+                <div class="header-con">
+                    <i class="arrow-back" onclick="history.go(-1)">
+                        <img src="/shop/templates/yeshou/images/pay_03.png" alt="" /></i>
+                    <h1>订单详情</h1>
+                </div>
+            </div>
+            <div class="lay-body" id="J_MainBody">
+                <div class="main">
+                    <div class="Login">
+                        <div class="address_nr">
+                            <div class="address_top">
+                                <div class="address_t order_top">
+                                    订单状态：
+                    		<span>{$statusName}
+                            </span>
+                                </div>
+                                <div class="address_b">
+                                    <p>订单编号：{$order.order_no}</p>
+                                    <p>下单时间：{$order.add_time format="yyyy-MM-dd HH:mm:ss"}</p>
+                                </div>
+                            </div>
+                        </div> 
+                        <div class="address_nr">
+                            <div class="address_top">
+                                <div class="address_t order_top">收货人信息</div>
+                                <div class="address_b order_xx">
+                                    <p><span>收货人：&nbsp;&nbsp;&nbsp;&nbsp;</span>{$order.accept_name}</p>
+                                    <p><span>联系电话：</span>{$order.telphone}</p>
+                                    <p><span>收货地址：</span>{$order.address}</p>
+                                </div>
+                            </div>
+                        </div> 
+                        <div class="address_nr">
+                            <div class="address_top">
+                                <div class="address_t order_top">支付方式</div>
+                                <div class="address_b">
+                                    <p>
+                                        {$paymentName}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="address_nr">
+                            <div class="address_top">
+                                <div class="address_t order_top">商品清单</div>
+                                <!-- 如为定金订单 -->
+                                <vt:foreach from="$order.order_product" item="g" index="j">
+			          	  			          	  	<div class="address_b">
+				            <p><span>{$g.productName}</span></p>
+				            <p>价格：<span class="order_color" >￥{$g.salePrice}</span></p>
+				            <p>数量：<span class="order_color" id="sliang">{$g.stock}</span></p> 
+				          </div>
+                             </vt:foreach>
+                            </div>
+                        </div> 
+                        <div class="address_nr">
+                            <div class="address_top">
+                                <div class="address_b order_price">
+                                    <!-- 如为定金订单 -->
+                                    <p>订单总计：￥{$order.order_amount}</p>
+                                    <p>应付金额：<span class="order_color">￥{$order.order_amount}</span></p>
+                                </div>
+                            </div>
+                        </div> 
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="m-mask J_MenuBody" id="J_Mask"></div>
+
+        <!--左边菜单-->
+        <vt:template id="_bottom" file="_bottom.html" charset="utf-8" />
+        <!--end左边菜单-->
+        <script type="text/javascript" src="/shop/templates/yeshou/js/main.js?v=1"></script>
+        <script type="text/javascript" src="/shop/templates/yeshou/js/idangerous.swiper.min.js"></script>
+
+    </div>
+</body>
+</html>
