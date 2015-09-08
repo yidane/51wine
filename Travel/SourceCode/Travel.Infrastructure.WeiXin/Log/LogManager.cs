@@ -6,7 +6,7 @@ namespace Travel.Infrastructure.WeiXin.Log
 {
     public class LogManager
     {
-        private const int LOG_LEVEL = 1;
+        private const int LOG_LEVEL = 2;
 
         //在网站根目录下创建日志目录
         //public static string path = HttpContext.Current.Request.PhysicalApplicationPath + "logs";

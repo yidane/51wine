@@ -6,6 +6,7 @@ using System.Text;
 namespace Travel.Application.DomainModules.Order.Core
 {
     using System.Globalization;
+    using System.IO;
     using System.Transactions;
 
     using Travel.Application.DomainModules.Order.Core.Interface;
@@ -283,8 +284,8 @@ namespace Travel.Application.DomainModules.Order.Core
 
                 // todo: 处理返回值 
                 var refundResponse = this._paymentOperate.RefundPay(refundRequest);
-                LogManager.path = "d:\\";
-                LogManager.Error("RefundResponse", refundResponse.return_msg);
+
+                WriteLog(refundResponse.return_msg);
                 if (refundResponse.return_code.Equals("SUCCESS")
                     && refundResponse.result_code.Equals("SUCCESS"))
                 {
@@ -304,5 +305,25 @@ namespace Travel.Application.DomainModules.Order.Core
         }
 
         #endregion
+
+        protected static void WriteLog(string content)
+        {
+            var path = AppDomain.CurrentDomain.BaseDirectory + "log";
+            if (!Directory.Exists(path))//如果日志目录不存在就创建
+            {
+                Directory.CreateDirectory(path);
+            }
+
+            string time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff");//获取当前系统时间
+            string filename = path + "/" + DateTime.Now.ToString("yyyy-MM-dd") + ".txt";//用日期对日志文件命名
+
+            //创建或打开日志文件，向日志文件末尾追加记录
+            StreamWriter mySw = File.AppendText(filename);
+
+            mySw.WriteLine(time + "   |" + content + Environment.NewLine);
+
+            //关闭日志文件
+            mySw.Close();
+        }
     }
 }
