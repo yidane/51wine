@@ -337,21 +337,42 @@ namespace Travel.Application.DomainModules.Order.Service
 
                 var resp = service.GetAllOrderStatus(new GetAllOrderStatusRequest() { PostOrder = ECodes });
 
-                this.OrderCompleteProcess(
-                    tickets.Where(item => item.TicketStatus.Equals(OrderStatus.TicketStatus_WaitUse)).ToList(),
-                    resp.ResultData);
-
+                if (resp != null && resp.IsTrue)
+                {
 #if DEBUG
+                    foreach (var value in resp.ResultData)
+                    {
+                        Console.WriteLine("OrderCompleteProcessData: " + value.OrderStatusDesc +
+                        " responseData: " + value.RefundCount);
+                    }
 
-                Console.WriteLine("Refund ticket count: " + tickets.Where(item => item.TicketStatus.Equals(OrderStatus.TicketStatus_Refund_Audit)).ToList().Count);
 
 #endif
 
-                this.RefundProcess(
-                    tickets.Where(item => item.TicketStatus.Equals(OrderStatus.TicketStatus_Refund_Audit)).ToList(),
-                    resp.ResultData);
+                    this.OrderCompleteProcess(
+                        tickets.Where(item => item.TicketStatus.Equals(OrderStatus.TicketStatus_WaitUse)).ToList(),
+                        resp.ResultData);
 
+#if DEBUG
 
+                    Console.WriteLine("Refund ticket count: " + tickets.Where(item => item.TicketStatus.Equals(OrderStatus.TicketStatus_Refund_Audit)).ToList().Count);
+
+#endif
+
+                    this.RefundProcess(
+                        tickets.Where(item => item.TicketStatus.Equals(OrderStatus.TicketStatus_Refund_Audit)).ToList(),
+                        resp.ResultData);
+                }
+                else
+                {
+                    //获取状态失败
+                    Console.WriteLine("获取订单状态失败");
+
+                    if (resp != null)
+                    {
+                        Console.WriteLine(resp.ResultMsg);
+                    }
+                }
 
                 if (tickets.Count == pageSize)
                 {

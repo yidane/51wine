@@ -45,7 +45,7 @@ namespace Travel.Infrastructure.OTAWebService.Test
         [TestMethod]
         public void GetProductsTest()
         {
-            var request = new GetProductRequest(DateTime.Now.Date.AddDays(1));
+            var request = new GetProductRequest(DateTime.Now.Date);
             var result = new OTAServiceManager().GetProducts(request);
             Assert.IsTrue(result.IsTrue);
         }

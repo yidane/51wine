@@ -94,6 +94,14 @@ namespace Travel.Application.OrderUnitTest
         }
 
         [Test]
+        public void MyOrder_OrderService_ReturnOrderList()
+        {
+            var service = new OrderService();
+
+            var list = service.MyOrders("obzTswxzFzzzdWdAKf2mWx3CrpXk");
+        }
+
+        [Test]
         public void RefundPay_RefundOrder_ReturnWXComfirmRefundPayRequest()
         {
             var service = new OrderService();

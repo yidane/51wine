@@ -172,24 +172,7 @@
             <div class="swiper-wrapper" data-bind='foreach: Data'>
                 <div class="swiper-slide">
                     <ul class="ticket-list" data-bind='foreach: content'>
-                        <!-- ko if: canUse === false -->
-                        <li>
-                            <div class="ticket-detail" data-bind="style:{backgroundImage:image}">
-                                <span class="title">
-                                    <!--ko text: ticketName-->
-                                    <!--/ko-->
-                                    <span class="price">
-                                        <!--ko text: price-->
-                                        <!--/ko-->元
-                                    </span>
-                                </span>
-                                <span class="recommend"></span>
-                            </div>
-                            <div class="tip"><span>敬请期待</span></div>
-                        </li>
-                        <!-- /ko -->
-                        <!-- ko if: canUse === true -->
-                        <li>
+<li>
                             <a data-bind="attr: { 'href': 'TicketDetail.html?ticketid=' + ticketCategoryId + '&ticketName=' + ticketName + '&price=' + price+'&code='+$root.access_code }">
                                 <div class="ticket-detail" data-bind="style:{backgroundImage:image}">
                                     <span class="title">
@@ -204,7 +187,6 @@
                                 <span class="recommend"></span>
                             </a>
                         </li>
-                        <!-- /ko -->
                     </ul>
                 </div>
             </div>

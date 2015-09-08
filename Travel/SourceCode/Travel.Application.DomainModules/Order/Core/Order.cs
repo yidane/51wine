@@ -366,8 +366,7 @@ namespace Travel.Application.DomainModules.Order.Core
                                                this.OrderRequest
                                            .TicketCategory),
                                        Count = this.OrderRequest.Count,
-                                       SingleTicketPrice =
-                                           checkedTicketCategory.Price,
+                                       SingleTicketPrice = checkedTicketCategory.Price,
                                        IsDiscount = false,
                                        DiscountCategoryId = default(Guid?),
                                        TotalPrice =

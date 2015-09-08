@@ -92,7 +92,7 @@ namespace Travel.Application.DomainModules.Order.Core
                         ProductID = ticket.TicketProductId,
                         ProductPackID = dateTicket.TicketPackageId,
                         ProductName = dateTicket.TicketName,
-                        ProductPrice = dateTicket.TicketPrice,
+                        ProductPrice = decimal.Parse("0.02"), // dateTicket.TicketPrice,
                         ProductCount = 1,
                         ProductEDate = ticket.TicketEndTime.ToString("yyyy-MM-dd"),
                         ProductSDate = ticket.TicketStartTime.ToString("yyyy-MM-dd"),

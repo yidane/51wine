@@ -25,11 +25,7 @@ namespace Travel.Application.DomainModules.Order.Core
                                        out_trade_no = order.OrderCode,
                                        attach = "1",
                                        goods_tag = "1",
-#if DEBUG
-                                       total_fee = 1
-#else
-                                       total_fee = Decimal.ToInt32(order.GetCategoryTotalFee(Guid.Parse(OrderStatus.OrderDetailCategory_Create)) * 100)
-#endif
+                                       total_fee = 2  //Decimal.ToInt32(order.GetCategoryTotalFee(Guid.Parse(OrderStatus.OrderDetailCategory_Create)) * 100)
                                    };
             var WXPaymentService = new JsApiPay();
 
