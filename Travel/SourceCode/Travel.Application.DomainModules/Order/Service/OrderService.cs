@@ -384,7 +384,6 @@ namespace Travel.Application.DomainModules.Order.Service
                 }
             }
 
-            // todo: 未经过测试
             foreach (var someOrderTickets in changedStatusTickets.GroupBy(item => item.OrderId))
             {
                 var orderTickets = someOrderTickets.ToList();

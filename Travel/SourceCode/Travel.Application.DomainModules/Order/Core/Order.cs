@@ -9,11 +9,13 @@ namespace Travel.Application.DomainModules.Order.Core
     using System.Collections.Specialized;
     using System.Data;
     using System.Globalization;
+    using System.Security.Cryptography;
     using System.Transactions;
 
     using Travel.Application.DomainModules.Order.Core.Interface;
     using Travel.Application.DomainModules.Order.Entity;
     using Travel.Infrastructure.DomainDataAccess.Order;
+    using Travel.Infrastructure.WeiXin.Advanced;
     using Travel.Infrastructure.WeiXin.Common.Ticket;
 
     public class Order
@@ -533,9 +535,20 @@ namespace Travel.Application.DomainModules.Order.Core
                     this.ProcessOrderPaymentException(orderException);
                     //throw;
                 }
-                catch (Exception)
+                catch (WxPayException ex)
                 {
-
+                    var orderException = new OrderPaymentFailException("无法在制定的路径中找到秘钥", OrderPaymentStep.ApplyRefund, "CRYPTOGRAPHY_ERROR");
+                    orderException.param = new Dictionary<string, object>
+                                               {
+                                                   { "refundOrder", refundOrder },
+                                                   { "orderDetail", orderDetail },
+                                                   { "tickets", tickets }
+                                               };
+                    
+                    this.ProcessOrderPaymentException(orderException);
+                }
+                catch (Exception ex)
+                {
                     throw;
                 }
 

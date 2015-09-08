@@ -182,16 +182,19 @@ namespace Travel.Application.DomainModules.Order.Core
                     ticket.TicketStatus = OrderStatus.TicketStatus_PayComplete;
                     ticket.LatestModifyTime = DateTime.Now;
 
-                    var dateTicket = DateTicketEntity.GetDateTicketByTicketId(ticket.TicketId, DateTime.Now);
-                    if (dateTicket != null)
-                    {
-                        dateTicket.CurrentStatus = OrderStatus.DateTicketStatus_PayComplete;
-                        dateTickets.Add(dateTicket);
-                    }
+                    //修改订单规则
+                    //var dateTicket = DateTicketEntity.GetDateTicketByTicketId(ticket.TicketId, DateTime.Now);
+                    //if (dateTicket != null)
+                    //{
+                    //    dateTicket.CurrentStatus = OrderStatus.DateTicketStatus_PayComplete;
+                    //    dateTickets.Add(dateTicket);
+                    //}
                 }
 
                 this.OrderObj.ModifyOrder();
-                DateTicketEntity.Update(dateTickets);
+
+                //修改订单规则
+                //DateTicketEntity.Update(dateTickets);
 
                 this.IsProcessPaymentInfoSuccess = true;
             }

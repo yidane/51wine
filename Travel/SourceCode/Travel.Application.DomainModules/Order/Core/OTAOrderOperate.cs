@@ -148,15 +148,30 @@ namespace Travel.Application.DomainModules.Order.Core
             {
                 if (result.ResultData.Count == this.MainOrder.OrderObj.Tickets.Count)
                 {
-                    var arrTickets = this.MainOrder.OrderObj.Tickets.ToArray();
-                    for (int i = 0; i < this.MainOrder.OrderObj.Tickets.Count; i++)
+                    //修改订单规则
+                    //var arrTickets = this.MainOrder.OrderObj.Tickets.ToArray();
+                    //for (int i = 0; i < this.MainOrder.OrderObj.Tickets.Count; i++)
+                    //{
+                    //    arrTickets[i].ECode = result.ResultData[i].ECode;
+                    //    arrTickets[i].TicketStatus = OrderStatus.TicketStatus_WaitUse;
+                    //    arrTickets[i].LatestModifyTime = DateTime.Now;
+                    //}
+
+                    //this.MainOrder.OrderObj.Tickets = arrTickets.ToList();
+
+                    foreach (var ticket in this.MainOrder.OrderObj.Tickets)
                     {
-                        arrTickets[i].ECode = result.ResultData[i].ECode;
-                        arrTickets[i].TicketStatus = OrderStatus.TicketStatus_WaitUse;
-                        arrTickets[i].LatestModifyTime = DateTime.Now;
+                        var responseTicket = result.ResultData.FirstOrDefault(item => ticket.TicketId.Equals(int.Parse(item.ItemID)));
+                        
+                        if (responseTicket != null)
+                        {
+                            ticket.ECode = responseTicket.ECode;
+                            ticket.TicketStatus = OrderStatus.TicketStatus_WaitUse;
+                            ticket.LatestModifyTime = DateTime.Now;
+                        }                        
                     }
 
-                    this.MainOrder.OrderObj.Tickets = arrTickets.ToList();
+
                     // 更改订单状态为
                     this.MainOrder.OrderObj.OrderStatus = OrderStatus.OrderStatus_WaitUse;
                     this.MainOrder.OrderObj.ModifyOrder();

@@ -31,46 +31,38 @@ namespace Travel.Application.OrderUnitTest
             this.OrderRequest = new OrderRequestEntity()
                                {
                                    OpenId = "obzTswxzFzzzdWdAKf2mWx3CrpXk",
-                                   TicketCategory = "EC9CDD60-DE30-47A1-8025-1FB301F35825",
-                                   TicketName = "布尔津测试门票",
-                                   Count = 1,
+                                   TicketCategory = "366C3EA0-6F2F-4879-93E8-38F273A2CF60",
+                                   TicketName = "散客票一进",
+                                   Count = 2,
                                    CouponId = string.Empty,
-                                   ContactPersonName = "ybh",
+                                   ContactPersonName = "gbc",
                                    MobilePhoneNumber = "11111",
                                    IdentityCardNumber = "12345678901"
                                };
 
             this.PaymentNotify = new PaymentNotify()
                                      {
-                                         appid = "wx2421b1c4370ec43b",
+                                         appid = "wxdd6127bdb5e7611c",
                                          attach = "测试",
                                          bank_type = "CFT",
                                          fee_type = "CNY",
                                          is_subscribe = "Y",
-                                         mch_id = "100000100",
+                                         mch_id = "1266087601",
                                          nonce_str = "5d2b6c2a8db53831f7eda20af46e531c",
                                          openid = "obzTswxzFzzzdWdAKf2mWx3CrpXk",
-                                         out_trade_no = "C2015090513075990448089",
+                                         out_trade_no = "C2015090813432288181001",
                                          result_code = "SUCCESS",
                                          return_code = "SUCCESS",
                                          sign = "B552ED6B279343CB493C5DD0D78AB241",
                                          time_end = "20150929131540",
                                          total_fee = 1,
                                          trade_type = "JSAPI",
-                                         transaction_id = "1407611653"
+                                         transaction_id = "1407611653333333"
                                      };
 
             this.refundTickets =
-                TicketEntity.GetTicketsByOrderId(Guid.Parse("06DF4D81-E20D-4224-B267-B28EF9E8B8C2"))
-                .Where(item => item.TicketId.Equals(57963)).ToList();
-        }
-
-        [Test]
-        public void DeleteOrder()
-        {
-            var order = OrderEntity.GetOrderByOrderId(Guid.Parse("8A665FBC-2155-4485-A301-9471E03C3C4F"));
-
-            order.DeleteOrder();
+                TicketEntity.GetTicketsByOrderId(Guid.Parse("D7B94FDB-3D16-4DF1-9F2E-7E720FA42D72"))
+                .Where(item => item.TicketId.Equals(8302377)).ToList();
         }
 
         [Test]
@@ -104,13 +96,9 @@ namespace Travel.Application.OrderUnitTest
         [Test]
         public void RefundPay_RefundOrder_ReturnWXComfirmRefundPayRequest()
         {
-            if (refundTickets != null && refundTickets.Any())
-            {
-                var order = OrderEntity.GetOrderByOrderId(refundTickets.First().OrderId);
-                var otaOrder = new OTAOrder(order);
+            var service = new OrderService();
 
-                otaOrder.ProcessRefundPayment(refundTickets);
-            }
+            service.SearchTicketStatus(100);
         }
 
         [Test]
