@@ -1,8 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<xml>
-  <ToUserName><![CDATA[openid1111]]></ToUserName>
-  <FromUserName><![CDATA[222]]></FromUserName>
-  <CreateTime>1438954048</CreateTime>
-  <MsgType><![CDATA[text]]></MsgType>
-  <Content><![CDATA[验证微帐号与微信原始帐号id不一致，可能原因【1】系统配置错误，【2】非法的数据来源]]></Content>
-</xml>

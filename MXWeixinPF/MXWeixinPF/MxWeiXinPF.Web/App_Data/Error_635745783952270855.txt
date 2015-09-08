@@ -1,2 +1,0 @@
-MessageHandler中Execute()过程发生错误：关键字 'and' 附近有语法错误。
-关键字 'and' 附近有语法错误。

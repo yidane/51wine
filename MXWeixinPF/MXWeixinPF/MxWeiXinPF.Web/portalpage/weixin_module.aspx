@@ -1,1 +1,0 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="weixin_module.aspx.cs" Inherits="MxWeiXinPF.Web.portalpage.weixin_module" %>

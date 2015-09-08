@@ -1,8 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<xml>
-  <ToUserName><![CDATA[openid1111]]></ToUserName>
-  <FromUserName><![CDATA[gh_79cb1bc14e81]]></FromUserName>
-  <CreateTime>1440160995</CreateTime>
-  <MsgType><![CDATA[text]]></MsgType>
-  <Content><![CDATA[打发掉222]]></Content>
-</xml>
