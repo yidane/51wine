@@ -17,6 +17,12 @@ namespace Travel.Application.DomainModules.Coupon
     {
         private CouponRepository _repository;
         private UserRepository _userRepository;
+        //当活动未过期时,返回的空优惠券
+        private readonly CouponDTO _noCoupon = new CouponDTO() {
+            title = "已参与",
+            subTitle = "谢谢参与",
+            status = CouponState.BeParticipatedIn
+        };
         public CouponService()
         {
             _repository = new CouponRepository();
@@ -124,12 +130,19 @@ namespace Travel.Application.DomainModules.Coupon
         public CouponDTO GetRandomCoupon(UserInfoDTO wxUser)
         {
             CouponDTO result = null;
-            if (!BeParticipatedInCoupon(wxUser))
+            //using (TransactionScope scope = new TransactionScope(TransactionScopeOption.Required,
+            //   new TransactionOptions { IsolationLevel = IsolationLevel.ReadCommitted }))
+            //{
+                if (!BeParticipatedInCoupon(wxUser))
             {
 
 
 
-                var availableCoupons = _repository.GetAvailableCoupon();
+                
+
+
+             
+                    var availableCoupons = _repository.GetAvailableCoupon();
 
                 if (availableCoupons.Any())
                 {
@@ -173,20 +186,20 @@ namespace Travel.Application.DomainModules.Coupon
 
                     }
                 }
+                else
+                {
+                    result = _noCoupon;
+                }
+                   
 
 
             }
             else
             {
-                result = new CouponDTO()
-                {
-                    title = "已参与",
-                    subTitle = "感谢参与",
-                    status = CouponState.BeParticipatedIn
-
-                };
+                result = _noCoupon;
             }
-
+            //    scope.Complete();
+            //}
             return result;
         }
 

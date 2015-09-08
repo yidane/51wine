@@ -10,73 +10,10 @@ namespace Travel.Infrastructure.DomainDataAccess.Coupon
 {
     public class CouponRepository
     {
-        //private static List<CouponType> _testCouponType = new List<CouponType>();
-        //private static List<Entitys.Coupon> _testCoupon = new List<Entitys.Coupon>();
 
         private static object obj = new object();
         public CouponRepository()
         {
-
-            //var youhuiquan = new Coupon.Entitys.CouponType()
-            //{
-            //    CouponTypeId = Guid.NewGuid(),
-            //    CouponTypeName = "优惠券"
-            //};
-            //var xianjinquan = new Coupon.Entitys.CouponType()
-            //{
-            //    CouponTypeId = Guid.NewGuid(),
-            //    CouponTypeName = "现金券"
-            //};
-
-            //_testCouponType.Add(youhuiquan);
-            //_testCouponType.Add(xianjinquan);
-            //_testCoupon.AddRange(new Entitys.Coupon[] {
-            //    new Coupon.Entitys.Coupon()
-            //{
-            //    CouponId = Guid.NewGuid(),
-            //    Title = "10元优惠券",
-            //    SubTitle = "10元",
-            //    BeginTime = DateTime.Parse("2015-08-20"),
-            //    EndTime = DateTime.Parse("2015-08-30"),
-            //    Type = youhuiquan
-            //},
-            //new Coupon.Entitys.Coupon()
-            //{
-            //    CouponId = Guid.NewGuid(),
-            //    Title = "20元优惠券",
-            //    SubTitle = "20元",
-            //    BeginTime = DateTime.Parse("2015-08-20"),
-            //    EndTime = DateTime.Parse("2015-08-26"),
-            //    Type = youhuiquan
-            //},
-            //new Coupon.Entitys.Coupon()
-            //{
-            //    CouponId = Guid.NewGuid(),
-            //    Title = "30元现金券",
-            //    SubTitle = "30元",
-            //    BeginTime = DateTime.Parse("2015-08-20"),
-            //    EndTime = DateTime.Parse("2015-08-30"),
-            //    Type = xianjinquan
-            //},
-            // new Coupon.Entitys.Coupon()
-            // {
-            //     CouponId = Guid.NewGuid(),
-            //     Title = "15元现金券",
-            //     SubTitle = "15元",
-            //     BeginTime = DateTime.Parse("2015-08-20"),
-            //     EndTime = DateTime.Parse("2015-08-26"),
-            //     Type = xianjinquan
-            // },
-            // new Coupon.Entitys.Coupon()
-            // {
-            //     CouponId = Guid.NewGuid(),
-            //     Title = "15元现金券",
-            //     SubTitle = "15元",
-            //     BeginTime = DateTime.Parse("2015-08-20"),
-            //     EndTime = DateTime.Parse("2015-08-23"),
-            //     Type = xianjinquan
-            // }
-            //});
 
 
         }
