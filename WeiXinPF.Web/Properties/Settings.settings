@@ -1,0 +1,15 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="WeiXinPF.Web.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="WeiXinPF_Web_lzcats_ILzServices" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://sms.fgezi.com/Modules/Interface/ILzServices.asmx</Value>
+    </Setting>
+    <Setting Name="版权说明" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">版权说明：禁止在网络上公开销售本源码，违者必究，官方qq 23002807</Value>
+    </Setting>
+    <Setting Name="MxWeiXinPF_Web_lzcats_ILzServices" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://sms.fgezi.com/Modules/Interface/ILzServices.asmx</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
