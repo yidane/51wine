@@ -29,6 +29,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -87,6 +88,9 @@
     <Content Include="admin\cashred\fafanglog.aspx" />
     <Content Include="admin\cashred\img\jspeizhi.png" />
     <Content Include="admin\cashred\img\oauth2peizhi.png" />
+    <Content Include="admin\choujiang\shakeLuckyMoney\luckyMoneyAwardUser.aspx" />
+    <Content Include="admin\choujiang\shakeLuckyMoney\luckyMoneyEdit.aspx" />
+    <Content Include="admin\choujiang\shakeLuckyMoney\luckyMoneylist.aspx" />
     <Content Include="admin\weixin\baseSetting.aspx" />
     <Content Include="admin\zhanhui\110.png" />
     <Content Include="admin\agent\agent_edit.aspx" />
@@ -4260,6 +4264,27 @@
     </Compile>
     <Compile Include="admin\choujiang\ggklist.aspx.designer.cs">
       <DependentUpon>ggklist.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\choujiang\shakeLuckyMoney\luckyMoneyAwardUser.aspx.cs">
+      <DependentUpon>luckyMoneyAwardUser.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\choujiang\shakeLuckyMoney\luckyMoneyAwardUser.aspx.designer.cs">
+      <DependentUpon>luckyMoneyAwardUser.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\choujiang\shakeLuckyMoney\luckyMoneyEdit.aspx.cs">
+      <DependentUpon>luckyMoneyEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\choujiang\shakeLuckyMoney\luckyMoneyEdit.aspx.designer.cs">
+      <DependentUpon>luckyMoneyEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\choujiang\shakeLuckyMoney\luckyMoneylist.aspx.cs">
+      <DependentUpon>luckyMoneylist.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\choujiang\shakeLuckyMoney\luckyMoneylist.aspx.designer.cs">
+      <DependentUpon>luckyMoneylist.aspx</DependentUpon>
     </Compile>
     <Compile Include="admin\choujiang\zjdedite.aspx.cs">
       <DependentUpon>zjdedite.aspx</DependentUpon>

@@ -1,5 +1,4 @@
 ﻿
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,14 +9,14 @@ using WeiXinPF.Common;
 using System.Text;
 using System.Data;
 
-namespace WeiXinPF.Web.admin.cashred
+namespace WeiXinPF.Web.admin.choujiang.shakeLuckyMoney
 {
-    public partial class actionmgr : Web.UI.ManagePage
+    public partial class luckyMoneylist : Web.UI.ManagePage
     {
         protected int totalCount;
         protected int page;
         protected int pageSize;
-        BLL.wx_xjhongbao_action gbll = new BLL.wx_xjhongbao_action();
+        BLL.wx_dzpActionInfo gbll = new BLL.wx_dzpActionInfo();
         protected string keywords = string.Empty;
 
         protected void Page_Load(object sender, EventArgs e)
@@ -33,18 +32,11 @@ namespace WeiXinPF.Web.admin.cashred
         }
 
         #region 数据绑定=================================
-        /// <summary>
-        /// 绑定红包活动数据
-        /// datetime:2015-8-2
-        /// auth:li pu
-        /// </summary>
-        /// <param name="_strWhere"></param>
-        /// <param name="_orderby"></param>
         private void RptBind(string _strWhere, string _orderby)
         {
 
             Model.wx_userweixin weixin = GetWeiXinCode();
-            _strWhere = "wid=" + weixin.id + " " + _strWhere;
+            _strWhere = "wId=" + weixin.id + " " + _strWhere;
             this.page = MXRequest.GetQueryInt("page", 1);
             txtKeywords.Text = this.keywords;
             DataSet ds = gbll.GetList(this.pageSize, this.page, _strWhere, _orderby, out this.totalCount);
@@ -71,7 +63,8 @@ namespace WeiXinPF.Web.admin.cashred
                     {
                         dr["status_s"] = "<span class=\"act_in\">进行中</span>";
                     }
-                 }
+                    dr["url"] = MyCommFun.getWebSite() + "/weixin/dzp/index.aspx?wid=" + dr["wid"].ToString() + "&aid=" + dr["id"].ToString();
+                }
                 ds.AcceptChanges();
             }
             this.rptList.DataSource = ds;
@@ -79,7 +72,7 @@ namespace WeiXinPF.Web.admin.cashred
 
             //绑定页码
             txtPageNum.Text = this.pageSize.ToString();
-            string pageUrl = Utils.CombUrlTxt("actionmgr.aspx", "keywords={0}&page={1}", this.keywords, "__id__");
+            string pageUrl = Utils.CombUrlTxt("dzplist.aspx", "keywords={0}&page={1}", this.keywords, "__id__");
             PageContent.InnerHtml = Utils.OutPageList(this.pageSize, this.page, this.totalCount, pageUrl, 8);
         }
         #endregion
@@ -91,7 +84,7 @@ namespace WeiXinPF.Web.admin.cashred
             _keywords = _keywords.Replace("'", "");
             if (!string.IsNullOrEmpty(_keywords))
             {
-                strTemp.Append(" and  act_name like  '%" + _keywords + "%' ");
+                strTemp.Append(" and  actName like  '%" + _keywords + "%' ");
             }
 
             return strTemp.ToString();
@@ -102,7 +95,7 @@ namespace WeiXinPF.Web.admin.cashred
         private int GetPageSize(int _default_size)
         {
             int _pagesize;
-            if (int.TryParse(Utils.GetCookie("actionmgr_page_size"), out _pagesize))
+            if (int.TryParse(Utils.GetCookie("dzplist_page_size"), out _pagesize))
             {
                 if (_pagesize > 0)
                 {
@@ -116,7 +109,7 @@ namespace WeiXinPF.Web.admin.cashred
         //关健字查询
         protected void btnSearch_Click(object sender, EventArgs e)
         {
-            Response.Redirect(Utils.CombUrlTxt("actionmgr.aspx", "keywords={0}", txtKeywords.Text));
+            Response.Redirect(Utils.CombUrlTxt("dzplist.aspx", "keywords={0}", txtKeywords.Text));
         }
 
         //设置分页数量
@@ -127,16 +120,16 @@ namespace WeiXinPF.Web.admin.cashred
             {
                 if (_pagesize > 0)
                 {
-                    Utils.WriteCookie("actionmgr_page_size", _pagesize.ToString(), 14400);
+                    Utils.WriteCookie("dzplist_page_size", _pagesize.ToString(), 14400);
                 }
             }
-            Response.Redirect(Utils.CombUrlTxt("actionmgr.aspx", "keywords={0}", this.keywords));
+            Response.Redirect(Utils.CombUrlTxt("dzplist.aspx", "keywords={0}", this.keywords));
         }
 
         //批量删除
         protected void btnDelete_Click(object sender, EventArgs e)
         {
-            // ChkAdminLevel("manager_list", MXEnums.ActionEnum.Delete.ToString()); //检查权限 李~朴
+            // ChkAdminLevel("manager_list", MXEnums.ActionEnum.Delete.ToString()); //检查权限
             int sucCount = 0;
             int errorCount = 0;
 
@@ -146,7 +139,7 @@ namespace WeiXinPF.Web.admin.cashred
                 CheckBox cb = (CheckBox)rptList.Items[i].FindControl("chkId");
                 if (cb.Checked)
                 {
-                    if (gbll.Delete(id))
+                    if (gbll.DeleteAction(id))
                     {
                         sucCount += 1;
                     }
@@ -156,44 +149,27 @@ namespace WeiXinPF.Web.admin.cashred
                     }
                 }
             }
-            AddAdminLog(MXEnums.ActionEnum.Delete.ToString(), "删除活动信息" + sucCount + "条，失败" + errorCount + "条"); //记录日志
+            AddAdminLog(MXEnums.ActionEnum.Delete.ToString(), "删除刮刮卡活动信息" + sucCount + "条，失败" + errorCount + "条"); //记录日志
 
-            JscriptMsg("删除成功" + sucCount + "条，失败" + errorCount + "条！", Utils.CombUrlTxt("actionmgr.aspx", "keywords={0}", this.keywords), "Success");
+            JscriptMsg("删除成功" + sucCount + "条，失败" + errorCount + "条！", Utils.CombUrlTxt("dzplist.aspx", "keywords={0}", this.keywords), "Success");
         }
 
-        protected string hdTypeStr(object obj)
+        /// <summary>
+        ///  
+        /// </summary>
+        /// <param name="source"></param>
+        /// <param name="e"></param>
+        protected void rptList_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
-            string ret="";
-            if (obj == null)
-            {
-                return "";
-            }
-            switch (obj.ToString())
-            { 
-                case "0":
-                    ret = "关注时红包";
-                    break;
-                case "1":
-                    ret = "关键词红包";
-                    break;
-                case "2":
-                    ret = "网页红包";
-                    break;
 
-             }
-            return ret;
         }
-        public string jine(object m)
-        {
-            string ret = "";
-            if(m==null)
-            {
-                return "";
-            }
-            int money = MyCommFun.Obj2Int(m);
-            ret = (money / 100.0).ToString();
-            return ret;
 
+        protected void rptList_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+
+            }
         }
     }
 }
