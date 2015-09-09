@@ -99,7 +99,7 @@ namespace WeiXinPF.Templates
                     openid = result.openid;
                 }
             }
-
+            
         }
 
 

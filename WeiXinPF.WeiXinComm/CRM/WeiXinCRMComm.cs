@@ -36,7 +36,8 @@ namespace WeiXinPF.WeiXinComm
                 BLL.wx_userweixin wBll = new wx_userweixin();
               
                 Model.wx_userweixin weixininfo = wBll.GetModel(wid);
-                if (weixininfo.AppId == null || weixininfo.AppSecret == null || weixininfo.AppId.Trim().Length <= 0 || weixininfo.AppSecret.Trim().Length <= 0)
+                if (weixininfo.AppId == null || weixininfo.AppSecret == null 
+                    || weixininfo.AppId.Trim().Length <= 0 || weixininfo.AppSecret.Trim().Length <= 0)
                 {
                     error = "appId或者AppSecret未填写完全,请在[我的公众帐号]里补全信息！";
                     WXLogs.AddLog(wid, "access_token", "获得access_token", error);
