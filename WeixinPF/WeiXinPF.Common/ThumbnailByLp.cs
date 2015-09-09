@@ -1,15 +1,4 @@
-﻿/**************************************
- *
- * author:li pu
- * company:上海沐 雪 网络 科技有限公司
- * qq:23002807
- * website:http://uweixin.cn
- * taobao:https://item.taobao.com/item.htm?spm=686.1000925.0.0.5HYEHQ&id=520523216527  
- * createDate:2013-11-1
- * update:2014-12-30
- * 
- ***********************************/
-
+﻿
 using System;
 using System.Data;
 using System.Collections;
@@ -246,7 +235,7 @@ namespace WeiXinPF.Common
         //}
 
 
-        ////wangdpeng 2011-01-12 水印
+        ////
         //public bool AddFile(DTOWeb_Pubattach dtoPubattach,int _isNeedWatermark,int _watermarkType,int _watermarkPosition,string _watermarkText,int _watermarkTextSize,string _watermarkPicPath)
         //{
         //    string strTime = DateTime.Now.ToShortDateString();
@@ -474,7 +463,7 @@ namespace WeiXinPF.Common
         //    }
         //}
 
-        ////2010-10-11 王大鹏修改 Webeditor缩略图生成
+
         //public void CreateThumbnail(string filePath)
         //{
         //    //if (this.IsThumbnail && this.isPic(dtoPubattach.CONTENTTYPE))
@@ -486,7 +475,7 @@ namespace WeiXinPF.Common
         //    //this.ShowThumbnail(filePath,GetOlympicFilePath(filePath),205,290);//生成奥运图//
         //    //}
         //}
-        ////2010-10-11 李朴修改 生成缩略图
+
         //public string GetMiddlePicFilePath(string filePath)
         //{
         //    string temp = filePath;
@@ -495,7 +484,7 @@ namespace WeiXinPF.Common
         //    temp = temp.Insert(temp.LastIndexOf('\\') + 1, "middle_");
         //    return temp;
         //}
-        ////2010-10-11 王大鹏 李朴 修改 生成小图
+
         //public string GetSmallPicFilePath(string filePath)
         //{
         //    string temp = filePath;

@@ -9,10 +9,6 @@ using WeiXinPF.Common;
 [assembly: AssemblyTitle("WeiXinPF DBUtility DLL")]
 [assembly: AssemblyDescription("WeiXinPF 链接层类库")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("上海沐雪网络科技有限公司")]
-[assembly: AssemblyProduct("muxue V" + MXKeys.ASSEMBLY_VERSION)]
-[assembly: AssemblyCopyright("Copyright - " + MXKeys.ASSEMBLY_YEAR + " uweixin.cn. All Rights Reserved.")]
-[assembly: AssemblyTrademark("禁止在网络上公开销售本源码，我们将追究法律责任")]
 [assembly: AssemblyCulture("")]
 
 // 将 ComVisible 设置为 false 使此程序集中的类型

@@ -50,7 +50,7 @@ namespace WeiXinPF.Web.lzcats {
         
         /// <remarks/>
         public ILzServices() {
-            this.Url = global::WeiXinPF.Web.Properties.Settings.Default.MxWeiXinPF_Web_lzcats_ILzServices;
+            this.Url = global::WeiXinPF.Web.Properties.Settings.Default.WeiXinPF_Web_lzcats_ILzServices;
             if ((this.IsLocalFileSystemWebService(this.Url) == true)) {
                 this.UseDefaultCredentials = true;
                 this.useDefaultCredentialsSetExplicitly = false;
