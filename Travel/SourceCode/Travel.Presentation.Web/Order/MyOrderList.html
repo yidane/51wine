@@ -14,6 +14,7 @@
     <script src="script/common/common.js"></script>
     <script src="script/common/jquery.pageItem.js"></script>
     <script src="script/common/jsRender.min.js"></script>
+    <script src="../javaScripts/Moment.js"></script>
     <meta content="yes" name="apple-mobile-web-app-capable" />
     <meta content="black" name="apple-mobile-web-app-status-bar-style" />
     <meta content="telephone=no" name="format-detection" />
@@ -60,7 +61,7 @@
                         </dl>
                     </div>
                     <div class="info_03">
-                        <span>已付款</span>
+                        <span>{{:OrderStatus}}</span>
                     </div>
                 </a>
             </li>
@@ -124,7 +125,7 @@
                         if (result.IsSuccess) {
                             var data = [];
                             $(result.Data).each(function (index, obj) {
-                                data.push({ OrderNo: obj.OrderCode, OrderID: obj.OrderId, TicketImageUrl: '../TicketImages/1.jpg', TicketName: obj.TicketName, LastUseDate: '2015-08-19', TicketPrice: obj.singleTicketPrice, TicketCount: obj.TicketCount, TicketTotalPrice: obj.TotelFee, OperateUrl: '', OperateName: '查看' });
+                                data.push({ OrderNo: obj.OrderCode, OrderID: obj.OrderId, TicketImageUrl: '../TicketImages/1.jpg', TicketName: obj.TicketName, LastUseDate: moment(obj.BuyTime).add(8, 'month').format("YYYY-MM-DD"), TicketPrice: obj.singleTicketPrice, TicketCount: obj.TicketCount, TicketTotalPrice: obj.TotelFee, OperateUrl: '', OrderStatus: obj.OrderStatus });
                             });
 
                             var template = $.templates("#ResultTemplateOrder");
