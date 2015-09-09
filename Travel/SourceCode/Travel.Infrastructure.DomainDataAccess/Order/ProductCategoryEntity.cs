@@ -79,7 +79,7 @@ namespace Travel.Infrastructure.DomainDataAccess.Order
         public static IEnumerable<ProductCategoryEntity> ProductCategory {
             get
             {                
-                if (_productCategory == null || _productCategory.Any() || !DateTime.Now.Date.Equals(_currentDate))
+                if (_productCategory == null || !_productCategory.Any() || !DateTime.Now.Date.Equals(_currentDate))
                 {                   
                     using (var db = new TravelDBContext())
                     {
@@ -103,7 +103,7 @@ namespace Travel.Infrastructure.DomainDataAccess.Order
         /// </summary>
         /// <param name="dailyProduct"></param>
         /// <returns></returns>
-        public static bool IsDailyProductExists(DailyProductEntity dailyProduct)
+        public static bool IsProductCategoryExists(DailyProductEntity dailyProduct)
         {
             var productCategory =
                 ProductCategory.FirstOrDefault(
