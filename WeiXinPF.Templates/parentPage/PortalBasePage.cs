@@ -1,13 +1,4 @@
-﻿/**************************************
- * 1e2124dd04e11d01b9df2865f85944be
- * author:李朴
- * company:上海沐雪网络科技有限公司
- * website:http://uweixin.cn
- * createDate:2013-11-1
- * update:2014-12-30
- * remark:门户网站页面的父类
- * 
- ***********************************/
+﻿
 
 using WeiXinPF.Common;
 using System;

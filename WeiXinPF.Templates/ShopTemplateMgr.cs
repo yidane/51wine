@@ -1,15 +1,4 @@
-﻿/**************************************
- * 
- * author:李朴
- * company:上海沐雪网络科技有限公司
- * website:http://uweixin.cn
- * createDate:2013-11-1
- * update:2014-12-30
- * remark:本代码为微商城模板的核心处理逻辑；
- * html模板页面上的所有的方法，属性都在这个类里处理。
- * 
- ***********************************/
-
+﻿
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -24,24 +13,14 @@ using WeiXinPF.Model;
 
 namespace WeiXinPF.Templates
 {
-    /**************************************
- *
- * author:李朴
- * company:上海沐雪网络科技有限公司
- * qq:23002807
- * website:http://uweixin.cn
- * taobao:https://item.taobao.com/item.htm?spm=686.1000925.0.0.5HYEHQ&id=520523216527  
- * createDate:2013-11-1
- * update:2014-12-30
- * 
- ***********************************/
+
 
     public class ShopTemplateMgr
     {
         WeiXinPF.DAL.templatesDal tDal = new DAL.templatesDal();
 
         #region 属性
-        protected internal string ccRight = "(c)2014 沐雪 技术提供";
+        protected internal string ccRight = "(c)2014";
         /// <summary>
         /// 当前页面的模板文档对象
         /// </summary>

@@ -38,7 +38,7 @@ namespace WeiXinPF.WeiXinComm
                         var fileVersionInfo = FileVersionInfo.GetVersionInfo(HttpContext.Current.Server.MapPath("~/bin/Senparc.Weixin.MP.dll"));
                         var version = fileVersionInfo.FileVersion;
                         strongResponseMessage.Content = string.Format(
-                            "欢迎关注【沐雪微信平台】，当前运行版本：v{0}。\r\n您还可以发送【位置】【图片】【语音】信息，查看不同格式的回复。\r\nSDK官方地址：http://m.uweixin.cn",
+                            "欢迎关注，当前运行版本：v{0}。\r\n您还可以发送【位置】【图片】【语音】信息，查看不同格式的回复。",
                             version);
                         responseMessage = strongResponseMessage;
                         break;

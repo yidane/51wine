@@ -6,25 +6,15 @@ using WeiXinPF.Common;
 // 有关程序集的常规信息通过以下特性集 
 // 控制。更改这些特性值可修改
 // 与程序集关联的信息。
-/**************************************
- *
- * 作者：李朴
- * 公司:上海沐 雪 网络 科技有限公司
- * qq:23002807
- * website:http://uweixin.cn
- * taobao:https://item.taobao.com/item.htm?spm=686.1000925.0.0.5HYEHQ&id=520523216527  
- * createDate:2013-11-1
- * update:2014-12-30
- * 1e2124dd04e11d01b9df2865f85944be
- ***********************************/
+
 
 [assembly: AssemblyTitle("WeiXinPF.Web DLL")]
 [assembly: AssemblyDescription("WeiXinPF-muxue 基础类库")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("上海沐雪网络科技有限公司")]
+[assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("muxue V" + MXKeys.ASSEMBLY_VERSION)]
-[assembly: AssemblyCopyright("Copyright 2015 - " + MXKeys.ASSEMBLY_YEAR + " uweixin.cn. All Rights Reserved.")]
-[assembly: AssemblyTrademark("禁止在网络上公开销售本源码，我们将追究法律责任")]
+[assembly: AssemblyCopyright("Copyright 2015 - " + MXKeys.ASSEMBLY_YEAR + ". All Rights Reserved.")]
+[assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
 // 将 ComVisible 设置为 false 会使此程序集中的类型 

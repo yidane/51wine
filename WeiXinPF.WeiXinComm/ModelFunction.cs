@@ -1,13 +1,4 @@
-﻿/**************************************
- *
- * author:李朴
- * company:上海沐雪网络科技有限公司
- * website:http://uweixin.cn
- * createDate:2013-11-1
- * update:2014-12-30
- * remark:该处主要处理模块插入回复信息的处理
- * 
- ***********************************/
+﻿
 
 using System;
 using System.Collections.Generic;
