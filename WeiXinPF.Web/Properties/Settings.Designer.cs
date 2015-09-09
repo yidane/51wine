@@ -32,24 +32,5 @@ namespace WeiXinPF.Web.Properties {
                 return ((string)(this["WeiXinPF_Web_lzcats_ILzServices"]));
             }
         }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("版权说明：禁止在网络上公开销售本源码，违者必究，官方qq 23002807")]
-        public string 版权说明 {
-            get {
-                return ((string)(this["版权说明"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://sms.fgezi.com/Modules/Interface/ILzServices.asmx")]
-        public string MxWeiXinPF_Web_lzcats_ILzServices {
-            get {
-                return ((string)(this["MxWeiXinPF_Web_lzcats_ILzServices"]));
-            }
-        }
     }
 }

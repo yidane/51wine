@@ -7,12 +7,8 @@ using WeiXinPF.Common;
 // 特性集控制。更改这些特性值可修改
 // 与程序集关联的信息。
 [assembly: AssemblyTitle("WeiXinPF Model DLL")]
-[assembly: AssemblyDescription("WeiXinPF-muxue 基础类库")]
+[assembly: AssemblyDescription("WeiXinPF 基础类库")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("上海沐雪网络科技有限公司")]
-[assembly: AssemblyProduct("muxue V" + MXKeys.ASSEMBLY_VERSION)]
-[assembly: AssemblyCopyright("Copyright - " + MXKeys.ASSEMBLY_YEAR + " uweixin.cn. All Rights Reserved.")]
-[assembly: AssemblyTrademark("禁止在网络上公开销售本源码，我们将追究法律责任")]
 [assembly: AssemblyCulture("")]
 
 // 将 ComVisible 设置为 false 使此程序集中的类型

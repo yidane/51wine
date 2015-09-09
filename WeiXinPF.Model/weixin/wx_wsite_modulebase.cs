@@ -1,16 +1,4 @@
-﻿/**************************************
- *
- * author:李 朴
- * company:上海沐 雪 网络 科技有限公司
- * qq:23002807
- * website:http://uweixin.cn
- * taobao:https://item.taobao.com/item.htm?spm=686.1000925.0.0.5HYEHQ&id=520523216527  
- * createDate:2013-11-1
- * update:2014-12-30
- * 
- ***********************************/
-
-using System;
+﻿using System;
 namespace WeiXinPF.Model
 {
 	/// <summary>

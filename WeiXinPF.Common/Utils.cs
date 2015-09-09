@@ -562,7 +562,6 @@ namespace WeiXinPF.Common
 
         /// <summary>
         /// 生成随机字母和数据字符串(字母和数字混合)
-        /// author:李朴 datetime:2013-12-4
         /// </summary>
         /// <param name="Length"></param>
         /// <returns></returns>
@@ -1413,12 +1412,10 @@ namespace WeiXinPF.Common
                 }
                 if (!string.IsNullOrEmpty(urlParams.ToString()) && _url.IndexOf("?") == -1)
                     urlParams.Insert(0, "?");
-                //李朴-----add  2014-3-30 begin ----
                 if (!string.IsNullOrEmpty(urlParams.ToString()) && _url.Contains("&") && _url.LastIndexOf("&")<(_url.Length-1))
                 {
                     _url += "&";
                 }
-                //李朴-----add  2014-3-30 end ----
             }
             catch
             {
