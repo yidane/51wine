@@ -1,13 +1,4 @@
-﻿/**************************************
- *
- * author:李朴
- * company:上海沐雪网络科技有限公司
- * website:http://uweixin.cn
- * createDate:2013-11-1
- * update:2014-12-30
- * remark:我的微账号列表
- * 版权说明：禁止在网络上公开销售本源码，违者必究,官方q——q 23002807
- ***********************************/
+﻿
 using System;
 using System.Text;
 using System.Data;
