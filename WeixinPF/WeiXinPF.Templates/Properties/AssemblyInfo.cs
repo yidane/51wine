@@ -9,10 +9,10 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("WeiXinPF.Templates")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("上海沐雪网络科技有限公司")]
+[assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("muxue V" + MXKeys.ASSEMBLY_VERSION)]
-[assembly: AssemblyCopyright("Copyright - " + MXKeys.ASSEMBLY_YEAR + " uweixin.cn. All Rights Reserved.")]
-[assembly: AssemblyTrademark("禁止在网络上公开销售本源码，我们将追究法律责任")]
+[assembly: AssemblyCopyright("Copyright - " + MXKeys.ASSEMBLY_YEAR + ". All Rights Reserved.")]
+[assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
 // 将 ComVisible 设置为 false 使此程序集中的类型
