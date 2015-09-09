@@ -18,7 +18,7 @@
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>
     <SccProvider>SAK</SccProvider>
-    <UseIISExpress>false</UseIISExpress>
+    <UseIISExpress>true</UseIISExpress>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <UpgradeBackupLocation>
@@ -3086,6 +3086,10 @@
     <Content Include="scripts\calendar.js" />
     <Content Include="scripts\city.min.js" />
     <Content Include="scripts\jquery\jquery-1.10.1.min.js" />
+    <Content Include="scripts\jquery\jquery.url.js" />
+    <Content Include="scripts\knockout\knockout-3.2.0.debug.js" />
+    <Content Include="scripts\knockout\knockout-3.3.0.js" />
+    <Content Include="scripts\mobilePhoneShake.min.js" />
     <Content Include="scripts\music\audio.js" />
     <Content Include="scripts\music\play.png" />
     <Content Include="scripts\music\stop.png" />
@@ -3212,6 +3216,7 @@
     <Content Include="scripts\lhgdialog\skins\igreen\igreen_s2.png" />
     <Content Include="scripts\lhgdialog\skins\jtop.css" />
     <Content Include="scripts\lhgdialog\skins\mac.css" />
+    <Content Include="scripts\pre-loader.js" />
     <Content Include="scripts\swfupload\swfupload.handlers.js" />
     <Content Include="scripts\swfupload\swfupload.js" />
     <Content Include="scripts\swfupload\swfupload.swf" />
@@ -7926,6 +7931,17 @@
     <Content Include="weixin\qiangpiao\pic_show.html" />
     <Content Include="weixin\qiangpiao\order_ret.html" />
     <Content Include="weixin\qiangpiao\笔记.txt" />
+    <Content Include="weixin\shakeLuckyMoney\css\page-animation.css" />
+    <Content Include="weixin\shakeLuckyMoney\css\shakecoupons.css" />
+    <Content Include="weixin\shakeLuckyMoney\images\back.jpg" />
+    <Content Include="weixin\shakeLuckyMoney\images\coupon.jpg" />
+    <Content Include="weixin\shakeLuckyMoney\images\coupon_background.png" />
+    <Content Include="weixin\shakeLuckyMoney\images\hand.png" />
+    <Content Include="weixin\shakeLuckyMoney\images\shake_background.png" />
+    <Content Include="weixin\shakeLuckyMoney\images\活动结束.png" />
+    <Content Include="scripts\oAuth2.js" />
+    <Content Include="weixin\shakeLuckyMoney\js\shakeLuckyMoney-vm.js" />
+    <Content Include="weixin\shakeLuckyMoney\shakeLuckyMoney.html" />
     <Content Include="weixin\shangqiang\index.aspx" />
     <Content Include="weixin\shangqiang\js\plugback.js" />
     <Content Include="weixin\sjb\css\mystyle.css" />

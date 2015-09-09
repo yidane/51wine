@@ -8,19 +8,19 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title>编辑大转盘活动</title>
-    <script type="text/javascript" src="../../scripts/jquery/jquery-1.10.2.min.js"></script>
-    <script type="text/javascript" src="../../scripts/jquery/Validform_v5.3.2_min.js"></script>
-    <script type="text/javascript" src="../../scripts/lhgdialog/lhgdialog.js?skin=idialog"></script>
-    <script type="text/javascript" src="../../scripts/datepicker/WdatePicker.js"></script>
-    <script type="text/javascript" src="../../scripts/swfupload/swfupload.js"></script>
-    <script type="text/javascript" src="../../scripts/swfupload/swfupload.queue.js"></script>
-    <script type="text/javascript" src="../../scripts/swfupload/swfupload.handlers.js"></script>
-    <script type="text/javascript" charset="utf-8" src="../../editor/kindeditor-min.js"></script>
-    <script type="text/javascript" charset="utf-8" src="../../editor/lang/zh_CN.js"></script>
-    <script type="text/javascript" src="../js/layout.js"></script>
-    <link href="../skin/default/style.css" rel="stylesheet" type="text/css" />
-    <link href="../skin/mystyle.css" rel="stylesheet" type="text/css" />
+    <title>编辑摇一摇活动</title>
+    <script type="text/javascript" src="../../../scripts/jquery/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="../../../scripts/jquery/Validform_v5.3.2_min.js"></script>
+    <script type="text/javascript" src="../../../scripts/lhgdialog/lhgdialog.js?skin=idialog"></script>
+    <script type="text/javascript" src="../../../scripts/datepicker/WdatePicker.js"></script>
+    <script type="text/javascript" src="../../../scripts/swfupload/swfupload.js"></script>
+    <script type="text/javascript" src="../../../scripts/swfupload/swfupload.queue.js"></script>
+    <script type="text/javascript" src="../../../scripts/swfupload/swfupload.handlers.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../../../editor/kindeditor-min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../../../editor/lang/zh_CN.js"></script>
+    <script type="text/javascript" src="../../js/layout.js"></script>
+    <link href="../../skin/default/style.css" rel="stylesheet" type="text/css" />
+    <link href="../../skin/mystyle.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript">
         $(function () {
             //初始化表单验证
@@ -46,9 +46,9 @@
     <form id="form1" runat="server">
         <!--导航栏-->
         <div class="location">
-            <a href="dzplist.aspx" class="back"><i></i><span>返回大转盘活动列表</span></a>
+            <a href="luckyMoneylist.aspx" class="back"><i></i><span>返回摇一摇活动列表</span></a>
             <i class="arrow"></i>
-            <span>编辑大转盘活动</span>
+            <span>编辑摇一摇活动</span>
         </div>
         <div class="line10"></div>
         <!--/导航栏-->
@@ -58,7 +58,7 @@
             <div id="floatHead" class="content-tab">
                 <div class="content-tab-ul-wrap">
                     <ul>
-                        <li><a href="javascript:;" onclick="tabs(this);" class="selected">编辑大转盘活动开始内容</a></li>
+                        <li><a href="javascript:;" onclick="tabs(this);" class="selected">编辑摇一摇活动开始内容</a></li>
                         <li><a href="javascript:;" onclick="tabs(this);">活动结束内容</a></li>
                         <li><a href="javascript:;" onclick="tabs(this);">奖项设置</a></li>
                     </ul>
@@ -71,14 +71,14 @@
                 <dt>关键词</dt>
                 <dd>
                     <asp:HiddenField ID="hidid" runat="server" Value="0" />
-                    <asp:TextBox ID="txtKW" runat="server" CssClass="input normal" datatype="*1-20" sucmsg=" " Text="大转盘" />
+                    <asp:TextBox ID="txtKW" runat="server" CssClass="input normal" datatype="*1-20" sucmsg=" " Text="摇一摇" />
                     <span class="Validform_checktip">*只能写一个关键词，用户输入此关键词将会触发此活动。</span>
                 </dd>
             </dl>
             <dl>
                 <dt>开始活动的图片</dt>
                 <dd>
-                    <asp:Image ID="imgbeginPic" runat="server" ImageUrl="/weixin/dzp/images/start.jpg" Style="max-height: 80px;" />
+                    <asp:Image ID="imgbeginPic" runat="server" ImageUrl="/weixin/shakeLuckyMoney/images/shake_background.png" Style="max-height: 80px;" />
                     <asp:TextBox ID="txtImgUrl" runat="server" CssClass="input normal upload-path" />
                     <div class="upload-box upload-img"></div>
                     <span class="Validform_checktip">（尺寸：宽720像素，高400像素） 小于200k;</span>
@@ -90,7 +90,7 @@
             <dl>
                 <dt>活动名称</dt>
                 <dd>
-                    <asp:TextBox ID="txtactName" runat="server" CssClass="input normal" datatype="*1-50" sucmsg=" " Text="大转盘活动开始了" />
+                    <asp:TextBox ID="txtactName" runat="server" CssClass="input normal" datatype="*1-50" sucmsg=" " Text="摇一摇活动开始了" />
                     <span class="Validform_checktip">*请不要多于50字!</span>
                 </dd>
             </dl>
@@ -131,7 +131,7 @@
             <dl>
                 <dt>活动说明</dt>
                 <dd>
-                    <textarea name="txtactContent" rows="2" cols="20" id="txtactContent" class="input" runat="server">亲，请点击进入大转盘活动页面，祝您好运哦！</textarea>
+                    <textarea name="txtactContent" rows="2" cols="20" id="txtactContent" class="input" runat="server">亲，请点击进入摇一摇活动页面，祝您好运哦！</textarea>
                     <span class="Validform_checktip"></span>
                 </dd>
             </dl>
@@ -158,7 +158,7 @@
             <dl>
                 <dt>活动结束的图片</dt>
                 <dd>
-                    <asp:Image ID="imgEndPic" runat="server" ImageUrl="/weixin/dzp/images/end.jpg" Style="max-height: 80px;" />
+                    <asp:Image ID="imgEndPic" runat="server" ImageUrl="/weixin/shakeLuckyMoney/images/活动结束.png" Style="max-height: 80px;" />
                     <asp:TextBox ID="txtEndPic" runat="server" CssClass="input normal upload-path" />
                     <div class="upload-box upload-img"></div>
                     <span class="Validform_checktip">（尺寸：宽720像素，高400像素） 小于200k;</span>
@@ -168,7 +168,7 @@
             <dl>
                 <dt>活动结束公告主题</dt>
                 <dd>
-                    <asp:TextBox ID="txtendNotice" runat="server" CssClass="input normal" datatype="*1-50" sucmsg=" " Text="大转盘活动已经结束了" />
+                    <asp:TextBox ID="txtendNotice" runat="server" CssClass="input normal" datatype="*1-50" sucmsg=" " Text="摇一摇活动已经结束了" />
                     <span class="Validform_checktip">*请不要多于50字!</span>
                 </dd>
             </dl>
