@@ -7572,6 +7572,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="admin\scenic\" />
     <Folder Include="aspx\" />
     <Folder Include="html\" />
     <Folder Include="scripts\datepicker\skin\whyGreen\" />
@@ -8457,7 +8458,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>False</AutoAssignPort>
           <DevelopmentServerPort>850</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
