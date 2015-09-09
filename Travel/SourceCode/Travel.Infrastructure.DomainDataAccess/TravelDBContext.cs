@@ -56,6 +56,10 @@
 
         public virtual DbSet<RefundOrderEntity> RefundOrder { get; set; }
 
+        public virtual DbSet<ProductCategoryEntity> ProductCategory { get; set; }
+
+        public virtual DbSet<DailyProductEntity> DailyProduct { get; set; }
+
         public virtual DbSet<UserContracts> UserContract { get; set; }
     }
 
