@@ -72,7 +72,7 @@ namespace WeiXinPF.Web.admin.choujiang.shakeLuckyMoney
 
             //绑定页码
             txtPageNum.Text = this.pageSize.ToString();
-            string pageUrl = Utils.CombUrlTxt("dzplist.aspx", "keywords={0}&page={1}", this.keywords, "__id__");
+            string pageUrl = Utils.CombUrlTxt("luckyMoneylist.aspx", "keywords={0}&page={1}", this.keywords, "__id__");
             PageContent.InnerHtml = Utils.OutPageList(this.pageSize, this.page, this.totalCount, pageUrl, 8);
         }
         #endregion
@@ -109,7 +109,7 @@ namespace WeiXinPF.Web.admin.choujiang.shakeLuckyMoney
         //关健字查询
         protected void btnSearch_Click(object sender, EventArgs e)
         {
-            Response.Redirect(Utils.CombUrlTxt("dzplist.aspx", "keywords={0}", txtKeywords.Text));
+            Response.Redirect(Utils.CombUrlTxt("luckyMoneylist.aspx", "keywords={0}", txtKeywords.Text));
         }
 
         //设置分页数量
@@ -123,7 +123,7 @@ namespace WeiXinPF.Web.admin.choujiang.shakeLuckyMoney
                     Utils.WriteCookie("dzplist_page_size", _pagesize.ToString(), 14400);
                 }
             }
-            Response.Redirect(Utils.CombUrlTxt("dzplist.aspx", "keywords={0}", this.keywords));
+            Response.Redirect(Utils.CombUrlTxt("luckyMoneylist.aspx", "keywords={0}", this.keywords));
         }
 
         //批量删除
@@ -151,7 +151,7 @@ namespace WeiXinPF.Web.admin.choujiang.shakeLuckyMoney
             }
             AddAdminLog(MXEnums.ActionEnum.Delete.ToString(), "删除刮刮卡活动信息" + sucCount + "条，失败" + errorCount + "条"); //记录日志
 
-            JscriptMsg("删除成功" + sucCount + "条，失败" + errorCount + "条！", Utils.CombUrlTxt("dzplist.aspx", "keywords={0}", this.keywords), "Success");
+            JscriptMsg("删除成功" + sucCount + "条，失败" + errorCount + "条！", Utils.CombUrlTxt("luckyMoneylist.aspx", "keywords={0}", this.keywords), "Success");
         }
 
         /// <summary>

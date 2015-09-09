@@ -61,7 +61,7 @@ namespace WeiXinPF.Web.admin.choujiang.shakeLuckyMoney
             hidid.Value = id.ToString();
             Model.wx_dzpActionInfo dzpAction = dzpBll.GetModel(id);
             IList<Model.wx_dzpAwardItem> aItemlist = iBll.GetModelList("actId=" + id);
-            Model.wx_requestRule rule = rBll.GetModelList("modelFunctionName='大转盘' and modelFunctionId=" + id)[0];
+            Model.wx_requestRule rule = rBll.GetModelList("modelFunctionName='摇一摇' and modelFunctionId=" + id)[0];
             txtKW.Text = rule.reqKeywords;
 
             if (dzpAction.beginPic != null && dzpAction.beginPic.Trim() != "/weixin/dzp/images/start.jpg")
@@ -222,8 +222,8 @@ namespace WeiXinPF.Web.admin.choujiang.shakeLuckyMoney
                 EditAwardItem(id);
                 //3 新增回复规则表
                 AddRule(weixin.id, id);
-                AddAdminLog(MXEnums.ActionEnum.Add.ToString(), "添加大转盘活动，主键为" + id); //记录日志//1e2124dd04e11d01b9df2865f85944be
-                JscriptMsg("添加大转盘活动成功！", "dzplist.aspx", "Success");
+                AddAdminLog(MXEnums.ActionEnum.Add.ToString(), "添加摇一摇活动，主键为" + id); //记录日志//1e2124dd04e11d01b9df2865f85944be
+                JscriptMsg("添加摇一摇活动成功！", "luckyMoneylist.aspx", "Success");
             }
             else
             {   //修改
@@ -232,7 +232,7 @@ namespace WeiXinPF.Web.admin.choujiang.shakeLuckyMoney
                 //2删除，且新增奖项表
                 EditAwardItem(id);
                 //3 修改回复规则表
-                IList<Model.wx_requestRule> rlist = rBll.GetModelList("modelFunctionName = '大转盘' and modelFunctionId=" + id);
+                IList<Model.wx_requestRule> rlist = rBll.GetModelList("modelFunctionName = '摇一摇' and modelFunctionId=" + id);
 
                 if (rlist != null && rlist.Count > 0)
                 {
@@ -245,8 +245,8 @@ namespace WeiXinPF.Web.admin.choujiang.shakeLuckyMoney
                     AddRule(weixin.id, id);
                 }
 
-                AddAdminLog(MXEnums.ActionEnum.Edit.ToString(), "修改大转盘活动，主键为" + id); //记录日志
-                JscriptMsg("修改大转盘活动成功！", "luckyMoneylist.aspx", "Success");
+                AddAdminLog(MXEnums.ActionEnum.Edit.ToString(), "修改摇一摇活动，主键为" + id); //记录日志
+                JscriptMsg("修改摇一摇活动成功！", "luckyMoneylist.aspx", "Success");
             }
 
         }
@@ -258,7 +258,7 @@ namespace WeiXinPF.Web.admin.choujiang.shakeLuckyMoney
         /// <param name="modelId"></param>
         private void AddRule(int wid, int modelId)
         {
-            rBll.AddModeltxtPicRule(wid, "大转盘", modelId, txtKW.Text.Trim());
+            rBll.AddModeltxtPicRule(wid, "摇一摇", modelId, txtKW.Text.Trim());
         }
 
 
