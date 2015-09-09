@@ -1,8 +1,8 @@
 ﻿var access_code = GetQueryString('code');
 if (access_code == null) {
-    var fromurl = location.href;
-    var url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxdd6127bdb5e7611c&redirect_uri=' + encodeURIComponent(fromurl) + '&response_type=code&scope=snsapi_base&state=STATE%23wechat_redirect&connect_redirect=1#wechat_redirect';
-    location.href = url;
+    //var fromurl = location.href;
+    //var url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxdd6127bdb5e7611c&redirect_uri=' + encodeURIComponent(fromurl) + '&response_type=code&scope=snsapi_base&state=STATE%23wechat_redirect&connect_redirect=1#wechat_redirect';
+    //location.href = url;
 }
 
 function addcookie(name, value, expire) {

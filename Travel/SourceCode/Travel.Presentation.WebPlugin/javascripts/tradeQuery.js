@@ -1,0 +1,3 @@
+﻿function Query() {
+    alert("query");
+}
