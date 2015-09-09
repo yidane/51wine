@@ -7,11 +7,10 @@ using System.Web.UI.WebControls;
 using WeiXinPF.Common;
 using WeiXinPF.BLL;
 
-namespace WeiXinPF.Web.admin.choujiang
+namespace WeiXinPF.Web.admin.choujiang.shakeLuckyMoney
 {
 
-
-    public partial class dzpEdit : Web.UI.ManagePage
+    public partial class luckyMoneyEdit : Web.UI.ManagePage
     {//1e2124dd04e11d01b9df2865f85944be
         private string action = MXEnums.ActionEnum.Add.ToString(); //操作类型
 
@@ -247,7 +246,7 @@ namespace WeiXinPF.Web.admin.choujiang
                 }
 
                 AddAdminLog(MXEnums.ActionEnum.Edit.ToString(), "修改大转盘活动，主键为" + id); //记录日志
-                JscriptMsg("修改大转盘活动成功！", "dzplist.aspx", "Success");
+                JscriptMsg("修改大转盘活动成功！", "luckyMoneylist.aspx", "Success");
             }
 
         }
