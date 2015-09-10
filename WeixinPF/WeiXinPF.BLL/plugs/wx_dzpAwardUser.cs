@@ -185,7 +185,9 @@ namespace WeiXinPF.BLL
             return DataTableToList(ds.Tables[0]);
         }
 
-        /// <summary>
+	   
+
+	    /// <summary>
         /// 该用户的中奖信息
         /// </summary>
         /// <param name="aid">活动表主键id</param>

@@ -7686,6 +7686,7 @@
     <Content Include="weixin\coupons\images\logo.png" />
     <Content Include="weixin\coupons\images\ticket.png" />
     <Content Include="weixin\coupons\js\couponDetail-vm.js" />
+    <Content Include="weixin\coupons\js\myCoupons-vm.js" />
     <Content Include="weixin\coupons\MyCoupons.html" />
     <Content Include="weixin\coupons\styles\aimbase.min.css" />
     <Content Include="weixin\coupons\styles\mine_detail.min.css" />

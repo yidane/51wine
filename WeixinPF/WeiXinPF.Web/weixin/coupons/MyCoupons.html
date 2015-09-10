@@ -38,30 +38,29 @@
             }
         }
 
-        
-/*@media screen and (max-width:320px) {
-        .price .fl {
-        font-size:
+
+        /*@media screen and (max-width:320px) {
+                .price .fl {
+                font-size:
+                }
         }
-}
 
-@media screen and (min-width:320px) and (max-width:400px) {
-    .phone {
-        width: 62%;
-    }
+        @media screen and (min-width:320px) and (max-width:400px) {
+            .phone {
+                width: 62%;
+            }
 
-    .moneyWrapper p {
-        top: 18%;
-        font-size: 1.3rem;
-    }
+            .moneyWrapper p {
+                top: 18%;
+                font-size: 1.3rem;
+            }
 
-    #money {
-        font-size: 1.3rem;
-        left: 47%;
-        top: 30%;
-    }
-}*/
-
+            #money {
+                font-size: 1.3rem;
+                left: 47%;
+                top: 30%;
+            }
+        }*/
     </style>
 
 </head>
@@ -92,22 +91,21 @@
         <div data-bind="visible:selectedType()=='unExpired'">
             <ul class="coupons-list" data-bind="foreach:unExpiredCoupons ,visible:unExpiredCoupons().length>0" style="display: none;">
                 <li class="clearfix fadeInRight">
-                    <a class="coupons-a used" data-bind="attr:{href:'couponDetail.html?openId='+$root.openId()+'&code='+$root.param().access_code+'&couponUsageId='+couponUsageId}">
+                    <a class="coupons-a used" data-bind="attr:{href:'couponDetail.html?openId='+$root.openId()+'&code='+$root.param().access_code+'&id='+id}">
 
                         <div class="top clearfix">
-                            <span class="price fl"><em>￥</em>   <!-- ko text:subTitle --><!-- /ko--></span>
+                            <span class="price fl"><em>￥</em>   <!-- ko text:jpname --><!-- /ko--></span>
                             <div class="info">
-                                <h3 data-bind="text:title"></h3>
+                                <h3 data-bind="text:jxname"></h3>
                                 <!--<p>满50元可使用</p>-->
                             </div>
                         </div>
                         <p class="coupons-handle">
-                            <!-- ko text:'有效期：'+ beginTime +' 至 '+endTime --><!-- /ko-->
-                            <!--<a class="fr used" data-bind="attr:{href:'couponDetail.html?openId='+$root.openId()+'&code='+$root.param().access_code+'&couponUsageId='+couponUsageId}">详情</a>-->
+                            <!-- ko text:'有效期：'+ info()?info().beginDate:'' +' 至 '+info()?info().endTime:'' --><!-- /ko-->
                         </p>
                     </a>
 
-</li>
+                </li>
 
             </ul>
             <div data-bind="visible:unExpiredCoupons().length<0">
@@ -124,16 +122,16 @@
                 <li class="clearfix fadeInRight">
 
 
-                    <a class="coupons-a used" data-bind="attr:{href:'couponDetail.html?openId='+$root.openId()+'&code='+$root.param().access_code+'&couponUsageId='+couponUsageId+'&type=used'}">
+                    <a class="coupons-a used" data-bind="attr:{href:'couponDetail.html?openId='+$root.openId()+'&code='+$root.param().access_code+'&id='+id+'&type=used'}">
                         <div class="top clearfix">
-                            <span class="price fl"><em>￥</em>   <!-- ko text:subTitle --><!-- /ko--></span>
+                            <span class="price fl"><em>￥</em>   <!-- ko text:jpname --><!-- /ko--></span>
                             <div class="info">
-                                <h3 data-bind="text:title"></h3>
+                                <h3 data-bind="text:jxname"></h3>
                                 <!--<p>满50元可使用</p>-->
                             </div>
                         </div>
                         <p class="coupons-handle">
-                            <!-- ko text:'有效期：'+ beginTime +' 至 '+endTime --><!-- /ko-->
+                            <!-- ko text:'有效期：'+ info()?info().beginDate:'' +' 至 '+info()?info().endTime:'' --><!-- /ko-->
 
                         </p>
                         <i class="status-used i-status"></i>
@@ -151,23 +149,22 @@
         <div data-bind="visible:selectedType()=='expired'" style="display: none;">
             <ul class="coupons-list" data-bind="foreach:expiredCoupons ,visible:expiredCoupons().length>0" style="display: none;">
                 <li class="fail clearfix fadeInRight">
-                    <a class="coupons-a used" data-bind="attr:{href:'couponDetail.html?openId='+$root.openId()+'&code='+$root.param().access_code+'&couponUsageId='+couponUsageId+'&type=expired'}">
+                    <a class="coupons-a used" data-bind="attr:{href:'couponDetail.html?openId='+$root.openId()+'&code='+$root.param().access_code+'&id='+id+'&type=expired'}">
 
                         <div class="top clearfix">
-                            <span class="price fl"><em>￥</em>   <!-- ko text:subTitle --><!-- /ko--></span>
+                            <span class="price fl"><em>￥</em>   <!-- ko text:jpname --><!-- /ko--></span>
                             <div class="info">
-                                <h3 data-bind="text:title"></h3>
+                                <h3 data-bind="text:jxname"></h3>
                                 <!--<p>满50元可使用</p>-->
                             </div>
                         </div>
                         <p class="coupons-handle">
-                            <!-- ko text:'有效期：'+ beginTime +' 至 '+endTime --><!-- /ko-->
-                            <!--<a class="fr used" data-bind="attr:{href:'couponDetail.html?openId='+$root.openId()+'&code='+$root.param().access_code+'&couponUsageId='+couponUsageId+'&type=expired'}">详情</a>-->
+                            <!-- ko text:'有效期：'+ info()?info().beginDate:'' +' 至 '+info()?info().endTime:'' --><!-- /ko-->
                         </p>
                         <i class="status-expired i-status"></i>
                     </a>
 
-</li>
+                </li>
 
             </ul>
             <div data-bind="visible:expiredCoupons().length<0">
@@ -179,26 +176,30 @@
 
     </div>
 
-    <script src="../javaScripts/jquery-2.1.4.min.js"></script>
-    <script src="../javaScripts/jquery.url.js"></script>
+    <script src="../../scripts/jquery/jquery-2.1.0.min.js"></script>
+    <script src="../../scripts/jquery/jquery.url.js"></script>
     <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 
-    <script src="../javaScripts/pre-loader.js"></script>
-    <script src="../javaScripts/knockout-3.2.0.debug.js"></script>
-    <script src="../order/script/common/common.js"></script>
-    <script src="../order/script/common/main.js"></script>
-    <script src="../js/oAuth2.js"></script>
-    <script src="../js/myCoupons-vm.js"></script>
+    <script src="../../scripts/pre-loader.js"></script>
+    <script src="../../scripts/knockout/knockout-3.2.0.debug.js"></script>
+    <script src="../../scripts/oAuth2.js"></script>
+    <script src="js/myCoupons-vm.js"></script>
     <script>
-
+    function getBaseUrl() {
+        var re = new RegExp(/^.*\//);
+        return re.exec(window.location.href);
+    }
+    var access_code = $.url.param("code")?$.url.param("code"):'';
+//    var aid = $.url.param("aid");
+//    var wid = $.url.param("wid");
 
     var param = {
         access_code: access_code
     };
     var baseurl = getBaseUrl();
     var imagesArray = [baseurl + 'TicketImages/coupons_bg.png',
-    baseurl + 'images/scenic/img_coupondetail_used_207x160.png'];
-   
+        baseurl + 'images/scenic/img_coupondetail_used_207x160.png'];
+
 
     new preLoader(imagesArray, {
         onProgress: function (src, element, index) {
@@ -219,7 +220,7 @@
         }
     });
 
-    
+
 
     </script>
 </body>
