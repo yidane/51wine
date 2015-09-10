@@ -11,23 +11,35 @@ var LuckyMoneyViewModel = function ($domParam, param) {
     this.info = ko.observable();
     this.coupon = ko.observable();
     this.user = ko.observable();
-    this.status = ko.observable("立即领取");
+    this.status = ko.observable("已参与");
+    this._couponStatus=ko.observable("notimes");
     this.couponStatus = ko.pureComputed({
         read: function () {
-            return self.status();
+            return self._couponStatus();
         },
         write: function (value) {
             switch (value) {
-                case 2:
-                    self.status("已参与");
+
+                case 'nomore':
+                    self.status('奖品已领完');
                     break;
-                case 3:
-                    self.status("立即领取");
+                case 'end':
+                    self.status('活动已结束');
                     break;
-                case 4:
+                case 'nostart':
+                    self.status('活动未开始');
+                    break;
+                //case 3:
+                //    self.status("立即领取");
+                //    break;
+                case 'success':
                     self.status("领取成功");
                     break;
+                case 'notimes':
+                default :
+                    self.status("已参与");
             }
+            self._couponStatus(value);
         },
         owner: this
     });
@@ -48,20 +60,20 @@ var LuckyMoneyViewModel = function ($domParam, param) {
     //------------wechat
     this.initWeChat = function (debug) {
         $.getJSON('WebService/WeChatWebService.asmx/WeChatConfigInit', { url: document.location.href })
-          .done(function (json) {
-              if (json.IsSuccess) {
-                  var wxConfig = json.Data;
-                  wxConfig.debug = debug;
-                  wxConfig.jsApiList = self.jsApiList();
-                  self.wxConfig(wxConfig);
-                  wx.config(wxConfig);
-                  self.onWeChatReady();
-              }
-          }).fail(
-          function (jqxhr, textStatus, error) {
-              var err = textStatus + ", " + error;
-              console.log("Request Failed: " + err);
-          });
+            .done(function (json) {
+                if (json.IsSuccess) {
+                    var wxConfig = json.Data;
+                    wxConfig.debug = debug;
+                    wxConfig.jsApiList = self.jsApiList();
+                    self.wxConfig(wxConfig);
+                    wx.config(wxConfig);
+                    self.onWeChatReady();
+                }
+            }).fail(
+            function (jqxhr, textStatus, error) {
+                var err = textStatus + ", " + error;
+                console.log("Request Failed: " + err);
+            });
 
 
 
@@ -94,7 +106,7 @@ var LuckyMoneyViewModel = function ($domParam, param) {
         wx.hideAllNonBaseMenuItem();
         wx.showMenuItems({
             menuList: [
-            "menuItem:share:appMessage"
+                "menuItem:share:appMessage"
             ] // 要显示的菜单项，所有menu项见附录3
         });
 
@@ -151,61 +163,62 @@ var LuckyMoneyViewModel = function ($domParam, param) {
     };
 
     this.getCouponBaseInfo = function() {
-        
+
         $.getJSON("WebService/CouponWebService.asmx/GetCouponBaseInfo", { aid: self.param().aid })
-           .done(function (json) {
-               if (json.IsSuccess) {
-                   self.info(json.Data);
-               }
-               else {
-                   console.log(json.Message);
-               }
-           }).fail(
-           function (jqxhr, textStatus, error) {
-               var err = textStatus + ", " + error;
-               console.log("Request Failed: " + err);
-           });
+            .done(function (json) {
+                if (json.IsSuccess) {
+                    self.info(json.Data);
+                }
+                else {
+                    console.log(json.Message);
+                }
+            }).fail(
+            function (jqxhr, textStatus, error) {
+                var err = textStatus + ", " + error;
+                console.log("Request Failed: " + err);
+            });
     };
 
     this.getRandomCoupon = function () {
         $.getJSON("WebService/CouponWebService.asmx/GetRandomCoupon", { code: self.param().access_code })
-           .done(function (json) {
-               if (json.IsSuccess) {
-                   self.coupon(json.Data.coupon);
-                   if(json.Data.coupon)
-                   {
-                       self.couponStatus(json.Data.coupon.status);
-                       if(json.Data.coupon.status!=3)
-                       {
+            .done(function (json) {
 
-                               self.jumpToMyCoupons(3000);
+                if (json.IsSuccess) {
+                    self.couponStatus(json.MessageType);
+                    self.coupon(json.Data.coupon);
+                    if(json.Data.coupon)
+                    {
+                        //self.couponStatus(json.Data.coupon.status);
+                        if(json.MessageType=='success')
+                        {
 
-                       }
-                   }
-                   else
-                   {
-                       self.expired(1);
-                   }
+                            self.jumpToMyCoupons(3000);
 
-                   self.user(json.Data.user);
-                   //alert(json.Data);
-                   //alert(json.Data.openId);
-                   setTimeout(function () {
-                       self.$DomParm().$endMp3[0].play();
+                        }
+                    }
 
-                   }, 1000);
-               }
-               else {
-                   console.log(json.Message);
-                  // alert(json.Message);
-               }
-           }).fail(
-           function (jqxhr, textStatus, error) {
-               var err = textStatus + ", " + error;
-               console.log("Request Failed: " + err);
-           });
 
-       
+                    self.user(json.Data.user);
+                    setTimeout(function () {
+                        self.$DomParm().$endMp3[0].play();
+
+                    }, 1000);
+                }
+                else {
+                    if(json.MessageType&&json.MessageType!='system'){
+                        self.couponStatus(json.MessageType);
+                    }
+
+                    console.log(json.Message+','+json.MessageType);
+                    // alert(json.Message);
+                }
+            }).fail(
+            function (jqxhr, textStatus, error) {
+                var err = textStatus + ", " + error;
+                console.log("Request Failed: " + err);
+            });
+
+
     };
 
     this.receiveCoupon = function () {
@@ -218,7 +231,7 @@ var LuckyMoneyViewModel = function ($domParam, param) {
                     self.couponStatus(4);
                     //self.$DomParm().$receiveBtn.val("领取成功!");
                     //self.$DomParm().$receiveBtn.attr("disabled", "disabled");
-                  self.jumpToMyCoupons(1000);
+                    self.jumpToMyCoupons(1000);
                 }
             }).fail(
             function (jqxhr, textStatus, error) {
