@@ -20,18 +20,58 @@ namespace WeiXinPF.WebService
         /// </summary>
         /// <param name="aid"></param>
         /// <param name="wid"></param>
-        [WebMethod]
-        public void GetBaseCouponInfo(int aid, int wid)
+        [WebMethod(EnableSession = true)]
+        public void GetBaseCouponInfo(int aid, int wid, string code)
         {
+            OAuthUserInfo user = null;
             try
             {
 
 
                 var service = new CouponService();
 
-                var info = service.GetCouponBaseInfo(aid);
+                if (Session["User"] == null)
+                {
+                    user = GetUser(wid, "coupon");
+                    if (user != null)
+                    {
+                        Session["User"] = user;
+                    }
 
-                Context.Response.Write(AjaxResult.Success(info));
+                }
+                else
+                {
+                    user = Session["User"] as OAuthUserInfo;
+                     
+                }
+                var info = service.GetCouponBaseInfo(aid,user);
+                if (info != null)
+                {
+                    BLL.wx_dzpAwardItem itemBll = new BLL.wx_dzpAwardItem();
+                    var itemlist = itemBll.GetModelList("actId=" + aid);//该活动的所有奖项信息
+                    //获取当前对象实体
+                    BLL.wx_userweixin bll = new BLL.wx_userweixin();
+                    Model.wx_userweixin uWeiXinModel = bll.GetModel(wid);
+
+                    //初始话jsskd
+                    var signatureDto = jssdkInit(uWeiXinModel);
+                    signatureDto.fxContent = info.brief;
+                    signatureDto.fxImg = MyCommFun.getWebSite() + info.beginPic;
+                    signatureDto.fxTitle = info.actName;
+                    var data = new
+                    {
+                        info = info,
+                        itemlist = itemlist,
+                        signature = signatureDto,
+                        user = user
+                    };
+                    Context.Response.Write(AjaxResult.Success(data));
+                }
+                else
+                {
+                    throw new Exception("参数异常");
+                }
+
 
 
             }
@@ -55,19 +95,30 @@ namespace WeiXinPF.WebService
         /// 获取随机优惠券
         /// </summary>
         [WebMethod(EnableSession = true)]
-        public void GetRandomCoupon(int aid, int wid, string code)
+        public void GetRandomCoupon(int aid, int wid,string openid)
         {
 
             OAuthUserInfo user = null;
             try
             {
+                var thisOpenid = string.Empty;
+                if (Session["User"] == null)
+                {
+                    thisOpenid = openid;
 
-                user = GetUser(wid, "coupon");
+
+                }
+                else
+                {
+                    user = Session["User"] as OAuthUserInfo;
+                    thisOpenid = user.openid;
+                }
+
 
 
                 var service = new CouponService();
 
-                var couponDto = service.GetRandomCoupon(user, aid, wid);
+                var couponDto = service.GetRandomCoupon(thisOpenid, aid, wid);
                 var data = new
                 {
                     coupon = couponDto,
@@ -90,7 +141,7 @@ namespace WeiXinPF.WebService
                     {
                         jpname = jpname,
                         jxname = jxname
-    
+
                     };
                 }
 
