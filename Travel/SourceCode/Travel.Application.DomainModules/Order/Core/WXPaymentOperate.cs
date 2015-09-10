@@ -14,14 +14,13 @@ namespace Travel.Application.DomainModules.Order.Core
     {
         public UnifiedOrderResult ConnectedPaymentPlatform(OrderEntity order)
         {
-            var ticket =
-                TicketCategoryEntity.TodayTicketCategory.FirstOrDefault(
-                    item => item.TicketCategoryId.Equals(order.Tickets.FirstOrDefault().TicketCategoryId));
+            var product = ProductCategoryEntity.ProductCategory.FirstOrDefault(item => item.ProductCategoryId.Equals(order.Tickets.FirstOrDefault().TicketCategoryId));
+
             var orderRequest = new UnifiedOrderRequest()
                                    {
                                        openid = order.OpenId,
-                                       body = ticket.TicketName,
-                                       detail = ticket.Price.ToString(),
+                                       body = product.ProductName,
+                                       detail = product.ProductPrice.ToString(),
                                        out_trade_no = order.OrderCode,
                                        attach = "1",
                                        goods_tag = "1",

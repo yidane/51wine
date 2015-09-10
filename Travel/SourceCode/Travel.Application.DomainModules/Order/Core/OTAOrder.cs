@@ -111,34 +111,7 @@ namespace Travel.Application.DomainModules.Order.Core
         /// </summary>
         private void OTAOrder_OnPreCreateOrder(object sender, EventArgs eventArgs)
         {
-            lock (ticketLock)
-            {
-                this.DateTicketList = DateTicketEntity.GetTodayTicketByNomber(this.OrderRequest.Count, this.OrderRequest.TicketName);
-
-
-                // todo: 修改订票方式
-                //if (this.DateTicketList != null && this.DateTicketList.Any())
-                //{
-                //    if (this.OrderRequest.Count.Equals(this.DateTicketList.Count))
-                //    {
-                //        foreach (var item in this.DateTicketList)
-                //        {
-                //            item.CurrentStatus = OrderStatus.DateTicketStatus_Lock;
-                //            item.LatestStatusModifyTime = DateTime.Now;
-                //        }
-
-                //        DateTicketEntity.Update(this.DateTicketList);
-                //    }
-                //    else
-                //    {
-                //        throw new OrderOperateFailException("余票不足", OrderOperationStep.GetDailyTicket, "NO_ENOUGH_TICKETS");
-                //    }
-                //}
-                //else
-                //{
-                //    throw new OrderOperateFailException("无法获取当日可售票", OrderOperationStep.GetDailyTicket, "RESULT_NULL");
-                //}
-            }
+            this.dailyProducts = DailyProductEntity.DailyProduct.ToList();
         }
 
         /// <summary>

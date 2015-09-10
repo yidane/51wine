@@ -59,39 +59,18 @@ namespace Travel.Application.DomainModules.Order.Core
 
             foreach (var ticket in this.MainOrder.OrderObj.Tickets)
             {
-                // todo: 修改订单规则
-                //var dateTicket = this.MainOrder.DateTicketList.FirstOrDefault(item => item.DateTicketId == ticket.TicketId);
+                var product = this.MainOrder.dailyProducts.FirstOrDefault(item => item.ProductCategoryId.Equals(ticket.TicketCategoryId));
 
-                var dateTicket = this.MainOrder.DateTicketList.FirstOrDefault();
-                var orderDetail = this.MainOrder.OrderObj.OrderDetails.FirstOrDefault();
-
-                if (dateTicket != null && orderDetail != null)
+                if (product != null)
                 {
-                    // todo: 修改订单规则
-                    //otaDetail.Add(new OTARequest.Detail()
-                    //             {
-                    //                 OrderNO = otaOrder.OrderNO,
-                    //                 ItemID = orderDetail.OrderDetailId.ToString(),
-                    //                 ProductCode = ticket.TicketCode,
-                    //                 ProductID = ticket.TicketId,
-                    //                 ProductPackID = dateTicket.TicketPackageId,
-                    //                 ProductName = dateTicket.TicketName,
-                    //                 ProductPrice = dateTicket.TicketPrice,
-                    //                 ProductCount = 1,
-                    //                 ProductEDate = ticket.TicketEndTime.ToString("yyyy-MM-dd"),
-                    //                 ProductSDate = ticket.TicketStartTime.ToString("yyyy-MM-dd"),
-                    //                 ItemType = string.Empty,
-                    //                 ECode = string.Empty
-                    //             });
-
                     otaDetail.Add(new OTARequest.Detail()
                     {
                         OrderNO = otaOrder.OrderNO,
                         ItemID = ticket.TicketId.ToString(),
                         ProductCode = ticket.TicketCode,
                         ProductID = ticket.TicketProductId,
-                        ProductPackID = dateTicket.TicketPackageId,
-                        ProductName = dateTicket.TicketName,
+                        ProductPackID = product.ProductPackageId,
+                        ProductName = product.ProductName,
                         ProductPrice = decimal.Parse("0.02"), // dateTicket.TicketPrice,
                         ProductCount = 1,
                         ProductEDate = ticket.TicketEndTime.ToString("yyyy-MM-dd"),
@@ -148,17 +127,6 @@ namespace Travel.Application.DomainModules.Order.Core
             {
                 if (result.ResultData.Count == this.MainOrder.OrderObj.Tickets.Count)
                 {
-                    //修改订单规则
-                    //var arrTickets = this.MainOrder.OrderObj.Tickets.ToArray();
-                    //for (int i = 0; i < this.MainOrder.OrderObj.Tickets.Count; i++)
-                    //{
-                    //    arrTickets[i].ECode = result.ResultData[i].ECode;
-                    //    arrTickets[i].TicketStatus = OrderStatus.TicketStatus_WaitUse;
-                    //    arrTickets[i].LatestModifyTime = DateTime.Now;
-                    //}
-
-                    //this.MainOrder.OrderObj.Tickets = arrTickets.ToList();
-
                     foreach (var ticket in this.MainOrder.OrderObj.Tickets)
                     {
                         var responseTicket = result.ResultData.FirstOrDefault(item => ticket.TicketId.Equals(int.Parse(item.ItemID)));
@@ -170,7 +138,6 @@ namespace Travel.Application.DomainModules.Order.Core
                             ticket.LatestModifyTime = DateTime.Now;
                         }                        
                     }
-
 
                     // 更改订单状态为
                     this.MainOrder.OrderObj.OrderStatus = OrderStatus.OrderStatus_WaitUse;
