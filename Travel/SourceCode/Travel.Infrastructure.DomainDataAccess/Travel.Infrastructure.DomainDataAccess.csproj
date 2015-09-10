@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{47F144AA-B49D-4DB2-80D3-59B05F8680E6}</ProjectGuid>
+    <ProjectGuid>{47F144AA-B49D-4DB2-80D3-59B05F8680FF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Travel.Infrastructure.DomainDataAccess</RootNamespace>
