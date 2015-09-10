@@ -77,7 +77,7 @@ namespace Travel.Infrastructure.DomainDataAccess.Order
                                         ProductName = item.ProductName,
                                         ProductPrice = item.ProductPrice,
                                         ProductType = item.ProductType
-                                    });
+                                    }).ToList();
                                     SetDailyProducts(dailyProducts);
                                     _dailyProducts = dailyProducts;
                                     _currentDate = DateTime.Now.Date;
@@ -98,7 +98,9 @@ namespace Travel.Infrastructure.DomainDataAccess.Order
                         {
                             using (var db = new TravelDBContext())
                             {
-                                _dailyProducts = db.DailyProduct.Where(item => item.SearchDate.Date.Equals(DateTime.Now.Date)).ToList();
+                                var today = DateTime.Now.Date;
+                                var tomorrow = today.AddDays(1);
+                                _dailyProducts = db.DailyProduct.Where(item => item.SearchDate >= today && item.SearchDate < tomorrow).ToList();
                             }
                         }
                     }                                        
@@ -112,11 +114,13 @@ namespace Travel.Infrastructure.DomainDataAccess.Order
         {
             using (var db = new TravelDBContext())
             {
-                return db.DailyProduct.Any(item => item.SearchDate.Date.Equals(DateTime.Now.Date));
+                var today = DateTime.Now.Date;
+                var tomorrow = today.AddDays(1);
+                return db.DailyProduct.Any(item => item.SearchDate >= today && item.SearchDate < tomorrow);
             }
         }
 
-        public static void SetDailyProducts(IEnumerable<DailyProductEntity> dailyProducts)
+        public static void SetDailyProducts(IList<DailyProductEntity> dailyProducts)
         {
             var hasNewProductCategory = false;
             if (dailyProducts.Any())

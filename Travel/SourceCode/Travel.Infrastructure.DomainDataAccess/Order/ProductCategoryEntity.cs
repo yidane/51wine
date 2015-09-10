@@ -76,7 +76,7 @@ namespace Travel.Infrastructure.DomainDataAccess.Order
 
         private static IEnumerable<ProductCategoryEntity> _productCategory;
         private static DateTime _currentDate = DateTime.Now.Date;
-        public static IEnumerable<ProductCategoryEntity> ProductCategory {
+        public static IList<ProductCategoryEntity> ProductCategory {
             get
             {                
                 if (_productCategory == null || !_productCategory.Any() || !DateTime.Now.Date.Equals(_currentDate))
@@ -86,10 +86,13 @@ namespace Travel.Infrastructure.DomainDataAccess.Order
                         _productCategory = db.ProductCategory.ToList();
                     }
 
-                    _currentDate = DateTime.Now.Date;
+                    if (_productCategory.Any())
+                    {
+                        _currentDate = DateTime.Now.Date;
+                    }                    
                 }
 
-                return _productCategory;
+                return _productCategory.ToList();
             }
 
             private set
@@ -105,12 +108,22 @@ namespace Travel.Infrastructure.DomainDataAccess.Order
         /// <returns></returns>
         public static bool IsProductCategoryExists(DailyProductEntity dailyProduct)
         {
-            var productCategory =
-                ProductCategory.FirstOrDefault(
-                    item =>
-                        item.ProductId.Equals(dailyProduct.ProductId)
-                        && item.ProductPackageId.Equals(dailyProduct.ProductPackageId)
-                        && item.ProductSource.Equals(dailyProduct.ProductSource));
+            var productCategory = ProductCategory.FirstOrDefault(item =>
+                                        item.ProductId.Equals(dailyProduct.ProductId)
+                                        && item.ProductPackageId.Equals(dailyProduct.ProductPackageId)
+                                        && item.ProductSource.Equals(dailyProduct.ProductSource));
+
+            if (productCategory == null)
+            {
+                using (var db = new TravelDBContext())
+                {
+                    productCategory = db.ProductCategory.FirstOrDefault(
+                                            item =>
+                                            item.ProductId.Equals(dailyProduct.ProductId)
+                                            && item.ProductPackageId.Equals(dailyProduct.ProductPackageId)
+                                            && item.ProductSource.Equals(dailyProduct.ProductSource));
+                }
+            }            
 
             if (productCategory != null)
             {
@@ -134,7 +147,7 @@ namespace Travel.Infrastructure.DomainDataAccess.Order
 
         public void SaveProductCategory()
         {
-            using (var db =new TravelDBContext())
+            using (var db = new TravelDBContext())
             {
                 db.ProductCategory.AddOrUpdate(this);
                 db.SaveChanges();

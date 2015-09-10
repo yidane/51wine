@@ -247,15 +247,17 @@ namespace Travel.Application.DomainModules.Order.Core
 
             if (this.dailyProducts.Any())
             {
-                var product = dailyProducts.FirstOrDefault(item => item.ProductCategoryId.Equals(Guid.Parse(this.OrderRequest.TicketCategory)));
+                var product =
+                    this.dailyProducts.FirstOrDefault(
+                        item => item.ProductCategoryId.Equals(Guid.Parse(this.OrderRequest.TicketCategory)));
 
-                for (int i = 0; i < this.OrderRequest.Count; i++)
+                for (var i = 0; i < this.OrderRequest.Count; i++)
                 {
                     if (product != null)
                     {
                         tickets.Add(new TicketEntity()
                         {
-                            TicketId = new Random((unchecked((int)DateTime.Now.Ticks + i))).Next(1000000, 9999999),
+                            TicketId = new Random(unchecked((int)DateTime.Now.Ticks + i)).Next(1000000, 9999999),
                             OrderId = this.OrderObj.OrderId,
                             RefundOrderId = default(Guid?),
                             RefundOrderDetailId = default(Guid?),
@@ -312,7 +314,9 @@ namespace Travel.Application.DomainModules.Order.Core
         /// <returns></returns>
         protected IList<OrderDetailEntity> CreateOrderDetail()
         {
-            var product = dailyProducts.FirstOrDefault(item => item.ProductCategoryId.Equals(Guid.Parse(this.OrderRequest.TicketCategory)));
+            var product =
+                this.dailyProducts.FirstOrDefault(
+                    item => item.ProductCategoryId.Equals(Guid.Parse(this.OrderRequest.TicketCategory)));
 
             if (product != null)
             {
@@ -323,12 +327,12 @@ namespace Travel.Application.DomainModules.Order.Core
                                        OrderDetailId = Guid.NewGuid(),
                                        OrderId = this.OrderObj.OrderId,
                                        OrderDetailCategoryId = Guid.Parse(OrderStatus.OrderDetailCategory_Create),
-                                       TicketCategoryId =product.ProductCategoryId,
+                                       TicketCategoryId = product.ProductCategoryId,
                                        Count = this.OrderRequest.Count,
                                        SingleTicketPrice = product.ProductPrice,
                                        IsDiscount = false,
                                        DiscountCategoryId = default(Guid?),
-                                       TotalPrice =product.ProductPrice * this.OrderRequest.Count
+                                       TotalPrice = product.ProductPrice * this.OrderRequest.Count
                                    }
                            };
             }
@@ -543,18 +547,12 @@ namespace Travel.Application.DomainModules.Order.Core
             switch (orderExcepion.OperationStep)
             {
                 case OrderOperationStep.GetDailyTicket:
-                    if (orderExcepion.ErrorCode.Equals("RESULT_NULL"))
-                    {
-                        //OTAOrder.SetDailyTicket();
-                        //needProcess = true;
-                        //processMethod = "重新获取景区票务数据";
-                    }
                     break;
                 case OrderOperationStep.OrderOccupy:
                     this.OrderObj.DeleteOrder();
 
                     needProcess = true;
-                    processMethod = "回滚Order表和DateTicket表中的数据";
+                    processMethod = "回滚Order表中的数据";
                     break;
                 case OrderOperationStep.OrderCreate:
 
@@ -579,26 +577,19 @@ namespace Travel.Application.DomainModules.Order.Core
                 case OrderPaymentStep.UnifiedOrder:
                     var result = this._orderOperate.OrderRelease();
 
-                    //if (result.IsTrue)
-                    //{
-                    //    this.OrderObj.DeleteOrder();
-                    //    foreach (var dateTicket in this.DateTicketList)
-                    //    {
-                    //        dateTicket.CurrentStatus = OrderStatus.DateTicketStatus_Init;
-                    //        dateTicket.LatestStatusModifyTime = DateTime.Now;
-                    //    }
+                    if (result.IsTrue)
+                    {
+                        this.OrderObj.DeleteOrder();
 
-                    //    DateTicketEntity.Update(this.DateTicketList);
-
-                    //    needProcess = true;
-                    //    processMethod = "回滚Order表和DateTicket表中的数据";
-                    //}
-                    //else
-                    //{
-                    //    needProcess = true;
-                    //    processMethod = "统一下单失败，释放订单失败";
-                    //    isProcessSuccess = false;
-                    //}
+                        needProcess = true;
+                        processMethod = "回滚Order表中的数据";
+                    }
+                    else
+                    {
+                        needProcess = true;
+                        processMethod = "统一下单失败，释放订单失败";
+                        isProcessSuccess = false;
+                    }
                     break;
                 case OrderPaymentStep.ApplyRefund:
                     if (orderException.param.ContainsKey("refundOrder")

@@ -22,61 +22,71 @@ namespace Travel.Application.DomainModules.Order.Service
         /// <returns></returns>
         public IList<TicketCategoryDTO> GetTicketCategoryList()
         {
-            var categories = TicketCategoryEntity.TodayTicketCategory;
+            var productCategories = ProductCategoryEntity.ProductCategory;
             var dto = new List<TicketCategoryDTO>();
 
-            if (!categories.Any())
+            if (productCategories == null || !productCategories.Any())
             {
-                OTAOrder.SetDailyTicket();
-                categories = TicketCategoryEntity.TodayTicketCategory;
+                // 通过获取当日产品，来初始化产品类型
+                var dailyProducts = DailyProductEntity.DailyProduct;
+                productCategories = ProductCategoryEntity.ProductCategory;
+            }
+
+            if (productCategories == null || !productCategories.Any())
+            {
+                return dto;
+            }
+            else
+            {
+                productCategories = productCategories.Where(item => item.ProductSource.Equals("KNSMP")).ToList();
             }
 
             dto.Add(new TicketCategoryDTO()
                                     {
                                         category = 1,
-                                        content = categories.Select(item => new TicketCategorySub()
+                                        content = productCategories.Select(item => new TicketCategorySub()
                                                                                 {
-                                                                                    ticketCategoryId = item.TicketCategoryId.ToString(),
+                                                                                    ticketCategoryId = item.ProductCategoryId.ToString(),
                                                                                     ticketType = "1",
-                                                                                    price = item.Price,
-                                                                                    ticketName = item.TicketName,
+                                                                                    price = item.ProductPrice,
+                                                                                    ticketName = item.ProductName,
                                                                                     canUse = true,
-                                                                                    type = item.Type,
-                                                                                    image = string.Format("url(../images/ticket{0}.jpg)", new Random((unchecked((int)DateTime.Now.Ticks + categories.IndexOf(item)))).Next(1, 8).ToString())
+                                                                                    type = item.ProductType,
+                                                                                    image = string.Format("url(../images/ticket{0}.jpg)", new Random(unchecked((int)DateTime.Now.Ticks + productCategories.IndexOf(item))).Next(1, 8).ToString())
                                                                                 }).ToList()
                                     });
 
             dto.Add(new TicketCategoryDTO()
                                     {
                                         category = 2,
-                                        content = categories
-                                        .Where(item => item.Type.Equals("mp"))
+                                        content = productCategories
+                                        .Where(item => !item.ProductName.Contains("车票"))
                                         .Select(item => new TicketCategorySub()
                                                 {
-                                                    ticketCategoryId = item.TicketCategoryId.ToString(),
+                                                    ticketCategoryId = item.ProductCategoryId.ToString(),
                                                     ticketType = "2",
-                                                    price = item.Price,
-                                                    ticketName = item.TicketName,
+                                                    price = item.ProductPrice,
+                                                    ticketName = item.ProductName,
                                                     canUse = true,
-                                                    type = item.Type,
-                                                    image = string.Format("url(../images/ticket{0}.jpg)", new Random((unchecked((int)DateTime.Now.Ticks + categories.IndexOf(item)))).Next(1, 8).ToString())
+                                                    type = "mp",
+                                                    image = string.Format("url(../images/ticket{0}.jpg)", new Random(unchecked((int)DateTime.Now.Ticks + productCategories.IndexOf(item))).Next(1, 8).ToString())
                                                 }).ToList()
                                     });
 
             dto.Add(new TicketCategoryDTO()
                                     {
                                         category = 3,
-                                        content = categories
-                                        .Where(item => item.Type.Equals("cp"))
+                                        content = productCategories
+                                        .Where(item => item.ProductName.Contains("车票"))
                                         .Select(item => new TicketCategorySub()
                                         {
-                                            ticketCategoryId = item.TicketCategoryId.ToString(),
+                                            ticketCategoryId = item.ProductCategoryId.ToString(),
                                             ticketType = "3",
-                                            price = item.Price,
-                                            ticketName = item.TicketName,
+                                            price = item.ProductPrice,
+                                            ticketName = item.ProductName,
                                             canUse = true,
-                                            type = item.Type,
-                                            image = string.Format("url(../images/ticket{0}.jpg)", new Random((unchecked((int)DateTime.Now.Ticks + categories.IndexOf(item)))).Next(1, 8).ToString())
+                                            type = "cp",
+                                            image = string.Format("url(../images/ticket{0}.jpg)", new Random(unchecked((int)DateTime.Now.Ticks + productCategories.IndexOf(item))).Next(1, 8).ToString())
                                         }).ToList()
                                     });
 
@@ -107,7 +117,7 @@ namespace Travel.Application.DomainModules.Order.Service
                             singleTicketPrice = item.Tickets.First().Price,
                             TotelFee = item.TotalFee(),
                             TicketCount = item.Tickets.Count,
-                            TicketName = TicketCategoryEntity.GetTicketNameByTicketCategoryId(item.Tickets.First().TicketCategoryId),
+                            TicketName = ProductCategoryEntity.ProductCategory.FirstOrDefault(category => category.ProductCategoryId.Equals(item.Tickets.First().TicketCategoryId)).ProductName,
                             BuyTime = item.Tickets.First().CreateTime.ToString("yyyy-MM-dd"),
                             OrderStatus = this.GetOrderStatus(item),
                             hasRefundTicket = item.Tickets.Any(this.RefundStatus()),
@@ -229,28 +239,35 @@ namespace Travel.Application.DomainModules.Order.Service
                 foreach (var order in myOrders)
                 {
                     tickets.AddRange(
-                        order.Tickets.Where(
-                            item => item.TicketStatus.Equals(OrderStatus.TicketStatus_Refund_Audit)
-                            || item.TicketStatus.Equals(OrderStatus.TicketStatus_Refund_RefundPayProcessing)
-                            || item.TicketStatus.Equals(OrderStatus.TicketStatus_Refund_Complete)
-                            || item.TicketStatus.Equals(OrderStatus.TicketStatus_Refund_WaitRefundFee))
-                            .Select(item => new RefundTicketDTO
-                            {
-                                TicketId = item.TicketId,
-                                OrderId = item.OrderId.ToString(),
-                                OrderCode = order.OrderCode,
-                                DeadLineDate = item.TicketStartTime.ToString("yyyy-MM-dd"),
-                                TicketCategoryId = item.TicketCategoryId.ToString(),
-                                TicketName = TicketCategoryEntity.GetTicketNameByTicketCategoryId(item.TicketCategoryId),
-                                TicketCode = item.TicketCode,
-                                Price = item.Price.ToString(),
-                                TicketStatus = this.getTicketStatus(item.TicketStatus),
-                                ECode = item.ECode
-                            }).ToList());
+                        order.Tickets.Where(this.RefundStatus())
+                            .Select(item =>
+                                {
+                                    var productCategory =
+                                        ProductCategoryEntity.ProductCategory.FirstOrDefault(
+                                            category => category.ProductCategoryId.Equals(item.TicketCategoryId));
+                                    return productCategory != null
+                                               ? new RefundTicketDTO
+                                                     {
+                                                         TicketId = item.TicketId,
+                                                         OrderId = item.OrderId.ToString(),
+                                                         OrderCode = order.OrderCode,
+                                                         DeadLineDate =
+                                                             item.TicketStartTime.ToString("yyyy-MM-dd"),
+                                                         TicketCategoryId =
+                                                             item.TicketCategoryId.ToString(),
+                                                         TicketName = productCategory.ProductName,
+                                                         TicketCode = item.TicketCode,
+                                                         Price = item.Price.ToString(),
+                                                         TicketStatus =
+                                                             this.getTicketStatus(item.TicketStatus),
+                                                         ECode = item.ECode
+                                                     }
+                                               : null;
+                                }));
                 }
             }
             
-            return tickets;
+            return tickets.Where(item => item != null).ToList();
         }
 
         private string getTicketStatus(string statusCode)
@@ -440,7 +457,19 @@ namespace Travel.Application.DomainModules.Order.Service
                     ticket.TicketStatus = OrderStatus.TicketStatus_Used;
                     ticket.LatestModifyTime = DateTime.Now;
                 }
+
                 TicketEntity.ModifyTickets(changedStatusTickets);
+
+                // 设置所有门票消费完毕的订单为已使用
+                foreach (var ticketsInOrder in changedStatusTickets.GroupBy(item => item.OrderId))
+                {
+                    if (OrderEntity.IsOrderFinish(ticketsInOrder.Key))
+                    {
+                        var order = OrderEntity.GetOrderByOrderId(ticketsInOrder.Key);
+                        order.OrderStatus = OrderStatus.OrderStatus_Used;
+                        order.ModifyOrder();
+                    }
+                }
             }
 
         }

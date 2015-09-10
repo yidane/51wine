@@ -111,6 +111,25 @@
             }
         }
 
+        public static bool IsOrderFinish(Guid orderId)
+        {
+            var order = GetOrderByOrderId(orderId);
+
+            if (order != null)
+            {
+                var usedTicketsCout = order.Tickets.Count(item => item.TicketStatus.Equals(Order.OrderStatus.TicketStatus_Used)
+                    || item.TicketStatus.Equals(Order.OrderStatus.TicketStatus_Refund_WaitRefundFee)
+                    || item.TicketStatus.Equals(Order.OrderStatus.TicketStatus_Refund_Complete));
+
+                if (order.Tickets.Count.Equals(usedTicketsCout))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
         public static OrderEntity GetOrderByOrderCode(string orderCode)
         {
             OrderEntity order = null;
