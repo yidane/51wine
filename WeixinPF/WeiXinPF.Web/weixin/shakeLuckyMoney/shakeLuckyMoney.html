@@ -8,9 +8,9 @@
     <meta name="format-detection" content="telephone=no, email=no" />
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-
-    <link href="css/page-animation.css" rel="stylesheet" />
     <link href="css/shakecoupons.css" rel="stylesheet" />
+
+    <link href="css/page-animation.css" rel="stylesheet" type="text/css" />
     <style>
         #loadingBox {
             position: fixed;
@@ -124,6 +124,13 @@
             margin-top: 0;
             margin-bottom: 5px;
         }
+
+        .div-info{
+            z-index: 40;
+            position: relative;
+            top: 75%;
+        }
+
     </style>
 </head>
 <body>
@@ -135,7 +142,7 @@
     </div>
 
     <div id="div_content" style="height: 100%;width:100%; display:none">
-        <div class="fullpage" data-bind="visible:$root.user()==null"
+        <div class="fullpage" data-bind="visible:$root.coupon()==null&&$root.couponStatus()!='nostart'&&$root.couponStatus()!='end'"
              style="background-color:#313E4F">
             <img src="images/shake_background.png" class="shake-back" />
 
@@ -147,27 +154,25 @@
                 </div>
             </div>
 
-            <div data-bind="with:info">
-                <!--<div class="boxcontent boxwhite">
+            <div  class="div-info">
+                <div class="boxcontent boxwhite">
                     <div class="box">
                         <div class="title-red"><span>奖项设置：</span></div>
-
-                        <div class="Detail">
-                            <asp:Literal ID="litOtherTip" runat="server" EnableViewState="false"></asp:Literal>
-                            <asp:Literal ID="litJiangXing" runat="server" EnableViewState="false"></asp:Literal>
+                        <div class="Detail"  data-bind="foreach:itemList">
+                            <p data-bind="text:jxName+':'+jpName+ '  数量：' +jpNum"></p>
                         </div>
                     </div>
-                </div>-->
-                <div class="boxcontent boxwhite">
+                </div>
+                <div class="boxcontent boxwhite" data-bind="with:info">
                     <div class="box">
                         <div class="title-red">活动说明：</div>
                         <div class="Detail">
                             <p class="red">
-                                本次活动每天可以转
+                                本次活动每天可以摇
                                 <!-- ko text:dayMaxTimes --><!-- /ko-->
-                                次,总共可以转
+                                次,总共可以摇
                                 <!-- ko text:personMaxTimes --><!-- /ko-->
-                                次 你已经转了 <span id="zhuantimes" data-bind="text:hasCjTimes">
+                                次 你已经摇了 <span id="zhuantimes" data-bind="text:hasCjTimes">
 
                                 </span> 次
                             </p>
@@ -178,11 +183,12 @@
                     </div>
                 </div>
             </div>
-            <!--<div class="botton main-center top-zIndex" id="botton" data-bind="click:$root.afterShake">马上领取</div>-->
+            <div class="botton main-center top-zIndex" id="botton" data-bind="click:$root.afterShake">马上领取</div>
             <AUDIO id="musicBox" src="audios/shake.wav" preload="metadata"></AUDIO>
             <AUDIO id="endMp3" src="audios/end.mp3" preload="metadata"></AUDIO>
         </div>
-        <div class="div-expired" data-bind="visible:$root._couponStatus()=='end'" style="display:none"></div>
+        <div class="div-nostart" data-bind="visible:$root.couponStatus()=='nostart',style:{'background-image':$root.info()?$root.info().beginPic:''}" style="display:none"></div>
+        <div class="div-expired" data-bind="visible:$root.couponStatus()=='end',style:{'background-image':$root.info()?$root.info().endPic:''}" style="display:none"></div>
         <div class="div-gift" data-bind="visible:coupon" style="display:none">
             <div class="main">
                 <div class="redEnvelope">
@@ -215,34 +221,20 @@
                                         <!-- ko text:user()?user().nickname:'' --><!--/ko-->
                                         <small class="text-time" data-bind="  text:coupon()? coupon().getTime:''"></small>
                                     </h5>
-                                    <span data-bind="visible:coupon()?coupon().status!=2:true">恭喜您获得 <!-- ko text:coupon()?coupon().title:'' --><!--/ko-->。</span>
-                                    <span style="display:none" data-bind="visible:coupon()?coupon().status==2:true">
+                                    <span style="display:none" data-bind="visible:couponStatus()=='success'">恭喜您获得 <!-- ko text:coupon()?coupon().jpname:'' --><!--/ko-->。</span>
+                                    <span data-bind="visible:couponStatus()!='success',text:$root.info()?$root.info().cfcjhf:''">
                                         感谢您参与本次活动。
                                     </span>
                                 </div>
                             </div>
                             <div style="margin-top: 10px;">
-                                <input id="receiveBtn" type="button" value="立即领取"
-                                       data-bind="click:receiveCoupon, enable:$root.couponStatus()=='立即领取',value:$root.couponStatus()">
+                                <input id="receiveBtn" type="button" value="已参与" disabled="disabled"
+                                       data-bind="click:receiveCoupon,value:$root.status()">
 
                             </div>
                         </form>
                     </div>
-                    <div id="debug" style="display:none"></div>
-                    <div class="successPart" style="display:none" id="successPart">
-                        <div class="resultWrapper">
-                            <p id="result" class="result">ajax成功与否返回的message</p>
 
-                            <div class="resultDetail">
-                                <span id="rtje">15</span>元代金券已放入账号
-                                <p id="successPhoneNumer"></p>
-                            </div>
-                            <input id="seeMoney" class="clickable" value="查看新人红包" type="button"
-                                   onclick="window.location.href='../hyzx.php?ac=djq'">
-
-                            <p class="tip">同一个用户仅限领取一次新人红包</p>
-                        </div>
-                    </div>
 
                 </div>
                 <p class="ruleLinkWrapper item-hidden"><a id="ruleLink" href="javascript:;">活动详情&gt;</a></p>
@@ -254,62 +246,67 @@
 
     <script src="../../scripts/jquery/jquery-2.1.0.min.js"></script>
     <script src="../../scripts/jquery/jquery.url.js"></script>
-    <script type="text/javascript" src="../../scripts/mobilePhoneShake.min.js"></script>
+    <script src="../../scripts/mobilePhoneShake.min.js"></script>
     <script src="../../scripts/pre-loader.js"></script>
     <script src="../../scripts/knockout/knockout-3.3.0.js"></script>
-    <script src="../../scripts/oAuth2.js"></script>
+    <!--<script src="../../scripts/oAuth2.js"></script>-->
     <script src="js/shakeLuckyMoney-vm.js"></script>
     <script>
-    //  var access_code = '';
-
-    var baseurl = getBaseUrl();
-
-    var imagesArray = [baseurl+'images/shake_background.png',
-        baseurl + 'images/hand.png',
-        baseurl+'images/back.jpg',
-        baseurl+'images/coupon.jpg',
-        baseurl+'images/活动结束.png'
-    ];
-
-    new preLoader(imagesArray, {
-        onProgress: function (src, element, index) {
-
-            var percent = Math.floor((100 / this.queue.length) * this.completed.length);
-
-            // update the progress element
-            $("#loadingTips").text(percent + '%');
-
-
-        },
-        onComplete: function (loaded, errors) {
-            $("#div_content").show();
-            $('#loadingBox').hide();
-            var $domParm = {
-                $musicBox: $('#musicBox'),
-                $endMp3: $('#endMp3'),
-                $hand: $('.hand'),
-                $money: $('.money'),
-                $receiveBtn: $('#receiveBtn')
-            };
-            var param = {
-                access_code: access_code
-                //,
-                //onAfterLoadData:function(){
-                //    $("#div_content").show();
-                //    $('#loadingBox').hide();
-                // }
-            };
-            var luckyMoneyVM = new LuckyMoneyViewModel($domParm, param);
-
-            ko.applyBindings(luckyMoneyVM, document.getElementById("html_lucky"));
-
-
-
+        function getBaseUrl() {
+            var re = new RegExp(/^.*\//);
+            return re.exec(window.location.href);
         }
-    });
+
+        var access_code = $.url.param("code")?$.url.param("code"):'';
+        var aid = $.url.param("aid");
+        var wid = $.url.param("wid");
+        var baseurl = getBaseUrl();
+
+        var imagesArray = [baseurl + 'images/shake_background.png',
+            baseurl + 'images/hand.png',
+            baseurl + 'images/back.jpg',
+            baseurl + 'images/coupon.jpg',
+            baseurl + 'images/活动结束.png'
+        ];
+
+        new preLoader(imagesArray, {
+            onProgress: function (src, element, index) {
+
+                var percent = Math.floor((100 / this.queue.length) * this.completed.length);
+
+                // update the progress element
+                $("#loadingTips").text(percent + '%');
+
+
+            },
+            onComplete: function (loaded, errors) {
+                $("#div_content").show();
+                $('#loadingBox').hide();
+                var $domParm = {
+                    $musicBox: $('#musicBox'),
+                    $endMp3: $('#endMp3'),
+                    $hand: $('.hand'),
+                    $money: $('.money'),
+                    $receiveBtn: $('#receiveBtn')
+                };
+                var param = {
+                    access_code: access_code,
+                    aid: aid,
+                    wid: wid
+                    //,
+                    //onAfterLoadData:function(){
+                    //    $("#div_content").show();
+                    //    $('#loadingBox').hide();
+                    // }
+                };
+                var luckyMoneyVM = new LuckyMoneyViewModel($domParm, param);
+
+                ko.applyBindings(luckyMoneyVM, document.getElementById("html_lucky"));
 
 
 
+            }
+        });
 
 
     </script>

@@ -35,18 +35,48 @@ namespace WeiXinPF.Application.DomainModules.Coupon
             //_userRepository = new UserRepository();
         }
 
-
-        public CouponBaseInfoDTO GetCouponBaseInfo(int aid, string openid = "")
+        /// <summary>
+        /// 获取摇一摇基本信息，并保存用户
+        /// </summary>
+        /// <param name="aid"></param>
+        /// <param name="wxUser"></param>
+        /// <returns></returns>
+        public CouponBaseInfoDTO GetCouponBaseInfo(int aid, OAuthUserInfo wxUser)
         {
             CouponBaseInfoDTO result = null;
             var dzpAction = _actBll.GetModel(aid);
             if (dzpAction != null)
             {
                 int hasCjTimes = 0;
-                if (!string.IsNullOrEmpty(openid))
+                if (!string.IsNullOrEmpty(wxUser.openid))
                 {
-                    hasCjTimes = _utbll.getCJCiShu(aid, openid);//返回该用户的抽奖次数
+                    hasCjTimes = _utbll.getCJCiShu(aid, wxUser.openid);//返回该用户的抽奖次数
                 }
+
+                #region 保存用户信息
+
+                if (wxUser != null)
+                {
+                    //保存微信用户信息
+                    var user = new UserInfoEntity()
+                    {
+                        openid = wxUser.openid,
+                        // groupid = wxUser.groupid,
+                        headimgurl = wxUser.headimgurl,
+                        // language = wxUser.language,
+                        province = wxUser.province,
+                        // remark = wxUser.remark,
+                        // subscribe = wxUser.subscribe,
+                        //  subscribe_time = wxUser.subscribe_time,
+                        nickname = wxUser.nickname,
+                        sex = wxUser.sex,
+                        city = wxUser.country,
+                        country = wxUser.country
+                    };
+                    user.SaveUser();
+                }
+
+                #endregion
 
                 result = new CouponBaseInfoDTO()
                 {
@@ -57,8 +87,13 @@ namespace WeiXinPF.Application.DomainModules.Coupon
                     dayMaxTimes = dzpAction.dayMaxTimes,
                     hasCjTimes = hasCjTimes,
                     djPwd = dzpAction.djPwd,
-                    beginDate = dzpAction.beginDate,
-                    endDate = dzpAction.endDate
+                    cfcjhf=dzpAction.cfcjhf,
+                    beginDate = dzpAction.beginDate?.ToString() ?? "",
+                    endDate = dzpAction.endDate?.ToString() ?? "",
+                    beginPic= MyCommFun.getWebSite() + dzpAction.beginPic,
+                    endNotice = dzpAction.endNotice,
+                    endContent = dzpAction.endContent,
+                    endPic = MyCommFun.getWebSite() + dzpAction.endPic
                 };
             }
 
@@ -356,18 +391,18 @@ namespace WeiXinPF.Application.DomainModules.Coupon
         /// <summary>
         /// 获取随机优惠券
         /// </summary>
-        /// <param name="wxUser"></param>
+        /// <param name="openid"></param>
         /// <param name="aid"></param>
         /// <param name="wid"></param>
         /// <returns></returns>
-        public CouponPrizeDTO GetRandomCoupon(OAuthUserInfo wxUser, int aid, int wid)
+        public CouponPrizeDTO GetRandomCoupon(string openid, int aid, int wid)
         {
             CouponPrizeDTO result = null;
 
             //抽奖
             #region 判断活动
 
-            if (aid == 0 || wid == 0 || wxUser.openid.Trim() == "")
+            if (aid == 0 || wid == 0 || openid.Trim() == "")
             {
                 throw new JsonException("参数错误！", "system");
 
@@ -398,18 +433,18 @@ namespace WeiXinPF.Application.DomainModules.Coupon
             int dayMaxTimes = dzpAction.dayMaxTimes ?? 0;
             //int perMaxTimes = dzpAction.personMaxTimes ?? 0;
             //判断每人最大抽奖次数，是否超过了
-            if (personCJTimes(wxUser.openid, aid) >= dzpAction.personMaxTimes)
+            if (personCJTimes(openid, aid) >= dzpAction.personMaxTimes)
             {
                 throw new JsonException("您已抽过奖了，欢迎下次再来！", "notimes");
 
             }
-            if (isTodayOverSum(aid, wxUser.openid, dayMaxTimes))
+            if (isTodayOverSum(aid, openid, dayMaxTimes))
             {
                 throw new JsonException("每人每天只有" + dayMaxTimes.ToString() + "次抽奖机会。", "notimes");
 
 
             }
-            Model.wx_dzpAwardUser award = _ubll.getZJinfoByOpenid(aid, wxUser.openid);
+            Model.wx_dzpAwardUser award = _ubll.getZJinfoByOpenid(aid, openid);
             if (award != null)
             {
                 throw new JsonException("您中奖了，欢迎下次再来！", "notimes");
@@ -419,30 +454,30 @@ namespace WeiXinPF.Application.DomainModules.Coupon
 
             #endregion
 
-            #region 保存用户信息
+            //#region 保存用户信息
 
-            if (wxUser != null)
-            {
-                //保存微信用户信息
-                var user = new UserInfoEntity()
-                {
-                    openid = wxUser.openid,
-                    // groupid = wxUser.groupid,
-                    headimgurl = wxUser.headimgurl,
-                    // language = wxUser.language,
-                    province = wxUser.province,
-                    // remark = wxUser.remark,
-                    // subscribe = wxUser.subscribe,
-                    //  subscribe_time = wxUser.subscribe_time,
-                    nickname = wxUser.nickname,
-                    sex = wxUser.sex,
-                    city = wxUser.country,
-                    country = wxUser.country
-                };
-                user.SaveUser();
-            }
+            //if (wxUser != null)
+            //{
+            //    //保存微信用户信息
+            //    var user = new UserInfoEntity()
+            //    {
+            //        openid = wxUser.openid,
+            //        // groupid = wxUser.groupid,
+            //        headimgurl = wxUser.headimgurl,
+            //        // language = wxUser.language,
+            //        province = wxUser.province,
+            //        // remark = wxUser.remark,
+            //        // subscribe = wxUser.subscribe,
+            //        //  subscribe_time = wxUser.subscribe_time,
+            //        nickname = wxUser.nickname,
+            //        sex = wxUser.sex,
+            //        city = wxUser.country,
+            //        country = wxUser.country
+            //    };
+            //    user.SaveUser();
+            //}
 
-            #endregion
+            //#endregion
 
             #region 计算中奖信息
 
@@ -488,14 +523,15 @@ namespace WeiXinPF.Application.DomainModules.Coupon
                 {
                     //这是中的中奖了
                     string snumber = Get_snumber(aid);
-                    int uId = _ubll.Add(aid, "", "", wxUser.openid, dajiang.jxName, dajiang.jpName, snumber);
+                    int uId = _ubll.Add(aid, "", "", openid, dajiang.jxName, dajiang.jpName, snumber);
                     result = new CouponPrizeDTO()
                     {
                         sortid = dajiang.sort_id.Value,
                         jxname = dajiang.jxName,
                         jpname = dajiang.jpName,
                         uid = uId,
-                        sn = snumber
+                        sn = snumber,
+                        getTime = DateTime.Now.ToString("yy-MM-dd HH-mm-ss")
                     };
 
 

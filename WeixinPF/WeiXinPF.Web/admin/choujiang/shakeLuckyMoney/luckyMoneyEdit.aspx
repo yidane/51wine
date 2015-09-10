@@ -28,10 +28,10 @@
 
             //初始化上传控件
             $(".upload-img").each(function () {
-                $(this).InitSWFUpload({ sendurl: "../../tools/upload_ajax.ashx", flashurl: "../../scripts/swfupload/swfupload.swf" });
+                $(this).InitSWFUpload({ sendurl: "../../../tools/upload_ajax.ashx", flashurl: "../../../scripts/swfupload/swfupload.swf" });
             });
             $(".upload-album").each(function () {
-                $(this).InitSWFUpload({ btntext: "批量上传", btnwidth: 66, single: false, water: true, thumbnail: true, filesize: "2048", sendurl: "../../tools/upload_ajax.ashx", flashurl: "../../scripts/swfupload/swfupload.swf", filetypes: "*.jpg;*.jpge;*.png;*.gif;" });
+                $(this).InitSWFUpload({ btntext: "批量上传", btnwidth: 66, single: false, water: true, thumbnail: true, filesize: "2048", sendurl: "../../../tools/upload_ajax.ashx", flashurl: "../../../scripts/swfupload/swfupload.swf", filetypes: "*.jpg;*.jpge;*.png;*.gif;" });
             });
             $(".attach-btn").click(function () {
                 showAttachDialog();
@@ -76,9 +76,9 @@
                 </dd>
             </dl>
             <dl>
-                <dt>开始活动的图片</dt>
+                <dt>活动未开始的图片</dt>
                 <dd>
-                    <asp:Image ID="imgbeginPic" runat="server" ImageUrl="/weixin/shakeLuckyMoney/images/shake_background.png" Style="max-height: 80px;" />
+                    <asp:Image ID="imgbeginPic" runat="server" ImageUrl="/weixin/shakeLuckyMoney/images/活动未开始.png" Style="max-height: 80px;" />
                     <asp:TextBox ID="txtImgUrl" runat="server" CssClass="input normal upload-path" />
                     <div class="upload-box upload-img"></div>
                     <span class="Validform_checktip">（尺寸：宽720像素，高400像素） 小于200k;</span>
