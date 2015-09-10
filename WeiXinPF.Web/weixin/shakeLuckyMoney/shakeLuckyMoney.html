@@ -2,7 +2,7 @@
 <html id="html_lucky">
 <head data-bind="with:info">
     <meta charset="utf-8">
-    <title  data-bind="text:actName">摇一摇</title>
+    <title data-bind="text:actName">摇一摇</title>
     <meta name="viewport"
           content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
     <meta name="format-detection" content="telephone=no, email=no" />
@@ -149,15 +149,15 @@
 
             <div data-bind="with:info">
                 <!--<div class="boxcontent boxwhite">
-            <div class="box">
-                <div class="title-red"><span>奖项设置：</span></div>
+                    <div class="box">
+                        <div class="title-red"><span>奖项设置：</span></div>
 
-                <div class="Detail">
-                    <asp:Literal ID="litOtherTip" runat="server" EnableViewState="false"></asp:Literal>
-                    <asp:Literal ID="litJiangXing" runat="server" EnableViewState="false"></asp:Literal>
-                </div>
-            </div>
-        </div>-->
+                        <div class="Detail">
+                            <asp:Literal ID="litOtherTip" runat="server" EnableViewState="false"></asp:Literal>
+                            <asp:Literal ID="litJiangXing" runat="server" EnableViewState="false"></asp:Literal>
+                        </div>
+                    </div>
+                </div>-->
                 <div class="boxcontent boxwhite">
                     <div class="box">
                         <div class="title-red">活动说明：</div>
@@ -182,16 +182,16 @@
             <AUDIO id="musicBox" src="audios/shake.wav" preload="metadata"></AUDIO>
             <AUDIO id="endMp3" src="audios/end.mp3" preload="metadata"></AUDIO>
         </div>
-        <div class="div-expired" data-bind="visible:$root.expired()!=null" style="display:none"></div>
+        <div class="div-expired" data-bind="visible:$root._couponStatus()=='end'" style="display:none"></div>
         <div class="div-gift" data-bind="visible:coupon" style="display:none">
             <div class="main">
                 <div class="redEnvelope">
                     <div class="normalPart">
                         <div class="moneyWrapper" data-bind="with:coupon">
-                            <p data-bind="text: couponType"></p>
+                            <p data-bind="text: jxname"></p>
                             <span id="money">
                                 <!--<span>￥</span>-->
-                                <!-- ko text:subTitle --><!-- /ko-->
+                                <!-- ko text:jpname --><!-- /ko-->
                             </span>
 
                         </div>
@@ -260,57 +260,57 @@
     <script src="../../scripts/oAuth2.js"></script>
     <script src="js/shakeLuckyMoney-vm.js"></script>
     <script>
-      //  var access_code = '';
+    //  var access_code = '';
 
-        var baseurl = getBaseUrl();
+    var baseurl = getBaseUrl();
 
-        var imagesArray = [baseurl+'images/shake_background.png',
-            baseurl + 'images/hand.png',
-            baseurl+'images/back.jpg',
+    var imagesArray = [baseurl+'images/shake_background.png',
+        baseurl + 'images/hand.png',
+        baseurl+'images/back.jpg',
         baseurl+'images/coupon.jpg',
         baseurl+'images/活动结束.png'
-        ];
+    ];
 
-        new preLoader(imagesArray, {
-            onProgress: function (src, element, index) {
+    new preLoader(imagesArray, {
+        onProgress: function (src, element, index) {
 
-                var percent = Math.floor((100 / this.queue.length) * this.completed.length);
+            var percent = Math.floor((100 / this.queue.length) * this.completed.length);
 
-                // update the progress element
-                $("#loadingTips").text(percent + '%');
+            // update the progress element
+            $("#loadingTips").text(percent + '%');
 
 
-            },
-            onComplete: function (loaded, errors) {
-                $("#div_content").show();
-                $('#loadingBox').hide();
-                var $domParm = {
-                    $musicBox: $('#musicBox'),
-                    $endMp3: $('#endMp3'),
-                    $hand: $('.hand'),
-                    $money: $('.money'),
-                    $receiveBtn: $('#receiveBtn')
-                };
-                var param = {
-                    access_code: access_code
-                    //,
-                    //onAfterLoadData:function(){
-                    //    $("#div_content").show();
-                    //    $('#loadingBox').hide();
-                    // }
-                };
-                var luckyMoneyVM = new LuckyMoneyViewModel($domParm, param);
+        },
+        onComplete: function (loaded, errors) {
+            $("#div_content").show();
+            $('#loadingBox').hide();
+            var $domParm = {
+                $musicBox: $('#musicBox'),
+                $endMp3: $('#endMp3'),
+                $hand: $('.hand'),
+                $money: $('.money'),
+                $receiveBtn: $('#receiveBtn')
+            };
+            var param = {
+                access_code: access_code
+                //,
+                //onAfterLoadData:function(){
+                //    $("#div_content").show();
+                //    $('#loadingBox').hide();
+                // }
+            };
+            var luckyMoneyVM = new LuckyMoneyViewModel($domParm, param);
 
-                ko.applyBindings(luckyMoneyVM, document.getElementById("html_lucky"));
+            ko.applyBindings(luckyMoneyVM, document.getElementById("html_lucky"));
 
-                
 
-            }
-        });
 
-      
+        }
+    });
 
-       
+
+
+
 
     </script>
 
