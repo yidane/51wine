@@ -56,7 +56,7 @@ namespace WeiXinPF.WebService
                     //初始话jsskd
                     var signatureDto = jssdkInit(uWeiXinModel);
                     signatureDto.fxContent = info.brief;
-                    signatureDto.fxImg = MyCommFun.getWebSite() + info.beginPic;
+                    signatureDto.fxImg =  info.beginPic;
                     signatureDto.fxTitle = info.actName;
                     var data = new
                     {
@@ -165,125 +165,101 @@ namespace WeiXinPF.WebService
             }
         }
 
+        /// <summary>
+        /// 我的优惠券列表
+        /// </summary>
+        /// <param name="access_code"></param>
+        [WebMethod(EnableSession = true)]
+        public void GetCouponList(string code,int wid)
+        {
+            string openid = string.Empty;
+            try
+            {
+
+
+                var service = new CouponService();
+
+                if (Session["openid"] == null)
+                {
+                    BLL.wx_userweixin bll = new BLL.wx_userweixin();
+                    Model.wx_userweixin wxModel = bll.GetModel(wid);
+                    openid = OAuth2BaseProc(wxModel, "coupon");
+                    if (!string.IsNullOrEmpty(openid))
+                    {
+                        Session["openid"] = openid;
+                    }
+
+                }
+                else
+                {
+                    openid = Session["openid"] as string;
+
+                }
+                CouponListDTO dto = service.GetCouponList( wid, openid);
+                if (dto != null)
+                {
+                    var data = new
+                    {
+                        lists = dto,
+                        openid = openid
+                    };
+                    Context.Response.Write(AjaxResult.Success(data));
+                }
+                else
+                {
+                    throw new Exception("参数异常");
+                }
 
 
 
-        //        /// <summary>
-        //        /// 我的优惠券列表
-        //        /// </summary>
-        //        /// <param name="access_code"></param>
-        //        [WebMethod(EnableSession = true)]
-        //        public void GetCouponList(string access_code)
-        //        {
-        //            try
-        //            {
-        //                //string strWXUser=Context.Request.QueryString[""];
-        //                UserInfoDTO user = null;
-        //                if (!string.IsNullOrEmpty(access_code))
-        //                {
-        //                    var openId = GetOpenIDByCodeID(access_code);
-        //                    var weChatService = new WeChatService();
+            }
+            catch (JsonException jsEx)
+            {
 
-        //                    user = weChatService.GetUserInfo(openId);
-        //                }
-        //#if DEBUG
+                Context.Response.Write(AjaxResult.Error(jsEx.Message, jsEx.ErrorType));
+            }
+            catch (Exception ex)
+            {
+                var s = "";
+                if (ex.InnerException != null)
+                {
+                    s = ex.InnerException.Message;
+                }
+                Context.Response.Write(AjaxResult.Error(s));
+            }
+        }
 
-        //                else
-        //                {
-        //                    var url = "http://wx.qlogo.cn/mmopen/g3MonUZtNHkdmzicIlibx6iaFqAc56vxLSUfpb6n5WKSYVY0ChQKkiaJSgQ1dZuTOgvLLrhJbERQQ4eMsv84eavHiaiceqxibJxCfHe/0";
-        //                    url = url.Substring(0, url.LastIndexOf("/")) + "/64";
-        //                    user = new UserInfoDTO()
-        //                    {
-        //                        openid = "obzTsw_PZU5Q5NZqixFi6lB2YHkI",
-        //                        nickname = "金小西",
-        //                        headimgurl = url
-        //                    };
-        //                }
-        //#endif
+        /// <summary>
+        /// 获取优惠券详细
+        /// </summary>
+        /// <param name="access_code"></param>
+        /// <param name="couponId"></param>
+        [WebMethod]
+        public void GetCoupon(int  id)
+        {
+            try
+            {
 
 
-        //                var service = new CouponService();
-
-        //                var dto = service.GetCouponList(user);
-        //                var data = new
-        //                {
-        //                    lists = dto,
-        //                    user = user
-        //                };
-
-        //                Context.Response.Write(AjaxResult.Success(data));
-
-
-        //            }
-        //            catch (Exception ex)
-        //            {
-        //                Context.Response.Write(AjaxResult.Error(ex.Message));
-        //            }
-        //        }
-
-        //        /// <summary>
-        //        /// 获取优惠券详细
-        //        /// </summary>
-        //        /// <param name="access_code"></param>
-        //        /// <param name="couponId"></param>
-        //        [WebMethod]
-        //        public void GetCoupon(string openId, string couponUsageId)
-        //        {
-        //            try
-        //            {
-
-        //                var service = new CouponService();
-        //                Guid id;
-        //                if (!Guid.TryParse(couponUsageId, out id))
-        //                {
-        //                    throw new Exception("指定的优惠券不正确!");
-        //                }
-        //                var coupon = service.GetCoupon(openId, id);
-        //                var data = new
-        //                {
-        //                    coupon = coupon
-        //                    // user=user
-        //                };
-        //                Context.Response.Write(AjaxResult.Success(data));
+              
+                var service = new CouponService();
+           
+                var coupon = service.GetCouponDetail(id);
+                var data = new
+                {
+                    coupon = coupon
+                    // user=user
+                };
+                Context.Response.Write(AjaxResult.Success(data));
 
 
-        //            }
-        //            catch (Exception ex)
-        //            {
-        //                Context.Response.Write(AjaxResult.Error(ex.Message));
-        //            }
-        //        }
+            }
+            catch (Exception ex)
+            {
+                Context.Response.Write(AjaxResult.Error(ex.Message));
+            }
+        }
 
-
-        //        /// <summary>
-        //        /// 使用优惠券
-        //        /// </summary>
-        //        /// <param name="openId"></param>
-        //        /// <param name="couponUsageId"></param>
-        //        [WebMethod]
-        //        public void UseCoupon(string openId, string couponUsageId)
-        //        {
-        //            try
-        //            {
-
-
-
-        //                //var user = weChatService.GetUserInfo(openId);
-        //                var service = new CouponService();
-        //                Guid id;
-        //                if (!Guid.TryParse(couponUsageId, out id))
-        //                {
-        //                    throw new Exception("指定的优惠券不正确!");
-        //                }
-        //                service.UseCoupon(openId, id);
-        //                Context.Response.Write(AjaxResult.Success(true));
-
-
-        //            }
-        //            catch (Exception ex)
-        //            {
-        //                Context.Response.Write(AjaxResult.Error(ex.Message));
-        //            }
-        //        }
+        
     }
 }

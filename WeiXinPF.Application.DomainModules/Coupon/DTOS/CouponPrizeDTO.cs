@@ -10,11 +10,11 @@ namespace WeiXinPF.Application.DomainModules.Coupon.DTOS
     /// </summary>
     public class CouponPrizeDTO
     {
+        public int id { get; set; }
         public string sn { get; set; }
         public int sortid { get; set; }
         public string jxname { get; set; }
         public string jpname { get; set; }
-        public int uid { get; set; }
         public string getTime { get; set; }
     }
 }
