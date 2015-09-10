@@ -70,10 +70,14 @@
     <Content Include="javascripts\tradeQuery.js" />
     <Content Include="javascripts\WdatePicker.js" />
     <Content Include="OrderStatistics.aspx" />
+    <Content Include="pics\base_z284ee4.png" />
+    <Content Include="styles\baseuser.css" />
     <Content Include="styles\global_min.css" />
     <Content Include="styles\pagination.css" />
     <Content Include="styles\skin_icons.png" />
     <Content Include="styles\style.css" />
+    <Content Include="styles\useranalysis.css" />
+    <Content Include="UserAnalysis.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -94,6 +98,13 @@
     <Compile Include="Order\OrderEntity.cs" />
     <Compile Include="Order\OrderStatisticsManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserAnalysis.aspx.cs">
+      <DependentUpon>UserAnalysis.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserAnalysis.aspx.designer.cs">
+      <DependentUpon>UserAnalysis.aspx</DependentUpon>
+    </Compile>
     <Compile Include="WebHelper.cs" />
   </ItemGroup>
   <ItemGroup>
