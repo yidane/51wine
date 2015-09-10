@@ -48,7 +48,15 @@ namespace Travel.Infrastructure.UnitTest
         [Test]
         public void fdf()
         {
-            var dfd=TicketCategoryEntity.TodayTicketCategory.FirstOrDefault();
+            var tickets = new List<TicketCategoryEntity>();
+
+            tickets.Add(new TicketCategoryEntity()
+                            {
+                                TicketName = "gb"
+                            });
+            tickets.Add(null);
+
+             var df=tickets.Count;
         }
     }
 }

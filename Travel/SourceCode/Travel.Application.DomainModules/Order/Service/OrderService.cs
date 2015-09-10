@@ -409,17 +409,20 @@ namespace Travel.Application.DomainModules.Order.Service
             {
                 var respStatus = resps.FirstOrDefault(item => item.OrderCode.Equals(ticket.ECode));
 
-                switch (respStatus.OrderStatus)
+                if (respStatus != null)
                 {
-                    case "A":
-                    case "P":
-                    case "M":
-                        changedStatusTickets.Add(ticket);
-                        break;
-                    case "E":
-                    default:
-                        break;
-                }
+                    switch (respStatus.OrderStatus)
+                    {
+                        case "A":
+                        case "P":
+                        case "M":
+                            changedStatusTickets.Add(ticket);
+                            break;
+                        case "E":
+                        default:
+                            break;
+                    }
+                }                
             }
 
             foreach (var someOrderTickets in changedStatusTickets.GroupBy(item => item.OrderId))
@@ -439,15 +442,18 @@ namespace Travel.Application.DomainModules.Order.Service
             {
                 var respStatus = resps.FirstOrDefault(item => item.OrderCode.Equals(ticket.ECode));
 
-                switch (respStatus.OrderStatus)
+                if (respStatus != null)
                 {
-                    case "T":
-                    case "O":
-                        changedStatusTickets.Add(ticket);
-                        break;
-                    default:
-                        break;
-                }
+                    switch (respStatus.OrderStatus)
+                    {
+                        case "T":
+                        case "O":
+                            changedStatusTickets.Add(ticket);
+                            break;
+                        default:
+                            break;
+                    }
+                }                
             }
 
             if (changedStatusTickets.Any())

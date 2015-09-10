@@ -13,6 +13,7 @@ namespace Travel.Application.OrderUnitTest
     using Travel.Application.DomainModules.Order.Entity;
     using Travel.Application.DomainModules.Order.Service;
     using Travel.Infrastructure.DomainDataAccess.Order;
+    using Travel.Infrastructure.WeiXin.Advanced.Pay;
     using Travel.Infrastructure.WeiXin.Advanced.Pay.Model;
     using Travel.Services.WebService;
 
@@ -24,18 +25,18 @@ namespace Travel.Application.OrderUnitTest
         public PaymentNotify PaymentNotify;
 
         public IList<TicketEntity> refundTickets;
-        
+
         [SetUp]
         public void Init()
         {
             this.OrderRequest = new OrderRequestEntity()
                                {
                                    OpenId = "obzTswxzFzzzdWdAKf2mWx3CrpXk",
-                                   TicketCategory = "366C3EA0-6F2F-4879-93E8-38F273A2CF60",
-                                   TicketName = "散客票一进",
-                                   Count = 2,
+                                   TicketCategory = "125CDE65-BE62-40B5-99A0-4AD32B5DB677",
+                                   TicketName = "残疾证门票一进",
+                                   Count = 1,
                                    CouponId = string.Empty,
-                                   ContactPersonName = "gbc",
+                                   ContactPersonName = "提出",
                                    MobilePhoneNumber = "11111",
                                    IdentityCardNumber = "12345678901"
                                };
@@ -43,14 +44,14 @@ namespace Travel.Application.OrderUnitTest
             this.PaymentNotify = new PaymentNotify()
                                      {
                                          appid = "wxdd6127bdb5e7611c",
-                                         attach = "测试",
+                                         attach = "测试123",
                                          bank_type = "CFT",
                                          fee_type = "CNY",
                                          is_subscribe = "Y",
                                          mch_id = "1266087601",
                                          nonce_str = "5d2b6c2a8db53831f7eda20af46e531c",
                                          openid = "obzTswxzFzzzdWdAKf2mWx3CrpXk",
-                                         out_trade_no = "C2015090813432288181001",
+                                         out_trade_no = "C2015091015011979123379",
                                          result_code = "SUCCESS",
                                          return_code = "SUCCESS",
                                          sign = "B552ED6B279343CB493C5DD0D78AB241",
@@ -61,8 +62,8 @@ namespace Travel.Application.OrderUnitTest
                                      };
 
             this.refundTickets =
-                TicketEntity.GetTicketsByOrderId(Guid.Parse("D7B94FDB-3D16-4DF1-9F2E-7E720FA42D72"))
-                .Where(item => item.TicketId.Equals(8302377)).ToList();
+                TicketEntity.GetTicketsByOrderId(Guid.Parse("2E0E4EE2-D383-4030-A5AC-D1EB26A284E0"))
+                .Where(item => item.TicketId.Equals(3297855)).ToList();
         }
 
         [Test]
@@ -90,15 +91,7 @@ namespace Travel.Application.OrderUnitTest
                 var otaOrder = new OTAOrder(order);
 
                 otaOrder.ProcessRefundRequestMain(this.refundTickets);
-            }            
-        }
-
-        [Test]
-        public void MyOrder_OrderService_ReturnOrderList()
-        {
-            var service = new OrderService();
-
-            var list = service.MyOrders("obzTswxzFzzzdWdAKf2mWx3CrpXk");
+            }
         }
 
         [Test]
@@ -107,6 +100,14 @@ namespace Travel.Application.OrderUnitTest
             var service = new OrderService();
 
             service.SearchTicketStatus(100);
+        }
+
+        [Test]
+        public void MyOrder_OrderService_ReturnOrderList()
+        {
+            var service = new OrderService();
+
+            var list = service.MyOrders("obzTswxzFzzzdWdAKf2mWx3CrpXk");
         }
 
         [Test]
@@ -140,7 +141,7 @@ namespace Travel.Application.OrderUnitTest
             if (orders.Any())
             {
                 service.RefundTickets(orders[1].OrderId, 1);
-            }            
+            }
         }
 
         [Test]
@@ -166,7 +167,7 @@ namespace Travel.Application.OrderUnitTest
 
             //service.MyOrders("obzTswxzFzzzdWdAKf2mWx3CrpXk");
 
-            
+
 
             //service.MyRefundTickets("obzTswxzFzzzdWdAKf2mWx3CrpXk");
             ////service.RefundTickets("35D7650B-21C1-45CD-B15D-2203857B7977", 1);
@@ -205,7 +206,7 @@ namespace Travel.Application.OrderUnitTest
                                           }
                         };
 
-            foreach (var group in t.GroupBy(item=>item.OrderId))
+            foreach (var group in t.GroupBy(item => item.OrderId))
             {
                 var d = group.ToList();
             }
@@ -214,12 +215,37 @@ namespace Travel.Application.OrderUnitTest
         [Test]
         public void webservice()
         {
-            var service = new OrderWebService();
+            JsApiPay api = new JsApiPay();
 
-            service.MyRefundTickets("obzTsw5qxlbwGYYZJC9b-91J-X1Y");
+            api.QueryOrder("1003800117201509080821933860");
             //service.MyTickets("1C99E930-D0D6-420E-B279-D3A9C3CE1930");
             //service.TicketCategoryList();
             //service.MyOrders("obzTswxzFzzzdWdAKf2mWx3CrpXk");
+        }
+
+        public class MyClass
+        {
+            public string Name { get; set; }
+
+            public int Age { get; set; }
+        }
+
+        public static void abc(MyClass my)
+        {
+            my.Name = "gb";
+            my.Age = 20;
+        }
+
+        [Test]
+        public void test()
+        {
+            var g = new MyClass();
+            g.Name = "xqf";
+            g.Age = 10;
+
+            abc(g);
+
+
         }
     }
 }
