@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Newtonsoft.Json.Converters;
+using Newtonsoft.Json.Serialization;
 
 namespace WeiXinPF.Common
 {
@@ -12,16 +14,20 @@ namespace WeiXinPF.Common
         /// 将对象转换成为JSON字符串
         /// </summary>
         /// <param name="data"></param>
+        /// <param name="useCamel">是否使用驼峰命名法序列化</param>
         /// <returns></returns>
-        public static string Serialize(object data)
+        public static string Serialize(object data, bool useCamel = false)
         {
             //设置时间类型的序列化
-            var settings = new JsonSerializerSettings()
+            var settings = new JsonSerializerSettings();
+            settings.Converters.Add(new IsoDateTimeConverter()
             {
-                DateFormatHandling = DateFormatHandling.MicrosoftDateFormat,
-                DateTimeZoneHandling = DateTimeZoneHandling.Utc
-            };
-
+                DateTimeFormat = "yyyy-MM-dd"
+            });
+            if (useCamel)
+            {
+                settings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+            }
             return JsonConvert.SerializeObject(data, settings);
         }
 

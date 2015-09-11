@@ -14,12 +14,6 @@ using System.Web;
 
 namespace WeiXinPF.Web.weixin
 {
-    /// <summary>
-    /// 前端微信第3方页面的父级页面
-    /// author:李　朴
-    /// datetime:2015-8-8
-    /// 
-    /// </summary>
     public class WeiXinPage : System.Web.UI.Page
     {
         //分享js的参数
