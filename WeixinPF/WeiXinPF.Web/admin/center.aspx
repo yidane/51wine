@@ -32,7 +32,7 @@
         </div>
         <div class="line10"></div>
  
-        <div class="nlist-2">
+        <%--<div class="nlist-2">
             <h3><i></i>站点信息</h3>
             <ul>
                 <li>站点名称：<%=siteConfig.webname %></li>
@@ -44,17 +44,7 @@
             <ul>
                <asp:Literal ID="LitNotice" runat="server" /> 
             </ul>
-        </div>
-        <div class="nlist-2">
-             <h3><i></i>沐雪最新动态</h3>
-           <iframe src="http://uweixin.cn/portalpage/news_list_min.aspx" style="width:60%;height:150px;"   frameborder="0" ></iframe>
-            </div>
-
-        <div class="line20"></div>
- 
-
-       
-
+        </div>--%>
         <!--/内容-->
     </form>
 </body>

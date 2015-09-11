@@ -36,7 +36,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Dapper, Version=1.40.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Dapper.1.42\lib\net40\Dapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
@@ -104,6 +110,9 @@
     <Compile Include="plugs\wx_sjb_qiudui.cs" />
     <Compile Include="plugs\wx_sjb_richeng.cs" />
     <Compile Include="plugs\wx_sjb_users.cs" />
+    <Compile Include="plugs\wx_travel_scenic.cs" />
+    <Compile Include="plugs\wx_travel_scenicDetail.cs" />
+    <Compile Include="plugs\wx_travel_scenicSetting.cs" />
     <Compile Include="plugs\wx_zjdActionInfo.cs" />
     <Compile Include="plugs\wx_zjdAwardItem.cs" />
     <Compile Include="plugs\wx_zjdAwardUser.cs" />
@@ -268,6 +277,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="wqiche\bq002.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

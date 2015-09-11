@@ -105,6 +105,9 @@
     <Compile Include="plugs\wx_sjb_qiudui.cs" />
     <Compile Include="plugs\wx_sjb_richeng.cs" />
     <Compile Include="plugs\wx_sjb_users.cs" />
+    <Compile Include="plugs\wx_travel_scenic.cs" />
+    <Compile Include="plugs\wx_travel_scenicDetail.cs" />
+    <Compile Include="plugs\wx_travel_scenicSetting.cs" />
     <Compile Include="plugs\wx_zjdActionInfo.cs" />
     <Compile Include="plugs\wx_zjdAwardItem.cs" />
     <Compile Include="plugs\wx_zjdAwardUser.cs" />
