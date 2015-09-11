@@ -100,6 +100,8 @@
     <Content Include="admin\choujiang\shakeLuckyMoney\luckyMoneyAwardUser.aspx" />
     <Content Include="admin\choujiang\shakeLuckyMoney\luckyMoneyEdit.aspx" />
     <Content Include="admin\choujiang\shakeLuckyMoney\luckyMoneylist.aspx" />
+    <Content Include="admin\scenic\scenic_detail_edit.aspx" />
+    <Content Include="admin\scenic\scenic_detail_list.aspx" />
     <Content Include="admin\scenic\scenic_list.aspx" />
     <Content Include="admin\scenic\scenic_edit.aspx" />
     <Content Include="admin\weixin\baseSetting.aspx" />
@@ -5117,6 +5119,20 @@
     <Compile Include="admin\qiangpiao\qpuser_list.aspx.designer.cs">
       <DependentUpon>qpuser_list.aspx</DependentUpon>
     </Compile>
+    <Compile Include="admin\scenic\scenic_detail_edit.aspx.cs">
+      <DependentUpon>scenic_detail_edit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\scenic\scenic_detail_edit.aspx.designer.cs">
+      <DependentUpon>scenic_detail_edit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\scenic\scenic_detail_list.aspx.cs">
+      <DependentUpon>scenic_detail_list.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\scenic\scenic_detail_list.aspx.designer.cs">
+      <DependentUpon>scenic_detail_list.aspx</DependentUpon>
+    </Compile>
     <Compile Include="admin\scenic\scenic_list.aspx.cs">
       <DependentUpon>scenic_list.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -7063,6 +7079,23 @@
     <Compile Include="weixin\qiangpiao\uProcess.ashx.cs">
       <DependentUpon>uProcess.ashx</DependentUpon>
     </Compile>
+    <Compile Include="weixin\scenic\detail.aspx.cs">
+      <DependentUpon>detail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="weixin\scenic\detail.aspx.designer.cs">
+      <DependentUpon>detail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="weixin\scenic\index.aspx.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="weixin\scenic\index.aspx.designer.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="weixin\scenic\secnic.ashx.cs">
+      <DependentUpon>secnic.ashx</DependentUpon>
+    </Compile>
     <Compile Include="weixin\shangqiang\index.aspx.cs">
       <DependentUpon>index.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -7974,6 +8007,36 @@
     <Content Include="weixin\qiangpiao\pic_show.html" />
     <Content Include="weixin\qiangpiao\order_ret.html" />
     <Content Include="weixin\qiangpiao\笔记.txt" />
+    <Content Include="weixin\scenic\css\index.css" />
+    <Content Include="weixin\scenic\detail.aspx" />
+    <Content Include="weixin\scenic\images\bg.png" />
+    <Content Include="weixin\scenic\images\bg1.png" />
+    <Content Include="weixin\scenic\images\bg2.jpg" />
+    <Content Include="weixin\scenic\images\blur.svg" />
+    <Content Include="weixin\scenic\images\border-left-top.png" />
+    <Content Include="weixin\scenic\images\border-right-bottom.png" />
+    <Content Include="weixin\scenic\images\gy.png" />
+    <Content Include="weixin\scenic\images\intro-bg.png" />
+    <Content Include="weixin\scenic\images\kanasi.png" />
+    <Content Include="weixin\scenic\images\listen.png" />
+    <Content Include="weixin\scenic\images\listen_close.png" />
+    <Content Include="weixin\scenic\images\poetry.png" />
+    <Content Include="weixin\scenic\images\scenic1.jpg" />
+    <Content Include="weixin\scenic\images\scenic2.jpg" />
+    <Content Include="weixin\scenic\images\scenic3.jpg" />
+    <Content Include="weixin\scenic\images\scenic4.jpg" />
+    <Content Include="weixin\scenic\images\scenic_name.png" />
+    <Content Include="weixin\scenic\images\stamp.png" />
+    <Content Include="weixin\scenic\images\step.png" />
+    <Content Include="weixin\scenic\images\step1.png" />
+    <Content Include="weixin\scenic\images\step2.png" />
+    <Content Include="weixin\scenic\images\step3.png" />
+    <Content Include="weixin\scenic\images\step4.png" />
+    <Content Include="weixin\scenic\images\sx.png" />
+    <Content Include="weixin\scenic\images\wl.png" />
+    <Content Include="weixin\scenic\images\yl.png" />
+    <Content Include="weixin\scenic\index.aspx" />
+    <Content Include="weixin\scenic\overview.html" />
     <Content Include="weixin\shakeLuckyMoney\audios\end.mp3" />
     <Content Include="weixin\shakeLuckyMoney\audios\shake.wav" />
     <Content Include="weixin\shakeLuckyMoney\css\normalize.css" />
@@ -8515,6 +8578,7 @@
     <Content Include="shop\templates\yeshou\font\FontAwesome.otf" />
     <None Include="Properties\PublishProfiles\weixin2.pubxml" />
     <Content Include="weixin\cashred\images\lottery.psd" />
+    <Content Include="weixin\scenic\secnic.ashx" />
     <None Include="副本 Web.Debug.config">
       <DependentUpon>副本 Web.config</DependentUpon>
     </None>

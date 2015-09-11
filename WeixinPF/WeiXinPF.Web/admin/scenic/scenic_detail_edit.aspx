@@ -1,20 +1,17 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="scenic_edit.aspx.cs" Inherits="WeiXinPF.Web.admin.scenic.scenic_edit" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="scenic_detail_edit.aspx.cs" Inherits="WeiXinPF.Web.admin.scenic.scenic_detail_edit" %>
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>景区导览编辑</title>
+    <title></title>
     <script type="text/javascript" src="../../scripts/jquery/jquery-1.10.2.min.js"></script>
     <script type="text/javascript" src="../../scripts/jquery/Validform_v5.3.2_min.js"></script>
     <script type="text/javascript" src="../../scripts/lhgdialog/lhgdialog.js?skin=idialog"></script>
-    <script type="text/javascript" src="../../scripts/datepicker/WdatePicker.js"></script>
     <script type="text/javascript" src="../../scripts/swfupload/swfupload.js"></script>
     <script type="text/javascript" src="../../scripts/swfupload/swfupload.queue.js"></script>
     <script type="text/javascript" src="../../scripts/swfupload/swfupload.handlers.js"></script>
-    <script type="text/javascript" charset="utf-8" src="../../editor/kindeditor-min.js"></script>
-    <script type="text/javascript" charset="utf-8" src="../../editor/lang/zh_CN.js"></script>
     <script type="text/javascript" src="../js/layout.js"></script>
     <link href="../skin/default/style.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript">
@@ -36,7 +33,9 @@
         <div class="location">
             <a href="scenic_list.aspx" class="home"><i></i><span>景区导览列表</span></a>
             <i class="arrow"></i>
-            <span>景区导览编辑</span>
+            <a href="scenic_detail_list.aspx" class="home"><i></i><span>景点详情列表</span></a>
+            <i class="arrow"></i>
+            <span>景点详情编辑</span>
         </div>
         <div class="line10"></div>
         <!--/导航栏-->
@@ -45,7 +44,7 @@
             <div id="floatHead" class="content-tab">
                 <div class="content-tab-ul-wrap">
                     <ul>
-                        <li><a href="javascript:;" onclick="tabs(this);" class="selected">内容</a></li>
+                        <li><a href="javascript:;" onclick="tabs(this);" class="selected">景点详情</a></li>
                     </ul>
                 </div>
             </div>
@@ -59,47 +58,46 @@
                 </dd>
             </dl>
             <dl>
+                <dt>封面图片</dt>
+                <dd>
+                    <asp:TextBox ID="txtCover" runat="server" datatype="*2-100" CssClass="input normal upload-path" />
+                    <div class="upload-box upload-img"></div>
+                    <%--<span class="Validform_checktip"></span>--%>
+                </dd>
+            </dl>
+            <dl>
                 <dt>首页背景图片</dt>
                 <dd>
-                    <asp:TextBox ID="txtFirstBgImg" runat="server" CssClass="input normal upload-path" />
+                    <asp:TextBox ID="txtBackgroundImage" runat="server" datatype="*2-100" CssClass="input normal upload-path" />
                     <div class="upload-box upload-img"></div>
                     <%--<span class="Validform_checktip"></span>--%>
                 </dd>
             </dl>
             <dl>
-                <dt>景区标识图片</dt>
+                <dt>摘要</dt>
                 <dd>
-                    <asp:TextBox ID="txtIdentifyImg" runat="server" CssClass="input normal upload-path" />
+                    <asp:TextBox ID="txtDigest" runat="server" CssClass="input normal" />
+                </dd>
+            </dl>
+            <dl>
+                <dt>正文</dt>
+                <dd>
+                    <asp:TextBox ID="txtContent" runat="server" CssClass="input normal" />
+                </dd>
+            </dl>
+            <dl>
+                <dt>音频文件</dt>
+                <dd>
+                    <asp:TextBox ID="txtAudio" runat="server" datatype="*2-100" CssClass="input normal upload-path" />
                     <div class="upload-box upload-img"></div>
                     <%--<span class="Validform_checktip"></span>--%>
                 </dd>
             </dl>
             <dl>
-                <dt>景区标识显示动画</dt>
+                <dt>是否自动播放音频文件</dt>
                 <dd>
                     <div class="rule-multi-radio">
-                        <asp:RadioButtonList ID="rblDiaplayAction" runat="server" RepeatDirection="Horizontal" RepeatLayout="Flow">
-                            <asp:ListItem Value="fadeIn" Selected="True">淡入</asp:ListItem>
-                            <asp:ListItem Value="fadeIn">左侧滚入</asp:ListItem>
-                            <asp:ListItem Value="fadeIn">右侧滚入</asp:ListItem>
-                        </asp:RadioButtonList>
-                    </div>
-                </dd>
-            </dl>
-            <dl>
-                <dt>第二页背景图片</dt>
-                <dd>
-                    <asp:TextBox ID="txtSecondBgImg" runat="server" CssClass="input normal upload-path" />
-                    <div class="upload-box upload-img"></div>
-                    <span class="Validform_checktip"></span>
-                </dd>
-            </dl>
-            <dl>
-                <dt>是否自动显示第二页：
-                </dt>
-                <dd>
-                    <div class="rule-multi-radio">
-                        <asp:RadioButtonList ID="rblAutoDisplayNextPage" runat="server" RepeatDirection="Horizontal" RepeatLayout="Flow">
+                        <asp:RadioButtonList ID="rblAutoAudio" runat="server" RepeatDirection="Horizontal" RepeatLayout="Flow">
                             <asp:ListItem Value="1" Selected="True">是</asp:ListItem>
                             <asp:ListItem Value="0">否</asp:ListItem>
                         </asp:RadioButtonList>
@@ -107,16 +105,14 @@
                 </dd>
             </dl>
             <dl>
-                <dt>延迟显示时间</dt>
+                <dt>是否循环播放音频文件</dt>
                 <dd>
-                    <asp:TextBox ID="txtDelay" runat="server" datatype="n" CssClass="input normal" />
-                    <span class="Validform_checktip">*以秒为单位</span>
-                </dd>
-            </dl>
-            <dl>
-                <dt>景区描述</dt>
-                <dd>
-                    <asp:TextBox runat="server" ID="txtDescription" TextMode="MultiLine" Height="75"></asp:TextBox>
+                    <div class="rule-multi-radio">
+                        <asp:RadioButtonList ID="rblLoopAudio" runat="server" RepeatDirection="Horizontal" RepeatLayout="Flow">
+                            <asp:ListItem Value="1" Selected="True">是</asp:ListItem>
+                            <asp:ListItem Value="0">否</asp:ListItem>
+                        </asp:RadioButtonList>
+                    </div>
                 </dd>
             </dl>
         </div>

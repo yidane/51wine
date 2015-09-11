@@ -1,13 +1,13 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="scenic_list.aspx.cs" Inherits="WeiXinPF.Web.admin.scenic.scenic_list" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="scenic_detail_list.aspx.cs" Inherits="WeiXinPF.Web.admin.scenic.scenic_detail_list" %>
 
 <%@ Import Namespace="WeiXinPF.Common" %>
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
-
 <head runat="server">
-    <title>景区导览列表</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>景点详情列表</title>
     <script type="text/javascript" src="../../scripts/jquery/jquery-1.10.2.min.js"></script>
     <script type="text/javascript" src="../../scripts/jquery/Validform_v5.3.2_min.js"></script>
     <script type="text/javascript" src="../../scripts/lhgdialog/lhgdialog.js?skin=idialog"></script>
@@ -19,7 +19,9 @@
     <form id="form1" runat="server">
         <!--导航栏-->
         <div class="location">
-            <a href="javascript:;" class="home"><i></i><span>景区导览列表</span></a>
+            <a href="scenic_list.aspx" class="home"><i></i><span>景区导览列表</span></a>
+            <i class="arrow"></i>
+            <span>景点详情列表</span>
         </div>
         <!--/导航栏-->
 
@@ -28,16 +30,12 @@
             <div id="floatHead" class="toolbar">
                 <div class="l-list">
                     <ul class="icon-list">
-                        <li><a class="add" href="scenic_edit.aspx?action=<%=MXEnums.ActionEnum.Add %>"><i></i><span>新增</span></a></li>
+                        <li><a class="add" href="scenic_detail_edit.aspx?action=<%=MXEnums.ActionEnum.Add %>&scenicId=<%=ScenicId%>"><i></i><span>新增</span></a></li>
 
                         <li><a class="all" href="javascript:;" onclick="checkAll(this);"><i></i><span>全选</span></a></li>
                         <li>
                             <asp:LinkButton ID="btnDelete" runat="server" CssClass="del" OnClientClick="return ExePostBack('btnDelete','删除该分类将不可恢复，是否继续？');" OnClick="btnDelete_Click"><i></i><span>删除</span></asp:LinkButton></li>
                     </ul>
-                </div>
-                <div class="r-list">
-                    <asp:TextBox ID="txtKeywords" runat="server" CssClass="keyword" />
-                    <asp:LinkButton ID="lbtnSearch" runat="server" CssClass="btn-search" OnClick="lbtnSearch_Click">查询</asp:LinkButton>
                 </div>
             </div>
         </div>
@@ -55,13 +53,12 @@
             </HeaderTemplate>
             <ItemTemplate>
                 <tr>
-                    <td align="center">
+                    <td style="text-align: center">
                         <asp:CheckBox ID="chkId" CssClass="checkall" runat="server" Style="vertical-align: middle;" /><asp:HiddenField ID="hidId" Value='<%#Eval("id")%>' runat="server" />
                     </td>
                     <td style="text-align: center;"><%#Eval("Name") %></td>
                     <td style="text-align: center">
-                        <a href="scenic_edit.aspx?action=<%#MXEnums.ActionEnum.Edit %>&id=<%#Eval("Id")%>">修改</a>
-                        <a href="scenic_detail_list.aspx?scenicId=<%#Eval("Id")%>">景点详情</a>
+                        <a href="scenic_detail_edit.aspx?action=<%#MXEnums.ActionEnum.Edit %>&id=<%#Eval("Id")%>&scenicId=<%=ScenicId%>">修改</a>
                     </td>
                 </tr>
             </ItemTemplate>
