@@ -81,6 +81,8 @@ namespace WeiXinPF.BLL
 		{
 			return dal.GetList(strWhere);
 		}
+
+
 		/// <summary>
 		/// 获得前几行数据
 		/// </summary>
@@ -96,10 +98,24 @@ namespace WeiXinPF.BLL
 			DataSet ds = dal.GetList(strWhere);
 			return DataTableToList(ds.Tables[0]);
 		}
-		/// <summary>
-		/// 获得数据列表
-		/// </summary>
-		public List<WeiXinPF.Model.wx_dzpAwardUser> DataTableToList(DataTable dt)
+
+
+        public List<WeiXinPF.Model.wx_dzpAwardUser> GetModelListWithAction(string strWhere)
+        {
+            DataSet ds = dal.GetListWithAction(strWhere);
+            return DataTableToList(ds.Tables[0]);
+        }
+
+        public  DataSet GetListWithAction(string strWhere)
+        {
+            DataSet ds = dal.GetListWithAction(strWhere);
+            return ds;
+        }
+
+        /// <summary>
+        /// 获得数据列表
+        /// </summary>
+        public List<WeiXinPF.Model.wx_dzpAwardUser> DataTableToList(DataTable dt)
 		{
 			List<WeiXinPF.Model.wx_dzpAwardUser> modelList = new List<WeiXinPF.Model.wx_dzpAwardUser>();
 			int rowsCount = dt.Rows.Count;

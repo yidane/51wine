@@ -70,8 +70,8 @@
 .succ-ex2 a{ display: block; color: #f46f6f;}
 
 .coupons-list{ padding: 1rem;}
-.coupons-list li{ background: url(../../TicketImages/coupons_bg.png) 100% no-repeat; background-size: cover; height: 9.4rem; color: #fff; margin-bottom: 1rem; position: relative;}
-.coupons-list li.fail{ background: url(../../images/scenic/coupons_bg-fail.png) 100% no-repeat;}
+.coupons-list li{ background: url(../images/coupons_bg.png) 100% no-repeat; background-size: cover; height: 9.4rem; color: #fff; margin-bottom: 1rem; position: relative;}
+.coupons-list li.fail{ background: url(../images/coupons_bg-fail.png) 100% no-repeat;}
 
 .coupons-a{
     color: #FFF;
@@ -91,12 +91,12 @@
 }
 .time-status{ position: absolute; width: 5.5rem; height: 4.7rem;  background-size: cover; background-repeat: no-repeat; top:0.7rem; right:4rem;}
 .status-used {
-    background-image: url(../../images/scenic/img_coupondetail_used_207x160.png);
+    background-image: url(../images/img_coupondetail_used_207x160.png);
     background-size: 90%;
     background-repeat: no-repeat;
 }
 .status-expired{
- background-image: url(../../images/scenic/img_coupondetail_overdue_207x160.png);
+ background-image: url(../images/img_coupondetail_overdue_207x160.png);
     background-size: 90%;
     background-repeat: no-repeat;    
 }

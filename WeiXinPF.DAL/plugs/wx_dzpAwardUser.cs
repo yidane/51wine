@@ -459,6 +459,30 @@ namespace WeiXinPF.DAL
 
         #endregion  ExtensionMethod
 
-	}
+	    public DataSet GetListWithAction(string strWhere)
+	    {
+            StringBuilder strSql = new StringBuilder();
+	        strSql.Append(@"SELECT  a.id ,
+        a.actId ,
+        a.uName ,
+        a.uTel ,
+        a.openid ,
+        a.jxName ,
+        a.jxIndex ,
+        a.jpName ,
+        a.createDate ,
+        a.hasLingQu ,
+        a.sn,
+		b.beginDate,
+		b.endDate FROM dbo.wx_dzpAwardUser AS a JOIN 
+dbo.wx_dzpActionInfo AS b ON a.actId=b.id");
+          //  strSql.Append(" FROM wx_dzpAwardUser ");
+            if (strWhere.Trim() != "")
+            {
+                strSql.Append(" where " + strWhere);
+            }
+            return DbHelperSQL.Query(strSql.ToString());
+        }
+    }
 }
 

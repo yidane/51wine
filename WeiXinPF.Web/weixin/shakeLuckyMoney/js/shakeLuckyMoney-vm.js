@@ -12,7 +12,24 @@ var LuckyMoneyViewModel = function ($domParam, param) {
     this.itemList = ko.observableArray();
     this.info = ko.observable();
     this.coupon = ko.observable();
-    this.user = ko.observable();    
+    this.user = ko.observable();
+    this._message = ko.observable('');
+    this.message = ko.pureComputed({
+        read: function () {
+
+            if (!self._message() && self.info()) {
+                self._message(self.info().cfcjhf);
+            }
+
+            return self._message();
+        },
+        write: function (value) {
+            
+                
+            self._message(value);
+        },
+        owner: this
+    });
     this.status = ko.observable("已参与");
     this._couponStatus=ko.observable("notimes");
     this.couponStatus = ko.pureComputed({
@@ -181,7 +198,7 @@ var LuckyMoneyViewModel = function ($domParam, param) {
     //------------shake
     this.initShake = function () {
         var yy = new mobilePhoneShake({
-            speed: 1000,//阀值，值越小，能检测到摇动的手机摆动幅度越小
+            speed: 2000,//阀值，值越小，能检测到摇动的手机摆动幅度越小
             callback: function (x, y, z) {//将设备放置在水平表面，屏幕向上，则其x,y,z信息如下：{x: 0,y: 0,z: 9.81};
                 self.afterShake();
                 self.shakeObj().stop();
@@ -230,6 +247,7 @@ var LuckyMoneyViewModel = function ($domParam, param) {
             .done(function (json) {
                 console.log(json);
                 if (json.IsSuccess) {
+                    document.title = json.Data.info.actName;
                     self.user(json.Data.user);
                     self.info(json.Data.info);
                     self.itemList(json.Data.itemlist);
@@ -298,6 +316,10 @@ var LuckyMoneyViewModel = function ($domParam, param) {
                          window.location.href=json.Message;
                          return;
                      }
+                        
+                        else if (json.MessageType == 'notimes') {
+                            self.message(json.Message);
+                     }
                         self.coupon(json.Data.coupon);
 
                         self.couponStatus(json.MessageType);
@@ -306,6 +328,7 @@ var LuckyMoneyViewModel = function ($domParam, param) {
 
                         }, 1000);
                     }
+                   
 
                     console.log(json.Message+','+json.MessageType);
                     // alert(json.Message);

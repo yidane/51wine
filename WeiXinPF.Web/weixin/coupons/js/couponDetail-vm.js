@@ -11,10 +11,10 @@ var DetailViewModel = function ($domParam, param) {
         },
         write: function (value) {
             switch (value) {
-                case 0:
+                case false:
                     self.status("unExpired");
                     break;
-                case 1:
+                case true:
                     self.status("used");
                     break;
             }
@@ -32,7 +32,7 @@ var DetailViewModel = function ($domParam, param) {
         return result;
     }, this);
     this.getCoupon = function () {
-        $.getJSON("../WebService/CouponWebService.asmx/GetCoupon",
+        $.getJSON("../../WebServices/CouponWebService.asmx/GetCoupon",
             {
                 openId: self.param().openId,
                 id: self.param().id
@@ -90,7 +90,7 @@ var DetailViewModel = function ($domParam, param) {
     };
 
     this.btnSureClick = function ($confirm, data, event) {
-        $.getJSON("../WebService/CouponWebService.asmx/UseCoupon",
+        $.getJSON("../WebServices/CouponWebService.asmx/UseCoupon",
            {
                openId: self.param().openId,
                id: self.param().id
@@ -109,7 +109,7 @@ var DetailViewModel = function ($domParam, param) {
     };
 
     this.btnGobackClick = function () {
-        window.location.href = 'MyCoupons.html';//?code='+self.param().access_code;
+        window.location.href = 'MyCoupons.html?wid=' + self.param().wid+'&code='+self.param().access_code;
         // window.location.href='https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxdd6127bdb5e7611c&redirect_uri=http%3A%2F%2Fwww.cloudorg.com.cn%2Ftravel%2FCoupons%2FMyCoupons.html&response_type=code&scope=snsapi_base&state=STATE%23wechat_redirect&connect_redirect=1#wechat_redirect';
         //window.history.back();
     };
