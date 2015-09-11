@@ -114,6 +114,17 @@ namespace WeiXinPF.WebService
                     thisOpenid = user.openid;
                 }
 
+                if (Session["openid"] == null)
+                {
+                    
+                    if (!string.IsNullOrEmpty(thisOpenid))
+                    {
+                        Session["openid"] = thisOpenid;
+                    }
+
+                }
+                
+
 
 
                 var service = new CouponService();
@@ -140,7 +151,8 @@ namespace WeiXinPF.WebService
                     dto = new CouponPrizeDTO()
                     {
                         jpname = jpname,
-                        jxname = jxname
+                        jxname = jxname,
+                        getTime=DateTime.Now.ToString("yy-MM-dd HH-mm-ss")
 
                     };
                 }
@@ -183,7 +195,7 @@ namespace WeiXinPF.WebService
                 {
                     BLL.wx_userweixin bll = new BLL.wx_userweixin();
                     Model.wx_userweixin wxModel = bll.GetModel(wid);
-                    openid = OAuth2BaseProc(wxModel, "coupon");
+                    openid = OAuth2BaseProc(wxModel, "coupon", code);
                     if (!string.IsNullOrEmpty(openid))
                     {
                         Session["openid"] = openid;

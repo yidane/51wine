@@ -73,17 +73,17 @@
                 <div class="banner-logo"
                      style="background-image:
      url(images/logo.png)"></div>
-                <h1 class="banner-title" data-bind="text:title"></h1>
+                <h1 class="banner-title" data-bind="text:jpname"></h1>
 
-                <p class="banner-detail">会议礼品券</p>
-                <span class="banner-time" data-bind="text:'有效期'+ beginTime+'到'+endTime"></span>
+                <p class="banner-detail" data-bind="text:jxname">会议礼品券</p>
+                <span class="banner-time" data-bind="text:'有效期'+ beginDate+'到'+endDate"></span>
                 <span class="banner-bottom"></span>
             </div>
             <div id="qrcode-container">
                 <div class="qrcode img" id="qrcode" style="margin:0 auto">
 
                 </div>
-                <span class="qrcode-num" data-bind="text:couponId"></span>
+                <span class="qrcode-num" data-bind="text:sn"></span>
 
                 <p class="qrcode-tips">使用时请出示二维码</p>
                 <span class="qrcode-stamp  stamp" style="display: none;"
@@ -131,13 +131,16 @@
     <script>
 
         var openId = "";
+        var access_code = $.url.param("code") ? $.url.param("code") : '';
         openId = $.url.param("openId");
         var id = $.url.param("id");
+        var wid = $.url.param("wid");
         var param = {
             // access_code: access_code,
             id: id,
             access_code: access_code,
-            openId: openId
+            openId: openId,
+            wid: wid
         };
         var $doms = {
             $qrcode: $("#qrcode1")

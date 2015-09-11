@@ -4,28 +4,29 @@ var MyCouponsViewModel= function ($domParam, param) {
     this.$DomParm = ko.observable($domParam);
     this.param = ko.observable(param);
     // this.user = ko.observable();
-    this.openId = ko.observable("");
-    this.info=ko.observable();
+    this.openId = ko.observable('obzTsw4p1nhpl97G1xJwKicDNsiQ');
+    //this.info=ko.observable();
     this.expiredCoupons=ko.observableArray();
     this.unExpiredCoupons=ko.observableArray();
     this.usedCoupons=ko.observableArray();
     this.selectedType=ko.observable("unExpired");
 
     this.getCoupons=function(){
-        $.getJSON("../../WebService/CouponWebService.asmx/GetCouponList"
+        $.getJSON("../../WebServices/CouponWebService.asmx/GetCouponList"
             , {
-                aid: self.param().aid,
+               
                 wid: self.param().wid,
-                code:self.param().access_code
+                code: self.param().access_code,
+                openid: self.openId()
             })
             .done(function (json) {
                 if (json.IsSuccess) {
 
-                    self.info(json.Data.lists.BaseInfo);
+                   // self.info(json.Data.lists.BaseInfo);
                     self.expiredCoupons(json.Data.lists.ExpiredCoupons);
                     self.unExpiredCoupons(json.Data.lists.UnExpiredCoupons);
                     self.usedCoupons(json.Data.lists.UsedCoupons);
-                    self.openId(json.Data.user.openid);
+                    self.openId(json.Data.openid);
                 }
                 else {
                     if (json.MessageType != 'system') {

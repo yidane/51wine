@@ -16,6 +16,10 @@ namespace WeiXinPF.Application.DomainModules.Coupon.DTOS
         public string jxname { get; set; }
         public string jpname { get; set; }
         public string getTime { get; set; }
-        public int status { get; set; }
+        public bool status { get; set; }
+
+        public string beginDate { get; set; }
+        public string endDate { get; set; }
+
     }
 }

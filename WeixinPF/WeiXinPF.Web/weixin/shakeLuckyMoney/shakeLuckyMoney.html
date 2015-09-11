@@ -1,8 +1,8 @@
 ﻿<!doctype html>
-<html id="html_lucky">
-<head data-bind="with:info">
+<html >
+<head >
     <meta charset="utf-8">
-    <title data-bind="text:actName">摇一摇</title>
+    <title >摇一摇</title>
     <meta name="viewport"
           content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
     <meta name="format-detection" content="telephone=no, email=no" />
@@ -183,7 +183,7 @@
                     </div>
                 </div>
             </div>
-            <div class="botton main-center top-zIndex" id="botton" data-bind="click:$root.afterShake">马上领取</div>
+            <!--<div class="botton main-center top-zIndex" id="botton" data-bind="click:$root.afterShake">马上领取</div>-->
             <AUDIO id="musicBox" src="audios/shake.wav" preload="metadata"></AUDIO>
             <AUDIO id="endMp3" src="audios/end.mp3" preload="metadata"></AUDIO>
         </div>
@@ -222,7 +222,7 @@
                                         <small class="text-time" data-bind="  text:coupon()? coupon().getTime:''"></small>
                                     </h5>
                                     <span style="display:none" data-bind="visible:couponStatus()=='success'">恭喜您获得 <!-- ko text:coupon()?coupon().jpname:'' --><!--/ko-->。</span>
-                                    <span data-bind="visible:couponStatus()!='success',text:$root.info()?$root.info().cfcjhf:''">
+                                    <span data-bind="visible:couponStatus()!='success',text:$root.message()">
                                         感谢您参与本次活动。
                                     </span>
                                 </div>
@@ -301,7 +301,7 @@
                 };
                 var luckyMoneyVM = new LuckyMoneyViewModel($domParm, param);
 
-                ko.applyBindings(luckyMoneyVM, document.getElementById("html_lucky"));
+                ko.applyBindings(luckyMoneyVM);
 
 
 

@@ -26,6 +26,11 @@ namespace WeiXinPF.Infrastructure.DomainDataAccess.User
         #endregion
 
 
+    
+    }
+
+    public partial class UserInfoEntity
+    {
         #region Method
         /// <summary>
         /// 添加用户
@@ -82,7 +87,8 @@ namespace WeiXinPF.Infrastructure.DomainDataAccess.User
             {
                 AddUser();
             }
-        } 
+        }
         #endregion
     }
+
 }

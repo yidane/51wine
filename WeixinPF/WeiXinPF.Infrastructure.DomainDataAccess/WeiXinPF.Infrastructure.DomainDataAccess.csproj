@@ -58,6 +58,9 @@
       <DependentUpon>201509091103444_DBUpdate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Photo\photoActionInfo.cs" />
+    <Compile Include="Photo\photoScenesInfo.cs" />
+    <Compile Include="Photo\photoUserParticipated.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="User\UserInfo.cs" />
     <Compile Include="WXDBContext.cs" />

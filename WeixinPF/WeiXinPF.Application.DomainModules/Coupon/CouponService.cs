@@ -107,24 +107,23 @@ namespace WeiXinPF.Application.DomainModules.Coupon
             CouponListDTO result = new CouponListDTO();
             if (openid != null)
             {
-                string str = string.Format(" openid='{0}' ", openid);
-                       
-                var list = GetList(str);
+                string str = string.Empty;
 
                 //no use
-                 str = string.Format(" openid='{0}'  and hasLingQu=0", openid);
-              
-                   result.UnExpiredCoupons = GetList(str);
+                 str = string.Format(
+                     " openid='{0}'  and hasLingQu=0  and actId IN (SELECT id FROM wx_dzpActionInfo WHERE wid={1}) and a.createDate BETWEEN b.beginDate AND b.endDate ", openid, wid);
+
+                result.UnExpiredCoupons = GetList(str);
 
                     //expired
-                    str = string.Format(" openid='{0}'  and hasLingQu=0", openid);
-              
-                    result.ExpiredCoupons = GetList(str);
+                    str = string.Format(" openid='{0}'  and hasLingQu=0  and actId IN (SELECT id FROM wx_dzpActionInfo WHERE wid={1})  and a.createDate > b.endDate", openid, wid);
+
+                result.ExpiredCoupons = GetList(str);
 
                     //used
-                    str = string.Format(" openid='{0}'  and hasLingQu=1", openid);
-               
-                    result.UsedCoupons = GetList(str);
+                    str = string.Format(" openid='{0}'  and hasLingQu=1  and actId IN (SELECT id FROM wx_dzpActionInfo WHERE wid={1}) ", openid, wid);
+
+                result.UsedCoupons = GetList(str);
                  
             }
             return result;
@@ -136,19 +135,11 @@ namespace WeiXinPF.Application.DomainModules.Coupon
         /// <returns></returns>
         private List<CouponPrizeDTO> GetList(string strWhere)
         {
-            List<CouponPrizeDTO> result = null;
-            var dataSet = _ubll.GetList(strWhere);
-            var list = _ubll.DataTableToList(dataSet.Tables[0]);
+            List<CouponPrizeDTO> result = null; 
+            var ds = _ubll.GetListWithAction(strWhere);
+            var list = TransformToPrizeList(ds);
 
-            result = list.Select(dajiang =>
-            new CouponPrizeDTO()
-            {
-                id=dajiang.id,
-                jxname = dajiang.jxName,
-                jpname = dajiang.jpName,
-                //uid = dajiang.id,
-                sn = dajiang.sn
-            }).ToList();
+            result = list;
 
             return result;
         }
@@ -161,21 +152,60 @@ namespace WeiXinPF.Application.DomainModules.Coupon
             {
                 if (model.openid==openId)
                 {
+                    var data = new CouponPrizeDTO()
+                    {
+                        id = id,
+                        status = model.hasLingQu,
+                        jpname = model.jpName,
+                        jxname = model.jxName,
+                        sn = model.sn
+                    };
                     
-                    result = new CouponPrizeDTO() {
-                     id=id,
-                     status= model.hasLingQu?1:0,
-                      jpname =model.jpName,
-                      jxname=model.jxName,
-                       sn=model.sn
-                };
+                    if (model.actId != null)
+                    {
+                        var aModel = _actBll.GetModel(model.actId.Value);
+                        if (aModel.beginDate != null) data.beginDate = aModel.beginDate.Value.ToString("yyyy-MM-dd");
+                        if (aModel.endDate != null) data.endDate = aModel.endDate.Value.ToString("yyyy-MM-dd");
+                    }
+
+                    result = data;
                 }
-                
             }
 
             return result;
         }
 
+        private List<CouponPrizeDTO> TransformToPrizeList(DataSet ds)
+        {
+            List<CouponPrizeDTO> result = null;
+            var dt = ds.Tables[0];
+            if (dt!=null)
+            {
+                //         public int id { get; set; }
+                //public string sn { get; set; }
+                //public int sortid { get; set; }
+                //public string jxname { get; set; }
+                //public string jpname { get; set; }
+                //public string getTime { get; set; }
+                //public int status { get; set; }
+
+                //public string beginDate { get; set; }
+                //public string endDate { get; set; }
+                result = dt.AsEnumerable().Select(p => new CouponPrizeDTO()
+                {
+                    id = p.Field<int>("id"),
+                    sn = p.Field<string>("sn"),
+                   // sortid = p.Field<int>("sortid"),
+                    jxname = p.Field<string>("jxname"),
+                    jpname = p.Field<string>("jpname"),
+                    getTime = p.Field<DateTime>("createDate").ToString("yyyy-MM-dd HH:mm:ss"),
+                    status = p.Field<bool>("hasLingQu"),
+                    beginDate = p.Field<DateTime>("beginDate").ToString("yyyy-MM-dd"),
+                    endDate = p.Field<DateTime>("endDate").ToString("yyyy-MM-dd"),
+                }).ToList();
+            }
+            return result;
+        }
 
 
         private CouponBaseInfoDTO TransformToBaseInfo(wx_dzpActionInfo dzpAction)

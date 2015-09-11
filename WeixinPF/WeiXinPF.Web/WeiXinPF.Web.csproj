@@ -7732,6 +7732,11 @@
     <Content Include="weixin\cashred\js\wScratchPad.js" />
     <Content Include="weixin\cashred\js\zepto.js" />
     <Content Include="weixin\coupons\couponDetail.html" />
+    <Content Include="weixin\coupons\images\coupons_bg-fail.png" />
+    <Content Include="weixin\coupons\images\coupons_bg.png" />
+    <Content Include="weixin\coupons\images\img_coupondetail_bannerbottom_640x4.png" />
+    <Content Include="weixin\coupons\images\img_coupondetail_overdue_207x160.png" />
+    <Content Include="weixin\coupons\images\img_coupondetail_used_207x160.png" />
     <Content Include="weixin\coupons\images\logo.png" />
     <Content Include="weixin\coupons\images\ticket.png" />
     <Content Include="weixin\coupons\js\couponDetail-vm.js" />
@@ -7925,6 +7930,15 @@
     <Content Include="weixin\pano360\pano.aspx" />
     <Content Include="weixin\pano360\pano.xml" />
     <Content Include="weixin\pano360\xmlstr.aspx" />
+    <Content Include="weixin\photo\images\message.png" />
+    <Content Include="weixin\photo\images\monster.png" />
+    <Content Include="weixin\photo\images\shenxianwan.jpg" />
+    <Content Include="weixin\photo\images\wolongwan.jpg" />
+    <Content Include="weixin\photo\images\yueliangwan.jpg" />
+    <Content Include="weixin\photo\MakePhoto.html" />
+    <Content Include="weixin\photo\Scripts\photo.js" />
+    <Content Include="weixin\photo\Scripts\WeiXinSdk.js" />
+    <Content Include="weixin\photo\ShowPhoto.html" />
     <Content Include="weixin\product\all.aspx" />
     <Content Include="weixin\product\css\alltype.css" />
     <Content Include="weixin\product\css\alltypelist.css" />

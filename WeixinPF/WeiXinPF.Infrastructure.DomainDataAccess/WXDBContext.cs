@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Text;
+using WeiXinPF.Infrastructure.DomainDataAccess.Photo;
 using WeiXinPF.Infrastructure.DomainDataAccess.User;
 
 namespace WeiXinPF.Infrastructure.DomainDataAccess
@@ -33,6 +34,10 @@ namespace WeiXinPF.Infrastructure.DomainDataAccess
        
         public virtual DbSet<UserInfoEntity> UserInfo { get; set; }
 
-       
+        public virtual DbSet<photoActionInfo> photoActionInfo { get; set; }
+        public virtual DbSet<photoScenesInfo> photoScenesInfo { get; set; }
+        public virtual DbSet<photoUserParticipated> photoUserParticipated { get; set; }
+ 
+
     }
 }
