@@ -107,22 +107,23 @@ namespace WeiXinPF.Application.DomainModules.Coupon
             CouponListDTO result = new CouponListDTO();
             if (openid != null)
             {
-                string str =
-                       $" openid='{openid}' ";
+                string str = string.Format(" openid='{0}' ", openid);
+                       
                 var list = GetList(str);
 
                 //no use
-                 str =
-                        $" openid='{openid}'  and hasLingQu=0";
+                 str = string.Format(" openid='{0}'  and hasLingQu=0", openid);
+              
                    result.UnExpiredCoupons = GetList(str);
 
                     //expired
-                    str =
-                        $" openid='{openid}'  and hasLingQu=0";
+                    str = string.Format(" openid='{0}'  and hasLingQu=0", openid);
+              
                     result.ExpiredCoupons = GetList(str);
 
                     //used
-                    str = $"  openid='{openid}'  and hasLingQu=1";
+                    str = string.Format(" openid='{0}'  and hasLingQu=1", openid);
+               
                     result.UsedCoupons = GetList(str);
                  
             }
