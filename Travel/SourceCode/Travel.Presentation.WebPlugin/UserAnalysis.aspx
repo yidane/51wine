@@ -8,7 +8,7 @@
     <title></title>
     <link href="styles/useranalysis.css" rel="stylesheet" />
     <link href="styles/baseuser.css" rel="stylesheet" />
-
+    <link href="styles/date_range218878.css" rel="stylesheet" />
     <script type="text/javascript">
         window.wxError = function () {
             function e(e, i) {
@@ -272,8 +272,8 @@
     <div>
         <div class="main_hd">
     <h2>统计</h2>
-    <div class="title_tab" id="js_topTab">
-    </div>
+    <%--<div class="title_tab" id="js_topTab">
+    </div>--%>
 </div>
     <div class="main_bd user_analysis">
 	<div class="wrp_overview">
@@ -389,11 +389,11 @@
 					<div class="button_group">
                         
 					    <a class="btn btn_default selected" href="javascript:;" data-tab="1" data-source="99999999">全部</a>
-					    <a class="btn btn_default" href="javascript:;" data-tab="3" data-source="35">搜索公众号名称</a>
+					    <%--<a class="btn btn_default" href="javascript:;" data-tab="3" data-source="35">搜索公众号名称</a>
 					    <a class="btn btn_default" href="javascript:;" data-tab="4" data-source="3">搜索微信号</a>
 					    <a class="btn btn_default" href="javascript:;" data-tab="6" data-source="43">图文页右上角菜单</a>
 					    <a class="btn btn_default" href="javascript:;" data-tab="2" data-source="17">名片分享</a>
-					    <a class="btn btn_default" href="javascript:;" data-tab="7" data-source="0">其他</a>
+					    <a class="btn btn_default" href="javascript:;" data-tab="7" data-source="0">其他</a>--%>
                         
 					</div>
 				</div>
@@ -425,7 +425,8 @@
                     <div class="sub_content">
                         <div class="sub_content" id="js_msg_chart">  </div>
                     </div>
-                   <h4 class="sub_title">详细数据	                   	<div class="tr_ext_info"><a target="_blank" href="#" id="js_download_detail">导出Excel</a> </div>
+
+                   <%--<h4 class="sub_title">详细数据	                   	<div class="tr_ext_info"><a target="_blank" href="#" id="js_download_detail">导出Excel</a> </div>
                		</h4>
                     <div class="page_msg mini top">
                         <div class="inner group">
@@ -499,7 +500,9 @@
 	                     </div>
 	                     
                          <div class="turn_page tr" id="js_pagebar"></div>
-                   </div>
+                   </div>--%>
+
+
                 </div>
 
 	    </div>
@@ -586,7 +589,7 @@
 <script type="text/javascript">
     function getico(n) {
         var o = new Image(1, 1);
-        o.src = wx.url && wx.url(location.protocol + "//" + location.host + "/misc/getico?location=" + (n || -1) + "&rand=" + Math.random());
+        o.src = wx.url && wx.url(location.protocol + "//" + location.host + "/getico?location=" + (n || -1) + "&rand=" + Math.random());
     }
     getico("2215"), jQuery(function () {
         window._points && (window._points[4] = +new Date);
