@@ -76,6 +76,9 @@
     <Content Include="OrderStatistics.aspx" />
     <Content Include="pics\arrow-spr265437.png" />
     <Content Include="pics\base_z284ee4.png" />
+    <Content Include="pics\calendar_all218877.png" />
+    <Content Include="pics\icon32_loading_dark218877.gif" />
+    <Content Include="pics\wx.ico" />
     <Content Include="styles\baseuser.css" />
     <Content Include="ProductEdit.aspx" />
     <Content Include="ProductList.aspx" />
@@ -135,6 +138,7 @@
   <ItemGroup>
     <Content Include="javascripts\jquery\jQuery-1.10.2.min.js" />
     <Content Include="ListContent.Master" />
+    <None Include="Properties\PublishProfiles\Yidane.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
