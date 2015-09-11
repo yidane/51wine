@@ -20,7 +20,7 @@
                 return /MicroMessenger/i.test(e) ? "wechat" : /firefox/i.test(e) ? "firefox" : /chrome/i.test(e) ? "chrome" : /opera/i.test(e) ? "opera" : /safari/i.test(e) ? "safari" : /msie 6/i.test(e) ? "IE6" : /msie 7/i.test(e) ? "IE7" : /msie 8/i.test(e) ? "IE8" : /msie 9/i.test(e) ? "IE9" : /msie 10/i.test(e) ? "IE10" : "other";
             }
             function n() {
-                r.path = /(?:mp\.)?weixin\.qq\.com(?::8080)?\/(.*\?)/.exec(location.href)[1], /action=.*/.exec(location.href) && (action = /action=.*/.exec(location.href)[0].split("&")[0],
+                r.path = /(?:mp\.)?weixin\.qq\.com(?::8080)?\/(.*\?)/.exec(location.href), /action=.*/.exec(location.href) && (action = /action=.*/.exec(location.href)[0].split("&")[0],
                 r.path += action);
                 for (var e in r.PATH_REG_MAP) if (r.PATH_REG_MAP[e] instanceof RegExp && r.PATH_REG_MAP[e].exec(r.path)) {
                     path = e;
@@ -261,6 +261,13 @@
                                                                                     cumulate_user: 36,
                                                                                     netgain_user: 0,
                                                                                     new_user: 0
+                                                                                }
+                                                                                , {
+                                                                                    date: "2015-09-10",
+                                                                                    cancel_user: 0,
+                                                                                    cumulate_user: 39,
+                                                                                    netgain_user: 3,
+                                                                                    new_user: 3
                                                                                 }
                                                         ]
                                                     }
@@ -589,7 +596,7 @@
 <script type="text/javascript">
     function getico(n) {
         var o = new Image(1, 1);
-        o.src = wx.url && wx.url(location.protocol + "//" + location.host + "/getico?location=" + (n || -1) + "&rand=" + Math.random());
+        o.src = wx.url && wx.url(location.protocol + "//" + location.host + "misc/getico?location=" + (n || -1) + "&rand=" + Math.random());
     }
     getico("2215"), jQuery(function () {
         window._points && (window._points[4] = +new Date);
