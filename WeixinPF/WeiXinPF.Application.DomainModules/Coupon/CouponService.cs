@@ -152,18 +152,24 @@ namespace WeiXinPF.Application.DomainModules.Coupon
             return result;
         }
 
-        public CouponPrizeDTO GetCouponDetail(int id) {
+        public CouponPrizeDTO GetCouponDetail(string openId,int id) {
             CouponPrizeDTO result = null;
 
             var model = _ubll.GetModel(id);
             if (model!=null)
             {
-                result = new CouponPrizeDTO() {
+                if (model.openid==openId)
+                {
+                    
+                    result = new CouponPrizeDTO() {
                      id=id,
-                      jpname=model.jpName,
+                     status= model.hasLingQu?1:0,
+                      jpname =model.jpName,
                       jxname=model.jxName,
                        sn=model.sn
                 };
+                }
+                
             }
 
             return result;
