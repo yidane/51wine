@@ -31,13 +31,22 @@ namespace Travel.Presentation.WebPlugin {
         protected global::System.Web.UI.WebControls.TextBox txtendDate;
         
         /// <summary>
-        /// ddlCategoryId 控件。
+        /// ddlCategoryStatus 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlCategoryId;
+        protected global::System.Web.UI.WebControls.DropDownList ddlCategoryStatus;
+        
+        /// <summary>
+        /// ddlTicketCategory 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlTicketCategory;
         
         /// <summary>
         /// txtMinAmount 控件。
@@ -92,14 +101,5 @@ namespace Travel.Presentation.WebPlugin {
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl PageContent;
-        
-        /// <summary>
-        /// aLookIndex 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink aLookIndex;
     }
 }

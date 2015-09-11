@@ -72,6 +72,8 @@
     <Content Include="OrderStatistics.aspx" />
     <Content Include="pics\base_z284ee4.png" />
     <Content Include="styles\baseuser.css" />
+    <Content Include="ProductEdit.aspx" />
+    <Content Include="ProductList.aspx" />
     <Content Include="styles\global_min.css" />
     <Content Include="styles\pagination.css" />
     <Content Include="styles\skin_icons.png" />
@@ -97,6 +99,22 @@
     </Compile>
     <Compile Include="Order\OrderEntity.cs" />
     <Compile Include="Order\OrderStatisticsManager.cs" />
+    <Compile Include="ProductEdit.aspx.cs">
+      <DependentUpon>ProductEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ProductEdit.aspx.designer.cs">
+      <DependentUpon>ProductEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ProductList.aspx.cs">
+      <DependentUpon>ProductList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ProductList.aspx.designer.cs">
+      <DependentUpon>ProductList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Product\ProductEntity.cs" />
+    <Compile Include="Product\ProductEntityManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserAnalysis.aspx.cs">
       <DependentUpon>UserAnalysis.aspx</DependentUpon>

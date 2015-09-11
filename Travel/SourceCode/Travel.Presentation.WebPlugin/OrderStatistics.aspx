@@ -44,19 +44,22 @@
                     <div class="form-group more hide">
                         <div class="form-item">
                             <label class="label" for="">交易状态：</label>
-                            <asp:DropDownList ID="ddlCategoryId" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlCategoryId_SelectedIndexChanged"></asp:DropDownList>
+                            <asp:DropDownList ID="ddlCategoryStatus" runat="server"></asp:DropDownList>
+                        </div>
+                    </div>
+                    <div class="form-group more hide">
+                        <div class="form-item">
+                            <label class="label" for="">票种类：</label>
+                            <asp:DropDownList ID="ddlTicketCategory" runat="server"></asp:DropDownList>
                         </div>
                     </div>
 
                     <div class="form-group more hide">
                         <div class="form-item">
                             <label class="label" for="">交易金额：</label>
-                            <span class="ipt-box mini-ipt-box" />
-                            <asp:TextBox runat="server" ID="txtMinAmount" CssClass="ipt"></asp:TextBox>
+                            <asp:TextBox runat="server" ID="txtMinAmount"></asp:TextBox>
                             <span class="gaps">到</span>
-                            <span class="ipt-box mini-ipt-box"/>
-                                <asp:TextBox runat="server" ID="txtMaxAmount"></asp:TextBox>
-                                <span class="tips-error hide" id="ErrTipAmount"></span>
+                            <asp:TextBox runat="server" ID="txtMaxAmount"></asp:TextBox>
                         </div>
                     </div>
 
@@ -64,11 +67,6 @@
                         <div class="form-item">
                             <a class="btn btn-primary" id="batchQueryButton" runat="server" onserverclick="btnSearch_Click">查询</a>
                             <a href="#" id="moreSearch" onclick="AdvanceSearch()">显示高级选项</a>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="form-item">
-                            <span class="tips-error hide" id="search_error"></span>
                         </div>
                     </div>
                 </div>
@@ -84,35 +82,35 @@
         <HeaderTemplate>
             <table width="100%" border="0" cellspacing="0" cellpadding="0" class="ltable">
                 <tr>
-                    <th width="6%">选择</th>
-                    <th align="left">标题</th>
-                    <th align="left" width="10%">所属类别</th>
-                    <th align="left" width="30%">访问地址</th>
-                    <th align="left" width="12%">发布时间</th>
-                    <th align="left" width="65">排序</th>
-                    <th align="left" width="110" style="display: none;">属性</th>
-                    <th width="8%">操作</th>
+                    <th width="180">订单号</th>
+                    <th align="left" width="22%">交易时间</th>
+                    <th align="left" width="12%">联系人</th>
+                    <th align="left" width="20%">联系电话</th>
+                    <th align="left" width="22%">联系人身份证</th>
+                    <th align="left" width="14%">订单状态</th>
+                    <th align="center" width="8%">票名称</th>
+                    <th align="center" width="8%">票数量</th>
+                    <th width="8%">票单价</th>
+                    <th width="8%">票总价</th>
                 </tr>
         </HeaderTemplate>
         <ItemTemplate>
             <tr>
-                <td align="center">
-                    <asp:CheckBox ID="chkId" CssClass="checkall" runat="server" Style="vertical-align: middle;" /><asp:HiddenField ID="hidId" Value='<%#Eval("id")%>' runat="server" />
-                </td>
-                <td><%#Eval("title")%></td>
-                <td><%#Convert.ToInt32(Eval("category_id"))%></td>
-                <td>
-                    <%# Eval("link_url") %>
-                </td>
-                <td><%#string.Format("{0:g}",Eval("add_time"))%></td>
-                <td>
-                    <asp:TextBox ID="txtSortId" runat="server" Text='<%#Eval("sort_id")%>' CssClass="sort" onkeydown="return checkNumber(event);" /></td>
-                <td></td>
+                <td><%#Eval("TradeNo") %></td>
+                <td><%#Eval("TradeTime") %></td>
+                <td><%#Eval("ContactPersonName")%></td>
+                <td><%#Eval("MobilePhoneNumber")%></td>
+                <td><%#Eval("IdentityCardNumber") %></td>
+                <td><%#Eval("OrderStatus")%></td>
+                <td><%#Eval("TicketCategoryName")%></td>
+                <td><%#Eval("TicketCount")%></td>
+                <td><%#Eval("TicketPrice")%></td>
+                <td><%#Eval("TotalPrice")%></td>
             </tr>
         </ItemTemplate>
         <FooterTemplate>
             <%#rptList.Items.Count == 0 ? "<tr><td align=\"center\" colspan=\"8\">暂无记录</td></tr>" : ""%>
-</table>
+            </table>
         </FooterTemplate>
     </asp:Repeater>
     <!--/文字列表-->
@@ -125,15 +123,6 @@
         <div id="PageContent" runat="server" class="default"></div>
     </div>
     <!--/内容底部-->
-
-    <!--工具栏-->
-    <div class="page-footer">
-        <div class="btn-list">
-            <asp:HyperLink ID="aLookIndex" runat="server" CssClass="btn yellow fontwhite">查看效果</asp:HyperLink>
-        </div>
-        <div class="clear"></div>
-    </div>
-    <!--/工具栏-->
 
     <script language="javascript">
         function AdvanceSearch() {

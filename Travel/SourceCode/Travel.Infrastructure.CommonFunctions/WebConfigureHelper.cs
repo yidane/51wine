@@ -17,7 +17,7 @@ namespace Travel.Infrastructure.CommonFunctions
                 get
                 {
                     if (string.IsNullOrEmpty(m_DbConnection))
-                        m_DbConnection = System.Configuration.ConfigurationManager.AppSettings["DBConnection"];
+                        m_DbConnection = System.Configuration.ConfigurationManager.ConnectionStrings["DBConnection"].ConnectionString;
 
                     return m_DbConnection;
                 }
