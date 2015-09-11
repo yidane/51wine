@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeiXinPF.Web", "WeiXinPF.Web\WeiXinPF.Web.csproj", "{6DB1BDD3-4EE3-4259-B459-62F54591995E}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -81,7 +81,63 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeiXinPF.Application.Domain
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeiXinPF.Infrastructure.DomainDataAccess", "WeiXinPF.Infrastructure.DomainDataAccess\WeiXinPF.Infrastructure.DomainDataAccess.csproj", "{64C35E8A-F1C0-44DB-ACA6-3CC44EE9716B}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{74096C78-5C6D-494D-B002-4235E814F2D8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeiXinPF.BLL.UnitTest", "WeiXinPF.BLL.UnitTest\WeiXinPF.BLL.UnitTest.csproj", "{F0F46890-03B4-4274-903E-CDC67EF26FF4}"
+EndProject
 Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 16
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs20
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = WeiXinPF.Web\\WeiXinPF.Web.csproj
+		SccProjectName1 = WeiXinPF.Web
+		SccLocalPath1 = WeiXinPF.Web
+		SccProjectUniqueName2 = WeiXinPF.API\\WeiXinPF.API.csproj
+		SccProjectName2 = WeiXinPF.API
+		SccLocalPath2 = WeiXinPF.API
+		SccProjectUniqueName3 = WeiXinPF.WeiXinComm\\WeiXinPF.WeiXinComm.csproj
+		SccProjectName3 = WeiXinPF.WeiXinComm
+		SccLocalPath3 = WeiXinPF.WeiXinComm
+		SccProjectUniqueName4 = WeiXinPF.Templates\\WeiXinPF.Templates.csproj
+		SccProjectName4 = WeiXinPF.Templates
+		SccLocalPath4 = WeiXinPF.Templates
+		SccProjectUniqueName5 = VTemplate.Engine\\VTemplate.Engine.csproj
+		SccProjectName5 = VTemplate.Engine
+		SccLocalPath5 = VTemplate.Engine
+		SccProjectUniqueName6 = WeiXinPF.BLL\\WeiXinPF.BLL.csproj
+		SccProjectName6 = WeiXinPF.BLL
+		SccLocalPath6 = WeiXinPF.BLL
+		SccProjectUniqueName7 = WeiXinPF.Common\\WeiXinPF.Common.csproj
+		SccProjectName7 = WeiXinPF.Common
+		SccLocalPath7 = WeiXinPF.Common
+		SccProjectUniqueName8 = WeiXinPF.DAL\\WeiXinPF.DAL.csproj
+		SccProjectName8 = WeiXinPF.DAL
+		SccLocalPath8 = WeiXinPF.DAL
+		SccProjectUniqueName9 = WeiXinPF.Web.UI\\WeiXinPF.Web.UI.csproj
+		SccProjectName9 = WeiXinPF.Web.UI
+		SccLocalPath9 = WeiXinPF.Web.UI
+		SccProjectUniqueName10 = WeiXinPF.Model\\WeiXinPF.Model.csproj
+		SccProjectName10 = WeiXinPF.Model
+		SccLocalPath10 = WeiXinPF.Model
+		SccProjectUniqueName11 = WeiXinPF.DBUtility\\WeiXinPF.DBUtility.csproj
+		SccProjectName11 = WeiXinPF.DBUtility
+		SccLocalPath11 = WeiXinPF.DBUtility
+		SccProjectUniqueName12 = WeiXinPF.WebService\\WeiXinPF.WebService.csproj
+		SccProjectName12 = WeiXinPF.WebService
+		SccLocalPath12 = WeiXinPF.WebService
+		SccProjectUniqueName13 = WeiXinPF.Application.DomainModules\\WeiXinPF.Application.DomainModules.csproj
+		SccProjectName13 = WeiXinPF.Application.DomainModules
+		SccLocalPath13 = WeiXinPF.Application.DomainModules
+		SccProjectUniqueName14 = WeiXinPF.Infrastructure.DomainDataAccess\\WeiXinPF.Infrastructure.DomainDataAccess.csproj
+		SccProjectName14 = WeiXinPF.Infrastructure.DomainDataAccess
+		SccLocalPath14 = WeiXinPF.Infrastructure.DomainDataAccess
+		SccProjectUniqueName15 = WeiXinPF.BLL.UnitTest\\WeiXinPF.BLL.UnitTest.csproj
+		SccProjectTopLevelParentUniqueName15 = WeiXinPF.sln
+		SccProjectName15 = WeiXinPF.BLL.UnitTest
+		SccLocalPath15 = WeiXinPF.BLL.UnitTest
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|Mixed Platforms = Debug|Mixed Platforms
@@ -237,57 +293,22 @@ Global
 		{64C35E8A-F1C0-44DB-ACA6-3CC44EE9716B}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{64C35E8A-F1C0-44DB-ACA6-3CC44EE9716B}.Release|x86.ActiveCfg = Release|Any CPU
 		{64C35E8A-F1C0-44DB-ACA6-3CC44EE9716B}.Release|x86.Build.0 = Release|Any CPU
+		{F0F46890-03B4-4274-903E-CDC67EF26FF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F0F46890-03B4-4274-903E-CDC67EF26FF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F0F46890-03B4-4274-903E-CDC67EF26FF4}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{F0F46890-03B4-4274-903E-CDC67EF26FF4}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{F0F46890-03B4-4274-903E-CDC67EF26FF4}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F0F46890-03B4-4274-903E-CDC67EF26FF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F0F46890-03B4-4274-903E-CDC67EF26FF4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F0F46890-03B4-4274-903E-CDC67EF26FF4}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{F0F46890-03B4-4274-903E-CDC67EF26FF4}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{F0F46890-03B4-4274-903E-CDC67EF26FF4}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 15
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs20
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = WeiXinPF.Web\\WeiXinPF.Web.csproj
-		SccProjectName1 = WeiXinPF.Web
-		SccLocalPath1 = WeiXinPF.Web
-		SccProjectUniqueName2 = WeiXinPF.API\\WeiXinPF.API.csproj
-		SccProjectName2 = WeiXinPF.API
-		SccLocalPath2 = WeiXinPF.API
-		SccProjectUniqueName3 = WeiXinPF.WeiXinComm\\WeiXinPF.WeiXinComm.csproj
-		SccProjectName3 = WeiXinPF.WeiXinComm
-		SccLocalPath3 = WeiXinPF.WeiXinComm
-		SccProjectUniqueName4 = WeiXinPF.Templates\\WeiXinPF.Templates.csproj
-		SccProjectName4 = WeiXinPF.Templates
-		SccLocalPath4 = WeiXinPF.Templates
-		SccProjectUniqueName5 = VTemplate.Engine\\VTemplate.Engine.csproj
-		SccProjectName5 = VTemplate.Engine
-		SccLocalPath5 = VTemplate.Engine
-		SccProjectUniqueName6 = WeiXinPF.BLL\\WeiXinPF.BLL.csproj
-		SccProjectName6 = WeiXinPF.BLL
-		SccLocalPath6 = WeiXinPF.BLL
-		SccProjectUniqueName7 = WeiXinPF.Common\\WeiXinPF.Common.csproj
-		SccProjectName7 = WeiXinPF.Common
-		SccLocalPath7 = WeiXinPF.Common
-		SccProjectUniqueName8 = WeiXinPF.DAL\\WeiXinPF.DAL.csproj
-		SccProjectName8 = WeiXinPF.DAL
-		SccLocalPath8 = WeiXinPF.DAL
-		SccProjectUniqueName9 = WeiXinPF.Web.UI\\WeiXinPF.Web.UI.csproj
-		SccProjectName9 = WeiXinPF.Web.UI
-		SccLocalPath9 = WeiXinPF.Web.UI
-		SccProjectUniqueName10 = WeiXinPF.Model\\WeiXinPF.Model.csproj
-		SccProjectName10 = WeiXinPF.Model
-		SccLocalPath10 = WeiXinPF.Model
-		SccProjectUniqueName11 = WeiXinPF.DBUtility\\WeiXinPF.DBUtility.csproj
-		SccProjectName11 = WeiXinPF.DBUtility
-		SccLocalPath11 = WeiXinPF.DBUtility
-		SccProjectUniqueName12 = WeiXinPF.WebService\\WeiXinPF.WebService.csproj
-		SccProjectName12 = WeiXinPF.WebService
-		SccLocalPath12 = WeiXinPF.WebService
-		SccProjectUniqueName13 = WeiXinPF.Application.DomainModules\\WeiXinPF.Application.DomainModules.csproj
-		SccProjectName13 = WeiXinPF.Application.DomainModules
-		SccLocalPath13 = WeiXinPF.Application.DomainModules
-		SccProjectUniqueName14 = WeiXinPF.Infrastructure.DomainDataAccess\\WeiXinPF.Infrastructure.DomainDataAccess.csproj
-		SccProjectName14 = WeiXinPF.Infrastructure.DomainDataAccess
-		SccLocalPath14 = WeiXinPF.Infrastructure.DomainDataAccess
+	GlobalSection(NestedProjects) = preSolution
+		{F0F46890-03B4-4274-903E-CDC67EF26FF4} = {74096C78-5C6D-494D-B002-4235E814F2D8}
 	EndGlobalSection
 	GlobalSection(SubversionScc) = preSolution
 		Svn-Managed = True

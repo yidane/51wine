@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommandInfo.cs" />
+    <Compile Include="DbFactory.cs" />
     <Compile Include="DbHelperSQL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

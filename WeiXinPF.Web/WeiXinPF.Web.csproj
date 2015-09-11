@@ -100,6 +100,8 @@
     <Content Include="admin\choujiang\shakeLuckyMoney\luckyMoneyAwardUser.aspx" />
     <Content Include="admin\choujiang\shakeLuckyMoney\luckyMoneyEdit.aspx" />
     <Content Include="admin\choujiang\shakeLuckyMoney\luckyMoneylist.aspx" />
+    <Content Include="admin\scenic\scenic_list.aspx" />
+    <Content Include="admin\scenic\scenic_edit.aspx" />
     <Content Include="admin\weixin\baseSetting.aspx" />
     <Content Include="admin\zhanhui\110.png" />
     <Content Include="admin\agent\agent_edit.aspx" />
@@ -3233,6 +3235,7 @@
     <Content Include="scripts\pre-loader.js" />
     <Content Include="scripts\swfupload\swfupload.handlers.js" />
     <Content Include="scripts\swfupload\swfupload.js" />
+    <Content Include="scripts\swfupload\swfupload.queue.js" />
     <Content Include="scripts\swfupload\swfupload.swf" />
     <Content Include="scripts\weixin\wxcomm.js" />
     <Content Include="shopmgr\catalog\attribute_edit.aspx" />
@@ -5113,6 +5116,20 @@
     </Compile>
     <Compile Include="admin\qiangpiao\qpuser_list.aspx.designer.cs">
       <DependentUpon>qpuser_list.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\scenic\scenic_list.aspx.cs">
+      <DependentUpon>scenic_list.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\scenic\scenic_list.aspx.designer.cs">
+      <DependentUpon>scenic_list.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\scenic\scenic_edit.aspx.cs">
+      <DependentUpon>scenic_edit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\scenic\scenic_edit.aspx.designer.cs">
+      <DependentUpon>scenic_edit.aspx</DependentUpon>
     </Compile>
     <Compile Include="admin\settings\builder_html.aspx.cs">
       <DependentUpon>builder_html.aspx</DependentUpon>
@@ -7591,7 +7608,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="admin\scenic\" />
     <Folder Include="aspx\" />
     <Folder Include="html\" />
     <Folder Include="scripts\datepicker\skin\whyGreen\" />
