@@ -114,10 +114,10 @@
                    data-bind="click:btnSureClick.bind($data, $('#confirm-cover') )">确定</a>
             </div>
         </div>
-        <section class="bottom_back">
+        <!--<section class="bottom_back">
             <a id="btn-use" class="btn1" href="javascript:;" style="display:none"
                data-bind="click:btnUseClick.bind($data, $('#confirm-cover'),$('.confirm-cover-main')),visible:profitStatus()==''">使用</a>
-        </section>
+        </section>-->
     </div>
     <script src="../../scripts/jquery/jquery-2.1.0.min.js"></script>
     <script src="../../scripts/jquery/jquery.url.js"></script> 
@@ -132,10 +132,10 @@
 
         var openId = "";
         openId = $.url.param("openId");
-        var couponUsageId = $.url.param("couponUsageId");
+        var id = $.url.param("id");
         var param = {
             // access_code: access_code,
-            couponUsageId: couponUsageId,
+            id: id,
             access_code: access_code,
             openId: openId
         };

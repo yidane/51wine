@@ -235,7 +235,7 @@ namespace WeiXinPF.WebService
         /// <param name="access_code"></param>
         /// <param name="couponId"></param>
         [WebMethod]
-        public void GetCoupon(int  id)
+        public void GetCoupon(string openId,int  id)
         {
             try
             {
@@ -244,7 +244,7 @@ namespace WeiXinPF.WebService
               
                 var service = new CouponService();
            
-                var coupon = service.GetCouponDetail(id);
+                var coupon = service.GetCouponDetail(openId,id);
                 var data = new
                 {
                     coupon = coupon
