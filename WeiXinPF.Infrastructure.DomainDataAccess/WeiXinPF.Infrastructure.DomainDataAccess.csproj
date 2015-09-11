@@ -57,6 +57,22 @@
     <Compile Include="Migrations\201509091103444_DBUpdate.Designer.cs">
       <DependentUpon>201509091103444_DBUpdate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201509110922074_Photo.cs" />
+    <Compile Include="Migrations\201509110922074_Photo.Designer.cs">
+      <DependentUpon>201509110922074_Photo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509111012454_Photo1.cs" />
+    <Compile Include="Migrations\201509111012454_Photo1.Designer.cs">
+      <DependentUpon>201509111012454_Photo1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509111030461_Photo2.cs" />
+    <Compile Include="Migrations\201509111030461_Photo2.Designer.cs">
+      <DependentUpon>201509111030461_Photo2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509111039220_Photo21.cs" />
+    <Compile Include="Migrations\201509111039220_Photo21.Designer.cs">
+      <DependentUpon>201509111039220_Photo21.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Photo\photoActionInfo.cs" />
     <Compile Include="Photo\photoScenesInfo.cs" />
@@ -72,6 +88,18 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201509091103444_DBUpdate.resx">
       <DependentUpon>201509091103444_DBUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509110922074_Photo.resx">
+      <DependentUpon>201509110922074_Photo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509111012454_Photo1.resx">
+      <DependentUpon>201509111012454_Photo1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509111030461_Photo2.resx">
+      <DependentUpon>201509111030461_Photo2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509111039220_Photo21.resx">
+      <DependentUpon>201509111039220_Photo21.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

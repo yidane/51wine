@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
+using AutoMapper;
 using WeiXinPF.Application.DomainModules.Photo.DTOS;
 using WeiXinPF.Infrastructure.DomainDataAccess.Photo;
 
@@ -12,6 +14,14 @@ namespace WeiXinPF.Application.DomainModules.Photo
         
         public PhotoService()
         {
+            Mapper.CreateMap< photoActionInfo,photoActionDTO >().ForMember(
+               dest=>dest.beginDate,
+               opt=>opt.ResolveUsing(src=>src.beginDate.ToString("yyyy-MM-dd HH:mm:ss"))
+                )
+                .ForMember(dest => dest.endDate,
+               opt => opt.ResolveUsing(src => src.endDate.ToString("yyyy-MM-dd HH:mm:ss"))
+                )
+                ;
         }
 
         /// <summary>
@@ -26,16 +36,8 @@ namespace WeiXinPF.Application.DomainModules.Photo
             var list = photoActionInfo.GetList(wid);
             if (list!=null&&list.Any())
             {
-                result = list.Select(p => new photoActionDTO()
-                {
-                   id = p.id,
-                   wid = p.wid,
-                   actContent = p.actContent,
-                   beginDate = p.beginDate.ToString("yyyy-MM-dd HH:mm:ss"),
-                   brief = p.brief,
-                   endDate = p.endDate.ToString("yyyy-MM-dd HH:mm:ss"),
-                   isAllowSharing = p.isAllowSharing
-                }).ToList();
+                var da = Mapper.Map< IQueryable<photoActionInfo>, IQueryable<photoActionDTO>>(list);
+                result = da.ToList();
             }
 
 
