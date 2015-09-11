@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
@@ -10,9 +11,12 @@ namespace WeiXinPF.Infrastructure.DomainDataAccess.Photo
     public partial class photoScenesInfo
     {
         #region Properties
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int id { get; set; }
-        [ForeignKey("aid")]
+        [ForeignKey("ActionInfo")]
+
         public int aid { get; set; }
+
         public virtual photoActionInfo ActionInfo { get; set; }
         /// <summary>
         /// 湖怪形象设置
