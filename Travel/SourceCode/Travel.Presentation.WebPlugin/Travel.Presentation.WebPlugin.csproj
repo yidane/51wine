@@ -67,19 +67,21 @@
     <Content Include="javascripts\jquery\jquery.lazyload.min.js" />
     <Content Include="javascripts\jquery\lhgdialog.js" />
     <Content Include="javascripts\layout.js" />
+    <Content Include="javascripts\skin\datePicker.gif" />
+    <Content Include="javascripts\skin\default\datepicker.css" />
+    <Content Include="javascripts\skin\default\img.gif" />
+    <Content Include="javascripts\skin\WdatePicker.css" />
     <Content Include="javascripts\tradeQuery.js" />
     <Content Include="javascripts\WdatePicker.js" />
     <Content Include="OrderStatistics.aspx" />
     <Content Include="pics\arrow-spr265437.png" />
     <Content Include="pics\base_z284ee4.png" />
-    <Content Include="pics\calendar_all218877.png" />
-    <Content Include="pics\icon32_loading_dark218877.gif" />
-    <Content Include="pics\wx.ico" />
     <Content Include="styles\baseuser.css" />
     <Content Include="ProductEdit.aspx" />
     <Content Include="ProductList.aspx" />
     <Content Include="styles\date_range218878.css" />
     <Content Include="styles\global_min.css" />
+    <Content Include="styles\layout.css" />
     <Content Include="styles\pagination.css" />
     <Content Include="styles\skin_icons.png" />
     <Content Include="styles\style.css" />
@@ -145,6 +147,11 @@
       <Project>{bb26e33b-85de-464b-83a2-109794a2c00a}</Project>
       <Name>Travel.Infrastructure.CommonFunctions</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="img\" />
+    <Folder Include="javascripts\jquery\skins\" />
+    <Folder Include="javascripts\skin\whyGreen\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -1,7 +1,7 @@
 ﻿@charset "utf-8";
 /* CSS Document */
-@import url("../layout.css");
-@import url("../base.css");
+@import url("layout.css");
+@import url("base.css");
 
 /* =========================登录页样式.开始======================= */
 .login-screen {
@@ -1084,7 +1084,7 @@ textarea {
                         background-position: -56px -28px;
                     }
 
-                    .toolbar .l-list .icon-list li a.del i {
+                    .toolbar .l-list .icon-list li a.del1 i {
                         background-position: -84px -28px;
                     }
 

@@ -33,6 +33,8 @@ namespace Travel.Presentation.WebPlugin
             Repeater rptList = new Repeater();
             rptList = this.rptList1;
 
+            var hasDelete = false;
+
             for (int i = 0; i < rptList.Items.Count; i++)
             {
                 var productId = Convert.ToInt32(((HiddenField)rptList.Items[i].FindControl("hdProductID")).Value);
@@ -42,10 +44,18 @@ namespace Travel.Presentation.WebPlugin
                 if (cb.Checked)
                 {
                     new ProductEntityManager().DeleteEntity(productId, productPackageID, productSource);
+                    hasDelete = true;
                 }
             }
 
-            AlertAndRedirect("删除成功", "ProductList.aspx");
+            if (hasDelete)
+            {
+                AlertAndRedirect("删除成功", "ProductList.aspx");  
+            }
+            else
+            {
+                AlertAndRedirect("请选择一条记录后再删除", "ProductList.aspx");
+            }
         }
 
         private void AlertAndRedirect(string message, string url)

@@ -18,13 +18,9 @@
                     <li><a class="add" href="ProductEdit.aspx"><i></i><span>新增单页</span></a></li>
                     <li><a class="all" href="javascript:;" onclick="checkAll(this);"><i></i><span>全选</span></a></li>
                     <li>
-                        <asp:LinkButton ID="btnDelete" runat="server" CssClass="del" OnClick="btnDelete_Click"><i></i><span>删除</span></asp:LinkButton></li>
+                        <asp:LinkButton ID="btnDelete" runat="server" CssClass="del1" OnClick="btnDelete_Click"><i></i><span>删除</span></asp:LinkButton></li>
                 </ul>
             </div>
-            <%--            <div class="r-list">
-                <asp:TextBox ID="txtKeywords" runat="server" CssClass="keyword" />
-                <asp:LinkButton ID="lbtnSearch" runat="server" CssClass="btn-search" OnClick="btnSearch_Click">查询</asp:LinkButton>
-            </div>--%>
         </div>
     </div>
     <!--/工具栏-->
@@ -35,16 +31,16 @@
             <table width="100%" border="0" cellspacing="0" cellpadding="0" class="ltable">
                 <tr>
                     <th width="6%">选择</th>
-                    <th align="left">产品名称</th>
-                    <th align="left">原产品名称</th>
-                    <th align="left" width="129">产品类型</th>
+                    <th align="left" width="110">产品名称</th>
+                    <th align="left" width="110">原产品名称</th>
+                    <th align="left" width="248">产品类型</th>
                     <th align="left" width="65">产品编码</th>
                     <th align="left" width="110">产品价格</th>
-                    <th align="left" width="65">是否组合产品</th>
-                    <th align="left" width="65">是否自定义产品</th>
-                    <th align="left" width="65">当前状态</th>
-                    <th align="left" width="65">一级排序</th>
-                    <th align="left" width="65">二级排序</th>
+                    <th align="left" width="100">是否组合产品</th>
+                    <th align="left" width="100">是否自定义产品</th>
+                    <th align="left" width="70">当前状态</th>
+                    <th align="left" width="70">一级排序</th>
+                    <th align="left" width="70">二级排序</th>
                     <th width="8%">操作</th>
                 </tr>
         </HeaderTemplate>
@@ -93,7 +89,7 @@
     <!--内容底部-->
     <div class="line20"></div>
     <div class="pagelist">
-        <div class="l-btns">
+        <div class="l-btns" style="visibility: hidden">
             <span>显示</span><asp:TextBox ID="txtPageNum" runat="server" CssClass="pagenum" onkeydown="return checkNumber(event);" AutoPostBack="True"></asp:TextBox><span>条/页</span>
         </div>
         <div id="PageContent" runat="server" class="default"></div>

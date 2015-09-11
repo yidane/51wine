@@ -48,7 +48,7 @@
                         </div>
                     </div>
                     <div class="form-group more hide">
-                        <div class="form-item">
+                        <div class="form-item single-select">
                             <label class="label" for="">票种类：</label>
                             <asp:DropDownList ID="ddlTicketCategory" runat="server"></asp:DropDownList>
                         </div>
@@ -57,9 +57,9 @@
                     <div class="form-group more hide">
                         <div class="form-item">
                             <label class="label" for="">交易金额：</label>
-                            <asp:TextBox runat="server" ID="txtMinAmount"></asp:TextBox>
+                            <asp:TextBox runat="server" ID="txtMinAmount" CssClass="input normal"></asp:TextBox>
                             <span class="gaps">到</span>
-                            <asp:TextBox runat="server" ID="txtMaxAmount"></asp:TextBox>
+                            <asp:TextBox runat="server" ID="txtMaxAmount" CssClass="input normal"></asp:TextBox>
                         </div>
                     </div>
 
@@ -88,10 +88,10 @@
                     <th align="left" width="20%">联系电话</th>
                     <th align="left" width="22%">联系人身份证</th>
                     <th align="left" width="14%">订单状态</th>
-                    <th align="center" width="8%">票名称</th>
+                    <th align="center" width="180">票名称</th>
                     <th align="center" width="8%">票数量</th>
-                    <th width="8%">票单价</th>
-                    <th width="8%">票总价</th>
+                    <th align="center" width="8%">票单价</th>
+                    <th align="center" width="8%">票总价</th>
                 </tr>
         </HeaderTemplate>
         <ItemTemplate>
