@@ -27,6 +27,18 @@ var MyCouponsViewModel= function ($domParam, param) {
                     self.usedCoupons(json.Data.lists.UsedCoupons);
                     self.openId(json.Data.user.openid);
                 }
+                else {
+                    if (json.MessageType != 'system') {
+                        if (json.MessageType == '41008') {
+                            window.location.href = json.Message;
+                            return;
+                        }
+
+
+                    }
+
+                    console.log(json.Message);
+                }
             }).fail(
             function (jqxhr, textStatus, error) {
                 var err = textStatus + ", " + error;
