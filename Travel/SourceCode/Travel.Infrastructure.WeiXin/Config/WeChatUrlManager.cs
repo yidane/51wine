@@ -114,6 +114,19 @@
             public const string GetResourceUrl = "https://api.weixin.qq.com/cgi-bin/media/get";
         }
 
+        public static class StatisticsManager
+        {
+            /// <summary>
+            /// 获取用户增减数据
+            /// </summary>
+            public const string GetUserSummaryUrl = "https://api.weixin.qq.com/datacube/getusersummary";
+
+            /// <summary>
+            /// 获取累计用户数据
+            /// </summary>
+            public const string GetUserCumulateUrl = "https://api.weixin.qq.com/datacube/getusercumulate";
+        }
+
         /// <summary>
         /// 用户列表
         /// </summary>
