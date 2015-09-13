@@ -198,22 +198,22 @@
                     <div class="list-group" name="微信帐号管理" style="display: block;">
                         <h2>微信帐号管理<i></i></h2>
                         <ul style="display: block;">
-                             <li>
+                             <%--<li>
                                 <a navid="myinfoedit" href="manager/editormyinfo.aspx" target="mainframe" class="item ">
                                     
                                     <span>个人资料修改</span>
                                 </a>
-                            </li>
+                            </li>--%>
                             <li>
                                 <a navid="list_weixin" href="weixin/myweixinlist.aspx" target="mainframe" class="item selected">
                                     <span>我的公众帐号</span>
                                 </a>
                             </li>
-                            <li>
+<%--                            <li>
                                 <a navid="add_weixin" href="weixin/editorWeiXin.aspx" target="mainframe" class="item">
                                     <span>添加公众帐号</span>
                                 </a>
-                            </li>
+                            </li>--%>
                         </ul>
                     </div>
                 </div>

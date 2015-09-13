@@ -39,6 +39,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -47,6 +48,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
@@ -104,6 +106,9 @@
     <Content Include="admin\scenic\scenic_detail_list.aspx" />
     <Content Include="admin\scenic\scenic_list.aspx" />
     <Content Include="admin\scenic\scenic_edit.aspx" />
+    <Content Include="admin\scenic\scenic_picture_edit.aspx" />
+    <Content Include="admin\scenic\scenic_picture_list.aspx" />
+    <Content Include="admin\skin\default\loginbody.png" />
     <Content Include="admin\weixin\baseSetting.aspx" />
     <Content Include="admin\zhanhui\110.png" />
     <Content Include="admin\agent\agent_edit.aspx" />
@@ -5147,6 +5152,20 @@
     <Compile Include="admin\scenic\scenic_edit.aspx.designer.cs">
       <DependentUpon>scenic_edit.aspx</DependentUpon>
     </Compile>
+    <Compile Include="admin\scenic\scenic_picture_edit.aspx.cs">
+      <DependentUpon>scenic_picture_edit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\scenic\scenic_picture_edit.aspx.designer.cs">
+      <DependentUpon>scenic_picture_edit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\scenic\scenic_picture_list.aspx.cs">
+      <DependentUpon>scenic_picture_list.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\scenic\scenic_picture_list.aspx.designer.cs">
+      <DependentUpon>scenic_picture_list.aspx</DependentUpon>
+    </Compile>
     <Compile Include="admin\settings\builder_html.aspx.cs">
       <DependentUpon>builder_html.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -7093,8 +7112,8 @@
     <Compile Include="weixin\scenic\index.aspx.designer.cs">
       <DependentUpon>index.aspx</DependentUpon>
     </Compile>
-    <Compile Include="weixin\scenic\secnic.ashx.cs">
-      <DependentUpon>secnic.ashx</DependentUpon>
+    <Compile Include="weixin\scenic\scenic.ashx.cs">
+      <DependentUpon>scenic.ashx</DependentUpon>
     </Compile>
     <Compile Include="weixin\shangqiang\index.aspx.cs">
       <DependentUpon>index.aspx</DependentUpon>
@@ -8572,8 +8591,8 @@
     <Content Include="css\font-awesome\scss\_rotated-flipped.scss" />
     <Content Include="css\font-awesome\scss\_stacked.scss" />
     <Content Include="css\font-awesome\scss\_variables.scss" />
+    <None Include="Properties\PublishProfiles\jin.pubxml" />
     <None Include="Properties\PublishProfiles\jxiaox.pubxml" />
-    <None Include="Properties\PublishProfiles\weixin.pubxml" />
     <Content Include="weixin\yuyue\uploadhead.ashx" />
     <Content Include="shop\shop.ashx" />
     <Content Include="weixin\qiangpiao\uProcess.ashx" />
@@ -8590,9 +8609,8 @@
     <Content Include="shop\templates\yeshou\font\fontawesome-webfont.ttf" />
     <Content Include="shop\templates\yeshou\font\fontawesome-webfont.woff" />
     <Content Include="shop\templates\yeshou\font\FontAwesome.otf" />
-    <None Include="Properties\PublishProfiles\weixin2.pubxml" />
     <Content Include="weixin\cashred\images\lottery.psd" />
-    <Content Include="weixin\scenic\secnic.ashx" />
+    <Content Include="weixin\scenic\scenic.ashx" />
     <None Include="副本 Web.Debug.config">
       <DependentUpon>副本 Web.config</DependentUpon>
     </None>

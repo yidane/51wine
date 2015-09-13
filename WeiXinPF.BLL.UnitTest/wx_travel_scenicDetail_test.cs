@@ -34,11 +34,11 @@ namespace WeiXinPF.BLL.UnitTest
                 Video = "fhfgh",
                 AutoVideo = true,
                 OriginalLink = "asdfghfghasd",
-                Albumses = new List<Model.wx_travel_albums>()
-                {
-                   new wx_travel_albums(){ThumbPath ="asdasdasdasdasdasd" },
-                    new wx_travel_albums(){ThumbPath ="ffffgfggfg" }
-                }
+                //Albumses = new List<Model.wx_travel_albums>()
+                //{
+                //   new wx_travel_albums(){ThumbPath ="asdasdasdasdasdasd" },
+                //    new wx_travel_albums(){ThumbPath ="ffffgfggfg" }
+                //}
 
 
             };

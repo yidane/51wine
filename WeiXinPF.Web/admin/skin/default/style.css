@@ -8,10 +8,10 @@
 .login-icon{ float:left; width:96px; height:96px; text-indent:-9999px; background:url(login_logo.png) no-repeat; }
 	.login-icon>h4{ margin-top:4px; color:#fff; font-size:17px; font-weight:200; line-height:34px; opacity:0.95; }
 		.login-icon>h4 small{color:inherit; display:block; font-size:inherit; font-weight:700; }
-.login-form{ float:left; margin-left:30px; padding:20px 25px 25px 25px; width:310px; background:#ECEFF1; border-radius:6px; text-align:center; -webkit-box-shadow:2px 2px 3px #aaa; -moz-box-shadow:2px 2px 3px #aaa; filter: progid:DXImageTransform.Microsoft.Shadow(Strength=3, Direction=135, Color='#999999'); box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1); }
+.login-form{ float:left; margin-left:30px; padding:20px 25px 25px 25px; width:310px; background:#3e3f40; border-radius:6px; text-align:center; -webkit-box-shadow:2px 2px 3px #aaa; -moz-box-shadow:2px 2px 3px #aaa; filter: progid:DXImageTransform.Microsoft.Shadow(Strength=3, Direction=135, Color='#999999'); box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1); }
 	.login-form h1{
          display:block; margin-bottom:20px; border-bottom:1px solid #DFDFDF; 
-         text-align:left; height:40px; line-height:30px; color:#304b65; font-size:21px;
+         text-align:left; height:40px; line-height:30px; color:#fff; font-size:21px;
           font-weight:300; font-family:'Microsoft YaHei'; 
             }
 	.control-group{ position:relative; margin-bottom:6px; }
@@ -21,7 +21,7 @@
 	.login-field-icon{ position:absolute; display:block; top:14px; right:13px; width:16px; height:20px; cursor:pointer; background:url(skin_icons.png) no-repeat; }
 		.login-field-icon.user{ background-position:-1px -137px;}
 		.login-field-icon.pwd{ background-position:-28px -137px; }
-	.btn-login{ display:block; margin:0; padding:10px 0; width:100%; color:#fff; border:2px solid #ECEFF1; border-radius:6px 6px 6px 6px;  background:#33B5E5; font-size:16.5px; text-decoration:none; cursor:pointer; *border:0; }
+	.btn-login{ display:block; margin:0; padding:10px 0; width:100%; color:#fff; border:2px solid #ECEFF1; border-radius:6px 6px 6px 6px;  background:#62b900 ; font-size:16.5px; text-decoration:none; cursor:pointer; *border:0; }
 	.login-tips{ display:block; margin:15px auto 0 auto; height:14px; }
 		.login-tips i{ display:inline-block; margin-right:5px; width:14px; height:14px; background:url(skin_icons.png) -56px -140px no-repeat; text-indent:-9999px; vertical-align:middle; }
 		.login-tips b{

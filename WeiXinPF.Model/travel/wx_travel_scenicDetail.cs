@@ -64,11 +64,5 @@ namespace WeiXinPF.Model
         /// </summary>
         public string OriginalLink { get; set; }
 
-        public List<wx_travel_albums> Albumses { get; set; }
-
-        public wx_travel_scenicDetail()
-        {
-            Albumses = new List<wx_travel_albums>();
-        }
     }
 }

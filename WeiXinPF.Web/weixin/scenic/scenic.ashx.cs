@@ -10,7 +10,7 @@ namespace WeiXinPF.Web.weixin.scenic
     /// <summary>
     /// secnic 的摘要说明
     /// </summary>
-    public class secnic : IHttpHandler
+    public class scenic : IHttpHandler
     {
 
         public void ProcessRequest(HttpContext context)

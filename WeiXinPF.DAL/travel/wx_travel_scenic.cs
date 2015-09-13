@@ -50,7 +50,7 @@ namespace WeiXinPF.DAL
                 StringBuilder queryBuilder = new StringBuilder();
                 queryBuilder.Append("Update[dbo].[wx_travel_scenic] ");
                 queryBuilder.Append("Set [wid] = @wid");
-                queryBuilder.Append("Set [Name] = @Name");
+                queryBuilder.Append(",[Name] = @Name");
                 queryBuilder.Append(",[Description] = @Description");
                 queryBuilder.Append(",[TemplateId] = @TemplateId");
                 queryBuilder.Append(",[FirstBgImg] = @FirstBgImg");
