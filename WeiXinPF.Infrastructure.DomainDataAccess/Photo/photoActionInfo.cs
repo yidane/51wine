@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 
@@ -55,7 +56,24 @@ namespace WeiXinPF.Infrastructure.DomainDataAccess.Photo
 
         }
 
-        public photoActionInfo GetModel(int id)
+        public void Modify()
+        {
+            var db = new WXDBContext();
+            db.photoActionInfo.Attach(this);
+            db.Entry(this).State = EntityState.Modified;
+            db.SaveChanges();
+
+        }
+
+
+        public void Delete()
+        {
+            var db = new WXDBContext();
+            db.photoActionInfo.Remove(this);
+            db.SaveChanges();
+        }
+
+        public static photoActionInfo GetModel(int id)
         {
             photoActionInfo result = null;
             var db = new WXDBContext();
