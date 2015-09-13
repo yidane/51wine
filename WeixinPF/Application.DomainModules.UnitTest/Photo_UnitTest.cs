@@ -11,13 +11,33 @@ namespace Application.DomainModules.UnitTest
     {
 
         [TestMethod]
-        public void Add_ReturnNull_Withwid()
+        public void AddAndModify_ReturnNull_Withwid()
         {
-            int wid = 36;
+             
             var service = new PhotoService();
+            var dto= new photoActionDTO()
+            {
+                wid = 36,
+                beginDate = "2015-09-01",
+                endDate = "2015-10-01",
+                actContent = "test",
+                brief = "jianjie",
+                isAllowSharing = true
+            };
+              service.Add( dto);
+            Assert.IsTrue(dto.id>0);
 
-            var dtos = service.GetList(wid);
-            Assert.IsNotNull(dtos);
+            photoActionDTO model =  service.GetModel(dto.id);
+            Assert.AreEqual(dto.wid,model.wid);
+
+            dto.brief = "test间接";
+            service.Modify(dto);
+            Assert.IsNotNull(dto);
+
+            model = service.GetModel(dto.id);
+            Assert.AreEqual(dto.brief,model.brief);
+
+
         }
 
         [TestMethod]

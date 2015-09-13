@@ -20,8 +20,14 @@ namespace WeiXinPF.Application.DomainModules.Photo
                 )
                 .ForMember(dest => dest.endDate,
                opt => opt.ResolveUsing(src => src.endDate.ToString("yyyy-MM-dd HH:mm:ss"))
+                );
+            Mapper.CreateMap<photoActionDTO, photoActionInfo>().ForMember(
+               dest => dest.beginDate,
+               opt => opt.ResolveUsing(src => DateTime.Parse(src.beginDate))
                 )
-                ;
+                .ForMember(dest => dest.endDate,
+               opt => opt.ResolveUsing(src => DateTime.Parse(src.endDate))
+                );
         }
 
         /// <summary>
@@ -36,7 +42,9 @@ namespace WeiXinPF.Application.DomainModules.Photo
             var list = photoActionInfo.GetList(wid);
             if (list!=null&&list.Any())
             {
-                var da = Mapper.Map< IQueryable<photoActionInfo>, IQueryable<photoActionDTO>>(list);
+                var li = list.ToList();
+                var da = Mapper.Map<List<photoActionInfo>
+                    , List<photoActionDTO>>(li);
                 result = da.ToList();
             }
 
@@ -47,13 +55,33 @@ namespace WeiXinPF.Application.DomainModules.Photo
         /// <summary>
         /// 添加记录
         /// </summary>
-        public void Add(photoActionDTO dto)
+        public void Add( photoActionDTO  dto)
         {
             if (dto!=null)
             {
-                var info=new photoActionInfo();
+                var info=Mapper.Map<photoActionDTO,photoActionInfo>(dto);
                 info.Add();
+                dto.id = info.id;
+            }
+        }
 
+        public photoActionDTO GetModel(int id)
+        {
+            photoActionDTO result = null;
+            var info = photoActionInfo.GetModel(id);
+            if (info!=null)
+            {
+                result = Mapper.Map<photoActionDTO>(info);
+            }
+            return result;
+        }
+
+        public void Modify(photoActionDTO dto)
+        {
+            if (dto!=null)
+            {
+                var info = Mapper.Map<photoActionDTO,photoActionInfo>(dto);
+                info.Modify();
             }
         }
     }
