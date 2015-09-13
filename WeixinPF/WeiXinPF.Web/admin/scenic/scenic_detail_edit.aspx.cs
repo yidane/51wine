@@ -13,7 +13,7 @@ namespace WeiXinPF.Web.admin.scenic
         private string _action = MXEnums.ActionEnum.Add.ToString();
         private int _id = 0;
         private int _scenicId = 0;
-        private BLL.wx_travel_scenicDetail _bll = new BLL.wx_travel_scenicDetail();
+        private readonly BLL.wx_travel_scenicDetail _bll = new BLL.wx_travel_scenicDetail();
         protected void Page_Load(object sender, EventArgs e)
         {
             _action = MXRequest.GetQueryString("action");
@@ -71,11 +71,11 @@ namespace WeiXinPF.Web.admin.scenic
             model.LoopAudio = rblLoopAudio.SelectedItem.Value == "1";
 
 
-            //if (_bll.Update(model))
-            //{
-            //    AddAdminLog(MXEnums.ActionEnum.Edit.ToString(), "微旅游编辑景区导览:" + model.Name); //记录日志
-            //    result = true;
-            //}
+            if (_bll.Update(model))
+            {
+                AddAdminLog(MXEnums.ActionEnum.Edit.ToString(), "微旅游编辑景区导览:" + model.Name); //记录日志
+                result = true;
+            }
             return result;
         }
 

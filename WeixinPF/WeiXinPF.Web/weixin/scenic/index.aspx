@@ -16,7 +16,8 @@
 </head>
 <body>
     <div class="container">
-        <section class="page bg1">
+        <section class="page bg1" data-bind="with: scenic">
+            <img alt="" data-bind="attr: { 'src': firstBgImg }" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1" />
             <div class="circle">
                 <img class="scenic-name" src="images/scenic_name.png" />
                 <img class="stamp" src="images/stamp.png" />
@@ -72,6 +73,7 @@
         </section>
     </div>
     <script src="../../scripts/jquery/jquery-2.1.0.min.js"></script>
+    <script src="../../scripts/knockout/knockout-3.3.0.js"></script>
     <script type="text/javascript">
         var hash = document.location.hash;
         function renderViewport() {
@@ -91,23 +93,30 @@
         }
 
         $(function () {
-            renderViewport();
-            if (hash == "#page2") {
-                $('.bg1').hide();
-                $('.bg2').show();
-            } else {
-                var timer = setTimeout(showPage, 10000);
-                $(".trigger").on('click', function () {
-                    if (timer) {
-                        clearTimeout(timer);
-                    }
-                    showPage();
+            var scenicViewModel = new ScenicViewModel();
+            ko.applyBindings(scenicViewModel);
+        });
+
+
+        var ScenicViewModel = function () {
+            var self = this;
+            this.scenic = ko.observable();
+            this.details = ko.observableArray();
+
+            var loadData = function () {
+                $.getJSON('scenic.ashx', {
+                    action: 'GetScenic', id: 1
+                }).done(function (res) {
+                    if (res && res.success) {
+                        self.scenic(res.result.scenic);
+                        self.details(res.result.details);
+                    };
+                }).fail(function (a, b, c) {
+                    alert(1);
                 });
             }
-            $.getJSON('scenic.ashx', { acton: 'GetScenic', id: 1 }).done(function (res) {
-                alert(res.success);
-            });
-        });
+            loadData();
+        }
     </script>
 </body>
 </html>

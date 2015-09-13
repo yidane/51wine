@@ -59,6 +59,7 @@
                     <td style="text-align: center;"><%#Eval("Name") %></td>
                     <td style="text-align: center">
                         <a href="scenic_detail_edit.aspx?action=<%#MXEnums.ActionEnum.Edit %>&id=<%#Eval("Id")%>&scenicId=<%=ScenicId%>">修改</a>
+                        <a href="scenic_picture_list.aspx?detailId=<%#Eval("Id")%>">添加图片</a>
                     </td>
                 </tr>
             </ItemTemplate>

@@ -29,7 +29,6 @@
 
 <body class="mainbody">
     <form id="form1" runat="server">
-        <!--导航栏 禁止在网络上公开销售本源码，违者必究,官方q——q 23002807-->
         <div class="location" style="display: none;">
             <a href="javascript:history.back(-1);" class="back"><i></i><span>返回上一页</span></a>
             <a href="wxCenter.aspx" class="home"><i></i><span>首页</span></a>
@@ -39,7 +38,7 @@
         <!--/导航栏-->
 
         <!--工具栏-->
-        <div class="toolbar-wrap">
+        <div class="toolbar-wrap" style="display: none">
             <div id="floatHead" class="toolbar">
                 <div class="l-list">
                     <ul class="icon-list">
