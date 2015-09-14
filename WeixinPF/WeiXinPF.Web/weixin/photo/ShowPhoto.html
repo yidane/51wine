@@ -76,7 +76,7 @@
             height: 134.5px;
             top: 50%;
             left: 15%;
-            background-image: url(../images/avatar2.png);
+            background-image: url(images/avatar2.png);
             background-size: cover;
         }
 
@@ -226,14 +226,16 @@
         </div>
 
         <div class="cartoon">
-            <img class="face" src="../images/intro-background.jpg" />
+            <img class="face" src="images/intro-background.jpg" />
         </div>
         <div class="btn">
-            <a href="MakePhoto.html" id="btn_replay" class="left">在玩一次</a>
+            <a href="javascript:void(0);" id="btn_replay" class="left" onclick="javascript: ui.playAgain();">在玩一次</a>
             <a id="introduce" class="right">景点介绍</a>
         </div>
     </div>
-    <script src="../javaScripts/zepto.min.js"></script>
+
+    <script src="../../scripts/jquery/zepto.min.js"></script> 
+
     <script>
         document.onreadystatechange = loading;
         function loading() {
@@ -260,26 +262,33 @@
             var r = window.location.search.substr(1).match(reg);
             if (r != null) return (r[2]); return null;
         }
+
+        function getBaseUrl() {
+            var re = new RegExp(/^.*\//);
+            return re.exec(window.location.href);
+        }
+        var baseurl = getBaseUrl();
         var ui = {
-            scenics: [{
-                name: '卧龙湾',
-                cls: 'wolongwan',
-                url: '../Guide/wolongwan.html'
-            }, {
-                name: '月亮湾',
-                cls: 'yueliangwan',
-                url: '../Guide/yueliangwan.html'
-            }, {
-                name: '神仙湾',
-                cls: 'shenxianwan',
-                url: '../Guide/shenxianwan.html'
-            }
+            scenics: [
+                {
+                    name: '卧龙湾',
+                    cls: 'wolongwan',
+                    url: '../Guide/wolongwan.html'
+                }, {
+                    name: '月亮湾',
+                    cls: 'yueliangwan',
+                    url: '../Guide/yueliangwan.html'
+                }, {
+                    name: '神仙湾',
+                    cls: 'shenxianwan',
+                    url: '../Guide/shenxianwan.html'
+                }
             ],
             cartoon: ['avatar-box1', 'avatar-box2'],
-            getRandom: function (seed) {
+            getRandom: function(seed) {
                 return Math.round(Math.random() * seed);
             },
-            setScenic: function (i) {
+            setScenic: function(i) {
                 var scenic = ui.scenics[i];
                 $('.container').addClass(scenic.cls).attr('alt', scenic.name);
                 $('#introduce').attr('href', scenic.url);
@@ -287,18 +296,28 @@
             //setCartoon: function (i) {
             //    $('.avatar-box').addClass(ui.cartoon[i]);
             //},
-            setPhoto: function (img) {
+            setPhoto: function(img) {
                 $('.face').attr('src', 'uploadimages/' + img + '.jpg');
             },
-            getParams: function () {
+
+            playAgain: function() {
+                var param = this.getParams();
+                var url = 'MakePhoto.html?wid={0}&aid={1}';
+
+                document.location.href = formatString(url,param.wid, param.aid);
+            },
+
+            getParams: function() {
                 return {
                     img: getQueryString('img'),
                     scenic: getQueryString('scenic'),
                     //cartoon: getQueryString('cartoon'),
-                    share: getQueryString('share')
+                    share: getQueryString('share'),
+                    wid: getQueryString('wid'),
+                    aid: getQueryString('aid')
                 };
             },
-            init: function () {
+            init: function() {
                 var param = this.getParams();
                 //ui.setCartoon(param.cartoon == null ? 0 : param.cartoon);
                 ui.setScenic(param.scenic == null ? 0 : param.scenic);
@@ -309,10 +328,11 @@
                 }
 
                 wxsdk.initWxConfig(false);
+                
                 var shareMsg = {
                     title: "~~~啊啊啊啊，湖怪出现了，小伙伴们速速来合影！！！", // 分享标题
                     link: document.location.href + "&share=1", // 分享链接
-                    imgUrl: "http://www.cloudorg.com.cn/travel/photo/uploadimages/" + param.img + ".jpg", // 分享图标
+                    imgUrl: baseurl+"uploadimages/" + param.img + ".jpg" // 分享图标
                 }
 
                 wxsdk.shareMessage(shareMsg);
@@ -321,7 +341,22 @@
                     wxsdk.showShareMenu();
                 }
             }
-        }
+        };
+
+        function formatString() {
+            if (arguments.length < 1) {
+                return null;
+            }
+
+            var str = arguments[0];
+
+            for (var i = 1; i < arguments.length; i++) {
+                var placeHolder = '{' + (i - 1) + '}';
+                str = str.replace(placeHolder, arguments[i]);
+            }
+
+            return str;
+        };
 
         $(function () {
             ui.init();

@@ -46,6 +46,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -71,6 +72,7 @@
     <Compile Include="threeInterface\xjHongBao.cs" />
     <Compile Include="WeiXCommFun.cs" />
     <Compile Include="CRM\WeiXinCRMComm.cs" />
+    <Compile Include="WeiXinMediaFun.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\WeiXinPF.BLL\WeiXinPF.BLL.csproj">

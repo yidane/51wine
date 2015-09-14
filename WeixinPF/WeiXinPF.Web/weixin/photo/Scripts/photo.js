@@ -23,7 +23,7 @@
         formData.imgName = ui.image.imgName;
 
         $.ajax({
-            url: '../WebService/MonsterService.asmx/CropImage',
+            url: '../../WebServices/MonsterWebService.asmx/CropImage',
             data: formData,
             type: 'post',
             dataType: 'json',
@@ -41,6 +41,7 @@
             }
         });
     }
+
     mk.chooseImage = function () {
         wxsdk.chooseImage({
             success: function (chooseResult) {
@@ -56,9 +57,34 @@
             }
         });
     }
+
+    mk.getInfo = function(aid,wid,code) {
+        $.getJSON("../../WebServices/MonsterWebService.asmx/GetBaseInfo",
+           {
+               aid: aid,
+               wid: wid
+
+           })
+           .done(function (json) {
+               console.log(json);
+               if (json.IsSuccess) {
+                   document.title = json.Data.actName;
+                   $("#msg_monster").text(json.Data.actContent);
+               }
+               else {
+                   console.log(json.Message);
+               }
+           }).fail(
+           function (jqxhr, textStatus, error) {
+               var err = textStatus + ", " + error;
+               console.log("Request Failed: " + err);
+           });
+    };
+
+
     var showPhoto = function (img) {
-        var url = 'ShowPhoto.html?img={0}&scenic={1}';
-        document.location.href = formatString(url, img, getRandom(2));
+        var url = 'ShowPhoto.html?img={0}&scenic={1}&wid={2}&aid={3}';
+        document.location.href = formatString(url, img, getRandom(2),wid,aid);
     }
 
 
@@ -172,7 +198,7 @@
 
     var downImageFromServer = function (serverId) {
         $.ajax({
-            url: '../WebService/MonsterService.asmx/DownLoadImage',
+            url: '../../WebServices/MonsterWebService.asmx/DownLoadImage',
             data: { mediaId: serverId },
             type: 'post',
             dataType: 'json',
@@ -212,6 +238,8 @@ function formatString() {
 };
 
 $(function () {
+   
+    mk.getInfo(aid, wid, code);
     wxsdk.initWxConfig(false);
     $("#chooseImage").on('click', mk.chooseImage);
     $("#btnSure").on('click', mk.cropFormServer);

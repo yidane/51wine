@@ -4,7 +4,8 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
     <title>与湖怪合影</title>
-    <link href="../Styles/jquery.Jcrop.css" rel="stylesheet" />
+    <link href="css/jquery.Jcrop.css" rel="stylesheet" />
+    <!-- ReSharper disable once CssNotResolved -->
     <style type="text/css">
         * {
             margin: 0;
@@ -15,7 +16,7 @@
         ol {
             list-style: none;
         }
-            
+
 
         html {
             width: 100%;
@@ -448,7 +449,7 @@
             <li><span></span></li>
         </ul>
         <div class="monster">
-            <span class="message">
+            <span id="msg_monster" class="message">
                 亲，来合个影吧！
             </span>
         </div>
@@ -476,7 +477,10 @@
             </div>
         </div>
     </div>
-    <script src="../javaScripts/jquery-2.1.4.min.js"></script>
+
+    <script src="../../scripts/jquery/jquery-2.1.0.min.js"></script>
+    <script src="../../scripts/jquery/jquery.url.js"></script>
+
     <script>
         document.onreadystatechange = loading;
         function loading() {
@@ -494,9 +498,12 @@
                 $(".container").show();
             }
         }
+        var code = $.url.param("code") ? $.url.param("code") : '';
+        var aid = $.url.param("aid");
+        var wid = $.url.param("wid");
     </script>
     <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
-    <script src="../javaScripts/jquery.Jcrop.min.js"></script>
+    <script src="../../scripts/jquery/jquery.jcrop.min.js"></script>
     <script src="Scripts/WeiXinSdk.js"></script>
     <script src="Scripts/photo.js"></script>
 </body>

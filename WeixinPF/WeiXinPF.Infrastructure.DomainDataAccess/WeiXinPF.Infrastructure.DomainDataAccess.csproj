@@ -73,6 +73,18 @@
     <Compile Include="Migrations\201509111039220_Photo21.Designer.cs">
       <DependentUpon>201509111039220_Photo21.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201509140153446_Photo3.cs" />
+    <Compile Include="Migrations\201509140153446_Photo3.Designer.cs">
+      <DependentUpon>201509140153446_Photo3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509140201089_Photo4.cs" />
+    <Compile Include="Migrations\201509140201089_Photo4.Designer.cs">
+      <DependentUpon>201509140201089_Photo4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509140233592_Photo5.cs" />
+    <Compile Include="Migrations\201509140233592_Photo5.Designer.cs">
+      <DependentUpon>201509140233592_Photo5.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Photo\photoActionInfo.cs" />
     <Compile Include="Photo\photoScenesInfo.cs" />
@@ -100,6 +112,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201509111039220_Photo21.resx">
       <DependentUpon>201509111039220_Photo21.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509140153446_Photo3.resx">
+      <DependentUpon>201509140153446_Photo3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509140201089_Photo4.resx">
+      <DependentUpon>201509140201089_Photo4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509140233592_Photo5.resx">
+      <DependentUpon>201509140233592_Photo5.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

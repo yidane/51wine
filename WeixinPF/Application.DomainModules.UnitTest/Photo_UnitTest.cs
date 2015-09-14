@@ -19,8 +19,8 @@ namespace Application.DomainModules.UnitTest
             {
                 wid = 36,
                 beginDate = "2015-09-01",
-                endDate = "2015-10-01",
-                actContent = "test",
+                endDate = DateTime.Now.AddDays(5).ToString(),
+                actContent = "test20151",
                 brief = "jianjie",
                 isAllowSharing = true
             };
@@ -46,8 +46,14 @@ namespace Application.DomainModules.UnitTest
             int wid = 36;
             var service = new PhotoService();
 
-            var dtos = service.GetList(wid);
+            var dtos = service.GetList(1,10, "", wid);
             Assert.IsNotNull(dtos);
+            Assert.IsTrue(dtos.list.Count>0);
+
+            dtos = service.GetList(1, 10, "test", wid);
+            Assert.IsNotNull(dtos);
+            Assert.IsTrue(dtos.list.Count > 0);
+
         }
     }
 }

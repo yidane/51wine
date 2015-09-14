@@ -1,23 +1,28 @@
-﻿
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using WeiXinPF.Common;
-using System.Text;
+﻿using System;
 using System.Data;
+using System.Linq;
+using System.Text;
+using System.Web.UI.WebControls;
+using WeiXinPF.Application.DomainModules.Common;
+using WeiXinPF.Application.DomainModules.Photo;
+using WeiXinPF.Application.DomainModules.Photo.DTOS;
+using WeiXinPF.Common;
 
-namespace WeiXinPF.Web.admin.choujiang.shakeLuckyMoney
+namespace WeiXinPF.Web.admin.photo
 {
-    public partial class luckyMoneylist : Web.UI.ManagePage
+    public partial class photolist : Web.UI.ManagePage
     {
         protected int totalCount;
         protected int page;
         protected int pageSize;
         BLL.wx_dzpActionInfo gbll = new BLL.wx_dzpActionInfo();
+        private readonly PhotoService _service;
         protected string keywords = string.Empty;
+
+        public photolist()
+        {
+            _service = new PhotoService();
+        }
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -26,53 +31,55 @@ namespace WeiXinPF.Web.admin.choujiang.shakeLuckyMoney
             this.pageSize = GetPageSize(10); //每页数量
             if (!Page.IsPostBack)
             {
-
-                RptBind(CombSqlTxt(keywords), "createDate desc,id desc");
+                RptBind();
             }
         }
 
         #region 数据绑定=================================
-        private void RptBind(string _strWhere, string _orderby)
+        private void RptBind()
         {
 
             Model.wx_userweixin weixin = GetWeiXinCode();
-            _strWhere = "wId=" + weixin.id + " " + _strWhere;
             this.page = MXRequest.GetQueryInt("page", 1);
             txtKeywords.Text = this.keywords;
-            DataSet ds = gbll.GetList(this.pageSize, this.page, _strWhere, _orderby, out this.totalCount);
-            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+
+            //获取分页的列表
+            var pagingDto = _service.GetList(this.page, this.pageSize, this.keywords, weixin.id);
+            if (pagingDto != null)
             {
-                DataRow dr;
-                DateTime begin = new DateTime();
-                DateTime end = new DateTime();
-                int count = ds.Tables[0].Rows.Count;
-                for (int i = 0; i < count; i++)
+                if (pagingDto.list.Any())
                 {
-                    dr = ds.Tables[0].Rows[i];
-                    begin = MyCommFun.Obj2DateTime(dr["beginDate"]);
-                    end = MyCommFun.Obj2DateTime(dr["endDate"]);
-                    if (begin > DateTime.Now)
+                    var nowDate = DateTime.Now;
+                    var list = pagingDto.list.Select(p =>
                     {
-                        dr["status_s"] = "<span class=\"act_before\">未开始</span>";
-                    }
-                    else if (end <= DateTime.Now)
-                    {
-                        dr["status_s"] = "<span class=\"act_end\">已结束</span>";
-                    }
-                    else
-                    {
-                        dr["status_s"] = "<span class=\"act_in\">进行中</span>";
-                    }
-                    dr["url"] = MyCommFun.getWebSite() + "/weixin/dzp/index.aspx?wid=" + dr["wid"].ToString() + "&aid=" + dr["id"].ToString();
+                        //获取状态
+                        var begin = DateTime.Parse(p.beginDate);
+                        var end = DateTime.Parse(p.endDate);
+                        if (begin > nowDate)
+                        {
+                            p.status_s = "<span class=\"act_before\">未开始</span>";
+                        }
+                        else if (end <= DateTime.Now)
+                        {
+                            p.status_s = "<span class=\"act_end\">已结束</span>";
+                        }
+                        else
+                        {
+                            p.status_s = "<span class=\"act_in\">进行中</span>";
+                        }
+                        //获取地址
+                        p.url = string.Format("{0}/weixin/photo/MakePhoto.html?wid={1}&aid={2}",
+                            MyCommFun.getWebSite(), p.wid, p.id);
+                        return p;
+                    });
+                    this.rptList.DataSource = list;
+                    this.rptList.DataBind();
                 }
-                ds.AcceptChanges();
             }
-            this.rptList.DataSource = ds;
-            this.rptList.DataBind();
 
             //绑定页码
             txtPageNum.Text = this.pageSize.ToString();
-            string pageUrl = Utils.CombUrlTxt("luckyMoneylist.aspx", "keywords={0}&page={1}", this.keywords, "__id__");
+            string pageUrl = Utils.CombUrlTxt("photolist.aspx", "keywords={0}&page={1}", this.keywords, "__id__");
             PageContent.InnerHtml = Utils.OutPageList(this.pageSize, this.page, this.totalCount, pageUrl, 8);
         }
         #endregion
@@ -95,7 +102,7 @@ namespace WeiXinPF.Web.admin.choujiang.shakeLuckyMoney
         private int GetPageSize(int _default_size)
         {
             int _pagesize;
-            if (int.TryParse(Utils.GetCookie("luckyMoneylist_page_size"), out _pagesize))
+            if (int.TryParse(Utils.GetCookie("photolist_page_size"), out _pagesize))
             {
                 if (_pagesize > 0)
                 {
@@ -109,7 +116,7 @@ namespace WeiXinPF.Web.admin.choujiang.shakeLuckyMoney
         //关健字查询
         protected void btnSearch_Click(object sender, EventArgs e)
         {
-            Response.Redirect(Utils.CombUrlTxt("luckyMoneylist.aspx", "keywords={0}", txtKeywords.Text));
+            Response.Redirect(Utils.CombUrlTxt("photolist.aspx", "keywords={0}", txtKeywords.Text));
         }
 
         //设置分页数量
@@ -120,10 +127,10 @@ namespace WeiXinPF.Web.admin.choujiang.shakeLuckyMoney
             {
                 if (_pagesize > 0)
                 {
-                    Utils.WriteCookie("luckyMoneylist_page_size", _pagesize.ToString(), 14400);
+                    Utils.WriteCookie("photolist_page_size", _pagesize.ToString(), 14400);
                 }
             }
-            Response.Redirect(Utils.CombUrlTxt("luckyMoneylist.aspx", "keywords={0}", this.keywords));
+            Response.Redirect(Utils.CombUrlTxt("photolist.aspx", "keywords={0}", this.keywords));
         }
 
         //批量删除
@@ -139,37 +146,24 @@ namespace WeiXinPF.Web.admin.choujiang.shakeLuckyMoney
                 CheckBox cb = (CheckBox)rptList.Items[i].FindControl("chkId");
                 if (cb.Checked)
                 {
-                    if (gbll.DeleteAction(id))
+                    try
                     {
+                        _service.Delete(id);
                         sucCount += 1;
                     }
-                    else
+                    catch (Exception)
                     {
+
                         errorCount += 1;
                     }
+
                 }
             }
-            AddAdminLog(MXEnums.ActionEnum.Delete.ToString(), "删除摇一摇活动信息" + sucCount + "条，失败" + errorCount + "条"); //记录日志
+            AddAdminLog(MXEnums.ActionEnum.Delete.ToString(), "删除湖怪活动信息" + sucCount + "条，失败" + errorCount + "条"); //记录日志
 
-            JscriptMsg("删除成功" + sucCount + "条，失败" + errorCount + "条！", Utils.CombUrlTxt("luckyMoneylist.aspx", "keywords={0}", this.keywords), "Success");
+            JscriptMsg("删除成功" + sucCount + "条，失败" + errorCount + "条！", Utils.CombUrlTxt("photolist.aspx", "keywords={0}", this.keywords), "Success");
         }
 
-        /// <summary>
-        ///  
-        /// </summary>
-        /// <param name="source"></param>
-        /// <param name="e"></param>
-        protected void rptList_ItemCommand(object source, RepeaterCommandEventArgs e)
-        {
 
-        }
-
-        protected void rptList_ItemDataBound(object sender, RepeaterItemEventArgs e)
-        {
-            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
-            {
-
-            }
-        }
     }
 }
