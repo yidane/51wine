@@ -70,6 +70,20 @@
                if (json.IsSuccess) {
                    document.title = json.Data.actName;
                    $("#msg_monster").text(json.Data.actContent);
+                   if (json.Data.status_s == "nostart") {
+                       $(".div-nostart").show();
+                        
+                       $(".container").hide();
+                       $("#crop_container").hide();
+                   }
+                   else if (json.Data.status_s == "end") {
+                       $(".div-expired").show();
+                       $(".container").hide();
+
+                       $("#crop_container").hide();
+                   } else {
+                       $(".container").show();
+                   }
                }
                else {
                    console.log(json.Message);

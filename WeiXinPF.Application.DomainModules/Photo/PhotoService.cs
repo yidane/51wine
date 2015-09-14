@@ -31,7 +31,7 @@ namespace WeiXinPF.Application.DomainModules.Photo
                 )
                 .ForMember(dest => dest.endDate,
                opt => opt.ResolveUsing(src => MyCommFun.Obj2DateTime(src.endDate))
-                );
+                ).ForMember(x => x.createTime, opt => opt.Ignore());
         }
 
         /// <summary>
