@@ -6,6 +6,7 @@ using Travel.Application.DomainModules.WeChat.DTOS;
 using Travel.Infrastructure.WeiXin.Common;
 using Travel.Infrastructure.WeiXin.Common.OAuth2;
 using Travel.Infrastructure.WeiXin.Common.Ticket;
+using Travel.Infrastructure.WeiXin.Statistics;
 using Travel.Infrastructure.WeiXin.User;
 
 namespace Travel.Application.DomainModules.WeChat
@@ -65,6 +66,28 @@ namespace Travel.Application.DomainModules.WeChat
                     remark = result.remark,
                     groupid = result.groupid
                 };
+        }
+
+        public List<UserStatisticsDTO> GetUserStatistics(DateTime beginDate, DateTime endDate)
+        {
+            var rtnUserStatisticsList = new List<UserStatisticsDTO>();
+            var result = new UserStatistics().GetUserStatistics(beginDate, endDate);
+            if (result != null && result.list != null && result.list.Count > 0)
+            {
+                foreach (UserStatisticsInfo info in result.list)
+                {
+                    rtnUserStatisticsList.Add(new UserStatisticsDTO()
+                        {
+                            ref_date = info.ref_date,
+                            user_source = info.user_source,
+                            user_sourceDesc = info.user_sourceDesc,
+                            new_user = info.new_user,
+                            cancel_user = info.cancel_user
+                        });
+                }
+            }
+
+            return rtnUserStatisticsList;
         }
     }
 }

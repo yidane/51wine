@@ -75,6 +75,7 @@
     <Compile Include="WeChat\DTOS\CardTicketDTO.cs" />
     <Compile Include="WeChat\DTOS\SignatureDTO.cs" />
     <Compile Include="WeChat\DTOS\UserInfoDTO.cs" />
+    <Compile Include="WeChat\DTOS\UserStatisticsDTO.cs" />
     <Compile Include="WeChat\WeChatService.cs" />
   </ItemGroup>
   <ItemGroup>
