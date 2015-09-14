@@ -67,6 +67,7 @@
     <Content Include="javascripts\jquery\jquery.lazyload.min.js" />
     <Content Include="javascripts\jquery\lhgdialog.js" />
     <Content Include="javascripts\layout.js" />
+    <Content Include="javascripts\lib.js" />
     <Content Include="javascripts\skin\datePicker.gif" />
     <Content Include="javascripts\skin\default\datepicker.css" />
     <Content Include="javascripts\skin\default\img.gif" />

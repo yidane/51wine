@@ -39,5 +39,15 @@ namespace Travel.Services.WebService
                 Context.Response.Write(AjaxResult.Success(result));
             }
         }
+
+        [WebMethod]
+        public void GetUserAnalysis(DateTime beginDate, DateTime endDate)
+        {
+            var userStatisticsList = new WeChatService().GetUserStatistics(beginDate, endDate);
+            if (userStatisticsList.Count > 0)
+            {
+                Context.Response.Write(AjaxResult.Success(userStatisticsList));
+            }
+        }
     }
 }
