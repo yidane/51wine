@@ -78,7 +78,7 @@ namespace Travel.Application.DomainModules.WeChat
                 {
                     rtnUserStatisticsList.Add(new UserStatisticsDTO()
                         {
-                            ref_date = info.ref_date,
+                            date = info.ref_date,
                             user_source = info.user_source,
                             user_sourceDesc = info.user_sourceDesc,
                             new_user = info.new_user,

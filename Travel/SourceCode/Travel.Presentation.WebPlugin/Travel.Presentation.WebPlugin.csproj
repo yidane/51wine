@@ -72,6 +72,7 @@
     <Content Include="javascripts\skin\default\datepicker.css" />
     <Content Include="javascripts\skin\default\img.gif" />
     <Content Include="javascripts\skin\WdatePicker.css" />
+    <Content Include="javascripts\tab-bar.js" />
     <Content Include="javascripts\tradeQuery.js" />
     <Content Include="javascripts\WdatePicker.js" />
     <Content Include="OrderStatistics.aspx" />
@@ -92,6 +93,7 @@
     <Content Include="styles\useranalysis.css" />
     <Content Include="UserAnalysis.aspx" />
     <Content Include="Web.config" />
+    <Content Include="WebServices\WeChatWebService.asmx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ListContent.Master.cs">
@@ -135,6 +137,10 @@
       <DependentUpon>UserAnalysis.aspx</DependentUpon>
     </Compile>
     <Compile Include="WebHelper.cs" />
+    <Compile Include="WebServices\WeChatWebService.asmx.cs">
+      <DependentUpon>WeChatWebService.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="javascripts\jquery\jQuery-1.10.2.min.js" />
@@ -148,9 +154,17 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Travel.Application.DomainModules\Travel.Application.DomainModules.csproj">
+      <Project>{a4eb3c6e-748d-4e16-ab48-43704bbdba24}</Project>
+      <Name>Travel.Application.DomainModules</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Travel.Infrastructure.CommonFunctions\Travel.Infrastructure.CommonFunctions.csproj">
       <Project>{bb26e33b-85de-464b-83a2-109794a2c00a}</Project>
       <Name>Travel.Infrastructure.CommonFunctions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Travel.Infrastructure.WeiXin\Travel.Infrastructure.WeiXin.csproj">
+      <Project>{37afc00a-8d40-45df-98e8-3e671dd420fb}</Project>
+      <Name>Travel.Infrastructure.WeiXin</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

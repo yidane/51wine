@@ -9,6 +9,7 @@
     <link href="styles/useranalysis.css" rel="stylesheet" />
     <link href="styles/baseuser.css" rel="stylesheet" />
     <link href="styles/date_range218878.css" rel="stylesheet" />
+    <script src="javascripts/jquery/jQuery-1.10.2.min.js"></script>
     <script type="text/javascript">
         window.wxError = function () {
             function e(e, i) {
@@ -93,188 +94,104 @@
             list: [
                                                     {
                                                         user_source: 99999999,
-                                                        list: [
-                                                                                                                        {
-                                                                                                                            date: "2015-08-17",
-                                                                                                                            cancel_user: 0,
-                                                                                                                            cumulate_user: 1,
-                                                                                                                            netgain_user: 0,
-                                                                                                                            new_user: 0
-                                                                                                                        }
-                                                                                , {
-                                                                                    date: "2015-08-18",
-                                                                                    cancel_user: 0,
-                                                                                    cumulate_user: 4,
-                                                                                    netgain_user: 4,
-                                                                                    new_user: 4
-                                                                                }
-                                                                                , {
-                                                                                    date: "2015-08-19",
-                                                                                    cancel_user: 2,
-                                                                                    cumulate_user: 4,
-                                                                                    netgain_user: 0,
-                                                                                    new_user: 2
-                                                                                }
-                                                                                , {
-                                                                                    date: "2015-08-20",
-                                                                                    cancel_user: 5,
-                                                                                    cumulate_user: 7,
-                                                                                    netgain_user: 1,
-                                                                                    new_user: 6
-                                                                                }
-                                                                                , {
-                                                                                    date: "2015-08-21",
-                                                                                    cancel_user: 1,
-                                                                                    cumulate_user: 9,
-                                                                                    netgain_user: 2,
-                                                                                    new_user: 3
-                                                                                }
-                                                                                , {
-                                                                                    date: "2015-08-22",
-                                                                                    cancel_user: 0,
-                                                                                    cumulate_user: 9,
-                                                                                    netgain_user: 0,
-                                                                                    new_user: 0
-                                                                                }
-                                                                                , {
-                                                                                    date: "2015-08-23",
-                                                                                    cancel_user: 4,
-                                                                                    cumulate_user: 10,
-                                                                                    netgain_user: 0,
-                                                                                    new_user: 4
-                                                                                }
-                                                                                , {
-                                                                                    date: "2015-08-24",
-                                                                                    cancel_user: 4,
-                                                                                    cumulate_user: 11,
-                                                                                    netgain_user: 1,
-                                                                                    new_user: 5
-                                                                                }
-                                                                                , {
-                                                                                    date: "2015-08-25",
-                                                                                    cancel_user: 4,
-                                                                                    cumulate_user: 12,
-                                                                                    netgain_user: 1,
-                                                                                    new_user: 5
-                                                                                }
-                                                                                , {
-                                                                                    date: "2015-08-26",
-                                                                                    cancel_user: 2,
-                                                                                    cumulate_user: 20,
-                                                                                    netgain_user: 8,
-                                                                                    new_user: 10
-                                                                                }
-                                                                                , {
-                                                                                    date: "2015-08-27",
-                                                                                    cancel_user: 1,
-                                                                                    cumulate_user: 24,
-                                                                                    netgain_user: 4,
-                                                                                    new_user: 5
-                                                                                }
-                                                                                , {
-                                                                                    date: "2015-08-28",
-                                                                                    cancel_user: 1,
-                                                                                    cumulate_user: 24,
-                                                                                    netgain_user: 0,
-                                                                                    new_user: 1
-                                                                                }
-                                                                                , {
-                                                                                    date: "2015-08-29",
-                                                                                    cancel_user: 4,
-                                                                                    cumulate_user: 26,
-                                                                                    netgain_user: 2,
-                                                                                    new_user: 6
-                                                                                }
-                                                                                , {
-                                                                                    date: "2015-08-30",
-                                                                                    cancel_user: 1,
-                                                                                    cumulate_user: 27,
-                                                                                    netgain_user: 1,
-                                                                                    new_user: 2
-                                                                                }
-                                                                                , {
-                                                                                    date: "2015-08-31",
-                                                                                    cancel_user: 1,
-                                                                                    cumulate_user: 31,
-                                                                                    netgain_user: 4,
-                                                                                    new_user: 5
-                                                                                }
-                                                                                , {
-                                                                                    date: "2015-09-01",
-                                                                                    cancel_user: 2,
-                                                                                    cumulate_user: 32,
-                                                                                    netgain_user: 1,
-                                                                                    new_user: 3
-                                                                                }
-                                                                                , {
-                                                                                    date: "2015-09-02",
-                                                                                    cancel_user: 6,
-                                                                                    cumulate_user: 33,
-                                                                                    netgain_user: 1,
-                                                                                    new_user: 7
-                                                                                }
-                                                                                , {
-                                                                                    date: "2015-09-03",
-                                                                                    cancel_user: 1,
-                                                                                    cumulate_user: 34,
-                                                                                    netgain_user: 1,
-                                                                                    new_user: 2
-                                                                                }
-                                                                                , {
-                                                                                    date: "2015-09-04",
-                                                                                    cancel_user: 9,
-                                                                                    cumulate_user: 34,
-                                                                                    netgain_user: 1,
-                                                                                    new_user: 10
-                                                                                }
-                                                                                , {
-                                                                                    date: "2015-09-05",
-                                                                                    cancel_user: 3,
-                                                                                    cumulate_user: 34,
-                                                                                    netgain_user: 0,
-                                                                                    new_user: 3
-                                                                                }
-                                                                                , {
-                                                                                    date: "2015-09-06",
-                                                                                    cancel_user: 5,
-                                                                                    cumulate_user: 34,
-                                                                                    netgain_user: 1,
-                                                                                    new_user: 6
-                                                                                }
-                                                                                , {
-                                                                                    date: "2015-09-07",
-                                                                                    cancel_user: 4,
-                                                                                    cumulate_user: 36,
-                                                                                    netgain_user: 2,
-                                                                                    new_user: 6
-                                                                                }
-                                                                                , {
-                                                                                    date: "2015-09-08",
-                                                                                    cancel_user: 2,
-                                                                                    cumulate_user: 36,
-                                                                                    netgain_user: 0,
-                                                                                    new_user: 2
-                                                                                }
-                                                                                , {
-                                                                                    date: "2015-09-09",
-                                                                                    cancel_user: 0,
-                                                                                    cumulate_user: 36,
-                                                                                    netgain_user: 0,
-                                                                                    new_user: 0
-                                                                                }
-                                                                                , {
-                                                                                    date: "2015-09-10",
-                                                                                    cancel_user: 0,
-                                                                                    cumulate_user: 39,
-                                                                                    netgain_user: 3,
-                                                                                    new_user: 3
-                                                                                }
-                                                        ]
-                                                    }
-            ]
-
+                                                        list: [{
+                                                            date: "2015-08-17",
+                                                            cancel_user: 0,
+                                                            //cumulate_user: 1,
+                                                            //netgain_user: 0,
+                                                            user_source: 0,
+                                                            user_sourceDesc:"其他",
+                                                            new_user: 0
+                                                        }, {
+                                                            date: "2015-08-18",
+                                                            cancel_user: 0,
+                                                            //cumulate_user: 1,
+                                                            //netgain_user: 0,
+                                                            user_source: 0,
+                                                            user_sourceDesc: "其他",
+                                                            new_user: 0
+                                                        }]
+                                                    }]
         };
     </script>
+    <script type="text/javascript">
+
+        function FormatDate(date) {
+            var y = date.getFullYear();
+            var m = date.getMonth() + 1;
+            m = m < 10 ? '0' + m : m;
+            var d = date.getDate();
+            d = d < 10 ? ('0' + d) : d;
+            return y + '-' + m + '-' + d;
+        };
+
+        var myDate = new Date();
+        var recentDate = myDate.getTime();
+        var n = 7;
+        var end = new Date(recentDate - 24 * 60 * 60 * 1000);
+        var endTime = FormatDate(end);
+        $(document).ready(function () {
+            var start = new Date(recentDate - 24 * 60 * 60 * 1000 * n);
+            var startTime = FormatDate(start);
+            $.ajax({
+                type: "POST",
+                url: "WebServices/WeChatWebService.asmx/GetUserAnalysis",
+                data: {beginDate :startTime , endDate: endTime },
+                dataType: 'json',
+                success: function (result) {
+                    //$('#dictionary').append(result.d);
+                    window.cgiData.list = result.Data;
+                }
+            });
+
+            $("#sevendays").click(function () {
+                n = 7;
+                var start = new Date(recentDate - 24 * 60 * 60 * 1000 * n);
+                var startTime = FormatDate(start);
+                $.ajax({
+                    type: "POST",
+                    url: "WebServices/WeChatWebService.asmx/GetUserAnalysis",
+                    data: {beginDate :startTime , endDate: endTime },
+                    dataType: 'json',
+                    success: function (result) {
+                        //$('#dictionary').append(result.d);
+                        window.cgiData.list = result.Data;
+                    }
+                });
+            });
+            $("#fourteendays").click(function () {
+                n = 14;
+                var start = new Date(recentDate - 24 * 60 * 60 * 1000 * n);
+                var startTime = FormatDate(start);
+                $.ajax({
+                    type: "POST",
+                    url: "WebServices/WeChatWebService.asmx/GetUserAnalysis",
+                    data: { beginDate: startTime, endDate: endTime },
+                    dataType: 'json',
+                    success: function (result) {
+                        //$('#dictionary').append(result.d);
+                        window.cgiData.list = result.Data;
+                    }
+                });
+            });
+            $("#thirtydays").click(function () {
+                n = 30;
+                var start = new Date(recentDate - 24 * 60 * 60 * 1000 * n);
+                var startTime = FormatDate(start);
+                $.ajax({
+                    type: "POST",
+                    //contentType: "application/json",
+                    url: "WebServices/WeChatWebService.asmx/GetUserAnalysis",
+                    data: { beginDate: startTime, endDate: endTime },
+                    dataType: 'json',
+                    success: function (result) {
+                        //$('#dictionary').append(result.d);
+                        window.cgiData.list = result.Data;
+                    }
+                });
+            });
+        });
+        </script>
     <form id="form1" runat="server">
         <div>
             <div class="main_hd">
@@ -403,9 +320,9 @@
                                         <strong class="lable time_lable">时间</strong>
 
                                         <div class="button_group">
-                                            <a class="btn btn_default" href="javascript:;" range="7">7日</a>
-                                            <a class="btn btn_default" href="javascript:;" range="14">14日</a>
-                                            <a class="btn btn_default selected" href="javascript:;" range="30">30日</a>
+                                            <a class="btn btn_default" href="javascript:;" range="7" id="sevendays">7日</a>
+                                            <a class="btn btn_default" href="javascript:;" range="14" id="fourteendays">14日</a>
+                                            <a class="btn btn_default selected" href="javascript:;" range="30" id="thirtydays">30日</a>
 
                                             <div class="btn_group_item td_data_container" id="js_date_container0">
                                                 <div class="ta_date" id="div_js_dateRangeTitle1">

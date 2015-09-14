@@ -7,7 +7,7 @@ namespace Travel.Application.DomainModules.WeChat.DTOS
 {
     public class UserStatisticsDTO
     {
-        public string ref_date { get; set; }
+        public string date { get; set; }
         public int user_source { get; set; }
         public string user_sourceDesc { get; set; }
         public int new_user { get; set; }
