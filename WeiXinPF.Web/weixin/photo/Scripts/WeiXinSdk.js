@@ -16,8 +16,11 @@
     //注册方法
     wxsdk.initWxConfig = function (debug) {
         $.ajax({
-            url: '../WebService/WeChatWebService.asmx/WeChatConfigInit',
-            data: { url: document.location.href },
+            url: '../../WebServices/WeChatWebService.asmx/WeChatConfigInit',
+            data: {
+                url: document.location.href,
+                wid: wid
+            },
             async: false,
             dataType: 'json',
             success: function (res) {

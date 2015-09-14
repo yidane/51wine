@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="luckyMoneylist.aspx.cs" Inherits="WeiXinPF.Web.admin.choujiang.shakeLuckyMoney.luckyMoneylist" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="photolist.aspx.cs" Inherits="WeiXinPF.Web.admin.photo.photolist" %>
 
 
 <%@ Import Namespace="WeiXinPF.Common" %>
@@ -7,13 +7,13 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
-    <title>摇一摇活动管理</title>
-    <script type="text/javascript" src="../../../scripts/jquery/jquery-1.10.2.min.js"></script>
-    <script type="text/javascript" src="../../../scripts/lhgdialog/lhgdialog.js?skin=idialog"></script>
-    <script type="text/javascript" src="../../js/layout.js"></script>
-       <link href="../../skin/default/style.css" rel="stylesheet" type="text/css" />
-     <link href="../../skin/mystyle.css" rel="stylesheet" type="text/css" />
-    <link href="../../../css/pagination.css" rel="stylesheet" type="text/css" />
+    <title>湖怪活动管理</title>
+    <script type="text/javascript" src="../../scripts/jquery/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="../../scripts/lhgdialog/lhgdialog.js?skin=idialog"></script>
+    <script type="text/javascript" src="../js/layout.js"></script>
+       <link href="../skin/default/style.css" rel="stylesheet" type="text/css" />
+     <link href="../skin/mystyle.css" rel="stylesheet" type="text/css" />
+    <link href="../../css/pagination.css" rel="stylesheet" type="text/css" />
 
     <script type="text/javascript">
         function parentToIndex(id) {
@@ -27,7 +27,7 @@
     <form id="form1" runat="server">
         <!--导航栏-->
         <div class="location">
-            <a href="javascript:;" class="home"><i></i><span>摇一摇活动管理</span></a>
+            <a href="javascript:;" class="home"><i></i><span>湖怪活动管理</span></a>
         </div>
         <!--/导航栏-->
 
@@ -36,7 +36,7 @@
             <div id="floatHead" class="toolbar">
                 <div class="l-list">
                     <ul class="icon-list">
-                        <li><a class="icon-btn add" href="luckyMoneyEdit.aspx?action=<%=MXEnums.ActionEnum.Add %>"  id="itemAddButton"><i></i><span>新增摇一摇活动</span></a></li>
+                        <li><a class="icon-btn add" href="photoEdit.aspx?action=<%=MXEnums.ActionEnum.Add %>"  id="itemAddButton"><i></i><span>新增湖怪活动</span></a></li>
                         <li><a class="all" href="javascript:;" onclick="checkAll(this);"><i></i><span>全选</span></a></li>
                         <li>
                             <asp:LinkButton ID="btnDelete" runat="server" CssClass="del" OnClientClick="return ExePostBack('btnDelete');" OnClick="btnDelete_Click"><i></i><span>删除</span></asp:LinkButton></li>
@@ -52,14 +52,14 @@
 
         <!--列表-->
 
-        <asp:Repeater ID="rptList" runat="server" OnItemCommand="rptList_ItemCommand" OnItemDataBound="rptList_ItemDataBound">
+        <asp:Repeater ID="rptList" runat="server">
             <HeaderTemplate>
                 <table width="100%" border="0" cellspacing="0" cellpadding="0" class="ltable">
                     <thead>
                         <tr>
                             <th width="5%">选择</th>
                              <th>活动名称</th>
-                            <th width="10%">关键词</th>
+                            <%--<th width="10%">关键词</th>--%>
                             <th width="15%">开始时间/结束时间</th>
                             <th width="5%">状态</th>
                             <th width="25%" >链接地址</th>
@@ -77,9 +77,9 @@
                     <td>
                         <%# Eval("actName") %>
                     </td>
-                    <td>
+                  <%--  <td>      
                         <%# Eval("kw") %>
-                    </td>
+                    </td>--%>
                      <td>
                         <%# Eval("beginDate") %><br />
                          <%# Eval("endDate") %>
@@ -92,8 +92,8 @@
                         <a href="javascript:;"><%# Eval("url") %> </a>
                     </td>
                      <td>
-                        <a  href='luckyMoneyEdit.aspx?id=<%#Eval("id") %>&action=<%=MXEnums.ActionEnum.Edit %>' class="operator">编辑</a>
-                          <a  href='luckyMoneyAwardUser.aspx?id=<%#Eval("id") %>'  >获奖用户</a>
+                        <a  href='photoEdit.aspx?id=<%#Eval("id") %>&action=<%=MXEnums.ActionEnum.Edit %>' class="operator">编辑</a>
+                          <%--<a  href='luckyMoneyAwardUser.aspx?id=<%#Eval("id") %>'  >获奖用户</a>--%>
                     </td>
                 </tr>
             </ItemTemplate>

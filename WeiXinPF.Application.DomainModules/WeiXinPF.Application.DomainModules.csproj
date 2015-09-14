@@ -62,6 +62,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\PagingDto.cs" />
     <Compile Include="Coupon\CouponService.cs" />
     <Compile Include="Coupon\DTOS\CouponBaseInfoDTO.cs" />
     <Compile Include="Coupon\DTOS\CouponDTO.cs" />

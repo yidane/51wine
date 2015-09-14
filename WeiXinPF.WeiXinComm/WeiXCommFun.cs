@@ -45,7 +45,7 @@ namespace WeiXinPF.WeiXinComm
         /// <returns></returns>
         public IResponseMessageBase GetResponseMessageeMusic(RequestMessageText requestMessage, int Indexid, int wid)
         {
-
+            
             var responseMessage = ResponseMessageBase.CreateFromRequestMessage<ResponseMessageMusic>(requestMessage);
             Model.wx_requestRuleContent model_wx = getDataMusicComm(wid, Indexid);
             if (model_wx == null)
@@ -63,6 +63,10 @@ namespace WeiXinPF.WeiXinComm
 
             return responseMessage;
         }
+
+
+      
+
 
         /// <summary>
         /// 推送多图文

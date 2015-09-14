@@ -102,6 +102,8 @@
     <Content Include="admin\choujiang\shakeLuckyMoney\luckyMoneyAwardUser.aspx" />
     <Content Include="admin\choujiang\shakeLuckyMoney\luckyMoneyEdit.aspx" />
     <Content Include="admin\choujiang\shakeLuckyMoney\luckyMoneylist.aspx" />
+    <Content Include="admin\photo\photoEdit.aspx" />
+    <Content Include="admin\photo\photolist.aspx" />
     <Content Include="admin\scenic\scenic_detail_edit.aspx" />
     <Content Include="admin\scenic\scenic_detail_list.aspx" />
     <Content Include="admin\scenic\scenic_list.aspx" />
@@ -3107,6 +3109,7 @@
     <Content Include="scripts\calendar.js" />
     <Content Include="scripts\city.min.js" />
     <Content Include="scripts\jquery\jquery-1.10.1.min.js" />
+    <Content Include="scripts\jquery\zepto.min.js" />
     <Content Include="scripts\qrcode\jquery.qrcode.min.js" />
     <Content Include="scripts\jquery\jquery.url.js" />
     <Content Include="scripts\qrcode\qrcode.min.js" />
@@ -5032,6 +5035,20 @@
     </Compile>
     <Compile Include="admin\pano360\index.aspx.designer.cs">
       <DependentUpon>index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\photo\photoEdit.aspx.cs">
+      <DependentUpon>photoEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\photo\photoEdit.aspx.designer.cs">
+      <DependentUpon>photoEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\photo\photolist.aspx.cs">
+      <DependentUpon>photolist.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\photo\photolist.aspx.designer.cs">
+      <DependentUpon>photolist.aspx</DependentUpon>
     </Compile>
     <Compile Include="admin\picmgr\picSelect.aspx.cs">
       <DependentUpon>picSelect.aspx</DependentUpon>
@@ -7626,6 +7643,10 @@
       <Project>{E824FFCC-705E-4CF6-8710-142395937FCB}</Project>
       <Name>WeiXinPF.API</Name>
     </ProjectReference>
+    <ProjectReference Include="..\WeiXinPF.Application.DomainModules\WeiXinPF.Application.DomainModules.csproj">
+      <Project>{b2387b96-7302-4321-bbe3-a7c50f032939}</Project>
+      <Name>WeiXinPF.Application.DomainModules</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WeiXinPF.BLL\WeiXinPF.BLL.csproj">
       <Project>{EC27BBA4-030C-4853-9FB2-A075654B28FA}</Project>
       <Name>WeiXinPF.BLL</Name>
@@ -7672,6 +7693,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="WebServices\CouponWebService.asmx" />
+    <Content Include="WebServices\MonsterWebService.asmx" />
+    <Content Include="WebServices\WeChatWebService.asmx" />
     <Content Include="weixin\albums\alubmslist.aspx" />
     <Content Include="weixin\albums\css\cate1_6.css" />
     <Content Include="weixin\albums\css\icons%402x.png" />
@@ -7949,6 +7972,10 @@
     <Content Include="weixin\pano360\pano.aspx" />
     <Content Include="weixin\pano360\pano.xml" />
     <Content Include="weixin\pano360\xmlstr.aspx" />
+    <Content Include="weixin\photo\css\jquery.Jcrop.css" />
+    <Content Include="weixin\photo\images\avatar1.png" />
+    <Content Include="weixin\photo\images\avatar2.png" />
+    <Content Include="weixin\photo\images\intro-background.jpg" />
     <Content Include="weixin\photo\images\message.png" />
     <Content Include="weixin\photo\images\monster.png" />
     <Content Include="weixin\photo\images\shenxianwan.jpg" />
