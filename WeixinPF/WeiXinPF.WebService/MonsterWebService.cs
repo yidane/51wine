@@ -27,6 +27,22 @@ namespace WeiXinPF.WebService
 
                 var service = new PhotoService();
                 var info = service.GetModel(aid);
+                var now = DateTime.Now;
+                //获取状态
+                var begin = DateTime.Parse(info.beginDate);
+                var end = DateTime.Parse(info.endDate);
+                if (begin > now)
+                {
+                    info.status_s = "nostart";
+                }
+                else if (end <= DateTime.Now)
+                {
+                    info.status_s = "end";
+                }
+                else
+                {
+                    info.status_s = "success";
+                }
                 Context.Response.Write(AjaxResult.Success(info));
 
 

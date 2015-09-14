@@ -7981,6 +7981,8 @@
     <Content Include="weixin\photo\images\shenxianwan.jpg" />
     <Content Include="weixin\photo\images\wolongwan.jpg" />
     <Content Include="weixin\photo\images\yueliangwan.jpg" />
+    <Content Include="weixin\photo\images\活动未开始.png" />
+    <Content Include="weixin\photo\images\活动结束.png" />
     <Content Include="weixin\photo\MakePhoto.html" />
     <Content Include="weixin\photo\Scripts\photo.js" />
     <Content Include="weixin\photo\Scripts\WeiXinSdk.js" />
