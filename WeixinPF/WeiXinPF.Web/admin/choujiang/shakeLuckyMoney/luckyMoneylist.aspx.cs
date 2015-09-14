@@ -63,7 +63,7 @@ namespace WeiXinPF.Web.admin.choujiang.shakeLuckyMoney
                     {
                         dr["status_s"] = "<span class=\"act_in\">进行中</span>";
                     }
-                    dr["url"] = MyCommFun.getWebSite() + "/weixin/dzp/index.aspx?wid=" + dr["wid"].ToString() + "&aid=" + dr["id"].ToString();
+                    dr["url"] = MyCommFun.getWebSite() + "/weixin/shakeLuckyMoney/shakeLuckyMoney.html?wid=" + dr["wid"].ToString() + "&aid=" + dr["id"].ToString();
                 }
                 ds.AcceptChanges();
             }
