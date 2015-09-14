@@ -5,6 +5,7 @@ using System.Security.Policy;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Travel.Infrastructure.WeiXin.Common;
 using Travel.Infrastructure.WeiXin.Common.Ticket;
+using Travel.Infrastructure.WeiXin.Statistics;
 using Travel.Infrastructure.WeiXin.User;
 
 namespace Travel.Infrastructure.WeiXin.Test
@@ -69,6 +70,16 @@ namespace Travel.Infrastructure.WeiXin.Test
             var result = new UserInfoHelper().GetUserInfoByOpenID(openId);
 
             Assert.IsTrue(result != null);
+        }
+
+        [TestMethod]
+        public void TestUserStatistics()
+        {
+            var beginDate = new DateTime(2015, 9, 1);
+            var endDate = new DateTime(2015, 9, 6);
+            var userList = new UserStatistics().GetUserStatistics(beginDate, endDate);
+
+            Assert.IsTrue(userList != null && userList.list != null && userList.list.Count > 0);
         }
     }
 }

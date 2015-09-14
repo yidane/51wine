@@ -121,6 +121,7 @@
     <Compile Include="Plugin\TextPlugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Statistics\UserStatistics.cs" />
+    <Compile Include="Statistics\UserStatisticsInfo.cs" />
     <Compile Include="User\UserInfo.cs" />
     <Compile Include="User\UserInfoHelper.cs" />
   </ItemGroup>
