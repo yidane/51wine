@@ -82,12 +82,8 @@ namespace WeiXinPF.WebService
             }
             catch (Exception ex)
             {
-                var s = "";
-                if (ex.InnerException != null)
-                {
-                    s = ex.InnerException.Message;
-                }
-                Context.Response.Write(AjaxResult.Error(s));
+               
+                Context.Response.Write(AjaxResult.Error(ex.Message));
             }
         }
 
