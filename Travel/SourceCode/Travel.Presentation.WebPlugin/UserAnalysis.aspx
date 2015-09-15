@@ -100,7 +100,7 @@
                                                             //cumulate_user: 1,
                                                             //netgain_user: 0,
                                                             user_source: 0,
-                                                            user_sourceDesc:"其他",
+                                                            user_sourceDesc: "其他",
                                                             new_user: 0
                                                         }, {
                                                             date: "2015-08-18",
@@ -140,7 +140,9 @@
                 dataType: 'json',
                 success: function (result) {
                     //$('#dictionary').append(result.d);
+                    
                     window.cgiData.list = result.Data;
+                    seajs.use('https://res.wx.qq.com/c/=/mpres/zh_CN/htmledition/js/biz_common/moment26d05a.js,/mpres/zh_CN/htmledition/js/statistics/user_stat/summary/summary27cccc.js');;
                 }
             });
 
