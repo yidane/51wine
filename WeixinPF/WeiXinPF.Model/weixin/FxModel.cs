@@ -12,9 +12,9 @@ namespace WeiXinPF.Model
     {
 
        
-        public string appid { get; set; }
+        public string appId { get; set; }
         public string timestamp { get; set; }
-        public string nonce { get; set; }
+        public string nonceStr { get; set; }
         /// <summary>
         /// 分享弹窗上的标题
         /// </summary>

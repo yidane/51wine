@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Drawing;
+using System.Net;
 using Senparc.Weixin.MP;
 using Senparc.Weixin.MP.AdvancedAPIs;
 using Senparc.Weixin.MP.CommonAPIs;
@@ -13,7 +14,7 @@ namespace WeiXinPF.WeiXinComm
     public static partial class WeiXinMediaFun
     {
 
-    
+
 
         /// <summary>
         /// 获取文件流
@@ -21,11 +22,11 @@ namespace WeiXinPF.WeiXinComm
         /// <param name="accessToken"></param>
         /// <param name="mediaId"></param>
         /// <returns></returns>
-        public static void Get(string accessToken, string mediaId, MemoryStream ms)
+        public static void Get(string accessToken, string mediaId, Stream ms)
         {
 
             MediaApi.Get(accessToken, mediaId, ms);
-             
+
         }
 
         /// <summary>
@@ -34,44 +35,51 @@ namespace WeiXinPF.WeiXinComm
         /// <param name="accessToken"></param>
         /// <param name="mediaId"></param>
         /// <returns></returns>
-        public static  void SaveImage(string accessToken, string mediaId,string fileName)
+        public static Image SaveImage(string accessToken, string mediaId)
         {
-          //  Image result = null;
-
-            using (MemoryStream ms = new MemoryStream())
-            {
-                Get(accessToken, mediaId, ms);
+            Image result = null;
 
 
-                
-                using (FileStream fs = new FileStream(fileName, FileMode.Create))
-                {
-                    ms.Position = 0;
-                    byte[] buffer = new byte[1024];
-                    int bytesRead = 0;
-                    while ((bytesRead = ms.Read(buffer, 0, buffer.Length)) != 0)
-                    {
-                        fs.Write(buffer, 0, bytesRead);
-                    }
-                    fs.Flush();
-                }
+            var url = "http://file.api.weixin.qq.com/cgi-bin/media/get";
+            var str = string.Format("{0}?access_token={1}&media_id={2}", url, accessToken, mediaId);
+            var ms = GetStream(str);
 
 
-             //   result = ms.ToImage();
-            }
+
+            //using (FileStream fs = new FileStream(fileName, FileMode.Create))
+            //{
+            //    ms.Position = 0;
+            //    byte[] buffer = new byte[1024];
+            //    int bytesRead = 0;
+            //    while ((bytesRead = ms.Read(buffer, 0, buffer.Length)) != 0)
+            //    {
+            //        fs.Write(buffer, 0, bytesRead);
+            //    }
+            //    fs.Flush();
+            //}
 
 
-           
+            result = ms.ToImage();
 
-           // return result;
+
+
+
+            return result;
         }
 
 
+        public static Stream GetStream(string url)
+        {
+            var request = WebRequest.Create(url);
+            request.Method = "GET";
+            return request.GetResponse().GetResponseStream();
+        }
 
-        private static Image ToImage(this MemoryStream stream)
+
+        private static Image ToImage(this Stream stream)
         {
             Image img = default(Image);
-            if (stream != null )
+            if (stream != null)
             {
                 img = Image.FromStream(stream);
             }

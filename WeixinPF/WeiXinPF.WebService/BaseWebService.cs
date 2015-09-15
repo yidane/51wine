@@ -62,8 +62,8 @@ namespace WeiXinPF.WebService
         /// <param name="state"></param>
         /// <param name="code">默认读取请求中的code属性</param>
         /// <param name="targetUrl">目标地址</param>
-        protected string OAuth2BaseProc(Model.wx_userweixin model, string state, string code = "",
-            string targetUrl = null)
+        protected string OAuth2BaseProc(Model.wx_userweixin model, string state, string code ,
+            string targetUrl)
         {
             string openid = String.Empty;
 
@@ -116,7 +116,7 @@ namespace WeiXinPF.WebService
         /// <param name="wid"></param>
         /// <param name="state"></param>
         /// <returns></returns>
-        protected OAuthUserInfo GetUser(int wid, string state)
+        protected OAuthUserInfo GetUser(int wid, string state,string code,string targetUrl)
         {
             OAuthUserInfo user = null;
 
@@ -137,7 +137,7 @@ namespace WeiXinPF.WebService
 
                 };
                 return user;
-            } 
+            }   
 #endif
 
             string error;
@@ -146,7 +146,7 @@ namespace WeiXinPF.WebService
             {
                 BLL.wx_userweixin bll = new BLL.wx_userweixin();
                 Model.wx_userweixin wxModel = bll.GetModel(wid);
-                var openId = OAuth2BaseProc(wxModel, state);
+                var openId = OAuth2BaseProc(wxModel, state,code, targetUrl);
 
                 user = OAuthApi.GetUserInfo(accessToken, openId);
             }
@@ -167,23 +167,16 @@ namespace WeiXinPF.WebService
         ///    初始化微信分享
         /// </summary>
         /// <param name="wxModel"></param>
-        /// <param name="fxUrl">分享的目标url，如果传过来的值为空字符串或者为null则默认是当前的网址</param>
-        public FxModel jssdkInit(Model.wx_userweixin wxModel, string fxUrl = "")
+        /// <param name="currentUrl">分享的目标url，如果传过来的值为空字符串或者为null则默认是当前的网址</param>
+        public FxModel jssdkInit(Model.wx_userweixin wxModel, string currentUrl )
         {
             FxModel fxModel = new FxModel();
-            fxModel.appid = wxModel.AppId;
+            fxModel.appId = wxModel.AppId;
             fxModel.timestamp = JSSDKHelper.GetTimestamp();
-            fxModel.nonce = JSSDKHelper.GetNoncestr();
-            fxModel.thisUrl = HttpContext.Current.Request.Url.ToString();
-
-            if (fxUrl == null || fxUrl.Trim() == "")
-            {
-                fxModel.fxUrl = fxModel.thisUrl;
-            }
-            else
-            {
-                fxModel.fxUrl = fxUrl;
-            }
+            fxModel.nonceStr = JSSDKHelper.GetNoncestr();
+            fxModel.thisUrl = currentUrl;
+            fxModel.fxUrl = fxModel.thisUrl;
+           
             string error = "";
             string ticket = WeiXinPF.WeiXinComm.WeiXinCRMComm.getJsApiTicket(wxModel.id, out error);
             if (error != "")
@@ -192,7 +185,7 @@ namespace WeiXinPF.WebService
             }
             JSSDKHelper jsHelper = new JSSDKHelper();
             //获取签名
-            var signature = jsHelper.GetSignature(ticket, fxModel.nonce, fxModel.timestamp, fxModel.thisUrl);
+            var signature = jsHelper.GetSignature(ticket, fxModel.nonceStr, fxModel.timestamp, fxModel.thisUrl);
 
             fxModel.signature = signature;
             return fxModel;

@@ -33,7 +33,7 @@
             title: "<%=fxModel.fxTitle%>",
             desc: "<%=fxModel.fxContent%>",
             timestamp: '<%=fxModel.timestamp%>',
-            nonceStr: '<%=fxModel.nonce%>',
+            nonceStr: '<%=fxModel.nonceStr%>',
             signature: '<%=fxModel.signature%>',
             jsApiList: ["checkJsApi",
                     'onMenuShareTimeline',

@@ -220,7 +220,7 @@
     var downImageFromServer = function (serverId) {
         $.ajax({
             url: '../../WebServices/MonsterWebService.asmx/DownLoadImage',
-            data: { mediaId: serverId },
+            data: { mediaId: serverId,wid:wid },
             type: 'post',
             dataType: 'json',
             success: function (res) {

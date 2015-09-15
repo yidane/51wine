@@ -126,9 +126,9 @@ namespace WeiXinPF.Web.UI
         public void jssdkInit(Model.wx_userweixin wxModel, string fxUrl)
         {
 
-            fxModel.appid = wxModel.AppId;
+            fxModel.appId = wxModel.AppId;
             fxModel.timestamp = TenPayV3Util.GetTimestamp();
-            fxModel.nonce = TenPayV3Util.GetNoncestr();
+            fxModel.nonceStr = TenPayV3Util.GetNoncestr();
             fxModel.thisUrl = HttpContext.Current.Request.Url.ToString();
             // fxModel.fxUrl = MyCommFun.getWebSite() + "/weixin/huodong/index.aspx";
             if (fxUrl == null || fxUrl.Trim() == "")
@@ -143,7 +143,7 @@ namespace WeiXinPF.Web.UI
             var ticketResult = JsApiTicketContainer.GetTicketResult(wxModel.AppId); //获取Ticket完整结果（包括当前过期秒数）
 
             // 这里参数的顺序要按照 key 值 ASCII 码升序排序  
-            string rawstring = "jsapi_ticket=" + ticketResult.ticket + "&noncestr=" + fxModel.nonce + "&timestamp=" + fxModel.timestamp + "&url=" + fxModel.thisUrl + "";
+            string rawstring = "jsapi_ticket=" + ticketResult.ticket + "&noncestr=" + fxModel.nonceStr + "&timestamp=" + fxModel.timestamp + "&url=" + fxModel.thisUrl + "";
             fxModel.signature = SHA1_Hash(rawstring);
         }//end:function
         //SHA1哈希加密算法  

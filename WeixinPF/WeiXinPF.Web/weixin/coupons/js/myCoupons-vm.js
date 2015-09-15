@@ -4,7 +4,7 @@ var MyCouponsViewModel= function ($domParam, param) {
     this.$DomParm = ko.observable($domParam);
     this.param = ko.observable(param);
     // this.user = ko.observable();
-    this.openId = ko.observable('obzTsw4p1nhpl97G1xJwKicDNsiQ');
+    this.openId = ko.observable('');
     //this.info=ko.observable();
     this.expiredCoupons=ko.observableArray();
     this.unExpiredCoupons=ko.observableArray();
@@ -17,6 +17,7 @@ var MyCouponsViewModel= function ($domParam, param) {
                
                 wid: self.param().wid,
                 code: self.param().access_code,
+                url: document.location.href,
                 openid: self.openId()
             })
             .done(function (json) {
