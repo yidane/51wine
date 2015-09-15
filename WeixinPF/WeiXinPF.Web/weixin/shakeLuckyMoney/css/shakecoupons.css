@@ -98,7 +98,7 @@ body {
     background-image: url(../images/hand.png);
     background-size: cover;
     position: fixed;
-    bottom: 28%;
+    top: 40%;
     left: 50%;
     margin-left: -70px;
     -webkit-animation: hand_move infinite 1s;
