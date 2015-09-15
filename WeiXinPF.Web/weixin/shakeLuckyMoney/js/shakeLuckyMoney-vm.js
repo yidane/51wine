@@ -7,7 +7,7 @@ var LuckyMoneyViewModel = function ($domParam, param) {
     this.$DomParm = ko.observable($domParam);
     this.param = ko.observable(param);
     this.shakeObj = ko.observable();
-    this.wechatDebug = ko.observable(false);
+    this.wechatDebug = ko.observable(true);
     this.stage = ko.observable("hand");
     this.itemList = ko.observableArray();
     this.info = ko.observable();
@@ -78,24 +78,7 @@ var LuckyMoneyViewModel = function ($domParam, param) {
     };
 
     //------------wechat
-    this.initWeChat = function () {
-        $.getJSON('../../WebService/WeChatWebService.asmx/WeChatConfigInit', { url: document.location.href })
-            .done(function (json) {
-                if (json.IsSuccess) {
-                    var wxConfig = json.Data;
-                    self.configWeChat(wxConfig);
-                }
-            }).fail(
-            function (jqxhr, textStatus, error) {
-                var err = textStatus + ", " + error;
-                console.log("Request Failed: " + err);
-            });
-
-
-
-
-
-    };
+   
     this.configWeChat = function (wxConfig) {
         wxConfig.debug = self.wechatDebug();
         wxConfig.jsApiList = self.jsApiList();
@@ -106,15 +89,12 @@ var LuckyMoneyViewModel = function ($domParam, param) {
 
     this.onWeChatReady = function (wxConfig) {
         wx.ready(function () {
-            //wx.checkJsApi({
-            //    jsApiList: [
-            //      'getNetworkType',
-            //      'previewImage'
-            //    ],
-            //    success: function (res) {
-            //        alert(JSON.stringify(res));
-            //    }
-            //});
+            wx.checkJsApi({
+                jsApiList: wxConfig.jsApiList,
+                success: function (res) {
+                    alert(JSON.stringify(res));
+                }
+            });
 
             self.hideWeChatBtn();
             
@@ -241,7 +221,8 @@ var LuckyMoneyViewModel = function ($domParam, param) {
             {
                 aid: self.param().aid,
                 wid: self.param().wid,
-                code: self.param().access_code
+                code: self.param().access_code,
+                url: document.location.href
                 
             })
             .done(function (json) {
@@ -283,6 +264,7 @@ var LuckyMoneyViewModel = function ($domParam, param) {
             {
                 aid: self.param().aid,
                 wid: self.param().wid,
+                url:document.location.href,
                 openid: self.user()?self.user().openid:''
               //  openid:'obzTsw4p1nhpl97G1xJwKicDNsiQ'
             })

@@ -21,7 +21,7 @@ namespace WeiXinPF.WebService
         /// <param name="aid"></param>
         /// <param name="wid"></param>
         [WebMethod(EnableSession = true)]
-        public void GetBaseCouponInfo(int aid, int wid, string code)
+        public void GetBaseCouponInfo(int aid, int wid, string code,string url)
         {
             OAuthUserInfo user = null;
             try
@@ -32,7 +32,7 @@ namespace WeiXinPF.WebService
 
                 if (Session["User"] == null)
                 {
-                    user = GetUser(wid, "coupon");
+                    user = GetUser(wid, "coupon",code,url);
                     if (user != null)
                     {
                         Session["User"] = user;
@@ -54,7 +54,7 @@ namespace WeiXinPF.WebService
                     Model.wx_userweixin uWeiXinModel = bll.GetModel(wid);
 
                     //初始话jsskd
-                    var signatureDto = jssdkInit(uWeiXinModel);
+                    var signatureDto = jssdkInit(uWeiXinModel, url);
                     signatureDto.fxContent = info.brief;
                     signatureDto.fxImg =  info.beginPic;
                     signatureDto.fxTitle = info.actName;
@@ -178,7 +178,7 @@ namespace WeiXinPF.WebService
         /// </summary>
         /// <param name="access_code"></param>
         [WebMethod(EnableSession = true)]
-        public void GetCouponList(string code,int wid)
+        public void GetCouponList(string code,int wid,string url)
         {
             string openid = string.Empty;
             try
@@ -191,7 +191,7 @@ namespace WeiXinPF.WebService
                 {
                     BLL.wx_userweixin bll = new BLL.wx_userweixin();
                     Model.wx_userweixin wxModel = bll.GetModel(wid);
-                    openid = OAuth2BaseProc(wxModel, "coupon", code);
+                    openid = OAuth2BaseProc(wxModel, "coupon", code, url);
                     if (!string.IsNullOrEmpty(openid))
                     {
                         Session["openid"] = openid;

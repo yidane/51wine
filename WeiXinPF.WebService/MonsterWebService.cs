@@ -150,11 +150,11 @@ namespace WeiXinPF.WebService
                 string imagePath = GetImagePath(imageName);
                 string path = MyCommFun.GetRootPath() + imagePath;
 
-                WeiXinMediaFun.SaveImage(accessToken, mediaId, path);
+               var image=  WeiXinMediaFun.SaveImage(accessToken, mediaId);
 
                 var imgUrl = string.Format("{0}/{1}", MyCommFun.getWebSite(), imagePath);
 
-                //image.Save(path);
+                image.Save(path);
 
                 result = AjaxResult.Success(new { imgName = imageName, imgUrl = imgUrl });
             }

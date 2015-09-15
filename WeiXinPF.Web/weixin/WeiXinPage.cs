@@ -112,9 +112,9 @@ namespace WeiXinPF.Web.weixin
         public void jssdkInit(Model.wx_userweixin wxModel, string fxUrl="")
         {
 
-            fxModel.appid = wxModel.AppId;
+            fxModel.appId = wxModel.AppId;
             fxModel.timestamp = JSSDKHelper.GetTimestamp();
-            fxModel.nonce = JSSDKHelper.GetNoncestr();
+            fxModel.nonceStr = JSSDKHelper.GetNoncestr();
             fxModel.thisUrl = HttpContext.Current.Request.Url.ToString();
           
             if (fxUrl == null || fxUrl.Trim() == "")
@@ -134,7 +134,7 @@ namespace WeiXinPF.Web.weixin
             }
             JSSDKHelper jsHelper = new JSSDKHelper();
             //获取签名
-            var signature = jsHelper.GetSignature(ticket, fxModel.nonce, fxModel.timestamp, fxModel.thisUrl);
+            var signature = jsHelper.GetSignature(ticket, fxModel.nonceStr, fxModel.timestamp, fxModel.thisUrl);
 
             fxModel.signature = signature;
         }//end:function
