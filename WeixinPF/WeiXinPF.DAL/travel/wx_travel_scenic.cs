@@ -9,6 +9,7 @@ using System.Text;
 using Dapper;
 using WeiXinPF.Common;
 using WeiXinPF.DBUtility;
+using WeiXinPF.Model;
 
 namespace WeiXinPF.DAL
 {
@@ -37,6 +38,19 @@ namespace WeiXinPF.DAL
                 db.Execute(query, dynamicParameters);
 
                 return dynamicParameters.Get<int>("@Id");
+            }
+        }
+
+        public List<Model.wx_travel_scenic> GetModelList(string strWhere)
+        {
+            if (!string.IsNullOrEmpty(strWhere))
+            {
+                strWhere = " Where " + strWhere;
+            }
+
+            using (IDbConnection db = DbFactory.GetOpenedConnection())
+            {
+                return db.Query<Model.wx_travel_scenic>("Select * From wx_travel_scenic " + strWhere).ToList();
             }
         }
 
