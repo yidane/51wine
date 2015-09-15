@@ -26,6 +26,8 @@ namespace Travel.Presentation.WebPlugin.UserStatistics
 
             var result = GetUserStatistics(beginDate, endDate);
 
+            return result;
+
             //已存在数据的时间散列域
             var existsDateList = new List<DateTime>();
             if (result != null && result.Count > 0)

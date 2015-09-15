@@ -18,7 +18,7 @@ namespace Travel.Presentation.WebPlugin
         protected void Page_Load(object sender, EventArgs e)
         {
             webService = new WeChatWebService();
-            json_data=webService.GetUserAnalysis(Convert.ToDateTime("2015-09-08"),Convert.ToDateTime("2015-09-14"));
+            json_data=webService.GetUserAnalysis(Convert.ToDateTime("2015-09-01"),Convert.ToDateTime("2015-09-14"));
         }
     }
 }
