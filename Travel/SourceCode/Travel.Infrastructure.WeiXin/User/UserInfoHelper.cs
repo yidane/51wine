@@ -25,5 +25,20 @@ namespace Travel.Infrastructure.WeiXin.User
 
             return result;
         }
+
+        public UserInfo GetUserInfoByOpenID(string accessToken, string openId)
+        {
+            var httpHelper = new HttpHelper(WeChatUrlConfigManager.UserManager.GetUserInfoUrl);
+            var formData = new FormData()
+                {
+                    {"access_token",accessToken},
+                    {"openid",openId},
+                    {"lang","zh_CN"}
+                };
+
+            var result = httpHelper.Get<UserInfo>(formData);
+
+            return result;
+        }
     }
 }
