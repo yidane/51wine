@@ -11,6 +11,7 @@ using Senparc.Weixin.MP;
 using Senparc.Weixin.MP.AdvancedAPIs;
 using Senparc.Weixin.MP.CommonAPIs;
 using WeiXinPF.Application.DomainModules.Photo;
+using WeiXinPF.BLL;
 using WeiXinPF.Common;
 using WeiXinPF.WeiXinComm;
 
@@ -18,13 +19,16 @@ namespace WeiXinPF.WebService
 {
     public class MonsterWebService : BaseWebService
     {
+        /// <summary>
+        /// 获取湖怪活动基本信息
+        /// </summary>
+        /// <param name="aid"></param>
+        /// <param name="wid"></param>
         [WebMethod]
         public void GetBaseInfo(int aid, int wid)
         {
             try
             {
-
-
                 var service = new PhotoService();
                 var info = service.GetModel(aid);
                 var now = DateTime.Now;
@@ -63,11 +67,68 @@ namespace WeiXinPF.WebService
             }
         }
 
-
-
-
+        /// <summary>
+        /// 获取场景
+        /// </summary>
+        /// <param name="wid"></param>
         [WebMethod]
-        public void DownLoadImage(string mediaId,int wid)
+        public void GetScenics(int wid)
+        {
+            try
+            {
+                var scenicBll = new wx_travel_scenic();
+                var detailBll = new wx_travel_scenicDetail();
+
+                var scenic = scenicBll.GetModelList("wid=" + wid).FirstOrDefault();
+                if (scenic != null)
+                {
+                    var scenics = detailBll.GetModelByScenicId(scenic.Id);
+
+                    if (scenics.Any())
+                    {
+                        var dtos = scenics.Select(p => new
+                        {
+                            name = p.Name,
+                            img =string.Format("url({0})", p.BackgroundImage) ,
+                            url = string.Format("{0}/weixin/scenic/index.aspx?id={1}",
+                            MyCommFun.getWebSite(), p.Id)
+                        });
+
+
+                        Context.Response.Write(AjaxResult.Success(dtos));
+                    }
+                }
+
+
+
+
+
+            }
+            catch (JsonException jsEx)
+            {
+
+                Context.Response.Write(AjaxResult.Error(jsEx.Message, jsEx.ErrorType));
+            }
+            catch (Exception ex)
+            {
+                var s = "";
+                if (ex.InnerException != null)
+                {
+                    s = ex.InnerException.Message;
+                }
+                Context.Response.Write(AjaxResult.Error(s));
+            }
+        }
+
+
+
+        /// <summary>
+        /// 下载微信上图片
+        /// </summary>
+        /// <param name="mediaId"></param>
+        /// <param name="wid"></param>
+        [WebMethod]
+        public void DownLoadImage(string mediaId, int wid)
         {
             AjaxResult result = null;
             try
@@ -78,13 +139,13 @@ namespace WeiXinPF.WebService
                 {
                     throw new Exception(error);
                 }
-                
+
                 if (string.IsNullOrEmpty(accessToken) || string.IsNullOrEmpty(mediaId))
                 {
                     throw new ArgumentNullException("参数不能为空！");
                 }
 
-            
+
                 string imageName = Guid.NewGuid().ToString();
                 string imagePath = GetImagePath(imageName);
                 string path = MyCommFun.GetRootPath() + imagePath;
@@ -106,8 +167,15 @@ namespace WeiXinPF.WebService
         }
 
 
-     
 
+        /// <summary>
+        /// 裁剪图片
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
+        /// <param name="imgName"></param>
         [WebMethod]
         public void CropImage(int x, int y, int width, int height, string imgName)
         {
@@ -119,7 +187,7 @@ namespace WeiXinPF.WebService
                 var cutImageName = Guid.NewGuid().ToString();
                 //string path = MyCommFun.GetRootPath() + GetImagePath(cutImageName);
                 string cutPath = MyCommFun.GetRootPath() + GetImagePath(cutImageName);
-                var sourcePath= MyCommFun.GetRootPath() + GetImagePath(imgName);
+                var sourcePath = MyCommFun.GetRootPath() + GetImagePath(imgName);
                 Bitmap cuted = ic.KiCut(new Bitmap(Image.FromFile(sourcePath)));
 
                 cuted.Save(cutPath, ImageFormat.Jpeg);
@@ -136,7 +204,7 @@ namespace WeiXinPF.WebService
         #region 私有方法
         private string GetImagePath(string imageName)
         {
-            
+
             string folderName = "weixin/photo/uploadimages";
             string path = MyCommFun.GetRootPath() + folderName;
             if (!Directory.Exists(path))

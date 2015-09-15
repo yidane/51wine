@@ -97,7 +97,7 @@ body {
     height: 175.8px;
     background-image: url(../images/hand.png);
     background-size: cover;
-    position: absolute;
+    position: fixed;
     bottom: 28%;
     left: 50%;
     margin-left: -70px;

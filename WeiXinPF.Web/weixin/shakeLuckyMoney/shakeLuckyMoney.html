@@ -1,8 +1,8 @@
 ﻿<!doctype html>
-<html >
-<head >
+<html>
+<head>
     <meta charset="utf-8">
-    <title >摇一摇</title>
+    <title>摇一摇</title>
     <meta name="viewport"
           content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
     <meta name="format-detection" content="telephone=no, email=no" />
@@ -90,9 +90,11 @@
         }
 
         .shake-back {
+            position: fixed;
             height: 100%;
             width: 100%;
-            position: absolute;
+            top: 0;
+            left: 0;
             z-index: 10;
         }
 
@@ -125,16 +127,11 @@
             margin-bottom: 5px;
         }
 
-        .div-info{
+        .div-info {
             z-index: 40;
             position: relative;
             top: 75%;
         }
-
-
-
-
-
     </style>
 </head>
 <body>
@@ -158,11 +155,11 @@
                 </div>
             </div>
 
-            <div  class="div-info">
+            <div class="div-info">
                 <div class="boxcontent boxwhite">
                     <div class="box">
                         <div class="title-red"><span>奖项设置：</span></div>
-                        <div class="Detail"  data-bind="foreach:itemList">
+                        <div class="Detail" data-bind="foreach:itemList">
                             <p data-bind="text:jxName+':'+jpName+ '  数量：' +jpNum"></p>
                         </div>
                     </div>
@@ -261,7 +258,7 @@
             return re.exec(window.location.href);
         }
 
-        var access_code = $.url.param("code")?$.url.param("code"):'';
+        var access_code = $.url.param("code") ? $.url.param("code") : '';
         var aid = $.url.param("aid");
         var wid = $.url.param("wid");
         var baseurl = getBaseUrl();

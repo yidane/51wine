@@ -11,7 +11,8 @@
         },
         hideMask: function () {
             $("#mask").hide();
-        }
+        },
+        info:null
     }
 
     mk.cropFormServer = function () {
@@ -68,8 +69,10 @@
            .done(function (json) {
                console.log(json);
                if (json.IsSuccess) {
+                   ui.info = json.Data;
                    document.title = json.Data.actName;
                    $("#msg_monster").text(json.Data.actContent);
+                   $("#p_brief").html(json.Data.brief);
                    if (json.Data.status_s == "nostart") {
                        $(".div-nostart").show();
                         
@@ -97,7 +100,11 @@
 
 
     var showPhoto = function (img) {
-        var url = 'ShowPhoto.html?img={0}&scenic={1}&wid={2}&aid={3}';
+        var title = '';
+        if (ui.info && ui.info.actName) {
+            title = '&shareTitle='+ui.info.actName;
+        }
+        var url = 'ShowPhoto.html?img={0}&scenic={1}&wid={2}&aid={3}' + title;
         document.location.href = formatString(url, img, getRandom(2),wid,aid);
     }
 
