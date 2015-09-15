@@ -389,7 +389,7 @@
             z-index: 10;
             top: 0;
             left: 0;
-            background: rgba(0, 0, 0,.1);
+            background: rgba(0, 0, 0, .1);
             -webkit-transition: all .8s ease;
             transition: all .8s ease;
         }
@@ -436,86 +436,186 @@
                 transform: rotate(360deg);
             }
         }
-@-webkit-keyframes bounceInDown {
-    0%, 60%, 75%, 90%, 100% {
-        -webkit-transition-timing-function: cubic-bezier(0.215, .610, .355, 1.000);
-        transition-timing-function: cubic-bezier(0.215, .610, .355, 1.000)
-    }
-    0% {
-        opacity: 0;
-        -webkit-transform: translate3d(0, -3000px, 0);
-        transform: translate3d(0, -3000px, 0)
-    }
-    60% {
-        opacity: 1;
-        -webkit-transform: translate3d(0, 25px, 0);
-        transform: translate3d(0, 25px, 0)
-    }
-    75% {
-        -webkit-transform: translate3d(0, -10px, 0);
-        transform: translate3d(0, -10px, 0)
-    }
-    90% {
-        -webkit-transform: translate3d(0, 5px, 0);
-        transform: translate3d(0, 5px, 0)
-    }
-    100% {
-        -webkit-transform: none;
-        transform: none
-    }
-}
 
-@keyframes bounceInDown {
-    0%, 60%, 75%, 90%, 100% {
-        -webkit-transition-timing-function: cubic-bezier(0.215, .610, .355, 1.000);
-        transition-timing-function: cubic-bezier(0.215, .610, .355, 1.000)
-    }
-    0% {
-        opacity: 0;
-        -webkit-transform: translate3d(0, -3000px, 0);
-        transform: translate3d(0, -3000px, 0)
-    }
-    60% {
-        opacity: 1;
-        -webkit-transform: translate3d(0, 25px, 0);
-        transform: translate3d(0, 25px, 0)
-    }
-    75% {
-        -webkit-transform: translate3d(0, -10px, 0);
-        transform: translate3d(0, -10px, 0)
-    }
-    90% {
-        -webkit-transform: translate3d(0, 5px, 0);
-        transform: translate3d(0, 5px, 0)
-    }
-    100% {
-        -webkit-transform: none;
-        transform: none
-    }
-}
+        @-webkit-keyframes bounceInDown {
+            0%, 60%, 75%, 90%, 100% {
+                -webkit-transition-timing-function: cubic-bezier(0.215, .610, .355, 1.000);
+                transition-timing-function: cubic-bezier(0.215, .610, .355, 1.000);
+            }
 
+            0% {
+                opacity: 0;
+                -webkit-transform: translate3d(0, -3000px, 0);
+                transform: translate3d(0, -3000px, 0);
+            }
 
-                .div-expired {
-    background:url(images/活动结束.png)  no-repeat;
-    background-size: cover;
-    height: 100%;
-    width: 100%;
+            60% {
+                opacity: 1;
+                -webkit-transform: translate3d(0, 25px, 0);
+                transform: translate3d(0, 25px, 0);
+            }
 
+            75% {
+                -webkit-transform: translate3d(0, -10px, 0);
+                transform: translate3d(0, -10px, 0);
+            }
 
-    -webkit-animation: bounceInDown 1.5s ease-out 0s both;
-    animation: bounceInDown 1.5s ease-out 0s both;
-}
+            90% {
+                -webkit-transform: translate3d(0, 5px, 0);
+                transform: translate3d(0, 5px, 0);
+            }
 
-.div-nostart{
-    background:url(images/活动未开始.png)  no-repeat;
-    background-size: cover;
-    height: 100%;
-    width: 100%;
+            100% {
+                -webkit-transform: none;
+                transform: none;
+            }
+        }
+
+        @keyframes bounceInDown {
+            0%, 60%, 75%, 90%, 100% {
+                -webkit-transition-timing-function: cubic-bezier(0.215, .610, .355, 1.000);
+                transition-timing-function: cubic-bezier(0.215, .610, .355, 1.000);
+            }
+
+            0% {
+                opacity: 0;
+                -webkit-transform: translate3d(0, -3000px, 0);
+                transform: translate3d(0, -3000px, 0);
+            }
+
+            60% {
+                opacity: 1;
+                -webkit-transform: translate3d(0, 25px, 0);
+                transform: translate3d(0, 25px, 0);
+            }
+
+            75% {
+                -webkit-transform: translate3d(0, -10px, 0);
+                transform: translate3d(0, -10px, 0);
+            }
+
+            90% {
+                -webkit-transform: translate3d(0, 5px, 0);
+                transform: translate3d(0, 5px, 0);
+            }
+
+            100% {
+                -webkit-transform: none;
+                transform: none;
+            }
+        }
 
 
-    -webkit-animation: bounceInDown 1.5s ease-out 0s both;
-    animation: bounceInDown 1.5s ease-out 0s both;
-}
+        .div-expired {
+            background: url(images/活动结束.png) no-repeat;
+            background-size: cover;
+            height: 100%;
+            width: 100%;
+            -webkit-animation: bounceInDown 1.5s ease-out 0s both;
+            animation: bounceInDown 1.5s ease-out 0s both;
+        }
+
+        .div-nostart {
+            background: url(images/活动未开始.png) no-repeat;
+            background-size: cover;
+            height: 100%;
+            width: 100%;
+            -webkit-animation: bounceInDown 1.5s ease-out 0s both;
+            animation: bounceInDown 1.5s ease-out 0s both;
+        }
+    </style>
+
+    <style>
+        /*活动说明*/
+        .div-info {
+            z-index: 40;
+            position: relative;
+            top: 95%;
+        }
+
+        .boxcontent {
+            margin: 15px 15px 0;
+            border-radius: 5px;
+            padding: 2px;
+            background-color: #FEF8B2;
+            -webkit-box-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
+            -moz-box-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
+            -o-box-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
+        }
+
+        .boxwhite {
+            margin: 15px 15px 0;
+            border-radius: 5px;
+            padding: 2px;
+            background-color: #FEF8B2;
+            -webkit-box-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
+            -moz-box-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
+            -o-box-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
+        }
+
+        .boxyellow {
+            background-color: #FEF8B2;
+        }
+
+        .boxwhite {
+            background-color: #ffffff;
+        }
+
+        .box {
+            border-radius: 5px;
+            font-size: 14px;
+            border: 1px dashed rgba(0, 0, 0, 0.3);
+        }
+
+            .box .title-red {
+                padding: 0 5px 0px 10px;
+                background: url(../shakeLuckyMoney/images/title-bg-red.png) no-repeat 0 0;
+                border-radius: 3px 3px 3px 0;
+                color: #ffffff;
+                height: 22px;
+                margin: -1px;
+                /*-moz-text-shadow:0 1px 0 #8d0001;-webkit-text-shadow:0 1px 0 #8d0001;text-shadow:0 1px 0 #8d0001;
+        text-shadow:0px 1px 0 #8d0001;*/
+            }
+
+            .box .title-orange {
+                padding: 0 5px 0px 10px;
+                background: url(../shakeLuckyMoney/images/title-bg-orange.png) no-repeat 0 0;
+                border-radius: 3px 3px 3px 0;
+                color: #ffffff;
+                height: 22px;
+                margin: -1px;
+                /*-moz-text-shadow:0 1px 0 #8d0001;-webkit-text-shadow:0 1px 0 #8d0001;text-shadow:0 1px 0 #8d0001;
+        text-shadow:0px 1px 0 #8d0001;*/
+            }
+
+            .box .title-green {
+                padding: 0 5px 0px 10px;
+                background: url(../shakeLuckyMoney/images/title-bg-green.png) no-repeat 0 0;
+                border-radius: 3px 3px 3px 0;
+                color: #ffffff;
+                height: 22px;
+                margin: -1px;
+                /*-moz-text-shadow:0 1px 0 #8d0001;-webkit-text-shadow:0 1px 0 #8d0001;text-shadow:0 1px 0 #8d0001;
+        text-shadow:0px 1px 0 #8d0001;*/
+            }
+
+            .box .title-brown {
+                padding: 0 5px 0px 10px;
+                background: url(../shakeLuckyMoney/images/title-bg-brown.png) no-repeat 0 0;
+                border-radius: 3px 3px 3px 0;
+                color: #ffffff;
+                height: 22px;
+                margin: -1px;
+                /*-moz-text-shadow:0 1px 0 #8d0001;-webkit-text-shadow:0 1px 0 #8d0001;text-shadow:0 1px 0 #8d0001;
+        text-shadow:0px 1px 0 #8d0001;*/
+            }
+
+            .box .Detail {
+                padding: 15px;
+            }
     </style>
 </head>
 <body>
@@ -533,12 +633,28 @@
                 亲，来合个影吧！
             </span>
         </div>
+
+        <div class="div-info">
+
+            <div class="boxcontent boxwhite" data-bind="with:info">
+                <div class="box">
+                    <div class="title-red">活动说明：</div>
+                    <div class="Detail">
+
+                        <p id="p_brief">
+
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <span class="btn_box" id="chooseImage">上传照片与湖怪合影</span>
     </div>
     <div id="mask" style="width: 100%; height: 100%; position: fixed; top: 0; left: 0; z-index: 9999; background: #000; opacity: .7; display: none;">
         <div class="loader spin"></div>
     </div>
-    <div class="div-nostart"  style="display:none"></div>
+    <div class="div-nostart" style="display:none"></div>
     <div class="div-expired" style="display:none"></div>
 
 
@@ -579,7 +695,7 @@
 
             function loaded() {
                 $("#loading").hide();
-               // $(".container").show();
+                // $(".container").show();
             }
         }
         var code = $.url.param("code") ? $.url.param("code") : '';

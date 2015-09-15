@@ -41,17 +41,7 @@
             display: none;
         }
 
-        .wolongwan {
-            background-image: url(images/wolongwan.jpg);
-        }
-
-        .yueliangwan {
-            background-image: url(images/yueliangwan.jpg);
-        }
-
-        .shenxianwan {
-            background-image: url(images/shenxianwan.jpg);
-        }
+      
 
         .monster {
             position: absolute;
@@ -254,43 +244,79 @@
                 $(".slideshow").show();
             }
         }
-    </script>
-    <script src="Scripts/WeiXinSdk.js"></script>
-    <script type="text/javascript">
+
         function getQueryString(name) {
             var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
             var r = window.location.search.substr(1).match(reg);
             if (r != null) return (r[2]); return null;
         }
 
+        var wid=getQueryString('wid');
+    </script>
+    <script src="Scripts/WeiXinSdk.js"></script>
+    <script type="text/javascript">
+       
+
         function getBaseUrl() {
             var re = new RegExp(/^.*\//);
             return re.exec(window.location.href);
         }
         var baseurl = getBaseUrl();
+
+       
+
         var ui = {
             scenics: [
                 {
                     name: '卧龙湾',
-                    cls: 'wolongwan',
+                    'background-image': 'url(images/wolongwan.jpg)',
                     url: '../Guide/wolongwan.html'
                 }, {
                     name: '月亮湾',
-                    cls: 'yueliangwan',
+                    'background-image': 'url(images/wolongwan.jpg)',
                     url: '../Guide/yueliangwan.html'
                 }, {
                     name: '神仙湾',
-                    cls: 'shenxianwan',
+                    'background-image': 'url(images/wolongwan.jpg)',
                     url: '../Guide/shenxianwan.html'
                 }
             ],
             cartoon: ['avatar-box1', 'avatar-box2'],
+
+            getScenics: function (param) {
+
+                $.ajax({
+                    url: "../../WebServices/MonsterWebService.asmx/GetScenics",
+                    data: {
+                        wid: param.wid
+                    },
+                    type: 'post',
+                    dataType: 'json',
+                    success: function (json) {
+                        console.log(json);
+                        if (json.IsSuccess) {
+                            ui.scenics = json.Data;
+                            ui.setScenic(param.scenic == null ? 0 : param.scenic);
+                        }
+                        else {
+                            console.log(json.Message);
+                        }
+                    },
+                    error: function (a, b, c) {
+                        //$("#token").html(a.response);
+                    }
+                });
+
+
+              
+            },
+
             getRandom: function(seed) {
                 return Math.round(Math.random() * seed);
             },
             setScenic: function(i) {
                 var scenic = ui.scenics[i];
-                $('.container').addClass(scenic.cls).attr('alt', scenic.name);
+                $('.container').css({ 'background-image': scenic.img }).attr('alt', scenic.name);
                 $('#introduce').attr('href', scenic.url);
             },
             //setCartoon: function (i) {
@@ -314,13 +340,15 @@
                     //cartoon: getQueryString('cartoon'),
                     share: getQueryString('share'),
                     wid: getQueryString('wid'),
-                    aid: getQueryString('aid')
+                    aid: getQueryString('aid'),
+                    shareTitle: getQueryString('shareTitle')
                 };
             },
             init: function() {
                 var param = this.getParams();
                 //ui.setCartoon(param.cartoon == null ? 0 : param.cartoon);
-                ui.setScenic(param.scenic == null ? 0 : param.scenic);
+                ui.getScenics(param);
+                //ui.setScenic(param.scenic == null ? 0 : param.scenic);
                 ui.setPhoto(param.img);
 
                 if (param.share) {
@@ -328,9 +356,12 @@
                 }
 
                 wxsdk.initWxConfig(false);
-                
+                var title = "~~~啊啊啊啊，湖怪出现了，小伙伴们速速来合影！！！";
+                if (param&&param.shareTitle) {
+                    title = param.shareTitle;
+                }
                 var shareMsg = {
-                    title: "~~~啊啊啊啊，湖怪出现了，小伙伴们速速来合影！！！", // 分享标题
+                    title: title, // 分享标题
                     link: document.location.href + "&share=1", // 分享链接
                     imgUrl: baseurl+"uploadimages/" + param.img + ".jpg" // 分享图标
                 }
