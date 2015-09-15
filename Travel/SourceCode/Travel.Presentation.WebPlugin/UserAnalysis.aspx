@@ -90,31 +90,34 @@
 </head>
 <body>
     <script type="text/javascript">
-        window.cgiData = {
-            list: [
-                                                    {
-                                                        user_source: 99999999,
-                                                        list: [{
-                                                            date: "2015-08-17",
-                                                            cancel_user: 0,
-                                                            //cumulate_user: 1,
-                                                            //netgain_user: 0,
-                                                            user_source: 0,
-                                                            user_sourceDesc: "其他",
-                                                            new_user: 0
-                                                        }, {
-                                                            date: "2015-08-18",
-                                                            cancel_user: 0,
-                                                            //cumulate_user: 1,
-                                                            //netgain_user: 0,
-                                                            user_source: 0,
-                                                            user_sourceDesc: "其他",
-                                                            new_user: 0
-                                                        }]
-                                                    }]
-        };
+        
+        var testJson = eval("(" + '<%=json_data%>' + ")");
+        window.cgiData = testJson;
+        //window.cgiData = {
+        //    list: [
+        //                                            {
+        //                                                user_source: 99999999,
+        //                                                list: [{
+        //                                                    date: "2015-08-17",
+        //                                                    cancel_user: 0,
+        //                                                    //cumulate_user: 1,
+        //                                                    //netgain_user: 0,
+        //                                                    user_source: 0,
+        //                                                    user_sourceDesc: "其他",
+        //                                                    new_user: 0
+        //                                                }, {
+        //                                                    date: "2015-08-18",
+        //                                                    cancel_user: 0,
+        //                                                    //cumulate_user: 1,
+        //                                                    //netgain_user: 0,
+        //                                                    user_source: 0,
+        //                                                    user_sourceDesc: "其他",
+        //                                                    new_user: 0
+        //                                                }]
+        //                                            }]
+        //};
     </script>
-    <script type="text/javascript">
+   <%-- <script type="text/javascript">
 
         function FormatDate(date) {
             var y = date.getFullYear();
@@ -193,7 +196,7 @@
                 });
             });
         });
-        </script>
+        </script>--%>
     <form id="form1" runat="server">
         <div>
             <div class="main_hd">
@@ -305,6 +308,8 @@
 
                     <div class="info_box drop_hd_right">
                         <div class="inner" id="js_actionstest">
+
+
                             <div>
                                 <div class="info_hd">
                                     <strong class="lable time_lable">关键指标详解</strong>

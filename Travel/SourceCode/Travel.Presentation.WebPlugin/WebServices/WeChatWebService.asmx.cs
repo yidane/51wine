@@ -7,6 +7,7 @@ using Travel.Application.DomainModules.WeChat;
 using Travel.Application.DomainModules.WeChat.DTOS;
 using Travel.Infrastructure.CommonFunctions.Ajax;
 using Travel.Infrastructure.WeiXin.Common.OAuth2;
+using Travel.Infrastructure.CommonFunctions;
 
 namespace Travel.Presentation.WebPlugin.WebServices
 {
@@ -22,13 +23,25 @@ namespace Travel.Presentation.WebPlugin.WebServices
     {
 
         [WebMethod]
-        public void GetUserAnalysis(DateTime beginDate, DateTime endDate)
+        public string GetUserAnalysis(DateTime beginDate, DateTime endDate)
         {
             var userStatisticsList = new WeChatService().GetUserStatistics(beginDate, endDate);
-            if (userStatisticsList.Count > 0)
+            //if (userStatisticsList.Count > 0)
+            //{
+            //    Context.Response.Write(AjaxResult.Success(userStatisticsList));
+            //}
+            var listdata = new
             {
-                Context.Response.Write(AjaxResult.Success(userStatisticsList));
-            }
+                user_source = 99999999,
+                list = userStatisticsList
+            };
+            var array=new object[1]{listdata };
+            var result = new 
+            {
+                list = array
+            };
+            var json = JSONHelper.Serialize(result);
+            return json;
         }
     }
 }
