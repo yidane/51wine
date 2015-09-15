@@ -33,10 +33,11 @@ namespace Travel.Infrastructure.WeiXin.Statistics
 
             var userCumulateInfoList = Extra.HttpHelper.Post<StatisticsRequestResult<UserCumulateInfo>>(string.Format("{0}?access_token={1}", WeChatUrlConfigManager.StatisticsManager.GetUserCumulateUrl, credential.AccessToken), JsonConvert.SerializeObject(postData), null, null);
 
+
             return new StatisticsResult()
                 {
-                    CumulateList = userCumulateInfoList.list,
-                    SummaryList = userSummaryInfoList.list
+                    CumulateList = userCumulateInfoList.list ?? null,
+                    SummaryList = userSummaryInfoList.list ?? null
                 };
         }
 
