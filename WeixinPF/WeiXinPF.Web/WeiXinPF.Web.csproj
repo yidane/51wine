@@ -3110,6 +3110,7 @@
     <Content Include="scripts\city.min.js" />
     <Content Include="scripts\jquery\jquery-1.10.1.min.js" />
     <Content Include="scripts\jquery\zepto.min.js" />
+    <Content Include="scripts\jsrender.min.js" />
     <Content Include="scripts\qrcode\jquery.qrcode.min.js" />
     <Content Include="scripts\jquery\jquery.url.js" />
     <Content Include="scripts\qrcode\qrcode.min.js" />
@@ -8070,6 +8071,7 @@
     <Content Include="weixin\qiangpiao\order_ret.html" />
     <Content Include="weixin\qiangpiao\笔记.txt" />
     <Content Include="weixin\scenic\css\index.css" />
+    <Content Include="weixin\scenic\css\swiper.min.css" />
     <Content Include="weixin\scenic\detail.aspx" />
     <Content Include="weixin\scenic\images\bg.png" />
     <Content Include="weixin\scenic\images\bg1.png" />
@@ -8098,6 +8100,7 @@
     <Content Include="weixin\scenic\images\wl.png" />
     <Content Include="weixin\scenic\images\yl.png" />
     <Content Include="weixin\scenic\index.aspx" />
+    <Content Include="weixin\scenic\js\swiper.min.js" />
     <Content Include="weixin\scenic\overview.html" />
     <Content Include="weixin\shakeLuckyMoney\audios\end.mp3" />
     <Content Include="weixin\shakeLuckyMoney\audios\shake.wav" />

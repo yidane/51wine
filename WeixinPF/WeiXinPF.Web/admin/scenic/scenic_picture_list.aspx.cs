@@ -16,10 +16,12 @@ namespace WeiXinPF.Web.admin.scenic
         protected int TotalCount;
         protected int CurrentPage;
         protected int PageSize;
-        protected int DetailId = 0;  //微相册主键id
+        protected int ScenicId = 0; //景区导览主键id
+        protected int DetailId = 0;  //景点主键id
         BLL.wx_travel_picture _bll = new BLL.wx_travel_picture();
         protected void Page_Load(object sender, EventArgs e)
         {
+            ScenicId = MXRequest.GetQueryInt("scenicId");
             DetailId = MyCommFun.RequestInt("detailId");
 
             this.PageSize = GetPageSize(10); //每页数量
@@ -41,7 +43,7 @@ namespace WeiXinPF.Web.admin.scenic
 
             //绑定页码
             txtPageNum.Text = this.PageSize.ToString();
-            string pageUrl = Utils.CombUrlTxt("scenic_picture_list.aspx", "detailId={0}&page={1}", DetailId.ToString(), "__id__");
+            string pageUrl = Utils.CombUrlTxt("scenic_picture_list.aspx", "scenicId={0}&detailId={1}&page={2}", ScenicId.ToString(), DetailId.ToString(), "__id__");
             PageContent.InnerHtml = Utils.OutPageList(PageSize, CurrentPage, TotalCount, pageUrl, 8);
         }
         #endregion
@@ -73,7 +75,7 @@ namespace WeiXinPF.Web.admin.scenic
                     Utils.WriteCookie("photolist_page_size", pagesize.ToString(), 14400);
                 }
             }
-            Response.Redirect(Utils.CombUrlTxt("scenic_picture_list.aspx", "detailId={0}", DetailId.ToString()));
+            Response.Redirect(Utils.CombUrlTxt("scenic_picture_list.aspx", "scenicId={0}&detailId={1}", ScenicId.ToString(), DetailId.ToString()));
         }
 
         //批量删除
@@ -100,7 +102,7 @@ namespace WeiXinPF.Web.admin.scenic
             }
             AddAdminLog(MXEnums.ActionEnum.Delete.ToString(), "删除景点-图片信息" + sucCount + "条，失败" + errorCount + "条"); //记录日志
 
-            JscriptMsg("删除成功" + sucCount + "条，失败" + errorCount + "条！", Utils.CombUrlTxt("scenic_picture_list.aspx", "detailId={0}", DetailId.ToString()), "Success");
+            JscriptMsg("删除成功" + sucCount + "条，失败" + errorCount + "条！", Utils.CombUrlTxt("scenic_picture_list.aspx", "scenicId={0}&detailId={1}", ScenicId.ToString(), DetailId.ToString()), "Success");
         }
     }
 }

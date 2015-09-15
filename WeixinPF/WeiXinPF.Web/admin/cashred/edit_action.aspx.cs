@@ -6,18 +6,6 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using WeiXinPF.Common;
 using WeiXinPF.BLL;
-/**************************************
- *
- * author: 李 朴
- * company:上海 沐 雪 网络科 技有限公 司
- * qq:23002807
- * website:http://uweixin.cn
- * taobao:https://item.taobao.com/item.htm?spm=686.1000925.0.0.5HYEHQ&id=520523216527  
- * createDate:2015-8-2
- * update:2015-8-2
- * 
- ***********************************/
-
 namespace WeiXinPF.Web.admin.cashred
 {
     public partial class edit_action : Web.UI.ManagePage

@@ -98,25 +98,26 @@
                     <!--分类-->
 
                     <ul id="menu">
-                        <vt:function var="category" method="CategoryListByChannelName" type="$this"  channel_name="modulebrief" />
+                        <vt:function var="category" method="CategoryListByChannelName" type="$this" channel_name="modulebrief" />
                         <vt:foreach from="$category" item="item" index="i">
-                         
-                          <li>
-                            <a class="nav-header"><i class="icon-angle-right"></i>{$item.title}</a>
-                            <ul class="ckit">
-                                <vt:function var="sun" method="getArticleByCategory" type="$this" rows="0" categoryid="$item.id"  />
-                                  <vt:foreach from="$sun" item="s" index="j">
-                                       <vt:if var="s.id" value="$model.id" compare="==">
+
+                            <li>
+                                <a class="nav-header"><i class="icon-angle-right"></i>{$item.title}</a>
+                                <ul class="ckit">
+                                    <vt:function var="sun" method="getArticleByCategory" type="$this" rows="0" categoryid="$item.id" />
+                                    <vt:foreach from="$sun" item="s" index="j">
+                                        <vt:if var="s.id" value="$model.id" compare="==">
                                             <li class="selected "><a href="{$yuming}/portalpage/weixin_module.aspx?id={$s.id}">{$s.title}</a></li>
-                                        <vt:else>
-                                            <li><a href="{$yuming}/portalpage/weixin_module.aspx?id={$s.id}">{$s.title}</a></li>
-                                       </vt:if>   
-                                 </vt:foreach>
-                            </ul>
-                        </li>
-                          
-                       </vt:foreach>
-                        
+                                            <vt:else>
+                                                <li><a href="{$yuming}/portalpage/weixin_module.aspx?id={$s.id}">{$s.title}</a></li>
+                                            </vt:else>
+                                        </vt:if>
+                                    </vt:foreach>
+                                </ul>
+                            </li>
+
+                        </vt:foreach>
+
                     </ul>
 
                     <!--内容-->
@@ -124,7 +125,7 @@
                     <div class="content3" style="min-height: 800px">
                         <h2>{$model.title}</h2>
                         <div class="content4">
-                            {$model.content}    
+                            {$model.content}
                         </div>
 
                     </div>
@@ -165,6 +166,5 @@
     <!--_bottom-->
     <vt:template id="bottom" file="_bottom.html" charset="utf-8" />
     <!--/_bottom-->
-      <div style="display: none">©上海沐雪网络科技提供qq 23002807 https://item.taobao.com/item.htm?spm=686.1000925.0.0.5HYEHQ&id=520523216527  </div>
 </body>
 </html>

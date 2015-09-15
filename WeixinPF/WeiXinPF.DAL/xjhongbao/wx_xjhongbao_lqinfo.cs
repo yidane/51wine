@@ -1,16 +1,4 @@
-﻿/**************************************
- *
- * 作者：李~朴
- * 公司:上·海沐·雪·网·络·科·技·有·限·公·司
- * qq:23002807
- * website:http://uweixin.cn
- * taobao:https://item.taobao.com/item.htm?spm=686.1000925.0.0.5HYEHQ&id=520523216527  
- * createDate:2015-8-3
- * update:2015-8-3
- * 
- ***********************************/
-
-
+﻿
 using System;
 using System.Data;
 using System.Text;

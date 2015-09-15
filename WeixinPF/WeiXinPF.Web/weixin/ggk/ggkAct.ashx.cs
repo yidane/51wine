@@ -6,12 +6,6 @@ using System.Web;
 
 namespace WeiXinPF.Web.weixin.ggk
 {
-    /// <summary>
-    /// ggkAct 的摘要说明
-    /// author:li pu
-    /// qq: 23002807
-    /// 
-    /// </summary>
     public class ggkAct : IHttpHandler
     {
 

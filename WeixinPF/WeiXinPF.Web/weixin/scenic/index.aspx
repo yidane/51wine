@@ -16,8 +16,10 @@
 </head>
 <body>
     <div class="container">
-        <section class="page bg1" data-bind="with: scenic">
-            <img alt="" data-bind="attr: { 'src': firstBgImg }" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1" />
+    </div>
+    <script type="text/x-jquery-tmpl" id="tmpl">
+        <section class="page bg1">
+            <img alt="" src="{{:scenic.firstBgImg}}" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1" />
             <div class="circle">
                 <img class="scenic-name" src="images/scenic_name.png" />
                 <img class="stamp" src="images/stamp.png" />
@@ -34,46 +36,27 @@
                 </svg>
             </span>
         </section>
-        <section class="page bg2" style="display: none;">
-            <ul class="scenic-list">
+        <section class="page bg2">
+            <img alt="" src="{{:scenic.secondBgImg}}" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1" />
+            <ul class="scenic-list" data-bind="foreach: details">
+                {{for details}}
                 <li>
-                    <a href="detail.aspx">
+                    <a href="detail.aspx?id={{:id}}">
                         <div class="annular-round">
-                            <img src="images/scenic1.jpg" />
+                            <img src="{{:cover}}" />
                         </div>
-                        <span>卧龙湾</span>
+                        <span>{{:name}}</span>
                     </a>
                 </li>
-                <li>
-                    <a href="detail.aspx">
-                        <div class="annular-round">
-                            <img src="images/scenic2.jpg" />
-                        </div>
-                        <span>月亮湾</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="detail.aspx">
-                        <div class="annular-round">
-                            <img src="images/scenic3.jpg" />
-                        </div>
-                        <span>神仙湾</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="detail.aspx">
-                        <div class="annular-round">
-                            <img src="images/scenic4.jpg" />
-                        </div>
-                        <span>观鱼台</span>
-                    </a>
-                </li>
+                {{/for}}
             </ul>
-            <div class="info"><span style="font-size: 16px; font-weight: bold;">&nbsp;&nbsp;&nbsp;&nbsp;喀纳斯</span>，一个美丽富饶、神秘莫测的地方，在这里壮观的冰川映衬着宁静的湖水、茫茫的草原包容着幽深的原始森林。神秘的湖怪、古朴的土瓦人、变换的湖水、眩人的风景会让人痴迷。生活在都市的你，可以适时的停下脚步，背上背包，在这片净土上和自己的心来一次徒步之旅。</div>
+            <div class="info">
+                {{:scenic.description}}
+            </div>
         </section>
-    </div>
+    </script>
     <script src="../../scripts/jquery/jquery-2.1.0.min.js"></script>
-    <script src="../../scripts/knockout/knockout-3.3.0.js"></script>
+    <script src="../../scripts/jsrender.min.js"></script>
     <script type="text/javascript">
         var hash = document.location.hash;
         function renderViewport() {
@@ -87,36 +70,45 @@
 
         function showPage() {
             if (!hash) {
-                document.location.hash = "page2";
+                document.location.hash = "#2";
             }
             $(".bg2").addClass("slide-down").show();
         }
 
         $(function () {
-            var scenicViewModel = new ScenicViewModel();
-            ko.applyBindings(scenicViewModel);
+            renderViewport();
+            $.ajax({
+                url: 'scenic.ashx',
+                data: { action: 'GetScenic', id: 1 },
+                dataType: "json"
+            }).done(function (res) {
+                if (res && res.success) {
+                    var outHtml = $("#tmpl").render(res.result);
+                    $(".container").empty().html(outHtml);
+
+                    if (hash != "#2") {
+                        var autoDisplayNextPage = res.result.scenic.autoDisplayNextPage;
+                        var delay = res.result.scenic.delay || 10;
+
+                        if (autoDisplayNextPage) {
+                            var timer = setTimeout(showPage, delay * 1000);
+                            $(".trigger").on('click', function () {
+                                if (timer) {
+                                    clearTimeout(timer);
+                                }
+                                showPage();
+                            });
+                        }
+                    }
+                    else {
+                        $('.bg1').hide();
+                        $('.bg2').show();
+                    }
+                }
+            }).fail(function () {
+                alert('获取配置信息失败。');
+            });
         });
-
-
-        var ScenicViewModel = function () {
-            var self = this;
-            this.scenic = ko.observable();
-            this.details = ko.observableArray();
-
-            var loadData = function () {
-                $.getJSON('scenic.ashx', {
-                    action: 'GetScenic', id: 1
-                }).done(function (res) {
-                    if (res && res.success) {
-                        self.scenic(res.result.scenic);
-                        self.details(res.result.details);
-                    };
-                }).fail(function (a, b, c) {
-                    alert(1);
-                });
-            }
-            loadData();
-        }
     </script>
 </body>
 </html>

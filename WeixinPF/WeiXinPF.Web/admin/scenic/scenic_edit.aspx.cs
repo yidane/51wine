@@ -35,7 +35,7 @@ namespace WeiXinPF.Web.admin.scenic
             {
                 wid = weixin.id,
                 Name = txtName.Text.Trim(),
-                Description = txtDescription.Text.Trim(),
+                Description = txtDescription.InnerText.Trim(),
                 TemplateId = 1,
                 FirstBgImg = txtFirstBgImg.Text,
                 IdentifyImg = txtIdentifyImg.Text,
@@ -62,7 +62,7 @@ namespace WeiXinPF.Web.admin.scenic
             bool result = false;
             Model.wx_travel_scenic model = _bll.GetModel(id);
             model.Name = txtName.Text.Trim();
-            model.Description = txtDescription.Text.Trim();
+            model.Description = txtDescription.InnerText.Trim();
             model.TemplateId = 1;
             model.FirstBgImg = txtFirstBgImg.Text;
             model.IdentifyImg = txtIdentifyImg.Text;
@@ -84,7 +84,7 @@ namespace WeiXinPF.Web.admin.scenic
         {
             Model.wx_travel_scenic model = _bll.GetModel(id);
             model.Name = txtName.Text = model.Name;
-            txtDescription.Text = model.Description;
+            txtDescription.InnerText = model.Description;
             txtFirstBgImg.Text = model.FirstBgImg;
             txtIdentifyImg.Text = model.IdentifyImg;
             rblDiaplayAction.SelectedValue = model.DisplayAction;
