@@ -79,6 +79,10 @@
       <Project>{37afc00a-8d40-45df-98e8-3e671dd420fb}</Project>
       <Name>Travel.Infrastructure.WeiXin</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Travel.Presentation.WebPlugin\Travel.Presentation.WebPlugin.csproj">
+      <Project>{29575b29-faf5-49c7-9e4a-6c32906931a5}</Project>
+      <Name>Travel.Presentation.WebPlugin</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

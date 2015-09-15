@@ -135,9 +135,9 @@ namespace Travel.Presentation.WebPlugin
                     DateTime.TryParse(this.txtendDate.Text.Trim(), out endDate);
 
                 rtnSearchParameter.BeginDate = beginDate;
-                rtnSearchParameter.BeginTotalPrice = maxAmount;
+                rtnSearchParameter.BeginTotalPrice = minAmount;
                 rtnSearchParameter.EndDate = endDate;
-                rtnSearchParameter.EndTotalPrice = minAmount;
+                rtnSearchParameter.EndTotalPrice = maxAmount;
 
                 return rtnSearchParameter;
             }

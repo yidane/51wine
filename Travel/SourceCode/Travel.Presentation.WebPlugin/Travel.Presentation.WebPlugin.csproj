@@ -136,6 +136,8 @@
     <Compile Include="UserAnalysis.aspx.designer.cs">
       <DependentUpon>UserAnalysis.aspx</DependentUpon>
     </Compile>
+    <Compile Include="UserStatistics\UserStatisticsInfo.cs" />
+    <Compile Include="UserStatistics\UserStatisticsManager.cs" />
     <Compile Include="WebHelper.cs" />
     <Compile Include="WebServices\WeChatWebService.asmx.cs">
       <DependentUpon>WeChatWebService.asmx</DependentUpon>

@@ -5,9 +5,12 @@ using System.Text;
 
 namespace Travel.Infrastructure.WeiXin.Statistics
 {
-    public class UserStatisticsInfo
+    /// <summary>
+    /// 用户关注变化
+    /// </summary>
+    public class UserSummaryInfo
     {
-        public string ref_date { get; set; }
+        public DateTime ref_date { get; set; }
         public int user_source { get; set; }
         public string user_sourceDesc
         {
@@ -34,11 +37,30 @@ namespace Travel.Infrastructure.WeiXin.Statistics
         }
         public int new_user { get; set; }
         public int cancel_user { get; set; }
-        //public int cumulate_user { get; set; }
+    }
+
+    /// <summary>
+    /// 用户实时统计
+    /// </summary>
+    public class UserCumulateInfo
+    {
+        public DateTime ref_date { get; set; }
+        public int cumulate_user { get; set; }
     }
 
     public class StatisticsResult
     {
-        public List<UserStatisticsInfo> list { get; set; }
+        public List<UserSummaryInfo> SummaryList { get; set; }
+        public List<UserCumulateInfo> CumulateList { get; set; }
+
+        public bool HasValue()
+        {
+            return SummaryList != null && SummaryList.Count > 0 && CumulateList != null && CumulateList.Count > 0;
+        }
+    }
+
+    public class StatisticsRequestResult<T> where T : class
+    {
+        public List<T> list { get; set; }
     }
 }

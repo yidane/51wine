@@ -29,9 +29,15 @@ namespace Travel.Infrastructure.WeiXin.Statistics
                     end_date = endDate.ToString("yyyy-MM-dd")
                 };
 
-            var userList = Extra.HttpHelper.Post<StatisticsResult>(string.Format("{0}?access_token={1}", WeChatUrlConfigManager.StatisticsManager.GetUserCumulateUrl, credential.AccessToken), JsonConvert.SerializeObject(postData), null, null);
+            var userSummaryInfoList = Extra.HttpHelper.Post<StatisticsRequestResult<UserSummaryInfo>>(string.Format("{0}?access_token={1}", WeChatUrlConfigManager.StatisticsManager.GetUserSummaryUrl, credential.AccessToken), JsonConvert.SerializeObject(postData), null, null);
 
-            return userList;
+            var userCumulateInfoList = Extra.HttpHelper.Post<StatisticsRequestResult<UserCumulateInfo>>(string.Format("{0}?access_token={1}", WeChatUrlConfigManager.StatisticsManager.GetUserCumulateUrl, credential.AccessToken), JsonConvert.SerializeObject(postData), null, null);
+
+            return new StatisticsResult()
+                {
+                    CumulateList = userCumulateInfoList.list,
+                    SummaryList = userSummaryInfoList.list
+                };
         }
 
         /// <summary>

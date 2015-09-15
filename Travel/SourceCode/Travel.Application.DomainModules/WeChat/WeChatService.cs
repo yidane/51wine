@@ -72,18 +72,29 @@ namespace Travel.Application.DomainModules.WeChat
         {
             var rtnUserStatisticsList = new List<UserStatisticsDTO>();
             var result = new UserStatistics().GetUserStatistics(beginDate, endDate);
-            if (result != null && result.list != null && result.list.Count > 0)
+            if (result != null && result.HasValue())
             {
-                foreach (UserStatisticsInfo info in result.list)
+                foreach (UserSummaryInfo info in result.SummaryList)
                 {
-                    rtnUserStatisticsList.Add(new UserStatisticsDTO()
+                    var newUserStatisticsDTO = new UserStatisticsDTO()
                         {
-                            date = info.ref_date,
+                            date = info.ref_date.ToString("yyyy-MM-dd"),
                             user_source = info.user_source,
                             user_sourceDesc = info.user_sourceDesc,
                             new_user = info.new_user,
                             cancel_user = info.cancel_user
-                        });
+                        };
+
+                    var cumulateInfo =
+                        result.CumulateList.FirstOrDefault(
+                            cumInfo => DateTime.Equals(cumInfo.ref_date, info.ref_date));
+
+                    if (cumulateInfo != null)
+                    {
+                        newUserStatisticsDTO.cumulate_user = cumulateInfo.cumulate_user;
+                    }
+
+                    rtnUserStatisticsList.Add(newUserStatisticsDTO);
                 }
             }
 

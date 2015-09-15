@@ -10,62 +10,56 @@
     <!--/导航栏-->
 
     <!--工具栏-->
-    <div class="toolbar-wrap">
+    <div class="tab-content">
         <!-- 查询面板 S -->
         <div class="query-panel">
             <div class="tab-subnav">
                 <a href='#' data-target="#batchQuery" class="on">批量订单查询</a>
             </div>
-            <input type="hidden" id="token" name="ecc_csrf_token" value="7f625c239ff4beeb0a42a8b084df515e">
-
             <div class="tab-subcon">
                 <!-- 批量订单查询 S -->
                 <div class="" id="batchQuery">
-
-                    <div class="form-group">
-                        <div class="form-item">
-                            <label class="label" for="">交易时间：</label>
+                    <dl>
+                        <dt>开始时间：</dt>
+                        <dd>
                             <div class="input-date">
-                                <span class="btn datepicker-switch">
-                                    <asp:TextBox ID="txtbeginDate" runat="server" CssClass="input date" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" datatype="*1-50" errormsg="请选择正确的日期" sucmsg=" " nullmsg=" " />
-                                    <i>开始时间</i>
-                                </span>
+                                <asp:TextBox ID="txtbeginDate" runat="server" CssClass="input date" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" datatype="*1-50" errormsg="请选择正确的日期" sucmsg=" " nullmsg=" " />
+                                <i>日期</i>
                             </div>
                             <span class="gaps">到</span>
                             <div class="input-date">
-                                <span class="btn datepicker-switch">
-                                    <asp:TextBox ID="txtendDate" runat="server" CssClass="input date" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" datatype="*1-50" errormsg="请选择正确的日期" sucmsg=" " nullmsg=" " />
-                                    <i>结束时间</i>
-                                </span>
-                                <span class="tips-error hide" id="ErrTipTime"></span>
+                                <asp:TextBox ID="txtendDate" runat="server" CssClass="input date" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" datatype="*1-50" errormsg="请选择正确的日期" sucmsg=" " nullmsg=" " />
+                                <i>日期</i>
                             </div>
-                        </div>
-                    </div>
-                    <div class="form-group more hide">
-                        <div class="form-item">
-                            <label class="label" for="">交易状态：</label>
-                            <asp:DropDownList ID="ddlCategoryStatus" runat="server"></asp:DropDownList>
-                        </div>
-                    </div>
-                    <div class="form-group more hide">
-                        <div class="form-item single-select">
-                            <label class="label" for="">票种类：</label>
-                            <asp:DropDownList ID="ddlTicketCategory" runat="server"></asp:DropDownList>
-                        </div>
-                    </div>
-
-                    <div class="form-group more hide">
-                        <div class="form-item">
-                            <label class="label" for="">交易金额：</label>
-                            <asp:TextBox runat="server" ID="txtMinAmount" CssClass="input normal"></asp:TextBox>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>交易状态：</dt>
+                        <dd>
+                            <div class="rule-single-select">
+                                <asp:DropDownList ID="ddlCategoryStatus" runat="server"></asp:DropDownList>
+                            </div>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>票种类：</dt>
+                        <dd>
+                            <div class="rule-single-select">
+                                <asp:DropDownList ID="ddlTicketCategory" runat="server" datatype="*" sucmsg=" "></asp:DropDownList>
+                            </div>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>交易金额：</dt>
+                        <dd>
+                            <asp:TextBox runat="server" ID="txtMinAmount" CssClass="input"></asp:TextBox>
                             <span class="gaps">到</span>
-                            <asp:TextBox runat="server" ID="txtMaxAmount" CssClass="input normal"></asp:TextBox>
-                        </div>
-                    </div>
-
+                            <asp:TextBox runat="server" ID="txtMaxAmount" CssClass="input"></asp:TextBox>
+                        </dd>
+                    </dl>
                     <div class="form-group">
                         <div class="form-item">
-                            <a class="btn btn-primary" id="batchQueryButton" runat="server" onserverclick="btnSearch_Click">查询</a>
+                            <a class="btn" id="batchQueryButton" runat="server" onserverclick="btnSearch_Click">查询</a>
                             <a href="#" id="moreSearch" onclick="AdvanceSearch()">显示高级选项</a>
                         </div>
                     </div>

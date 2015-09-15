@@ -7,6 +7,7 @@ using Travel.Infrastructure.WeiXin.Common;
 using Travel.Infrastructure.WeiXin.Common.Ticket;
 using Travel.Infrastructure.WeiXin.Statistics;
 using Travel.Infrastructure.WeiXin.User;
+using Travel.Presentation.WebPlugin.UserStatistics;
 
 namespace Travel.Infrastructure.WeiXin.Test
 {
@@ -79,7 +80,15 @@ namespace Travel.Infrastructure.WeiXin.Test
             var endDate = new DateTime(2015, 9, 6);
             var userList = new UserStatistics().GetUserStatistics(beginDate, endDate);
 
-            Assert.IsTrue(userList != null && userList.list != null && userList.list.Count > 0);
+            Assert.IsTrue(userList != null && userList.HasValue());
+        }
+
+        [TestMethod]
+        public void TestGetUserStatisticsWithDataBase()
+        {
+            UserStatisticsManager manager = new UserStatisticsManager();
+            var result = manager.GetUserStatistics(new DateTime(2015, 8, 26), DateTime.Now.AddDays(-1));
+            Assert.IsTrue(result != null);
         }
     }
 }

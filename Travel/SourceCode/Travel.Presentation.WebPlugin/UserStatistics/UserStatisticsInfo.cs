@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using System.Web;
 
-namespace Travel.Application.DomainModules.WeChat.DTOS
+namespace Travel.Presentation.WebPlugin.UserStatistics
 {
-    public class UserStatisticsDTO
+    public class UserStatisticsInfo
     {
         public string date { get; set; }
         public int user_source { get; set; }
