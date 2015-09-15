@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="scenic_detail_edit.aspx.cs" Inherits="WeiXinPF.Web.admin.scenic.scenic_detail_edit" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" ValidateRequest="false" CodeBehind="scenic_detail_edit.aspx.cs" Inherits="WeiXinPF.Web.admin.scenic.scenic_detail_edit" %>
 
 <!DOCTYPE html>
 
@@ -12,6 +12,8 @@
     <script type="text/javascript" src="../../scripts/swfupload/swfupload.js"></script>
     <script type="text/javascript" src="../../scripts/swfupload/swfupload.queue.js"></script>
     <script type="text/javascript" src="../../scripts/swfupload/swfupload.handlers.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../../editor/kindeditor-min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../../editor/lang/zh_CN.js"></script>
     <script type="text/javascript" src="../js/layout.js"></script>
     <link href="../skin/default/style.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript">
@@ -22,6 +24,13 @@
             //初始化上传控件
             $(".upload-img").each(function () {
                 $(this).InitSWFUpload({ sendurl: "../../tools/upload_ajax.ashx", flashurl: "../../scripts/swfupload/swfupload.swf", filetypes: "*.jpg;*.jpge;*.png;*.gif;*.mp3;" });
+            });
+
+            var editor = KindEditor.create('.editor', {
+                width: '80%',
+                height: '250px',
+                resizeType: 1,
+                uploadJson: '../../tools/upload_ajax.ashx?action=EditorFile&IsWater=1'
             });
         });
 
