@@ -28,7 +28,7 @@
             <div id="floatHead" class="toolbar">
                 <div class="l-list">
                     <ul class="icon-list">
-                        <li><a class="add" href="scenic_edit.aspx?action=<%=MXEnums.ActionEnum.Add %>"><i></i><span>新增</span></a></li>
+                        <li><a class="add" href="scenic_edit.aspx?action=<%=MXEnums.ActionEnum.Add %>"><i></i><span>新增景区导览</span></a></li>
 
                         <li><a class="all" href="javascript:;" onclick="checkAll(this);"><i></i><span>全选</span></a></li>
                         <li>
@@ -50,6 +50,7 @@
                     <tr>
                         <th width="6%">选择</th>
                         <th>标题</th>
+                        <th>使用地址</th>
                         <th width="12%">操作</th>
                     </tr>
             </HeaderTemplate>
@@ -59,9 +60,10 @@
                         <asp:CheckBox ID="chkId" CssClass="checkall" runat="server" Style="vertical-align: middle;" /><asp:HiddenField ID="hidId" Value='<%#Eval("id")%>' runat="server" />
                     </td>
                     <td style="text-align: center;"><%#Eval("Name") %></td>
+                    <td><%=MyCommFun.getWebSite() %>/weixin/scenic/index.aspx?id=<%#Eval("Id") %></td>
                     <td style="text-align: center">
                         <a href="scenic_edit.aspx?action=<%#MXEnums.ActionEnum.Edit %>&id=<%#Eval("Id")%>">修改</a>
-                        <a href="scenic_detail_list.aspx?scenicId=<%#Eval("Id")%>">景点详情</a>
+                        <a href="scenic_detail_list.aspx?scenicId=<%#Eval("Id")%>">添加景点</a>
                     </td>
                 </tr>
             </ItemTemplate>

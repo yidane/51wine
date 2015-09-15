@@ -27,13 +27,13 @@
 
     </script>
 </head>
-<body>
+<body class="mainbody">
     <form id="form1" runat="server">
         <!--导航栏-->
         <div class="location">
             <a href="scenic_list.aspx" class="home"><i></i><span>景区导览列表</span></a>
             <i class="arrow"></i>
-            <a href="scenic_detail_list.aspx" class="home"><i></i><span>景点详情列表</span></a>
+            <a href="scenic_detail_list.aspx?scenicId=<%=ScenicId %>"><i></i><span>景点列表</span></a>
             <i class="arrow"></i>
             <span>景点详情编辑</span>
         </div>
@@ -82,7 +82,8 @@
             <dl>
                 <dt>正文</dt>
                 <dd>
-                    <asp:TextBox ID="txtContent" runat="server" CssClass="input normal" />
+                    <textarea id="txtContent" class="editor" style="visibility: hidden;" runat="server"></textarea>
+                    <%--<asp:TextBox ID="txtContent" runat="server" CssClass="input normal" />--%>
                 </dd>
             </dl>
             <dl>

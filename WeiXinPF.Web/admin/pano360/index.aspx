@@ -66,7 +66,7 @@
 
         <!--列表-->
 
-        <asp:Repeater ID="rptList" runat="server"  >
+        <asp:Repeater ID="rptList" runat="server">
             <HeaderTemplate>
                 <table width="100%" border="0" cellspacing="0" cellpadding="0" class="ltable">
                     <thead>
@@ -93,34 +93,34 @@
                         <asp:CheckBox ID="chkId" CssClass="checkall" runat="server" Style="vertical-align: middle;" />
                         <asp:HiddenField ID="hidId" Value='<%#Eval("id")%>' runat="server" />
                     </td>
-                    
-                     <td>
+
+                    <td>
                         <%# Eval("jdName") %>
                     </td>
                     <td>
-                        <asp:Image ID="Image1" runat="server" ImageUrl='<%# Eval("pic_front") %>'   CssClass="panolistpic" />
+                        <asp:Image ID="Image1" runat="server" ImageUrl='<%# Eval("pic_front") %>' CssClass="panolistpic" />
                     </td>
-                   
-                     <td>
+
+                    <td>
                         <asp:Image ID="Image2" runat="server" ImageUrl='<%# Eval("pic_right") %>' CssClass="panolistpic" />
                     </td>
 
-                     <td>
+                    <td>
                         <asp:Image ID="Image3" runat="server" ImageUrl='<%# Eval("pic_behind") %>' CssClass="panolistpic" />
                     </td>
 
-                     <td>
+                    <td>
                         <asp:Image ID="Image4" runat="server" ImageUrl='<%# Eval("pic_left") %>' CssClass="panolistpic" />
                     </td>
 
-                     <td>
+                    <td>
                         <asp:Image ID="Image5" runat="server" ImageUrl='<%# Eval("pic_top") %>' CssClass="panolistpic" />
                     </td>
 
-                     <td>
-                        <asp:Image ID="Image6" runat="server" ImageUrl='<%# Eval("pic_bottom") %>' CssClass="panolistpic"/>
+                    <td>
+                        <asp:Image ID="Image6" runat="server" ImageUrl='<%# Eval("pic_bottom") %>' CssClass="panolistpic" />
                     </td>
- 
+
                     <td>
                         <a href='editpano.aspx?id=<%#Eval("id") %>&action=<%=MXEnums.ActionEnum.Edit %>' class="operator">编辑</a>
                     </td>
@@ -145,6 +145,5 @@
         </div>
         <!--/内容底部-->
     </form>
-    <div style="display: none">©上海沐雪网络科技提供qq 23002807 https://item.taobao.com/item.htm?spm=686.1000925.0.0.5HYEHQ&id=520523216527  </div>
 </body>
 </html>

@@ -44,5 +44,10 @@ namespace WeiXinPF.BLL
         {
             return _dal.GetPageList(pageSize, pageIndex, strWhere, filedOrder, out recordCount);
         }
+
+        public List<Model.wx_travel_picture> GetModelList(string strWhere)
+        {
+            return _dal.GetModelList(strWhere);
+        }
     }
 }

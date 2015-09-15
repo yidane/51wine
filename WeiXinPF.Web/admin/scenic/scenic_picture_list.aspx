@@ -61,7 +61,7 @@
         <div class="location">
             <a href="scenic_list.aspx" class="home"><i></i><span>景区导览列表</span></a>
             <i class="arrow"></i>
-            <a href="scenic_detail_list.aspx" class="home"><i></i><span>景点详情列表</span></a>
+            <a href="scenic_detail_list.aspx?scenicId=<%=ScenicId %>"><i></i><span>景点列表</span></a>
             <i class="arrow"></i>
             <span>图片管理</span>
         </div>
@@ -70,7 +70,7 @@
             <div id="floatHead" class="toolbar">
                 <div class="l-list">
                     <ul class="icon-list">
-                        <li><a class="icon-btn add" href="scenic_picture_edit.aspx?action=<%=MXEnums.ActionEnum.Add %>&detailId=<%=DetailId %>" id="itemAddButton"><i></i><span>新增图片</span></a></li>
+                        <li><a class="icon-btn add" href="scenic_picture_edit.aspx?action=<%=MXEnums.ActionEnum.Add %>&detailId=<%=DetailId %>&scenicId=<%=ScenicId %>" id="itemAddButton"><i></i><span>新增图片</span></a></li>
 
                         <li><a class="all" href="javascript:;" onclick="checkAll(this);"><i></i><span>全选</span></a></li>
                         <li>
@@ -105,7 +105,7 @@
                         </div>
                         <div class="foot">
                             <p class="time"><%#string.Format("{0:yyyy-MM-dd HH:mm:ss}", Eval("CreateDate"))%></p>
-                            <a href="scenic_picture_edit.aspx?action=<%#MXEnums.ActionEnum.Edit %>&detailId=<%#this.DetailId %>&Id=<%#Eval("Id")%>" title="编辑" class="edit">编辑</a>
+                            <a href="scenic_picture_edit.aspx?action=<%#MXEnums.ActionEnum.Edit %>&scenicId=<%=ScenicId %>&detailId=<%#DetailId %>&Id=<%#Eval("Id")%>" title="编辑" class="edit">编辑</a>
                         </div>
                     </div>
                 </li>

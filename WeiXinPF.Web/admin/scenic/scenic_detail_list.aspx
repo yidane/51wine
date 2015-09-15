@@ -21,7 +21,7 @@
         <div class="location">
             <a href="scenic_list.aspx" class="home"><i></i><span>景区导览列表</span></a>
             <i class="arrow"></i>
-            <span>景点详情列表</span>
+            <span>景点列表</span>
         </div>
         <!--/导航栏-->
 
@@ -30,7 +30,7 @@
             <div id="floatHead" class="toolbar">
                 <div class="l-list">
                     <ul class="icon-list">
-                        <li><a class="add" href="scenic_detail_edit.aspx?action=<%=MXEnums.ActionEnum.Add %>&scenicId=<%=ScenicId%>"><i></i><span>新增</span></a></li>
+                        <li><a class="add" href="scenic_detail_edit.aspx?action=<%=MXEnums.ActionEnum.Add %>&scenicId=<%=ScenicId%>"><i></i><span>添加景点</span></a></li>
 
                         <li><a class="all" href="javascript:;" onclick="checkAll(this);"><i></i><span>全选</span></a></li>
                         <li>
@@ -59,7 +59,7 @@
                     <td style="text-align: center;"><%#Eval("Name") %></td>
                     <td style="text-align: center">
                         <a href="scenic_detail_edit.aspx?action=<%#MXEnums.ActionEnum.Edit %>&id=<%#Eval("Id")%>&scenicId=<%=ScenicId%>">修改</a>
-                        <a href="scenic_picture_list.aspx?detailId=<%#Eval("Id")%>">添加图片</a>
+                        <a href="scenic_picture_list.aspx?scenicId=<%=ScenicId%>&detailId=<%#Eval("Id")%>">添加图片</a>
                     </td>
                 </tr>
             </ItemTemplate>

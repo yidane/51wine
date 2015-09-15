@@ -8,12 +8,6 @@ using WeiXinPF.Common;
 
 namespace WeiXinPF.Web.tools
 {
-    /// <summary>
-    /// verify_code1 的摘要说明
-    /// 作——者:李朴
-    /// qq:23002807
-    /// 
-    /// </summary>
     public class verify_code1 : IHttpHandler, IRequiresSessionState
     {
 

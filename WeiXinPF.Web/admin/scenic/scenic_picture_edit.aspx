@@ -4,7 +4,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>图片信息</title>
     <script type="text/javascript" src="../../scripts/jquery/jquery-1.10.2.min.js"></script>
     <script type="text/javascript" src="../../scripts/jquery/Validform_v5.3.2_min.js"></script>
@@ -16,7 +16,7 @@
     <script type="text/javascript" charset="utf-8" src="../../editor/kindeditor-min.js"></script>
     <script type="text/javascript" charset="utf-8" src="../../editor/lang/zh_CN.js"></script>
     <script type="text/javascript" src="../js/layout.js"></script>
-    
+
     <link href="../skin/default/style.css" rel="stylesheet" type="text/css" />
     <link href="../skin/mystyle.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript">
@@ -36,9 +36,9 @@
     <form id="form1" runat="server">
         <!--导航栏-->
         <div class="location">
-            <a href="scenic_detail_list.aspx" class="home"><i></i><span>景点列表</span></a>
+            <a href="scenic_detail_list.aspx?scenicId=<%=ScenicId %>" class="home"><i></i><span>景点列表</span></a>
             <i class="arrow"></i>
-            <a href="scenic_picture_list.aspx?detailId=<%=DetailId %>"><span>图片列表</span></a>
+            <a href="scenic_picture_list.aspx?scenicId=<%=ScenicId %>&detailId=<%=DetailId %>"><span>图片列表</span></a>
             <i class="arrow"></i>
             <span>图片编辑</span>
         </div>

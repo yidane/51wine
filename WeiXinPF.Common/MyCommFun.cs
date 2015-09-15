@@ -945,15 +945,3 @@ namespace WeiXinPF.Common
         intType, stringType, floatType
     }
 }
-
-/**************************************
- *
- * author:li pu
- * company:上海沐 雪 网络 科技有限公司
- * qq:23002807
- * website:http://uweixin.cn
- * taobao:https://item.taobao.com/item.htm?spm=686.1000925.0.0.5HYEHQ&id=520523216527  
- * createDate:2013-11-1
- * update:2015-8-2
- * warning:禁止在网络上公开销售本源码
- ***********************************/

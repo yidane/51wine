@@ -14,11 +14,13 @@ namespace WeiXinPF.Web.admin.scenic
         private string _action = MXEnums.ActionEnum.Add.ToString(); //操作类型
 
         BLL.wx_travel_picture _bll = new BLL.wx_travel_picture();
+        protected int ScenicId;
         protected int DetailId;
         protected int Id;
         protected void Page_Load(object sender, EventArgs e)
         {
             _action = MXRequest.GetQueryString("action");
+            ScenicId = MXRequest.GetQueryInt("scenicId");
             DetailId = MyCommFun.RequestInt("detailId");
             Id = MXRequest.GetQueryInt("Id");
             if (!Page.IsPostBack)
@@ -107,7 +109,7 @@ namespace WeiXinPF.Web.admin.scenic
                     JscriptMsg("保存过程中发生错误啦！", "", "Error");
                     return;
                 }
-                JscriptMsg("修改信息成功！", Utils.CombUrlTxt("scenic_picture_list.aspx", "detailId={0}", DetailId.ToString()), "Success");
+                JscriptMsg("修改信息成功！", Utils.CombUrlTxt("scenic_picture_list.aspx", "scenicId={0}&detailId={1}",ScenicId.ToString(), DetailId.ToString()), "Success");
             }
             else //添加
             {
@@ -116,7 +118,7 @@ namespace WeiXinPF.Web.admin.scenic
                     JscriptMsg("保存过程中发生错误啦！", "", "Error");
                     return;
                 }
-                JscriptMsg("添加信息成功！", Utils.CombUrlTxt("scenic_picture_list.aspx", "detailId={0}", DetailId.ToString()), "Success");
+                JscriptMsg("添加信息成功！", Utils.CombUrlTxt("scenic_picture_list.aspx", "scenicId={0}&detailId={1}", ScenicId.ToString(), DetailId.ToString()), "Success");
             }
         }
     }

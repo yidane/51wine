@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="scenic_edit.aspx.cs" Inherits="WeiXinPF.Web.admin.scenic.scenic_edit" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="scenic_edit.aspx.cs" ValidateRequest="false" Inherits="WeiXinPF.Web.admin.scenic.scenic_edit" %>
 
 <!DOCTYPE html>
 
@@ -26,11 +26,18 @@
             $(".upload-img").each(function () {
                 $(this).InitSWFUpload({ sendurl: "../../tools/upload_ajax.ashx", flashurl: "../../scripts/swfupload/swfupload.swf", filetypes: "*.jpg;*.jpge;*.png;*.gif;*.mp3;" });
             });
+
+            var editor = KindEditor.create('.editor', {
+                width: '80%',
+                height: '250px',
+                resizeType: 1,
+                uploadJson: '../../tools/upload_ajax.ashx?action=EditorFile&IsWater=1'
+            });
         });
 
     </script>
 </head>
-<body>
+<body class="mainbody">
     <form id="form1" runat="server">
         <!--导航栏-->
         <div class="location">
@@ -116,7 +123,7 @@
             <dl>
                 <dt>景区描述</dt>
                 <dd>
-                    <asp:TextBox runat="server" ID="txtDescription" TextMode="MultiLine" Height="75"></asp:TextBox>
+                    <textarea id="txtDescription" class="editor" style="visibility: hidden;" runat="server"></textarea>
                 </dd>
             </dl>
         </div>
