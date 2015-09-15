@@ -327,9 +327,12 @@
                                         <strong class="lable time_lable">时间</strong>
 
                                         <div class="button_group">
-                                            <a class="btn btn_default" href="javascript:;" range="7" id="sevendays">7日</a>
+                                            <asp:HyperLink  class="btn btn_default" href="javascript:;" range="7" id="sevendays" runat="server">7日</asp:HyperLink>
+                                            <asp:HyperLink  class="btn btn_default" href="javascript:;" range="14" id="fourteendays" runat="server">14日</asp:HyperLink>
+                                            <asp:HyperLink  class="btn btn_default selected" href="javascript:;" range="30" id="thirtydays" runat="server">30日</asp:HyperLink>
+                                            <%--<a class="btn btn_default" href="javascript:;" range="7" id="sevendays">7日</a>
                                             <a class="btn btn_default" href="javascript:;" range="14" id="fourteendays">14日</a>
-                                            <a class="btn btn_default selected" href="javascript:;" range="30" id="thirtydays">30日</a>
+                                            <a class="btn btn_default selected" href="javascript:;" range="30" id="thirtydays">30日</a>--%>
 
                                             <div class="btn_group_item td_data_container" id="js_date_container0">
                                                 <div class="ta_date" id="div_js_dateRangeTitle1">
