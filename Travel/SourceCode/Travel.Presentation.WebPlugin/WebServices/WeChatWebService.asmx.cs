@@ -36,8 +36,8 @@ namespace Travel.Presentation.WebPlugin.WebServices
                 user_source = 99999999,
                 list = userStatisticsList
             };
-            var array=new object[1]{listdata };
-            var result = new 
+            var array = new object[1] { listdata };
+            var result = new
             {
                 list = array
             };
@@ -50,10 +50,21 @@ namespace Travel.Presentation.WebPlugin.WebServices
         public void GetUserAnalysisWeb(DateTime beginDate, DateTime endDate)
         {
             var userStatisticsList = new UserStatisticsManager().GetUserStatistics(beginDate, endDate);
+            var userAnalysisData = new UserAnalysisData
+            {
+                users = 3,
+                day = 1,
+                week = 1,
+                month = 1
+            };
             var listdata = new
             {
                 user_source = 99999999,
-                list = userStatisticsList
+                list = userStatisticsList,
+                newuser = userAnalysisData,
+                canceluser = userAnalysisData,
+                netgainuser = userAnalysisData,
+                cumulateuser = userAnalysisData
             };
             var array = new object[1] { listdata };
             var result = new
@@ -62,5 +73,16 @@ namespace Travel.Presentation.WebPlugin.WebServices
             };
             Context.Response.Write(AjaxResult.Success(result));
         }
+
+
     }
+
+    public class UserAnalysisData
+    {
+        public int users { get; set; }
+        public int day { get; set; }
+        public int week { get; set; }
+        public int month { get; set; }
+    }
+
 }

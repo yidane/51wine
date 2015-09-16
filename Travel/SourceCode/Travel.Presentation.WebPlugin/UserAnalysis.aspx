@@ -34,7 +34,31 @@
                                                             user_source: 0,
                                                             user_sourceDesc: "其他",
                                                             new_user: 12
-                                                        }]
+                                                        }],
+                                                        newuser: {
+                                                            users: 0,
+                                                            day: 0,
+                                                            week: 0,
+                                                            month: 0
+                                                        },
+                                                        canceluser: {
+                                                            users: 0,
+                                                            day: 0,
+                                                            week: 0,
+                                                            month: 0
+                                                        },
+                                                        netgainuser: {
+                                                            users: 0,
+                                                            day: 0,
+                                                            week: 0,
+                                                            month: 0
+                                                        },
+                                                        cumulateuser: {
+                                                            users: 0,
+                                                            day: 0,
+                                                            week: 0,
+                                                            month: 0
+                                                        }
                                                     }]
         };
     </script>
@@ -200,6 +224,22 @@
                         data: arrcumulate
                     }]
                 });
+                $('#newuser').text(window.cgiData.list[0].newuser.users);
+                $('#canceluser').text(window.cgiData.list[0].canceluser.users);
+                $('#netgainuser').text(window.cgiData.list[0].netgainuser.users);
+                $('#cumulateuser').text(window.cgiData.list[0].cumulateuser.users);
+                $('#newday').text('   '+window.cgiData.list[0].newuser.day+'%');
+                $('#cancelday').text('   ' + window.cgiData.list[0].canceluser.day + '%');
+                $('#netgainday').text('   ' + window.cgiData.list[0].netgainuser.day + '%');
+                $('#cumulateday').text('   ' + window.cgiData.list[0].cumulateuser.day + '%');
+                $('#newweek').text('   ' + window.cgiData.list[0].newuser.week + '%');
+                $('#cancelweek').text('   ' + window.cgiData.list[0].canceluser.week + '%');
+                $('#netgainweek').text('   ' + window.cgiData.list[0].netgainuser.week + '%');
+                $('#cumulateweek').text('   ' + window.cgiData.list[0].cumulateuser.week + '%');
+                $('#newmonth').text('   ' + window.cgiData.list[0].newuser.month + '%');
+                $('#cancelmonth').text('   ' + window.cgiData.list[0].canceluser.month + '%');
+                $('#netgainmonth').text('   ' + window.cgiData.list[0].netgainuser.month + '%');
+                $('#cumulatemonth').text('   ' + window.cgiData.list[0].cumulateuser.month + '%');
             }
         });
     </script>
@@ -212,7 +252,7 @@
             </div>
             <div class="main_bd user_analysis">
                 <div class="wrp_overview">
-                    
+
 
                     <div class="info_box" id="">
                         <div class="inner">
@@ -252,10 +292,10 @@
                                                         <div class="ui_trendgrid_chart"></div>
                                                         <dl>
                                                             <dt><b>新关注人数</b></dt>
-                                                            <dd class="ui_trendgrid_number"><strong></strong><em class="ui_trendgrid_unit"></em></dd>
-                                                            <dd>日</dd>
-                                                            <dd>周</dd>
-                                                            <dd>月</dd>
+                                                            <dd class="ui_trendgrid_number"><strong><span id="newuser"></span></strong><em class="ui_trendgrid_unit"></em></dd>
+                                                            <dd>日</dd><span id="newday"></span>
+                                                            <dd>周</dd><span id="newweek"></span>
+                                                            <dd>月</dd><span id="newmonth"></span>
                                                         </dl>
                                                     </div>
                                                 </td>
@@ -264,10 +304,10 @@
                                                         <div class="ui_trendgrid_chart"></div>
                                                         <dl>
                                                             <dt><b>取消关注人数</b></dt>
-                                                            <dd class="ui_trendgrid_number"><strong></strong><em class="ui_trendgrid_unit"></em></dd>
-                                                            <dd>日 </dd>
-                                                            <dd>周 </dd>
-                                                            <dd>月 </dd>
+                                                            <dd class="ui_trendgrid_number"><strong><span id="canceluser"></span></strong><em class="ui_trendgrid_unit"></em></dd>
+                                                            <dd>日</dd><span id="cancelday"></span>
+                                                            <dd>周</dd><span id="cancelweek"></span>
+                                                            <dd>月</dd><span id="cancelmonth"></span>
                                                         </dl>
                                                     </div>
                                                 </td>
@@ -276,10 +316,10 @@
                                                         <div class="ui_trendgrid_chart"></div>
                                                         <dl>
                                                             <dt><b>净增关注人数</b></dt>
-                                                            <dd class="ui_trendgrid_number"><strong></strong><em class="ui_trendgrid_unit"></em></dd>
-                                                            <dd>日</dd>
-                                                            <dd>周</dd>
-                                                            <dd>月</dd>
+                                                            <dd class="ui_trendgrid_number"><strong><span id="netgainuser"></span></strong><em class="ui_trendgrid_unit"></em></dd>
+                                                            <dd>日</dd><span id="netgainday"></span>
+                                                            <dd>周</dd><span id="netgainweek"></span>
+                                                            <dd>月</dd><span id="netgainmonth"></span>
                                                         </dl>
                                                     </div>
                                                 </td>
@@ -288,10 +328,10 @@
                                                         <div class="ui_trendgrid_chart"></div>
                                                         <dl>
                                                             <dt><b>累积关注人数</b></dt>
-                                                            <dd class="ui_trendgrid_number"><strong></strong><em class="ui_trendgrid_unit"></em></dd>
-                                                            <dd>日</dd>
-                                                            <dd>周</dd>
-                                                            <dd>月</dd>
+                                                            <dd class="ui_trendgrid_number"><strong><span id="cumulateuser"></span></strong><em class="ui_trendgrid_unit"></em></dd>
+                                                            <dd>日</dd><span id="cumulateday"></span>
+                                                            <dd>周</dd><span id="cumulateweek"></span>
+                                                            <dd>月</dd><span id="cumulatemonth"></span>
                                                         </dl>
                                                     </div>
                                                 </td>
