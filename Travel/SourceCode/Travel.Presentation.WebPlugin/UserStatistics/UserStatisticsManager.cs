@@ -43,11 +43,6 @@ namespace Travel.Presentation.WebPlugin.UserStatistics
             }
             existsDateList.Sort();
 
-            //
-            //existsDateList.Add(new DateTime(2015, 8, 29));
-            //existsDateList.Add(new DateTime(2015, 9, 2));
-            //existsDateList.Add(new DateTime(2015, 9, 7));
-
             //不存在数据的时间散列区间域
             var notExistsDataRangeList = new List<DateRange>();
 
@@ -88,6 +83,12 @@ namespace Travel.Presentation.WebPlugin.UserStatistics
         {
             var rtnUserStatisticsList = new List<UserStatisticsInfo>();
 
+            //合并每天的数据
+            for (DateTime date = beginDate.Date; date <= endDate.Date; date = date.AddDays(1))
+            {
+                rtnUserStatisticsList.Add(new UserStatisticsInfo() { date = date.ToString("yyyy-MM-dd") });
+            }
+
             var sqlparams = new List<SqlParameter>()
                 {
                     new SqlParameter(){ParameterName = "@BeginDate",SqlDbType = SqlDbType.Date,Value = beginDate},
@@ -102,14 +103,66 @@ namespace Travel.Presentation.WebPlugin.UserStatistics
             {
                 foreach (DataRow row in result.Rows)
                 {
-                    var newUserStatistics = new UserStatisticsInfo();
-                    newUserStatistics.cancel_user = row.Field<int>("cancel_user");
+                    var date = row.Field<DateTime>("ref_date").ToString("yyyy-MM-dd");
+                    var newUserStatistics = rtnUserStatisticsList.FirstOrDefault(item => string.Equals(item.date, date));
+
+                    newUserStatistics.cancel_user += row.Field<int>("cancel_user");
                     newUserStatistics.cumulate_user = row.Field<int>("cumulate_user");
-                    newUserStatistics.date = row.Field<DateTime>("ref_date").ToString("yyyy-MM-dd");
-                    newUserStatistics.new_user = row.Field<int>("new_user");
+                    newUserStatistics.date = date;
+                    newUserStatistics.new_user += row.Field<int>("new_user");
                     newUserStatistics.user_source = row.Field<int>("user_source");
-                    newUserStatistics.netgain_user = row.Field<int>("new_user") - row.Field<int>("cancel_user");
+                    rtnUserStatisticsList.RemoveAll(item => string.Equals(item.date, date));
                     rtnUserStatisticsList.Add(newUserStatistics);
+                }
+            }
+
+            //计算净值，平滑总关注数据曲线
+            foreach (UserStatisticsInfo info in rtnUserStatisticsList)
+            {
+                info.netgain_user = info.new_user - info.cancel_user;
+            }
+
+            foreach (UserStatisticsInfo info in rtnUserStatisticsList)
+            {
+                if (info.cumulate_user == 0)
+                {
+                    var infoIndex = rtnUserStatisticsList.IndexOf(info);
+                    if (infoIndex == 0 && rtnUserStatisticsList.Count > 1)
+                    {
+                        info.cumulate_user = rtnUserStatisticsList[1].cumulate_user - rtnUserStatisticsList[1].netgain_user;
+                    }
+                    else if (infoIndex == rtnUserStatisticsList.Count - 1 && rtnUserStatisticsList.Count > 1)
+                    {
+                        info.cumulate_user = rtnUserStatisticsList[rtnUserStatisticsList.Count - 2].cumulate_user +
+                                             rtnUserStatisticsList[rtnUserStatisticsList.Count - 2].netgain_user;
+                    }
+                    else
+                    {
+                        var preInfo = rtnUserStatisticsList[infoIndex - 1];
+                        var nextInfo = rtnUserStatisticsList[infoIndex + 1];
+                        if (preInfo.cumulate_user == 0)
+                        {
+                            if (nextInfo.cumulate_user == 0)
+                            {
+                                info.cumulate_user = 0;
+                            }
+                            else
+                            {
+                                info.cumulate_user = nextInfo.cumulate_user - nextInfo.netgain_user;
+                            }
+                        }
+                        else
+                        {
+                            if (nextInfo.cumulate_user == 0)
+                            {
+                                info.cumulate_user = preInfo.cumulate_user + preInfo.netgain_user;
+                            }
+                            else
+                            {
+                                info.cumulate_user = (nextInfo.cumulate_user + preInfo.cumulate_user) / 2;
+                            }
+                        }
+                    }
                 }
             }
 
