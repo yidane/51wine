@@ -89,7 +89,7 @@ namespace WeiXinPF.WebService
                         var dtos = scenics.Select(p => new
                         {
                             name = p.Name,
-                            img =string.Format("url({0})", p.BackgroundImage) ,
+                            img =string.Format("url({0})", p.Cover) ,
                             url = string.Format("{0}/weixin/scenic/index.aspx?id={1}",
                             MyCommFun.getWebSite(), p.Id)
                         });

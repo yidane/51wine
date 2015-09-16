@@ -7,6 +7,8 @@ using System.Web.UI.WebControls;
 using WeiXinPF.Common;
 using System.Text;
 using System.Data;
+using WeiXinPF.Application.DomainModules.User;
+using WeiXinPF.Application.DomainModules.User.DTOS;
 
 namespace WeiXinPF.Web.admin.choujiang.shakeLuckyMoney
 {
@@ -19,6 +21,7 @@ namespace WeiXinPF.Web.admin.choujiang.shakeLuckyMoney
         protected int page;
         protected int pageSize;
         BLL.wx_dzpAwardUser ubll = new BLL.wx_dzpAwardUser();
+        UserService _userService = new UserService();
         protected string keywords = string.Empty;
 
         protected void Page_Load(object sender, EventArgs e)
@@ -47,13 +50,36 @@ namespace WeiXinPF.Web.admin.choujiang.shakeLuckyMoney
             this.page = MXRequest.GetQueryInt("page", 1);
             txtKeywords.Text = this.keywords;
             DataSet ds = ubll.GetList(this.pageSize, this.page, _strWhere, _orderby, out this.totalCount);
-
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                DataRow dr;
+                int count = ds.Tables[0].Rows.Count;
+                var table = ds.Tables[0];
+                table.Columns.Add("nickName");
+                table.Columns.Add("headimgurl");
+                for (int i = 0; i < count; i++)
+                {
+                    dr = table.Rows[i];
+                    var openid = dr["openid"].ToString();
+                    if (!string.IsNullOrEmpty(openid))
+                    {
+                        var userDto = _userService.GetModel(openid);
+                        if (userDto!=null)
+                        {
+                            dr["nickName"] = userDto.nickname;
+                            dr["headimgurl"] = userDto.headimgurl;
+                        }
+                    }
+                    
+                }
+                ds.AcceptChanges();
+            }
             this.rptList.DataSource = ds;
             this.rptList.DataBind();
 
             //绑定页码
             txtPageNum.Text = this.pageSize.ToString();
-            string pageUrl = Utils.CombUrlTxt("luckyMoneyAwardUser.aspx", "id={0}&keywords={1}&page={2}",MyCommFun.RequestInt("id").ToString(), this.keywords, "__id__");
+            string pageUrl = Utils.CombUrlTxt("luckyMoneyAwardUser.aspx", "id={0}&keywords={1}&page={2}", MyCommFun.RequestInt("id").ToString(), this.keywords, "__id__");
             PageContent.InnerHtml = Utils.OutPageList(this.pageSize, this.page, this.totalCount, pageUrl, 8);
         }
         #endregion
@@ -90,7 +116,7 @@ namespace WeiXinPF.Web.admin.choujiang.shakeLuckyMoney
         //关健字查询
         protected void btnSearch_Click(object sender, EventArgs e)
         {
-            Response.Redirect(Utils.CombUrlTxt("luckyMoneyAwardUser.aspx", "id={0}&keywords={1}",MyCommFun.RequestInt("id").ToString(), txtKeywords.Text));
+            Response.Redirect(Utils.CombUrlTxt("luckyMoneyAwardUser.aspx", "id={0}&keywords={1}", MyCommFun.RequestInt("id").ToString(), txtKeywords.Text));
         }
 
         //设置分页数量
@@ -104,7 +130,7 @@ namespace WeiXinPF.Web.admin.choujiang.shakeLuckyMoney
                     Utils.WriteCookie("dzpAwardUser_page_size", _pagesize.ToString(), 14400);
                 }
             }
-            Response.Redirect(Utils.CombUrlTxt("luckyMoneyAwardUser.aspx", "id={0}&keywords={1}",MyCommFun.RequestInt("id").ToString(), this.keywords));
+            Response.Redirect(Utils.CombUrlTxt("luckyMoneyAwardUser.aspx", "id={0}&keywords={1}", MyCommFun.RequestInt("id").ToString(), this.keywords));
         }
 
         //批量删除
@@ -132,7 +158,7 @@ namespace WeiXinPF.Web.admin.choujiang.shakeLuckyMoney
             }
             AddAdminLog(MXEnums.ActionEnum.Delete.ToString(), "删除摇一摇活动信息" + sucCount + "条，失败" + errorCount + "条"); //记录日志
 
-            JscriptMsg("删除成功" + sucCount + "条，失败" + errorCount + "条！", Utils.CombUrlTxt("luckyMoneyAwardUser.aspx", "id={0}&keywords={1}",MyCommFun.RequestInt("id").ToString(), this.keywords), "Success");
+            JscriptMsg("删除成功" + sucCount + "条，失败" + errorCount + "条！", Utils.CombUrlTxt("luckyMoneyAwardUser.aspx", "id={0}&keywords={1}", MyCommFun.RequestInt("id").ToString(), this.keywords), "Success");
         }
 
         /// <summary>
@@ -153,5 +179,7 @@ namespace WeiXinPF.Web.admin.choujiang.shakeLuckyMoney
                     break;
             }
         }
+
+
     }
 }

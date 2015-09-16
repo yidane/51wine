@@ -69,7 +69,7 @@
                         <tr>
                             <th width="5%">选择</th>
                              <th>openid</th>
-                            <th width="10%">手机</th>
+                            <th width="10%">用户信息</th>
                             <th width="35%">奖品名称</th>
                               <th width="15%">sn码</th>
                             <th width="12%">中奖时间</th>
@@ -88,7 +88,9 @@
                         <%# Eval("openid") %>
                     </td>
                     <td>
-                        <%# Eval("uTel") %>
+                        <p><%# Eval("nickName") %></p>
+                       <img src=" <%# Eval("headimgurl") %>" style="height: 64px"/>
+
                     </td>
                      <td>
                         【<%# Eval("jxName") %>】

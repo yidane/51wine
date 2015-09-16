@@ -7,7 +7,7 @@ var LuckyMoneyViewModel = function ($domParam, param) {
     this.$DomParm = ko.observable($domParam);
     this.param = ko.observable(param);
     this.shakeObj = ko.observable();
-    this.wechatDebug = ko.observable(true);
+    this.wechatDebug = ko.observable(false);
     this.stage = ko.observable("hand");
     this.itemList = ko.observableArray();
     this.info = ko.observable();
@@ -89,12 +89,12 @@ var LuckyMoneyViewModel = function ($domParam, param) {
 
     this.onWeChatReady = function (wxConfig) {
         wx.ready(function () {
-            wx.checkJsApi({
-                jsApiList: wxConfig.jsApiList,
-                success: function (res) {
-                    alert(JSON.stringify(res));
-                }
-            });
+            //wx.checkJsApi({
+            //    jsApiList: wxConfig.jsApiList,
+            //    success: function (res) {
+            //        alert(JSON.stringify(res));
+            //    }
+            //});
 
             self.hideWeChatBtn();
             

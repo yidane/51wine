@@ -480,7 +480,7 @@ namespace WeiXinPF.DAL
         public DataSet GetList(int pageSize, int pageIndex, string strWhere, string filedOrder, out int recordCount)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select a.*,'' as status_s,'' as url,(select reqkeywords from wx_requestRule where modelfunctionName='大转盘' and modelFunctionId=a.id) as kw  from wx_dzpActionInfo a ");
+            strSql.Append("select a.*,'' as status_s,'' as url,(select reqkeywords from wx_requestRule where modelfunctionName='摇一摇' and modelFunctionId=a.id) as kw  from wx_dzpActionInfo a ");
             if (strWhere.Trim() != "")
             {
                 strSql.Append(" where  " + strWhere);

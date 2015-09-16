@@ -8,6 +8,7 @@ using Senparc.Weixin.MP;
 using Senparc.Weixin.MP.AdvancedAPIs;
 using Senparc.Weixin.MP.AdvancedAPIs.OAuth;
 using Senparc.Weixin.MP.Helpers;
+using Travel.Infrastructure.WeiXin.User;
 using WeiXinPF.BLL;
 using WeiXinPF.Common;
 using WeiXinPF.Model;
@@ -148,7 +149,22 @@ namespace WeiXinPF.WebService
                 Model.wx_userweixin wxModel = bll.GetModel(wid);
                 var openId = OAuth2BaseProc(wxModel, state,code, targetUrl);
 
-                user = OAuthApi.GetUserInfo(accessToken, openId);
+                var helper = new UserInfoHelper();
+                var userInfo = helper.GetUserInfoByOpenID(accessToken, openId);
+                if (userInfo != null)
+                {
+                    user = new OAuthUserInfo()
+                    {
+                        openid = userInfo.openid,
+                        city = userInfo.city,
+                        country = userInfo.country,
+                        headimgurl = userInfo.headimgurl,
+                        nickname = userInfo.nickname,
+                        province = userInfo.province
+
+                    };
+                }
+                //user = OAuthApi.GetUserInfo(accessToken, openId);
             }
             else
             {

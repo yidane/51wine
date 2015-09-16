@@ -49,9 +49,13 @@ namespace WeiXinPF.Application.DomainModules.Coupon
             if (dzpAction != null)
             {
                 int hasCjTimes = 0;
-                if (!string.IsNullOrEmpty(wxUser.openid))
+                if (wxUser != null)
                 {
-                    hasCjTimes = _utbll.getCJCiShu(aid, wxUser.openid);//返回该用户的抽奖次数
+
+                    if (!string.IsNullOrEmpty(wxUser.openid))
+                    {
+                        hasCjTimes = _utbll.getCJCiShu(aid, wxUser.openid); //返回该用户的抽奖次数
+                    }
                 }
 
                 #region 保存用户信息
@@ -102,7 +106,7 @@ namespace WeiXinPF.Application.DomainModules.Coupon
         /// <param name="wid"></param>
         /// <param name="user"></param>
         /// <returns></returns>
-        public CouponListDTO GetCouponList( int wid, string openid)
+        public CouponListDTO GetCouponList(int wid, string openid)
         {
             CouponListDTO result = new CouponListDTO();
             if (openid != null)
@@ -110,21 +114,21 @@ namespace WeiXinPF.Application.DomainModules.Coupon
                 string str = string.Empty;
 
                 //no use
-                 str = string.Format(
-                     " openid='{0}'  and hasLingQu=0  and actId IN (SELECT id FROM wx_dzpActionInfo WHERE wid={1}) and a.createDate BETWEEN b.beginDate AND b.endDate ", openid, wid);
+                str = string.Format(
+                    " openid='{0}'  and hasLingQu=0  and actId IN (SELECT id FROM wx_dzpActionInfo WHERE wid={1}) and a.createDate BETWEEN b.beginDate AND b.endDate ", openid, wid);
 
                 result.UnExpiredCoupons = GetList(str);
 
-                    //expired
-                    str = string.Format(" openid='{0}'  and hasLingQu=0  and actId IN (SELECT id FROM wx_dzpActionInfo WHERE wid={1})  and a.createDate > b.endDate", openid, wid);
+                //expired
+                str = string.Format(" openid='{0}'  and hasLingQu=0  and actId IN (SELECT id FROM wx_dzpActionInfo WHERE wid={1})  and a.createDate > b.endDate", openid, wid);
 
                 result.ExpiredCoupons = GetList(str);
 
-                    //used
-                    str = string.Format(" openid='{0}'  and hasLingQu=1  and actId IN (SELECT id FROM wx_dzpActionInfo WHERE wid={1}) ", openid, wid);
+                //used
+                str = string.Format(" openid='{0}'  and hasLingQu=1  and actId IN (SELECT id FROM wx_dzpActionInfo WHERE wid={1}) ", openid, wid);
 
                 result.UsedCoupons = GetList(str);
-                 
+
             }
             return result;
         }
@@ -135,7 +139,7 @@ namespace WeiXinPF.Application.DomainModules.Coupon
         /// <returns></returns>
         private List<CouponPrizeDTO> GetList(string strWhere)
         {
-            List<CouponPrizeDTO> result = null; 
+            List<CouponPrizeDTO> result = null;
             var ds = _ubll.GetListWithAction(strWhere);
             var list = TransformToPrizeList(ds);
 
@@ -144,13 +148,14 @@ namespace WeiXinPF.Application.DomainModules.Coupon
             return result;
         }
 
-        public CouponPrizeDTO GetCouponDetail(string openId,int id) {
+        public CouponPrizeDTO GetCouponDetail(string openId, int id)
+        {
             CouponPrizeDTO result = null;
 
             var model = _ubll.GetModel(id);
-            if (model!=null)
+            if (model != null)
             {
-                if (model.openid==openId)
+                if (model.openid == openId)
                 {
                     var data = new CouponPrizeDTO()
                     {
@@ -160,7 +165,7 @@ namespace WeiXinPF.Application.DomainModules.Coupon
                         jxname = model.jxName,
                         sn = model.sn
                     };
-                    
+
                     if (model.actId != null)
                     {
                         var aModel = _actBll.GetModel(model.actId.Value);
@@ -179,7 +184,7 @@ namespace WeiXinPF.Application.DomainModules.Coupon
         {
             List<CouponPrizeDTO> result = null;
             var dt = ds.Tables[0];
-            if (dt!=null)
+            if (dt != null)
             {
                 //         public int id { get; set; }
                 //public string sn { get; set; }
@@ -195,7 +200,7 @@ namespace WeiXinPF.Application.DomainModules.Coupon
                 {
                     id = p.Field<int>("id"),
                     sn = p.Field<string>("sn"),
-                   // sortid = p.Field<int>("sortid"),
+                    // sortid = p.Field<int>("sortid"),
                     jxname = p.Field<string>("jxname"),
                     jpname = p.Field<string>("jpname"),
                     getTime = p.Field<DateTime>("createDate").ToString("yyyy-MM-dd HH:mm:ss"),
@@ -219,8 +224,8 @@ namespace WeiXinPF.Application.DomainModules.Coupon
                 dayMaxTimes = dzpAction.dayMaxTimes,
                 djPwd = dzpAction.djPwd,
                 cfcjhf = dzpAction.cfcjhf,
-                beginDate = dzpAction.beginDate==null ? dzpAction.beginDate.ToString() : "",
-                endDate = dzpAction.endDate == null? dzpAction.endDate.ToString() : "",
+                beginDate = dzpAction.beginDate == null ? dzpAction.beginDate.ToString() : "",
+                endDate = dzpAction.endDate == null ? dzpAction.endDate.ToString() : "",
                 beginPic = MyCommFun.getWebSite() + dzpAction.beginPic,
                 endNotice = dzpAction.endNotice,
                 endContent = dzpAction.endContent,
@@ -247,7 +252,7 @@ namespace WeiXinPF.Application.DomainModules.Coupon
 
 
 
-      
+
 
 
 
