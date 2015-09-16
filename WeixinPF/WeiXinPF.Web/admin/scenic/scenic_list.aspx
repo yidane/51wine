@@ -24,7 +24,7 @@
         <!--/导航栏-->
 
         <!--工具栏-->
-        <div class="toolbar-wrap">
+        <div class="toolbar-wrap" style="display: none">
             <div id="floatHead" class="toolbar">
                 <div class="l-list">
                     <ul class="icon-list">
@@ -62,7 +62,7 @@
                     <td style="text-align: center;"><%#Eval("Name") %></td>
                     <td><%=MyCommFun.getWebSite() %>/weixin/scenic/index.aspx?id=<%#Eval("Id") %></td>
                     <td style="text-align: center">
-                        <a href="scenic_edit.aspx?action=<%#MXEnums.ActionEnum.Edit %>&id=<%#Eval("Id")%>">修改</a>
+                        <a style="display: none;" href="scenic_edit.aspx?action=<%#MXEnums.ActionEnum.Edit %>&id=<%#Eval("Id")%>">修改</a>
                         <a href="scenic_detail_list.aspx?scenicId=<%#Eval("Id")%>">添加景点</a>
                     </td>
                 </tr>
