@@ -26,7 +26,7 @@ namespace Travel.Presentation.WebPlugin.UserStatistics
 
             var result = GetUserStatistics(beginDate, endDate);
 
-            return result;
+            //return result;
 
             //已存在数据的时间散列域
             var existsDateList = new List<DateTime>();
@@ -70,7 +70,9 @@ namespace Travel.Presentation.WebPlugin.UserStatistics
                     }
                 }
             }
-            notExistsDataRangeList.Add(range);
+
+            if (range != null)
+                notExistsDataRangeList.Add(range);
 
             foreach (var dateRange in notExistsDataRangeList)
             {
@@ -176,10 +178,20 @@ namespace Travel.Presentation.WebPlugin.UserStatistics
             var result = new WeChatService().GetUserStatistics(BeginDate, EndDate);
             if (result != null && result.Count > 0)
             {
+                //在一次获取统计数据时候，中间某天无数据，使用初始化的值代替
+                for (DateTime date = BeginDate; date <= EndDate; date = date.AddDays(1))
+                {
+                    if (!result.Any(d => DateTime.Equals(Convert.ToDateTime(d.date), date)))
+                    {
+                        result.Add(new UserStatisticsDTO() { date = date.ToString("yyyy-MM-dd") });
+                    }
+                }
+
                 foreach (var userStatisticsDto in result)
                 {
                     SaveData(userStatisticsDto);
                 }
+
             }
         }
 
