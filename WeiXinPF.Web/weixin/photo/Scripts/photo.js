@@ -238,7 +238,7 @@
         });
     }
 
-    downImageFromServer('AE4djwwMCj18u_Aszs9w2fXLtT1OvV_CAG6zps7scZBH-tyGRflUs5AZG2u0chh9');
+    //downImageFromServer('AE4djwwMCj18u_Aszs9w2fXLtT1OvV_CAG6zps7scZBH-tyGRflUs5AZG2u0chh9');
 })(jQuery);
 
 function getRandom(seed) {
