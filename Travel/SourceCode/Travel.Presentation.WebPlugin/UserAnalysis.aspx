@@ -313,9 +313,9 @@
                                     <div>
                                         <strong class="lable time_lable">时间</strong>
                                         <div class="button_group">
-                                            <asp:HyperLink class="btn btn_default" href="javascript:;" range="7" ID="sevendays" runat="server">7日</asp:HyperLink>
-                                            <asp:HyperLink class="btn btn_default" href="javascript:;" range="14" ID="fourteendays" runat="server">14日</asp:HyperLink>
-                                            <asp:HyperLink class="btn btn_default selected" href="javascript:;" range="30" ID="thirtydays" runat="server">30日</asp:HyperLink>
+                                            <asp:Button class="btn btn_default" range="7" ID="sevendays" runat="server" Text="7日" OnClick="sevendays_Click"/>
+                                            <asp:Button class="btn btn_default" range="14" ID="fourteendays" runat="server" Text="14日" OnClick="fourteendays_Click" />
+                                            <asp:Button class="btn btn_default selected" range="30" ID="thirtydays" runat="server" Text="30日" OnClick="thirtydays_Click" />
                                             <div class="btn_group_item td_data_container" id="js_single_timer_container"></div>
                                         </div>
                                         <div class="setup">

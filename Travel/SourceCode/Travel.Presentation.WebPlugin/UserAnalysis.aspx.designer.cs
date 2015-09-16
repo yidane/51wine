@@ -28,7 +28,7 @@ namespace Travel.Presentation.WebPlugin {
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink sevendays;
+        protected global::System.Web.UI.WebControls.Button sevendays;
         
         /// <summary>
         /// fourteendays 控件。
@@ -37,7 +37,7 @@ namespace Travel.Presentation.WebPlugin {
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink fourteendays;
+        protected global::System.Web.UI.WebControls.Button fourteendays;
         
         /// <summary>
         /// thirtydays 控件。
@@ -46,6 +46,6 @@ namespace Travel.Presentation.WebPlugin {
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink thirtydays;
+        protected global::System.Web.UI.WebControls.Button thirtydays;
     }
 }
