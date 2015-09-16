@@ -87,6 +87,15 @@
             window._points && (window._points[3] = +new Date());
         };
     </script>
+    <script type="text/JavaScript">
+        $(window).load(function () {
+            HideTimeBar();
+        });
+        function HideTimeBar() {
+            $("#div_js_dateRangeTitle1").parents(".sub_menu").hide();
+
+        }
+        </script>
 </head>
 <body>
     <script type="text/javascript">
@@ -317,9 +326,6 @@
                                             <asp:Button CssClass="btn btn_default" range="14" ID="fourteendays" runat="server" Text="14日" OnClick="fourteendays_Click" />
                                             <asp:Button CssClass="btn btn_default" range="30" ID="thirtydays" runat="server" Text="30日" OnClick="thirtydays_Click" />
                                             <div class="btn_group_item td_data_container" id="js_single_timer_container"></div>
-                                        </div>
-                                        <div class="setup">
-                                            <button class="btn btn_primary" id="js_compare_btn0">按时间对比</button>
                                         </div>
                                     </div>
                                 </div>
