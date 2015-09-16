@@ -92,8 +92,8 @@
     <Content Include="styles\skin_icons.png" />
     <Content Include="styles\style.css" />
     <Content Include="styles\useranalysis.css" />
+    <Content Include="UserAnalysisOld.aspx" />
     <Content Include="UserAnalysis.aspx" />
-    <Content Include="UserAnalysisTest.aspx" />
     <Content Include="Web.config" />
     <Content Include="WebServices\WeChatWebService.asmx" />
   </ItemGroup>
@@ -131,19 +131,19 @@
     <Compile Include="Product\ProductEntity.cs" />
     <Compile Include="Product\ProductEntityManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserAnalysisOld.aspx.cs">
+      <DependentUpon>UserAnalysisOld.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserAnalysisOld.aspx.designer.cs">
+      <DependentUpon>UserAnalysisOld.aspx</DependentUpon>
+    </Compile>
     <Compile Include="UserAnalysis.aspx.cs">
       <DependentUpon>UserAnalysis.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="UserAnalysis.aspx.designer.cs">
       <DependentUpon>UserAnalysis.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="UserAnalysisTest.aspx.cs">
-      <DependentUpon>UserAnalysisTest.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="UserAnalysisTest.aspx.designer.cs">
-      <DependentUpon>UserAnalysisTest.aspx</DependentUpon>
     </Compile>
     <Compile Include="UserStatistics\UserStatisticsInfo.cs" />
     <Compile Include="UserStatistics\UserStatisticsManager.cs" />
