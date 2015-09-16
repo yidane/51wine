@@ -90,7 +90,7 @@ namespace WeiXinPF.WebService
                         {
                             name = p.Name,
                             img =string.Format("url({0})", p.Cover) ,
-                            url = string.Format("{0}/weixin/scenic/index.aspx?id={1}",
+                            url = string.Format("{0}/weixin/scenic/detail.aspx?id={1}",
                             MyCommFun.getWebSite(), p.Id)
                         });
 
