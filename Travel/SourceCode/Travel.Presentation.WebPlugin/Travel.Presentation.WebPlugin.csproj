@@ -64,6 +64,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="javascripts\highcharts.js" />
     <Content Include="javascripts\jquery\jquery.lazyload.min.js" />
     <Content Include="javascripts\jquery\lhgdialog.js" />
     <Content Include="javascripts\layout.js" />
@@ -92,6 +93,7 @@
     <Content Include="styles\style.css" />
     <Content Include="styles\useranalysis.css" />
     <Content Include="UserAnalysis.aspx" />
+    <Content Include="UserAnalysisTest.aspx" />
     <Content Include="Web.config" />
     <Content Include="WebServices\WeChatWebService.asmx" />
   </ItemGroup>
@@ -135,6 +137,13 @@
     </Compile>
     <Compile Include="UserAnalysis.aspx.designer.cs">
       <DependentUpon>UserAnalysis.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UserAnalysisTest.aspx.cs">
+      <DependentUpon>UserAnalysisTest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserAnalysisTest.aspx.designer.cs">
+      <DependentUpon>UserAnalysisTest.aspx</DependentUpon>
     </Compile>
     <Compile Include="UserStatistics\UserStatisticsInfo.cs" />
     <Compile Include="UserStatistics\UserStatisticsManager.cs" />

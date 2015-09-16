@@ -9,8 +9,8 @@
     <link href="styles/useranalysis.css" rel="stylesheet" />
     <link href="styles/baseuser.css" rel="stylesheet" />
     <link href="styles/date_range218878.css" rel="stylesheet" />
-    <script src="http://cdn.hcharts.cn/highcharts/highcharts.js" type="text/javascript"></script>
     <script src="javascripts/jquery/jQuery-1.10.2.min.js"></script>
+    <script src="javascripts/highcharts.js" type="text/javascript"></script>
 </head>
 <body>
     <script type="text/javascript">
@@ -20,23 +20,24 @@
                                                         user_source: 99999999,
                                                         list: [{
                                                             date: "2015-08-17",
-                                                            cancel_user: 0,
-                                                            //cumulate_user: 1,
-                                                            //netgain_user: 0,
+                                                            cancel_user: 1,
+                                                            cumulate_user: 1,
+                                                            netgain_user: 2,
                                                             user_source: 0,
                                                             user_sourceDesc: "其他",
-                                                            new_user: 0
+                                                            new_user: 3
                                                         }, {
                                                             date: "2015-08-18",
-                                                            cancel_user: 0,
-                                                            //cumulate_user: 1,
-                                                            //netgain_user: 0,
+                                                            cancel_user: 4,
+                                                            cumulate_user: 1,
+                                                            netgain_user: 8,
                                                             user_source: 0,
                                                             user_sourceDesc: "其他",
-                                                            new_user: 0
+                                                            new_user: 12
                                                         }]
                                                     }]
         };
+        window.cgiData.list[0].list.new_user;
     </script>
     <script type="text/javascript">
 
@@ -48,24 +49,36 @@
             d = d < 10 ? ('0' + d) : d;
             return y + '-' + m + '-' + d;
         };
-
+        function DateArray(n) {
+            var arr = new Array();
+            for (var i = n; i > 0; i--)
+            {
+                var date_rec = new Date(recentDate - 24 * 60 * 60 * 1000 * i);
+                var rec = FormatDate(date_rec);
+                arr.push([rec]);
+            }
+            return arr;
+        }
         var myDate = new Date();
         var recentDate = myDate.getTime();
         var n = 7;
         var end = new Date(recentDate - 24 * 60 * 60 * 1000);
         var endTime = FormatDate(end);
+        var arrdate = new Array();
+        arrdate = DateArray(n);
         $(document).ready(function () {
             var start = new Date(recentDate - 24 * 60 * 60 * 1000 * n);
             var startTime = FormatDate(start);
             $.ajax({
                 type: "POST",
-                url: "WebServices/WeChatWebService.asmx/GetUserAnalysis",
+                url: "WebServices/WeChatWebService.asmx/GetUserAnalysisWeb",
                 data: { beginDate: startTime, endDate: endTime },
                 dataType: 'json',
                 success: function (result) {
                     //$('#dictionary').append(result.d);
 
-                    window.cgiData.list = result.Data;
+                    window.cgiData = result.Data;
+                    bind(n);
                 }
             });
 
@@ -75,12 +88,13 @@
                 var startTime = FormatDate(start);
                 $.ajax({
                     type: "POST",
-                    url: "WebServices/WeChatWebService.asmx/GetUserAnalysis",
+                    url: "WebServices/WeChatWebService.asmx/GetUserAnalysisWeb",
                     data: { beginDate: startTime, endDate: endTime },
                     dataType: 'json',
                     success: function (result) {
                         //$('#dictionary').append(result.d);
-                        window.cgiData.list = result.Data;
+                        window.cgiData = result.Data;
+                        bind(n);
                     }
                 });
             });
@@ -90,12 +104,13 @@
                 var startTime = FormatDate(start);
                 $.ajax({
                     type: "POST",
-                    url: "WebServices/WeChatWebService.asmx/GetUserAnalysis",
+                    url: "WebServices/WeChatWebService.asmx/GetUserAnalysisWeb",
                     data: { beginDate: startTime, endDate: endTime },
                     dataType: 'json',
                     success: function (result) {
                         //$('#dictionary').append(result.d);
-                        window.cgiData.list = result.Data;
+                        window.cgiData = result.Data;
+                        bind(n);
                     }
                 });
             });
@@ -106,63 +121,78 @@
                 $.ajax({
                     type: "POST",
                     //contentType: "application/json",
-                    url: "WebServices/WeChatWebService.asmx/GetUserAnalysis",
+                    url: "WebServices/WeChatWebService.asmx/GetUserAnalysisWeb",
                     data: { beginDate: startTime, endDate: endTime },
                     dataType: 'json',
                     success: function (result) {
                         //$('#dictionary').append(result.d);
-                        window.cgiData.list = result.Data;
+                        window.cgiData = result.Data;
+                        bind(n);
                     }
                 });
             });
-
-            $('#js_msg_chart').highcharts({
-                title: {
-                    text: 'Monthly Average Temperature',
-                    x: -20 //center
-                },
-                subtitle: {
-                    text: 'Source: WorldClimate.com',
-                    x: -20
-                },
-                xAxis: {
-                    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun','Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-                },
-                yAxis: {
+            
+            function bind(n) {
+                var arrnew = new Array();
+                var arrcancel = new Array();
+                var arrnetgain = new Array();
+                var arrcumulate = new Array();
+                for (var i in window.cgiData.list[0].list) {
+                    arrnew.push([window.cgiData.list[0].list[i].new_user]);
+                    arrcancel.push([window.cgiData.list[0].list[i].cancel_user]);
+                    arrnetgain.push([window.cgiData.list[0].list[i].netgain_user]);
+                    arrcumulate.push([window.cgiData.list[0].list[i].cumulate_user]);
+                }
+                var arrdate = new Array();
+                arrdate = DateArray(n);
+                $('#js_msg_charttest').highcharts({
                     title: {
-                        text: 'Temperature (°C)'
+                        text: '用户分析',
+                        x: -20 //center
                     },
-                    plotLines: [{
-                        value: 0,
-                        width: 1,
-                        color: '#808080'
+                    //subtitle: {
+                    //    text: 'Source: WorldClimate.com',
+                    //    x: -20
+                    //},
+                    xAxis: {
+                        categories: arrdate
+                    },
+                    yAxis: {
+                        title: {
+                            text: '人数'
+                        },
+                        plotLines: [{
+                            value: 0,
+                            width: 1,
+                            color: '#808080'
+                        }]
+                    },
+                    //tooltip: {
+                    //    valueSuffix: '°C'
+                    //},
+                    legend: {
+                        layout: 'vertical',
+                        align: 'right',
+                        verticalAlign: 'middle',
+                        borderWidth: 0
+                    },
+                    series: [{
+                        name: '新增关注人数',
+                        data: arrnew
+                    }, {
+                        name: '取消关注人数',
+                        data: arrcancel
+                    }, {
+                        name: '净增关注人数',
+                        data: arrnetgain
+                    }, {
+                        name: '累计关注人数',
+                        data: arrcumulate
                     }]
-                },
-                tooltip: {
-                    valueSuffix: '°C'
-                },
-                legend: {
-                    layout: 'vertical',
-                    align: 'right',
-                    verticalAlign: 'middle',
-                    borderWidth: 0
-                },
-                series: [{
-                    name: 'Tokyo',
-                    data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]
-                }, {
-                    name: 'New York',
-                    data: [-0.2, 0.8, 5.7, 11.3, 17.0, 22.0, 24.8, 24.1, 20.1, 14.1, 8.6, 2.5]
-                }, {
-                    name: 'Berlin',
-                    data: [-0.9, 0.6, 3.5, 8.4, 13.5, 17.0, 18.6, 17.9, 14.3, 9.0, 3.9, 1.0]
-                }, {
-                    name: 'London',
-                    data: [3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]
-                }]
-            });
+                });
+            }
         });
-        </script>
+    </script>
     <form id="form1" runat="server">
         <div>
             <div class="main_hd">
@@ -275,7 +305,7 @@
                     <div class="info_box drop_hd_right">
                         <div class="inner" id="js_actionstest">
                             <div>
-                                <div class="info_hd">
+                                <%--<div class="info_hd">
                                     <strong class="lable time_lable">关键指标详解</strong>
                                     <div class="tabs">
                                         <a class="first current" href="javascript:;">新增人数</a>
@@ -283,7 +313,7 @@
                                         <a href="javascript:;">净增人数</a>
                                         <a class="last" href="javascript:;">累积人数</a>
                                     </div>
-                                </div>
+                                </div>--%>
 
                                 <div class="sub_menu">
                                     <div>
@@ -291,27 +321,18 @@
                                         <strong class="lable time_lable">时间</strong>
 
                                         <div class="button_group">
-                                            <a class="btn btn_default" href="javascript:;" range="7" id="sevendays">7日</a>
+                                            <a class="btn btn_default selected" href="javascript:;" range="7" id="sevendays">7日</a>
                                             <a class="btn btn_default" href="javascript:;" range="14" id="fourteendays">14日</a>
-                                            <a class="btn btn_default selected" href="javascript:;" range="30" id="thirtydays">30日</a>
+                                            <a class="btn btn_default" href="javascript:;" range="30" id="thirtydays">30日</a>
 
-                                            <div class="btn_group_item td_data_container" id="js_date_container0">
-                                                <div class="ta_date" id="div_js_dateRangeTitle1">
-                                                    <span class="date_title" id="js_dateRangeTitle1">2015-08-15 至 2015-09-13</span>
-                                                    <a class="opt_sel" id="js_dateRangeTrigger1" href="#">
-                                                        <i class="i_orderd"></i>
-                                                    </a>
-                                                </div>
-                                                <label class="contrast" for="needCompare_1442200323296" style="display: none;">
-                                                    <input type="checkbox" class="pc" name="needCompare_1442200323296" id="needCompare_1442200323296" value="1" style="display: none;">对比</label><div class="ta_date" id="div_compare_js_dateRangeTitle1" style="display: none;"><span name="dateCompare" id="js_dateRangeTitle1Compare" class="date_title" style="display: none;">2015-07-16 至 2015-08-14</span>	<a class="opt_sel" id="compare_trigger_0" href="#"><i class="i_orderd"></i></a></div>
-                                            </div>
+                                           
                                             <div class="btn_group_item td_data_container" id="js_single_timer_container"></div>
                                         </div>
 
 
-                                        <div class="setup">
+                                        <%--<div class="setup">
                                             <button class="btn btn_primary" id="js_compare_btn0">按时间对比</button>
-                                        </div>
+                                        </div>--%>
 
                                     </div>
                                 </div>
@@ -358,7 +379,7 @@
 
                                 <div class="sub_title">趋势图</div>
                                 <div class="sub_content">
-                                    <div class="sub_content" id="js_msg_chart"></div>
+                                    <div class="sub_content" id="js_msg_charttest"></div>
                                 </div>
 
                                 <%--<h4 class="sub_title">详细数据	                   	<div class="tr_ext_info"><a target="_blank" href="#" id="js_download_detail">导出Excel</a> </div>
@@ -455,6 +476,6 @@
         </div>
     </form>
 
- 
+
 </body>
 </html>
