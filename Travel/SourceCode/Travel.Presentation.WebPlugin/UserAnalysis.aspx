@@ -87,7 +87,7 @@
             window._points && (window._points[3] = +new Date());
         };
     </script>
-    <script type="text/JavaScript">
+   <%-- <script type="text/JavaScript">
         $(window).load(function () {
             HideTimeBar();
         });
@@ -95,7 +95,7 @@
             $("#div_js_dateRangeTitle1").parents(".sub_menu").hide();
 
         }
-        </script>
+    </script>--%>
 </head>
 <body>
     <script type="text/javascript">
@@ -317,12 +317,22 @@
 
                     <div class="info_box drop_hd_right">
                         <div class="inner" id="js_actionsTest">
+
+                            <%--<div class="info_hd">
+                                <strong class="lable time_lable">关键指标详解</strong>
+                                <div class="tabs">
+                                    <a class="first current" href="javascript:;" jquery19109084401493408061="16">新增人数</a> 
+                                    <a href="javascript:;" jquery19109084401493408061="18">取消关注人数</a> 
+                                    <a href="javascript:;" jquery19109084401493408061="20">净增人数</a> 
+                                    <a class="last" href="javascript:;" jquery19109084401493408061="22">累积人数</a> 
+                                </div>
+                            </div>--%>
                             <div>
                                 <div class="sub_menu">
                                     <div>
                                         <strong class="lable time_lable">时间</strong>
                                         <div class="button_group">
-                                            <asp:Button CssClass="btn btn_default selected"  range="7" ID="sevendays" runat="server" Text="7日" OnClick="sevendays_Click" />
+                                            <asp:Button CssClass="btn btn_default selected" range="7" ID="sevendays" runat="server" Text="7日" OnClick="sevendays_Click" />
                                             <asp:Button CssClass="btn btn_default" range="14" ID="fourteendays" runat="server" Text="14日" OnClick="fourteendays_Click" />
                                             <asp:Button CssClass="btn btn_default" range="30" ID="thirtydays" runat="server" Text="30日" OnClick="thirtydays_Click" />
                                             <div class="btn_group_item td_data_container" id="js_single_timer_container"></div>

@@ -108,7 +108,7 @@ namespace Travel.Presentation.WebPlugin.UserStatistics
                     newUserStatistics.date = row.Field<DateTime>("ref_date").ToString("yyyy-MM-dd");
                     newUserStatistics.new_user = row.Field<int>("new_user");
                     newUserStatistics.user_source = row.Field<int>("user_source");
-
+                    newUserStatistics.netgain_user = row.Field<int>("new_user") - row.Field<int>("cancel_user");
                     rtnUserStatisticsList.Add(newUserStatistics);
                 }
             }
