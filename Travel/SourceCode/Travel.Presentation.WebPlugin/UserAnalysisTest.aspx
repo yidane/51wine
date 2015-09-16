@@ -37,7 +37,6 @@
                                                         }]
                                                     }]
         };
-        window.cgiData.list[0].list.new_user;
     </script>
     <script type="text/javascript">
 
@@ -150,10 +149,6 @@
                         text: '用户分析',
                         x: -20 //center
                     },
-                    //subtitle: {
-                    //    text: 'Source: WorldClimate.com',
-                    //    x: -20
-                    //},
                     xAxis: {
                         categories: arrdate
                     },
@@ -167,9 +162,9 @@
                             color: '#808080'
                         }]
                     },
-                    //tooltip: {
-                    //    valueSuffix: '°C'
-                    //},
+                    tooltip: {
+                        valueSuffix: '人'
+                    },
                     legend: {
                         layout: 'vertical',
                         align: 'right',
@@ -305,15 +300,6 @@
                     <div class="info_box drop_hd_right">
                         <div class="inner" id="js_actionstest">
                             <div>
-                                <%--<div class="info_hd">
-                                    <strong class="lable time_lable">关键指标详解</strong>
-                                    <div class="tabs">
-                                        <a class="first current" href="javascript:;">新增人数</a>
-                                        <a href="javascript:;">取消关注人数</a>
-                                        <a href="javascript:;">净增人数</a>
-                                        <a class="last" href="javascript:;">累积人数</a>
-                                    </div>
-                                </div>--%>
 
                                 <div class="sub_menu">
                                     <div>
@@ -328,32 +314,10 @@
                                            
                                             <div class="btn_group_item td_data_container" id="js_single_timer_container"></div>
                                         </div>
-
-
-                                        <%--<div class="setup">
-                                            <button class="btn btn_primary" id="js_compare_btn0">按时间对比</button>
-                                        </div>--%>
-
                                     </div>
                                 </div>
                                 <div></div>
                             </div>
-
-
-
-                            <div class="sub_menu" id="js_subselection">
-                                <strong class="lable time_lable">增长来源</strong>
-                                <div class="button_group">
-
-                                    <a class="btn btn_default selected" href="javascript:;" data-tab="1" data-source="99999999">全部</a>
-                                    <%--<a class="btn btn_default" href="javascript:;" data-tab="3" data-source="35">搜索公众号名称</a>
-					    <a class="btn btn_default" href="javascript:;" data-tab="4" data-source="3">搜索微信号</a>
-					    <a class="btn btn_default" href="javascript:;" data-tab="6" data-source="43">图文页右上角菜单</a>
-					    <a class="btn btn_default" href="javascript:;" data-tab="2" data-source="17">名片分享</a>
-					    <a class="btn btn_default" href="javascript:;" data-tab="7" data-source="0">其他</a>--%>
-                                </div>
-                            </div>
-
                             <div class="info_bd">
                                 <div class="page_msg mini">
                                     <div class="inner group">
@@ -382,81 +346,7 @@
                                     <div class="sub_content" id="js_msg_charttest"></div>
                                 </div>
 
-                                <%--<h4 class="sub_title">详细数据	                   	<div class="tr_ext_info"><a target="_blank" href="#" id="js_download_detail">导出Excel</a> </div>
-               		</h4>
-                    <div class="page_msg mini top">
-                        <div class="inner group">
-                            <span class="msg_icon_wrp">
-                                <i class="icon_msg_mini info"></i>
-                            </span>
-                            <div class="msg_content">
-                                <p>用户总数和用户增长数分别根据不同方法和时间点来统计，可能出现不匹配。</p>
-                            </div>
-                        </div>
-                    </div>
-                   <div class="sub_content">
-	                     <div class="table_wrp">
-	                     	  <table class="table" cellspacing="0" id="js_single_table">
-                                <thead class="thead">
-                                <tr>
-                                    <th class="table_cell rank_area tl" data-type="date">
-                                        时间                                        <span class="icon_rank rank_area">
-                                            <i class="arrow arrow_up"></i><i class="arrow arrow_down"></i>
-                                        </span>
-                                    </th>
-                                    <th class="table_cell rank_area tr" data-type="new_user">
-                                        新关注人数                                        <span class="icon_rank">
-                                            <i class="arrow arrow_up"></i><i class="arrow arrow_down"></i>
-                                        </span>
-                                    </th>
-                                    <th class="table_cell rank_area tr" data-type="cancel_user">
-                                        取消关注人数                                        <span class="icon_rank">
-                                            <i class="arrow arrow_up"></i><i class="arrow arrow_down"></i>
-                                        </span>
-                                    </th>
-                                     <th class="table_cell rank_area tr" data-type="netgain_user">
-                                        净增关注人数                                        <span class="icon_rank">
-                                            <i class="arrow arrow_up"></i><i class="arrow arrow_down"></i>
-                                        </span>
-                                    </th>
-                                    <th class="table_cell tr rank_area last_child no_extra" data-type="cumulate_user">
-                                        累积关注人数                                        <span class="icon_rank">
-                                            <i class="arrow arrow_up"></i><i class="arrow arrow_down"></i>
-                                        </span>
-                                    </th>
-                                    
-                                </tr>
-                                </thead>
-                                <tbody class="tbody" id="js_detail">
-                                    <tr class="empty_item"><td colspan="10" class="empty_tips">暂无数据</td></tr>
-                                </tbody>
-                            </table>  
-
-                            <table class="table" cellspacing="0" id="js_compare_table" style="display: none;">
-                                <thead class="thead">
-                                <tr>
-                                	<th class="table_cell rank_area tl">
-                                        序号                                    </th>
-                                    <th class="table_cell rank_area tl">
-                                        时间                                    </th>
-                                    <th class="table_cell rank_area tr">
-                                        新关注人数                                    </th>
-                                    <th class="table_cell rank_area tr">
-                                        取消关注人数                                    </th>
-                                     <th class="table_cell rank_area tr">
-                                        净增关注人数                                    </th>
-                                    <th class="table_cell tr rank_area last_child no_extra">
-                                        累积关注人数                                    </th>
-                                    
-                                </tr>
-                                </thead>
-                                <tbody class="tbody">
-                                </tbody>
-                            </table>                          
-	                     </div>
-	                     
-                         <div class="turn_page tr" id="js_pagebar"></div>
-                   </div>--%>
+                              
                             </div>
 
                         </div>
