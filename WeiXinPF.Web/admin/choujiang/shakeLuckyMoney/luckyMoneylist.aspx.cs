@@ -46,9 +46,11 @@ namespace WeiXinPF.Web.admin.choujiang.shakeLuckyMoney
                 DateTime begin = new DateTime();
                 DateTime end = new DateTime();
                 int count = ds.Tables[0].Rows.Count;
+                var table = ds.Tables[0];
+                table.Columns.Add("couponUrl");
                 for (int i = 0; i < count; i++)
                 {
-                    dr = ds.Tables[0].Rows[i];
+                    dr = table.Rows[i];
                     begin = MyCommFun.Obj2DateTime(dr["beginDate"]);
                     end = MyCommFun.Obj2DateTime(dr["endDate"]);
                     if (begin > DateTime.Now)
@@ -64,6 +66,8 @@ namespace WeiXinPF.Web.admin.choujiang.shakeLuckyMoney
                         dr["status_s"] = "<span class=\"act_in\">进行中</span>";
                     }
                     dr["url"] = MyCommFun.getWebSite() + "/weixin/shakeLuckyMoney/shakeLuckyMoney.html?wid=" + dr["wid"].ToString() + "&aid=" + dr["id"].ToString();
+
+                    dr["couponUrl"] = MyCommFun.getWebSite() + "/weixin/coupons/MyCoupons.html?wid=" + dr["wid"].ToString() + "&aid=" + dr["id"].ToString();
                 }
                 ds.AcceptChanges();
             }

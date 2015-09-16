@@ -61,8 +61,10 @@
                              <th>活动名称</th>
                             <th width="10%">关键词</th>
                             <th width="15%">开始时间/结束时间</th>
-                            <th width="5%">状态</th>
-                            <th width="25%" >链接地址</th>
+                           
+                            <th width="15%" >链接地址</th>
+                            <th width="15%" >我的奖券链接地址</th>
+                             <th width="5%">状态</th>
                             <th width="12%">操作</th>
                         </tr>
                     </thead>
@@ -85,11 +87,15 @@
                          <%# Eval("endDate") %>
                     </td>
                     
-                    <td>
-                          <%# Eval("status_s") %>
-                    </td>
-                     <td >
+                   
+                     <td style="word-break: break-all">
                         <a href="javascript:;"><%# Eval("url") %> </a>
+                    </td>
+                    <td style="word-break: break-all">
+                        <a href="javascript:;"><%=MyCommFun.getWebSite() %>/weixin/coupons/MyCoupons.html?wid=<%#Eval("wid") %> </a>
+                    </td>
+                     <td>
+                          <%# Eval("status_s") %>
                     </td>
                      <td>
                         <a  href='luckyMoneyEdit.aspx?id=<%#Eval("id") %>&action=<%=MXEnums.ActionEnum.Edit %>' class="operator">编辑</a>

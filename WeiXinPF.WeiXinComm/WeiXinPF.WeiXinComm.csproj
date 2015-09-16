@@ -55,6 +55,9 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="Travel.Infrastructure.WeiXin">
+      <HintPath>..\dll\Travel.Infrastructure.WeiXin.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CRM\WeiXinUser.cs" />
@@ -94,6 +97,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="threeInterface\bq002.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -28,7 +28,9 @@ namespace WeiXinPF.Infrastructure.DomainDataAccess.User
         #endregion
 
 
-    
+
+
+       
     }
 
     public partial class UserInfoEntity
@@ -89,6 +91,18 @@ namespace WeiXinPF.Infrastructure.DomainDataAccess.User
             {
                 AddUser();
             }
+        }
+
+
+        public static UserInfoEntity GetModel(string openid)
+        {
+            UserInfoEntity result = null;
+            using (var db = new WXDBContext())
+            {
+                result = db.UserInfo.Find(openid);
+                
+            }
+            return result;
         }
         #endregion
     }
