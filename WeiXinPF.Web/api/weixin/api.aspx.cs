@@ -1,14 +1,4 @@
-﻿/**************************************
- * author:李朴
- * company:上海沐雪网络科技有限公司
- * website:http://uweixin.cn
- * createDate:2013-11-1
- * update:2014-12-30
- * remark:微信公众平台接口对接的地址，
- * 形式如:http://uweixin.cn/api/weixin/api.aspx
- ***********************************/
-
-using WeiXinPF.BLL;
+﻿using WeiXinPF.BLL;
 using WeiXinPF.Common;
 using WeiXinPF.WeiXinComm;
 using WeiXinPF.WeiXinComm.CustomMessageHandler;
@@ -72,14 +62,14 @@ namespace WeiXinPF.Web.api.weixin
             }
             else
             {
-                
+
                 //本地测试的时候注释掉 ----start -----
 
-                //if (!CheckSignature.Check(signature, timestamp, nonce, Token))
-                //{
-                //    WriteContent("参数错误！");
-                //    return;
-                //}
+                if (!CheckSignature.Check(signature, timestamp, nonce, Token))
+                {
+                    WriteContent("参数错误！");
+                    return;
+                }
                 //本地测试的时候注释掉 ----end -----
 
                 //post method - 当有用户想公众账号发送消息时触发

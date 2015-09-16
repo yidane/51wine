@@ -1,5 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="index.aspx.cs" Inherits="WeiXinPF.Web.weixin.scenic.index" %>
 
+<%@ Import Namespace="WeiXinPF.Common" %>
 <!DOCTYPE html>
 
 <html>
@@ -79,7 +80,7 @@
             renderViewport();
             $.ajax({
                 url: 'scenic.ashx',
-                data: { action: 'GetScenic', id: 1 },
+                data: { action: 'GetScenic', id: <%=MyCommFun.RequestInt("id") %> },
                 dataType: "json"
             }).done(function (res) {
                 if (res && res.success) {
