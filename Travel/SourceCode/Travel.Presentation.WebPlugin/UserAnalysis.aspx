@@ -307,15 +307,15 @@
                     </div>
 
                     <div class="info_box drop_hd_right">
-                        <div class="inner" id="js_actions">
+                        <div class="inner" id="js_actionsTest">
                             <div>
                                 <div class="sub_menu">
                                     <div>
                                         <strong class="lable time_lable">时间</strong>
                                         <div class="button_group">
-                                            <asp:Button class="btn btn_default" range="7" ID="sevendays" runat="server" Text="7日" OnClick="sevendays_Click"/>
-                                            <asp:Button class="btn btn_default" range="14" ID="fourteendays" runat="server" Text="14日" OnClick="fourteendays_Click" />
-                                            <asp:Button class="btn btn_default selected" range="30" ID="thirtydays" runat="server" Text="30日" OnClick="thirtydays_Click" />
+                                            <asp:Button CssClass="btn btn_default selected"  range="7" ID="sevendays" runat="server" Text="7日" OnClick="sevendays_Click" />
+                                            <asp:Button CssClass="btn btn_default" range="14" ID="fourteendays" runat="server" Text="14日" OnClick="fourteendays_Click" />
+                                            <asp:Button CssClass="btn btn_default" range="30" ID="thirtydays" runat="server" Text="30日" OnClick="thirtydays_Click" />
                                             <div class="btn_group_item td_data_container" id="js_single_timer_container"></div>
                                         </div>
                                         <div class="setup">

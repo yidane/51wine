@@ -17,6 +17,8 @@ namespace Travel.Presentation.WebPlugin.UserStatistics
 
         public List<UserStatisticsInfo> GetUserStatistics(DateTime beginDate, DateTime endDate, int recursiveTimes = 0)
         {
+            beginDate = beginDate.Date;
+            endDate = endDate.Date;
             //今天结果不能查询
             if (DateTime.Equals(endDate, DateTime.Now))
                 endDate = endDate.AddDays(-1);
@@ -181,7 +183,7 @@ namespace Travel.Presentation.WebPlugin.UserStatistics
                 //在一次获取统计数据时候，中间某天无数据，使用初始化的值代替
                 for (DateTime date = BeginDate; date <= EndDate; date = date.AddDays(1))
                 {
-                    if (!result.Any(d => DateTime.Equals(Convert.ToDateTime(d.date), date)))
+                    if (!result.Any(d => DateTime.Equals(Convert.ToDateTime(d.date), date.Date)))
                     {
                         result.Add(new UserStatisticsDTO() { date = date.ToString("yyyy-MM-dd") });
                     }
