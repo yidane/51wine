@@ -184,18 +184,18 @@ namespace Travel.Presentation.WebPlugin.UserStatistics
                 rtnUserStatisricsRadioInfo.DayCumulateUser = row.Field<string>("DayCumulateUser");
                 rtnUserStatisricsRadioInfo.DayNetgainUser = row.Field<string>("DayNetgainUser");
                 rtnUserStatisricsRadioInfo.DayNewUser = row.Field<string>("DayNewUser");
-                rtnUserStatisricsRadioInfo.MonthCancelUser = row.Field<float>("MonthCancelUser").ToString("0.0");
-                rtnUserStatisricsRadioInfo.MonthCumulateUser = row.Field<float>("MonthCumulateUser").ToString("0.0");
-                rtnUserStatisricsRadioInfo.MonthNetgainUser = row.Field<float>("MonthNetgainUser").ToString("0.0");
-                rtnUserStatisricsRadioInfo.MonthNewUser = row.Field<float>("MonthNewUser").ToString("0.0");
-                rtnUserStatisricsRadioInfo.ThisDayCancelUser = row.Field<float>("ThisDayCancelUser").ToString("0.0");
-                rtnUserStatisricsRadioInfo.ThisDayCumulateUser = row.Field<float>("ThisDayCumulateUser").ToString("0.0");
-                rtnUserStatisricsRadioInfo.ThisDayNetgainUser = row.Field<float>("ThisDayNetgainUser").ToString("0.0");
-                rtnUserStatisricsRadioInfo.ThisDayNewUser = row.Field<float>("ThisDayNewUser").ToString("0.0");
-                rtnUserStatisricsRadioInfo.WeekCancelUser = row.Field<float>("WeekCancelUser").ToString("0.0");
-                rtnUserStatisricsRadioInfo.WeekCumulateUser = row.Field<float>("WeekCumulateUser").ToString("0.0");
-                rtnUserStatisricsRadioInfo.WeekNetgainUser = row.Field<float>("WeekNetgainUser").ToString("0.0");
-                rtnUserStatisricsRadioInfo.WeekNewUser = row.Field<float>("WeekNewUser").ToString("0.0");
+                rtnUserStatisricsRadioInfo.MonthCancelUser = row.Field<float>("MonthCancelUser").ToString("p");
+                rtnUserStatisricsRadioInfo.MonthCumulateUser = row.Field<float>("MonthCumulateUser").ToString("p");
+                rtnUserStatisricsRadioInfo.MonthNetgainUser = row.Field<float>("MonthNetgainUser").ToString("p");
+                rtnUserStatisricsRadioInfo.MonthNewUser = row.Field<float>("MonthNewUser").ToString("p");
+                rtnUserStatisricsRadioInfo.ThisDayCancelUser = row.Field<float>("ThisDayCancelUser").ToString("p");
+                rtnUserStatisricsRadioInfo.ThisDayCumulateUser = row.Field<float>("ThisDayCumulateUser").ToString("p");
+                rtnUserStatisricsRadioInfo.ThisDayNetgainUser = row.Field<float>("ThisDayNetgainUser").ToString("p");
+                rtnUserStatisricsRadioInfo.ThisDayNewUser = row.Field<float>("ThisDayNewUser").ToString("p");
+                rtnUserStatisricsRadioInfo.WeekCancelUser = row.Field<float>("WeekCancelUser").ToString("p");
+                rtnUserStatisricsRadioInfo.WeekCumulateUser = row.Field<float>("WeekCumulateUser").ToString("p");
+                rtnUserStatisricsRadioInfo.WeekNetgainUser = row.Field<float>("WeekNetgainUser").ToString("p");
+                rtnUserStatisricsRadioInfo.WeekNewUser = row.Field<float>("WeekNewUser").ToString("p");
             }
 
             return rtnUserStatisricsRadioInfo;
