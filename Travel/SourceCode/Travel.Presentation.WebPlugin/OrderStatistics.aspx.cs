@@ -112,6 +112,19 @@ namespace Travel.Presentation.WebPlugin
             }
         }
 
+        protected void btnDownloadSearchResult_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var searchParameter = CreateSearchParameter();
+                DownloadSearchResult(searchParameter);
+            }
+            catch (Exception)
+            {
+
+            }
+        }
+
         private SearchParameter CreateSearchParameter()
         {
             var rtnSearchParameter = new SearchParameter();
@@ -154,6 +167,11 @@ namespace Travel.Presentation.WebPlugin
 
                 return rtnSearchParameter;
             }
+        }
+
+        private void DownloadSearchResult(SearchParameter searchParameter)
+        {
+            new OrderStatisticsManager().DownloadSearchResult(searchParameter);
         }
 
         private void Search(SearchParameter searchParameter)

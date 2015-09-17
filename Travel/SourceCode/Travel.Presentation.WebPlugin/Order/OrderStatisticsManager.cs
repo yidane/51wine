@@ -6,6 +6,7 @@ using PetroChina.Riped.DBAccess;
 using System.Linq;
 using System.Web;
 using Travel.Infrastructure.CommonFunctions;
+using System.IO;
 
 namespace Travel.Presentation.WebPlugin.Order
 {
@@ -118,6 +119,70 @@ namespace Travel.Presentation.WebPlugin.Order
             }
 
             return rtnTicketStatusEntityList;
+        }
+
+        public void DownloadSearchResult(SearchParameter searchParameter)
+        {
+            var sqlparams = new List<SqlParameter>()
+                {
+                    new SqlParameter(){ParameterName = "@TicketCategoryID",Value = searchParameter.TicketCategoryID,SqlDbType = SqlDbType.UniqueIdentifier},
+                    new SqlParameter(){ParameterName = "@BeginDate",Value = searchParameter.BeginDate, SqlDbType = SqlDbType.DateTime},
+                    new SqlParameter(){ParameterName = "@EndDate",Value = searchParameter.EndDate, SqlDbType = SqlDbType.DateTime},
+                    new SqlParameter(){ParameterName = "@OrderStatus",Value =string.IsNullOrEmpty(searchParameter.OrderStatus)?"":searchParameter.OrderStatus, SqlDbType = SqlDbType.NVarChar},
+                    new SqlParameter(){ParameterName = "@BeginTotalPrice",Value = searchParameter.BeginTotalPrice, SqlDbType = SqlDbType.Decimal},
+                    new SqlParameter(){ParameterName = "@EndTotalPrice",Value = searchParameter.EndTotalPrice, SqlDbType = SqlDbType.Decimal}
+                };
+
+            var result = new SqlHelper().ExecuteDataTable(WebConfigureHelper.ConnectionStrings.DbConnection, CommandType.StoredProcedure, "usp_DownloadOrderSearch", sqlparams.ToArray());
+            DownloadSearchResult(result);
+        }
+
+        public void DownloadSearchResult(DataTable table)
+        {
+            var stream = new MemoryStream();
+            using (var sw = new StreamWriter(stream, System.Text.Encoding.UTF8))
+            {
+                string data = "序号,";
+                //写出列名称
+                for (int i = 0; i < table.Columns.Count; i++)
+                {
+                    data += table.Columns[i].ColumnName.ToString();
+                    if (i < table.Columns.Count - 1)
+                    {
+                        data += ",";
+                    }
+                }
+                sw.WriteLine(data);
+
+                //写出各行数据
+                for (int i = 0; i < table.Rows.Count; i++)
+                {
+                    data = (i + 1).ToString() + ",";
+                    for (int j = 0; j < table.Columns.Count; j++)
+                    {
+                        data += (string.Equals(table.Columns[j].ColumnName, "联系电话") ||
+                                        string.Equals(table.Columns[j].ColumnName, "联系人身份证") ||
+                                        string.Equals(table.Columns[j].ColumnName, "订单号")
+                                    ? "'"
+                                    : "") + table.Rows[i][j].ToString();
+
+                        if (j < table.Columns.Count - 1)
+                        {
+                            data += ",";
+                        }
+                    }
+                    sw.WriteLine(data);
+                }
+            }
+
+            HttpContext.Current.Response.Clear();
+            HttpContext.Current.Response.Charset = "utf-8";
+            HttpContext.Current.Response.AppendHeader("content-disposition", "attachment;filename=OrderResult.csv");
+            HttpContext.Current.Response.ContentEncoding = System.Text.Encoding.Default;
+
+            //response.contenttype指定文件类型 能为application/ms-excel || application/ms-word || application/ms-txt || application/ms-html || 或其他浏览器可直接支持文件 
+            HttpContext.Current.Response.ContentType = "application/ms-txt";
+            HttpContext.Current.Response.BinaryWrite(stream.ToArray());
         }
     }
 
