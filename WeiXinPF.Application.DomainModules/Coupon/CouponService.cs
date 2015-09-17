@@ -439,7 +439,8 @@ namespace WeiXinPF.Application.DomainModules.Coupon
         /// <param name="itemlist">所有的奖品信息</param>
         /// <param name="haszjlist">已经中奖的列表</param>
         /// <returns></returns>
-        private Model.wx_dzpAwardItem getZJItem(IList<Model.wx_dzpAwardItem> itemlist, IList<Model.wx_dzpAwardUser> haszjlist)
+        private Model.wx_dzpAwardItem getZJItem(IList<Model.wx_dzpAwardItem> itemlist,
+            IList<Model.wx_dzpAwardUser> haszjlist)
         {
             IList<Model.wx_dzpAwardItem> zjItemlist = new List<Model.wx_dzpAwardItem>();//剩余奖品列表
 
@@ -450,7 +451,10 @@ namespace WeiXinPF.Application.DomainModules.Coupon
             for (int i = 0; i < itemlist.Count; i++)
             {
                 tmpItem = itemlist[i];
-                thiszjRs = (from user in haszjlist where user.jpName == tmpItem.jpName && user.jxName == tmpItem.jxName select user).ToArray<Model.wx_dzpAwardUser>();
+                List<wx_dzpAwardUser> list = haszjlist.Where(user =>
+                user.jpName == tmpItem.jpName &&
+                user.jxName == tmpItem.jxName).ToList();
+                thiszjRs = list.ToArray<Model.wx_dzpAwardUser>();
                 int tmpSYNum = 0;
                 if (thiszjRs != null)
                 {
