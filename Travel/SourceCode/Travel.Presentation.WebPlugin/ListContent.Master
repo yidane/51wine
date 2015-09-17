@@ -14,10 +14,13 @@
     <script src="<%=WebHelper.MapUrl("javascripts/WDatePicker/WdatePicker.js") %>"></script>
     <script src="<%=WebHelper.MapUrl("javascripts/tradeQuery.js") %>"></script>
     <script src="<%=WebHelper.MapUrl("javascripts/layout.js") %>"></script>
+    <script src="<%=WebHelper.MapUrl("javascripts/highcharts.js") %>"></script>
     <link href="<%=WebHelper.MapUrl("styles/style.css") %>" rel="stylesheet" />
     <link href="<%=WebHelper.MapUrl("styles/pagination.css") %>" rel="stylesheet" />
     <link href="<%=WebHelper.MapUrl("styles/global_min.css") %>" rel="stylesheet" />
-
+    <link href="<%=WebHelper.MapUrl("styles/useranalysis.css") %>" rel="stylesheet" />
+    <link href="<%=WebHelper.MapUrl("styles/baseuser.css") %>" rel="stylesheet" />
+    <link href="<%=WebHelper.MapUrl("styles/date_range218878.css") %>" rel="stylesheet" />
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
     <style type="text/css">
