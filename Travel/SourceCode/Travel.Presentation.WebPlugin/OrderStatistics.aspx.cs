@@ -134,6 +134,12 @@ namespace Travel.Presentation.WebPlugin
                 if (!string.IsNullOrEmpty(this.txtendDate.Text))
                     DateTime.TryParse(this.txtendDate.Text.Trim(), out endDate);
 
+                if (this.ddlTicketCategory.SelectedIndex != 0)
+                    rtnSearchParameter.TicketCategoryID = new Guid(this.ddlTicketCategory.SelectedValue);
+
+                if (this.ddlCategoryStatus.SelectedIndex != 0)
+                    rtnSearchParameter.OrderStatus = ddlCategoryStatus.SelectedValue;
+
                 rtnSearchParameter.BeginDate = beginDate;
                 rtnSearchParameter.BeginTotalPrice = minAmount;
                 rtnSearchParameter.EndDate = endDate;

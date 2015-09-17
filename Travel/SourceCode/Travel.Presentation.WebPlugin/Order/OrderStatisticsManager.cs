@@ -83,9 +83,9 @@ namespace Travel.Presentation.WebPlugin.Order
                 foreach (DataRow row in result.Rows)
                 {
                     var newTicketCategoryEntity = new TicketCategoryEntity();
-                    newTicketCategoryEntity.TicketCategoryID = row.Field<Guid>("TicketCategoryID");
-                    newTicketCategoryEntity.TicketName = row.Field<string>("TicketName");
-                    newTicketCategoryEntity.Type = row.Field<string>("Type");
+                    newTicketCategoryEntity.TicketCategoryID = row.Field<Guid>("ProductCategoryID");
+                    newTicketCategoryEntity.TicketName = row.Field<string>("ProductName");
+                    //newTicketCategoryEntity.Type = row.Field<string>("Type");
 
                     rtnTicketCategoryEntityList.Add(newTicketCategoryEntity);
                 }

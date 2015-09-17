@@ -8,7 +8,7 @@
         }
 
         .dHide {
-            visibility: hidden;
+            /*visibility: hidden;*/
         }
         .shownone {
             display:none !important;
@@ -71,7 +71,7 @@
                     <div class="form-group">
                         <div class="form-item">
                             <a class="btn" id="batchQueryButton" runat="server" onserverclick="btnSearch_Click">查询</a>
-                            <a href="#" id="moreSearch" onclick="AdvanceSearch()">显示高级选项</a>
+                            <%--<a href="#" id="moreSearch" onclick="AdvanceSearch()">显示高级选项</a>--%>
                         </div>
                     </div>
                 </div>

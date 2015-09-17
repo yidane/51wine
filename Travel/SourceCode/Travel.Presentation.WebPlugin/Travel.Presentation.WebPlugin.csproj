@@ -167,6 +167,9 @@
   <ItemGroup>
     <Content Include="javascripts\jquery\jQuery-1.10.2.min.js" />
     <Content Include="ListContent.Master" />
+    <Content Include="App_Browsers\ie.browser" />
+    <Content Include="App_Browsers\firefox.browser" />
+    <Content Include="packages.config" />
     <None Include="Properties\PublishProfiles\Yidane.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
