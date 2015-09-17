@@ -168,6 +168,38 @@ namespace Travel.Presentation.WebPlugin.UserStatistics
 
             return rtnUserStatisticsList;
         }
+
+        public UserStatisricsRadioInfo GetUserStatisricsRadioInfo()
+        {
+            var result =
+                new PetroChina.Riped.DBAccess.SqlHelper().ExecuteDataTable(
+                    WebConfigureHelper.ConnectionStrings.DbConnection, CommandType.StoredProcedure,
+                    "usp_GetUserStatisticsRatio");
+
+            var rtnUserStatisricsRadioInfo = new UserStatisricsRadioInfo();
+            if (result != null && result.Rows.Count > 0)
+            {
+                var row = result.Rows[0];
+                rtnUserStatisricsRadioInfo.DayCancelUser = row.Field<string>("DayCancelUser");
+                rtnUserStatisricsRadioInfo.DayCumulateUser = row.Field<string>("DayCumulateUser");
+                rtnUserStatisricsRadioInfo.DayNetgainUser = row.Field<string>("DayNetgainUser");
+                rtnUserStatisricsRadioInfo.DayNewUser = row.Field<string>("DayNewUser");
+                rtnUserStatisricsRadioInfo.MonthCancelUser = row.Field<string>("MonthCancelUser");
+                rtnUserStatisricsRadioInfo.MonthCumulateUser = row.Field<string>("MonthCumulateUser");
+                rtnUserStatisricsRadioInfo.MonthNetgainUser = row.Field<string>("MonthNetgainUser");
+                rtnUserStatisricsRadioInfo.MonthNewUser = row.Field<string>("MonthNewUser");
+                rtnUserStatisricsRadioInfo.ThisDayCancelUser = row.Field<string>("ThisDayCancelUser");
+                rtnUserStatisricsRadioInfo.ThisDayCumulateUser = row.Field<string>("ThisDayCumulateUser");
+                rtnUserStatisricsRadioInfo.ThisDayNetgainUser = row.Field<string>("ThisDayNetgainUser");
+                rtnUserStatisricsRadioInfo.ThisDayNewUser = row.Field<string>("ThisDayNewUser");
+                rtnUserStatisricsRadioInfo.WeekCancelUser = row.Field<string>("WeekCancelUser");
+                rtnUserStatisricsRadioInfo.WeekCumulateUser = row.Field<string>("WeekCumulateUser");
+                rtnUserStatisricsRadioInfo.WeekNetgainUser = row.Field<string>("WeekNetgainUser");
+                rtnUserStatisricsRadioInfo.WeekNewUser = row.Field<string>("WeekNewUser");
+            }
+
+            return rtnUserStatisricsRadioInfo;
+        }
     }
 
     public class DateRange
@@ -263,5 +295,25 @@ namespace Travel.Presentation.WebPlugin.UserStatistics
 
             new PetroChina.Riped.DBAccess.SqlHelper().ExecuteNonQuery(WebConfigureHelper.ConnectionStrings.DbConnection, CommandType.StoredProcedure, "usp_WriteUserStatistics", sqlparams.ToArray());
         }
+    }
+
+    public class UserStatisricsRadioInfo
+    {
+        public string ThisDayNewUser { get; set; }
+        public string ThisDayCancelUser { get; set; }
+        public string ThisDayNetgainUser { get; set; }
+        public string ThisDayCumulateUser { get; set; }
+        public string DayNewUser { get; set; }
+        public string DayCancelUser { get; set; }
+        public string DayNetgainUser { get; set; }
+        public string DayCumulateUser { get; set; }
+        public string WeekNewUser { get; set; }
+        public string WeekCancelUser { get; set; }
+        public string WeekNetgainUser { get; set; }
+        public string WeekCumulateUser { get; set; }
+        public string MonthNewUser { get; set; }
+        public string MonthCancelUser { get; set; }
+        public string MonthNetgainUser { get; set; }
+        public string MonthCumulateUser { get; set; }
     }
 }

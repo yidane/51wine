@@ -3,6 +3,14 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <style type="text/css">
+        .d {
+        }
+
+        .dHide {
+            visibility: hidden;
+        }
+    </style>
     <!--导航栏-->
     <div class="location">
         <a class="home"><i></i><span>内容列表</span></a>
@@ -33,7 +41,7 @@
                             </div>
                         </dd>
                     </dl>
-                    <dl>
+                    <dl class="d dHide">
                         <dt>交易状态：</dt>
                         <dd>
                             <div class="rule-single-select">
@@ -41,7 +49,7 @@
                             </div>
                         </dd>
                     </dl>
-                    <dl>
+                    <dl class="d dHide">
                         <dt>票种类：</dt>
                         <dd>
                             <div class="rule-single-select">
@@ -49,7 +57,7 @@
                             </div>
                         </dd>
                     </dl>
-                    <dl>
+                    <dl class="d dHide">
                         <dt>交易金额：</dt>
                         <dd>
                             <asp:TextBox runat="server" ID="txtMinAmount" CssClass="input"></asp:TextBox>
@@ -84,8 +92,8 @@
                     <th align="left" width="14%">订单状态</th>
                     <th align="center" width="180">票名称</th>
                     <th align="center" width="8%">票数量</th>
-                    <th align="center" width="8%">票单价</th>
-                    <th align="center" width="8%">票总价</th>
+                    <th align="center" width="8%">票单价(元)</th>
+                    <th align="center" width="8%">票总价(元)</th>
                 </tr>
         </HeaderTemplate>
         <ItemTemplate>
@@ -97,9 +105,9 @@
                 <td><%#Eval("IdentityCardNumber") %></td>
                 <td><%#Eval("OrderStatus")%></td>
                 <td><%#Eval("TicketCategoryName")%></td>
-                <td><%#Eval("TicketCount")%></td>
-                <td><%#Eval("TicketPrice")%></td>
-                <td><%#Eval("TotalPrice")%></td>
+                <td align="center"><%#Eval("TicketCount")%></td>
+                <td align="center"><%#Eval("TicketPrice")%></td>
+                <td align="center"><%#Eval("TotalPrice")%></td>
             </tr>
         </ItemTemplate>
         <FooterTemplate>
@@ -120,11 +128,11 @@
 
     <script language="javascript">
         function AdvanceSearch() {
-            if ($(".more").hasClass('hide')) {
-                $(".more").removeClass('hide');
+            if ($(".d").hasClass('dHide')) {
+                $(".d").removeClass('dHide');
                 $("#moreSearch").text('隐藏高级选项');
             } else {
-                $(".more").addClass('hide');
+                $(".d").addClass('dHide');
                 $("#moreSearch").text('显示高级选项');
             }
         }

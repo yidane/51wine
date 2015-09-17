@@ -20,6 +20,11 @@
 
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
+    <style type="text/css">
+        .mainbody {
+            margin: 10px 15px;
+        }
+    </style>
 </head>
 <body class="mainbody">
     <form id="form1" runat="server">
