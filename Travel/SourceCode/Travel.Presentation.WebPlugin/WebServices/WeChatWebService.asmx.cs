@@ -54,13 +54,13 @@ namespace Travel.Presentation.WebPlugin.WebServices
             var listdata = new
             {
                 user_source = 99999999,
-                list = userStatisticsList,
-                UserStatisricsRadioInfo = userAnalysisData
+                list = userStatisticsList
             };
             var array = new object[1] { listdata };
             var result = new
             {
-                list = array
+                list = array,
+                UserStatisricsRadioInfo = userAnalysisData
             };
             Context.Response.Write(AjaxResult.Success(result));
         }

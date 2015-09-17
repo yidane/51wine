@@ -108,6 +108,7 @@
 
                     window.cgiData = result.Data;
                     bind(n);
+                    header();
                 }
             });
 
@@ -169,7 +170,24 @@
                     }
                 });
             });
-
+            function header() {
+                $('#newuser').text(window.cgiData.UserStatisricsRadioInfo.ThisDayNewUser);
+                $('#canceluser').text(window.cgiData.UserStatisricsRadioInfo.ThisDayCancelUser);
+                $('#netgainuser').text(window.cgiData.UserStatisricsRadioInfo.ThisDayNetgainUser);
+                $('#cumulateuser').text(window.cgiData.UserStatisricsRadioInfo.ThisDayCumulateUser);
+                $('#newday').text('   ' + window.cgiData.UserStatisricsRadioInfo.DayNewUser + '%');
+                $('#cancelday').text('   ' + window.cgiData.UserStatisricsRadioInfo.DayCancelUser + '%');
+                $('#netgainday').text('   ' + window.cgiData.UserStatisricsRadioInfo.DayNetgainUser + '%');
+                $('#cumulateday').text('   ' + window.cgiData.UserStatisricsRadioInfo.DayCumulateUser + '%');
+                $('#newweek').text('   ' + window.cgiData.UserStatisricsRadioInfo.WeekNewUser + '%');
+                $('#cancelweek').text('   ' + window.cgiData.UserStatisricsRadioInfo.WeekCancelUser + '%');
+                $('#netgainweek').text('   ' + window.cgiData.UserStatisricsRadioInfo.WeekNetgainUser + '%');
+                $('#cumulateweek').text('   ' + window.cgiData.UserStatisricsRadioInfo.WeekCumulateUser + '%');
+                $('#newmonth').text('   ' + window.cgiData.UserStatisricsRadioInfo.MonthNewUser + '%');
+                $('#cancelmonth').text('   ' + window.cgiData.UserStatisricsRadioInfo.MonthCancelUser + '%');
+                $('#netgainmonth').text('   ' + window.cgiData.UserStatisricsRadioInfo.MonthNetgainUser + '%');
+                $('#cumulatemonth').text('   ' + window.cgiData.UserStatisricsRadioInfo.MonthCumulateUser + '%');
+            }
             function bind(n) {
                 var arrnew = new Array();
                 var arrcancel = new Array();
@@ -224,22 +242,6 @@
                         data: arrcumulate
                     }]
                 });
-                $('#newuser').text(window.cgiData.newuser.users);
-                $('#canceluser').text(window.cgiData.canceluser.users);
-                $('#netgainuser').text(window.cgiData.netgainuser.users);
-                $('#cumulateuser').text(window.cgiData.cumulateuser.users);
-                $('#newday').text('   ' + window.cgiData.newuser.day + '%');
-                $('#cancelday').text('   ' + window.cgiData.canceluser.day + '%');
-                $('#netgainday').text('   ' + window.cgiData.netgainuser.day + '%');
-                $('#cumulateday').text('   ' + window.cgiData.cumulateuser.day + '%');
-                $('#newweek').text('   ' + window.cgiData.newuser.week + '%');
-                $('#cancelweek').text('   ' + window.cgiData.canceluser.week + '%');
-                $('#netgainweek').text('   ' + window.cgiData.netgainuser.week + '%');
-                $('#cumulateweek').text('   ' + window.cgiData.cumulateuser.week + '%');
-                $('#newmonth').text('   ' + window.cgiData.newuser.month + '%');
-                $('#cancelmonth').text('   ' + window.cgiData.canceluser.month + '%');
-                $('#netgainmonth').text('   ' + window.cgiData.netgainuser.month + '%');
-                $('#cumulatemonth').text('   ' + window.cgiData.cumulateuser.month + '%');
             }
         });
     </script>
