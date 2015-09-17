@@ -316,7 +316,7 @@
             },
             setScenic: function(i) {
                 var scenic = ui.scenics[i];
-                $('.container').css({ 'background-image': scenic.img }).attr('alt', scenic.name);
+                $('.container').css({ 'background-image': scenic.img, 'background-size': '100% 100%' }).attr('alt', scenic.name);
                 $('#introduce').attr('href', scenic.url);
             },
             //setCartoon: function (i) {
