@@ -3,55 +3,14 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <script type="text/javascript">
-        window.cgiData = {
-            list: [
-                {
-                    user_source: 99999999,
-                    list: [{
-                        date: "2015-08-17",
-                        cancel_user: 1,
-                        cumulate_user: 1,
-                        netgain_user: 2,
-                        user_source: 0,
-                        user_sourceDesc: "其他",
-                        new_user: 3
-                    }, {
-                        date: "2015-08-18",
-                        cancel_user: 4,
-                        cumulate_user: 1,
-                        netgain_user: 8,
-                        user_source: 0,
-                        user_sourceDesc: "其他",
-                        new_user: 12
-                    }]
-                }],
-            newuser: {
-                users: 0,
-                day: 0,
-                week: 0,
-                month: 0
-            },
-            canceluser: {
-                users: 0,
-                day: 0,
-                week: 0,
-                month: 0
-            },
-            netgainuser: {
-                users: 0,
-                day: 0,
-                week: 0,
-                month: 0
-            },
-            cumulateuser: {
-                users: 0,
-                day: 0,
-                week: 0,
-                month: 0
-            }
-        };
-    </script>
+    <style type="text/css">
+        .content {
+            width: 100% !important;
+            display: block;
+            min-height: 160px !important;
+            height: 180px !important;
+        }
+    </style>
     <script type="text/javascript">
 
         function show() {
@@ -99,6 +58,7 @@
                     window.cgiData = result.Data;
                     bind(n);
                     header();
+                    showicon();
                 }
             });
 
@@ -160,6 +120,13 @@
                     }
                 });
             });
+            function showicon(id) {
+                var text = $('#' + id + '').text();
+                if (text.indexOf("-") > 0) {
+                    $('#' + id + '').parent().children()[0].className = "icon_down";
+                    $('#' + id + '').parent().children()[0].title = "下降";
+                }
+            }
             function header() {
                 $('#newuser').text(window.cgiData.UserStatisricsRadioInfo.ThisDayNewUser);
                 $('#canceluser').text(window.cgiData.UserStatisricsRadioInfo.ThisDayCancelUser);
@@ -177,6 +144,18 @@
                 $('#cancelmonth').text('   ' + window.cgiData.UserStatisricsRadioInfo.MonthCancelUser + '');
                 $('#netgainmonth').text('   ' + window.cgiData.UserStatisricsRadioInfo.MonthNetgainUser + '');
                 $('#cumulatemonth').text('   ' + window.cgiData.UserStatisricsRadioInfo.MonthCumulateUser + '');
+                showicon("newday");
+                showicon("cancelday");
+                showicon("netgainday");
+                showicon("cumulateday");
+                showicon("newweek");
+                showicon("cancelweek");
+                showicon("netgainweek");
+                showicon("cumulateweek");
+                showicon("newmonth");
+                showicon("cancelmonth");
+                showicon("netgainmonth");
+                showicon("cumulatemonth");
             }
             function bind(n) {
                 var arrnew = new Array();
@@ -283,12 +262,9 @@
                                                     <dl>
                                                         <dt><b>新关注人数</b></dt>
                                                         <dd class="ui_trendgrid_number"><strong><span id="newuser"></span></strong><em class="ui_trendgrid_unit"></em></dd>
-                                                        <dd>日</dd>
-                                                        <span id="newday"></span>
-                                                        <dd>周</dd>
-                                                        <span id="newweek"></span>
-                                                        <dd>月</dd>
-                                                        <span id="newmonth"></span>
+                                                        <dd>日<i class="icon_up" title="上升"></i><span id="newday"></span></dd>
+                                                        <dd>周<i class="icon_up" title="上升"></i><span id="newweek"></span></dd>
+                                                        <dd>月<i class="icon_up" title="上升"></i><span id="newmonth"></span></dd>
                                                     </dl>
                                                 </div>
                                             </td>
@@ -298,12 +274,9 @@
                                                     <dl>
                                                         <dt><b>取消关注人数</b></dt>
                                                         <dd class="ui_trendgrid_number"><strong><span id="canceluser"></span></strong><em class="ui_trendgrid_unit"></em></dd>
-                                                        <dd>日</dd>
-                                                        <span id="cancelday"></span>
-                                                        <dd>周</dd>
-                                                        <span id="cancelweek"></span>
-                                                        <dd>月</dd>
-                                                        <span id="cancelmonth"></span>
+                                                        <dd>日<i class="icon_up" title="上升"></i><span id="cancelday"></span></dd>
+                                                        <dd>周<i class="icon_up" title="上升"></i><span id="cancelweek"></span></dd>
+                                                        <dd>月<i class="icon_up" title="上升"></i><span id="cancelmonth"></span></dd>
                                                     </dl>
                                                 </div>
                                             </td>
@@ -313,12 +286,9 @@
                                                     <dl>
                                                         <dt><b>净增关注人数</b></dt>
                                                         <dd class="ui_trendgrid_number"><strong><span id="netgainuser"></span></strong><em class="ui_trendgrid_unit"></em></dd>
-                                                        <dd>日</dd>
-                                                        <span id="netgainday"></span>
-                                                        <dd>周</dd>
-                                                        <span id="netgainweek"></span>
-                                                        <dd>月</dd>
-                                                        <span id="netgainmonth"></span>
+                                                        <dd>日<i class="icon_up" title="上升"></i><span id="netgainday"></span></dd>
+                                                        <dd>周<i class="icon_up" title="上升"></i><span id="netgainweek"></span></dd>
+                                                        <dd>月<i class="icon_up" title="上升"></i><span id="netgainmonth"></span></dd>
                                                     </dl>
                                                 </div>
                                             </td>
@@ -328,12 +298,9 @@
                                                     <dl>
                                                         <dt><b>累积关注人数</b></dt>
                                                         <dd class="ui_trendgrid_number"><strong><span id="cumulateuser"></span></strong><em class="ui_trendgrid_unit"></em></dd>
-                                                        <dd>日</dd>
-                                                        <span id="cumulateday"></span>
-                                                        <dd>周</dd>
-                                                        <span id="cumulateweek"></span>
-                                                        <dd>月</dd>
-                                                        <span id="cumulatemonth"></span>
+                                                        <dd>日<i class="icon_up" title="上升"></i><span id="cumulateday"></span></dd>
+                                                        <dd>周<i class="icon_up" title="上升"></i><span id="cumulateweek"></span></dd>
+                                                        <dd>月<i class="icon_up" title="上升"></i><span id="cumulatemonth"></span></dd>
                                                     </dl>
                                                 </div>
                                             </td>
@@ -358,8 +325,6 @@
                                         <a class="btn btn_default selected" href="javascript:;" range="7" id="sevendays">7日</a>
                                         <a class="btn btn_default" href="javascript:;" range="14" id="fourteendays">14日</a>
                                         <a class="btn btn_default" href="javascript:;" range="30" id="thirtydays">30日</a>
-
-
                                         <div class="btn_group_item td_data_container" id="js_single_timer_container"></div>
                                     </div>
                                 </div>
