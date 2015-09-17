@@ -176,6 +176,7 @@ namespace Travel.Presentation.WebPlugin.Order
             }
 
             HttpContext.Current.Response.Clear();
+            HttpContext.Current.Response.Buffer = true;
             HttpContext.Current.Response.Charset = "utf-8";
             HttpContext.Current.Response.AppendHeader("content-disposition", "attachment;filename=OrderResult.csv");
             HttpContext.Current.Response.ContentEncoding = System.Text.Encoding.Default;
@@ -183,6 +184,8 @@ namespace Travel.Presentation.WebPlugin.Order
             //response.contenttype指定文件类型 能为application/ms-excel || application/ms-word || application/ms-txt || application/ms-html || 或其他浏览器可直接支持文件 
             HttpContext.Current.Response.ContentType = "application/ms-txt";
             HttpContext.Current.Response.BinaryWrite(stream.ToArray());
+            HttpContext.Current.Response.Flush();
+            HttpContext.Current.Response.End();
         }
     }
 
