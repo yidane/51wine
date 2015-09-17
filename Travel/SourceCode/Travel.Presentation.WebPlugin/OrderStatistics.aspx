@@ -10,6 +10,9 @@
         .dHide {
             visibility: hidden;
         }
+        .shownone {
+            display:none !important;
+        }
     </style>
     <!--导航栏-->
     <div class="location">
@@ -57,7 +60,7 @@
                             </div>
                         </dd>
                     </dl>
-                    <dl class="d dHide">
+                    <dl class="d dHide shownone">
                         <dt>交易金额：</dt>
                         <dd>
                             <asp:TextBox runat="server" ID="txtMinAmount" CssClass="input"></asp:TextBox>

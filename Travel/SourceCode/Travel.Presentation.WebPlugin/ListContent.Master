@@ -11,7 +11,7 @@
     <script src="<%=WebHelper.MapUrl("javascripts/jquery/jQuery-1.10.2.min.js") %>"></script>
     <script src="<%=WebHelper.MapUrl("javascripts/jquery/jquery.lazyload.min.js") %>"></script>
     <script src="<%=WebHelper.MapUrl("javascripts/jquery/lhgdialog.js") %>"></script>
-    <script src="<%=WebHelper.MapUrl("javascripts/WdatePicker.js") %>"></script>
+    <script src="<%=WebHelper.MapUrl("javascripts/WDatePicker/WdatePicker.js") %>"></script>
     <script src="<%=WebHelper.MapUrl("javascripts/tradeQuery.js") %>"></script>
     <script src="<%=WebHelper.MapUrl("javascripts/layout.js") %>"></script>
     <link href="<%=WebHelper.MapUrl("styles/style.css") %>" rel="stylesheet" />
