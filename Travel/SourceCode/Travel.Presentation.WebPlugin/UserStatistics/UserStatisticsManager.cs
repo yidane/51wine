@@ -116,55 +116,55 @@ namespace Travel.Presentation.WebPlugin.UserStatistics
                 }
             }
 
-            //计算净值，平滑总关注数据曲线
-            foreach (UserStatisticsInfo info in rtnUserStatisticsList)
-            {
-                info.netgain_user = info.new_user - info.cancel_user;
-            }
+            ////计算净值，平滑总关注数据曲线
+            //foreach (UserStatisticsInfo info in rtnUserStatisticsList)
+            //{
+            //    info.netgain_user = info.new_user - info.cancel_user;
+            //}
 
-            foreach (UserStatisticsInfo info in rtnUserStatisticsList)
-            {
-                if (info.cumulate_user == 0)
-                {
-                    var infoIndex = rtnUserStatisticsList.IndexOf(info);
-                    if (infoIndex == 0 && rtnUserStatisticsList.Count > 1)
-                    {
-                        info.cumulate_user = rtnUserStatisticsList[1].cumulate_user - rtnUserStatisticsList[1].netgain_user;
-                    }
-                    else if (infoIndex == rtnUserStatisticsList.Count - 1 && rtnUserStatisticsList.Count > 1)
-                    {
-                        info.cumulate_user = rtnUserStatisticsList[rtnUserStatisticsList.Count - 2].cumulate_user +
-                                             rtnUserStatisticsList[rtnUserStatisticsList.Count - 2].netgain_user;
-                    }
-                    else
-                    {
-                        var preInfo = rtnUserStatisticsList[infoIndex - 1];
-                        var nextInfo = rtnUserStatisticsList[infoIndex + 1];
-                        if (preInfo.cumulate_user == 0)
-                        {
-                            if (nextInfo.cumulate_user == 0)
-                            {
-                                info.cumulate_user = 0;
-                            }
-                            else
-                            {
-                                info.cumulate_user = nextInfo.cumulate_user - nextInfo.netgain_user;
-                            }
-                        }
-                        else
-                        {
-                            if (nextInfo.cumulate_user == 0)
-                            {
-                                info.cumulate_user = preInfo.cumulate_user + preInfo.netgain_user;
-                            }
-                            else
-                            {
-                                info.cumulate_user = (nextInfo.cumulate_user + preInfo.cumulate_user) / 2;
-                            }
-                        }
-                    }
-                }
-            }
+            //foreach (UserStatisticsInfo info in rtnUserStatisticsList)
+            //{
+            //    if (info.cumulate_user == 0)
+            //    {
+            //        var infoIndex = rtnUserStatisticsList.IndexOf(info);
+            //        if (infoIndex == 0 && rtnUserStatisticsList.Count > 1)
+            //        {
+            //            info.cumulate_user = rtnUserStatisticsList[1].cumulate_user - rtnUserStatisticsList[1].netgain_user;
+            //        }
+            //        else if (infoIndex == rtnUserStatisticsList.Count - 1 && rtnUserStatisticsList.Count > 1)
+            //        {
+            //            info.cumulate_user = rtnUserStatisticsList[rtnUserStatisticsList.Count - 2].cumulate_user +
+            //                                 rtnUserStatisticsList[rtnUserStatisticsList.Count - 2].netgain_user;
+            //        }
+            //        else
+            //        {
+            //            var preInfo = rtnUserStatisticsList[infoIndex - 1];
+            //            var nextInfo = rtnUserStatisticsList[infoIndex + 1];
+            //            if (preInfo.cumulate_user == 0)
+            //            {
+            //                if (nextInfo.cumulate_user == 0)
+            //                {
+            //                    info.cumulate_user = 0;
+            //                }
+            //                else
+            //                {
+            //                    info.cumulate_user = nextInfo.cumulate_user - nextInfo.netgain_user;
+            //                }
+            //            }
+            //            else
+            //            {
+            //                if (nextInfo.cumulate_user == 0)
+            //                {
+            //                    info.cumulate_user = preInfo.cumulate_user + preInfo.netgain_user;
+            //                }
+            //                else
+            //                {
+            //                    info.cumulate_user = (nextInfo.cumulate_user + preInfo.cumulate_user) / 2;
+            //                }
+            //            }
+            //        }
+            //    }
+            //}
 
             return rtnUserStatisticsList;
         }
