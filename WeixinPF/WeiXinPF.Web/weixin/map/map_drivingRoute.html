@@ -1,0 +1,195 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
+    <style type="text/css">
+        body, html, #allmap {
+            width: 100%;height: 100%;overflow: hidden;margin: 0;font-family: "微软雅黑";
+        }
+        #allmap {
+           height: 60%;
+        }
+    </style>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=ZtOic4MnOSLOCAH4WqkeyWuQ"></script>
+    <title>单个标注点沿直线的轨迹运动</title>
+</head>
+<body>
+
+    <div style='margin:5px 0px'>
+        <b>起点: </b>
+        <select id="start" onchange="calcRoute();">
+            <option value="87.060914,48.627384">87.060914,48.627384</option>
+        </select>
+        <b>终点: </b>
+        <select id="end" onchange="calcRoute();">
+            <option value="87.047627,48.66528">87.047627,48.66528</option>
+        </select>
+        <b>计算策略：</b>
+        <select id="policy" onchange="calcRoute();">
+            <option value="LEAST_TIME">最少时间</option>
+            <option value="LEAST_DISTANCE">最短距离</option>
+            <option value="AVOID_HIGHWAYS">避开高速</option>
+            <option value="REAL_TRAFFIC">实时路况</option>
+            <option value="PREDICT_TRAFFIC">预测路况</option>
+        </select>
+        <label>
+            <input id="sp" type="checkbox" value='1' onclick='showP()' />
+            显示路段地标
+        </label>
+    </div>
+    <div id="allmap"></div>
+    <div style="width:1003px;padding-top:5px" id="routes"></div>
+</body>
+</html>
+<script type="text/javascript">
+	// 百度地图API功能
+	var map = new BMap.Map("allmap");
+  var route_steps;
+	map.centerAndZoom(new BMap.Point(87.060914,48.627384), 15);
+
+	//var myP1 = new BMap.Point(87.060914,48.627384);    //起点
+	//var myP2 = new BMap.Point(87.047627,48.66528);    //终点
+	var myIcon = new BMap.Icon("http://developer.baidu.com/map/jsdemo/img/Mario.png", new BMap.Size(32, 70), {    //小车图片
+		//offset: new BMap.Size(0, -5),    //相当于CSS精灵
+		imageOffset: new BMap.Size(0, 0)    //图片的偏移量。为了是图片底部中心对准坐标点。
+	  });
+	//var driving2 = new BMap.DrivingRoute(map,
+	//{
+	//    renderOptions: { map: map, autoViewport: true },
+	//    onSearchComplete: function (drivingRouteResult) {
+	//        alert(drivingRouteResult);
+	//    }
+
+	//});    //驾车实例
+	//////driving2.search(myP1, myP2);    //显示一条公交线路
+
+	//calcRoute(driving2);
+
+	function calcRoute(driving2) {
+	    var start_name = document.getElementById("start").value.split(",");
+	    var end_name = document.getElementById("end").value.split(",");
+	    var policy = document.getElementById("policy").value;
+
+
+	    var myP1 = new BMap.Point(start_name[0], start_name[1]);    //起点
+	    var myP2 = new BMap.Point(end_name[0], end_name[1]);    //终点
+	    driving2.search(myP1, myP2);    //显示一条公交线路
+	    driving2.setSearchCompleteCallback(function () {
+	        var result = driving2.getResults();
+	        var getPlannum = result.getNumPlans();
+	        var routes_desc = [];
+	        for (var i = 0; i < getPlannum; i++) {
+	            var plan = result.getPlan(i);
+	            var route = plan.getRoute(0);//驾车路线
+                 for(var j=0;j<route.getNumSteps();j++)
+				 {
+					var step=route.getStep(j);
+					var des= step.getDescription();
+					var distance= ',到下一个关键点的距离:'+step.getDistance();
+					 //var steps = route.
+					 //var turning_img = '&nbsp;&nbsp;<span' +
+					 //   	 ' style="margin-bottom: -4px;' +
+					 //   	 'display:inline-block;background:' +
+					 //   	 'url(img/turning.png) no-repeat '  + ';width:19px;height:' +
+					 //   	 '19px"></span>&nbsp;';
+					 var p_attributes = [
+						 'onclick="renderStep(' + j + ')"',
+						 'onmouseover=this.style.background="#eee"',
+						 'onmouseout=this.style.background="#fff"',
+						 'style="margin:5px 0px;cursor:pointer"'
+					 ].join(' ');
+					 routes_desc.push('<p ' + p_attributes + ' ><b>' + (j + 1) +
+							 '.</b>'  + des+distance);
+                 }
+
+
+
+
+
+	        }
+
+	        //方案文本描述
+	        var routes = document.getElementById('routes');
+	        routes.innerHTML = routes_desc.join('<br>');
+
+	        var pts = result.getPlan(0).getRoute(0).getPath();    //通过驾车实例，获得一系列点的数组
+	        var paths = pts.length;    //获得有几个点
+
+	        var carMk = new BMap.Marker(pts[0], { icon: myIcon });
+	        map.addOverlay(carMk);
+	        i = 0;
+	        function resetMkPoint(i) {
+	            carMk.setPosition(pts[i]);
+	            if (i < paths) {
+	                setTimeout(function () {
+	                    i++;
+	                    resetMkPoint(i);
+	                }, 100);
+	            }
+	        }
+
+	        setTimeout(function () {
+	            resetMkPoint(5);
+	        }, 100);
+
+	    });
+	     
+
+	  
+	}
+
+	function renderStep(index) {
+//	    var step = route_steps[index];
+//	    //clear overlays;
+//	    step_line && step_line.setMap(null);
+//	    //draw setp line
+//	    step_line = new qq.maps.Polyline(
+//            {
+//                path: step.path,
+//                strokeColor: '#ff0000',
+//                strokeWeight: 6,
+//                map: map
+//            }
+//        );
+	}
+
+
+	window.run = function (){
+	    var driving = new BMap.DrivingRoute(map,
+	{
+	    renderOptions: { map: map, autoViewport: true }
+
+	});    //驾车实例
+	    calcRoute(driving);
+		//driving.search(myP1, myP2);
+		//driving.setSearchCompleteCallback(function(){
+		//	var pts = driving.getResults().getPlan(0).getRoute(0).getPath();    //通过驾车实例，获得一系列点的数组
+		//	var paths = pts.length;    //获得有几个点
+
+		//	var carMk = new BMap.Marker(pts[0],{icon:myIcon});
+		//	map.addOverlay(carMk);
+		//	i=0;
+		//	function resetMkPoint(i){
+		//		carMk.setPosition(pts[i]);
+		//		if(i < paths){
+		//			setTimeout(function(){
+		//				i++;
+		//				resetMkPoint(i);
+		//			},100);
+		//		}
+		//	}
+
+		//	setTimeout(function () {
+		//	    resetMkPoint(5);
+		//	}, 100);
+
+		//});
+	}
+
+	setTimeout(function(){
+		run();
+	},1500);
+</script>
