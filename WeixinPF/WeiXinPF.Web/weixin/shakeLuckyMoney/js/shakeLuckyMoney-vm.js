@@ -232,6 +232,9 @@ var LuckyMoneyViewModel = function ($domParam, param) {
                     self.user(json.Data.user);
                     self.info(json.Data.info);
                     self.itemList(json.Data.itemlist);
+
+                    json.Data.signature.fxImg = getBaseUrl() + 'images/shareLuckyMoney.png';
+
                     self.configWeChat(json.Data.signature);
                 }
                 else {
