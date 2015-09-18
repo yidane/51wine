@@ -8112,6 +8112,7 @@
     <Content Include="weixin\shakeLuckyMoney\images\coupon_background.png" />
     <Content Include="weixin\shakeLuckyMoney\images\hand.png" />
     <Content Include="weixin\shakeLuckyMoney\images\shake_background.png" />
+    <Content Include="weixin\shakeLuckyMoney\images\shareLuckyMoney.png" />
     <Content Include="weixin\shakeLuckyMoney\images\title-bg-brown.png" />
     <Content Include="weixin\shakeLuckyMoney\images\title-bg-green.png" />
     <Content Include="weixin\shakeLuckyMoney\images\title-bg-orange.png" />
