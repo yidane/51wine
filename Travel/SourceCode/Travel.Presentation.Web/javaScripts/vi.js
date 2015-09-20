@@ -1142,6 +1142,8 @@ VPay.prototype.order = function () {
     if (This.isLoading == 1) return;
 
     This.isLoading = 1;
+    $("#loading").show();
+    $(".container").hide();
     var zPayBtn = $('#payBtn');
     zPayBtn.addClass('z-btn-top');
 
@@ -1181,19 +1183,27 @@ VPay.prototype.order = function () {
                     paySign: result.Data.paySign, // 支付签名
                     success: function (res) {
                         This.isLoading = 0;
+                        $("#loading").hide();
+                        $(".container").show();
                         document.location.href = "../order/MyOrderList.html";
                     },
                     fail: function (res) {
                         OrderRelease(result.Data.orderId);
                         This.isLoading = 0;
+                        $("#loading").hide();
+                        $(".container").show();
                         alert(JSON.stringify(res));
                     },
                     cancel: function (res) {
                         OrderRelease(result.Data.orderId);
                         This.isLoading = 0;
+                        $("#loading").hide();
+                        $(".container").show();
                     },
                     complete: function (res) {
                         This.isLoading = 0;
+                        $("#loading").hide();
+                        $(".container").show();
                         zPayBtn.removeClass('z-btn-top');
                     }
                 });
@@ -1201,6 +1211,8 @@ VPay.prototype.order = function () {
                 alert(result.Message);
                 //alert("已达今日门票配额上限");
                 This.isLoading = 0;
+                $("#loading").hide();
+                $(".container").show();
                 zPayBtn.removeClass('z-btn-top');
             }
         },
@@ -1208,6 +1220,8 @@ VPay.prototype.order = function () {
             alert(error);
             //alert("已达今日门票配额上限");
             This.isLoading = 0;
+            $("#loading").hide();
+            $(".container").show();
             zPayBtn.removeClass('z-btn-top');
         },
     });

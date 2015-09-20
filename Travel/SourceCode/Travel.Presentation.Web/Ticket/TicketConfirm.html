@@ -13,10 +13,69 @@
             margin-left: 0;
         }
     </style>
+    <style type="text/css">
+        #loading {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 10;
+            top: 0;
+            left: 0;
+            background: rgba(0, 0, 0,.1);
+            -webkit-transition: all .8s ease;
+            transition: all .8s ease;
+        }
+
+        .loader {
+            width: 3px;
+            height: 3px;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin-top: -1.5px;
+            margin-left: -1.5px;
+            border-radius: 100%; /* 圆角 */
+            box-shadow: 0 -10px 0 1px #81a8d7, /* 上, 1px 扩展 */
+            10px 0 #81a8d7, /* 右 */
+            0 10px #81a8d7, /* 下 */
+            -10px 0 #81a8d7, /* 左 */
+            -7px -7px 0 .5px #81a8d7, /* 左上, 0.5px扩展 */
+            7px -7px 0 1.5px #81a8d7, /* 右上, 1.5px扩展 */
+            7px 7px #81a8d7, /* 右下 */
+            -7px 7px #81a8d7; /* 左下 */
+            -webkit-transform: rotate(360deg);
+            -webkit-animation: spin 1s linear infinite;
+            transform: rotate(360deg);
+            animation: spin 1s linear infinite;
+        }
+
+        @-webkit-keyframes spin {
+            from {
+                -webkit-transform: rotate(0deg);
+            }
+
+            to {
+                -webkit-transform: rotate(360deg);
+            }
+        }
+
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+
     <link href="../styles/normalize.css" rel="stylesheet" />
 </head>
 <body>
-
+    <div id="loading" style="display: none">
+        <div class="loader"></div>
+    </div>
     <div id="container" class="container">
         <div class="row">
             <section>
@@ -105,7 +164,7 @@
 <script src="../javaScripts/vi.js"></script>
 
 
-<script type="text/javascript">
+    <script type="text/javascript">
     VI.assets_url = 'http://longmen.qqdyw.cn'; VI.base_url = 'http://longmen.qqdyw.cn'; VI.curr_site_url = 'http://longmen.qqdyw.cn/plugins/goods/front';
 
     function GetQueryString(name) {
