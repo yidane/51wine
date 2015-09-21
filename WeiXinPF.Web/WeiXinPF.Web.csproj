@@ -7690,6 +7690,7 @@
     <Folder Include="templates\index\qiche\js\" />
     <Folder Include="weixin\dzp\js\" />
     <Folder Include="weixin\haibao\" />
+    <Folder Include="weixin\map\css\" />
     <Folder Include="weixin\sticket\js\" />
   </ItemGroup>
   <ItemGroup>
@@ -7946,6 +7947,8 @@
     <Content Include="weixin\map\baidumap\map_getcurrentLocation.html" />
     <Content Include="weixin\map\baidumap\map_getLocation.html" />
     <Content Include="weixin\map\baidumap\map_seachservicebycircle.html" />
+    <Content Include="weixin\map\js\mapaddress_vm.js" />
+    <Content Include="weixin\map\map_address.html" />
     <Content Include="weixin\map\qqmap\qqmap_drivingRoute.html" />
     <Content Include="weixin\map\qqmap\qqmap_getcurrentlocation.html" />
     <Content Include="weixin\map\qqmap\qqmap_getLocation.html" />
