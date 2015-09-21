@@ -7941,11 +7941,11 @@
     <Content Include="weixin\magazine\js\main_d7a097e190.js" />
     <Content Include="weixin\magazine\js\scroll_7523dfb4df.js" />
     <Content Include="weixin\magazine\magazine.aspx" />
-    <Content Include="weixin\map\mapFunctionList.html" />
-    <Content Include="weixin\map\map_drivingRoute.html" />
-    <Content Include="weixin\map\map_getcurrentLocation.html" />
-    <Content Include="weixin\map\map_getLocation.html" />
-    <Content Include="weixin\map\map_seachservicebycircle.html" />
+    <Content Include="weixin\map\baidumap\mapFunctionList.html" />
+    <Content Include="weixin\map\baidumap\map_drivingRoute.html" />
+    <Content Include="weixin\map\baidumap\map_getcurrentLocation.html" />
+    <Content Include="weixin\map\baidumap\map_getLocation.html" />
+    <Content Include="weixin\map\baidumap\map_seachservicebycircle.html" />
     <Content Include="weixin\map\qqmap\qqmap_drivingRoute.html" />
     <Content Include="weixin\map\qqmap\qqmap_getcurrentlocation.html" />
     <Content Include="weixin\map\qqmap\qqmap_getLocation.html" />
