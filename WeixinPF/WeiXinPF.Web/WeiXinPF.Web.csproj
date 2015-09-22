@@ -7695,6 +7695,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="WebServices\CouponWebService.asmx" />
+    <Content Include="WebServices\MapWebService.asmx" />
     <Content Include="WebServices\MonsterWebService.asmx" />
     <Content Include="WebServices\WeChatWebService.asmx" />
     <Content Include="weixin\albums\alubmslist.aspx" />
@@ -7942,7 +7943,7 @@
     <Content Include="weixin\magazine\js\main_d7a097e190.js" />
     <Content Include="weixin\magazine\js\scroll_7523dfb4df.js" />
     <Content Include="weixin\magazine\magazine.aspx" />
-    <Content Include="weixin\map\baidumap\mapFunctionList.html" />
+    <Content Include="weixin\map\mapFunctionList.html" />
     <Content Include="weixin\map\baidumap\map_drivingRoute.html" />
     <Content Include="weixin\map\baidumap\map_getcurrentLocation.html" />
     <Content Include="weixin\map\baidumap\map_getLocation.html" />

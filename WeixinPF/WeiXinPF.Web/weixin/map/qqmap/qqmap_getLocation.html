@@ -3,23 +3,30 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>检索面板</title>
+    <title>检索坐标</title>
     <style type="text/css">
-        * {
-            margin: 0px;
-            padding: 0px;
+        html, body {
+            width: 100%;
+            height: 100%;
         }
+
+         * {
+             margin: 0px;
+             padding: 0px;
+         }
 
         body, button, input, select, textarea {
             font: 12px/16px Verdana, Helvetica, Arial, sans-serif;
+
         }
 
         li {
             margin-left: 30px;
         }
     </style>
-    <script charset="utf-8" src="http://map.qq.com/api/js?v=2.exp&key=XQSBZ-MYPKU-EJSVT-4XWSN-QWJXH-2TBDM"></script>
+    <script charset="utf-8" src="http://map.qq.com/api/js?v=2.exp&libraries=place&key=XQSBZ-MYPKU-EJSVT-4XWSN-QWJXH-2TBDM"></script>
     <script>
+        var ap;
         function G(id) {
             return document.getElementById(id);
         }
@@ -27,53 +34,64 @@
             G("p_lng").innerHTML = point.lng;
             G("p_lat").innerHTML = point.lat;
         }
-        var map = null;
-        var searchService = null;
-
-        var init = function () {
+        function init() {
             var center = new qq.maps.LatLng(48.6589239484962, 87.04087972640991);
-            map = new qq.maps.Map(document.getElementById('container'), {
-                center:center,
-                zoomLevel:18
+            var map = new qq.maps.Map(document.getElementById("container"), {
+                center: center,
+                zoom: 13
             });
-            qq.maps.event.addListener(map, 'click', function (e) {
-                var point = e.latLng;
-                setlocalInfo(point);
-            });
-            searchService = new qq.maps.SearchService({
-                panel:document.getElementById('infoDiv'),
+            setautocompletelocal();
+//            ap.setOptions({
+//                location:region.value
+//            });
+            var searchService = new qq.maps.SearchService({
                 map: map,
-                autoExtend:false
+                pageCapacity:1,
+                complete:function(res){
+                    if(res&&res.detail&&res.detail.pois)
+                    {
+                        if(res.detail.pois.length>0)
+                        {
+                            var firstpoi=res.detail.pois[0];
+                            setlocalInfo(firstpoi.latLng);
+                        }
+                    }
+                }
             });
-            getResult();
-        }
-        function getResult() {
-
-            //设置searchRequest
-            var poiText = document.getElementById("poiText").value;
             var regionText = document.getElementById("regionText").value;
 
             searchService.setLocation(regionText);
+            qq.maps.event.addListener(ap, "confirm", function (res) {
+              
+                searchService.search(res.value);
+            });
+            qq.maps.event.addListener(map, 'click', function (e) {
+                setlocalInfo(e.latLng);
+            });
+        }
 
-            searchService.search(poiText);
+        function setautocompletelocal(){
+            var region=G("regionText");
 
+            //实例化自动完成
+            ap = new qq.maps.place.Autocomplete(document.getElementById('place'),{
+
+                location:'新疆维吾尔自治区'
+            });
         }
 
     </script>
 </head>
 <body onload="init()">
-<div  style="width: 1003px; height: 500px"id="container"></div>
+<div style="width: 100%; height: 70%" id="container"></div>
+<div><p>提示：输入地点提示输入，确认完后显示最精确的一个坐标。同时点击地图上任意位置，可以变更坐标。</p></div>
+    <p style="margin: 5px;    padding-left: 24px;">   区域： <input type='text' style="width: 210px; padding: 3px 4px;" disabled value='新疆维吾尔自治区阿勒泰地区布尔津县' id="regionText" /></p>
+<p style="margin: 5px">
+   输入地点： <input style="width: 210px; padding: 3px 4px;" type="text" id="place"/>
+</p>
     <div id="txtpoint">
         <p>经度：<span id="p_lng"></span></p>
         <p>维度：<span id="p_lat"></span></p>
     </div>
-<div>
-    区域 <input type='text' value='新疆维吾尔自治区阿勒泰地区布尔津县喀纳斯景区' id="regionText"/>
-    地点 <input type='text' value="神仙湾" id="poiText"/>
-    <input type="button" value="Search" onclick="getResult()"/>
-
-    <div id="pageIndexLabel" style="width: 100px;"></div>
-</div>
-    <div style='width: 500px; height: 180px' id="infoDiv"></div>
 </body>
 </html>

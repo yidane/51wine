@@ -62,6 +62,9 @@
     <Compile Include="CouponWebService.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="MapWebService.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="MonsterWebService.cs">
       <SubType>Component</SubType>
     </Compile>

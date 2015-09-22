@@ -67,7 +67,7 @@
 
         self.getinfo();
 
-        self.searchRoad();
+        
     };
 
     this.clearOverlay=function(overlay){
@@ -88,14 +88,11 @@
         var routes_desc=[];
         //所有可选路线方案
         for(var i = 0;i < directions_routes.length; i++) {
-            var route = directions_routes[i],
-                legs = route;
+            var route = directions_routes[i] ;
             //调整地图窗口显示所有路线
             self.map().fitBounds(response.detail.bounds);
             //所有路程信息
-            //for(var j = 0 ; j < legs.length; j++){
-            var steps = legs.steps;
-            var route_steps = steps;
+            //for(var j = 0 ; j < legs.length; j++){ 
             var polyline = new qq.maps.Polyline(
                 {
                     path: route.path,
@@ -118,39 +115,46 @@
     };
 
     this.getinfo = function () {
-        //todo 调用服务获取poi
-        var testdata = [
-            {
-                id: 1,
-                name: '神仙湾',
-                address: '从xxx出发路过第一个路口后右转',
-                position: {lat: 48.65837828202619, lng: 87.04097628593445}
-            }
-        ];
-        for (var i = 0; i < testdata.length; i++) {
-            if (testdata[i].id == self.params().id) {
-                self.info(testdata[i]);
-                // var point = new qq.maps.LatLng(self.info().position.lat, self.info().position.lng);
-                // self.info().point=point;
 
-            }
-        }
-        var point = new qq.maps.LatLng(self.info().position.lat, self.info().position.lng);
-        //marker
-        var marker = new qq.maps.Marker({
-            map: self.map(),
-            position: point
-        });
-        self.endmarker(marker);
-        // marker.setTitle('teststsetset');
-        //marker-click
-        qq.maps.event.addListener(marker, "click", function (e) {
+        $.ajax({
+            url: '../../WebServices/MapWebService.asmx/GetMapInfo',
+            data: { id: self.params().id },
+            type: 'post',
+            dataType: 'json',
+            success: function (json) {
+                if (json.IsSuccess) {
+                    self.info(json.Data);
 
-            if (!self.isSetInfo()) {
-                self.setinfo();
+                    var point = new qq.maps.LatLng(self.info().position.lat, self.info().position.lng);
+                    //marker
+                    var marker = new qq.maps.Marker({
+                        map: self.map(),
+                        position: point
+                    });
+                    self.endmarker(marker);
+                    // marker.setTitle('teststsetset');
+                    //marker-click
+                    qq.maps.event.addListener(marker, "click", function (e) {
+
+                        if (!self.isSetInfo()) {
+                            self.setinfo();
+                        }
+                        self.infoWin().open();
+                    });
+
+                    //完成后搜索
+                    self.searchRoad();
+                }
+            },
+            error: function (a, b, c) {
+                var err = textStatus + ", " + error;
+                console.log("Request Failed: " + err);
             }
-            self.infoWin().open();
         });
+
+
+         
+       
 
     };
 
