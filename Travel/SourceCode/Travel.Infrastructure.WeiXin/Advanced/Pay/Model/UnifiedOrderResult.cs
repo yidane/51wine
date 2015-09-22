@@ -145,8 +145,8 @@ namespace Travel.Infrastructure.WeiXin.Advanced.Pay.Model
             jsApiParam.SetValue("appId", this.appid);
             //jsApiParam.SetValue("timeStamp", WxPayHelper.GenerateTimeStamp());
             jsApiParam.SetValue("timeStamp", WxPayHelper.GenerateTimeStamp());
-            jsApiParam.SetValue("nonceStr", "d5b01bb68a7a4af6bdf0e4515c5b3216");
-            //jsApiParam.SetValue("nonceStr", WxPayHelper.GenerateNonceStr());
+            //jsApiParam.SetValue("nonceStr", "d5b01bb68a7a4af6bdf0e4515c5b3216");
+            jsApiParam.SetValue("nonceStr", WxPayHelper.GenerateNonceStr());
             jsApiParam.SetValue("package", "prepay_id=" + this.prepay_id);
             jsApiParam.SetValue("signType", "MD5");
             jsApiParam.SetValue("paySign", jsApiParam.MakeSign());

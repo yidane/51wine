@@ -55,6 +55,12 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\..\CommonDLL\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="OneGulp.WeChat">
+      <HintPath>..\..\CommonDLL\OneGulp.WeChat.dll</HintPath>
+    </Reference>
+    <Reference Include="OneGulp.WeChat.MP">
+      <HintPath>..\..\CommonDLL\OneGulp.WeChat.MP.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.configuration" />
@@ -73,6 +79,8 @@
     <Compile Include="Advanced\Pay\Model\PaymentNotify.cs" />
     <Compile Include="Advanced\Pay\Model\RefundOrderRequest.cs" />
     <Compile Include="Advanced\Pay\Model\RefundOrderResponse.cs" />
+    <Compile Include="Advanced\Pay\Model\RefundQueryRequest.cs" />
+    <Compile Include="Advanced\Pay\Model\RefundQueryResponse.cs" />
     <Compile Include="Advanced\Pay\Model\UnifiedOrderRequest.cs" />
     <Compile Include="Advanced\Pay\Model\UnifiedOrderResult.cs" />
     <Compile Include="Advanced\Pay\WxPayApi.cs" />

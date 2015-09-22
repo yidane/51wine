@@ -5,7 +5,11 @@ using System.Text;
 using System.Web;
 using System.Web.Security;
 using System.Web.UI;
+using System.Xml.Linq;
 using LitJson;
+using OneGulp.WeChat.MP;
+using OneGulp.WeChat.MP.AdvancedAPIs;
+using OneGulp.WeChat.MP.TenPayLibV3;
 using Travel.Infrastructure.WeiXin.Advanced.Pay.Model;
 using Travel.Infrastructure.WeiXin.Log;
 
@@ -21,29 +25,60 @@ namespace Travel.Infrastructure.WeiXin.Advanced.Pay
         /// <returns>统一下单结果</returns>
         public UnifiedOrderResult GetUnifiedOrderResult(UnifiedOrderRequest request)
         {
-            //统一下单
-            var data = new WxPayData();
-            data.SetValue("body", request.body);
-            data.SetValue("attach", request.attach);
-            data.SetValue("out_trade_no", request.out_trade_no);
-            data.SetValue("total_fee", request.total_fee);
-            //data.SetValue("total_fee", 2);
-            //data.SetValue("time_start", DateTime.Now.ToString("yyyyMMddHHmmss"));
-            //data.SetValue("time_expire", DateTime.Now.AddMinutes(10).ToString("yyyyMMddHHmmss"));
-            data.SetValue("time_start", request.time_start);
-            data.SetValue("time_expire", request.time_expire);
-            data.SetValue("goods_tag", request.goods_tag);
-            data.SetValue("trade_type", "JSAPI");
-            data.SetValue("openid", request.openid);
+            ////统一下单
+            //var data = new WxPayData();
+            //data.SetValue("body", request.body);
+            //data.SetValue("attach", request.attach);
+            //data.SetValue("out_trade_no", request.out_trade_no);
+            //data.SetValue("total_fee", request.total_fee);
+            ////data.SetValue("total_fee", 2);
+            ////data.SetValue("time_start", DateTime.Now.ToString("yyyyMMddHHmmss"));
+            ////data.SetValue("time_expire", DateTime.Now.AddMinutes(10).ToString("yyyyMMddHHmmss"));
+            //data.SetValue("time_start", request.time_start);
+            //data.SetValue("time_expire", request.time_expire);
+            //data.SetValue("goods_tag", request.goods_tag);
+            //data.SetValue("trade_type", "JSAPI");
+            //data.SetValue("openid", request.openid);
 
-            var result = WxPayApi.UnifiedOrder(data);
+            //var result = WxPayApi.UnifiedOrder(data);
 
-            if (string.IsNullOrEmpty(result.appid) || string.IsNullOrEmpty(result.prepay_id))
-            {
-                throw new WxPayException("UnifiedOrder response error!");
-            }
+            //if (string.IsNullOrEmpty(result.appid) || string.IsNullOrEmpty(result.prepay_id))
+            //{
+            //    throw new WxPayException("UnifiedOrder response error!");
+            //}
 
-            return result;
+            //return result;
+
+            var packageReqHandler = new RequestHandler(null);
+            //初始化
+            packageReqHandler.Init();
+            //packageReqHandler.SetKey(""/*TenPayV3Info.Key*/);
+
+            var timeStamp = TenPayV3Util.GetTimestamp();
+            var nonceStr = TenPayV3Util.GetNoncestr();
+
+            //设置package订单参数
+            packageReqHandler.SetParameter("appid", WxPayConfig.APPID);		  //公众账号ID
+            packageReqHandler.SetParameter("mch_id", WxPayConfig.MCHID);		  //商户号
+            packageReqHandler.SetParameter("nonce_str", nonceStr);                    //随机字符串
+            packageReqHandler.SetParameter("body", request.body);  //商品描述
+            packageReqHandler.SetParameter("attach", request.attach);
+            packageReqHandler.SetParameter("out_trade_no", request.out_trade_no);		//商家订单号
+            packageReqHandler.SetParameter("total_fee", request.total_fee.ToString());			        //商品金额,以分为单位(money * 100).ToString()
+            packageReqHandler.SetParameter("spbill_create_ip", WxPayConfig.IP);   //用户的公网ip，不是商户服务器IP
+            packageReqHandler.SetParameter("notify_url", WxPayConfig.NOTIFY_URL);		    //接收财付通通知的URL
+            packageReqHandler.SetParameter("trade_type", TenPayV3Type.JSAPI.ToString());//交易类型
+            packageReqHandler.SetParameter("openid", request.openid);	                    //用户的openId
+
+            string sign = packageReqHandler.CreateMd5Sign("key", WxPayConfig.KEY);
+            packageReqHandler.SetParameter("sign", sign);	                    //签名
+
+            string data = packageReqHandler.ParseXML();
+
+            var unifiedOrderResult = TenPayV3.Unifiedorder(data);
+            var rtnUnifiedOrderResult = new UnifiedOrderResult(unifiedOrderResult);
+
+            return rtnUnifiedOrderResult;
         }
 
         /**
@@ -106,6 +141,11 @@ namespace Travel.Infrastructure.WeiXin.Advanced.Pay
             {
                 return false;
             }
+        }
+
+        public RefundQueryResponse RefundQuery(RefundQueryRequest request)
+        {
+            return new RefundQueryResponse();
         }
     }
 }

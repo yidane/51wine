@@ -16,7 +16,7 @@ namespace Travel.Infrastructure.WeiXin.Common
         {
             var ret = new MenuHelper
             {
-                AccessToken = Credential.CachedAccessToken,
+                AccessToken = string.Empty,
                 CreateUrl = WeChatUrlConfigManager.MenuManager.CreateUrlDefault,
                 QueryUrl = WeChatUrlConfigManager.MenuManager.QueryUrlDefault,
                 DeleteUrl = WeChatUrlConfigManager.MenuManager.DeleteUrlDefault

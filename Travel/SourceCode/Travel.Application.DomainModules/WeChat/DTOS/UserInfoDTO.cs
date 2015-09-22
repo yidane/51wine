@@ -7,7 +7,7 @@ namespace Travel.Application.DomainModules.WeChat.DTOS
 {
     public class UserInfoDTO
     {
-        public string subscribe { get; set; }
+        public int subscribe { get; set; }
         public string openid { get; set; }
         public string nickname { get; set; }
         public int sex { get; set; }

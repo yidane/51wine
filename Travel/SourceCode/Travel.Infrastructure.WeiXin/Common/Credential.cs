@@ -8,24 +8,24 @@ namespace Travel.Infrastructure.WeiXin.Common
 {
     public class Credential
     {
-        private static string _accessToken;
+        //private static string _accessToken;
 
-        /// <summary>
-        /// 多access_token缓存（根据appid），满足一个服务器服务于多个微信公号的需求。
-        /// </summary>
-        private readonly static Dictionary<string, string> MultiTokenCache = new Dictionary<string, string>();
+        ///// <summary>
+        ///// 多access_token缓存（根据appid），满足一个服务器服务于多个微信公号的需求。
+        ///// </summary>
+        //private readonly static Dictionary<string, string> MultiTokenCache = new Dictionary<string, string>();
 
-        /// <summary>
-        /// 获取缓存的（最后一次获取的）AccessToken。
-        /// 注意，即使缓存的token已过期或不存在也不会获取新AccessToken。
-        /// </summary>
-        public static string CachedAccessToken
-        {
-            get
-            {
-                return _accessToken;
-            }
-        }
+        ///// <summary>
+        ///// 获取缓存的（最后一次获取的）AccessToken。
+        ///// 注意，即使缓存的token已过期或不存在也不会获取新AccessToken。
+        ///// </summary>
+        //public static string CachedAccessToken
+        //{
+        //    get
+        //    {
+        //        return _accessToken;
+        //    }
+        //}
 
         /// <summary>
         /// 获取access_token填写client_credential
@@ -41,31 +41,36 @@ namespace Travel.Infrastructure.WeiXin.Common
         {
             get
             {
-                if (!MultiTokenCache.ContainsKey(WeChatAccountManager.AppId) || string.IsNullOrEmpty(MultiTokenCache[WeChatAccountManager.AppId]))
-                {
-                    var helper = GetHelper();
-                    var ret = helper.Get<TokenResult>(new FormData
-                    {
-                       { "grant_type",GrantType},
-                       { "appid",WeChatAccountManager.AppId},
-                       { "secret",WeChatAccountManager.AppSecret},
-                    });
+                //if (!MultiTokenCache.ContainsKey(WeChatAccountManager.AppId) || string.IsNullOrEmpty(MultiTokenCache[WeChatAccountManager.AppId]))
+                //{
+                //    var helper = GetHelper();
+                //    var ret = helper.Get<TokenResult>(new FormData
+                //    {
+                //       { "grant_type",GrantType},
+                //       { "appid",WeChatAccountManager.AppId},
+                //       { "secret",WeChatAccountManager.AppSecret},
+                //    });
 
-                    if (ret.IsSucceed)
-                    {
-                        _accessToken = ret.access_token;
-                        MultiTokenCache[WeChatAccountManager.AppId] = _accessToken;//缓存
-                        var autoEvent = new AutoResetEvent(false);
-                        var timer = new Timer(state =>
-                        {
-                            _accessToken = null;
-                            autoEvent.Set();
-                        }, autoEvent, (ret.expires_in - 3)/*避免时间误差*/ * 1000, Timeout.Infinite);
-                        timer.Dispose(autoEvent);
-                    }
-                }
+                //    if (ret.IsSucceed)
+                //    {
+                //        _accessToken = ret.access_token;
+                //        MultiTokenCache[WeChatAccountManager.AppId] = _accessToken;//缓存
+                //        var autoEvent = new AutoResetEvent(false);
+                //        var timer = new Timer(state =>
+                //        {
+                //            _accessToken = null;
+                //            autoEvent.Set();
+                //        }, autoEvent, (ret.expires_in - 3)/*避免时间误差*/ * 1000, Timeout.Infinite);
+                //        timer.Dispose(autoEvent);
+                //    }
+                //}
 
-                return _accessToken;
+                //return _accessToken;
+                var token = OneGulp.WeChat.MP.CommonAPIs.CommonApi.GetToken(WeChatAccountManager.AppId,
+                                                                       WeChatAccountManager.AppSecret);
+                if (token != null)
+                    return token.access_token;
+                return string.Empty;
             }
         }
 

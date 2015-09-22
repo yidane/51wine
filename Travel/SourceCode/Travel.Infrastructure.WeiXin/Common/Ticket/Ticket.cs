@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
+using OneGulp.WeChat;
 using Travel.Infrastructure.WeiXin.Config;
 
 namespace Travel.Infrastructure.WeiXin.Common.Ticket
@@ -84,25 +85,32 @@ namespace Travel.Infrastructure.WeiXin.Common.Ticket
         /// <returns></returns>
         public string CreateTicket()
         {
-            if (MultiTicketCache.ContainsKey(m_Credential.WeChatAccountManager.AppId))
-                return MultiTicketCache[m_Credential.WeChatAccountManager.AppId];
+            //if (MultiTicketCache.ContainsKey(m_Credential.WeChatAccountManager.AppId))
+            //    return MultiTicketCache[m_Credential.WeChatAccountManager.AppId];
 
-            var helper = GetHelper();
-            var ret = helper.Get<TicketResult>(new FormData
-                    {
-                        {"type", type},
-                        {"access_token", m_Credential.AccessToken}
-                    });
+            //var helper = GetHelper();
+            //var ret = helper.Get<TicketResult>(new FormData
+            //        {
+            //            {"type", type},
+            //            {"access_token", m_Credential.AccessToken}
+            //        });
 
-            if (!ret.IsSucceed)
-                return string.Empty;
+            //if (!ret.IsSucceed)
+            //    return string.Empty;
 
-            MultiTicketCache[m_Credential.WeChatAccountManager.AppId] = ret.ticket; //缓存
-            var autoEvent = new AutoResetEvent(false);
-            var timer = new Timer(state => autoEvent.Set(), autoEvent, (ret.expires_in - 3) /*避免时间误差*/* 1000, Timeout.Infinite);
-            timer.Dispose(autoEvent);
+            //MultiTicketCache[m_Credential.WeChatAccountManager.AppId] = ret.ticket; //缓存
+            //var autoEvent = new AutoResetEvent(false);
+            //var timer = new Timer(state => autoEvent.Set(), autoEvent, (ret.expires_in - 3) /*避免时间误差*/* 1000, Timeout.Infinite);
+            //timer.Dispose(autoEvent);
 
-            return MultiTicketCache[m_Credential.WeChatAccountManager.AppId];
+            //return MultiTicketCache[m_Credential.WeChatAccountManager.AppId];
+
+            var ticket = OneGulp.WeChat.MP.CommonAPIs.CommonApi.GetTicket(m_Credential.WeChatAccountManager.AppId,
+                                                                    m_Credential.WeChatAccountManager.AppSecret);
+            if (ticket != null && ticket.errcode == ReturnCode.请求成功)
+                return ticket.ticket;
+
+            return string.Empty;
         }
     }
 
