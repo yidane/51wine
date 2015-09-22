@@ -68,6 +68,7 @@
     <Compile Include="Coupon\DTOS\CouponDTO.cs" />
     <Compile Include="Coupon\DTOS\CouponListDTO.cs" />
     <Compile Include="Coupon\DTOS\CouponPrizeDTO.cs" />
+    <Compile Include="Map\DTOS\MapDTO.cs" />
     <Compile Include="Photo\DTOS\photoActionDTO.cs" />
     <Compile Include="Photo\PhotoService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -95,6 +96,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" />
   <Target Name="EnsureBclBuildImported" BeforeTargets="BeforeBuild" Condition="'$(BclBuildImported)' == ''">
