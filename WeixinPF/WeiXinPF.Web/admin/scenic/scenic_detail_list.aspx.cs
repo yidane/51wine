@@ -76,7 +76,7 @@ namespace WeiXinPF.Web.admin.scenic
         {
             int sucCount = 0;
             int errorCount = 0;
-            BLL.wx_travel_scenic bll = new BLL.wx_travel_scenic();
+            BLL.wx_travel_scenicDetail bll = new BLL.wx_travel_scenicDetail();
             for (int i = 0; i < rptList.Items.Count; i++)
             {
                 int id = Convert.ToInt32(((HiddenField)rptList.Items[i].FindControl("hidId")).Value);
@@ -86,7 +86,6 @@ namespace WeiXinPF.Web.admin.scenic
                     if (bll.Delete(id))
                     {
                         sucCount += 1;
-
                     }
                     else
                     {

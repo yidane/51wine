@@ -7947,6 +7947,10 @@
     <Content Include="weixin\map\baidumap\map_getcurrentLocation.html" />
     <Content Include="weixin\map\baidumap\map_getLocation.html" />
     <Content Include="weixin\map\baidumap\map_seachservicebycircle.html" />
+    <Content Include="weixin\map\images\close.png" />
+    <Content Include="weixin\map\images\icons.png" />
+    <Content Include="weixin\map\images\map.jpg" />
+    <Content Include="weixin\map\index.html" />
     <Content Include="weixin\map\js\mapaddress_vm.js" />
     <Content Include="weixin\map\map_address.html" />
     <Content Include="weixin\map\qqmap\qqmap_drivingRoute.html" />

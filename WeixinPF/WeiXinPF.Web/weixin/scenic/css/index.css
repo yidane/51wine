@@ -123,6 +123,7 @@ a {
 }
 
 .info {
+    margin-top: 15px;
     padding: 2% 6%;
     color: #fafafa;
     line-height: 150%;
@@ -132,11 +133,13 @@ a {
 }
 
 .scenic-list {
-    margin: 15px 0 10px;
+    /*margin: 15px 0 10px;*/
     padding: 2%;
+    overflow: hidden;
 }
 
     .scenic-list li {
+        float:left;
         margin: 1%;
         width: 47%;
         border-radius: 5px;

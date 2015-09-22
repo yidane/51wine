@@ -39,6 +39,9 @@
         </section>
         <section class="page bg2">
             <img alt="" src="{{:scenic.secondBgImg}}" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1" />
+            <div class="info">
+                {{:scenic.description}}
+            </div>
             <ul class="scenic-list" data-bind="foreach: details">
                 {{for details}}
                 <li>
@@ -51,9 +54,6 @@
                 </li>
                 {{/for}}
             </ul>
-            <div class="info">
-                {{:scenic.description}}
-            </div>
         </section>
     </script>
     <script src="../../scripts/jquery/jquery-2.1.0.min.js"></script>
