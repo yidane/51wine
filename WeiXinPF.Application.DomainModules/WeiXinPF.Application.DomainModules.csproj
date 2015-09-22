@@ -69,6 +69,7 @@
     <Compile Include="Coupon\DTOS\CouponListDTO.cs" />
     <Compile Include="Coupon\DTOS\CouponPrizeDTO.cs" />
     <Compile Include="Map\DTOS\MapDTO.cs" />
+    <Compile Include="Map\MapService.cs" />
     <Compile Include="Photo\DTOS\photoActionDTO.cs" />
     <Compile Include="Photo\PhotoService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
