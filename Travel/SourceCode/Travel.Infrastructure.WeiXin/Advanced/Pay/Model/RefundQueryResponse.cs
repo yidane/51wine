@@ -22,6 +22,10 @@ namespace Travel.Infrastructure.WeiXin.Advanced.Pay.Model
         public int cash_fee { get; set; }
         public int refund_count { get; set; }
         public List<RefundInfo> RefundInfoList { get; set; }
+        public bool IsSuccess
+        {
+            get { return string.Equals(result_code, "SUCCESS"); }
+        }
     }
 
     public class RefundInfo
