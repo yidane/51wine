@@ -118,5 +118,16 @@ namespace Travel.Infrastructure.WeiXin.Test
             JsApiPay jsApiPay = new JsApiPay();
             jsApiPay.Refund(refundOrderRequest);
         }
+
+        [TestMethod]
+        public void RefundQueryTest()
+        {
+            var refundQueryRequest = new RefundQueryRequest();
+            refundQueryRequest.out_trade_no = "T2015092214410310012668";
+
+            var result = new JsApiPay().RefundQuery(refundQueryRequest);
+
+            Assert.IsTrue(result != null);
+        }
     }
 }

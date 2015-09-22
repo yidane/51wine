@@ -145,7 +145,9 @@ namespace Travel.Infrastructure.WeiXin.Advanced.Pay
 
         public RefundQueryResponse RefundQuery(RefundQueryRequest request)
         {
-            return new RefundQueryResponse();
+            var refundQueryString = request.CreatePayData();
+            var result = WxPayApi.RefundQuery(refundQueryString);
+            return new RefundQueryResponse(result);
         }
     }
 }
