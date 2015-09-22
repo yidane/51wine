@@ -52,6 +52,14 @@
                 width: 100%;
             }
 
+        .marker-list {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
         .marker {
             position: absolute;
             width: 30px;
@@ -162,92 +170,85 @@
 <body>
     <div class="content">
         <div class="map">
-            <div class="marker" style="left: 607px;top: 634px;">
-                <i class="point"></i>
-                <div class="tip">
-                    <div class="tip-title">
-                        <h3>卧龙湾</h3>
-                        <i class="close"></i>
+            <div class="marker-list" data-bind="foreach:markers">
+                <div class="marker" data-bind="click:$root.showtip,style:{left: coords.left,top:coords.top}">
+                    <i class="point"></i>
+                    <div class="tip" data-bind="attr:{id:'tip_'+id}">
+                        <div class="tip-title">
+                            <h3 data-bind="text:name"></h3>
+                            <i class="close" data-bind="click:$root.close,clickBubble: false"></i>
+                        </div>
+                        <div class="tip-content" data-bind="text:digest"></div>
+                        <div class="tip-bottom">
+                            <ul>
+                                <li data-bind="click:$root.view">查看详情</li>
+                                <li data-bind="click:$root.goto">去这里</li>
+                            </ul>
+                        </div>
+                        <i class="triangle"></i>
                     </div>
-                    <div class="tip-content">我是卧龙湾啊我是卧龙湾啊我是卧龙湾啊我是卧龙湾啊</div>
-                    <div class="tip-bottom">
-                        <ul>
-                            <li>查看详情</li>
-                            <li><a href="map_address.html?id=1">去这里</a></li>
-                        </ul>
-                    </div>
-                    <i class="triangle"></i>
                 </div>
-            </div>
-            <div class="marker" style="left: 583px;top: 595px;">
-                <i class="point"></i>
-                <div class="tip">
-                    <div class="tip-title">
-                        <h3>月亮湾</h3>
-                        <i class="close"></i>
-                    </div>
-                    <div class="tip-content">我是月亮湾啊我是月亮湾啊我是月亮湾啊我是月亮湾啊我是月亮湾啊我是月亮湾啊</div>
-                    <div class="tip-bottom">
-                        <ul>
-                            <li>查看详情</li>
-                            <li><a href="map_address.html?id=2">去这里</a></li>
-                        </ul>
-                    </div>
-                    <i class="triangle"></i>
-                </div>
-            </div>
-            <div class="marker" style="left: 557px;top: 552px;">
-                <div class="tip">
-                    <div class="tip-title">
-                        <h3>神仙湾</h3>
-                        <i class="close"></i>
-                    </div>
-                    <div class="tip-content">我是神仙湾啊我是神仙湾啊我是神仙湾啊我是神仙湾啊我是神仙湾啊我是神仙湾啊我是神仙湾啊</div>
-                    <div class="tip-bottom">
-                        <ul>
-                            <li>查看详情</li>
-                            <li><a href="map_address.html?id=3">去这里</a></li>
-                        </ul>
-                    </div>
-                    <i class="triangle"></i>
-                </div>
-                <i class="point"></i>
-            </div>
-            <div class="marker" style="left: 498px;top: 385px;">
-                <div class="tip">
-                    <div class="tip-title">
-                        <h3>观鱼台</h3>
-                        <i class="close"></i>
-                    </div>
-                    <div class="tip-content">我是观鱼台啊我是观鱼台啊我是观鱼台啊我是观鱼台啊我是观鱼台啊我是观鱼台啊</div>
-                    <div class="tip-bottom">
-                        <ul>
-                            <li>查看详情</li>
-                            <li><a href="map_address.html?id=4">去这里</a></li>
-                        </ul>
-                    </div>
-                    <i class="triangle"></i>
-                </div>
-                <i class="point"></i>
             </div>
             <img src="images/map.jpg" alt="" />
         </div>
     </div>
     <script src="../../scripts/jquery/zepto.min.js"></script>
+    <script src="../../scripts/knockout/knockout-3.3.0.js"></script>
     <script type="text/javascript">
+        var coords = {
+            "1": { left: "607px", top: "634px" },
+            "2": { left: "583px", top: "595px" },
+            "3": { left: "557px", top: "552px" },
+            "4": { left: "498px", top: "385px" }
+        }
+
+        var ViewModel = function () {
+            var self = this;
+            this.markers = ko.observableArray();
+
+            var loadData = function () {
+                $.ajax({
+                    url: '/WebServices/MapWebService.asmx/GetSecnicSpotList',
+                    dataType: "json",
+                    data: { wid: 1 },
+                    success: function (res) {
+                        if (res.success) {
+
+                            self.markers($.map(res.result, function (marker) {
+                                marker.coords = coords[marker.id + ''];
+                                return marker;
+                            }));
+                        }
+                        else {
+                            alert(res.error.message);
+                        }
+                    }
+                });
+            };
+
+            self.showtip = function (marker) {
+                $(".tip").hide();
+                $('#tip_' + marker.id).show();
+            }
+            self.close = function (marker) {
+                $('#tip_' + marker.id).hide();
+            }
+
+            self.view = function (marker) {
+                document.location.href = '../scenic/detail.aspx?id=' + marker.id;
+            }
+            self.goto = function (marker) {
+                document.location.href = 'map_address.html?id=' + marker.id;
+            }
+            loadData();
+        }
+
         $(function () {
             $('.content').scrollTop(100);
             $('.content').scrollLeft(400);
 
-            $(".map").on('click', '.marker', function () {
-                $(".tip").hide();
-                $(this).find('.tip').show();
-            });
-
-            $(".close").on('click', function (e) {
-                e.stopPropagation();
-                $(this).closest('.tip').hide();
-            });
+            var viewModel = new ViewModel();
+            ko.applyBindings(viewModel);
         });
     </script>
 </body>
