@@ -16,7 +16,7 @@ namespace Travel.Application.DomainModules.Order.Core.Interface
 
         OTAResult<OrderReleaseResponse> OrderRelease();
 
-        void OrderFinish();
+        OTAResult<List<OrderFinishResponse>> OrderFinish();
 
         OTAResult<List<ChangeOrderEditResponse>> ChangeOrderEdit(ICollection<TicketEntity> refundTickets);
     }

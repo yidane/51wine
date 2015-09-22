@@ -81,5 +81,10 @@ namespace Travel.Infrastructure.DomainDataAccess.Order
         /// 退票单初始状态
         /// </summary>
         public const string RefundOrderStatus_Init = "ROS50001";
+
+        /// <summary>
+        /// 退票订单退款已受理
+        /// </summary>
+        public const string RefundOrderStatus_WaitRefundFee = "ROS50002";
     }
 }

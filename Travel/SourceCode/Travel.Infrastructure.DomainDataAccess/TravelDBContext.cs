@@ -61,6 +61,11 @@
         public virtual DbSet<DailyProductEntity> DailyProduct { get; set; }
 
         public virtual DbSet<UserContracts> UserContract { get; set; }
+
+        public virtual DbSet<StatusEntity> Status { get; set; }
+        public virtual DbSet<InterfaceOperationLogEntity> InterfaceOperationLog { get; set; }
+
+        public virtual DbSet<ExceptionLogEntity> ExceptionLog { get; set; }
     }
 
     //public class MyEntity

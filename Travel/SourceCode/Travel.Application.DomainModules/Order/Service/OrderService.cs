@@ -5,7 +5,10 @@ using System.Text;
 
 namespace Travel.Application.DomainModules.Order.Service
 {
+    using System.ComponentModel;
+    using System.Data.Entity.Core.Metadata.Edm;
     using System.Security.Cryptography.X509Certificates;
+    using System.Transactions;
 
     using Travel.Application.DomainModules.Order.Core;
     using Travel.Application.DomainModules.Order.DTOs;
@@ -13,6 +16,7 @@ namespace Travel.Application.DomainModules.Order.Service
     using Travel.Infrastructure.OTAWebService;
     using Travel.Infrastructure.OTAWebService.Request;
     using Travel.Infrastructure.OTAWebService.Response;
+    using Travel.Infrastructure.WeiXin.Advanced.Pay.Model;
 
     public class OrderService
     {
@@ -22,73 +26,74 @@ namespace Travel.Application.DomainModules.Order.Service
         /// <returns></returns>
         public IList<TicketCategoryDTO> GetTicketCategoryList()
         {
-            var productCategories = ProductCategoryEntity.ProductCategory;
             var dto = new List<TicketCategoryDTO>();
+            var dailyProducts = DailyProductEntity.DailyProduct;
 
-            if (productCategories == null || !productCategories.Any())
+            if (dailyProducts.Any())
             {
-                // 通过获取当日产品，来初始化产品类型
-                var dailyProducts = DailyProductEntity.DailyProduct;
-                productCategories = ProductCategoryEntity.ProductCategory;
-            }
+                // 不要直接join DailyProductEntity.DailyProduct，否则如果有新类型票种，将无法及时显示
+                var productCategories =
+                        ProductCategoryEntity.ProductCategory
+                            .Where(item => item.CurrentStatus.Equals("10001"))
+                            .Join(
+                                dailyProducts,
+                                category => category.ProductCategoryId,
+                                daily => daily.ProductCategoryId,
+                                (a, b) => a).ToList();
 
-            if (productCategories == null || !productCategories.Any())
-            {
-                return dto;
-            }
-            else
-            {
-                productCategories = productCategories.Where(item => item.ProductSource.Equals("KNSMP")).ToList();
-            }
 
-            dto.Add(new TicketCategoryDTO()
-                                    {
-                                        category = 1,
-                                        content = productCategories.Select(item => new TicketCategorySub()
-                                                                                {
-                                                                                    ticketCategoryId = item.ProductCategoryId.ToString(),
-                                                                                    ticketType = "1",
-                                                                                    price = item.ProductPrice,
-                                                                                    ticketName = item.ProductName,
-                                                                                    canUse = true,
-                                                                                    type = item.ProductType,
-                                                                                    image = string.Format("url(../images/ticket{0}.jpg)", new Random(unchecked((int)DateTime.Now.Ticks + productCategories.IndexOf(item))).Next(1, 8).ToString())
-                                                                                }).ToList()
-                                    });
+                if (productCategories.Any())
+                {
+                    dto.Add(new TicketCategoryDTO()
+                                            {
+                                                category = 1,
+                                                content = productCategories.Select(item => new TicketCategorySub()
+                                                                                        {
+                                                                                            ticketCategoryId = item.ProductCategoryId.ToString(),
+                                                                                            ticketType = "1",
+                                                                                            price = item.ProductPrice,
+                                                                                            ticketName = item.ProductName,
+                                                                                            canUse = true,
+                                                                                            type = item.ProductType,
+                                                                                            image = string.Format("url(../images/ticket{0}.jpg)", new Random(unchecked((int)DateTime.Now.Ticks + productCategories.IndexOf(item))).Next(1, 8).ToString())
+                                                                                        }).ToList()
+                                            });
 
-            dto.Add(new TicketCategoryDTO()
-                                    {
-                                        category = 2,
-                                        content = productCategories
-                                        .Where(item => !item.ProductName.Contains("车票"))
-                                        .Select(item => new TicketCategorySub()
+                    dto.Add(new TicketCategoryDTO()
+                                            {
+                                                category = 2,
+                                                content = productCategories
+                                                .Where(item => !item.ProductName.Contains("车票"))
+                                                .Select(item => new TicketCategorySub()
+                                                        {
+                                                            ticketCategoryId = item.ProductCategoryId.ToString(),
+                                                            ticketType = "2",
+                                                            price = item.ProductPrice,
+                                                            ticketName = item.ProductName,
+                                                            canUse = true,
+                                                            type = "mp",
+                                                            image = string.Format("url(../images/ticket{0}.jpg)", new Random(unchecked((int)DateTime.Now.Ticks + productCategories.IndexOf(item))).Next(1, 8).ToString())
+                                                        }).ToList()
+                                            });
+
+                    dto.Add(new TicketCategoryDTO()
+                                            {
+                                                category = 3,
+                                                content = productCategories
+                                                .Where(item => item.ProductName.Contains("车票"))
+                                                .Select(item => new TicketCategorySub()
                                                 {
                                                     ticketCategoryId = item.ProductCategoryId.ToString(),
-                                                    ticketType = "2",
+                                                    ticketType = "3",
                                                     price = item.ProductPrice,
                                                     ticketName = item.ProductName,
                                                     canUse = true,
-                                                    type = "mp",
+                                                    type = "cp",
                                                     image = string.Format("url(../images/ticket{0}.jpg)", new Random(unchecked((int)DateTime.Now.Ticks + productCategories.IndexOf(item))).Next(1, 8).ToString())
                                                 }).ToList()
-                                    });
-
-            dto.Add(new TicketCategoryDTO()
-                                    {
-                                        category = 3,
-                                        content = productCategories
-                                        .Where(item => item.ProductName.Contains("车票"))
-                                        .Select(item => new TicketCategorySub()
-                                        {
-                                            ticketCategoryId = item.ProductCategoryId.ToString(),
-                                            ticketType = "3",
-                                            price = item.ProductPrice,
-                                            ticketName = item.ProductName,
-                                            canUse = true,
-                                            type = "cp",
-                                            image = string.Format("url(../images/ticket{0}.jpg)", new Random(unchecked((int)DateTime.Now.Ticks + productCategories.IndexOf(item))).Next(1, 8).ToString())
-                                        }).ToList()
-                                    });
+                                            });
+                }
+            }
 
             return dto;
         }
@@ -107,7 +112,7 @@ namespace Travel.Application.DomainModules.Order.Service
             if (orders.Any(item => item.OrderStatus.Equals(OrderStatus.OrderStatus_WaitUse)
                 || item.OrderStatus.Equals(OrderStatus.OrderStatus_Used)))
             {
-                sortList=new List<OrderDTO>();
+                sortList = new List<OrderDTO>();
                 dto = orders.Where(item => item.OrderStatus.Equals(OrderStatus.OrderStatus_WaitUse)
                                             || item.OrderStatus.Equals(OrderStatus.OrderStatus_Used))
                         .Select(item => new OrderDTO()
@@ -121,7 +126,8 @@ namespace Travel.Application.DomainModules.Order.Service
                             BuyTime = item.Tickets.First().CreateTime.ToString("yyyy-MM-dd"),
                             OrderStatus = this.GetOrderStatus(item),
                             hasRefundTicket = item.Tickets.Any(this.RefundStatus()),
-                            RefundType = this.GetRefundType(item) }).ToList();
+                            RefundType = this.GetRefundType(item)
+                        }).ToList();
                 sortList.InsertRange(sortList.Count, dto.Where(item => item.OrderStatus.Equals("未使用")));
                 sortList.InsertRange(sortList.Count, dto.Where(item => item.OrderStatus.Equals("已过期")));
                 sortList.InsertRange(sortList.Count, dto.Where(item => item.OrderStatus.Equals("已使用")));
@@ -129,6 +135,95 @@ namespace Travel.Application.DomainModules.Order.Service
             }
 
             return sortList;
+        }
+
+        public void GetMyRefundTicketsStatus(string openId)
+        {
+            var orders = OrderEntity.GetMyOrders(openId).ToList();
+            var tickets = new List<TicketEntity>();
+
+            orders.ForEach(item => tickets.AddRange(item.Tickets));
+            if (tickets.Any())
+            {
+                foreach (var refundOrderGroup in tickets.GroupBy(item => item.RefundOrderId))
+                {
+                    if (refundOrderGroup.Key != null && (refundOrderGroup.Key.Value != default(Guid?) || refundOrderGroup.Key.Value.Equals(Guid.Empty)))
+                    {
+                        var strStatus = OTAOrder.RefundQuery(refundOrderGroup.Key.Value);
+                        var refundTickets = refundOrderGroup.ToList();
+
+                        if (refundTickets.Any())
+                        {
+                            switch (strStatus)
+                            {
+                                case "SUCCESS":
+                                    refundTickets.ForEach(item =>
+                                        {
+                                            item.TicketStatus = OrderStatus.TicketStatus_Refund_Complete;
+                                            item.LatestModifyTime = DateTime.Now;
+                                        });
+                                    TicketEntity.ModifyTickets(refundTickets);
+                                    break;
+                                case "FAIL":
+                                    break;
+                                case "CHANGE":
+                                    break;
+                                case "NOTSURE":
+                                    var otaOrder = new OTAOrder(refundTickets.FirstOrDefault().Order);
+
+                                    var refundOrder = RefundOrderEntity.GetRefundOrder(refundOrderGroup.Key.Value);
+                                    RefundOrderResponse response = null;
+                                    if (refundOrder != null)
+                                    {
+                                        response = otaOrder.RefundPay(refundOrder);
+
+                                        if (response.return_code.Equals("SUCCESS")
+                                            && response.result_code.Equals("SUCCESS"))
+                                        {
+                                            foreach (var ticket in refundTickets)
+                                            {
+                                                ticket.TicketStatus = OrderStatus.TicketStatus_Refund_WaitRefundFee;
+                                                ticket.LatestModifyTime = DateTime.Now;
+                                            }
+
+                                            refundOrder.WXRefundOrderCode = response.refund_id;
+                                            refundOrder.RefundStatus = OrderStatus.RefundOrderStatus_WaitRefundFee;
+                                            refundOrder.LatestModifyTime = DateTime.Now;
+
+                                            using (var scope = new TransactionScope())
+                                            {
+                                                TicketEntity.ModifyTickets(refundTickets);
+                                                refundOrder.Modify();
+
+                                                scope.Complete();
+                                            }
+                                        }
+                                        else
+                                        {
+                                            var orderDetail = OrderDetailEntity.GetOrderDetail(refundTickets.FirstOrDefault().RefundOrderDetailId.Value);
+
+                                            refundOrder.Delete();
+                                            orderDetail.Delete();
+                                            foreach (var ticket in refundTickets)
+                                            {
+                                                ticket.TicketStatus = OrderStatus.TicketStatus_Refund_Audit;
+                                                ticket.LatestModifyTime = DateTime.Now;
+                                                ticket.RefundOrderId = default(Guid?);
+                                                ticket.RefundOrderDetailId = default(Guid);
+                                            }
+
+                                            TicketEntity.ModifyTickets(tickets);
+                                        }
+                                    }
+
+                                    break;
+                                default: break;
+                            }
+                        }
+                    }
+
+                }
+            }
         }
 
         private string GetOrderStatus(OrderEntity order)
@@ -266,7 +361,7 @@ namespace Travel.Application.DomainModules.Order.Service
                                 }));
                 }
             }
-            
+
             return tickets.Where(item => item != null).ToList();
         }
 
@@ -422,7 +517,7 @@ namespace Travel.Application.DomainModules.Order.Service
                         default:
                             break;
                     }
-                }                
+                }
             }
 
             foreach (var someOrderTickets in changedStatusTickets.GroupBy(item => item.OrderId))
@@ -453,7 +548,7 @@ namespace Travel.Application.DomainModules.Order.Service
                         default:
                             break;
                     }
-                }                
+                }
             }
 
             if (changedStatusTickets.Any())

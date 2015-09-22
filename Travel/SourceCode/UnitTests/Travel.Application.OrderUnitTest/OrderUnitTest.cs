@@ -32,11 +32,11 @@ namespace Travel.Application.OrderUnitTest
             this.OrderRequest = new OrderRequestEntity()
                                {
                                    OpenId = "obzTswxzFzzzdWdAKf2mWx3CrpXk",
-                                   TicketCategory = "125CDE65-BE62-40B5-99A0-4AD32B5DB677",
-                                   TicketName = "残疾证门票一进",
+                                   TicketCategory = "1C33E28F-F0AE-4629-A2CC-B02A41902F4E",
+                                   TicketName = "门票+车联票",
                                    Count = 1,
                                    CouponId = string.Empty,
-                                   ContactPersonName = "提出",
+                                   ContactPersonName = "红酒",
                                    MobilePhoneNumber = "11111",
                                    IdentityCardNumber = "12345678901"
                                };
@@ -62,8 +62,8 @@ namespace Travel.Application.OrderUnitTest
                                      };
 
             this.refundTickets =
-                TicketEntity.GetTicketsByOrderId(Guid.Parse("2E0E4EE2-D383-4030-A5AC-D1EB26A284E0"))
-                .Where(item => item.TicketId.Equals(3297855)).ToList();
+                TicketEntity.GetTicketsByOrderId(Guid.Parse("AD499E20-BE89-4FE9-B17B-7D76F8BE29DE"))
+                .Where(item => item.TicketId.Equals(2120370)).ToList();
         }
 
         [Test]
@@ -131,47 +131,41 @@ namespace Travel.Application.OrderUnitTest
         [Test]
         public void DailyFirstRefundTecket_RefundTicket_ReturnNULL()
         {
-            var list = TicketCategoryEntity.TodayTicketCategory;
-
-
             var service = new OrderService();
 
-            var orders = service.MyOrders("obzTswxzFzzzdWdAKf2mWx3CrpXk");
+            var orders = service.MyOrders("obzTswxzFzzzdWdAKf2mWx3CrpXk").Where(item => item.OrderCode.Equals("C2015092200263658215349")).ToList();
 
             if (orders.Any())
             {
-                service.RefundTickets(orders[1].OrderId, 1);
+                service.RefundTickets(orders[0].OrderId, 1);
             }
+        }
+
+        [Test]
+        public void CompleteRefundTicketOperate_RefundTicket_ReturnChangeTicketStatus()
+        {
+            var myOrders = OrderEntity.GetMyOrders("obzTswxzFzzzdWdAKf2mWx3CrpXk").ToList();
+
+            new OrderService().GetMyRefundTicketsStatus("obzTswxzFzzzdWdAKf2mWx3CrpXk");
         }
 
         [Test]
         public void SearchTicketStatus_Order_Return()
         {
-            var list = TicketCategoryEntity.TodayTicketCategory;
-
-
             var service = new OrderService();
-            service.GetOrderByOrderID(Guid.Parse("789E2BDC-EB44-4855-AEB1-660C57973217"));
-            var category = service.GetTicketCategoryList();
-
-            var first = category.FirstOrDefault().content[0];
-            this.OrderRequest.TicketCategory = first.ticketCategoryId;
-            this.OrderRequest.TicketName = first.ticketName;
-            var otaOrder = new OTAOrder(this.OrderRequest);
-
-            otaOrder.CreateOrderMain();
-
 
             //service.MyRefundTickets("obzTswxzFzzzdWdAKf2mWx3CrpXk");
-            //service.GetTicketCategoryList();
+            //service.RefundTickets("35D7650B-21C1-45CD-B15D-2203857B7977", 1);
+            service.SearchTicketStatus(100);
+        }
 
-            //service.MyOrders("obzTswxzFzzzdWdAKf2mWx3CrpXk");
+        [Test]
+        public void RefundTickets()
+        {
+            var refundTicket = RefundOrderEntity.GetRefundOrder(Guid.Parse("FF72D557-6148-4E2D-A580-8D8F154A6CD6"));
 
-
-
-            //service.MyRefundTickets("obzTswxzFzzzdWdAKf2mWx3CrpXk");
-            ////service.RefundTickets("35D7650B-21C1-45CD-B15D-2203857B7977", 1);
-            //service.SearchTicketStatus(100);
+            refundTicket.RefundStatus = "ROS50002";
+            refundTicket.Modify();
         }
 
         [Test]
@@ -215,37 +209,16 @@ namespace Travel.Application.OrderUnitTest
         [Test]
         public void webservice()
         {
-            JsApiPay api = new JsApiPay();
+            var service = new OrderService();
 
-            api.QueryOrder("1003800117201509080821933860");
+            service.GetTicketCategoryList();
+            //JsApiPay api = new JsApiPay();
+
+            //api.QueryOrder("1003800117201509080821933860");
             //service.MyTickets("1C99E930-D0D6-420E-B279-D3A9C3CE1930");
             //service.TicketCategoryList();
             //service.MyOrders("obzTswxzFzzzdWdAKf2mWx3CrpXk");
         }
 
-        public class MyClass
-        {
-            public string Name { get; set; }
-
-            public int Age { get; set; }
-        }
-
-        public static void abc(MyClass my)
-        {
-            my.Name = "gb";
-            my.Age = 20;
-        }
-
-        [Test]
-        public void test()
-        {
-            var g = new MyClass();
-            g.Name = "xqf";
-            g.Age = 10;
-
-            abc(g);
-
-
-        }
     }
 }

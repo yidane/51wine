@@ -184,9 +184,41 @@ namespace Travel.Application.DomainModules.Order.Core
             {
                 this.ProcessOrderPaymentException(orderPaymentException);
             }
-            catch (Exception)
+            catch (TimeoutException ex)
             {
-                // todo:针对不同事件报出的异常进行不同的异常处理
+                var exLog = new ExceptionLogEntity()
+                {
+                    ExceptionLogId = Guid.NewGuid(),
+                    Module = this.OrderObj != null ? "生成订单请求外部接口" + "------" + this.OrderObj.OrderCode : "生成订单请求外部接口",
+                    CreateTime = DateTime.Now,
+                    ExceptionType = ex.GetType().FullName,
+                    ExceptionMessage = ex.Message,
+                    TrackMessage = ex.StackTrace,
+                    HasExceptionProcessing = false,
+                    NeedProcess = false,
+                    ProcessFunction = string.Empty
+                };
+
+                exLog.Add();
+
+                throw;
+            }
+            catch (Exception ex)
+            {
+                var exLog = new ExceptionLogEntity()
+                {
+                    ExceptionLogId = Guid.NewGuid(),
+                    Module = this.OrderObj != null ? "生成订单" + "------" + this.OrderObj.OrderCode : "生成订单",
+                    CreateTime = DateTime.Now,
+                    ExceptionType = ex.GetType().FullName,
+                    ExceptionMessage = ex.Message,
+                    TrackMessage = ex.StackTrace,
+                    HasExceptionProcessing = false,
+                    NeedProcess = false,
+                    ProcessFunction = string.Empty
+                };
+
+                exLog.Add();
                 throw;
             }
         }
@@ -279,7 +311,7 @@ namespace Travel.Application.DomainModules.Order.Core
                         tickets.Clear();
                         break;
                     }
-                }                
+                }
             }
 
             return tickets;
@@ -379,7 +411,23 @@ namespace Travel.Application.DomainModules.Order.Core
             {
                 this.ProcessOrderOperationException(orderException);
             }
-            
+            catch (Exception ex)
+            {
+                var exLog = new ExceptionLogEntity()
+                {
+                    ExceptionLogId = Guid.NewGuid(),
+                    Module = "退票请求处理" + "------" + this.OrderObj.OrderCode,
+                    CreateTime = DateTime.Now,
+                    ExceptionType = ex.GetType().FullName,
+                    ExceptionMessage = ex.Message,
+                    TrackMessage = ex.StackTrace,
+                    HasExceptionProcessing = false,
+                    NeedProcess = false,
+                    ProcessFunction = string.Empty
+                };
+
+                exLog.Add();
+            }
         }
 
         protected virtual void ProcessRefund(ICollection<TicketEntity> tickets)
@@ -477,7 +525,6 @@ namespace Travel.Application.DomainModules.Order.Core
                 }
                 catch (OrderPaymentFailException orderException)
                 {
-                    WriteLog(orderException.Message);
                     orderException.param = new Dictionary<string, object>
                                                {
                                                    { "refundOrder", refundOrder },
@@ -489,7 +536,6 @@ namespace Travel.Application.DomainModules.Order.Core
                 }
                 catch (WxPayException ex)
                 {
-                    WriteLog(ex.Message);
                     var orderException = new OrderPaymentFailException("无法在制定的路径中找到秘钥", OrderPaymentStep.ApplyRefund, "CRYPTOGRAPHY_ERROR");
                     orderException.param = new Dictionary<string, object>
                                                {
@@ -497,11 +543,26 @@ namespace Travel.Application.DomainModules.Order.Core
                                                    { "orderDetail", orderDetail },
                                                    { "tickets", tickets }
                                                };
-                    
+
                     this.ProcessOrderPaymentException(orderException);
                 }
                 catch (Exception ex)
                 {
+                    var exLog = new ExceptionLogEntity()
+                    {
+                        ExceptionLogId = Guid.NewGuid(),
+                        Module = "微信退款" + "------" + this.OrderObj.OrderCode,
+                        CreateTime = DateTime.Now,
+                        ExceptionType = ex.GetType().FullName,
+                        ExceptionMessage = ex.Message,
+                        TrackMessage = ex.StackTrace,
+                        HasExceptionProcessing = false,
+                        NeedProcess = false,
+                        ProcessFunction = string.Empty
+                    };
+
+                    exLog.Add();
+
                     throw;
                 }
 
@@ -564,6 +625,22 @@ namespace Travel.Application.DomainModules.Order.Core
                 default:
                     break;
             }
+
+            var exLog = new ExceptionLogEntity()
+            {
+                ExceptionLogId = Guid.NewGuid(),
+                Module = this.OrderObj != null ? Enum.GetName(typeof(OrderOperationStep), orderExcepion.OperationStep) + "------" + this.OrderObj.OrderCode 
+                                                : Enum.GetName(typeof(OrderOperationStep), orderExcepion.OperationStep),
+                CreateTime = DateTime.Now,
+                ExceptionType = orderExcepion.GetType().FullName,
+                ExceptionMessage = orderExcepion.Message,
+                TrackMessage = orderExcepion.StackTrace,
+                HasExceptionProcessing = true,
+                NeedProcess = needProcess,
+                ProcessFunction = processMethod
+            };
+
+            exLog.Add();
         }
 
         public void ProcessOrderPaymentException(OrderPaymentFailException orderException)
@@ -611,8 +688,11 @@ namespace Travel.Application.DomainModules.Order.Core
                         }
 
                         TicketEntity.ModifyTickets(tickets);
+
+                        needProcess = true;
+                        processMethod = "清除退款订单及其订单详情，回滚门票状态";
                     }
-                    
+
                     break;
                 case OrderPaymentStep.PaymentResultNotify:
                     break;
@@ -621,6 +701,22 @@ namespace Travel.Application.DomainModules.Order.Core
                 default:
                     break;
             }
+
+            var exLog = new ExceptionLogEntity()
+            {
+                ExceptionLogId = Guid.NewGuid(),
+                Module = this.OrderObj != null ? Enum.GetName(typeof(OrderOperationStep), orderException.PaymentStep) + "------" + this.OrderObj.OrderCode
+                                                : Enum.GetName(typeof(OrderOperationStep), orderException.PaymentStep),
+                CreateTime = DateTime.Now,
+                ExceptionType = orderException.GetType().FullName,
+                ExceptionMessage = orderException.Message,
+                TrackMessage = orderException.StackTrace,
+                HasExceptionProcessing = true,
+                NeedProcess = needProcess,
+                ProcessFunction = processMethod
+            };
+
+            exLog.Add();
         }
 
         #endregion

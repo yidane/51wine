@@ -15,6 +15,7 @@ namespace Travel.Application.DomainModules.Order.Core
     using Travel.Infrastructure.DomainDataAccess.Order;
     using Travel.Infrastructure.OTAWebService;
     using Travel.Infrastructure.OTAWebService.Response;
+    using Travel.Infrastructure.WeiXin.Advanced.Pay;
     using Travel.Infrastructure.WeiXin.Advanced.Pay.Model;
     using Travel.Infrastructure.WeiXin.Log;
 
@@ -30,10 +31,12 @@ namespace Travel.Application.DomainModules.Order.Core
             : base(orderRequest)
         {
             this._orderOperate = new OTAOrderOperate(this);
+            this.PreValidate += OTAOrder_PreValidate;
             this.PreCreateOrder += this.OTAOrder_OnPreCreateOrder;
             this.CreateOrderComplete += this.OTAOrder_CreateOrderComplete;
             this.CreateOrderComplete += this.OTAOrder_InvokePaymentService;
         }
+
         public OTAOrder(OrderEntity order)
             : base(order)
         {
@@ -42,12 +45,17 @@ namespace Travel.Application.DomainModules.Order.Core
             this.RefundPayComplete += this.OTAOrder_RefundPayComplete;
         }
 
+        void OTAOrder_PreValidate(object sender, EventArgs e)
+        {
+
+        }
+
         /// <summary>
         /// 锁定当日可售票，并更改票的状态
         /// </summary>
         private void OTAOrder_OnPreCreateOrder(object sender, EventArgs eventArgs)
         {
-            this.dailyProducts = DailyProductEntity.DailyProduct.ToList();
+            this.dailyProducts = DailyProductEntity.DailyProduct;
         }
 
         /// <summary>
@@ -58,6 +66,28 @@ namespace Travel.Application.DomainModules.Order.Core
         private void OTAOrder_CreateOrderComplete(object sender, EventArgs e)
         {
             var oatLockOrderResult = this._orderOperate.OrderOccupies();
+
+            try
+            {
+                var log = new InterfaceOperationLogEntity()
+                {
+                    InterfaceOperationLogId = Guid.NewGuid(),
+                    CreateTime = DateTime.Now,
+                    Module = "锁定景区门票",
+                    OrderCode = this.OrderObj.OrderCode,
+                    OperateObjectId = this.OrderObj.OrderId.ToString(),
+                    OperateName = "OrderOccupies",
+                    IsOperateSuccess = oatLockOrderResult.IsTrue,
+                    ErrorCode = oatLockOrderResult.IsTrue ? string.Empty : oatLockOrderResult.ResultCode,
+                    ErrorDescription = oatLockOrderResult.IsTrue ? string.Empty : oatLockOrderResult.ResultMsg
+                };
+                log.Add();
+            }
+            catch (Exception)
+            {
+
+            }
+
 
             if (oatLockOrderResult.IsTrue)
             {
@@ -82,6 +112,28 @@ namespace Travel.Application.DomainModules.Order.Core
             var paymentOperate = new WXPaymentOperate();
 
             var result = paymentOperate.ConnectedPaymentPlatform(this.OrderObj);
+
+            try
+            {
+                var log = new InterfaceOperationLogEntity()
+                {
+                    InterfaceOperationLogId = Guid.NewGuid(),
+                    CreateTime = DateTime.Now,
+                    Module = "微信支付统一下单",
+                    OrderCode = this.OrderObj.OrderCode,
+                    OperateObjectId = this.OrderObj.OrderId.ToString(),
+                    OperateName = "ConnectedPaymentPlatform",
+                    IsOperateSuccess = result.result_code.ToUpper().Equals("SUCCESS") && result.return_code.ToUpper().Equals("SUCCESS")
+                };
+                log.ErrorCode = log.IsOperateSuccess ? string.Empty : result.err_code;
+                log.ErrorDescription = log.IsOperateSuccess ? string.Empty : result.err_code_des;
+                log.Add();
+            }
+            catch (Exception)
+            {
+
+            }
+
             if (this.CheckUnifiedOrderResponse(result))
             {
                 this.PaymentType = result.trade_type;
@@ -130,6 +182,28 @@ namespace Travel.Application.DomainModules.Order.Core
             var editResult = this._orderOperate.ChangeOrderEdit(tickets);
             var failedTickets = new List<TicketEntity>();
 
+            try
+            {
+                var log = new InterfaceOperationLogEntity()
+                {
+                    InterfaceOperationLogId = Guid.NewGuid(),
+                    CreateTime = DateTime.Now,
+                    Module = "退票处理",
+                    OrderCode = this.OrderObj.OrderCode,
+                    OperateObjectId = this.OrderObj.OrderId.ToString(),
+                    OperateName = "ChangeOrderEdit",
+                    IsOperateSuccess = editResult.IsTrue,
+                    ErrorCode = editResult.IsTrue ? string.Empty : editResult.ResultCode,
+                    ErrorDescription = editResult.IsTrue ? string.Empty : editResult.ResultMsg
+                };
+
+                log.Add();
+            }
+            catch (Exception)
+            {
+
+            }
+
             if (editResult.IsTrue)
             {
                 foreach (var ticketResponse in editResult.ResultData)
@@ -155,7 +229,7 @@ namespace Travel.Application.DomainModules.Order.Core
                     }
                 }
 
-                // 将状态发生修改的票会写数据库
+                // 将状态发生修改的票回写数据库
                 TicketEntity.ModifyTickets(tickets.Where(item => item.TicketStatus.Equals(OrderStatus.TicketStatus_Refund_Audit)).ToList());
 
                 // todo: 对更改状态失败的票进行操作
@@ -173,28 +247,32 @@ namespace Travel.Application.DomainModules.Order.Core
         void OTAOrder_RefundPayComplete(object sender, EventArgs e)
         {
             var eventArg = e as RefundEventArgs;
-            var refundRequest = new RefundOrderRequest();
-
+            RefundOrderResponse refundResponse = null;
             if (eventArg != null)
             {
-                var refundFee = TicketEntity.GetTicketsByOrderId(this.OrderObj.OrderId)
-                        .Where(item => item.RefundOrderId.Equals(eventArg.refundOrder.RefundOrderId))
-                        .Sum(item => item.Price);
+                refundResponse = this.RefundPay(eventArg.refundOrder);
 
-                refundRequest.transaction_id = this.OrderObj.WXOrderCode;
-                //refundRequest.out_trade_no = this.OrderObj.OrderCode;
-                refundRequest.out_refund_no = eventArg.refundOrder.RefundOrderCode;
+                try
+                {
+                    var log = new InterfaceOperationLogEntity()
+                    {
+                        InterfaceOperationLogId = Guid.NewGuid(),
+                        CreateTime = DateTime.Now,
+                        Module = "微信退款",
+                        OrderCode = this.OrderObj.OrderCode,
+                        OperateObjectId = this.OrderObj.OrderId.ToString(),
+                        OperateName = "RefundPay",
+                        IsOperateSuccess = refundResponse.result_code.ToUpper().Equals("SUCCESS") && refundResponse.return_code.ToUpper().Equals("SUCCESS")
+                    };
+                    log.ErrorCode = log.IsOperateSuccess ? string.Empty : refundResponse.err_code;
+                    log.ErrorDescription = log.IsOperateSuccess ? string.Empty : refundResponse.err_code_des;
+                    log.Add();
+                }
+                catch (Exception)
+                {
 
+                }
 
-                refundRequest.total_fee = 2; // Decimal.ToInt32(this.OrderObj.TotalFee() * 100);
-
-                refundRequest.refund_fee = 2; // Decimal.ToInt32(refundFee * 100);
-
-
-                // todo: 处理返回值 
-                var refundResponse = this._paymentOperate.RefundPay(refundRequest);
-
-                WriteLog(refundResponse.return_msg);
                 if (refundResponse.return_code.Equals("SUCCESS")
                     && refundResponse.result_code.Equals("SUCCESS"))
                 {
@@ -204,13 +282,82 @@ namespace Travel.Application.DomainModules.Order.Core
                         ticket.LatestModifyTime = DateTime.Now;
                     }
 
-                    TicketEntity.ModifyTickets(eventArg.tickets);
+                    eventArg.refundOrder.WXRefundOrderCode = refundResponse.refund_id;
+                    eventArg.refundOrder.RefundStatus = OrderStatus.RefundOrderStatus_WaitRefundFee;
+                    eventArg.refundOrder.LatestModifyTime = DateTime.Now;
+
+                    using (var scope = new TransactionScope())
+                    {
+                        TicketEntity.ModifyTickets(eventArg.tickets);
+                        eventArg.refundOrder.Modify();
+
+                        scope.Complete();
+                    }
                 }
                 else
                 {
                     throw new OrderPaymentFailException(refundResponse.return_msg, OrderPaymentStep.ApplyRefund, "RESULT_FAIL");
                 }
             }
+        }
+
+        public RefundOrderResponse RefundPay(RefundOrderEntity refundOrder)
+        {
+            var refundRequest = new RefundOrderRequest();
+            var refundTickets =
+                    TicketEntity.GetTicketsByOrderId(this.OrderObj.OrderId)
+                        .Where(item => item.RefundOrderId.Equals(refundOrder.RefundOrderId)).ToList();
+            var refundFee = refundTickets.Sum(item => item.Price);
+
+            refundRequest.transaction_id = this.OrderObj.WXOrderCode;
+            refundRequest.out_refund_no = refundOrder.RefundOrderCode;
+            refundRequest.total_fee = this.OrderObj.Tickets.Count * 2; // Decimal.ToInt32(this.OrderObj.TotalFee() * 100);
+            refundRequest.refund_fee = refundTickets.Count * 2; // Decimal.ToInt32(refundFee * 100);
+
+            // todo: 处理返回值 
+            return this._paymentOperate.RefundPay(refundRequest);
+        }
+
+        public static string RefundQuery(Guid refundOrderId)
+        {
+            var refundOrder = RefundOrderEntity.GetRefundOrder(refundOrderId);
+
+            if (refundOrder != null)
+            {               
+                var queryResponse = new WXPaymentOperate().RefundQuery(refundOrder.RefundOrderCode);
+
+                try
+                {
+                    var log = new InterfaceOperationLogEntity()
+                    {
+                        InterfaceOperationLogId = Guid.NewGuid(),
+                        CreateTime = DateTime.Now,
+                        Module = "微信退款查询",
+                        OrderCode = refundOrder.RefundOrderCode,
+                        OperateObjectId = refundOrderId.ToString(),
+                        OperateName = "RefundQuery",
+                        IsOperateSuccess = queryResponse.IsSuccess
+                    };
+                    log.ErrorCode = log.IsOperateSuccess ? string.Empty : queryResponse.err_code;
+                    log.ErrorDescription = log.IsOperateSuccess ? string.Empty : queryResponse.err_code_des;
+                    log.Add();
+                }
+                catch (Exception)
+                {
+
+                }
+
+                if (queryResponse.IsSuccess)
+                {
+                    var queryResult = queryResponse.RefundInfoList.FirstOrDefault(item => item.out_refund_no.Equals(refundOrder.RefundOrderCode));
+                    if (queryResult != null)
+                    {
+                        return queryResult.refund_status.ToUpper();
+                    }                    
+                }                
+            }
+
+            return string.Empty; 
         }
 
         #endregion

@@ -47,9 +47,9 @@ namespace Travel.Infrastructure.DomainDataAccess.Order
         public Guid ProductCategoryId { get; set; }
 
         private static object dailyProductLock = new object();
-        private static IEnumerable<DailyProductEntity> _dailyProducts;
+        private static IList<DailyProductEntity> _dailyProducts;
         private static DateTime _currentDate = DateTime.Now.Date;
-        public static IEnumerable<DailyProductEntity> DailyProduct { 
+        public static IList<DailyProductEntity> DailyProduct { 
             get 
             {
                 if (_dailyProducts == null || !_dailyProducts.Any() || !DateTime.Now.Date.Equals(_currentDate))
@@ -128,27 +128,27 @@ namespace Travel.Infrastructure.DomainDataAccess.Order
                 foreach (var dailyProduct in dailyProducts)
                 {
                     if (!ProductCategoryEntity.IsProductCategoryExists(dailyProduct))
-                    {                    
+                    {
                         var productCategory = new ProductCategoryEntity()
-                                                  {
-                                                      ProductCategoryId = Guid.NewGuid(),
-                                                      ProductId = dailyProduct.ProductId,
-                                                      ProductPackageId = dailyProduct.ProductPackageId,
-                                                      ProductSource = dailyProduct.ProductSource,
-                                                      ProductName = dailyProduct.ProductName,
-                                                      OldProductName = dailyProduct.ProductName,
-                                                      ProductType = dailyProduct.ProductType,
-                                                      ProductCode = dailyProduct.ProductCode,
-                                                      ProductPrice = dailyProduct.ProductPrice,
-                                                      ProductDescription = string.Empty,
-                                                      IsCombinedProduct = false,
-                                                      IsSelfDefinedProduct = false,
-                                                      CurrentStatus = "10001",
-                                                      FirstSort = "10001",
-                                                      SecondSort = string.Empty
-                                                  };
+                        {
+                            ProductCategoryId = Guid.NewGuid(),
+                            ProductId = dailyProduct.ProductId,
+                            ProductPackageId = dailyProduct.ProductPackageId,
+                            ProductSource = dailyProduct.ProductSource,
+                            ProductName = dailyProduct.ProductName,
+                            OldProductName = dailyProduct.ProductName,
+                            ProductType = dailyProduct.ProductType,
+                            ProductCode = dailyProduct.ProductCode,
+                            ProductPrice = dailyProduct.ProductPrice,
+                            ProductDescription = string.Empty,
+                            IsCombinedProduct = false,
+                            IsSelfDefinedProduct = false,
+                            CurrentStatus = "10001",
+                            FirstSort = "10001",
+                            SecondSort = string.Empty
+                        };
 
-                        productCategory.SaveProductCategory();                        
+                        productCategory.SaveProductCategory();
                         dailyProduct.ProductCategoryId = productCategory.ProductCategoryId;
                         hasNewProductCategory = true;
                     }

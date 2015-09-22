@@ -96,7 +96,59 @@ namespace Travel.Application.DomainModules.Order.Core
                 var order = new OTAOrder(myOrder);
                 var orderOperate = new OTAOrderOperate(order);
 
-                orderOperate.OrderFinish();
+                var result = orderOperate.OrderFinish();
+
+                try
+                {
+                    var log = new InterfaceOperationLogEntity()
+                    {
+                        InterfaceOperationLogId = Guid.NewGuid(),
+                        CreateTime = DateTime.Now,
+                        Module = "订单完成",
+                        OrderCode = myOrder.OrderCode,
+                        OperateObjectId = myOrder.OrderId.ToString(),
+                        OperateName = "OrderFinish",
+                        IsOperateSuccess = result.IsTrue,
+                        ErrorCode = result.IsTrue ? string.Empty : result.ResultCode,
+                        ErrorDescription = result.IsTrue ? string.Empty : result.ResultMsg
+                    };
+
+                    log.Add();
+                }
+                catch (Exception)
+                {
+
+                }
+
+                if (result.IsTrue)
+                {
+                    if (result.ResultData.Count == myOrder.Tickets.Count)
+                    {
+                        foreach (var ticket in myOrder.Tickets)
+                        {
+                            var responseTicket = result.ResultData.FirstOrDefault(item => ticket.TicketId.Equals(int.Parse(item.ItemID)));
+
+                            if (responseTicket != null)
+                            {
+                                ticket.ECode = responseTicket.ECode;
+                                ticket.TicketStatus = OrderStatus.TicketStatus_WaitUse;
+                                ticket.LatestModifyTime = DateTime.Now;
+                            }
+                        }
+
+                        // 更改订单状态为
+                        myOrder.OrderStatus = OrderStatus.OrderStatus_WaitUse;
+                        myOrder.ModifyOrder();
+                    }
+                    else
+                    {
+                        throw new Exception();
+                    }
+                }
+                else
+                {
+                    throw new InvalidOperationException("OrderFinish");
+                }
             }
 
         }

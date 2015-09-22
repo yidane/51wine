@@ -114,44 +114,14 @@ namespace Travel.Application.DomainModules.Order.Core
             return new OTAServiceManager().OrderRelease(request);
         }
 
-        public void OrderFinish()
+        public OTAResult<List<OrderFinishResponse>> OrderFinish()
         {
             var orderFinish = new OTARequest.OrderFinishRequest()
                                   {
                                       OtaOrderNO = this.MainOrder.OrderObj.OrderCode
                                   };
 
-            var result = this._serviceManager.OrderFinish(orderFinish);
-
-            if (result.IsTrue)
-            {
-                if (result.ResultData.Count == this.MainOrder.OrderObj.Tickets.Count)
-                {
-                    foreach (var ticket in this.MainOrder.OrderObj.Tickets)
-                    {
-                        var responseTicket = result.ResultData.FirstOrDefault(item => ticket.TicketId.Equals(int.Parse(item.ItemID)));
-                        
-                        if (responseTicket != null)
-                        {
-                            ticket.ECode = responseTicket.ECode;
-                            ticket.TicketStatus = OrderStatus.TicketStatus_WaitUse;
-                            ticket.LatestModifyTime = DateTime.Now;
-                        }                        
-                    }
-
-                    // 更改订单状态为
-                    this.MainOrder.OrderObj.OrderStatus = OrderStatus.OrderStatus_WaitUse;
-                    this.MainOrder.OrderObj.ModifyOrder();
-                }
-                else
-                {
-                    throw new Exception();
-                }
-            }
-            else
-            {
-                throw new InvalidOperationException("OrderFinish");
-            }
+            return this._serviceManager.OrderFinish(orderFinish);            
         }
 
         public OTAResult<List<ChangeOrderEditResponse>> ChangeOrderEdit(ICollection<TicketEntity> refundTickets)

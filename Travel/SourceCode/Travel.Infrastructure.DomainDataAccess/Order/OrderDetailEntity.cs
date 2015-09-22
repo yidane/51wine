@@ -4,6 +4,7 @@
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity;
+    using System.Linq;
 
     public class OrderDetailEntity
     {
@@ -72,6 +73,14 @@
                 db.OrderDetail.Attach(this);
                 db.Entry(this).State = EntityState.Deleted;
                 db.SaveChanges();
+            }
+        }
+
+        public static OrderDetailEntity GetOrderDetail(Guid detailId)
+        {
+            using (var db = new TravelDBContext())
+            {
+                return db.OrderDetail.FirstOrDefault(item => item.OrderDetailId.Equals(detailId));
             }
         }
     }

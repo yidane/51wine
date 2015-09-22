@@ -146,9 +146,15 @@
     <Compile Include="Migrations\201509100514430_newTicket.Designer.cs">
       <DependentUpon>201509100514430_newTicket.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201509180107166_gbc1.cs" />
+    <Compile Include="Migrations\201509180107166_gbc1.Designer.cs">
+      <DependentUpon>201509180107166_gbc1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Order\DailyProductEntity.cs" />
     <Compile Include="Order\DateTicketEntity.cs" />
+    <Compile Include="Order\ExceptionLogEntity.cs" />
+    <Compile Include="Order\InterfaceOperationLogEntity.cs" />
     <Compile Include="Order\OrderDetailEntity.cs" />
     <Compile Include="Order\OrderEntity.cs" />
     <Compile Include="Order\OrderException.cs" />
@@ -156,6 +162,7 @@
     <Compile Include="Order\ProductCategoryEntity.cs" />
     <Compile Include="Order\RefundOrderEntity.cs" />
     <Compile Include="Order\RefundOrderQueueEntity.cs" />
+    <Compile Include="Order\StatusEntity.cs" />
     <Compile Include="Order\TicketCategoryEntity.cs" />
     <Compile Include="Order\TicketEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -247,6 +254,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201509100514430_newTicket.resx">
       <DependentUpon>201509100514430_newTicket.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509180107166_gbc1.resx">
+      <DependentUpon>201509180107166_gbc1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

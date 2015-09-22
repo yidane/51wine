@@ -8,6 +8,7 @@ namespace Travel.Infrastructure.DomainDataAccess.Order
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Migrations;
+    using System.Runtime.CompilerServices;
 
     public class ProductCategoryEntity
     {
@@ -74,7 +75,10 @@ namespace Travel.Infrastructure.DomainDataAccess.Order
         /// </summary>
         public string SecondSort { get; set; }
 
-        private static IEnumerable<ProductCategoryEntity> _productCategory;
+        internal static object _productLock = new object();
+
+        private static IList<ProductCategoryEntity> _productCategory;
+
         private static DateTime _currentDate = DateTime.Now.Date;
         public static IList<ProductCategoryEntity> ProductCategory {
             get
@@ -92,7 +96,7 @@ namespace Travel.Infrastructure.DomainDataAccess.Order
                     }                    
                 }
 
-                return _productCategory.ToList();
+                return _productCategory;
             }
 
             private set
@@ -108,22 +112,17 @@ namespace Travel.Infrastructure.DomainDataAccess.Order
         /// <returns></returns>
         public static bool IsProductCategoryExists(DailyProductEntity dailyProduct)
         {
-            var productCategory = ProductCategory.FirstOrDefault(item =>
+            ProductCategoryEntity productCategory = null;
+
+            using (var db = new TravelDBContext())
+            {
+                productCategory = db.ProductCategory.FirstOrDefault(
+                                        item =>
                                         item.ProductId.Equals(dailyProduct.ProductId)
                                         && item.ProductPackageId.Equals(dailyProduct.ProductPackageId)
                                         && item.ProductSource.Equals(dailyProduct.ProductSource));
-
-            if (productCategory == null)
-            {
-                using (var db = new TravelDBContext())
-                {
-                    productCategory = db.ProductCategory.FirstOrDefault(
-                                            item =>
-                                            item.ProductId.Equals(dailyProduct.ProductId)
-                                            && item.ProductPackageId.Equals(dailyProduct.ProductPackageId)
-                                            && item.ProductSource.Equals(dailyProduct.ProductSource));
-                }
-            }            
+            }
+            
 
             if (productCategory != null)
             {

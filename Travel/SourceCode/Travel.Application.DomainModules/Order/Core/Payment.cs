@@ -146,13 +146,25 @@ namespace Travel.Application.DomainModules.Order.Core
                     }
                 }           
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 this.IsProcessPaymentInfoSuccess = false;
-            }
 
-            this.OnPaymentComplete(EventArgs.Empty);
+                var exLog = new ExceptionLogEntity()
+                                {
+                                    ExceptionLogId = Guid.NewGuid(),
+                                    Module = "微信支付通知",
+                                    CreateTime = DateTime.Now,
+                                    ExceptionType = ex.GetType().FullName,
+                                    ExceptionMessage = ex.Message,
+                                    TrackMessage = ex.StackTrace,
+                                    HasExceptionProcessing = false,
+                                    NeedProcess = false,
+                                    ProcessFunction = ex.Source
+                                };
 
+                exLog.Add();
+            }            
 
             try
             {
@@ -161,41 +173,42 @@ namespace Travel.Application.DomainModules.Order.Core
                     this.OnAfterPaymentComplete(EventArgs.Empty);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                
-                throw;
+                this.IsProcessPaymentInfoSuccess = false;
+
+                var exLog = new ExceptionLogEntity()
+                {
+                    ExceptionLogId = Guid.NewGuid(),
+                    Module = "订单结束",
+                    CreateTime = DateTime.Now,
+                    ExceptionType = ex.GetType().FullName,
+                    ExceptionMessage = ex.Message,
+                    TrackMessage = ex.StackTrace,
+                    HasExceptionProcessing = false,
+                    NeedProcess = false,
+                    ProcessFunction = ex.Source
+                };
+
+                exLog.Add();
             }
             
+            this.OnPaymentComplete(EventArgs.Empty);
         }
 
         protected void ProcessPayment()
         {
             if (this.OrderObj != null)
             {
-                var dateTickets = new List<DateTicketEntity>();
-
                 this.OrderObj.OrderStatus = OrderStatus.OrderStatus_PayComplete;
                 this.OrderObj.WXOrderCode = this.PaymentResponse.transaction_id;
                 foreach (var ticket in this.OrderObj.Tickets)
                 {
                     ticket.TicketStatus = OrderStatus.TicketStatus_PayComplete;
                     ticket.LatestModifyTime = DateTime.Now;
-
-                    //修改订单规则
-                    //var dateTicket = DateTicketEntity.GetDateTicketByTicketId(ticket.TicketId, DateTime.Now);
-                    //if (dateTicket != null)
-                    //{
-                    //    dateTicket.CurrentStatus = OrderStatus.DateTicketStatus_PayComplete;
-                    //    dateTickets.Add(dateTicket);
-                    //}
                 }
 
                 this.OrderObj.ModifyOrder();
-
-                //修改订单规则
-                //DateTicketEntity.Update(dateTickets);
-
                 this.IsProcessPaymentInfoSuccess = true;
             }
             else

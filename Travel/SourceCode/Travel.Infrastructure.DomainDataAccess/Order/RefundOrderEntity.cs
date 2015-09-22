@@ -43,6 +43,16 @@ namespace Travel.Infrastructure.DomainDataAccess.Order
             }
         }
 
+        public void Modify()
+        {
+            using (var db = new TravelDBContext())
+            {
+                db.RefundOrder.Attach(this);
+                db.Entry(this).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+        }
+
         public void Delete()
         {
             using (var db = new TravelDBContext())
@@ -51,6 +61,14 @@ namespace Travel.Infrastructure.DomainDataAccess.Order
                 db.Entry(this).State = EntityState.Deleted;
                 //db.RefundOrder.Remove(this);
                 db.SaveChanges();
+            }
+        }
+
+        public static RefundOrderEntity GetRefundOrder(Guid refundOrderId)
+        {
+            using (var db = new TravelDBContext())
+            {
+                return db.RefundOrder.FirstOrDefault(item => item.RefundOrderId.Equals(refundOrderId));
             }
         }
     }
