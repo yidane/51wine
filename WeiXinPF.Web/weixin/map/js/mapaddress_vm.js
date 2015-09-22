@@ -44,8 +44,18 @@
             map: map
         });
         self.infoWin(infoWin);
+
+        var anchor = new qq.maps.Point(6, 6),
+                    size = new qq.maps.Size(32, 37),
+                    start_icon = new qq.maps.MarkerImage(
+                        'http://s.map.qq.com/themes/default/img/busmapicon.png',
+                        size,
+                        new qq.maps.Point(0, 0),
+                        anchor
+                    );
         //marker
         var marker = new qq.maps.Marker({
+            icon: start_icon,
             map: map,
             position: latlng
         });
@@ -126,8 +136,19 @@
                     self.info(json.Data);
 
                     var point = new qq.maps.LatLng(self.info().position.lat, self.info().position.lng);
+                    var anchor = new qq.maps.Point(6, 6),
+                    size = new qq.maps.Size(32, 37),                    
+                    end_icon = new qq.maps.MarkerImage(
+                        'http://s.map.qq.com/themes/default/img/busmapicon.png',
+                        size,
+                        new qq.maps.Point(32, 0),
+                        anchor
+
+                    );
+
                     //marker
                     var marker = new qq.maps.Marker({
+                        icon: end_icon,
                         map: self.map(),
                         position: point
                     });
