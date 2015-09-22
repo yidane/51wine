@@ -10,6 +10,8 @@ using Travel.Infrastructure.DomainDataAccess.Order;
 
 namespace Travel.Services.WebService
 {
+    using Travel.Application.DomainModules.Order.Core;
+
     /// <summary>
     /// OrderWebService 的摘要说明
     /// </summary>
@@ -26,6 +28,21 @@ namespace Travel.Services.WebService
             }
             catch (Exception exception)
             {
+                var exLog = new ExceptionLogEntity()
+                {
+                    ExceptionLogId = Guid.NewGuid(),
+                    Module = "获取门票列表",
+                    CreateTime = DateTime.Now,
+                    ExceptionType = exception.GetType().FullName,
+                    ExceptionMessage = exception.Message,
+                    TrackMessage = exception.StackTrace,
+                    HasExceptionProcessing = false,
+                    NeedProcess = false,
+                    ProcessFunction = string.Empty
+                };
+
+                exLog.Add(); 
+
                 Context.Response.Write(AjaxResult.Error(exception.Message));
             }
         }
@@ -33,12 +50,34 @@ namespace Travel.Services.WebService
         [WebMethod(EnableSession = true)]
         public void MyOrders(string code)
         {
+            string openId = string.Empty;
             try
             {
-                var openId = GetOpenIDByCodeID(code);
+                openId = GetOpenIDByCodeID(code);
 
                 if (!string.IsNullOrEmpty(openId))
                 {
+                    try
+                    {
+                        new OrderService().GetMyRefundTicketsStatus(openId);
+                    }
+                    catch (Exception ex)
+                    {
+                        var exLog = new ExceptionLogEntity()
+                        {
+                            ExceptionLogId = Guid.NewGuid(),
+                            Module = "获取退款状态" + "------OpenId:" + openId,
+                            CreateTime = DateTime.Now,
+                            ExceptionType = ex.GetType().FullName,
+                            ExceptionMessage = ex.Message,
+                            TrackMessage = ex.StackTrace,
+                            HasExceptionProcessing = false,
+                            NeedProcess = false,
+                            ProcessFunction = string.Empty
+                        };
+
+                        exLog.Add();                     
+                    }
                     var orders = new OrderService().MyOrders(openId);
 
                     Context.Response.Write(AjaxResult.Success(orders));
@@ -50,6 +89,21 @@ namespace Travel.Services.WebService
             }
             catch (Exception exception)
             {
+                var exLog = new ExceptionLogEntity()
+                {
+                    ExceptionLogId = Guid.NewGuid(),
+                    Module = "获取我的订单" + "------OpenId:" + openId,
+                    CreateTime = DateTime.Now,
+                    ExceptionType = exception.GetType().FullName,
+                    ExceptionMessage = exception.Message,
+                    TrackMessage = exception.StackTrace,
+                    HasExceptionProcessing = false,
+                    NeedProcess = false,
+                    ProcessFunction = string.Empty
+                };
+
+                exLog.Add(); 
+
                 Context.Response.Write(AjaxResult.Error(exception.Message));
             }
         }
@@ -64,6 +118,21 @@ namespace Travel.Services.WebService
             }
             catch (Exception exception)
             {
+                var exLog = new ExceptionLogEntity()
+                {
+                    ExceptionLogId = Guid.NewGuid(),
+                    Module = "获取订单详情" + "------OrderId:" + orderId,
+                    CreateTime = DateTime.Now,
+                    ExceptionType = exception.GetType().FullName,
+                    ExceptionMessage = exception.Message,
+                    TrackMessage = exception.StackTrace,
+                    HasExceptionProcessing = false,
+                    NeedProcess = false,
+                    ProcessFunction = string.Empty
+                };
+
+                exLog.Add(); 
+
                 Context.Response.Write(AjaxResult.Error(exception.Message));
             }
         }
@@ -86,6 +155,21 @@ namespace Travel.Services.WebService
             }
             catch (Exception exception)
             {
+                var exLog = new ExceptionLogEntity()
+                {
+                    ExceptionLogId = Guid.NewGuid(),
+                    Module = "获取我的票" + "------OrderId:" + orderId,
+                    CreateTime = DateTime.Now,
+                    ExceptionType = exception.GetType().FullName,
+                    ExceptionMessage = exception.Message,
+                    TrackMessage = exception.StackTrace,
+                    HasExceptionProcessing = false,
+                    NeedProcess = false,
+                    ProcessFunction = string.Empty
+                };
+
+                exLog.Add(); 
+
                 Context.Response.Write(AjaxResult.Error(exception.Message));
             }
         }
@@ -93,9 +177,10 @@ namespace Travel.Services.WebService
         [WebMethod(EnableSession = true)]
         public void MyRefundTickets(string code)
         {
+            string openId = string.Empty;
             try
             {
-                var openId = GetOpenIDByCodeID(code);
+                openId = GetOpenIDByCodeID(code);
                 if (!string.IsNullOrEmpty(openId))
                 {
                     var tickets = new OrderService().MyRefundTickets(openId);
@@ -109,6 +194,20 @@ namespace Travel.Services.WebService
             }
             catch (Exception exception)
             {
+                var exLog = new ExceptionLogEntity()
+                {
+                    ExceptionLogId = Guid.NewGuid(),
+                    Module = "获取我的退票列表" + "------OpenId:" + openId,
+                    CreateTime = DateTime.Now,
+                    ExceptionType = exception.GetType().FullName,
+                    ExceptionMessage = exception.Message,
+                    TrackMessage = exception.StackTrace,
+                    HasExceptionProcessing = false,
+                    NeedProcess = false,
+                    ProcessFunction = string.Empty
+                };
+
+                exLog.Add(); 
                 Context.Response.Write(AjaxResult.Error(exception.Message));
             }
         }
@@ -131,10 +230,39 @@ namespace Travel.Services.WebService
             }
             catch (ArgumentException ex)
             {
+                var exLog = new ExceptionLogEntity()
+                {
+                    ExceptionLogId = Guid.NewGuid(),
+                    Module = "退票操作" + "------OrderId:" + orderId,
+                    CreateTime = DateTime.Now,
+                    ExceptionType = ex.GetType().FullName,
+                    ExceptionMessage = ex.Message,
+                    TrackMessage = ex.StackTrace,
+                    HasExceptionProcessing = false,
+                    NeedProcess = false,
+                    ProcessFunction = string.Empty
+                };
+
+                exLog.Add();
                 Context.Response.Write(AjaxResult.Error(ex.Message));
             }
             catch (Exception exception)
             {
+                var exLog = new ExceptionLogEntity()
+                {
+                    ExceptionLogId = Guid.NewGuid(),
+                    Module = "退票操作" + "------OrderId:" + orderId,
+                    CreateTime = DateTime.Now,
+                    ExceptionType = exception.GetType().FullName,
+                    ExceptionMessage = exception.Message,
+                    TrackMessage = exception.StackTrace,
+                    HasExceptionProcessing = false,
+                    NeedProcess = false,
+                    ProcessFunction = string.Empty
+                };
+
+                exLog.Add(); 
+
                 Context.Response.Write(AjaxResult.Error(exception.Message));
             }
         }
