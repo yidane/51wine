@@ -71,7 +71,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "dll", "dll", "{CF6C4727-717
 		dll\OneGulp.WeChat.dll = dll\OneGulp.WeChat.dll
 		dll\OneGulp.WeChat.MP.dll = dll\OneGulp.WeChat.MP.dll
 		dll\ThoughtWorks.QRCode.dll = dll\ThoughtWorks.QRCode.dll
-		dll\Travel.Infrastructure.WeiXin.dll = dll\Travel.Infrastructure.WeiXin.dll
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeiXinPF.WebService", "WeiXinPF.WebService\WeiXinPF.WebService.csproj", "{1AEC7785-0F53-4678-80CC-8D6EA1038A74}"
