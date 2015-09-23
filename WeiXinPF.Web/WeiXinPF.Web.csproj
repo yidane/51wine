@@ -7115,6 +7115,86 @@
     <Compile Include="weixin\qiangpiao\uProcess.ashx.cs">
       <DependentUpon>uProcess.ashx</DependentUpon>
     </Compile>
+    <Compile Include="weixin\restaurant\caidan_guanyu.aspx.cs">
+      <DependentUpon>caidan_guanyu.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="weixin\restaurant\caidan_guanyu.aspx.designer.cs">
+      <DependentUpon>caidan_guanyu.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="weixin\restaurant\caidan_manage_index.aspx.cs">
+      <DependentUpon>caidan_manage_index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="weixin\restaurant\caidan_manage_index.aspx.designer.cs">
+      <DependentUpon>caidan_manage_index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="weixin\restaurant\caidan_manage_indexdetail.aspx.cs">
+      <DependentUpon>caidan_manage_indexdetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="weixin\restaurant\caidan_manage_indexdetail.aspx.designer.cs">
+      <DependentUpon>caidan_manage_indexdetail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="weixin\restaurant\caidan_shangjia.aspx.cs">
+      <DependentUpon>caidan_shangjia.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="weixin\restaurant\caidan_shangjia.aspx.designer.cs">
+      <DependentUpon>caidan_shangjia.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="weixin\restaurant\diancai_dingdan.aspx.cs">
+      <DependentUpon>diancai_dingdan.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="weixin\restaurant\diancai_dingdan.aspx.designer.cs">
+      <DependentUpon>diancai_dingdan.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="weixin\restaurant\diancai_geren.aspx.cs">
+      <DependentUpon>diancai_geren.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="weixin\restaurant\diancai_geren.aspx.designer.cs">
+      <DependentUpon>diancai_geren.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="weixin\restaurant\diancai_login.ashx.cs">
+      <DependentUpon>diancai_login.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="weixin\restaurant\diancai_Login.aspx.cs">
+      <DependentUpon>diancai_Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="weixin\restaurant\diancai_Login.aspx.designer.cs">
+      <DependentUpon>diancai_Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="weixin\restaurant\diancai_oder.aspx.cs">
+      <DependentUpon>diancai_oder.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="weixin\restaurant\diancai_oder.aspx.designer.cs">
+      <DependentUpon>diancai_oder.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="weixin\restaurant\diancai_shoppingCart.aspx.cs">
+      <DependentUpon>diancai_shoppingCart.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="weixin\restaurant\diancai_shoppingCart.aspx.designer.cs">
+      <DependentUpon>diancai_shoppingCart.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="weixin\restaurant\index.aspx.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="weixin\restaurant\index.aspx.designer.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="weixin\restaurant\zhaoshang_xiangq.aspx.cs">
+      <DependentUpon>zhaoshang_xiangq.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="weixin\restaurant\zhaoshang_xiangq.aspx.designer.cs">
+      <DependentUpon>zhaoshang_xiangq.aspx</DependentUpon>
+    </Compile>
     <Compile Include="weixin\scenic\detail.aspx.cs">
       <DependentUpon>detail.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -8086,6 +8166,37 @@
     <Content Include="weixin\qiangpiao\pic_show.html" />
     <Content Include="weixin\qiangpiao\order_ret.html" />
     <Content Include="weixin\qiangpiao\笔记.txt" />
+    <Content Include="weixin\restaurant\caidan_guanyu.aspx" />
+    <Content Include="weixin\restaurant\caidan_manage_index.aspx" />
+    <Content Include="weixin\restaurant\caidan_manage_indexdetail.aspx" />
+    <Content Include="weixin\restaurant\caidan_shangjia.aspx" />
+    <Content Include="weixin\restaurant\css\diancai.css" />
+    <Content Include="weixin\restaurant\diancai_dingdan.aspx" />
+    <Content Include="weixin\restaurant\diancai_geren.aspx" />
+    <Content Include="weixin\restaurant\diancai_Login.aspx" />
+    <Content Include="weixin\restaurant\diancai_oder.aspx" />
+    <Content Include="weixin\restaurant\diancai_shoppingCart.aspx" />
+    <Content Include="weixin\restaurant\images\2yFKO6TwKI.png" />
+    <Content Include="weixin\restaurant\images\A3pvbcomeF.jpg" />
+    <Content Include="weixin\restaurant\images\addr.png" />
+    <Content Include="weixin\restaurant\images\arrow3.png" />
+    <Content Include="weixin\restaurant\images\detail.png" />
+    <Content Include="weixin\restaurant\images\J0uZbXQWvJ.png" />
+    <Content Include="weixin\restaurant\images\Lngjm86JQq.png" />
+    <Content Include="weixin\restaurant\images\loading.gif" />
+    <Content Include="weixin\restaurant\images\manage.png" />
+    <Content Include="weixin\restaurant\images\mdlg_btn_x.png" />
+    <Content Include="weixin\restaurant\images\RTqs2yHIc9.jpg" />
+    <Content Include="weixin\restaurant\images\s22KaR0Wtc.png" />
+    <Content Include="weixin\restaurant\images\tel.png" />
+    <Content Include="weixin\restaurant\images\unchoosen.png" />
+    <Content Include="weixin\restaurant\images\xxyX63YryG.png" />
+    <Content Include="weixin\restaurant\index.aspx" />
+    <Content Include="weixin\restaurant\js\alert.js" />
+    <Content Include="weixin\restaurant\js\cookie.js" />
+    <Content Include="weixin\restaurant\js\iscroll.js" />
+    <Content Include="weixin\restaurant\js\jquery.min.js" />
+    <Content Include="weixin\restaurant\zhaoshang_xiangq.aspx" />
     <Content Include="weixin\scenic\css\index.css" />
     <Content Include="weixin\scenic\css\swiper.min.css" />
     <Content Include="weixin\scenic\detail.aspx" />
@@ -8660,6 +8771,7 @@
     <Content Include="shop\templates\yeshou\font\FontAwesome.otf" />
     <Content Include="weixin\cashred\images\lottery.psd" />
     <Content Include="weixin\scenic\scenic.ashx" />
+    <Content Include="weixin\restaurant\diancai_login.ashx" />
     <None Include="副本 Web.Debug.config">
       <DependentUpon>副本 Web.config</DependentUpon>
     </None>
