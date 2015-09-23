@@ -22,11 +22,11 @@ namespace WeiXinPF.Application.DomainModules.Map.DTOS
     public class Position
     {
         /// <summary>
-        /// 经度
+        /// 纬度
         /// </summary>
         public double lat { get; set; }
         /// <summary>
-        /// 纬度
+        /// 经度
         /// </summary>
         public double lng { get; set; }
     }

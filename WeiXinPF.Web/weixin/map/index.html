@@ -173,14 +173,14 @@
     <div class="content">
         <div class="map">
             <div class="marker-list" data-bind="foreach:markers">
-                <div class="marker" data-bind="click:$root.showtip,style:{left: coords.left,top:coords.top}">
+                <div class="marker" data-bind="click:$root.showtip,style:{left:left+'px',top:top+'px'}">
                     <i class="point"></i>
                     <div class="tip" data-bind="attr:{id:'tip_'+id}">
                         <div class="tip-title">
                             <h3 data-bind="text:name"></h3>
                             <i class="close" data-bind="click:$root.close,clickBubble: false"></i>
                         </div>
-                        <div class="tip-content" data-bind="text:digest"></div>
+                        <div class="tip-content" data-bind="text:remark"></div>
                         <div class="tip-bottom">
                             <ul>
                                 <li data-bind="click:$root.view">查看详情</li>
@@ -197,29 +197,18 @@
     <script src="../../scripts/jquery/zepto.min.js"></script>
     <script src="../../scripts/knockout/knockout-3.3.0.js"></script>
     <script type="text/javascript">
-        var coords = {
-            "1": { left: "607px", top: "634px" },
-            "2": { left: "583px", top: "595px" },
-            "3": { left: "557px", top: "552px" },
-            "4": { left: "498px", top: "385px" }
-        }
-
         var ViewModel = function () {
             var self = this;
             this.markers = ko.observableArray();
 
             var loadData = function () {
                 $.ajax({
-                    url: '/WebServices/MapWebService.asmx/GetSecnicSpotList',
+                    url: '/WebServices/MapWebService.asmx/GetMarkers',
                     dataType: "json",
                     data: { wid: 1 },
                     success: function (res) {
                         if (res.success) {
-
-                            self.markers($.map(res.result, function (marker) {
-                                marker.coords = coords[marker.id + ''];
-                                return marker;
-                            }));
+                            self.markers(res.result);
                         }
                         else {
                             alert(res.error.message);
@@ -237,7 +226,7 @@
             }
 
             self.view = function (marker) {
-                document.location.href = '../scenic/detail.aspx?id=' + marker.id;
+                document.location.href = marker.url;
             }
             self.goto = function (marker) {
                 document.location.href = 'map_address.html?id=' + marker.id;

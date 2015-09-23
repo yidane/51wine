@@ -41,28 +41,20 @@ namespace WeiXinPF.WebService
         /// 获取所有景点信息
         /// </summary>
         [WebMethod]
-        public void GetSecnicSpotList(int wid)
+        public void GetMarkers(int wid)
         {
             try
             {
-                BLL.wx_travel_scenic scenicBll = new BLL.wx_travel_scenic();
-                BLL.wx_travel_scenicDetail detailBll = new BLL.wx_travel_scenicDetail();
-                var scenic = scenicBll.GetModelList(string.Format("wid={0}", wid)).FirstOrDefault();
-                if (scenic == null)
+                BLL.wx_travel_marker bll = new BLL.wx_travel_marker();
+                var markers = bll.GetModelList(string.Format("wid={0}", wid));
+               
+                if (!markers.Any())
                 {
-                    Context.Response.Write(new AjaxResponse(new ErrorInfo("改微信帐号下未配置景区信息")));
+                    Context.Response.Write(new AjaxResponse(new ErrorInfo("该微信帐号下未配置景点信息")));
                     return;
                 }
 
-                var details = detailBll.GetModelByScenicId(scenic.Id);
-
-                if (!details.Any())
-                {
-                    Context.Response.Write(new AjaxResponse(new ErrorInfo("改微信帐号下未配置景点信息")));
-                    return;
-                }
-
-                Context.Response.Write(new AjaxResponse(details));
+                Context.Response.Write(new AjaxResponse(markers));
             }
             catch
             {
