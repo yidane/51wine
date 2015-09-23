@@ -1,7 +1,4 @@
-﻿
-
-
-using WeiXinPF.BLL;
+﻿using WeiXinPF.BLL;
 using OneGulp.WeChat.MP.AdvancedAPIs;
 using OneGulp.WeChat.MP.AdvancedAPIs.User;
 using OneGulp.WeChat.MP.CommonAPIs;
@@ -10,7 +7,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Travel.Infrastructure.WeiXin.Common;
 
 namespace WeiXinPF.WeiXinComm
 {
@@ -49,40 +45,40 @@ namespace WeiXinPF.WeiXinComm
                 if (!pBll.ExistsWid(wid, "access_token"))
                 {
 
-                   
-                    //AccessTokenResult result = CommonApi.GetToken(weixininfo.AppId, weixininfo.AppSecret);
-                    //token = result.access_token;
-                    //pBll.AddAccess_Token(wid, token, result.expires_in);
-                    //return token;
 
-                    WeChatAccountManager manager = WeChatAccountManager.CreateInstance(weixininfo.AppId, weixininfo.AppSecret);
-                    Credential credential = new Credential(manager);
-                    token = credential.AccessToken;
-                    pBll.AddAccess_Token(wid, token, 7000);
+                    AccessTokenResult result = CommonApi.GetToken(weixininfo.AppId, weixininfo.AppSecret);
+                    token = result.access_token;
+                    pBll.AddAccess_Token(wid, token, result.expires_in);
                     return token;
+
+                    //WeChatAccountManager manager = WeChatAccountManager.CreateInstance(weixininfo.AppId, weixininfo.AppSecret);
+                    //Credential credential = new Credential(manager);
+                    //token = credential.AccessToken;
+                    //pBll.AddAccess_Token(wid, token, 7000);
+                    //return token;
                 }
 
                 wxProperty = pBll.GetModelList("iName='access_token' and wid=" + wid)[0];
                 double chajunSecond = (DateTime.Now - wxProperty.createDate.Value).TotalSeconds;
 
                 if (chajunSecond >= wxProperty.expires_in)
-                {  //从微信平台重新获得access_token
-                   //AccessTokenResult result = CommonApi.GetToken(weixininfo.AppId, weixininfo.AppSecret);
-                    //AccessTokenResult result = CommonApi.GetToken(weixininfo.AppId, weixininfo.AppSecret);
-                    //token = result.access_token;
-                    ////更新到数据库里
-                    //wxProperty.iContent = token;
-                    //wxProperty.createDate = DateTime.Now;
-                    //wxProperty.expires_in = result.expires_in;
-
-                    WeChatAccountManager manager = WeChatAccountManager.CreateInstance(weixininfo.AppId, weixininfo.AppSecret);
-                    Credential credential = new Credential(manager);
-                    token = credential.AccessToken;
+                {
+                    //从微信平台重新获得access_token
+                    AccessTokenResult result = CommonApi.GetToken(weixininfo.AppId, weixininfo.AppSecret);
+                    token = result.access_token;
                     //更新到数据库里
                     wxProperty.iContent = token;
                     wxProperty.createDate = DateTime.Now;
-                    wxProperty.expires_in = 7000;
-                    pBll.Update(wxProperty);
+                    wxProperty.expires_in = result.expires_in;
+
+                    //WeChatAccountManager manager = WeChatAccountManager.CreateInstance(weixininfo.AppId, weixininfo.AppSecret);
+                    //Credential credential = new Credential(manager);
+                    //token = credential.AccessToken;
+                    ////更新到数据库里
+                    //wxProperty.iContent = token;
+                    //wxProperty.createDate = DateTime.Now;
+                    //wxProperty.expires_in = 7000;
+                    //pBll.Update(wxProperty);
 
                 }
                 else
