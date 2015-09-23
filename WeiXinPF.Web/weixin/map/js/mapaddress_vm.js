@@ -11,10 +11,17 @@
     this.endmarker = ko.observable();
     this.service = ko.observable();
     this.polyline=ko.observable();
+    this.localinfo =ko.observable( {
+        latlng: { lat: 48.6589239484962, lng: 87.04087972640991 },
+        location: '新疆维吾尔自治区',
+        locationdetail: '新疆维吾尔自治区阿勒泰地区布尔津县'
+    });
+    this.seachType=ko.observable("start");
 
     //func
     this.getLocation = function () {
         if (navigator.geolocation) {
+            self.$doms().$txtbegin.val('当前位置');
             navigator.geolocation.getCurrentPosition(self.showPosition);
         } else {
             x.innerHTML = "浏览器不支持定位.";
@@ -73,7 +80,42 @@
                 self.drivingServiceComplete(response);
             }
         });
+
         self.service(service);
+        var searchService = new qq.maps.SearchService({
+            map: map,
+            pageCapacity:1,
+            complete:function(res){
+                if(res&&res.detail&&res.detail.pois)
+                {
+                    if(res.detail.pois.length>0)
+                    {
+                        var firstpoi=res.detail.pois[0];
+                       if(firstpoi){
+self.setmaker(firstpoi);
+                       }
+                    }
+                }
+            }
+        });
+        searchService.setLocation(self.localinfo().locationdetail);
+       var apstart = new qq.maps.place.Autocomplete(self.$doms().$txtbegin[0],{
+
+            location: self.localinfo().location
+        });
+        qq.maps.event.addListener(apstart, "confirm", function (res) {
+self.seachType('start');
+            searchService.search(res.value);
+        });
+        var apend = new qq.maps.place.Autocomplete(self.$doms().$txtend[0],{
+
+            location: self.localinfo().location
+        });
+        qq.maps.event.addListener(apend, "confirm", function (res) {
+            self.seachType('end');
+            searchService.search(res.value);
+        });
+
 
         self.getinfo();
 
@@ -157,13 +199,15 @@
                     self.endmarker(marker);
                     // marker.setTitle('teststsetset');
                     //marker-click
-                    qq.maps.event.addListener(marker, "click", function (e) {
+                    qq.maps.event.addListener( self.endmarker(), "click", function (e) {
 
                         if (!self.isSetInfo()) {
                             self.isSetInfo(true);
                             self.setinfo();
                         }
                         self.infoWin().open();
+                        var content = self.$doms().$info_pop;
+                        content.show();
                     });
 
                     //完成后搜索         
@@ -211,8 +255,51 @@
         document.title = self.info().name;
 
 
-        content.show();
+        //content.show();
 
 
-    }
+    };
+    this.setmaker=function(firstpoi){
+        var point=firstpoi.latLng;
+        if(self.seachType()=='start')
+        {
+            self.clearOverlay(self.startmarker());
+         //   self.map().setCenter(point);
+            var anchor = new qq.maps.Point(6, 6),
+                size = new qq.maps.Size(32, 37),
+                start_icon = new qq.maps.MarkerImage(
+                    'http://s.map.qq.com/themes/default/img/busmapicon.png',
+                    size,
+                    new qq.maps.Point(0, 0),
+                    anchor
+                );
+            //marker
+            var marker = new qq.maps.Marker({
+                icon: start_icon,
+                map: self.map(),
+                position: point
+            });
+            self.startmarker(marker);
+        }
+        else{
+            self.clearOverlay(self.endmarker());
+            var anchor = new qq.maps.Point(6, 6),
+                size = new qq.maps.Size(32, 37),
+                end_icon = new qq.maps.MarkerImage(
+                    'http://s.map.qq.com/themes/default/img/busmapicon.png',
+                    size,
+                    new qq.maps.Point(32, 0),
+                    anchor
+
+                );
+
+            //marker
+            var marker = new qq.maps.Marker({
+                icon: end_icon,
+                map: self.map(),
+                position: point
+            });
+            self.endmarker(marker);
+        }
+    };
 };
