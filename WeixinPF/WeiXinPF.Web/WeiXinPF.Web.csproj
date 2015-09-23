@@ -64,12 +64,11 @@
       <HintPath>..\..\LitJSON.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.JScript" />
-    <Reference Include="Senparc.Weixin, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\dll\Senparc.Weixin.dll</HintPath>
+    <Reference Include="OneGulp.WeChat">
+      <HintPath>..\dll\OneGulp.WeChat.dll</HintPath>
     </Reference>
-    <Reference Include="Senparc.Weixin.MP">
-      <HintPath>..\dll\Senparc.Weixin.MP.dll</HintPath>
+    <Reference Include="OneGulp.WeChat.MP">
+      <HintPath>..\dll\OneGulp.WeChat.MP.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />

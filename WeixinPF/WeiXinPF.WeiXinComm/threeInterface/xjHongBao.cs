@@ -1,4 +1,4 @@
-﻿using Senparc.Weixin.MP.TenPayLibV3;
+﻿using OneGulp.WeChat.MP.TenPayLibV3;
 using System;
 using System.Net;
 using System.Net.Security;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Security.Cryptography.X509Certificates;
 using System.IO;
-using Senparc.Weixin.MP.AdvancedAPIs;
+using OneGulp.WeChat.MP.AdvancedAPIs;
 using WeiXinPF.BLL;
 using System.Web;
 using System.Xml;

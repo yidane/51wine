@@ -5,7 +5,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Web;
 using System.Web.Services;
-using Senparc.Weixin.MP.Helpers;
+using OneGulp.WeChat.MP.Helpers;
 using WeiXinPF.Common;
 
 namespace WeiXinPF.WebService

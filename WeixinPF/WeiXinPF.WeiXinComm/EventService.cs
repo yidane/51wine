@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Web;
-using Senparc.Weixin.MP.Entities;
-using Senparc.Weixin.MP.Helpers;
-using Senparc.Weixin;
-using Senparc.Weixin.MP;
+using OneGulp.WeChat.MP.Entities;
+using OneGulp.WeChat.MP.Helpers;
+using OneGulp.WeChat;
+using OneGulp.WeChat.MP;
  
 
 namespace WeiXinPF.WeiXinComm
@@ -34,8 +34,8 @@ namespace WeiXinPF.WeiXinComm
                     {
                         var strongResponseMessage = requestMessage.CreateResponseMessage<ResponseMessageText>();
 
-                        //获取Senparc.Weixin.MP.dll版本信息
-                        var fileVersionInfo = FileVersionInfo.GetVersionInfo(HttpContext.Current.Server.MapPath("~/bin/Senparc.Weixin.MP.dll"));
+                        //获取OneGulp.WeChat.MP.dll版本信息
+                        var fileVersionInfo = FileVersionInfo.GetVersionInfo(HttpContext.Current.Server.MapPath("~/bin/OneGulp.WeChat.MP.dll"));
                         var version = fileVersionInfo.FileVersion;
                         strongResponseMessage.Content = string.Format(
                             "欢迎关注，当前运行版本：v{0}。\r\n您还可以发送【位置】【图片】【语音】信息，查看不同格式的回复。",

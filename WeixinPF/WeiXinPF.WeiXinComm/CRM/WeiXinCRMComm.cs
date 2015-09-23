@@ -2,10 +2,10 @@
 
 
 using WeiXinPF.BLL;
-using Senparc.Weixin.MP.AdvancedAPIs;
-using Senparc.Weixin.MP.AdvancedAPIs.User;
-using Senparc.Weixin.MP.CommonAPIs;
-using Senparc.Weixin.MP.Entities;
+using OneGulp.WeChat.MP.AdvancedAPIs;
+using OneGulp.WeChat.MP.AdvancedAPIs.User;
+using OneGulp.WeChat.MP.CommonAPIs;
+using OneGulp.WeChat.MP.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -202,7 +202,7 @@ namespace WeiXinPF.WeiXinComm
                     var url = string.Format("https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token={0}&type={1}",
                                       accessToken, type);
 
-                    JsApiTicketResult result = Senparc.Weixin.HttpUtility.Get.GetJson<JsApiTicketResult>(url);
+                    JsApiTicketResult result = OneGulp.WeChat.HttpUtility.Get.GetJson<JsApiTicketResult>(url);
                     token = result.ticket;
                     //存入属性表
                     wxProperty.wid = wid;
@@ -225,7 +225,7 @@ namespace WeiXinPF.WeiXinComm
                     var url = string.Format("https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token={0}&type={1}",
                                       accessToken, type);
 
-                    JsApiTicketResult result = Senparc.Weixin.HttpUtility.Get.GetJson<JsApiTicketResult>(url);
+                    JsApiTicketResult result = OneGulp.WeChat.HttpUtility.Get.GetJson<JsApiTicketResult>(url);
                     token = result.ticket;
 
                     //更新到数据库里

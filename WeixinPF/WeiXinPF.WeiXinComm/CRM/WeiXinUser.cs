@@ -10,8 +10,8 @@
  * 
  ***********************************/
 
-using Senparc.Weixin.MP.AdvancedAPIs;
-using Senparc.Weixin.MP.AdvancedAPIs.User;
+using OneGulp.WeChat.MP.AdvancedAPIs;
+using OneGulp.WeChat.MP.AdvancedAPIs.User;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -162,7 +162,7 @@ namespace WeiXinPF.WeiXinComm
         //    string access_token = getAccessToken();
         //    foreach (string openidValue in openidStr)
         //    {
-        //        userlist.Add(Senparc.Weixin.MP.AdvancedAPIs.User.Info(access_token, openidValue));
+        //        userlist.Add(OneGulp.WeChat.MP.AdvancedAPIs.User.Info(access_token, openidValue));
         //    }
 
         //    return userlist;

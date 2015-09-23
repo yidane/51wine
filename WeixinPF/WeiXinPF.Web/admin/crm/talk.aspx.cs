@@ -1,5 +1,5 @@
-﻿using Senparc.Weixin.MP.Entities;
-using Senparc.Weixin.MP.CommonAPIs;
+﻿using OneGulp.WeChat.MP.Entities;
+using OneGulp.WeChat.MP.CommonAPIs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +10,7 @@ using WeiXinPF.Common;
 using WeiXinPF.WeiXinComm;
 using System.Data;
 using System.Text;
-using Senparc.Weixin.Entities;
+using OneGulp.WeChat.Entities;
 
 namespace WeiXinPF.Web.admin.crm
 {

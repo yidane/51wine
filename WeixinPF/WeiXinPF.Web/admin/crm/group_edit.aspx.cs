@@ -6,10 +6,10 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using WeiXinPF.Common;
 using WeiXinPF.WeiXinComm;
-using Senparc.Weixin.MP.AdvancedAPIs;
-using Senparc.Weixin.MP.Entities;
-using Senparc.Weixin.MP.AdvancedAPIs.Groups;
-using Senparc.Weixin.Entities;
+using OneGulp.WeChat.MP.AdvancedAPIs;
+using OneGulp.WeChat.MP.Entities;
+using OneGulp.WeChat.MP.AdvancedAPIs.Groups;
+using OneGulp.WeChat.Entities;
 
 namespace WeiXinPF.Web.admin.crm
 {

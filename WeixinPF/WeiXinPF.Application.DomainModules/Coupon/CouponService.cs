@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Senparc.Weixin.MP.AdvancedAPIs.OAuth;
+using OneGulp.WeChat.MP.AdvancedAPIs.OAuth;
 using WeiXinPF.Application.DomainModules.Coupon.DTOS;
 using WeiXinPF.Common;
 using WeiXinPF.Infrastructure.DomainDataAccess.User;

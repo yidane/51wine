@@ -336,7 +336,7 @@ namespace WeiXinPF.Web.admin.weixin
 
                 try
                 {
-                    var result = Senparc.Weixin.MP.CommonAPIs.CommonApi.GetToken(AppId, AppSecret);
+                    var result = OneGulp.WeChat.MP.CommonAPIs.CommonApi.GetToken(AppId, AppSecret);
                     newToken = result.access_token;
 
                 }

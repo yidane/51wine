@@ -4,17 +4,17 @@ using System.Configuration;
 using System.IO;
 using System.Text;
 using System.Web.Configuration;
-using Senparc.Weixin.MP.Agent;
-using Senparc.Weixin.Context;
-using Senparc.Weixin.MP.Entities;
-using Senparc.Weixin.MP.MessageHandlers;
-using Senparc.Weixin.MP.Helpers;
+using OneGulp.WeChat.MP.Agent;
+using OneGulp.WeChat.Context;
+using OneGulp.WeChat.MP.Entities;
+using OneGulp.WeChat.MP.MessageHandlers;
+using OneGulp.WeChat.MP.Helpers;
 using System.Xml;
 using System.Xml.Linq;
 using WeiXinPF.DAL;
 using WeiXinPF.Common;
-using Senparc.Weixin.MP;
-using Senparc.Weixin;
+using OneGulp.WeChat.MP;
+using OneGulp.WeChat;
  
 
 namespace WeiXinPF.WeiXinComm.CustomMessageHandler

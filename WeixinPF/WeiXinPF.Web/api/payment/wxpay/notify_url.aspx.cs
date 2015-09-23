@@ -10,7 +10,7 @@
  ***********************************/
 using WeiXinPF.BLL;
 using WeiXinPF.Common;
-using Senparc.Weixin.MP.TenPayLibV3;
+using OneGulp.WeChat.MP.TenPayLibV3;
 using System;
 using System.Collections.Generic;
 using System.Linq;

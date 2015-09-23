@@ -1,10 +1,10 @@
 ﻿using WeiXinPF.BLL;
 using WeiXinPF.Common;
 using WeiXinPF.Model;
-using Senparc.Weixin.MP;
-using Senparc.Weixin.MP.AdvancedAPIs;
-using Senparc.Weixin.MP.CommonAPIs;
-using Senparc.Weixin.MP.TenPayLibV3;
+using OneGulp.WeChat.MP;
+using OneGulp.WeChat.MP.AdvancedAPIs;
+using OneGulp.WeChat.MP.CommonAPIs;
+using OneGulp.WeChat.MP.TenPayLibV3;
 using System;
 using System.Collections.Generic;
 using System.Linq;

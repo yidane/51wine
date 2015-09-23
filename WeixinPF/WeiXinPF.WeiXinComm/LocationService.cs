@@ -1,9 +1,9 @@
 ﻿
 
 using System.Collections.Generic;
-using Senparc.Weixin.MP.Entities;
-using Senparc.Weixin.MP.Entities.GoogleMap;
-using Senparc.Weixin.MP.Helpers;
+using OneGulp.WeChat.MP.Entities;
+using OneGulp.WeChat.MP.Entities.GoogleMap;
+using OneGulp.WeChat.MP.Helpers;
 using WeiXinPF.Common;
 
 namespace WeiXinPF.WeiXinComm
@@ -39,7 +39,7 @@ namespace WeiXinPF.WeiXinComm
             //responseMessage.Articles.Add(new Article()
             //{
             //    Title = "微信公众平台SDK 官网链接",
-            //    Description = "Senparc.Weixin.MK SDK地址",
+            //    Description = "OneGulp.WeChat.MK SDK地址",
             //    PicUrl = "http://weixin.senparc.com/images/logo1.jpg",
             //    Url = "http://m.uweixin.cn"
             //});

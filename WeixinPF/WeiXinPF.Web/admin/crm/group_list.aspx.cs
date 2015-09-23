@@ -1,5 +1,5 @@
 ﻿using WeiXinPF.WeiXinComm;
-using Senparc.Weixin.MP.AdvancedAPIs;
+using OneGulp.WeChat.MP.AdvancedAPIs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +7,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using WeiXinPF.Common;
-using Senparc.Weixin.MP.AdvancedAPIs.Groups;
+using OneGulp.WeChat.MP.AdvancedAPIs.Groups;
 
 namespace WeiXinPF.Web.admin.crm
 {

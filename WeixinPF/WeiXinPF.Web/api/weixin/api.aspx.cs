@@ -2,8 +2,8 @@
 using WeiXinPF.Common;
 using WeiXinPF.WeiXinComm;
 using WeiXinPF.WeiXinComm.CustomMessageHandler;
-using Senparc.Weixin.MP;
-using Senparc.Weixin.MP.Entities.Request;
+using OneGulp.WeChat.MP;
+using OneGulp.WeChat.MP.Entities.Request;
 using System;
 using System.Collections.Generic;
 using System.IO;
