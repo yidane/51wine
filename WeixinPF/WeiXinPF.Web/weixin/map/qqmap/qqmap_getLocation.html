@@ -27,7 +27,10 @@
     <script charset="utf-8" src="http://map.qq.com/api/js?v=2.exp&libraries=place&key=XQSBZ-MYPKU-EJSVT-4XWSN-QWJXH-2TBDM"></script>
     <script>
         var ap;
+        var marker;
         var params;
+        var geocoder;
+        var map;
         var localinfo = {
             latlng: { lat: 48.6589239484962, lng: 87.04087972640991 },
             location: '新疆维吾尔自治区',
@@ -44,8 +47,24 @@
             return document.getElementById(id);
         }
         function setlocalInfo(point) {
+
+//            //地址解析
+//            if (geocoder) {
+//                geocoder.getAddress(point);
+//            }
+            if(marker)
+            {
+                clearOverlay(marker);
+            }
+            //map.setCenter(point);
+            marker= new qq.maps.Marker({
+                map: map,
+                position: point
+            });
+
             G("p_lng").innerHTML = point.lng;
             G("p_lat").innerHTML = point.lat;
+
 
             //同时设置父窗口信息
             if(window.parent&&window.parent.document.getElementById("txtLngYPoint")){
@@ -83,13 +102,31 @@
                 center = new qq.maps.LatLng(localinfo.latlng.lat, localinfo.latlng.lng);
 
             }
-            var map = new qq.maps.Map(document.getElementById("container"), {
+             map = new qq.maps.Map(document.getElementById("container"), {
                 center: center,
                 zoom: 13
             });
 
+            //地址和经纬度之间进行转换服务
+            geocoder = new qq.maps.Geocoder({
+                //设置服务请求成功的回调函数
+                complete: function (result) {
+                    setlocalInfo(result.detail.location);
+                    qq.maps.event.addListener(marker, 'click', function () {
+                        info.open();
+                        info.setContent('<div style="width:280px;height:100px;">' +
+                            result.detail.address + '</div>');
+                        info.setPosition(result.detail.location);
+                    });
+                },
+                //若服务请求失败，则运行以下函数
+                error: function () {
+                    alert("出错了，请输入正确的经纬度！！！");
+                }
+            });
+
             if (params) {
-                var marker = new qq.maps.Marker({
+                 marker = new qq.maps.Marker({
                     map: map,
                     position: center
                 });
@@ -123,6 +160,13 @@
             qq.maps.event.addListener(map, 'click', function (e) {
                 setlocalInfo(e.latLng);
             });
+        }
+
+        //清除地图上的marker
+        function clearOverlay(overlay){
+  
+                overlay.setMap(null);
+
         }
 
         function setautocompletelocal(){
