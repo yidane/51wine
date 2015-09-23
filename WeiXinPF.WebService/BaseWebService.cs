@@ -8,7 +8,6 @@ using OneGulp.WeChat.MP;
 using OneGulp.WeChat.MP.AdvancedAPIs;
 using OneGulp.WeChat.MP.AdvancedAPIs.OAuth;
 using OneGulp.WeChat.MP.Helpers;
-using Travel.Infrastructure.WeiXin.User;
 using WeiXinPF.BLL;
 using WeiXinPF.Common;
 using WeiXinPF.Model;
@@ -149,8 +148,8 @@ namespace WeiXinPF.WebService
                 Model.wx_userweixin wxModel = bll.GetModel(wid);
                 var openId = OAuth2BaseProc(wxModel, state,code, targetUrl);
 
-                var helper = new UserInfoHelper();
-                var userInfo = helper.GetUserInfoByOpenID(accessToken, openId);
+               
+                var userInfo = UserApi.Info(accessToken, openId);
                 if (userInfo != null)
                 {
                     user = new OAuthUserInfo()
