@@ -7,9 +7,9 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using WeiXinPF.Common;
 using WeiXinPF.WeiXinComm;
-using Senparc.Weixin.MP.AdvancedAPIs;
-using Senparc.Weixin.MP.AdvancedAPIs.Groups;
-using Senparc.Weixin.MP.AdvancedAPIs.User;
+using OneGulp.WeChat.MP.AdvancedAPIs;
+using OneGulp.WeChat.MP.AdvancedAPIs.Groups;
+using OneGulp.WeChat.MP.AdvancedAPIs.User;
 
 namespace WeiXinPF.Web.admin.crm
 {

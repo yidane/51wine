@@ -10,12 +10,12 @@ using System.IO;
 using System.Web;
 using System.Web.Script.Serialization;
 using System.Net;
-using Senparc.Weixin.HttpUtility;
-using Senparc.Weixin.Entities;
-using Senparc.Weixin.MP.Entities.Menu;
-using Senparc.Weixin.MP.Entities;
-using Senparc.Weixin.MP;
-using Senparc.Weixin.Exceptions;
+using OneGulp.WeChat.HttpUtility;
+using OneGulp.WeChat.Entities;
+using OneGulp.WeChat.MP.Entities.Menu;
+using OneGulp.WeChat.MP.Entities;
+using OneGulp.WeChat.MP;
+using OneGulp.WeChat.Exceptions;
  
 
 namespace WeiXinPF.WeiXinComm
@@ -55,7 +55,7 @@ namespace WeiXinPF.WeiXinComm
         {
             var url = string.Format("https://api.weixin.qq.com/cgi-bin/menu/get?access_token={0}", accessToken);
 
-            var jsonString = Senparc.Weixin.HttpUtility.RequestUtility.HttpGet(url, Encoding.UTF8);
+            var jsonString = OneGulp.WeChat.HttpUtility.RequestUtility.HttpGet(url, Encoding.UTF8);
             //var finalResult = GetMenuFromJson(jsonString);
 
             GetMenuResult finalResult;
@@ -65,12 +65,12 @@ namespace WeiXinPF.WeiXinComm
                 var jsonResult = js.Deserialize<GetMenuResultFull>(jsonString);
                 if (jsonResult.menu == null || jsonResult.menu.button.Count == 0)
                 {
-                    throw new WeixinException(jsonResult.errmsg);
+                    throw new WeChatException(jsonResult.errmsg);
                 }
 
                 finalResult = GetMenuFromJsonResult(jsonResult);
             }
-            catch (WeixinException ex)
+            catch (WeChatException ex)
             {
                 finalResult = null;
             }
@@ -104,7 +104,7 @@ namespace WeiXinPF.WeiXinComm
                         if (rootButton.type.Equals("CLICK", StringComparison.OrdinalIgnoreCase)
                             && string.IsNullOrEmpty(rootButton.key))
                         {
-                            throw new WeixinMenuException("单击按钮的key不能为空！");
+                            throw new WeChatMenuException("单击按钮的key不能为空！");
                         }
 
                         if (rootButton.type.Equals("CLICK", StringComparison.OrdinalIgnoreCase))
@@ -131,7 +131,7 @@ namespace WeiXinPF.WeiXinComm
                     }
                     //else if (availableSubButton < 1)
                     //{
-                    //    throw new WeixinMenuException("子菜单至少需要填写1个！");
+                    //    throw new WeChatMenuException("子菜单至少需要填写1个！");
                     //}
                     else
                     {
@@ -149,7 +149,7 @@ namespace WeiXinPF.WeiXinComm
                             if (subSubButton.type.Equals("CLICK", StringComparison.OrdinalIgnoreCase)
                                 && string.IsNullOrEmpty(subSubButton.key))
                             {
-                                throw new WeixinMenuException("单击按钮的key不能为空！");
+                                throw new WeChatMenuException("单击按钮的key不能为空！");
                             }
 
 
@@ -179,7 +179,7 @@ namespace WeiXinPF.WeiXinComm
 
                 if (bg.button.Count < 1)
                 {
-                    throw new WeixinMenuException("一级菜单按钮至少为1个！");
+                    throw new WeChatMenuException("一级菜单按钮至少为1个！");
                 }
 
                 result = new GetMenuResult()
@@ -189,7 +189,7 @@ namespace WeiXinPF.WeiXinComm
             }
             catch (Exception ex)
             {
-                throw new WeixinMenuException(ex.Message, ex);
+                throw new WeChatMenuException(ex.Message, ex);
             }
             return result;
         }
@@ -204,7 +204,7 @@ namespace WeiXinPF.WeiXinComm
         public string GetMenu2(string accessToken)
         {
             var url = string.Format("https://api.weixin.qq.com/cgi-bin/menu/get?access_token={0}", accessToken);
-            var jsonString = Senparc.Weixin.HttpUtility.RequestUtility.HttpGet(url, Encoding.UTF8);
+            var jsonString = OneGulp.WeChat.HttpUtility.RequestUtility.HttpGet(url, Encoding.UTF8);
             return jsonString;
         }
 

@@ -18,9 +18,9 @@ using System.Web.UI.WebControls;
 using WeiXinPF.Common;
 using WeiXinPF.BLL;
 using WeiXinPF.WeiXinComm;
-using Senparc.Weixin.MP.Entities;
-using Senparc.Weixin.MP.CommonAPIs;
-using Senparc.Weixin.MP.Entities.Menu;
+using OneGulp.WeChat.MP.Entities;
+using OneGulp.WeChat.MP.CommonAPIs;
+using OneGulp.WeChat.MP.Entities.Menu;
 
 
 namespace WeiXinPF.Web.admin.weixin
@@ -294,7 +294,7 @@ namespace WeiXinPF.Web.admin.weixin
                     JscriptMsg(error, "", "Error");
                     return;
                 }
-                var result = Senparc.Weixin.MP.CommonAPIs.CommonApi.DeleteMenu(token);
+                var result = OneGulp.WeChat.MP.CommonAPIs.CommonApi.DeleteMenu(token);
                 //重新获得最新的菜单
                 GetMenu();
 

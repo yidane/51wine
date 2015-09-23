@@ -6,8 +6,8 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Senparc.Weixin.MP.AdvancedAPIs;
-using Senparc.Weixin.MP.AdvancedAPIs.OAuth;
+using OneGulp.WeChat.MP.AdvancedAPIs;
+using OneGulp.WeChat.MP.AdvancedAPIs.OAuth;
 
 
 namespace WeiXinPF.Web.shop

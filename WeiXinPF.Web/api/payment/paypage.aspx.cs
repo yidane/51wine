@@ -10,11 +10,11 @@
 using WeiXinPF.API.Payment.wxpay;
 using WeiXinPF.BLL;
 using WeiXinPF.Common;
-using Senparc.Weixin;
-using Senparc.Weixin.MP;
-using Senparc.Weixin.MP.AdvancedAPIs;
-using Senparc.Weixin.MP.AdvancedAPIs.OAuth;
-using Senparc.Weixin.MP.TenPayLibV3;
+using OneGulp.WeChat;
+using OneGulp.WeChat.MP;
+using OneGulp.WeChat.MP.AdvancedAPIs;
+using OneGulp.WeChat.MP.AdvancedAPIs.OAuth;
+using OneGulp.WeChat.MP.TenPayLibV3;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -144,7 +144,7 @@ namespace WeiXinPF.Web.api.payment
 
 
             //创建支付应答对象
-            Senparc.Weixin.MP.TenPayLibV3.RequestHandler packageReqHandler = new Senparc.Weixin.MP.TenPayLibV3.RequestHandler(null);
+            OneGulp.WeChat.MP.TenPayLibV3.RequestHandler packageReqHandler = new OneGulp.WeChat.MP.TenPayLibV3.RequestHandler(null);
             //初始化
             packageReqHandler.Init();
             //packageReqHandler.SetKey(""/*TenPayV3Info.Key*/);
@@ -176,7 +176,7 @@ namespace WeiXinPF.Web.api.payment
             prepayId = res.Element("xml").Element("prepay_id").Value;
       
             //设置支付参数
-            Senparc.Weixin.MP.TenPayLibV3.RequestHandler paySignReqHandler = new Senparc.Weixin.MP.TenPayLibV3.RequestHandler(null);
+            OneGulp.WeChat.MP.TenPayLibV3.RequestHandler paySignReqHandler = new OneGulp.WeChat.MP.TenPayLibV3.RequestHandler(null);
             paySignReqHandler.SetParameter("appId", uwEntity.AppId);
             paySignReqHandler.SetParameter("timeStamp", timeStamp);
             paySignReqHandler.SetParameter("nonceStr", nonceStr);

@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Drawing;
 using System.Net;
-using Senparc.Weixin.MP;
-using Senparc.Weixin.MP.AdvancedAPIs;
-using Senparc.Weixin.MP.CommonAPIs;
+using OneGulp.WeChat.MP;
+using OneGulp.WeChat.MP.AdvancedAPIs;
+using OneGulp.WeChat.MP.CommonAPIs;
 
 namespace WeiXinPF.WeiXinComm
 {

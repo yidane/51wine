@@ -6,15 +6,15 @@ using System.Configuration;
 using System.IO;
 using System.Text;
 using System.Web.Configuration;
-using Senparc.Weixin.MP.Agent;
-using Senparc.Weixin.Context;
-using Senparc.Weixin.MP.Entities;
-using Senparc.Weixin.MP.MessageHandlers;
-using Senparc.Weixin.MP.Helpers;
+using OneGulp.WeChat.MP.Agent;
+using OneGulp.WeChat.Context;
+using OneGulp.WeChat.MP.Entities;
+using OneGulp.WeChat.MP.MessageHandlers;
+using OneGulp.WeChat.MP.Helpers;
 using System.Xml;
 using System.Xml.Linq;
 using WeiXinPF.Common;
-using Senparc.Weixin.MP.Entities.Request;
+using OneGulp.WeChat.MP.Entities.Request;
 
 namespace WeiXinPF.WeiXinComm.CustomMessageHandler
 {
@@ -42,8 +42,8 @@ namespace WeiXinPF.WeiXinComm.CustomMessageHandler
         {
             //这里设置仅用于测试，实际开发可以在外部更全局的地方设置，
             //比如MessageHandler<MessageContext>.GlobalWeixinContext.ExpireMinutes = 3。
-            WeixinContext.ExpireMinutes = 10;
-            WeixinContext.MaxRecordCount = 1000;  //最多存储多少条记录
+            WeChatContext.ExpireMinutes = 10;
+            WeChatContext.MaxRecordCount = 1000;  //最多存储多少条记录
 
         }
 

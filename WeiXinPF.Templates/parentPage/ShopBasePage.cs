@@ -1,7 +1,7 @@
 ﻿
 using WeiXinPF.Common;
-using Senparc.Weixin.MP;
-using Senparc.Weixin.MP.AdvancedAPIs;
+using OneGulp.WeChat.MP;
+using OneGulp.WeChat.MP.AdvancedAPIs;
 using System;
 using System.Collections.Generic;
 using System.IO;

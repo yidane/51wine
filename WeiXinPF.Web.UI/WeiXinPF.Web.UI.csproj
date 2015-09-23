@@ -39,11 +39,11 @@
     <Reference Include="LitJSON">
       <HintPath>..\dll\LitJSON.dll</HintPath>
     </Reference>
-    <Reference Include="Senparc.Weixin">
-      <HintPath>..\dll\Senparc.Weixin.dll</HintPath>
+    <Reference Include="OneGulp.WeChat">
+      <HintPath>..\dll\OneGulp.WeChat.dll</HintPath>
     </Reference>
-    <Reference Include="Senparc.Weixin.MP">
-      <HintPath>..\dll\Senparc.Weixin.MP.dll</HintPath>
+    <Reference Include="OneGulp.WeChat.MP">
+      <HintPath>..\dll\OneGulp.WeChat.MP.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
