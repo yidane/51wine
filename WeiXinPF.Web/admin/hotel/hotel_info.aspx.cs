@@ -58,7 +58,8 @@ namespace WeiXinPF.Web.admin.hotel
                 this.orderRemark.Value = hotel.orderRemark;
                 this.txtLatXPoint.Text = hotel.xplace.ToString();
                 this.txtLngYPoint.Text = hotel.yplace.ToString();
-                ClientScript.RegisterStartupScript(GetType(), "message", "<script language='javascript'> $(\"#baiduframe\").attr(\"src\", \"../lbs/MapSelectPoint.aspx?yjindu=" + hotel.yplace.Value.ToString() + "&xweidu=" + hotel.xplace.Value.ToString() + "\");</script>");
+                ClientScript.RegisterStartupScript(GetType(), "message",
+                    "<script language='javascript'> $(\"#baiduframe\").attr(\"src\", \"../../weixin/map/qqmap/qqmap_getLocation.html?lng=" + hotel.yplace.Value.ToString() + "&lat=" + hotel.xplace.Value.ToString() + "\");</script>");
 
             }
 

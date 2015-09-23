@@ -78,6 +78,8 @@
         self.getinfo();
 
         
+
+      
     };
 
     this.clearOverlay=function(overlay){
@@ -158,13 +160,19 @@
                     qq.maps.event.addListener(marker, "click", function (e) {
 
                         if (!self.isSetInfo()) {
+                            self.isSetInfo(true);
                             self.setinfo();
                         }
                         self.infoWin().open();
                     });
 
-                    //完成后搜索
+                    //完成后搜索         
                     self.searchRoad();
+
+                    if (!self.isSetInfo()) {
+                        self.isSetInfo(true);
+                        self.setinfo();
+                    }
                 }
             },
             error: function (a, b, c) {
