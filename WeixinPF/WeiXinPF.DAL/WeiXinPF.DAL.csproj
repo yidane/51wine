@@ -110,6 +110,7 @@
     <Compile Include="plugs\wx_sjb_qiudui.cs" />
     <Compile Include="plugs\wx_sjb_richeng.cs" />
     <Compile Include="plugs\wx_sjb_users.cs" />
+    <Compile Include="travel\wx_travel_marker.cs" />
     <Compile Include="travel\wx_travel_picture.cs" />
     <Compile Include="travel\wx_travel_scenic.cs" />
     <Compile Include="travel\wx_travel_scenicDetail.cs" />
