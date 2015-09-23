@@ -8772,6 +8772,7 @@
     <Content Include="weixin\cashred\images\lottery.psd" />
     <Content Include="weixin\scenic\scenic.ashx" />
     <Content Include="weixin\restaurant\diancai_login.ashx" />
+    <None Include="Properties\PublishProfiles\Yidane.pubxml" />
     <None Include="副本 Web.Debug.config">
       <DependentUpon>副本 Web.config</DependentUpon>
     </None>
