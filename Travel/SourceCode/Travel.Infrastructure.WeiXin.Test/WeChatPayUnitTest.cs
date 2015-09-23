@@ -123,7 +123,7 @@ namespace Travel.Infrastructure.WeiXin.Test
         public void RefundQueryTest()
         {
             var refundQueryRequest = new RefundQueryRequest();
-            refundQueryRequest.out_trade_no = "T2015092214410310012668";
+            refundQueryRequest.transaction_id = "1003310117201509230963841378";
 
             var result = new JsApiPay().RefundQuery(refundQueryRequest);
 
