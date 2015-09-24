@@ -7122,6 +7122,13 @@
     <Compile Include="weixin\restaurant\caidan_guanyu.aspx.designer.cs">
       <DependentUpon>caidan_guanyu.aspx</DependentUpon>
     </Compile>
+    <Compile Include="weixin\restaurant\caidan_manage_confirm.aspx.cs">
+      <DependentUpon>caidan_manage_confirm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="weixin\restaurant\caidan_manage_confirm.aspx.designer.cs">
+      <DependentUpon>caidan_manage_confirm.aspx</DependentUpon>
+    </Compile>
     <Compile Include="weixin\restaurant\caidan_manage_index.aspx.cs">
       <DependentUpon>caidan_manage_index.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -8167,6 +8174,7 @@
     <Content Include="weixin\qiangpiao\order_ret.html" />
     <Content Include="weixin\qiangpiao\笔记.txt" />
     <Content Include="weixin\restaurant\caidan_guanyu.aspx" />
+    <Content Include="weixin\restaurant\caidan_manage_confirm.aspx" />
     <Content Include="weixin\restaurant\caidan_manage_index.aspx" />
     <Content Include="weixin\restaurant\caidan_manage_indexdetail.aspx" />
     <Content Include="weixin\restaurant\caidan_shangjia.aspx" />
