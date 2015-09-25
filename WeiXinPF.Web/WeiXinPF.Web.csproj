@@ -8037,6 +8037,8 @@
     <Content Include="weixin\magazine\js\main_d7a097e190.js" />
     <Content Include="weixin\magazine\js\scroll_7523dfb4df.js" />
     <Content Include="weixin\magazine\magazine.aspx" />
+    <Content Include="weixin\map\images\ico_general_map_04%402x.png" />
+    <Content Include="weixin\map\images\ico_general_map_05%402x.png" />
     <Content Include="weixin\map\mapFunctionList.html" />
     <Content Include="weixin\map\baidumap\map_drivingRoute.html" />
     <Content Include="weixin\map\baidumap\map_getcurrentLocation.html" />

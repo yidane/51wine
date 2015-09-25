@@ -11,6 +11,9 @@
             width: 100%;
             height: 100%;
         }
+        html{
+            font-size: 16px;
+        }
 
         * {
             margin: 0px;
@@ -24,17 +27,89 @@
             font: 12px/16px Verdana, Helvetica, Arial, sans-serif;
         }
 
-        .btn {
-            width: 142px;
-        }
+        /*.btn {*/
+            /*width: 142px;*/
+        /*}*/
 
        .text-center {
             text-align: center;
             }
-        /*.form-horizontal .form-group .input-group*/
-        /*{*/
-            /*width: 100%;*/
-        /*}*/
+
+        .menu_acitve .form-searchroad {
+            display: block;
+            transition:0.4s height, 0.4s padding;
+        }
+        .form-searchroad {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
+            margin: auto;
+            background: #34475a;
+            -webkit-box-shadow: 0 0 5px #181b1e;
+            box-shadow: 0 0 5px #181b1e;
+            border-radius: .25rem;
+            overflow: hidden;
+            display: none;
+            transition:0.7s height, 0.7s padding, 0s visibility 0.7s;
+        }
+
+        .map_nav_bar_v2 {
+            position: fixed;
+            z-index: 1;
+            height: 2.8125rem;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+        .map_nav_bar_v2 .map_nav_item_03 {
+            right: .5rem;
+            background-image: url("images/ico_general_map_04@2x.png?v=2014050901");
+        }
+
+        .menu_acitve .map_nav_bar_v2 {
+            bottom: 6.5rem;
+        }
+        .menu_acitve .map_nav_item_03:after {
+            -webkit-transform: rotate(180deg) translateY(2px);
+            transform: rotate(180deg) translateY(2px);
+        }
+
+        .map_nav_bar_v2 .map_nav_item_03:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+            width: 1.3125rem;
+            height: .8125rem;
+            background-image: url("images/ico_general_map_05@2x.png?v=2014050901");
+            background-size: 100% auto;
+        }
+
+
+        .map_nav_bar_v2 .map_nav_item_01, .map_nav_bar_v2 .map_nav_item_02, .map_nav_bar_v2 .map_nav_item_03, .map_nav_bar_v2 .map_nav_item_04 {
+            position: absolute;
+            top: .125rem;
+            width: 2.5625rem;
+            height: 2.5625rem;
+            background-size: 100% auto;
+        }
+
+
+        .form-group {
+            margin-bottom: 1px;
+            -webkit-box-shadow: 1px 1px 0 #181b1e, 2px 2px 0 #526273;
+            box-shadow: 1px 1px 0 #181b1e, 2px 2px 0 #526273;
+        }
+        .form-group:last-child
+        {
+            margin-bottom: 0;
+        }
+
     </style>
     <style>
         /*map info style*/
@@ -126,7 +201,7 @@
             var vm = new mapViewModel(params, $doms);
             ko.applyBindings(vm);
 
-            vm.getLocation();
+            vm.init();
 
 
         });
@@ -135,9 +210,44 @@
     </script>
 </head>
 <body>
-<div style="width: 100%; height: 70%;" id="container"></div>
-<div style="width: 100%; height: 30%;">
-    <form  style="padding-top: 15px;"  class="form-horizontal">
+<div data-bind="css:{menu_acitve:formshow}" style="    width: 100%;    height: 100%;">
+
+
+<div style="width: 100%; height: 100%;" id="container"></div>
+
+<div class="map_nav_bar_v2" >
+
+    <div class="map_nav_item_03" data-bind="click:togglesearchroad"></div>
+
+</div>
+
+<div  class="form-searchroad"  data-bind="visible: formshow" >
+    <form   >
+        <div class="form-group">
+
+
+            <div class="input-group">
+                <span class="input-group-addon" >计算策略</span>
+                <select id="policy" class="form-control"
+                        data-bind="event:{ change: searchRoad}">
+                    <option value="LEAST_TIME">最少时间</option>
+                    <option value="LEAST_DISTANCE">最短距离</option>
+                    <option value="AVOID_HIGHWAYS">避开高速</option>
+                    <option value="REAL_TRAFFIC">实时路况</option>
+                    <option value="PREDICT_TRAFFIC">预测路况</option>
+                </select>
+
+                <!--<div class=" input-group-btn" style="width: 142px;">-->
+                    <!--&lt;!&ndash;<label>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<input type="checkbox" value="" checked>&ndash;&gt;-->
+                    <!--&lt;!&ndash;显示路段路标&ndash;&gt;-->
+                    <!--&lt;!&ndash;</label>&ndash;&gt;-->
+                <!--</div>-->
+
+            </div>
+
+
+        </div>
         <div class="form-group" style="display:none;">
 
 
@@ -161,10 +271,10 @@
                     <div class="input-group-addon" style="width: 82.4px;">
                         <span  style="float: right;">起点</span>
                     </div>
-                    <input type="text" class="form-control" id="txtbegin" placeholder="请输入起点">
-      <span class="input-group-btn">
+                    <input type="text" class="form-control" id="txtbegin" placeholder="请输入起点" data-bind="value:startlocation">
+      <div class="input-group-btn">
          <button type="button" class="btn btn-primary"  data-bind="click:getLocation">使用当前位置</button>
-      </span>
+      </div>
                 </div>
 
 
@@ -177,49 +287,24 @@
                     <span  style="float: right;">终点</span>
                 </div>
 
-                <input type="text" class="form-control" id="txtend" placeholder="请输入终点">
-                 <span class="input-group-btn" style="width: 142px;">
-
-      </span>
-               </div>
-
-
-        </div>
-        <div class="form-group">
-
-
-            <div class="input-group">
-                <span class="input-group-addon" >计算策略</span>
-                <select id="policy" class="form-control"
-                data-bind="event:{ change: searchRoad}">
-                <option value="LEAST_TIME">最少时间</option>
-                <option value="LEAST_DISTANCE">最短距离</option>
-                <option value="AVOID_HIGHWAYS">避开高速</option>
-                <option value="REAL_TRAFFIC">实时路况</option>
-                <option value="PREDICT_TRAFFIC">预测路况</option>
-                </select>
-
-       <div class="checkbox input-group-addon" style="width: 142px;">
-           <label>
-               <input type="checkbox" value="" checked>
-               显示路段路标
-           </label>
-       </div>
-
-            </div>
+                <input type="text" class="form-control" id="txtend" placeholder="请输入终点" data-bind="value:endlocation">
+                <div class="input-group-btn">
+                    <button type="button" class="btn btn-success" style="    width: 110px;" data-bind="click:searchRoad">查询</button>
+                </div>
 
 
         </div>
-
-        <div class="form-group text-center">
-
-            <button type="button" class="btn btn-success" data-bind="click:searchRoad">查询</button>
         </div>
+
+        <!--<div class="form-group text-center">-->
+
+            <!--<button type="button" class="btn btn-success" data-bind="click:searchRoad">查询</button>-->
+        <!--</div>-->
 
     </form>
 
 </div>
-
+</div>
 
 <div id="info_pop" style="display: none">
 
