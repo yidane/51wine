@@ -3,6 +3,9 @@
     var self = this;
     this.params = ko.observable(params);
     this.$doms = ko.observable($doms);
+    this.startlocation = ko.observable('当前位置');
+    this.formshow=ko.observable(false);
+    this.endlocation = ko.observable('');
     this.info = ko.observable();
     this.isSetInfo = ko.observable(false);
     this.map = ko.observable();
@@ -10,18 +13,28 @@
     this.startmarker = ko.observable();
     this.endmarker = ko.observable();
     this.service = ko.observable();
-    this.polyline=ko.observable();
-    this.localinfo =ko.observable( {
-        latlng: { lat: 48.6589239484962, lng: 87.04087972640991 },
+    this.searchservice= ko.observable();
+    this.polyline = ko.observable();
+    this.localinfo = ko.observable({
+        latlng: {lat: 48.6589239484962, lng: 87.04087972640991},
         location: '新疆维吾尔自治区',
         locationdetail: '新疆维吾尔自治区阿勒泰地区布尔津县'
     });
-    this.seachType=ko.observable("start");
+    this.seachType = ko.observable("start");
+
+    this.init = function () {
+
+        //self.initmap();
+        self.getLocation();
+    };
+    this.togglesearchroad=function(){
+       self.formshow(!self.formshow());
+    };
 
     //func
     this.getLocation = function () {
         if (navigator.geolocation) {
-            self.$doms().$txtbegin.val('当前位置');
+            //self.$doms().$txtbegin.val('当前位置');
             navigator.geolocation.getCurrentPosition(self.showPosition);
         } else {
             x.innerHTML = "浏览器不支持定位.";
@@ -31,18 +44,25 @@
         var lat = position.coords.latitude;
         var lng = position.coords.longitude;
         //todo 移除测试代码
-          var point = new qq.maps.LatLng(lat, lng);
-      //  var point = new qq.maps.LatLng(48.65916135658294, 87.03942060470581);
+        var point = new qq.maps.LatLng(lat, lng);
+        //  var point = new qq.maps.LatLng(48.65916135658294, 87.03942060470581);
 
-        self.initmap(point);
+        //如果地图没初始化
+        if(!self.map())
+        {
+            self.initmap(point);
+        }
+        if (point) {
+            self.map().setCenter(point);
+            self.startlocation('当前位置');
+        }
+        //如果初始了点则添加Marker
+        self.setstartmarker(point);
     };
 
-    this.initmap = function (latLng) {
-        var latlng = new qq.maps.LatLng(latLng.lat, latLng.lng);
-        //map
+    this.initmap = function () {
         var map = new qq.maps.Map($("#container")[0], {
-            center: latlng
-           // zoom: 13
+
         });
         self.map(map);
 
@@ -52,62 +72,59 @@
         });
         self.infoWin(infoWin);
 
-        var anchor = new qq.maps.Point(6, 6),
-                    size = new qq.maps.Size(32, 37),
-                    start_icon = new qq.maps.MarkerImage(
-                        'http://s.map.qq.com/themes/default/img/busmapicon.png',
-                        size,
-                        new qq.maps.Point(0, 0),
-                        anchor
-                    );
-        //marker
-        var marker = new qq.maps.Marker({
-            icon: start_icon,
-            map: map,
-            position: latlng
-        });
-        self.startmarker(marker);
-        // marker.setTitle('teststsetset');
-        //marker-click
-        //qq.maps.event.addListener(marker, "click", function (e) {
-        //
-        //
-        //
-        //});
 
-        var service = new qq.maps.DrivingService({
+
+        //导航路线
+        self.adddirveservice();
+
+
+        //搜索服务
+        self.addsearchservice(map);
+
+        //添加autocomplete
+        self.addAutocomplete(self.searchservice());
+
+
+        self.getinfo();
+    };
+    this.adddirveservice= function () {
+        //导航路线
+        var drivingservice = new qq.maps.DrivingService({
             complete: function (response) {
                 self.drivingServiceComplete(response);
             }
         });
-
-        self.service(service);
+        self.service(drivingservice);
+    };
+    this.addsearchservice=function(map){
+        //搜索服务
         var searchService = new qq.maps.SearchService({
             map: map,
-            pageCapacity:1,
-            complete:function(res){
-                if(res&&res.detail&&res.detail.pois)
-                {
-                    if(res.detail.pois.length>0)
-                    {
-                        var firstpoi=res.detail.pois[0];
-                       if(firstpoi){
-self.setmaker(firstpoi);
-                       }
+            pageCapacity: 1,
+            complete: function (res) {
+                if (res && res.detail && res.detail.pois) {
+                    if (res.detail.pois.length > 0) {
+                        var firstpoi = res.detail.pois[0];
+                        if (firstpoi) {
+                            self.setmaker(firstpoi);
+                        }
                     }
                 }
             }
         });
         searchService.setLocation(self.localinfo().locationdetail);
-       var apstart = new qq.maps.place.Autocomplete(self.$doms().$txtbegin[0],{
+        self.searchservice(searchService);
+    };
+    this.addAutocomplete=function(searchService){
+        var apstart = new qq.maps.place.Autocomplete(self.$doms().$txtbegin[0], {
 
             location: self.localinfo().location
         });
         qq.maps.event.addListener(apstart, "confirm", function (res) {
-self.seachType('start');
+            self.seachType('start');
             searchService.search(res.value);
         });
-        var apend = new qq.maps.place.Autocomplete(self.$doms().$txtend[0],{
+        var apend = new qq.maps.place.Autocomplete(self.$doms().$txtend[0], {
 
             location: self.localinfo().location
         });
@@ -115,34 +132,26 @@ self.seachType('start');
             self.seachType('end');
             searchService.search(res.value);
         });
-
-
-        self.getinfo();
-
-        
-
-      
     };
 
-    this.clearOverlay=function(overlay){
+    this.clearOverlay = function (overlay) {
         //清除地图上的marker
 
-         if (overlay)
-         {
-             overlay.setMap(null);
+        if (overlay) {
+            overlay.setMap(null);
 
-         }
+        }
     };
 
     this.drivingServiceComplete = function (response) {
         var start = response.detail.start,
             end = response.detail.end;
 
-     var   directions_routes = response.detail.routes;
-        var routes_desc=[];
+        var directions_routes = response.detail.routes;
+        var routes_desc = [];
         //所有可选路线方案
-        for(var i = 0;i < directions_routes.length; i++) {
-            var route = directions_routes[i] ;
+        for (var i = 0; i < directions_routes.length; i++) {
+            var route = directions_routes[i];
             //调整地图窗口显示所有路线
             self.map().fitBounds(response.detail.bounds);
             //所有路程信息
@@ -172,23 +181,22 @@ self.seachType('start');
 
         $.ajax({
             url: '../../WebServices/MapWebService.asmx/GetMapInfo',
-            data: { id: self.params().id },
+            data: {id: self.params().id},
             type: 'post',
             dataType: 'json',
             success: function (json) {
                 if (json.IsSuccess) {
                     self.info(json.Data);
-
+                    self.endlocation(json.Data.name);
                     var point = new qq.maps.LatLng(self.info().position.lat, self.info().position.lng);
-                    var anchor = new qq.maps.Point(6, 6),
-                    size = new qq.maps.Size(32, 37),                    
-                    end_icon = new qq.maps.MarkerImage(
-                        'http://s.map.qq.com/themes/default/img/busmapicon.png',
-                        size,
-                        new qq.maps.Point(32, 0),
-                        anchor
-
-                    );
+                    var anchor = new qq.maps.Point(16, 16),
+                        size = new qq.maps.Size(32, 37),
+                        end_icon = new qq.maps.MarkerImage(
+                            'http://s.map.qq.com/themes/default/img/busmapicon.png',
+                            size,
+                            new qq.maps.Point(32, 0),
+                            anchor
+                        );
 
                     //marker
                     var marker = new qq.maps.Marker({
@@ -199,7 +207,7 @@ self.seachType('start');
                     self.endmarker(marker);
                     // marker.setTitle('teststsetset');
                     //marker-click
-                    qq.maps.event.addListener( self.endmarker(), "click", function (e) {
+                    qq.maps.event.addListener(self.endmarker(), "click", function (e) {
 
                         if (!self.isSetInfo()) {
                             self.isSetInfo(true);
@@ -225,9 +233,6 @@ self.seachType('start');
             }
         });
 
-
-         
-       
 
     };
 
@@ -259,47 +264,52 @@ self.seachType('start');
 
 
     };
-    this.setmaker=function(firstpoi){
-        var point=firstpoi.latLng;
-        if(self.seachType()=='start')
-        {
-            self.clearOverlay(self.startmarker());
-         //   self.map().setCenter(point);
-            var anchor = new qq.maps.Point(6, 6),
-                size = new qq.maps.Size(32, 37),
-                start_icon = new qq.maps.MarkerImage(
-                    'http://s.map.qq.com/themes/default/img/busmapicon.png',
-                    size,
-                    new qq.maps.Point(0, 0),
-                    anchor
-                );
-            //marker
-            var marker = new qq.maps.Marker({
-                icon: start_icon,
-                map: self.map(),
-                position: point
-            });
-            self.startmarker(marker);
+    this.setmaker = function (firstpoi) {
+        var point = firstpoi.latLng;
+        if (self.seachType() == 'start') {
+            self.setstartmarker(point);
         }
-        else{
-            self.clearOverlay(self.endmarker());
-            var anchor = new qq.maps.Point(6, 6),
-                size = new qq.maps.Size(32, 37),
-                end_icon = new qq.maps.MarkerImage(
-                    'http://s.map.qq.com/themes/default/img/busmapicon.png',
-                    size,
-                    new qq.maps.Point(32, 0),
-                    anchor
-
-                );
-
-            //marker
-            var marker = new qq.maps.Marker({
-                icon: end_icon,
-                map: self.map(),
-                position: point
-            });
-            self.endmarker(marker);
+        else {
+            self.setendmarker(point);
         }
+    };
+
+    this.setstartmarker = function (point) {
+        self.clearOverlay(self.startmarker());
+        //   self.map().setCenter(point);
+        var anchor = new qq.maps.Point(6, 6),
+            size = new qq.maps.Size(32, 37),
+            start_icon = new qq.maps.MarkerImage(
+                'http://s.map.qq.com/themes/default/img/busmapicon.png',
+                size,
+                new qq.maps.Point(0, 0),
+                anchor
+            );
+        //marker
+        var marker = new qq.maps.Marker({
+            icon: start_icon,
+            map: self.map(),
+            position: point
+        });
+        self.startmarker(marker);
+    };
+    this.setendmarker = function (point) {
+        self.clearOverlay(self.endmarker());
+        var anchor = new qq.maps.Point(6, 6),
+            size = new qq.maps.Size(32, 37),
+            end_icon = new qq.maps.MarkerImage(
+                'http://s.map.qq.com/themes/default/img/busmapicon.png',
+                size,
+                new qq.maps.Point(32, 0),
+                anchor
+            );
+
+        //marker
+        var marker = new qq.maps.Marker({
+            icon: end_icon,
+            map: self.map(),
+            position: point
+        });
+        self.endmarker(marker);
     };
 };
