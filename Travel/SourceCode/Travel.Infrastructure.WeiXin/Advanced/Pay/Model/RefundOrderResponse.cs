@@ -194,6 +194,7 @@ namespace Travel.Infrastructure.WeiXin.Advanced.Pay.Model
                 var couponCount = GetNodeInnerText(xmlDocument, "coupon_count");
                 transaction_id = GetNodeInnerText(xmlDocument, "transaction_id");
                 out_trade_no = GetNodeInnerText(xmlDocument, "out_trade_no");
+                refund_id = GetNodeInnerText(xmlDocument, "refund_id");
             }
         }
 
