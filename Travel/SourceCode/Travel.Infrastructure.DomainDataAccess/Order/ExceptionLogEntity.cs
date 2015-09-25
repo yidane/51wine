@@ -12,6 +12,7 @@ namespace Travel.Infrastructure.DomainDataAccess.Order
 
     public class ExceptionLogEntity
     {
+        [Key]
         public Guid ExceptionLogId { get; set; }
 
         [Required]
