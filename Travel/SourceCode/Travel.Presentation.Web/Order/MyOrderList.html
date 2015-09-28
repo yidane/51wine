@@ -57,6 +57,7 @@
                     <div class="info_02">
                         <dl>
                             <dd><b class="i_gray_icon"></b>订单编号 {{:OrderNo}}</dd>
+                            <dd><b class="time_gray_icon"></b>购票日期 {{:BuyTime}}</dd>
                             <dd><b class="time_gray_icon"></b>有效期至 {{:LastUseDate}}</dd>
                         </dl>
                     </div>
@@ -78,7 +79,7 @@
                 </div>
                 <div class="info_02">
                     <dl>
-                        <dd><b class="i_gray_icon"></b>订单编号 {{:OrderNo}}</dd>
+                        <dd><b class="i_gray_icon"></b>退单编号 {{:OrderNo}}</dd>
                         <dd><b class="time_gray_icon"></b>购票日期 {{:LastUseDate}}</dd>
                     </dl>
                 </div>
@@ -125,7 +126,7 @@
                         if (result.IsSuccess) {
                             var data = [];
                             $(result.Data).each(function (index, obj) {
-                                data.push({ OrderNo: obj.OrderCode, OrderID: obj.OrderId, TicketImageUrl: '../TicketImages/1.jpg', TicketName: obj.TicketName, LastUseDate: moment(obj.BuyTime).add(8, 'month').format("YYYY-MM-DD"), TicketPrice: obj.singleTicketPrice, TicketCount: obj.TicketCount, TicketTotalPrice: obj.TotelFee, OperateUrl: '', OrderStatus: obj.OrderStatus });
+                                data.push({ OrderNo: obj.OrderCode, OrderID: obj.OrderId, TicketImageUrl: '../TicketImages/1.jpg', TicketName: obj.TicketName, BuyTime: obj.BuyTime, LastUseDate: moment(obj.BuyTime).add(8, 'month').format("YYYY-MM-DD"), TicketPrice: obj.singleTicketPrice, TicketCount: obj.TicketCount, TicketTotalPrice: obj.TotelFee, OperateUrl: '', OrderStatus: obj.OrderStatus });
                             });
 
                             var template = $.templates("#ResultTemplateOrder");
