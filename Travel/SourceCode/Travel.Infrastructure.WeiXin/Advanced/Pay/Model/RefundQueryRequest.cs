@@ -34,7 +34,7 @@ namespace Travel.Infrastructure.WeiXin.Advanced.Pay.Model
 
             if (!string.IsNullOrEmpty(out_refund_no))
             {
-                rtnPayData.SetValue("",out_refund_no);
+                rtnPayData.SetValue("out_refund_no", out_refund_no);
                 return rtnPayData;
             }
 

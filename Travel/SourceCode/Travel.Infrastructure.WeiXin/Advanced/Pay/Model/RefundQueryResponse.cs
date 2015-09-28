@@ -57,7 +57,7 @@ namespace Travel.Infrastructure.WeiXin.Advanced.Pay.Model
                 nonce_str = GetNodeInnerText(xmlDocument, "nonce_str");
                 sign = GetNodeInnerText(xmlDocument, "sign");
                 result_code = GetNodeInnerText(xmlDocument, "result_code");
-                err_code = GetNodeInnerText(xmlDocument, "xmlDocument");
+                err_code = GetNodeInnerText(xmlDocument, "err_code");
                 err_code_des = GetNodeInnerText(xmlDocument, "err_code_des");
                 total_fee = int.Parse(GetNodeInnerText(xmlDocument, "total_fee"));
                 fee_type = GetNodeInnerText(xmlDocument, "fee_type");
@@ -66,6 +66,63 @@ namespace Travel.Infrastructure.WeiXin.Advanced.Pay.Model
                 var couponCount = GetNodeInnerText(xmlDocument, "coupon_count");
                 transaction_id = GetNodeInnerText(xmlDocument, "transaction_id");
                 out_trade_no = GetNodeInnerText(xmlDocument, "out_trade_no");
+
+                RefundInfoList = new List<RefundInfo>();
+                //计算退款单号对象
+                var refundIndex = 0;
+                var out_refund_no = GetNodeInnerText(xmlDocument, string.Format("out_refund_no_{0}", refundIndex));
+                var refund_id = GetNodeInnerText(xmlDocument, string.Format("refund_id_{0}", refundIndex));
+                var refund_fee = GetNodeInnerText(xmlDocument, string.Format("refund_fee_{0}", refundIndex));
+                var refund_channel = GetNodeInnerText(xmlDocument, string.Format("refund_channel_{0}", refundIndex));
+                var refund_status = GetNodeInnerText(xmlDocument, string.Format("refund_status_{0}", refundIndex));
+                var coupon_refund_fee = GetNodeInnerText(xmlDocument, string.Format("coupon_refund_fee_{0}", refundIndex));
+                var coupon_refund_count = GetNodeInnerText(xmlDocument, string.Format("coupon_refund_count_{0}", refundIndex));
+
+                while (!string.IsNullOrEmpty(out_refund_no) && !string.IsNullOrEmpty(refund_id) && !string.IsNullOrEmpty(refund_fee))
+                {
+                    var coupon_refund_count_int = 0;
+                    var coupon_refund_fee_int = 0;
+
+                    var refundInfo = new RefundInfo
+                        {
+                            out_refund_no = out_refund_no,
+                            refund_id = refund_id,
+                            refund_fee = int.Parse(refund_fee),
+                            refund_channel = refund_channel,
+                            refund_status = refund_status
+                        };
+
+                    if (int.TryParse(coupon_refund_count, out coupon_refund_count_int) && int.TryParse(coupon_refund_fee, out coupon_refund_fee_int))
+                    {
+                        refundInfo.CouponRefundInfoList = new List<CouponRefundInfo>();
+                        for (int couponIndex = 0; couponIndex < coupon_refund_count_int; couponIndex++)
+                        {
+                            var couponRefundInfo = new CouponRefundInfo
+                                {
+                                    coupon_refund_batch_id = GetNodeInnerText(xmlDocument, string.Format("coupon_refund_batch_id_{0}_{1}", refundIndex, couponIndex)),
+                                    coupon_refund_id = GetNodeInnerText(xmlDocument, string.Format("coupon_refund_id_{0}_{1}", refundIndex, couponIndex))
+                                };
+                            var coupon_refund_fee_id = GetNodeInnerText(xmlDocument, string.Format("coupon_refund_fee_{0}_{1}", refundIndex, couponIndex));
+
+                            if (!string.IsNullOrEmpty(coupon_refund_fee))
+                            {
+                                couponRefundInfo.coupon_refund_fee = Convert.ToInt16(coupon_refund_fee_id);
+                            }
+                            refundInfo.CouponRefundInfoList.Add(couponRefundInfo);
+                        }
+                    }
+
+                    RefundInfoList.Add(refundInfo);
+
+                    refundIndex++;
+
+                    out_refund_no = GetNodeInnerText(xmlDocument, string.Format("out_refund_no_{0}", refundIndex));
+                    refund_id = GetNodeInnerText(xmlDocument, string.Format("refund_id_{0}", refundIndex));
+                    refund_fee = GetNodeInnerText(xmlDocument, string.Format("refund_fee_{0}", refundIndex));
+                    refund_channel = GetNodeInnerText(xmlDocument, string.Format("refund_channel_{0}", refundIndex));
+                    coupon_refund_fee = GetNodeInnerText(xmlDocument, string.Format("coupon_refund_fee_{0}", refundIndex));
+                    coupon_refund_count = GetNodeInnerText(xmlDocument, string.Format("coupon_refund_count_{0}", refundIndex));
+                }
             }
         }
 
@@ -90,7 +147,7 @@ namespace Travel.Infrastructure.WeiXin.Advanced.Pay.Model
 
     public class CouponRefundInfo
     {
-        public string coupon_refund_batch_idP { get; set; }
+        public string coupon_refund_batch_id { get; set; }
         public string coupon_refund_id { get; set; }
         public int coupon_refund_fee { get; set; }
     }
