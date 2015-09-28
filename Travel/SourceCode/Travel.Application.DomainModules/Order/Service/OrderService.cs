@@ -145,7 +145,7 @@ namespace Travel.Application.DomainModules.Order.Service
             var orders = OrderEntity.GetMyOrders(openId).ToList();
             var tickets = new List<TicketEntity>();
 
-            orders.ForEach(item => tickets.AddRange(item.Tickets));
+            orders.ForEach(item => tickets.AddRange(item.Tickets.Where(ticket => ticket.TicketStatus.Equals(OrderStatus.TicketStatus_Refund_WaitRefundFee))));
             if (tickets.Any())
             {
                 foreach (var refundOrderGroup in tickets.GroupBy(item => item.RefundOrderId))
