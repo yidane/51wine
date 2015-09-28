@@ -74,6 +74,35 @@ namespace WeiXinPF.DAL
             }
         }
         /// <summary>
+        /// 增加一条数据
+        /// </summary>
+        public int AddCommodity(WeiXinPF.Model.wx_diancai_dingdan_caiping model)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("insert into wx_diancai_dingdan_commodity(");
+            strSql.Append("dingId,caiId,price)");
+            strSql.Append(" values (");
+            strSql.Append("@dingId,@caiId,@price)");
+            strSql.Append(";select @@IDENTITY");
+            SqlParameter[] parameters = {
+					new SqlParameter("@dingId", SqlDbType.Int,4),
+					new SqlParameter("@caiId", SqlDbType.Int,4),
+					new SqlParameter("@price", SqlDbType.Float,8)};
+            parameters[0].Value = model.dingId;
+            parameters[1].Value = model.caiId;
+            parameters[2].Value = model.price;
+
+            object obj = DbHelperSQL.GetSingle(strSql.ToString(), parameters);
+            if (obj == null)
+            {
+                return 0;
+            }
+            else
+            {
+                return Convert.ToInt32(obj);
+            }
+        }
+        /// <summary>
         /// 更新一条数据
         /// </summary>
         public bool Update(WeiXinPF.Model.wx_diancai_dingdan_caiping model)

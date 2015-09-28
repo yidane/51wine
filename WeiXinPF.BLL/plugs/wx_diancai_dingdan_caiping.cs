@@ -39,6 +39,14 @@ namespace WeiXinPF.BLL
 			return dal.Add(model);
 		}
 
+        /// <summary>
+        /// 增加一条售出商品信息
+        /// </summary>
+        public int AddCommodity(WeiXinPF.Model.wx_diancai_dingdan_caiping model)
+        {
+            return dal.AddCommodity(model);
+        }
+
 		/// <summary>
 		/// 更新一条数据
 		/// </summary>
