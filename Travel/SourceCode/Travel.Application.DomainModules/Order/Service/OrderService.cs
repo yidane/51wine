@@ -223,19 +223,21 @@ namespace Travel.Application.DomainModules.Order.Service
                                 default: break;
                             }
                         }
-
-                        //处理全部退票的订单，将订单置为已使用
-                        var refundOrderEntity = RefundOrderEntity.GetRefundOrder(refundOrderGroup.Key.Value);
-                        var orderEntity = orders.FirstOrDefault(item => string.Equals(item.OrderId, refundOrderEntity.OrderId));
-                        var ticketList = tickets.Select(item => item.RefundOrderId == refundOrderGroup.Key).ToList();
-                        if (orderEntity.Tickets.Count == ticketList.Count)
-                        {
-                            orderEntity.OrderStatus = OrderStatus.OrderStatus_Used;
-                            orderEntity.ModifyOrder();
-                        }
                     }
                 }
             }
+
+            // 检查订单是否已全部使用完毕并修改订单状态
+            orders.Where(item => !item.OrderStatus.Equals(OrderStatus.OrderStatus_Used)).ToList()
+                .ForEach(
+                    item =>
+                        {                        
+                            if (OrderEntity.IsOrderFinish(item))
+                            {
+                                item.OrderStatus = OrderStatus.OrderStatus_Used;
+                                item.ModifyOrder();
+                            }
+                        });
         }
 
         private string GetOrderStatus(OrderEntity order)
@@ -577,15 +579,15 @@ namespace Travel.Application.DomainModules.Order.Service
                 // 设置所有门票消费完毕的订单为已使用
                 foreach (var ticketsInOrder in changedStatusTickets.GroupBy(item => item.OrderId))
                 {
-                    if (OrderEntity.IsOrderFinish(ticketsInOrder.Key))
+                    var order = ticketsInOrder.FirstOrDefault().Order;
+
+                    if (OrderEntity.IsOrderFinish(order))
                     {
-                        var order = OrderEntity.GetOrderByOrderId(ticketsInOrder.Key);
                         order.OrderStatus = OrderStatus.OrderStatus_Used;
                         order.ModifyOrder();
                     }
                 }
             }
-
         }
 
         public void OrderRelease(string orderId)

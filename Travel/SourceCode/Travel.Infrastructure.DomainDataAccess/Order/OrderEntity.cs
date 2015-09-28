@@ -111,23 +111,24 @@
             }
         }
 
-        public static bool IsOrderFinish(Guid orderId)
+        public static bool IsOrderFinish(OrderEntity order)
         {
-            var order = GetOrderByOrderId(orderId);
-
-            if (order != null)
+            if (order == null || !order.Tickets.Any())
             {
-                var usedTicketsCout = order.Tickets.Count(item => item.TicketStatus.Equals(Order.OrderStatus.TicketStatus_Used)
-                    || item.TicketStatus.Equals(Order.OrderStatus.TicketStatus_Refund_WaitRefundFee)
-                    || item.TicketStatus.Equals(Order.OrderStatus.TicketStatus_Refund_Complete));
-
-                if (order.Tickets.Count.Equals(usedTicketsCout))
-                {
-                    return true;
-                }
+                return false;
             }
 
-            return false;
+            var usedTicketsCount = order.Tickets.Count(item => item.TicketStatus.Equals(Order.OrderStatus.TicketStatus_Used));
+            var refundTicketsCount = order.Tickets.Count(item => item.TicketStatus.Equals(Order.OrderStatus.TicketStatus_Refund_Complete));
+
+            if ((usedTicketsCount + refundTicketsCount) == order.Tickets.Count)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public static OrderEntity GetOrderByOrderCode(string orderCode)
