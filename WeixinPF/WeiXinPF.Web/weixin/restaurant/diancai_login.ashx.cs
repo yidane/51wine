@@ -27,7 +27,7 @@ namespace WeiXinPF.Web.weixin.restaurant
             string state = MyCommFun.QueryString("state");
             string goodsData = QueryString("goodsData");
             int shopid = MyCommFun.RequestInt("shopid");
-           
+
 
             BLL.wx_diancai_dianyuan dianyuanbll = new BLL.wx_diancai_dianyuan();
             Model.wx_diancai_dianyuan dianyuan = new Model.wx_diancai_dianyuan();
@@ -61,7 +61,7 @@ namespace WeiXinPF.Web.weixin.restaurant
                 }
             }
 
-            else  if (_action == "setstatus")
+            else if (_action == "setstatus")
             {
                 //id
 
@@ -87,10 +87,10 @@ namespace WeiXinPF.Web.weixin.restaurant
 
             }
 
-            else if (_action =="addmember")
+            else if (_action == "addmember")
             {
                 #region 用户基本信息管理
-                member = menberbll.GetModel( shopid, openid);
+                member = menberbll.GetModel(shopid, openid);
                 bool isAdd = false;
                 if (member == null)
                 {
@@ -99,7 +99,7 @@ namespace WeiXinPF.Web.weixin.restaurant
                 else
                 {
                     if (member.status.Value == 0)
-                    { 
+                    {
                         //处于黑名单里
                         jsonDict.Add("ret", "fail");
                         jsonDict.Add("content", "您处于黑名单里！");
@@ -108,45 +108,45 @@ namespace WeiXinPF.Web.weixin.restaurant
                     }
                 }
 
-            
-                    member.shopid = shopid;
-                    member.openid = openid;
-                    member.weixinName = MyCommFun.QueryString("weixinName");
-                    member.Name = MyCommFun.QueryString("username");
-                    member.memberName = MyCommFun.QueryString("username");
-                    member.menberTel = MyCommFun.QueryString("customerTel");
-                    member.memberAddress = MyCommFun.QueryString("address");
-                    member.successDingdan = 0;
-                    member.failDingdan = 0;
-                    member.cancelDingdan = 0;
-                    member.zongjifen = 0;
-                    member.zongcje = 0;
-                    member.status = 0;
-                    member.createDate = DateTime.Now;
-               
+
+                member.shopid = shopid;
+                member.openid = openid;
+                member.weixinName = MyCommFun.QueryString("weixinName");
+                member.Name = MyCommFun.QueryString("username");
+                member.memberName = MyCommFun.QueryString("username");
+                member.menberTel = MyCommFun.QueryString("customerTel");
+                member.memberAddress = MyCommFun.QueryString("address");
+                member.successDingdan = 0;
+                member.failDingdan = 0;
+                member.cancelDingdan = 0;
+                member.zongjifen = 0;
+                member.zongcje = 0;
+                member.status = 0;
+                member.createDate = DateTime.Now;
+
                 if (isAdd)
                 {
                     menberbll.Add(member);
                 }
                 else
                 {
-                    menberbll.Update (member);
+                    menberbll.Update(member);
                 }
 
-               jsonDict.Add("ret", "ok");
-               jsonDict.Add("content", "提交成功！");
-               context.Response.Write(MyCommFun.getJsonStr(jsonDict));
+                jsonDict.Add("ret", "ok");
+                jsonDict.Add("content", "提交成功！");
+                context.Response.Write(MyCommFun.getJsonStr(jsonDict));
 
 
                 #endregion
 
             }
-            else  if (_action == "addcaidan")
+            else if (_action == "addcaidan")
             {
-                string deskNumber=MyCommFun.QueryString("deskNumber");//桌号
+                string deskNumber = MyCommFun.QueryString("deskNumber");//桌号
                 //用户点菜完，提交订单
                 #region 判断参数是否合法，判断用户是否处于黑名单里
-                if (goodsData == "" || openid=="")
+                if (goodsData == "" || openid == "")
                 {
                     jsonDict.Add("ret", "err");
                     jsonDict.Add("content", "订单提交失败,参数为空值！");
@@ -193,10 +193,10 @@ namespace WeiXinPF.Web.weixin.restaurant
 
                 #endregion
 
-              
+
                 member.shopid = shopid;
                 member.openid = openid;
-               
+
                 member.Name = MyCommFun.QueryString("name");
                 member.memberName = MyCommFun.QueryString("name");
                 member.menberTel = MyCommFun.QueryString("phone");
@@ -208,14 +208,14 @@ namespace WeiXinPF.Web.weixin.restaurant
                 member.zongcje = 0;
                 member.status = 0;
                 member.createDate = DateTime.Now;
-            
+
                 if (isAdd)
                 {
                     menberbll.Add(member);
                 }
                 else
                 {
-                    menberbll.Update (member);
+                    menberbll.Update(member);
                 }
 
                 #region //订单信息
@@ -237,7 +237,7 @@ namespace WeiXinPF.Web.weixin.restaurant
 
                 #region   //form表单提交
                 BLL.wx_diancai_form_control cBll = new BLL.wx_diancai_form_control();
-                IList<Model.wx_diancai_form_control> controlList = cBll.GetModelList("shopinfoId="+shopid);
+                IList<Model.wx_diancai_form_control> controlList = cBll.GetModelList("shopinfoId=" + shopid);
                 if (controlList != null)
                 {
                     BLL.wx_diancai_form_result retBll = new BLL.wx_diancai_form_result();
@@ -245,7 +245,7 @@ namespace WeiXinPF.Web.weixin.restaurant
                     result.shopinfoId = shopid;
                     result.openid = openid;
                     result.createDate = DateTime.Now;
-              
+
                     Model.wx_diancai_form_control control = new Model.wx_diancai_form_control();
                     for (int i = 0; i < controlList.Count; i++)
                     {
@@ -260,7 +260,7 @@ namespace WeiXinPF.Web.weixin.restaurant
                 #endregion
 
                 //菜品
-              
+
                 for (int i = 0; i < sArray.Length - 1; i++)
                 {
 
@@ -270,7 +270,9 @@ namespace WeiXinPF.Web.weixin.restaurant
                     caipin.num = Convert.ToInt32(sAr[1]);//菜品件数
                     caipin.price = Convert.ToDecimal(sAr[2]);//菜品单价
                     caipin.totpric = Convert.ToInt32(sAr[1]) * Convert.ToDecimal(sAr[2]);//总价
-                  //  payAmount += Convert.ToInt32(sAr[1]) * Convert.ToDecimal(sAr[2]);//客户购买总价
+                    //  payAmount += Convert.ToInt32(sAr[1]) * Convert.ToDecimal(sAr[2]);//客户购买总价
+                    for (int j = 0; j < caipin.num; j++)
+                        caipinbll.AddCommodity(caipin);
                     caipinbll.Add(caipin);
                 }
                 //订单满多少免配送费
@@ -278,20 +280,20 @@ namespace WeiXinPF.Web.weixin.restaurant
                 {
                     payAmount += Convert.ToDecimal(shopinfoEntity.sendCost);
                 }
-              
-               bool isOk=  manage.Update(idf, payAmount);
-               if (isOk)
-               {
-                   jsonDict.Add("ret", "ok");
-                   jsonDict.Add("content", "订单提交成功！请到订单查看！");
-                   context.Response.Write(MyCommFun.getJsonStr(jsonDict));
-               }
-               else
-               {
-                   jsonDict.Add("ret", "err");
-                   jsonDict.Add("content", "订单提交失败！");
-                   context.Response.Write(MyCommFun.getJsonStr(jsonDict));
-               }
+
+                bool isOk = manage.Update(idf, payAmount);
+                if (isOk)
+                {
+                    jsonDict.Add("ret", "ok");
+                    jsonDict.Add("content", "订单提交成功！请到订单查看！");
+                    context.Response.Write(MyCommFun.getJsonStr(jsonDict));
+                }
+                else
+                {
+                    jsonDict.Add("ret", "err");
+                    jsonDict.Add("content", "订单提交失败！");
+                    context.Response.Write(MyCommFun.getJsonStr(jsonDict));
+                }
                 context.Response.End();
 
             }
