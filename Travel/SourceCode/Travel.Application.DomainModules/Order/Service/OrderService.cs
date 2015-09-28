@@ -223,8 +223,17 @@ namespace Travel.Application.DomainModules.Order.Service
                                 default: break;
                             }
                         }
-                    }
 
+                        //处理全部退票的订单，将订单置为已使用
+                        var refundOrderEntity = RefundOrderEntity.GetRefundOrder(refundOrderGroup.Key.Value);
+                        var orderEntity = orders.FirstOrDefault(item => string.Equals(item.OrderId, refundOrderEntity.OrderId));
+                        var ticketList = tickets.Select(item => item.RefundOrderId == refundOrderGroup.Key).ToList();
+                        if (orderEntity.Tickets.Count == ticketList.Count)
+                        {
+                            orderEntity.OrderStatus = OrderStatus.OrderStatus_Used;
+                            orderEntity.ModifyOrder();
+                        }
+                    }
                 }
             }
         }
