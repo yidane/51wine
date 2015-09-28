@@ -128,7 +128,10 @@ namespace Travel.Application.DomainModules.Order.Service
                             hasRefundTicket = item.Tickets.Any(this.RefundStatus()),
                             RefundType = this.GetRefundType(item)
                         }).ToList();
-                sortList.InsertRange(sortList.Count, dto.Where(item => item.OrderStatus.Equals("未使用")));
+
+                sortList.InsertRange(sortList.Count, dto.Where(item => item.OrderStatus.Equals("未使用") && string.IsNullOrEmpty(item.RefundType)));
+                sortList.InsertRange(sortList.Count, dto.Where(item => item.OrderStatus.Equals("未使用") && item.RefundType.Equals("部分退票")));
+                sortList.InsertRange(sortList.Count, dto.Where(item => item.OrderStatus.Equals("未使用") && item.RefundType.Equals("全部退票")));
                 sortList.InsertRange(sortList.Count, dto.Where(item => item.OrderStatus.Equals("已过期")));
                 sortList.InsertRange(sortList.Count, dto.Where(item => item.OrderStatus.Equals("已使用")));
                 sortList.InsertRange(sortList.Count, dto.Where(item => item.OrderStatus.Equals(string.Empty)));
@@ -346,6 +349,7 @@ namespace Travel.Application.DomainModules.Order.Service
                                                          TicketId = item.TicketId,
                                                          OrderId = item.OrderId.ToString(),
                                                          OrderCode = order.OrderCode,
+                                                         BuyTime = order.CreateTime.ToString("yyyy-MM-dd"),
                                                          DeadLineDate =
                                                              item.TicketStartTime.ToString("yyyy-MM-dd"),
                                                          TicketCategoryId =

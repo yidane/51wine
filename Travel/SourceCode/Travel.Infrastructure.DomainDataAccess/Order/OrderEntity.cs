@@ -91,7 +91,7 @@
         {
             using (var db = new TravelDBContext())
             {
-                
+
                 db.Order.Attach(this);
                 foreach (var ticket in this.Tickets)
                 {
@@ -158,7 +158,7 @@
         {
             var orderDetail_Create =
                 this.OrderDetails.Where(
-                    item => item.OrderDetailCategoryId.Equals(orderDetailCategory));            
+                    item => item.OrderDetailCategoryId.Equals(orderDetailCategory));
 
             return orderDetail_Create.Sum(detail => detail.TotalPrice);
         }
@@ -179,7 +179,7 @@
                                     new SqlParameter(){ParameterName = "@PageIndex", SqlDbType = SqlDbType.Int, Value = pageIndex},
                                     new SqlParameter(){ParameterName = "@PageSize", SqlDbType = SqlDbType.Int, Value = pageSize}
                                 };
-                 return db.Database.SqlQuery<TicketEntity>("USP_Ticket_GetTicketForSearchStatus @PageIndex, @PageSize", param.ToArray()).ToList();
+                return db.Database.SqlQuery<TicketEntity>("USP_Ticket_GetTicketForSearchStatus @PageIndex, @PageSize", param.ToArray()).ToList();
             }
         }
 
@@ -187,7 +187,11 @@
         {
             using (var db = new TravelDBContext())
             {
-                return db.Order.Include(item =>item.Tickets).Include(item => item.OrderDetails).Where(item => item.OpenId.Equals(openId)).ToList();
+                return db.Order
+                        .Include(item => item.Tickets).Include(item => item.OrderDetails)
+                        .Where(item => item.OpenId.Equals(openId))
+                        .OrderByDescending(item => item.CreateTime)
+                        .ToList();
             }
         }
 

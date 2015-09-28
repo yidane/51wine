@@ -79,7 +79,7 @@
                 <div class="info_02">
                     <dl>
                         <dd><b class="i_gray_icon"></b>订单编号 {{:OrderNo}}</dd>
-                        <dd><b class="time_gray_icon"></b>有效期至 {{:LastUseDate}}</dd>
+                        <dd><b class="time_gray_icon"></b>购票日期 {{:LastUseDate}}</dd>
                     </dl>
                 </div>
                 <div class="info_03">
@@ -148,7 +148,7 @@
                         if (result.IsSuccess) {
                             var data = [];
                             $(result.Data).each(function (index, obj) {
-                                data.push({ OrderNo: obj.OrderCode, TicketName: obj.TicketName, TicketPrice: obj.Price, TicketCount: 1, TicketTotalPrice: obj.Price, LastUseDate: obj.DeadLineDate, TicketStatus: obj.TicketStatus });
+                                data.push({ OrderNo: obj.OrderCode, TicketName: obj.TicketName, TicketPrice: obj.Price, TicketCount: 1, TicketTotalPrice: obj.Price, LastUseDate: obj.BuyTime, TicketStatus: obj.TicketStatus });
                             });
 
                             var template = $.templates("#ResultTemplateTicket");
