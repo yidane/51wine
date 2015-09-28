@@ -129,12 +129,12 @@ namespace Travel.Application.DomainModules.Order.Service
                             RefundType = this.GetRefundType(item)
                         }).ToList();
 
-                sortList.InsertRange(sortList.Count, dto.Where(item => item.OrderStatus.Equals("未使用") && string.IsNullOrEmpty(item.RefundType)));
-                sortList.InsertRange(sortList.Count, dto.Where(item => item.OrderStatus.Equals("未使用") && item.RefundType.Equals("部分退票")));
-                sortList.InsertRange(sortList.Count, dto.Where(item => item.OrderStatus.Equals("未使用") && item.RefundType.Equals("全部退票")));
-                sortList.InsertRange(sortList.Count, dto.Where(item => item.OrderStatus.Equals("已过期")));
-                sortList.InsertRange(sortList.Count, dto.Where(item => item.OrderStatus.Equals("已使用")));
-                sortList.InsertRange(sortList.Count, dto.Where(item => item.OrderStatus.Equals(string.Empty)));
+                sortList.InsertRange(sortList.Count, dto.Where(item => item.OrderStatus.Equals("未使用") && string.IsNullOrEmpty(item.RefundType)).OrderByDescending(item => item.BuyTime));
+                sortList.InsertRange(sortList.Count, dto.Where(item => item.OrderStatus.Equals("未使用") && item.RefundType.Equals("部分退票")).OrderByDescending(item => item.BuyTime));
+                sortList.InsertRange(sortList.Count, dto.Where(item => item.OrderStatus.Equals("未使用") && item.RefundType.Equals("全部退票")).OrderByDescending(item => item.BuyTime));
+                sortList.InsertRange(sortList.Count, dto.Where(item => item.OrderStatus.Equals("已过期")).OrderByDescending(item => item.BuyTime));
+                sortList.InsertRange(sortList.Count, dto.Where(item => item.OrderStatus.Equals("已使用")).OrderByDescending(item => item.BuyTime));
+                sortList.InsertRange(sortList.Count, dto.Where(item => item.OrderStatus.Equals(string.Empty)).OrderByDescending(item => item.BuyTime));
             }
 
             return sortList;
