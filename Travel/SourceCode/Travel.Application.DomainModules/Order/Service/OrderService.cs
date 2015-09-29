@@ -124,6 +124,7 @@ namespace Travel.Application.DomainModules.Order.Service
                             TicketCount = item.Tickets.Count,
                             TicketName = ProductCategoryEntity.ProductCategory.FirstOrDefault(category => category.ProductCategoryId.Equals(item.Tickets.First().TicketCategoryId)).ProductName,
                             BuyTime = item.Tickets.First().CreateTime.ToString("yyyy-MM-dd"),
+                            DeadTime = item.Tickets.First().CreateTime.AddDays(365).ToString("yyyy-MM-dd"),
                             OrderStatus = this.GetOrderStatus(item),
                             hasRefundTicket = item.Tickets.Any(this.RefundStatus()),
                             RefundType = this.GetRefundType(item)

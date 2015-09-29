@@ -880,7 +880,7 @@ VPay.prototype.init = function () {
             zNumAdd.removeClass('num-gray');
         }
 
-        zMoney.html(val * options.price);
+        zMoney.html(val * (options.price * 100) / 100);
     };
 
     var keyHandler = function (e) {

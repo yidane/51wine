@@ -19,6 +19,8 @@ namespace Travel.Application.DomainModules.Order.DTOs
 
         public string BuyTime { get; set; }
 
+        public string DeadTime { get; set; }
+
         public int TicketCount { get; set; }
 
         public string OrderStatus { get; set; }

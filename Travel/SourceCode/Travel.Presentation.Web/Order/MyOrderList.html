@@ -127,7 +127,7 @@
                             var data = [];
                             var access_code = getCode();
                             $(result.Data).each(function (index, obj) {
-                                data.push({ access_code:access_code, OrderNo: obj.OrderCode, OrderID: obj.OrderId, TicketImageUrl: '../TicketImages/1.jpg', TicketName: obj.TicketName, BuyTime: obj.BuyTime, LastUseDate: moment(obj.BuyTime).add(8, 'month').format("YYYY-MM-DD"), TicketPrice: obj.singleTicketPrice, TicketCount: obj.TicketCount, TicketTotalPrice: obj.TotelFee, OperateUrl: '', OrderStatus: obj.OrderStatus });
+                                data.push({ access_code: access_code, OrderNo: obj.OrderCode, OrderID: obj.OrderId, TicketImageUrl: '../TicketImages/1.jpg', TicketName: obj.TicketName, BuyTime: obj.BuyTime, LastUseDate: obj.DeadTime, TicketPrice: obj.singleTicketPrice, TicketCount: obj.TicketCount, TicketTotalPrice: obj.TotelFee, OperateUrl: '', OrderStatus: obj.OrderStatus });
                             });
 
                             var template = $.templates("#ResultTemplateOrder");

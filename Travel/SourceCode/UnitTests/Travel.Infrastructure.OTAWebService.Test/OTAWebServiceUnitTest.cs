@@ -31,7 +31,7 @@ namespace Travel.Infrastructure.OTAWebService.Test
         public void GetAccountInfoTest()
         {
             var result = new OTAServiceManager().GetAccountInfo();
-            Assert.IsTrue(true);
+            Assert.IsTrue(result.IsTrue);
         }
 
         [TestMethod]
