@@ -231,13 +231,13 @@ namespace Travel.Application.DomainModules.Order.Service
             orders.Where(item => !item.OrderStatus.Equals(OrderStatus.OrderStatus_Used)).ToList()
                 .ForEach(
                     item =>
-                        {                        
-                            if (OrderEntity.IsOrderFinish(item))
-                            {
-                                item.OrderStatus = OrderStatus.OrderStatus_Used;
-                                item.ModifyOrder();
-                            }
-                        });
+                    {
+                        if (OrderEntity.IsOrderFinish(item))
+                        {
+                            item.OrderStatus = OrderStatus.OrderStatus_Used;
+                            item.ModifyOrder();
+                        }
+                    });
         }
 
         private string GetOrderStatus(OrderEntity order)
@@ -300,7 +300,9 @@ namespace Travel.Application.DomainModules.Order.Service
                     OrderId = order.OrderId,
                     TicketCodeList = this.GetTicketCodeWithOrder(ticketList).ToList(),
                     PayTime = order.CreateTime.ToShortDateString(),
-                    SinglePrice = ticketList.First().Price.ToString()
+                    UseRange = string.Format("{0}至{1}", order.CreateTime.ToShortDateString(), order.CreateTime.AddDays(365).ToShortDateString()),
+                    SinglePrice = ticketList.First().Price.ToString(),
+                    TotalPrice = ticketList.Count * ticketList.First().Price
                 };
 
             return orderWithDetailListDTO;

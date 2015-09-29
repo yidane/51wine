@@ -41,9 +41,19 @@ namespace Travel.Application.DomainModules.Order.DTOs
         }
 
         /// <summary>
+        /// 总价
+        /// </summary>
+        public decimal TotalPrice { get; set; }
+
+        /// <summary>
         /// 支付时间，下单时间
         /// </summary>
         public string PayTime { get; set; }
+
+        /// <summary>
+        /// 有效期
+        /// </summary>
+        public string UseRange { get; set; }
 
         /// <summary>
         /// 订单串码列表
