@@ -490,7 +490,8 @@ namespace Travel.Application.DomainModules.Order.Service
 #endif
 
                     this.RefundProcess(
-                        tickets.Where(item => item.TicketStatus.Equals(OrderStatus.TicketStatus_Refund_Audit)).ToList(),
+                        tickets.Where(item => item.TicketStatus.Equals(OrderStatus.TicketStatus_Refund_Audit) 
+                            || item.TicketStatus.Equals(OrderStatus.TicketStatus_Refund_RefundPayProcessing)).ToList(),
                         resp.ResultData);
                 }
                 else
