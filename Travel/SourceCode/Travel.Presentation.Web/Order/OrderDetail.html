@@ -49,6 +49,9 @@
 
         .full-w {
             width: 100%;
+            padding:0 10px;
+            margin-bottom: 10px;
+            overflow: hidden;
         }
 
         .silde-background {
@@ -179,6 +182,23 @@
             background: -moz-linear-gradient(top, #62b900, #62b900);
             filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#62b900', endColorstr='#62b900');
         }
+
+        .ticket-code {
+            float: left;
+        }
+
+            .ticket-code span {
+                color: #a94442;
+                font-weight: 700;
+                text-transform: uppercase;
+            }
+
+            .ticket-status{
+                float:right;
+                color: #a94442;
+                font-weight: 700;
+                text-transform: uppercase;
+            }
     </style>
 </head>
 
@@ -195,9 +215,13 @@
                 </div>
             </div>
             <div class="full-w">
-                <p class="text-uppercase">
+                <div class="ticket-code">
+                    票号：<span id="ticketCode"></span>
+                </div>
+                <span id="ticketStatus" class="ticket-status"></span>
+                <!--<p class="text-uppercase">
                     票号：<strong id="ticketCode" class="text-danger item-pullleft"></strong><strong class="text-danger pull-right item-pullleft" id="ticketStatus"></strong>
-                </p>
+                </p>-->
             </div>
         </section>
 
@@ -207,7 +231,7 @@
         <section class="gpd-item ">
             <div class="gpd-item-title">
                 <img class="detailicon-ticket" src="../images/info.png" />使用须知
-            <div class="gp-icons gpd-up-icon"></div>
+                <div class="gp-icons gpd-up-icon"></div>
             </div>
             <div class="gpd-content">
                 <p>【取票方式】</p>
@@ -224,7 +248,7 @@
         <section class="gpd-item ">
             <div class="gpd-item-title">
                 <img class="detailicon-ticket" src="../images/orderDetail.png" />订单明细
-            <div class="gp-icons gpd-up-icon"></div>
+                <div class="gp-icons gpd-up-icon"></div>
             </div>
             <div class="gpd-content">
                 <p>微信订单号：<span id="weChatOrderNo"></span></p>
@@ -238,7 +262,7 @@
         <section class="gpd-item ">
             <div class="gpd-item-title">
                 <img class="detailicon-ticket" src="../images/undo.png" />退票规则
-            <div class="gp-icons gpd-up-icon"></div>
+                <div class="gp-icons gpd-up-icon"></div>
             </div>
             <div class="gpd-content">
                 <p>1、支付成功后，可在票据有效期内申请退票，过期则视为作废不予受理退票</p>
