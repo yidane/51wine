@@ -58,6 +58,15 @@ namespace Travel.Application.DomainModules.Order.DTOs
         /// <summary>
         /// 订单串码列表
         /// </summary>
-        public List<string> TicketCodeList = new List<string>();
+        public List<TicketCode> TicketCodeList = new List<TicketCode>();
+    }
+
+    public class TicketCode
+    {
+        public string Code { get; set; }
+        public string Status { get; set; }
+        public string StatusDesc { get; set; }
+        public string Url { get; set; }
+        public int Sort { get; set; }
     }
 }

@@ -13,6 +13,8 @@ namespace Travel.Application.DomainModules.Order.DTOs
 
         public string OrderCode { get; set; }
 
+        public string RefundCode { get; set; }
+
         public string TicketName { get; set; }
 
         public string TicketCategoryId { get; set; }

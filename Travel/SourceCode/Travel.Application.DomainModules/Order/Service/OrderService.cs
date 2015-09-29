@@ -299,7 +299,7 @@ namespace Travel.Application.DomainModules.Order.Service
                     IdentityCardNumber = order.IdentityCardNumber,
                     OrderCode = order.OrderCode,
                     OrderId = order.OrderId,
-                    TicketCodeList = this.GetTicketCodeWithOrder(ticketList).ToList(),
+                    TicketCodeList = this.GetTicketCodeWithOrder(ticketList),
                     PayTime = order.CreateTime.ToShortDateString(),
                     UseRange = string.Format("{0}至{1}", order.CreateTime.ToShortDateString(), order.CreateTime.AddDays(365).ToShortDateString()),
                     SinglePrice = ticketList.First().Price.ToString(),
@@ -309,12 +309,17 @@ namespace Travel.Application.DomainModules.Order.Service
             return orderWithDetailListDTO;
         }
 
-        private IList<string> GetTicketCodeWithOrder(ICollection<TicketEntity> tickets)
+        private List<TicketCode> GetTicketCodeWithOrder(ICollection<TicketEntity> tickets)
         {
-            var sortList = new List<string>();
+            var sortList = tickets.Select(GetTicketCode).ToList();
 
-            sortList.InsertRange(sortList.Count, tickets.Except(tickets.Where(this.RefundStatus())).Select(item => item.ECode));
-            sortList.InsertRange(sortList.Count, tickets.Where(this.RefundStatus()).Select(item => item.ECode));
+            //待使用在前
+            sortList.Sort(delegate(TicketCode code1, TicketCode code2)
+                {
+                    if (code1.Sort > code2.Sort)
+                        return -1;
+                    return 1;
+                });
 
             return sortList;
         }
@@ -362,17 +367,15 @@ namespace Travel.Application.DomainModules.Order.Service
                                                      {
                                                          TicketId = item.TicketId,
                                                          OrderId = item.OrderId.ToString(),
+                                                         RefundCode = item.RefundOrderId.HasValue ? RefundOrderEntity.GetRefundOrder(item.RefundOrderId.Value).RefundOrderCode : string.Empty,
                                                          OrderCode = order.OrderCode,
                                                          BuyTime = order.CreateTime.ToString("yyyy-MM-dd"),
-                                                         DeadLineDate =
-                                                             item.TicketStartTime.ToString("yyyy-MM-dd"),
-                                                         TicketCategoryId =
-                                                             item.TicketCategoryId.ToString(),
+                                                         DeadLineDate = item.TicketStartTime.ToString("yyyy-MM-dd"),
+                                                         TicketCategoryId = item.TicketCategoryId.ToString(),
                                                          TicketName = productCategory.ProductName,
                                                          TicketCode = item.TicketCode,
                                                          Price = item.Price.ToString(),
-                                                         TicketStatus =
-                                                             this.getTicketStatus(item.TicketStatus),
+                                                         TicketStatus = this.getTicketStatus(item.TicketStatus),
                                                          ECode = item.ECode
                                                      }
                                                : null;
@@ -401,12 +404,49 @@ namespace Travel.Application.DomainModules.Order.Service
                 case OrderStatus.TicketStatus_Refund_Complete:
                     statusName = "退票完成";
                     break;
+                case OrderStatus.TicketStatus_WaitUse:
+                    statusName = "待使用";
+                    break;
                 default:
                     statusName = "退票失败";
                     break;
             }
 
             return statusName;
+        }
+
+        private TicketCode GetTicketCode(TicketEntity ticket)
+        {
+            var ticketCode = new TicketCode();
+            ticketCode.Code = ticket.ECode;
+            ticketCode.Url = "../images/refundTicket.png";
+
+            switch (ticket.TicketStatus)
+            {
+                case OrderStatus.TicketStatus_Refund_Audit:
+                    ticketCode.StatusDesc = "退票审核中";
+                    
+                    break;
+                case OrderStatus.TicketStatus_Refund_RefundPayProcessing:
+                    ticketCode.StatusDesc = "退款受理中";
+                    break;
+                case OrderStatus.TicketStatus_Refund_WaitRefundFee:
+                    ticketCode.StatusDesc = "等待退款";
+                    break;
+                case OrderStatus.TicketStatus_Refund_Complete:
+                    ticketCode.StatusDesc = "退票完成";
+                    break;
+                case OrderStatus.TicketStatus_WaitUse:
+                    ticketCode.StatusDesc = "待使用";
+                    ticketCode.Url = string.Format("../WebService/ErCodeHandler.ashx?key={0}", ticket.ECode);
+                    ticketCode.Sort = 1;
+                    break;
+                default:
+                    ticketCode.StatusDesc = "退票失败";
+                    break;
+            }
+
+            return ticketCode;
         }
 
         public void RefundTickets(string orderId, int refundTicketsNumber)

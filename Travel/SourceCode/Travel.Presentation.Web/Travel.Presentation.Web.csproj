@@ -137,6 +137,7 @@
     <Content Include="images\背景3.png" />
     <Content Include="images\orderDetail.png" />
     <Content Include="images\refundPart.png" />
+    <Content Include="images\refundTicket.png" />
     <Content Include="introductiontest.html" />
     <Content Include="javaScripts\Moment.js" />
     <Content Include="js\classie.js" />
