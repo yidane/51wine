@@ -155,9 +155,22 @@
                                 var item = { access_code: access_code, OrderNo: obj.OrderCode, OrderID: obj.OrderId, TicketImageUrl: '../TicketImages/1.jpg', TicketName: obj.TicketName, BuyTime: obj.BuyTime, LastUseDate: obj.DeadTime, TicketPrice: obj.singleTicketPrice, TicketCount: obj.TicketCount, TicketTotalPrice: obj.TotelFee, OperateUrl: '', OrderStatus: obj.OrderStatus };
 
                                 //todo:测试数据，请替换未服务对应的数据
-                                var status = ["status-refundAll", "status-refundPart"];
-                                var i = getRandomNum(0, status.length);
-                                item.RefundStatus = status[i];
+                                //是否退票
+                                if (obj.hasRefundTicket) {
+                                    switch (obj.RefundType) {
+                                        case '部分退票':
+                                            item.RefundStatus = "status-refundPart";
+                                            break;
+                                        case '全部退票':
+                                            item.RefundStatus = "status-refundAll";
+                                            break;
+                                        
+                                        default:
+                                            item.RefundStatus = '';
+                                    }
+                                }
+
+ 
 
                                 data.push(item);
                             });
