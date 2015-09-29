@@ -1,0 +1,232 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>地图导览</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.5/leaflet.css" />
+
+    <link href="//cdn.bootcss.com/font-awesome/4.4.0/css/font-awesome.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://rawgithub.com/domoritz/leaflet-locatecontrol/gh-pages/dist/L.Control.Locate.min.css" />
+    <!--[if lt IE 9]>
+    <link rel="stylesheet" href="http://rawgithub.com/domoritz/leaflet-locatecontrol/gh-pages/dist/L.Control.Locate.ie.min.css"/>
+    <![endif]-->
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+
+        #map {
+            height: 100%;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+<p id="txtlatlng"></p>
+<div id="map"></div>
+<div style="display: none">
+    <div class="marker-list" data-bind="foreach:markers">
+        <div class="marker" data-bind="click:$root.showtip,style:{left:left+'px',top:top+'px'}">
+            <i class="point"></i>
+            <div class="tip" data-bind="attr:{id:'tip_'+id}">
+                <div class="tip-title">
+                    <h3 data-bind="text:name"></h3>
+                    <i class="close" data-bind="click:$root.close,clickBubble: false"></i>
+                </div>
+                <div class="tip-content" data-bind="text:remark"></div>
+                <div class="tip-bottom">
+                    <ul>
+                        <li data-bind="click:$root.view">查看详情</li>
+                        <li data-bind="click:$root.goto">去这里</li>
+                    </ul>
+                </div>
+                <i class="triangle"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="http://cdn.leafletjs.com/leaflet-0.7.5/leaflet.js"></script>
+
+<script src="//rawgithub.com/domoritz/leaflet-locatecontrol/gh-pages/dist/L.Control.Locate.min.js"></script>
+
+    <script src="../../scripts/jquery/zepto.min.js"></script>
+<script src="../../scripts/knockout/knockout-3.3.0.js"></script>
+
+    <script type="text/javascript">
+        var ViewModel = function() {
+            var self = this;
+            this.markers = ko.observableArray();
+
+            var loadData = function() {
+                $.ajax({
+                    url: '/WebServices/MapWebService.asmx/GetMarkers',
+                    dataType: "json",
+                    data: { wid: 1 },
+                    success: function(res) {
+                        if (res.success) {
+                            self.markers(res.result);
+                        } else {
+                            alert(res.error.message);
+                        }
+                    }
+                });
+            };
+
+            self.showtip = function(marker) {
+                $(".tip").hide();
+                $('#tip_' + marker.id).show();
+            }
+            self.close = function(marker) {
+                $('#tip_' + marker.id).hide();
+            }
+
+            self.view = function(marker) {
+                document.location.href = marker.url;
+            }
+            self.goto = function(marker) {
+                document.location.href = 'map_address.html?id=' + marker.id;
+            }
+            loadData();
+        };
+
+      
+    </script>
+
+
+<script>
+    $(function () {
+        $('.content').scrollTop(100);
+        $('.content').scrollLeft(400);
+
+        var viewModel = new ViewModel();
+        ko.applyBindings(viewModel);
+    });
+
+    
+
+    var log = Math.log,
+        pow = Math.pow;
+
+    latlng = new L.LatLng(50.5, 30.51);
+
+    var map = L.map('map', {
+        maxZoom: 20,
+        minZoom: 17,
+        crs: L.CRS.Simple
+    }).setView([39.994675699999995, 116.35149100000001], 18);
+    //map.panTo(new L.LatLng(39.994675699999995, 116.35149100000001));
+    //map.setMapCenter();
+    //	.setView([4000, 3000], 18);
+    //map.setMapCenter(.5,.5);
+    //map.addLayer(osm);
+    L.control.locate().addTo(map);
+
+
+    var zoomPow = 10;
+    var zoomBoundMax = pow(2, 8 + zoomPow);
+    var mapsize = { height: 6068, width: 8858 };
+
+
+    //	var north = (-1)*((zoomBoundMax - mapsize.height) / 2 ) / zoomBoundMax * 256 ,
+    //			south = -256-north ,
+    //			east = ((zoomBoundMax - mapsize.width) / 2 ) / zoomBoundMax * 256 ,
+    //			west = 256-east;
+
+    var southWest = map.unproject([0, mapsize.height], map.getMaxZoom());
+    var northEast = map.unproject([mapsize.width, 0], map.getMaxZoom());
+    console.log(southWest);
+    console.log(northEast);
+    southWest.lat += 39.99848;
+    southWest.lng += 116.3469;
+    northEast.lat += 39.99848;
+    northEast.lng += 116.3469;
+
+    //imageBounds = [[south, west], [north, east]];
+    //var bounds=new L.LatLngBounds([south, west], [north, east]);
+    console.log(southWest);
+    console.log(northEast);
+
+    var bounds = new L.LatLngBounds(southWest, northEast);
+    //map.setMaxBounds(new L.LatLngBounds(southWest, northEast));
+    //		var	bounds = new L.LatLngBounds(
+    //      		new L.LatLng(40.71222,-74.22655),
+    //      		new L.LatLng(40.77394,-74.12544));
+
+    //map.fitBounds(bounds);
+    map.setMaxBounds(bounds);
+
+
+    var overlay = new L.ImageOverlay("http://www.cloudorg.com.cn/weixin/map/images/map.jpg", bounds, {
+        //opacity: 0.5,
+        //interactive: true
+    
+    });
+    map.addLayer(overlay);
+
+    map.on('click', function(e) {
+        document.getElementById('txtlatlng').innerHTML = e.latlng;
+        //alert(e.latlng);
+    });
+
+
+    map
+        .on('zoom', function(event) {
+            console.log("map zoom :", event);
+        })
+        .on("locationfound", function(event) {
+            console.log("locationfound :", event);
+//                var marker = L.marker([event.latitude, event.longitude]).addTo(map);
+//                marker.bindPopup("I am here!.").openPopup();
+        })
+        .on("locationerror", function(event) {
+            console.log("locationerror :", event);
+//				_this.isLocationfound = 0;
+//
+//				//_this.locate.click();
+//				//定位出错
+//				if(event.type == "locationerror"){
+//					$scope.$apply(function(){
+//						_this.locate.statusbox.text = "亲，定位出错了！";
+//						_this.locate.statusbox.show = 1;
+//					});
+//				}
+//				//不在景区
+//				if(event.type == "locationfound"){
+//					$scope.$apply(function(){
+//						_this.locate.statusbox.text = "亲，你不在景区内，赶紧去景区试试吧！";
+//						_this.locate.statusbox.show = 1;
+//					});
+//				}
+        })
+        .on("clickSpot", function(spot) {
+            console.log(spot);
+//				$scope.Audio && $scope.Audio.status && $scope.Audio.pause();
+//				_this.setSpotContent(spot);
+//				$scope.$apply();
+//
+//				//修改地图包样式.  这并不完美..
+//				if(spot.tags && spot.tags[0].tag_id == 4 && spot.imgurl && spot.body){
+//					$timeout(function(){
+//						angular.element($window.document.querySelector('.leaflet-popup-tip')).addClass('has_point_detail');
+//					}, 200);
+//				}
+        })
+        .on('click', function(event) {
+            console.log("map click :", event);
+//				if($scope.Audio && $scope.Audio.status){
+//					$scope.Audio.pause();
+//				}
+        });
+
+
+//add maker
+    //-0.00309, 0.00302
+    var marker = L.marker([39.9954, 116.34995]).addTo(map);
+    marker.bindPopup("<b>神仙湾</b><br>我叫神仙湾！.").openPopup();
+</script>
+</body>
+</html>
