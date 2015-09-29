@@ -41,7 +41,44 @@ namespace Travel.Services.WebService
                     ProcessFunction = string.Empty
                 };
 
-                exLog.Add(); 
+                exLog.Add();
+
+                Context.Response.Write(AjaxResult.Error(exception.Message));
+            }
+        }
+
+        [WebMethod(EnableSession = true)]
+        public void TicketCategoryById(string categoryId)
+        {
+            try
+            {
+                var categories = new OrderService().GetTicketCategoryList();
+                TicketCategorySub result = null;
+                foreach (TicketCategoryDTO ticketCategoryDto in categories)
+                {
+                    if (result != null)
+                        break;
+                    result = ticketCategoryDto.content.FirstOrDefault(item => string.Equals(item.ticketCategoryId, categoryId));
+                }
+
+                Context.Response.Write(AjaxResult.Success(result));
+            }
+            catch (Exception exception)
+            {
+                var exLog = new ExceptionLogEntity()
+                {
+                    ExceptionLogId = Guid.NewGuid(),
+                    Module = "获取门票列表",
+                    CreateTime = DateTime.Now,
+                    ExceptionType = exception.GetType().FullName,
+                    ExceptionMessage = exception.Message,
+                    TrackMessage = exception.StackTrace,
+                    HasExceptionProcessing = false,
+                    NeedProcess = false,
+                    ProcessFunction = string.Empty
+                };
+
+                exLog.Add();
 
                 Context.Response.Write(AjaxResult.Error(exception.Message));
             }
@@ -76,7 +113,7 @@ namespace Travel.Services.WebService
                             ProcessFunction = string.Empty
                         };
 
-                        exLog.Add();                     
+                        exLog.Add();
                     }
                     var orders = new OrderService().MyOrders(openId);
 
@@ -102,7 +139,7 @@ namespace Travel.Services.WebService
                     ProcessFunction = string.Empty
                 };
 
-                exLog.Add(); 
+                exLog.Add();
 
                 Context.Response.Write(AjaxResult.Error(exception.Message));
             }
@@ -131,7 +168,7 @@ namespace Travel.Services.WebService
                     ProcessFunction = string.Empty
                 };
 
-                exLog.Add(); 
+                exLog.Add();
 
                 Context.Response.Write(AjaxResult.Error(exception.Message));
             }
@@ -168,7 +205,7 @@ namespace Travel.Services.WebService
                     ProcessFunction = string.Empty
                 };
 
-                exLog.Add(); 
+                exLog.Add();
 
                 Context.Response.Write(AjaxResult.Error(exception.Message));
             }
@@ -207,7 +244,7 @@ namespace Travel.Services.WebService
                     ProcessFunction = string.Empty
                 };
 
-                exLog.Add(); 
+                exLog.Add();
                 Context.Response.Write(AjaxResult.Error(exception.Message));
             }
         }
@@ -261,7 +298,7 @@ namespace Travel.Services.WebService
                     ProcessFunction = string.Empty
                 };
 
-                exLog.Add(); 
+                exLog.Add();
 
                 Context.Response.Write(AjaxResult.Error(exception.Message));
             }

@@ -98,6 +98,8 @@ namespace Travel.Application.DomainModules.Order.Service
             return dto;
         }
 
+
+
         /// <summary>
         /// 获取我的订单列表
         /// </summary>
@@ -300,6 +302,7 @@ namespace Travel.Application.DomainModules.Order.Service
                     OrderCode = order.OrderCode,
                     OrderId = order.OrderId,
                     TicketCodeList = this.GetTicketCodeWithOrder(ticketList),
+                    TicketName = ProductCategoryEntity.ProductCategory.FirstOrDefault(item => item.ProductCategoryId.Equals(ticketList.First().TicketCategoryId)).ProductName,
                     PayTime = order.CreateTime.ToShortDateString(),
                     UseRange = string.Format("{0}至{1}", order.CreateTime.ToShortDateString(), order.CreateTime.AddDays(365).ToShortDateString()),
                     SinglePrice = ticketList.First().Price.ToString(),

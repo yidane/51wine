@@ -130,14 +130,14 @@
             <h3>退票信息</h3>
             <div class="ticket-detail">
                 <div class="ticket-detail-item noborder">
-                    <label>喀纳斯景区门票—半价票</label>
+                    <label id="ticketName"></label>
                     <span id="singleTicketPrice" class="text-blod pr"></span>
                 </div>
                 <div class="ticket-detail-item">
                     <label>退票数量</label>
                     <span>
                         <i class="addon disable" id="minus">-</i>
-                        <input id="number" value=1 />
+                        <input id="number" value="1" />
                         <i class="addon" id="plus">+</i>
                     </span>
                 </div>
@@ -157,6 +157,7 @@
         var singlePrice = null;
         var ticketCategory = null;
         var orderId = null;
+        var ticketName = null;
 
         function getQueryString(name) {
             var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
@@ -167,9 +168,14 @@
         $(document).ready(function () {
             singlePrice = getQueryString("SingleTicketPrice");
             orderId = getQueryString("OrderId");
+            ticketName = getQueryString("TicketName");
+            while (ticketName.indexOf("%") > -1) {
+                ticketName = decodeURI(ticketName);
+            }
 
-            if (singlePrice && orderId) {
-                $(".text-blod.pr").html( parseFloat(singlePrice) + "元");
+            if (singlePrice && orderId && ticketName) {
+                $("#ticketName").html(ticketName);
+                $(".text-blod.pr").html(parseFloat(singlePrice) + "元");
                 $("#plus").on("click", f_plusClick);
                 $("#minus").on("click", f_subClick);
                 $("#btnSubmit").on("click", function () {

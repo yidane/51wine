@@ -349,7 +349,7 @@
 
                         $("#swiperContain").html(ercodeHtml);
                         $("#swiperFooter").html(ercodefoothtml);
-                        $("#btnRefund").attr("href", "ApplyRefund.html?OrderId=" + GetQueryString("orderId") + "&SingleTicketPrice=" + result.Data.SinglePrice);
+                        $("#btnRefund").attr("href", "ApplyRefund.html?OrderId=" + GetQueryString("orderId") + "&SingleTicketPrice=" + result.Data.SinglePrice + "&TicketName=" + result.Data.TicketName);
                         initswiper();
                     }
                 }
@@ -365,7 +365,6 @@
 
         function initswiper() {
             var swiper = new Swiper('.swiper-container', {
-                autoplay: 3000,
                 loop: false,
                 pagination: '.swiper-pagination',
                 onTransitionEnd: function (swi) {

@@ -12,6 +12,12 @@ namespace Travel.Application.DomainModules.Order.DTOs
         /// 订单号
         /// </summary>
         public string OrderCode { get; set; }
+
+        /// <summary>
+        /// TicketName
+        /// </summary>
+        public string TicketName { get; set; }
+
         /// <summary>
         /// 联系人
         /// </summary>
