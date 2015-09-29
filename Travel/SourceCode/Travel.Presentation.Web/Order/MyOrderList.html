@@ -27,6 +27,25 @@
         .ticket-list li {
             border-bottom: 1px solid #000000;
         }
+
+        .i-status {
+    float: right;
+    width: 109px;
+    position: absolute;
+    height: 83px;
+    top: 1px;
+    right: -8px;
+}
+        .status-refundAll {
+    background-image: url(../images/refundAll.png);
+    background-size: 90%;
+    background-repeat: no-repeat;
+}
+.status-refundPart{
+ background-image: url(../images/refundPart.png);
+    background-size: 90%;
+    background-repeat: no-repeat;    
+}
     </style>
 </head>
 <body>
@@ -64,6 +83,7 @@
                     <div class="info_03">
                         <span>{{:OrderStatus}}</span>
                     </div>
+                   
                 </a>
             </li>
         </ul>
@@ -86,6 +106,7 @@
                 <div class="info_03">
                     <span>{{:TicketStatus}}</span>
                 </div>
+                <i class="{{:RefundStatus}} i-status"></i>
             </li>
         </ul>
     </script>
@@ -126,6 +147,8 @@
                         if (result.IsSuccess) {
                             var data = [];
                             var access_code = getCode();
+
+                            
                             $(result.Data).each(function (index, obj) {
                                 data.push({ access_code: access_code, OrderNo: obj.OrderCode, OrderID: obj.OrderId, TicketImageUrl: '../TicketImages/1.jpg', TicketName: obj.TicketName, BuyTime: obj.BuyTime, LastUseDate: obj.DeadTime, TicketPrice: obj.singleTicketPrice, TicketCount: obj.TicketCount, TicketTotalPrice: obj.TotelFee, OperateUrl: '', OrderStatus: obj.OrderStatus });
                             });
@@ -150,7 +173,16 @@
                         if (result.IsSuccess) {
                             var data = [];
                             $(result.Data).each(function (index, obj) {
-                                data.push({ OrderNo: obj.OrderCode, TicketName: obj.TicketName, TicketPrice: obj.Price, TicketCount: 1, TicketTotalPrice: obj.Price, LastUseDate: obj.BuyTime, TicketStatus: obj.TicketStatus });
+                                var item = { OrderNo: obj.OrderCode, TicketName: obj.TicketName, TicketPrice: obj.Price, TicketCount: 1, TicketTotalPrice: obj.Price, LastUseDate: obj.BuyTime, TicketStatus: obj.TicketStatus };
+
+                                //todo:测试数据，请替换未服务对应的数据
+                                var status = ["status-refundAll", "status-refundPart"];
+                                var i = getRandomNum(0, status.length);
+                                console.log(i);
+                                item.RefundStatus = status[i];
+                                console.log(item.RefundStatus);
+
+                                data.push(item);
                             });
 
                             var template = $.templates("#ResultTemplateTicket");
@@ -163,6 +195,12 @@
                 });
             }
         });
+
+        function getRandomNum(Min, Max) {
+            var Range = Max - Min;
+            var Rand = Math.random();
+            return (Min + Math.round(Rand * Range));
+        }
 
         function getCode() {
             return access_code;
