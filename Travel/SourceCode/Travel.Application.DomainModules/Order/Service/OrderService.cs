@@ -319,7 +319,7 @@ namespace Travel.Application.DomainModules.Order.Service
             //待使用在前
             sortList.Sort(delegate(TicketCode code1, TicketCode code2)
                 {
-                    if (code1.Sort > code2.Sort)
+                    if (code1.Sort < code2.Sort)
                         return -1;
                     return 1;
                 });
@@ -423,12 +423,13 @@ namespace Travel.Application.DomainModules.Order.Service
             var ticketCode = new TicketCode();
             ticketCode.Code = ticket.ECode;
             ticketCode.Url = "../images/refundTicket.png";
+            ticketCode.Sort = 1;
 
             switch (ticket.TicketStatus)
             {
                 case OrderStatus.TicketStatus_Refund_Audit:
                     ticketCode.StatusDesc = "退票审核中";
-                    
+
                     break;
                 case OrderStatus.TicketStatus_Refund_RefundPayProcessing:
                     ticketCode.StatusDesc = "退款受理中";
@@ -442,7 +443,12 @@ namespace Travel.Application.DomainModules.Order.Service
                 case OrderStatus.TicketStatus_WaitUse:
                     ticketCode.StatusDesc = "待使用";
                     ticketCode.Url = string.Format("../WebService/ErCodeHandler.ashx?key={0}", ticket.ECode);
-                    ticketCode.Sort = 1;
+                    ticketCode.Sort = 0;
+                    break;
+                case OrderStatus.TicketStatus_Used:
+                    ticketCode.StatusDesc = "已使用";
+                    ticketCode.Url = "../images/usedTicket.png";
+                    ticketCode.Sort = 2;
                     break;
                 default:
                     ticketCode.StatusDesc = "退票失败";
@@ -533,7 +539,7 @@ namespace Travel.Application.DomainModules.Order.Service
 #endif
 
                     this.RefundProcess(
-                        tickets.Where(item => item.TicketStatus.Equals(OrderStatus.TicketStatus_Refund_Audit) 
+                        tickets.Where(item => item.TicketStatus.Equals(OrderStatus.TicketStatus_Refund_Audit)
                             || item.TicketStatus.Equals(OrderStatus.TicketStatus_Refund_RefundPayProcessing)).ToList(),
                         resp.ResultData);
                 }
