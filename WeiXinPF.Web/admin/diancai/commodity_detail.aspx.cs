@@ -44,10 +44,10 @@ namespace WeiXinPF.Web.admin.diancai
             id = MyCommFun.QueryString("id");
             cid = MyCommFun.QueryString("cid");
             shopid = MyCommFun.RequestInt("shopid");
-            string status = ddlStatusType.SelectedItem.Value;
+            string status = "2";
 
             managebll.UpdateCommoditystatus(cid, status);
-
+            managebll.Updatestatus(id, "1");
             UpdateDing(id);
 
             manage = managebll.GetModel(MyCommFun.Str2Int(id));
@@ -69,8 +69,9 @@ namespace WeiXinPF.Web.admin.diancai
 
 
             AddAdminLog(MXEnums.ActionEnum.Edit.ToString(), "修改支付状态，主键为" + id); //记录日志
-            JscriptMsg("修改成功！", "dingdan_confirm.aspx?shopid=" + shopid + "", "Success");
-
+            //JscriptMsg("修改成功！", "dingdan_confirm.aspx?shopid=" + shopid + "", "Success");
+            //Response.Redirect("dingdan_confirm.aspx?shopid=" + shopid + "");
+            Response.Write("<script language='javascript' type='text/javascript'>alert('修改成功！');location.href = 'dingdan_confirm.aspx?shopid=" + shopid + "';</script>");
 
         }
 
@@ -85,7 +86,7 @@ namespace WeiXinPF.Web.admin.diancai
                     if (dt.Rows[i]["status"].ToString() == "0" || dt.Rows[i]["status"].ToString() == "1")
                         return;
                 }
-                managebll.Updatestatus(id, "1");
+                managebll.Updatestatus(id, "2");
             }
         }
 
@@ -103,7 +104,11 @@ namespace WeiXinPF.Web.admin.diancai
                 decimal amount = 0;
 
 
-                ddlStatusType.SelectedValue = dr.Tables[0].Rows[0]["status"].ToString();
+                if (dr.Tables[0].Rows[0]["status"].ToString() == "2")
+                {
+                    save_groupbase.Text = "已验证";
+                    save_groupbase.Enabled = false;
+                }
                 Dingdanlist += "<tr><th>菜品名称</th><th class=\"cc\">单价</th><th class=\"cc\">购买份数</th><th class=\"rr\">价格</th> </tr>";
                 for (int i = 0; i < dr.Tables[0].Rows.Count; i++)
                 {
@@ -139,9 +144,13 @@ namespace WeiXinPF.Web.admin.diancai
                 dingdanren += "<tr><td>联系电话：" + manage.customerTel + "</td></tr>";
                 dingdanren += "<tr><td>地址：" + manage.address + "</td></tr>";
                 dingdanren += "<tr><td>备注 ：" + manage.oderRemark + "</td></tr>";
-                if (manage.payStatus == 1)
+                if (manage.payStatus == 2)
                 {
                     dingdanren += "<tr><td>订单状态：<em  style='width:70px;' class='ok'>已使用</em></td></tr>";
+                }
+                else if (manage.payStatus == 1)
+                {
+                    dingdanren += "<tr><td>订单状态：<em  style='width:70px;' class='ok'>部分使用</em></td></tr>";
                 }
                 else
                 {

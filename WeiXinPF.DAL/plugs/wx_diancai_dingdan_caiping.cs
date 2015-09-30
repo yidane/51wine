@@ -92,7 +92,7 @@ namespace WeiXinPF.DAL
             parameters[0].Value = model.dingId;
             parameters[1].Value = model.caiId;
             parameters[2].Value = model.price;
-            parameters[3].Value = GuidToLongID().ToString();
+            parameters[3].Value = getTimestamp().ToString() + GuidToLongID().ToString();
 
             object obj = DbHelperSQL.GetSingle(strSql.ToString(), parameters);
             if (obj == null)
@@ -111,7 +111,12 @@ namespace WeiXinPF.DAL
         public static long GuidToLongID()
         {
             byte[] buffer = Guid.NewGuid().ToByteArray();
-            return BitConverter.ToInt64(buffer, 0);
+            return BitConverter.ToInt64(buffer, 0)/1000000000000;
+        }
+        public static string getTimestamp()
+        {
+            TimeSpan ts = DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0, 0);
+            return (Convert.ToInt64(ts.TotalSeconds)/100000).ToString();
         }
 
         /// <summary>

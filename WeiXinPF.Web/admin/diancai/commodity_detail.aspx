@@ -35,9 +35,9 @@
     <form id="form1" runat="server">
           <div class="location">
             <a href="shop_list.aspx" class="home"><i></i><span>点菜系统</span></a>
-            <i  class="arrow"></i><span><a href="dingdan_manage.aspx?shopid=<%=shopid %>">订单处理</a></span>
+            <i  class="arrow"></i><span><a href="dingdan_confirm.aspx?shopid=<%=shopid %>">订单验证</a></span>
             <i class="arrow"></i>            
-            <span>订单处理</span>
+            <span>菜品处理</span>
         </div>
       
         <!--/导航栏-->
@@ -45,7 +45,7 @@
 
         <div  class="tab-content"> 
        <ul class="round">
-       <li class="title"><span class="none smallspan">订单详情</span></li>
+       <li class="title"><span class="none smallspan">菜品详情</span></li>
        <table width="100%" border="0" cellpadding="0" cellspacing="0" class="cpbiaoge">
       
       <%=Dingdanlist %>
@@ -63,7 +63,7 @@
 </ul>  
 
 </div>
-         <div class="tab-content">
+         <%--<div class="tab-content">
             <dl>
                 <dt>该菜品状态为：</dt>
                 <dd>
@@ -77,11 +77,11 @@
                     
                 </dd>
             </dl>
-         </div>
+         </div>--%>
 
            <div class="page-footer">
             <div class="btn-list">
-                <asp:Button ID="save_groupbase" runat="server" CssClass="btn" Text="保存" OnClick="save_groupbase_Click"  />
+                <asp:Button ID="save_groupbase" runat="server" CssClass="btn" Text="验证" OnClick="save_groupbase_Click"  />
             </div>
             <div class="clear"></div>
         </div>
