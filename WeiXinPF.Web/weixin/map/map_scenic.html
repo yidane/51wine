@@ -12,6 +12,132 @@
     <!--[if lt IE 9]>
     <link rel="stylesheet" href="http://rawgithub.com/domoritz/leaflet-locatecontrol/gh-pages/dist/L.Control.Locate.ie.min.css"/>
     <![endif]-->
+    <style type="text/css">
+        * {
+            margin: 0;
+            outline: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: rgba(0,0,0,0);
+        }
+        ul, li {
+            list-style: none;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        html {
+            height: 100%;
+            -webkit-text-size-adjust: 100%;
+            -moz-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+            text-size-adjust: 100%;
+        }
+
+        body {
+            width: 100%;
+            height: 100%;
+            font-family: 'Microsoft Yahei',Tahoma,Helvetica,Arial,sans-serif;
+            font-size: 62.5%;
+            position: relative;
+        }
+
+
+
+        .tip .leaflet-popup-content
+        {
+            margin: 0;
+        }
+
+        .tip-title {
+            position: relative;
+            height: 30px;
+            line-height: 30px;
+            border-bottom: 1px solid #E5E5E5;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+        }
+
+        .tip-title h3 {
+            float: left;
+            height: 30px;
+            color: #1d9d74;
+            line-height: 30px;
+            padding-left: 10px;
+            font-weight: normal;
+            font-size: 16px;
+            text-shadow: 0 1px 1px #FFF;
+            font-weight: bold;
+        }
+
+        .tip-title .close {
+            position: absolute;
+            right: 5px;
+            top: 8px;
+            width: 13px;
+            height: 13px;
+            background: url(images/close.png) 0 0 no-repeat;
+        }
+
+        .tip-content {
+            padding: 15px;
+            font-size: 14px;
+        }
+
+        .tip-bottom {
+            height: 35px;
+            width: 100%;
+            border-top: 1px solid #E5E5E5;
+            border-bottom-left-radius: 5px;
+            border-bottom-right-radius: 5px;
+        }
+
+        .tip-bottom ul {
+            width: 100%;
+        }
+
+        .tip-bottom ul li {
+            float: left;
+            width: 50%;
+            height: 35px;
+            line-height: 35px;
+            text-align: center;
+            font-size: 14px;
+            box-sizing: border-box;
+            background: #e4e4e4;
+        }
+
+
+        .tip-bottom ul li:first-child {
+            border-right: 1px solid rgba(0, 0, 0, 0.15);
+        }
+
+        .tip-bottom ul li a{
+            color: #2c3e50;
+        }
+
+        .triangle {
+            width: 0;
+            height: 0;
+            left: 50%;
+            bottom: -8px;
+            margin-left: -8px;
+            border-width: 8px 8px 0;
+            border-style: solid;
+            border-color: #fff transparent transparent;
+            position: absolute;
+        }
+
+        .leaflet-popup-tip.has_point_detail {
+            background: #e4e4e4;
+        }
+
+        .leaflet-popup-content-wrapper
+        {
+            padding: 0;
+        }
+    </style>
     <style>
         html, body {
             height: 100%;
@@ -29,24 +155,31 @@
 <div id="map"></div>
 <div style="display: none">
     <div class="marker-list" data-bind="foreach:markers">
-        <div class="marker" data-bind="click:$root.showtip,style:{left:left+'px',top:top+'px'}">
+        <div class="marker" data-bind="click:$root.showtip">
             <i class="point"></i>
             <div class="tip" data-bind="attr:{id:'tip_'+id}">
                 <div class="tip-title">
                     <h3 data-bind="text:name"></h3>
-                    <i class="close" data-bind="click:$root.close,clickBubble: false"></i>
+
                 </div>
                 <div class="tip-content" data-bind="text:remark"></div>
                 <div class="tip-bottom">
                     <ul>
-                        <li data-bind="click:$root.view">查看详情</li>
-                        <li data-bind="click:$root.goto">去这里</li>
+                        <li ><a data-bind="attr:{href:url}">
+                            <i class="fa fa-info-circle fa-lg" style="    color: #1d9d74;
+    margin-right: 5px;"></i><span>查看详情</span>
+                            </a></li>
+                        <li ><a data-bind="attr:{href:'map_address.html?id=' + id}">
+                            <i class="fa fa-map-marker fa-lg" style="    color: #1d9d74;
+    margin-right: 5px;"></i><span>去这里</span></a></li>
                     </ul>
                 </div>
-                <i class="triangle"></i>
+
             </div>
         </div>
     </div>
+
+
 </div>
 
 <script src="http://cdn.leafletjs.com/leaflet-0.7.5/leaflet.js"></script>
@@ -59,9 +192,85 @@
     <script type="text/javascript">
         var ViewModel = function() {
             var self = this;
+            this.map=ko.observable();
             this.markers = ko.observableArray();
 
-            var loadData = function() {
+            this.init=function(){
+                self.initmap(39.99530029296875, 116.35028839111328);
+                self.addlocation();//添加定位服务
+                self.addScenicLayer();//添加景区图层
+                self.bindevent();//添加绑定事件
+            };
+
+            this.initmap=function(lat,lng){
+                var map = L.map('map', {
+                    maxZoom: 20,
+                    minZoom: 17,
+                    crs: L.CRS.Simple
+                }).setView([lat, lng], 18);
+                self.map(map);
+
+            };
+            this.getMapSize=function(){
+                return { height: 6068, width: 8858 };
+            };
+            this.addlocation=function(){
+                L.control.locate().addTo(self.map());
+            };
+            this.addScenicLayer=function(){
+
+                var map=self.map();
+                var mapsize = self.getMapSize();
+                var latlng={lat:39.99848,lng:116.3469};
+                var imageurl="http://www.cloudorg.com.cn/weixin/map/images/map.jpg";
+
+                var southWest = map.unproject([0, mapsize.height], map.getMaxZoom());
+                var northEast = map.unproject([mapsize.width, 0], map.getMaxZoom());
+
+                //移动地图到景区
+                southWest.lat += latlng.lat;
+                southWest.lng += latlng.lng;
+                northEast.lat += latlng.lat;
+                northEast.lng += latlng.lng;
+
+                var bounds = new L.LatLngBounds(southWest, northEast);
+                map.setMaxBounds(bounds);
+
+
+                var overlay = new L.ImageOverlay(imageurl, bounds);
+                map.addLayer(overlay);
+            };
+            this.bindevent=function(){
+                var map=self.map();
+                map
+                        .on('zoom', function(event) {
+                            console.log("map zoom :", event);
+                        })
+                        .on("locationfound", function(event) {
+                            console.log("locationfound :", event);
+                        })
+                        .on("locationerror", function(event) {
+                            console.log("locationerror :", event);
+                        })
+                        .on("popupopen", function(spot) {
+                            console.log(spot);
+
+                            //修改地图包样式.  这并不完美..
+
+                                setTimeout(function(){
+                                    $('.leaflet-popup-tip').addClass('has_point_detail');
+                                }, 200);
+
+                        })
+                        .on('click', function(event) {
+                            console.log("map click :", event);
+
+                        });
+            };
+
+
+
+            this.loadData = function() {
                 $.ajax({
                     url: '/WebServices/MapWebService.asmx/GetMarkers',
                     dataType: "json",
@@ -69,6 +278,8 @@
                     success: function(res) {
                         if (res.success) {
                             self.markers(res.result);
+                            self.addmarkers();
+
                         } else {
                             alert(res.error.message);
                         }
@@ -76,21 +287,51 @@
                 });
             };
 
-            self.showtip = function(marker) {
-                $(".tip").hide();
-                $('#tip_' + marker.id).show();
-            }
-            self.close = function(marker) {
-                $('#tip_' + marker.id).hide();
-            }
+
 
             self.view = function(marker) {
                 document.location.href = marker.url;
-            }
+            };
             self.goto = function(marker) {
                 document.location.href = 'map_address.html?id=' + marker.id;
-            }
-            loadData();
+            };
+            self.addmarkers=function(){
+                var map=self.map();
+                for(var i=0;i<self.markers().length;i++)
+                {
+                    var data=self.markers()[i];
+                  var marker = L.marker([data.lat,data.lng]).addTo(map);
+
+//                    var marker = L.marker(self.getLatLng(data.left,data.top)).addTo(map);
+                    var popup=self.getPopup(data.id);
+                    marker.bindPopup(popup);
+                }
+            };
+            self.getPopup=function(id){
+                var content=$('#tip_'+id).html();
+                var popup=new L.popup({
+                    className:'tip'
+                });
+                popup.setContent(content);
+                return popup;
+            };
+            self.getLatLng= function(x,y){
+                return self._XYToLatLng(x,y);
+            };
+            self._XYToLatLng= function(x,y){
+                if(x instanceof  Array)
+                    y = x[1],x = x[0];
+//                var OE.Scenic.originalZoom=10;
+                var originalZoom = 10 * 1.0;
+                var maxSize = Math.pow(2,originalZoom+8) * 1.0;
+                var mapsize = self.getMapSize(),
+                        lat =  (y * mapsize.height  + (maxSize - mapsize.height)/2)/maxSize,
+                        lng =  (x * mapsize.width  + (maxSize - mapsize.width)/2)/maxSize;
+                return [-256 * lat,256 * lng];
+            };
+
+            this.init();
+            this.loadData();
         };
 
       
@@ -107,126 +348,126 @@
     });
 
     
-
-    var log = Math.log,
-        pow = Math.pow;
-
-    latlng = new L.LatLng(50.5, 30.51);
-
-    var map = L.map('map', {
-        maxZoom: 20,
-        minZoom: 17,
-        crs: L.CRS.Simple
-    }).setView([39.994675699999995, 116.35149100000001], 18);
-    //map.panTo(new L.LatLng(39.994675699999995, 116.35149100000001));
-    //map.setMapCenter();
-    //	.setView([4000, 3000], 18);
-    //map.setMapCenter(.5,.5);
-    //map.addLayer(osm);
-    L.control.locate().addTo(map);
-
-
-    var zoomPow = 10;
-    var zoomBoundMax = pow(2, 8 + zoomPow);
-    var mapsize = { height: 6068, width: 8858 };
-
-
-    //	var north = (-1)*((zoomBoundMax - mapsize.height) / 2 ) / zoomBoundMax * 256 ,
-    //			south = -256-north ,
-    //			east = ((zoomBoundMax - mapsize.width) / 2 ) / zoomBoundMax * 256 ,
-    //			west = 256-east;
-
-    var southWest = map.unproject([0, mapsize.height], map.getMaxZoom());
-    var northEast = map.unproject([mapsize.width, 0], map.getMaxZoom());
-    console.log(southWest);
-    console.log(northEast);
-    southWest.lat += 39.99848;
-    southWest.lng += 116.3469;
-    northEast.lat += 39.99848;
-    northEast.lng += 116.3469;
-
-    //imageBounds = [[south, west], [north, east]];
-    //var bounds=new L.LatLngBounds([south, west], [north, east]);
-    console.log(southWest);
-    console.log(northEast);
-
-    var bounds = new L.LatLngBounds(southWest, northEast);
-    //map.setMaxBounds(new L.LatLngBounds(southWest, northEast));
-    //		var	bounds = new L.LatLngBounds(
-    //      		new L.LatLng(40.71222,-74.22655),
-    //      		new L.LatLng(40.77394,-74.12544));
-
-    //map.fitBounds(bounds);
-    map.setMaxBounds(bounds);
-
-
-    var overlay = new L.ImageOverlay("http://www.cloudorg.com.cn/weixin/map/images/map.jpg", bounds, {
-        //opacity: 0.5,
-        //interactive: true
-    
-    });
-    map.addLayer(overlay);
-
-    map.on('click', function(e) {
-        document.getElementById('txtlatlng').innerHTML = e.latlng;
-        //alert(e.latlng);
-    });
-
-
-    map
-        .on('zoom', function(event) {
-            console.log("map zoom :", event);
-        })
-        .on("locationfound", function(event) {
-            console.log("locationfound :", event);
-//                var marker = L.marker([event.latitude, event.longitude]).addTo(map);
-//                marker.bindPopup("I am here!.").openPopup();
-        })
-        .on("locationerror", function(event) {
-            console.log("locationerror :", event);
-//				_this.isLocationfound = 0;
 //
-//				//_this.locate.click();
-//				//定位出错
-//				if(event.type == "locationerror"){
-//					$scope.$apply(function(){
-//						_this.locate.statusbox.text = "亲，定位出错了！";
-//						_this.locate.statusbox.show = 1;
-//					});
-//				}
-//				//不在景区
-//				if(event.type == "locationfound"){
-//					$scope.$apply(function(){
-//						_this.locate.statusbox.text = "亲，你不在景区内，赶紧去景区试试吧！";
-//						_this.locate.statusbox.show = 1;
-//					});
-//				}
-        })
-        .on("clickSpot", function(spot) {
-            console.log(spot);
-//				$scope.Audio && $scope.Audio.status && $scope.Audio.pause();
-//				_this.setSpotContent(spot);
-//				$scope.$apply();
+//    var log = Math.log,
+//        pow = Math.pow;
 //
-//				//修改地图包样式.  这并不完美..
-//				if(spot.tags && spot.tags[0].tag_id == 4 && spot.imgurl && spot.body){
-//					$timeout(function(){
-//						angular.element($window.document.querySelector('.leaflet-popup-tip')).addClass('has_point_detail');
-//					}, 200);
-//				}
-        })
-        .on('click', function(event) {
-            console.log("map click :", event);
-//				if($scope.Audio && $scope.Audio.status){
-//					$scope.Audio.pause();
-//				}
-        });
-
-
-//add maker
-    //-0.00309, 0.00302
-    var marker = L.marker([39.9954, 116.34995]).addTo(map);
-    marker.bindPopup("<b>神仙湾</b><br>我叫神仙湾！.").openPopup();
+//    latlng = new L.LatLng(50.5, 30.51);
+//
+//    var map = L.map('map', {
+//        maxZoom: 20,
+//        minZoom: 17,
+//        crs: L.CRS.Simple
+//    }).setView([39.994675699999995, 116.35149100000001], 18);
+//    //map.panTo(new L.LatLng(39.994675699999995, 116.35149100000001));
+//    //map.setMapCenter();
+//    //	.setView([4000, 3000], 18);
+//    //map.setMapCenter(.5,.5);
+//    //map.addLayer(osm);
+//    L.control.locate().addTo(map);
+//
+//
+//    var zoomPow = 10;
+//    var zoomBoundMax = pow(2, 8 + zoomPow);
+//    var mapsize = { height: 6068, width: 8858 };
+//
+//
+//    //	var north = (-1)*((zoomBoundMax - mapsize.height) / 2 ) / zoomBoundMax * 256 ,
+//    //			south = -256-north ,
+//    //			east = ((zoomBoundMax - mapsize.width) / 2 ) / zoomBoundMax * 256 ,
+//    //			west = 256-east;
+//
+//    var southWest = map.unproject([0, mapsize.height], map.getMaxZoom());
+//    var northEast = map.unproject([mapsize.width, 0], map.getMaxZoom());
+//    console.log(southWest);
+//    console.log(northEast);
+//    southWest.lat += 39.99848;
+//    southWest.lng += 116.3469;
+//    northEast.lat += 39.99848;
+//    northEast.lng += 116.3469;
+//
+//    //imageBounds = [[south, west], [north, east]];
+//    //var bounds=new L.LatLngBounds([south, west], [north, east]);
+//    console.log(southWest);
+//    console.log(northEast);
+//
+//    var bounds = new L.LatLngBounds(southWest, northEast);
+//    //map.setMaxBounds(new L.LatLngBounds(southWest, northEast));
+//    //		var	bounds = new L.LatLngBounds(
+//    //      		new L.LatLng(40.71222,-74.22655),
+//    //      		new L.LatLng(40.77394,-74.12544));
+//
+//    //map.fitBounds(bounds);
+//    map.setMaxBounds(bounds);
+//
+//
+//    var overlay = new L.ImageOverlay("http://www.cloudorg.com.cn/weixin/map/images/map.jpg", bounds, {
+//        //opacity: 0.5,
+//        //interactive: true
+//
+//    });
+//    map.addLayer(overlay);
+//
+//    map.on('click', function(e) {
+//        document.getElementById('txtlatlng').innerHTML = e.latlng;
+//        //alert(e.latlng);
+//    });
+//
+//
+//    map
+//        .on('zoom', function(event) {
+//            console.log("map zoom :", event);
+//        })
+//        .on("locationfound", function(event) {
+//            console.log("locationfound :", event);
+////                var marker = L.marker([event.latitude, event.longitude]).addTo(map);
+////                marker.bindPopup("I am here!.").openPopup();
+//        })
+//        .on("locationerror", function(event) {
+//            console.log("locationerror :", event);
+////				_this.isLocationfound = 0;
+////
+////				//_this.locate.click();
+////				//定位出错
+////				if(event.type == "locationerror"){
+////					$scope.$apply(function(){
+////						_this.locate.statusbox.text = "亲，定位出错了！";
+////						_this.locate.statusbox.show = 1;
+////					});
+////				}
+////				//不在景区
+////				if(event.type == "locationfound"){
+////					$scope.$apply(function(){
+////						_this.locate.statusbox.text = "亲，你不在景区内，赶紧去景区试试吧！";
+////						_this.locate.statusbox.show = 1;
+////					});
+////				}
+//        })
+//        .on("clickSpot", function(spot) {
+//            console.log(spot);
+////				$scope.Audio && $scope.Audio.status && $scope.Audio.pause();
+////				_this.setSpotContent(spot);
+////				$scope.$apply();
+////
+////				//修改地图包样式.  这并不完美..
+////				if(spot.tags && spot.tags[0].tag_id == 4 && spot.imgurl && spot.body){
+////					$timeout(function(){
+////						angular.element($window.document.querySelector('.leaflet-popup-tip')).addClass('has_point_detail');
+////					}, 200);
+////				}
+//        })
+//        .on('click', function(event) {
+//            console.log("map click :", event);
+////				if($scope.Audio && $scope.Audio.status){
+////					$scope.Audio.pause();
+////				}
+//        });
+//
+//
+////add maker
+//    //-0.00309, 0.00302
+//    var marker = L.marker([39.9954, 116.34995]).addTo(map);
+//    marker.bindPopup("<b>神仙湾</b><br>我叫神仙湾！.").openPopup();
 </script>
 </body>
 </html>
