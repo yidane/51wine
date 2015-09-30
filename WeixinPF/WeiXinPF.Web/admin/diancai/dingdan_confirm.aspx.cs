@@ -52,6 +52,10 @@ namespace WeiXinPF.Web.admin.diancai
                     Response.Write("<script language='javascript' type='text/javascript'>alert('该订单非本店订单，请确认！')</script>");
                 }
             }
+            else
+            {
+                Response.Write("<script language='javascript' type='text/javascript'>alert('该订单不存在或未付款，请确认！')</script>");
+            }
         }
 
         protected void confirmnumber_Validating()

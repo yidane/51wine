@@ -311,10 +311,10 @@ namespace WeiXinPF.DAL
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("select a.id,shopinfoid,openid,wid,orderNumber,deskNumber,customerName,customerTel,address,oderTime,oderRemark,payAmount,payStatus,createDate,b.id AS cid  FROM wx_diancai_dingdan_manage AS a ");
-            strSql.Append(" right join (select * from wx_diancai_dingdan_commodity ");
+            strSql.Append(" right join (select * from wx_diancai_dingdan_commodity where status=1 ");
             if (strWhere.Trim() != "")
             {
-                strSql.Append(" where " + strWhere);
+                strSql.Append(" and " + strWhere);
             }
             strSql.Append(" ) as b on a.id=b.dingId ");
             return DbHelperSQL.Query(strSql.ToString());
