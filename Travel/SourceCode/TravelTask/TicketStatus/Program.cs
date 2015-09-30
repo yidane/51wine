@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Travel.Infrastructure.CommonFunctions;
 
 namespace TicketStatus
 {
@@ -33,16 +34,16 @@ namespace TicketStatus
             Console.WriteLine("按任意键退出.");
             Console.ReadLine();
 #else
- 
-            Timer tmr = new Timer(doWork, "获取门票状态......", 3000,
-                5*60*100);          
+
+            var windowsTimeSpan = WebConfigureHelper.Appsettings.WindowsConfig.WindowsTimeSpan;
+
+            var tmr = new Timer(doWork, "获取门票状态......", 3000, windowsTimeSpan * 60 * 1000);
 
             Console.WriteLine("按任意键退出.");
             Console.ReadLine();
             Console.WriteLine("按任意键确认退出.");
             Console.ReadLine();
             tmr.Dispose();
-            
 #endif
         }
 
@@ -50,7 +51,7 @@ namespace TicketStatus
         {
             var service = new OrderService();
             Console.WriteLine("开始获取票务状态。");
-            try 
+            try
             {
                 service.SearchTicketStatus(100);
             }

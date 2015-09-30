@@ -5,8 +5,10 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Travel.Application.DomainModules.WeChat;
+using Travel.Infrastructure.DomainDataAccess.Order;
 using Travel.Infrastructure.WeiXin.Advanced.Pay;
 using Travel.Infrastructure.WeiXin.Advanced.Pay.Model;
+using System.Linq;
 
 namespace Travel.Presentation.Web.WXAPI
 {
@@ -34,17 +36,27 @@ namespace Travel.Presentation.Web.WXAPI
 
         protected void btnRefund_Click(object sender, EventArgs e)
         {
-            var refundOrderRequest = new RefundOrderRequest
+            //var refundRequest = new RefundOrderRequest();
+            //var order = OrderEntity.GetOrderByOrderId(Guid.Parse("EAF0393F-772A-4AEE-8509-61AE873F7B7B"));
+            //var refundTickets = TicketEntity.GetTicketsByOrderId(order.OrderId);
+            //var refundFee = refundTickets.Sum(item => item.Price);
+
+            //refundRequest.transaction_id = order.WXOrderCode;
+            //refundRequest.out_refund_no = "T20150930124113579";
+            //refundRequest.total_fee = decimal.ToInt32(order.TotalFee() * 100);
+            //refundRequest.refund_fee = decimal.ToInt32(refundFee * 100);
+
+            var refundRequest = new RefundOrderRequest
             {
-                transaction_id = "1003310117201509020772668428",
+                transaction_id = "1003800113201509301044597815",
                 //out_trade_no = "C2015090204153143034787",
-                total_fee =1,
-                refund_fee =1,
-                out_refund_no ="T2015090218440551242147"// WxPayHelper.GenerateOutTradeNo()
+                total_fee = 26500,
+                refund_fee = 26500,
+                out_refund_no = "T2015090218440551242147"// WxPayHelper.GenerateOutTradeNo()
             };
 
             JsApiPay jsApiPay = new JsApiPay();
-            var result = jsApiPay.Refund(refundOrderRequest);
+            var result = jsApiPay.Refund(refundRequest);
         }
     }
 }

@@ -72,15 +72,15 @@ namespace Travel.Infrastructure.OTAWebService.Test
                     new Detail()
                         {
                             OrderNO = OrderNo,
-                            ItemID = "afee205e-5e63-4020-a26d-d78f3211483f",
-                            ProductCode = "berj001",
-                            ProductID = 57882,
-                            ProductName = "布尔津测试门票",
-                            ProductPrice = 100,
+                            ItemID = "6FECA376-A316-4BC2-9847-DE3425B3373E",
+                            ProductCode = "5140",
+                            ProductID = 435,
+                            ProductName = "微信测试票",
+                            ProductPrice = 2200,
                             ProductCount = 1,
-                            ProductSDate = "2015-09-01",
-                            ProductEDate = "2015-09-01",
-                            ProductPackID = 216
+                            ProductSDate = "2015-10-01",
+                            ProductEDate = "2015-10-01",
+                            ProductPackID = 42
                         }
                 };
 
@@ -159,10 +159,10 @@ namespace Travel.Infrastructure.OTAWebService.Test
             var request = new GetAllOrderStatusRequest
                 {
                     PostOrder = new List<OrderNoCode>()
-                        {
-                            new OrderNoCode() {OrderCode = "499230524858"},
-                            //new OrderNoCode(){OrderCode = "C20150825168858961"}
-                        }
+                        //{
+                        //    new OrderNoCode() {OrderCode = "499230524858"},
+                        //    //new OrderNoCode(){OrderCode = "C20150825168858961"}
+                        //}
                 };
 
             var result = new OTAServiceManager().GetAllOrderStatus(request);

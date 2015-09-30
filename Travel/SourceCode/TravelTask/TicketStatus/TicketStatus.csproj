@@ -77,6 +77,10 @@
       <Project>{a4eb3c6e-748d-4e16-ab48-43704bbdba24}</Project>
       <Name>Travel.Application.DomainModules</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Travel.Infrastructure.CommonFunctions\Travel.Infrastructure.CommonFunctions.csproj">
+      <Project>{bb26e33b-85de-464b-83a2-109794a2c00a}</Project>
+      <Name>Travel.Infrastructure.CommonFunctions</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Travel.Infrastructure.DomainDataAccess\Travel.Infrastructure.DomainDataAccess.csproj">
       <Project>{47f144aa-b49d-4db2-80d3-59b05f8680e6}</Project>
       <Name>Travel.Infrastructure.DomainDataAccess</Name>

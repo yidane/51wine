@@ -222,6 +222,26 @@ namespace Travel.Infrastructure.CommonFunctions
                     }
                 }
             }
+
+            public class WindowsConfig
+            {
+                /// <summary>
+                /// 统一下单时候订单失效时间，单位（分钟）
+                /// </summary>
+                public static int WindowsTimeSpan
+                {
+                    get
+                    {
+                        //服务轮训时间最小时间为3分钟
+                        var timeExpire = 3;
+                        var timeExpireString = System.Configuration.ConfigurationManager.AppSettings["WindowsTimeSpan"];
+                        if (string.IsNullOrEmpty(timeExpireString))
+                            return timeExpire;
+                        int.TryParse(timeExpireString, out timeExpire);
+                        return timeExpire;
+                    }
+                }
+            }
         }
 
         private string ReadAppConfig()

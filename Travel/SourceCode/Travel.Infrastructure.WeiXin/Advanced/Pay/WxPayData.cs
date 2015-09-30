@@ -208,7 +208,7 @@ namespace Travel.Infrastructure.WeiXin.Advanced.Pay
             //转url格式
             var str = ToUrl();
             //在string后加入API KEY
-            str += "&key=" + WxPayConfig.KEY.ToUpper();
+            str += "&key=" + WxPayConfig.KEY;
             //MD5加密
             var md5 = MD5.Create();
             var bs = md5.ComputeHash(Encoding.UTF8.GetBytes(str));

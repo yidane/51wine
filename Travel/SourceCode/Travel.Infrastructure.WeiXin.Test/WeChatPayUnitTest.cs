@@ -18,7 +18,7 @@ namespace Travel.Infrastructure.WeiXin.Test
             var unifiedOrderRequest = new UnifiedOrderRequest
                 {
                     body = "yidane Test body",
-                    openid = "obzTsw5qxlbwGYYZJC9b-91J-X1Y",
+                    openid = "oFGzntzSB_X-i35tZ9jHmIVBrKoc",
                     out_trade_no = WxPayHelper.GenerateOutTradeNo(),
                     attach = "attach test",
                     total_fee = 1,
@@ -38,21 +38,21 @@ namespace Travel.Infrastructure.WeiXin.Test
         {
             var jsApiPay = new JsApiPay();
             var unifiedOrderRequest = new UnifiedOrderRequest
-                {
-                    body = "yidane Test body",
-                    openid = "obzTsw5qxlbwGYYZJC9b-91J-X1Y",
-                    out_trade_no = WxPayHelper.GenerateOutTradeNo(),
-                    attach = "attach test",
-                    total_fee = 1,
-                    goods_tag = "goods_tag test"
-                };
+            {
+                body = "yidane Test body",
+                openid = "oFGzntzSB_X-i35tZ9jHmIVBrKoc",
+                out_trade_no = WxPayHelper.GenerateOutTradeNo(),
+                attach = "attach test",
+                total_fee = 1,
+                goods_tag = "goods_tag test"
+            };
             //unifiedOrderRequest.time_start = DateTime.Now.ToString("yyyyMMddHHmmss");
             //unifiedOrderRequest.time_expire = DateTime.Now.AddMinutes(20).ToString("yyyyMMddHHmmss");
 
 
             var result = jsApiPay.GetUnifiedOrderResult(unifiedOrderRequest);
 
-            var p = result.GetJsApiParameters();
+            var parame = result.GetJsApiParameters();
 
             Assert.IsTrue(true);
         }
@@ -108,7 +108,7 @@ namespace Travel.Infrastructure.WeiXin.Test
         {
             var refundOrderRequest = new RefundOrderRequest
                 {
-                    transaction_id = "1003310117201509250990172393",
+                    //transaction_id = "1003310117201509250990172393",
                     // out_trade_no = "C2015090204471208755383",
                     total_fee = 1,
                     refund_fee = 1,
@@ -125,7 +125,7 @@ namespace Travel.Infrastructure.WeiXin.Test
             var refundQueryRequest = new RefundQueryRequest();
             //refundQueryRequest.transaction_id = "1003310117201509230963841378";
 
-            refundQueryRequest.refund_id = "2003310117201509270050497578";
+            refundQueryRequest.refund_id = "2003310117201509300051959118";
 
             var result = new JsApiPay().RefundQuery(refundQueryRequest);
 
