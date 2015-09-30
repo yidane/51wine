@@ -34,7 +34,7 @@ namespace WeiXinPF.Web.admin.diancai
         protected void confirm_dingdan_Click(object sender, EventArgs e)
         {
             string number = confirmnumber.Text.Trim();
-            string condition = "identifyingcode=" + number;
+            string condition = "identifyingcode='" + number + "'";
             DataSet ds = manage.GetCommodityList(condition);
             DataTable table = ds.Tables[0];
             if (table.Rows.Count >= 1)
