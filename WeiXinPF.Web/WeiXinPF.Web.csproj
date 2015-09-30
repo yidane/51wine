@@ -101,6 +101,7 @@
     <Content Include="admin\choujiang\shakeLuckyMoney\luckyMoneyAwardUser.aspx" />
     <Content Include="admin\choujiang\shakeLuckyMoney\luckyMoneyEdit.aspx" />
     <Content Include="admin\choujiang\shakeLuckyMoney\luckyMoneylist.aspx" />
+    <Content Include="admin\diancai\commodity_detail.aspx" />
     <Content Include="admin\diancai\dingdan_confirm.aspx" />
     <Content Include="admin\photo\photoEdit.aspx" />
     <Content Include="admin\photo\photolist.aspx" />
@@ -4550,6 +4551,13 @@
     </Compile>
     <Compile Include="admin\diancai\caipin_manage_add.aspx.designer.cs">
       <DependentUpon>caipin_manage_add.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\diancai\commodity_detail.aspx.cs">
+      <DependentUpon>commodity_detail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\diancai\commodity_detail.aspx.designer.cs">
+      <DependentUpon>commodity_detail.aspx</DependentUpon>
     </Compile>
     <Compile Include="admin\diancai\desk_number.aspx.cs">
       <DependentUpon>desk_number.aspx</DependentUpon>
