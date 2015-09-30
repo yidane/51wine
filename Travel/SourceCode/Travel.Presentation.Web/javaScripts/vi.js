@@ -67,7 +67,7 @@ VI.goTop = function (id) {
 };
 
 VI.alert = function (msg) {
-    var tmpl = '<div class="alert-all-wrap">\
+    var tmpl = '<div class="alert-all-wrap"><img src=\'../images/caution.png\'></img>\
 					{{content}}\
 				</div>';
     var html = VI.template(tmpl, { content: msg });
@@ -79,7 +79,7 @@ VI.alert = function (msg) {
 
     setTimeout(function () {
         zHtml.remove();
-    }, 3000);
+    }, 300000);
 };
 
 VI.trim = function (str) {

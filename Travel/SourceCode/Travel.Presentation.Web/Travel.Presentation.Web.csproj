@@ -108,6 +108,7 @@
     <Content Include="Guide\shenxianwan.html" />
     <Content Include="Guide\wolongwan.html" />
     <Content Include="Guide\yueliangwan.html" />
+    <Content Include="images\caution.png" />
     <Content Include="images\info.png" />
     <Content Include="images\introduction.png" />
     <Content Include="images\i_gray_icon.png" />
