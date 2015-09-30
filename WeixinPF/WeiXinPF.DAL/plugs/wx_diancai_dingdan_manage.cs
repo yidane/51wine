@@ -304,6 +304,21 @@ namespace WeiXinPF.DAL
 			}
 			return DbHelperSQL.Query(strSql.ToString());
 		}
+        /// <summary>
+        /// 获得商品列表
+        /// </summary>
+        public DataSet GetCommodityList(string strWhere)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("select a.id,shopinfoid,openid,wid,orderNumber,deskNumber,customerName,customerTel,address,oderTime,oderRemark,payAmount,payStatus,createDate,b.id AS cid  FROM wx_diancai_dingdan_manage AS a ");
+            strSql.Append(" right join (select * from wx_diancai_dingdan_commodity ");
+            if (strWhere.Trim() != "")
+            {
+                strSql.Append(" where " + strWhere);
+            }
+            strSql.Append(" ) as b on a.id=b.dingId ");
+            return DbHelperSQL.Query(strSql.ToString());
+        }
 
 		/// <summary>
 		/// 获得前几行数据
@@ -468,6 +483,25 @@ namespace WeiXinPF.DAL
             return DbHelperSQL.Query(strSql.ToString());
         }
 
+        public DataSet Getcommodity(string cid)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append(" select aa.id,aa.cpName as cpName,bb.price as price,bb.status as status from wx_diancai_caipin_manage  as aa ");
+            strSql.Append(" right join (select * from wx_diancai_dingdan_commodity where id='" + cid + "') as bb on aa.id=bb.caiId ");
+
+            return DbHelperSQL.Query(strSql.ToString());
+        }
+
+        public DataSet GetcommodityTable(string did)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append(" select aa.id,aa.cpName as cpName,bb.price as price,bb.status from wx_diancai_caipin_manage  as aa ");
+            strSql.Append(" right join (select * from wx_diancai_dingdan_commodity where dingId='" + did + "') as bb on aa.id=bb.caiId ");
+
+            return DbHelperSQL.Query(strSql.ToString());
+        }
+
+
         public WeiXinPF.Model.wx_diancai_dingdan_manage GetModeldingdan(string dingdan)
 		{
 			
@@ -544,6 +578,23 @@ namespace WeiXinPF.DAL
             }
         }
 
+        public bool UpdateCommoditystatus(string cid, string status)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("update  wx_diancai_dingdan_commodity set status='" + status + "'  ");
+
+            strSql.Append(" where id='" + cid + "' ");
+
+            int rows = DbHelperSQL.ExecuteSql(strSql.ToString());
+            if (rows > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
 
         public bool Delete(string dingdan)
         {

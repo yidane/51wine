@@ -80,17 +80,19 @@ namespace WeiXinPF.DAL
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("insert into wx_diancai_dingdan_commodity(");
-            strSql.Append("dingId,caiId,price)");
+            strSql.Append("dingId,caiId,price,identifyingcode,status)");
             strSql.Append(" values (");
-            strSql.Append("@dingId,@caiId,@price)");
+            strSql.Append("@dingId,@caiId,@price,@identifyingcode,0)");
             strSql.Append(";select @@IDENTITY");
             SqlParameter[] parameters = {
 					new SqlParameter("@dingId", SqlDbType.Int,4),
 					new SqlParameter("@caiId", SqlDbType.Int,4),
-					new SqlParameter("@price", SqlDbType.Float,8)};
+					new SqlParameter("@price", SqlDbType.Float,8),
+                    new SqlParameter("@identifyingcode", SqlDbType.VarChar,20)};
             parameters[0].Value = model.dingId;
             parameters[1].Value = model.caiId;
             parameters[2].Value = model.price;
+            parameters[3].Value = GuidToLongID().ToString();
 
             object obj = DbHelperSQL.GetSingle(strSql.ToString(), parameters);
             if (obj == null)
@@ -102,6 +104,16 @@ namespace WeiXinPF.DAL
                 return Convert.ToInt32(obj);
             }
         }
+
+        /// <summary>
+        /// 根据GUID获取19位的唯一数字序列
+        /// </summary>
+        public static long GuidToLongID()
+        {
+            byte[] buffer = Guid.NewGuid().ToByteArray();
+            return BitConverter.ToInt64(buffer, 0);
+        }
+
         /// <summary>
         /// 更新一条数据
         /// </summary>

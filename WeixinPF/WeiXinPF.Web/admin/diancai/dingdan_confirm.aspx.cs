@@ -34,18 +34,20 @@ namespace WeiXinPF.Web.admin.diancai
         protected void confirm_dingdan_Click(object sender, EventArgs e)
         {
             string number = confirmnumber.Text.Trim();
-            string condition = "orderNumber=" + number;
-            DataSet ds = manage.GetList(condition);
+            string condition = "identifyingcode=" + number;
+            DataSet ds = manage.GetCommodityList(condition);
             DataTable table = ds.Tables[0];
-            if (table.Rows.Count == 1)
+            if (table.Rows.Count >= 1)
             {
                 if (table.Rows[0]["shopinfoid"].ToString() == shopid.ToString())
                 {
-                    string orderid = table.Rows[0]["id"].ToString();
-                    string url = "dingdan_deal.aspx?id=" + orderid + "&shopid=" + shopid;
+                    string icode = number;
+                    string id = table.Rows[0]["id"].ToString();
+                    string cid = table.Rows[0]["cid"].ToString();
+                    string url = "commodity_detail.aspx?cid=" + cid + "&shopid=" + shopid + "&id=" + id;
                     Response.Redirect(url);
                 }
-                else 
+                else
                 {
                     Response.Write("<script language='javascript' type='text/javascript'>alert('该订单非本店订单，请确认！')</script>");
                 }
@@ -53,8 +55,8 @@ namespace WeiXinPF.Web.admin.diancai
         }
 
         protected void confirmnumber_Validating()
-        { 
-        
+        {
+
         }
         #endregion
     }
