@@ -19,12 +19,12 @@ namespace Travel.Application.DomainModules.Order.Core
             var orderRequest = new UnifiedOrderRequest()
                                    {
                                        openid = order.OpenId,
-                                       body = product.ProductName,
+                                       body = product.ProductName + " X " + order.Tickets.Count,
                                        detail = product.ProductPrice.ToString(),
                                        out_trade_no = order.OrderCode,
                                        attach = "1",
                                        goods_tag = "1",
-                                       total_fee = order.Tickets.Count * 2 //Decimal.ToInt32(order.GetCategoryTotalFee(Guid.Parse(OrderStatus.OrderDetailCategory_Create)) * 100)
+                                       total_fee = decimal.ToInt32(order.GetCategoryTotalFee(Guid.Parse(OrderStatus.OrderDetailCategory_Create)) * 100)
                                    };
             var WXPaymentService = new JsApiPay();
 

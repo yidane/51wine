@@ -32,8 +32,8 @@ namespace Travel.Application.OrderUnitTest
             this.OrderRequest = new OrderRequestEntity()
                                {
                                    OpenId = "obzTswxzFzzzdWdAKf2mWx3CrpXk",
-                                   TicketCategory = "1C33E28F-F0AE-4629-A2CC-B02A41902F4E",
-                                   TicketName = "门票+车联票",
+                                   TicketCategory = "D33F0298-A61D-4B4E-A25D-E7A60EB41948",
+                                   TicketName = "微信测试门票",
                                    Count = 1,
                                    CouponId = string.Empty,
                                    ContactPersonName = "红酒",
@@ -69,6 +69,8 @@ namespace Travel.Application.OrderUnitTest
         [Test]
         public void CreateOrderCode_CreateOrder_ReturnUnRepeatOrderCode()
         {
+
+            var str = Enum.GetName(typeof(OrderOperationStep), OrderOperationStep.OrderChange);
             var otaOrder = new OTAOrder(this.OrderRequest);
 
             otaOrder.CreateOrderMain();
@@ -144,9 +146,9 @@ namespace Travel.Application.OrderUnitTest
         [Test]
         public void CompleteRefundTicketOperate_RefundTicket_ReturnChangeTicketStatus()
         {
-            var myOrders = OrderEntity.GetMyOrders("obzTswxzFzzzdWdAKf2mWx3CrpXk").ToList();
+            //var myOrders = OrderEntity.GetMyOrders("obzTswxzFzzzdWdAKf2mWx3CrpXk").ToList();
 
-            new OrderService().GetMyRefundTicketsStatus("obzTswxzFzzzdWdAKf2mWx3CrpXk");
+            new OrderService().GetMyRefundTicketsStatus("obzTsw3oHcJPbZ8X3mCUnGuCFDOY");
         }
 
         [Test]
@@ -154,9 +156,9 @@ namespace Travel.Application.OrderUnitTest
         {
             var service = new OrderService();
 
-            //service.MyRefundTickets("obzTswxzFzzzdWdAKf2mWx3CrpXk");
+            service.MyRefundTickets("obzTswxzFzzzdWdAKf2mWx3CrpXk");
             //service.RefundTickets("35D7650B-21C1-45CD-B15D-2203857B7977", 1);
-            service.SearchTicketStatus(100);
+            //service.SearchTicketStatus(100);
         }
 
         [Test]

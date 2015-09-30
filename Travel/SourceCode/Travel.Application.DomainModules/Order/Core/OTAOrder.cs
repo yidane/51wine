@@ -311,8 +311,8 @@ namespace Travel.Application.DomainModules.Order.Core
 
             refundRequest.transaction_id = this.OrderObj.WXOrderCode;
             refundRequest.out_refund_no = refundOrder.RefundOrderCode;
-            refundRequest.total_fee = this.OrderObj.Tickets.Count * 2; // Decimal.ToInt32(this.OrderObj.TotalFee() * 100);
-            refundRequest.refund_fee = refundTickets.Count * 2; // Decimal.ToInt32(refundFee * 100);
+            refundRequest.total_fee = decimal.ToInt32(this.OrderObj.TotalFee() * 100);
+            refundRequest.refund_fee = decimal.ToInt32(refundFee * 100);
 
             // todo: 处理返回值 
             return this._paymentOperate.RefundPay(refundRequest);
