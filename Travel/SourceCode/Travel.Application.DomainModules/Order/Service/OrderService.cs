@@ -508,6 +508,10 @@ namespace Travel.Application.DomainModules.Order.Service
                     Console.WriteLine(ticket.OrderId + " OrderId:" + ticket.OrderId);
                 }
 #endif
+                if (!tickets.Any())
+                {
+                    break;
+                }
 
                 foreach (var ticket in tickets)
                 {
