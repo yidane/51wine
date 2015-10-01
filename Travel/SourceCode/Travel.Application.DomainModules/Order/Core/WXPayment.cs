@@ -54,33 +54,7 @@ namespace Travel.Application.DomainModules.Order.Core
             {
                 throw new ArgumentNullException("order");
             }
-        }
-
-        /// <summary>
-        /// 验证微信支付通知的参数是否正确
-        /// </summary>
-        /// <returns></returns>
-
-
-
-        /// <summary>
-        /// 异步接收微信支付通知并完成订单处理后，给微信回执
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void WXPayment_PaymentComplete(object sender, EventArgs e)
-        {
-            var turnbackTemplate = "{{'return_code':'{0}', 'return_msg':'{1}'}}";
-
-            if (this.IsPaymentInfoProcessed || this.IsProcessPaymentInfoSuccess)
-            {
-                this.WXTurnbackResult = string.Format(turnbackTemplate, "SUCCESS", "OK");
-            }
-            else
-            {
-                this.WXTurnbackResult = string.Format(turnbackTemplate, "FALL", "参数格式校验错误或签名失败");
-            }
-        }
+        }      
 
         /// <summary>
         /// 支付完成后，通知OTA接口购票成功并且获取二维码
@@ -150,7 +124,25 @@ namespace Travel.Application.DomainModules.Order.Core
                     throw new InvalidOperationException("OrderFinish");
                 }
             }
+        }
 
+        /// <summary>
+        /// 异步接收微信支付通知并完成订单处理后，给微信回执
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void WXPayment_PaymentComplete(object sender, EventArgs e)
+        {
+            var turnbackTemplate = "{{'return_code':'{0}', 'return_msg':'{1}'}}";
+
+            if (this.IsPaymentInfoProcessed || this.IsProcessPaymentInfoSuccess)
+            {
+                this.WXTurnbackResult = string.Format(turnbackTemplate, "SUCCESS", "OK");
+            }
+            else
+            {
+                this.WXTurnbackResult = string.Format(turnbackTemplate, "FALL", "参数格式校验错误或签名失败");
+            }
         }
     }
 }
