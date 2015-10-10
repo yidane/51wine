@@ -4,14 +4,15 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>身边服务</title>
     <meta name="viewport"
-          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <link href="css/bootstrap.css" rel="stylesheet">
     <style type="text/css">
         html, body {
             width: 100%;
             height: 100%;
         }
-        html{
+
+        html {
             font-size: 16px;
         }
 
@@ -22,23 +23,31 @@
             -moz-box-sizing: border-box;
             box-sizing: border-box;
         }
+        
+        a {
+            text-decoration: none;
+        }
+        a:visited{
+            color:#000;
+        }
 
         body, button, input, select, textarea {
             font: 12px/16px Verdana, Helvetica, Arial, sans-serif;
         }
 
         /*.btn {*/
-            /*width: 142px;*/
+        /*width: 142px;*/
         /*}*/
 
-       .text-center {
+        .text-center {
             text-align: center;
-            }
+        }
 
         .menu_acitve .form-searchroad {
             display: block;
-            transition:0.4s height, 0.4s padding;
+            transition: 0.4s height, 0.4s padding;
         }
+
         .form-searchroad {
             position: absolute;
             bottom: 0;
@@ -52,7 +61,7 @@
             border-radius: .25rem;
             overflow: hidden;
             display: none;
-            transition:0.7s height, 0.7s padding, 0s visibility 0.7s;
+            transition: 0.7s height, 0.7s padding, 0s visibility 0.7s;
         }
 
         .map_nav_bar_v2 {
@@ -61,16 +70,18 @@
             height: 2.8125rem;
             left: 0;
             right: 0;
-            bottom: 0;
+            bottom: 50px;
         }
-        .map_nav_bar_v2 .map_nav_item_03 {
-            right: .5rem;
-            background-image: url("images/ico_general_map_04@2x.png?v=2014050901");
-        }
+
+            .map_nav_bar_v2 .map_nav_item_03 {
+                right: .5rem;
+                background-image: url("images/ico_general_map_04@2x.png?v=2014050901");
+            }
 
         .menu_acitve .map_nav_bar_v2 {
             bottom: 6.5rem;
         }
+
         .menu_acitve .map_nav_item_03:after {
             -webkit-transform: rotate(180deg) translateY(2px);
             transform: rotate(180deg) translateY(2px);
@@ -105,11 +116,10 @@
             -webkit-box-shadow: 1px 1px 0 #181b1e, 2px 2px 0 #526273;
             box-shadow: 1px 1px 0 #181b1e, 2px 2px 0 #526273;
         }
-        .form-group:last-child
-        {
-            margin-bottom: 0;
-        }
 
+            .form-group:last-child {
+                margin-bottom: 0;
+            }
     </style>
     <style>
         /*map info style*/
@@ -146,21 +156,58 @@
             width: 100%;
         }
 
-        .table_addr_tel tr:first-child th, .table_addr_tel tr:first-child td {
-            padding-bottom: 5px;
+            .table_addr_tel tr:first-child th, .table_addr_tel tr:first-child td {
+                padding-bottom: 5px;
+            }
+
+            .table_addr_tel th, .table_addr_tel td {
+                vertical-align: top;
+                padding: 0;
+            }
+
+            .table_addr_tel th {
+                font-weight: 400;
+                width: 40px;
+                white-space: nowrap;
+                word-break: keep-all;
+            }
+
+
+        .bottom-navigation {
+            position: fixed;
+            z-index: 900;
+            width: 100%;
+            bottom: 0;
+            background-color: #f9f9f9;
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
         }
 
-        .table_addr_tel th, .table_addr_tel td {
-            vertical-align: top;
-            padding: 0;
+        .btn-group {
+            width: 100%;
+            -webkit-box-align: center;
+            display: -webkit-box !important;
+            display: -webkit-flex !important;
+            -webkit-align-items: center;
         }
 
-        .table_addr_tel th {
-            font-weight: 400;
-            width: 40px;
-            white-space: nowrap;
-            word-break: keep-all;
+        .btn {
+            display: block;
+            height: 44px;
+            line-height: 44px;
+            font-size: 15px;
+            border-top: 1px solid #d4d4d4;
+            border-right: 1px solid #d4d4d4;
+            padding: 0 10px;
+            -webkit-box-flex: 1;
+            -webkit-flex: 1;
+            text-align: center;
         }
+
+            .btn:last-child {
+                border-right: none;
+            }
     </style>
 
     <script charset="utf-8" src="http://map.qq.com/api/js?v=2.exp&libraries=place&key=XQSBZ-MYPKU-EJSVT-4XWSN-QWJXH-2TBDM"></script>
@@ -195,155 +242,159 @@
             var $doms = {
                 $info_pop: $("#info_pop"),
                 $policy: $("#policy"),
-                $txtbegin:$("#txtbegin"),
-                $txtend:$("#txtend")
+                $txtbegin: $("#txtbegin"),
+                $txtend: $("#txtend")
             };
             var vm = new mapViewModel(params, $doms);
             ko.applyBindings(vm);
 
             vm.init();
-
-
         });
 
 
     </script>
 </head>
 <body>
-<div data-bind="css:{menu_acitve:formshow}" style="    width: 100%;    height: 100%;">
+    <div data-bind="css:{menu_acitve:formshow}" style="    width: 100%;    height: 100%;">
 
 
-<div style="width: 100%; height: 100%;" id="container"></div>
+        <div style="width: 100%; height: 100%;" id="container"></div>
 
-<div class="map_nav_bar_v2" >
+        <div class="map_nav_bar_v2">
 
-    <div class="map_nav_item_03" data-bind="click:togglesearchroad"></div>
+            <div class="map_nav_item_03" data-bind="click:togglesearchroad"></div>
 
-</div>
+        </div>
 
-<div  class="form-searchroad"  data-bind="visible: formshow" >
-    <form   >
-        <div class="form-group">
+        <div class="form-searchroad" data-bind="visible: formshow">
+            <form>
+                <div class="form-group">
 
 
-            <div class="input-group">
-                <span class="input-group-addon" >计算策略</span>
-                <select id="policy" class="form-control"
-                        data-bind="event:{ change: searchRoad}">
-                    <option value="LEAST_TIME">最少时间</option>
-                    <option value="LEAST_DISTANCE">最短距离</option>
-                    <option value="AVOID_HIGHWAYS">避开高速</option>
-                    <option value="REAL_TRAFFIC">实时路况</option>
-                    <option value="PREDICT_TRAFFIC">预测路况</option>
-                </select>
+                    <div class="input-group">
+                        <span class="input-group-addon">计算策略</span>
+                        <select id="policy" class="form-control"
+                                data-bind="event:{ change: searchRoad}">
+                            <option value="LEAST_TIME">最少时间</option>
+                            <option value="LEAST_DISTANCE">最短距离</option>
+                            <option value="AVOID_HIGHWAYS">避开高速</option>
+                            <option value="REAL_TRAFFIC">实时路况</option>
+                            <option value="PREDICT_TRAFFIC">预测路况</option>
+                        </select>
 
-                <!--<div class=" input-group-btn" style="width: 142px;">-->
-                    <!--&lt;!&ndash;<label>&ndash;&gt;-->
-                    <!--&lt;!&ndash;<input type="checkbox" value="" checked>&ndash;&gt;-->
-                    <!--&lt;!&ndash;显示路段路标&ndash;&gt;-->
-                    <!--&lt;!&ndash;</label>&ndash;&gt;-->
+                        <!--<div class=" input-group-btn" style="width: 142px;">-->
+                        <!--&lt;!&ndash;<label>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<input type="checkbox" value="" checked>&ndash;&gt;-->
+                        <!--&lt;!&ndash;显示路段路标&ndash;&gt;-->
+                        <!--&lt;!&ndash;</label>&ndash;&gt;-->
+                        <!--</div>-->
+
+                    </div>
+
+
+                </div>
+                <div class="form-group" style="display:none;">
+
+
+                    <div class="input-group" style="  width: 100%;">
+                        <div class="input-group-addon" style="width: 82.4px;">
+                            <span style="float: right;">区域</span>
+                        </div>
+
+                        <input type='text' class="form-control" value='新疆维吾尔自治区阿勒泰地区布尔津县' id="regionText" />
+                        <span class="input-group-btn" style="width: 142px;">
+
+                        </span>
+                    </div>
+
+
+                </div>
+                <div class="form-group">
+
+
+                    <div class="input-group">
+                        <div class="input-group-addon" style="width: 82.4px;">
+                            <span style="float: right;">起点</span>
+                        </div>
+                        <input type="text" class="form-control" id="txtbegin" placeholder="请输入起点" data-bind="value:startlocation">
+                        <div class="input-group-btn">
+                            <button type="button" class="btn btn-primary" data-bind="click:getLocation">使用当前位置</button>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="form-group">
+
+
+                    <div class="input-group" style="    width: 100%;">
+                        <div class="input-group-addon" style="width: 82.4px;">
+                            <span style="float: right;">终点</span>
+                        </div>
+
+                        <input type="text" class="form-control" id="txtend" placeholder="请输入终点" data-bind="value:endlocation">
+                        <div class="input-group-btn">
+                            <button type="button" class="btn btn-success" style="    width: 110px;" data-bind="click:searchRoad">查询</button>
+                        </div>
+
+
+                    </div>
+                </div>
+
+                <!--<div class="form-group text-center">-->
+                <!--<button type="button" class="btn btn-success" data-bind="click:searchRoad">查询</button>-->
                 <!--</div>-->
 
-            </div>
-
+            </form>
 
         </div>
-        <div class="form-group" style="display:none;">
+    </div>
+
+    <div id="info_pop" style="display: none">
 
 
-            <div class="input-group" style="  width: 100%;">
-                <div class="input-group-addon" style="width: 82.4px;">
-                    <span  style="float: right;">区域</span>
+        <div class="map_bubble_pop"
+             style=" cursor: default; background-color: rgb(255, 255, 255);width:180px;" data-bind="with:info">
+            <div class="map_bubble_top" style="border-bottom:1px solid #ccc;height:31px">
+                <div class="map_bubble_title"
+                     style="line-height: 30px; overflow: hidden; height: 30px; white-space: nowrap; width: 345px; background-color: rgb(249, 249, 249);">
+
+                    <p class="iw_poi_title " data-bind="attr:{title:name}">
+                        <span class="susIconSetFlag"></span><span class="title" data-bind="text:name"></span>
+                    </p>
                 </div>
 
-                <input type='text' class="form-control" value='新疆维吾尔自治区阿勒泰地区布尔津县' id="regionText"/>
-<span class="input-group-btn" style="width: 142px;">
-
-      </span>
             </div>
-
-
-        </div>
-        <div class="form-group">
-
-
-                <div class="input-group">
-                    <div class="input-group-addon" style="width: 82.4px;">
-                        <span  style="float: right;">起点</span>
+            <div class="map_bubble_center" style="z-index: 3;width: 100%; position: relative;">
+                <div class="map_bubble_content" style=" overflow: hidden;width: 100%;">
+                    <div class="iw_poi_conTop">
+                        <div class="iw_poi_content iw_poi_content_search">
+                            <table cellspacing="0" class="table_addr_tel">
+                                <tbody>
+                                    <tr tid="iw_poi_addr">
+                                        <th>地址：&nbsp;</th>
+                                        <td>
+                                            <p data-bind="text:address"></p>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="iw_btn_con suspendContainer"></div>
+                        <div class="iw_btn_con"></div>
                     </div>
-                    <input type="text" class="form-control" id="txtbegin" placeholder="请输入起点" data-bind="value:startlocation">
-      <div class="input-group-btn">
-         <button type="button" class="btn btn-primary"  data-bind="click:getLocation">使用当前位置</button>
-      </div>
+
+
                 </div>
-
-
-        </div>
-        <div class="form-group">
-
-
-            <div class="input-group" style="    width: 100%;">
-                <div class="input-group-addon" style="width: 82.4px;">
-                    <span  style="float: right;">终点</span>
-                </div>
-
-                <input type="text" class="form-control" id="txtend" placeholder="请输入终点" data-bind="value:endlocation">
-                <div class="input-group-btn">
-                    <button type="button" class="btn btn-success" style="    width: 110px;" data-bind="click:searchRoad">查询</button>
-                </div>
-
-
-        </div>
-        </div>
-
-        <!--<div class="form-group text-center">-->
-
-            <!--<button type="button" class="btn btn-success" data-bind="click:searchRoad">查询</button>-->
-        <!--</div>-->
-
-    </form>
-
-</div>
-</div>
-
-<div id="info_pop" style="display: none">
-
-
-    <div class="map_bubble_pop"
-         style=" cursor: default; background-color: rgb(255, 255, 255);width:180px;" data-bind="with:info">
-        <div class="map_bubble_top" style="border-bottom:1px solid #ccc;height:31px">
-            <div class="map_bubble_title"
-                 style="line-height: 30px; overflow: hidden; height: 30px; white-space: nowrap; width: 345px; background-color: rgb(249, 249, 249);">
-
-                <p class="iw_poi_title " data-bind="attr:{title:name}">
-                    <span class="susIconSetFlag"></span><span class="title" data-bind="text:name"></span>
-                </p>
-            </div>
-
-        </div>
-        <div class="map_bubble_center" style="z-index: 3;width: 100%; position: relative;">
-            <div class="map_bubble_content" style=" overflow: hidden;width: 100%;">
-                <div class="iw_poi_conTop">
-                    <div class="iw_poi_content iw_poi_content_search">
-                        <table cellspacing="0" class="table_addr_tel">
-                            <tbody>
-                            <tr tid="iw_poi_addr">
-                                <th>地址：&nbsp;</th>
-                                <td>
-                                    <p data-bind="text:address"></p>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="iw_btn_con suspendContainer"></div>
-                    <div class="iw_btn_con"></div>
-                </div>
-
-
             </div>
         </div>
     </div>
-</div>
+    <div class="bottom-navigation">
+        <div class="btn-group">
+            <a class="btn">当前位置</a>
+            <a class="btn" href="map_service.html">身边服务</a>
+            <a class="btn">去哪儿玩</a>
+        </div>
+    </div>
 </body>
 </html>
