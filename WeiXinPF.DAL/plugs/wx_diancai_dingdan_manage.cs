@@ -12,7 +12,7 @@ namespace WeiXinPF.DAL
 	public partial class wx_diancai_dingdan_manage
 	{
 		public wx_diancai_dingdan_manage()
-		{}
+        { }
 		#region  BasicMethod
 
 		/// <summary>
@@ -28,7 +28,7 @@ namespace WeiXinPF.DAL
 		/// </summary>
 		public bool Exists(int id)
 		{
-			StringBuilder strSql=new StringBuilder();
+            StringBuilder strSql = new StringBuilder();
 			strSql.Append("select count(1) from wx_diancai_dingdan_manage");
 			strSql.Append(" where id=@id");
 			SqlParameter[] parameters = {
@@ -36,7 +36,7 @@ namespace WeiXinPF.DAL
 			};
 			parameters[0].Value = id;
 
-			return DbHelperSQL.Exists(strSql.ToString(),parameters);
+            return DbHelperSQL.Exists(strSql.ToString(), parameters);
 		}
 
 
@@ -45,7 +45,7 @@ namespace WeiXinPF.DAL
 		/// </summary>
 		public int Add(WeiXinPF.Model.wx_diancai_dingdan_manage model)
 		{
-			StringBuilder strSql=new StringBuilder();
+            StringBuilder strSql = new StringBuilder();
 			strSql.Append("insert into wx_diancai_dingdan_manage(");
 			strSql.Append("shopinfoid,openid,wid,orderNumber,deskNumber,customerName,customerTel,address,oderTime,oderRemark,payAmount,payStatus,createDate)");
 			strSql.Append(" values (");
@@ -79,7 +79,7 @@ namespace WeiXinPF.DAL
 			parameters[11].Value = model.payStatus;
 			parameters[12].Value = model.createDate;
 
-			object obj = DbHelperSQL.GetSingle(strSql.ToString(),parameters);
+            object obj = DbHelperSQL.GetSingle(strSql.ToString(), parameters);
 			if (obj == null)
 			{
 				return 0;
@@ -94,7 +94,7 @@ namespace WeiXinPF.DAL
 		/// </summary>
 		public bool Update(WeiXinPF.Model.wx_diancai_dingdan_manage model)
 		{
-			StringBuilder strSql=new StringBuilder();
+            StringBuilder strSql = new StringBuilder();
 			strSql.Append("update wx_diancai_dingdan_manage set ");
 			strSql.Append("shopinfoid=@shopinfoid,");
 			strSql.Append("openid=@openid,");
@@ -140,7 +140,7 @@ namespace WeiXinPF.DAL
 			parameters[12].Value = model.createDate;
 			parameters[13].Value = model.id;
 
-			int rows=DbHelperSQL.ExecuteSql(strSql.ToString(),parameters);
+            int rows = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
 			if (rows > 0)
 			{
 				return true;
@@ -157,7 +157,7 @@ namespace WeiXinPF.DAL
 		public bool Delete(int id)
 		{
 			
-			StringBuilder strSql=new StringBuilder();
+            StringBuilder strSql = new StringBuilder();
 			strSql.Append("delete from wx_diancai_dingdan_manage ");
 			strSql.Append(" where id=@id");
 			SqlParameter[] parameters = {
@@ -165,7 +165,7 @@ namespace WeiXinPF.DAL
 			};
 			parameters[0].Value = id;
 
-			int rows=DbHelperSQL.ExecuteSql(strSql.ToString(),parameters);
+            int rows = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
 			if (rows > 0)
 			{
 				return true;
@@ -178,12 +178,12 @@ namespace WeiXinPF.DAL
 		/// <summary>
 		/// 批量删除数据
 		/// </summary>
-		public bool DeleteList(string idlist )
+        public bool DeleteList(string idlist)
 		{
-			StringBuilder strSql=new StringBuilder();
+            StringBuilder strSql = new StringBuilder();
 			strSql.Append("delete from wx_diancai_dingdan_manage ");
-			strSql.Append(" where id in ("+idlist + ")  ");
-			int rows=DbHelperSQL.ExecuteSql(strSql.ToString());
+            strSql.Append(" where id in (" + idlist + ")  ");
+            int rows = DbHelperSQL.ExecuteSql(strSql.ToString());
 			if (rows > 0)
 			{
 				return true;
@@ -201,7 +201,7 @@ namespace WeiXinPF.DAL
 		public WeiXinPF.Model.wx_diancai_dingdan_manage GetModel(int id)
 		{
 			
-			StringBuilder strSql=new StringBuilder();
+            StringBuilder strSql = new StringBuilder();
 			strSql.Append("select  top 1 id,shopinfoid,openid,wid,orderNumber,deskNumber,customerName,customerTel,address,oderTime,oderRemark,payAmount,payStatus,createDate from wx_diancai_dingdan_manage ");
 			strSql.Append(" where id=@id");
 			SqlParameter[] parameters = {
@@ -209,9 +209,9 @@ namespace WeiXinPF.DAL
 			};
 			parameters[0].Value = id;
 
-			WeiXinPF.Model.wx_diancai_dingdan_manage model=new WeiXinPF.Model.wx_diancai_dingdan_manage();
-			DataSet ds=DbHelperSQL.Query(strSql.ToString(),parameters);
-			if(ds.Tables[0].Rows.Count>0)
+            WeiXinPF.Model.wx_diancai_dingdan_manage model = new WeiXinPF.Model.wx_diancai_dingdan_manage();
+            DataSet ds = DbHelperSQL.Query(strSql.ToString(), parameters);
+            if (ds.Tables[0].Rows.Count > 0)
 			{
 				return DataRowToModel(ds.Tables[0].Rows[0]);
 			}
@@ -227,64 +227,64 @@ namespace WeiXinPF.DAL
 		/// </summary>
 		public WeiXinPF.Model.wx_diancai_dingdan_manage DataRowToModel(DataRow row)
 		{
-			WeiXinPF.Model.wx_diancai_dingdan_manage model=new WeiXinPF.Model.wx_diancai_dingdan_manage();
+            WeiXinPF.Model.wx_diancai_dingdan_manage model = new WeiXinPF.Model.wx_diancai_dingdan_manage();
 			if (row != null)
 			{
-				if(row["id"]!=null && row["id"].ToString()!="")
+                if (row["id"] != null && row["id"].ToString() != "")
 				{
-					model.id=int.Parse(row["id"].ToString());
+                    model.id = int.Parse(row["id"].ToString());
 				}
-				if(row["shopinfoid"]!=null && row["shopinfoid"].ToString()!="")
+                if (row["shopinfoid"] != null && row["shopinfoid"].ToString() != "")
 				{
-					model.shopinfoid=int.Parse(row["shopinfoid"].ToString());
+                    model.shopinfoid = int.Parse(row["shopinfoid"].ToString());
 				}
-				if(row["openid"]!=null)
+                if (row["openid"] != null)
 				{
-					model.openid=row["openid"].ToString();
+                    model.openid = row["openid"].ToString();
 				}
-				if(row["wid"]!=null && row["wid"].ToString()!="")
+                if (row["wid"] != null && row["wid"].ToString() != "")
 				{
-					model.wid=int.Parse(row["wid"].ToString());
+                    model.wid = int.Parse(row["wid"].ToString());
 				}
-				if(row["orderNumber"]!=null)
+                if (row["orderNumber"] != null)
 				{
-					model.orderNumber=row["orderNumber"].ToString();
+                    model.orderNumber = row["orderNumber"].ToString();
 				}
-				if(row["deskNumber"]!=null)
+                if (row["deskNumber"] != null)
 				{
-					model.deskNumber=row["deskNumber"].ToString();
+                    model.deskNumber = row["deskNumber"].ToString();
 				}
-				if(row["customerName"]!=null)
+                if (row["customerName"] != null)
 				{
-					model.customerName=row["customerName"].ToString();
+                    model.customerName = row["customerName"].ToString();
 				}
-				if(row["customerTel"]!=null)
+                if (row["customerTel"] != null)
 				{
-					model.customerTel=row["customerTel"].ToString();
+                    model.customerTel = row["customerTel"].ToString();
 				}
-				if(row["address"]!=null)
+                if (row["address"] != null)
 				{
-					model.address=row["address"].ToString();
+                    model.address = row["address"].ToString();
 				}
-				if(row["oderTime"]!=null && row["oderTime"].ToString()!="")
+                if (row["oderTime"] != null && row["oderTime"].ToString() != "")
 				{
-					model.oderTime=DateTime.Parse(row["oderTime"].ToString());
+                    model.oderTime = DateTime.Parse(row["oderTime"].ToString());
 				}
-				if(row["oderRemark"]!=null)
+                if (row["oderRemark"] != null)
 				{
-					model.oderRemark=row["oderRemark"].ToString();
+                    model.oderRemark = row["oderRemark"].ToString();
 				}
-				if(row["payAmount"]!=null && row["payAmount"].ToString()!="")
+                if (row["payAmount"] != null && row["payAmount"].ToString() != "")
 				{
-					model.payAmount=decimal.Parse(row["payAmount"].ToString());
+                    model.payAmount = decimal.Parse(row["payAmount"].ToString());
 				}
-				if(row["payStatus"]!=null && row["payStatus"].ToString()!="")
+                if (row["payStatus"] != null && row["payStatus"].ToString() != "")
 				{
-					model.payStatus=int.Parse(row["payStatus"].ToString());
+                    model.payStatus = int.Parse(row["payStatus"].ToString());
 				}
-				if(row["createDate"]!=null && row["createDate"].ToString()!="")
+                if (row["createDate"] != null && row["createDate"].ToString() != "")
 				{
-					model.createDate=DateTime.Parse(row["createDate"].ToString());
+                    model.createDate = DateTime.Parse(row["createDate"].ToString());
 				}
 			}
 			return model;
@@ -295,12 +295,12 @@ namespace WeiXinPF.DAL
 		/// </summary>
 		public DataSet GetList(string strWhere)
 		{
-			StringBuilder strSql=new StringBuilder();
+            StringBuilder strSql = new StringBuilder();
 			strSql.Append("select id,shopinfoid,openid,wid,orderNumber,deskNumber,customerName,customerTel,address,oderTime,oderRemark,payAmount,payStatus,createDate ");
 			strSql.Append(" FROM wx_diancai_dingdan_manage ");
-			if(strWhere.Trim()!="")
+            if (strWhere.Trim() != "")
 			{
-				strSql.Append(" where "+strWhere);
+                strSql.Append(" where " + strWhere);
 			}
 			return DbHelperSQL.Query(strSql.ToString());
 		}
@@ -323,19 +323,19 @@ namespace WeiXinPF.DAL
 		/// <summary>
 		/// 获得前几行数据
 		/// </summary>
-		public DataSet GetList(int Top,string strWhere,string filedOrder)
+        public DataSet GetList(int Top, string strWhere, string filedOrder)
 		{
-			StringBuilder strSql=new StringBuilder();
+            StringBuilder strSql = new StringBuilder();
 			strSql.Append("select ");
-			if(Top>0)
+            if (Top > 0)
 			{
-				strSql.Append(" top "+Top.ToString());
+                strSql.Append(" top " + Top.ToString());
 			}
 			strSql.Append(" id,shopinfoid,openid,wid,orderNumber,deskNumber,customerName,customerTel,address,oderTime,oderRemark,payAmount,payStatus,createDate ");
 			strSql.Append(" FROM wx_diancai_dingdan_manage ");
-			if(strWhere.Trim()!="")
+            if (strWhere.Trim() != "")
 			{
-				strSql.Append(" where "+strWhere);
+                strSql.Append(" where " + strWhere);
 			}
 			strSql.Append(" order by " + filedOrder);
 			return DbHelperSQL.Query(strSql.ToString());
@@ -346,11 +346,11 @@ namespace WeiXinPF.DAL
 		/// </summary>
 		public int GetRecordCount(string strWhere)
 		{
-			StringBuilder strSql=new StringBuilder();
+            StringBuilder strSql = new StringBuilder();
 			strSql.Append("select count(1) FROM wx_diancai_dingdan_manage ");
-			if(strWhere.Trim()!="")
+            if (strWhere.Trim() != "")
 			{
-				strSql.Append(" where "+strWhere);
+                strSql.Append(" where " + strWhere);
 			}
 			object obj = DbHelperSQL.GetSingle(strSql.ToString());
 			if (obj == null)
@@ -367,12 +367,12 @@ namespace WeiXinPF.DAL
 		/// </summary>
 		public DataSet GetListByPage(string strWhere, string orderby, int startIndex, int endIndex)
 		{
-			StringBuilder strSql=new StringBuilder();
+            StringBuilder strSql = new StringBuilder();
 			strSql.Append("SELECT * FROM ( ");
 			strSql.Append(" SELECT ROW_NUMBER() OVER (");
 			if (!string.IsNullOrEmpty(orderby.Trim()))
 			{
-				strSql.Append("order by T." + orderby );
+                strSql.Append("order by T." + orderby);
 			}
 			else
 			{
@@ -431,13 +431,33 @@ namespace WeiXinPF.DAL
 
         public DataSet GetListList(string openid)
 		{
-			StringBuilder strSql=new StringBuilder();
-			strSql.Append("select id,shopinfoid,openid,wid,orderNumber,deskNumber,customerName,customerTel,address,oderTime,oderRemark,payAmount,payStatus,createDate ");
-			strSql.Append(" FROM wx_diancai_dingdan_manage ");
-            if (openid.Trim() != "")
-			{
-                strSql.Append(" where openid='" + openid + "'");
-			}
+            StringBuilder strSql = new StringBuilder();
+            //strSql.Append("select id,shopinfoid,openid,wid,orderNumber,deskNumber,customerName,customerTel,address,oderTime,oderRemark,payAmount,payStatus,createDate ");
+            //strSql.Append(" FROM wx_diancai_dingdan_manage ");
+
+            strSql.Append(@"SELECT  d.id ,
+                                        shopinfoid ,
+                                        s.hotelName ,
+                                        openid ,
+                                        d.wid ,
+                                        orderNumber ,
+                                        deskNumber ,
+                                        customerName ,
+                                        customerTel ,
+                                        d.address ,
+                                        oderTime ,
+                                        oderRemark ,
+                                        payAmount ,
+                                        payStatus ,
+                                        d.createDate
+                                FROM    wx_diancai_dingdan_manage d
+                                        LEFT JOIN wx_diancai_shopinfo s ON d.shopinfoid = s.id");
+
+            //TODO:测试阶段，没有数据，不对OpenID过滤，后续必须要加上。
+            //if (openid.Trim() != "")
+            //{
+            //    strSql.Append(" where openid='" + openid + "'");
+            //}
 			return DbHelperSQL.Query(strSql.ToString());
 		}
 
@@ -466,9 +486,9 @@ namespace WeiXinPF.DAL
 
         public DataSet Getcaopin(string dingdan)
 		{
-			StringBuilder strSql=new StringBuilder();
+            StringBuilder strSql = new StringBuilder();
             strSql.Append(" select aa.id,aa.cpName as cpName,bb.price as price,bb.num as num,bb.totpric as totpric  from wx_diancai_caipin_manage  as aa ");
-            strSql.Append(" right join (select * from wx_diancai_dingdan_caiping where dingId='"+dingdan +"') as bb on aa.id=bb.caiId ");
+            strSql.Append(" right join (select * from wx_diancai_dingdan_caiping where dingId='" + dingdan + "') as bb on aa.id=bb.caiId ");
 		
 			return DbHelperSQL.Query(strSql.ToString());
 		}
@@ -505,7 +525,7 @@ namespace WeiXinPF.DAL
         public WeiXinPF.Model.wx_diancai_dingdan_manage GetModeldingdan(string dingdan)
 		{
 			
-			StringBuilder strSql=new StringBuilder();
+            StringBuilder strSql = new StringBuilder();
 			strSql.Append("select  top 1 id,shopinfoid,openid,wid,orderNumber,deskNumber,customerName,customerTel,address,oderTime,oderRemark,payAmount,payStatus,createDate from wx_diancai_dingdan_manage ");
             strSql.Append(" where id=@dingdan");
 			SqlParameter[] parameters = {
@@ -513,9 +533,9 @@ namespace WeiXinPF.DAL
 			};
             parameters[0].Value = dingdan;
 
-			WeiXinPF.Model.wx_diancai_dingdan_manage model=new WeiXinPF.Model.wx_diancai_dingdan_manage();
-			DataSet ds=DbHelperSQL.Query(strSql.ToString(),parameters);
-			if(ds.Tables[0].Rows.Count>0)
+            WeiXinPF.Model.wx_diancai_dingdan_manage model = new WeiXinPF.Model.wx_diancai_dingdan_manage();
+            DataSet ds = DbHelperSQL.Query(strSql.ToString(), parameters);
+            if (ds.Tables[0].Rows.Count > 0)
 			{
 				return DataRowToModel(ds.Tables[0].Rows[0]);
 			}
@@ -552,7 +572,7 @@ namespace WeiXinPF.DAL
 
         public DataSet GetListshop(int shopid)
 		{
-			StringBuilder strSql=new StringBuilder();
+            StringBuilder strSql = new StringBuilder();
             strSql.Append("select id,shopinfoid,openid,wid,orderNumber,deskNumber,customerName,customerTel,address,oderTime,oderRemark,payAmount,payStatus,createDate ");
             strSql.Append(" FROM wx_diancai_dingdan_manage where shopinfoid='" + shopid + "' order by  createDate desc,id desc  ");
 		
