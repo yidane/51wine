@@ -70,6 +70,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="threeInterface\weipaiInterface.cs" />
     <Compile Include="threeInterface\xjHongBao.cs" />
+    <Compile Include="WebHelper.cs" />
     <Compile Include="WeiXCommFun.cs" />
     <Compile Include="CRM\WeiXinCRMComm.cs" />
     <Compile Include="WeiXinMediaFun.cs" />

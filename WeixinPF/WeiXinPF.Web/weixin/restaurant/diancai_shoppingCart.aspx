@@ -1,21 +1,17 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="diancai_shoppingCart.aspx.cs" Inherits="WeiXinPF.Web.weixin.restaurant.diancai_shoppingCart" %>
-
-<html>
-<head runat="server">
+﻿<%@ Page Language="C#" MasterPageFile="Restaurant.Master" AutoEventWireup="true" CodeBehind="diancai_shoppingCart.aspx.cs" Inherits="WeiXinPF.Web.weixin.restaurant.diancai_shoppingCart" %>
+<asp:Content ID="h" ContentPlaceHolderID="head" runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="format-detection" content="telephone=no">
-    <title><%=hotelName %></title>
     <link href="css/diancai.css" rel="stylesheet" type="text/css" />
-    <script src="js/jquery.min.js" type="text/javascript"></script>
     <script src="js/cookie.js" type="text/javascript"></script>
     <script src="js/alert.js" type="text/javascript"></script>
 
-</head>
+</asp:Content>
 
-<body id="mymenu">
+<asp:Content ID="c" ContentPlaceHolderID="content" runat="server">
 
     <div id="mcover" onclick="document.getElementById('mcover').style.display='';">
 
@@ -26,16 +22,6 @@
                 <a class="two" href="javascript:void(0)">取消</a>
             </div>
             <a class="x" onclick="document.getElementById('mcover').style.display='';">X</a>
-        </div>
-    </div>
-
-    <div class="menu_header">
-        <div class="menu_topbar">
-            <strong class="head-title">购物车</strong>
-            <span class="head_btn_left"><a href="javascript:history.go(-1);"><span>返回</span></a><b></b></span>
-            <a class="head_btn_right" href="caidan_shangjia.aspx?shopid=<%=shopid %>&openid=<%=openid %>">
-                <span><i class="menu_header_home"></i></span><b></b>
-            </a>
         </div>
     </div>
 
@@ -193,41 +179,6 @@
 
     </form>
 
-    <div class="footermenu">
-        <ul>
-            <li>
-                <a href="caidan_guanyu.aspx?shopid=<%=shopid %>&openid=<%=openid %>">
-                    <img src="images/xxyX63YryG.png">
-                    <p>关于</p>
-                </a>
-            </li>
-            <li>
-                <a href="index.aspx?shopid=<%=shopid %>&openid=<%=openid %>">
-                    <img src="images/Lngjm86JQq.png">
-                    <p><%=rename %></p>
-                </a>
-            </li>
-            <li>
-                <a class="active" href="diancai_shoppingCart.aspx?shopid=<%=shopid %>&openid=<%=openid %>">
-                    <span class="num" id="cartN2">0</span>
-                    <img src="images/2yFKO6TwKI.png">
-                    <p>购物车</p>
-                </a>
-            </li>
-            <li>
-                <a href="diancai_oder.aspx?shopid=<%=shopid %>&openid=<%=openid %>">
-                    <img src="images/s22KaR0Wtc.png">
-                    <p>订单</p>
-                </a>
-            </li>
-            <li>
-                <a href="diancai_geren.aspx?shopid=<%=shopid %>&openid=<%=openid %>">
-                    <img src="images/J0uZbXQWvJ.png">
-                    <p>我的</p>
-                </a>
-            </li>
-        </ul>
-    </div>
     <script>
         var OAK = OAK || {};
         OAK.Dom = {};
@@ -634,5 +585,4 @@
         });
     </script>
 
-</body>
-</html>
+</asp:Content>
