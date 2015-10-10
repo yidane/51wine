@@ -8045,6 +8045,8 @@
     <Content Include="weixin\magazine\js\main_d7a097e190.js" />
     <Content Include="weixin\magazine\js\scroll_7523dfb4df.js" />
     <Content Include="weixin\magazine\magazine.aspx" />
+    <Content Include="weixin\map\cateringlist.html" />
+    <Content Include="weixin\map\hotellist.html" />
     <Content Include="weixin\map\images\ico_general_map_04%402x.png" />
     <Content Include="weixin\map\images\ico_general_map_05%402x.png" />
     <Content Include="weixin\map\images\map\0\0\0.png" />
@@ -9183,6 +9185,7 @@
     <Content Include="weixin\map\images\map\6\9\9.png" />
     <Content Include="weixin\map\images\map\leaflet.html" />
     <Content Include="weixin\map\images\map\openlayers.html" />
+    <Content Include="weixin\map\images\poi_type_icons.png" />
     <Content Include="weixin\map\mapFunctionList.html" />
     <Content Include="weixin\map\baidumap\map_drivingRoute.html" />
     <Content Include="weixin\map\baidumap\map_getcurrentLocation.html" />
@@ -9199,6 +9202,8 @@
     <Content Include="weixin\map\qqmap\qqmap_getcurrentlocation.html" />
     <Content Include="weixin\map\qqmap\qqmap_getLocation.html" />
     <Content Include="weixin\map\qqmap\qqmap_seachservicebycircle.html" />
+    <Content Include="weixin\map\map_service.html" />
+    <Content Include="weixin\map\sceniclist.html" />
     <Content Include="weixin\message\css\message.css" />
     <Content Include="weixin\message\images\11.jpg" />
     <Content Include="weixin\message\images\icon06.gif" />

@@ -1,0 +1,317 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>酒店预定</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link href="../../css/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <style type="text/css">
+        * {
+            margin: 0;
+            outline: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: rgba(0,0,0,0);
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+            a:visited {
+                color: #000;
+            }
+
+        html {
+            height: 100%;
+            -webkit-text-size-adjust: 100%;
+            -moz-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+            text-size-adjust: 100%;
+        }
+
+        body {
+            width: 100%;
+            height: 100%;
+            font-family: 'Microsoft Yahei',Tahoma,Helvetica,Arial,sans-serif;
+            font-size: 62.5%;
+            position: relative;
+        }
+
+        ul, li {
+            list-style: none;
+        }
+
+        .content {
+            width: 100%;
+            height: 100%;
+        }
+
+        .header {
+            position: relative;
+            width: 100%;
+            line-height: 44px;
+            height: 44px;
+            background-color: #62b900;
+        }
+
+        .text {
+            margin: 0 80px;
+            text-align: center;
+            font-size: 18px;
+            color: #fff;
+        }
+
+        .back {
+            float: left;
+            width: 50px;
+            line-height: 44px;
+            height: 44px;
+            height: 100%;
+            font-size: 32px;
+            text-align: center;
+            color: #fff;
+            opacity: .65;
+        }
+
+        .user-center {
+            float: right;
+            width: 50px;
+            line-height: 44px;
+            height: 44px;
+            height: 100%;
+            font-size: 28px;
+            text-align: center;
+            color: #fff;
+            opacity: .65;
+        }
+
+        .search-wrapper {
+            position: relative;
+            padding: 5px 12px;
+            width: 100%;
+            height: 44px;
+            overflow: hidden;
+            background: #eee;
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+            .search-wrapper .input {
+                display: block;
+                height: 100%;
+                width: 100%;
+                padding: 7px 32px 7px 12px;
+                line-height: 20px;
+                border-radius: 24px;
+                color: #303030;
+                border: 1px solid #dbdbdb;
+            }
+
+            .search-wrapper .botton {
+                position: absolute;
+                display: block;
+                top: 50%;
+                right: 9px;
+                border: none;
+                width: 30px;
+                line-height: 30px;
+                height: 30px;
+                margin-top: -15px;
+                font-size: 14px;
+                color: #4cff00;
+            }
+
+        .hotel-list {
+            width: 100%;
+            overflow: hidden;
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        .hotel-list-container {
+            width: 100%;
+            padding: 0 12px;
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        .hotel-item {
+            display: block;
+            padding: 12px 0;
+            text-decoration: none;
+            border-bottom: 1px solid #e0e0e0;
+            overflow: hidden;
+        }
+
+            .hotel-item .img-wapper {
+                position: relative;
+                float: left;
+                width: 96px;
+                height: 72px;
+            }
+
+                .hotel-item .img-wapper img {
+                    width: 100%;
+                    height: 100%;
+                }
+
+            .hotel-item .info-wapper {
+                position: relative;
+                margin-left: 108px;
+            }
+
+                .hotel-item .info-wapper .info-title {
+                    line-height: 16px;
+                    height: 16px;
+                    overflow: hidden;
+                }
+
+                    .hotel-item .info-wapper .info-title .title {
+                        display: inline-block;
+                        max-width: 100%;
+                        font-size: 16px;
+                        font-weight: 700;
+                        color: #22222d;
+                        white-space: nowrap;
+                        overflow: hidden;
+                        -ms-text-overflow: ellipsis;
+                        -o-text-overflow: ellipsis;
+                        text-overflow: ellipsis;
+                    }
+
+                    .hotel-item .info-wapper .info-title .distince {
+                        float: right;
+                        color: #88888d;
+                        font-size: 12px;
+                    }
+
+                .hotel-item .info-wapper .info-desc {
+                    line-height: 16px;
+                    height: 32px;
+                    margin: 4px 0;
+                    overflow: hidden;
+                    display: -webkit-box;
+                    -webkit-line-clamp: 2;
+                    -webkit-box-orient: vertical;
+                    font-size: 12px;
+                    color: #88888d;
+                }
+
+                .hotel-item .info-wapper .info-botton {
+                    height: 16px;
+                }
+
+                    .hotel-item .info-wapper .info-botton .button {
+                        float: left;
+                        display: block;
+                        width: 50%;
+                        text-align: center;
+                    }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <header class="header">
+            <a href="javascript:history.back();" class="back fa fa-angle-left">
+            </a>
+            <a class="user-center fa fa-user" ></a>
+            <div class="text">酒店列表</div>
+        </header>
+        <section class="search-wrapper">
+            <input class="input" type="search" maxlength="20" placeholder="搜索酒店">
+            <i class="botton fa fa-search"></i>
+        </section>
+        <section class="hotel-list">
+            <div class="hotel-list-container">
+                <a class="hotel-item">
+                    <div class="img-wapper">
+                        <img src="images/popular.jpg" />
+                    </div>
+                    <div class="info-wapper">
+                        <div class="info-title">
+                            <div class="title">喀纳斯山庄(三星级)</div>
+                            <div class="distince">1000km</div>
+                        </div>
+                        <div class="info-desc">我是喀纳斯山庄 啊呀呀呀</div>
+                        <div class="info-botton">
+                            <span class="button">
+                                <i class="fa fa-money"></i>
+                                预定
+                            </span>
+                            <span class="button">
+                                <i class="fa fa-location-arrow"></i> 去这
+                            </span>
+                        </div>
+                    </div>
+                </a>
+                <a class="hotel-item">
+                    <div class="img-wapper">
+                        <img src="images/popular.jpg" />
+                    </div>
+                    <div class="info-wapper">
+                        <div class="info-title">
+                            <div class="title">喀纳斯山庄(三星级)</div>
+                            <div class="distince">1000km</div>
+                        </div>
+                        <div class="info-desc">我是喀纳斯山庄 啊呀呀呀</div>
+                        <div class="info-botton">
+                            <span class="button">
+                                <i class="fa fa-money"></i>
+                                预定
+                            </span>
+                            <span class="button">
+                                <i class="fa fa-location-arrow"></i> 去这
+                            </span>
+                        </div>
+                    </div>
+                </a>
+                <a class="hotel-item">
+                    <div class="img-wapper">
+                        <img src="images/popular.jpg" />
+                    </div>
+                    <div class="info-wapper">
+                        <div class="info-title">
+                            <div class="title">喀纳斯山庄(三星级)</div>
+                            <div class="distince">1000km</div>
+                        </div>
+                        <div class="info-desc">我是喀纳斯山庄 啊呀呀呀</div>
+                        <div class="info-botton">
+                            <span class="button">
+                                <i class="fa fa-money"></i>
+                                预定
+                            </span>
+                            <span class="button">
+                                <i class="fa fa-location-arrow"></i> 去这
+                            </span>
+                        </div>
+                    </div>
+                </a>
+                <a class="hotel-item">
+                    <div class="img-wapper">
+                        <img src="images/popular.jpg" />
+                    </div>
+                    <div class="info-wapper">
+                        <div class="info-title">
+                            <div class="title">喀纳斯山庄(三星级)</div>
+                            <div class="distince">1000km</div>
+                        </div>
+                        <div class="info-desc">我是喀纳斯山庄 啊呀呀呀</div>
+                        <div class="info-botton">
+                            <span class="button">
+                                <i class="fa fa-money"></i>
+                                预定
+                            </span>
+                            <span class="button">
+                                <i class="fa fa-location-arrow"></i> 去这
+                            </span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </section>
+    </div>
+</body>
+</html>

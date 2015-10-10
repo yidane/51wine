@@ -1,0 +1,378 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>身边服务</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link href="../../css/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <style type="text/css">
+        * {
+            margin: 0;
+            outline: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: rgba(0,0,0,0);
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+            a:visited {
+                color: #000;
+            }
+
+        html {
+            height: 100%;
+            -webkit-text-size-adjust: 100%;
+            -moz-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+            text-size-adjust: 100%;
+        }
+
+        body {
+            width: 100%;
+            height: 100%;
+            font-family: 'Microsoft Yahei',Tahoma,Helvetica,Arial,sans-serif;
+            font-size: 62.5%;
+            position: relative;
+        }
+
+        ul, li {
+            list-style: none;
+        }
+
+        .content {
+            width: 100%;
+            height: 100%;
+        }
+
+        .search-wrapper {
+            position: relative;
+            padding: 5px 12px;
+            width: 100%;
+            height: 44px;
+            overflow: hidden;
+            background: #eee;
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+            .search-wrapper .input {
+                display: block;
+                height: 100%;
+                width: 100%;
+                padding: 7px 32px 7px 12px;
+                line-height: 20px;
+                border-radius: 24px;
+                color: #303030;
+                border: 1px solid #dbdbdb;
+            }
+
+            .search-wrapper .botton {
+                position: absolute;
+                display: block;
+                top: 50%;
+                right: 9px;
+                border: none;
+                width: 30px;
+                line-height: 30px;
+                height: 30px;
+                margin-top: -15px;
+                font-size: 14px;
+                color: #4cff00;
+            }
+
+        .poi-list-view {
+            width: 100%;
+            padding: 20px 10px;
+            overflow: hidden;
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+            .poi-list-view li {
+                float: left;
+                width: 33%;
+                text-align: center;
+            }
+
+                .poi-list-view li:nth-child(3n) {
+                    width: 34%;
+                }
+
+        .poi-img {
+            display: block;
+            margin: 0 auto;
+            width: 64px;
+            height: 64px;
+            border-radius: 64px;
+            font-size: 24px;
+            line-height: 64px;
+            color: #fff;
+            text-align: center;
+        }
+
+            .poi-img.fa-cutlery {
+                background-color: #f73838;
+            }
+
+            .poi-img.fa-hotel {
+                background-color: #f3a61f;
+            }
+
+            .poi-img.fa-tree {
+                background-color: #61b51d;
+            }
+
+        .poi-text {
+            display: block;
+            text-align: center;
+            font-size: 14px;
+            line-height: 28px;
+        }
+
+        .popular-list {
+            width: 100%;
+            overflow: hidden;
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        .popular-list-title {
+            height: 40px;
+            line-height: 40px;
+            padding: 0 12px;
+            font-weight: 400;
+            font-size: 16px;
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        .popular-list-container {
+            width: 100%;
+            padding: 0 12px;
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        .popular-item {
+            display: block;
+            padding: 12px 0;
+            text-decoration: none;
+            border-bottom: 1px solid #e0e0e0;
+            overflow: hidden;
+        }
+
+            .popular-item .img-wapper {
+                position: relative;
+                float: left;
+                width: 96px;
+                height: 72px;
+            }
+
+                .popular-item .img-wapper img {
+                    width: 100%;
+                    height: 100%;
+                }
+
+            .popular-item .info-wapper {
+                position: relative;
+                margin-left: 108px;
+            }
+
+                .popular-item .info-wapper .info-title {
+                    line-height: 16px;
+                    height: 16px;
+                    overflow: hidden;
+                }
+
+                    .popular-item .info-wapper .info-title .title {
+                        display: inline-block;
+                        max-width: 100%;
+                        font-size: 16px;
+                        font-weight: 700;
+                        color: #22222d;
+                        white-space: nowrap;
+                        overflow: hidden;
+                        -ms-text-overflow: ellipsis;
+                        -o-text-overflow: ellipsis;
+                        text-overflow: ellipsis;
+                    }
+
+                    .popular-item .info-wapper .info-title .distince {
+                        float: right;
+                        color: #88888d;
+                        font-size: 12px;
+                    }
+
+                .popular-item .info-wapper .info-desc {
+                    line-height: 16px;
+                    height: 32px;
+                    margin: 4px 0;
+                    overflow: hidden;
+                    display: -webkit-box;
+                    -webkit-line-clamp: 2;
+                    -webkit-box-orient: vertical;
+                    font-size: 12px;
+                    color: #88888d;
+                }
+
+                .popular-item .info-wapper .info-botton {
+                    height: 16px;
+                }
+
+                    .popular-item .info-wapper .info-botton .button {
+                        float: left;
+                        display: block;
+                        width: 50%;
+                        text-align: center;
+                    }
+
+        .bottom-navigation {
+            position: fixed;
+            z-index: 900;
+            width: 100%;
+            bottom: 0;
+            background-color: #f9f9f9;
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        .btn-group {
+            width: 100%;
+            -webkit-box-align: center;
+            display: -webkit-box !important;
+            display: -webkit-flex !important;
+            -webkit-align-items: center;
+        }
+
+        .btn {
+            display: block;
+            height: 44px;
+            line-height: 44px;
+            font-size: 15px;
+            border-top: 1px solid #d4d4d4;
+            border-right: 1px solid #d4d4d4;
+            padding: 0 10px;
+            -webkit-box-flex: 1;
+            -webkit-flex: 1;
+            text-align: center;
+        }
+            .btn:last-child {
+                border-right: none;
+            }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <section class="search-wrapper">
+            <input class="input" type="search" maxlength="20" placeholder="搜索景点、酒店、餐饮">
+            <i class="botton fa fa-search"></i>
+        </section>
+        <section class="poi-list-view">
+            <ul>
+                <li>
+                    <a href="sceniclist.html">
+                        <i class="poi-img fa fa-tree"></i>
+                        <label class="poi-text">景点</label>
+                    </a>
+                </li>
+                <li>
+                    <a href="hotellist.html">
+                        <i class="poi-img fa fa-hotel"></i>
+                        <label class="poi-text">酒店</label>
+                    </a>
+                </li>
+                <li>
+                    <a href="cateringlist.html">
+                        <i class="poi-img fa fa-cutlery"></i>
+                        <label class="poi-text">餐饮</label>
+                    </a>
+                </li>
+            </ul>
+        </section>
+        <section class="popular-list">
+            <h3 class="popular-list-title">热门推荐</h3>
+            <div class="popular-list-container">
+                <a class="popular-item">
+                    <div class="img-wapper">
+                        <img src="images/popular.jpg" />
+                    </div>
+                    <div class="info-wapper">
+                        <div class="info-title">
+                            <div class="title">卧龙湾</div>
+                            <div class="distince">1000km</div>
+                        </div>
+                        <div class="info-desc">我是卧龙湾湾 啊呀呀呀</div>
+                        <div class="info-botton">
+                            <span class="button">
+                                <i class="fa fa-bullhorn"></i>
+                                介绍
+                            </span>
+                            <span class="button">
+                                <i class="fa fa-location-arrow"></i> 去这
+                            </span>
+                        </div>
+                    </div>
+                </a>
+                <a class="popular-item">
+                    <div class="img-wapper">
+                        <img src="images/popular.jpg" />
+                    </div>
+                    <div class="info-wapper">
+                        <div class="info-title">
+                            <div class="title">喀纳斯山庄(三星级)</div>
+                            <div class="distince">1000km</div>
+                        </div>
+                        <div class="info-desc">我是喀纳斯山庄 啊呀呀呀</div>
+                        <div class="info-botton">
+                            <span class="button">
+                                <i class="fa fa-money"></i>
+                                预定
+                            </span>
+                            <span class="button">
+                                <i class="fa fa-location-arrow"></i> 去这
+                            </span>
+                        </div>
+                    </div>
+                </a>
+                <a class="popular-item">
+                    <div class="img-wapper">
+                        <img src="images/popular.jpg" />
+                    </div>
+                    <div class="info-wapper">
+                        <div class="info-title">
+                            <div class="title">坑德基</div>
+                            <div class="distince">1000km</div>
+                        </div>
+                        <div class="info-desc">我是肯德基 啊呀呀呀</div>
+                        <div class="info-botton">
+                            <span class="button">
+                                <i class="fa fa-money"></i>
+                                预定
+                            </span>
+                            <span class="button">
+                                <i class="fa fa-location-arrow"></i> 去这
+                            </span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </section>
+        <section class="bottom-navigation">
+            <div class="btn-group">
+                <a class="btn" href="map_address.html">当前位置</a>
+                <a class="btn">身边服务</a>
+                <a class="btn" href="map_address.html">去哪儿玩</a>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
