@@ -9197,6 +9197,7 @@
     <Content Include="weixin\map\index.html" />
     <Content Include="weixin\map\js\mapaddress_vm.js" />
     <Content Include="weixin\map\map_address.html" />
+    <Content Include="weixin\map\map_aroundService.html" />
     <Content Include="weixin\map\map_scenic.html" />
     <Content Include="weixin\map\qqmap\qqmap_drivingRoute.html" />
     <Content Include="weixin\map\qqmap\qqmap_getcurrentlocation.html" />
