@@ -9369,9 +9369,11 @@
     <Content Include="weixin\restaurant\images\xxyX63YryG.png" />
     <Content Include="weixin\restaurant\index.aspx" />
     <Content Include="weixin\restaurant\js\alert.js" />
+    <Content Include="weixin\restaurant\js\BuyProducts.js" />
     <Content Include="weixin\restaurant\js\cookie.js" />
     <Content Include="weixin\restaurant\js\iscroll.js" />
     <Content Include="weixin\restaurant\js\jquery.min.js" />
+    <Content Include="weixin\restaurant\js\shopCart.js" />
     <Content Include="weixin\restaurant\zhaoshang_xiangq.aspx" />
     <Content Include="weixin\scenic\css\index.css" />
     <Content Include="weixin\scenic\css\swiper.min.css" />

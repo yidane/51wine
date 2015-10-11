@@ -26,7 +26,7 @@
     </div>
 
     <div class="header">
-        <span class="pCount">请叫服务员下单</span>
+        <span class="pCount"></span>
         <label><i>共计：</i><b id="totalPrice" class="duiqi">0</b><b class="duiqi">元</b></label>
     </div>
 
@@ -178,268 +178,27 @@
         </div>
 
     </form>
-
+    
+    <script src="js/shopCart.js" type="text/javascript"></script>
+    <script src="js/BuyProducts.js" type="text/javascript"></script>
     <script>
-        var OAK = OAK || {};
-        OAK.Dom = {};
-        OAK.Shop = {};
-        OAK.Util = {};
-        OAK.Dom.setAttributes = function (el, prop) {
-            for (var i in prop) {
-                el.setAttribute(i, prop[i]);
-            }
-            return el;
+        var cart = new OAK.Shop.Cart(<%=shopid %>);
+        window.onload = function () {
+            cart.getFromCache();
+            showShopCart();
         }
-        OAK.Util.setProps = function (s, prop) {
-            for (var i in prop) {
-                s[i] = prop[i];
-            }
-            return s;
+        function clearCache() {
+            cart.clear();
+            showShopCart();
         }
-        OAK.Util.isEqualInConditions = function (o, conditions) {
-            for (var i in conditions) {
-                if (o[i] != conditions[i]) {
-                    return false;
-                }
-            }
-            return true;
-        }
-        OAK.Util.copy = function (o) {
-            var res = new Object();
-            for (var i in o) {
-                res[i] = o[i];
-            }
-            return res;
-        }
-        OAK.Util.setParam = function (name, value) {
-            localStorage.setItem(name, value);
-        }
-        OAK.Util.getParam = function (name) {
-            return localStorage.getItem(name);
-        }
-        OAK.Shop.Product = function (prop) {
-            var prod = {
-                id: 0,
-                name: "",
-                specId: 0,
-                price: 0.00,
-                number: 0,
-                categoryId: 0
-            };
-            return new OAK.Util.setProps(prod, prop);
-        }
-        OAK.Shop.Cart = function () {
-            if (typeof OAK.Shop.Cart.single_instance === "undefined") {
-                this._totalNumber = 0;
-                this._totalAmount = 0.00;
-                this._products = [];
-                this.onBeforeAdd = null;
-                this.onAfterAdd = null;
-                this.onBeforeUpdate = null;
-                this.onAfterUpdate = null;
-                this.onBeforeDelete = null;
-                this.onAfterDelete = null;
-                OAK.Shop.Cart.single_instance = this;
-            }
-            return OAK.Shop.Cart.single_instance;
-        }
-        OAK.Shop.Cart.prototype = {
-            specs: { 1: "正辣", 2: "微辣", 3: "不辣" },
-            categories: <%=categories%>,
-            total: 50,
-            saveToCache: function () {
-                OAK.Util.setParam("ShoppingdiancaiCart<%=shopid%>", JSON.stringify(this));
-             },
-            getFromCache: function () {
-                var ShoppingdiancaiCart<%=shopid%> = OAK.Util.getParam("ShoppingdiancaiCart<%=shopid%>");
-                 if (ShoppingdiancaiCart<%=shopid%> != null && ShoppingdiancaiCart<%=shopid%> != "") {
-                     //alert(ShoppingdiancaiCart783);
-                     OAK.Util.setProps(this, JSON.parse(ShoppingdiancaiCart<%=shopid%>));
-                }
-             },
-            clear: function () {
-                //localStorage.clear();
-                OAK.Util.setParam("ShoppingdiancaiCart<%=shopid%>", null);
-                 this._totalNumber = 0;
-                 this._totalAmount = 0.00;
-                 this._products = [];
-             },
-            addProduct: function (p, conditions) {
-                this.onBeforeAdd !== null && this.onBeforeAdd(this, p, conditions);
-                var _conditions = conditions || { id: p.id, specId: p.specId, ref: true };
-                var alreadyExistProduct = this.getProduct(_conditions);
-                var ret_num = 0;
-                //一元鸭翅活动
-                if (p.name == "一元鸭翅" && this.existProduct({ name: p.name })) {
-                    alert("每单只能购买一盒一元鸭翅");
-                    return;
-                }
-                if (alreadyExistProduct !== null) {
-                    alreadyExistProduct.number += p.number;
-                }
-                else
-                    this._products.push(p);
-                this._totalNumber += p.number;
-                this._totalAmount += p.number * p.price;
-                this.onAfterAdd !== null && this.onAfterAdd(this, alreadyExistProduct ? alreadyExistProduct.number : p.number, _conditions);
-            },
-            getQuantity: function () {
-                return { totalNumber: this._totalNumber, totalAmount: this._totalAmount };
-            },
-            updateNumber: function (num, conditions) {
-                this.onBeforeUpdate !== null && this.onBeforeUpdate(this, num, conditions);
-                conditions.ref = true;
-                var alreadyExistProduct = this.getProduct(conditions);
-                if (alreadyExistProduct !== null) {
-                    this._totalNumber += (parseInt(num) - parseInt(alreadyExistProduct.number));
-                    this._totalAmount += ((parseInt(num) * parseFloat(alreadyExistProduct.price)) - parseInt(alreadyExistProduct.number) * parseFloat(alreadyExistProduct.price));
-                    alreadyExistProduct.number = num;
-                }
-                this.onAfterUpdate !== null && this.onAfterUpdate(this, alreadyExistProduct ? alreadyExistProduct.number : 0, conditions);
-            },
-            //获取购物车中的所有商品
-            getProductList: function () {
-                return this._products;
-            },
-            getProduct: function (conditions) {
-                var ref = conditions.ref;
-                delete conditions.ref;
-                for (var i in this._products) {
-                    if (OAK.Util.isEqualInConditions(this._products[i], conditions))
-                        return ref ? this._products[i] : OAK.Util.copy(this._products[i]);
-                }
-                return null;
-            },
-            getProductNumber: function (conditions) {
-                for (var i in this._products) {
-                    if (OAK.Util.isEqualInConditions(this._products[i], conditions))
-                        return this._products[i].number;
-                }
-                return null;
-            },
-            existProduct: function (conditions) {
-                for (var i in this._products) {
-                    if (OAK.Util.isEqualInConditions(this._products[i], conditions))
-                        return true;
-                }
-                return false;
-            },
-            deleteProduct: function (conditions) {
-                this.onBeforeDelete !== null && this.onBeforeDelete(this, conditions);
-                for (var i in this._products) {
-                    if (OAK.Util.isEqualInConditions(this._products[i], conditions)) {
-                        this._totalNumber -= parseInt(this._products[i].number);
-                        this._totalAmount -= parseInt(this._products[i].number) * parseFloat(this._products[i].price);
-                        this._products.splice(i, 1);
-                        break;
-                    }
-                }
-                this.onAfterDelete !== null && this.onAfterDelete(this, conditions);
-            },
-            sortAsc: function (a, b) {
-                if (a.categoryId > b.categoryId) {
-                    return 1;
-                } else if (a.categoryId == b.categoryId) {
-                    if (a.id > b.id)
-                        return 1;
-                    else if (a.id == b.id)
-                        return a.specId > b.specId ? 1 : -1;
-                    return -1;
-                }
-                return -1;
-            }
-        }
-    </script>
-    <script>
-        function g(id) {
-            return document.getElementById(id);
-        }
-
 
         function gotoorder() {
             window.location.href = window.location.href;
             //window.location.href='http://www.apiwx.com/?ac=diancaionline-list&c=o99epjjmjWhMPNzoQbo9r6DAEYds&shopid=783&id=33473&g=1';
         }
-        var cart = new OAK.Shop.Cart();
 
-        function clearCache() {
-            cart.clear();
-            cart.showCartInfo();
-        }
-        function addProduct(productId, specId, name, price, categoryId, addnum) {
-
-            cart.addProduct(OAK.Shop.Product({ id: productId, specId: specId, number: addnum, price: price, name: name, categoryId: categoryId }));
-        }
-        function reduceProduct(productId, specId, num) {
-            var oldnum = cart.getProductNumber({ id: productId, specId: specId });
-            if (oldnum !== null) {
-                if (oldnum - num > 0) {
-                    cart.updateNumber(oldnum - num, { id: productId, specId: specId });
-                } else {
-                    cart.deleteProduct({ id: productId, specId: specId });
-                }
-            }
-        }
-        function showTip() {
-            var quant = cart.getQuantity();
-            if (quant.totalAmount >= cart.total) {
-                g('infoForm').style.display = "";
-                g('notEnoughLi').style.display = "none";
-                g('emptyLi').style.display = "none";
-            } else {
-                g('infoForm').style.display = "none";
-                if (quant.totalAmount > 0) {
-                    g('notEnoughLi').style.display = "";
-                    g('emptyLi').style.display = "none";
-                }
-                else {
-                    g('emptyLi').style.display = "";
-                    g('notEnoughLi').style.display = "none";
-                }
-            }
-        }
-        function getNextElement(node) {
-            if (node.nextSibling.nodeType == 1) {    //判断下一个节点类型为1则是"元素"节点
-                return node.nextSibling;
-            }
-            if (node.nextSibling.nodeType == 3) {      //判断下一个节点类型为3则是"文本"节点  ，回调自身函数
-                return getNextElement(node.nextSibling);
-            }
-            return null;
-        }
-        function getPreviousElement(node) {
-            if (node.previousSibling.nodeType == 1) {    //判断下一个节点类型为1则是"元素"节点
-                return node.previousSibling;
-            }
-            if (node.previousSibling.nodeType == 3) {      //判断下一个节点类型为3则是"文本"节点  ，回调自身函数
-                return getPreviousElement(node.previousSibling);
-            }
-            return null;
-        }
-        cart.showProductNum = function (productId, specId, num) {
-            if (num > 0) {
-                g("num_" + productId + "_" + specId).innerHTML = parseInt(num);
-            } else {
-                var curNode = g("li_" + productId + "_" + specId);
-                var nextNode = getNextElement(curNode);
-                if (!nextNode || nextNode.nodeName != 'LI' || nextNode.id == 'notEnoughLi' || nextNode.id == 'emptyLi') {
-                    var previousNode = getPreviousElement(curNode);
-                    if (previousNode && previousNode.nodeName == 'DT') {
-                        previousNode.parentNode.removeChild(previousNode);
-                    }
-                }
-                curNode.parentNode.removeChild(curNode);
-            }
-        }
-        cart.showTotalNum = function () {
-            var quant = cart.getQuantity();
-            // g("totalNum").innerHTML = quant.totalNumber;
-            SetCookie("diancai<%=shopid%>", quant.totalNumber);
-            g("cartN2").innerHTML = quant.totalNumber;
-            g("totalPrice").innerHTML = quant.totalAmount.toFixed(2);
-            showTip();
-        };
-        cart.showCartInfo = function () {
+        function showShopCart() {
+            var categories = <%=string.IsNullOrEmpty(categories) ? "[]" : categories%>;
             var products = cart.getProductList();
             var orderlist = g("ullist");
             products && products.sort(cart.sortAsc);
@@ -447,47 +206,52 @@
             var currentCategory = 0;
             for (var i in products) {
                 if (currentCategory != products[i].categoryId) {
-                    liststr += "<dt>" + cart.categories[products[i].categoryId] + "</dt>";
+                    liststr += "<dt>" + categories[products[i].categoryId] + "</dt>";
                     currentCategory = products[i].categoryId;
 
                 }
                 liststr += "<li class=\"ccbg2\" id=\"li_" + products[i].id + "_" + products[i].specId + "\">" +
-                "<div class=\"orderdish\"><span class=\"\">" + products[i].name + "</span><p><span class=\"price\" id=\"v_0\">" + products[i].price + "</span><span class=\"price\">元</span></p></div>" +
+                    "<div class=\"orderdish\"><span class=\"\">" + products[i].name + "</span><p><span class=\"price\" id=\"v_0\">" + products[i].price + "</span><span class=\"price\">元</span></p></div>" +
                     "<div class=\"orderchange\">" +
-                        "<a href=\"javascript:addProduct(" + products[i].id + "," + products[i].specId + ",\'" + products[i].name + "\'," + products[i].price + "," + products[i].categoryId + ",1" + ")\" class=\"increase\"><b class=\"ico_increase\">加一份</b></a>" +
-                        "<span class=\"count\" id=\"num_" + products[i].id + "_" + products[i].specId + "\">" + products[i].number + "</span>" +
-                        "<a href=\"javascript:reduceProduct(" + products[i].id + "," + products[i].specId + ",1)\" class=\"reduce\"><b class=\"ico_reduce\">减一份</b></a>" +
+                    "<a href=\"javascript:addProduct(" + products[i].id + "," + products[i].specId + ",\'" + products[i].name + "\'," + products[i].price + "," + products[i].categoryId + ",1" + ")\" class=\"increase\"><b class=\"ico_increase\">加一份</b></a>" +
+                    "<span class=\"count\" id=\"num_" + products[i].id + "_" + products[i].specId + "\">" + products[i].number + "</span>" +
+                    "<a href=\"javascript:reduceProduct(" + products[i].id + "," + products[i].specId + ",1)\" class=\"reduce\"><b class=\"ico_reduce\">减一份</b></a>" +
                     "</div>" +
-                "</li>";
+                    "</li>";
 
             }
-            liststr += "<li class=\"ccbg2\" id='notEnoughLi' style='display: none;'>必须要满" + cart.total + "元才能下单哦</li>" +
-            "<li class=\"ccbg2\" id='emptyLi' style='display: none;'>购物车为空哦，快去挑选吧！</li>";
+            liststr += "<li class=\"ccbg2\" id='notEnoughLi' style='display: none;'>必须要满1元才能下单哦</li>" +
+                "<li class=\"ccbg2\" id='emptyLi' style='display: none;'>购物车为空哦，快去挑选吧！</li>";
 
             orderlist.innerHTML = liststr;
-            cart.showTotalNum();
+            showShopCartTotalProce();
+            showShopCartProductsNumber();
+            showShopCartProductsDetail();
         };
         cart.onAfterAdd = function (obj, num, conditions) {
-            cart.showProductNum(conditions.id, conditions.specId, num);
-            cart.showTotalNum();
+            processProductsInShopCart(conditions.id, conditions.specId, num);
+            showShopCartTotalProce();
+            showShopCartProductsNumber();
+            showShopCartProductsDetail();
             cart.saveToCache();
         };
         cart.onAfterUpdate = function (obj, num, conditions) {
-            cart.showProductNum(conditions.id, conditions.specId, num);
-            cart.showTotalNum();
+            processProductsInShopCart(conditions.id, conditions.specId, num);
+            showShopCartTotalProce();
+            showShopCartProductsNumber();
+            showShopCartProductsDetail();
             cart.saveToCache();
         };
         cart.onAfterDelete = function (obj, conditions) {
-            cart.showProductNum(conditions.id, conditions.specId, 0);
-            cart.showTotalNum();
+            processProductsInShopCart(conditions.id, conditions.specId, 0);
+            showShopCartTotalProce();
+            showShopCartProductsNumber();
+            showShopCartProductsDetail();
             cart.saveToCache();
         };
     </script>
     <script>
-
         function submitOrder() {
-           
-
             vailReSubmit();
            
             if (valiForm()) {
@@ -515,13 +279,13 @@
             };
            
             $.post('diancai_login.ashx?openid=<%=openid%>&shopid=<%=shopid%>', submitData,
-             function (data) {
+                function (data) {
                 
-                 if (data.ret == "ok") {
-                     alert(data.content);
-                     clearCache();
-                 } else { alert(data.content); }
-             },
+                    if (data.ret == "ok") {
+                        alert(data.content);
+                        clearCache();
+                    } else { alert(data.content); }
+                },
                 "json");
 
 
@@ -568,18 +332,9 @@
             g('wxpay').checked = false;
             g('huodao').checked = true;
             return false;
-        }
-        window.onload = function () {
-            cart.getFromCache();
-
-            cart.total = 12;
-            cart.showCartInfo();
-        }
-
+        }       
     </script>
     <script type="text/javascript">
-
-
         document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
             WeixinJSBridge.call('hideToolbar');
         });
