@@ -235,16 +235,23 @@ namespace WeiXinPF.BLL
             DataSet dr = GetcommodityTable(id);
             DataTable dt = dr.Tables[0];
             int sum=0;
+            int paid = 0;
             if (dt.Rows.Count >= 0)
             {
                 for (int i = 0; i < dt.Rows.Count; i++)
                 {
-                    if (dt.Rows[i]["status"].ToString() == "0" || dt.Rows[i]["status"].ToString() == "1")
+                    if (dt.Rows[i]["status"].ToString() == "1")
+                        paid++;
+                    else if (dt.Rows[i]["status"].ToString() == "2")
                         sum++;
                 }
-                if (sum == 0)
+                if (sum == dt.Rows.Count)
                 {
                     Updatestatus(id, RestaurantCommodityStatus.Used.ToString());
+                }
+                if (paid == dt.Rows.Count)
+                {
+                    Updatestatus(id, RestaurantCommodityStatus.Paid.ToString());
                 }
             }
             return result;
