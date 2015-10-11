@@ -15,12 +15,20 @@ namespace WeiXinPF.WebService
         /// 获取地图基本信息
         /// </summary>
         [WebMethod]
-        public void GetMapInfo(int id)
+        public void GetMapInfo(int id, string type)
         {
             try
             {
+                var mapInfo = new MapDTO();
                 var service = new MapService();
-                var mapInfo = service.GetMapInfo(id);
+                switch (type)
+                {
+                    case "scenic"://类似是景区
+                        mapInfo = service.GetMapInfo(id);
+                        break;
+
+                }
+
 
 
                 Context.Response.Write(AjaxResult.Success(mapInfo));
@@ -47,7 +55,7 @@ namespace WeiXinPF.WebService
             {
                 BLL.wx_travel_marker bll = new BLL.wx_travel_marker();
                 var markers = bll.GetModelList(string.Format("wid={0}", wid));
-               
+
                 if (!markers.Any())
                 {
                     Context.Response.Write(new AjaxResponse(new ErrorInfo("该微信帐号下未配置景点信息")));
