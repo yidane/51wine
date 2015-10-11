@@ -59,6 +59,9 @@
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net40\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Gma.QrCodeNet.Encoding">
+      <HintPath>..\dll\Gma.QrCodeNet.Encoding.dll</HintPath>
+    </Reference>
     <Reference Include="LitJSON, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\LitJSON.dll</HintPath>
@@ -7197,12 +7200,22 @@
     <Compile Include="weixin\restaurant\diancai_oder.aspx.designer.cs">
       <DependentUpon>diancai_oder.aspx</DependentUpon>
     </Compile>
+    <Compile Include="weixin\restaurant\diancai_orderDetail.aspx.cs">
+      <DependentUpon>diancai_orderDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="weixin\restaurant\diancai_orderDetail.aspx.designer.cs">
+      <DependentUpon>diancai_orderDetail.aspx</DependentUpon>
+    </Compile>
     <Compile Include="weixin\restaurant\diancai_shoppingCart.aspx.cs">
       <DependentUpon>diancai_shoppingCart.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="weixin\restaurant\diancai_shoppingCart.aspx.designer.cs">
       <DependentUpon>diancai_shoppingCart.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="weixin\restaurant\ErCodeHandler.ashx.cs">
+      <DependentUpon>ErCodeHandler.ashx</DependentUpon>
     </Compile>
     <Compile Include="weixin\restaurant\index.aspx.cs">
       <DependentUpon>index.aspx</DependentUpon>
@@ -7882,6 +7895,12 @@
     <Content Include="weixin\cashred\images\title-bg-red.png" />
     <Content Include="weixin\cashred\index.aspx" />
     <Content Include="weixin\cashred\js\alert.js" />
+    <Content Include="weixin\restaurant\css\swiper.min.css" />
+    <Content Include="weixin\restaurant\images\gp_icons.png" />
+    <Content Include="weixin\restaurant\images\info.png" />
+    <Content Include="weixin\restaurant\images\time.png" />
+    <Content Include="weixin\restaurant\images\undo.png" />
+    <Content Include="weixin\restaurant\js\swiper.min.js" />
     <Content Include="weixin\cashred\js\watermark.js" />
     <Content Include="weixin\cashred\js\wScratchPad.js" />
     <Content Include="weixin\cashred\js\zepto.js" />
@@ -9351,6 +9370,7 @@
     <Content Include="weixin\restaurant\diancai_geren.aspx" />
     <Content Include="weixin\restaurant\diancai_Login.aspx" />
     <Content Include="weixin\restaurant\diancai_oder.aspx" />
+    <Content Include="weixin\restaurant\diancai_orderDetail.aspx" />
     <Content Include="weixin\restaurant\diancai_shoppingCart.aspx" />
     <Content Include="weixin\restaurant\images\2yFKO6TwKI.png" />
     <Content Include="weixin\restaurant\images\A3pvbcomeF.jpg" />
@@ -9374,6 +9394,7 @@
     <Content Include="weixin\restaurant\js\iscroll.js" />
     <Content Include="weixin\restaurant\js\jquery.min.js" />
     <Content Include="weixin\restaurant\js\shopCart.js" />
+    <Content Include="weixin\restaurant\js\zepto.min.js" />
     <Content Include="weixin\restaurant\zhaoshang_xiangq.aspx" />
     <Content Include="weixin\scenic\css\index.css" />
     <Content Include="weixin\scenic\css\swiper.min.css" />

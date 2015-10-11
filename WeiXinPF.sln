@@ -66,6 +66,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeiXinPF.DBUtility", "WeiXi
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "dll", "dll", "{CF6C4727-717B-4832-B7C7-A320EE672903}"
 	ProjectSection(SolutionItems) = preProject
+		dll\Gma.QrCodeNet.Encoding.dll = dll\Gma.QrCodeNet.Encoding.dll
 		dll\LitJSON.dll = dll\LitJSON.dll
 		dll\Newtonsoft.Json.dll = dll\Newtonsoft.Json.dll
 		dll\OneGulp.WeChat.dll = dll\OneGulp.WeChat.dll

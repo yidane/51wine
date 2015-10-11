@@ -668,9 +668,9 @@ ul.round {
     text-align: left;
     font-size: 14px;
     line-height: 24px;
-    border-radius: 5px;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
+    border-radius: 5px;
     -moz-box-shadow: 0 1px 1px #f6f6f6;
     -webkit-box-shadow: 0 1px 1px #f6f6f6;
     box-shadow: 0 1px 1px #f6f6f6;
@@ -913,6 +913,31 @@ em.no {
         border-top: 1px solid #E6E6E6;
         font-size: 14px;
         padding: 8px 10px 8px 10px;
+    }
+
+.DishDetail {
+    width: 100%;
+    text-align: left;
+}
+
+    .DishDetail .Col1 {
+        text-align: center !important;
+        width: 33%;
+    }
+
+    .DishDetail .Col2 {
+        text-align: center !important;
+        width: 17%;
+    }
+
+    .DishDetail .Col3 {
+        text-align: center !important;
+        width: 25%;
+    }
+
+    .DishDetail .Col4 {
+        text-align: center !important;
+        width: 23%;
     }
 
 .qiandaobanner {
@@ -1874,3 +1899,68 @@ font-size:16px;*/
         line-height: 32px;
         color: #fff;
     }
+
+.silde-center {
+    text-align: center;
+}
+
+.silde-background {
+    border: 1px solid #C6C6C6;
+    width: 100%;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+}
+
+.img-border {
+    border: 10px;
+    border-color: white;
+    border-style: solid;
+    padding: 20px;
+}
+
+/*#region gdp */
+.gpd-item {
+    padding: 10px 0;
+}
+
+.gpd-item-title {
+    font-size: 18px;
+    position: relative;
+    border-bottom: 1px solid #d7c38c;
+    padding-bottom: 6px;
+    padding-bottom: 6px;
+}
+
+.gp-icons {
+    background-image: url(../images/gp_icons.png);
+    background-size: 320px auto;
+}
+
+.gpd-up-icon {
+    width: 44px;
+    height: 32px;
+    position: absolute;
+    right: 0;
+    top: -2px;
+    background-position: -34px -41px;
+}
+
+.gdp-curr .gpd-up-icon {
+    background-position: -34px 3px;
+}
+
+.gpd-content {
+    display: none;
+}
+
+.gdp-curr .gpd-content {
+    display: block;
+}
+
+.detailicon-ticket {
+    height: 30px;
+    width: 30px;
+    margin: auto 10px;
+}
+/*#endregion */
