@@ -7211,6 +7211,13 @@
     <Compile Include="weixin\restaurant\index.aspx.designer.cs">
       <DependentUpon>index.aspx</DependentUpon>
     </Compile>
+    <Compile Include="weixin\restaurant\Restaurant.Master.cs">
+      <DependentUpon>Restaurant.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="weixin\restaurant\Restaurant.Master.designer.cs">
+      <DependentUpon>Restaurant.Master</DependentUpon>
+    </Compile>
     <Compile Include="weixin\restaurant\zhaoshang_xiangq.aspx.cs">
       <DependentUpon>zhaoshang_xiangq.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -9942,6 +9949,7 @@
     <Content Include="weixin\scenic\scenic.ashx" />
     <Content Include="weixin\restaurant\diancai_login.ashx" />
     <None Include="Properties\PublishProfiles\Yidane.pubxml" />
+    <Content Include="weixin\restaurant\Restaurant.Master" />
     <None Include="副本 Web.Debug.config">
       <DependentUpon>副本 Web.config</DependentUpon>
     </None>

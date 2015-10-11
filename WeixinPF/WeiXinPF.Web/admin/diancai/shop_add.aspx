@@ -241,7 +241,7 @@
                     <span class="Validform_checktip">*</span>
                 </dd>
                 <dd>
-                    <iframe id="baiduframe" src="../lbs/MapSelectPoint.aspx?yjindu=121.526149&xweidu=31.222663" height="300" width="600" style="border: 1px solid #e1e1e1;"></iframe>
+                    <iframe id="baiduframe" src="../../weixin/map/qqmap/qqmap_getLocation.html" height="400" width="600" style="border: 1px solid #e1e1e1;"></iframe>
                 </dd>
             </dl>
 

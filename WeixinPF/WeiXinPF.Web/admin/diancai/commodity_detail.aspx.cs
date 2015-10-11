@@ -108,6 +108,7 @@ namespace WeiXinPF.Web.admin.diancai
                 {
                     save_groupbase.Text = "已验证";
                     save_groupbase.Enabled = false;
+                    save_groupbase.Style.Value = "";
                 }
                 Dingdanlist += "<tr><th>菜品名称</th><th class=\"cc\">单价</th><th class=\"cc\">购买份数</th><th class=\"rr\">价格</th> </tr>";
                 for (int i = 0; i < dr.Tables[0].Rows.Count; i++)
