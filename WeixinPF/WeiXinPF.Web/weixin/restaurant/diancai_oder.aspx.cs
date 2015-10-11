@@ -51,7 +51,7 @@ namespace WeiXinPF.Web.weixin.restaurant
                 for (int i = 0; i < dr.Tables[0].Rows.Count;i++ )
                 {
                     str += "<ul class=\"round\">";
-                    str += "<li class=\"title\"><a href=\"diancai_dingdan.aspx?shopid=" + shopid + "&dingdan=" + dr.Tables[0].Rows[i]["id"].ToString() + "&openid=" + openid + "\"><span>" + dr.Tables[0].Rows[i]["oderTime"].ToString() + "<img src=\"images\\tel.png\" class=\"HomeImage\"></img>" + dr.Tables[0].Rows[i].Field<string>("hotelName") + "</span></a></li>";
+                    str += "<li class=\"title\"><a href=\"diancai_orderDetail.aspx?shopid=" + shopid + "&dingdan=" + dr.Tables[0].Rows[i]["id"].ToString() + "&openid=" + openid + "\"><span>" + dr.Tables[0].Rows[i]["oderTime"].ToString() + "<img src=\"images\\tel.png\" class=\"HomeImage\"></img>" + dr.Tables[0].Rows[i].Field<string>("hotelName") + "</span></a></li>";
                     str+=" <table width=\"100%\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" class=\"cpbiaoge\">";
                     str += "<tr><th>订单编号</th>";
                     str += "<th width=\"70\" class=\"cc\">订单金额</th><th width=\"55\" class=\"cc\">订单状态</th></tr>";
