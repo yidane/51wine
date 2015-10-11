@@ -222,6 +222,33 @@ namespace WeiXinPF.BLL
         {
             return dal.UpdateCommoditystatus(cid, status);
         }
+        /// <summary>
+        /// 修改订菜商品状态
+        /// </summary>
+        /// <param name="ccode">订单编号</param>
+        /// <param name="status">状态类型</param>
+        /// <returns></returns>
+        public bool UpdateCommoditystatus(string ccode, int status)
+        {
+            bool result= dal.UpdateCommoditystatus(ccode, status);
+            string id=GetCommodityList("identifyingcode='" + ccode + "'").Tables[0].Rows[0]["id"].ToString();
+            DataSet dr = GetcommodityTable(id);
+            DataTable dt = dr.Tables[0];
+            int sum=0;
+            if (dt.Rows.Count >= 0)
+            {
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    if (dt.Rows[i]["status"].ToString() == "0" || dt.Rows[i]["status"].ToString() == "1")
+                        sum++;
+                }
+                if (sum == 0)
+                {
+                    Updatestatus(id, RestaurantCommodityStatus.Used.ToString());
+                }
+            }
+            return result;
+        }
 
         public bool Delete(string dingdan)
         {

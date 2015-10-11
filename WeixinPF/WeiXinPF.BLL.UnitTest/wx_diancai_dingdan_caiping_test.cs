@@ -68,13 +68,12 @@ namespace WeiXinPF.BLL.UnitTest
         }
 
         [TestMethod]
-        public void TestAddCommodity()
+        public void TestChangeCommodity()
         {
-            wx_diancai_dingdan_caiping bll = new wx_diancai_dingdan_caiping();
-            Model.wx_diancai_dingdan_caiping model = new Model.wx_diancai_dingdan_caiping
-            {
+            wx_diancai_dingdan_manage bll = new wx_diancai_dingdan_manage();
+            string ccode = "4978729704708228";
 
-            };
+            bll.UpdateCommoditystatus(ccode,1);
         }
     }
 }

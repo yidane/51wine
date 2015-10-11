@@ -310,7 +310,7 @@ namespace WeiXinPF.DAL
         public DataSet GetCommodityList(string strWhere)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select a.id,shopinfoid,openid,wid,orderNumber,deskNumber,customerName,customerTel,address,oderTime,oderRemark,payAmount,payStatus,createDate,b.id AS cid  FROM wx_diancai_dingdan_manage AS a ");
+            strSql.Append("select a.id as id,shopinfoid,openid,wid,orderNumber,deskNumber,customerName,customerTel,address,oderTime,oderRemark,payAmount,payStatus,createDate,b.id AS cid  FROM wx_diancai_dingdan_manage AS a ");
             strSql.Append(" right join (select * from wx_diancai_dingdan_commodity where status=1 ");
             if (strWhere.Trim() != "")
             {
@@ -604,6 +604,23 @@ namespace WeiXinPF.DAL
             strSql.Append("update  wx_diancai_dingdan_commodity set status='" + status + "'  ");
 
             strSql.Append(" where id='" + cid + "' ");
+
+            int rows = DbHelperSQL.ExecuteSql(strSql.ToString());
+            if (rows > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        public bool UpdateCommoditystatus(string ccode, int status)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("update  wx_diancai_dingdan_commodity set status='" + status + "'  ");
+
+            strSql.Append(" where identifyingcode='" + ccode + "' ");
 
             int rows = DbHelperSQL.ExecuteSql(strSql.ToString());
             if (rows > 0)
