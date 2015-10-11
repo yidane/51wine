@@ -92,7 +92,7 @@ namespace WeiXinPF.DAL
             parameters[0].Value = model.dingId;
             parameters[1].Value = model.caiId;
             parameters[2].Value = model.price;
-            parameters[3].Value = getTimestamp().ToString() + GuidToLongID().ToString();
+            parameters[3].Value = GetCodeID();
 
             object obj = DbHelperSQL.GetSingle(strSql.ToString(), parameters);
             if (obj == null)
@@ -105,18 +105,32 @@ namespace WeiXinPF.DAL
             }
         }
 
+        public static string GetCodeID()
+        {
+            string code = "";
+            code = getTimestamp().ToString() + GuidToLongID().ToString();
+            StringBuilder sql = new StringBuilder();
+            sql.Append("select * from wx_diancai_dingdan_commodity where identifyingcode=@identifyingcode");
+            SqlParameter para = new SqlParameter("@identifyingcode", SqlDbType.VarChar, 20);
+            para.Value = code;
+            if (DbHelperSQL.GetSingle(sql.ToString(), para) != null)
+            {
+                code = GetCodeID();
+            }
+            return code;
+        }
         /// <summary>
         /// 根据GUID获取19位的唯一数字序列
         /// </summary>
         public static long GuidToLongID()
         {
             byte[] buffer = Guid.NewGuid().ToByteArray();
-            return BitConverter.ToInt64(buffer, 0)/1000000000000;
+            return BitConverter.ToInt64(buffer, 0) / 1000000000000;
         }
         public static string getTimestamp()
         {
             TimeSpan ts = DateTime.UtcNow - new DateTime(2000, 1, 1, 0, 0, 0, 0);
-            return (Convert.ToInt64(ts.TotalSeconds)/100000).ToString();
+            return (Convert.ToInt64(ts.TotalSeconds)).ToString();
         }
 
         /// <summary>
