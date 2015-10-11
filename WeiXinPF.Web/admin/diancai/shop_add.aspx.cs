@@ -81,6 +81,8 @@ namespace WeiXinPF.Web.admin.diancai
                 this.address.Text = hotel.address;
                 this.txtLatXPoint.Text = hotel.xplace.ToString();
                 this.txtLngYPoint.Text = hotel.yplace.ToString();
+                ClientScript.RegisterStartupScript(GetType(), "message",
+                    "<script language='javascript'> $(\"#baiduframe\").attr(\"src\", \"../../weixin/map/qqmap/qqmap_getLocation.html?lng=" + hotel.yplace.Value.ToString() + "&lat=" + hotel.xplace.Value.ToString() + "\");</script>");
                 this.personLimite.Text = hotel.personLimite.ToString();
                 this.notice.InnerText = hotel.notice;
                 this.hotelintroduction.InnerText = hotel.hotelintroduction;

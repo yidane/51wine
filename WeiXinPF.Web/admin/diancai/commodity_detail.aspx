@@ -11,7 +11,7 @@
        <link href="../skin/default/style.css" rel="stylesheet" type="text/css" />
      <link href="../skin/mystyle.css" rel="stylesheet" type="text/css" />
    <%-- <link href="../../css/pagination.css" rel="stylesheet" type="text/css" />--%>
-        <link href="../../weixin/diancai/css/diancai.css" rel="stylesheet" type="text/css" />
+        <link href="../../weixin/restaurant/css/diancai.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript">
         function parentToIndex(id) {
             parent.location.href = "/admin/Index.aspx?id=" + id;
