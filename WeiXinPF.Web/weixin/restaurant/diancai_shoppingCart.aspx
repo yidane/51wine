@@ -272,7 +272,7 @@
                 name:g('name').value,
                 phone:g('phone').value,
                 <%=javascriptStr%>
-                address:g('address').value,
+                address:"123",//g('address').value,
                 oderRemark:g('Textarea1').value,  
                 deskNumber:g('select0').value,  
                 myact: "addcaidan"
