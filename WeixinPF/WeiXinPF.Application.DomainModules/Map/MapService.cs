@@ -20,6 +20,7 @@ namespace WeiXinPF.Application.DomainModules.Map
             .ForMember(dto => dto.id, opt => opt.MapFrom(marker => marker.Id))
             .ForMember(dto => dto.name, opt => opt.MapFrom(marker => marker.Name))
             .ForMember(dto => dto.address, opt => opt.MapFrom(marker => marker.Description))
+            .ForMember(dto => dto.remark, opt => opt.MapFrom(marker => marker.Remark))
             .AfterMap((maker, dto) => dto.position = new Position() {
                 lat=maker.Lat,
                 lng=maker.Lng

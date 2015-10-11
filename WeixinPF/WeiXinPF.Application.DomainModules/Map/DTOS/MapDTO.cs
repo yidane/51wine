@@ -12,6 +12,7 @@ namespace WeiXinPF.Application.DomainModules.Map.DTOS
     {
         public int id { get; set; }
         public string name { get; set; }
+        public string remark { get; set; }
         public string address { get; set; }
         public Position position { get; set; }
     }
