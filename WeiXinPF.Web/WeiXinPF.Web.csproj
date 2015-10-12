@@ -7821,7 +7821,6 @@
     <Folder Include="templates\index\qiche\js\" />
     <Folder Include="weixin\dzp\js\" />
     <Folder Include="weixin\haibao\" />
-    <Folder Include="weixin\map\css\" />
     <Folder Include="weixin\sticket\js\" />
   </ItemGroup>
   <ItemGroup>
@@ -7904,6 +7903,10 @@
     <Content Include="weixin\cashred\images\title-bg-red.png" />
     <Content Include="weixin\cashred\index.aspx" />
     <Content Include="weixin\cashred\js\alert.js" />
+    <Content Include="weixin\map\css\bootstrap.min.css" />
+    <Content Include="weixin\map\css\L.Control.Locate.ie.min.css" />
+    <Content Include="weixin\map\css\L.Control.Locate.min.css" />
+    <Content Include="weixin\map\js\L.Control.Locate.min.js" />
     <Content Include="weixin\restaurant\css\swiper.min.css" />
     <Content Include="weixin\restaurant\diancai_refund.aspx" />
     <Content Include="weixin\restaurant\images\gp_icons.png" />

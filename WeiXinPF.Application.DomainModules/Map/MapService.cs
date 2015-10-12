@@ -58,7 +58,7 @@ namespace WeiXinPF.Application.DomainModules.Map
         public MapDTO GetMapInfo(int id)
         {
             MapDTO result = null;
-
+            
             var marker = new BLL.wx_travel_marker().GetModel(id);
 
             result = Mapper.Map<Model.wx_travel_marker, MapDTO>(marker);

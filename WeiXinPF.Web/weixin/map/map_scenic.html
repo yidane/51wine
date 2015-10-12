@@ -9,9 +9,9 @@
  
 
     <link href="//cdn.bootcss.com/font-awesome/4.4.0/css/font-awesome.css" rel="stylesheet">
-    <link rel="stylesheet" href="http://rawgithub.com/domoritz/leaflet-locatecontrol/gh-pages/dist/L.Control.Locate.min.css" />
+    <link rel="stylesheet" href="css/L.Control.Locate.min.css" />
     <!--[if lt IE 9]>
-    <link rel="stylesheet" href="http://rawgithub.com/domoritz/leaflet-locatecontrol/gh-pages/dist/L.Control.Locate.ie.min.css"/>
+    <link rel="stylesheet" href="css/L.Control.Locate.ie.min.css"/>
     <![endif]-->
     <style type="text/css">
         * {
@@ -372,7 +372,7 @@
 
 <script src="http://cdn.leafletjs.com/leaflet-1.0.0-b1/leaflet.js"></script>
 
-<script src="//rawgithub.com/domoritz/leaflet-locatecontrol/gh-pages/dist/L.Control.Locate.min.js"></script>
+<script src="js/L.Control.Locate.min.js"></script>
 
     <script src="../../scripts/jquery/zepto.min.js"></script>
 <script src="../../scripts/knockout/knockout-3.3.0.js"></script>
@@ -612,7 +612,11 @@
                 {
                     var data=self.markers()[i];
                     var latlng= map.unproject( [data.left, data.top], map.getMaxZoom());
-                  var marker = L.marker(latlng).addTo(map);
+                  var marker = L.marker(latlng,{
+                      bounceOnAdd: true,
+                      bounceOnAddOptions: {duration: 1500, height: 100},
+                      bounceOnAddCallback: function() {console.log("done");}
+                  }).addTo(map);
 
 //                    var marker = L.marker(self.getLatLng(data.left,data.top)).addTo(map);
                     var popup=self.getPopup(data.id);
