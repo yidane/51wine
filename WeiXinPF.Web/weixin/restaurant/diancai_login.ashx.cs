@@ -58,7 +58,7 @@ namespace WeiXinPF.Web.weixin.restaurant
                 else
                 {
                     jsonDict.Add("ret", "fail");
-                    jsonDict.Add("content", "密码错误！");
+                    jsonDict.Add("content", "密码错误！");                    
 
                     context.Response.Write(MyCommFun.getJsonStr(jsonDict));
                 }
@@ -103,12 +103,17 @@ namespace WeiXinPF.Web.weixin.restaurant
 
                 var order = orderProcessResult.BusinessData as Model.wx_diancai_dingdan_manage;
 
-                // 支付处理程序，可在前台处理，参数通过完成订单后的返回参数传递
-
-                // 完成订单处理
-                this.jsonDict.Add("ret", "ok");
-                this.jsonDict.Add("content", orderProcessResult.Message);
-                context.Response.Write(MyCommFun.getJsonStr(this.jsonDict));
+                if (order != null)
+                {
+                    this.jsonDict.Add("ret", "ok");
+                    this.jsonDict.Add("content", orderProcessResult.Message);
+                    this.jsonDict.Add("orderid", order.id.ToString());
+                    this.jsonDict.Add("openid", openid);
+                    this.jsonDict.Add("payamount", order.payAmount.ToString());
+                    this.jsonDict.Add("shopname", new BLL.wx_diancai_shopinfo().GetModel(this.shopid).hotelName);
+                    context.Response.Write(MyCommFun.getJsonStr(this.jsonDict));
+                }
+                
                 context.Response.End();
             }else if (_action == "afterpayment")
             {

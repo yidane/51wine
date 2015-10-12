@@ -193,8 +193,8 @@
            
             $.post('diancai_login.ashx?openid=<%=openid%>&shopid=<%=shopid%>', submitData,
                 function (data) {
-                
                     if (data.ret == "ok") {
+                        
                         alert(data.content);
                         clearCache();
                     } else { alert(data.content); }
