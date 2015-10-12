@@ -172,6 +172,136 @@
             border-top: 1px solid #d4d4d4;
             text-align: center;
         }
+
+        /*菜单*/
+        .atfront{
+            z-index: 1000;
+        }
+        .form-grouping
+        {
+        bottom: 0;
+        position: fixed;
+        width: 100%;
+        left: 0;
+        }
+        .menu_acitve .form-grouping
+        {
+        height: 5rem;
+        }
+        .map_nav_bar_v2 {
+            position: absolute;
+            /*z-index: 1;*/
+            height: 2.8125rem;
+            /* left: 0; */
+            right: 0;
+            bottom: 0rem;
+            width: 50px;
+            float: right;
+        }
+
+        .map_nav_bar_v2 .map_nav_item_03 {
+            right: .5rem;
+            background-image: url("images/ico_general_map_04@2x.png?v=2014050901");
+        }
+
+        .menu_acitve .map_nav_bar_v2 {
+            bottom: 8.7rem;
+        }
+
+        .menu_acitve .map_nav_item_03:after {
+            -webkit-transform: rotate(180deg) translateY(2px);
+            transform: rotate(180deg) translateY(2px);
+        }
+
+        .map_nav_bar_v2 .map_nav_item_03:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+            width: 1.3125rem;
+            height: .8125rem;
+            background-image: url("images/ico_general_map_05@2x.png?v=2014050901");
+            background-size: 100% auto;
+        }
+
+        .map_nav_bar_v2 .map_nav_item_01, .map_nav_bar_v2 .map_nav_item_02, .map_nav_bar_v2 .map_nav_item_03, .map_nav_bar_v2 .map_nav_item_04 {
+            position: absolute;
+            top: .125rem;
+            width: 2.5625rem;
+            height: 2.5625rem;
+            background-size: 100% auto;
+        }
+
+        .menu_acitve .map_menu_containner {
+            display: block;
+        }
+        .map_menu_containner {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
+            margin: auto;
+            background: #34475a;
+            -webkit-box-shadow: 0 0 5px #181b1e;
+            box-shadow: 0 0 5px #181b1e;
+            border-radius: .25rem;
+            overflow: hidden;
+            display: none;
+        }
+        .cf {
+            zoom: 1;
+        }
+
+        .map_menu_ico {
+            position: relative;
+            z-index: 1;
+            width: 20%;
+            height: 4.0625rem;
+            float: left;
+            color: #ADC6E2;
+            text-shadow: 0 1px 0 rgba(0,0,0,0.4);
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            padding-top: 2.5rem;
+            line-height: 1.25rem;
+            font-size: .625rem;
+            text-align: center;
+            -webkit-box-shadow: 1px 1px 0 #181b1e,2px 2px 0 #526273;
+            box-shadow: 1px 1px 0 #181b1e,2px 2px 0 #526273;
+        }
+        .map_menu_ico i {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: 4rem;
+            height: 4rem;
+            margin: auto;
+
+        }
+
+        .map_menu_ico.disabled,.map_menu_ico.disabled i  {
+            color: #52677C;
+        }
+
+        .poi-img {
+            display: block;
+            margin: 0 auto;
+            width: 64px;
+            height: 64px;
+            border-radius: 64px;
+            font-size: 24px;
+            line-height: 64px;
+            /*color: #1E2934;*/
+            text-align: center;
+        }
+
     </style>
     <style>
 
@@ -190,6 +320,26 @@
 <div class="map_location_status" data-bind="visible :statusbox.show" style="display: none;">
     <div class="map_location_status_text" data-bind="text:statusbox.text"></div>
     <div class="map_location_status_ok" data-bind="click:statusbox.close">确 定</div>
+</div>
+<div class="form-grouping atfront " data-bind="css:{menu_acitve:pointMenu.show}" >
+<div class="map_nav_bar_v2">
+
+    <div class="map_nav_item_03" data-bind="click:togglemenu"></div>
+
+</div>
+    <div class="map_menu_containner cf"  data-bind="visible:pointMenu.show">
+        <a class="map_menu_ico active" data-bind="css:{'active': pointMenu.activeType() == 'spot','disabled': !pointMenu.isEnabled.spot()},click:pointMenu.showTag.bind($data,'spot')" href="javascript:;" ><i class="poi-img fa fa-tree fa-2x"></i>景点</a>
+        <a class="map_menu_ico" data-bind="css:{'active': pointMenu.activeType() == 'eat','disabled': !pointMenu.isEnabled.eat()},click:pointMenu.showTag.bind($data,'eat')" href="javascript:;" ><i class="poi-img fa fa-cutlery fa-2x"></i>美食</a>
+        <a class="map_menu_ico" data-bind="css:{'active': pointMenu.activeType() == 'hotel','disabled': !pointMenu.isEnabled.hotel()},click:pointMenu.showTag.bind($data,'hotel')" href="javascript:;" ><i class="poi-img fa fa-hotel fa-2x"></i>酒店</a>
+        <a class="map_menu_ico" data-bind="css:{'active': pointMenu.activeType() == 'wc','disabled': !pointMenu.isEnabled.wc()},click:pointMenu.showTag.bind($data,'wc')" href="javascript:;" ><i class="poi-img fa fa-male fa-2x"></i>洗手间</a>
+        <a class="map_menu_ico" data-bind="css:{'active': pointMenu.activeType() == 'shop','disabled': !pointMenu.isEnabled.shop()},click:pointMenu.showTag.bind($data,'shop')" href="javascript:;" ><i class="poi-img fa fa-car fa-2x"></i>停车场</a>
+        <a class="map_menu_ico" data-bind="css:{'active': pointMenu.activeType() == 'show','disabled': !pointMenu.isEnabled.show()},click:pointMenu.showTag.bind($data,'show')" href="javascript:;"  ><i class="poi-img fa fa-university fa-2x"></i>游牧点</a>
+        <a class="map_menu_ico" data-bind="css:{'active': pointMenu.activeType() == 'help','disabled': !pointMenu.isEnabled.help()},click:pointMenu.showTag.bind($data,'help')" href="javascript:;"  ><i class="poi-img fa fa-road fa-2x"></i>栈道</a>
+        <a class="map_menu_ico " data-bind="css:{'active': pointMenu.activeType() == 'wifi','disabled': !pointMenu.isEnabled.wifi()},click:pointMenu.showTag.bind($data,'wifi')" href="javascript:;"><i class="poi-img fa fa-home fa-2x"></i>定居点</a>
+
+    <!--<a class="map_menu_ico_08" data-bind="{'active': pointMenu.activeType == 'spot','disabled': pointMenu.isEnabled(spot)}" href="{{host}}/scenic/{{scenicId}}/detail">景区概述</a>-->
+</div>
+
 </div>
 <div style="display: none">
     <div class="marker-list" data-bind="foreach:markers">
@@ -228,8 +378,9 @@
 <script src="../../scripts/knockout/knockout-3.3.0.js"></script>
 
     <script type="text/javascript">
-        var ViewModel = function() {
+        var ViewModel = function(params) {
             var self = this;
+            this.params=ko.observable(params);
             this.map=ko.observable();
             this.mapborder=ko.observable();
             this.markers = ko.observableArray();
@@ -237,6 +388,40 @@
                 self.statusbox.show(false);
 
             }};
+            this.pointMenu={
+                show:ko.observable(false),
+                activeType:ko.observable('spot'),
+                isEnabled:{
+                    spot:ko.observable(true),
+                    eat:ko.observable(true),
+                    hotel:ko.observable(true),
+                    wc:ko.observable(false),
+                    shop:ko.observable(false),
+                    show:ko.observable(false),
+                    help:ko.observable(false),
+                    wifi:ko.observable(false)
+
+                },
+                showTag:function(type){
+                    if(self.pointMenu.isEnabled[type]())
+                    {
+                        self.pointMenu.activeType(type);
+                    }
+                    var wid=self.params().wid;
+                    switch (type)
+                    {
+                        case 'spot':
+                            self.jumpUrl('sceniclist.html?wid='+wid);
+                            break;
+                        case 'hotel':
+                            self.jumpUrl('hotellist.html?wid='+wid);
+                            break;
+                        case 'eat':
+                            self.jumpUrl('cateringlist.html?wid='+wid);
+                            break;
+                    }
+                }
+            };
 
             this.init=function(){
                 self.initmap(40.0625, 116.34375);
@@ -263,7 +448,7 @@
                 });
                 var mapsize = self.getMapSize();
                 var _mapCenter =map.unproject([mapsize.width/2,mapsize.height/2], mapMaxZoom);
-                map.setView(_mapCenter, mapMinZoom);
+                map.setView(_mapCenter, mapMinZoom+1);
                 self.map(map);
 
             };
@@ -399,7 +584,7 @@
                 $.ajax({
                     url: '/WebServices/MapWebService.asmx/GetMarkers',
                     dataType: "json",
-                    data: { wid: 1 },
+                    data: { wid: self.params().wid },
                     success: function(res) {
                         if (res.success) {
                             self.markers(res.result);
@@ -455,6 +640,13 @@
                         lng =  (x * mapsize.width  + (maxSize - mapsize.width)/2)/maxSize;
                 return [-256 * lat,256 * lng];
             };
+            self.togglemenu=function(){
+                self.pointMenu.show(!self.pointMenu.show());
+
+            };
+            self.jumpUrl=function(url){
+                document.location.href=url;
+            };
 
             this.init();
 
@@ -465,14 +657,25 @@
 
 
 <script>
+    var params={};
     $(function () {
         $('.content').scrollTop(100);
         $('.content').scrollLeft(400);
+        var wid=getQueryString('wid');
+        if(wid)
+        {
+            params.wid=wid;
+        }
 
-        var viewModel = new ViewModel();
+        var viewModel = new ViewModel(params);
         ko.applyBindings(viewModel);
     });
-
+    function getQueryString(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) return (r[2]);
+        return null;
+    }
 
 </script>
 </body>

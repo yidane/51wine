@@ -8076,6 +8076,9 @@
     <Content Include="weixin\map\hotellist.html" />
     <Content Include="weixin\map\images\ico_general_map_04%402x.png" />
     <Content Include="weixin\map\images\ico_general_map_05%402x.png" />
+    <Content Include="weixin\map\images\ico_general_map_menu.png" />
+    <Content Include="weixin\map\images\ico_general_map_menu_active.png" />
+    <Content Include="weixin\map\images\ico_general_map_menu_disabled.png" />
     <Content Include="weixin\map\images\map\0\0\0.png" />
     <Content Include="weixin\map\images\map\1\0\0.png" />
     <Content Include="weixin\map\images\map\1\1\0.png" />
