@@ -22,15 +22,6 @@ namespace WeiXinPF.Web.weixin.restaurant {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl contact_info;
         
         /// <summary>
-        /// address 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlTextArea address;
-        
-        /// <summary>
         /// showcard 控件。
         /// </summary>
         /// <remarks>
@@ -38,14 +29,5 @@ namespace WeiXinPF.Web.weixin.restaurant {
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlAnchor showcard;
-        
-        /// <summary>
-        /// showcard2 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor showcard2;
     }
 }
