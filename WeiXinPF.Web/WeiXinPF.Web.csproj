@@ -7209,6 +7209,13 @@
     <Compile Include="weixin\restaurant\diancai_orderDetail.aspx.designer.cs">
       <DependentUpon>diancai_orderDetail.aspx</DependentUpon>
     </Compile>
+    <Compile Include="weixin\restaurant\diancai_refund.aspx.cs">
+      <DependentUpon>diancai_refund.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="weixin\restaurant\diancai_refund.aspx.designer.cs">
+      <DependentUpon>diancai_refund.aspx</DependentUpon>
+    </Compile>
     <Compile Include="weixin\restaurant\diancai_shoppingCart.aspx.cs">
       <DependentUpon>diancai_shoppingCart.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -7898,8 +7905,10 @@
     <Content Include="weixin\cashred\index.aspx" />
     <Content Include="weixin\cashred\js\alert.js" />
     <Content Include="weixin\restaurant\css\swiper.min.css" />
+    <Content Include="weixin\restaurant\diancai_refund.aspx" />
     <Content Include="weixin\restaurant\images\gp_icons.png" />
     <Content Include="weixin\restaurant\images\info.png" />
+    <Content Include="weixin\restaurant\images\telephone.png" />
     <Content Include="weixin\restaurant\images\time.png" />
     <Content Include="weixin\restaurant\images\undo.png" />
     <Content Include="weixin\restaurant\js\swiper.min.js" />
