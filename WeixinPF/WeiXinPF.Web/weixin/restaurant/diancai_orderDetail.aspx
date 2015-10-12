@@ -29,8 +29,8 @@
 
         <div id="contact_info" class="cardexplain">
             <section>
-                <div style="float: left">订单编号123</div>
-                <div style="float: right"><strong style="font-size: 1.2em; right: 2px">总价 </strong>68元</div>
+                <div style="float: left">订单编号 <%=OrderNumber %></div>
+                <div style="float: right"><strong style="font-size: 1.2em; right: 2px">总价 </strong><%=PayAmount %>元</div>
             </section>
             <section>
                 <table width="100%" border="0" cellpadding="0" cellspacing="0" class="DishDetail">
@@ -42,69 +42,17 @@
                     </tr>
                 </table>
             </section>
-            <div>
-                <table width="100%" border="0" cellpadding="0" cellspacing="0" class="DishDetail">
-                    <tr>
-                        <td class="Col1" style="width: 33%">脆鸡八分堡套餐</td>
-                        <td class="Col2" style="width: 17%">1</td>
-                        <td class="Col3" style="width: 25%">25元</td>
-                        <td class="Col4" style="width: 23%">
-                            <asp:Button ID="Button1" runat="server" Text="申请退款" />
-                        </td>
-                    </tr>
-                </table>
-                <div class="silde-background">
-                    <div class="swiper-container gpd-ablum swiper-container-horizontal">
-                        <div class="swiper-wrapper silde-center" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px);" id="swiperContain">
-                            <div class='swiper-slide'>
-                                <img id='123' class='img-border' src="ErCodeHandler.ashx?key=123123123">
-                            </div>
-                            <div class='swiper-slide'>
-                                <img id='Img1' class='img-border' src="ErCodeHandler.ashx?key=123123123">
-                            </div>
-                            <div class='swiper-slide'>
-                                <img id='Img2' class='img-border' src="ErCodeHandler.ashx?key=123123123">
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div runat="server" id="detail">
             </div>
-            <section>
-                <table width="100%" border="0" cellpadding="0" cellspacing="0" class="cpbiaoge">
-                    <tr>
-                        <td class="cc" style="width: 33%">脆鸡八分堡套餐</td>
-                        <td class="cc" style="width: 17%">1</td>
-                        <td class="cc" style="width: 25%">25元</td>
-                        <td class="cc" style="width: 23%">
-                            <asp:Button ID="Button2" runat="server" Text="申请退款" />
-                        </td>
-                    </tr>
-                </table>
-                <div class="silde-background">
-                    <div class="swiper-container gpd-ablum swiper-container-horizontal">
-                        <div class="swiper-wrapper silde-center" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px);" id="Div1">
-                            <div class='swiper-slide'>
-                                <img id='Img3' class='img-border' src="ErCodeHandler.ashx?key=123123123">
-                            </div>
-                            <div class='swiper-slide'>
-                                <img id='Img4' class='img-border' src="ErCodeHandler.ashx?key=123123123">
-                            </div>
-                            <div class='swiper-slide'>
-                                <img id='Img5' class='img-border' src="ErCodeHandler.ashx?key=123123123">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
             <section>
                 <div>
                     联系人
                         <hr />
                     <div>
-                        联系人：张某
+                        联系人：<%=customeName %>
                     </div>
                     <div>
-                        联系电话:18910051235
+                        联系电话:<%= customerTel%>
                     </div>
                 </div>
             </section>
@@ -112,11 +60,13 @@
                 店铺信息
                     <hr />
                 <div style="width: 78%; float: left">
-                    喀纳斯FKC
+                    <%=RestruantName %>
+                    <br />
+                    喀纳斯地点。。。
                 </div>
                 <div style="float: right">
-                    <a href="tel:15201261252">
-                        <img src="images/2yFKO6TwKI.png" />
+                    <a href="tel:<%=RestruantPhone %>">
+                        <img src="images/telephone.png" />
                     </a>
                 </div>
             </section>
@@ -151,7 +101,7 @@
 
             <section class="gpd-item ">
                 <div class="gpd-item-title">
-                    <img class="detailicon-ticket" src="images/time.png" />订单有效期 <span style="float: right" id="dateRange"></span>
+                    <img class="detailicon-ticket" src="images/time.png" />订单有效期 <span style="float: right" id="dateRange"><%=orderRange %></span>
                     <div class="line-title"></div>
                 </div>
             </section>

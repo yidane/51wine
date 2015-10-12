@@ -196,6 +196,11 @@ namespace WeiXinPF.BLL
             return dal.GetcommodityTable(did);
         }
 
+        public DataSet GetOrderDetail(int orderId)
+        {
+            return dal.GetOrderDetail(orderId);
+        }
+
         public WeiXinPF.Model.wx_diancai_dingdan_manage GetModeldingdan(string dingdan)
         {
 
