@@ -447,7 +447,8 @@
                     crs: L.CRS.Simple
                 });
                 var mapsize = self.getMapSize();
-                var _mapCenter =map.unproject([mapsize.width/2,mapsize.height/2], mapMaxZoom);
+//                var _mapCenter =map.unproject([mapsize.width/2,mapsize.height/2], mapMaxZoom);
+                var _mapCenter =map.unproject([3146,3034], mapMaxZoom);
                 map.setView(_mapCenter, mapMinZoom+1);
                 self.map(map);
 
