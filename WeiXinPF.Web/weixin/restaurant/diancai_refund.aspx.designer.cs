@@ -22,13 +22,13 @@ namespace WeiXinPF.Web.weixin.restaurant {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
-        /// spanRefundCount 控件。
+        /// txtRefundCount 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl spanRefundCount;
+        protected global::System.Web.UI.WebControls.TextBox txtRefundCount;
         
         /// <summary>
         /// spanRefundAmount 控件。

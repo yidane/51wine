@@ -24,11 +24,11 @@ namespace WeiXinPF.Web.weixin.restaurant
             NoUseCount = 5;
         }
 
-
-
         protected void btnRefund_Click(object sender, EventArgs e)
         {
-            
+            var refundCount = Convert.ToInt32(this.txtRefundCount.Text);
+
+            Response.Write(string.Format("<script type=\"text/javascript\">alert(\"退单数量{0}\");</script>", refundCount));
         }
     }
 }
