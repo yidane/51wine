@@ -31,6 +31,71 @@
             z-index: 9999;
             background-color: #62b900;
         }
+
+        .Orderchange {
+            right: 0;
+            top: 50%;
+            margin-top: -16px;
+            line-height: 30px;
+        }
+
+            .Orderchange .count {
+                display: inline-block;
+                width: 28px;
+                height: 28px;
+                border-radius: 4px;
+                background: #697077;
+                line-height: 28px;
+                text-align: center;
+                color: #FFFFFF;
+                text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+                box-shadow: 0 1px 2px rgba(0,0,0,0.3) inset;
+                font-size: 18px;
+            }
+
+            .Orderchange .increase, .Orderchange .reduce {
+                display: inline-block;
+                width: 35px;
+                height: 38px;
+                vertical-align: -2px;
+            }
+
+            .Orderchange .ico_increase, .Orderchange .ico_reduce {
+                position: relative;
+                display: block;
+                width: 25px;
+                height: 25px;
+                margin: 6px 0 0 5px;
+                background: #D00A0A;
+                border-radius: 50%;
+                text-indent: -9999px;
+            }
+
+            .Orderchange .ico_reduce {
+                background: #D00A0A;
+            }
+
+                .Orderchange .ico_increase:after, .Orderchange .ico_reduce:after {
+                    position: absolute;
+                    top: 11px;
+                    left: 5px;
+                    content: "";
+                    display: block;
+                    width: 15px;
+                    height: 3px;
+                    background: #FFFFFF;
+                }
+
+            .Orderchange .ico_increase:before {
+                position: absolute;
+                top: 5px;
+                left: 11px;
+                content: "";
+                display: block;
+                width: 3px;
+                height: 15px;
+                background: #FFFFFF;
+            }
     </style>
 </head>
 <body class="mode_webapp">
@@ -82,8 +147,10 @@
                             <tr>
                                 <td style="text-align: right; width: 140px">
                                     <label for="RefundCount" class="ui-input-text">退票数：</label></td>
-                                <td>
-                                    <span  id="spanRefundCount" runat="server" enableviewstate="True"><%=NoUseCount %></span>
+                                <td class="Orderchange">
+                                    <a href="javascript:addProduct()" class="increase"><b class="ico_increase">加一份</b></a>
+                                    <asp:TextBox runat="server" ID="txtRefundCount" Text="1" Enabled="False" CssClass="count" BorderWidth="0"></asp:TextBox>
+                                    <a href="javascript:reduceProduct()" class="reduce"><b class="ico_reduce">减一份</b></a>
                                 </td>
                             </tr>
                             <tr id="Tr1">
@@ -96,6 +163,24 @@
             </ul>
             <asp:Button runat="server" ID="btnRefund" Text="提交" OnClick="btnRefund_Click" CssClass="gpd-ticket" />
         </div>
+
+        <script type="text/javascript">
+            var noUseCount = <%=NoUseCount %>;
+            
+            function addProduct() {
+                var currentCount =parseInt($("#txtRefundCount").val());
+                if (currentCount < noUseCount) {
+                    $("#txtRefundCount").val(++currentCount);
+                }
+            }
+            
+            function reduceProduct() {
+                var currentCount = parseInt($("#txtRefundCount").val());
+                if (currentCount > 1) {
+                    $("#txtRefundCount").val(--currentCount);
+                }
+            }
+        </script>
     </form>
 </body>
 </html>
