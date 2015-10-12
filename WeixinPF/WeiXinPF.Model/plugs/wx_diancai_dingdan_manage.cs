@@ -13,7 +13,7 @@ namespace WeiXinPF.Model
 		private int _id;
 		private int? _shopinfoid;
 		private string _openid;
-		private int? _wid;
+		private string _wid;
 		private string _ordernumber;
 		private string _desknumber;
 		private string _customername;
@@ -51,7 +51,7 @@ namespace WeiXinPF.Model
 		/// <summary>
 		/// 
 		/// </summary>
-		public int? wid
+		public string wid
 		{
 			set{ _wid=value;}
 			get{return _wid;}

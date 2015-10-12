@@ -54,7 +54,7 @@ namespace WeiXinPF.DAL
 			SqlParameter[] parameters = {
 					new SqlParameter("@shopinfoid", SqlDbType.Int,4),
 					new SqlParameter("@openid", SqlDbType.VarChar,200),
-					new SqlParameter("@wid", SqlDbType.Int,4),
+					new SqlParameter("@wid", SqlDbType.VarChar,50),
 					new SqlParameter("@orderNumber", SqlDbType.VarChar,200),
 					new SqlParameter("@deskNumber", SqlDbType.VarChar,200),
 					new SqlParameter("@customerName", SqlDbType.VarChar,200),
@@ -113,7 +113,7 @@ namespace WeiXinPF.DAL
 			SqlParameter[] parameters = {
 					new SqlParameter("@shopinfoid", SqlDbType.Int,4),
 					new SqlParameter("@openid", SqlDbType.VarChar,200),
-					new SqlParameter("@wid", SqlDbType.Int,4),
+					new SqlParameter("@wid", SqlDbType.VarChar,50),
 					new SqlParameter("@orderNumber", SqlDbType.VarChar,200),
 					new SqlParameter("@deskNumber", SqlDbType.VarChar,200),
 					new SqlParameter("@customerName", SqlDbType.VarChar,200),
@@ -244,7 +244,7 @@ namespace WeiXinPF.DAL
 				}
                 if (row["wid"] != null && row["wid"].ToString() != "")
 				{
-                    model.wid = int.Parse(row["wid"].ToString());
+                    model.wid = row["wid"].ToString();
 				}
                 if (row["orderNumber"] != null)
 				{
@@ -615,7 +615,26 @@ namespace WeiXinPF.DAL
                 return false;
             }
         }
-        public bool UpdateCommoditystatus(string ccode, int status)
+
+	    public bool UpdateCommodityStatusByOrderId(string orderId, string status)
+	    {
+            var strSql = new StringBuilder();
+            strSql.Append("update  wx_diancai_dingdan_commodity set status='" + status + "'  ");
+
+            strSql.Append(" where dingId=" + orderId);
+
+            int rows = DbHelperSQL.ExecuteSql(strSql.ToString());
+            if (rows > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+	    }
+
+	    public bool UpdateCommoditystatus(string ccode, int status)
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("update  wx_diancai_dingdan_commodity set status='" + status + "'  ");
