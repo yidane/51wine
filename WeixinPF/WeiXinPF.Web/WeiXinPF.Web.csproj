@@ -7906,6 +7906,7 @@
     <Content Include="weixin\map\css\bootstrap.min.css" />
     <Content Include="weixin\map\css\L.Control.Locate.ie.min.css" />
     <Content Include="weixin\map\css\L.Control.Locate.min.css" />
+    <Content Include="weixin\map\js\bouncemarker.js" />
     <Content Include="weixin\map\js\L.Control.Locate.min.js" />
     <Content Include="weixin\restaurant\css\swiper.min.css" />
     <Content Include="weixin\restaurant\diancai_refund.aspx" />
