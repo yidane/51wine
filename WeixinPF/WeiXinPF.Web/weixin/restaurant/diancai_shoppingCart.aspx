@@ -6,7 +6,6 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="format-detection" content="telephone=no">
     <link href="css/diancai.css" rel="stylesheet" type="text/css" />
-    <script src="js/cookie.js" type="text/javascript"></script>
     <script src="js/alert.js" type="text/javascript"></script>
 
 </asp:Content>
@@ -41,9 +40,6 @@
         <section class="order">
             <div class="orderlist">
                 <ul id="ullist">
-
-                    <%-- <li class="ccbg2" id="notEnoughLi" style="display: none;">必须要满12元才能下单哦</li>
-      <li class="ccbg2" id="emptyLi" style="display: none;">购物车为空哦，快去挑选吧！</li>--%>
                 </ul>
             </div>
         </section>
@@ -85,96 +81,14 @@
                                     </div>
                                 </td>
                             </tr>
-
-                            <tr>
-                                <td width="80px">
-                                    <label for="select0" class="ui-input-text">桌号：</label></td>
-                                <td colspan="2">
-                                    <select name="select0" class="selectstyle" id="select0">
-                                        <option value="0">请选择桌号</option>
-                                     <%=zhselect %>
-                                    </select>
-                                </td>
-                            </tr>
-
-
-                            <tr id="phoneinfo-layout" style="display: none;">
-                                <td width="80px"></td>
-                                <td colspan="2" id="phoneinfo" class="cart-editalertinfo"></td>
-                            </tr>
-                            <%=kongjian %>
-                            <tr>
-                                <td width="80px">
-                                    <label for="address" class="ui-input-text">地址：</label></td>
-                                <td>
-                                    <textarea id="address" name="address" runat="server" placeholder="" class="ui-input-text"></textarea>
-                                </td>
-                            </tr>
-
-                            <tr id="addressinfo-layout">
-                                <td width="80px"></td>
-                                <td colspan="2" id="addressinfo" class="cart-editalertinfo"></td>
-                            </tr>
-                            <tr>
-                                <td width="80px">
-                                    <label for="note" class="ui-input-text">备注：</label></td>
-                                <td>
-                                    <textarea id="Textarea1" name="note" placeholder="" class="ui-input-text"></textarea></td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                    <table style="display: none" id="paypassword-layout">
-                        <tbody>
-                            <tr>
-                                <td width="80px">
-                                    <label for="paypassword" class="ui-input-text">交易密码：</label></td>
-                                <td width="80px">
-                                    <div class="ui-input-text">
-                                        <input type="password" id="paypassword" name="paypassword" class="ui-input-text">
-                                    </div>
-                                </td>
-                                <td></td>
-                            </tr>
-                            <tr id="paypasswordinfo-layout">
-                                <td width="80px"></td>
-                                <td colspan="2" id="paypasswordinfo" class="cart-editalertinfo"></td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                    <table style="display: none" id="captcha-layout" style="word-wrap: break-word; word-break: break-all;">
-                        <tbody>
-                            <tr>
-                                <td width="80px">
-                                    <label for="captcha" class="ui-input-text">验证码：</label></td>
-                                <td width="80px">
-                                    <div class="ui-input-text">
-                                        <input type="tel" id="captcha" name="captcha" class="ui-input-text">
-                                    </div>
-                                </td>
-                                <td style="padding-left: 5px;">
-                                    <div class="ui-btn">
-                                        <span class="ui-btn-inner"><span class="ui-btn-text">发送验证码</span></span>
-                                        <button id="getcaptcha" type="button" data-mini="true" onclick="sendCaptcha(80063, 'oXWABj3CUPSffzJj7asG2Ptc0uEY', 19, 7)" class="ui-btn-hidden" data-disabled="false">发送验证码</button>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td width="80px"></td>
-                                <td colspan="2" id="cart-captchainfo" class="cart-editalertinfo">第一次下单需要验证手机号码，请点击上面的按钮获取。</td>
-                            </tr>
                         </tbody>
                     </table>
                 </li>
             </ul>
         </div>
 
-
-
         <div class="footReturn" style="margin-bottom: 70px;">
             <a id="showcard" class="submit" href="javascript:submitOrder();" runat="server">确定提交</a>
-            <a id="showcard2" class="submit" href="javascript:void();" style="display:none;" runat="server">非营业时间不可以下单!</a>
         </div>
 
     </form>
@@ -271,10 +185,9 @@
                 goodsData:g('goodsData').value,
                 name:g('name').value,
                 phone:g('phone').value,
-                <%=javascriptStr%>
-                address:"123",//g('address').value,
-                oderRemark:g('Textarea1').value,  
-                deskNumber:g('select0').value,  
+                address:'',
+                oderRemark:'',  
+                deskNumber:'',  
                 myact: "addcaidan"
             };
            
@@ -288,9 +201,6 @@
                 },
                 "json");
 
-
-            // document.forms[0].submit();
-
             document.infoForm.issubmit.value = 1;//不能再提交
         }
         function valiForm() {
@@ -303,15 +213,13 @@
                 return true;
             }
             if (!(phonePattern.test(g("phone").value) || mobilePattern.test(g("phone").value))) {
-                // g("phone").className = "textinput alertinput";
                 alert("亲，您的联系电话格式有误！");
                 return true;
             }
 
-
-
             return flag;
         }
+
         function vailReSubmit() {
             if (document.infoForm.issubmit.value == 0) {
                 return true;
@@ -320,18 +228,6 @@
                 alert(' 按一次就够了，请勿重复提交！请耐心等待！谢谢合作！');
                 return false;
             }
-        }
-
-
-        function testInPayArea() {
-            if (g("address").value == "") {
-                alert("请先填写收货地址");
-            } else {
-                return true;
-            }
-            g('wxpay').checked = false;
-            g('huodao').checked = true;
-            return false;
         }       
     </script>
     <script type="text/javascript">
