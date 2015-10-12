@@ -91,7 +91,7 @@ namespace WeiXinPF.Web.weixin.restaurant
             }
             else if (_action == "addcaidan")
             {
-                var orderProcessResult = this.ProcessOrder(context);
+                var orderProcessResult = this.ProcessOrder();
 
                 if (!orderProcessResult.IsSuccess)
                 {
@@ -110,6 +110,24 @@ namespace WeiXinPF.Web.weixin.restaurant
                 this.jsonDict.Add("content", orderProcessResult.Message);
                 context.Response.Write(MyCommFun.getJsonStr(this.jsonDict));
                 context.Response.End();
+            }else if (_action == "afterpayment")
+            {
+                var afterPaymentProcessResult = this.AfterPaymentProcess();
+
+                if (!afterPaymentProcessResult.IsSuccess)
+                {
+                    this.jsonDict.Add("ret", "err");
+                    this.jsonDict.Add("content", afterPaymentProcessResult.Message);
+                    context.Response.Write(MyCommFun.getJsonStr(this.jsonDict));
+                    return;
+                }
+                else
+                {
+                    this.jsonDict.Add("ret", "ok");
+                    this.jsonDict.Add("content", afterPaymentProcessResult.Message);
+                    context.Response.Write(MyCommFun.getJsonStr(this.jsonDict));
+                    context.Response.End();
+                }
             }
         }
 
@@ -124,7 +142,7 @@ namespace WeiXinPF.Web.weixin.restaurant
         /// <returns>
         /// The <see cref="ProcessResult"/>.
         /// </returns>
-        private ProcessResult ProcessOrder(HttpContext context)
+        private ProcessResult ProcessOrder()
         {
             if (this.IsParametersEmpty())
             {
@@ -331,8 +349,61 @@ namespace WeiXinPF.Web.weixin.restaurant
 
         #endregion
 
-        #region 处理支付
-        
+        #region 支付成功后处理程序
+
+        /// <summary>
+        /// The after payment process.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="ProcessResult"/>.
+        /// </returns>
+        private ProcessResult AfterPaymentProcess()
+        {
+            // 微信支付id
+            var wid = MyCommFun.QueryString("wid");
+
+            // 订单id
+            var orderid = MyCommFun.QueryString("orderid");
+
+            if (!string.IsNullOrEmpty(wid) && !string.IsNullOrEmpty(orderid))
+            {
+                var bll = new BLL.wx_diancai_dingdan_manage();
+                var order = bll.GetModel(int.Parse(orderid));
+
+                if (order != null)
+                {
+                    order.wid = wid;
+                    order.payStatus = 1;
+                    order.oderTime = DateTime.Now;
+
+                    try
+                    {
+                        using (var scope = new TransactionScope())
+                        {
+                            bll.Update(order);
+                            bll.UpdateCommodityStatusByOrderId(orderid, "1");
+
+                            scope.Complete();
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        return new ProcessResult() { IsSuccess = false, Message = "保存支付信息失败" };
+                    }                    
+                }
+                else
+                {
+                    return new ProcessResult() { IsSuccess = false, Message = "无效的订单号" };
+                }
+            }
+            else
+            {
+                return new ProcessResult() { IsSuccess = false, Message = "参数不能为空" };
+            }
+
+            return new ProcessResult() { IsSuccess = true, Message = string.Empty };
+        }
+
         #endregion
 
         public static string QueryString(string param)

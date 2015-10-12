@@ -6,6 +6,9 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace WeiXinPF.BLL.UnitTest
 {
+    using System.Runtime.InteropServices.ComTypes;
+    using System.Transactions;
+
     /// <summary>
     /// wx_diancai_dingdan_caiping_test 的摘要说明
     /// </summary>
@@ -74,6 +77,55 @@ namespace WeiXinPF.BLL.UnitTest
             string ccode = "4978729704708228";
 
             bll.UpdateCommoditystatus(ccode,1);
+        }
+
+        [TestMethod]
+        public void AfterPaymentProcess_diancaiOrderManage_ReturnSuccessProcess()
+        {
+            var wid = "11111";
+
+            // 订单id
+            var orderid = "7";
+            var result = false;
+
+            if (!string.IsNullOrEmpty(wid) && !string.IsNullOrEmpty(orderid))
+            {
+                var bll = new BLL.wx_diancai_dingdan_manage();
+                var order = bll.GetModel(int.Parse(orderid));
+
+                if (order != null)
+                {
+                    order.wid = wid;
+                    order.payStatus = 1;
+                    order.oderTime = DateTime.Now;
+
+                    try
+                    {
+                        using (var scope = new TransactionScope())
+                        {
+                            bll.Update(order);
+                            bll.UpdateCommodityStatusByOrderId(orderid, "1");
+
+                            scope.Complete();
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        result= false;
+                    }
+                }
+                else
+                {
+                    result= false;
+                }
+                result = true;
+            }
+            else
+            {
+                result= false;
+            }
+
+            Assert.IsTrue(result);
         }
     }
 }

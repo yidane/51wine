@@ -257,6 +257,11 @@ namespace WeiXinPF.BLL
             return result;
         }
 
+        public bool UpdateCommodityStatusByOrderId(string orderId, string status)
+        {
+            return dal.UpdateCommodityStatusByOrderId(orderId, status);
+        }
+
         public bool Delete(string dingdan)
         {
 
