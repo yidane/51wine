@@ -220,112 +220,28 @@
             <a class="user-center fa fa-user"></a>
             <div class="text">周边美食</div>
         </header>
-        <section class="search-wrapper">
-            <input class="input" type="search" maxlength="20" placeholder="搜索美食">
-            <i class="botton fa fa-search"></i>
+        <section class="search-wrapper" data-bind="enterkey:search">
+            <input class="input" type="search" maxlength="20" placeholder="搜索美食" data-bind="value:keywords">
+            <i class="botton fa fa-search" data-bind="click:search"></i>
         </section>
         <section class="catering-list">
-            <div class="catering-list-container">
+            <div class="catering-list-container" data-bind="foreach:shops">
                 <a class="catering-item">
                     <div class="img-wapper">
-                        <img src="images/popular.jpg" />
+                        <img data-bind="attr:{ src:logo }" />
                     </div>
                     <div class="info-wapper">
                         <div class="info-title">
-                            <div class="title">坑德基</div>
+                            <div class="title" data-bind="text:name"></div>
                             <div class="distince">1000km</div>
                         </div>
-                        <div class="info-desc">我是肯德基 啊呀呀呀</div>
+                        <div class="info-desc" data-bind="text:introduction"></div>
                         <div class="info-botton">
-                            <span class="button">
+                            <span class="button" data-bind="click:$root.book">
                                 <i class="fa fa-money"></i>
                                 预定
                             </span>
-                            <span class="button">
-                                <i class="fa fa-location-arrow"></i> 去这
-                            </span>
-                        </div>
-                    </div>
-                </a>
-                <a class="catering-item">
-                    <div class="img-wapper">
-                        <img src="images/popular.jpg" />
-                    </div>
-                    <div class="info-wapper">
-                        <div class="info-title">
-                            <div class="title">坑德基</div>
-                            <div class="distince">1000km</div>
-                        </div>
-                        <div class="info-desc">我是肯德基 啊呀呀呀</div>
-                        <div class="info-botton">
-                            <span class="button">
-                                <i class="fa fa-money"></i>
-                                预定
-                            </span>
-                            <span class="button">
-                                <i class="fa fa-location-arrow"></i> 去这
-                            </span>
-                        </div>
-                    </div>
-                </a>
-                <a class="catering-item">
-                    <div class="img-wapper">
-                        <img src="images/popular.jpg" />
-                    </div>
-                    <div class="info-wapper">
-                        <div class="info-title">
-                            <div class="title">坑德基</div>
-                            <div class="distince">1000km</div>
-                        </div>
-                        <div class="info-desc">我是肯德基 啊呀呀呀</div>
-                        <div class="info-botton">
-                            <span class="button">
-                                <i class="fa fa-money"></i>
-                                预定
-                            </span>
-                            <span class="button">
-                                <i class="fa fa-location-arrow"></i> 去这
-                            </span>
-                        </div>
-                    </div>
-                </a>
-                <a class="catering-item">
-                    <div class="img-wapper">
-                        <img src="images/popular.jpg" />
-                    </div>
-                    <div class="info-wapper">
-                        <div class="info-title">
-                            <div class="title">坑德基</div>
-                            <div class="distince">1000km</div>
-                        </div>
-                        <div class="info-desc">我是肯德基 啊呀呀呀</div>
-                        <div class="info-botton">
-                            <span class="button">
-                                <i class="fa fa-money"></i>
-                                预定
-                            </span>
-                            <span class="button">
-                                <i class="fa fa-location-arrow"></i> 去这
-                            </span>
-                        </div>
-                    </div>
-                </a>
-                <a class="catering-item">
-                    <div class="img-wapper">
-                        <img src="images/popular.jpg" />
-                    </div>
-                    <div class="info-wapper">
-                        <div class="info-title">
-                            <div class="title">坑德基</div>
-                            <div class="distince">1000km</div>
-                        </div>
-                        <div class="info-desc">我是肯德基 啊呀呀呀</div>
-                        <div class="info-botton">
-                            <span class="button">
-                                <i class="fa fa-money"></i>
-                                预定
-                            </span>
-                            <span class="button">
+                            <span class="button" data-bind="click:$root.go">
                                 <i class="fa fa-location-arrow"></i> 去这
                             </span>
                         </div>
@@ -334,5 +250,52 @@
             </div>
         </section>
     </div>
+
+    <script src="../../scripts/jquery/zepto.min.js"></script>
+    <script src="../../scripts/knockout/knockout-3.3.0.js"></script>
+    <script src="../../scripts/knockout/knockout-extend.js"></script>
+    <script type="text/javascript">
+
+        var ViewModel = function () {
+            var self = this;
+
+            this.keywords = ko.observable();
+            this.shops = ko.observableArray();
+
+            var loadData = function () {
+                $.ajax({
+                    url: '/WebServices/MapWebService.asmx/GetCateringShops',
+                    dataType: "json",
+                    data: { wid: 5, keywords: self.keywords() },
+                    success: function (res) {
+                        if (res.success) {
+                            self.shops(res.result);
+                        }
+                        else {
+                            alert(res.error.message);
+                        }
+                    }
+                });
+            };
+
+            self.search = function (q) {
+                loadData();
+            };
+
+            self.book = function (shop) {
+                document.location.href = '/weixin/restaurant/index.aspx?shopid=' + shop.id + '&openid=XXXX';
+            }
+            self.go = function (shop) {
+                document.location.href = 'map_address.html?type=food&id=' + shop.id;
+            }
+
+            loadData();
+        }
+
+        $(function () {
+            var viewModel = new ViewModel();
+            ko.applyBindings(viewModel);
+        });
+    </script>
 </body>
 </html>

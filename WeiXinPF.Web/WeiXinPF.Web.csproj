@@ -3116,6 +3116,7 @@
     <Content Include="scripts\jquery\jquery-1.10.1.min.js" />
     <Content Include="scripts\jquery\zepto.min.js" />
     <Content Include="scripts\jsrender.min.js" />
+    <Content Include="scripts\knockout\knockout-extend.js" />
     <Content Include="scripts\qrcode\jquery.qrcode.min.js" />
     <Content Include="scripts\jquery\jquery.url.js" />
     <Content Include="scripts\qrcode\qrcode.min.js" />
