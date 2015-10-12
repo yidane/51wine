@@ -373,7 +373,7 @@
 <script src="http://cdn.leafletjs.com/leaflet-1.0.0-b1/leaflet.js"></script>
 
 <script src="js/L.Control.Locate.min.js"></script>
-
+    <script src="js/bouncemarker.js"></script>
     <script src="../../scripts/jquery/zepto.min.js"></script>
 <script src="../../scripts/knockout/knockout-3.3.0.js"></script>
 
@@ -614,9 +614,12 @@
                     var latlng= map.unproject( [data.left, data.top], map.getMaxZoom());
                   var marker = L.marker(latlng,{
                       bounceOnAdd: true,
-                      bounceOnAddOptions: {duration: 1500, height: 100},
+                      bounceOnAddOptions: { height: 100},
                       bounceOnAddCallback: function() {console.log("done");}
                   }).addTo(map);
+                    marker.on('click', function (e) {
+                        e.target.bounce({ height: 100});
+                    });
 
 //                    var marker = L.marker(self.getLatLng(data.left,data.top)).addTo(map);
                     var popup=self.getPopup(data.id);
