@@ -48,54 +48,28 @@ namespace WeiXinPF.WebService
         public void GetOpenId(string code, int wid, string url)
         {
             string openid = string.Empty;
-            //try
-            //{
-            //    if (Session["openid"] == null)
-            //    {
-            //        BLL.wx_userweixin bll = new BLL.wx_userweixin();
-            //        Model.wx_userweixin wxModel = bll.GetModel(wid);
-            //        openid = OAuth2BaseProc(wxModel, "coupon", code, url);
-            //        if (!string.IsNullOrEmpty(openid))
-            //        {
-            //            Session["openid"] = openid;
-            //        }
-
-            //    }
-            //    else
-            //    {
-            //        openid = Session["openid"] as string;
-
-            //    }
-            //    CouponListDTO dto = service.GetCouponList(wid, openid);
-            //    if (dto != null)
-            //    {
-            //        var data = new
-            //        {
-            //            lists = dto,
-            //            openid = openid
-            //        };
-            //        Context.Response.Write(AjaxResult.Success(data));
-            //    }
-            //    else
-            //    {
-            //        throw new Exception("参数异常");
-            //    }
-
-            //}
-            //catch (JsonException jsEx)
-            //{
-
-            //    Context.Response.Write(AjaxResult.Error(jsEx.Message, jsEx.ErrorType));
-            //}
-            //catch (Exception ex)
-            //{
-            //    var s = "";
-            //    if (ex.InnerException != null)
-            //    {
-            //        s = ex.InnerException.Message;
-            //    }
-            //    Context.Response.Write(AjaxResult.Error(s));
-            //}
+            try
+            {
+                if (Session["openid"] == null)
+                {
+                    BLL.wx_userweixin bll = new BLL.wx_userweixin();
+                    Model.wx_userweixin wxModel = bll.GetModel(wid);
+                    openid = OAuth2BaseProc(wxModel, "OpenId", code, url);
+                    if (!string.IsNullOrEmpty(openid))
+                    {
+                        Session["openid"] = openid;
+                    }
+                }
+                Context.Response.Write(AjaxResult.Success(openid).ToCamelString());
+            }
+            catch (UnAuthException oEx)
+            {
+                Context.Response.Write(AjaxResult.Error(oEx.RedirectUrl, oEx.Code).ToCamelString());
+            }
+            catch(Exception ex)
+            {
+                Context.Response.Write(AjaxResult.Error("获取OpenID失败。").ToCamelString());
+            }
         }
     }
 }

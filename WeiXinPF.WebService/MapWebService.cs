@@ -26,26 +26,21 @@ namespace WeiXinPF.WebService
                     case "scenic"://类似是景区
                         mapInfo = service.GetMapInfo(id);
                         break;
-                    case "food"://类似是美食
-
+                    case "catering"://类似是餐饮
                         mapInfo = service.GetShop(id);
                         break;
                     case "hotel"://类似是酒店
-
                         mapInfo = service.GetHotel(id);
                         break;
-
                 }
                 Context.Response.Write(AjaxResult.Success(mapInfo));
             }
             catch (JsonException jsEx)
             {
-
                 Context.Response.Write(AjaxResult.Error(jsEx.Message, jsEx.ErrorType));
             }
             catch (Exception ex)
             {
-
                 Context.Response.Write(AjaxResult.Error(ex.Message));
             }
         }
@@ -63,15 +58,15 @@ namespace WeiXinPF.WebService
 
                 if (!markers.Any())
                 {
-                    Context.Response.Write(new AjaxResponse(new ErrorInfo("该微信帐号下未配置景点信息")));
+                    Context.Response.Write(AjaxResult.Error("该微信帐号下未配置景点信息").ToCamelString());
                     return;
                 }
 
-                Context.Response.Write(new AjaxResponse(markers));
+                Context.Response.Write(AjaxResult.Success(markers).ToCamelString());
             }
             catch
             {
-                Context.Response.Write(new AjaxResponse(new ErrorInfo("获取景点信息失败")));
+                Context.Response.Write(AjaxResult.Error("获取景点信息失败").ToCamelString());
             }
         }
 
@@ -83,11 +78,11 @@ namespace WeiXinPF.WebService
                 var service = new MapService();
                 var scenics = service.GetScenics(wid, keywords);
 
-                Context.Response.Write(new AjaxResponse(scenics));
+                Context.Response.Write(AjaxResult.Success(scenics).ToCamelString());
             }
             catch
             {
-                Context.Response.Write(new AjaxResponse(new ErrorInfo("获取景点信息失败")));
+                Context.Response.Write(AjaxResult.Error("获取景点信息失败").ToCamelString());
             }
         }
 
@@ -104,11 +99,11 @@ namespace WeiXinPF.WebService
                 var service = new MapService();
                 var shops = service.GetCateringShops(wid, keywords);
 
-                Context.Response.Write(new AjaxResponse(shops));
+                Context.Response.Write(AjaxResult.Success(shops).ToCamelString());
             }
             catch
             {
-                Context.Response.Write(new AjaxResponse(new ErrorInfo("获取周边餐饮信息失败")));
+                Context.Response.Write(AjaxResult.Error("获取周边餐饮信息失败").ToCamelString());
             }
         }
 
@@ -125,11 +120,11 @@ namespace WeiXinPF.WebService
                 var service = new MapService();
                 var hotels = service.GetHotels(wid, keywords);
 
-                Context.Response.Write(new AjaxResponse(hotels));
+                Context.Response.Write(AjaxResult.Success(hotels).ToCamelString());
             }
             catch
             {
-                Context.Response.Write(new AjaxResponse(new ErrorInfo("获取周边酒店信息失败")));
+                Context.Response.Write(AjaxResult.Error("获取周边酒店信息失败").ToCamelString());
             }
         }
     }

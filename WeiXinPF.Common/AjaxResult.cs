@@ -30,11 +30,11 @@ namespace WeiXinPF.Common
         /// </summary>
         public object Data { get; set; }
 
-        
 
-        # region Success
 
-        public static AjaxResult Success(string message, object data,string messageType= "success")
+        #region Success
+
+        public static AjaxResult Success(string message, object data, string messageType = "success")
         {
             return new AjaxResult()
             {
@@ -77,6 +77,15 @@ namespace WeiXinPF.Common
         public override string ToString()
         {
             return JSONHelper.Serialize(this);
+        }
+
+        /// <summary>
+        /// 以驼峰命名法则序列化成Json
+        /// </summary>
+        /// <returns></returns>
+        public string ToCamelString()
+        {
+            return JSONHelper.Serialize(this, true);
         }
         #endregion
     }
