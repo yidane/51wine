@@ -139,7 +139,7 @@
                 }
             }
             showShopCartProductsNumber();
-        };
+        }
 
         cart.onAfterAdd = function (obj, num, conditions) {
             showProductNumberWithBought(conditions.id, conditions.specId, num);
