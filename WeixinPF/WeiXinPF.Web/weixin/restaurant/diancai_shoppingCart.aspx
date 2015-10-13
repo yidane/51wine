@@ -1,4 +1,5 @@
 ﻿<%@ Page Language="C#" MasterPageFile="Restaurant.Master" AutoEventWireup="true" CodeBehind="diancai_shoppingCart.aspx.cs" Inherits="WeiXinPF.Web.weixin.restaurant.diancai_shoppingCart" %>
+
 <asp:Content ID="h" ContentPlaceHolderID="head" runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no">
@@ -7,7 +8,8 @@
     <meta name="format-detection" content="telephone=no">
     <link href="css/diancai.css" rel="stylesheet" type="text/css" />
     <script src="js/alert.js" type="text/javascript"></script>
-
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <script src="../WeChatPay/js/WeChatPay_3.0.js"></script>
 </asp:Content>
 
 <asp:Content ID="c" ContentPlaceHolderID="content" runat="server">
@@ -64,7 +66,7 @@
                                     <label for="name" class="ui-input-text">联系人：</label></td>
                                 <td>
                                     <div class="ui-input-text">
-                                        <input type="text" id="name" name="name"   value="<%=name %>" placeholder="" class="ui-input-text">
+                                        <input type="text" id="name" name="name" value="<%=name %>" placeholder="" class="ui-input-text">
                                     </div>
                                 </td>
                             </tr>
@@ -77,7 +79,7 @@
                                     <label for="phone" class="ui-input-text">联系电话：</label></td>
                                 <td>
                                     <div class="ui-input-text">
-                                        <input type="tel" id="phone" name="phone" placeholder="联系人电话" value="<%=phone %>"   class="ui-input-text">
+                                        <input type="tel" id="phone" name="phone" placeholder="联系人电话" value="<%=phone %>" class="ui-input-text">
                                     </div>
                                 </td>
                             </tr>
@@ -90,9 +92,8 @@
         <div class="footReturn" style="margin-bottom: 70px;">
             <a id="showcard" class="submit" href="javascript:submitOrder();" runat="server">确定提交</a>
         </div>
-
     </form>
-    
+
     <script src="js/shopCart.js" type="text/javascript"></script>
     <script src="js/BuyProducts.js" type="text/javascript"></script>
     <script>
@@ -194,9 +195,12 @@
             $.post('diancai_login.ashx?openid=<%=openid%>&shopid=<%=shopid%>', submitData,
                 function (data) {
                     if (data.ret == "ok") {
-                        
-                        alert(data.content);
-                        clearCache();
+
+                        var payResult= Pay(data.shopname,"",data.orderNumber,data.payamount,data.openid);
+                        if (payResult) {
+                            alert(data.content);
+                            clearCache();
+                        }
                     } else { alert(data.content); }
                 },
                 "json");

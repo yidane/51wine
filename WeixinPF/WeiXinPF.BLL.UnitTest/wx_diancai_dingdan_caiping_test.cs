@@ -76,19 +76,19 @@ namespace WeiXinPF.BLL.UnitTest
             wx_diancai_dingdan_manage bll = new wx_diancai_dingdan_manage();
             string ccode = "4978729704708228";
 
-            bll.UpdateCommoditystatus(ccode,1);
+            bll.UpdateCommoditystatus(ccode, 1);
         }
 
         [TestMethod]
         public void AfterPaymentProcess_diancaiOrderManage_ReturnSuccessProcess()
         {
-            var wid = "11111";
+            var wid = 36;
 
             // 订单id
             var orderid = "7";
             var result = false;
 
-            if (!string.IsNullOrEmpty(wid) && !string.IsNullOrEmpty(orderid))
+            if (wid > 0 && !string.IsNullOrEmpty(orderid))
             {
                 var bll = new BLL.wx_diancai_dingdan_manage();
                 var order = bll.GetModel(int.Parse(orderid));
@@ -111,18 +111,18 @@ namespace WeiXinPF.BLL.UnitTest
                     }
                     catch (Exception)
                     {
-                        result= false;
+                        result = false;
                     }
                 }
                 else
                 {
-                    result= false;
+                    result = false;
                 }
                 result = true;
             }
             else
             {
-                result= false;
+                result = false;
             }
 
             Assert.IsTrue(result);

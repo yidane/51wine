@@ -78,6 +78,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Transactions" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -7458,6 +7459,10 @@
     <Compile Include="weixin\vote\vote.ashx.cs">
       <DependentUpon>vote.ashx</DependentUpon>
     </Compile>
+    <Compile Include="weixin\WeChatPay\WeChatService.asmx.cs">
+      <DependentUpon>WeChatService.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="weixin\WeiXinPage.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -7822,6 +7827,8 @@
     <Folder Include="weixin\dzp\js\" />
     <Folder Include="weixin\haibao\" />
     <Folder Include="weixin\sticket\js\" />
+    <Folder Include="weixin\WeChatPay\css\" />
+    <Folder Include="weixin\WeChatPay\images\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="WebServices\CouponWebService.asmx" />
@@ -9640,6 +9647,9 @@
     <Content Include="weixin\vote\js\jquery.icheck.min.js" />
     <Content Include="weixin\vote\js\play.js" />
     <Content Include="weixin\vote\tp_result.aspx" />
+    <Content Include="weixin\WeChatPay\js\jquery-2.1.0.min.js" />
+    <Content Include="weixin\WeChatPay\WeChatPay.html" />
+    <Content Include="weixin\WeChatPay\WeChatService.asmx" />
     <Content Include="weixin\wfangchan\aboutWe.aspx" />
     <Content Include="weixin\wfangchan\css\back.css" />
     <Content Include="weixin\wfangchan\css\cate36_0.css" />
@@ -9991,6 +10001,7 @@
     <Content Include="weixin\restaurant\diancai_login.ashx" />
     <None Include="Properties\PublishProfiles\Yidane.pubxml" />
     <Content Include="weixin\restaurant\Restaurant.Master" />
+    <Content Include="weixin\WeChatPay\js\WeChatPay_3.0.js" />
     <None Include="副本 Web.Debug.config">
       <DependentUpon>副本 Web.config</DependentUpon>
     </None>
