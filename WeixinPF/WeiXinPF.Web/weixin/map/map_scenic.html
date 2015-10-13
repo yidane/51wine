@@ -439,7 +439,7 @@
             this.initmap=function(lat,lng)
             {
                 var mapMinZoom = 3;
-                var mapMaxZoom = 6;
+                var mapMaxZoom = 5;
                 var map = L.map('map', {
                     maxZoom: mapMaxZoom,
                     minZoom: mapMinZoom,
@@ -448,13 +448,14 @@
                 });
                 var mapsize = self.getMapSize();
 //                var _mapCenter =map.unproject([mapsize.width/2,mapsize.height/2], mapMaxZoom);
-                var _mapCenter =map.unproject([3146,3034], mapMaxZoom);
+//                var _mapCenter =map.unproject([3146,3034], mapMaxZoom);
+                var _mapCenter =map.unproject([1612,1462], mapMaxZoom);
                 map.setView(_mapCenter, mapMinZoom+1);
                 self.map(map);
 
             };
             this.getMapSize=function(){
-                return { height: 6144, width: 8960 };
+                return { height: 6068/2, width: 8858/2 };
             };
             this.getborderlatlng = function() {
                 return { lat: 39.99848, lng: 116.3469 };
@@ -476,7 +477,7 @@
             this.addtileLayer=function(){
                 var map=self.map();
                 var mapsize = self.getMapSize();
-                var latlng = self.getborderlatlng();
+//                var latlng = self.getborderlatlng();
                 var mapMinZoom = map.getMinZoom();
                 var mapMaxZoom = map.getMaxZoom();
                 var mapBounds;
@@ -614,7 +615,7 @@
                     var latlng= map.unproject( [data.left, data.top], map.getMaxZoom());
                   var marker = L.marker(latlng,{
                       bounceOnAdd: true,
-                      bounceOnAddOptions: { height: 100},
+                      bounceOnAddOptions: {duration:400*(i+1)+500, height: 100},
                       bounceOnAddCallback: function() {console.log("done");}
                   }).addTo(map);
                     marker.on('click', function (e) {
