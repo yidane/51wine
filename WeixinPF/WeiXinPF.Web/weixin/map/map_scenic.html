@@ -630,7 +630,8 @@
             self.getPopup=function(id){
                 var content=$('#tip_'+id).html();
                 var popup=new L.popup({
-                    className:'tip'
+                    className:'tip',
+                    closeButton:false
                 });
                 popup.setContent(content);
                 return popup;
