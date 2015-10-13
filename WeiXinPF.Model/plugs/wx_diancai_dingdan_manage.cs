@@ -54,7 +54,7 @@ namespace WeiXinPF.Model
 		public int wid
 		{
 			set{ _wid=value;}
-			get{int _wid;}
+			get{return _wid;}
 		}
 		/// <summary>
 		/// 订单号
