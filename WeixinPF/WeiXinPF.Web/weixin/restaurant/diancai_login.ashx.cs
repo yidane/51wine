@@ -14,6 +14,7 @@ namespace WeiXinPF.Web.weixin.restaurant
     using WeiXinPF.Web.weixin.qiangpiao;
 
     using wx_diancai_caipin_manage = WeiXinPF.BLL.wx_diancai_caipin_manage;
+    using wx_diancai_shopinfo = WeiXinPF.BLL.wx_diancai_shopinfo;
 
     /// <summary>
     /// diancai_login 的摘要说明
@@ -108,9 +109,11 @@ namespace WeiXinPF.Web.weixin.restaurant
                     this.jsonDict.Add("ret", "ok");
                     this.jsonDict.Add("content", orderProcessResult.Message);
                     this.jsonDict.Add("orderid", order.id.ToString());
+                    this.jsonDict.Add("ordercode", order.orderNumber);
                     this.jsonDict.Add("openid", openid);
                     this.jsonDict.Add("payamount", order.payAmount.ToString());
                     this.jsonDict.Add("shopname", new BLL.wx_diancai_shopinfo().GetModel(this.shopid).hotelName);
+                    this.jsonDict.Add("wid", order.wid.ToString());
                     context.Response.Write(MyCommFun.getJsonStr(this.jsonDict));
                 }
                 
@@ -241,6 +244,7 @@ namespace WeiXinPF.Web.weixin.restaurant
             var order = new Model.wx_diancai_dingdan_manage
             {
                 shopinfoid = this.shopid,
+                wid = new BLL.wx_diancai_shopinfo().GetModel(this.shopid).wid.Value,
                 openid = this.openid,
                 orderNumber = Utils.Number(13),
                 deskNumber = string.Empty,
@@ -364,20 +368,16 @@ namespace WeiXinPF.Web.weixin.restaurant
         /// </returns>
         private ProcessResult AfterPaymentProcess()
         {
-            // 微信支付id
-            var wid = MyCommFun.QueryString("wid");
+            // 订单code
+            var orderId = MyCommFun.QueryString("orderid");
 
-            // 订单id
-            var orderid = MyCommFun.QueryString("orderid");
-
-            if (!string.IsNullOrEmpty(wid) && !string.IsNullOrEmpty(orderid))
+            if (!string.IsNullOrEmpty(orderId))
             {
                 var bll = new BLL.wx_diancai_dingdan_manage();
-                var order = bll.GetModel(int.Parse(orderid));
+                var order = bll.GetModel(int.Parse(orderId));
 
                 if (order != null)
                 {
-                    order.wid = wid;
                     order.payStatus = 1;
                     order.oderTime = DateTime.Now;
 
@@ -386,7 +386,7 @@ namespace WeiXinPF.Web.weixin.restaurant
                         using (var scope = new TransactionScope())
                         {
                             bll.Update(order);
-                            bll.UpdateCommodityStatusByOrderId(orderid, "1");
+                            bll.UpdateCommodityStatusByOrderId(orderId, "1");
 
                             scope.Complete();
                         }
