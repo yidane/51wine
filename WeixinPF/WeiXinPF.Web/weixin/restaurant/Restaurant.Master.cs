@@ -29,7 +29,13 @@ namespace WeiXinPF.Web.weixin.restaurant
                 }
                 else
                 {
-                    this.hotelName = new BLL.wx_diancai_shopinfo().GetModel(this.shopid).hotelName;
+                    var shopinfo = new BLL.wx_diancai_shopinfo().GetModel(this.shopid);
+
+                    if (shopinfo == null)
+                    {
+                        return;
+                    }
+                    this.hotelName = shopinfo.hotelName;
                 }                
             }
         }

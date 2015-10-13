@@ -59,6 +59,11 @@ namespace WeiXinPF.Web.weixin.restaurant
         {
 
             shopinfo = shopBll.GetModel(shopid);
+
+            if (shopinfo == null)
+            {
+                return;
+            }
             rename = shopinfo.dcRename;
             hotelName = shopinfo.hotelName;
             DataSet category1 = categorybll.GetList(shopid);
