@@ -15,7 +15,7 @@
         <div class="menu_topbar">
             <strong class="head-title"><%=title %></strong>
             <span class="head_btn_left"><a href="javascript:history.go(-1);"><span>返回</span></a><b></b></span>
-            <a class="head_btn_right" href="caidan_shangjia.aspx?shopid=<%=shopid %>&openid=<%=openid %>">
+            <a class="head_btn_right" href="../map/cateringlist.html">
                 <span><i class="menu_header_home"></i></span><b></b>
             </a>
         </div>

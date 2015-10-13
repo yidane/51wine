@@ -49,6 +49,12 @@ namespace WeiXinPF.Web.weixin.restaurant
             }
 
             shopinfo = shopBll.GetModel(shopid);
+
+            if (shopinfo == null)
+            {
+                return;
+            }
+
             hotelName = shopinfo.hotelName;
             idf = MyCommFun.RequestInt("id");
 

@@ -35,7 +35,7 @@
         <h2>我的订单
             <button id="clearBtn" class="btn_add emptyIt" onclick="clearCache();">清空</button>
             <a href="index.aspx?shopid=<%=shopid %>&openid=<%=openid %>">
-                <button class="btn_add">继续点单外卖</button></a>
+                <button class="btn_add">继续选购</button></a>
         </h2>
 
 

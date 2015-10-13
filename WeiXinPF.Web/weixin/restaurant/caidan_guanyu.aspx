@@ -40,29 +40,18 @@
 <ul class="round">
     <li class="title"><span class="none smallspan">店铺信息</span></li>
         <table width="100%" border="0" cellpadding="0" cellspacing="0" class="cpbiaoge">
-<%=status %>
     <tr>
     <td>店铺分类：<%=kcType %></td>
     </tr>
     <%=yingye1 %>
     <%=yingye2 %>
     <%=yingye3 %>
-     <tr>
-    <td>起送价格：<%=sendPrice %>元</td>
-  </tr>
-   <tr>
-    <td>服务半径：<%=radius %>千米</td>
-  </tr>
-         <tr>
-    <td valign="top">配送区域：<%=sendArea %></td>
-  </tr>
            </table>
 </ul>
     
     <ul class="round">
         <li class="tel"><a href="tel:<%=tel %>"><span><%=tel %></span></a></li>
-<li class="addr"><a href="http://api.map.baidu.com/marker?location=<%=xplace %>,<%=yplace %>&amp;title=<%=hotelName %>&amp;content=<%=address %>&amp;output=html"><span><%=address %></span></a></li>
-        <li class="manage"><a href="diancai_Login.aspx?shopid=<%=shopid %>"><span>订单管理</span></a></li>
+<li class="addr"><a href="/weixin/map/map_address.html?type=catering&id=<%=shopid %>"><span><%=address %></span></a></li>
 </ul>
 
 <div class="detailcontent"><h2>详情介绍</h2>
