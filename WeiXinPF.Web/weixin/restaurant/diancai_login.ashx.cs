@@ -114,11 +114,13 @@ namespace WeiXinPF.Web.weixin.restaurant
                     this.jsonDict.Add("payamount", order.payAmount.ToString());
                     this.jsonDict.Add("shopname", new BLL.wx_diancai_shopinfo().GetModel(this.shopid).hotelName);
                     this.jsonDict.Add("wid", order.wid.ToString());
+                    this.jsonDict.Add("orderNumber", order.orderNumber);
                     context.Response.Write(MyCommFun.getJsonStr(this.jsonDict));
                 }
                 
                 context.Response.End();
-            }else if (_action == "afterpayment")
+            }
+            else if (_action == "afterpayment")
             {
                 var afterPaymentProcessResult = this.AfterPaymentProcess();
 
