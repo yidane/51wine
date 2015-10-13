@@ -61,6 +61,8 @@
         </div>
     </div>
 </div>
+    <script src="js/shopCart.js" type="text/javascript"></script>
+    <script src="js/BuyProducts.js" type="text/javascript"></script>
 <script>
     var count = $("#thelist img").size();
     $("#thelist img").css("width", document.body.clientWidth);
@@ -72,6 +74,16 @@
 
         $("#thelist img").css("width", document.body.clientWidth);
         $("#scroller").css("width", document.body.clientWidth * count);
+    }
+
+    window.onload = function () {
+        cart.getFromCache();
+        showProductsInShopCart();
+    }
+
+    var cart = new OAK.Shop.Cart(<%=shopid %>);
+    function showProductsInShopCart() {
+        showShopCartProductsNumber();
     }
 
 </script>

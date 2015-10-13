@@ -34,7 +34,7 @@
     <div class="biaodan">
         <h2>我的订单
             <button id="clearBtn" class="btn_add emptyIt" onclick="clearCache();">清空</button>
-            <a href="index.aspx?shopid=<%=shopid %>&openid=<%=openid %>">
+            <a href="index.aspx?shopid=<%=shopid %>&openid=<%=openid %>&wid=<%=wid %>">
                 <button class="btn_add">继续选购</button></a>
         </h2>
 
@@ -192,7 +192,7 @@
                 myact: "addcaidan"
             };
            
-            $.post('diancai_login.ashx?openid=<%=openid%>&shopid=<%=shopid%>', submitData,
+            $.post('diancai_login.ashx?openid=<%=openid%>&shopid=<%=shopid%>&wid=<%=wid%>', submitData,
                 function (data) {
                     if (data.ret == "ok") {
 
@@ -201,7 +201,8 @@
                             alert(data.content);
                             clearCache();
                         }
-                    } else { alert(data.content); }
+                    } else {
+                        alert(data.content); }
                 },
                 "json");
 

@@ -15,7 +15,7 @@
         <div class="menu_topbar">
             <strong class="head-title"><%=title %></strong>
             <span class="head_btn_left"><a href="javascript:history.go(-1);"><span>返回</span></a><b></b></span>
-            <a class="head_btn_right" href="../map/cateringlist.html">
+            <a class="head_btn_right" href="../map/poilist.html?type=catering&wid=<%=wid %>">
                 <span><i class="menu_header_home"></i></span><b></b>
             </a>
         </div>
@@ -30,19 +30,19 @@
     <div class="footermenu">
         <ul>
             <li>
-                <a id="about" href="caidan_guanyu.aspx?shopid=<%=shopid %>&openid=<%=openid %>">
+                <a id="about" href="caidan_guanyu.aspx?shopid=<%=shopid %>&openid=<%=openid %>&wid=<%=wid %>">
                     <img src="images/xxyX63YryG.png">
                     <p>关于</p>
                 </a>
             </li>
             <li>
-                <a id="buy" class="active" href="index.aspx?shopid=<%=shopid %>&openid=<%=openid %>">
+                <a id="buy" class="active" href="index.aspx?shopid=<%=shopid %>&openid=<%=openid %>&wid=<%=wid %>">
                     <img src="images/Lngjm86JQq.png">
                     <p>美食选购</p>
                 </a>
             </li>
             <li>
-                <a id="shopcart" href="diancai_shoppingCart.aspx?shopid=<%=shopid %>&openid=<%=openid %>">
+                <a id="shopcart" href="diancai_shoppingCart.aspx?shopid=<%=shopid %>&openid=<%=openid %>&wid=<%=wid %>">
                     <span class="num" id="cartN2">0</span>
                     <img src="images/2yFKO6TwKI.png">
                     <p>商铺购物车</p>

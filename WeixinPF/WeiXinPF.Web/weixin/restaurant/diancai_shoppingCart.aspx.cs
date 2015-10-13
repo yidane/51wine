@@ -21,6 +21,8 @@ namespace WeiXinPF.Web.weixin.restaurant
         public string name = "";
         public string phone = "";
 
+        public string wid = "";
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
@@ -42,6 +44,7 @@ namespace WeiXinPF.Web.weixin.restaurant
 
             openid = MyCommFun.QueryString("openid");
             shopid = MyCommFun.RequestInt("shopid");
+            wid = MyCommFun.QueryString("wid");
 
             if (openid == "" || shopid == 0)
             {
