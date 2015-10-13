@@ -16,22 +16,22 @@ namespace WeiXinPF.Web.weixin.scenic
         public void ProcessRequest(HttpContext context)
         {
             string action = context.Request["action"];
-            AjaxResponse response;
+            AjaxResult response;
             switch (action)
             {
                 case "GetScenic":
                     response = GetScenic(context);
                     break;
                 default:
-                    response = new AjaxResponse(new ErrorInfo("请求的方法不存在！"));
+                    response = AjaxResult.Error("请求的方法不存在！");
                     break;
             }
 
             context.Response.ContentType = "json/application";
-            context.Response.Write(response);
+            context.Response.Write(response.ToCamelString());
         }
 
-        private static AjaxResponse GetScenic(HttpContext context)
+        private static AjaxResult GetScenic(HttpContext context)
         {
             wx_travel_scenic scenicBll = new wx_travel_scenic();
             wx_travel_scenicDetail scenicDetailBll = new wx_travel_scenicDetail();
@@ -47,7 +47,7 @@ namespace WeiXinPF.Web.weixin.scenic
                 details = details
             };
 
-            return new AjaxResponse(result);
+            return AjaxResult.Success(result);
         }
 
         public bool IsReusable

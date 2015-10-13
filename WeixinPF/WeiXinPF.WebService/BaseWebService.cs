@@ -92,7 +92,7 @@ namespace WeiXinPF.WebService
                 string newUrl = OAuthApi.GetAuthorizeUrl(model.AppId, targetUrl, state, OAuthScope.snsapi_base);
 
                 //41008	缺少oauth code
-                throw new JsonException(newUrl, "41008");
+                throw new UnAuthException(newUrl, "41008");
             }
             else
             {

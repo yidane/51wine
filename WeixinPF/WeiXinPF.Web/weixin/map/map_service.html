@@ -14,7 +14,7 @@
         }
 
         a {
-            color:#000;
+            color: #000;
             text-decoration: none;
         }
 
@@ -266,6 +266,7 @@
             -webkit-flex: 1;
             text-align: center;
         }
+
             .btn:last-child {
                 border-right: none;
             }
@@ -277,26 +278,26 @@
             <input class="input" type="search" maxlength="20" placeholder="搜索景点、酒店、餐饮">
             <i class="botton fa fa-search"></i>
         </section>
-        <section class="poi-list-view">
-            <ul>
+        <section class="poi-list-view" >
+            <ul data-bind="foreach:poicatgs">
                 <li>
-                    <a href="sceniclist.html">
-                        <i class="poi-img fa fa-tree"></i>
-                        <label class="poi-text">景点</label>
+                    <a data-bind="attr:{href:url}">
+                        <i data-bind="attr:{class:cls}"></i>
+                        <label class="poi-text" data-bind="text:name"></label>
                     </a>
                 </li>
-                <li>
-                    <a href="hotellist.html">
+                <!--<li>
+                    <a href="poilist.html">
                         <i class="poi-img fa fa-hotel"></i>
                         <label class="poi-text">酒店</label>
                     </a>
                 </li>
                 <li>
-                    <a href="cateringlist.html">
+                    <a href="poilist.html">
                         <i class="poi-img fa fa-cutlery"></i>
                         <label class="poi-text">餐饮</label>
                     </a>
-                </li>
+                </li>-->
             </ul>
         </section>
         <section class="popular-list">
@@ -375,5 +376,63 @@
             </div>
         </section>
     </div>
+    <script src="../../scripts/jquery/jquery-2.1.0.min.js"></script>
+    <script src="../../scripts/jquery/jquery.url.js"></script>
+    <script src="../../scripts/knockout/knockout-3.3.0.js"></script>
+    <script src="../../scripts/knockout/knockout-extend.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            var param = {
+                wid: $.url.param('wid'),
+                openId: $.url.param('openId')
+            }
+
+            var access_code = $.url.param("code") ? $.url.param("code") : '';
+
+            if (!param.openId) {
+                $.ajax({
+                    url: '/WebServices/WeChatWebService.asmx/GetOpenId',
+                    dataType: 'json',
+                    async: false,
+                    data: {
+                        code: access_code,
+                        wid: param.wid,
+                        url: document.location.href
+                    },
+                    success: function (res) {
+                        if (res.isSuccess) {
+                            param.openId = res.data;
+                        }
+                        else {
+                            if (res.messageType == '41008') {
+                                document.location.href = res.message;
+                                return;
+                            }
+                        }
+                    },
+                    error: function (a, b, c) {
+                        alert(1)
+                    }
+                });
+            }
+
+            var viewModel = {
+                poicatgs: [{
+                    name: '景点',
+                    cls: 'poi-img fa fa-tree',
+                    url: 'poilist.html?type=scenic&wid=' + param.wid+'&openId='+param.openId
+                }, {
+                    name: '酒店',
+                    cls: 'poi-img fa fa-hotel',
+                    url: 'poilist.html?type=hotel&wid=' + param.wid + '&openId=' + param.openId
+                }, {
+                    name: '餐饮',
+                    cls: 'poi-img fa fa-cutlery',
+                    url: 'poilist.html?type=catering&wid=' + param.wid + '&openId=' + param.openId
+                }]
+            }
+            ko.applyBindings(viewModel);
+        });
+    </script>
 </body>
 </html>

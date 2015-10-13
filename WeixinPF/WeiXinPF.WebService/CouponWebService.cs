@@ -221,10 +221,10 @@ namespace WeiXinPF.WebService
 
 
             }
-            catch (JsonException jsEx)
+            catch (UnAuthException jsEx)
             {
 
-                Context.Response.Write(AjaxResult.Error(jsEx.Message, jsEx.ErrorType));
+                Context.Response.Write(AjaxResult.Error(jsEx.RedirectUrl, jsEx.Code));
             }
             catch (Exception ex)
             {

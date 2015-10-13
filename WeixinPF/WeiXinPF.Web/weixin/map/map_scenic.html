@@ -411,13 +411,13 @@
                     switch (type)
                     {
                         case 'spot':
-                            self.jumpUrl('sceniclist.html?wid='+wid);
+                            self.jumpUrl('poilist.html?type=scenic&wid=' + wid);
                             break;
                         case 'hotel':
-                            self.jumpUrl('hotellist.html?wid='+wid);
+                            self.jumpUrl('hotellist.html?type=hotel&wid=' + wid);
                             break;
                         case 'eat':
-                            self.jumpUrl('cateringlist.html?wid='+wid);
+                            self.jumpUrl('cateringlist.html?type=catering&wid=' + wid);
                             break;
                     }
                 }
@@ -588,12 +588,12 @@
                     dataType: "json",
                     data: { wid: self.params().wid },
                     success: function(res) {
-                        if (res.success) {
-                            self.markers(res.result);
+                        if (res.isSuccess) {
+                            self.markers(res.data);
                             self.addmarkers();
 
                         } else {
-                            alert(res.error.message);
+                            console.log(res.message);
                         }
                     }
                 });

@@ -1,0 +1,98 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>周边美食</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link href="../../css/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="css/poi.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="content">
+        <header class="header">
+            <a href="javascript:history.back();" class="back fa fa-angle-left">
+            </a>
+            <a class="user-center fa fa-user"></a>
+            <div class="text" data-bind="text:title">周边美食</div>
+        </header>
+        <section class="search-wrapper" data-bind="enterkey:search">
+            <input class="input" type="search" maxlength="20" placeholder="输入关键字搜素" data-bind="value:keywords">
+            <i class="botton fa fa-search" data-bind="click:search"></i>
+        </section>
+        <section class="poi-list">
+            <div class="poi-list-container" data-bind="foreach:pois">
+                <div class="poi-item" data-bind="click:$root.book">
+                    <div class="img-wapper">
+                        <img data-bind="attr:{ src:logo }" />
+                    </div>
+                    <div class="info-wapper">
+                        <div class="info-title">
+                            <div class="title" data-bind="text:name"></div>
+                            <div class="distince">1000km</div>
+                        </div>
+                        <div class="info-desc" data-bind="text:introduction"></div>
+                        <div class="info-botton">
+                            <span class="button" data-bind="click:$root.book">
+                                <i data-bind="attr:{class:$parent.actionCss}"></i>
+                                <!--ko text: $parent.actionName--><!--/ko-->
+                            </span>
+                            <span class="button" data-bind="click:$root.go,clickBubble:false">
+                                <i class="fa fa-location-arrow"></i> 去这
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="../../scripts/jquery/jquery-2.1.0.min.js"></script>
+    <script src="../../scripts/jquery/jquery.url.js"></script>
+    <script src="../../scripts/knockout/knockout-3.3.0.js"></script>
+    <script src="../../scripts/knockout/knockout-extend.js"></script>
+    <script src="js/PoiViewModel.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            var param = {
+                wid: $.url.param('wid'),
+                type: $.url.param('type'),
+                openId: $.url.param('openId')
+            }
+
+            var access_code = $.url.param("code") ? $.url.param("code") : '';
+
+            if (!param.openId) {
+                $.ajax({
+                    url: '/WebServices/WeChatWebService.asmx/GetOpenId',
+                    dataType: "json",
+                    data: {
+                        code: access_code,
+                        wid: param.wid,
+                        url: document.location.href
+                    },
+                    success: function (res) {
+                        if (res.isSuccess) {
+                            param.openId = res.data;
+                            var viewModel = new PoiViewModel(param);
+                            ko.applyBindings(viewModel);
+                        }
+                        else {
+                            if (res.messageType == '41008') {
+                                document.location.href = res.message;
+                                return;
+                            }
+                        }
+                    },
+                    error: function (a, b, c) {
+                        alert(1)
+                    }
+                });
+            }
+            else {
+                var viewModel = new PoiViewModel(param);
+                ko.applyBindings(viewModel);
+            }
+        });
+    </script>
+</body>
+</html>

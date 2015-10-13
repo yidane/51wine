@@ -83,12 +83,12 @@
                 data: { action: 'GetScenic', id: <%=MyCommFun.RequestInt("id") %> },
                 dataType: "json"
             }).done(function (res) {
-                if (res && res.success) {
-                    var outHtml = $("#tmpl").render(res.result);
+                if (res && res.isSuccess) {
+                    var outHtml = $("#tmpl").render(res.data);
                     $(".container").empty().html(outHtml);
 
                     if (hash != "#2") {
-                        var autoDisplayNextPage = res.result.scenic.autoDisplayNextPage;
+                        var autoDisplayNextPage = res.data.scenic.autoDisplayNextPage;
                         var delay = res.result.scenic.delay || 10;
 
                         if (autoDisplayNextPage) {
