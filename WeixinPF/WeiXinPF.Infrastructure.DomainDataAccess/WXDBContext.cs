@@ -8,6 +8,8 @@ using WeiXinPF.Infrastructure.DomainDataAccess.User;
 
 namespace WeiXinPF.Infrastructure.DomainDataAccess
 {
+    using WeiXinPF.Infrastructure.DomainDataAccess.Payment;
+
     public class WXDBContext : DbContext
     {
         //您的上下文已配置为从您的应用程序的配置文件(App.config 或 Web.config)
@@ -54,6 +56,7 @@ namespace WeiXinPF.Infrastructure.DomainDataAccess
         public virtual DbSet<photoScenesInfo> photoScenesInfo { get; set; }
         public virtual DbSet<photoUserParticipated> photoUserParticipated { get; set; }
 
+        public virtual DbSet<PaymentInfo> PaymentInfo { get; set; }
 
     }
 }
