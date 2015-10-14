@@ -45,7 +45,7 @@ $(document).ready(function () {
                 wx.ready(function () {
 
                     WeChatPayIsReady = true;
-                    wx.hideOptionMenu();
+                    //wx.hideOptionMenu();
 
                     //wx.onMenuShareAppMessage({
                     //    title: window.share.title,
@@ -103,6 +103,7 @@ function Pay(body, attach, out_trade_no, total_fee, openid) {
             data: "{ request:" + JSON.stringify(UnifiedOrderRequest) + "}",
             success: function (result) {
                 if (result.IsSuccess) {
+                    alert(result.IsSuccess);
                     wx.chooseWXPay({
                         timestamp: result.Data.timeStamp, // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
                         nonceStr: result.Data.nonceStr, // 支付签名随机串，不长于 32 位

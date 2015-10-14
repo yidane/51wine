@@ -171,7 +171,7 @@
     </script>
     <script type="text/javascript">
         document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
-            WeixinJSBridge.call('hideToolbar');
+            //WeixinJSBridge.call('hideToolbar');
         });
     </script>
 </asp:Content>

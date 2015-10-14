@@ -19,7 +19,7 @@ namespace WeiXinPF.Web.weixin
         //分享js的参数
         public FxModel fxModel = new FxModel();
         public string openid = "";
-       
+
         public string mywebSite = MyCommFun.getWebSite();
         /// <summary>
         /// 只允许微信里访问
@@ -40,7 +40,7 @@ namespace WeiXinPF.Web.weixin
                 }
             }
 
-        
+
         }
 
         public Model.wxcodeconfig getwebsiteinfo(int wid)
@@ -57,7 +57,7 @@ namespace WeiXinPF.Web.weixin
         public string getwebcopyright(int wid)
         {
             wsiteBll wBll = new wsiteBll();
-            Model.wxcodeconfig config= wBll.GetModelByWid(wid, "");
+            Model.wxcodeconfig config = wBll.GetModelByWid(wid, "");
             if (config != null)
             {
                 return config.wcopyright;
@@ -76,9 +76,10 @@ namespace WeiXinPF.Web.weixin
         /// </summary>
         /// <param name="state"></param>
         /// <param name="targetUrl">目标地址</param>
-        public void OAuth2BaseProc(Model.wx_userweixin model, string state, string targetUrl)
+        [Obsolete("过时的方法")]
+        public void OAuth2BaseProcOld(Model.wx_userweixin model, string state, string targetUrl)
         {
-            
+
             string code = MyCommFun.QueryString("code");
             if (code == null || code.Trim() == "")
             {
@@ -88,7 +89,7 @@ namespace WeiXinPF.Web.weixin
                 }
                 //thisUrl = MyCommFun.getWebSite() + "/weixin/huodong/index.aspx";
                 string newUrl = OAuthApi.GetAuthorizeUrl(model.AppId, targetUrl, state, OAuthScope.snsapi_base);
-               // WXLogs.AddLog(model.id, "OAuth授权跳转页面", "获得OAuth2BaseProc", newUrl);
+                // WXLogs.AddLog(model.id, "OAuth授权跳转页面", "获得OAuth2BaseProc", newUrl);
                 Response.Redirect(newUrl);
             }
             else
@@ -99,6 +100,36 @@ namespace WeiXinPF.Web.weixin
 
         }
 
+        /// <summary>
+        /// 授权判断，页面跳转
+        /// </summary>
+        /// <param name="state"></param>
+        /// <param name="targetUrl">目标地址</param>
+        public void OAuth2BaseProc(Model.wx_userweixin model, string state, string targetUrl)
+        {
+
+            var code = MyCommFun.QueryString("code");
+            openid = MyCommFun.QueryString("openid");
+
+            if (!string.IsNullOrEmpty(openid))
+                return;
+
+            //如果不存在code,表示尚未和微信平台OAuth2
+            if (string.IsNullOrEmpty(code))
+            {
+                if (targetUrl == null || targetUrl.Trim() == "")
+                {
+                    targetUrl = MyCommFun.getTotalUrl();
+                }
+                var newUrl = OAuthApi.GetAuthorizeUrl(model.AppId, targetUrl, state, OAuthScope.snsapi_base);
+                Response.Redirect(newUrl);
+            }
+            else
+            {
+                var result = OAuthApi.GetAccessToken(model.AppId, model.AppSecret, code);
+                Response.Redirect(string.Format("{0}&openid={1}", Request.Url, result.openid));
+            }
+        }
 
 
         #region 分享的jssdk代码
@@ -109,14 +140,14 @@ namespace WeiXinPF.Web.weixin
         /// </summary>
         /// <param name="wxModel"></param>
         /// <param name="fxUrl">分享的目标url，如果传过来的值为空字符串或者为null则默认是当前的网址</param>
-        public void jssdkInit(Model.wx_userweixin wxModel, string fxUrl="")
+        public void jssdkInit(Model.wx_userweixin wxModel, string fxUrl = "")
         {
 
             fxModel.appId = wxModel.AppId;
             fxModel.timestamp = JSSDKHelper.GetTimestamp();
             fxModel.nonceStr = JSSDKHelper.GetNoncestr();
             fxModel.thisUrl = HttpContext.Current.Request.Url.ToString();
-          
+
             if (fxUrl == null || fxUrl.Trim() == "")
             {
                 fxModel.fxUrl = fxModel.thisUrl;
@@ -125,8 +156,8 @@ namespace WeiXinPF.Web.weixin
             {
                 fxModel.fxUrl = fxUrl;
             }
-            string error="";
-            string ticket = WeiXinPF.WeiXinComm.WeiXinCRMComm.getJsApiTicket(wxModel.id,out  error);
+            string error = "";
+            string ticket = WeiXinPF.WeiXinComm.WeiXinCRMComm.getJsApiTicket(wxModel.id, out  error);
             if (error != "")
             {  //取临时票据出现问题
 

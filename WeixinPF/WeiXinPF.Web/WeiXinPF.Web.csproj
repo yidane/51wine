@@ -7792,6 +7792,10 @@
       <Project>{20908989-7773-493B-B1BD-764BE322A935}</Project>
       <Name>WeiXinPF.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\WeiXinPF.Infrastructure.DomainDataAccess\WeiXinPF.Infrastructure.DomainDataAccess.csproj">
+      <Project>{64c35e8a-f1c0-44db-aca6-3cc44ee9716b}</Project>
+      <Name>WeiXinPF.Infrastructure.DomainDataAccess</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WeiXinPF.Model\WeiXinPF.Model.csproj">
       <Project>{59E451EA-4E7A-408A-9F5C-36F2AC8D90AD}</Project>
       <Name>WeiXinPF.Model</Name>
