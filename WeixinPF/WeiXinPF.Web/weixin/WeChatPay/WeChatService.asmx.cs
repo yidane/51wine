@@ -118,26 +118,26 @@ namespace WeiXinPF.Web.weixin.WeChatPay
                 var unifiedOrderResult = TenPayV3.Unifiedorder(data);
                 var rtnUnifiedOrderResult = new UnifiedOrderResult(unifiedOrderResult);
 
-                //下单成功，保存下单对象
-                if (rtnUnifiedOrderResult.IsSucceed)
-                {
-                    var paymentInfo = new PaymentInfo();
-                    paymentInfo.Wid = request.wid;
-                    paymentInfo.CreateTime = DateTime.Now;
-                    paymentInfo.Description = "yidane Test";
-                    paymentInfo.ShopName = request.body;
-                    paymentInfo.ModuleName = "餐饮点菜";
-                    paymentInfo.OrderCode = request.out_trade_no;
-                    paymentInfo.OrderId = request.out_trade_no;
-                    paymentInfo.Pid = "Pid";
-                    paymentInfo.PayAmount = request.total_fee;
-                    paymentInfo.WXOrderCode = rtnUnifiedOrderResult.prepay_id;
-                    paymentInfo.ModifyTime = DateTime.Now;
-                    paymentInfo.Status = 0;
+                ////下单成功，保存下单对象
+                //if (rtnUnifiedOrderResult.IsSucceed)
+                //{
+                //    var paymentInfo = new PaymentInfo();
+                //    paymentInfo.Wid = request.wid;
+                //    paymentInfo.CreateTime = DateTime.Now;
+                //    paymentInfo.Description = "yidane Test";
+                //    paymentInfo.ShopName = request.body;
+                //    paymentInfo.ModuleName = "餐饮点菜";
+                //    paymentInfo.OrderCode = request.out_trade_no;
+                //    paymentInfo.OrderId = request.out_trade_no;
+                //    paymentInfo.Pid = "Pid";
+                //    paymentInfo.PayAmount = request.total_fee;
+                //    paymentInfo.WXOrderCode = rtnUnifiedOrderResult.prepay_id;
+                //    paymentInfo.ModifyTime = DateTime.Now;
+                //    paymentInfo.Status = 0;
 
-                    paymentInfo.Add();
+                //    paymentInfo.Add();
 
-                }
+                //}
 
                 var jsApiParameters = rtnUnifiedOrderResult.GetJsApiParameters("4A5E7B87F3324A6DA22E55FDC12150B6");
 
