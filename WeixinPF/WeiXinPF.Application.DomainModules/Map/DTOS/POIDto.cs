@@ -18,6 +18,16 @@ namespace WeiXinPF.Application.DomainModules.Map.DTOS
         public string Name { get; set; }
 
         /// <summary>
+        /// 纬度
+        /// </summary>
+        public double Lat { get; set; }
+
+        /// <summary>
+        /// 经度
+        /// </summary>
+        public double Lng { get; set; }
+
+        /// <summary>
         /// 介绍
         /// </summary>
         public string Introduction { get; set; }

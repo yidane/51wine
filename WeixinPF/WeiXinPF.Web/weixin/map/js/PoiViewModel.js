@@ -23,7 +23,6 @@ String.prototype.format = function (args) {
 }
 
 var poiOptions = {
-    mapUrl: 'map_address.html?type={type}&id={id}',
     scenic: {
         name: '景点列表',
         ajaxUrl: '/WebServices/MapWebService.asmx/GetScenics'
@@ -31,12 +30,12 @@ var poiOptions = {
     catering: {
         name: '周边美食',
         ajaxUrl: '/WebServices/MapWebService.asmx/GetCateringShops',
-        detailUrl: '/weixin/restaurant/index.aspx?shopid={id}&openid={openId}'
+        detailUrl: '/weixin/restaurant/index.aspx?shopid={id}'//&openid={openId}'
     },
     hotel: {
         name: '周边酒店',
         ajaxUrl: '/WebServices/MapWebService.asmx/GetHotels',
-        detailUrl: '/weixin/hotel/index.aspx?hotelid={id}&openid={openId}'
+        detailUrl: '/weixin/hotel/index.aspx?hotelid={id}'//&openid={openId}'
     }
 }
 
@@ -50,6 +49,9 @@ var PoiViewModel = function (param) {
     this.pois = ko.observableArray();
     this.param = param;
     this.options = null;
+
+    this.currentLatlng = null;
+
 
     this.actionName = ko.pureComputed(function () {
         if (self.param.type == 'scenic') {
@@ -77,6 +79,17 @@ var PoiViewModel = function (param) {
         loadData();
     }
 
+    //获取当前位置的坐标
+    var getLocation = function () {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function (position) {
+                var lat = position.coords.latitude;
+                var lng = position.coords.longitude;
+                self.currentLatlng = new qq.maps.LatLng(lat, lng);
+            });
+        }
+    };
+
     var loadData = function () {
         $.ajax({
             url: self.options.ajaxUrl,
@@ -103,12 +116,12 @@ var PoiViewModel = function (param) {
             document.location.href = poi.url;
         }
         else {
-            document.location.href = self.options.detailUrl.format({ id: poi.id, openId: self.param.openId });
+            document.location.href = self.options.detailUrl.format({ id: poi.id });//, openId: self.param.openId });
         }
     }
 
     self.go = function (poi) {
-        document.location.href = poiOptions.mapUrl.format({ type: self.param.type, id: poi.id });
+        document.location.href = 'map_address.html?type={type}&id={id}'.format({ type: self.param.type, id: poi.id });
     }
 
     init();
