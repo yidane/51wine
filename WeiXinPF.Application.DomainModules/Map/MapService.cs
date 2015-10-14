@@ -58,7 +58,7 @@ namespace WeiXinPF.Application.DomainModules.Map
         public MapDTO GetMapInfo(int id)
         {
             MapDTO result = null;
-            
+
             var marker = new BLL.wx_travel_marker().GetModel(id);
 
             result = Mapper.Map<Model.wx_travel_marker, MapDTO>(marker);
@@ -114,6 +114,8 @@ namespace WeiXinPF.Application.DomainModules.Map
                     Name = m.Name,
                     Introduction = m.Remark,
                     Logo = "",
+                    Lat = m.Lat,
+                    Lng = m.Lng,
                     Url = m.Url
                 }).ToList();
             }
@@ -146,7 +148,9 @@ namespace WeiXinPF.Application.DomainModules.Map
                     Id = s.id,
                     Name = s.hotelName,
                     Introduction = s.hotelintroduction,
-                    Logo = s.hotelLogo
+                    Logo = s.hotelLogo,
+                    Lat = (double)s.xplace,
+                    Lng = (double)s.yplace
                 }).ToList();
             }
 
@@ -178,7 +182,9 @@ namespace WeiXinPF.Application.DomainModules.Map
                     Id = h.id,
                     Name = h.hotelName,
                     Introduction = h.hotelIntroduct,
-                    Logo = h.coverPic
+                    Logo = h.coverPic,
+                    Lat = (double)h.xplace,
+                    Lng = (double)h.yplace
                 }).ToList();
             }
 

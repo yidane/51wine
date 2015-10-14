@@ -383,52 +383,54 @@
     <script type="text/javascript">
         $(function () {
             var param = {
-                wid: $.url.param('wid'),
-                openId: $.url.param('openId')
+                wid: $.url.param('wid')//,
+                //openId: $.url.param('openId')
             }
 
-            var access_code = $.url.param("code") ? $.url.param("code") : '';
+            //var access_code = $.url.param("code") ? $.url.param("code") : '';
 
-            if (!param.openId) {
-                $.ajax({
-                    url: '/WebServices/WeChatWebService.asmx/GetOpenId',
-                    dataType: 'json',
-                    async: false,
-                    data: {
-                        code: access_code,
-                        wid: param.wid,
-                        url: document.location.href
-                    },
-                    success: function (res) {
-                        if (res.isSuccess) {
-                            param.openId = res.data;
-                        }
-                        else {
-                            if (res.messageType == '41008') {
-                                document.location.href = res.message;
-                                return;
-                            }
-                        }
-                    },
-                    error: function (a, b, c) {
-                        alert(1)
-                    }
-                });
-            }
+            //if (!param.openId) {
+            //    $.ajax({
+            //        url: '/WebServices/WeChatWebService.asmx/GetOpenId',
+            //        dataType: 'json',
+            //        async: false,
+            //        data: {
+            //            code: access_code,
+            //            wid: param.wid,
+            //            url: document.location.href
+            //        },
+            //        success: function (res) {
+            //            if (res.isSuccess) {
+            //                param.openId = res.data;
+            //            }
+            //            else {
+            //                if (res.messageType == '41008') {
+            //                    document.location.href = res.message;
+            //                }
+            //                else {
+            //                    alert(res.message);
+            //                }
+            //            }
+            //        },
+            //        error: function (a, b, c) {
+            //            alert(1)
+            //        }
+            //    });
+            //}
 
             var viewModel = {
                 poicatgs: [{
                     name: '景点',
                     cls: 'poi-img fa fa-tree',
-                    url: 'poilist.html?type=scenic&wid=' + param.wid+'&openId='+param.openId
+                    url: 'poilist.html?type=scenic&wid=' + param.wid//+'&openId='+param.openId
                 }, {
                     name: '酒店',
                     cls: 'poi-img fa fa-hotel',
-                    url: 'poilist.html?type=hotel&wid=' + param.wid + '&openId=' + param.openId
+                    url: 'poilist.html?type=hotel&wid=' + param.wid// + '&openId=' + param.openId
                 }, {
                     name: '餐饮',
                     cls: 'poi-img fa fa-cutlery',
-                    url: 'poilist.html?type=catering&wid=' + param.wid + '&openId=' + param.openId
+                    url: 'poilist.html?type=catering&wid=' + param.wid// + '&openId=' + param.openId
                 }]
             }
             ko.applyBindings(viewModel);
