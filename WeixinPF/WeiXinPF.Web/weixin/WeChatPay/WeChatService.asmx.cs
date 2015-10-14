@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 using System.Runtime.Serialization;
 using System.Security.Cryptography;
@@ -12,7 +11,6 @@ using OneGulp.WeChat.MP;
 using OneGulp.WeChat.MP.AdvancedAPIs;
 using OneGulp.WeChat.MP.Helpers;
 using OneGulp.WeChat.MP.TenPayLibV3;
-using WeiXinPF.API.Payment.wxpay;
 using WeiXinPF.Common;
 using WeiXinPF.Infrastructure.DomainDataAccess.Payment;
 using WeiXinPF.WeiXinComm;
@@ -31,7 +29,6 @@ namespace WeiXinPF.Web.weixin.WeChatPay
     // [System.Web.Script.Services.ScriptService]
     public class WeChatService : System.Web.Services.WebService
     {
-
         /// <summary>
         /// jsapi初始化
         /// </summary>
@@ -83,7 +80,7 @@ namespace WeiXinPF.Web.weixin.WeChatPay
         /// </summary>
         /// <param name="request"></param>
         [WebMethod]
-        public void UnifiedOrder(UnifiedOrderRequest request)
+        public AjaxResult UnifiedOrder(UnifiedOrderRequest request)
         {
             try
             {
@@ -106,7 +103,8 @@ namespace WeiXinPF.Web.weixin.WeChatPay
                 packageReqHandler.SetParameter("body", request.body);  //商品描述
                 packageReqHandler.SetParameter("attach", request.attach);
                 packageReqHandler.SetParameter("out_trade_no", request.out_trade_no);		//商家订单号
-                packageReqHandler.SetParameter("total_fee", request.total_fee.ToString());			        //商品金额,以分为单位(money * 100).ToString()
+                //packageReqHandler.SetParameter("total_fee", request.total_fee.ToString());			        //商品金额,以分为单位(money * 100).ToString()
+                packageReqHandler.SetParameter("total_fee", "1");			        //商品金额,以分为单位(money * 100).ToString()
                 //packageReqHandler.SetParameter("spbill_create_ip", wxPayInfo);   //用户的公网ip，不是商户服务器IP
                 packageReqHandler.SetParameter("notify_url", "http://www.baidu.com");		    //接收财付通通知的URL
                 packageReqHandler.SetParameter("trade_type", TenPayV3Type.JSAPI.ToString());//交易类型
@@ -120,32 +118,44 @@ namespace WeiXinPF.Web.weixin.WeChatPay
                 var unifiedOrderResult = TenPayV3.Unifiedorder(data);
                 var rtnUnifiedOrderResult = new UnifiedOrderResult(unifiedOrderResult);
 
-                ////下单成功，保存下单对象
-                //if (rtnUnifiedOrderResult.IsSucceed)
-                //{
-                //    var paymentInfo = new PaymentInfo();
-                //    paymentInfo.Wid = request.wid;
-                //    paymentInfo.CreateTime = DateTime.Now;
-                //    paymentInfo.Description = "yidane Test";
-                //    paymentInfo.ShopName = request.body;
-                //    paymentInfo.ModuleName = "餐饮点菜";
-                //    paymentInfo.OrderCode = request.out_trade_no;
-                //    paymentInfo.OrderId = request.out_trade_no;
-                //    paymentInfo.Pid = "Pid";
-                //    paymentInfo.PayAmount = request.total_fee;
-                //    paymentInfo.WXOrderCode = rtnUnifiedOrderResult.prepay_id;
-                //    paymentInfo.ModifyTime = DateTime.Now;
-                //    paymentInfo.Status = 0;
+                //下单成功，保存下单对象
+                if (rtnUnifiedOrderResult.IsSucceed)
+                {
+                    var paymentInfo = new PaymentInfo();
+                    paymentInfo.Wid = request.wid;
+                    paymentInfo.CreateTime = DateTime.Now;
+                    paymentInfo.Description = "yidane Test";
+                    paymentInfo.ShopName = request.body;
+                    paymentInfo.ModuleName = "餐饮点菜";
+                    paymentInfo.OrderCode = request.out_trade_no;
+                    paymentInfo.OrderId = request.out_trade_no;
+                    paymentInfo.Pid = "Pid";
+                    paymentInfo.PayAmount = request.total_fee;
+                    paymentInfo.WXOrderCode = rtnUnifiedOrderResult.prepay_id;
+                    paymentInfo.ModifyTime = DateTime.Now;
+                    paymentInfo.Status = 0;
 
-                //    paymentInfo.Add();
+                    paymentInfo.Add();
 
-                //}
+                }
 
-                HttpContext.Current.Response.Write(AjaxResult.Success(rtnUnifiedOrderResult.GetJsApiParameters("4A5E7B87F3324A6DA22E55FDC12150B6")));
+                var jsApiParameters = rtnUnifiedOrderResult.GetJsApiParameters("4A5E7B87F3324A6DA22E55FDC12150B6");
+
+                return new AjaxResult()
+                    {
+                        IsSuccess = true,
+                        Data = jsApiParameters
+                    };
             }
             catch (Exception exception)
             {
-                HttpContext.Current.Response.Write(AjaxResult.Error(exception.Message));
+                var ajaxResult = new AjaxResult()
+                    {
+                        IsSuccess = false,
+                        Message = exception.Message
+                    };
+
+                return ajaxResult;
             }
         }
     }
