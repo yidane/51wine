@@ -9,7 +9,7 @@ namespace WeiXinPF.Infrastructure.DomainDataAccess.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = true;
+            AutomaticMigrationsEnabled = false;
         }
 
         protected override void Seed(WeiXinPF.Infrastructure.DomainDataAccess.WXDBContext context)
