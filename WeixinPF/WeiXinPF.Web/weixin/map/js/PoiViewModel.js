@@ -50,9 +50,6 @@ var PoiViewModel = function (param) {
     this.param = param;
     this.options = null;
 
-    this.currentLatlng = null;
-
-
     this.actionName = ko.pureComputed(function () {
         if (self.param.type == 'scenic') {
             return '介绍';
@@ -79,17 +76,6 @@ var PoiViewModel = function (param) {
         loadData();
     }
 
-    //获取当前位置的坐标
-    var getLocation = function () {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function (position) {
-                var lat = position.coords.latitude;
-                var lng = position.coords.longitude;
-                self.currentLatlng = new qq.maps.LatLng(lat, lng);
-            });
-        }
-    };
-
     var loadData = function () {
         $.ajax({
             url: self.options.ajaxUrl,
@@ -103,7 +89,8 @@ var PoiViewModel = function (param) {
                 alert(res.message);
             }
         }).fail(function (a, b, c) {
-            alert(1)
+            alert(JSON.stringify(a));
+            alert(b)
         });
     };
 

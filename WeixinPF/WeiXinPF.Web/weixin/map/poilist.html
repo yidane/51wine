@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <title>周边美食</title>
+    <title></title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link href="../../css/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
@@ -13,7 +13,7 @@
             <a href="javascript:history.back();" class="back fa fa-angle-left">
             </a>
             <a class="user-center fa fa-user"></a>
-            <div class="text" data-bind="text:title">周边美食</div>
+            <div class="text" data-bind="text:title"></div>
         </header>
         <section class="search-wrapper" data-bind="enterkey:search">
             <input class="input" type="search" maxlength="20" placeholder="输入关键字搜素" data-bind="value:keywords">
@@ -28,7 +28,7 @@
                     <div class="info-wapper">
                         <div class="info-title">
                             <div class="title" data-bind="text:name"></div>
-                            <div class="distince">1000km</div>
+                            <div class="distince"></div>
                         </div>
                         <div class="info-desc" data-bind="text:introduction"></div>
                         <div class="info-botton">
@@ -50,49 +50,45 @@
     <script src="../../scripts/jquery/jquery.url.js"></script>
     <script src="../../scripts/knockout/knockout-3.3.0.js"></script>
     <script src="../../scripts/knockout/knockout-extend.js"></script>
+    <script charset="utf-8" src="http://map.qq.com/api/js?v=2.exp&libraries=geometry&key=XQSBZ-MYPKU-EJSVT-4XWSN-QWJXH-2TBDM"></script>
     <script src="js/PoiViewModel.js"></script>
     <script type="text/javascript">
+        var viewModel = null;
         $(function () {
             var param = {
                 wid: $.url.param('wid'),
-                type: $.url.param('type')//,
-                //openId: $.url.param('openId')
+                type: $.url.param('type')
             }
-
-            //var access_code = $.url.param("code") ? $.url.param("code") : '';
-
-            //if (!param.openId) {
-            //    $.ajax({
-            //        url: '/WebServices/WeChatWebService.asmx/GetOpenId',
-            //        dataType: "json",
-            //        data: {
-            //            code: access_code,
-            //            wid: param.wid,
-            //            url: document.location.href
-            //        },
-            //        success: function (res) {
-            //            if (res.isSuccess) {
-            //                param.openId = res.data;
-            //                var viewModel = new PoiViewModel(param);
-            //                ko.applyBindings(viewModel);
-            //            }
-            //            else {
-            //                if (res.messageType == '41008') {
-            //                    document.location.href = res.message;
-            //                    return;
-            //                }
-            //            }
-            //        },
-            //        error: function (a, b, c) {
-            //            alert(1)
-            //        }
-            //    });
-            //}
-            //else {
-            var viewModel = new PoiViewModel(param);
+            viewModel = new PoiViewModel(param);
             ko.applyBindings(viewModel);
-            //}
+            getLocation();
         });
+
+        //获取当前位置的坐标
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(computeDistance);
+            }
+        };
+
+        function computeDistance(position) {
+            var lat = position.coords.latitude;
+            var lng = position.coords.longitude;
+            var currentLatlng = new qq.maps.LatLng(lat, lng);
+
+            if (!viewModel) return;
+
+            var timer = setInterval(function () {
+                $.each(viewModel.pois(), function (index, poi) {
+                    var poiLatlng = new qq.maps.LatLng(poi.lat, poi.lng);
+                    var distince = Math.round(qq.maps.geometry.spherical.computeDistanceBetween(currentLatlng, poiLatlng) / 1000);
+
+                    $("#poi_" + poi.id).find(".distince").text(distince + 'km');
+                });
+
+                clearInterval(timer);
+            }, 500);
+        }
     </script>
 </body>
 </html>
