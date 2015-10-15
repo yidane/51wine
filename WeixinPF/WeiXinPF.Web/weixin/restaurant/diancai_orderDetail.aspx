@@ -39,7 +39,7 @@
     background-color: #5cb85c;
 }
 .label-danger {
-    background-color: #d9534f;
+    color: #d9534f;
 }
 .label {
     display: inline;
@@ -47,7 +47,7 @@
     /*font-size: 75%;*/
     font-weight: 700;
     line-height: 1;
-    color: #fff;
+    /*color: #fff;*/
     text-align: center;
     white-space: nowrap;
     vertical-align: baseline;
@@ -88,6 +88,34 @@ height: 32px;
 {
 float: left;
 }
+
+.btn {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.btn-success {
+    color: #fff;
+    background-color: #5cb85c;
+    border-color: #4cae4c;
+}
  
 </style>
 </head>
@@ -121,6 +149,8 @@ float: left;
                 <table width="100%" border="0" cellpadding="0" cellspacing="0" class="DishDetail table table-bordered">
                   <thead>
                     <tr>
+                        <th class="Col4" style="width: 5%"></th>
+                        
                         <th class="Col1" style="width: 33%">类型</th>
                         <th class="Col2" style="width: 17%">份数</th>
                         <th class="Col3" style="width: 25%">总价</th>
