@@ -97,7 +97,7 @@ namespace WeiXinPF.Web.weixin.restaurant
                     builder.Append("</td>");
                     builder.Append("</tr>");
                     builder.Append("</table>");
-                    builder.Append("<div class=\"silde-background\">");
+                    builder.Append("<div class=\"silde-background \" id='silde-module-" + pair.Key + "'>");
                     builder.Append("<div class=\"swiper-container gpd-ablum swiper-container-horizontal\">");
                     builder.AppendFormat("<div class=\"swiper-wrapper silde-center\" style=\"transition-duration: 0ms; transform: translate3d(0px, 0px, 0px);\" id=\"div-{0}-{1}\">", orderId, pair.Key);
 
@@ -106,9 +106,11 @@ namespace WeiXinPF.Web.weixin.restaurant
                         builder.Append("<div class='swiper-slide'>");
                         builder.AppendFormat("<img id='Img3' class='img-border' src=\"ErCodeHandler.ashx?key={0}\">", detail.identifyingcode);
                         builder.Append("</div>");
-                    }
-
+                    }   
+                   
                     builder.Append("</div>");
+                    builder.Append("<div class='swiper-pagination'></div>");
+                       
                     builder.Append("</div>");
                     builder.Append("</div>");
                     builder.Append("</section>");
