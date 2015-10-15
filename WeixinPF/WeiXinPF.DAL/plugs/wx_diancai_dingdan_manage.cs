@@ -454,11 +454,26 @@ namespace WeiXinPF.DAL
                                         LEFT JOIN wx_diancai_shopinfo s ON d.shopinfoid = s.id");
 
             //TODO:测试阶段，没有数据，不对OpenID过滤，后续必须要加上。
-            //if (openid.Trim() != "")
-            //{
-            //    strSql.Append(" where openid='" + openid + "'");
-            //}
+            if (openid.Trim() != "")
+            {
+                strSql.Append(" where openid='" + openid + "'");
+            }
             return DbHelperSQL.Query(strSql.ToString());
+        }
+
+        /// <summary>
+        /// 支付完成
+        /// </summary>
+        /// <param name="prepayid"></param>
+        public void PaySuccess(string prepayid)
+        {
+            var sql = "UPDATE dbo.wx_diancai_dingdan_manage SET payStatus=1 WHERE orderNumber=(SELECT OrderId FROM [dbo].[wx_Payment_PaymentInfo] WHERE WXOrderCode=@PrepayID)";
+            SqlParameter[] sqlparams =
+                {
+                    new SqlParameter() {ParameterName = "@PrepayID", SqlDbType = SqlDbType.NVarChar, Value = prepayid}
+                };
+
+            DbHelperSQL.ExecuteSql(sql, sqlparams);
         }
 
 

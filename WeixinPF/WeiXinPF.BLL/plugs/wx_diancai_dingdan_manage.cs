@@ -170,6 +170,10 @@ namespace WeiXinPF.BLL
             return dal.GetListList(openid);
         }
 
+        public void PaySuccess(string prepayid)
+        {
+            return dal.PaySuccess(prepayid);
+        }
 
         public bool Update(int id, decimal payAmount)
         {
@@ -235,11 +239,11 @@ namespace WeiXinPF.BLL
         /// <returns></returns>
         public bool UpdateCommoditystatus(string ccode, int status)
         {
-            bool result= dal.UpdateCommoditystatus(ccode, status);
-            string id=GetCommodityList("identifyingcode='" + ccode + "'").Tables[0].Rows[0]["id"].ToString();
+            bool result = dal.UpdateCommoditystatus(ccode, status);
+            string id = GetCommodityList("identifyingcode='" + ccode + "'").Tables[0].Rows[0]["id"].ToString();
             DataSet dr = GetcommodityTable(id);
             DataTable dt = dr.Tables[0];
-            int sum=0;
+            int sum = 0;
             int paid = 0;
             if (dt.Rows.Count >= 0)
             {

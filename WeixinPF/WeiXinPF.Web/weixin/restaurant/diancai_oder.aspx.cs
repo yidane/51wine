@@ -11,48 +11,39 @@ namespace WeiXinPF.Web.weixin.restaurant
 {
     public partial class diancai_oder : WeiXinPage
     {
-      
-        public int shopid = 0;
-        public string openid = "";
-        BLL.wx_diancai_dingdan_manage managebll= new BLL.wx_diancai_dingdan_manage();
+        BLL.wx_diancai_dingdan_manage managebll = new BLL.wx_diancai_dingdan_manage();
         Model.wx_diancai_dingdan_manage manage = new Model.wx_diancai_dingdan_manage();
-        public  string str = "";
-        BLL.wx_diancai_shopinfo shopBll = new BLL.wx_diancai_shopinfo();
-        Model.wx_diancai_shopinfo shopinfo = new Model.wx_diancai_shopinfo();
-        public string hotelName = "";
-        public string rename = "";
+        public string str = "";
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
             {
-            
-                shopid = MyCommFun.RequestInt("shopid");
-
-                openid = MyCommFun.QueryString("openid");
-             
-                shopinfo = shopBll.GetModel(shopid);
-                hotelName = shopinfo.hotelName;
-                rename = shopinfo.dcRename;
-                if (openid!="")
+                var openId = MyCommFun.QueryString("openid");
+                var type = MyCommFun.QueryString("type");
+                if (!string.IsNullOrEmpty(openId))
                 {
-                    List(openid);
+                    if (string.Equals(type, "Pay", StringComparison.CurrentCultureIgnoreCase))
+                    {
+                        GetRefund(openId);
+                    }
+                    else
+                    {
+                        GetPay(openId);
+                    }
                 }
+            }
+        }
 
-             }
-           }
-
-
-        public void List(string openid)
+        public void GetPay(string openid)
         {
-
             DataSet dr = managebll.GetListList(openid);
-            if(dr.Tables[0].Rows.Count>0)
+            if (dr.Tables[0].Rows.Count > 0)
             {
-                for (int i = 0; i < dr.Tables[0].Rows.Count;i++ )
+                for (int i = 0; i < dr.Tables[0].Rows.Count; i++)
                 {
                     str += "<ul class=\"round\">";
-                    str += "<li class=\"title\"><a href=\"diancai_orderDetail.aspx?shopid=" + shopid + "&dingdan=" + dr.Tables[0].Rows[i]["id"].ToString() + "&openid=" + openid + "\"><span>" + dr.Tables[0].Rows[i]["oderTime"].ToString() + "<img src=\"images\\tel.png\" class=\"HomeImage\"></img>" + dr.Tables[0].Rows[i].Field<string>("hotelName") + "</span></a></li>";
-                    str+=" <table width=\"100%\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" class=\"cpbiaoge\">";
+                    str += "<li class=\"title\"><a href=\"diancai_orderDetail.aspx?shopid=" + dr.Tables[0].Rows[i]["shopinfoid"].ToString() + "&dingdan=" + dr.Tables[0].Rows[i]["id"].ToString() + "&openid=" + openid + "\"><span>" + dr.Tables[0].Rows[i]["oderTime"].ToString() + "<img src=\"images\\tel.png\" class=\"HomeImage\"></img>" + dr.Tables[0].Rows[i].Field<string>("hotelName") + "</span></a></li>";
+                    str += " <table width=\"100%\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" class=\"cpbiaoge\">";
                     str += "<tr><th>订单编号</th>";
                     str += "<th width=\"70\" class=\"cc\">订单金额</th><th width=\"55\" class=\"cc\">订单状态</th></tr>";
                     str += "<tr><td>" + dr.Tables[0].Rows[i]["orderNumber"].ToString() + "</td><td class=\"cc\">" + dr.Tables[0].Rows[i]["payAmount"].ToString() + "元</td>";
@@ -69,16 +60,43 @@ namespace WeiXinPF.Web.weixin.restaurant
                     {
                         str += "<em class=\"no\">未处理</em>";
                     }
-                    str+=" </td></tr></table></ul>";
+                    str += " </td></tr></table></ul>";
                 }
             }
-
         }
 
-
+        public void GetRefund(string openid)
+        {
+            DataSet dr = managebll.GetListList(openid);
+            if (dr.Tables[0].Rows.Count > 0)
+            {
+                for (int i = 0; i < dr.Tables[0].Rows.Count; i++)
+                {
+                    str += "<ul class=\"round\">";
+                    str += "<li class=\"title\"><a href=\"diancai_orderDetail.aspx?shopid=" + dr.Tables[0].Rows[i]["shopinfoid"].ToString() + "&dingdan=" + dr.Tables[0].Rows[i]["id"].ToString() + "&openid=" + openid + "\"><span>" + dr.Tables[0].Rows[i]["oderTime"].ToString() + "<img src=\"images\\tel.png\" class=\"HomeImage\"></img>" + dr.Tables[0].Rows[i].Field<string>("hotelName") + "</span></a></li>";
+                    str += " <table width=\"100%\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" class=\"cpbiaoge\">";
+                    str += "<tr><th>订单编号</th>";
+                    str += "<th width=\"70\" class=\"cc\">订单金额</th><th width=\"55\" class=\"cc\">订单状态</th></tr>";
+                    str += "<tr><td>" + dr.Tables[0].Rows[i]["orderNumber"].ToString() + "</td><td class=\"cc\">" + dr.Tables[0].Rows[i]["payAmount"].ToString() + "元</td>";
+                    str += "<td class=\"cc\"> ";
+                    if (dr.Tables[0].Rows[i]["payStatus"].ToString() == "1")
+                    {
+                        str += "<em class=\"ok\">成功</em>";
+                    }
+                    else if (dr.Tables[0].Rows[i]["payStatus"].ToString() == "2")
+                    {
+                        str += "<em class=\"error\">失败</em>";
+                    }
+                    else
+                    {
+                        str += "<em class=\"no\">未处理</em>";
+                    }
+                    str += " </td></tr></table></ul>";
+                }
+            }
         }
-      }
+    }
+}
 
-    
 
-   
+

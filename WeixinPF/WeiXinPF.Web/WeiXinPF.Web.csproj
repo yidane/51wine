@@ -7234,6 +7234,10 @@
     <Compile Include="weixin\restaurant\index.aspx.designer.cs">
       <DependentUpon>index.aspx</DependentUpon>
     </Compile>
+    <Compile Include="weixin\restaurant\PayService.asmx.cs">
+      <DependentUpon>PayService.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="weixin\restaurant\Restaurant.Master.cs">
       <DependentUpon>Restaurant.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -7458,6 +7462,20 @@
     </Compile>
     <Compile Include="weixin\vote\vote.ashx.cs">
       <DependentUpon>vote.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="weixin\WeChatPay\MyOrderCenter.aspx.cs">
+      <DependentUpon>MyOrderCenter.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="weixin\WeChatPay\MyOrderCenter.aspx.designer.cs">
+      <DependentUpon>MyOrderCenter.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="weixin\WeChatPay\PayNotify.aspx.cs">
+      <DependentUpon>PayNotify.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="weixin\WeChatPay\PayNotify.aspx.designer.cs">
+      <DependentUpon>PayNotify.aspx</DependentUpon>
     </Compile>
     <Compile Include="weixin\WeChatPay\WeChatService.asmx.cs">
       <DependentUpon>WeChatService.asmx</DependentUpon>
@@ -9424,6 +9442,7 @@
     <Content Include="weixin\restaurant\js\jquery.min.js" />
     <Content Include="weixin\restaurant\js\shopCart.js" />
     <Content Include="weixin\restaurant\js\zepto.min.js" />
+    <Content Include="weixin\restaurant\PayService.asmx" />
     <Content Include="weixin\restaurant\zhaoshang_xiangq.aspx" />
     <Content Include="weixin\scenic\css\index.css" />
     <Content Include="weixin\scenic\css\swiper.min.css" />
@@ -9652,6 +9671,8 @@
     <Content Include="weixin\vote\js\play.js" />
     <Content Include="weixin\vote\tp_result.aspx" />
     <Content Include="weixin\WeChatPay\js\jquery-2.1.0.min.js" />
+    <Content Include="weixin\WeChatPay\MyOrderCenter.aspx" />
+    <Content Include="weixin\WeChatPay\PayNotify.aspx" />
     <Content Include="weixin\WeChatPay\WeChatPay.html" />
     <Content Include="weixin\WeChatPay\WeChatService.asmx" />
     <Content Include="weixin\wfangchan\aboutWe.aspx" />

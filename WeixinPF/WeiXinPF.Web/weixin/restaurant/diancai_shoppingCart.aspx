@@ -166,6 +166,32 @@
         };
     </script>
     <script>
+        function afterPaySuccess(prepayid) {
+            $.ajax({
+                url: "PayService.asmx/AfterPaySuccess",
+                type: "post",
+                dataType: "json",
+                async: false,
+                data: { prepayid: prepayid },
+                success: function (result) {
+                },
+                error: function (error) {
+                }
+            });
+        }
+
+        function afterPayFail(prepayid) {
+            alert("afterPayFail:"+prepayid);
+        }
+        
+        function afterPayComplete(prepayid) {
+            alert("afterPayComplete:"+prepayid);
+        }
+        
+        function afterPayCancel(prepayid) {
+            alert("afterPayCancel:"+prepayid);
+        }
+
         function submitOrder() {
             vailReSubmit();
            
@@ -195,8 +221,7 @@
             $.post('diancai_login.ashx?openid=<%=openid%>&shopid=<%=shopid%>&wid=<%=wid%>', submitData,
                 function (data) {
                     if (data.ret == "ok") {
-
-                        var payResult= Pay(data.shopname,"",data.orderNumber,data.payamount,data.openid);
+                        var payResult= PayManager.Pay(data.shopname,"",data.orderNumber,data.payamount,data.openid,afterPaySuccess,afterPayFail,afterPayCancel,afterPayComplete);
                         if (payResult) {
                             alert(data.content);
                             clearCache();
@@ -208,6 +233,7 @@
 
             document.infoForm.issubmit.value = 1;//不能再提交
         }
+        
         function valiForm() {
             var phonePattern = /^((\(\d{3}\))|(\d{3}\-))?(\(0\d{2,3}\)|0\d{2,3}-)?[1-9]\d{6,7}$/;
             var mobilePattern = /^1\d{10}$/;
@@ -233,7 +259,7 @@
                 alert(' 按一次就够了，请勿重复提交！请耐心等待！谢谢合作！');
                 return false;
             }
-        }       
+        }
     </script>
     <script type="text/javascript">
         document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {

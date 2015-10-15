@@ -84,52 +84,63 @@ $(document).ready(function () {
     });
 });
 
-function Pay(body, attach, out_trade_no, total_fee, openid) {
-    if (WeChatPayIsReady) {
-        UnifiedOrderRequest.wid = wid;
-        UnifiedOrderRequest.body = body;
-        UnifiedOrderRequest.attach = attach;
-        UnifiedOrderRequest.out_trade_no = out_trade_no;
-        UnifiedOrderRequest.total_fee = total_fee;
-        UnifiedOrderRequest.openid = openid;
+var PayManager =
+{
+    pay: function (body, attach, out_trade_no, total_fee, openid, afterSuccess, afterFail, afterCancel, afterComplete) {
+        if (WeChatPayIsReady) {
+            UnifiedOrderRequest.wid = wid;
+            UnifiedOrderRequest.body = body;
+            UnifiedOrderRequest.attach = attach;
+            UnifiedOrderRequest.out_trade_no = out_trade_no;
+            UnifiedOrderRequest.total_fee = total_fee;
+            UnifiedOrderRequest.openid = openid;
 
-        var payResult = false;
-        $.ajax({
-            url: "../WeChatPay/WeChatService.asmx/UnifiedOrder",
-            type: "post",
-            contentType: "application/json; charset=utf-8",
-            //dataType: "json",
-            async: false,
-            data: "{ request:" + JSON.stringify(UnifiedOrderRequest) + "}",
-            success: function (result) {
-                if (result.d != null && result.d.IsSuccess) {
-                    wx.chooseWXPay({
-                        timestamp: result.d.Data.timeStamp, // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
-                        nonceStr: result.d.Data.nonceStr, // 支付签名随机串，不长于 32 位
-                        package: result.d.Data.package, // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=***）
-                        signType: 'MD5', // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
-                        paySign: result.d.Data.paySign, // 支付签名
-                        success: function (res) {
-                            payResult = true;
-                        },
-                        fail: function (res) {
-                            //OrderRelease(result.Data.orderId);
-                        },
-                        cancel: function (res) {
-                            //OrderRelease(result.Data.orderId);
-                        },
-                        complete: function (res) {
-
-                        }
-                    });
+            var payResult = false;
+            $.ajax({
+                url: "../WeChatPay/WeChatService.asmx/UnifiedOrder",
+                type: "post",
+                dataType: "json",
+                async: false,
+                data: { request: JSON.stringify(UnifiedOrderRequest) },
+                success: function (result) {
+                    if (result != null && result.IsSuccess) {
+                        wx.chooseWXPay({
+                            timestamp: result.Data.timeStamp, // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
+                            nonceStr: result.Data.nonceStr, // 支付签名随机串，不长于 32 位
+                            package: result.Data.package, // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=***）
+                            signType: 'MD5', // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
+                            paySign: result.Data.paySign, // 支付签名
+                            success: function (res) {
+                                payResult = true;
+                                if (typeof afterSuccess === "function") {
+                                    afterComplete(result.Data.prepayid);
+                                }
+                            },
+                            fail: function (res) {
+                                if (typeof afterFail === "function") {
+                                    afterFail(result.Data.prepayid);
+                                }
+                            },
+                            cancel: function (res) {
+                                if (typeof afterCancel === "function") {
+                                    afterCancel(result.Data.prepayid);
+                                }
+                            },
+                            complete: function (res) {
+                                if (typeof afterComplete === "function") {
+                                    afterComplete(result.Data.prepayid);
+                                }
+                            }
+                        });
+                    }
+                },
+                error: function (error) {
                 }
-            },
-            error: function (error) {
-            }
-        });
+            });
 
-        return payResult;
-    } else {
-        alert("支付状态正在初始化，请稍后再试");
+            return payResult;
+        } else {
+            alert("支付状态正在初始化，请稍后再试");
+        }
     }
-}
+};
