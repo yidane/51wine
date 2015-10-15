@@ -451,12 +451,13 @@ namespace WeiXinPF.DAL
                                         payStatus ,
                                         d.createDate
                                 FROM    wx_diancai_dingdan_manage d
-                                        LEFT JOIN wx_diancai_shopinfo s ON d.shopinfoid = s.id");
+                                        LEFT JOIN wx_diancai_shopinfo s ON d.shopinfoid = s.id
+                                WHERE payStatus=1");
 
             //TODO:测试阶段，没有数据，不对OpenID过滤，后续必须要加上。
             if (openid.Trim() != "")
             {
-                strSql.Append(" where openid='" + openid + "'");
+                strSql.Append(" and openid='" + openid + "'");
             }
             return DbHelperSQL.Query(strSql.ToString());
         }

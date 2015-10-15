@@ -120,7 +120,7 @@ namespace WeiXinPF.Web.weixin.restaurant
 
         protected void Refund_Click(object sender, EventArgs e)
         {
-            var currentButton = sender as Button;
+            
         }
     }
 

@@ -167,6 +167,12 @@ namespace WeiXinPF.Web.weixin.WeChatPay
                 HttpContext.Current.Response.Write(AjaxResult.Error(exception.Message));
             }
         }
+
+        [WebMethod]
+        public void RefundOrder(string request)
+        {
+
+        }
     }
 
     /// <summary>
@@ -187,6 +193,17 @@ namespace WeiXinPF.Web.weixin.WeChatPay
         public int total_fee { get; set; }
         [DataMember]
         public string openid { get; set; }
+    }
+
+    [DataContract]
+    public class RefundOrderRequest
+    {
+        public string transaction_id { get; set; }
+        public string out_trade_no { get; set; }
+        public int total_fee { get; set; }
+        public int refund_fee { get; set; }
+        public string out_refund_no { get; set; }
+        public string op_user_id { get; set; }
     }
 
     #region Pay Models

@@ -86,9 +86,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeiXinPF.BLL.UnitTest", "We
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.DomainModules.UnitTest", "Application.DomainModules.UnitTest\Application.DomainModules.UnitTest.csproj", "{74A35DB5-C6A3-4179-80BA-69631E4F65BA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeiXinPF.WeChat", "WeiXinPF.WeChat\WeiXinPF.WeChat.csproj", "{5B94F552-71F5-4298-B64C-01B1902C9EB6}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 17
+		SccNumberOfProjects = 18
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs20
 		SccLocalPath0 = .
@@ -142,6 +144,9 @@ Global
 		SccProjectTopLevelParentUniqueName16 = WeiXinPF.sln
 		SccProjectName16 = Application.DomainModules.UnitTest
 		SccLocalPath16 = Application.DomainModules.UnitTest
+		SccProjectUniqueName17 = WeiXinPF.WeChat\\WeiXinPF.WeChat.csproj
+		SccProjectName17 = WeiXinPF.WeChat
+		SccLocalPath17 = WeiXinPF.WeChat
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -320,6 +325,16 @@ Global
 		{74A35DB5-C6A3-4179-80BA-69631E4F65BA}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{74A35DB5-C6A3-4179-80BA-69631E4F65BA}.Release|x86.ActiveCfg = Release|Any CPU
 		{74A35DB5-C6A3-4179-80BA-69631E4F65BA}.Release|x86.Build.0 = Release|Any CPU
+		{5B94F552-71F5-4298-B64C-01B1902C9EB6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B94F552-71F5-4298-B64C-01B1902C9EB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B94F552-71F5-4298-B64C-01B1902C9EB6}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{5B94F552-71F5-4298-B64C-01B1902C9EB6}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{5B94F552-71F5-4298-B64C-01B1902C9EB6}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5B94F552-71F5-4298-B64C-01B1902C9EB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B94F552-71F5-4298-B64C-01B1902C9EB6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B94F552-71F5-4298-B64C-01B1902C9EB6}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{5B94F552-71F5-4298-B64C-01B1902C9EB6}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{5B94F552-71F5-4298-B64C-01B1902C9EB6}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

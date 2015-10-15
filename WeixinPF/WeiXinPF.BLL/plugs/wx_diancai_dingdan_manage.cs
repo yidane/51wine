@@ -172,7 +172,7 @@ namespace WeiXinPF.BLL
 
         public void PaySuccess(string prepayid)
         {
-            return dal.PaySuccess(prepayid);
+            dal.PaySuccess(prepayid);
         }
 
         public bool Update(int id, decimal payAmount)
