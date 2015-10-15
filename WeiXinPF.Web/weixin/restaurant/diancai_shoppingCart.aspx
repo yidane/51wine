@@ -200,11 +200,13 @@
             }
             
             var goodsData = '';
+            var goodsDescription = '';
             
             var goodsList = cart.getProductList();
             goodsList && goodsList.sort(cart.sortAsc);
             for (var i in goodsList) {
                 goodsData += goodsList[i].id + ',' + goodsList[i].number + ',' + goodsList[i].price + ';';
+                goodsDescription += goodsList[i].name + ' X' + goodsList[i].number + '/r/n';
             }
             //菜品ID，数量，单价
             g('goodsData').value = goodsData;
@@ -221,6 +223,7 @@
             $.post('diancai_login.ashx?openid=<%=openid%>&shopid=<%=shopid%>&wid=<%=wid%>', submitData,
                 function (data) {
                     if (data.ret == "ok") {
+                        // goodsDescription
                         var payResult= PayManager.Pay(data.shopname,"",data.orderNumber,data.payamount,data.openid,afterPaySuccess,afterPayFail,afterPayCancel,afterPayComplete);
                         if (payResult) {
                             alert(data.content);
@@ -259,7 +262,7 @@
                 alert(' 按一次就够了，请勿重复提交！请耐心等待！谢谢合作！');
                 return false;
             }
-        }
+        }       
     </script>
     <script type="text/javascript">
         document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
