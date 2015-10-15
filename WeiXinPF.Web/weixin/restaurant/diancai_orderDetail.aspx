@@ -81,6 +81,12 @@ font-weight: 700;
 width: 100%;
 float: left;
 padding-top: 10px;
+height: 32px;
+    line-height: 32px;
+}
+.gpd-item-title .detailicon-ticket,.gpd-item-title .gpd-item-title-name
+{
+float: left;
 }
  
 </style>
@@ -128,7 +134,7 @@ padding-top: 10px;
             <section  class="gpd-item ">
               <div class="gpd-item-title">
                            <img class="detailicon-ticket" src="images/info.png" />
-                                           联系人
+                                          <div class="gpd-item-title-name"> 联系人</div>
                                           <div class="gp-icons gpd-up-icon"></div>
                                            </div>
 <div class="gpd-content">
@@ -146,7 +152,8 @@ padding-top: 10px;
             <section class="gpd-item gdp-curr">
              <div class="gpd-item-title">
                <img class="detailicon-ticket" src="images/info.png" />
-                              店铺信息
+                  <div class="gpd-item-title-name"> 店铺信息</div>
+
                               <div class="gp-icons gpd-up-icon"></div>
                                </div>
 <div class="gpd-content">
@@ -170,7 +177,9 @@ padding-top: 10px;
 
    <section class="gpd-item ">
                 <div class="gpd-item-title">
-                    <img class="detailicon-ticket" src="images/info.png" />使用须知<div class="gp-icons gpd-up-icon"></div>
+                    <img class="detailicon-ticket" src="images/info.png" />
+                     <div class="gpd-item-title-name"> 使用须知</div>
+                    <div class="gp-icons gpd-up-icon"></div>
                 </div>
                 <div class="gpd-content">
                     <p>1、支付成功后，可在票据有效期内申请退票，过期则视为作废不予受理退票</p>
@@ -182,7 +191,9 @@ padding-top: 10px;
             </section>
             <section class="gpd-item ">
                 <div class="gpd-item-title">
-                    <img class="detailicon-ticket" src="images/undo.png" />退单规则<div class="gp-icons gpd-up-icon"></div>
+                    <img class="detailicon-ticket" src="images/undo.png" />
+                    <div class="gpd-item-title-name"> 退单规则</div>
+                    <div class="gp-icons gpd-up-icon"></div>
                 </div>
                 <div class="gpd-content">
                     <p>1、支付成功后，可在票据有效期内申请退票，过期则视为作废不予受理退票</p>
@@ -195,7 +206,10 @@ padding-top: 10px;
 
             <section class="gpd-item ">
                 <div class="gpd-item-title">
-                    <img class="detailicon-ticket" src="images/time.png" />订单有效期 <span style="float: right" id="dateRange"><%=orderRange %></span>
+                    <img class="detailicon-ticket" src="images/time.png" />
+                       <div class="gpd-item-title-name"> 订单有效期</div>
+                     <div style="float: right" id="dateRange"><%=orderRange %></div>
+
                     <div class="line-title"></div>
                 </div>
             </section>
