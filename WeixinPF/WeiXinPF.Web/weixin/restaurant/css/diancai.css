@@ -1926,10 +1926,16 @@ font-size:16px;*/
 
 .gpd-item-title {
     font-size: 18px;
+    padding-top: 5px;
     position: relative;
     border-bottom: 1px solid #d7c38c;
-    padding-bottom: 6px;
-    padding-bottom: 6px;
+    /*padding-bottom: 6px;*/
+    /*padding-bottom: 6px;*/
+}
+.gpd-item-title span
+{
+    height: 30px;
+    line-height: 30px;
 }
 
 .gp-icons {
@@ -1942,7 +1948,8 @@ font-size:16px;*/
     height: 32px;
     position: absolute;
     right: 0;
-    top: -2px;
+    /*top: -2px;*/
+    bottom: 0;
     background-position: -34px -41px;
 }
 
@@ -1952,6 +1959,7 @@ font-size:16px;*/
 
 .gpd-content {
     display: none;
+    padding: 20px;
 }
 
 .gdp-curr .gpd-content {
@@ -1959,8 +1967,8 @@ font-size:16px;*/
 }
 
 .detailicon-ticket {
-    height: 30px;
-    width: 30px;
+    height: 32px;
+    width: 32px;
     margin: auto 10px;
 }
 /*#endregion */
