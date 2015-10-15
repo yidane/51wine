@@ -343,8 +343,16 @@
                         content.show();
                     });
 
-                    //完成后搜索         
-                    self.searchRoad();
+                   if(self.params().uselocale)
+                   {
+                       //完成后搜索
+                       self.searchRoad();
+                   }
+                    else
+                   {
+                        self.map().panTo(point);
+                       self.map().zoomTo(18);
+                   }
 
                     if (!self.isSetInfo()) {
                         self.isSetInfo(true);

@@ -7945,7 +7945,6 @@
     <Content Include="weixin\restaurant\images\gp_icons.png" />
     <Content Include="weixin\restaurant\images\info.png" />
     <Content Include="weixin\restaurant\images\telephone.png" />
-    <Content Include="weixin\restaurant\images\time.png" />
     <Content Include="weixin\restaurant\images\undo.png" />
     <Content Include="weixin\restaurant\js\swiper.min.js" />
     <Content Include="weixin\cashred\js\watermark.js" />
