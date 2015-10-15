@@ -30,12 +30,12 @@ var poiOptions = {
     catering: {
         name: '周边美食',
         ajaxUrl: '/WebServices/MapWebService.asmx/GetCateringShops',
-        detailUrl: '/weixin/restaurant/index.aspx?shopid={id}'//&openid={openId}'
+        detailUrl: '/weixin/restaurant/index.aspx?wid={wid}&shopid={id}'//&openid={openId}'
     },
     hotel: {
         name: '周边酒店',
         ajaxUrl: '/WebServices/MapWebService.asmx/GetHotels',
-        detailUrl: '/weixin/hotel/index.aspx?hotelid={id}'//&openid={openId}'
+        detailUrl: '/weixin/hotel/index.aspx?wid={wid}&hotelid={id}'//&openid={openId}'
     }
 }
 
@@ -103,7 +103,7 @@ var PoiViewModel = function (param) {
             document.location.href = poi.url;
         }
         else {
-            document.location.href = self.options.detailUrl.format({ id: poi.id });//, openId: self.param.openId });
+            document.location.href = self.options.detailUrl.format({ wid: self.param.wid, id: poi.id });//, openId: self.param.openId });
         }
     }
 
