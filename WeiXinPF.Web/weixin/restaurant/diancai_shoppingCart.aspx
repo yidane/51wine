@@ -225,7 +225,7 @@
                 function (data) {
                     if (data.ret == "ok") {
                         // goodsDescription
-                        var payResult= Pay("../WeChatPay/WeChatPay.aspx",<%=wid%>,data.shopname,"",data.orderNumber,data.payamount,data.openid,afterPaySuccess,afterPayFail,afterPayCancel,afterPayComplete);
+                        var payResult= Pay("../wechatpay/WeChatPay.aspx",<%=wid%>,data.shopname,"",data.orderNumber,data.payamount,data.openid,afterPaySuccess,afterPayFail,afterPayCancel,afterPayComplete);
                         if (payResult) {
                             alert(data.content);
                             clearCache();

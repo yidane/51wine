@@ -5,14 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <script src="js/jquery-2.1.0.min.js"></script>
-    <script src="js/WeChatPay_3.0.js"></script>
-
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
     <script type="text/javascript">
         var WeChatPayIsReady = true;
-        var wid = GetQueryString("wid");
-        if (wid == "" || wid == undefined) {
-            alert("不存在参数wid");
-        }
+        //var wid = GetQueryString("wid");
+        //if (wid == "" || wid == undefined) {
+        //    alert("不存在参数wid");
+        //}
 
         var PayManager =
                 {
@@ -97,7 +96,7 @@
                 url: "../WeChatPay/WeChatService.asmx/WeChatConfigInit",
                 type: "post",
                 dataType: "json",
-                data: { "wid": wid, "url": document.location.href },
+                data: { "wid": parseInt(<%=wid%>), "url": document.location.href },
                 success: function (result) {
                     if (result.IsSuccess) {
                         wx.config({
