@@ -33,7 +33,7 @@ namespace WeiXinPF.Web.admin.diancai
                 }
                 else
                 {
-                    shopid = MyCommFun.RequestInt("shopid");
+                    shopid = MyCommFun.RequestInt("shopid")==0?GetShopId(): MyCommFun.RequestInt("shopid");
                 }
                 RptBind(CombSqlTxt(keywords), "sortid asc,id desc");
 

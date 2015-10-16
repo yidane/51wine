@@ -99,7 +99,7 @@
                      <a href="javascript:;"><%=yuming%>/weixin/diancai/index.aspx?wid=<%=wid %>&shopid=<%#Eval("id") %></a>
                     </td>
                      <td>                     
-
+                         <a  href='shop_admin_list.aspx?shopid=<%#Eval("id") %>' >管理员设置</a>
                          <a  href='shop_add.aspx?shopid=<%#Eval("id") %>&type=edite' >商家设置</a>
                          <a  href='shop_setup.aspx?shopid=<%#Eval("id") %>&type=add'  >商城设置</a>
                          <a  href='dingdan_manage.aspx?shopid=<%#Eval("id") %>' >订单管理</a>

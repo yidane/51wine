@@ -10,16 +10,7 @@
 namespace WeiXinPF.Web.admin.diancai {
     
     
-    public partial class shop_list {
-        
-        /// <summary>
-        /// Head1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlHead Head1;
+    public partial class shop_admin_edit {
         
         /// <summary>
         /// form1 control.
@@ -31,57 +22,84 @@ namespace WeiXinPF.Web.admin.diancai {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
-        /// btnDelete control.
+        /// txtUserName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnDelete;
+        protected global::System.Web.UI.WebControls.TextBox txtUserName;
         
         /// <summary>
-        /// txtKeywords control.
+        /// txtPassword control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtKeywords;
+        protected global::System.Web.UI.WebControls.TextBox txtPassword;
         
         /// <summary>
-        /// lbtnSearch control.
+        /// litpwdtip control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbtnSearch;
+        protected global::System.Web.UI.WebControls.Literal litpwdtip;
         
         /// <summary>
-        /// rptList control.
+        /// txtRealName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptList;
+        protected global::System.Web.UI.WebControls.TextBox txtRealName;
         
         /// <summary>
-        /// txtPageNum control.
+        /// txtTelephone control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPageNum;
+        protected global::System.Web.UI.WebControls.TextBox txtTelephone;
         
         /// <summary>
-        /// PageContent control.
+        /// txtEmail control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl PageContent;
+        protected global::System.Web.UI.WebControls.TextBox txtEmail;
+        
+        /// <summary>
+        /// cbIsLock control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox cbIsLock;
+        
+        /// <summary>
+        /// txtRemark control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtRemark;
+        
+        /// <summary>
+        /// btnSubmit control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSubmit;
     }
 }
