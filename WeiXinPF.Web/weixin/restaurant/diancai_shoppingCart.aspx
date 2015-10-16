@@ -9,7 +9,7 @@
     <link href="css/diancai.css" rel="stylesheet" type="text/css" />
     <script src="js/alert.js" type="text/javascript"></script>
     <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
-    <script src="../WeChatPay/js/WeChatPay_3.0.js"></script>
+    <script src="../WeChatPay/js/Pay.js"></script>
 </asp:Content>
 
 <asp:Content ID="c" ContentPlaceHolderID="content" runat="server">
@@ -174,57 +174,58 @@
                 async: false,
                 data: { prepayid: prepayid },
                 success: function (result) {
+                    document.location.href = "diancai_oder.aspx?openid=<%=openid %>&type=pay";
                 },
                 error: function (error) {
                 }
             });
-        }
-
-        function afterPayFail(prepayid) {
-            alert("afterPayFail:"+prepayid);
-        }
-        
-        function afterPayComplete(prepayid) {
-            alert("afterPayComplete:"+prepayid);
-        }
-        
-        function afterPayCancel(prepayid) {
-            alert("afterPayCancel:"+prepayid);
-        }
-
-        function submitOrder() {
-            vailReSubmit();
-           
-            if (valiForm()) {
-                return;
             }
-            
-            var goodsData = '';
-            var goodsDescription = '';
-            
-            var goodsList = cart.getProductList();
-            goodsList && goodsList.sort(cart.sortAsc);
-            for (var i in goodsList) {
-                goodsData += goodsList[i].id + ',' + goodsList[i].number + ',' + goodsList[i].price + ';';
-                goodsDescription += goodsList[i].name + ' X' + goodsList[i].number + '/r/n';
+
+            function afterPayFail(prepayid) {
+                alert("afterPayFail:"+prepayid);
             }
-            //菜品ID，数量，单价
-            g('goodsData').value = goodsData;
-            var submitData = {            
-                goodsData:g('goodsData').value,
-                name:g('name').value,
-                phone:g('phone').value,
-                address:'',
-                oderRemark:'',  
-                deskNumber:'',  
-                myact: "addcaidan"
-            };
+        
+            function afterPayComplete(prepayid) {
+                alert("afterPayComplete:"+prepayid);
+            }
+        
+            function afterPayCancel(prepayid) {
+                alert("afterPayCancel:"+prepayid);
+            }
+
+            function submitOrder() {
+                vailReSubmit();
            
-            $.post('diancai_login.ashx?openid=<%=openid%>&shopid=<%=shopid%>&wid=<%=wid%>', submitData,
+                if (valiForm()) {
+                    return;
+                }
+            
+                var goodsData = '';
+                var goodsDescription = '';
+            
+                var goodsList = cart.getProductList();
+                goodsList && goodsList.sort(cart.sortAsc);
+                for (var i in goodsList) {
+                    goodsData += goodsList[i].id + ',' + goodsList[i].number + ',' + goodsList[i].price + ';';
+                    goodsDescription += goodsList[i].name + ' X' + goodsList[i].number + '/r/n';
+                }
+                //菜品ID，数量，单价
+                g('goodsData').value = goodsData;
+                var submitData = {            
+                    goodsData:g('goodsData').value,
+                    name:g('name').value,
+                    phone:g('phone').value,
+                    address:'',
+                    oderRemark:'',  
+                    deskNumber:'',  
+                    myact: "addcaidan"
+                };
+           
+                $.post('diancai_login.ashx?openid=<%=openid%>&shopid=<%=shopid%>&wid=<%=wid%>', submitData,
                 function (data) {
                     if (data.ret == "ok") {
                         // goodsDescription
-                        var payResult= PayManager.Pay(data.shopname,"",data.orderNumber,data.payamount,data.openid,afterPaySuccess,afterPayFail,afterPayCancel,afterPayComplete);
+                        var payResult= Pay("../WeChatPay/WeChatPay.aspx",<%=wid%>,data.shopname,"",data.orderNumber,data.payamount,data.openid,afterPaySuccess,afterPayFail,afterPayCancel,afterPayComplete);
                         if (payResult) {
                             alert(data.content);
                             clearCache();
@@ -234,35 +235,35 @@
                 },
                 "json");
 
-            document.infoForm.issubmit.value = 1;//不能再提交
-        }
+                document.infoForm.issubmit.value = 1;//不能再提交
+            }
         
-        function valiForm() {
-            var phonePattern = /^((\(\d{3}\))|(\d{3}\-))?(\(0\d{2,3}\)|0\d{2,3}-)?[1-9]\d{6,7}$/;
-            var mobilePattern = /^1\d{10}$/;
-            var flag = false;
-            if (g("name").value.length < 1) {
-                //  g("name").className = "textinput alertinput";
-                alert("联系人不能为空");
-                return true;
-            }
-            if (!(phonePattern.test(g("phone").value) || mobilePattern.test(g("phone").value))) {
-                alert("亲，您的联系电话格式有误！");
-                return true;
+            function valiForm() {
+                var phonePattern = /^((\(\d{3}\))|(\d{3}\-))?(\(0\d{2,3}\)|0\d{2,3}-)?[1-9]\d{6,7}$/;
+                var mobilePattern = /^1\d{10}$/;
+                var flag = false;
+                if (g("name").value.length < 1) {
+                    //  g("name").className = "textinput alertinput";
+                    alert("联系人不能为空");
+                    return true;
+                }
+                if (!(phonePattern.test(g("phone").value) || mobilePattern.test(g("phone").value))) {
+                    alert("亲，您的联系电话格式有误！");
+                    return true;
+                }
+
+                return flag;
             }
 
-            return flag;
-        }
-
-        function vailReSubmit() {
-            if (document.infoForm.issubmit.value == 0) {
-                return true;
-            }
-            else {
-                alert(' 按一次就够了，请勿重复提交！请耐心等待！谢谢合作！');
-                return false;
-            }
-        }       
+            function vailReSubmit() {
+                if (document.infoForm.issubmit.value == 0) {
+                    return true;
+                }
+                else {
+                    alert(' 按一次就够了，请勿重复提交！请耐心等待！谢谢合作！');
+                    return false;
+                }
+            }       
     </script>
     <script type="text/javascript">
         document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {

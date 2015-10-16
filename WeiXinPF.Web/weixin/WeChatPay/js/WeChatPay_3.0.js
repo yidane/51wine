@@ -86,7 +86,7 @@ $(document).ready(function () {
 
 var PayManager =
 {
-    pay: function (body, attach, out_trade_no, total_fee, openid, afterSuccess, afterFail, afterCancel, afterComplete) {
+    Pay: function (body, attach, out_trade_no, total_fee, openid, afterSuccess, afterFail, afterCancel, afterComplete) {
         if (WeChatPayIsReady) {
             UnifiedOrderRequest.wid = wid;
             UnifiedOrderRequest.body = body;
@@ -104,34 +104,40 @@ var PayManager =
                 data: { request: JSON.stringify(UnifiedOrderRequest) },
                 success: function (result) {
                     if (result != null && result.IsSuccess) {
-                        wx.chooseWXPay({
-                            timestamp: result.Data.timeStamp, // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
-                            nonceStr: result.Data.nonceStr, // 支付签名随机串，不长于 32 位
-                            package: result.Data.package, // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=***）
-                            signType: 'MD5', // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
-                            paySign: result.Data.paySign, // 支付签名
-                            success: function (res) {
-                                payResult = true;
-                                if (typeof afterSuccess === "function") {
-                                    afterComplete(result.Data.prepayid);
-                                }
-                            },
-                            fail: function (res) {
-                                if (typeof afterFail === "function") {
-                                    afterFail(result.Data.prepayid);
-                                }
-                            },
-                            cancel: function (res) {
-                                if (typeof afterCancel === "function") {
-                                    afterCancel(result.Data.prepayid);
-                                }
-                            },
-                            complete: function (res) {
-                                if (typeof afterComplete === "function") {
-                                    afterComplete(result.Data.prepayid);
-                                }
-                            }
-                        });
+                        //wx.chooseWXPay({
+                        //    timestamp: result.Data.timeStamp, // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
+                        //    nonceStr: result.Data.nonceStr, // 支付签名随机串，不长于 32 位
+                        //    package: result.Data.package, // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=***）
+                        //    signType: 'MD5', // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
+                        //    paySign: result.Data.paySign, // 支付签名
+                        //    success: function (res) {
+                        //        payResult = true;
+                        //        if (typeof afterSuccess === "function") {
+                        //            afterSuccess(result.Data.prepayid);
+                        //            afterSuccess('wx2015101513472207b1dc81060930902371');
+                        //        }
+                        //    },
+                        //    fail: function (res) {
+                        //        if (typeof afterFail === "function") {
+                        //            afterFail(result.Data.prepayid);
+                        //        }
+                        //    },
+                        //    cancel: function (res) {
+                        //        if (typeof afterCancel === "function") {
+                        //            afterCancel(result.Data.prepayid);
+                        //        }
+                        //    },
+                        //    complete: function (res) {
+                        //        if (typeof afterComplete === "function") {
+                        //            afterComplete(result.Data.prepayid);
+                        //        }
+                        //    }
+                        //});
+                        
+                        payResult = true;
+                        if (typeof afterSuccess === "function") {
+                            afterSuccess('wx2015101513472207b1dc81060930902371');
+                        }
                     }
                 },
                 error: function (error) {

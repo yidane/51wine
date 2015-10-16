@@ -11,18 +11,12 @@
     <title><%=RestruantName %>餐饮订单</title>
     <link href="css/diancai.css" rel="stylesheet" type="text/css">
     <link href="css/swiper.min.css" rel="stylesheet" />
-<%--    <script src="js/jquery.min.js" type="text/javascript"></script>--%>
+    <script src="js/jquery.min.js" type="text/javascript"></script>
     <script src="js/alert.js" type="text/javascript"></script>
     <script src="js/swiper.min.js"></script>    
     <script src="js/zepto.min.js"></script>
     <style>
-    /*.table-bordered {*/
-        /*border: 1px solid #ddd;*/
-    /*}*/
-     /*.table-bordered>thead>tr>th {*/
-        /*border: 1px solid #ddd;*/
-    /*}*/
-    .table>thead>tr>th {
+        .table > thead > tr > th {
         vertical-align: bottom;
         border-bottom: 2px solid #ddd;
     }
@@ -35,12 +29,15 @@
     .label-info {
     background-color: #5bc0de;
 }
+
     .label-success {
     background-color: #5cb85c;
 }
+
 .label-danger {
     color: #d9534f;
 }
+
 .label {
     display: inline;
     padding: .2em .6em .3em;
@@ -59,25 +56,25 @@
     background-color: #dff0d8;
     border-color: #d6e9c6;
 }
+
 .alert {
     padding: 15px;
     margin-bottom: 20px;
     border: 1px solid transparent;
     border-radius: 4px;
 }
+
 .top-alert {
-    height:32px;
+            height: 32px;
     line-height: 32px;
     vertical-align: middle;
 }
 
-.top-alert-name
-{
+        .top-alert-name {
 font-weight: 700;
 }
 
-.gpd-item-title
-{
+        .gpd-item-title {
 width: 100%;
 float: left;
 padding-top: 10px;
@@ -120,8 +117,6 @@ float: left;
 </style>
 </head>
 <body class="mode_webapp">
-   
-
   <form id="form1" runat="server">   
         <div class="menu_header">
             <div class="menu_topbar">
@@ -137,7 +132,7 @@ float: left;
             <div class="alert alert-success top-alert" role="alert">
                   <span style="float: left"><span class="top-alert-name">订单编号：</span> <%=OrderNumber %></span>
                 <span style="float: right"><span class="top-alert-name">总价：</span>
-                <span class="label label-danger"> <%=PayAmount %>元</span></span>
+                    <span class="label label-danger"><%=PayAmount %>元</span></span>
       
     </div>
 <%--            <section class="alert alert-success">--%>
@@ -161,7 +156,7 @@ float: left;
             </section>
             <div runat="server" id="detail">
             </div>
-            <section  class="gpd-item ">
+            <section class="gpd-item ">
               <div class="gpd-item-title">
                            <img class="detailicon-ticket" src="images/info.png" />
                                           <div class="gpd-item-title-name"> 联系人</div>
@@ -169,8 +164,8 @@ float: left;
                                            </div>
 <div class="gpd-content">
  <div style="width: 100%; float: left">
- <p>  联系人：<%=customeName %></p>
- <p>  联系电话:<%= customerTel%></p>
+                        <p>联系人：<%=customeName %></p>
+                        <p>联系电话:<%= customerTel%></p>
 
 
 
@@ -188,8 +183,8 @@ float: left;
                                </div>
 <div class="gpd-content">
  <div style="width: 78%; float: left">
- <p>   <%=RestruantName %></p>
- <p>  喀纳斯地点。。。</p>
+                        <p><%=RestruantName %></p>
+                        <p>喀纳斯地点。。。</p>
 
 
 
@@ -264,7 +259,7 @@ float: left;
                   });
 
 
-                  $('.silde-background').each(function(i) {
+            $('.silde-background').each(function (i) {
                       var id = $(this).attr("id");
                       var swiper = new Swiper('#' + id + ' .swiper-container', {
                           loop: false,

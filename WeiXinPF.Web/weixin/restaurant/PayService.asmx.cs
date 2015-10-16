@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Services;
+using WeiXinPF.Common;
 
 namespace WeiXinPF.Web.weixin.restaurant
 {
@@ -20,6 +21,7 @@ namespace WeiXinPF.Web.weixin.restaurant
         public void AfterPaySuccess(string prepayid)
         {
             new BLL.wx_diancai_dingdan_manage().PaySuccess(prepayid);
+            HttpContext.Current.Response.Write(AjaxResult.Success("支付成功"));
         }
     }
 }

@@ -14,11 +14,12 @@ namespace WeiXinPF.Web.weixin.restaurant
         BLL.wx_diancai_dingdan_manage managebll = new BLL.wx_diancai_dingdan_manage();
         Model.wx_diancai_dingdan_manage manage = new Model.wx_diancai_dingdan_manage();
         public string str = "";
+        public string openId = string.Empty;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
             {
-                var openId = MyCommFun.QueryString("openid");
+                openId = MyCommFun.QueryString("openid");
                 var type = MyCommFun.QueryString("type");
                 if (!string.IsNullOrEmpty(openId))
                 {
@@ -34,9 +35,9 @@ namespace WeiXinPF.Web.weixin.restaurant
             }
         }
 
-        public void GetPay(string openid)
+        public void GetPay(string openID)
         {
-            DataSet dr = managebll.GetListList(openid);
+            DataSet dr = managebll.GetListList(openID);
             if (dr.Tables[0].Rows.Count > 0)
             {
                 for (int i = 0; i < dr.Tables[0].Rows.Count; i++)
@@ -50,11 +51,11 @@ namespace WeiXinPF.Web.weixin.restaurant
                     str += "<td class=\"cc\"> ";
                     if (dr.Tables[0].Rows[i]["payStatus"].ToString() == "1")
                     {
-                        str += "<em class=\"ok\">成功</em>";
+                        str += "<em class=\"ok\">部分使用</em>";
                     }
                     else if (dr.Tables[0].Rows[i]["payStatus"].ToString() == "2")
                     {
-                        str += "<em class=\"error\">失败</em>";
+                        str += "<em class=\"error\">全部使用</em>";
                     }
                     else
                     {
@@ -65,9 +66,9 @@ namespace WeiXinPF.Web.weixin.restaurant
             }
         }
 
-        public void GetRefund(string openid)
+        public void GetRefund(string openID)
         {
-            DataSet dr = managebll.GetListList(openid);
+            DataSet dr = managebll.GetListList(openID);
             if (dr.Tables[0].Rows.Count > 0)
             {
                 for (int i = 0; i < dr.Tables[0].Rows.Count; i++)
@@ -81,11 +82,11 @@ namespace WeiXinPF.Web.weixin.restaurant
                     str += "<td class=\"cc\"> ";
                     if (dr.Tables[0].Rows[i]["payStatus"].ToString() == "1")
                     {
-                        str += "<em class=\"ok\">成功</em>";
+                        str += "<em class=\"ok\">部分使用</em>";
                     }
                     else if (dr.Tables[0].Rows[i]["payStatus"].ToString() == "2")
                     {
-                        str += "<em class=\"error\">失败</em>";
+                        str += "<em class=\"error\">全部使用</em>";
                     }
                     else
                     {

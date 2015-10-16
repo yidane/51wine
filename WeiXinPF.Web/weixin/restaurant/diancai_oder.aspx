@@ -51,8 +51,8 @@
 <body class="mode_webapp">
     <div class="menu_header">
         <div class="menu_top">
-            <a class="Pay" href="diancai_oder.aspx?openid=<%=openid %>&type=pay">已付款</a>
-            <a class="Refund" href="diancai_oder.aspx?openid=<%=openid %>&type=refund">退单</a>
+            <a class="Pay" href="diancai_oder.aspx?openid=<%=openId %>&type=pay">已付款</a>
+            <a class="Refund" href="diancai_oder.aspx?openid=<%=openId %>&type=refund">退单</a>
         </div>
     </div>
 

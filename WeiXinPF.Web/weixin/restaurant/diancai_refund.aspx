@@ -162,6 +162,7 @@
                 </li>
             </ul>
             <asp:Button runat="server" ID="btnRefund" Text="提交" OnClick="btnRefund_Click" CssClass="gpd-ticket" />
+            <asp:HiddenField runat="server" ID="caiidList" />
         </div>
 
         <script type="text/javascript">
