@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Text;
 using System.Data.SqlClient;
@@ -462,12 +463,82 @@ namespace WeiXinPF.DAL
             return DbHelperSQL.Query(strSql.ToString());
         }
 
+        public DataSet GetRefundListList(string openid)
+        {
+            return null;
+        }
+
+        public DataSet GetDingdanRefundDetail(int shopid, int dingdanid, string openid, int caiid)
+        {
+            var strSql = new StringBuilder();
+            strSql.Append(@"SELECT   c.id ,
+                                            s.hotelName,
+                                            openid ,
+                                            orderNumber ,
+                                            m.cpName,
+                                            c.price ,
+                                            identifyingcode ,
+                                            status
+                                    FROM    dbo.wx_diancai_dingdan_manage d
+                                            INNER JOIN dbo.wx_diancai_dingdan_commodity c ON d.id = c.dingId
+		                                    LEFT JOIN dbo.wx_diancai_shopinfo s
+		                                    ON d.shopinfoid=s.id
+		                                    LEFT JOIN dbo.wx_diancai_caipin_manage m
+		                                    ON c.caiId=m.id
+                                    WHERE   c.status = 1
+                                            AND d.id = @DindanID
+                                            AND d.openid = @OpenID
+                                            AND c.caiId = @CaiID
+                                            AND d.shopinfoid = @ShopInfoID;");
+            SqlParameter[] sqlparams =
+                {
+                    new SqlParameter(){ParameterName = "@DindanID",SqlDbType = SqlDbType.Int,Value = dingdanid},
+                    new SqlParameter(){ParameterName = "@OpenID",SqlDbType = SqlDbType.NVarChar,Value = openid},
+                    new SqlParameter(){ParameterName = "@CaiID",SqlDbType = SqlDbType.Int,Value = caiid},
+                    new SqlParameter(){ParameterName = "@ShopInfoID",SqlDbType = SqlDbType.Int,Value = shopid}
+                };
+
+            return DbHelperSQL.Query(strSql.ToString(), sqlparams);
+        }
+
+        public void RefundDiancai(int shopinfiId, string openid, int wid, int caipinId, int refundAmount, int dingdanid, int caiid, List<int> caipinIdList)
+        {
+            var refundCaiId = string.Empty;
+            if (caipinIdList != null && caipinIdList.Count > 0)
+            {
+                for (int index = 0; index < caipinIdList.Count; index++)
+                {
+                    if (index == caipinIdList.Count - 1)
+                    {
+                        refundCaiId = refundCaiId + caipinIdList[index].ToString();
+                    }
+                    else
+                    {
+                        refundCaiId = refundCaiId + caipinIdList[index].ToString() + ",";
+                    }
+                }
+
+                var sql = "UPDATE dbo.wx_diancai_dingdan_commodity  SET status=2 WHERE dingId=@DingdanId AND caiId=@CaiID AND id IN (@RefundCaiID);";
+                SqlParameter[] sqlparams =
+                {
+                    new SqlParameter(){ParameterName = "@DingdanId",SqlDbType = SqlDbType.Int,Value = dingdanid},
+                    new SqlParameter(){ParameterName = "@CaiID",SqlDbType = SqlDbType.Int,Value = caiid},
+                    new SqlParameter(){ParameterName = "@RefundCaiID",SqlDbType = SqlDbType.NVarChar,Value = refundCaiId}
+                };
+
+                DbHelperSQL.ExecuteSql(sql, sqlparams);
+            }
+        }
+
+
+
         /// <summary>
         /// 支付完成
         /// </summary>
         /// <param name="prepayid"></param>
         public void PaySuccess(string prepayid)
         {
+            //状态为2表示退款中
             var sql = "UPDATE dbo.wx_diancai_dingdan_manage SET payStatus=1 WHERE orderNumber=(SELECT OrderId FROM [dbo].[wx_Payment_PaymentInfo] WHERE WXOrderCode=@PrepayID)";
             SqlParameter[] sqlparams =
                 {

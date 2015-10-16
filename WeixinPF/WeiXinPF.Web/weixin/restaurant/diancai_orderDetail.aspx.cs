@@ -95,7 +95,10 @@ namespace WeiXinPF.Web.weixin.restaurant
                     builder.AppendFormat("<td class=\"cc\" style=\"width: 17%\">{0}</td>", pair.Value.Count);
                     builder.AppendFormat("<td class=\"cc\" style=\"width: 25%\">{0}元</td>", pair.Value.Count * pair.Value[0].price);
                     builder.Append("<td class=\"cc\" style=\"width: 23%\">");
-                    builder.AppendFormat("<a class='btn btn-success' href=\"diancai_refund.aspx?shopid={0}&dingdan={1}&openid={2}&caiid={3}\">申请退款</a>", shopid, orderId, openid, pair.Key);//组合订单ID和菜品ID作为Button的主键
+
+                    //存在未使用的，则添加退款按钮
+                    if (pair.Value.Any(item => item.status == StatusManager.DishStatus.NoUsed.StatusID))
+                        builder.AppendFormat("<a href=\"diancai_refund.aspx?shopid={0}&dingdan={1}&openid={2}&caiid={3}\">申请退款</a>", shopid, orderId, openid, pair.Key);//组合订单ID和菜品ID作为Button的主键
                     builder.Append("</td>");
                     builder.Append("</tr>");
                     builder.Append("</table>");
@@ -122,12 +125,7 @@ namespace WeiXinPF.Web.weixin.restaurant
 
             this.detail.InnerHtml = builder.ToString();
         }
-
-        protected void Refund_Click(object sender, EventArgs e)
-        {
-            
         }
-    }
 
     /// <summary>
     /// 订单详情对象
@@ -153,12 +151,12 @@ namespace WeiXinPF.Web.weixin.restaurant
         public double xplace { get; set; }
         public double yplace { get; set; }
         public string tel { get; set; }
-        public DateTime hoteltimeBegin { get; set; }
-        public DateTime hoteltimeEnd { get; set; }
-        public DateTime hoteltimeBegin1 { get; set; }
-        public DateTime hoteltimeEnd1 { get; set; }
-        public DateTime hoteltimeBegin2 { get; set; }
-        public DateTime hoteltimeEnd2 { get; set; }
+        public DateTime? hoteltimeBegin { get; set; }
+        public DateTime? hoteltimeEnd { get; set; }
+        public DateTime? hoteltimeBegin1 { get; set; }
+        public DateTime? hoteltimeEnd1 { get; set; }
+        public DateTime? hoteltimeBegin2 { get; set; }
+        public DateTime? hoteltimeEnd2 { get; set; }
 
         public Dictionary<int, List<OrderCaipinDetail>> OrderCaipinDetail = new Dictionary<int, List<OrderCaipinDetail>>();
 
@@ -178,12 +176,12 @@ namespace WeiXinPF.Web.weixin.restaurant
                     this.customerTel = orderTableFirstRow.Field<string>("customerTel");
                     this.dcRename = orderTableFirstRow.Field<string>("dcRename");
                     this.hotelName = orderTableFirstRow.Field<string>("hotelName");
-                    this.hoteltimeBegin = orderTableFirstRow.Field<DateTime>("hoteltimeBegin");
-//                    this.hoteltimeBegin1 = orderTableFirstRow.Field<DateTime>("hoteltimeBegin1");
-//                    this.hoteltimeBegin2 = orderTableFirstRow.Field<DateTime>("hoteltimeBegin2");
-                    this.hoteltimeEnd = orderTableFirstRow.Field<DateTime>("hoteltimeEnd");
-//                    this.hoteltimeEnd1 = orderTableFirstRow.Field<DateTime>("hoteltimeEnd1");
-//                    this.hoteltimeEnd2 = orderTableFirstRow.Field<DateTime>("hoteltimeEnd2");
+                    this.hoteltimeBegin = orderTableFirstRow.Field<DateTime?>("hoteltimeBegin");
+                    this.hoteltimeBegin1 = orderTableFirstRow.Field<DateTime?>("hoteltimeBegin1");
+                    this.hoteltimeBegin2 = orderTableFirstRow.Field<DateTime?>("hoteltimeBegin2");
+                    this.hoteltimeEnd = orderTableFirstRow.Field<DateTime?>("hoteltimeEnd");
+                    this.hoteltimeEnd1 = orderTableFirstRow.Field<DateTime?>("hoteltimeEnd1");
+                    this.hoteltimeEnd2 = orderTableFirstRow.Field<DateTime?>("hoteltimeEnd2");
                     this.oderTime = orderTableFirstRow.Field<DateTime>("oderTime");
                     this.orderNumber = orderTableFirstRow.Field<string>("orderNumber");
                     this.payAmount = orderTableFirstRow.Field<double>("payAmount");

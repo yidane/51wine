@@ -58,5 +58,6 @@ namespace WeiXinPF.Infrastructure.DomainDataAccess
 
         public virtual DbSet<PaymentInfo> PaymentInfo { get; set; }
 
+        public virtual DbSet<RefundmentInfo> RefundmentInfo { get; set; }
     }
 }

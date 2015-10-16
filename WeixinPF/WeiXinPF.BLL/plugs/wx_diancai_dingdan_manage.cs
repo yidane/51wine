@@ -170,6 +170,21 @@ namespace WeiXinPF.BLL
             return dal.GetListList(openid);
         }
 
+        public DataSet GetRefundListList(string openid)
+        {
+            return dal.GetRefundListList(openid);
+        }
+
+        public DataSet GetDingdanRefundDetail(int shopid, int dingdanid, string openid, int caiid)
+        {
+            return dal.GetDingdanRefundDetail(shopid, dingdanid, openid, caiid);
+        }
+
+        public void RefundDiancai(int dingdanid, int caiid, List<int> caipinIdList )
+        {
+            //dal.RefundDiancai(dingdanid, caiid, caipinIdList);
+        }
+
         public void PaySuccess(string prepayid)
         {
             dal.PaySuccess(prepayid);
