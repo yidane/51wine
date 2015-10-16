@@ -1,0 +1,85 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="KNSHotelMasterPage.master.cs" Inherits="WeiXinPF.Web.weixin.KNSHotel.KNSHotelMasterPage" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <script src="js/jquery.min.js"></script>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <link href="css/hotels.css" rel="stylesheet" type="text/css">
+    
+</head>
+<body>
+    <div class="menu_header">
+        <div class="menu_topbar">
+            <strong class="head-title"><%=title %></strong>
+            <span class="head_btn_left"><a href="javascript:history.go(-1);"><span>返回</span></a><b></b></span>
+            <a class="head_btn_right" href="../map/poilist.html?type=catering&wid=<%=wid %>">
+                <span><i class="menu_header_home"></i></span><b></b>
+            </a>
+        </div>
+    </div>
+
+    <form id="form1" runat="server">
+    <div style="padding: 40px 0 35px 0; display: block;">
+        <asp:ContentPlaceHolder ID="content" runat="server">
+        
+        </asp:ContentPlaceHolder>
+    </div>
+    </form>
+    
+    <div class="footermenu">
+    <ul>
+        <li>
+            <a id="about"  href="hotel_detail.aspx?openid=<%=openid %>&hotelid=<%=hotelid%>">
+            <img src="images/xxyX63YryG.png">
+            <p>关于</p>
+            </a>
+        </li>
+        <li>
+            <a id="choice" class="active" href="index.aspx?openid=<%=openid %>&hotelid=<%=hotelid%>">
+            <img src="images/3YQLfzfunJ.png">
+            <p>房型选择</p>
+            </a>
+        </li>        
+        <li>
+            <a id="myOrder" href="hotel_order.aspx?openid=<%=openid %>&hotelid=<%=hotelid%>">
+            <span class="num" ><%=dingdannum %></span>  <img src="images/s22KaR0Wtc.png">
+            <p>订单</p>
+            </a>
+        </li>
+    </ul>
+</div>
+        <script type="text/javascript">
+        $(function () {
+            var title = $(".head-title").html();
+
+            switch (title) {
+                case "关于":
+                    $("#about").addClass("active");
+                    $("#choice").removeClass("active");
+                    $("#myOrder").removeClass("active");
+                    break;
+                case "房型选择":
+                    $("#about").removeClass("active");
+                    $("#choice").addClass("active");
+                    $("#myOrder").removeClass("active");
+                    break;
+                case "订单":
+                    $("#about").removeClass("active");
+                    $("#choice").removeClass("active");
+                    $("#myOrder").addClass("active");
+                    break;
+                default:
+                    $("#about").removeClass("active");
+                    $("#choice").removeClass("active");
+                    $("#myOrder").addClass("active");
+                    break;
+            }
+        });
+    </script>
+</body>
+</html>

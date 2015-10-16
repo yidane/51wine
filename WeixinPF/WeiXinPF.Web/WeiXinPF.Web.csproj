@@ -6988,6 +6988,58 @@
     <Compile Include="weixin\groupbuy\purchase.aspx.designer.cs">
       <DependentUpon>purchase.aspx</DependentUpon>
     </Compile>
+    <Compile Include="weixin\KNSHotel\hotel_detail.aspx.cs">
+      <DependentUpon>hotel_detail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="weixin\KNSHotel\hotel_detail.aspx.designer.cs">
+      <DependentUpon>hotel_detail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="weixin\KNSHotel\hotel_form.aspx.cs">
+      <DependentUpon>hotel_form.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="weixin\KNSHotel\hotel_form.aspx.designer.cs">
+      <DependentUpon>hotel_form.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="weixin\KNSHotel\hotel_info.ashx.cs">
+      <DependentUpon>hotel_info.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="weixin\KNSHotel\hotel_order.aspx.cs">
+      <DependentUpon>hotel_order.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="weixin\KNSHotel\hotel_order.aspx.designer.cs">
+      <DependentUpon>hotel_order.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="weixin\KNSHotel\hotel_order_edite.aspx.cs">
+      <DependentUpon>hotel_order_edite.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="weixin\KNSHotel\hotel_order_edite.aspx.designer.cs">
+      <DependentUpon>hotel_order_edite.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="weixin\KNSHotel\hotel_order_onlin.aspx.cs">
+      <DependentUpon>hotel_order_onlin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="weixin\KNSHotel\hotel_order_onlin.aspx.designer.cs">
+      <DependentUpon>hotel_order_onlin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="weixin\KNSHotel\hotel_order_xianshi.aspx.cs">
+      <DependentUpon>hotel_order_xianshi.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="weixin\KNSHotel\hotel_order_xianshi.aspx.designer.cs">
+      <DependentUpon>hotel_order_xianshi.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="weixin\KNSHotel\index.aspx.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="weixin\KNSHotel\index.aspx.designer.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+    </Compile>
     <Compile Include="weixin\hotel\hotel_detail.aspx.cs">
       <DependentUpon>hotel_detail.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -7039,6 +7091,13 @@
     </Compile>
     <Compile Include="weixin\hotel\index.aspx.designer.cs">
       <DependentUpon>index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="weixin\KNSHotel\KNSHotelMasterPage.Master.cs">
+      <DependentUpon>KNSHotelMasterPage.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="weixin\KNSHotel\KNSHotelMasterPage.Master.designer.cs">
+      <DependentUpon>KNSHotelMasterPage.Master</DependentUpon>
     </Compile>
     <Compile Include="weixin\lbs\detailAddr.aspx.cs">
       <DependentUpon>detailAddr.aspx</DependentUpon>
@@ -7979,6 +8038,27 @@
     <Content Include="weixin\cashred\images\title-bg-red.png" />
     <Content Include="weixin\cashred\index.aspx" />
     <Content Include="weixin\cashred\js\alert.js" />
+    <Content Include="weixin\KNSHotel\css\hotels.css" />
+    <Content Include="weixin\KNSHotel\css\mystyle.css" />
+    <Content Include="weixin\KNSHotel\hotel_detail.aspx" />
+    <Content Include="weixin\KNSHotel\hotel_form.aspx" />
+    <Content Include="weixin\KNSHotel\hotel_order.aspx" />
+    <Content Include="weixin\KNSHotel\hotel_order_edite.aspx" />
+    <Content Include="weixin\KNSHotel\hotel_order_onlin.aspx" />
+    <Content Include="weixin\KNSHotel\hotel_order_xianshi.aspx" />
+    <Content Include="weixin\KNSHotel\images\3YQLfzfunJ.png" />
+    <Content Include="weixin\KNSHotel\images\9uKCykhUSh.png" />
+    <Content Include="weixin\KNSHotel\images\addr.png" />
+    <Content Include="weixin\KNSHotel\images\arrow3.png" />
+    <Content Include="weixin\KNSHotel\images\detail.png" />
+    <Content Include="weixin\KNSHotel\images\RTqs2yHIc9.jpg" />
+    <Content Include="weixin\KNSHotel\images\s22KaR0Wtc.png" />
+    <Content Include="weixin\KNSHotel\images\tel.png" />
+    <Content Include="weixin\KNSHotel\images\xxyX63YryG.png" />
+    <Content Include="weixin\KNSHotel\index.aspx" />
+    <Content Include="weixin\KNSHotel\js\iscroll.js" />
+    <Content Include="weixin\KNSHotel\js\jquery.min.js" />
+    <Content Include="weixin\KNSHotel\js\plugback.js" />
     <Content Include="weixin\map\css\bootstrap.min.css" />
     <Content Include="weixin\map\css\L.Control.Locate.ie.min.css" />
     <Content Include="weixin\map\css\L.Control.Locate.min.css" />
@@ -10077,7 +10157,8 @@
     <None Include="Properties\PublishProfiles\Yidane.pubxml" />
     <Content Include="weixin\restaurant\Restaurant.Master" />
     <Content Include="weixin\WeChatPay\js\WeChatPay_3.0.js" />
-    <Content Include="weixin\restaurant\ErCodeHandler.ashx" />
+    <Content Include="weixin\KNSHotel\hotel_info.ashx" />
+    <Content Include="weixin\KNSHotel\KNSHotelMasterPage.Master" />
     <None Include="副本 Web.Debug.config">
       <DependentUpon>副本 Web.config</DependentUpon>
     </None>
