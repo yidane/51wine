@@ -17,16 +17,16 @@ namespace WeiXinPF.Web.admin.diancai
         protected int pageSize;
         BLL.wx_diancai_dingdan_manage gbll = new BLL.wx_diancai_dingdan_manage();
         protected string keywords = string.Empty;
-        protected  int shopid=0 ;
+        protected int shopid = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
             this.keywords = MXRequest.GetQueryString("keywords");
-            shopid = MyCommFun.RequestInt("shopid");
+            shopid = MyCommFun.RequestInt("shopid") == 0 ? GetShopId() : MyCommFun.RequestInt("shopid"); ;
             this.pageSize = GetPageSize(10); //每页数量
             if (!Page.IsPostBack)
             {
 
-              
+
                 RptBind(CombSqlTxt(keywords), "createDate desc,id desc");
 
             }
@@ -36,11 +36,11 @@ namespace WeiXinPF.Web.admin.diancai
         private void RptBind(string _strWhere, string _orderby)
         {
 
-           // Model.wx_userweixin weixin = GetWeiXinCode();
+            // Model.wx_userweixin weixin = GetWeiXinCode();
 
             //判断是否已经设置了微留言基本信息
             BLL.wx_diancai_dingdan_manage sbll = new BLL.wx_diancai_dingdan_manage();
-    
+
 
             _strWhere = "shopinfoid=" + shopid + " " + _strWhere;
             this.page = MXRequest.GetQueryInt("page", 1);
@@ -67,7 +67,7 @@ namespace WeiXinPF.Web.admin.diancai
                     {
                         dr["payStatusStr"] = "失败";
                     }
-                    
+
 
                 }
                 ds.AcceptChanges();
@@ -158,7 +158,7 @@ namespace WeiXinPF.Web.admin.diancai
             }
             AddAdminLog(MXEnums.ActionEnum.Delete.ToString(), "信息" + sucCount + "条，失败" + errorCount + "条"); //记录日志
 
-            JscriptMsg("删除成功" + sucCount + "条，失败" + errorCount + "条！", Utils.CombUrlTxt("dingdan_manage.aspx", "keywords={0}&shopid={1}",this.keywords,shopid.ToString()), "Success");
+            JscriptMsg("删除成功" + sucCount + "条，失败" + errorCount + "条！", Utils.CombUrlTxt("dingdan_manage.aspx", "keywords={0}&shopid={1}", this.keywords, shopid.ToString()), "Success");
         }
 
         /// <summary>

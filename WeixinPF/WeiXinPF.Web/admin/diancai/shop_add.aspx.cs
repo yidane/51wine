@@ -26,16 +26,17 @@ namespace WeiXinPF.Web.admin.diancai
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            shopid = MyCommFun.RequestInt("shopid");
+            shopid = MyCommFun.RequestInt("shopid") == 0 ? GetShopId() : MyCommFun.RequestInt("shopid");
+
 
             if (!IsPostBack)
             {
-               
+
                 editetype = MyCommFun.QueryString("type");
-                
+
                 if (editetype == "edite")
                 {
-                   list(shopid);
+                    list(shopid);
                 }
 
 
@@ -129,7 +130,7 @@ namespace WeiXinPF.Web.admin.diancai
                 hotel.wid = wid;
                 hotel.hotelName = this.hotelName.Text;
                 hotel.hotelLogo = this.hotelLogo.Text;
-                hotel.hoteltimeBegin = Convert.ToDateTime("2100-1-1 "+this.hoteltimeBegin.Text);
+                hotel.hoteltimeBegin = Convert.ToDateTime("2100-1-1 " + this.hoteltimeBegin.Text);
                 hotel.hoteltimeEnd = Convert.ToDateTime("2100-1-1 " + this.hoteltimeEnd.Text);
                 if (this.hoteltimeBegin1.Text != "" && this.hoteltimeEnd1.Text != "")
                 {
@@ -138,7 +139,7 @@ namespace WeiXinPF.Web.admin.diancai
                 }
                 else
                 {
-                    hotel.hoteltimeBegin2 =null;
+                    hotel.hoteltimeBegin2 = null;
                     hotel.hoteltimeEnd2 = null;
                 }
                 if (this.hoteltimeBegin2.Text != "" && this.hoteltimeEnd2.Text != "")
@@ -148,13 +149,13 @@ namespace WeiXinPF.Web.admin.diancai
                 }
                 else
                 {
-                    hotel.hoteltimeBegin2 =null;
+                    hotel.hoteltimeBegin2 = null;
                     hotel.hoteltimeEnd2 = null;
                 }
 
 
                 hotel.limiteOrder = Convert.ToBoolean(this.limiteOrder.SelectedValue);
-                
+
                 hotel.dcRename = this.rename.Text;
                 hotel.sendPrice = Convert.ToDecimal(this.sendPrice.Text);
                 hotel.sendCost = Convert.ToDecimal(this.sendCost.Text);
@@ -191,7 +192,7 @@ namespace WeiXinPF.Web.admin.diancai
 
                         pic.shopid = id;
                         pic.description = description.Text.ToString();
-                        pic.sortid = MyCommFun.Str2Int( sortid.Text.ToString());
+                        pic.sortid = MyCommFun.Str2Int(sortid.Text.ToString());
                         pic.picUrl = picUrl.Text.ToString();
                         pic.pictzUrl = pictzUrl.Text.ToString();
                         pic.createDate = DateTime.Now;
@@ -199,101 +200,101 @@ namespace WeiXinPF.Web.admin.diancai
 
                     }
                 }
-                    AddAdminLog(MXEnums.ActionEnum.Add.ToString(), "添加商家设置，主键为" + id); //记录日志
-                    JscriptMsg("添加成功！","shop_list.aspx", "Success");
-               
+                AddAdminLog(MXEnums.ActionEnum.Add.ToString(), "添加商家设置，主键为" + id); //记录日志
+                JscriptMsg("添加成功！", "shop_list.aspx", "Success");
+
             }
 
 
 
-                if (editetype == "edite")
+            if (editetype == "edite")
+            {
+                if (shopid == 0)
                 {
-                    if (shopid==0)
-                    {
 
-                        return;
-                        //操作失败！
-                    }
-                    hotel.id = shopid;
-                    hotel.wid = wid;
-                    hotel.hotelName = this.hotelName.Text;
-                    hotel.hotelLogo = this.hotelLogo.Text;
-                    hotel.hoteltimeBegin = Convert.ToDateTime("2100-1-1 " + this.hoteltimeBegin.Text);
-                    hotel.hoteltimeEnd = Convert.ToDateTime("2100-1-1 " + this.hoteltimeEnd.Text);
+                    return;
+                    //操作失败！
+                }
+                hotel.id = shopid;
+                hotel.wid = wid;
+                hotel.hotelName = this.hotelName.Text;
+                hotel.hotelLogo = this.hotelLogo.Text;
+                hotel.hoteltimeBegin = Convert.ToDateTime("2100-1-1 " + this.hoteltimeBegin.Text);
+                hotel.hoteltimeEnd = Convert.ToDateTime("2100-1-1 " + this.hoteltimeEnd.Text);
 
-                    if (this.hoteltimeBegin1.Text != "" && this.hoteltimeEnd1.Text != "")
-                    {
-                        hotel.hoteltimeBegin1 = Convert.ToDateTime("2100-1-1 " + this.hoteltimeBegin1.Text);
-                        hotel.hoteltimeEnd1 = Convert.ToDateTime("2100-1-1 " + this.hoteltimeEnd1.Text);
-                    }
-                    else
-                    {
-                        hotel.hoteltimeBegin2 = null;
-                        hotel.hoteltimeEnd2 = null;
-                    }
-                    if (this.hoteltimeBegin2.Text != "" && this.hoteltimeEnd2.Text != "")
-                    {
-                        hotel.hoteltimeBegin2 = Convert.ToDateTime("2100-1-1 " + this.hoteltimeBegin2.Text);
-                        hotel.hoteltimeEnd2 = Convert.ToDateTime("2100-1-1 " + this.hoteltimeEnd2.Text);
-                    }
-                    else
-                    {
-                        hotel.hoteltimeBegin2 = null;
-                        hotel.hoteltimeEnd2 = null;
-                    }
-
-                    hotel.limiteOrder = Convert.ToBoolean(this.limiteOrder.SelectedValue);
-                    hotel.dcRename = this.rename.Text;
-                    hotel.sendPrice = Convert.ToDecimal(this.sendPrice.Text);
-                    hotel.sendCost = Convert.ToDecimal(this.sendCost.Text);
-                    hotel.freeSendcost = Convert.ToInt32(this.freeSendcost.Text);
-                    hotel.radius = this.radius.Text;
-                    hotel.sendArea = this.sendArea.Text;
-                    hotel.tel = this.tel.Text;
-                    hotel.address = this.address.Text;
-                    hotel.personLimite = Convert.ToInt32(this.personLimite.Text);
-                    hotel.notice = this.notice.InnerText;
-                    hotel.hotelintroduction = this.hotelintroduction.InnerText;
-                    hotel.email = this.email.Text;
-                    hotel.emailpwd = this.emailpwd.Text;
-                    hotel.stmp = this.stmp.Text;
-                    hotel.css = this.css.Text;
-            
-                    hotel.kcType = this.type.Value;
-                    hotel.miaoshu = this.miaoshu.InnerText;
-                    hotel.xplace = Convert.ToDecimal(this.txtLatXPoint.Text);
-                    hotel.yplace = Convert.ToDecimal(this.txtLngYPoint.Text);
-                    hotelBll.Update(hotel);
-
-                    picBll.Delete(shopid);
-
-                    for (int i = 1; i <= 6; i++)
-                    {
-                        description = this.FindControl("description" + i) as TextBox;
-                        sortid = this.FindControl("sortid" + i) as TextBox;
-                        picUrl = this.FindControl("picUrl" + i) as TextBox;
-                        pictzUrl = this.FindControl("pictzUrl" + i) as TextBox;
-
-                        if (description.Text.Trim() != "" && sortid.Text.Trim() != "")
-                        {
-
-                            pic.shopid = shopid;
-                            pic.description = description.Text.ToString();
-                            pic.sortid =MyCommFun.Str2Int( sortid.Text.ToString());
-                            pic.picUrl = picUrl.Text.ToString();
-                            pic.pictzUrl = pictzUrl.Text.ToString();
-                            pic.createDate = DateTime.Now;
-                            picBll.Add(pic);
-
-                        }
-                    }
-                    AddAdminLog(MXEnums.ActionEnum.Edit.ToString(), "修改商家设置，主键为" + shopid); //记录日志
-                    JscriptMsg("修改成功！", "shop_list.aspx", "Success");
+                if (this.hoteltimeBegin1.Text != "" && this.hoteltimeEnd1.Text != "")
+                {
+                    hotel.hoteltimeBegin1 = Convert.ToDateTime("2100-1-1 " + this.hoteltimeBegin1.Text);
+                    hotel.hoteltimeEnd1 = Convert.ToDateTime("2100-1-1 " + this.hoteltimeEnd1.Text);
+                }
+                else
+                {
+                    hotel.hoteltimeBegin2 = null;
+                    hotel.hoteltimeEnd2 = null;
+                }
+                if (this.hoteltimeBegin2.Text != "" && this.hoteltimeEnd2.Text != "")
+                {
+                    hotel.hoteltimeBegin2 = Convert.ToDateTime("2100-1-1 " + this.hoteltimeBegin2.Text);
+                    hotel.hoteltimeEnd2 = Convert.ToDateTime("2100-1-1 " + this.hoteltimeEnd2.Text);
+                }
+                else
+                {
+                    hotel.hoteltimeBegin2 = null;
+                    hotel.hoteltimeEnd2 = null;
                 }
 
+                hotel.limiteOrder = Convert.ToBoolean(this.limiteOrder.SelectedValue);
+                hotel.dcRename = this.rename.Text;
+                hotel.sendPrice = Convert.ToDecimal(this.sendPrice.Text);
+                hotel.sendCost = Convert.ToDecimal(this.sendCost.Text);
+                hotel.freeSendcost = Convert.ToInt32(this.freeSendcost.Text);
+                hotel.radius = this.radius.Text;
+                hotel.sendArea = this.sendArea.Text;
+                hotel.tel = this.tel.Text;
+                hotel.address = this.address.Text;
+                hotel.personLimite = Convert.ToInt32(this.personLimite.Text);
+                hotel.notice = this.notice.InnerText;
+                hotel.hotelintroduction = this.hotelintroduction.InnerText;
+                hotel.email = this.email.Text;
+                hotel.emailpwd = this.emailpwd.Text;
+                hotel.stmp = this.stmp.Text;
+                hotel.css = this.css.Text;
 
+                hotel.kcType = this.type.Value;
+                hotel.miaoshu = this.miaoshu.InnerText;
+                hotel.xplace = Convert.ToDecimal(this.txtLatXPoint.Text);
+                hotel.yplace = Convert.ToDecimal(this.txtLngYPoint.Text);
+                hotelBll.Update(hotel);
 
+                picBll.Delete(shopid);
 
+                for (int i = 1; i <= 6; i++)
+                {
+                    description = this.FindControl("description" + i) as TextBox;
+                    sortid = this.FindControl("sortid" + i) as TextBox;
+                    picUrl = this.FindControl("picUrl" + i) as TextBox;
+                    pictzUrl = this.FindControl("pictzUrl" + i) as TextBox;
+
+                    if (description.Text.Trim() != "" && sortid.Text.Trim() != "")
+                    {
+
+                        pic.shopid = shopid;
+                        pic.description = description.Text.ToString();
+                        pic.sortid = MyCommFun.Str2Int(sortid.Text.ToString());
+                        pic.picUrl = picUrl.Text.ToString();
+                        pic.pictzUrl = pictzUrl.Text.ToString();
+                        pic.createDate = DateTime.Now;
+                        picBll.Add(pic);
+
+                    }
+                }
+                AddAdminLog(MXEnums.ActionEnum.Edit.ToString(), "修改商家设置，主键为" + shopid); //记录日志
+                JscriptMsg("修改成功！", "shop_list.aspx", "Success");
             }
+
+
+
+
         }
     }
+}

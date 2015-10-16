@@ -66,6 +66,7 @@
     <Compile Include="mail_template.cs" />
     <Compile Include="plugs\wx_cards.cs" />
     <Compile Include="plugs\wx_cards_gl.cs" />
+    <Compile Include="plugs\wx_diancai_admin.cs" />
     <Compile Include="plugs\wx_diancai_blacklist.cs" />
     <Compile Include="plugs\wx_diancai_caipin_category.cs" />
     <Compile Include="plugs\wx_diancai_caipin_manage.cs" />

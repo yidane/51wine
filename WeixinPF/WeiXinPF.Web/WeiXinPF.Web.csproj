@@ -108,6 +108,10 @@
     <Content Include="admin\choujiang\shakeLuckyMoney\luckyMoneylist.aspx" />
     <Content Include="admin\diancai\commodity_detail.aspx" />
     <Content Include="admin\diancai\dingdan_confirm.aspx" />
+    <Content Include="admin\diancai\shop_admin_edit.aspx" />
+    <Content Include="admin\diancai\shop_admin_list.aspx" />
+    <Content Include="admin\diancai\shop_user_edit.aspx" />
+    <Content Include="admin\diancai\shop_user_list.aspx" />
     <Content Include="admin\photo\photoEdit.aspx" />
     <Content Include="admin\photo\photolist.aspx" />
     <Content Include="admin\scenic\scenic_detail_edit.aspx" />
@@ -4628,12 +4632,40 @@
     <Compile Include="admin\diancai\dingdan_manage.aspx.designer.cs">
       <DependentUpon>dingdan_manage.aspx</DependentUpon>
     </Compile>
+    <Compile Include="admin\diancai\shop_admin_edit.aspx.cs">
+      <DependentUpon>shop_admin_edit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\diancai\shop_admin_edit.aspx.designer.cs">
+      <DependentUpon>shop_admin_edit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\diancai\shop_admin_list.aspx.cs">
+      <DependentUpon>shop_admin_list.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\diancai\shop_admin_list.aspx.designer.cs">
+      <DependentUpon>shop_admin_list.aspx</DependentUpon>
+    </Compile>
     <Compile Include="admin\diancai\shop_setup.aspx.cs">
       <DependentUpon>shop_setup.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="admin\diancai\shop_setup.aspx.designer.cs">
       <DependentUpon>shop_setup.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\diancai\shop_user_edit.aspx.cs">
+      <DependentUpon>shop_user_edit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\diancai\shop_user_edit.aspx.designer.cs">
+      <DependentUpon>shop_user_edit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\diancai\shop_user_list.aspx.cs">
+      <DependentUpon>shop_user_list.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\diancai\shop_user_list.aspx.designer.cs">
+      <DependentUpon>shop_user_list.aspx</DependentUpon>
     </Compile>
     <Compile Include="admin\grouppurchase\group_base_add.aspx.cs">
       <DependentUpon>group_base_add.aspx</DependentUpon>

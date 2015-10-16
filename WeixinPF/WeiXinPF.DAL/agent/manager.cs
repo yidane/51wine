@@ -27,7 +27,7 @@ namespace WeiXinPF.DAL
             strSql.Append("select count(1) from " + databaseprefix + "manager");
             strSql.Append(" where id=@id ");
             SqlParameter[] parameters = {
-					new SqlParameter("@id", SqlDbType.Int,4)};
+                    new SqlParameter("@id", SqlDbType.Int,4)};
             parameters[0].Value = id;
 
             return DbHelperSQL.Exists(strSql.ToString(), parameters);
@@ -42,7 +42,7 @@ namespace WeiXinPF.DAL
             strSql.Append("select count(1) from " + databaseprefix + "manager");
             strSql.Append(" where user_name=@user_name ");
             SqlParameter[] parameters = {
-					new SqlParameter("@user_name", SqlDbType.NVarChar,100)};
+                    new SqlParameter("@user_name", SqlDbType.NVarChar,100)};
             parameters[0].Value = user_name;
 
             return DbHelperSQL.Exists(strSql.ToString(), parameters);
@@ -50,13 +50,13 @@ namespace WeiXinPF.DAL
         /// <summary>
         /// 查询用户名是否存在
         /// </summary>
-        public bool Exists(string user_name,string email)
+        public bool Exists(string user_name, string email)
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("select count(1) from " + databaseprefix + "manager");
             strSql.Append(" where user_name=@user_name and email=@email ");
             SqlParameter[] parameters = {
-					new SqlParameter("@user_name", SqlDbType.NVarChar,100),
+                    new SqlParameter("@user_name", SqlDbType.NVarChar,100),
                     new SqlParameter("@email", SqlDbType.NVarChar,100)};
             parameters[0].Value = user_name;
             parameters[1].Value = email;
@@ -95,26 +95,26 @@ namespace WeiXinPF.DAL
             strSql.Append("@role_id,@role_type,@user_name,@password,@salt,@real_name,@telephone,@email,@is_lock,@add_time,@wxNum,@agentId,@reg_ip,@qq,@province,@city,@county,@remark,@sort_id,@agentLevel)");
             strSql.Append(";select @@IDENTITY");
             SqlParameter[] parameters = {
-					new SqlParameter("@role_id", SqlDbType.Int,4),
-					new SqlParameter("@role_type", SqlDbType.Int,4),
-					new SqlParameter("@user_name", SqlDbType.NVarChar,100),
-					new SqlParameter("@password", SqlDbType.NVarChar,100),
-					new SqlParameter("@salt", SqlDbType.NVarChar,20),
-					new SqlParameter("@real_name", SqlDbType.NVarChar,50),
-					new SqlParameter("@telephone", SqlDbType.NVarChar,30),
-					new SqlParameter("@email", SqlDbType.NVarChar,30),
-					new SqlParameter("@is_lock", SqlDbType.Int,4),
-					new SqlParameter("@add_time", SqlDbType.DateTime),
+                    new SqlParameter("@role_id", SqlDbType.Int,4),
+                    new SqlParameter("@role_type", SqlDbType.Int,4),
+                    new SqlParameter("@user_name", SqlDbType.NVarChar,100),
+                    new SqlParameter("@password", SqlDbType.NVarChar,100),
+                    new SqlParameter("@salt", SqlDbType.NVarChar,20),
+                    new SqlParameter("@real_name", SqlDbType.NVarChar,50),
+                    new SqlParameter("@telephone", SqlDbType.NVarChar,30),
+                    new SqlParameter("@email", SqlDbType.NVarChar,30),
+                    new SqlParameter("@is_lock", SqlDbType.Int,4),
+                    new SqlParameter("@add_time", SqlDbType.DateTime),
                     new SqlParameter("@wxNum", SqlDbType.Int,4),
                     new SqlParameter("@agentId", SqlDbType.Int,4),
                     new SqlParameter("@reg_ip", SqlDbType.NVarChar,30),
-					new SqlParameter("@qq", SqlDbType.NVarChar,30),
-					new SqlParameter("@province", SqlDbType.NVarChar,200),
-					new SqlParameter("@city", SqlDbType.NVarChar,200),
-					new SqlParameter("@county", SqlDbType.NVarChar,200),
-					new SqlParameter("@remark", SqlDbType.NVarChar,1500),
-					new SqlParameter("@sort_id", SqlDbType.Int,4),
-					new SqlParameter("@agentLevel", SqlDbType.Int,4)};
+                    new SqlParameter("@qq", SqlDbType.NVarChar,30),
+                    new SqlParameter("@province", SqlDbType.NVarChar,200),
+                    new SqlParameter("@city", SqlDbType.NVarChar,200),
+                    new SqlParameter("@county", SqlDbType.NVarChar,200),
+                    new SqlParameter("@remark", SqlDbType.NVarChar,1500),
+                    new SqlParameter("@sort_id", SqlDbType.Int,4),
+                    new SqlParameter("@agentLevel", SqlDbType.Int,4)};
             parameters[0].Value = model.role_id;
             parameters[1].Value = model.role_type;
             parameters[2].Value = model.user_name;
@@ -177,25 +177,25 @@ namespace WeiXinPF.DAL
             strSql.Append("agentLevel=@agentLevel");
             strSql.Append(" where id=@id");
             SqlParameter[] parameters = {
-					new SqlParameter("@id", SqlDbType.Int,4),
-					new SqlParameter("@role_id", SqlDbType.Int,4),
-					new SqlParameter("@role_type", SqlDbType.Int,4),
-					new SqlParameter("@user_name", SqlDbType.NVarChar,100),
-					new SqlParameter("@password", SqlDbType.NVarChar,100),
-					new SqlParameter("@real_name", SqlDbType.NVarChar,50),
-					new SqlParameter("@telephone", SqlDbType.NVarChar,30),
-					new SqlParameter("@email", SqlDbType.NVarChar,30),
-					new SqlParameter("@is_lock", SqlDbType.Int,4),
-					new SqlParameter("@add_time", SqlDbType.DateTime),
+                    new SqlParameter("@id", SqlDbType.Int,4),
+                    new SqlParameter("@role_id", SqlDbType.Int,4),
+                    new SqlParameter("@role_type", SqlDbType.Int,4),
+                    new SqlParameter("@user_name", SqlDbType.NVarChar,100),
+                    new SqlParameter("@password", SqlDbType.NVarChar,100),
+                    new SqlParameter("@real_name", SqlDbType.NVarChar,50),
+                    new SqlParameter("@telephone", SqlDbType.NVarChar,30),
+                    new SqlParameter("@email", SqlDbType.NVarChar,30),
+                    new SqlParameter("@is_lock", SqlDbType.Int,4),
+                    new SqlParameter("@add_time", SqlDbType.DateTime),
                     new SqlParameter("@wxNum", SqlDbType.Int,4),
                     new SqlParameter("@agentId", SqlDbType.Int,4),
                     new SqlParameter("@reg_ip", SqlDbType.NVarChar,30),
-					new SqlParameter("@qq", SqlDbType.NVarChar,30),
-					new SqlParameter("@province", SqlDbType.NVarChar,200),
-					new SqlParameter("@city", SqlDbType.NVarChar,200),
-					new SqlParameter("@county", SqlDbType.NVarChar,200),
-					new SqlParameter("@remark", SqlDbType.NVarChar,1500),
-					new SqlParameter("@sort_id", SqlDbType.Int,4),
+                    new SqlParameter("@qq", SqlDbType.NVarChar,30),
+                    new SqlParameter("@province", SqlDbType.NVarChar,200),
+                    new SqlParameter("@city", SqlDbType.NVarChar,200),
+                    new SqlParameter("@county", SqlDbType.NVarChar,200),
+                    new SqlParameter("@remark", SqlDbType.NVarChar,1500),
+                    new SqlParameter("@sort_id", SqlDbType.Int,4),
                     new SqlParameter("@agentLevel", SqlDbType.Int,4)};
             parameters[0].Value = model.id;
             parameters[1].Value = model.role_id;
@@ -240,8 +240,8 @@ namespace WeiXinPF.DAL
             StringBuilder strSql = new StringBuilder();
             strSql.Append("delete from " + databaseprefix + "manager ");
             strSql.Append(" where id=@id and (select count(id) from dt_manager where agentid=@id)<=0");
-            SqlParameter[] parameters = { 
-					new SqlParameter("@id", SqlDbType.Int,4)};
+            SqlParameter[] parameters = {
+                    new SqlParameter("@id", SqlDbType.Int,4)};
             parameters[0].Value = id;
 
             int rows = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
@@ -266,7 +266,7 @@ namespace WeiXinPF.DAL
             strSql.Append(" where id=@id and (select count(id) from dt_manager where agentid=@id)<=0;");
             strSql.Append("delete from wx_agent_info where managerId=@id");
             SqlParameter[] parameters = {
-					new SqlParameter("@id", SqlDbType.Int,4)};
+                    new SqlParameter("@id", SqlDbType.Int,4)};
             parameters[0].Value = id;
 
             int rows = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
@@ -289,7 +289,7 @@ namespace WeiXinPF.DAL
             strSql.Append("select  top 1 id,role_id,role_type,user_name,password,salt,real_name,telephone,email,is_lock,add_time,wxNum,agentId,reg_ip,qq,province,city,county,remark,sort_id,agentLevel from " + databaseprefix + "manager ");
             strSql.Append(" where id=@id");
             SqlParameter[] parameters = {
-					new SqlParameter("@id", SqlDbType.Int,4)};
+                    new SqlParameter("@id", SqlDbType.Int,4)};
             parameters[0].Value = id;
 
             Model.manager model = new Model.manager();
@@ -324,7 +324,7 @@ namespace WeiXinPF.DAL
                     model.add_time = DateTime.Parse(ds.Tables[0].Rows[0]["add_time"].ToString());
                 }
                 model.wxNum = MyCommFun.Obj2Int(ds.Tables[0].Rows[0]["wxNum"]);
-                model.agentId =MyCommFun.Obj2Int(ds.Tables[0].Rows[0]["agentId"]);
+                model.agentId = MyCommFun.Obj2Int(ds.Tables[0].Rows[0]["agentId"]);
 
                 if (ds.Tables[0].Rows[0]["reg_ip"] != null)
                 {
@@ -367,7 +367,7 @@ namespace WeiXinPF.DAL
                 return null;
             }
         }
-    
+
         /// <summary>
         /// 根据用户名密码返回一个实体
         /// </summary>
@@ -377,7 +377,7 @@ namespace WeiXinPF.DAL
             strSql.Append("select id from " + databaseprefix + "manager");
             strSql.Append(" where user_name=@user_name and password=@password and is_lock=0");
             SqlParameter[] parameters = {
-					new SqlParameter("@user_name", SqlDbType.NVarChar,100),
+                    new SqlParameter("@user_name", SqlDbType.NVarChar,100),
                     new SqlParameter("@password", SqlDbType.NVarChar,100)};
             parameters[0].Value = user_name;
             parameters[1].Value = password;
@@ -407,7 +407,10 @@ namespace WeiXinPF.DAL
             {
                 strSql.Append(" where " + strWhere);
             }
-            strSql.Append(" order by " + filedOrder);
+            if (!string.IsNullOrEmpty(filedOrder))
+            {
+                strSql.Append(" order by " + filedOrder);
+            }
             return DbHelperSQL.Query(strSql.ToString());
         }
 

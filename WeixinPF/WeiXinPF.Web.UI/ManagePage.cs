@@ -10,7 +10,7 @@ namespace WeiXinPF.Web.UI
     public class ManagePage : System.Web.UI.Page
     {
         protected internal Model.siteconfig siteConfig;
-        
+
         public ManagePage()
         {
             this.Load += new EventHandler(ManagePage_Load);
@@ -126,7 +126,7 @@ namespace WeiXinPF.Web.UI
         protected void JscriptMsg(string msgtitle, string url, string msgcss)
         {
             string msbox = "parent.jsprint(\"" + msgtitle + "\", \"" + url + "\", \"" + msgcss + "\")";
-            ClientScript.RegisterClientScriptBlock(Page.GetType(), "JsPrint",msbox, true);
+            ClientScript.RegisterClientScriptBlock(Page.GetType(), "JsPrint", msbox, true);
         }
         /// <summary>
         /// 带回传函数的添加编辑删除提示
@@ -144,7 +144,7 @@ namespace WeiXinPF.Web.UI
         #endregion 
         public bool IsWeiXinCode()
         {
-             
+
             //如果Session为Null
             if (Session["nowweixin"] != null)
             {
@@ -189,7 +189,23 @@ namespace WeiXinPF.Web.UI
             return null;
         }
 
-
-
+        public int GetShopId()
+        {
+            if (Session[MXKeys.WEIXIN_DIANCAI_SHOPID] != null)
+            {
+                return MyCommFun.Obj2Int(Session[MXKeys.WEIXIN_DIANCAI_SHOPID]);
+            }
+            else
+            {
+                //检查Cookies
+                string shopId = Utils.GetCookie(MXKeys.WEIXIN_DIANCAI_SHOPID, "WeiXinPF");
+                if (shopId != "")
+                {
+                    Session[MXKeys.WEIXIN_DIANCAI_SHOPID] = shopId;
+                    return MyCommFun.Str2Int(shopId);
+                }
+                return 0;
+            }
+        }
     }
 }

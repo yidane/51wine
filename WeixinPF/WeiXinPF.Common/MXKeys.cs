@@ -39,11 +39,11 @@ namespace WeiXinPF.Common
         /// </summary>
         public const string FILE_ORDER_XML_CONFING = "Orderpath";
         /// <summary>
-        /// 升级代码http://www.uweixin.cn/upgrade.ashx?t=1
+        /// 升级代码
         /// </summary>
         public const string FILE_URL_UPGRADE_CODE = "3BF49B1599CD07FDDC067583EF91D8832AA63C5A73625623F7CFA27A4DE476E5E12A61FEF2B50FC7";
         /// <summary>
-        /// 消息代码http://www.uweixin.cn/upgrade.ashx?t=2
+        /// 消息代码
         /// </summary>
         public const string FILE_URL_NOTICE_CODE = "3BF49B1599CD07FDDC067583EF91D8832AA63C5A73625623F7CFA27A4DE476E5C7F2042287629BA5";
 
@@ -161,6 +161,14 @@ namespace WeiXinPF.Common
         /// </summary>
         public const string COOKIE_URL_REFERRER = "dt_cookie_url_referrer";
 
-        
+        /// <summary>
+        /// 点菜商家ID
+        /// </summary>
+        public const string WEIXIN_DIANCAI_SHOPID = "wx_diancai_shopid";
+
+        /// <summary>
+        /// 酒店ID
+        /// </summary>
+        public const string WEIXIN_HOTEL_ID = "wx_hotel_id";
     }
 }

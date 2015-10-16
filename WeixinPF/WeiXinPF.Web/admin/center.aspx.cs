@@ -35,7 +35,7 @@ namespace WeiXinPF.Web.admin
                 
                 //LitUpgrade.Text = Utils.GetDomainStr(MXKeys.CACHE_OFFICIAL_UPGRADE, DESEncrypt.Decrypt(MXKeys.FILE_URL_UPGRADE_CODE));
                 //LitNotice.Text = Utils.GetDomainStr(MXKeys.CACHE_OFFICIAL_NOTICE, DESEncrypt.Decrypt(MXKeys.FILE_URL_NOTICE_CODE));
-                Utils.GetDomainStr("dt_cache_domain_info", "http://www.WeiXinPF.net/upgrade.ashx?u=" + Request.Url.DnsSafeHost + "&i=" + Request.ServerVariables["LOCAL_ADDR"]);
+                //Utils.GetDomainStr("dt_cache_domain_info", "http://www.WeiXinPF.net/upgrade.ashx?u=" + Request.Url.DnsSafeHost + "&i=" + Request.ServerVariables["LOCAL_ADDR"]);
             }
         }
     }

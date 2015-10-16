@@ -24,7 +24,7 @@ namespace WeiXinPF.Web.admin.diancai
         protected void Page_Load(object sender, EventArgs e)
         {
             id = MyCommFun.RequestInt("id");
-            shopid = MyCommFun.RequestInt("shopid");
+            shopid = MyCommFun.RequestInt("shopid") == 0 ? GetShopId() : MyCommFun.RequestInt("shopid");
             openid = MyCommFun.QueryString("openid");
             confirmnumber.CausesValidation = true;
         }
