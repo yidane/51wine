@@ -232,7 +232,7 @@ float: left;
 
                   var timer = setInterval(function () {
                      
-                      $("#detail_distince"  ).text(distince + 'km');
+                      $("#detail_distince"  ).text('店铺距离：'+distince + 'km');
 
                       clearInterval(timer);
                   }, 500);
