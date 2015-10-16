@@ -16,7 +16,7 @@
             left: 0px;
             width: 50%;
             text-align: center;
-            background-color: red;
+            /*background-color: red;*/
             border: 0;
             margin: 0;
         }
@@ -35,7 +35,7 @@
             /*background-color: #c32d32;
             background: -webkit-gradient(linear,left top,left bottom,from(#fe444a),to(#c32d32));
             border-bottom: 1px solid #700d00;*/
-            padding: 0 10px 0 10px;
+            /*padding: 0 10px 0 10px;*/
             box-shadow: 0 0 5px #333;
             border-top: 0 none;
             position: fixed;
@@ -46,13 +46,22 @@
             line-height: 40px;
             text-align: center;
         }
+
+        .menu-active
+        {
+        background-color: #c32d32;
+            background: -webkit-gradient(linear,left top,left bottom,from(#fe444a),to(#c32d32));
+            border-bottom: 1px solid #700d00;
+        }
     </style>
 </head>
 <body class="mode_webapp">
     <div class="menu_header">
         <div class="menu_top">
-            <a class="Pay" href="diancai_oder.aspx?openid=<%=openId %>&type=pay">已付款</a>
-            <a class="Refund" href="diancai_oder.aspx?openid=<%=openId %>&type=refund">退单</a>
+             <%=menuStr %>
+            
+<%--            <a class="Pay menu-active" href="diancai_oder.aspx?openid=<%=openid %>&type=pay">已付款</a>--%>
+<%--            <a class="Refund" href="diancai_oder.aspx?openid=<%=openid %>&type=refund">退单</a>--%>
         </div>
     </div>
 
