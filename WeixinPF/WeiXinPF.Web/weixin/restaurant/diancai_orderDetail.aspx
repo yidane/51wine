@@ -11,10 +11,12 @@
     <title><%=RestruantName %>餐饮订单</title>
     <link href="css/diancai.css" rel="stylesheet" type="text/css">
     <link href="css/swiper.min.css" rel="stylesheet" />
-    <script src="js/jquery.min.js" type="text/javascript"></script>
+<%--    <script src="js/jquery.min.js" type="text/javascript"></script>--%>
     <script src="js/alert.js" type="text/javascript"></script>
     <script src="js/swiper.min.js"></script>    
     <script src="js/zepto.min.js"></script>
+     <script charset="utf-8" src="http://map.qq.com/api/js?v=2.exp&libraries=geometry&key=XQSBZ-MYPKU-EJSVT-4XWSN-QWJXH-2TBDM"></script>
+   
     <style>
         .table > thead > tr > th {
         vertical-align: bottom;
@@ -154,7 +156,7 @@ float: left;
  <div style="width: 78%; float: left">
                         <p><%=RestruantName %></p>
                         <p>喀纳斯地点。。。</p>
-
+      <p class="distince" id="detail_distince"></p>
 
 
                 </div>
@@ -213,11 +215,32 @@ float: left;
 
     </form>
           <script type="text/javascript">
-           
+              //获取当前位置的坐标
+              function getLocation() {
+                  if (navigator.geolocation) {
+                      navigator.geolocation.getCurrentPosition(computeDistance);
+                  }
+              }
+              function computeDistance(position) {
+                  var lat = position.coords.latitude;
+                  var lng = position.coords.longitude;
+                  var currentLatlng = new qq.maps.LatLng(lat, lng);
+                  var poiLatlng = new qq.maps.LatLng(<%=lat %>, <%=lng %>);
+                  var distince = Math.round(qq.maps.geometry.spherical.computeDistanceBetween(currentLatlng, poiLatlng) / 1000);
+
+                  $("#detail_distince"  ).text(distince + 'km');
+
+                  var timer = setInterval(function () {
+                     
+                      $("#detail_distince"  ).text(distince + 'km');
+
+                      clearInterval(timer);
+                  }, 500);
+              }
 
               Zepto(function ($) {
-            
 
+                  getLocation();
 
             $('.silde-background').each(function (i) {
                       var id = $(this).attr("id");

@@ -31,6 +31,8 @@ namespace WeiXinPF.Web.weixin.restaurant
         public string orderRange = string.Empty;
         public string RestruantLocation = string.Empty;
         public string RestruantPhone = string.Empty;
+        public double lat;
+        public double lng;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -50,7 +52,8 @@ namespace WeiXinPF.Web.weixin.restaurant
 
                     var orderDetail = new OrderDetail();
                     orderDetail.GetDetail(dingdan);
-
+                    lat = orderDetail.xplace;
+                    lng = orderDetail.yplace;
                     BindOrderDetaile(orderDetail);
                 }
             }
