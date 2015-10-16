@@ -156,7 +156,7 @@
                     <div style="width: 78%; float: left">
                         <p><%=RestruantName %></p>
                         <p>喀纳斯地点。。。</p>
-
+                         <p class="distince" id="detail_distince"></p>
 
 
                     </div>
@@ -178,7 +178,28 @@
 
     </form>
     <script type="text/javascript">
+         //获取当前位置的坐标
+              function getLocation() {
+                  if (navigator.geolocation) {
+                      navigator.geolocation.getCurrentPosition(computeDistance);
+                  }
+              }
+              function computeDistance(position) {
+                  var lat = position.coords.latitude;
+                  var lng = position.coords.longitude;
+                  var currentLatlng = new qq.maps.LatLng(lat, lng);
+                  var poiLatlng = new qq.maps.LatLng(<%=lat %>, <%=lng %>);
+                  var distince = Math.round(qq.maps.geometry.spherical.computeDistanceBetween(currentLatlng, poiLatlng) / 1000);
 
+                  $("#detail_distince"  ).text(distince + 'km');
+
+                  var timer = setInterval(function () {
+                     
+                      $("#detail_distince"  ).text('店铺距离：'+distince + 'km');
+
+                      clearInterval(timer);
+                  }, 500);
+              }
 
         Zepto(function ($) {
              
