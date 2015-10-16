@@ -85,6 +85,10 @@
     <Compile Include="Migrations\201509140233592_Photo5.Designer.cs">
       <DependentUpon>201509140233592_Photo5.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201510160335219_AutoMigration1016.cs" />
+    <Compile Include="Migrations\201510160335219_AutoMigration1016.Designer.cs">
+      <DependentUpon>201510160335219_AutoMigration1016.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Payment\PaymentInfo.cs" />
     <Compile Include="Payment\RefundmentInfo.cs" />
@@ -123,6 +127,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201509140233592_Photo5.resx">
       <DependentUpon>201509140233592_Photo5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510160335219_AutoMigration1016.resx">
+      <DependentUpon>201510160335219_AutoMigration1016.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
