@@ -81,39 +81,10 @@ padding-top: 10px;
 height: 32px;
     line-height: 32px;
 }
-.gpd-item-title .detailicon-ticket,.gpd-item-title .gpd-item-title-name
-{
+
+            .gpd-item-title .detailicon-ticket, .gpd-item-title .gpd-item-title-name {
 float: left;
 }
-
-.btn {
-    display: inline-block;
-    padding: 6px 12px;
-    margin-bottom: 0;
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 1.42857143;
-    text-align: center;
-    white-space: nowrap;
-    vertical-align: middle;
-    -ms-touch-action: manipulation;
-    touch-action: manipulation;
-    cursor: pointer;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    background-image: none;
-    border: 1px solid transparent;
-    border-radius: 4px;
-}
-
-.btn-success {
-    color: #fff;
-    background-color: #5cb85c;
-    border-color: #4cae4c;
-}
- 
 </style>
 </head>
 <body class="mode_webapp">
@@ -144,8 +115,6 @@ float: left;
                 <table width="100%" border="0" cellpadding="0" cellspacing="0" class="DishDetail table table-bordered">
                   <thead>
                     <tr>
-                        <th class="Col4" style="width: 5%"></th>
-                        
                         <th class="Col1" style="width: 33%">类型</th>
                         <th class="Col2" style="width: 17%">份数</th>
                         <th class="Col3" style="width: 25%">总价</th>
@@ -159,7 +128,7 @@ float: left;
             <section class="gpd-item ">
               <div class="gpd-item-title">
                            <img class="detailicon-ticket" src="images/info.png" />
-                                          <div class="gpd-item-title-name"> 联系人</div>
+                    <div class="gpd-item-title-name">联系人</div>
                                           <div class="gp-icons gpd-up-icon"></div>
                                            </div>
 <div class="gpd-content">
@@ -177,7 +146,7 @@ float: left;
             <section class="gpd-item gdp-curr">
              <div class="gpd-item-title">
                <img class="detailicon-ticket" src="images/info.png" />
-                  <div class="gpd-item-title-name"> 店铺信息</div>
+                    <div class="gpd-item-title-name">店铺信息</div>
 
                               <div class="gp-icons gpd-up-icon"></div>
                                </div>
@@ -203,7 +172,7 @@ float: left;
    <section class="gpd-item ">
                 <div class="gpd-item-title">
                     <img class="detailicon-ticket" src="images/info.png" />
-                     <div class="gpd-item-title-name"> 使用须知</div>
+                    <div class="gpd-item-title-name">使用须知</div>
                     <div class="gp-icons gpd-up-icon"></div>
                 </div>
                 <div class="gpd-content">
@@ -217,7 +186,7 @@ float: left;
             <section class="gpd-item ">
                 <div class="gpd-item-title">
                     <img class="detailicon-ticket" src="images/undo.png" />
-                    <div class="gpd-item-title-name"> 退单规则</div>
+                    <div class="gpd-item-title-name">退单规则</div>
                     <div class="gp-icons gpd-up-icon"></div>
                 </div>
                 <div class="gpd-content">
@@ -232,7 +201,7 @@ float: left;
             <section class="gpd-item ">
                 <div class="gpd-item-title">
                     <img class="detailicon-ticket" src="images/time.png" />
-                       <div class="gpd-item-title-name"> 订单有效期</div>
+                    <div class="gpd-item-title-name">订单有效期</div>
                      <div style="float: right" id="dateRange"><%=orderRange %></div>
 
                     <div class="line-title"></div>
@@ -247,16 +216,7 @@ float: left;
            
 
               Zepto(function ($) {
-                  var swiper = new Swiper('#module01 .swiper-container', {
-                      loop: false,
-                      pagination: '#module01 .swiper-pagination ',
-                      onTransitionEnd: function (swi) {
-                                                  var current = swi.slides[swi.activeIndex];
-                                                  var ticketid = current.childNodes[0].id;
-                                                  $("#ticketCode").html(ticketid.split('_')[0]);
-                                                  $("#ticketStatus").html(ticketid.split('_')[1]);
-                      }
-                  });
+            
 
 
             $('.silde-background').each(function (i) {
