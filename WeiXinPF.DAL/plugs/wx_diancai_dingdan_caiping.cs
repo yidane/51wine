@@ -80,9 +80,9 @@ namespace WeiXinPF.DAL
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("insert into wx_diancai_dingdan_commodity(");
-            strSql.Append("dingId,caiId,price,identifyingcode,status)");
+            strSql.Append("dingId,caiId,price,identifyingcode,status,modifytime)");
             strSql.Append(" values (");
-            strSql.Append("@dingId,@caiId,@price,@identifyingcode,0)");
+            strSql.Append("@dingId,@caiId,@price,@identifyingcode,0,getdate())");
             strSql.Append(";select @@IDENTITY");
             SqlParameter[] parameters = {
 					new SqlParameter("@dingId", SqlDbType.Int,4),

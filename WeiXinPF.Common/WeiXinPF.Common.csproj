@@ -50,6 +50,8 @@
   <ItemGroup>
     <Compile Include="AjaxResult.cs" />
     <Compile Include="CacheHelper.cs" />
+    <Compile Include="ColumnAttribute.cs" />
+    <Compile Include="DataTableToEntity.cs" />
     <Compile Include="DESEncrypt.cs" />
     <Compile Include="JsonException.cs" />
     <Compile Include="JSONHelper.cs" />
