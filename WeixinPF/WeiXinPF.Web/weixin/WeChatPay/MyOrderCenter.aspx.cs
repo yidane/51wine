@@ -14,11 +14,17 @@ namespace WeiXinPF.Web.weixin.WeChatPay
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            string thisUrl = MyCommFun.getWebSite() + "/weixin/WeChatPay/MyOrderCenter.aspx" + Request.Url.Query;
-            int widInt = MyCommFun.RequestWid();
+#if  DEBUG
+            openid = "obzTsw5qxlbwGYYZJC9b-91J-X1Y";
+#else
+            var thisUrl = MyCommFun.getWebSite() + "/weixin/WeChatPay/MyOrderCenter.aspx" + Request.Url.Query;
+            var widInt = MyCommFun.RequestWid();
             var bll = new BLL.wx_userweixin();
-            Model.wx_userweixin uWeiXinModel = bll.GetModel(widInt);
+            var uWeiXinModel = bll.GetModel(widInt);
+            if (uWeiXinModel == null)
+                throw new Exception("不合法的参数wid");
             OAuth2BaseProc(uWeiXinModel, "MyOrderCenter", thisUrl);
+#endif
         }
     }
 }

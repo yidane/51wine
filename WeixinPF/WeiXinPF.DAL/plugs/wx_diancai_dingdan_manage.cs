@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Common;
 using System.Text;
 using System.Data.SqlClient;
 using WeiXinPF.DBUtility;
@@ -485,7 +486,7 @@ namespace WeiXinPF.DAL
 		                                    ON d.shopinfoid=s.id
 		                                    LEFT JOIN dbo.wx_diancai_caipin_manage m
 		                                    ON c.caiId=m.id
-                                    WHERE   c.status = 1
+                                    WHERE   c.status = 0
                                             AND d.id = @DindanID
                                             AND d.openid = @OpenID
                                             AND c.caiId = @CaiID
@@ -501,33 +502,151 @@ namespace WeiXinPF.DAL
             return DbHelperSQL.Query(strSql.ToString(), sqlparams);
         }
 
-        public void RefundDiancai(int shopinfiId, string openid, int wid, int caipinId, int refundAmount, int dingdanid, int caiid, List<int> caipinIdList)
+        private DataTable GetDingdanNoUsedCount(string openId, int orderId, int caipinId)
         {
-            var refundCaiId = string.Empty;
-            if (caipinIdList != null && caipinIdList.Count > 0)
-            {
-                for (int index = 0; index < caipinIdList.Count; index++)
-                {
-                    if (index == caipinIdList.Count - 1)
-                    {
-                        refundCaiId = refundCaiId + caipinIdList[index].ToString();
-                    }
-                    else
-                    {
-                        refundCaiId = refundCaiId + caipinIdList[index].ToString() + ",";
-                    }
-                }
+            const string sql = @"DECLARE @NoUseCaipinCount INT;
+                                    DECLARE @NoUseAllCount INT;
 
-                var sql = "UPDATE dbo.wx_diancai_dingdan_commodity  SET status=2 WHERE dingId=@DingdanId AND caiId=@CaiID AND id IN (@RefundCaiID);";
-                SqlParameter[] sqlparams =
+                                    SELECT  @NoUseCaipinCount = COUNT(1)
+                                    FROM    dbo.wx_diancai_dingdan_manage m
+                                            INNER JOIN dbo.wx_diancai_dingdan_commodity c ON m.id = c.dingId
+                                    WHERE   c.status = 0
+                                            AND m.id = @OrderID
+                                            AND m.openid = @OpenID
+                                            AND c.CaiID = @CaiPinID;
+
+                                    SELECT  @NoUseAllCount = COUNT(1)
+                                    FROM    dbo.wx_diancai_dingdan_manage m
+                                            INNER JOIN dbo.wx_diancai_dingdan_commodity c ON m.id = c.dingId
+                                    WHERE   c.status = 0
+                                            AND m.id = @OrderID
+                                            AND m.openid = @OpenID;
+
+                                    SELECT  @NoUseCaipinCount AS NoUseCaipinCount ,
+                                            @NoUseAllCount AS NoUseAllCount";
+            SqlParameter[] sqlparams =
+                {
+                    new SqlParameter(){ParameterName = "@OrderID",SqlDbType = SqlDbType.Int,Value = orderId},
+                    new SqlParameter(){ParameterName = "@OpenID",SqlDbType = SqlDbType.NVarChar,Value = openId},
+                    new SqlParameter(){ParameterName = "@CaiPinID",SqlDbType = SqlDbType.Int,Value = caipinId} 
+                };
+
+            var result = DbHelperSQL.Query(sql, sqlparams);
+
+            return result.Tables.Count > 0 ? result.Tables[0] : null;
+        }
+
+        /// <summary>
+        /// 退款
+        /// </summary>
+        /// <param name="shopinfiId"></param>
+        /// <param name="openid"></param>
+        /// <param name="wid"></param>
+        /// <param name="refundAmount"></param>
+        /// <param name="dingdanid"></param>
+        /// <param name="caiid"></param>
+        /// <param name="caipinIdList"></param>
+        /// <returns></returns>
+        public bool RefundDiancai(int shopinfiId, string openid, int wid, int refundAmount, int dingdanid, int caiid, List<int> caipinIdList)
+        {
+            if (caipinIdList == null || caipinIdList.Count == 0)
+                return true;
+            //启用事务
+            //1、修改菜品状态
+            //2、写入待退款记录
+            //3、修改订单状态，看是全部退款还是部分退款
+
+
+            var commandInfoList = new List<CommandInfo>();
+            //获取此订单下此类菜品尚未使用的菜品数量
+            var noUseCaiDataTable = GetDingdanNoUsedCount(openid, dingdanid, caiid);
+            var noUseCaiCount = 0;
+            var noUseCaiAllCount = 0;
+            if (noUseCaiDataTable == null || noUseCaiDataTable.Rows.Count == 0)
+                throw new Exception("无此订单");
+
+            noUseCaiCount = Convert.ToInt32(noUseCaiDataTable.Rows[0]["NoUseCaipinCount"].ToString());
+            noUseCaiAllCount = Convert.ToInt32(noUseCaiDataTable.Rows[0]["NoUseAllCount"].ToString());
+
+            if (noUseCaiCount == 0)
+                return true;
+
+            //修改菜品状态
+            var refundCaiId = string.Empty;
+            for (int index = 0; index < caipinIdList.Count; index++)
+            {
+                refundCaiId = index == caipinIdList.Count - 1
+                                  ? refundCaiId + caipinIdList[index].ToString()
+                                  : refundCaiId + caipinIdList[index].ToString() + ",";
+            }
+
+            const string caipinModifySql = "UPDATE dbo.wx_diancai_dingdan_commodity  SET status=2 WHERE dingId=@DingdanId AND caiId=@CaiID AND id IN (@RefundCaiID);";
+            SqlParameter[] caipinModifysqlparams =
                 {
                     new SqlParameter(){ParameterName = "@DingdanId",SqlDbType = SqlDbType.Int,Value = dingdanid},
                     new SqlParameter(){ParameterName = "@CaiID",SqlDbType = SqlDbType.Int,Value = caiid},
                     new SqlParameter(){ParameterName = "@RefundCaiID",SqlDbType = SqlDbType.NVarChar,Value = refundCaiId}
                 };
 
-                DbHelperSQL.ExecuteSql(sql, sqlparams);
+            var caipinModifyCommand = new CommandInfo() { CommandText = caipinModifySql, Parameters = caipinModifysqlparams };
+            commandInfoList.Add(caipinModifyCommand);
+
+            //写入待退款记录
+            const string insertTuidanSql = @"INSERT INTO dbo.wx_diancai_tuidan_manage
+                                                                ( shopinfoid ,
+                                                                  openid ,
+                                                                  wid ,
+                                                                  caipinid ,
+                                                                  orderNumber ,
+                                                                  refundCode ,
+                                                                  refundTime ,
+                                                                  refundAmount ,
+                                                                  refundStatus ,
+                                                                  createDate
+                                                                )
+                                                        VALUES  ( @ShopInfoID ,
+                                                                  @OpenID ,
+                                                                  @Wid ,
+                                                                  @CaiPinID ,
+                                                                  '',
+                                                                  @RefundCode ,
+                                                                  null ,
+                                                                  @RefundAmount ,
+                                                                  0 ,
+                                                                  GETDATE()
+                                                                )";
+
+            foreach (var id in caipinIdList)
+            {
+                SqlParameter[] insertTuidanParams =
+                {
+                    new SqlParameter(){ParameterName = "@ShopInfoID",SqlDbType = SqlDbType.Int,Value = shopinfiId},
+                    new SqlParameter(){ParameterName = "@OpenID",SqlDbType = SqlDbType.NVarChar,Value = openid},
+                    new SqlParameter(){ParameterName = "@Wid",SqlDbType = SqlDbType.Int,Value = wid},
+                    new SqlParameter(){ParameterName = "@CaiPinID",SqlDbType = SqlDbType.Int,Value = id},
+                    new SqlParameter(){ParameterName = "@RefundCode",SqlDbType = SqlDbType.NVarChar,Value = "T"+Utils.Number(13)}, 
+                    new SqlParameter(){ParameterName = "@RefundAmount",SqlDbType = SqlDbType.Int,Value = refundAmount} 
+                };
+
+                commandInfoList.Add(new CommandInfo() { CommandText = insertTuidanSql, Parameters = insertTuidanParams });
             }
+
+            //修改订单状态
+            const string updateDingdanStatus = @"UPDATE dbo.wx_diancai_dingdan_manage SET payStatus=@PayStatus WHERE id=@DingdanID AND openid=@OpenID";
+            var payStatus = caipinIdList.Count == noUseCaiAllCount ? 3 : 2;
+            SqlParameter[] updateDingdanStatusParams =
+                    {
+                        new SqlParameter(){ParameterName = "@PayStatus",SqlDbType = SqlDbType.Int,Value = payStatus},
+                        new SqlParameter(){ParameterName = "@DingdanID",SqlDbType = SqlDbType.Int,Value = dingdanid},
+                        new SqlParameter(){ParameterName = "@OpenID",SqlDbType = SqlDbType.NVarChar,Value = openid}, 
+                    };
+
+            var updateDingdanCommand = new CommandInfo() { CommandText = updateDingdanStatus, Parameters = updateDingdanStatusParams };
+            commandInfoList.Add(updateDingdanCommand);
+
+            var result = DbHelperSQL.ExecuteSqlTran(commandInfoList);
+
+            return result > 0;
         }
 
 

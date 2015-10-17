@@ -20,40 +20,40 @@ namespace WeiXinPF.Web.weixin.WeChatPay
         {
             if (!IsPostBack)
             {
-                //if (Request.Form.Count > 0)
-                //{
-                //    var payData = Request.Form["payData"];
-                //    if (payData != null)
-                //    {
-                //        var payDataModel = JSONHelper.Deserialize<UnifiedOrderRequest>(payData);
-
-                //        if (payDataModel != null)
-                //        {
-                //            wid = payDataModel.wid;
-                //            body = payDataModel.body;
-                //            attach = payDataModel.attach;
-                //            out_trade_no = payDataModel.out_trade_no;
-                //            total_fee = payDataModel.total_fee;
-                //            openid = payDataModel.openid;
-                //        }
-                //    }
-                //}
-
-                var payData = Request.QueryString["payData"];
-                if (payData != null)
+                if (Request.Form.Count > 0)
                 {
-                    var payDataModel = JSONHelper.Deserialize<UnifiedOrderRequest>(payData);
-
-                    if (payDataModel != null)
+                    var payData = Request.Form["payData"];
+                    if (payData != null)
                     {
-                        wid = payDataModel.wid;
-                        body = payDataModel.body;
-                        attach = payDataModel.attach;
-                        out_trade_no = payDataModel.out_trade_no;
-                        total_fee = payDataModel.total_fee;
-                        openid = payDataModel.openid;
+                        var payDataModel = JSONHelper.Deserialize<UnifiedOrderRequest>(payData);
+
+                        if (payDataModel != null)
+                        {
+                            wid = payDataModel.wid;
+                            body = payDataModel.body;
+                            attach = payDataModel.attach;
+                            out_trade_no = payDataModel.out_trade_no;
+                            total_fee = payDataModel.total_fee;
+                            openid = payDataModel.openid;
+                        }
                     }
                 }
+
+                //var payData = Request.QueryString["payData"];
+                //if (payData != null)
+                //{
+                //    var payDataModel = JSONHelper.Deserialize<UnifiedOrderRequest>(payData);
+
+                //    if (payDataModel != null)
+                //    {
+                //        wid = payDataModel.wid;
+                //        body = payDataModel.body;
+                //        attach = payDataModel.attach;
+                //        out_trade_no = payDataModel.out_trade_no;
+                //        total_fee = payDataModel.total_fee;
+                //        openid = payDataModel.openid;
+                //    }
+                //}
             }
         }
     }

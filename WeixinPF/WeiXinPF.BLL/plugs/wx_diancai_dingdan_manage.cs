@@ -180,9 +180,9 @@ namespace WeiXinPF.BLL
             return dal.GetDingdanRefundDetail(shopid, dingdanid, openid, caiid);
         }
 
-        public void RefundDiancai(int dingdanid, int caiid, List<int> caipinIdList )
+        public void RefundDiancai(int shopinfiId, string openid, int wid, int refundAmount, int dingdanid, int caiid, List<int> caipinIdList)
         {
-            //dal.RefundDiancai(dingdanid, caiid, caipinIdList);
+            dal.RefundDiancai(shopinfiId, openid, wid, refundAmount, dingdanid, caiid, caipinIdList);
         }
 
         public void PaySuccess(string prepayid)

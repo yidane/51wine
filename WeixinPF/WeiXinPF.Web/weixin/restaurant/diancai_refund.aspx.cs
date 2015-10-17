@@ -22,6 +22,7 @@ namespace WeiXinPF.Web.weixin.restaurant
         private int dingdan = 0;
         private string openid = string.Empty;
         private int caiid = 0;
+        private int wid = 0;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -31,6 +32,7 @@ namespace WeiXinPF.Web.weixin.restaurant
                 dingdan = MyCommFun.RequestInt("dingdan");
                 openid = MyCommFun.QueryString("openid");
                 caiid = MyCommFun.RequestInt("caiid");
+                wid = MyCommFun.RequestInt("wid");
 
                 if (!IsPostBack)
                 {
@@ -43,6 +45,7 @@ namespace WeiXinPF.Web.weixin.restaurant
                         CaiPinName = result.Tables[0].Rows[0].Field<string>("cpName");
                         Price = result.Tables[0].Rows[0].Field<decimal>("price");
                         NoUseCount = result.Tables[0].Rows.Count;
+                        this.txtRefundAmount.Text = string.Format("{0}元", Price);
 
                         //缓存订单菜id
                         var caiidListString = string.Empty;
@@ -70,23 +73,32 @@ namespace WeiXinPF.Web.weixin.restaurant
 
         protected void btnRefund_Click(object sender, EventArgs e)
         {
-            var refundCount = Convert.ToInt32(this.txtRefundCount.Text);
-            var caiidListString = this.caiidList.Value;
-            var caiidListArr = caiidListString.Split(',');
-            if (caiidListArr.Length < refundCount)
-                throw new Exception("退菜数量超过总数");
-
-            if (caiidListArr.Length >= refundCount)
+            try
             {
-                var refundCaiidList = new List<int>();
-                for (int index = 0; index < refundCount; index++)
+                var refundCount = Convert.ToInt32(this.txtRefundCount.Text);
+                var caiidListString = this.caiidList.Value;
+                var caiidListArr = caiidListString.Split(',');
+                var refundAmount = Convert.ToDecimal(this.txtRefundAmount.Text.Replace("元", ""));
+                if (caiidListArr.Length < refundCount)
+                    throw new Exception("退菜数量超过总数");
+
+                if (caiidListArr.Length >= refundCount)
                 {
-                    refundCaiidList.Add(Convert.ToInt32(refundCaiidList));
+                    var refundCaiidList = new List<int>();
+                    for (int index = 0; index < caiidListArr.Length; index++)
+                    {
+                        refundCaiidList.Add(Convert.ToInt32(caiidListArr[index]));
+                    }
+
+                    //(int shopinfiId, string openid, int wid, int refundAmount, int dingdanid, int caiid, List<int> caipinIdList)
+                    new BLL.wx_diancai_dingdan_manage().RefundDiancai(shopid, openid, wid, (int)(refundAmount * 100), dingdan, caiid, refundCaiidList);
+
+                    Response.Redirect(string.Format("diancai_oder.aspx?openid={0}&type=refund", openid));
                 }
+            }
+            catch (Exception)
+            {
 
-                new BLL.wx_diancai_dingdan_manage().RefundDiancai(dingdan, caiid, refundCaiidList);
-
-                Response.Redirect(string.Format("diancai_oder.aspx?openid={0}&type=refund", openid));
             }
         }
     }

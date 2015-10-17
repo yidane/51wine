@@ -1,7 +1,7 @@
 ﻿/// <reference path="jquery-2.1.0.min.js" />
 
 function Pay(url, wid, body, attach, out_trade_no, total_fee, openid, afterSuccess, afterFail, afterCancel, afterComplete) {
-    var select = $("<iframe/>").appendTo($("body"));
+    var select = $("<div/>").appendTo($("body"));
     var unifiedOrderRequest =
     {
         wid: wid,
@@ -16,8 +16,8 @@ function Pay(url, wid, body, attach, out_trade_no, total_fee, openid, afterSucce
         afterComplete: afterComplete
     };
 
-    $(select).attr("src", url + "?payData=" + JSON.stringify(unifiedOrderRequest));
-    //$(select).load(url, { "payData": JSON.stringify(unifiedOrderRequest) }, function () {
-    //    //加载完毕之后干啥。。。
-    //});
+    //$(select).attr("src", url + "?payData=" + JSON.stringify(unifiedOrderRequest));
+    $(select).load(url, { "payData": JSON.stringify(unifiedOrderRequest) }, function () {
+        //加载完毕之后干啥。。。
+    });
 }

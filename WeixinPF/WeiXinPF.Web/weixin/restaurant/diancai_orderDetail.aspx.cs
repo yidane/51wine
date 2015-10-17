@@ -17,6 +17,7 @@ namespace WeiXinPF.Web.weixin.restaurant
         private int shopid = 0;
         private string openid = string.Empty;
         private int dingdan = 0;
+        private int wid = 0;
         BLL.wx_diancai_dingdan_manage managebll = new BLL.wx_diancai_dingdan_manage();
         Model.wx_diancai_dingdan_manage manage = new Model.wx_diancai_dingdan_manage();
         public string str = "";
@@ -41,20 +42,18 @@ namespace WeiXinPF.Web.weixin.restaurant
                 shopid = MyCommFun.RequestInt("shopid");
                 openid = MyCommFun.QueryString("openid");
                 dingdan = MyCommFun.RequestInt("dingdan");
-
+                wid = MyCommFun.RequestInt("wid");
 
                 shopinfo = shopBll.GetModel(shopid);
                 RestruantName = shopinfo.hotelName;
                 rename = shopinfo.dcRename;
                 if (dingdan > 0)
                 {
-                    //List(openid);
-
                     var orderDetail = new OrderDetail();
                     orderDetail.GetDetail(dingdan);
                     lat = orderDetail.xplace;
                     lng = orderDetail.yplace;
-                    BindOrderDetaile(orderDetail);
+                    BindOrderDetail(orderDetail);
                 }
             }
         }
@@ -63,7 +62,7 @@ namespace WeiXinPF.Web.weixin.restaurant
         /// 绑定订单详情
         /// </summary>
         /// <param name="orderDetail"></param>
-        public void BindOrderDetaile(OrderDetail orderDetail)
+        public void BindOrderDetail(OrderDetail orderDetail)
         {
             OrderNumber = orderDetail.orderNumber;
             PayAmount = orderDetail.payAmount.ToString();
@@ -101,7 +100,7 @@ namespace WeiXinPF.Web.weixin.restaurant
 
                     //存在未使用的，则添加退款按钮
                     if (pair.Value.Any(item => item.status == StatusManager.DishStatus.NoUsed.StatusID))
-                        builder.AppendFormat("<a href=\"diancai_refund.aspx?shopid={0}&dingdan={1}&openid={2}&caiid={3}\">申请退款</a>", shopid, orderId, openid, pair.Key);//组合订单ID和菜品ID作为Button的主键
+                        builder.AppendFormat("<a href=\"diancai_refund.aspx?wid={4}&shopid={0}&dingdan={1}&openid={2}&caiid={3}\">申请退款</a>", shopid, orderId, openid, pair.Key, wid);//组合订单ID和菜品ID作为Button的主键
                     builder.Append("</td>");
                     builder.Append("</tr>");
                     builder.Append("</table>");
@@ -114,11 +113,11 @@ namespace WeiXinPF.Web.weixin.restaurant
                         builder.Append("<div class='swiper-slide'>");
                         builder.AppendFormat("<img id='Img3' class='img-border' src=\"ErCodeHandler.ashx?key={0}\">", detail.identifyingcode);
                         builder.Append("</div>");
-                    }   
-                   
+                    }
+
                     builder.Append("</div>");
                     builder.Append("<div class='swiper-pagination'></div>");
-                       
+
                     builder.Append("</div>");
                     builder.Append("</div>");
                     builder.Append("</section>");
@@ -128,7 +127,7 @@ namespace WeiXinPF.Web.weixin.restaurant
 
             this.detail.InnerHtml = builder.ToString();
         }
-        }
+    }
 
     /// <summary>
     /// 订单详情对象

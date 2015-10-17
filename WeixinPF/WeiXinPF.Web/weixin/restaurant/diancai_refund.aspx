@@ -96,6 +96,13 @@
                 height: 15px;
                 background: #FFFFFF;
             }
+
+        .Amount {
+            width: 70px;
+            background-color: white;
+            border: 0px;
+            color: red;
+        }
     </style>
 </head>
 <body class="mode_webapp">
@@ -134,7 +141,7 @@
                                 <td style="text-align: right; width: 140px">
                                     <label for="price" class="ui-input-text">单价：</label></td>
                                 <td>
-                                    <%=Price %>
+                                    <%=Price %>元
                                 </td>
                             </tr>
                             <tr>
@@ -154,7 +161,7 @@
                                 </td>
                             </tr>
                             <tr id="Tr1">
-                                <td colspan="3" id="Td1" class="cart-editalertinfo" style="text-align: right">退款总额：<span id="spanRefundAmount" runat="server" enableviewstate="True">123</span>元
+                                <td colspan="3" id="Td1" class="cart-editalertinfo" style="text-align: right">退款总额：<asp:TextBox runat="server" ID="txtRefundAmount" Enabled="False" CssClass="Amount" Text="0元"></asp:TextBox>
                                 </td>
                             </tr>
                         </tbody>
