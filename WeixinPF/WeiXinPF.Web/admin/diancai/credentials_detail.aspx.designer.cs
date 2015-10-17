@@ -49,6 +49,15 @@ namespace WeiXinPF.Web.admin.diancai {
         protected global::System.Web.UI.WebControls.TextBox endDate;
         
         /// <summary>
+        /// dingdanId 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox dingdanId;
+        
+        /// <summary>
         /// paidmin 控件。
         /// </summary>
         /// <remarks>
@@ -67,15 +76,6 @@ namespace WeiXinPF.Web.admin.diancai {
         protected global::System.Web.UI.WebControls.TextBox paidmax;
         
         /// <summary>
-        /// dingdanId 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox dingdanId;
-        
-        /// <summary>
         /// orderperson 控件。
         /// </summary>
         /// <remarks>
@@ -85,13 +85,13 @@ namespace WeiXinPF.Web.admin.diancai {
         protected global::System.Web.UI.WebControls.TextBox orderperson;
         
         /// <summary>
-        /// Button1 控件。
+        /// serch 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button1;
+        protected global::System.Web.UI.WebControls.Button serch;
         
         /// <summary>
         /// rptList 控件。
