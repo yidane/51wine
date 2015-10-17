@@ -87,19 +87,40 @@ namespace WeiXinPF.Web.admin
             }
             else
             {
-                BLL.wx_diancai_admin dBll = new BLL.wx_diancai_admin();
-                Model.wx_diancai_admin shopAdmin = dBll.GetModel(model.id);
-
                 //餐饮 商铺管理员
-                if (shopAdmin != null)
+                if (IsShopAdmin(model.id))
                 {
-                    Session[MXKeys.WEIXIN_DIANCAI_SHOPID] = shopAdmin.ShopId;
-                    Utils.WriteCookie(MXKeys.WEIXIN_DIANCAI_SHOPID, "WeiXinPF", shopAdmin.ShopId.ToString());
                     Response.Redirect("index.aspx");
                 }
                 Response.Redirect("wxIndex.aspx");
             }
         }
+        private bool IsShopAdmin(int id)
+        {
+            BLL.wx_diancai_admin dBll = new BLL.wx_diancai_admin();
+            Model.wx_diancai_admin shopAdmin = dBll.GetModel(id);
 
+            //餐饮 商铺管理员
+            if (shopAdmin != null)
+            {
+                Session[MXKeys.WEIXIN_DIANCAI_SHOPID] = shopAdmin.ShopId;
+                Utils.WriteCookie(MXKeys.WEIXIN_DIANCAI_SHOPID, "WeiXinPF", shopAdmin.ShopId.ToString());
+
+                return true;
+            }
+
+            BLL.wx_diancai_shop_user suBll = new BLL.wx_diancai_shop_user();
+            Model.wx_diancai_shop_user shopUser = suBll.GetModel(id);
+
+            if (shopUser != null)
+            {
+                Session[MXKeys.WEIXIN_DIANCAI_SHOPID] = shopUser.ShopId;
+                Utils.WriteCookie(MXKeys.WEIXIN_DIANCAI_SHOPID, "WeiXinPF", shopUser.ShopId.ToString());
+
+                return true;
+            }
+
+            return false;
+        }
     }
 }

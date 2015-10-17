@@ -86,6 +86,7 @@
     <Compile Include="plugs\wx_diancai_shoppic.cs" />
     <Compile Include="plugs\wx_diancai_shop_advertisement.cs" />
     <Compile Include="plugs\wx_diancai_shop_setup.cs" />
+    <Compile Include="plugs\wx_diancai_shop_user.cs" />
     <Compile Include="plugs\wx_diancai_tuidan_manage.cs" />
     <Compile Include="plugs\wx_hb_category.cs" />
     <Compile Include="plugs\wx_hb_haibao.cs" />

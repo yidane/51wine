@@ -14,7 +14,7 @@ namespace WeiXinPF.Web.admin.diancai
         protected int shopid = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
-            shopid = MXRequest.GetQueryInt("shopid");
+            shopid = MXRequest.GetQueryInt("shopid", GetShopId());
             if (!IsPostBack)
             {
                 RptBind();
@@ -26,8 +26,8 @@ namespace WeiXinPF.Web.admin.diancai
         /// </summary>
         private void RptBind()
         {
-            BLL.wx_diancai_admin dcBll = new BLL.wx_diancai_admin();
-            List<Model.wx_diancai_admin> shopAdmins = dcBll.GetModelList("ShopId=" + shopid);
+            BLL.wx_diancai_shop_user dcBll = new BLL.wx_diancai_shop_user();
+            List<Model.wx_diancai_shop_user> shopAdmins = dcBll.GetModelList("ShopId=" + shopid);
 
             BLL.manager managerBll = new BLL.manager();
             DataSet dsData = new DataSet();

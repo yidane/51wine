@@ -116,7 +116,8 @@ namespace WeiXinPF.Application.DomainModules.Map
                     Logo = "",
                     Lat = m.Lat,
                     Lng = m.Lng,
-                    Url = m.Url
+                    Url = m.Url,
+                    PoiType = "scenic"
                 }).ToList();
             }
 
@@ -150,7 +151,8 @@ namespace WeiXinPF.Application.DomainModules.Map
                     Introduction = s.hotelintroduction,
                     Logo = s.hotelLogo,
                     Lat = (double)s.xplace,
-                    Lng = (double)s.yplace
+                    Lng = (double)s.yplace,
+                    PoiType = "catering"
                 }).ToList();
             }
 
@@ -184,12 +186,45 @@ namespace WeiXinPF.Application.DomainModules.Map
                     Introduction = h.hotelIntroduct,
                     Logo = h.coverPic,
                     Lat = (double)h.xplace,
-                    Lng = (double)h.yplace
+                    Lng = (double)h.yplace,
+                    PoiType = "hotel"
                 }).ToList();
             }
 
             return null;
         }
 
+        /// <summary>
+        /// 获取推荐的Poi
+        /// </summary>
+        /// <param name="wid"></param>
+        /// <param name="keywords"></param>
+        /// <returns></returns>
+        public List<POIDto> GetRecommendPoi(int wid, string keywords)
+        {
+            List<POIDto> recommendPois = new List<POIDto>();
+
+            //默认都取第一个吧；
+            var scenics = GetScenics(wid, keywords);
+            if (scenics != null && scenics.Any())
+            {
+                recommendPois.Add(scenics.FirstOrDefault());
+            }
+
+            var caterings = GetCateringShops(wid, keywords);
+            if (caterings != null && caterings.Any())
+            {
+                recommendPois.Add(caterings.FirstOrDefault());
+            }
+
+            var hotels = GetHotels(wid, keywords);
+            if (hotels != null && hotels.Any())
+            {
+                recommendPois.Add(hotels.FirstOrDefault());
+            }
+
+            return recommendPois;
+
+        }
     }
 }

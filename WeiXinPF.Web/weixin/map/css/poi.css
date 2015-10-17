@@ -115,9 +115,71 @@ ul, li {
         color: #4cff00;
     }
 
+.poi-type-list-view {
+    width: 100%;
+    padding: 20px 10px;
+    overflow: hidden;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+    .poi-type-list-view li {
+        float: left;
+        width: 33%;
+        text-align: center;
+    }
+
+        .poi-type-list-view li:nth-child(3n) {
+            width: 34%;
+        }
+
+.poi-type-img {
+    display: block;
+    margin: 0 auto;
+    width: 64px;
+    height: 64px;
+    border-radius: 64px;
+    font-size: 24px;
+    line-height: 64px;
+    color: #fff;
+    text-align: center;
+}
+
+    .poi-type-img.fa-cutlery {
+        background-color: #f73838;
+    }
+
+    .poi-type-img.fa-hotel {
+        background-color: #f3a61f;
+    }
+
+    .poi-type-img.fa-tree {
+        background-color: #61b51d;
+    }
+
+.poi-type-text {
+    display: block;
+    text-align: center;
+    font-size: 14px;
+    line-height: 28px;
+}
+
 .poi-list {
     width: 100%;
     overflow: hidden;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.poi-list-title {
+    height: 40px;
+    line-height: 40px;
+    padding: 0 12px;
+    font-weight: 400;
+    font-size: 16px;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
@@ -203,3 +265,40 @@ ul, li {
                 width: 50%;
                 text-align: center;
             }
+
+
+.bottom-navigation {
+    position: fixed;
+    z-index: 900;
+    width: 100%;
+    bottom: 0;
+    background-color: #f9f9f9;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.btn-group {
+    width: 100%;
+    -webkit-box-align: center;
+    display: -webkit-box !important;
+    display: -webkit-flex !important;
+    -webkit-align-items: center;
+}
+
+.btn {
+    display: block;
+    height: 44px;
+    line-height: 44px;
+    font-size: 15px;
+    border-top: 1px solid #d4d4d4;
+    border-right: 1px solid #d4d4d4;
+    padding: 0 10px;
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    text-align: center;
+}
+
+    .btn:last-child {
+        border-right: none;
+    }
