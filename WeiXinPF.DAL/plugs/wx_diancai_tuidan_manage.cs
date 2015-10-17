@@ -80,13 +80,50 @@ namespace WeiXinPF.DAL
         }
 
         /// <summary>
+        /// 退款成功
+        /// </summary>
+        /// <param name="refundId"></param>
+        public void Refund(int refundId)
+        {
+            const string sql = "UPDATE dbo.wx_diancai_tuidan_manage SET refundStatus=1 WHERE id=@RefundID";
+            SqlParameter[] sqlparams =
+                {
+                    new SqlParameter(){ParameterName = "@RefundID",SqlDbType = SqlDbType.Int,Value = refundId} 
+                };
+
+            DbHelperSQL.ExecuteSql(sql, sqlparams);
+        }
+
+        /// <summary>
         /// 获取退款记录
         /// </summary>
         /// <param name="openId"></param>
         /// <returns></returns>
         public DataSet GetRefundList(string openId)
         {
-            return null;
+            const string sql = @"SELECT  tm.createDate ,
+                                            ds.hotelName ,
+                                            tm.refundCode ,
+                                            dm.orderNumber ,
+                                            tm.refundAmount ,
+                                            tm.refundStatus ,
+                                            tm.wid ,
+                                            tm.openid ,
+                                            tm.shopinfoid ,
+                                            dm.id AS dingdan
+                                    FROM    dbo.wx_diancai_tuidan_manage tm
+                                            INNER JOIN dbo.wx_diancai_dingdan_commodity dc ON tm.caipinid = dc.id
+                                            LEFT JOIN dbo.wx_diancai_shopinfo ds ON tm.shopinfoid = ds.id
+                                            INNER JOIN dbo.wx_diancai_dingdan_manage dm ON dc.dingId = dm.id
+		                                    WHERE dm.openid=@OpenID
+                                            Order by dm.CreateDate DESC";
+
+            SqlParameter[] sqlparams =
+                {
+                    new SqlParameter(){ParameterName = "@OpenID",SqlDbType = SqlDbType.NVarChar,Value = openId} 
+                };
+
+            return DbHelperSQL.Query(sql, sqlparams);
         }
     }
 }

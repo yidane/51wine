@@ -14,5 +14,20 @@ namespace WeiXinPF.BLL
         {
             dal.AddRefundModel(modelList);
         }
+
+        public void Refund(string refundcode)
+        {
+            dal.Refund(refundcode);
+        }
+
+        public void Refund(int refundId)
+        {
+            dal.Refund(refundId);
+        }
+
+        public DataSet GetRefundList(string openId)
+        {
+            return dal.GetRefundList(openId);
+        }
     }
 }

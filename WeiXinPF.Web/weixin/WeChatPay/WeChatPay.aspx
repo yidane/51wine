@@ -8,10 +8,6 @@
     <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
     <script type="text/javascript">
         var WeChatPayIsReady = true;
-        //var wid = GetQueryString("wid");
-        //if (wid == "" || wid == undefined) {
-        //    alert("不存在参数wid");
-        //}
 
         var PayManager =
                 {
@@ -43,6 +39,8 @@
                                                 }
                                             },
                                             fail: function (res) {
+                                                alert("pay faild");
+                                                alert(res);
                                                 if (typeof UnifiedOrderRequest.afterFail === "function") {
                                                     UnifiedOrderRequest.afterFail(result.Data.prepayid);
                                                 }
