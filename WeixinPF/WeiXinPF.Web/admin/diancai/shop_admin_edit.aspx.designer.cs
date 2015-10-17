@@ -22,6 +22,15 @@ namespace WeiXinPF.Web.admin.diancai {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
+        /// lblRoleName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblRoleName;
+        
+        /// <summary>
         /// txtUserName control.
         /// </summary>
         /// <remarks>

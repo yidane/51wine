@@ -16,9 +16,7 @@
     <form id="form1" runat="server">
         <!--导航栏-->
         <div class="location">
-            <a href="shop_list.aspx" class="home"><i></i><span>点菜系统</span></a>
-            <i class="arrow"></i>
-            <span>管理员设置</span>
+             <a href="javascript:;" class="home"><i></i><span>管理员设置</span></a>
         </div>
         <div class="line10"></div>
 

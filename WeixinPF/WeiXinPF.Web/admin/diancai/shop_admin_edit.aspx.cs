@@ -13,6 +13,8 @@ namespace WeiXinPF.Web.admin.diancai
         private string action = MXEnums.ActionEnum.Add.ToString();
         protected int shopid = 0; //商铺ID
         private int id = 0;//管理员ID
+
+        private int shop_admin_role = 17;
         protected void Page_Load(object sender, EventArgs e)
         {
             shopid = MXRequest.GetQueryInt("shopid");
@@ -34,6 +36,7 @@ namespace WeiXinPF.Web.admin.diancai
 
             if (!IsPostBack)
             {
+                lblRoleName.Text = new BLL.manager_role().GetModel(shop_admin_role).role_name;
                 if (action == MXEnums.ActionEnum.Edit.ToString())
                 {
                     ShowInfo(id);
@@ -76,7 +79,8 @@ namespace WeiXinPF.Web.admin.diancai
             BLL.manager bll = new BLL.manager();
 
             //固定为餐饮管理员的角色
-            model.role_id = MyCommFun.Str2Int(MyCommFun.getAppSettingValue("diancai_shop_admin_role"));
+
+            model.role_id = shop_admin_role;
             model.role_type = new BLL.manager_role().GetModel(model.role_id).role_type;
 
             if (cbIsLock.Checked == true)
@@ -132,7 +136,7 @@ namespace WeiXinPF.Web.admin.diancai
 
             if (addId > 0)
             {
-                AddAdminLog(MXEnums.ActionEnum.Add.ToString(), "添加餐饮商铺管理员:" + model.user_name); //记录日志
+                AddAdminLog(MXEnums.ActionEnum.Add.ToString(), "添加餐饮商铺超级管理员:" + model.user_name); //记录日志
                 return true;
             }
             return false;
@@ -155,6 +159,7 @@ namespace WeiXinPF.Web.admin.diancai
             {
                 model.is_lock = 1;
             }
+
             //判断密码是否更改
             if (txtPassword.Text.Trim() != "")
             {
@@ -169,12 +174,9 @@ namespace WeiXinPF.Web.admin.diancai
             model.remark = txtRemark.Text;
 
             bool updateRet = bll.Update(model);
-
-
-
             if (updateRet)
             {
-                AddAdminLog(MXEnums.ActionEnum.Edit.ToString(), "修改餐饮商铺管理员信息:" + model.user_name); //记录日志
+                AddAdminLog(MXEnums.ActionEnum.Edit.ToString(), "修改餐饮商铺超级管理员信息:" + model.user_name); //记录日志
                 return true;
             }
             return false;
@@ -190,7 +192,7 @@ namespace WeiXinPF.Web.admin.diancai
                     JscriptMsg("保存过程中发生错误！", "", "Error");
                     return;
                 }
-                JscriptMsg("修改用户信息成功！", "shop_admin_list.aspx?shopid="+shopid, "Success");
+                JscriptMsg("修改用户信息成功！", "shop_admin_list.aspx?shopid=" + shopid, "Success");
             }
             else //添加
             {

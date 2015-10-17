@@ -41,5 +41,7 @@ namespace WeiXinPF.Application.DomainModules.Map.DTOS
         /// 详情链接
         /// </summary>
         public string Url { get; set; }
+
+        public string PoiType { get; set; }
     }
 }

@@ -124,7 +124,23 @@ namespace WeiXinPF.WebService
             }
             catch
             {
-                Context.Response.Write(AjaxResult.Error("获取周边酒店信息失败").ToCamelString());
+                Context.Response.Write(AjaxResult.Error("获取周边酒店信息失败。").ToCamelString());
+            }
+        }
+
+        [WebMethod]
+        public void GetRecommendPoi(int wid,string keywords)
+        {
+            try
+            {
+                var service = new MapService();
+                var pois = service.GetRecommendPoi(wid, keywords);
+
+                Context.Response.Write(AjaxResult.Success(pois).ToCamelString());
+            }
+            catch
+            {
+                Context.Response.Write(AjaxResult.Error("获取周边推荐信息失败。").ToCamelString());
             }
         }
     }
