@@ -96,5 +96,9 @@ namespace WeiXinPF.Web.admin.diancai
             }
         }
 
+        protected void serch_OnClick(object sender, EventArgs e)
+        {
+            RptBind();
+        }
     }
 }

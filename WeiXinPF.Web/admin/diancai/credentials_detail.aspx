@@ -8,10 +8,24 @@
     <script type="text/javascript" src="../../scripts/jquery/jquery-1.10.2.min.js"></script>
     <script type="text/javascript" src="../../scripts/lhgdialog/lhgdialog.js?skin=idialog"></script>
     <script type="text/javascript" src="../js/layout.js"></script>
+    <script type="text/javascript" src="../../scripts/datepicker/WdatePicker.js"></script>
     <link href="../skin/default/style.css" rel="stylesheet" type="text/css" />
     <link href="../skin/mystyle.css" rel="stylesheet" type="text/css" />
     <link href="../../css/pagination.css" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+        .label-left {
+            width: 200px;
+        }
+        .serchbtn {
+            margin: auto;
+        }
+        .center-button {
+            text-align: center;
+        }
 
+        .l-list {
+        }
+    </style>
     <script type="text/javascript">
         function parentToIndex(id) {
             parent.location.href = "/admin/Index.aspx?id=" + id;
@@ -22,6 +36,7 @@
 
 
         });
+
 
 
 
@@ -44,30 +59,39 @@
         <!--工具栏-->
         <div class="toolbar-wrap">
             <div id="floatHead" class="toolbar">
-                <div class="l-list">
-                    <div class="credentials-condition">
-                        <span>订单关闭日期范围</span>
-                        <asp:TextBox ID="startDate" runat="server"></asp:TextBox>
-                        至
-                        <asp:TextBox ID="endDate" runat="server"></asp:TextBox>
-                    </div>
-                    <div class="credentials-condition">
-                        <span>订单支付金额</span>
-                        <asp:TextBox ID="paidmin" runat="server"></asp:TextBox>至<asp:TextBox ID="paidmax" runat="server"></asp:TextBox>
-                    </div>
-                </div>
-                <div class="r-list">
-                    <div class="credentials-condition">
-                        <span>订单编号</span>
-                        <asp:TextBox ID="dingdanId" runat="server"></asp:TextBox>
-                    </div>
-                    <div class="credentials-condition">
-                        <span>预约人</span>
-                        <asp:TextBox ID="orderperson" runat="server"></asp:TextBox>
-                    </div>
-                </div>
+                <table style="border: 0; width: 100%; text-align: left;">
+                    <tr>
+                        <td style="width: 65%">
+                            <div class="credentials-condition">
+                                <span class="label-left">订单关闭日期范围</span>
+                                <asp:TextBox ID="startDate" runat="server" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" datatype="*1-50" errormsg="请选择正确的日期" sucmsg=" " nullmsg=" "></asp:TextBox>至<asp:TextBox ID="endDate" runat="server" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" datatype="*1-50" errormsg="请选择正确的日期" sucmsg=" " nullmsg=" "></asp:TextBox>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="credentials-condition">
+                                <span class="label-left">订单编号</span>
+                                <asp:TextBox ID="dingdanId" runat="server"></asp:TextBox>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="credentials-condition">
+                                <span class="label-left">订单支付金额</span>
+                                <asp:TextBox ID="paidmin" runat="server"></asp:TextBox>至<asp:TextBox ID="paidmax" runat="server"></asp:TextBox>
+                            </div>
+                        </td>
+
+                        <td>
+                            <div class="credentials-condition">
+                                <span class="label-left">预约人</span>
+                                <asp:TextBox ID="orderperson" runat="server"></asp:TextBox>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
                 <div class="center-button">
-                    <asp:Button ID="Button1" runat="server" Text="查询"></asp:Button>
+                    <asp:Button ID="serch" runat="server" Text="查询" OnClick="serch_OnClick"></asp:Button>
                     <%--<asp:Button ID="Button2" runat="server" Text="导出Excel"></asp:Button>--%>
                 </div>
             </div>
@@ -81,11 +105,11 @@
                 <table width="100%" border="0" cellspacing="0" cellpadding="0" class="ltable">
                     <thead>
                         <tr>
-                            <th>订单编号</th>
-                            <th>订单状态</th>
-                            <th>订单关闭日期</th>
-                            <th>预约人</th>
-                            <th>总计</th>
+                            <th style="width: 10%">订单编号</th>
+                            <th style="width: 10%">订单状态</th>
+                            <th style="width: 10%">订单关闭日期</th>
+                            <th style="width: 10%">预约人</th>
+                            <th style="width: 10%">总计</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -93,20 +117,20 @@
             </HeaderTemplate>
             <ItemTemplate>
                 <tr class="td_c">
-                    <td>
+                    <td style="width: 10%">
                         <asp:HiddenField ID="HiddenField1" Value='<%#Eval("id")%>' runat="server" />
                         <%# Eval("orderNumber") %>
                     </td>
-                    <td>
+                    <td style="width: 10%">
                         <%# Eval("payStatus") %>
                     </td>
-                    <td>
+                    <td style="width: 10%">
                         <%# Eval("modifyTime") %>                        
                     </td>
-                    <td>
+                    <td style="width: 10%">
                         <%# Eval("customerName") %>                        
                     </td>
-                    <td>
+                    <td style="width: 10%">
                         <%# Eval("payAmount") %>                        
                     </td>
                     <td></td>
@@ -116,7 +140,7 @@
                     <td colspan="2">
                         <asp:Repeater runat="server" ID="rp">
                             <HeaderTemplate>
-                                <table cellspacing="0" rules="all" border="1" id="CommodityList" style="border-collapse: collapse; width: 100%; margin: 1px 0px 5px 33px;" class="Repeater">
+                                <table cellspacing="0" rules="all" border="1" id="CommodityList" style="border-collapse: collapse; width: 90%; margin: 1px 0px 5px 33px;" class="Repeater">
                                     <tr>
                                         <th scope="col">商品名称
                                         </th>
