@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Collections.Generic;
+using System.Linq;
 using WeiXinPF.Common;
 using WeiXinPF.Model;
 namespace WeiXinPF.BLL
@@ -163,6 +164,17 @@ namespace WeiXinPF.BLL
         public DataSet GetList(int pageSize, int pageIndex, string strWhere, string filedOrder, out int recordCount)
         {
             return dal.GetList(pageSize, pageIndex, strWhere, filedOrder, out recordCount);
+        }
+
+        public List<wx_diancai_credentials_detail> GetCredentialsList(int shopid, string condition, out double totalAmount)
+        {
+            DataSet ds = dal.GetCredentialsList(shopid, condition,out totalAmount);
+            return ds.Tables[0].ToObject<wx_diancai_credentials_detail>().ToList();
+        }
+
+        public DataSet GetCredentialsCommodityList(int dingId)
+        {
+            return dal.GetCredentialsCommodityList(dingId);
         }
 
         public DataSet GetListList(string openid)

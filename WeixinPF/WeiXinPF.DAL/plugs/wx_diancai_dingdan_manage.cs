@@ -431,6 +431,34 @@ namespace WeiXinPF.DAL
             return DbHelperSQL.Query(PagingHelper.CreatePagingSql(recordCount, pageSize, pageIndex, strSql.ToString(), filedOrder));
         }
 
+        public DataSet GetCredentialsList(int shopid, string condition,out double totalAmount)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("SELECT * FROM (SELECT id,orderNumber,'已关闭' AS payStatus,(SELECT TOP 1 modifytime FROM wx_diancai_dingdan_commodity WHERE dingId=a.id ORDER BY modifytime DESC) AS modifyTime,customerName,payAmount FROM wx_diancai_dingdan_manage a ");
+            strSql.Append(" WHERE paystatus=2 AND shopinfoid=" + shopid + " ) AS dingList ");
+            if (!String.IsNullOrEmpty(condition))
+            {
+                strSql.Append(" where " + condition);
+            }
+            strSql.Append(" ORDER BY modifyTime DESC");
+            DataSet ds = DbHelperSQL.Query(strSql.ToString());
+            DataTable dt = ds.Tables[0];
+            totalAmount = 0.0;
+            for (int row = 0; row < dt.Rows.Count; row++)
+                totalAmount += Convert.ToDouble(dt.Rows[row]["payAmount"].ToString());
+            return ds;
+        }
+
+        public DataSet GetCredentialsCommodityList(int dingId)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("SELECT (SELECT cpName FROM wx_diancai_caipin_manage WHERE id=a.caiId) AS caiName,'1' AS number,price,identifyingcode,(CASE STATUS WHEN 0 THEN '未支付' WHEN 1 THEN '已支付' WHEN 2 THEN '已使用' WHEN 3 THEN '申请退款' WHEN 4 THEN '已退款' END) AS status,ModifyTime FROM wx_diancai_dingdan_commodity a  ");
+            strSql.Append(" WHERE dingId=" + dingId );
+            strSql.Append(" ORDER BY modifyTime DESC");
+            DataSet ds = DbHelperSQL.Query(strSql.ToString());
+            return ds;
+        }
+
         public DataSet GetListList(string openid)
         {
             StringBuilder strSql = new StringBuilder();
@@ -525,7 +553,7 @@ namespace WeiXinPF.DAL
                                     SELECT  @NoUseCaipinCount AS NoUseCaipinCount ,
                                             @NoUseAllCount AS NoUseAllCount";
             SqlParameter[] sqlparams =
-                {
+            {
                     new SqlParameter(){ParameterName = "@OrderID",SqlDbType = SqlDbType.Int,Value = orderId},
                     new SqlParameter(){ParameterName = "@OpenID",SqlDbType = SqlDbType.NVarChar,Value = openId},
                     new SqlParameter(){ParameterName = "@CaiPinID",SqlDbType = SqlDbType.Int,Value = caipinId} 
@@ -573,14 +601,14 @@ namespace WeiXinPF.DAL
 
             //修改菜品状态
             var refundCaiId = string.Empty;
-            for (int index = 0; index < caipinIdList.Count; index++)
-            {
+                for (int index = 0; index < caipinIdList.Count; index++)
+                {
                 refundCaiId = index == caipinIdList.Count - 1
                                   ? refundCaiId + caipinIdList[index].ToString()
                                   : refundCaiId + caipinIdList[index].ToString() + ",";
-            }
+                }
 
-            const string caipinModifySql = "UPDATE dbo.wx_diancai_dingdan_commodity  SET status=2 WHERE dingId=@DingdanId AND caiId=@CaiID AND id IN (@RefundCaiID);";
+                const string caipinModifySql = "UPDATE dbo.wx_diancai_dingdan_commodity  SET status=2,ModifyTime=GETDATE() WHERE dingId=@DingdanId AND caiId=@CaiID AND id IN (@RefundCaiID);";
             SqlParameter[] caipinModifysqlparams =
                 {
                     new SqlParameter(){ParameterName = "@DingdanId",SqlDbType = SqlDbType.Int,Value = dingdanid},
@@ -864,7 +892,7 @@ namespace WeiXinPF.DAL
         public bool UpdateCommoditystatus(string cid, string status)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("update  wx_diancai_dingdan_commodity set status='" + status + "'  ");
+            strSql.Append("update  wx_diancai_dingdan_commodity set status='" + status + "',modifytime=getdate()  ");
 
             strSql.Append(" where id='" + cid + "' ");
 
@@ -882,7 +910,7 @@ namespace WeiXinPF.DAL
         public bool UpdateCommodityStatusByOrderId(string orderId, string status)
         {
             var strSql = new StringBuilder();
-            strSql.Append("update  wx_diancai_dingdan_commodity set status='" + status + "'  ");
+            strSql.Append("update  wx_diancai_dingdan_commodity set status='" + status + "',modifytime=getdate()  ");
 
             strSql.Append(" where dingId=" + orderId);
 
@@ -900,7 +928,7 @@ namespace WeiXinPF.DAL
         public bool UpdateCommoditystatus(string ccode, int status)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("update  wx_diancai_dingdan_commodity set status='" + status + "'  ");
+            strSql.Append("update  wx_diancai_dingdan_commodity set status='" + status + "',modifytime=getdate()  ");
 
             strSql.Append(" where identifyingcode='" + ccode + "' ");
 
