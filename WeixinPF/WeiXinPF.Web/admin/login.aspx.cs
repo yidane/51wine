@@ -28,7 +28,7 @@ namespace WeiXinPF.Web.admin
 
                 msgtip.InnerHtml = "请输入用户名或密码";
                 txtUserName.Value = Utils.GetCookie("DTRememberName");
-                txtPassword.Value = Utils.GetCookie("DTRememberPwd");
+//                txtPassword.Value = Utils.GetCookie("DTRememberPwd");
             }
         }
 
@@ -73,10 +73,10 @@ namespace WeiXinPF.Web.admin
             }
             //写入Cookies
             Utils.WriteCookie("DTRememberName", model.user_name, 14400);
-            if (chkRemember.Checked)
-            {
-                Utils.WriteCookie("DTRememberPwd", model.password, 14400);
-            }
+//            if (chkRemember.Checked)
+//            {
+//                Utils.WriteCookie("DTRememberPwd", model.password, 14400);
+//            }
             
             Utils.WriteCookie("AdminName", "WeiXinPF", model.user_name);
             Utils.WriteCookie("AdminPwd", "WeiXinPF", model.password);
