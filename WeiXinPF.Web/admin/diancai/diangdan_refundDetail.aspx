@@ -4,7 +4,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-<title>订单详情</title>
+    <title>订单详情</title>
     <script type="text/javascript" src="../../scripts/jquery/jquery-1.10.2.min.js"></script>
     <script type="text/javascript" src="../../scripts/lhgdialog/lhgdialog.js?skin=idialog"></script>
     <script type="text/javascript" src="../js/layout.js"></script>
@@ -34,40 +34,43 @@
         }
 
         .btn-success:hover {
-    color: #fff;
-    background-color: #449d44;
-    border-color: #398439;
-}
-.btn.focus, .btn:focus, .btn:hover {
-    color: #333;
-    text-decoration: none;
-}
-.btn-success {
-    color: #fff;
-    background-color: #5cb85c;
-    border-color: #4cae4c;
-}
-.btn {
-    display: inline-block;
-    padding: 6px 12px;
-    margin-bottom: 0;
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 1.42857143;
-    text-align: center;
-    white-space: nowrap;
-    vertical-align: middle;
-    -ms-touch-action: manipulation;
-    touch-action: manipulation;
-    cursor: pointer;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    background-image: none;
-    border: 1px solid transparent;
-    border-radius: 4px;
-}
+            color: #fff;
+            background-color: #449d44;
+            border-color: #398439;
+        }
+
+        .btn.focus, .btn:focus, .btn:hover {
+            color: #333;
+            text-decoration: none;
+        }
+
+        .btn-success {
+            color: #fff;
+            background-color: #5cb85c;
+            border-color: #4cae4c;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 6px 12px;
+            margin-bottom: 0;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 1.42857143;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: middle;
+            -ms-touch-action: manipulation;
+            touch-action: manipulation;
+            cursor: pointer;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            background-image: none;
+            border: 1px solid transparent;
+            border-radius: 4px;
+        }
     </style>
 </head>
 <body class="mainbody">
@@ -80,36 +83,27 @@
         </div>
 
         <!--/导航栏-->
-
-
         <div class="tab-content">
             <ul class="round">
                 <li class="title"><span class="none smallspan">退单详情</span></li>
                 <table width="100%" border="0" cellpadding="0" cellspacing="0" class="cpbiaoge">
-
                     <%=Dingdanlist %>
                 </table>
-
             </ul>
 
             <ul class="round">
                 <li class="title"><span class="none smallspan">退单信息</span></li>
-
                 <table width="100%" border="0" cellpadding="0" cellspacing="0" class="cpbiaoge">
                     <%=dingdanren %>
                 </table>
-
             </ul>
-
         </div>
-        
-        <div class="tab-content" >
-             <dl>
+
+        <div class="tab-content">
+            <dl>
                 <dt>不同意退单理由：</dt>
                 <dd>
-                    <textarea name="reason" rows="2" cols="20" id="instructions" datatype="*1-1000" sucmsg=" " nullmsg=""  class="input" runat="server"></textarea>
-                   
-
+                    <textarea name="reason" rows="2" cols="20" id="instructions" datatype="*1-1000" sucmsg=" " nullmsg="" class="input" runat="server"></textarea>
                 </dd>
             </dl>
         </div>
@@ -123,7 +117,6 @@
                         <asp:ListItem Text="成功" Value="1"></asp:ListItem>
                         <asp:ListItem Text="失败" Value="2"></asp:ListItem>
                     </asp:DropDownList>
-
                 </dd>
             </dl>
         </div>

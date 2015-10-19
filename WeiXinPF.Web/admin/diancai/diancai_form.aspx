@@ -16,7 +16,6 @@
     <script type="text/javascript">
         function parentToIndex(id) {
             parent.location.href = "/admin/Index.aspx?id=" + id;
-
         }
 
         $(function () {
