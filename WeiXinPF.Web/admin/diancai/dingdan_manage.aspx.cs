@@ -16,71 +16,84 @@ namespace WeiXinPF.Web.admin.diancai
         protected int page;
         protected int pageSize;
         BLL.wx_diancai_dingdan_manage gbll = new BLL.wx_diancai_dingdan_manage();
-        protected string keywords = string.Empty;
+
+        /*页面参数*/
+        protected DateTime beginDate = DateTime.MinValue;
+        protected DateTime endDate = DateTime.MinValue;
+        protected int payAmountMin = -1;
+        protected int payAmountMax = -1;
+        protected string orderNumber = string.Empty;
+        protected string customerName = string.Empty;
+        protected string customerTel = string.Empty;
         protected int shopid = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
-            this.keywords = MXRequest.GetQueryString("keywords");
-            shopid = MyCommFun.RequestInt("shopid") == 0 ? GetShopId() : MyCommFun.RequestInt("shopid"); ;
+            //获取链接参数，对控件赋值，查询
+            this.shopid = MyCommFun.RequestInt("shopid") == 0 ? GetShopId() : MyCommFun.RequestInt("shopid");
+            DateTime.TryParse(MyCommFun.QueryString("beginDate"), out beginDate);
+            DateTime.TryParse(MyCommFun.QueryString("endDate"), out endDate);
+            payAmountMin = MyCommFun.RequestInt("payAmountMin");
+            payAmountMax = MyCommFun.RequestInt("payAmountMax");
+            this.orderNumber = MyCommFun.QueryString("OrderNumber");
+            this.customerName = MyCommFun.QueryString("CustomerName");
+            this.customerTel = MyCommFun.QueryString("customerTel");
+
             this.pageSize = GetPageSize(10); //每页数量
             if (!Page.IsPostBack)
             {
-
-
-                RptBind(CombSqlTxt(keywords), "createDate desc,id desc");
-
+                BindControls();
+                BindResult();
             }
         }
 
-        #region 数据绑定=================================
-        private void RptBind(string _strWhere, string _orderby)
+        private void BindControls()
         {
+            if (beginDate != DateTime.MinValue)
+                this.txtbeginDate.Text = beginDate.ToString();
+            if (endDate != DateTime.MinValue)
+                this.txtEndDate.Text = endDate.ToString();
+            if (payAmountMax > -1)
+                this.txtPayAmountMax.Text = payAmountMax.ToString();
+            if (payAmountMin > -1)
+                this.txtPayAmountMin.Text = payAmountMin.ToString();
+            this.txtOrderNumber.Text = this.orderNumber;
+            this.txtCustomerName.Text = this.customerName;
+            this.txtCustomerTel.Text = this.customerTel;
+        }
 
-            // Model.wx_userweixin weixin = GetWeiXinCode();
-
+        #region 数据绑定=================================
+        private void BindResult()
+        {
             //判断是否已经设置了微留言基本信息
-            BLL.wx_diancai_dingdan_manage sbll = new BLL.wx_diancai_dingdan_manage();
-
-
-            _strWhere = "shopinfoid=" + shopid + " " + _strWhere;
+            var sbll = new BLL.wx_diancai_dingdan_manage();
             this.page = MXRequest.GetQueryInt("page", 1);
-            txtKeywords.Text = this.keywords;
-            DataSet ds = gbll.GetList(this.pageSize, this.page, _strWhere, _orderby, out this.totalCount);
-            // DataSet ds = gbll.GetList( _strWhere);
-            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            var result = gbll.GetOrderList(shopid, this.pageSize, this.page, beginDate, endDate, payAmountMin,
+                                           payAmountMax, orderNumber, customerName, customerTel, out this.totalCount);
+
+            if (result != null && result.Tables.Count > 0 && result.Tables[0].Rows.Count > 0)
             {
                 DataRow dr;
 
-                int count = ds.Tables[0].Rows.Count;
+                int count = result.Tables[0].Rows.Count;
                 for (int i = 0; i < count; i++)
                 {
-                    dr = ds.Tables[0].Rows[i];
-                    if (dr["payStatus"].ToString() == "0")
-                    {
-                        dr["payStatusStr"] = "未处理";
-                    }
-                    else if (dr["payStatus"].ToString() == "1")
-                    {
-                        dr["payStatusStr"] = "成功";
-                    }
-                    else
-                    {
-                        dr["payStatusStr"] = "失败";
-                    }
+                    dr = result.Tables[0].Rows[i];
 
-
+                    var orderId = Convert.ToInt32(dr["id"]);
+                    var detail = sbll.GetOrderCaipinDetail(orderId);
+                    dr["Detail"] = detail;
+                    dr["OrderNo"] = i + 1;
                 }
-                ds.AcceptChanges();
+
+                result.AcceptChanges();
             }
-            this.rptList.DataSource = ds;
+            this.rptList.DataSource = result;
             this.rptList.DataBind();
 
             //绑定页码
             txtPageNum.Text = this.pageSize.ToString();
-            string pageUrl = Utils.CombUrlTxt("dingdan_manage.aspx", "keywords={0}&page={1}&shopid={2}", this.keywords, "__id__", shopid.ToString());
+            string pageUrl = this.GetNewUrl();
             PageContent.InnerHtml = Utils.OutPageList(this.pageSize, this.page, this.totalCount, pageUrl, 8);
-
-
         }
         #endregion
 
@@ -116,7 +129,29 @@ namespace WeiXinPF.Web.admin.diancai
         //关健字查询
         protected void btnSearch_Click(object sender, EventArgs e)
         {
-            Response.Redirect(Utils.CombUrlTxt("dingdan_manage.aspx", "keywords={0}&shopid={1}", txtKeywords.Text, shopid.ToString()));
+            Response.Redirect(GetNewUrl());
+        }
+
+        private string GetNewUrl()
+        {
+            var queryStringBuilder = new StringBuilder();
+            queryStringBuilder.AppendFormat("dingdan_manage.aspx?shopid={0}", shopid);
+            if (!string.IsNullOrEmpty(this.txtbeginDate.Text))
+                queryStringBuilder.AppendFormat("&beginDate={0}", this.txtbeginDate.Text.Trim());
+            if (!string.IsNullOrEmpty(this.txtEndDate.Text))
+                queryStringBuilder.AppendFormat("&endDate={0}", this.txtEndDate.Text);
+            if (!string.IsNullOrEmpty(this.txtPayAmountMax.Text))
+                queryStringBuilder.AppendFormat("&payAmountMax={0}", this.txtPayAmountMax.Text);
+            if (!string.IsNullOrEmpty(this.txtPayAmountMin.Text))
+                queryStringBuilder.AppendFormat("&payAmountMin={0}", this.txtPayAmountMin.Text);
+            if (!string.IsNullOrEmpty(this.txtOrderNumber.Text))
+                queryStringBuilder.AppendFormat("&orderNumber={0}", this.txtOrderNumber.Text);
+            if (!string.IsNullOrEmpty(this.txtCustomerName.Text))
+                queryStringBuilder.AppendFormat("&customerName={0}", this.txtCustomerName.Text);
+            if (!string.IsNullOrEmpty(this.txtCustomerTel.Text))
+                queryStringBuilder.AppendFormat("&customerTel={0}", this.txtCustomerTel.Text);
+
+            return queryStringBuilder.ToString();
         }
 
         //设置分页数量
@@ -130,7 +165,8 @@ namespace WeiXinPF.Web.admin.diancai
                     Utils.WriteCookie("dingdan_manage_page_size", _pagesize.ToString(), 14400);
                 }
             }
-            Response.Redirect(Utils.CombUrlTxt("dingdan_manage.aspx", "keywords={0}&shopid={1}", txtKeywords.Text, shopid.ToString()));
+
+            Response.Redirect(this.GetNewUrl());
         }
 
         //批量删除
@@ -158,7 +194,7 @@ namespace WeiXinPF.Web.admin.diancai
             }
             AddAdminLog(MXEnums.ActionEnum.Delete.ToString(), "信息" + sucCount + "条，失败" + errorCount + "条"); //记录日志
 
-            JscriptMsg("删除成功" + sucCount + "条，失败" + errorCount + "条！", Utils.CombUrlTxt("dingdan_manage.aspx", "keywords={0}&shopid={1}", this.keywords, shopid.ToString()), "Success");
+            JscriptMsg("删除成功" + sucCount + "条，失败" + errorCount + "条！", GetNewUrl(), "Success");
         }
 
         /// <summary>
