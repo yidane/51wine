@@ -36,9 +36,10 @@
         </div>
         <div class="tab-content">
             <dl>
-                <dt>角色</dt>
+                <dt>管理角色</dt>
                 <dd>
-                    <asp:Label ID="lblRoleName" runat="server" Text="" Font-Bold="true"></asp:Label></dd>
+                    <asp:Label ID="lblRoleName" runat="server" Text="" Font-Bold="true"></asp:Label>
+                </dd>
             </dl>
             <dl>
                 <dt>登录名</dt>

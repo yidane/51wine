@@ -50,8 +50,14 @@ namespace WeiXinPF.Web.admin.diancai
             {
                 this.hotelName.Text = hotel.hotelName;
                 this.hotelLogo.Text = hotel.hotelLogo;
-                this.hoteltimeBegin.Text = hotel.hoteltimeBegin.Value.ToString("HH:mm:ss");
-                this.hoteltimeEnd.Text = hotel.hoteltimeEnd.Value.ToString("HH:mm:ss");
+                if (hotel.hoteltimeBegin.HasValue)
+                {
+                    this.hoteltimeBegin.Text = hotel.hoteltimeBegin.Value.ToString("HH:mm:ss");
+                }
+                if (hotel.hoteltimeEnd.HasValue)
+                {
+                    this.hoteltimeEnd.Text = hotel.hoteltimeEnd.Value.ToString("HH:mm:ss");
+                }
                 if (hotel.hoteltimeBegin1 != null)
                 {
                     this.hoteltimeBegin1.Text = hotel.hoteltimeBegin1.Value.ToString("HH:mm:ss");
@@ -82,15 +88,19 @@ namespace WeiXinPF.Web.admin.diancai
                 this.address.Text = hotel.address;
                 this.txtLatXPoint.Text = hotel.xplace.ToString();
                 this.txtLngYPoint.Text = hotel.yplace.ToString();
-                ClientScript.RegisterStartupScript(GetType(), "message",
-                    "<script language='javascript'> $(\"#baiduframe\").attr(\"src\", \"../../weixin/map/qqmap/qqmap_getLocation.html?lng=" + hotel.yplace.Value.ToString() + "&lat=" + hotel.xplace.Value.ToString() + "\");</script>");
-                this.personLimite.Text = hotel.personLimite.ToString();
+                if (hotel.xplace.HasValue && hotel.yplace.HasValue)
+                {
+                    ClientScript.RegisterStartupScript(GetType(), "message",
+                        "<script language='javascript'> $(\"#baiduframe\").attr(\"src\", \"../../weixin/map/qqmap/qqmap_getLocation.html?lng=" + hotel.yplace.Value.ToString() + "&lat=" + hotel.xplace.Value.ToString() + "\");</script>");
+                }
+                this.personLimite.Text = hotel.personLimite.HasValue ? hotel.personLimite.ToString() : string.Empty;
                 this.notice.InnerText = hotel.notice;
                 this.hotelintroduction.InnerText = hotel.hotelintroduction;
                 this.email.Text = hotel.email;
                 this.emailpwd.Text = hotel.emailpwd;
                 this.stmp.Text = hotel.stmp;
                 this.css.Text = hotel.css;
+                this.manager.Text = hotel.Operator;
             }
 
             IList<Model.wx_diancai_shoppic> itemlist = iBll.GetModelList("shopid=" + shopid + " order by id asc");
@@ -191,8 +201,8 @@ namespace WeiXinPF.Web.admin.diancai
 
 
                 //---喀纳斯添加的字段
-                hotel.manager = this.manager.Text;
-                hotel.mobile = this.mobile.Text;
+                //hotel.manager = this.manager.Text;
+                hotel.Mobile = this.mobile.Text;
                 //---
 
                 int id = hotelBll.Add(hotel);
@@ -284,8 +294,8 @@ namespace WeiXinPF.Web.admin.diancai
                 hotel.yplace = Convert.ToDecimal(this.txtLngYPoint.Text);
 
                 //---喀纳斯添加的字段
-                hotel.manager = this.manager.Text;
-                hotel.mobile = this.mobile.Text;
+                //hotel.manager = this.manager.Text;
+                hotel.Mobile = this.mobile.Text;
                 //---
 
                 hotelBll.Update(hotel);
