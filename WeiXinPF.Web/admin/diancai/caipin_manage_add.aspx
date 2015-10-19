@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="caipin_manage_add.aspx.cs" Inherits="WeiXinPF.Web.admin.diancai.caipin_manage_add" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="caipin_manage_add.aspx.cs" Inherits="WeiXinPF.Web.admin.diancai.caipin_manage_add" ValidateRequest="false" %>
 
 <!DOCTYPE html>
 
@@ -15,6 +15,7 @@
     <script type="text/javascript" src="../../scripts/swfupload/swfupload.handlers.js"></script>
     <script type="text/javascript" charset="utf-8" src="../../editor/kindeditor-min.js"></script>
     <script type="text/javascript" charset="utf-8" src="../../editor/lang/zh_CN.js"></script>
+
     <script type="text/javascript" src="../js/layout.js"></script>
     <link href="../skin/default/style.css" rel="stylesheet" type="text/css" />
     <link href="../skin/mystyle.css" rel="stylesheet" type="text/css" />
@@ -35,16 +36,37 @@
              });
 
 
+             //初始化编辑器
+             var editor = KindEditor.create('.editor', {
+                 width: '98%',
+                 height: '350px',
+                 resizeType: 1,
+                 uploadJson: '../../tools/upload_ajax.ashx?action=EditorFile&IsWater=1',
+                 fileManagerJson: '../../tools/upload_ajax.ashx?action=ManagerFile',
+                 allowFileManager: true
+             });
+             var editorMini = KindEditor.create('.editor-mini', {
+                 width: '98%',
+                 height: '250px',
+                 resizeType: 1,
+                 uploadJson: '../../tools/upload_ajax.ashx?action=EditorFile&IsWater=1',
+                 items: [
+                     'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
+                     'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+                     'insertunorderedlist', '|', 'emoticons', 'image', 'link']
+             });
+
+
          });
     </script>
 </head>
 <body class="mainbody">
     <form id="form1" runat="server">
       <div class="location">
-           <a href="shop_list.aspx" class="home"><i></i><span>点菜系统</span></a>
-            <i  class="arrow"></i><span><a href="caipin_manage.aspx?shopid=<%=shopid %>">编辑菜品或菜单</a></span>
+           <a href="shop_list.aspx" class="home"><i></i><span>餐饮管理</span></a>
+            <i  class="arrow"></i><span><a href="caipin_manage.aspx?shopid=<%=shopid %>">商品信息管理</a></span>
             <i class="arrow"></i>
-            <span>编辑菜品或菜单</span>
+            <span>编辑商品信息</span>
         </div>
         <div class="line10"></div>
         <!--/导航栏-->
@@ -53,7 +75,7 @@
             <div id="floatHead" class="content-tab">
                 <div class="content-tab-ul-wrap">
                     <ul>
-                        <li><a href="javascript:;" onclick="tabs(this);" class="selected">编辑菜品或菜单</a></li>                    
+                        <li><a href="javascript:;" onclick="tabs(this);" class="selected">编辑商品信息</a></li>                    
                         <asp:HiddenField ID="hidId" runat="server" Value="0" />
                     </ul>
                 </div>
@@ -61,14 +83,21 @@
         </div>
          <div  class="tab-content" >
               <dl>
-                  <dt>名称：</dt>
+                  <dt>编号：</dt>
+                  <dd>
+                  <asp:TextBox runat="server" ID="number" CssClass="input normal" disabled='disabled'  placeholder="系统自动生成"  ></asp:TextBox>
+                  <span class="Validform_checktip" >系统自动生成*</span>
+                  </dd>
+              </dl>
+              <dl>
+                  <dt>商品信息名称：</dt>
                   <dd>
                   <asp:TextBox runat="server" ID="cpName" CssClass="input normal" sucmsg=" " nullmsg="" datatype="*1-100" ></asp:TextBox>
                   <span class="Validform_checktip">*</span>
                   </dd>
               </dl>
              <dl>
-                  <dt>类别：</dt>
+                  <dt>商品信息类别：</dt>
                   <dd>
                         <div class="rule-single-select">
                         <asp:DropDownList ID="dllCategoryName" runat="server" datatype="*" sucmsg=" ">
@@ -77,7 +106,7 @@
                   </dd>
               </dl>
                 <dl>
-                  <dt>价格：</dt>
+                  <dt>原价：</dt>
                   <dd>
                   <asp:TextBox runat="server" ID="cpPrice" CssClass="input normal" sucmsg=" " nullmsg="" datatype="n" ></asp:TextBox>
                   <span class="Validform_checktip">*</span>
@@ -105,19 +134,59 @@
                   </dd>
               </dl>
                 <dl>
-                  <dt>图片地址：</dt>
+                  <dt>商品信息图片：</dt>
                   <dd>
                    <asp:TextBox ID="picUrl" runat="server" CssClass="input normal upload-path"  style="width:200px;"  sucmsg=" " nullmsg=""  />
                     <div class="upload-box upload-img"></div>
                   </dd>
               </dl>
+             
+              <dl>
+                <dt>有效期</dt>
+                <dd>
+                    <div class="input-date">
+                        <asp:TextBox ID="txtbeginDate" runat="server" CssClass="input date" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" datatype="*1-50" errormsg="请选择正确的日期" sucmsg=" " nullmsg=" " />
+                        <i>开始时间</i>
+                    </div>
+                    到
+                  
+                    <div class="input-date">
+                        <asp:TextBox ID="txtendDate" runat="server" CssClass="input date" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" datatype="*1-50" errormsg="请选择正确的日期" sucmsg=" " nullmsg=" " />
+                        <i>结束时间</i>
+                    </div>
+                    <span class="Validform_checktip">*</span>
+
+                </dd>
+            </dl>
+
                  <dl>
-                  <dt>详细内容：</dt>
+                  <dt>商品说明：</dt>
                   <dd>
                     <textarea name="detailContent" rows="2" cols="20" id="detailContent" datatype="*1-1000" sucmsg=" " nullmsg=""  class="input" runat="server"></textarea>
                         <span class="Validform_checktip">*</span>
                   </dd>
               </dl>
+              <dl>
+                  <dt>使用说明：</dt>
+                  <dd>
+                    <textarea name="instructions" rows="2" cols="20" id="instructions" datatype="*1-1000" sucmsg=" " nullmsg=""  class="input" runat="server"></textarea>
+                        <span class="Validform_checktip">*</span>
+                  </dd>
+              </dl>
+                <dl>
+                <dt>商户或门店介绍：</dt>
+                <dd>
+                    <textarea name="shopIntroduction"  id="shopIntroduction" class="editor" style="visibility: hidden;" runat="server"></textarea>
+                    <span class="Validform_checktip">*</span>
+                </dd>
+            </dl>
+              <dl>
+                <dt>排序：</dt>
+                <dd>
+                    <asp:TextBox runat="server" ID="sortid" CssClass="input normal" sucmsg=" " nullmsg="" datatype="n" ></asp:TextBox>
+                    <span class="Validform_checktip">*</span>
+                </dd>
+            </dl>
          </div>
 
          <div class="page-footer" >

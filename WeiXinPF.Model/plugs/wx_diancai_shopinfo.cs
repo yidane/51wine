@@ -41,7 +41,10 @@ namespace WeiXinPF.Model
 		private DateTime? _hoteltimeend1;
 		private DateTime? _hoteltimebegin2;
 		private DateTime? _hoteltimeend2;
-		/// <summary>
+	    private string _manager;
+	    private string _mobile;
+
+	    /// <summary>
 		/// 编号
 		/// </summary>
 		public int id
@@ -289,7 +292,20 @@ namespace WeiXinPF.Model
 			set{ _hoteltimeend2=value;}
 			get{return _hoteltimeend2;}
 		}
-		#endregion Model
+
+	    public string manager
+	    {
+	        get { return _manager; }
+	        set { _manager = value; }
+	    }
+
+	    public string mobile
+	    {
+	        get { return _mobile; }
+	        set { _mobile = value; }
+	    }
+
+	    #endregion Model
 
 	}
 }

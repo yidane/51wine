@@ -4,7 +4,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
-    <title>菜品分类管理</title>
+    <title>商品信息分类管理</title>
     <script type="text/javascript" src="../../scripts/jquery/jquery-1.10.2.min.js"></script>
     <script type="text/javascript" src="../../scripts/lhgdialog/lhgdialog.js?skin=idialog"></script>
     <script type="text/javascript" src="../js/layout.js"></script>
@@ -36,18 +36,18 @@
 <body class="mainbody">
     <form id="form1" runat="server">
         <div class="location">
-       <a href="shop_list.aspx" class="home"><i></i><span>点菜系统</span></a>
+       <a href="shop_list.aspx" class="home"><i></i><span>餐饮管理</span></a>
             <i class="arrow"></i>             
-            <span>菜品分类管理</span>
+            <span>商品信息分类管理</span>
         </div>
        <div class="mytips">        
-            提醒：设置好菜品分类后，再添加菜品，点击进入菜品管理。
+            提醒：设置好商品信息分类后，再添加商品信息，点击进入商品信息管理。
          </div>
        <div class="toolbar-wrap">
             <div id="floatHead" class="toolbar">
                 <div class="l-list">
                     <ul class="icon-list">
-                        <li><a class="icon-btn add" href="caipin_category_add.aspx?action=<%=WeiXinPF.Common.MXEnums.ActionEnum.Add %>&shopid=<%=shopid %>&type=add"  id="itemAddButton"><i></i><span>新增菜品分类</span></a></li>
+                        <li><a class="icon-btn add" href="caipin_category_add.aspx?action=<%=WeiXinPF.Common.MXEnums.ActionEnum.Add %>&shopid=<%=shopid %>&type=add"  id="itemAddButton"><i></i><span>新增商品信息分类</span></a></li>
 
                         <li><a class="all" href="javascript:;" onclick="checkAll(this);"><i></i><span>全选</span></a></li>
                         <li>

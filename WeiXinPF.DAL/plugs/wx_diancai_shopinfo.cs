@@ -47,9 +47,9 @@ namespace WeiXinPF.DAL
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("insert into wx_diancai_shopinfo(");
-            strSql.Append("wid,hotelName,hotelLogo,hoteltimeBegin,hoteltimeEnd,limiteOrder,dcRename,sendPrice,sendCost,freeSendcost,radius,sendArea,tel,address,personLimite,notice,hotelintroduction,email,emailpwd,stmp,css,createDate,kcType,miaoshu,xplace,yplace,hoteltimeBegin1,hoteltimeEnd1,hoteltimeBegin2,hoteltimeEnd2)");
+            strSql.Append("wid,hotelName,hotelLogo,hoteltimeBegin,hoteltimeEnd,limiteOrder,dcRename,sendPrice,sendCost,freeSendcost,radius,sendArea,tel,address,personLimite,notice,hotelintroduction,email,emailpwd,stmp,css,createDate,kcType,miaoshu,xplace,yplace,hoteltimeBegin1,hoteltimeEnd1,hoteltimeBegin2,hoteltimeEnd2,manager,mobile)");
             strSql.Append(" values (");
-            strSql.Append("@wid,@hotelName,@hotelLogo,@hoteltimeBegin,@hoteltimeEnd,@limiteOrder,@dcRename,@sendPrice,@sendCost,@freeSendcost,@radius,@sendArea,@tel,@address,@personLimite,@notice,@hotelintroduction,@email,@emailpwd,@stmp,@css,@createDate,@kcType,@miaoshu,@xplace,@yplace,@hoteltimeBegin1,@hoteltimeEnd1,@hoteltimeBegin2,@hoteltimeEnd2)");
+            strSql.Append("@wid,@hotelName,@hotelLogo,@hoteltimeBegin,@hoteltimeEnd,@limiteOrder,@dcRename,@sendPrice,@sendCost,@freeSendcost,@radius,@sendArea,@tel,@address,@personLimite,@notice,@hotelintroduction,@email,@emailpwd,@stmp,@css,@createDate,@kcType,@miaoshu,@xplace,@yplace,@hoteltimeBegin1,@hoteltimeEnd1,@hoteltimeBegin2,@hoteltimeEnd2,@manager,@mobile)");
             strSql.Append(";select @@IDENTITY");
             SqlParameter[] parameters = {
 					new SqlParameter("@wid", SqlDbType.Int,4),
@@ -81,7 +81,10 @@ namespace WeiXinPF.DAL
 					new SqlParameter("@hoteltimeBegin1", SqlDbType.DateTime),
 					new SqlParameter("@hoteltimeEnd1", SqlDbType.DateTime),
 					new SqlParameter("@hoteltimeBegin2", SqlDbType.DateTime),
-					new SqlParameter("@hoteltimeEnd2", SqlDbType.DateTime)};
+					new SqlParameter("@hoteltimeEnd2", SqlDbType.DateTime),
+                    new SqlParameter("@manager", SqlDbType.VarChar,100),
+                    new SqlParameter("@mobile", SqlDbType.VarChar,100)
+            };
             parameters[0].Value = model.wid;
             parameters[1].Value = model.hotelName;
             parameters[2].Value = model.hotelLogo;
@@ -112,6 +115,8 @@ namespace WeiXinPF.DAL
             parameters[27].Value = model.hoteltimeEnd1;
             parameters[28].Value = model.hoteltimeBegin2;
             parameters[29].Value = model.hoteltimeEnd2;
+            parameters[30].Value = model.manager;
+            parameters[31].Value = model.mobile;
 
             object obj = DbHelperSQL.GetSingle(strSql.ToString(), parameters);
             if (obj == null)
@@ -159,7 +164,9 @@ namespace WeiXinPF.DAL
             strSql.Append("hoteltimeBegin1=@hoteltimeBegin1,");
             strSql.Append("hoteltimeEnd1=@hoteltimeEnd1,");
             strSql.Append("hoteltimeBegin2=@hoteltimeBegin2,");
-            strSql.Append("hoteltimeEnd2=@hoteltimeEnd2");
+            strSql.Append("hoteltimeEnd2=@hoteltimeEnd2,");
+            strSql.Append("manager=@manager,");
+            strSql.Append("mobile=@mobile");
             strSql.Append(" where id=@id");
             SqlParameter[] parameters = {
 					new SqlParameter("@wid", SqlDbType.Int,4),
@@ -192,7 +199,10 @@ namespace WeiXinPF.DAL
 					new SqlParameter("@hoteltimeEnd1", SqlDbType.DateTime),
 					new SqlParameter("@hoteltimeBegin2", SqlDbType.DateTime),
 					new SqlParameter("@hoteltimeEnd2", SqlDbType.DateTime),
-					new SqlParameter("@id", SqlDbType.Int,4)};
+                    new SqlParameter("@manager", SqlDbType.VarChar,100),
+                    new SqlParameter("@mobile", SqlDbType.VarChar,100),
+
+                    new SqlParameter("@id", SqlDbType.Int,4)};
             parameters[0].Value = model.wid;
             parameters[1].Value = model.hotelName;
             parameters[2].Value = model.hotelLogo;
@@ -223,7 +233,10 @@ namespace WeiXinPF.DAL
             parameters[26].Value = model.hoteltimeEnd1;
             parameters[27].Value = model.hoteltimeBegin2;
             parameters[28].Value = model.hoteltimeEnd2;
-            parameters[29].Value = model.id;
+
+            parameters[29].Value = model.manager;
+            parameters[30].Value = model.mobile;
+            parameters[31].Value = model.id;
 
             int rows = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
             if (rows > 0)

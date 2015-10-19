@@ -45,11 +45,13 @@ namespace WeiXinPF.DAL
 		/// </summary>
 		public int Add(WeiXinPF.Model.wx_diancai_caipin_manage model)
 		{
-			StringBuilder strSql=new StringBuilder();
+            
+
+            StringBuilder strSql =new StringBuilder();
 			strSql.Append("insert into wx_diancai_caipin_manage(");
-			strSql.Append("categoryid,cpName,categoryName,cpPrice,zkPrice,priceUnite,cpPic,picUrl,detailContent,createDate,shopid,sortid,scan)");
+			strSql.Append("categoryid,cpName,categoryName,cpPrice,zkPrice,priceUnite,cpPic,picUrl,detailContent,createDate,shopid,sortid,scan,instructions,shopIntroduction,beginDate,endDate)");
 			strSql.Append(" values (");
-			strSql.Append("@categoryid,@cpName,@categoryName,@cpPrice,@zkPrice,@priceUnite,@cpPic,@picUrl,@detailContent,@createDate,@shopid,@sortid,@scan)");
+			strSql.Append("@categoryid,@cpName,@categoryName,@cpPrice,@zkPrice,@priceUnite,@cpPic,@picUrl,@detailContent,@createDate,@shopid,@sortid,@scan,@instructions,@shopIntroduction,@beginDate,@endDate)");
 			strSql.Append(";select @@IDENTITY");
 			SqlParameter[] parameters = {
 					new SqlParameter("@categoryid", SqlDbType.Int,4),
@@ -64,7 +66,14 @@ namespace WeiXinPF.DAL
 					new SqlParameter("@createDate", SqlDbType.DateTime),
 					new SqlParameter("@shopid", SqlDbType.Int,4),
 					new SqlParameter("@sortid", SqlDbType.Int,4),
-					new SqlParameter("@scan", SqlDbType.Int,4)};
+					new SqlParameter("@scan", SqlDbType.Int,4),
+                    new SqlParameter("@instructions", SqlDbType.VarChar,300),
+                    new SqlParameter("@shopIntroduction", SqlDbType.VarChar,300),
+                    new SqlParameter("@beginDate", SqlDbType.DateTime),
+                    new SqlParameter("@endDate", SqlDbType.DateTime)
+
+
+            };
 			parameters[0].Value = model.categoryid;
 			parameters[1].Value = model.cpName;
 			parameters[2].Value = model.categoryName;
@@ -78,8 +87,12 @@ namespace WeiXinPF.DAL
 			parameters[10].Value = model.shopid;
 			parameters[11].Value = model.sortid;
 			parameters[12].Value = model.scan;
+			parameters[13].Value = model.instructions;
+			parameters[14].Value = model.shopIntroduction;
+			parameters[15].Value = model.beginDate;
+			parameters[16].Value = model.endDate;
 
-			object obj = DbHelperSQL.GetSingle(strSql.ToString(),parameters);
+            object obj = DbHelperSQL.GetSingle(strSql.ToString(),parameters);
 			if (obj == null)
 			{
 				return 0;
@@ -108,8 +121,10 @@ namespace WeiXinPF.DAL
 			strSql.Append("createDate=@createDate,");
 			strSql.Append("shopid=@shopid,");
 			strSql.Append("sortid=@sortid,");
-			strSql.Append("scan=@scan");
-			strSql.Append(" where id=@id");
+			strSql.Append("scan=@scan,");
+			strSql.Append("instructions=@instructions,");
+			strSql.Append("shopIntroduction=@shopIntroduction");
+            strSql.Append(" where id=@id");
 			SqlParameter[] parameters = {
 					new SqlParameter("@categoryid", SqlDbType.Int,4),
 					new SqlParameter("@cpName", SqlDbType.VarChar,100),
@@ -124,7 +139,12 @@ namespace WeiXinPF.DAL
 					new SqlParameter("@shopid", SqlDbType.Int,4),
 					new SqlParameter("@sortid", SqlDbType.Int,4),
 					new SqlParameter("@scan", SqlDbType.Int,4),
-					new SqlParameter("@id", SqlDbType.Int,4)};
+                    new SqlParameter("@instructions", SqlDbType.VarChar,300),
+                    new SqlParameter("@shopIntroduction", SqlDbType.VarChar,300),
+                    new SqlParameter("@beginDate", SqlDbType.DateTime),
+                    new SqlParameter("@endDate", SqlDbType.DateTime),
+
+                    new SqlParameter("@id", SqlDbType.Int,4)};
 			parameters[0].Value = model.categoryid;
 			parameters[1].Value = model.cpName;
 			parameters[2].Value = model.categoryName;
@@ -138,7 +158,11 @@ namespace WeiXinPF.DAL
 			parameters[10].Value = model.shopid;
 			parameters[11].Value = model.sortid;
 			parameters[12].Value = model.scan;
-			parameters[13].Value = model.id;
+            parameters[13].Value = model.instructions;
+            parameters[14].Value = model.shopIntroduction;
+            parameters[15].Value = model.beginDate;
+            parameters[16].Value = model.endDate;
+            parameters[17].Value = model.id;
 
 			int rows=DbHelperSQL.ExecuteSql(strSql.ToString(),parameters);
 			if (rows > 0)
@@ -202,7 +226,7 @@ namespace WeiXinPF.DAL
 		{
 			
 			StringBuilder strSql=new StringBuilder();
-			strSql.Append("select  top 1 id,categoryid,cpName,categoryName,cpPrice,zkPrice,priceUnite,cpPic,picUrl,detailContent,createDate,shopid,sortid,scan from wx_diancai_caipin_manage ");
+			strSql.Append("select  top 1 id,categoryid,number,cpName,categoryName,cpPrice,zkPrice,priceUnite,cpPic,picUrl,detailContent,createDate,shopid,sortid,scan,instructions,shopIntroduction,beginDate,endDate from wx_diancai_caipin_manage ");
 			strSql.Append(" where id=@id");
 			SqlParameter[] parameters = {
 					new SqlParameter("@id", SqlDbType.Int,4)
@@ -286,7 +310,30 @@ namespace WeiXinPF.DAL
 				{
 					model.scan=int.Parse(row["scan"].ToString());
 				}
-			}
+
+                if (row["number"] != null)
+                {
+                    model.number = row["number"].ToString();
+                }
+                if (row["instructions"] != null)
+                {
+                    model.instructions = row["instructions"].ToString();
+                }
+                if (row["shopIntroduction"] != null)
+                {
+                    model.shopIntroduction = row["shopIntroduction"].ToString();
+                }
+
+                if (row["beginDate"] != null && row["beginDate"].ToString() != "")
+                {
+                    model.beginDate = DateTime.Parse(row["beginDate"].ToString());
+                }
+
+                if (row["endDate"] != null && row["endDate"].ToString() != "")
+                {
+                    model.endDate = DateTime.Parse(row["endDate"].ToString());
+                }
+            }
 			return model;
 		}
 
@@ -296,7 +343,7 @@ namespace WeiXinPF.DAL
 		public DataSet GetList(string strWhere)
 		{
 			StringBuilder strSql=new StringBuilder();
-			strSql.Append("select id,categoryid,cpName,categoryName,cpPrice,zkPrice,priceUnite,cpPic,picUrl,detailContent,createDate,shopid,sortid,scan ");
+			strSql.Append("select id,categoryid,number,cpName,categoryName,cpPrice,zkPrice,priceUnite,cpPic,picUrl,detailContent,createDate,shopid,sortid,scan ");
 			strSql.Append(" FROM wx_diancai_caipin_manage ");
 			if(strWhere.Trim()!="")
 			{
@@ -316,7 +363,7 @@ namespace WeiXinPF.DAL
 			{
 				strSql.Append(" top "+Top.ToString());
 			}
-			strSql.Append(" id,categoryid,cpName,categoryName,cpPrice,zkPrice,priceUnite,cpPic,picUrl,detailContent,createDate,shopid,sortid,scan ");
+			strSql.Append(" id,categoryid,number,cpName,categoryName,cpPrice,zkPrice,priceUnite,cpPic,picUrl,detailContent,createDate,shopid,sortid,scan ");
 			strSql.Append(" FROM wx_diancai_caipin_manage ");
 			if(strWhere.Trim()!="")
 			{
@@ -403,7 +450,7 @@ namespace WeiXinPF.DAL
         public DataSet GetList(int pageSize, int pageIndex, string strWhere, string filedOrder, out int recordCount)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select aa.id,aa.categoryid,aa.cpName,aa.categoryName as categoryName,aa.cpPrice,aa.zkPrice,aa.priceUnite,aa.cpPic,aa.picUrl,aa.detailContent,aa.createDate,aa.shopid,aa.sortid,aa.scan ");
+            strSql.Append("select aa.id,aa.categoryid,aa.number,aa.cpName,aa.categoryName as categoryName,aa.cpPrice,aa.zkPrice,aa.priceUnite,aa.cpPic,aa.picUrl,aa.detailContent,aa.createDate,aa.shopid,aa.sortid,aa.scan ");
             strSql.Append(" FROM wx_diancai_caipin_manage ");
             strSql.Append(" as aa left join (select * from  wx_diancai_caipin_category ) as bb on aa.categoryid=bb.id");
             strSql.Append(" where 1=1 ");//
@@ -420,7 +467,7 @@ namespace WeiXinPF.DAL
         public DataSet GetList(int cateid)
 		{
 			StringBuilder strSql=new StringBuilder();
-			strSql.Append("select id,categoryid,cpName,categoryName,cpPrice,zkPrice,priceUnite,cpPic,picUrl,detailContent,createDate,shopid,sortid,scan ");
+			strSql.Append("select id,categoryid,aa.number,cpName,categoryName,cpPrice,zkPrice,priceUnite,cpPic,picUrl,detailContent,createDate,shopid,sortid,scan ");
 			strSql.Append(" FROM wx_diancai_caipin_manage ");
             if (cateid != 0)
 			{

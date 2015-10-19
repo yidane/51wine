@@ -157,9 +157,21 @@ namespace WeiXinPF.Web.admin.diancai
                 hotel.limiteOrder = Convert.ToBoolean(this.limiteOrder.SelectedValue);
 
                 hotel.dcRename = this.rename.Text;
-                hotel.sendPrice = Convert.ToDecimal(this.sendPrice.Text);
-                hotel.sendCost = Convert.ToDecimal(this.sendCost.Text);
-                hotel.freeSendcost = Convert.ToInt32(this.freeSendcost.Text);
+                if (!string.IsNullOrEmpty(this.sendPrice.Text))
+                {
+                    hotel.sendPrice = Convert.ToDecimal(this.sendPrice.Text);
+                }
+
+                if (!string.IsNullOrEmpty(this.sendCost.Text))
+                {
+                    hotel.sendCost = Convert.ToDecimal(this.sendCost.Text);
+                }
+
+                if (!string.IsNullOrEmpty(this.freeSendcost.Text))
+                {
+                    hotel.freeSendcost = Convert.ToInt32(this.freeSendcost.Text);
+                }
+                 
                 hotel.radius = this.radius.Text;
                 hotel.sendArea = this.sendArea.Text;
                 hotel.tel = this.tel.Text;
@@ -176,6 +188,12 @@ namespace WeiXinPF.Web.admin.diancai
                 hotel.miaoshu = this.miaoshu.InnerText;
                 hotel.xplace = Convert.ToDecimal(this.txtLatXPoint.Text);
                 hotel.yplace = Convert.ToDecimal(this.txtLngYPoint.Text);
+
+
+                //---喀纳斯添加的字段
+                hotel.manager = this.manager.Text;
+                hotel.mobile = this.mobile.Text;
+                //---
 
                 int id = hotelBll.Add(hotel);
 
@@ -200,7 +218,7 @@ namespace WeiXinPF.Web.admin.diancai
 
                     }
                 }
-                AddAdminLog(MXEnums.ActionEnum.Add.ToString(), "添加商家设置，主键为" + id); //记录日志
+                AddAdminLog(MXEnums.ActionEnum.Add.ToString(), "添加商户设置，主键为" + id); //记录日志
                 JscriptMsg("添加成功！", "shop_list.aspx", "Success");
 
             }
@@ -264,6 +282,12 @@ namespace WeiXinPF.Web.admin.diancai
                 hotel.miaoshu = this.miaoshu.InnerText;
                 hotel.xplace = Convert.ToDecimal(this.txtLatXPoint.Text);
                 hotel.yplace = Convert.ToDecimal(this.txtLngYPoint.Text);
+
+                //---喀纳斯添加的字段
+                hotel.manager = this.manager.Text;
+                hotel.mobile = this.mobile.Text;
+                //---
+
                 hotelBll.Update(hotel);
 
                 picBll.Delete(shopid);
@@ -288,7 +312,7 @@ namespace WeiXinPF.Web.admin.diancai
 
                     }
                 }
-                AddAdminLog(MXEnums.ActionEnum.Edit.ToString(), "修改商家设置，主键为" + shopid); //记录日志
+                AddAdminLog(MXEnums.ActionEnum.Edit.ToString(), "修改商户设置，主键为" + shopid); //记录日志
                 JscriptMsg("修改成功！", "shop_list.aspx", "Success");
             }
 
