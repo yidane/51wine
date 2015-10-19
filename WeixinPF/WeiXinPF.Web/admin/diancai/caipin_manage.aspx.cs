@@ -36,7 +36,7 @@ namespace WeiXinPF.Web.admin.diancai
                 }
              
 
-                RptBind(CombSqlTxt(keywords), "createDate desc,id desc");
+                RptBind(CombSqlTxt(keywords), "sortid asc ,createDate desc,id desc");
 
             }
         }

@@ -4,7 +4,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
-    <title>菜品管理</title>
+    <title>商品信息管理</title>
     <script type="text/javascript" src="../../scripts/jquery/jquery-1.10.2.min.js"></script>
     <script type="text/javascript" src="../../scripts/lhgdialog/lhgdialog.js?skin=idialog"></script>
     <script type="text/javascript" src="../js/layout.js"></script>
@@ -30,18 +30,18 @@
 <body class="mainbody">
     <form id="form1" runat="server">
           <div class="location">
-            <a href="shop_list.aspx" class="home"><i></i><span>点菜系统</span></a>
+            <a href="shop_list.aspx" class="home"><i></i><span>餐饮管理</span></a>
             <i class="arrow"></i>            
-            <span>菜品管理</span>
+            <span>商品信息管理</span>
         </div>
        <div class="mytips">        
-            提醒：请先设置好菜品分类，再添加新的菜品，点击设置菜品分类
+            提醒：请先设置好商品信息分类，再添加新的商品信息，点击设置商品信息分类
          </div>
        <div class="toolbar-wrap">
             <div id="floatHead" class="toolbar">
                 <div class="l-list">
                     <ul class="icon-list">
-                        <li><a class="icon-btn add" href="caipin_manage_add.aspx?action=<%=WeiXinPF.Common.MXEnums.ActionEnum.Add %>&shopid=<%=shopid %>&type=add"  id="itemAddButton"><i></i><span>新增商品</span></a></li>
+                        <li><a class="icon-btn add" href="caipin_manage_add.aspx?action=<%=WeiXinPF.Common.MXEnums.ActionEnum.Add %>&shopid=<%=shopid %>&type=add"  id="itemAddButton"><i></i><span>新增商品信息</span></a></li>
 
                         <li><a class="all" href="javascript:;" onclick="checkAll(this);"><i></i><span>全选</span></a></li>
                         <li>
@@ -62,14 +62,14 @@
                     <thead>
                         <tr>
                             <th >选择</th>
-                           
+                           <th >编号</th>
                             <th >名称</th>
-                            <th >市场价格</th>   
-                            <th >销售价格</th> 
-                            <th >类别</th> 
-                            <th >浏览次数</th>
+                            <th >原价</th>   
+                            <th >折扣</th> 
+                            <th >商品信息分类</th> 
+                            <th style="display: none" >浏览次数</th>
                             <th >时间</th>     
-                            <th >排序值</th>         
+                            <th >排序</th>         
                             <th >操作</th>           
                         </tr>
                     </thead>
@@ -81,7 +81,9 @@
                         <asp:CheckBox ID="chkId" CssClass="checkall" runat="server" Style="vertical-align: middle;" />
                         <asp:HiddenField ID="hidId" Value='<%#Eval("id")%>' runat="server" />
                     </td>
-             
+              <td>
+                        <%# Eval("number") %>
+                    </td>
                     <td>
                         <%# Eval("cpName") %>
                     </td>
@@ -97,7 +99,7 @@
                         <%# Eval("categoryName") %>
                         
                     </td>
-                     <td>
+                     <td style="display: none" >
                         <%# Eval("scan") %>
                         
                     </td>

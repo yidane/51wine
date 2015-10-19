@@ -41,9 +41,9 @@
 <body class="mainbody">
     <form id="form1" runat="server">
         <div class="location">
-            <a href="shop_list.aspx" class="home"><i></i><span>点菜系统</span></a>
+            <a href="shop_list.aspx" class="home"><i></i><span>餐饮管理</span></a>
             <i class="arrow"></i>
-            <span>商家设置</span>
+            <span>商户或门店信息设置</span>
         </div>
         <div class="line10"></div>
         <!--/导航栏-->
@@ -52,8 +52,8 @@
             <div id="floatHead" class="content-tab">
                 <div class="content-tab-ul-wrap">
                     <ul>
-                        <li><a href="javascript:;" onclick="tabs(this);" class="selected">商家设置</a></li>
-                        <li><a href="javascript:;" onclick="tabs(this);">商家图片</a></li>
+                        <li><a href="javascript:;" onclick="tabs(this);" class="selected">商户或门店信息设置</a></li>
+                        <li><a href="javascript:;" onclick="tabs(this);">商户或门店图片</a></li>
                         <asp:HiddenField ID="hidId" runat="server" Value="0" />
                     </ul>
                 </div>
@@ -62,14 +62,14 @@
 
         <div class="tab-content">
             <dl>
-                <dt>商家名称：</dt>
+                <dt>商户或门店名称：</dt>
                 <dd>
                     <asp:TextBox runat="server" ID="hotelName" CssClass="input normal" sucmsg=" " nullmsg="" datatype="*1-100"></asp:TextBox>
                     <span class="Validform_checktip">*</span>
                 </dd>
             </dl>
             <dl>
-                <dt>商家Logo：</dt>
+                <dt>商户或门店Logo：</dt>
                 <dd>
                     <asp:TextBox ID="hotelLogo" runat="server" CssClass="input normal upload-path"  datatype="*1-200" Style="width: 200px;" sucmsg=" " nullmsg="" />
                     <div class="upload-box upload-img"></div>
@@ -77,6 +77,42 @@
                     <span class="red">外链地址(图片尺寸100x100
                     </span>
 
+                </dd>
+            </dl>
+            
+             
+            
+              <dl >
+                <dt>商户或门店邮箱：</dt>
+                <dd>
+                    <asp:TextBox runat="server" ID="email" CssClass="input normal" sucmsg=" " nullmsg=" " datatype="*0-100"></asp:TextBox>
+                    <span class="Validform_checktip">*</span>
+                   
+                    
+                </dd>
+            </dl>
+            
+             <dl>
+                <dt>经营人：</dt>
+                <dd>
+                    <asp:TextBox runat="server" ID="manager" CssClass="input normal" sucmsg=" " nullmsg=" " datatype="*1-100"></asp:TextBox>
+                    <span class="Validform_checktip">*</span>
+                </dd>
+            </dl>
+            
+            
+              <dl>
+                <dt>联系电话：</dt>
+                <dd>
+                    <asp:TextBox runat="server" ID="tel" CssClass="input normal" sucmsg=" " nullmsg=" " datatype="*1-100"></asp:TextBox>
+                    <span class="Validform_checktip">*</span>
+                </dd>
+            </dl>
+             <dl>
+                <dt>联系手机：</dt>
+                <dd>
+                    <asp:TextBox runat="server" ID="mobile" CssClass="input normal" sucmsg=" " nullmsg=" " datatype="*1-100"></asp:TextBox>
+                    <span class="Validform_checktip">*</span>
                 </dd>
             </dl>
 
@@ -101,6 +137,25 @@
                     <span class="Validform_checktip">*</span>
                 </dd>
             </dl>
+            
+                   <dl>
+                <dt>联系地址：</dt>
+                <dd>
+                    <asp:TextBox runat="server" ID="address" CssClass="input normal" sucmsg=" " nullmsg=" " datatype="*1-100"></asp:TextBox>
+                    <span class="Validform_checktip">*</span>
+                </dd>
+                <dd>纬度（x）: 
+                      <asp:TextBox ID="txtLatXPoint" runat="server" Width="200px" Text="" CssClass="input small " datatype="*1-20" sucmsg=" " nullmsg=" "></asp:TextBox>
+                    <span class="Validform_checktip">*</span> &nbsp;&nbsp;&nbsp;
+                </dd>
+                <dd>经度（y）:
+                      <asp:TextBox ID="txtLngYPoint" runat="server" Width="200px" Text="" CssClass="input small " datatype="*1-20" sucmsg=" " nullmsg=" "></asp:TextBox>
+                    <span class="Validform_checktip">*</span>
+                </dd>
+                <dd>
+                    <iframe id="baiduframe" src="../../weixin/map/qqmap/qqmap_getLocation.html" height="400" width="600" style="border: 1px solid #e1e1e1;"></iframe>
+                </dd>
+            </dl>
 
             <dl>
                 <dt>下单限制：</dt>
@@ -114,46 +169,8 @@
                     </div>
                 </dd>
             </dl>
-            <dl>
-                <dt>点单重命名：</dt>
-                <dd>
-                    <asp:TextBox runat="server" ID="rename" CssClass="input normal" sucmsg=" " nullmsg=" " datatype="*1-100"></asp:TextBox>
-                    <span class="Validform_checktip">*</span>
-                    <br />
-                    <span class="red">4个字内(如 点菜,点单,外卖 )
-                    </span>
-
-                </dd>
-            </dl>
-
-            <dl>
-                <dt>起送价格：</dt>
-                <dd>
-                    <asp:TextBox runat="server" ID="sendPrice" CssClass="input normal" sucmsg=" " nullmsg=" " datatype="n"></asp:TextBox>
-                    <span class="Validform_checktip">*</span>
-                </dd>
-            </dl>
-
-            <dl>
-                <dt>配送费用：</dt>
-                <dd>
-                    <asp:TextBox runat="server" ID="sendCost" CssClass="input normal" sucmsg=" " nullmsg=" " datatype="n"></asp:TextBox>
-                    <span class="Validform_checktip">*</span>
-                    <br />
-                    <span class="red">默认为0表示都需要配送费
-                    </span>
-                </dd>
-            </dl>
-
-            <dl>
-                <dt>订单满多少免配送费：</dt>
-                <dd>
-                    <asp:TextBox runat="server" ID="freeSendcost" CssClass="input normal" sucmsg=" " nullmsg=" " datatype="n"></asp:TextBox>
-                    <span class="Validform_checktip">*</span>
-                </dd>
-            </dl>
-
-            <dl>
+            
+                <dl>
                 <dt>选择分类：</dt>
                 <dd>
                     <select name="type" id="type" runat="server">
@@ -191,9 +208,9 @@
                     </select>
                 </dd>
             </dl>
-
-            <dl>
-                <dt>商家简短描述：</dt>
+            
+               <dl>
+                <dt>商户或门店一句话描述：</dt>
                 <dd>
                     <textarea name="miaoshu" rows="2" cols="20" id="miaoshu" datatype="*1-1000" sucmsg=" " nullmsg=" " class="input" runat="server"></textarea>
                     <span class="Validform_checktip">*</span>
@@ -202,50 +219,8 @@
                     </span>
                 </dd>
             </dl>
-
-            <dl>
-                <dt>服务半径：</dt>
-                <dd>
-                    <asp:TextBox runat="server" ID="radius" CssClass="input normal" sucmsg=" " nullmsg=" " datatype="*1-100"></asp:TextBox>
-                    <span class="Validform_checktip">*千米</span>
-                </dd>
-            </dl>
-            <dl>
-                <dt>配送区域：</dt>
-                <dd>
-                    <asp:TextBox runat="server" ID="sendArea" CssClass="input normal" sucmsg=" " nullmsg=" " datatype="*1-100"></asp:TextBox>
-                    <span class="Validform_checktip">*</span>
-                </dd>
-            </dl>
-
-            <dl>
-                <dt>联系电话：</dt>
-                <dd>
-                    <asp:TextBox runat="server" ID="tel" CssClass="input normal" sucmsg=" " nullmsg=" " datatype="*1-100"></asp:TextBox>
-                    <span class="Validform_checktip">*</span>
-                </dd>
-            </dl>
-
-            <dl>
-                <dt>联系地址：</dt>
-                <dd>
-                    <asp:TextBox runat="server" ID="address" CssClass="input normal" sucmsg=" " nullmsg=" " datatype="*1-100"></asp:TextBox>
-                    <span class="Validform_checktip">*</span>
-                </dd>
-                <dd>纬度（x）: 
-                      <asp:TextBox ID="txtLatXPoint" runat="server" Width="200px" Text="" CssClass="input small " datatype="*1-20" sucmsg=" " nullmsg=" "></asp:TextBox>
-                    <span class="Validform_checktip">*</span> &nbsp;&nbsp;&nbsp;
-                </dd>
-                <dd>经度（y）:
-                      <asp:TextBox ID="txtLngYPoint" runat="server" Width="200px" Text="" CssClass="input small " datatype="*1-20" sucmsg=" " nullmsg=" "></asp:TextBox>
-                    <span class="Validform_checktip">*</span>
-                </dd>
-                <dd>
-                    <iframe id="baiduframe" src="../../weixin/map/qqmap/qqmap_getLocation.html" height="400" width="600" style="border: 1px solid #e1e1e1;"></iframe>
-                </dd>
-            </dl>
-
-            <dl>
+            
+             <dl>
                 <dt>每人每天允许下单次数：</dt>
                 <dd>
                     <asp:TextBox runat="server" ID="personLimite" CssClass="input normal" sucmsg=" " nullmsg=" " datatype="n"></asp:TextBox>
@@ -255,9 +230,9 @@
                     </span>
                 </dd>
             </dl>
-
-            <dl>
-                <dt>商家公告：</dt>
+            
+             <dl>
+                <dt>商户或门店公告：</dt>
                 <dd>
                     <textarea name="notice" rows="2" cols="20" id="notice" sucmsg=" " nullmsg=" " class="input" runat="server"></textarea>
                     <span class="Validform_checktip">*</span>
@@ -265,23 +240,82 @@
             </dl>
 
             <dl>
-                <dt>商家简介：</dt>
+                <dt>商户或门店简介：</dt>
                 <dd>
                     <textarea name="hotelintroduction" rows="2" cols="20" id="hotelintroduction"  sucmsg=" " nullmsg=" " class="input" runat="server"></textarea>
                     <span class="Validform_checktip">*</span>
                 </dd>
             </dl>
+            
+
 
             <dl style="display: none">
-                <dt>下单通知邮箱：</dt>
+                <dt>点单重命名：</dt>
                 <dd>
-                    <asp:TextBox runat="server" ID="email" CssClass="input normal" sucmsg=" " nullmsg=" " datatype="*0-100"></asp:TextBox>
+                    <asp:TextBox runat="server" ID="rename" CssClass="input normal"></asp:TextBox>
                     <span class="Validform_checktip">*</span>
                     <br />
-                    <span class="red">当有用户下单时候会通过此邮箱通知！建议使用163邮箱 例如:123456789@163.com
+                    <span class="red">4个字内(如 点菜,点单,外卖 )
+                    </span>
+
+                </dd>
+            </dl>
+
+            <dl style="display: none">
+                <dt>起送价格：</dt>
+                <dd>
+                    <asp:TextBox runat="server" ID="sendPrice" CssClass="input normal" ></asp:TextBox>
+                    <span class="Validform_checktip">*</span>
+                </dd>
+            </dl>
+
+            <dl style="display: none">
+                <dt>配送费用：</dt>
+                <dd>
+                    <asp:TextBox runat="server" ID="sendCost" CssClass="input normal" ></asp:TextBox>
+                    <span class="Validform_checktip">*</span>
+                    <br />
+                    <span class="red">默认为0表示都需要配送费
                     </span>
                 </dd>
             </dl>
+
+            <dl style="display: none">
+                <dt>订单满多少免配送费：</dt>
+                <dd>
+                    <asp:TextBox runat="server" ID="freeSendcost" CssClass="input normal"></asp:TextBox>
+                    <span class="Validform_checktip">*</span>
+                </dd>
+            </dl>
+
+        
+
+         
+
+            <dl style="display: none">
+                <dt>服务半径：</dt>
+                <dd>
+                    <asp:TextBox runat="server" ID="radius" CssClass="input normal"></asp:TextBox>
+                    <span class="Validform_checktip">*千米</span>
+                </dd>
+            </dl>
+            <dl style="display: none">
+                <dt>配送区域：</dt>
+                <dd>
+                    <asp:TextBox runat="server" ID="sendArea" CssClass="input normal"></asp:TextBox>
+                    <span class="Validform_checktip">*</span>
+                </dd>
+            </dl>
+
+          
+
+     
+
+           
+
+           
+
+          
 
             <dl style="display: none">
                 <dt>邮箱登录密码：</dt>

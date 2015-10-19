@@ -49,7 +49,7 @@ namespace WeiXinPF.Web.admin.diancai
             caipin.isStart = Convert.ToBoolean( this.isStart.SelectedValue);
             caipin.createDate = DateTime.Now;
             int id = caipinbll.Add(caipin);
-            AddAdminLog(MXEnums.ActionEnum.Add.ToString(), "添加菜品分类，主键为" + id); //记录日志
+            AddAdminLog(MXEnums.ActionEnum.Add.ToString(), "添加商品信息分类，主键为" + id); //记录日志
             JscriptMsg("增加成功！", Utils.CombUrlTxt("caipin_category.aspx?shopid='" + shopid + "'&manage=managetype", "keywords={0}", ""), "Success");
            }
 
@@ -65,7 +65,7 @@ namespace WeiXinPF.Web.admin.diancai
                 caipin.isStart = Convert.ToBoolean( this.isStart.SelectedValue);
                 caipin.createDate = DateTime.Now;
                 caipinbll.Update(caipin);
-                AddAdminLog(MXEnums.ActionEnum.Edit.ToString(), "修改菜品分类，主键为" + ids); //记录日志
+                AddAdminLog(MXEnums.ActionEnum.Edit.ToString(), "修改商品信息分类，主键为" + ids); //记录日志
                 JscriptMsg("修改成功！", Utils.CombUrlTxt("caipin_category.aspx?shopid='" + shopid + "'&manage=managetype", "keywords={0}", ""), "Success");
          }
 

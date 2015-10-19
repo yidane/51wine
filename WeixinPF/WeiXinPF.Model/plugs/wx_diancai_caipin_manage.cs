@@ -24,7 +24,13 @@ namespace WeiXinPF.Model
 		private int? _shopid;
 		private int _sortid;
 		private int? _scan;
-		/// <summary>
+	    private string _number;
+	    private string _instructions;
+	    private string _shopIntroduction;
+	    private DateTime? _beginDate;
+	    private DateTime? _endDate;
+
+	    /// <summary>
 		/// 
 		/// </summary>
 		public int id
@@ -136,7 +142,38 @@ namespace WeiXinPF.Model
 			set{ _scan=value;}
 			get{return _scan;}
 		}
-		#endregion Model
+
+	    public string number
+	    {
+	        get { return _number; }
+	        set { _number = value; }
+	    }
+
+	    public string instructions
+	    {
+	        get { return _instructions; }
+	        set { _instructions = value; }
+	    }
+
+	    public string shopIntroduction
+	    {
+	        get { return _shopIntroduction; }
+	        set { _shopIntroduction = value; }
+	    }
+
+	    public DateTime? beginDate
+	    {
+	        get { return _beginDate; }
+	        set { _beginDate = value; }
+	    }
+
+	    public DateTime? endDate
+	    {
+	        get { return _endDate; }
+	        set { _endDate = value; }
+	    }
+
+	    #endregion Model
 
 	}
 }
