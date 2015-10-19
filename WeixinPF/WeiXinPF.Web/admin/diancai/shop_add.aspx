@@ -220,10 +220,10 @@
                 </dd>
             </dl>
 
-            <dl>
+            <dl style="display: none">
                 <dt>每人每天允许下单次数：</dt>
                 <dd>
-                    <asp:TextBox runat="server" ID="personLimite" CssClass="input normal" sucmsg=" " nullmsg=" " datatype="n"></asp:TextBox>
+                    <asp:TextBox runat="server" ID="personLimite" Text="0" CssClass="input normal" sucmsg=" " nullmsg=" " datatype="n"></asp:TextBox>
                     <span class="Validform_checktip">*</span>
                     <br />
                     <span class="red">0表示不限制，建议设置3，可以优先防止恶意刷单!

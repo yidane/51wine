@@ -36,7 +36,7 @@
 <body class="mainbody">
     <form id="form1" runat="server">
   <div class="location">
-            <a href="javascript:;" class="home"><i></i><span>点菜系统</span></a>
+            <a href="javascript:;" class="home"><i></i><span>商户或门店列表</span></a>
         </div>
         <!--/导航栏-->
   
