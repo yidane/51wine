@@ -29,5 +29,26 @@ namespace WeiXinPF.BLL
         {
             return dal.GetRefundList(openId);
         }
+
+        public DataSet GetRefundList(int shopId, int pageSize, int pageIndex,
+                                                            DateTime beginDate, DateTime endDate, int payAmountMin,
+                                                            int payAmountMax, string refundNumber, string orderNumber,
+                                                            string customerName, string customerTel, int refundStatus, out int totalCount)
+        {
+            return dal.GetRefundList(shopId, pageSize, pageIndex,
+                                                        beginDate, endDate, payAmountMin,
+                                                        payAmountMax, refundNumber, orderNumber,
+                                                        customerName, customerTel, refundStatus, out totalCount);
+        }
+
+        /// <summary>
+        /// 获取订单菜品详情信息
+        /// </summary>
+        /// <param name="refundId"></param>
+        /// <returns></returns>
+        public string GetRefundDetail(int refundId)
+        {
+            return dal.GetRefundDetail(refundId);
+        }
     }
 }

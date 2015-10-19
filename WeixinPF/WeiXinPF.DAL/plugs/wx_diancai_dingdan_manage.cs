@@ -558,11 +558,6 @@ namespace WeiXinPF.DAL
             return DbHelperSQL.Query(strSql.ToString());
         }
 
-        public DataSet GetRefundListList(string openid)
-        {
-            return null;
-        }
-
         public DataSet GetDingdanRefundDetail(int shopid, int dingdanid, string openid, int caiid)
         {
             var strSql = new StringBuilder();
@@ -690,8 +685,8 @@ namespace WeiXinPF.DAL
                                                                 ( shopinfoid ,
                                                                   openid ,
                                                                   wid ,
+                                                                  dingdanid,
                                                                   caipinid ,
-                                                                  orderNumber ,
                                                                   refundCode ,
                                                                   refundTime ,
                                                                   refundAmount ,
@@ -701,8 +696,8 @@ namespace WeiXinPF.DAL
                                                         VALUES  ( @ShopInfoID ,
                                                                   @OpenID ,
                                                                   @Wid ,
+                                                                  @DingdanID,
                                                                   @CaiPinID ,
-                                                                  '',
                                                                   @RefundCode ,
                                                                   null ,
                                                                   @RefundAmount ,
@@ -717,6 +712,7 @@ namespace WeiXinPF.DAL
                     new SqlParameter(){ParameterName = "@ShopInfoID",SqlDbType = SqlDbType.Int,Value = shopinfiId},
                     new SqlParameter(){ParameterName = "@OpenID",SqlDbType = SqlDbType.NVarChar,Value = openid},
                     new SqlParameter(){ParameterName = "@Wid",SqlDbType = SqlDbType.Int,Value = wid},
+                    new SqlParameter(){ParameterName = "@DingdanID",SqlDbType = SqlDbType.Int,Value = dingdanid},
                     new SqlParameter(){ParameterName = "@CaiPinID",SqlDbType = SqlDbType.Int,Value = id},
                     new SqlParameter(){ParameterName = "@RefundCode",SqlDbType = SqlDbType.NVarChar,Value = "T"+Utils.Number(13)}, 
                     new SqlParameter(){ParameterName = "@RefundAmount",SqlDbType = SqlDbType.Int,Value = refundAmount} 

@@ -125,5 +125,98 @@ namespace WeiXinPF.DAL
 
             return DbHelperSQL.Query(sql, sqlparams);
         }
+
+        /// <summary>
+        /// 商家查询退单
+        /// </summary>
+        /// <param name="shopId"></param>
+        /// <param name="pageSize"></param>
+        /// <param name="pageIndex"></param>
+        /// <param name="beginDate"></param>
+        /// <param name="endDate"></param>
+        /// <param name="payAmountMin"></param>
+        /// <param name="payAmountMax"></param>
+        /// <param name="refundNumber"></param>
+        /// <param name="orderNumber"></param>
+        /// <param name="customerName"></param>
+        /// <param name="customerTel"></param>
+        /// <param name="refundStatus"></param>
+        /// <param name="totalCount"></param>
+        /// <returns></returns>
+        public DataSet GetRefundList(int shopId, int pageSize, int pageIndex,
+                                                            DateTime beginDate, DateTime endDate, int payAmountMin,
+                                                            int payAmountMax, string refundNumber, string orderNumber,
+                                                            string customerName, string customerTel, int refundStatus, out int totalCount)
+        {
+            totalCount = 0;
+            var totalParam = new SqlParameter()
+                {
+                    ParameterName = "@TotalCount",
+                    SqlDbType = SqlDbType.Int,
+                    Value = totalCount,
+                    Direction = ParameterDirection.Output
+                };
+
+            var sqlparams = new List<SqlParameter>()
+                {
+                    new SqlParameter(){ParameterName = "@ShopID",SqlDbType = SqlDbType.Int,Value = shopId},
+                    new SqlParameter(){ParameterName = "@PageSize",SqlDbType = SqlDbType.Int,Value = pageSize},
+                    new SqlParameter(){ParameterName = "@PageIndex",SqlDbType = SqlDbType.Int,Value = pageIndex},
+                    new SqlParameter(){ParameterName = "@BeginCreateTime",SqlDbType = SqlDbType.DateTime,Value = beginDate},
+                    new SqlParameter(){ParameterName = "@EndCreateTime",SqlDbType = SqlDbType.DateTime,Value = endDate},
+                    new SqlParameter(){ParameterName = "@PayAmountMin",SqlDbType = SqlDbType.Int,Value = payAmountMin},
+                    new SqlParameter(){ParameterName = "@PayAmountMax",SqlDbType = SqlDbType.Int,Value = payAmountMax},
+                    new SqlParameter(){ParameterName = "@RefundNumber",SqlDbType = SqlDbType.NVarChar,Value = refundNumber},
+                    new SqlParameter(){ParameterName = "@OrderNumber",SqlDbType = SqlDbType.NVarChar,Value = refundNumber},
+                    new SqlParameter(){ParameterName = "@CustomerName",SqlDbType = SqlDbType.NVarChar,Value = customerName},
+                    new SqlParameter(){ParameterName = "@CustomerTel",SqlDbType = SqlDbType.NVarChar,Value = customerTel},
+                    new SqlParameter(){ParameterName = "@RefundStatus",SqlDbType = SqlDbType.Int,Value = refundStatus},
+                    totalParam
+                };
+
+            if (DateTime.Equals(beginDate, DateTime.MinValue))
+                sqlparams[3].Value = null;
+            else
+                sqlparams[3].Value = beginDate;
+
+            if (DateTime.Equals(endDate, DateTime.MinValue))
+                sqlparams[4].Value = null;
+            else
+                sqlparams[4].Value = endDate;
+
+            var result = DbHelperSQL.RunProcedure("usp_wx_diancai_tuidan_manage_RefundManage", sqlparams.ToArray(), "tuidan");
+
+            totalCount = totalParam.Value != null && totalParam.Value != DBNull.Value
+                             ? Convert.ToInt32(totalParam.Value)
+                             : 0;
+
+            return result;
+        }
+
+        /// <summary>
+        /// 获取订单详情
+        /// </summary>
+        /// <param name="refundId"></param>
+        /// <returns></returns>
+        public string GetRefundDetail(int refundId)
+        {
+            var sqlparams = new List<SqlParameter>()
+                {
+                    new SqlParameter(){ParameterName = "@RefundID",SqlDbType = SqlDbType.Int,Value = refundId}
+                };
+
+            var result = DbHelperSQL.RunProcedure("usp_wx_diancai_tuidan_manage_RefundDetail", sqlparams.ToArray(), "refundDetail");
+
+            var rtnStringBuilder = new StringBuilder();
+            if (result != null && result.Tables.Count > 0 && result.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow row in result.Tables[0].Rows)
+                {
+                    if (row[0] != null && row[0] != DBNull.Value)
+                        rtnStringBuilder.Append(row[0].ToString());
+                }
+            }
+            return rtnStringBuilder.ToString();
+        }
     }
 }

@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="dingdan_manage.aspx.cs" Inherits="WeiXinPF.Web.admin.diancai.dingdan_manage" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="diancai_dingdanRefund_manage.aspx.cs" Inherits="WeiXinPF.Web.admin.diancai.diancai_dingdanRefund_manage" %>
 
 <!DOCTYPE html>
 
@@ -28,66 +28,53 @@
         a.shenghe {
             color: red;
         }
-
-        .Width1 {
-            width: 16.6%;
-            text-align: right;
-        }
-
-        .Width2 {
-            width: 33.3%;
-            text-align: right;
-        }
-
-        .Width3 {
-            width: 45%;
-            padding: 5px 4px;
-            min-height: 20px;
-            line-height: 20px;
-            border: 1px solid #d4d4d4;
-            background: #fff;
-            vertical-align: middle;
-            color: #333;
-            font-size: 100%;
-        }
     </style>
 </head>
 <body class="mainbody">
     <form id="form1" runat="server">
 
         <div class="location">
-            <a href="shop_list.aspx" class="home"><i></i><span>商户或门店列表</span></a>
+            <a href="shop_list.aspx" class="home"><i></i><span>点菜系统</span></a>
             <i class="arrow"></i>
             <span>订单管理</span>
         </div>
+        <!--/导航栏-->
+        <%--         <div class="mytips">        
+            1、确认订单后，用户不能再取消该订单；被设置为无效的订单，将成为失败订单！
+             <br />
+            2、交易成功的订单会计入销售统计；交易失败的订单不会计入销售统计，多次交易失败的客户建议加入黑名单！
+         </div>--%>
         <div class="tab-content">
-            <table style="width: 100%">
+            <table>
                 <tr>
-                    <td class="Width1">交易时间
+                    <td>退单时间
                     </td>
-                    <td colspan="2" class="Width2">
-                        <asp:TextBox ID="txtbeginDate" runat="server" CssClass="input date Width3" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" datatype="*1-50" errormsg="请选择正确的日期" sucmsg=" " nullmsg=" " />
+                    <td>
+                        <asp:TextBox ID="txtbeginDate" runat="server" CssClass="input date" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" datatype="*1-50" errormsg="请选择正确的日期" sucmsg=" " nullmsg=" " />
                         至
-                        <asp:TextBox ID="txtEndDate" runat="server" CssClass="input date Width3" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" datatype="*1-50" errormsg="请选择正确的日期" sucmsg=" " nullmsg=" " /></td>
-                    <td class="Width1">交易金额</td>
-                    <td colspan="2" class="Width2">
-                        <asp:TextBox ID="txtPayAmountMin" runat="server" CssClass="Width3" datatype="n" sucmsg=" " Text="100" />
-                        至
-                        <asp:TextBox ID="txtPayAmountMax" runat="server" CssClass="Width3" datatype="n" sucmsg=" " Text="100" /></td>
+                        <asp:TextBox ID="txtEndDate" runat="server" CssClass="input date" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" datatype="*1-50" errormsg="请选择正确的日期" sucmsg=" " nullmsg=" " /></td>
+                    <td>退单号</td>
+                    <td>
+                        <asp:TextBox ID="txtRefundNo" runat="server" CssClass="input small" datatype="n" sucmsg=" " Text="100" /></td>
+                    <td>订单号</td>
+                    <td>
+                        <asp:TextBox ID="txtOrderNumber" runat="server" CssClass="input small" datatype="n" sucmsg=" " Text="100" />
+                    </td>
                 </tr>
                 <tr>
-                    <td class="Width1">订单号</td>
-                    <td class="Width1">
-                        <asp:TextBox ID="txtOrderNumber" runat="server" CssClass="input normal" datatype="*1-300" sucmsg=" " Text="" /></td>
-                    <td class="Width1">预约人</td>
-                    <td class="Width1">
+                    <td>订单状态</td>
+                    <td>
+                        <asp:DropDownList runat="server" ID="dboRefundStatus">
+                            <asp:ListItem Text="退款审核中" Value="2"></asp:ListItem>
+                            <asp:ListItem Text="已退款" Value="3"></asp:ListItem>
+                            <asp:ListItem Text="退款失败" Value="4"></asp:ListItem>
+                        </asp:DropDownList>
+                    <td>退单人</td>
+                    <td>
                         <asp:TextBox ID="txtCustomerName" runat="server" CssClass="input normal" datatype="*1-300" sucmsg=" " Text="" /></td>
-                    <td class="Width1">预约电话</td>
-                    <td class="Width1">
+                    <td>退单电话</td>
+                    <td>
                         <asp:TextBox ID="txtCustomerTel" runat="server" CssClass="input normal" datatype="*1-300" sucmsg=" " Text="" /></td>
-                </tr>
-                <tr>
-                    <td></td>
                 </tr>
             </table>
         </div>
@@ -122,8 +109,9 @@
                             <th>预订人</th>
                             <th>电话</th>
                             <th>预定时间</th>
-                            <th>预订套餐</th>
-                            <th>总价</th>
+                            <th>退单商品</th>
+                            <th>退款总额</th>
+                            <th>订单状态</th>
                             <th>操作</th>
                         </tr>
                     </thead>
@@ -148,16 +136,19 @@
                         <%# Eval("customerTel") %>                        
                     </td>
                     <td>
-                        <%# Eval("createDate") %>                        
+                        <%# Eval("RefundTime") %>                        
                     </td>
                     <td>
                         <%# Eval("detail") %>                        
                     </td>
                     <td>
-                        <%# Eval("payAmount") %>                        
+                        <%# Eval("RefundAmount") %>                        
                     </td>
                     <td>
-                        <a href='dingdan_deal.aspx?id=<%#Eval("id") %>&shopid=<%=shopid %>'>操作</a>
+                        <%# Eval("RefundStatus") %>                        
+                    </td>
+                    <td>
+                        <a href='diangdan_refundDetail.aspx?id=<%#Eval("id") %>&shopid=<%=shopid %>'>操作</a>
                     </td>
                 </tr>
             </ItemTemplate>

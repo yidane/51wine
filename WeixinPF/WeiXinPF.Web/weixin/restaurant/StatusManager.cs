@@ -87,7 +87,12 @@ namespace WeiXinPF.Web.weixin.restaurant
             /// <summary>
             /// 已退款
             /// </summary>
-            public static StatusDict Refund = new StatusDict() { StatusID = 2, StatusName = "已退款" };
+            public static StatusDict Refund = new StatusDict() { StatusID = 3, StatusName = "已退款" };
+
+            /// <summary>
+            /// 退款失败
+            /// </summary>
+            public static StatusDict RefundFaild = new StatusDict() { StatusID = 4, StatusName = "退款失败" };
 
             public static StatusDict GetStatusDict(int statusId)
             {
@@ -101,6 +106,8 @@ namespace WeiXinPF.Web.weixin.restaurant
                         return PreRefund;
                     case 3:
                         return Refund;
+                    case 4:
+                        return RefundFaild;
                     default:
                         throw new Exception("未知状态");
                 }
