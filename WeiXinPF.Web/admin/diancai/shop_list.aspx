@@ -90,12 +90,13 @@
                      <a href="javascript:;"><%=yuming%>/weixin/diancai/index.aspx?wid=<%=wid %>&shopid=<%#Eval("id") %></a>
                     </td>--%>
                     <td>
-                        <a href='shop_register.aspx?shopid=<%#Eval("id") %>&action=<%# WeiXinPF.Common.MXEnums.ActionEnum.Edit.ToString() %>'>修改</a>
-                        <a href='shop_admin_list.aspx?shopid=<%#Eval("id") %>'>管理员设置</a>
-                        <a href='shop_add.aspx?shopid=<%#Eval("id") %>&type=edite'>商户信息查看</a>
+                        <a href="shop_register.aspx?shopid=<%#Eval("id") %>&action=<%# WeiXinPF.Common.MXEnums.ActionEnum.Edit.ToString() %>">修改</a>
+                        <a href="shop_admin_list.aspx?shopid=<%#Eval("id") %>">管理员设置</a>
+                        <a href="shop_add.aspx?shopid=<%#Eval("id") %>&type=edite">商户或门店信息查看</a>
+                        <a href="caipin_manage.aspx?shopid=<%#Eval("id") %>">商品信息查看</a>
+                        <a href="dingdan_manage.aspx?shopid=<%#Eval("id") %>">订单查看</a>
+                        <a href="diancai_dingdanRefund_manage.aspx?shopid=<%#Eval("id") %>">退单查看</a>
                         <%--<a  href='shop_setup.aspx?shopid=<%#Eval("id") %>&type=add'  >商城设置</a>--%>
-                        <a href='caipin_manage.aspx?shopid=<%#Eval("id") %>'>商品信息查看</a>
-                        <a href='dingdan_manage.aspx?shopid=<%#Eval("id") %>'>订单查看</a>
                         <%--<a  href='caipin_category.aspx?shopid=<%#Eval("id") %>' ></a>--%>
                         <%--<a  href='desk_number.aspx?shopid=<%#Eval("id") %>' >桌号设置</a>--%>
                         <%--<a  href='caidan_member_manage.aspx?shopid=<%#Eval("id") %>' >会员管理</a>--%>
