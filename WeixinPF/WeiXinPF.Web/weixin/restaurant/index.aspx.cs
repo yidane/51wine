@@ -116,11 +116,12 @@ namespace WeiXinPF.Web.weixin.restaurant
                     manageString += "<dd> ";
                     manageString += "<span class=\"count_zero\" id=\"num_" + manage1.Tables[0].Rows[j]["id"].ToString() + "_1\" onClick=\"addProduct('" + manage1.Tables[0].Rows[j]["id"].ToString() + "','1','" + manage1.Tables[0].Rows[j]["cpName"].ToString() + "','" + manage1.Tables[0].Rows[j]["zkPrice"].ToString() + "','" + categoryid + "',1);\">0</span>";
                     manageString += " <div class=\"tupian\"><img src=" + manage1.Tables[0].Rows[j]["picUrl"].ToString() + " onClick=\"htmlit('" + manage1.Tables[0].Rows[j]["picUrl"].ToString() + "','" + manage1.Tables[0].Rows[j]["cpName"].ToString() + "'," + manage1.Tables[0].Rows[j]["id"].ToString() + ")\">";
-                    manageString += "<a href=\"javascript:addProduct('" + manage1.Tables[0].Rows[j]["id"].ToString() + "','1','" + manage1.Tables[0].Rows[j]["cpName"].ToString() + "','" + manage1.Tables[0].Rows[j]["zkPrice"].ToString() + "','" + categoryid + "',1);\" class=\"add\" data-foodid=\"" + manage1.Tables[0].Rows[j]["id"].ToString() + "_1\">";
+                    manageString += "<a href=\"javascript:htmlit('" + manage1.Tables[0].Rows[j]["picUrl"].ToString() + "','" + manage1.Tables[0].Rows[j]["cpName"].ToString() + "'," + manage1.Tables[0].Rows[j]["id"].ToString() + ");\" class=\"add\" data-foodid=\"" + manage1.Tables[0].Rows[j]["id"].ToString() + "_1\">";
                     manageString += "<h3>" + manage1.Tables[0].Rows[j]["cpName"].ToString() + "</h3>";
                     manageString += " <em>" + manage1.Tables[0].Rows[j]["zkPrice"].ToString() + "元/件<del>" + manage1.Tables[0].Rows[j]["cpPrice"].ToString() + "元/件</del></em>";
                     manageString += "  <p class=\"dpNum\">" + manage1.Tables[0].Rows[j]["scan"].ToString() + "</p></a> ";
-                    manageString += " <a href=\"javascript:reduceProduct('" + manage1.Tables[0].Rows[j]["id"].ToString() + "','1',1);\" class=\"reduce\" id=\"del_" + manage1.Tables[0].Rows[j]["id"].ToString() + "_1\" style=\"display:none;\"><b class=\"ico_reduce\">减一份</b></a>";
+                    manageString += " <a href=\"javascript:addProduct('" + manage1.Tables[0].Rows[j]["id"].ToString() + "','1','" + manage1.Tables[0].Rows[j]["cpName"].ToString() + "','" + manage1.Tables[0].Rows[j]["zkPrice"].ToString() + "','" + categoryid + "',1);\" class=\"action plus\" id=\"add_" + manage1.Tables[0].Rows[j]["id"].ToString() + "_1\"><b>加一份</b></a>";
+                    manageString += " <a href=\"javascript:reduceProduct('" + manage1.Tables[0].Rows[j]["id"].ToString() + "','1',1);\" class=\"action reduce\" id=\"del_" + manage1.Tables[0].Rows[j]["id"].ToString() + "_1\" style=\"display:none;\"><b>减一份</b></a>";
                     manageString += " </div></dd>";
                 }
 

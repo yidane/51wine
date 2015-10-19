@@ -1646,8 +1646,8 @@ em.no {
     overflow: hidden;
     padding: 0;
     min-height: 60px;
-    background: url(../images/unchoosen.png) no-repeat right center;
-    background-size: 25px 25px;
+    /*background: url(../images/unchoosen.png) no-repeat right center;
+    background-size: 25px 25px;*/
 }
 
 .list .count_zero {
@@ -1684,20 +1684,17 @@ em.no {
     border-radius: 3px;
 }
 
-.list .reduce {
+.list .action {
     position: absolute;
-    bottom: 0;
+    transform: translate3d(0, -50%, 0);
+}
+
+.list .plus {
+    top: 50%;
     right: 0;
 }
 
-.listimg .reduce {
-    top: 50%;
-    right: -5px;
-    margin-top: -22px;
-    bottom: auto;
-}
-
-.list .ico_reduce {
+.list .plus b {
     position: relative;
     display: block;
     width: 25px;
@@ -1708,7 +1705,47 @@ em.no {
     text-indent: -9999px;
 }
 
-    .list .ico_reduce:after {
+    .list .plus b:after {
+        position: absolute;
+        top: 11px;
+        left: 5px;
+        content: "";
+        display: block;
+        width: 15px;
+        height: 3px;
+        background: #FFFFFF;
+    }
+
+    .list .plus b:before {
+        position: absolute;
+        top: 5px;
+        left: 11px;
+        content: "";
+        display: block;
+        width: 3px;
+        height: 15px;
+        background: #FFFFFF;
+    }
+
+.list .reduce {
+    top: 50%;
+    right: 40px;
+}
+
+
+
+.list .reduce b {
+    position: relative;
+    display: block;
+    width: 25px;
+    height: 25px;
+    /*margin: 10px 5px 10px 10px;*/
+    background: #D00A0A;
+    border-radius: 50%;
+    text-indent: -9999px;
+}
+
+    .list .reduce b:after {
         position: absolute;
         top: 11px;
         left: 5px;
