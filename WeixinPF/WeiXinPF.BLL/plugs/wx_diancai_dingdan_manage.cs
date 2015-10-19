@@ -166,9 +166,21 @@ namespace WeiXinPF.BLL
             return dal.GetList(pageSize, pageIndex, strWhere, filedOrder, out recordCount);
         }
 
+        public DataSet GetOrderList(int shopId, int pageSize, int pageIndex,
+                                    DateTime beginDate, DateTime endDate, int payAmountMin,
+                                    int payAmountMax, string orderNumber, string customerName, string customerTel, out int totalCount)
+        {
+            return dal.GetOrderList(shopId, pageSize, pageIndex, beginDate, endDate, payAmountMin, payAmountMax, orderNumber, customerName, customerTel, out totalCount);
+        }
+
+        public string GetOrderCaipinDetail(int orderId)
+        {
+            return dal.GetOrderCaipinDetail(orderId);
+        }
+
         public List<wx_diancai_credentials_detail> GetCredentialsList(int shopid, string condition, out double totalAmount)
         {
-            DataSet ds = dal.GetCredentialsList(shopid, condition,out totalAmount);
+            DataSet ds = dal.GetCredentialsList(shopid, condition, out totalAmount);
             return ds.Tables[0].ToObject<wx_diancai_credentials_detail>().ToList();
         }
 

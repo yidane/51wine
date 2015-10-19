@@ -431,7 +431,73 @@ namespace WeiXinPF.DAL
             return DbHelperSQL.Query(PagingHelper.CreatePagingSql(recordCount, pageSize, pageIndex, strSql.ToString(), filedOrder));
         }
 
-        public DataSet GetCredentialsList(int shopid, string condition,out double totalAmount)
+        public DataSet GetOrderList(int shopId, int pageSize, int pageIndex, DateTime beginDate, DateTime endDate, int payAmountMin,
+                                    int payAmountMax, string orderNumber, string customerName, string customerTel, out int totalCount)
+        {
+            var totalParam = new SqlParameter()
+                {
+                    ParameterName = "@TotalCount",
+                    SqlDbType = SqlDbType.Int,
+                    Value = shopId,
+                    Direction = ParameterDirection.Output
+                };
+            var sqlparams = new List<SqlParameter>
+                {
+                    new SqlParameter() {ParameterName = "@ShopID", SqlDbType = SqlDbType.Int, Value = shopId},
+                    new SqlParameter() {ParameterName = "@PageSize", SqlDbType = SqlDbType.Int, Value = pageSize},
+                    new SqlParameter() {ParameterName = "@PageIndex", SqlDbType = SqlDbType.Int, Value = pageIndex},
+                    new SqlParameter() {ParameterName = "@BeginCreateTime", SqlDbType = SqlDbType.DateTime},
+                    new SqlParameter() {ParameterName = "@EndCreateTime", SqlDbType = SqlDbType.DateTime},
+                    new SqlParameter() {ParameterName = "@PayAmountMin", SqlDbType = SqlDbType.Int, Value = payAmountMin},
+                    new SqlParameter() {ParameterName = "@PayAmountMax", SqlDbType = SqlDbType.Int, Value = payAmountMax},
+                    new SqlParameter() {ParameterName = "@OrderNumber", SqlDbType = SqlDbType.NVarChar, Value = orderNumber},
+                    new SqlParameter() {ParameterName = "@CustomerName", SqlDbType = SqlDbType.NVarChar, Value = customerName},
+                    new SqlParameter() {ParameterName = "@CustomerTel", SqlDbType = SqlDbType.NVarChar, Value = customerTel},
+                    totalParam
+                };
+
+            if (DateTime.Equals(beginDate, DateTime.MinValue))
+                sqlparams[3].Value = null;
+            else
+                sqlparams[3].Value = beginDate;
+
+            if (DateTime.Equals(endDate, DateTime.MinValue))
+                sqlparams[4].Value = null;
+            else
+                sqlparams[4].Value = endDate;
+
+            var result = DbHelperSQL.RunProcedure("usp_wx_diancai_dingdan_manage_OrderManage", sqlparams.ToArray(), "wx_diancai_dingdan_manage");
+
+            totalCount = totalParam.Value == DBNull.Value ? 0 : Convert.ToInt32(totalParam.Value);
+
+            return result;
+        }
+
+        public string GetOrderCaipinDetail(int orderId)
+        {
+            var sqlparams = new List<SqlParameter>()
+                {
+                    new SqlParameter(){ParameterName = "@OrderID",SqlDbType = SqlDbType.Int,Value = orderId}
+                };
+
+            var result = DbHelperSQL.RunProcedure("usp_wx_diancai_dingdan_manage_OrderDetail", sqlparams.ToArray(), "orderDetail");
+
+            var resultString = new StringBuilder();
+            if (result != null && result.Tables.Count > 0 && result.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow row in result.Tables[0].Rows)
+                {
+                    if (row[0] != null && row[0] != DBNull.Value)
+                    {
+                        resultString.Append(row[0].ToString() + Environment.NewLine);
+                    }
+                }
+            }
+
+            return resultString.ToString();
+        }
+
+        public DataSet GetCredentialsList(int shopid, string condition, out double totalAmount)
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("SELECT * FROM (SELECT id,orderNumber,'已关闭' AS payStatus,(SELECT TOP 1 modifytime FROM wx_diancai_dingdan_commodity WHERE dingId=a.id ORDER BY modifytime DESC) AS modifyTime,customerName,payAmount FROM wx_diancai_dingdan_manage a ");
@@ -453,7 +519,7 @@ namespace WeiXinPF.DAL
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("SELECT (SELECT cpName FROM wx_diancai_caipin_manage WHERE id=a.caiId) AS caiName,'1' AS number,price,identifyingcode,(CASE STATUS WHEN 0 THEN '未支付' WHEN 1 THEN '已支付' WHEN 2 THEN '已使用' WHEN 3 THEN '申请退款' WHEN 4 THEN '已退款' END) AS status,ModifyTime FROM wx_diancai_dingdan_commodity a  ");
-            strSql.Append(" WHERE dingId=" + dingId );
+            strSql.Append(" WHERE dingId=" + dingId);
             strSql.Append(" ORDER BY modifyTime DESC");
             DataSet ds = DbHelperSQL.Query(strSql.ToString());
             return ds;
@@ -601,14 +667,14 @@ namespace WeiXinPF.DAL
 
             //修改菜品状态
             var refundCaiId = string.Empty;
-                for (int index = 0; index < caipinIdList.Count; index++)
-                {
+            for (int index = 0; index < caipinIdList.Count; index++)
+            {
                 refundCaiId = index == caipinIdList.Count - 1
                                   ? refundCaiId + caipinIdList[index].ToString()
                                   : refundCaiId + caipinIdList[index].ToString() + ",";
-                }
+            }
 
-                const string caipinModifySql = "UPDATE dbo.wx_diancai_dingdan_commodity  SET status=2,ModifyTime=GETDATE() WHERE dingId=@DingdanId AND caiId=@CaiID AND id IN (@RefundCaiID);";
+            const string caipinModifySql = "UPDATE dbo.wx_diancai_dingdan_commodity  SET status=2,ModifyTime=GETDATE() WHERE dingId=@DingdanId AND caiId=@CaiID AND id IN (@RefundCaiID);";
             SqlParameter[] caipinModifysqlparams =
                 {
                     new SqlParameter(){ParameterName = "@DingdanId",SqlDbType = SqlDbType.Int,Value = dingdanid},
