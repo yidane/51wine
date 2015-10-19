@@ -108,6 +108,7 @@
     <Content Include="admin\choujiang\shakeLuckyMoney\luckyMoneylist.aspx" />
     <Content Include="admin\diancai\commodity_detail.aspx" />
     <Content Include="admin\diancai\credentials_detail.aspx" />
+    <Content Include="admin\diancai\diangdan_refundDetail.aspx" />
     <Content Include="admin\diancai\dingdan_confirm.aspx" />
     <Content Include="admin\diancai\shop_admin_edit.aspx" />
     <Content Include="admin\diancai\shop_admin_list.aspx" />
@@ -4620,6 +4621,13 @@
     </Compile>
     <Compile Include="admin\diancai\diancai_form.aspx.designer.cs">
       <DependentUpon>diancai_form.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\diancai\diangdan_refundDetail.aspx.cs">
+      <DependentUpon>diangdan_refundDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\diancai\diangdan_refundDetail.aspx.designer.cs">
+      <DependentUpon>diangdan_refundDetail.aspx</DependentUpon>
     </Compile>
     <Compile Include="admin\diancai\dianyuan_add.aspx.cs">
       <DependentUpon>dianyuan_add.aspx</DependentUpon>
