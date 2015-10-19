@@ -89,7 +89,7 @@ ul.round li:last-of-type {
 .round li, .round li span, .round li a {
 	line-height:22px;
 }
-.round li span {
+.round li span:not(.swiper-pagination-bullet) {
 	display:block;
 	background:url(../images/arrow3.png) no-repeat right 50%;
 	-webkit-background-size:8.5px 13px;
