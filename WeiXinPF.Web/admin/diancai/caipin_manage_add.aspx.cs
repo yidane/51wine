@@ -39,6 +39,7 @@ namespace WeiXinPF.Web.admin.diancai
                     this.instructions.InnerText = manage.instructions;
                     this.shopIntroduction.InnerText = manage.shopIntroduction;
                     this.sortid.Text = manage.sortid.ToString();
+                    this.chargeback.InnerText = manage.chargeback;
                     if (manage.beginDate != null)
                         this.txtbeginDate.Text=manage.beginDate.Value.ToString("yyyy-MM-dd HH:mm:ss");
                     if (manage.endDate != null)
@@ -85,9 +86,15 @@ namespace WeiXinPF.Web.admin.diancai
                 manage.endDate = DateTime.Parse(this.txtendDate.Text);
                 manage.instructions = this.instructions.InnerText;
                 manage.shopIntroduction = this.shopIntroduction.InnerText;
-
+                manage.chargeback = this.chargeback.InnerText;
 
                 int id = managebll.Add(manage);
+                if (id>0)
+                {
+                    manage = managebll.GetModel(id);
+                    this.number.Text = manage.number;
+                }
+
                 AddAdminLog(MXEnums.ActionEnum.Add.ToString(), "添加商品信息管理，主键为" + id); //记录日志
                 JscriptMsg("增加成功！", Utils.CombUrlTxt("caipin_manage.aspx?shopid=" + shopid + "&manage=managetype", "keywords={0}", ""), "Success");
 
@@ -115,6 +122,7 @@ namespace WeiXinPF.Web.admin.diancai
                 manage.endDate = DateTime.Parse(this.txtendDate.Text);
                 manage.instructions = this.instructions.InnerText;
                 manage.shopIntroduction = this.shopIntroduction.InnerText;
+                manage.chargeback = this.chargeback.InnerText;
 
                 managebll.Update(manage);
 

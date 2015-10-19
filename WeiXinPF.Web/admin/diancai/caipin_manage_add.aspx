@@ -63,10 +63,10 @@
 <body class="mainbody">
     <form id="form1" runat="server">
       <div class="location">
-           <a href="shop_list.aspx" class="home"><i></i><span>餐饮管理</span></a>
-            <i  class="arrow"></i><span><a href="caipin_manage.aspx?shopid=<%=shopid %>">商品信息管理</a></span>
+           <a href="shop_list.aspx" class="home"><i></i><span>商户或门店列表</span></a>
+            <i  class="arrow"></i><span><a href="caipin_manage.aspx?shopid=<%=shopid %>">商品信息查看</a></span>
             <i class="arrow"></i>
-            <span>编辑商品信息</span>
+            <span>编辑商品</span>
         </div>
         <div class="line10"></div>
         <!--/导航栏-->
@@ -75,7 +75,7 @@
             <div id="floatHead" class="content-tab">
                 <div class="content-tab-ul-wrap">
                     <ul>
-                        <li><a href="javascript:;" onclick="tabs(this);" class="selected">编辑商品信息</a></li>                    
+                        <li><a href="javascript:;" onclick="tabs(this);" class="selected">编辑商品</a></li>                    
                         <asp:HiddenField ID="hidId" runat="server" Value="0" />
                     </ul>
                 </div>
@@ -90,14 +90,14 @@
                   </dd>
               </dl>
               <dl>
-                  <dt>商品信息名称：</dt>
+                  <dt>商品名称：</dt>
                   <dd>
                   <asp:TextBox runat="server" ID="cpName" CssClass="input normal" sucmsg=" " nullmsg="" datatype="*1-100" ></asp:TextBox>
                   <span class="Validform_checktip">*</span>
                   </dd>
               </dl>
              <dl>
-                  <dt>商品信息类别：</dt>
+                  <dt>商品类别：</dt>
                   <dd>
                         <div class="rule-single-select">
                         <asp:DropDownList ID="dllCategoryName" runat="server" datatype="*" sucmsg=" ">
@@ -134,7 +134,7 @@
                   </dd>
               </dl>
                 <dl>
-                  <dt>商品信息图片：</dt>
+                  <dt>商品图片：</dt>
                   <dd>
                    <asp:TextBox ID="picUrl" runat="server" CssClass="input normal upload-path"  style="width:200px;"  sucmsg=" " nullmsg=""  />
                     <div class="upload-box upload-img"></div>
@@ -142,7 +142,7 @@
               </dl>
              
               <dl>
-                <dt>有效期</dt>
+                <dt>使用有效期</dt>
                 <dd>
                     <div class="input-date">
                         <asp:TextBox ID="txtbeginDate" runat="server" CssClass="input date" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" datatype="*1-50" errormsg="请选择正确的日期" sucmsg=" " nullmsg=" " />
@@ -173,8 +173,17 @@
                         <span class="Validform_checktip">*</span>
                   </dd>
               </dl>
+             
                 <dl>
-                <dt>商户或门店介绍：</dt>
+                  <dt>退单规则：</dt>
+                  <dd>
+                    <textarea name="chargeback" rows="2" cols="20" id="chargeback" datatype="*1-1000" sucmsg=" " nullmsg=""  class="input" runat="server"></textarea>
+                        <span class="Validform_checktip">*</span>
+                  </dd>
+              </dl>
+
+                <dl>
+                <dt>商品介绍：</dt>
                 <dd>
                     <textarea name="shopIntroduction"  id="shopIntroduction" class="editor" style="visibility: hidden;" runat="server"></textarea>
                     <span class="Validform_checktip">*</span>

@@ -41,11 +41,11 @@
 <body class="mainbody">
     <form id="form1" runat="server">
       <div class="location">
-            <a href="shop_list.aspx" class="home"><i></i><span>餐饮管理</span></a>
-           <i class="arrow"></i><span> <a href="caipin_category.aspx?shopid=<%=shopid %>" >商品信息分类管理</a></span>
+            <a href="shop_list.aspx" class="home"><i></i><span>商户或门店列表</span></a>
+           <i class="arrow"></i><span> <a href="caipin_category.aspx?shopid=<%=shopid %>" >商品分类管理</a></span>
             <i class="arrow"></i>
              
-            <span>编辑商品信息分类</span>
+            <span>编辑商品分类</span>
         </div>
         <div class="line10"></div>
         <!--/导航栏-->
@@ -54,7 +54,7 @@
             <div id="floatHead" class="content-tab">
                 <div class="content-tab-ul-wrap">
                     <ul>
-                        <li><a href="javascript:;" onclick="tabs(this);" class="selected">编辑商品信息分类</a></li>
+                        <li><a href="javascript:;" onclick="tabs(this);" class="selected">编辑商品分类</a></li>
                     
                         <asp:HiddenField ID="hidId" runat="server" Value="0" />
                     </ul>

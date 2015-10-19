@@ -30,18 +30,18 @@
 <body class="mainbody">
     <form id="form1" runat="server">
           <div class="location">
-            <a href="shop_list.aspx" class="home"><i></i><span>餐饮管理</span></a>
+            <a href="shop_list.aspx" class="home"><i></i><span>商户或门店列表</span></a>
             <i class="arrow"></i>            
-            <span>商品信息管理</span>
+            <span>商品信息查看</span>
         </div>
        <div class="mytips">        
-            提醒：请先设置好商品信息分类，再添加新的商品信息，点击设置商品信息分类
+            提醒：请先设置好商品分类，再添加新的商品信息，点击设置商品分类
          </div>
        <div class="toolbar-wrap">
             <div id="floatHead" class="toolbar">
                 <div class="l-list">
                     <ul class="icon-list">
-                        <li><a class="icon-btn add" href="caipin_manage_add.aspx?action=<%=WeiXinPF.Common.MXEnums.ActionEnum.Add %>&shopid=<%=shopid %>&type=add"  id="itemAddButton"><i></i><span>新增商品信息</span></a></li>
+                        <li><a class="icon-btn add" href="caipin_manage_add.aspx?action=<%=WeiXinPF.Common.MXEnums.ActionEnum.Add %>&shopid=<%=shopid %>&type=add"  id="itemAddButton"><i></i><span>新增商品</span></a></li>
 
                         <li><a class="all" href="javascript:;" onclick="checkAll(this);"><i></i><span>全选</span></a></li>
                         <li>
@@ -66,7 +66,7 @@
                             <th >名称</th>
                             <th >原价</th>   
                             <th >折扣</th> 
-                            <th >商品信息分类</th> 
+                            <th >商品分类</th> 
                             <th style="display: none" >浏览次数</th>
                             <th >时间</th>     
                             <th >排序</th>         

@@ -49,9 +49,9 @@ namespace WeiXinPF.DAL
 
             StringBuilder strSql =new StringBuilder();
 			strSql.Append("insert into wx_diancai_caipin_manage(");
-			strSql.Append("categoryid,cpName,categoryName,cpPrice,zkPrice,priceUnite,cpPic,picUrl,detailContent,createDate,shopid,sortid,scan,instructions,shopIntroduction,beginDate,endDate)");
+			strSql.Append("categoryid,cpName,categoryName,cpPrice,zkPrice,priceUnite,cpPic,picUrl,detailContent,createDate,shopid,sortid,scan,instructions,shopIntroduction,beginDate,endDate,chargeback)");
 			strSql.Append(" values (");
-			strSql.Append("@categoryid,@cpName,@categoryName,@cpPrice,@zkPrice,@priceUnite,@cpPic,@picUrl,@detailContent,@createDate,@shopid,@sortid,@scan,@instructions,@shopIntroduction,@beginDate,@endDate)");
+			strSql.Append("@categoryid,@cpName,@categoryName,@cpPrice,@zkPrice,@priceUnite,@cpPic,@picUrl,@detailContent,@createDate,@shopid,@sortid,@scan,@instructions,@shopIntroduction,@beginDate,@endDate,@chargeback)");
 			strSql.Append(";select @@IDENTITY");
 			SqlParameter[] parameters = {
 					new SqlParameter("@categoryid", SqlDbType.Int,4),
@@ -70,7 +70,9 @@ namespace WeiXinPF.DAL
                     new SqlParameter("@instructions", SqlDbType.VarChar,300),
                     new SqlParameter("@shopIntroduction", SqlDbType.VarChar,300),
                     new SqlParameter("@beginDate", SqlDbType.DateTime),
-                    new SqlParameter("@endDate", SqlDbType.DateTime)
+                    new SqlParameter("@endDate", SqlDbType.DateTime),
+                    new SqlParameter("@chargeback",SqlDbType.VarChar,300)
+
 
 
             };
@@ -91,6 +93,7 @@ namespace WeiXinPF.DAL
 			parameters[14].Value = model.shopIntroduction;
 			parameters[15].Value = model.beginDate;
 			parameters[16].Value = model.endDate;
+			parameters[17].Value = model.chargeback;
 
             object obj = DbHelperSQL.GetSingle(strSql.ToString(),parameters);
 			if (obj == null)
@@ -123,7 +126,10 @@ namespace WeiXinPF.DAL
 			strSql.Append("sortid=@sortid,");
 			strSql.Append("scan=@scan,");
 			strSql.Append("instructions=@instructions,");
-			strSql.Append("shopIntroduction=@shopIntroduction");
+			strSql.Append("shopIntroduction=@shopIntroduction,");
+			strSql.Append("beginDate=@beginDate,");
+			strSql.Append("endDate=@endDate,");
+            strSql.Append("chargeback=@chargeback");
             strSql.Append(" where id=@id");
 			SqlParameter[] parameters = {
 					new SqlParameter("@categoryid", SqlDbType.Int,4),
@@ -143,6 +149,7 @@ namespace WeiXinPF.DAL
                     new SqlParameter("@shopIntroduction", SqlDbType.VarChar,300),
                     new SqlParameter("@beginDate", SqlDbType.DateTime),
                     new SqlParameter("@endDate", SqlDbType.DateTime),
+                    new SqlParameter("@chargeback", SqlDbType.VarChar,300),
 
                     new SqlParameter("@id", SqlDbType.Int,4)};
 			parameters[0].Value = model.categoryid;
@@ -162,7 +169,8 @@ namespace WeiXinPF.DAL
             parameters[14].Value = model.shopIntroduction;
             parameters[15].Value = model.beginDate;
             parameters[16].Value = model.endDate;
-            parameters[17].Value = model.id;
+            parameters[17].Value = model.chargeback;
+            parameters[18].Value = model.id;
 
 			int rows=DbHelperSQL.ExecuteSql(strSql.ToString(),parameters);
 			if (rows > 0)
@@ -226,7 +234,7 @@ namespace WeiXinPF.DAL
 		{
 			
 			StringBuilder strSql=new StringBuilder();
-			strSql.Append("select  top 1 id,categoryid,number,cpName,categoryName,cpPrice,zkPrice,priceUnite,cpPic,picUrl,detailContent,createDate,shopid,sortid,scan,instructions,shopIntroduction,beginDate,endDate from wx_diancai_caipin_manage ");
+			strSql.Append("select  top 1 id,categoryid,number,cpName,categoryName,cpPrice,zkPrice,priceUnite,cpPic,picUrl,detailContent,createDate,shopid,sortid,scan,instructions,shopIntroduction,beginDate,endDate,chargeback from wx_diancai_caipin_manage ");
 			strSql.Append(" where id=@id");
 			SqlParameter[] parameters = {
 					new SqlParameter("@id", SqlDbType.Int,4)
@@ -332,6 +340,11 @@ namespace WeiXinPF.DAL
                 if (row["endDate"] != null && row["endDate"].ToString() != "")
                 {
                     model.endDate = DateTime.Parse(row["endDate"].ToString());
+                }
+                
+                if (row["chargeback"] != null)
+                {
+                    model.chargeback = row["chargeback"].ToString();
                 }
             }
 			return model;

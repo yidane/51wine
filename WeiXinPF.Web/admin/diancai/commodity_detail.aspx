@@ -34,7 +34,7 @@
 <body class="mainbody">
     <form id="form1" runat="server">
           <div class="location">
-            <a href="shop_list.aspx" class="home"><i></i><span>点菜系统</span></a>
+            <a href="shop_list.aspx" class="home"><i></i><span>商户或门店列表</span></a>
             <i  class="arrow"></i><span><a href="dingdan_confirm.aspx?shopid=<%=shopid %>">订单验证</a></span>
             <i class="arrow"></i>            
             <span>菜品处理</span>

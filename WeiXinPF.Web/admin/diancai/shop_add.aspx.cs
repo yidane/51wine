@@ -100,6 +100,7 @@ namespace WeiXinPF.Web.admin.diancai
                 this.emailpwd.Text = hotel.emailpwd;
                 this.stmp.Text = hotel.stmp;
                 this.css.Text = hotel.css;
+                this.mobile.Text = hotel.Mobile;
                 this.manager.Text = hotel.Operator;
             }
 

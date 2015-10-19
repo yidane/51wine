@@ -4,7 +4,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
-    <title>点菜系统</title>
+    <title>商户或门店列表</title>
     <script type="text/javascript" src="../../scripts/jquery/jquery-1.10.2.min.js"></script>
     <script type="text/javascript" src="../../scripts/lhgdialog/lhgdialog.js?skin=idialog"></script>
     <script type="text/javascript" src="../js/layout.js"></script>
@@ -40,7 +40,7 @@
                     <ul class="icon-list">
                         <li><a class="icon-btn add" href="shop_register.aspx?action=<%=WeiXinPF.Common.MXEnums.ActionEnum.Add %>" id="itemAddButton"><i></i><span>商户或门店入驻登记</span></a></li>
                         <%-- <li><a class="icon-btn add" href="shop_setup.aspx?action=<%=WeiXinPF.Common.MXEnums.ActionEnum.Add %>&type=add"  id="itemButton"><i></i><span>商城设置</span></a></li>--%>
-                        <li><a class="icon-btn add" href="caidan_blacklist.aspx" id="itemBlackButton"><i></i><span>黑名单</span></a></li>
+                        <li><%--<a class="icon-btn add" href="caidan_blacklist.aspx" id="itemBlackButton"><i></i><span>黑名单</span></a>--%></li>
 
                         <li><a class="all" href="javascript:;" onclick="checkAll(this);"><i></i><span>全选</span></a></li>
                         <li>

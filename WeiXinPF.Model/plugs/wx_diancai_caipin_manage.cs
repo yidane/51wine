@@ -29,6 +29,7 @@ namespace WeiXinPF.Model
 	    private string _shopIntroduction;
 	    private DateTime? _beginDate;
 	    private DateTime? _endDate;
+	    private string _chargeback;
 
 	    /// <summary>
 		/// 
@@ -171,6 +172,12 @@ namespace WeiXinPF.Model
 	    {
 	        get { return _endDate; }
 	        set { _endDate = value; }
+	    }
+
+	    public string chargeback
+	    {
+	        get { return _chargeback; }
+	        set { _chargeback = value; }
 	    }
 
 	    #endregion Model
