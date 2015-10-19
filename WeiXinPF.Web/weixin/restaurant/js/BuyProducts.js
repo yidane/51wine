@@ -43,7 +43,7 @@ function showShopCartTotalProce() {
     }
 }
 
-function showShopCartProductsNumber () {
+function showShopCartProductsNumber() {
     var quant = cart.getQuantity();
 
     if (typeof quant.totalNumber === "undefined") {

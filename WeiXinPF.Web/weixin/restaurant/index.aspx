@@ -1,6 +1,7 @@
 ﻿<%@ Page Language="C#" MasterPageFile="Restaurant.Master" AutoEventWireup="true" CodeBehind="index.aspx.cs" Inherits="WeiXinPF.Web.weixin.restaurant.index" %>
+
 <asp:Content ID="h" ContentPlaceHolderID="head" runat="server">
-   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -35,7 +36,7 @@
         <div id="navBar">
             <dl>
                 <dt>分类</dt>
-               <%=cateString %>
+                <%=cateString %>
             </dl>
         </div>
 
@@ -45,7 +46,7 @@
                     <dl>
 
                         <div class="ccbg">
-                             <%=manageString %>
+                            <%=manageString %>
                         </div>
 
                     </dl>
@@ -136,10 +137,10 @@
 
                 if (products[i].categoryId == <%=categoryid%>) {
                     showProductNumberWithBought(product_id, spec_id, cart.getProductNumber({ id: product_id, specId: spec_id }) || 0);
-                }
             }
-            showShopCartProductsNumber();
         }
+        showShopCartProductsNumber();
+        };
 
         cart.onAfterAdd = function (obj, num, conditions) {
             showProductNumberWithBought(conditions.id, conditions.specId, num);
