@@ -87,7 +87,7 @@ namespace WeiXinPF.Web.admin.diancai
 
 
 
-                Dingdanlist += "<tr><th>菜品名称</th><th class=\"cc\">单价</th><th class=\"cc\">购买份数</th><th class=\"rr\">价格</th> </tr>";
+                Dingdanlist += "<tr><th>商品信息名称</th><th class=\"cc\">单价</th><th class=\"cc\">购买份数</th><th class=\"rr\">总价</th> </tr>";
                 for (int i = 0; i < dr.Tables[0].Rows.Count; i++)
                 {
                     Dingdanlist += " <tr><td>" + dr.Tables[0].Rows[i]["cpName"] + "</td>";
@@ -107,7 +107,7 @@ namespace WeiXinPF.Web.admin.diancai
                 {
                     Dingdanlist += "<tr><td>商品总费</td><td class=\"cc\">￥" + amount + "</td>  <td class=\"cc\" >配送费</td><td class=\"rr\" >￥" + 0 + "</td></tr>";
                 }
-                Dingdanlist += "<tr><td>总计：</td><td ></td><td ></td><td class=\"rr\">￥" + zongji + "</td></tr>";
+                Dingdanlist += "<tr><td></td><td ></td><td ></td><td class=\"rr\">总计：<span class='text-danger'>￥" + zongji + "</span></td></tr>";
 
             }
 
@@ -117,11 +117,11 @@ namespace WeiXinPF.Web.admin.diancai
             if (manage != null)
             {
                 dingdanren += "<tr><td width=\"70\">订单编号： " + manage.orderNumber + "</td></tr>";
-                dingdanren += "<tr> <td>下单时间：" + manage.oderTime + "</td></tr>";
-                dingdanren += "<tr><td>联系人：" + manage.customerName + "</td></tr>";
-                dingdanren += "<tr><td>联系电话：" + manage.customerTel + "</td></tr>";
-                dingdanren += "<tr><td>地址：" + manage.address + "</td></tr>";
-                dingdanren += "<tr><td>备注 ：" + manage.oderRemark + "</td></tr>";
+                dingdanren += "<tr> <td>预约日期：" + manage.oderTime + "</td></tr>";
+                dingdanren += "<tr><td>预约人：" + manage.customerName + "</td></tr>";
+                dingdanren += "<tr><td>电话：" + manage.customerTel + "</td></tr>";
+//                dingdanren += "<tr><td>地址：" + manage.address + "</td></tr>";
+//                dingdanren += "<tr><td>备注 ：" + manage.oderRemark + "</td></tr>";
                 if (manage.payStatus == 1)
                 {
                     dingdanren += "<tr><td>订单状态：<em  style='width:70px;' class='ok'>已处理</em></td></tr>";
@@ -146,7 +146,7 @@ namespace WeiXinPF.Web.admin.diancai
             }
 
 
-            dingdanren += "<tr><td>商家留言：</td></tr> <tr> <td></td></tr>";
+//            dingdanren += "<tr><td>商家留言：</td></tr> <tr> <td></td></tr>";
         }
     }
 }

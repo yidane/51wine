@@ -76,6 +76,11 @@
 
  
     </script>
+    <style>
+        .flat-left {
+            float: left;
+        }
+    </style>
 
 </head>
 
@@ -110,10 +115,10 @@
                         <input name="" type="password" runat="server" id="txtPassword" class="loginpwd" value="" placeholder="密码" /></li>
                     <li>
 
-                        <asp:Button ID="btnSubmit" runat="server" Text="登 录" CssClass="loginbtn" OnClick="btnSubmit_Click" />
+                        <asp:Button ID="btnSubmit" runat="server" Text="登 录" CssClass="loginbtn flat-left" OnClick="btnSubmit_Click" />
                         <label>
-                            <input name="" id="chkRemember" type="checkbox" value="" checked="checked" runat="server" />记住密码</label>
-                        <!--<span class="login-tips"><i></i><b id="msgtip" runat="server">请输入用户名和密码</b></span>-->
+                          <!--  <input name="" id="chkRemember" type="checkbox" value="" checked="checked" runat="server" />记住密码-->
+                        <span class="login-tips flat-left"><i></i><b id="msgtip" runat="server">请输入用户名和密码</b></span></label>
                     </li>
                 </ul>
 
