@@ -64,14 +64,14 @@
             <dl>
                 <dt>商户或门店名称：</dt>
                 <dd>
-                    <asp:TextBox runat="server" ID="hotelName" CssClass="input normal" sucmsg=" " nullmsg="" datatype="*1-100"></asp:TextBox>
+                    <asp:TextBox runat="server" ID="hotelName" Enabled="false" CssClass="input normal" sucmsg=" " nullmsg="" datatype="*1-100"></asp:TextBox>
                     <span class="Validform_checktip">*</span>
                 </dd>
             </dl>
             <dl>
                 <dt>商户或门店Logo：</dt>
                 <dd>
-                    <asp:TextBox ID="hotelLogo" runat="server" CssClass="input normal upload-path"  datatype="*1-200" Style="width: 200px;" sucmsg=" " nullmsg="" />
+                    <asp:TextBox ID="hotelLogo" runat="server" CssClass="input normal upload-path" datatype="*1-200" Style="width: 200px;" sucmsg=" " nullmsg="" />
                     <div class="upload-box upload-img"></div>
                     <br />
                     <span class="red">外链地址(图片尺寸100x100
@@ -79,36 +79,36 @@
 
                 </dd>
             </dl>
-            
-             
-            
-              <dl >
+
+
+
+            <dl>
                 <dt>商户或门店邮箱：</dt>
                 <dd>
                     <asp:TextBox runat="server" ID="email" CssClass="input normal" sucmsg=" " nullmsg=" " datatype="*0-100"></asp:TextBox>
                     <span class="Validform_checktip">*</span>
-                   
-                    
+
+
                 </dd>
             </dl>
-            
-             <dl>
+
+            <dl>
                 <dt>经营人：</dt>
                 <dd>
-                    <asp:TextBox runat="server" ID="manager" CssClass="input normal" sucmsg=" " nullmsg=" " datatype="*1-100"></asp:TextBox>
+                    <asp:TextBox runat="server" ID="manager" CssClass="input normal" Enabled="false" sucmsg=" " nullmsg=" " datatype="*1-100"></asp:TextBox>
                     <span class="Validform_checktip">*</span>
                 </dd>
             </dl>
-            
-            
-              <dl>
+
+
+            <dl>
                 <dt>联系电话：</dt>
                 <dd>
                     <asp:TextBox runat="server" ID="tel" CssClass="input normal" sucmsg=" " nullmsg=" " datatype="*1-100"></asp:TextBox>
                     <span class="Validform_checktip">*</span>
                 </dd>
             </dl>
-             <dl>
+            <dl>
                 <dt>联系手机：</dt>
                 <dd>
                     <asp:TextBox runat="server" ID="mobile" CssClass="input normal" sucmsg=" " nullmsg=" " datatype="*1-100"></asp:TextBox>
@@ -137,8 +137,8 @@
                     <span class="Validform_checktip">*</span>
                 </dd>
             </dl>
-            
-                   <dl>
+
+            <dl>
                 <dt>联系地址：</dt>
                 <dd>
                     <asp:TextBox runat="server" ID="address" CssClass="input normal" sucmsg=" " nullmsg=" " datatype="*1-100"></asp:TextBox>
@@ -169,11 +169,11 @@
                     </div>
                 </dd>
             </dl>
-            
-                <dl>
+
+            <dl>
                 <dt>选择分类：</dt>
                 <dd>
-                    <select name="type" id="type" runat="server">
+                    <select name="type" id="type" runat="server" disabled="disabled">
                         <option value="小吃快餐">小吃快餐</option>
                         <option value="自助餐">自助餐</option>
                         <option value="日韩料理">日韩料理</option>
@@ -208,8 +208,8 @@
                     </select>
                 </dd>
             </dl>
-            
-               <dl>
+
+            <dl>
                 <dt>商户或门店一句话描述：</dt>
                 <dd>
                     <textarea name="miaoshu" rows="2" cols="20" id="miaoshu" datatype="*1-1000" sucmsg=" " nullmsg=" " class="input" runat="server"></textarea>
@@ -219,8 +219,8 @@
                     </span>
                 </dd>
             </dl>
-            
-             <dl>
+
+            <dl>
                 <dt>每人每天允许下单次数：</dt>
                 <dd>
                     <asp:TextBox runat="server" ID="personLimite" CssClass="input normal" sucmsg=" " nullmsg=" " datatype="n"></asp:TextBox>
@@ -230,8 +230,8 @@
                     </span>
                 </dd>
             </dl>
-            
-             <dl>
+
+            <dl>
                 <dt>商户或门店公告：</dt>
                 <dd>
                     <textarea name="notice" rows="2" cols="20" id="notice" sucmsg=" " nullmsg=" " class="input" runat="server"></textarea>
@@ -242,11 +242,11 @@
             <dl>
                 <dt>商户或门店简介：</dt>
                 <dd>
-                    <textarea name="hotelintroduction" rows="2" cols="20" id="hotelintroduction"  sucmsg=" " nullmsg=" " class="input" runat="server"></textarea>
+                    <textarea name="hotelintroduction" rows="2" cols="20" id="hotelintroduction" sucmsg=" " nullmsg=" " class="input" runat="server"></textarea>
                     <span class="Validform_checktip">*</span>
                 </dd>
             </dl>
-            
+
 
 
             <dl style="display: none">
@@ -264,7 +264,7 @@
             <dl style="display: none">
                 <dt>起送价格：</dt>
                 <dd>
-                    <asp:TextBox runat="server" ID="sendPrice" CssClass="input normal" ></asp:TextBox>
+                    <asp:TextBox runat="server" ID="sendPrice" CssClass="input normal"></asp:TextBox>
                     <span class="Validform_checktip">*</span>
                 </dd>
             </dl>
@@ -272,7 +272,7 @@
             <dl style="display: none">
                 <dt>配送费用：</dt>
                 <dd>
-                    <asp:TextBox runat="server" ID="sendCost" CssClass="input normal" ></asp:TextBox>
+                    <asp:TextBox runat="server" ID="sendCost" CssClass="input normal"></asp:TextBox>
                     <span class="Validform_checktip">*</span>
                     <br />
                     <span class="red">默认为0表示都需要配送费
@@ -288,9 +288,9 @@
                 </dd>
             </dl>
 
-        
 
-         
+
+
 
             <dl style="display: none">
                 <dt>服务半径：</dt>
@@ -307,15 +307,15 @@
                 </dd>
             </dl>
 
-          
 
-     
 
-           
 
-           
 
-          
+
+
+
+
+
 
             <dl style="display: none">
                 <dt>邮箱登录密码：</dt>
@@ -358,7 +358,7 @@
                    <asp:TextBox ID="picUrl1" runat="server" CssClass="input normal upload-path" Style="width: 100px;" sucmsg=" " nullmsg=" " />
                     <div class="upload-box upload-img"></div>
                     图片跳转地址：                  
-                   <asp:TextBox ID="pictzUrl1" runat="server" CssClass="input" Style="width: 100px;"  sucmsg=" " nullmsg=" " />
+                   <asp:TextBox ID="pictzUrl1" runat="server" CssClass="input" Style="width: 100px;" sucmsg=" " nullmsg=" " />
                     <span class="Validform_checktip">*</span>
                 </dd>
             </dl>
@@ -375,7 +375,7 @@
                    <asp:TextBox ID="picUrl2" runat="server" CssClass="input normal upload-path" Style="width: 100px;" sucmsg=" " nullmsg=" " />
                     <div class="upload-box upload-img"></div>
                     图片跳转地址：                  
-                   <asp:TextBox ID="pictzUrl2" runat="server" CssClass="input" Style="width: 100px;"  sucmsg=" " nullmsg=" " />
+                   <asp:TextBox ID="pictzUrl2" runat="server" CssClass="input" Style="width: 100px;" sucmsg=" " nullmsg=" " />
                     <span class="Validform_checktip">*</span>
                 </dd>
             </dl>
@@ -391,7 +391,7 @@
                    <asp:TextBox ID="picUrl3" runat="server" CssClass="input normal upload-path" Style="width: 100px;" sucmsg=" " nullmsg=" " />
                     <div class="upload-box upload-img"></div>
                     图片跳转地址：                  
-                   <asp:TextBox ID="pictzUrl3" runat="server" CssClass="input" Style="width: 100px;"  sucmsg=" " nullmsg=" " />
+                   <asp:TextBox ID="pictzUrl3" runat="server" CssClass="input" Style="width: 100px;" sucmsg=" " nullmsg=" " />
                     <span class="Validform_checktip">*</span>
                 </dd>
             </dl>
@@ -408,7 +408,7 @@
                    <asp:TextBox ID="picUrl4" runat="server" CssClass="input normal upload-path" Style="width: 100px;" sucmsg=" " nullmsg=" " />
                     <div class="upload-box upload-img"></div>
                     图片跳转地址：                  
-                   <asp:TextBox ID="pictzUrl4" runat="server" CssClass="input" Style="width: 100px;"  sucmsg=" " nullmsg=" " />
+                   <asp:TextBox ID="pictzUrl4" runat="server" CssClass="input" Style="width: 100px;" sucmsg=" " nullmsg=" " />
                     <span class="Validform_checktip">*</span>
                 </dd>
             </dl>
@@ -425,7 +425,7 @@
                    <asp:TextBox ID="picUrl5" runat="server" CssClass="input normal upload-path" Style="width: 100px;" sucmsg=" " nullmsg=" " />
                     <div class="upload-box upload-img"></div>
                     图片跳转地址：                  
-                   <asp:TextBox ID="pictzUrl5" runat="server" CssClass="input" Style="width: 100px;"  sucmsg=" " nullmsg=" " />
+                   <asp:TextBox ID="pictzUrl5" runat="server" CssClass="input" Style="width: 100px;" sucmsg=" " nullmsg=" " />
                     <span class="Validform_checktip">*</span>
                 </dd>
             </dl>

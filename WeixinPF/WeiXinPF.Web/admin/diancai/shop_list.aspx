@@ -8,8 +8,8 @@
     <script type="text/javascript" src="../../scripts/jquery/jquery-1.10.2.min.js"></script>
     <script type="text/javascript" src="../../scripts/lhgdialog/lhgdialog.js?skin=idialog"></script>
     <script type="text/javascript" src="../js/layout.js"></script>
-       <link href="../skin/default/style.css" rel="stylesheet" type="text/css" />
-     <link href="../skin/mystyle.css" rel="stylesheet" type="text/css" />
+    <link href="../skin/default/style.css" rel="stylesheet" type="text/css" />
+    <link href="../skin/mystyle.css" rel="stylesheet" type="text/css" />
     <link href="../../css/pagination.css" rel="stylesheet" type="text/css" />
 
     <script type="text/javascript">
@@ -17,19 +17,10 @@
             parent.location.href = "/admin/Index.aspx?id=" + id;
 
         }
-
-        $(function () {
-
-
-        });
-
-
-
     </script>
     <style>
-       a.shenghe {
-        color:red;
-        
+        a.shenghe {
+            color: red;
         }
     </style>
 </head>
@@ -38,26 +29,26 @@
     <form id="form1" runat="server">
         <!--导航栏-->
         <div class="location">
-            <a href="javascript:;" class="home"><i></i><span>点菜系统</span></a>
+            <a href="javascript:;" class="home"><i></i><span>商户或门店列表</span></a>
         </div>
         <!--/导航栏-->
-  
+
         <!--工具栏-->
         <div class="toolbar-wrap">
             <div id="floatHead" class="toolbar">
                 <div class="l-list">
                     <ul class="icon-list">
-                        <li><a class="icon-btn add" href="shop_add.aspx?action=<%=WeiXinPF.Common.MXEnums.ActionEnum.Add %>&type=add"  id="itemAddButton"><i></i><span>新增商家或门店</span></a></li>
-                       <%-- <li><a class="icon-btn add" href="shop_setup.aspx?action=<%=WeiXinPF.Common.MXEnums.ActionEnum.Add %>&type=add"  id="itemButton"><i></i><span>商城设置</span></a></li>--%>
-                        <li><a class="icon-btn add" href="caidan_blacklist.aspx"  id="itemBlackButton"><i></i><span>黑名单</span></a></li>
-                       
+                        <li><a class="icon-btn add" href="shop_register.aspx?action=<%=WeiXinPF.Common.MXEnums.ActionEnum.Add %>" id="itemAddButton"><i></i><span>商户或门店入驻登记</span></a></li>
+                        <%-- <li><a class="icon-btn add" href="shop_setup.aspx?action=<%=WeiXinPF.Common.MXEnums.ActionEnum.Add %>&type=add"  id="itemButton"><i></i><span>商城设置</span></a></li>--%>
+                        <li><a class="icon-btn add" href="caidan_blacklist.aspx" id="itemBlackButton"><i></i><span>黑名单</span></a></li>
+
                         <li><a class="all" href="javascript:;" onclick="checkAll(this);"><i></i><span>全选</span></a></li>
                         <li>
                             <asp:LinkButton ID="btnDelete" runat="server" CssClass="del" OnClientClick="return ExePostBack('btnDelete');" OnClick="btnDelete_Click"><i></i><span>删除</span></asp:LinkButton></li>
                     </ul>
                 </div>
                 <div class="r-list">
-                  
+
                     <asp:TextBox ID="txtKeywords" runat="server" CssClass="keyword" />
                     <asp:LinkButton ID="lbtnSearch" runat="server" CssClass="btn-search" OnClick="btnSearch_Click">查询</asp:LinkButton>
                 </div>
@@ -72,12 +63,12 @@
                 <table width="100%" border="0" cellspacing="0" cellpadding="0" class="ltable">
                     <thead>
                         <tr>
-                            <th >选择</th>
-                            <th >商家名称</th>
-                         
-                            <th >类型</th>
-                            <th >查看</th>                         
-                            <th >操作</th>
+                            <th>选择</th>
+                            <th>商家名称</th>
+
+                            <th>类型</th>
+                            <%--<th >查看</th>--%>
+                            <th>操作</th>
                         </tr>
                     </thead>
                     <tbody class="ltbody">
@@ -91,27 +82,28 @@
                     <td>
                         <%# Eval("hotelName") %>
                     </td>
-                     <td>
+                    <td>
                         <%# Eval("kcType") %>
                         
                     </td>
-                    <td>
+                    <%--<td>
                      <a href="javascript:;"><%=yuming%>/weixin/diancai/index.aspx?wid=<%=wid %>&shopid=<%#Eval("id") %></a>
-                    </td>
-                     <td>                     
-                         <a  href='shop_admin_list.aspx?shopid=<%#Eval("id") %>' >管理员设置</a>
-                         <a  href='shop_add.aspx?shopid=<%#Eval("id") %>&type=edite' >商家设置</a>
-                         <a  href='shop_setup.aspx?shopid=<%#Eval("id") %>&type=add'  >商城设置</a>
-                         <a  href='dingdan_manage.aspx?shopid=<%#Eval("id") %>' >订单管理</a>
-                         <a  href='caipin_category.aspx?shopid=<%#Eval("id") %>' >菜品分类</a>
-                         <a  href='caipin_manage.aspx?shopid=<%#Eval("id") %>' >菜品管理</a>
-                         <a  href='desk_number.aspx?shopid=<%#Eval("id") %>' >桌号设置</a>
-                         <a  href='caidan_member_manage.aspx?shopid=<%#Eval("id") %>' >会员管理</a>
-                         <a  href='dianyuan_manage.aspx?shopid=<%#Eval("id") %>' >店员管理</a>
-                         <a  href='caidan_baobiao.aspx?shopid=<%#Eval("id") %>' >统计图表</a>
-                         <a  href='message_edite.aspx?shopid=<%#Eval("id") %>' >打印机设置</a>
-                         <a  href='diancai_form.aspx?shopid=<%#Eval("id") %>' >表单设计</a>
-                         <a  href='../../weixin/diancai/diancai_Login.aspx?shopid=<%#Eval("id") %>' target="_blank" >手机端管理</a>
+                    </td>--%>
+                    <td>
+                        <a href='shop_register.aspx?shopid=<%#Eval("id") %>&action=<%# WeiXinPF.Common.MXEnums.ActionEnum.Edit.ToString() %>'>修改</a>
+                        <a href='shop_admin_list.aspx?shopid=<%#Eval("id") %>'>管理员设置</a>
+                        <a href='shop_add.aspx?shopid=<%#Eval("id") %>&type=edite'>商户信息查看</a>
+                        <%--<a  href='shop_setup.aspx?shopid=<%#Eval("id") %>&type=add'  >商城设置</a>--%>
+                        <a href='caipin_manage.aspx?shopid=<%#Eval("id") %>'>商品信息查看</a>
+                        <a href='dingdan_manage.aspx?shopid=<%#Eval("id") %>'>订单查看</a>
+                        <%--<a  href='caipin_category.aspx?shopid=<%#Eval("id") %>' ></a>--%>
+                        <%--<a  href='desk_number.aspx?shopid=<%#Eval("id") %>' >桌号设置</a>--%>
+                        <%--<a  href='caidan_member_manage.aspx?shopid=<%#Eval("id") %>' >会员管理</a>--%>
+                        <%--<a  href='dianyuan_manage.aspx?shopid=<%#Eval("id") %>' >店员管理</a>--%>
+                        <%--<a  href='caidan_baobiao.aspx?shopid=<%#Eval("id") %>' >统计图表</a>--%>
+                        <%--<a  href='message_edite.aspx?shopid=<%#Eval("id") %>' >打印机设置</a>--%>
+                        <%--<a  href='diancai_form.aspx?shopid=<%#Eval("id") %>' >表单设计</a>--%>
+                        <%--<a  href='../../weixin/diancai/diancai_Login.aspx?shopid=<%#Eval("id") %>' target="_blank" >手机端管理</a>--%>
                     </td>
                 </tr>
             </ItemTemplate>

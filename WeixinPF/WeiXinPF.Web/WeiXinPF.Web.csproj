@@ -112,6 +112,7 @@
     <Content Include="admin\diancai\dingdan_confirm.aspx" />
     <Content Include="admin\diancai\shop_admin_edit.aspx" />
     <Content Include="admin\diancai\shop_admin_list.aspx" />
+    <Content Include="admin\diancai\shop_register.aspx" />
     <Content Include="admin\diancai\shop_user_edit.aspx" />
     <Content Include="admin\diancai\shop_user_list.aspx" />
     <Content Include="admin\photo\photoEdit.aspx" />
@@ -4684,6 +4685,13 @@
     </Compile>
     <Compile Include="admin\diancai\shop_admin_list.aspx.designer.cs">
       <DependentUpon>shop_admin_list.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\diancai\shop_register.aspx.cs">
+      <DependentUpon>shop_register.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\diancai\shop_register.aspx.designer.cs">
+      <DependentUpon>shop_register.aspx</DependentUpon>
     </Compile>
     <Compile Include="admin\diancai\shop_setup.aspx.cs">
       <DependentUpon>shop_setup.aspx</DependentUpon>
