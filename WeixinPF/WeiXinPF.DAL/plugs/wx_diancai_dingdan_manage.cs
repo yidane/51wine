@@ -579,7 +579,7 @@ namespace WeiXinPF.DAL
                                         d.createDate
                                 FROM    wx_diancai_dingdan_manage d
                                         LEFT JOIN wx_diancai_shopinfo s ON d.shopinfoid = s.id
-                                WHERE payStatus=1 AND d.shopinfoid = @ShopID AND d.openid = @OpenID
+                                WHERE d.shopinfoid = @ShopID AND d.openid = @OpenID
                                 Order By d.createDate DESC");
 
             SqlParameter[] sqlparams =
