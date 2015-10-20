@@ -2,7 +2,7 @@
 
 <!DOCTYPE html>
 
-<html >
+<html>
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
@@ -12,10 +12,9 @@
     <title><%=RestruantName %>餐饮订单</title>
     <link href="css/diancai.css" rel="stylesheet" type="text/css">
     <link href="css/swiper.min.css" rel="stylesheet" />
-    <%--    <script src="js/jquery.min.js" type="text/javascript"></script>--%>
+    <script src="js/zepto.min.js"></script>
     <script src="js/alert.js" type="text/javascript"></script>
     <script src="js/swiper.min.js"></script>
-    <script src="js/zepto.min.js"></script>
     <style>
         /*.table-bordered {*/
         /*border: 1px solid #ddd;*/
@@ -41,22 +40,22 @@
             background-color: #5cb85c;
         }
 
-         .label-danger {
-                   color: #d9534f;
-                }
+        .label-danger {
+            color: #d9534f;
+        }
 
-                .label {
-                    display: inline;
-                    padding: .2em .6em .3em;
-                    /*font-size: 75%;*/
-                    font-weight: 700;
-                    line-height: 1;
-                    /*color: #fff;*/
-                    text-align: center;
-                    white-space: nowrap;
-                    vertical-align: baseline;
-                    border-radius: .25em;
-                }
+        .label {
+            display: inline;
+            padding: .2em .6em .3em;
+            /*font-size: 75%;*/
+            font-weight: 700;
+            line-height: 1;
+            /*color: #fff;*/
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: baseline;
+            border-radius: .25em;
+        }
 
         .alert-success {
             color: #3c763d;
@@ -121,12 +120,12 @@
                 </div>
                 <div class="gpd-content">
                     <div runat="server" id="detail">
-            </div>
+                    </div>
 
                 </div>
 
             </section>
-           
+
             <section class="gpd-item  gdp-curr">
                 <div class="gpd-item-title">
                     <img class="detailicon-ticket" src="images/info.png" />
@@ -156,7 +155,7 @@
                     <div style="width: 78%; float: left">
                         <p><%=RestruantName %></p>
                         <p>喀纳斯地点。。。</p>
-                         <p class="distince" id="detail_distince"></p>
+                        <p class="distince" id="detail_distince"></p>
 
 
                     </div>
@@ -171,24 +170,24 @@
 
             </section>
 
-      
+
         </div>
 
 
 
     </form>
     <script type="text/javascript">
-         //获取当前位置的坐标
-              function getLocation() {
-                  if (navigator.geolocation) {
-                      navigator.geolocation.getCurrentPosition(computeDistance);
-                  }
-              }
-              function computeDistance(position) {
-                  var lat = position.coords.latitude;
-                  var lng = position.coords.longitude;
-                  var currentLatlng = new qq.maps.LatLng(lat, lng);
-                  var poiLatlng = new qq.maps.LatLng(<%=lat %>, <%=lng %>);
+        //获取当前位置的坐标
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(computeDistance);
+            }
+        }
+        function computeDistance(position) {
+            var lat = position.coords.latitude;
+            var lng = position.coords.longitude;
+            var currentLatlng = new qq.maps.LatLng(lat, lng);
+            var poiLatlng = new qq.maps.LatLng(<%=lat %>, <%=lng %>);
                   var distince = Math.round(qq.maps.geometry.spherical.computeDistanceBetween(currentLatlng, poiLatlng) / 1000);
 
                   $("#detail_distince"  ).text(distince + 'km');
@@ -201,18 +200,18 @@
                   }, 500);
               }
 
-        Zepto(function ($) {
+              Zepto(function ($) {
              
 
 
             
-            $(".gp-icons.gpd-up-icon").click(function () {
-                var zThis = $(this);
-                var zThisParent = zThis.parents(".gpd-item");
-                zThisParent.toggleClass("gdp-curr");
-                zThisParent.siblings(".gpd-item").removeClass("gdp-curr");
-            });
-        });
+                  $(".gp-icons.gpd-up-icon").click(function () {
+                      var zThis = $(this);
+                      var zThisParent = zThis.parents(".gpd-item");
+                      zThisParent.toggleClass("gdp-curr");
+                      zThisParent.siblings(".gpd-item").removeClass("gdp-curr");
+                  });
+              });
     </script>
 </body>
 </html>

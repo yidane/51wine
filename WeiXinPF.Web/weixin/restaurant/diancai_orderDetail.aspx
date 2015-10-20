@@ -11,86 +11,85 @@
     <title><%=RestruantName %>餐饮订单</title>
     <link href="css/diancai.css" rel="stylesheet" type="text/css">
     <link href="css/swiper.min.css" rel="stylesheet" />
-<%--    <script src="js/jquery.min.js" type="text/javascript"></script>--%>
-    <script src="js/alert.js" type="text/javascript"></script>
-    <script src="js/swiper.min.js"></script>    
     <script src="js/zepto.min.js"></script>
-     <script charset="utf-8" src="http://map.qq.com/api/js?v=2.exp&libraries=geometry&key=XQSBZ-MYPKU-EJSVT-4XWSN-QWJXH-2TBDM"></script>
-   
+    <script src="js/alert.js" type="text/javascript"></script>
+    <script src="js/swiper.min.js"></script>
+    <script charset="utf-8" src="http://map.qq.com/api/js?v=2.exp&libraries=geometry&key=XQSBZ-MYPKU-EJSVT-4XWSN-QWJXH-2TBDM"></script>
+
     <style>
         .table > thead > tr > th {
-        vertical-align: bottom;
-        border-bottom: 2px solid #ddd;
-    }
+            vertical-align: bottom;
+            border-bottom: 2px solid #ddd;
+        }
 
-    .label-primary {
-    background-color: #337ab7;
-}
+        .label-primary {
+            background-color: #337ab7;
+        }
 
 
-    .label-info {
-    background-color: #5bc0de;
-}
+        .label-info {
+            background-color: #5bc0de;
+        }
 
-    .label-success {
-    background-color: #5cb85c;
-}
+        .label-success {
+            background-color: #5cb85c;
+        }
 
-.label-danger {
-    color: #d9534f;
-}
+        .label-danger {
+            color: #d9534f;
+        }
 
-.label {
-    display: inline;
-    padding: .2em .6em .3em;
-    /*font-size: 75%;*/
-    font-weight: 700;
-    line-height: 1;
-    /*color: #fff;*/
-    text-align: center;
-    white-space: nowrap;
-    vertical-align: baseline;
-    border-radius: .25em;
-}
+        .label {
+            display: inline;
+            padding: .2em .6em .3em;
+            /*font-size: 75%;*/
+            font-weight: 700;
+            line-height: 1;
+            /*color: #fff;*/
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: baseline;
+            border-radius: .25em;
+        }
 
-.alert-success {
-    color: #3c763d;
-    background-color: #dff0d8;
-    border-color: #d6e9c6;
-}
+        .alert-success {
+            color: #3c763d;
+            background-color: #dff0d8;
+            border-color: #d6e9c6;
+        }
 
-.alert {
-    padding: 15px;
-    margin-bottom: 20px;
-    border: 1px solid transparent;
-    border-radius: 4px;
-}
+        .alert {
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid transparent;
+            border-radius: 4px;
+        }
 
-.top-alert {
+        .top-alert {
             height: 32px;
-    line-height: 32px;
-    vertical-align: middle;
-}
+            line-height: 32px;
+            vertical-align: middle;
+        }
 
         .top-alert-name {
-font-weight: 700;
-}
+            font-weight: 700;
+        }
 
         .gpd-item-title {
-width: 100%;
-float: left;
-padding-top: 10px;
-height: 32px;
-    line-height: 32px;
-}
+            width: 100%;
+            float: left;
+            padding-top: 10px;
+            height: 32px;
+            line-height: 32px;
+        }
 
             .gpd-item-title .detailicon-ticket, .gpd-item-title .gpd-item-title-name {
-float: left;
-}
-</style>
+                float: left;
+            }
+    </style>
 </head>
 <body class="mode_webapp">
-  <form id="form1" runat="server">   
+    <form id="form1" runat="server">
         <div class="menu_header">
             <div class="menu_topbar">
                 <strong style="float: left; margin-left: 80px">餐饮订单</strong>
@@ -103,75 +102,64 @@ float: left;
 
         <div id="contact_info" class="cardexplain">
             <div class="alert alert-success top-alert" role="alert">
-                  <span style="float: left"><span class="top-alert-name">订单编号：</span> <%=OrderNumber %></span>
+                <span style="float: left"><span class="top-alert-name">订单编号：</span> <%=OrderNumber %></span>
                 <span style="float: right"><span class="top-alert-name">总价：</span>
                     <span class="label label-danger"><%=PayAmount %>元</span></span>
-      
-    </div>
-<%--            <section class="alert alert-success">--%>
-<%--                <div style="float: left">订单编号 <%=OrderNumber %></div>--%>
-<%--                <div style="float: right"><strong style="font-size: 1.2em; right: 2px">总价 </strong>--%>
-<%--                <span class="label label-primary"> <%=PayAmount %>元</span></div>--%>
-<%--            </section>--%>
+
+            </div>
+            <%--            <section class="alert alert-success">--%>
+            <%--                <div style="float: left">订单编号 <%=OrderNumber %></div>--%>
+            <%--                <div style="float: right"><strong style="font-size: 1.2em; right: 2px">总价 </strong>--%>
+            <%--                <span class="label label-primary"> <%=PayAmount %>元</span></div>--%>
+            <%--            </section>--%>
             <section>
                 <table width="100%" border="0" cellpadding="0" cellspacing="0" class="DishDetail table table-bordered">
-                  <thead>
-                    <tr>
-                        <th class="Col1" style="width: 33%">类型</th>
-                        <th class="Col2" style="width: 17%">份数</th>
-                        <th class="Col3" style="width: 25%">总价</th>
-                        <th class="Col4" style="width: 23%"></th>
-                    </tr>
-                  </thead>
+                    <thead>
+                        <tr>
+                            <th class="Col1" style="width: 33%">类型</th>
+                            <th class="Col2" style="width: 17%">份数</th>
+                            <th class="Col3" style="width: 25%">总价</th>
+                            <th class="Col4" style="width: 23%"></th>
+                        </tr>
+                    </thead>
                 </table>
             </section>
             <div runat="server" id="detail">
             </div>
             <section class="gpd-item ">
-              <div class="gpd-item-title">
-                           <img class="detailicon-ticket" src="images/info.png" />
+                <div class="gpd-item-title">
+                    <img class="detailicon-ticket" src="images/info.png" />
                     <div class="gpd-item-title-name">联系人</div>
-                                          <div class="gp-icons gpd-up-icon"></div>
-                                           </div>
-<div class="gpd-content">
- <div style="width: 100%; float: left">
+                    <div class="gp-icons gpd-up-icon"></div>
+                </div>
+                <div class="gpd-content">
+                    <div style="width: 100%; float: left">
                         <p>联系人：<%=customeName %></p>
                         <p>联系电话:<%= customerTel%></p>
-
-
-
+                    </div>
                 </div>
-
-</div>
-
             </section>
             <section class="gpd-item gdp-curr">
-             <div class="gpd-item-title">
-               <img class="detailicon-ticket" src="images/info.png" />
+                <div class="gpd-item-title">
+                    <img class="detailicon-ticket" src="images/info.png" />
                     <div class="gpd-item-title-name">店铺信息</div>
 
-                              <div class="gp-icons gpd-up-icon"></div>
-                               </div>
-<div class="gpd-content">
- <div style="width: 78%; float: left">
+                    <div class="gp-icons gpd-up-icon"></div>
+                </div>
+                <div class="gpd-content">
+                    <div style="width: 78%; float: left">
                         <p><%=RestruantName %></p>
                         <p>喀纳斯地点。。。</p>
-      <p class="distince" id="detail_distince"></p>
-
-
+                        <p class="distince" id="detail_distince"></p>
+                    </div>
+                    <div style="float: right">
+                        <a href="tel:<%=RestruantPhone %>">
+                            <img src="images/telephone.png" />
+                        </a>
+                    </div>
                 </div>
-                <div style="float: right">
-                    <a href="tel:<%=RestruantPhone %>">
-                        <img src="images/telephone.png" />
-                    </a>
-                </div>
-</div>
-
-
-
             </section>
-
-   <section class="gpd-item ">
+            <section class="gpd-item ">
                 <div class="gpd-item-title">
                     <img class="detailicon-ticket" src="images/info.png" />
                     <div class="gpd-item-title-name">使用须知</div>
@@ -204,74 +192,74 @@ float: left;
                 <div class="gpd-item-title">
                     <img class="detailicon-ticket" src="images/time.png" />
                     <div class="gpd-item-title-name">订单有效期</div>
-                     <div style="float: right" id="dateRange"><%=orderRange %></div>
+                    <div style="float: right" id="dateRange"><%=orderRange %></div>
 
                     <div class="line-title"></div>
                 </div>
             </section>
         </div>
 
-  
+
 
     </form>
-          <script type="text/javascript">
-              //获取当前位置的坐标
-              function getLocation() {
-                  if (navigator.geolocation) {
-                      navigator.geolocation.getCurrentPosition(computeDistance);
-                  }
-              }
-              function computeDistance(position) {
-                  var lat = position.coords.latitude;
-                  var lng = position.coords.longitude;
-                  var currentLatlng = new qq.maps.LatLng(lat, lng);
-                  var poiLatlng = new qq.maps.LatLng(<%=lat %>, <%=lng %>);
-                  var distince = Math.round(qq.maps.geometry.spherical.computeDistanceBetween(currentLatlng, poiLatlng) / 1000);
+    <script type="text/javascript">
+        //获取当前位置的坐标
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(computeDistance);
+            }
+        }
+        function computeDistance(position) {
+            var lat = position.coords.latitude;
+            var lng = position.coords.longitude;
+            var currentLatlng = new qq.maps.LatLng(lat, lng);
+            var poiLatlng = new qq.maps.LatLng(<%=lat %>, <%=lng %>);
+            var distince = Math.round(qq.maps.geometry.spherical.computeDistanceBetween(currentLatlng, poiLatlng) / 1000);
 
-                  $("#detail_distince"  ).text(distince + 'km');
+            $("#detail_distince"  ).text(distince + 'km');
 
-                  var timer = setInterval(function () {
+            var timer = setInterval(function () {
                      
-                      $("#detail_distince"  ).text('店铺距离：'+distince + 'km');
+                $("#detail_distince"  ).text('店铺距离：'+distince + 'km');
 
-                      clearInterval(timer);
-                  }, 500);
-              }
+                clearInterval(timer);
+            }, 500);
+        }
 
-              Zepto(function ($) {
+        Zepto(function ($) {
 
-                  getLocation();
+            getLocation();
 
             $('.silde-background').each(function (i) {
-                      var id = $(this).attr("id");
-                      var swiper = new Swiper('#' + id + ' .swiper-container', {
-                          loop: false,
-                          pagination: '#' + id + ' .swiper-pagination ',
-                          onTransitionEnd: function (swi) {
-                              //                        var current = swi.slides[swi.activeIndex];
-                              //                        var ticketid = current.childNodes[0].id;
-                              //                        $("#ticketCode").html(ticketid.split('_')[0]);
-                              //                        $("#ticketStatus").html(ticketid.split('_')[1]);
-                          }
-                      });
-                  });
-//                var swiper = new Swiper('.swiper-container', {
-//                    loop: false,
-//                    pagination: ' .swiper-pagination ',
-//                    onTransitionEnd: function (swi) {
-//                        var current = swi.slides[swi.activeIndex];
-//                        var ticketid = current.childNodes[0].id;
-//                        $("#ticketCode").html(ticketid.split('_')[0]);
-//                        $("#ticketStatus").html(ticketid.split('_')[1]);
-//                    }
-//                });
-                $(".gp-icons.gpd-up-icon").click(function () {
-                    var zThis = $(this);
-                    var zThisParent = zThis.parents(".gpd-item");
-                    zThisParent.toggleClass("gdp-curr");
-                    zThisParent.siblings(".gpd-item").removeClass("gdp-curr");
+                var id = $(this).attr("id");
+                var swiper = new Swiper('#' + id + ' .swiper-container', {
+                    loop: false,
+                    pagination: '#' + id + ' .swiper-pagination ',
+                    onTransitionEnd: function (swi) {
+                        //                        var current = swi.slides[swi.activeIndex];
+                        //                        var ticketid = current.childNodes[0].id;
+                        //                        $("#ticketCode").html(ticketid.split('_')[0]);
+                        //                        $("#ticketStatus").html(ticketid.split('_')[1]);
+                    }
                 });
             });
-        </script>
+            //                var swiper = new Swiper('.swiper-container', {
+            //                    loop: false,
+            //                    pagination: ' .swiper-pagination ',
+            //                    onTransitionEnd: function (swi) {
+            //                        var current = swi.slides[swi.activeIndex];
+            //                        var ticketid = current.childNodes[0].id;
+            //                        $("#ticketCode").html(ticketid.split('_')[0]);
+            //                        $("#ticketStatus").html(ticketid.split('_')[1]);
+            //                    }
+            //                });
+            $(".gp-icons.gpd-up-icon").click(function () {
+                var zThis = $(this);
+                var zThisParent = zThis.parents(".gpd-item");
+                zThisParent.toggleClass("gdp-curr");
+                zThisParent.siblings(".gpd-item").removeClass("gdp-curr");
+            });
+        });
+    </script>
 </body>
 </html>

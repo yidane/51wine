@@ -60,11 +60,11 @@
                 <td align="right">订单状态</td>
                 <td>
                     <%--<div class="rule-single-select">--%>
-                        <asp:DropDownList runat="server" ID="dboRefundStatus" CssClass="select" Width="293">
-                            <asp:ListItem Text="退款审核中" Value="2"></asp:ListItem>
-                            <asp:ListItem Text="已退款" Value="3"></asp:ListItem>
-                            <asp:ListItem Text="退款失败" Value="4"></asp:ListItem>
-                        </asp:DropDownList>
+                    <asp:DropDownList runat="server" ID="dboRefundStatus" CssClass="select" Width="293">
+                        <asp:ListItem Text="退款审核中" Value="2"></asp:ListItem>
+                        <asp:ListItem Text="已退款" Value="3"></asp:ListItem>
+                        <asp:ListItem Text="退款失败" Value="4"></asp:ListItem>
+                    </asp:DropDownList>
                     <%--</div>--%>
                 </td>
                 <td align="right">退单人</td>
@@ -142,8 +142,7 @@
                     <td>
                         <%# Eval("detail") %>                        
                     </td>
-                    <td>
-                        <%# Eval("RefundAmount") %>                        
+                    <td>&yen; <%# Eval("RefundAmount") %>                      
                     </td>
                     <td>
                         <%# Eval("refundStatusDesc") %>                        

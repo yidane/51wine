@@ -28,8 +28,7 @@
     </script>
     <style>
        a.shenghe {
-        color:red;
-        
+            color: red;
         }
     </style>
 </head>
@@ -53,7 +52,7 @@
             <div id="floatHead" class="toolbar">
                 <div class="l-list">
                     <ul class="icon-list">
-                        <li><a class="icon-btn add" href="dianyuan_add.aspx?action=<%=WeiXinPF.Common.MXEnums.ActionEnum.Add %>&shopid=<%=shopid %>&type=add"  id="itemAddButton"><i></i><span>新增店员</span></a></li>
+                        <li><a class="icon-btn add" href="dianyuan_add.aspx?action=<%=WeiXinPF.Common.MXEnums.ActionEnum.Add %>&shopid=<%=shopid %>&type=add" id="itemAddButton"><i></i><span>新增店员</span></a></li>
 
                         <li><a class="all" href="javascript:;" onclick="checkAll(this);"><i></i><span>全选</span></a></li>
                         <li>
@@ -73,17 +72,17 @@
                 <table width="100%" border="0" cellspacing="0" cellpadding="0" class="ltable">
                     <thead>
                         <tr>
-                            <th >选择</th>
-                            <th >编号</th>
-                            <th >姓名</th>   
-                            <th >电话</th>   
-                            <th >用户名</th>   
-                            <th >密码</th>  
-                            <th >状态</th>   
-                            <th >分店</th>   
-                            <th >到岗时间</th>   
-                            <th >离职时间</th> 
-                            <th >操作</th>                    
+                            <th>选择</th>
+                            <th>编号</th>
+                            <th>姓名</th>
+                            <th>电话</th>
+                            <th>用户名</th>
+                            <th>密码</th>
+                            <th>状态</th>
+                            <th>分店</th>
+                            <th>到岗时间</th>
+                            <th>离职时间</th>
+                            <th>操作</th>
                         </tr>
                     </thead>
                     <tbody class="ltbody">
@@ -123,7 +122,7 @@
                         <%# Eval("endTime") %>                       
                     </td>
                     <td>
-                  <a  href='dianyuan_add.aspx?shopid=<%#Eval("shopid") %>&type=edite&id=<%#Eval("id") %>' >编辑</a>
+                        <a href='dianyuan_add.aspx?shopid=<%#Eval("shopid") %>&type=edite&id=<%#Eval("id") %>'>编辑</a>
                     </td>
                 </tr>
             </ItemTemplate>

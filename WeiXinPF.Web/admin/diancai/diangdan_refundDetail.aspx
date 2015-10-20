@@ -126,9 +126,10 @@
             </dl>
         </div>
 
-        <div class="page-footer" style="display: none">
-            <div class="btn-list">
-                <asp:Button ID="save_groupbase" runat="server" CssClass="btn" Text="保存" OnClick="save_groupbase_Click" />
+        <div class="page-footer">
+            <div class="btn-list" style="text-align: center">
+                <asp:Button ID="btnAgreeRefund" runat="server" CssClass="btn" Text="同意退单" OnClick="btnAgreeRefund_Click" />
+                <asp:Button ID="btnDisAgreeRefund" runat="server" CssClass="btn" Text="不同意退单" OnClick="btnDisAgreeRefund_Click" />
             </div>
             <div class="clear"></div>
         </div>

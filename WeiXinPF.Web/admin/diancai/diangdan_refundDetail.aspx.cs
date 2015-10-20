@@ -35,28 +35,6 @@ namespace WeiXinPF.Web.admin.diancai
             }
         }
 
-        protected void save_groupbase_Click(object sender, EventArgs e)
-        {
-            //string status = ddlStatusType.SelectedItem.Value;
-
-            //managebll.Updatestatus(orderID.ToString(), status);
-
-            //manage = managebll.GetModel(orderID);
-
-            //var menbll = new BLL.wx_diancai_member();
-            //if (status == "1")
-            //{
-            //    menbll.Update(manage.openid);
-            //}
-            //if (status == "2")
-            //{
-            //    menbll.Updatefail(manage.openid);
-            //}
-
-            //AddAdminLog(MXEnums.ActionEnum.Edit.ToString(), "修改支付状态，主键为" + orderID.ToString()); //记录日志
-            //JscriptMsg("修改成功！", "dingdan_manage.aspx?shopid=" + shopid + "", "Success");
-        }
-
         public void List()
         {
             //退单
@@ -94,7 +72,7 @@ namespace WeiXinPF.Web.admin.diancai
                     {
                         var currentRows = result.Tables[0].Select(string.Format("cpName='{0}'", row["Name"]));
                         row["BuyCount"] = currentRows.Length;
-                        row["Total"] = Convert.ToInt32(row["BuyCount"]) * currentRows.Length;
+                        row["Total"] = Convert.ToDouble(row["BuyPrice"]) * currentRows.Length;
                     }
 
 
@@ -107,14 +85,6 @@ namespace WeiXinPF.Web.admin.diancai
                         dingdanStringBuilder.AppendFormat("<td class=\"rr\">￥{0}</td></tr>", row["Total"]);
                     }
 
-                    //if (sjopmodel != null)
-                    //{
-                    //    Dingdanlist += "<tr><td>商品总费</td><td class=\"cc\">￥" + amount + "</td>  <td class=\"cc\" >配送费</td><td class=\"rr\" >￥" + sjopmodel.sendCost + "</td></tr>";
-                    //}
-                    //else
-                    //{
-                    //    Dingdanlist += "<tr><td>商品总费</td><td class=\"cc\">￥" + amount + "</td>  <td class=\"cc\" >配送费</td><td class=\"rr\" >￥" + 0 + "</td></tr>";
-                    //}
                     dingdanStringBuilder.AppendFormat("<tr><td></td><td ></td><td ></td><td class=\"rr\">总计：<span class='text-danger'>￥{0}</span></td></tr>", refundTotal / 100);
 
                     Dingdanlist = dingdanStringBuilder.ToString();
@@ -148,6 +118,30 @@ namespace WeiXinPF.Web.admin.diancai
                 }
 
                 dingdanren = tuidanBuilder.ToString();
+            }
+        }
+
+        protected void btnAgreeRefund_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+            }
+            catch (Exception exception)
+            {
+
+            }
+        }
+
+        protected void btnDisAgreeRefund_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+            }
+            catch (Exception exception)
+            {
+
             }
         }
     }

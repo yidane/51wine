@@ -15,12 +15,9 @@
     <script type="text/javascript">
         function parentToIndex(id) {
             parent.location.href = "/admin/Index.aspx?id=" + id;
-
         }
 
         $(function () {
-
-
         });
 
     </script>
@@ -53,6 +50,53 @@
                 background: -webkit-gradient(linear,left top,left bottom,from(#c32d32),to(#fe444a));
                 box-shadow: 0 1px 0 #FF9D9D inset, 0 1px 2px rgba(0, 0, 0, 0.5);
             }
+
+        .SearchBox {
+            float: left;
+            padding: 0 5px;
+            width: 410px;
+            height: 30px;
+            line-height: 28px;
+            font-size: 12px;
+            border: 1px solid #dbdbdb;
+            color: #444;
+        }
+
+        .SearchButton {
+            border: 1px solid #3d810c;
+            box-shadow: 0 1px 1px #aaa;
+            -moz-box-shadow: 0 1px 1px #aaa;
+            -webkit-box-shadow: 0 1px 1px #aaa;
+            padding: 5px 20px;
+            cursor: pointer;
+            display: inline-block;
+            text-align: center;
+            vertical-align: bottom;
+            overflow: visible;
+            border-radius: 3px;
+            -moz-border-radius: 3px;
+            -webkit-border-radius: 3px;
+            *zoom: 1;
+            background-color: #f1f1f1;
+            background-image: linear-gradient(bottom, #DCDADA 3%, #f9f9f9 97%, #fff 100%);
+            background-image: -moz-linear-gradient(bottom, #DCDADA 3%, #f9f9f9 97%, #fff 100%);
+            background-image: -webkit-linear-gradient(bottom, #DCDADA 3%, #f9f9f9 97%, #fff 100%);
+            color: #000;
+            border: 1px solid #AAA;
+            font-size: 14px;
+            line-height: 1.5;
+            background-color: #16a0d3;
+        }
+
+        .SearchDiv {
+            position: absolute;
+            float: left;
+            left: -205px;
+            margin-left: 45%;
+            width: 500px;
+            text-align: left;
+            margin-top: 100px;
+        }
     </style>
 </head>
 <body class="mainbody">
@@ -79,12 +123,9 @@
             2、交易成功的订单会计入销售统计；交易失败的订单不会计入销售统计，多次交易失败的客户建议加入黑名单！
         </div>
         <!--/验证内容-->
-        <div class="content">
-            <%--<input id="confirmnumber" type="text" value="" placeholder="请输入订单号" />--%>
-            <asp:TextBox ID="confirmnumber" runat="server" placeholder="请输入订单号"></asp:TextBox>
-            <%--<a id="btnconfirm" class="submit" href="javascript:void(0)">验 证</a>--%>
-            <%--<input type="submit" name="confirm_dingdan" value="验 证" id="confirm_dingdan" class="btn">--%>
-            <asp:Button ID="confirm_dingdan" name="confirm_dingdan" runat="server" Text="验 证" class="btn" OnClick="confirm_dingdan_Click"/>
+        <div class="SearchDiv">
+            <asp:TextBox ID="confirmnumber" runat="server" CssClass="SearchBox" placeholder="请输入验证码"></asp:TextBox>
+            <asp:Button ID="confirm_dingdan" name="confirm_dingdan" runat="server" Text="验 证" class="SearchButton" OnClick="confirm_dingdan_Click" />
         </div>
     </form>
 </body>
