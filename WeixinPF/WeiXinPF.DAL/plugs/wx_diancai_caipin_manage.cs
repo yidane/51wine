@@ -480,7 +480,7 @@ namespace WeiXinPF.DAL
         public DataSet GetList(int cateid)
 		{
 			StringBuilder strSql=new StringBuilder();
-			strSql.Append("select id,categoryid,aa.number,cpName,categoryName,cpPrice,zkPrice,priceUnite,cpPic,picUrl,detailContent,createDate,shopid,sortid,scan ");
+			strSql.Append("select id,categoryid,number,cpName,categoryName,cpPrice,zkPrice,priceUnite,cpPic,picUrl,detailContent,createDate,shopid,sortid,scan ");
 			strSql.Append(" FROM wx_diancai_caipin_manage ");
             if (cateid != 0)
 			{

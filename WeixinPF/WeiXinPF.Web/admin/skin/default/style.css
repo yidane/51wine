@@ -367,12 +367,12 @@ textarea.input{ width:300px; height:65px; }
 	.attach-list ul li .btns input{ display:inline-block; padding:0 3px; border:1px solid #d7d7d7; width:40px; height:20px; line-height:18px; color:#666; font-size:12px; background:#fff; vertical-align:middle; }
 	
 /*表格样式*/
-.border-table{ border-width:1px; margin:0; background:#fff; }
+.border-table{ border-width:1px; margin:0; background:#fff; font-size:12px; }
 	.border-table th{ margin:0; padding:2px 10px; line-height:26px; height:28px; border:1px solid #e1e1e1; vertical-align:middle; white-space:nowrap; word-break:keep-all; }
 	.border-table td{ margin:0; padding:2px 10px; line-height:26px; height:28px; border:1px solid #e1e1e1; vertical-align:middle; white-space:nowrap; word-break:keep-all; }
 	.border-table td input{ vertical-align:middle; }
 	.border-table td .position{ position:relative; min-height:100%; }
-	.border-table td .ibtn{ position:absolute;top:0; right:-7px; background:#cc; border:none; color:#666; cursor:pointer; font-family:"Microsoft Yahei"; font-size:12px; height:25px; line-height:25px; padding:0 12px; }
+	.border-table td .ibtn{ position:absolute;top:0; right:-7px; background:#ccc; border:none; color:#666; cursor:pointer; font-family:"Microsoft Yahei"; font-size:12px; height:25px; line-height:25px; padding:0 12px; }
 	.border-table td .ibtn:hover{ color:#fff; background:#FF9C30; }
 	.border-table thead th{ color:#333; font-weight:normal; white-space:nowrap; text-align:center; background:#f9f9f9; }
 	.border-table tbody th{padding-right:5px; text-align:right;color:#707070;background-color:#f9f9f9}

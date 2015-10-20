@@ -138,7 +138,7 @@ namespace WeiXinPF.WebService
 
                 Context.Response.Write(AjaxResult.Success(pois).ToCamelString());
             }
-            catch
+            catch(Exception ex)
             {
                 Context.Response.Write(AjaxResult.Error("获取周边推荐信息失败。").ToCamelString());
             }

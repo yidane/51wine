@@ -17,12 +17,6 @@
             parent.location.href = "/admin/Index.aspx?id=" + id;
 
         }
-
-        $(function () {
-
-
-        });
-
     </script>
     <style>
         a.shenghe {
@@ -34,50 +28,54 @@
     <form id="form1" runat="server">
 
         <div class="location">
-            <a href="shop_list.aspx" class="home"><i></i><span>点菜系统</span></a>
+            <a href="shop_list.aspx" class="home"><i></i><span>商户或门店列表</span></a>
             <i class="arrow"></i>
             <span>订单管理</span>
         </div>
+        <div class="line10"></div>
         <!--/导航栏-->
         <%--         <div class="mytips">        
             1、确认订单后，用户不能再取消该订单；被设置为无效的订单，将成为失败订单！
              <br />
             2、交易成功的订单会计入销售统计；交易失败的订单不会计入销售统计，多次交易失败的客户建议加入黑名单！
          </div>--%>
-        <div class="tab-content">
-            <table>
-                <tr>
-                    <td>退单时间
-                    </td>
-                    <td>
-                        <asp:TextBox ID="txtbeginDate" runat="server" CssClass="input date" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" datatype="*1-50" errormsg="请选择正确的日期" sucmsg=" " nullmsg=" " />
-                        至
+        <%--<div class="tab-content">--%>
+        <table border="0" cellspacing="0" cellpadding="0" class="border-table" width="98%">
+            <tr>
+                <td align="right">退单时间
+                </td>
+                <td>
+                    <asp:TextBox ID="txtbeginDate" runat="server" CssClass="input date" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" datatype="*1-50" errormsg="请选择正确的日期" sucmsg=" " nullmsg=" " />
+                    至
                         <asp:TextBox ID="txtEndDate" runat="server" CssClass="input date" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" datatype="*1-50" errormsg="请选择正确的日期" sucmsg=" " nullmsg=" " /></td>
-                    <td>退单号</td>
-                    <td>
-                        <asp:TextBox ID="txtRefundNo" runat="server" CssClass="input small" datatype="n" sucmsg=" " Text="100" /></td>
-                    <td>订单号</td>
-                    <td>
-                        <asp:TextBox ID="txtOrderNumber" runat="server" CssClass="input small" datatype="n" sucmsg=" " Text="100" />
-                    </td>
-                </tr>
-                <tr>
-                    <td>订单状态</td>
-                    <td>
-                        <asp:DropDownList runat="server" ID="dboRefundStatus">
+                <td align="right">退单号</td>
+                <td>
+                    <asp:TextBox ID="txtRefundNo" runat="server" CssClass="input normal" datatype="n" sucmsg=" " Text="100" /></td>
+                <td align="right">订单号</td>
+                <td>
+                    <asp:TextBox ID="txtOrderNumber" runat="server" CssClass="input normal" datatype="n" sucmsg=" " Text="100" />
+                </td>
+            </tr>
+            <tr>
+                <td align="right">订单状态</td>
+                <td>
+                    <%--<div class="rule-single-select">--%>
+                        <asp:DropDownList runat="server" ID="dboRefundStatus" CssClass="select" Width="293">
                             <asp:ListItem Text="退款审核中" Value="2"></asp:ListItem>
                             <asp:ListItem Text="已退款" Value="3"></asp:ListItem>
                             <asp:ListItem Text="退款失败" Value="4"></asp:ListItem>
                         </asp:DropDownList>
-                    <td>退单人</td>
-                    <td>
-                        <asp:TextBox ID="txtCustomerName" runat="server" CssClass="input normal" datatype="*1-300" sucmsg=" " Text="" /></td>
-                    <td>退单电话</td>
-                    <td>
-                        <asp:TextBox ID="txtCustomerTel" runat="server" CssClass="input normal" datatype="*1-300" sucmsg=" " Text="" /></td>
-                </tr>
-            </table>
-        </div>
+                    <%--</div>--%>
+                </td>
+                <td align="right">退单人</td>
+                <td>
+                    <asp:TextBox ID="txtCustomerName" runat="server" CssClass="input normal" datatype="*1-300" sucmsg=" " Text="" /></td>
+                <td align="right">退单电话</td>
+                <td>
+                    <asp:TextBox ID="txtCustomerTel" runat="server" CssClass="input normal" datatype="*1-300" sucmsg=" " Text="" /></td>
+            </tr>
+        </table>
+        <%--</div>--%>
         <!--工具栏-->
         <div class="toolbar-wrap">
             <div id="floatHead" class="toolbar">

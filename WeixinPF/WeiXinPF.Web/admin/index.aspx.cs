@@ -40,6 +40,9 @@ namespace WeiXinPF.Web.admin
             Session["uweixinId"] = null;
             Utils.WriteCookie("uweixinId", "WeiXinPF", -14400);
 
+            Session[MXKeys.WEIXIN_DIANCAI_SHOPID] = null;
+            Utils.WriteCookie(MXKeys.WEIXIN_DIANCAI_SHOPID, "WeiXinPF", -14400);
+
             Response.Redirect("login.aspx");
         }
 
