@@ -12,9 +12,9 @@ namespace WeiXinPF.Web.admin.diancai
     {
         BLL.wx_diancai_caipin_manage managebll = new BLL.wx_diancai_caipin_manage();
         Model.wx_diancai_caipin_manage manage = new Model.wx_diancai_caipin_manage();
-        protected static int shopid = 0;
-        public static string type = "";
-        public static int ids = 0;
+        protected  int shopid = 0;
+        public  string type = "";
+        public  int ids = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
             type = MyCommFun.QueryString("type");

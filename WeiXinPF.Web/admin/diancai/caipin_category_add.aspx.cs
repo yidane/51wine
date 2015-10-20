@@ -10,9 +10,9 @@ namespace WeiXinPF.Web.admin.diancai
 {
     public partial class caipin_category_add : Web.UI.ManagePage
     {
-        protected static int shopid = 0;
-        public static string type = "";
-        public static int ids = 0;
+        protected  int shopid = 0;
+        public  string type = "";
+        public  int ids = 0;
         BLL.wx_diancai_caipin_category caipinbll = new BLL.wx_diancai_caipin_category();
         Model.wx_diancai_caipin_category caipin = new Model.wx_diancai_caipin_category();
         protected void Page_Load(object sender, EventArgs e)
