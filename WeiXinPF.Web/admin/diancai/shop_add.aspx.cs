@@ -132,17 +132,125 @@ namespace WeiXinPF.Web.admin.diancai
         protected void save_groupbase_Click(object sender, EventArgs e)
         {
             editetype = MyCommFun.QueryString("type");
-            Model.wx_userweixin weixin = GetWeiXinCode();
-            int wid = weixin.id;
+            hotel = hotelBll.GetModel(shopid);
+            //            Model.wx_userweixin weixin = GetWeiXinCode();
+            //            int wid = weixin.id;
+
+            //            if (editetype == "add")
+            //            {
+            ////                hotel.wid = wid;
+            //                hotel.hotelName = this.hotelName.Text;
+            //                hotel.hotelLogo = this.hotelLogo.Text;
+            //                hotel.hoteltimeBegin = Convert.ToDateTime("2100-1-1 " + this.hoteltimeBegin.Text);
+            //                hotel.hoteltimeEnd = Convert.ToDateTime("2100-1-1 " + this.hoteltimeEnd.Text);
+            //                if (this.hoteltimeBegin1.Text != "" && this.hoteltimeEnd1.Text != "")
+            //                {
+            //                    hotel.hoteltimeBegin1 = Convert.ToDateTime("2100-1-1 " + this.hoteltimeBegin1.Text);
+            //                    hotel.hoteltimeEnd1 = Convert.ToDateTime("2100-1-1 " + this.hoteltimeEnd1.Text);
+            //                }
+            //                else
+            //                {
+            //                    hotel.hoteltimeBegin2 = null;
+            //                    hotel.hoteltimeEnd2 = null;
+            //                }
+            //                if (this.hoteltimeBegin2.Text != "" && this.hoteltimeEnd2.Text != "")
+            //                {
+            //                    hotel.hoteltimeBegin2 = Convert.ToDateTime("2100-1-1 " + this.hoteltimeBegin2.Text);
+            //                    hotel.hoteltimeEnd2 = Convert.ToDateTime("2100-1-1 " + this.hoteltimeEnd2.Text);
+            //                }
+            //                else
+            //                {
+            //                    hotel.hoteltimeBegin2 = null;
+            //                    hotel.hoteltimeEnd2 = null;
+            //                }
+            //
+            //
+            //                hotel.limiteOrder = Convert.ToBoolean(this.limiteOrder.SelectedValue);
+            //
+            //                hotel.dcRename = this.rename.Text;
+            //                if (!string.IsNullOrEmpty(this.sendPrice.Text))
+            //                {
+            //                    hotel.sendPrice = Convert.ToDecimal(this.sendPrice.Text);
+            //                }
+            //
+            //                if (!string.IsNullOrEmpty(this.sendCost.Text))
+            //                {
+            //                    hotel.sendCost = Convert.ToDecimal(this.sendCost.Text);
+            //                }
+            //
+            //                if (!string.IsNullOrEmpty(this.freeSendcost.Text))
+            //                {
+            //                    hotel.freeSendcost = Convert.ToInt32(this.freeSendcost.Text);
+            //                }
+            //                 
+            //                hotel.radius = this.radius.Text;
+            //                hotel.sendArea = this.sendArea.Text;
+            //                hotel.tel = this.tel.Text;
+            //                hotel.address = this.address.Text;
+            //                hotel.personLimite = Convert.ToInt32(this.personLimite.Text);
+            //                hotel.notice = this.notice.InnerText;
+            //                hotel.hotelintroduction = this.hotelintroduction.InnerText;
+            //                hotel.email = this.email.Text;
+            //                hotel.emailpwd = this.emailpwd.Text;
+            //                hotel.stmp = this.stmp.Text;
+            //                hotel.css = this.css.Text;
+            //                hotel.createDate = DateTime.Now;
+            //                hotel.kcType = this.type.Value;
+            //                hotel.miaoshu = this.miaoshu.InnerText;
+            //                hotel.xplace = Convert.ToDecimal(this.txtLatXPoint.Text);
+            //                hotel.yplace = Convert.ToDecimal(this.txtLngYPoint.Text);
+            //
+            //
+            //                //---喀纳斯添加的字段
+            //                //hotel.manager = this.manager.Text;
+            //                hotel.Mobile = this.mobile.Text;
+            //                //---
+            //
+            //                int id = hotelBll.Add(hotel);
+            //
+            //
+            //                for (int i = 1; i <= 6; i++)
+            //                {
+            //                    description = this.FindControl("description" + i) as TextBox;
+            //                    sortid = this.FindControl("sortid" + i) as TextBox;
+            //                    picUrl = this.FindControl("picUrl" + i) as TextBox;
+            //                    pictzUrl = this.FindControl("pictzUrl" + i) as TextBox;
+            //
+            //                    if (description.Text.Trim() != "" && sortid.Text.Trim() != "")
+            //                    {
+            //
+            //                        pic.shopid = id;
+            //                        pic.description = description.Text.ToString();
+            //                        pic.sortid = MyCommFun.Str2Int(sortid.Text.ToString());
+            //                        pic.picUrl = picUrl.Text.ToString();
+            //                        pic.pictzUrl = pictzUrl.Text.ToString();
+            //                        pic.createDate = DateTime.Now;
+            //                        picBll.Add(pic);
+            //
+            //                    }
+            //                }
+            //                AddAdminLog(MXEnums.ActionEnum.Add.ToString(), "添加商户设置，主键为" + id); //记录日志
+            //                JscriptMsg("添加成功！", "shop_list.aspx", "Success");
+            //
+            //            }
 
 
-            if (editetype == "add")
+
+            if (editetype == "edite")
             {
-                hotel.wid = wid;
+                if (shopid == 0)
+                {
+
+                    return;
+                    //操作失败！
+                }
+                //                hotel.id = shopid;
+                //                hotel.wid = wid;
                 hotel.hotelName = this.hotelName.Text;
                 hotel.hotelLogo = this.hotelLogo.Text;
                 hotel.hoteltimeBegin = Convert.ToDateTime("2100-1-1 " + this.hoteltimeBegin.Text);
                 hotel.hoteltimeEnd = Convert.ToDateTime("2100-1-1 " + this.hoteltimeEnd.Text);
+
                 if (this.hoteltimeBegin1.Text != "" && this.hoteltimeEnd1.Text != "")
                 {
                     hotel.hoteltimeBegin1 = Convert.ToDateTime("2100-1-1 " + this.hoteltimeBegin1.Text);
@@ -164,10 +272,9 @@ namespace WeiXinPF.Web.admin.diancai
                     hotel.hoteltimeEnd2 = null;
                 }
 
-
                 hotel.limiteOrder = Convert.ToBoolean(this.limiteOrder.SelectedValue);
-
                 hotel.dcRename = this.rename.Text;
+
                 if (!string.IsNullOrEmpty(this.sendPrice.Text))
                 {
                     hotel.sendPrice = Convert.ToDecimal(this.sendPrice.Text);
@@ -182,106 +289,19 @@ namespace WeiXinPF.Web.admin.diancai
                 {
                     hotel.freeSendcost = Convert.ToInt32(this.freeSendcost.Text);
                 }
-                 
+
+                
+                
                 hotel.radius = this.radius.Text;
                 hotel.sendArea = this.sendArea.Text;
                 hotel.tel = this.tel.Text;
                 hotel.address = this.address.Text;
-                hotel.personLimite = Convert.ToInt32(this.personLimite.Text);
-                hotel.notice = this.notice.InnerText;
-                hotel.hotelintroduction = this.hotelintroduction.InnerText;
-                hotel.email = this.email.Text;
-                hotel.emailpwd = this.emailpwd.Text;
-                hotel.stmp = this.stmp.Text;
-                hotel.css = this.css.Text;
-                hotel.createDate = DateTime.Now;
-                hotel.kcType = this.type.Value;
-                hotel.miaoshu = this.miaoshu.InnerText;
-                hotel.xplace = Convert.ToDecimal(this.txtLatXPoint.Text);
-                hotel.yplace = Convert.ToDecimal(this.txtLngYPoint.Text);
 
-
-                //---喀纳斯添加的字段
-                //hotel.manager = this.manager.Text;
-                hotel.Mobile = this.mobile.Text;
-                //---
-
-                int id = hotelBll.Add(hotel);
-
-
-                for (int i = 1; i <= 6; i++)
+                if (!string.IsNullOrEmpty(this.personLimite.Text))
                 {
-                    description = this.FindControl("description" + i) as TextBox;
-                    sortid = this.FindControl("sortid" + i) as TextBox;
-                    picUrl = this.FindControl("picUrl" + i) as TextBox;
-                    pictzUrl = this.FindControl("pictzUrl" + i) as TextBox;
-
-                    if (description.Text.Trim() != "" && sortid.Text.Trim() != "")
-                    {
-
-                        pic.shopid = id;
-                        pic.description = description.Text.ToString();
-                        pic.sortid = MyCommFun.Str2Int(sortid.Text.ToString());
-                        pic.picUrl = picUrl.Text.ToString();
-                        pic.pictzUrl = pictzUrl.Text.ToString();
-                        pic.createDate = DateTime.Now;
-                        picBll.Add(pic);
-
-                    }
+                    hotel.personLimite = Convert.ToInt32(this.personLimite.Text);
                 }
-                AddAdminLog(MXEnums.ActionEnum.Add.ToString(), "添加商户设置，主键为" + id); //记录日志
-                JscriptMsg("添加成功！", "shop_list.aspx", "Success");
-
-            }
-
-
-
-            if (editetype == "edite")
-            {
-                if (shopid == 0)
-                {
-
-                    return;
-                    //操作失败！
-                }
-                hotel.id = shopid;
-                hotel.wid = wid;
-                hotel.hotelName = this.hotelName.Text;
-                hotel.hotelLogo = this.hotelLogo.Text;
-                hotel.hoteltimeBegin = Convert.ToDateTime("2100-1-1 " + this.hoteltimeBegin.Text);
-                hotel.hoteltimeEnd = Convert.ToDateTime("2100-1-1 " + this.hoteltimeEnd.Text);
-
-                if (this.hoteltimeBegin1.Text != "" && this.hoteltimeEnd1.Text != "")
-                {
-                    hotel.hoteltimeBegin1 = Convert.ToDateTime("2100-1-1 " + this.hoteltimeBegin1.Text);
-                    hotel.hoteltimeEnd1 = Convert.ToDateTime("2100-1-1 " + this.hoteltimeEnd1.Text);
-                }
-                else
-                {
-                    hotel.hoteltimeBegin2 = null;
-                    hotel.hoteltimeEnd2 = null;
-                }
-                if (this.hoteltimeBegin2.Text != "" && this.hoteltimeEnd2.Text != "")
-                {
-                    hotel.hoteltimeBegin2 = Convert.ToDateTime("2100-1-1 " + this.hoteltimeBegin2.Text);
-                    hotel.hoteltimeEnd2 = Convert.ToDateTime("2100-1-1 " + this.hoteltimeEnd2.Text);
-                }
-                else
-                {
-                    hotel.hoteltimeBegin2 = null;
-                    hotel.hoteltimeEnd2 = null;
-                }
-
-                hotel.limiteOrder = Convert.ToBoolean(this.limiteOrder.SelectedValue);
-                hotel.dcRename = this.rename.Text;
-                hotel.sendPrice = Convert.ToDecimal(this.sendPrice.Text);
-                hotel.sendCost = Convert.ToDecimal(this.sendCost.Text);
-                hotel.freeSendcost = Convert.ToInt32(this.freeSendcost.Text);
-                hotel.radius = this.radius.Text;
-                hotel.sendArea = this.sendArea.Text;
-                hotel.tel = this.tel.Text;
-                hotel.address = this.address.Text;
-                hotel.personLimite = Convert.ToInt32(this.personLimite.Text);
+                
                 hotel.notice = this.notice.InnerText;
                 hotel.hotelintroduction = this.hotelintroduction.InnerText;
                 hotel.email = this.email.Text;
@@ -291,7 +311,16 @@ namespace WeiXinPF.Web.admin.diancai
 
                 hotel.kcType = this.type.Value;
                 hotel.miaoshu = this.miaoshu.InnerText;
-                hotel.xplace = Convert.ToDecimal(this.txtLatXPoint.Text);
+                if (!string.IsNullOrEmpty(this.txtLatXPoint.Text))
+                {
+                    hotel.xplace = Convert.ToDecimal(this.txtLatXPoint.Text);
+                }
+
+                if (!string.IsNullOrEmpty(this.txtLatXPoint.Text))
+                {
+                    hotel.xplace = Convert.ToDecimal(this.txtLatXPoint.Text);
+                }
+
                 hotel.yplace = Convert.ToDecimal(this.txtLngYPoint.Text);
 
                 //---喀纳斯添加的字段

@@ -43,7 +43,8 @@
                  resizeType: 1,
                  uploadJson: '../../tools/upload_ajax.ashx?action=EditorFile&IsWater=1',
                  fileManagerJson: '../../tools/upload_ajax.ashx?action=ManagerFile',
-                 allowFileManager: true
+                 allowFileManager: true,
+                 dialogAlignType: 'page'
              });
              var editorMini = KindEditor.create('.editor-mini', {
                  width: '98%',
@@ -192,7 +193,7 @@
               <dl>
                 <dt>排序：</dt>
                 <dd>
-                    <asp:TextBox runat="server" ID="sortid" CssClass="input normal" sucmsg=" " nullmsg="" datatype="n" ></asp:TextBox>
+                    <asp:TextBox runat="server" ID="sortid" Text="1" CssClass="input normal" sucmsg=" " nullmsg="" datatype="n" ></asp:TextBox>
                     <span class="Validform_checktip">*</span>
                 </dd>
             </dl>
