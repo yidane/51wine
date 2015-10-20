@@ -196,13 +196,13 @@ namespace WeiXinPF.DAL
         /// <summary>
         /// 获取订单详情
         /// </summary>
-        /// <param name="refundId"></param>
+        /// <param name="refundCode"></param>
         /// <returns></returns>
-        public string GetRefundDetail(int refundId)
+        public string GetRefundDetail(string refundCode)
         {
             var sqlparams = new List<SqlParameter>()
                 {
-                    new SqlParameter(){ParameterName = "@RefundID",SqlDbType = SqlDbType.Int,Value = refundId}
+                    new SqlParameter(){ParameterName = "@RefundCode",SqlDbType = SqlDbType.NVarChar,Value = refundCode}
                 };
 
             var result = DbHelperSQL.RunProcedure("usp_wx_diancai_tuidan_manage_RefundDetail", sqlparams.ToArray(), "refundDetail");
@@ -217,6 +217,26 @@ namespace WeiXinPF.DAL
                 }
             }
             return rtnStringBuilder.ToString();
+        }
+
+        /// <summary>
+        /// 获取退单详细信息
+        /// </summary>
+        /// <param name="shopId"></param>
+        /// <param name="orderId"></param>
+        /// <param name="refundCode"></param>
+        /// <returns></returns>
+        public DataSet GetRefundDetail(int shopId, int orderId, string refundCode)
+        {
+            var sqlparams = new List<SqlParameter>()
+                {
+                    new SqlParameter(){ParameterName = "@ShopID",SqlDbType = SqlDbType.Int,Value = shopId},
+                    new SqlParameter(){ParameterName = "@OrderID",SqlDbType = SqlDbType.Int,Value = orderId},
+                    new SqlParameter(){ParameterName = "@RefundCode",SqlDbType = SqlDbType.Int,Value = refundCode}
+                };
+
+            var result = DbHelperSQL.RunProcedure("", sqlparams.ToArray(), "refundDetail");
+            return result;
         }
     }
 }

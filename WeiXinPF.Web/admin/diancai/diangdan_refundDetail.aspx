@@ -15,12 +15,9 @@
     <script type="text/javascript">
         function parentToIndex(id) {
             parent.location.href = "/admin/Index.aspx?id=" + id;
-
         }
 
         $(function () {
-
-
         });
 
     </script>
@@ -113,9 +110,9 @@
                 <dt>状态调整为：</dt>
                 <dd>
                     <asp:DropDownList ID="ddlStatusType" runat="server">
-                        <asp:ListItem Text="未处理" Value="0"></asp:ListItem>
-                        <asp:ListItem Text="成功" Value="1"></asp:ListItem>
-                        <asp:ListItem Text="失败" Value="2"></asp:ListItem>
+                        <asp:ListItem Text="退款审核中" Value="2"></asp:ListItem>
+                        <asp:ListItem Text="已退款" Value="3"></asp:ListItem>
+                        <asp:ListItem Text="退款失败" Value="4"></asp:ListItem>
                     </asp:DropDownList>
                 </dd>
             </dl>

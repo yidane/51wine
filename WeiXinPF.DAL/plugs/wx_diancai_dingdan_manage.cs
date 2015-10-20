@@ -701,7 +701,7 @@ namespace WeiXinPF.DAL
                                                                   @RefundCode ,
                                                                   null ,
                                                                   @RefundAmount ,
-                                                                  0 ,
+                                                                  2 ,
                                                                   GETDATE()
                                                                 )";
 
