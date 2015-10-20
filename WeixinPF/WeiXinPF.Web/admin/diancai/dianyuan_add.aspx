@@ -41,7 +41,15 @@
 <body class="mainbody">
     <form id="form1" runat="server">
       <div class="location">
-            <a href="shop_list.aspx" class="home"><i></i><span>商户或门店列表</span></a>
+            <a <% if (IsWeiXinCode())
+                {%>
+                href="shop_list.aspx"
+                <%}%>
+                <%
+                else
+                {%>
+                href="#"
+                <%} %> class="home"><i></i><span>商户或门店列表</span></a>
             <i class="arrow"></i><span><a href="dianyuan_manage.aspx?shopid=<%=shopid %>" >店员信息管理</a></span>
             <i class="arrow"></i>            
             <span>店员信息管理</span>
