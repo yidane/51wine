@@ -10,9 +10,9 @@ namespace WeiXinPF.Web.admin.diancai
 {
     public partial class dianyuan_add : Web.UI.ManagePage
     {
-        protected static int shopid = 0;
-        protected static int ids = 0;
-        protected static string type = "";
+        protected  int shopid = 0;
+        protected  int ids = 0;
+        protected  string type = "";
         BLL.wx_diancai_dianyuan dianyuanbll = new BLL.wx_diancai_dianyuan();
         Model.wx_diancai_dianyuan dianyuan = new Model.wx_diancai_dianyuan();
         protected void Page_Load(object sender, EventArgs e)

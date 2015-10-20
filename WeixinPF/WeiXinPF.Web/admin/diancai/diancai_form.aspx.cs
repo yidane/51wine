@@ -13,7 +13,7 @@ namespace WeiXinPF.Web.admin.diancai
     public partial class diancai_form : Web.UI.ManagePage
     {
         private string action = MXEnums.ActionEnum.Add.ToString(); //操作类型
-        protected static int shopid = 0;
+        protected  int shopid = 0;
         wx_diancai_dingdan_manage yyBll = new wx_diancai_dingdan_manage();
         wx_diancai_form_control cBll = new wx_diancai_form_control();
 

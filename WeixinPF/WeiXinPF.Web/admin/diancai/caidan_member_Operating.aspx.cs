@@ -12,11 +12,11 @@ namespace WeiXinPF.Web.admin.diancai
     {
         BLL.wx_diancai_blacklist blaqckbll = new BLL.wx_diancai_blacklist();
         Model.wx_diancai_blacklist blaqck = new Model.wx_diancai_blacklist();
-        public static  string openid = "";
-        public static int id = 0;
-        public static int status = 0;
-        public static string blackName = "";
-        public static int shopid = 0; 
+        public   string openid = "";
+        public  int id = 0;
+        public  int status = 0;
+        public  string blackName = "";
+        public  int shopid = 0; 
         protected void Page_Load(object sender, EventArgs e)
         {
             openid = MyCommFun.QueryString("openid");

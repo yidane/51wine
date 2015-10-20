@@ -16,7 +16,7 @@ namespace WeiXinPF.Web.admin.diancai
         TextBox picUrl;
         TextBox pictzUrl;
         protected string editetype = "";
-        protected static int shopid = 0;
+        protected  int shopid = 0;
         BLL.wx_diancai_shopinfo hotelBll = new BLL.wx_diancai_shopinfo();
         Model.wx_diancai_shopinfo hotel = new Model.wx_diancai_shopinfo();
 

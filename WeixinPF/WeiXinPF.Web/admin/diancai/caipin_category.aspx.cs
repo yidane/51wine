@@ -17,7 +17,7 @@ namespace WeiXinPF.Web.admin.diancai
         protected int pageSize;
         BLL.wx_diancai_caipin_category gbll = new BLL.wx_diancai_caipin_category();
         protected string keywords = string.Empty;
-        protected static int shopid;
+        protected  int shopid;
 
         protected void Page_Load(object sender, EventArgs e)
         {

@@ -10,9 +10,9 @@ namespace WeiXinPF.Web.admin.diancai
 {
     public partial class desk_number_add : Web.UI.ManagePage
     {
-        protected static int shopid = 0;
-        public static int ids = 0;
-        public static string type = "";
+        protected  int shopid = 0;
+        public  int ids = 0;
+        public  string type = "";
         BLL.wx_diancai_desknum deskbll = new BLL.wx_diancai_desknum();
         Model.wx_diancai_desknum desk = new Model.wx_diancai_desknum();
 
