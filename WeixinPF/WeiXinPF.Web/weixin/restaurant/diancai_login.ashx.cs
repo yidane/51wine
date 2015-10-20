@@ -138,6 +138,18 @@ namespace WeiXinPF.Web.weixin.restaurant
                     context.Response.Write(MyCommFun.getJsonStr(this.jsonDict));
                     context.Response.End();
                 }
+            }else if (_action == "productDetail")
+            {
+                var productId = MyCommFun.QueryString("productId");
+                var productDescription = string.Empty;
+
+                if (!string.IsNullOrEmpty(productId))
+                {
+                    productDescription = new BLL.wx_diancai_caipin_manage().GetModel(int.Parse(productId)).shopIntroduction;                    
+                }
+
+                context.Response.Write(string.IsNullOrEmpty(productDescription) ? string.Empty : productDescription);
+                context.Response.End();
             }
         }
 

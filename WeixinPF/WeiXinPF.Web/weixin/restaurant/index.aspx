@@ -16,7 +16,7 @@
     <div id="mcover" onclick="document.getElementById('mcover').style.display='';">
         <div id="Popup">
             <div class="imgPopup">
-                <img id="picsrc" src="http://uweixin.cn/images/qQQk5sy4bu.jpg"><h3 id="h3title"></h3>
+                <img id="picsrc" src=""><h3 id="h3title"></h3>
                 <p class="jianjie" id="jianjie">
             </div>
         </div>
@@ -24,12 +24,28 @@
     </div>
     <script>
         function htmlit(url, title, fid) {
-            document.getElementById('mcover').style.display = 'block';
-            document.getElementById('Popup').style.display = 'block';
-            document.getElementById("picsrc").src = url;
-            document.getElementById("h3title").innerHTML = title;
-            //document.getElementById("jianjie").innerHTML = jianjie;
-            $('#jianjie').load('index.php?ac=diancaimenu&id=33473&shopid=783&c=o99epjjmjWhMPNzoQbo9r6DAEYds&fid=' + fid);
+            $.ajax({
+                url: "diancai_login.ashx",
+                type: "post",
+                dataType: "html",
+                async: false,
+                data: { productId: fid, myact:'productDetail'},
+                success: function (result) {                    
+                    if (typeof result === "undefined") {
+                        alert("无法获取此商品的详情");
+                        return;
+                    }
+                    
+                    document.getElementById('mcover').style.display = 'block';
+                    document.getElementById('Popup').style.display = 'block';
+                    document.getElementById("picsrc").src = url;
+                    document.getElementById("h3title").innerHTML = title;
+                    document.getElementById("jianjie").innerHTML = result;
+                },
+                error: function (error) {
+                    alert("无法获取此商品的详情");
+                }
+            });            
         }
     </script>
     <div style="background-color: #FFF">
