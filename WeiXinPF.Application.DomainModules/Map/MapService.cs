@@ -150,8 +150,8 @@ namespace WeiXinPF.Application.DomainModules.Map
                     Name = s.hotelName,
                     Introduction = s.hotelintroduction,
                     Logo = s.hotelLogo,
-                    Lat = (double)s.xplace,
-                    Lng = (double)s.yplace,
+                    Lat = (double)(s.xplace.HasValue ? s.xplace.Value : 0),
+                    Lng = (double)(s.yplace.HasValue ? s.yplace.Value : 0),
                     PoiType = "catering"
                 }).ToList();
             }
@@ -185,8 +185,8 @@ namespace WeiXinPF.Application.DomainModules.Map
                     Name = h.hotelName,
                     Introduction = h.hotelIntroduct,
                     Logo = h.coverPic,
-                    Lat = (double)h.xplace,
-                    Lng = (double)h.yplace,
+                    Lat = (double)(h.xplace.HasValue ? h.xplace.Value : 0),
+                    Lng = (double)(h.yplace.HasValue ? h.yplace.Value : 0),
                     PoiType = "hotel"
                 }).ToList();
             }
