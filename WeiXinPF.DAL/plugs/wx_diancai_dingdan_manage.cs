@@ -558,6 +558,39 @@ namespace WeiXinPF.DAL
             return DbHelperSQL.Query(strSql.ToString());
         }
 
+        public DataSet GetMyOrderInShop(string openid, int shopid)
+        {
+            var strSql = new StringBuilder();
+
+            strSql.Append(@"SELECT  d.id ,
+                                        shopinfoid ,
+                                        s.hotelName ,
+                                        openid ,
+                                        d.wid ,
+                                        orderNumber ,
+                                        deskNumber ,
+                                        customerName ,
+                                        customerTel ,
+                                        d.address ,
+                                        oderTime ,
+                                        oderRemark ,
+                                        payAmount ,
+                                        payStatus ,
+                                        d.createDate
+                                FROM    wx_diancai_dingdan_manage d
+                                        LEFT JOIN wx_diancai_shopinfo s ON d.shopinfoid = s.id
+                                WHERE payStatus=1 AND d.shopinfoid = @ShopID AND d.openid = @OpenID
+                                Order By d.createDate DESC");
+
+            SqlParameter[] sqlparams =
+                {
+                    new SqlParameter(){ParameterName = "@OpenID",SqlDbType = SqlDbType.NVarChar,Value = openid},
+                    new SqlParameter(){ParameterName = "@ShopID",SqlDbType = SqlDbType.Int,Value = shopid}
+                };
+
+            return DbHelperSQL.Query(strSql.ToString(), sqlparams);
+        }
+
         public DataSet GetDingdanRefundDetail(int shopid, int dingdanid, string openid, int caiid)
         {
             var strSql = new StringBuilder();

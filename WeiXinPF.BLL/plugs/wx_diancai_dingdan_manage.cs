@@ -194,6 +194,11 @@ namespace WeiXinPF.BLL
             return dal.GetListList(openid);
         }
 
+        public DataSet GetMyOrderInShop(string openid, int shopid)
+        {
+            return dal.GetMyOrderInShop(openid, shopid);
+        }
+
         public DataSet GetDingdanRefundDetail(int shopid, int dingdanid, string openid, int caiid)
         {
             return dal.GetDingdanRefundDetail(shopid, dingdanid, openid, caiid);

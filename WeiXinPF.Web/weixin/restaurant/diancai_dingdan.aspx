@@ -1,7 +1,6 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="diancai_dingdan.aspx.cs" Inherits="WeiXinPF.Web.weixin.restaurant.diancai_dingdan" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="Restaurant.Master" CodeBehind="diancai_dingdan.aspx.cs" Inherits="WeiXinPF.Web.weixin.restaurant.diancai_dingdan" %>
 
-<html>
-<head>
+<asp:Content ID="h" ContentPlaceHolderID="head" runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -11,18 +10,8 @@
     <link href="css/diancai.css" rel="stylesheet" type="text/css">
     <style>
 </style>
-</head>
-<body class="mode_webapp">
-    <div class="menu_header">
-        <div class="menu_topbar">
-            <strong class="head-title"></strong>
-            <span class="head_btn_left"><a href="javascript:history.go(-1);"><span>返回</span></a><b></b></span>
-            <a class="head_btn_right" href="caidan_shangjia.aspx?shopid=<%=shopid %>&openid=<%=openid %>">
-                <span><i class="menu_header_home"></i></span><b></b>
-            </a>
-        </div>
-    </div>
-
+</asp:Content>
+<asp:Content ID="c" ContentPlaceHolderID="content" runat="server" class="mode_webapp">
     <div class="cardexplain" id="contact_info" runat="server">
 
         <ul class="round">
@@ -43,8 +32,6 @@
 
         </ul>
         <div class="twobtn">
-           
-            <a class="del 3" id="showcard" runat="server">删除</a>
             <a id="showcard2" class="submit" href="javascript:history.go(-1);" style="display: none;" runat="server">返回</a>
         </div>
 
@@ -52,48 +39,23 @@
         <div class="clr"></div>
     </div>
 
+    <script src="js/shopCart.js" type="text/javascript"></script>
+    <script src="js/BuyProducts.js" type="text/javascript"></script>
+<script>
+    window.onload = function () {
+        cart.getFromCache();
+        showProductsInShopCart();
+    }
 
+    var cart = new OAK.Shop.Cart(<%=shopid %>);
+    function showProductsInShopCart() {
+        showShopCartProductsNumber();
+    }
 
-    <div class="footermenu">
-        <ul>
-            <li>
-                <a href="caidan_guanyu.aspx?shopid=<%=shopid %>&openid=<%=openid %>">
-                    <img src="images/xxyX63YryG.png">
-                    <p>关于</p>
-                </a>
-            </li>
-            <li>
-                <a href="index.aspx?shopid=<%=shopid %>&openid=<%=openid %>">
-                    <img src="images/Lngjm86JQq.png">
-                    <p><%=rename %></p>
-                </a>
-            </li>
-            <li>
-                <a href="diancai_shoppingCart.aspx?shopid=<%=shopid %>&openid=<%=openid %>">
-                    <span class="num" id="cartN2">0</span>
-                    <img src="images/2yFKO6TwKI.png">
-                    <p>购物车</p>
-                </a>
-            </li>
-            <li>
-                <a class="active" href="diancai_oder.aspx?shopid=<%=shopid %>&openid=<%=openid %>">
-                    <img src="images/s22KaR0Wtc.png">
-                    <p>订单</p>
-                </a>
-            </li>
-            <li>
-                <a href="diancai_geren.aspx?shopid=<%=shopid %>&openid=<%=openid %>">
-                    <img src="images/J0uZbXQWvJ.png">
-                    <p>我的</p>
-                </a>
-            </li>
-        </ul>
-    </div>
-
+</script>
     <script type="text/javascript">
         document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
             WeixinJSBridge.call('hideToolbar');
         });
     </script>
-</body>
-</html>
+</asp:Content>

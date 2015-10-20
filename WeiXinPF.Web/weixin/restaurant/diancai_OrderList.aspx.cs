@@ -41,7 +41,7 @@
         public void List(string openid)
         {
 
-            DataSet dr = this.managebll.GetListList(openid);
+            DataSet dr = this.managebll.GetMyOrderInShop(openid, this.shopid);
             if(dr.Tables[0].Rows.Count>0)
             {
                 for (int i = 0; i < dr.Tables[0].Rows.Count;i++ )

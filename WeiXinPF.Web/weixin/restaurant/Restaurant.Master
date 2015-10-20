@@ -30,22 +30,28 @@
     <div class="footermenu">
         <ul>
             <li>
-                <a id="about" href="caidan_guanyu.aspx?shopid=<%=shopid %>&wid=<%=wid %>">
+                <a id="about" href="caidan_guanyu.aspx?shopid=<%=shopid %>&openid=<%=openid %>&wid=<%=wid %>">
                     <img src="images/xxyX63YryG.png">
                     <p>关于</p>
                 </a>
             </li>
             <li>
-                <a id="buy" class="active" href="index.aspx?shopid=<%=shopid %>&wid=<%=wid %>">
+                <a id="buy" class="active" href="index.aspx?shopid=<%=shopid %>&openid=<%=openid %>&wid=<%=wid %>">
                     <img src="images/Lngjm86JQq.png">
                     <p>美食选购</p>
                 </a>
             </li>
             <li>
-                <a id="shopcart" href="diancai_shoppingCart.aspx?shopid=<%=shopid %>&wid=<%=wid %>">
+                <a id="shopcart" href="diancai_shoppingCart.aspx?shopid=<%=shopid %>&openid=<%=openid %>&wid=<%=wid %>">
                     <span class="num" id="cartN2">0</span>
                     <img src="images/2yFKO6TwKI.png">
                     <p>商铺购物车</p>
+                </a>
+            </li>
+            <li>
+                <a id="order" href="diancai_OrderList.aspx?shopid=<%=shopid %>&openid=<%=openid %>&wid=<%=wid %>">
+                    <img src="images/s22KaR0Wtc.png">
+                    <p>我的订单</p>
                 </a>
             </li>
         </ul>
@@ -60,21 +66,31 @@
                     $("#about").addClass("active");
                     $("#buy").removeClass("active");
                     $("#shopcart").removeClass("active");
+                    $("#order").removeClass("active");
                     break;
                 case "美食选购":
                     $("#about").removeClass("active");
                     $("#buy").addClass("active");
                     $("#shopcart").removeClass("active");
+                    $("#order").removeClass("active");
                     break;
                 case "商铺购物车":
                     $("#about").removeClass("active");
                     $("#buy").removeClass("active");
                     $("#shopcart").addClass("active");
+                    $("#order").removeClass("active");
+                    break;
+                case "我的订单":
+                    $("#about").removeClass("active");
+                    $("#buy").removeClass("active");
+                    $("#shopcart").removeClass("active");
+                    $("#order").addClass("active");
                     break;
                 default:
                     $("#about").removeClass("active");
                     $("#buy").addClass("active");
                     $("#shopcart").removeClass("active");
+                    $("#order").removeClass("active");
                     break;
             }
         });
