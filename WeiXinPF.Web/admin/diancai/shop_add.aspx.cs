@@ -23,11 +23,11 @@ namespace WeiXinPF.Web.admin.diancai
         BLL.wx_diancai_shoppic picBll = new BLL.wx_diancai_shoppic();
         Model.wx_diancai_shoppic pic = new Model.wx_diancai_shoppic();
         wx_diancai_shoppic iBll = new wx_diancai_shoppic();
+         
 
         protected void Page_Load(object sender, EventArgs e)
         {
             shopid = MyCommFun.RequestInt("shopid") == 0 ? GetShopId() : MyCommFun.RequestInt("shopid");
-
 
             if (!IsPostBack)
             {
@@ -353,7 +353,7 @@ namespace WeiXinPF.Web.admin.diancai
                     }
                 }
                 AddAdminLog(MXEnums.ActionEnum.Edit.ToString(), "修改商户设置，主键为" + shopid); //记录日志
-                JscriptMsg("修改成功！", "shop_list.aspx", "Success");
+//                JscriptMsg("修改成功！", "shop_list.aspx", "Success");
             }
 
 

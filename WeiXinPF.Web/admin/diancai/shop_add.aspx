@@ -41,7 +41,17 @@
 <body class="mainbody">
     <form id="form1" runat="server">
         <div class="location">
-            <a href="shop_list.aspx" class="home"><i></i><span>餐饮管理</span></a>
+            <a
+                <% if (IsWeiXinCode())
+                {%>
+                href="shop_list.aspx"
+                <%}%>
+                <%
+                else
+                {%>
+                href="#"
+                <%} %>
+                class="home"><i></i><span>商户或门店列表</span></a>
             <i class="arrow"></i>
             <span>商户或门店信息设置</span>
         </div>
@@ -224,7 +234,7 @@
                 <dt>每人每天允许下单次数：</dt>
                 <dd>
                     <asp:TextBox runat="server" ID="personLimite" Text="0" CssClass="input normal"></asp:TextBox>
-<%--                    <span class="Validform_checktip">*</span>--%>
+                    <%--                    <span class="Validform_checktip">*</span>--%>
                     <br />
                     <span class="red">0表示不限制，建议设置3，可以优先防止恶意刷单!
                     </span>
