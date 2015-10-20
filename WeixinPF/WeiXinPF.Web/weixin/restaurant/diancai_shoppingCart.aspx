@@ -174,7 +174,7 @@
                 async: false,
                 data: { prepayid: prepayid },
                 success: function (result) {
-                    document.location.href = "diancai_oder.aspx?openid=<%=openid %>&type=pay";
+                    document.location.href = "diancai_OrderList.aspx?openid=<%=openid %>&type=pay";
                 },
                 error: function (error) {
                 }
