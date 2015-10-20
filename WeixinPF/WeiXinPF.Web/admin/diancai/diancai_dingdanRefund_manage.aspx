@@ -149,7 +149,7 @@
                         <%# Eval("refundStatusDesc") %>                        
                     </td>
                     <td>
-                        <a href='diangdan_refundDetail.aspx?shopid=<%=shopid %>&dingdanid=<%#Eval("DingdanID") %>&id=<%#Eval("RefundNumber") %>'>操作</a>
+                        <a href='diangdan_refundDetail.aspx?shopid=<%#Eval("shopid") %>&dingdanid=<%#Eval("DingdanID") %>&id=<%#Eval("RefundNumber") %>'>操作</a>
                     </td>
                 </tr>
             </ItemTemplate>

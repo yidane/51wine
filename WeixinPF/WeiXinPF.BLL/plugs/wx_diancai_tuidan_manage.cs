@@ -53,7 +53,7 @@ namespace WeiXinPF.BLL
 
         public DataSet GetRefundDetailWithOrderDetail(int shopId, int orderId, string refundCode)
         {
-            return null;
+            return dal.GetRefundDetail(shopId, orderId, refundCode);
         }
     }
 }
