@@ -31,16 +31,17 @@
 <body class="mainbody">
     <form id="form1" runat="server">
       <div class="location">
-          <a <% if (IsWeiXinCode())
+         <% if (IsWeiXinCode())
                 {%>
-                href="shop_list.aspx"
+            <a    href="shop_list.aspx" class="home"><i></i><span>商户或门店列表</span></a>
+              <i class="arrow"></i>
                 <%}%>
                 <%
                 else
                 {%>
-                href="#"
-                <%} %> class="home"><i></i><span>商户或门店列表</span></a>
-          <i class="arrow"></i><span><a href="caidan_member_manage.aspx?shopid=<%=shopid %>" >会员管理</a></span>
+               
+                <%} %> 
+          <span><a href="caidan_member_manage.aspx?shopid=<%=shopid %>" >会员管理</a></span>
             <i class="arrow"></i>             
             <span>客户状态设置</span>
       </div>

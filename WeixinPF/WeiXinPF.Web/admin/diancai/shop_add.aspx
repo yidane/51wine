@@ -41,18 +41,19 @@
 <body class="mainbody">
     <form id="form1" runat="server">
         <div class="location">
-            <a
+            
                 <% if (IsWeiXinCode())
                 {%>
-                href="shop_list.aspx"
+                 <a    href="shop_list.aspx" class="home"><i></i><span>商户或门店列表</span></a>
+                <i class="arrow"></i>
                 <%}%>
                 <%
                 else
                 {%>
-                href="#"
+             
                 <%} %>
-                class="home"><i></i><span>商户或门店列表</span></a>
-            <i class="arrow"></i>
+                
+        
             <span>商户或门店信息设置</span>
         </div>
         <div class="line10"></div>

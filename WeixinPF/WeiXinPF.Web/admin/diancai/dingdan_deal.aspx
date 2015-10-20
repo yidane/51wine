@@ -37,16 +37,16 @@
 <body class="mainbody">
     <form id="form1" runat="server">
         <div class="location">
-            <a <% if (IsWeiXinCode())
+            <% if (IsWeiXinCode())
                 {%>
-                href="shop_list.aspx"
+            <a    href="shop_list.aspx" class="home"><i></i><span>商户或门店列表</span></a>
+              <i class="arrow"></i>
                 <%}%>
                 <%
                 else
                 {%>
-                href="#"
-                <%} %> class="home"><i></i><span>商户或门店列表</span></a>
-            <i class="arrow"></i><span><a href="dingdan_manage.aspx?shopid=<%=shopid %>">订单管理</a></span>
+               
+                <%} %><span><a href="dingdan_manage.aspx?shopid=<%=shopid %>">订单管理</a></span>
             <i class="arrow"></i>
             <span>订单详情</span>
         </div>

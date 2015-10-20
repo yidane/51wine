@@ -8,10 +8,11 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using WeiXinPF.Model;
+using WeiXinPF.Web.UI;
 
 namespace WeiXinPF.Web.admin.diancai
 {
-    public partial class credentials_detail : System.Web.UI.Page
+    public partial class credentials_detail : ManagePage
     {
         protected double totalAmount=0.0;
         BLL.wx_diancai_dingdan_manage gbll = new BLL.wx_diancai_dingdan_manage();

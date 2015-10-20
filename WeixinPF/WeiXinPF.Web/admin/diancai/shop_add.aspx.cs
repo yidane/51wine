@@ -353,7 +353,7 @@ namespace WeiXinPF.Web.admin.diancai
                     }
                 }
                 AddAdminLog(MXEnums.ActionEnum.Edit.ToString(), "修改商户设置，主键为" + shopid); //记录日志
-//                JscriptMsg("修改成功！", "shop_list.aspx", "Success");
+                JscriptMsg("修改成功！", "shop_add.aspx?type=edite", "Success");
             }
 
 
