@@ -4,6 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using OneGulp.WeChat.MP;
+using OneGulp.WeChat.MP.AdvancedAPIs;
+using WeiXinPF.Common;
 
 namespace WeiXinPF.Web.weixin.restaurant
 {
@@ -19,6 +22,14 @@ namespace WeiXinPF.Web.weixin.restaurant
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            //OAuth2
+            string thisUrl = MyCommFun.getWebSite() + "/weixin/restaurant/diancai_shoppingCart.aspx" + Request.Url.Query;
+            var bll = new BLL.wx_userweixin();
+            int widInt = MyCommFun.RequestWid();
+            Model.wx_userweixin uWeiXinModel = bll.GetModel(widInt);
+            OAuth2BaseProc(uWeiXinModel, "index", thisUrl);
+
+
             this.shopid = string.IsNullOrEmpty(WebHelper.GetQueryString("shopid")) ? 0 : int.Parse(WebHelper.GetQueryString("shopid"));
             this.openid = string.IsNullOrEmpty(WebHelper.GetQueryString("openid")) ? "loseopenid" : WebHelper.GetQueryString("openid");
             this.wid = string.IsNullOrEmpty(WebHelper.GetQueryString("wid")) ? "1" : WebHelper.GetQueryString("wid");
@@ -38,8 +49,38 @@ namespace WeiXinPF.Web.weixin.restaurant
                     {
                         return;
                     }
-                    this.hotelName = shopinfo.hotelName;                    
-                }                
+                    this.hotelName = shopinfo.hotelName;
+                }
+            }
+        }
+
+        /// <summary>
+        /// 授权判断，页面跳转
+        /// </summary>
+        /// <param name="state"></param>
+        /// <param name="targetUrl">目标地址</param>
+        public void OAuth2BaseProc(Model.wx_userweixin model, string state, string targetUrl)
+        {
+            var code = MyCommFun.QueryString("code");
+            openid = MyCommFun.QueryString("openid");
+
+            if (!string.IsNullOrEmpty(openid))
+                return;
+
+            //如果不存在code,表示尚未和微信平台OAuth2
+            if (string.IsNullOrEmpty(code))
+            {
+                if (targetUrl == null || targetUrl.Trim() == "")
+                {
+                    targetUrl = MyCommFun.getTotalUrl();
+                }
+                var newUrl = OAuthApi.GetAuthorizeUrl(model.AppId, targetUrl, state, OAuthScope.snsapi_base);
+                Response.Redirect(newUrl);
+            }
+            else
+            {
+                var result = OAuthApi.GetAccessToken(model.AppId, model.AppSecret, code);
+                Response.Redirect(string.Format("{0}&openid={1}", Request.Url, result.openid));
             }
         }
 
