@@ -9,14 +9,19 @@
     <title><%=hotelName %></title>
     <link href="css/diancai.css?20140325" rel="stylesheet" type="text/css" />
     <style>
-</style>
+        .pic-loading {
+            background: url(images/loading.gif) no-repeat 50% 50% #f5f5f5;
+            background-size: 50px 50px;
+        }
+
+    </style>
 </asp:Content>
 <asp:Content ID="c" ContentPlaceHolderID="content" runat="server" class="mode_webapp">
     <input type="hidden" name="formhash" id="formhash" value="52ebc03e" />
     <div id="mcover" onclick="document.getElementById('mcover').style.display='';">
         <div id="Popup">
             <div class="imgPopup">
-                <img id="picsrc" src=""><h3 id="h3title"></h3>
+                <img id="picsrc" class="pic-loading" src=""><h3 id="h3title"></h3>
                 <p class="jianjie" id="jianjie">
             </div>
         </div>
@@ -39,6 +44,7 @@
                     document.getElementById('mcover').style.display = 'block';
                     document.getElementById('Popup').style.display = 'block';
                     document.getElementById("picsrc").src = url;
+                    document.getElementById("picsrc").className = '';
                     document.getElementById("h3title").innerHTML = title;
                     document.getElementById("jianjie").innerHTML = result;
                 },
