@@ -101,9 +101,9 @@ namespace WeiXinPF.Web.weixin.restaurant
                     builder.Append("</a>");
                     builder.Append("</li>");
                     builder.Append("<table width=\"100%\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" class=\"cpbiaoge\">");
-                    builder.Append("<tr><th>退单编号</th><th>订单编号</th>");
+                    builder.Append("<tr><th>退单编号</th>");
                     builder.Append("<th width=\"50\" class=\"cc\">退款总额</th><th width=\"40\" class=\"cc\">状态</th></tr>");
-                    builder.Append("<tr><td class=\"cc\">" + dr.Tables[0].Rows[i]["refundCode"].ToString() + "</td><td class=\"cc\"><span>" + dr.Tables[0].Rows[i]["orderNumber"].ToString() + "</span></td><td class=\"cc\">" + dr.Tables[0].Rows[i]["refundAmount"].ToString() + "元</td>");
+                    builder.Append("<tr><td class=\"cc\">" + dr.Tables[0].Rows[i]["refundCode"].ToString() + "</td><td class=\"cc\">" + dr.Tables[0].Rows[i]["refundAmount"].ToString() + "元</td>");
                     builder.Append("<td class=\"cc\">");
 
                     var refundStatus = Convert.ToInt32(dr.Tables[0].Rows[i]["refundStatus"]);
