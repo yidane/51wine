@@ -49,7 +49,7 @@ namespace WeiXinPF.Web.weixin.restaurant
                 for (int i = 0; i < dr.Tables[0].Rows.Count; i++)
                 {
                     str += "<ul class=\"round\">";
-                    str += "<li class=\"title\"><a href=\"diancai_orderDetail.aspx?wid=" + dr.Tables[0].Rows[i]["wid"].ToString() + "&shopid=" + dr.Tables[0].Rows[i]["shopinfoid"].ToString() + "&dingdan=" + dr.Tables[0].Rows[i]["id"].ToString() + "&openid=" + openId + "\"><span>" + dr.Tables[0].Rows[i]["oderTime"].ToString() + "<img src=\"images\\tel.png\" class=\"HomeImage\"></img>" + dr.Tables[0].Rows[i].Field<string>("hotelName") + "</span></a></li>";
+                    str += "<li class=\"title\"><a href=\"diancai_orderDetail.aspx?wid=" + dr.Tables[0].Rows[i]["wid"].ToString() + "&shopid=" + dr.Tables[0].Rows[i]["shopinfoid"].ToString() + "&dingdan=" + dr.Tables[0].Rows[i]["id"].ToString() + "&openid=" + openId + "\"><span>" + dr.Tables[0].Rows[i]["oderTime"].ToString() + "  " + dr.Tables[0].Rows[i].Field<string>("hotelName") + "</span></a></li>";
                     str += " <table width=\"100%\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" class=\"cpbiaoge\">";
                     str += "<tr><th>订单编号</th>";
                     str += "<th width=\"70\" class=\"cc\">订单金额</th><th width=\"55\" class=\"cc\">订单状态</th></tr>";
@@ -96,7 +96,7 @@ namespace WeiXinPF.Web.weixin.restaurant
                                    dr.Tables[0].Rows[i]["dingdan"].ToString() + "&openid=" + openId + "\">");
                     builder.Append("<span>" +
                                    dr.Tables[0].Rows[i]["createDate"].ToString() +
-                                   "<img src=\"images\\tel.png\" class=\"HomeImage\"></img>" +
+                                   "  " +
                                    dr.Tables[0].Rows[i].Field<string>("hotelName") + "</span>");
                     builder.Append("</a>");
                     builder.Append("</li>");
@@ -105,17 +105,20 @@ namespace WeiXinPF.Web.weixin.restaurant
                     builder.Append("<th width=\"50\" class=\"cc\">退款总额</th><th width=\"40\" class=\"cc\">状态</th></tr>");
                     builder.Append("<tr><td class=\"cc\">" + dr.Tables[0].Rows[i]["refundCode"].ToString() + "</td><td class=\"cc\"><span>" + dr.Tables[0].Rows[i]["orderNumber"].ToString() + "</span></td><td class=\"cc\">" + dr.Tables[0].Rows[i]["refundAmount"].ToString() + "元</td>");
                     builder.Append("<td class=\"cc\">");
+
+                    var refundStatus = Convert.ToInt32(dr.Tables[0].Rows[i]["refundStatus"]);
+                    var statusDict = StatusManager.DishStatus.GetStatusDict(refundStatus);
                     if (dr.Tables[0].Rows[i]["refundStatus"].ToString() == "1")
                     {
-                        builder.Append("<em class=\"ok\">部分使用</em>");
+                        builder.AppendFormat("<em class=\"ok\">{0}</em>", statusDict.StatusName);
                     }
                     else if (dr.Tables[0].Rows[i]["refundStatus"].ToString() == "2")
                     {
-                        builder.Append("<em class=\"error\">全部使用</em>");
+                        builder.AppendFormat("<em class=\"error\">{0}</em>", statusDict.StatusName);
                     }
                     else
                     {
-                        builder.Append("<em class=\"no\">未处理</em>");
+                        builder.AppendFormat("<em class=\"no\">{0}</em>", statusDict.StatusName);
                     }
                     builder.Append(" </td></tr></table></ul>");
                 }

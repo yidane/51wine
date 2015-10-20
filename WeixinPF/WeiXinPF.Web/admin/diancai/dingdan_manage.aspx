@@ -158,8 +158,7 @@
                     <td>
                         <%# Eval("detail") %>                        
                     </td>
-                    <td>
-                        <%# Eval("payAmount") %>                        
+                    <td>&yen; <%# Eval("payAmount") %>                        
                     </td>
                     <td>
                         <a href='dingdan_deal.aspx?id=<%#Eval("id") %>&shopid=<%=shopid %>'>操作</a>

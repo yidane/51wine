@@ -36,6 +36,7 @@ namespace WeiXinPF.Web.admin.diancai
             DateTime.TryParse(MyCommFun.QueryString("endDate"), out endDate);
             refundNumber = MyCommFun.QueryString("refundNo");
             refundStatus = MyCommFun.RequestInt("refundStatus");
+            refundStatus = refundStatus == 0 ? -1 : refundStatus;
             this.orderNumber = MyCommFun.QueryString("OrderNumber");
             this.customerName = MyCommFun.QueryString("CustomerName");
             this.customerTel = MyCommFun.QueryString("customerTel");
