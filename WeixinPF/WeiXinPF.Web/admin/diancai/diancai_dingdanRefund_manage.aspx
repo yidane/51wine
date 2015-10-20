@@ -105,6 +105,7 @@
                         <tr>
                             <th>选择</th>
                             <th>序号</th>
+                            <th>退单号</th>
                             <th>订单号</th>
                             <th>预订人</th>
                             <th>电话</th>
@@ -121,10 +122,12 @@
                 <tr class="td_c">
                     <td>
                         <asp:CheckBox ID="chkId" CssClass="checkall" runat="server" Style="vertical-align: middle;" />
-                        <asp:HiddenField ID="hidId" Value='<%#Eval("id")%>' runat="server" />
                     </td>
                     <td>
                         <%# Eval("OrderNo") %>
+                    </td>
+                    <td>
+                        <%# Eval("RefundNumber") %>
                     </td>
                     <td>
                         <%# Eval("orderNumber") %>
@@ -145,10 +148,10 @@
                         <%# Eval("RefundAmount") %>                        
                     </td>
                     <td>
-                        <%# Eval("RefundStatus") %>                        
+                        <%# Eval("refundStatusDesc") %>                        
                     </td>
                     <td>
-                        <a href='diangdan_refundDetail.aspx?id=<%#Eval("id") %>&shopid=<%=shopid %>'>操作</a>
+                        <a href='diangdan_refundDetail.aspx?shopid=<%=shopid %>&dingdanid=<%#Eval("DingdanID") %>&id=<%#Eval("RefundNumber") %>'>操作</a>
                     </td>
                 </tr>
             </ItemTemplate>

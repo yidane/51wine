@@ -63,6 +63,12 @@ namespace WeiXinPF.Web.admin.diancai
             this.txtCustomerTel.Text = this.customerTel;
         }
 
+        private string GetRefundStatusItem(string refundStatusId)
+        {
+            var CurrentItem = this.dboRefundStatus.Items.Cast<ListItem>().FirstOrDefault(item => string.Equals(item.Value, refundStatusId));
+            return CurrentItem != null ? CurrentItem.Text : string.Empty;
+        }
+
         #region 数据绑定=================================
         private void BindResult()
         {
@@ -83,10 +89,13 @@ namespace WeiXinPF.Web.admin.diancai
                 {
                     dr = result.Tables[0].Rows[i];
 
-                    var orderId = Convert.ToInt32(dr["id"]);
-                    var detail = refundManager.GetRefundDetail(orderId);
+                    var refundnumber = dr["RefundNumber"].ToString();
+                    var detail = refundManager.GetRefundDetail(refundnumber);
                     dr["Detail"] = detail;
                     dr["OrderNo"] = i + 1;
+
+                    var status = dr["refundStatus"] != null && dr["refundStatus"] != DBNull.Value ? dr["refundStatus"].ToString() : string.Empty;
+                    dr["RefundStatusDesc"] = GetRefundStatusItem(status);
                 }
 
                 result.AcceptChanges();

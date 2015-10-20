@@ -44,11 +44,16 @@ namespace WeiXinPF.BLL
         /// <summary>
         /// 获取订单菜品详情信息
         /// </summary>
-        /// <param name="refundId"></param>
+        /// <param name="refundCode"></param>
         /// <returns></returns>
-        public string GetRefundDetail(int refundId)
+        public string GetRefundDetail(string refundCode)
         {
-            return dal.GetRefundDetail(refundId);
+            return dal.GetRefundDetail(refundCode);
+        }
+
+        public DataSet GetRefundDetailWithOrderDetail(int shopId, int orderId, string refundCode)
+        {
+            return null;
         }
     }
 }
