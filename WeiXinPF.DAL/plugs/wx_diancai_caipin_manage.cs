@@ -62,16 +62,16 @@ namespace WeiXinPF.DAL
 					new SqlParameter("@priceUnite", SqlDbType.VarChar,100),
 					new SqlParameter("@cpPic", SqlDbType.VarChar,300),
 					new SqlParameter("@picUrl", SqlDbType.VarChar,300),
-					new SqlParameter("@detailContent", SqlDbType.VarChar,300),
+					new SqlParameter("@detailContent", SqlDbType.VarChar,8000),
 					new SqlParameter("@createDate", SqlDbType.DateTime),
 					new SqlParameter("@shopid", SqlDbType.Int,4),
 					new SqlParameter("@sortid", SqlDbType.Int,4),
 					new SqlParameter("@scan", SqlDbType.Int,4),
-                    new SqlParameter("@instructions", SqlDbType.VarChar,300),
-                    new SqlParameter("@shopIntroduction", SqlDbType.VarChar,300),
+                    new SqlParameter("@instructions", SqlDbType.VarChar,8000),
+                    new SqlParameter("@shopIntroduction", SqlDbType.VarChar,8000),
                     new SqlParameter("@beginDate", SqlDbType.DateTime),
                     new SqlParameter("@endDate", SqlDbType.DateTime),
-                    new SqlParameter("@chargeback",SqlDbType.VarChar,300)
+                    new SqlParameter("@chargeback",SqlDbType.VarChar,8000)
 
 
 
@@ -140,16 +140,16 @@ namespace WeiXinPF.DAL
 					new SqlParameter("@priceUnite", SqlDbType.VarChar,100),
 					new SqlParameter("@cpPic", SqlDbType.VarChar,300),
 					new SqlParameter("@picUrl", SqlDbType.VarChar,300),
-					new SqlParameter("@detailContent", SqlDbType.VarChar,300),
+					new SqlParameter("@detailContent", SqlDbType.VarChar,8000),
 					new SqlParameter("@createDate", SqlDbType.DateTime),
 					new SqlParameter("@shopid", SqlDbType.Int,4),
 					new SqlParameter("@sortid", SqlDbType.Int,4),
 					new SqlParameter("@scan", SqlDbType.Int,4),
-                    new SqlParameter("@instructions", SqlDbType.VarChar,300),
-                    new SqlParameter("@shopIntroduction", SqlDbType.VarChar,300),
+                    new SqlParameter("@instructions", SqlDbType.VarChar,8000),
+                    new SqlParameter("@shopIntroduction", SqlDbType.VarChar,8000),
                     new SqlParameter("@beginDate", SqlDbType.DateTime),
                     new SqlParameter("@endDate", SqlDbType.DateTime),
-                    new SqlParameter("@chargeback", SqlDbType.VarChar,300),
+                    new SqlParameter("@chargeback", SqlDbType.VarChar,8000),
 
                     new SqlParameter("@id", SqlDbType.Int,4)};
 			parameters[0].Value = model.categoryid;
