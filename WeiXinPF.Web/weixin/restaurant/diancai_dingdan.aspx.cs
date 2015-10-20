@@ -81,11 +81,7 @@ namespace WeiXinPF.Web.weixin.restaurant
                     psf = sjopmodel.sendCost.Value;
                 }
 
-
-
-                Dingdanlist += "<tr><td>商品总费</td><td class=\"cc\">￥" + amount + "</td>  <td class=\"cc\" >配送费</td><td class=\"rr\" >￥" + psf + "</td></tr>";
                 Dingdanlist += "<tr><td>总计：</td><td ></td><td ></td><td class=\"rr\">￥" + zongji + "</td></tr>";
-
             }
 
 
