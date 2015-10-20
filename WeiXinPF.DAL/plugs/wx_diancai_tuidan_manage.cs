@@ -232,10 +232,10 @@ namespace WeiXinPF.DAL
                 {
                     new SqlParameter(){ParameterName = "@ShopID",SqlDbType = SqlDbType.Int,Value = shopId},
                     new SqlParameter(){ParameterName = "@OrderID",SqlDbType = SqlDbType.Int,Value = orderId},
-                    new SqlParameter(){ParameterName = "@RefundCode",SqlDbType = SqlDbType.Int,Value = refundCode}
+                    new SqlParameter(){ParameterName = "@RefundCode",SqlDbType = SqlDbType.NVarChar,Value = refundCode}
                 };
 
-            var result = DbHelperSQL.RunProcedure("", sqlparams.ToArray(), "refundDetail");
+            var result = DbHelperSQL.RunProcedure("usp_wx_diancai_tuidan_manage_Detail", sqlparams.ToArray(), "refundDetail");
             return result;
         }
     }
