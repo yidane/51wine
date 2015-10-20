@@ -12,7 +12,7 @@ namespace WeiXinPF.Web.weixin.restaurant
     {
         public string title { get; set; }
         public int shopid { get; set; }
-        //public string openid { get; set; }
+        public string openid { get; set; }
         public string hotelName { get; set; }
 
         public string wid { get; set; }
@@ -20,7 +20,7 @@ namespace WeiXinPF.Web.weixin.restaurant
         protected void Page_Load(object sender, EventArgs e)
         {
             this.shopid = string.IsNullOrEmpty(WebHelper.GetQueryString("shopid")) ? 0 : int.Parse(WebHelper.GetQueryString("shopid"));
-            //this.openid = string.IsNullOrEmpty(WebHelper.GetQueryString("openid")) ? "loseopenid" : WebHelper.GetQueryString("openid");
+            this.openid = string.IsNullOrEmpty(WebHelper.GetQueryString("openid")) ? "loseopenid" : WebHelper.GetQueryString("openid");
             this.wid = string.IsNullOrEmpty(WebHelper.GetQueryString("wid")) ? "1" : WebHelper.GetQueryString("wid");
             this.title = this.GetTitle();
 
@@ -55,6 +55,9 @@ namespace WeiXinPF.Web.weixin.restaurant
                     return "美食选购";
                 case "diancai_shoppingCart.aspx":
                     return "商铺购物车";
+                case "diancai_dingdan.aspx":
+                case "diancai_OrderList.aspx":
+                    return "我的订单";
                 default:
                     return "欢迎光临";
             }

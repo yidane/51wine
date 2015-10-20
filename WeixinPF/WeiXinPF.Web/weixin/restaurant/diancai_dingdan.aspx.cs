@@ -24,7 +24,6 @@ namespace WeiXinPF.Web.weixin.restaurant
         BLL.wx_diancai_shopinfo shopbll = new BLL.wx_diancai_shopinfo();
         Model.wx_diancai_shopinfo sjopmodel = new Model.wx_diancai_shopinfo();
         public string hotelName = "";
-        public string type = "";
         public string rename = "";
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -37,23 +36,6 @@ namespace WeiXinPF.Web.weixin.restaurant
                 sjopmodel = shopbll.GetModel(shopid);
                 hotelName = sjopmodel.hotelName;
                 rename = sjopmodel.dcRename;
-                type = MyCommFun.QueryString("type");
-                if (type=="delete")
-                {
-                    if (manage.Delete(dingdan))
-                    {
-                        contact_info.Style.Add("display", "none");
-                        showcard.Style.Add("display", "none");
-                        showcard.HRef = "#";
-                        return;
-                    }
-                    else
-                    {
-                        showcard.HRef = "diancai_dingdan.aspx?dingdan=" + dingdan + "&type=delete&shopid=" + shopid + "&openid=" + openid;
-                    }
-                }
-               
-
              
                 if (dingdan!="")
                 {
@@ -115,25 +97,23 @@ namespace WeiXinPF.Web.weixin.restaurant
                 dingdanren += "<tr> <td>下单时间：" + managemodel.oderTime + "</td></tr>";
                 dingdanren += "<tr><td>联系人：" + managemodel.customerName + "</td></tr>";
                 dingdanren += "<tr><td>联系电话：" + managemodel.customerTel + "</td></tr>";
-                dingdanren += "<tr><td>地址：" + managemodel.address + "</td></tr>";
-                dingdanren += "<tr><td>备注 ：" + managemodel.oderRemark + "</td></tr>";
                 if (managemodel.payStatus == 1)
                 {
                     dingdanren += "<tr><td>订单状态：<em  style='width:70px;' class='ok'>成功</em></td></tr>";
-                    showcard.Style.Add("display", "none");
+                    //showcard.Style.Add("display", "none");
                     showcard2.Style.Add("display", "");
-                    showcard.HRef = "#";
+                    //showcard.HRef = "#";
                 }
                 else if (managemodel.payStatus == 2)
                 {
                    
                     dingdanren += "<tr><td>订单状态：<em  style='width:70px;' class='error'>失败</em></td></tr>";
-                    showcard.HRef = "diancai_dingdan.aspx?dingdan=" + dingdan + "&type=delete&shopid=" + shopid + "&openid=" + openid;
+                    //showcard.HRef = "diancai_dingdan.aspx?dingdan=" + dingdan + "&type=delete&shopid=" + shopid + "&openid=" + openid;
                 }
                 else
                 {
                     dingdanren += "<tr><td>订单状态：<em  style='width:70px;' class='no'>未处理</em></td></tr>";
-                    showcard.HRef = "diancai_dingdan.aspx?dingdan=" + dingdan + "&type=delete&shopid=" + shopid + "&openid=" + openid;
+                    //showcard.HRef = "diancai_dingdan.aspx?dingdan=" + dingdan + "&type=delete&shopid=" + shopid + "&openid=" + openid;
                 }
 
 
@@ -143,16 +123,11 @@ namespace WeiXinPF.Web.weixin.restaurant
                 dingdanren += "<tr><td width=\"70\">订单编号：</td></tr>";
                 dingdanren += "<tr> <td>下单时间：</td></tr>";
                 dingdanren += "<tr><td>联系人：</td></tr>";
-                dingdanren += "<tr><td>联系电话：</td></tr>";
-                dingdanren += "<tr><td>地址：</td></tr>";
-                dingdanren += "<tr><td>备注 ：</td></tr>";
-    
-            
+                dingdanren += "<tr><td>联系电话：</td></tr>";            
                dingdanren += "<tr><td>订单状态：<em  style='width:70px;' class='no'>未处理</em></td></tr>";
               
             }
-       
-            
+                   
             dingdanren += "<tr><td>商家留言：</td></tr> <tr> <td></td></tr>"; 
         }
 
