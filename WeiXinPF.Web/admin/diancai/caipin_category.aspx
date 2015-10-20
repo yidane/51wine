@@ -36,20 +36,20 @@
 <body class="mainbody">
     <form id="form1" runat="server">
         <div class="location">
-       <a <% if (IsWeiXinCode())
+       <% if (IsWeiXinCode())
                 {%>
-                href="shop_list.aspx"
+            <a    href="shop_list.aspx" class="home"><i></i><span>商户或门店列表</span></a>
+              <i class="arrow"></i>
                 <%}%>
                 <%
                 else
                 {%>
-                href="#"
-                <%} %> class="home"><i></i><span>商户或门店列表</span></a>
-            <i class="arrow"></i>             
+               
+                <%} %> 
             <span>商品分类管理</span>
         </div>
        <div class="mytips">        
-            提醒：设置好商品分类后，再添加商品信息，点击进入商品信息查看。
+            提醒：设置好商品分类后，再添加商品，点击进入商品查看。
          </div>
        <div class="toolbar-wrap">
             <div id="floatHead" class="toolbar">
