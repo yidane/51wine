@@ -234,10 +234,10 @@
             type: 'post',
             dataType: 'json',
             success: function (json) {
-                if (json.success) {
+                if (json.isSuccess) {
                     var data = [];
-                    for (var i = 0; i < json.result.length; i++) {
-                        var item = json.result[i];
+                    for (var i = 0; i < json.data.length; i++) {
+                        var item = json.data[i];
                         item.address = item.description;
                         item.position = {lat: item.lat, lng: item.lng};
                         data.push(item);

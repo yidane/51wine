@@ -427,9 +427,9 @@
 </div>
 <!--<div class="bottom-navigation">-->
     <div class="btn-group btn-group-justified bottom-navigation">
-        <a class="btn btn-default" data-bind="css:{active:menuType=='locale'}"  href="map_address.html?uselocale=true">当前位置</a>
-        <a class="btn btn-default" data-bind="css:{active:menuType=='service'}"  href="map_service.html?wid=1&nav=1">身边服务</a>
-        <a class="btn btn-default" data-bind="css:{active:menuType=='showallmarker'}"  href="map_address.html?wid=1&showallmarker=true">去哪儿玩</a>
+        <a class="btn btn-default" data-bind="css:{active:menuType=='locale'},attr:{href:'map_address.html?wid='+params().wid +'&uselocale=true'}"  >当前位置</a>
+        <a class="btn btn-default" data-bind="css:{active:menuType=='service'},attr:{href:'map_service.html?wid='+params().wid +'&nav=1'}"   >身边服务</a>
+        <a class="btn btn-default" data-bind="css:{active:menuType=='showallmarker'},attr:{href:'map_address.html?wid='+params().wid +'&showallmarker=true'}"   >去哪儿玩</a>
     </div>
 <!--</div>-->
 
@@ -438,7 +438,7 @@
     //        var map;
     //        var infoWin;
     //        var marker;
-    var params = {};
+    var params = {wid:0};
 
     //common func
 
