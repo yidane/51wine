@@ -28,49 +28,14 @@ namespace WeiXinPF.Web.admin.diancai
             ids = MyCommFun.RequestInt("id");
             id = MyCommFun.QueryString("id");
             shopid = MyCommFun.RequestInt("shopid");
-            if(!IsPostBack)
+            if (!IsPostBack)
             {
-              
                 if (ids != 0)
                 {
                     List(ids);
                 }
             }
-            
         }
-
-        protected void save_groupbase_Click(object sender, EventArgs e)
-        {
-            id = MyCommFun.QueryString("id");
-            shopid = MyCommFun.RequestInt("shopid");
-            string status =ddlStatusType.SelectedItem.Value;
-
-            managebll.Updatestatus(id, status);
-
-            manage = managebll.GetModel( MyCommFun.Str2Int(id));
-
-            
-
-           
-            BLL.wx_diancai_member menbll = new BLL.wx_diancai_member();
-             if (status=="1")
-             {
-
-                 menbll.Update(manage.openid);               
-             }
-             if (status == "2")
-            {
-
-                menbll.Updatefail(manage.openid);     
-            }
-           
-
-            AddAdminLog(MXEnums.ActionEnum.Edit.ToString(), "修改支付状态，主键为" + id); //记录日志
-            JscriptMsg("修改成功！", "dingdan_manage.aspx?shopid=" + shopid + "", "Success");
-
-
-        }
-
 
         public void List(int ids)
         {
@@ -85,13 +50,11 @@ namespace WeiXinPF.Web.admin.diancai
             {
                 decimal amount = 0;
 
-
-
                 Dingdanlist += "<tr><th>商品信息名称</th><th class=\"cc\">单价</th><th class=\"cc\">购买份数</th><th class=\"rr\">总价</th> </tr>";
                 for (int i = 0; i < dr.Tables[0].Rows.Count; i++)
                 {
                     Dingdanlist += " <tr><td>" + dr.Tables[0].Rows[i]["cpName"] + "</td>";
-                    Dingdanlist += "<td class=\"cc\">" + dr.Tables[0].Rows[i]["price"] + "</td>";
+                    Dingdanlist += "<td class=\"cc\">￥" + dr.Tables[0].Rows[i]["price"] + "</td>";
                     Dingdanlist += "<td class=\"cc\">" + dr.Tables[0].Rows[i]["num"] + "</td>";
                     Dingdanlist += "<td class=\"rr\">￥" + dr.Tables[0].Rows[i]["totpric"] + "</td></tr>";
                     amount += Convert.ToDecimal(dr.Tables[0].Rows[i]["totpric"]);
@@ -101,14 +64,13 @@ namespace WeiXinPF.Web.admin.diancai
                 decimal zongji = amount + Convert.ToDecimal(sjopmodel.sendCost);
                 if (sjopmodel != null)
                 {
-                    Dingdanlist += "<tr><td>商品总费</td><td class=\"cc\">￥" + amount + "</td>  <td class=\"cc\" >配送费</td><td class=\"rr\" >￥" + sjopmodel.sendCost + "</td></tr>";
+                    Dingdanlist += "<tr><td>商品总费</td><td class=\"cc\">￥" + amount + "</td>  <td class=\"cc\" ></td><td class=\"rr\" ></td></tr>";
                 }
                 else
                 {
-                    Dingdanlist += "<tr><td>商品总费</td><td class=\"cc\">￥" + amount + "</td>  <td class=\"cc\" >配送费</td><td class=\"rr\" >￥" + 0 + "</td></tr>";
+                    Dingdanlist += "<tr><td>商品总费</td><td class=\"cc\">￥" + amount + "</td>  <td class=\"cc\" ></td><td class=\"rr\" ></td></tr>";
                 }
                 Dingdanlist += "<tr><td></td><td ></td><td ></td><td class=\"rr\">总计：<span class='text-danger'>￥" + zongji + "</span></td></tr>";
-
             }
 
 
@@ -120,8 +82,8 @@ namespace WeiXinPF.Web.admin.diancai
                 dingdanren += "<tr> <td>预约日期：" + manage.oderTime + "</td></tr>";
                 dingdanren += "<tr><td>预约人：" + manage.customerName + "</td></tr>";
                 dingdanren += "<tr><td>电话：" + manage.customerTel + "</td></tr>";
-//                dingdanren += "<tr><td>地址：" + manage.address + "</td></tr>";
-//                dingdanren += "<tr><td>备注 ：" + manage.oderRemark + "</td></tr>";
+                //                dingdanren += "<tr><td>地址：" + manage.address + "</td></tr>";
+                //                dingdanren += "<tr><td>备注 ：" + manage.oderRemark + "</td></tr>";
                 if (manage.payStatus == 1)
                 {
                     dingdanren += "<tr><td>订单状态：<em  style='width:70px;' class='ok'>已处理</em></td></tr>";
@@ -140,13 +102,14 @@ namespace WeiXinPF.Web.admin.diancai
                 dingdanren += "<tr><td>地址：</td></tr>";
                 dingdanren += "<tr><td>备注 ：</td></tr>";
 
-
                 dingdanren += "<tr><td>订单状态：<em  style='width:70px;' class='no'>未处理</em></td></tr>";
-
             }
+            //            dingdanren += "<tr><td>商家留言：</td></tr> <tr> <td></td></tr>";
+        }
 
+        public void OnOrderFinishClick(object sender, EventArgs e)
+        {
 
-//            dingdanren += "<tr><td>商家留言：</td></tr> <tr> <td></td></tr>";
         }
     }
 }

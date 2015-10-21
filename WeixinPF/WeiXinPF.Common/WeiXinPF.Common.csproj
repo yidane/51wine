@@ -51,6 +51,7 @@
     <Compile Include="AjaxResult.cs" />
     <Compile Include="CacheHelper.cs" />
     <Compile Include="ColumnAttribute.cs" />
+    <Compile Include="CSVHelper.cs" />
     <Compile Include="DataTableToEntity.cs" />
     <Compile Include="DESEncrypt.cs" />
     <Compile Include="JsonException.cs" />
