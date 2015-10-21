@@ -1356,3 +1356,39 @@ line-height: 18px;
 text-align: center;
 }
 .mode_webapp{padding-bottom:40px;}
+
+.header{
+	padding:15px 0 8px 0; display:block;
+	background-color: #E9E9EB;
+	position: relative;
+	width:100%;
+	z-index: 3;
+	/*top: 40px;*/
+}
+
+.header .pCount {
+    color: #666666;
+    margin-left: 12px;
+	font-size: 12px;
+	line-height: 18px;
+}
+.header label {
+    color: #666666;
+    float: right;
+    font-size: 12px;
+    line-height: 25px;
+    margin-top: -10px;
+    position: relative;
+	margin-right:12px;
+}
+.header label i {
+    float: left;
+    font-style: normal;
+    padding-top: 6px;
+}
+.header  label b {
+    padding-top: 5px; font-weight:normal;
+    color: #FF0000;
+    float: left;
+    font-size: 25px;
+}

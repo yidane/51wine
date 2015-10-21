@@ -22,8 +22,14 @@
 </asp:Content>
 
 <asp:Content ID="c" ContentPlaceHolderID="content" runat="server" class="mode_webapp">
-    <div class="qiandaobanner"><a href="index.aspx">
-        <img src="<%=image %>" /></a> </div>
+    <div class="qiandaobanner">
+        <img src="<%=image %>" /> 
+    </div>
+    
+    <div class="header">
+        <span class="pCount"></span>
+        <label><i>共计：</i><b id="totalPrice" class="duiqi"><%=totalPrice %></b><b class="duiqi">元</b></label>
+    </div>
     <div class="cardexplain">
         <ul class="round">
             <li class="title mb"><span class="none"><%=createtime %>订单详情<%=zhuangtai %></span></li>
@@ -35,7 +41,16 @@
                     <tr>
                         <th>预订人</th>
                         <td>
-                            <input name="truename" type="text" class="px" id="truename" runat="server" value="123" placeholder="请输入您的真实姓名"/></td>
+                            <input name="truename" type="text" class="px" id="truename" value="<%=truename %>" placeholder="请输入您的真实姓名"/></td>
+                    </tr>
+                </table>
+            </li>
+            <li class="nob">
+                <table width="100%" border="0" cellspacing="0" cellpadding="0" class="kuang">
+                    <tr>
+                        <th>身份证号</th>
+                        <td>
+                            <input name="identityNumber" class="px" id="identityNumber" value="<%=IdentityNumber %>" type="text" placeholder="请输入您的身份证号码"/></td>
                     </tr>
                 </table>
             </li>
@@ -44,7 +59,7 @@
                     <tr>
                         <th>联系电话</th>
                         <td>
-                            <input name="tel" class="px" id="tel" value="12345678999" runat="server" type="text" placeholder="请输入您的电话"/></td>
+                            <input name="tel" class="px" id="tel" value="<%=tel %>" type="text" placeholder="请输入您的电话"/></td>
                     </tr>
                 </table>
             </li>
@@ -53,7 +68,7 @@
                     <tr>
                         <th>入住时间</th>
                         <td>
-                            <input name="dateline" class="px datetimepicker" runat="server" id="dateline" value="" type="text" placeholder="入住时间"/>
+                            <input name="dateline" class="px datetimepicker" id="dateline" value="<%=dateline %>" type="text" placeholder="入住时间"/>
                         </td>
                     </tr>
                 </table>
@@ -74,7 +89,7 @@
                     <tr>
                         <th>预订数量</th>
                         <td>
-                            <select name="nums" class="dropdown-select" id="nums" runat="server" onchange="dothis(this.value)">
+                            <select name="nums" class="dropdown-select" id="nums" onchange="dothis(<%=nums %>)">
                                 <option value="1">1间</option>
                                 <option value="2">2间</option>
                                 <option value="3">3间</option>
@@ -162,13 +177,11 @@
         <input type="hidden" runat="server" id="jsnum" value="" />--%>
         <script type="text/javascript">
             function dothis(nums) {
-
-                var str1 = <%=yuanjia %> * nums;
                 var str2 = <%=price %> * nums;
-                var str3 = <%=jiesheng %> * nums;
-                $("#price1").text("￥" + str1);
-                $("#price2").text("￥" + str2);
-                $("#price3").text("￥" + str3);
+
+                $("#price3").text("￥" + (<%=yuanjia %>-<%=price %>) * nums);
+                $("#totalPrice").html(str2);
+                
             }
 
             var oLay = document.getElementById("overlay");
@@ -189,7 +202,7 @@
                     //var leaveTime = document.getElementById('leaveTime').value;
 
                     //var roomType = document.getElementById('roomtypenum').value;
-                    var openid = <%=openid %>;
+                    var openid = '<%=string.IsNullOrEmpty(openid) ? "''" : openid %>';
                     var roomid = <%=roomid %>;
                     var hotelid = <%=hotelid %>;
 
@@ -198,6 +211,7 @@
                     var yuanjianum = <%=yuanjia %>;
                     var dingdanidnum = <%=dingdanid %>;
                     var info = document.getElementById('info').value;
+                    var identitiyNumber =document.getElementById('identityNumber').value;
 
 
                     var submitData = {
@@ -212,6 +226,7 @@
                         yuanjianum: yuanjianum,
                         info: info,
                         dingdanidnum: dingdanidnum,
+                        identityNumber: identitiyNumber,
                         myact: "dingdanedite"
                     };
                     $.post('hotel_info.ashx', submitData,

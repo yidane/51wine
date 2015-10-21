@@ -47,14 +47,14 @@ namespace WeiXinPF.DAL
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("insert into wx_hotel_dingdan(");
-            strSql.Append("hotelid,openid,oderName,tel,arriveTime,leaveTime,roomType,orderTime,orderNum,price,orderStatus,isDelete,createDate,roomid,yuanjia,remark)");
+            strSql.Append("hotelid,openid,oderName,orderNumber,wxOrderNumber,identityNumber,tel,arriveTime,leaveTime,roomType,orderTime,orderNum,price,orderStatus,isDelete,createDate,roomid,yuanjia,remark)");
             strSql.Append(" values (");
-            strSql.Append("@hotelid,@openid,@oderName,@tel,@arriveTime,@leaveTime,@roomType,@orderTime,@orderNum,@price,@orderStatus,@isDelete,@createDate,@roomid,@yuanjia,@remark)");
+            strSql.Append("@hotelid,@openid,@oderName,@orderNumber,@wxOrderNumber,@identityNumber,@tel,@arriveTime,@leaveTime,@roomType,@orderTime,@orderNum,@price,@orderStatus,@isDelete,@createDate,@roomid,@yuanjia,@remark)");
             strSql.Append(";select @@IDENTITY");
             SqlParameter[] parameters = {
 					new SqlParameter("@hotelid", SqlDbType.Int,4),
 					new SqlParameter("@openid", SqlDbType.VarChar,200),
-					new SqlParameter("@oderName", SqlDbType.VarChar,100),
+					new SqlParameter("@oderName", SqlDbType.VarChar,100),                    
 					new SqlParameter("@tel", SqlDbType.VarChar,100),
 					new SqlParameter("@arriveTime", SqlDbType.DateTime),
 					new SqlParameter("@leaveTime", SqlDbType.DateTime),
@@ -67,7 +67,10 @@ namespace WeiXinPF.DAL
 					new SqlParameter("@createDate", SqlDbType.DateTime),
 					new SqlParameter("@roomid", SqlDbType.Int,4),
 					new SqlParameter("@yuanjia", SqlDbType.Float,8),
-					new SqlParameter("@remark", SqlDbType.NVarChar,100)};
+					new SqlParameter("@remark", SqlDbType.NVarChar,100),
+                    new SqlParameter("@orderNumber", SqlDbType.VarChar,50),
+                    new SqlParameter("@wxOrderNumber", SqlDbType.VarChar,50),
+                    new SqlParameter("@identityNumber", SqlDbType.VarChar,50)};
             parameters[0].Value = model.hotelid;
             parameters[1].Value = model.openid;
             parameters[2].Value = model.oderName;
@@ -84,6 +87,9 @@ namespace WeiXinPF.DAL
             parameters[13].Value = model.roomid;
             parameters[14].Value = model.yuanjia;
             parameters[15].Value = model.remark;
+            parameters[16].Value = model.OrderNumber;
+            parameters[17].Value = model.WXOrderNumber;
+            parameters[18].Value = model.IdentityNumber;
 
             object obj = DbHelperSQL.GetSingle(strSql.ToString(), parameters);
             if (obj == null)
@@ -105,6 +111,9 @@ namespace WeiXinPF.DAL
             strSql.Append("hotelid=@hotelid,");
             strSql.Append("openid=@openid,");
             strSql.Append("oderName=@oderName,");
+            strSql.Append("orderNumber=@orderNumber,");
+            strSql.Append("wxOrderNumber=@wxOrderNumber,");
+            strSql.Append("identityNumber=@identityNumber,");
             strSql.Append("tel=@tel,");
             strSql.Append("arriveTime=@arriveTime,");
             strSql.Append("leaveTime=@leaveTime,");
@@ -136,7 +145,10 @@ namespace WeiXinPF.DAL
 					new SqlParameter("@roomid", SqlDbType.Int,4),
 					new SqlParameter("@yuanjia", SqlDbType.Float,8),
 					new SqlParameter("@remark", SqlDbType.NVarChar,100),
-					new SqlParameter("@id", SqlDbType.Int,4)};
+					new SqlParameter("@id", SqlDbType.Int,4),
+                    new SqlParameter("@orderNumber", SqlDbType.NVarChar,50),
+                    new SqlParameter("@wxOrderNumber", SqlDbType.NVarChar,50),
+                    new SqlParameter("@identityNumber", SqlDbType.NVarChar,50)};
             parameters[0].Value = model.hotelid;
             parameters[1].Value = model.openid;
             parameters[2].Value = model.oderName;
@@ -154,6 +166,9 @@ namespace WeiXinPF.DAL
             parameters[14].Value = model.yuanjia;
             parameters[15].Value = model.remark;
             parameters[16].Value = model.id;
+            parameters[17].Value = model.OrderNumber;
+            parameters[18].Value = model.WXOrderNumber;
+            parameters[19].Value = model.IdentityNumber;
 
             int rows = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
             if (rows > 0)
@@ -217,7 +232,7 @@ namespace WeiXinPF.DAL
         {
 
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select  top 1 id,hotelid,openid,oderName,tel,arriveTime,leaveTime,roomType,orderTime,orderNum,price,orderStatus,isDelete,createDate,roomid,yuanjia,remark from wx_hotel_dingdan ");
+            strSql.Append("select  top 1 id,hotelid,openid,oderName,orderNumber,wxOrderNumber,identityNumber,tel,arriveTime,leaveTime,roomType,orderTime,orderNum,price,orderStatus,isDelete,createDate,roomid,yuanjia,remark from wx_hotel_dingdan ");
             strSql.Append(" where id=@id and isDelete='0' ");
             SqlParameter[] parameters = {
 					new SqlParameter("@id", SqlDbType.Int,4)
@@ -260,6 +275,18 @@ namespace WeiXinPF.DAL
                 if (row["oderName"] != null)
                 {
                     model.oderName = row["oderName"].ToString();
+                }
+                if (row["orderNumber"] != null)
+                {
+                    model.OrderNumber = row["orderNumber"].ToString();
+                }
+                if (row["wxOrderNumber"] != null)
+                {
+                    model.WXOrderNumber = row["wxOrderNumber"].ToString();
+                }
+                if (row["identityNumber"] != null)
+                {
+                    model.IdentityNumber = row["identityNumber"].ToString();
                 }
                 if (row["tel"] != null)
                 {
@@ -341,7 +368,7 @@ namespace WeiXinPF.DAL
             {
                 strSql.Append(" top " + Top.ToString());
             }
-            strSql.Append(" id,hotelid,openid,oderName,tel,arriveTime,leaveTime,roomType,orderTime,orderNum,price,orderStatus,isDelete,createDate,roomid,yuanjia,remark ");
+            strSql.Append(" id,hotelid,openid,oderName,orderNumber,wxOrderNumber,identityNumber,tel,arriveTime,leaveTime,roomType,orderTime,orderNum,price,orderStatus,isDelete,createDate,roomid,yuanjia,remark ");
             strSql.Append(" FROM wx_hotel_dingdan ");
             if (strWhere.Trim() != "")
             {
@@ -428,7 +455,7 @@ namespace WeiXinPF.DAL
         public DataSet GetList(int pageSize, int pageIndex, string strWhere, string filedOrder, out int recordCount)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select id,hotelid,openid,oderName,tel,arriveTime,leaveTime,roomType,orderTime,orderNum,price,orderStatus,isDelete,'' as payStatusStr,createDate ");
+            strSql.Append("select id,hotelid,openid,oderName,orderNumber,wxOrderNumber,identityNumber,tel,arriveTime,leaveTime,roomType,orderTime,orderNum,price,orderStatus,isDelete,'' as payStatusStr,createDate ");
             strSql.Append(" FROM wx_hotel_dingdan ");
             if (strWhere.Trim() != "")
             {
@@ -443,7 +470,7 @@ namespace WeiXinPF.DAL
         public DataSet GetList(int hotelid)
 		{
 			StringBuilder strSql=new StringBuilder();
-            strSql.Append("select aa.id,aa.hotelid,aa.openid,bb.hotelName as hotelName,aa.oderName,aa.tel,");
+            strSql.Append("select aa.id,aa.hotelid,aa.openid,bb.hotelName as hotelName,aa.oderName,aa.orderNumber,aa.wxOrderNumber,aa.identityNumber,aa.tel,");
             strSql.Append(" aa.arriveTime,aa.leaveTime,aa.roomType,aa.orderTime,aa.orderNum,aa.price,aa.orderStatus,aa.isDelete,aa.createDate,aa.roomid,aa.yuanjia,aa.remark  ");
             strSql.Append("from wx_hotel_dingdan  as aa left join (select * from wx_hotels_info where id='" + hotelid + "' ) as bb on bb.id=aa.hotelid");
 			return DbHelperSQL.Query(strSql.ToString());
@@ -454,6 +481,9 @@ namespace WeiXinPF.DAL
             StringBuilder strSql = new StringBuilder();
             strSql.Append("update wx_hotel_dingdan set ");
             strSql.Append("oderName=@oderName,");
+            strSql.Append("orderNumber=@orderNumber,");
+            strSql.Append("wxOrderNumber=@wxOrderNumber,");
+            strSql.Append("identityNumber=@identityNumber,");
             strSql.Append("tel=@tel,");
             strSql.Append("arriveTime=@arriveTime,");
             strSql.Append("orderNum=@orderNum,");
@@ -469,7 +499,10 @@ namespace WeiXinPF.DAL
 					new SqlParameter("@price", SqlDbType.Float,8),
 					new SqlParameter("@yuanjia", SqlDbType.Float,8),
 					new SqlParameter("@remark", SqlDbType.NVarChar,100),
-					new SqlParameter("@id", SqlDbType.Int,4)};
+					new SqlParameter("@id", SqlDbType.Int,4),
+                    new SqlParameter("@orderNumber", SqlDbType.NVarChar,50),
+                    new SqlParameter("@wxOrderNumber", SqlDbType.NVarChar,50),
+                    new SqlParameter("@identityNumber", SqlDbType.NVarChar,50)};
             parameters[0].Value = model.oderName;
             parameters[1].Value = model.tel;
             parameters[2].Value = model.arriveTime;
@@ -478,6 +511,9 @@ namespace WeiXinPF.DAL
             parameters[5].Value = model.yuanjia;
             parameters[6].Value = model.remark;
             parameters[7].Value = model.id;
+            parameters[8].Value = model.OrderNumber;
+            parameters[9].Value = model.WXOrderNumber;
+            parameters[10].Value = model.IdentityNumber;
 
             int rows = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
             if (rows > 0)

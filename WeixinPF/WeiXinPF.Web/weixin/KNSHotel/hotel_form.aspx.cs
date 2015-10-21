@@ -84,7 +84,14 @@ namespace WeiXinPF.Web.weixin.KNSHotel
                 {
                     tupian += "  <li><p>" + dr.Tables[0].Rows[i]["title"].ToString() + "</p><a href=\"" + dr.Tables[0].Rows[i]["roomPictz"].ToString() + "\"><img src=\"" + dr.Tables[0].Rows[i]["roomPic"].ToString() + "\"></a></li>";
                     j += 1;
-                    tabid += "<li >"+j.ToString()+"</li>";
+                    if (i==0)
+                    {
+                        tabid += "<li class='active'>" + j.ToString() + "</li>";
+                    }
+                    else
+                    {
+                        tabid += "<li>" + j.ToString() + "</li>";
+                    }
                 }
             }
             

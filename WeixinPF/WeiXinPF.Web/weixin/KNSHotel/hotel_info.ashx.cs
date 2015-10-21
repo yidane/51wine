@@ -35,32 +35,9 @@ namespace WeiXinPF.Web.weixin.KNSHotel
                 dingdan.oderName = oderName;
                 dingdan.tel = tel;
                 dingdan.orderStatus = 0;
-
-
-                if (Convert.ToDateTime(MyCommFun.QueryString("arriveTime")) < DateTime.Now.AddDays(-1))
-                {
-                    jsonDict.Add("ret", "faile");
-                    jsonDict.Add("content", "入住时间不能小于今天时间！");
-                    context.Response.Write(MyCommFun.getJsonStr(jsonDict));
-                    return;
-                }
-
-                if (Convert.ToDateTime(MyCommFun.QueryString("arriveTime")) > Convert.ToDateTime(MyCommFun.QueryString("leaveTime")))
-                {
-                    jsonDict.Add("ret", "faile");
-                    jsonDict.Add("content", "入住时间必须小于离店时间！");
-                    context.Response.Write(MyCommFun.getJsonStr(jsonDict));
-                    return;
-                }
-
-                if (MyCommFun.QueryString("arriveTime")!="")
-                {
-                dingdan.arriveTime = Convert.ToDateTime( MyCommFun.QueryString("arriveTime"));
-                }
-                if (MyCommFun.QueryString("leaveTime") != "")
-                {
-                    dingdan.leaveTime = Convert.ToDateTime(MyCommFun.QueryString("leaveTime"));
-                }
+                dingdan.IdentityNumber = MyCommFun.QueryString("identityNumber");                
+                dingdan.arriveTime = Convert.ToDateTime(MyCommFun.QueryString("arriveTime"));
+                dingdan.leaveTime = Convert.ToDateTime(MyCommFun.QueryString("leaveTime"));
                 dingdan.roomType = MyCommFun.QueryString("roomType");
                 dingdan.orderTime = DateTime.Now;
                 dingdan.orderNum = MyCommFun.RequestInt("orderNum");
@@ -68,6 +45,7 @@ namespace WeiXinPF.Web.weixin.KNSHotel
                 dingdan.price = MyCommFun.Str2Decimal( MyCommFun.QueryString("price"));
                 dingdan.yuanjia =MyCommFun.Str2Decimal(MyCommFun.QueryString("yuanjia"));
                 dingdan.remark = MyCommFun.QueryString("remark");
+                dingdan.OrderNumber = "H" + DateTime.Now.ToString("yyyyMMddHHmmssffff") + Utils.Number(5);
                 dingdanbll.Add(dingdan);
 
                jsonDict.Add("ret", "ok");
@@ -94,7 +72,7 @@ namespace WeiXinPF.Web.weixin.KNSHotel
 
                 if (MyCommFun.QueryString("dateline")!="")
                 {
-                dingdan.arriveTime = Convert.ToDateTime(MyCommFun.QueryString("dateline"));
+                    dingdan.arriveTime = Convert.ToDateTime(MyCommFun.QueryString("dateline"));
                 }
 
                
@@ -103,6 +81,7 @@ namespace WeiXinPF.Web.weixin.KNSHotel
                 dingdan.price = Convert.ToDecimal( MyCommFun.QueryString("xianjianum"));
                 dingdan.yuanjia = Convert.ToDecimal( MyCommFun.QueryString("yuanjianum"));
                 dingdan.remark = MyCommFun.QueryString("info");
+                dingdan.IdentityNumber = MyCommFun.QueryString("identityNumber");
                 dingdanbll.Updatehotel(dingdan);
 
                 jsonDict.Add("ret", "ok");
@@ -120,7 +99,15 @@ namespace WeiXinPF.Web.weixin.KNSHotel
                 context.Response.Write(MyCommFun.getJsonStr(jsonDict));
                 return;
             }
-
+            if (_action == "paymentSuccess")
+            {
+                int ddid = MyCommFun.RequestInt("dingdanidnum");
+                dingdanbll.Update(ddid, "3");
+                jsonDict.Add("ret", "ok");
+                jsonDict.Add("content", "订单支付成功！");
+                context.Response.Write(MyCommFun.getJsonStr(jsonDict));
+                return;
+            }
 
         }
 

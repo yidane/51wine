@@ -17,7 +17,7 @@
     <script type="text/javascript" src="../../scripts/bootstrap/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../../scripts/bootstrap/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
     <script type="text/javascript" src="../../scripts/bootstrap/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
-     
+         
     <script type="text/javascript">
         var myScroll;
 
@@ -28,7 +28,7 @@
                 hScrollbar: false,
                 onScrollEnd: function () {
                     document.querySelector('#indicator > li.active').className = '';
-                    document.querySelector('#indicator > li:nth-child(' + (this.currPageX + 1) + ')').className = 'active';
+                    document.querySelector('#indicator > li:nth-child(' + (this.currPageX +1) + ')').className = 'active';                   
                 }
             });
 
@@ -49,11 +49,11 @@
             </div>
         </div>
         <div id="nav">
-            <div id="prev" onclick="myScroll.scrollToPage('prev', 0,400,2);return false">&larr; prev</div>
+            <div id="prev" onclick="myScroll.scrollToPage('prev', 0,400,2);return false; ">&larr; prev</div>
             <ul id="indicator">
                 <%=tabid %>
             </ul>
-            <div id="next" onclick="myScroll.scrollToPage('next', 0);return false">next &rarr;</div>
+            <div id="next" onclick="myScroll.scrollToPage('next', 0);return false; ">next &rarr;</div>
         </div>
         <div class="clr"></div>
     </div>
@@ -117,6 +117,15 @@
             <li class="nob">
                 <table width="100%" border="0" cellspacing="0" cellpadding="0" class="kuang">
                     <tr>
+                        <th>身份证号</th>
+                        <td>
+                            <input name="identityNumber" type="text" class="px" id="identityNumber" value="" placeholder="请输入您的电话"/></td>
+                    </tr>
+                </table>
+            </li>
+            <li class="nob">
+                <table width="100%" border="0" cellspacing="0" cellpadding="0" class="kuang">
+                    <tr>
                         <th>联系电话</th>
                         <td>
                             <input name="tel" type="text" class="px" id="tel" value="" placeholder="请输入您的电话"/></td>
@@ -126,9 +135,9 @@
             <li class="nob">
                 <table width="100%" border="0" cellspacing="0" cellpadding="0" class="kuang">
                     <tr>
-                        <th>预定时间</th>
+                        <th>入住时间</th>
                         <td>
-                            <input name="arriveTime" class="px datetimepicker" id="arriveTime" runat="server" value="" type="text" placeholder="预定时间"/>
+                            <input name="arriveTime" class="px datetimepicker" id="arriveTime" value="" type="text" placeholder="入住时间"/>
                         </td>
                     </tr>
                 </table>
@@ -138,7 +147,7 @@
                     <tr>
                         <th>离店时间</th>
                         <td>
-                            <input name="leaveTime" class="px datetimepicker" id="leaveTime" runat="server" value="" type="text" placeholder="离店时间"/>
+                            <input name="leaveTime" class="px datetimepicker" id="leaveTime" value="" type="text" placeholder="离店时间"/>
                         </td>
                     </tr>
                 </table>
@@ -269,25 +278,25 @@
 
                     if ($("#arriveTime").val() >= $("#leaveTime").val())
                     {
-                        alert("离店时间不能小于入住时间！")
+                        alert("离店时间不能小于入住时间！");
                         return false;
                        
                     }
 
-
-                    if ($("#tel").val() == '') { alert('电话不能为空'); return; }
                     if ($("#oderName").val() == '') { alert('名字不能为空'); return; }
-                    if ($("#arriveTime").val() == '') { alert('请选择时间'); return; }
-
-
+                    if ($("#identityNumber").val() == '') { alert('身份证号码不能为空'); return; }
+                    if ($("#tel").val() == '') { alert('电话不能为空'); return; }                    
+                    if ($("#arriveTime").val() == '') { alert('请选择入住时间'); return; }
+                    if ($("#leaveTime").val() == '') { alert('请选择离店时间'); return; }
 
                     var oderName = document.getElementById('oderName').value;
+                    var identityNumber = document.getElementById('identityNumber').value;
                     var tel = document.getElementById('tel').value;
                     var arriveTime = document.getElementById('arriveTime').value;
                     var leaveTime = document.getElementById('leaveTime').value;
 
-                    var roomType = <%=roomtype %>;
-                    var openid = <%=openid %>;
+                    var roomType = '<%=roomtype %>';
+                    var openid = '<%= string.IsNullOrEmpty(openid) ? "''" : openid  %>';
                     var roomid = <%=roomid %>;
                     var hotelid = <%=hotelid %>;
 
@@ -299,6 +308,7 @@
 
                     var submitData = {
                         oderName: oderName,
+                        identityNumber: identityNumber,
                         tel: tel,
                         arriveTime: arriveTime,
                         leaveTime: leaveTime,
@@ -356,8 +366,7 @@
 
          $("#thelist img").css("width", document.body.clientWidth);
          $("#scroller").css("width", document.body.clientWidth * count);
-     }
-
+     };
         </script>
     </div>
     <script type="text/javascript">
