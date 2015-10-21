@@ -62,14 +62,21 @@ namespace WeiXinPF.Web.admin.diancai
         }
 
         #region 数据绑定=================================
-        private void BindResult()
+
+        private DataSet QueryData()
         {
             //判断是否已经设置了微留言基本信息
-            var sbll = new BLL.wx_diancai_dingdan_manage();
             this.page = MXRequest.GetQueryInt("page", 1);
             var result = gbll.GetOrderList(shopid, this.pageSize, this.page, beginDate, endDate, payAmountMin,
                                            payAmountMax, orderNumber, customerName, customerTel, out this.totalCount);
 
+            return result;
+        }
+
+        private void BindResult()
+        {
+            var result = QueryData();
+            var sbll = new BLL.wx_diancai_dingdan_manage();
             if (result != null && result.Tables.Count > 0 && result.Tables[0].Rows.Count > 0)
             {
                 DataRow dr;
@@ -130,6 +137,19 @@ namespace WeiXinPF.Web.admin.diancai
         protected void btnSearch_Click(object sender, EventArgs e)
         {
             Response.Redirect(GetNewUrl());
+        }
+
+        protected void btnExport_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var result = QueryData();
+                CSVHelper.DownloadAsSCV("订单管理", null, null, result.Tables[0]);
+            }
+            catch (Exception exception)
+            {
+
+            }
         }
 
         private string GetNewUrl()
@@ -229,6 +249,5 @@ namespace WeiXinPF.Web.admin.diancai
 
 
         }
-
     }
 }

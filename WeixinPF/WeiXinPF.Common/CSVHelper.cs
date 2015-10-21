@@ -6,6 +6,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.IO;
+using System.Web;
 
 namespace WeiXinPF.Common
 {
@@ -178,7 +179,7 @@ namespace WeiXinPF.Common
                 {
                     if (index == columnCount - 1)
                     {
-                        outputBuilder.Append(headerList[index]);
+                        outputBuilder.AppendFormat("{0}{1}", headerList[index], Environment.NewLine);
                     }
                     else
                     {
@@ -193,7 +194,7 @@ namespace WeiXinPF.Common
                 {
                     if (index == columnCount - 1)
                     {
-                        outputBuilder.Append(dataTable.Columns[index].ColumnName);
+                        outputBuilder.AppendFormat("{0}{1}", dataTable.Columns[index].ColumnName, Environment.NewLine);
                     }
                     else
                     {
@@ -215,21 +216,45 @@ namespace WeiXinPF.Common
                         var datafieldString = dataField.ToString();
                         if (IsNumberic(datafieldString) && datafieldString.Length > 8)
                         {
-                            outputBuilder.AppendFormat("{0}{1}{2}", datafieldString, specialSplitChar, scvSplitChar);
+                            outputBuilder.AppendFormat("{0}{1}", datafieldString, specialSplitChar);
                         }
                         else
                         {
-                            outputBuilder.AppendFormat("{0}{1}", datafieldString, scvSplitChar);
+                            outputBuilder.AppendFormat("{0}", datafieldString);
                         }
                     }
                     else
                     {
-                        outputBuilder.AppendFormat("{0}{1}", string.Empty, scvSplitChar);
+                        outputBuilder.AppendFormat("{0}", string.Empty);
+                    }
+
+                    //判断是否行结尾
+                    if (index == columnIndexList[columnIndexList.Count - 1])
+                    {
+                        outputBuilder.Append(Environment.NewLine);
+                    }
+                    else
+                    {
+                        outputBuilder.AppendFormat(scvSplitChar);
                     }
                 }
             }
 
             return outputBuilder.ToString();
+        }
+
+        /// <summary>
+        /// 生成SCV文件
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <param name="headerList"></param>
+        /// <param name="columnIndexList"></param>
+        /// <param name="dataTable"></param>
+        public static void DownloadAsSCV(string fileName, List<string> headerList, List<int> columnIndexList, DataTable dataTable)
+        {
+            string csvDataString = columnIndexList == null ? SaveAsCSV(headerList, dataTable) : SaveAsCSV(headerList, columnIndexList, dataTable);
+
+            DownloadCSV(fileName, csvDataString);
         }
 
         #region Private Functions
@@ -242,6 +267,37 @@ namespace WeiXinPF.Common
         {
             var rex = new System.Text.RegularExpressions.Regex(@"^\d+$");
             return rex.IsMatch(numbericString);
+        }
+
+        /// <summary>
+        /// 下载CSV文件
+        /// </summary>
+        /// <param>fileName</param>
+        /// <param>fileName</param>
+        /// <param name="csvDataString"></param>
+        private static void DownloadCSV(string fileName, string csvDataString)
+        {
+            //using (var stream = new MemoryStream())
+            //{
+            //    using (var sw = new StreamWriter(stream, System.Text.Encoding.UTF8))
+            //    {
+            //写入SCV文件流
+            //sw.Write(csvDataString);
+            //HttpContext.Current.Response.Clear();
+            //HttpContext.Current.Response.Buffer = true;
+            //HttpContext.Current.Response.Charset = "utf-8";
+
+            HttpContext.Current.Response.AppendHeader("content-disposition", string.Format("attachment;filename={0}.csv", fileName));
+            HttpContext.Current.Response.ContentEncoding = System.Text.Encoding.Default;
+
+            //response.contenttype指定文件类型 能为application/ms-excel || application/ms-word || application/ms-txt || application/ms-html || 或其他浏览器可直接支持文件 
+            HttpContext.Current.Response.ContentType = "application/ms-excel";
+            //HttpContext.Current.Response.BinaryWrite(stream.ToArray());
+            HttpContext.Current.Response.Write(csvDataString);
+            //HttpContext.Current.Response.Flush();
+            //HttpContext.Current.Response.End();
+            //    }
+            //}
         }
         #endregion
 

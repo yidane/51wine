@@ -122,12 +122,14 @@ namespace WeiXinPF.Web.weixin.restaurant
                     builder.Append("<div class='swiper-pagination'></div>");
 
                     builder.Append("</div>");
-                    builder.Append("</div>");
-                    builder.Append(@"<div class='full-w'>
+
+                    builder.AppendFormat(@"<div class='full-w'>
                         <p class='text-uppercase'>验证码：
-                        <strong id='ticketCode' class='text-danger item-pullleft'></strong>
-                        <strong class='text-danger pull-right item-pullleft'>未使用</strong>
-                      </p></div>");
+                        <strong id='itemkey' class='text-danger item-pullleft'>{0}</strong>
+                        <strong id='itemStatus' class='text-danger pull-right item-pullleft'>{0}</strong>
+                      </p></div>", pair.Value[0].identifyingcode, StatusManager.DishStatus.GetStatusDict(pair.Value[0].status));
+                    builder.Append("</div>");
+
                     builder.Append("</section>");
                 }
                 index++;

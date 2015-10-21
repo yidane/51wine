@@ -88,7 +88,7 @@
             }
 
 
-             .text-danger {
+        .text-danger {
             color: #c32d32;
         }
 
@@ -116,7 +116,6 @@
         .item-pullleft {
             margin-right: 10px;
         }
-
     </style>
 </head>
 <body class="mode_webapp">
@@ -267,23 +266,13 @@
                     loop: false,
                     pagination: '#' + id + ' .swiper-pagination ',
                     onTransitionEnd: function (swi) {
-                        //                        var current = swi.slides[swi.activeIndex];
-                        //                        var ticketid = current.childNodes[0].id;
-                        //                        $("#ticketCode").html(ticketid.split('_')[0]);
-                        //                        $("#ticketStatus").html(ticketid.split('_')[1]);
+                        var current = swi.slides[swi.activeIndex];
+                        var item = current.childNodes[0];
+                        $("#itemkey").html($(item).attr("key"));
+                        $("#itemStatus").html($(item).attr("status"));
                     }
                 });
             });
-            //                var swiper = new Swiper('.swiper-container', {
-            //                    loop: false,
-            //                    pagination: ' .swiper-pagination ',
-            //                    onTransitionEnd: function (swi) {
-            //                        var current = swi.slides[swi.activeIndex];
-            //                        var ticketid = current.childNodes[0].id;
-            //                        $("#ticketCode").html(ticketid.split('_')[0]);
-            //                        $("#ticketStatus").html(ticketid.split('_')[1]);
-            //                    }
-            //                });
             $(".gp-icons.gpd-up-icon").click(function () {
                 var zThis = $(this);
                 var zThisParent = zThis.parents(".gpd-item");
