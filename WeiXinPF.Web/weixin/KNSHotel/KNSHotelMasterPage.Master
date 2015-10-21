@@ -34,19 +34,19 @@
     <div class="footermenu">
     <ul>
         <li>
-            <a id="about"  href="hotel_detail.aspx?openid=<%=openid %>&hotelid=<%=hotelid%>">
+            <a id="about"  href="hotel_detail.aspx?openid=<%=openid %>&hotelid=<%=hotelid%>&wid=<%=wid%>">
             <img src="images/xxyX63YryG.png">
             <p>关于</p>
             </a>
         </li>
         <li>
-            <a id="choice" class="active" href="index.aspx?openid=<%=openid %>&hotelid=<%=hotelid%>">
+            <a id="choice" class="active" href="index.aspx?openid=<%=openid %>&hotelid=<%=hotelid%>&wid=<%=wid%>">
             <img src="images/3YQLfzfunJ.png">
             <p>房型选择</p>
             </a>
         </li>        
         <li>
-            <a id="myOrder" href="hotel_order.aspx?openid=<%=openid %>&hotelid=<%=hotelid%>">
+            <a id="myOrder" href="hotel_order.aspx?openid=<%=openid %>&hotelid=<%=hotelid%>&wid=<%=wid%>">
             <span class="num" ><%=dingdannum %></span>  <img src="images/s22KaR0Wtc.png">
             <p>订单</p>
             </a>

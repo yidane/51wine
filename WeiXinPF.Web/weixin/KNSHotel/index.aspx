@@ -32,9 +32,9 @@
    
 <!--后台可控制是否显示-->
 <ul class="round">
-<li class="addr"><a href="http://api.map.baidu.com/marker?location=<%=xplace %>,<%=yplace %>&amp;title=<%=dizhi %>&amp;content=<%=dizhi %>&amp;output=html"><span><%=dizhi %></span></a></li>
+<li class="addr"><a href="/weixin/map/map_address.html?type=hotel&id=<%=hotelid %>"><span><%=dizhi %></span></a></li>
 <li class="tel"><a href="tel:<%=tel %>"><span><%=tel %> 电话预订</span></a></li>
-<li class="detail"><a href="hotel_detail.aspx?openid=<%=openid%>&hotelid=<%=hotelid %>"><span>查看商家详情</span></a></li>
+<li class="detail"><a href="hotel_detail.aspx?openid=<%=openid%>&hotelid=<%=hotelid %>&wid=<%=wid %>"><span>查看商家详情</span></a></li>
 </ul>
 </div>
 <script src="js/plugback.js" type="text/javascript" ></script>

@@ -13,6 +13,8 @@ namespace WeiXinPF.Web.weixin.KNSHotel
     {
         public int hotelid = 0;
         public string openid = "";
+
+        public int wid = 0;
         BLL.wx_hotels_info hotelbll = new BLL.wx_hotels_info();
         Model.wx_hotels_info hotel = new Model.wx_hotels_info();
 
@@ -30,7 +32,14 @@ namespace WeiXinPF.Web.weixin.KNSHotel
         protected void Page_Load(object sender, EventArgs e)
         {
             hotelid = MyCommFun.RequestInt("hotelid");
+            wid = MyCommFun.RequestInt("wid");
             openid = MyCommFun.QueryString("openid");
+
+            string thisUrl = MyCommFun.getWebSite() + "/weixin/KNSHotel/index.aspx" + Request.Url.Query;
+            var bll = new BLL.wx_userweixin();
+            this.wid = MyCommFun.RequestWid();
+            Model.wx_userweixin uWeiXinModel = bll.GetModel(wid);
+            OAuth2BaseProc(uWeiXinModel, "index", thisUrl);
 
             if (!Page.IsPostBack)
             {
