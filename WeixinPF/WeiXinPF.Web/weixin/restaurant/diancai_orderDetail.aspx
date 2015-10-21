@@ -86,6 +86,37 @@
             .gpd-item-title .detailicon-ticket, .gpd-item-title .gpd-item-title-name {
                 float: left;
             }
+
+
+             .text-danger {
+            color: #c32d32;
+        }
+
+        .text-success {
+            color: #3c763d;
+        }
+
+        .text-muted {
+            color: #777;
+        }
+
+        .text-right {
+            text-align: right;
+        }
+
+
+        .pull-left {
+            float: left !important;
+        }
+
+        .pull-right {
+            float: right !important;
+        }
+
+        .item-pullleft {
+            margin-right: 10px;
+        }
+
     </style>
 </head>
 <body class="mode_webapp">

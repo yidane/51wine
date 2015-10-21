@@ -110,8 +110,11 @@ namespace WeiXinPF.Web.weixin.restaurant
 
                     foreach (OrderCaipinDetail detail in pair.Value)
                     {
+                        var status = StatusManager.DishStatus.GetStatusDict(detail.status);
                         builder.Append("<div class='swiper-slide'>");
-                        builder.AppendFormat("<img id='Img3' class='img-border' src=\"ErCodeHandler.ashx?key={0}\">", detail.identifyingcode);
+                        builder.AppendFormat(
+                            "<img id='Img3' class='img-border' src=\"ErCodeHandler.ashx?key={0}\" key='{0}' status='{1}'>",
+                            detail.identifyingcode, status.StatusName);
                         builder.Append("</div>");
                     }
 
