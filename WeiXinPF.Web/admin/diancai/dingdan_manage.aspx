@@ -50,22 +50,48 @@
             color: #333;
             font-size: 100%;
         }
+
+        .DingdanButton {
+            border: 1px solid #3d810c;
+            box-shadow: 0 1px 1px #aaa;
+            -moz-box-shadow: 0 1px 1px #aaa;
+            -webkit-box-shadow: 0 1px 1px #aaa;
+            padding: 5px 20px;
+            cursor: pointer;
+            display: inline-block;
+            text-align: center;
+            vertical-align: bottom;
+            overflow: visible;
+            border-radius: 3px;
+            -moz-border-radius: 3px;
+            -webkit-border-radius: 3px;
+            *zoom: 1;
+            background-color: #f1f1f1;
+            background-image: linear-gradient(bottom, #DCDADA 3%, #f9f9f9 97%, #fff 100%);
+            background-image: -moz-linear-gradient(bottom, #DCDADA 3%, #f9f9f9 97%, #fff 100%);
+            background-image: -webkit-linear-gradient(bottom, #DCDADA 3%, #f9f9f9 97%, #fff 100%);
+            color: #000;
+            border: 1px solid #AAA;
+            font-size: 14px;
+            line-height: 1.5;
+            background-color: #16a0d3;
+        }
     </style>
 </head>
 <body class="mainbody">
     <form id="form1" runat="server">
 
         <div class="location">
-               <% if (IsWeiXinCode())
-                {%>
-            <a    href="shop_list.aspx" class="home"><i></i><span>商户或门店列表</span></a>
-              <i class="arrow"></i>
-                <%}%>
-                <%
-                else
-                {%>
-               
-                <%} %>
+            <% if (IsWeiXinCode())
+               {%>
+            <a href="shop_list.aspx" class="home"><i></i><span>商户或门店列表</span></a>
+            <i class="arrow"></i>
+            <%}%>
+            <%
+               else
+               {%>
+
+            <%} %>
             <span>订单管理</span>
         </div>
         <table border="0" cellspacing="0" cellpadding="0" class="border-table" width="98%">
@@ -96,6 +122,10 @@
                     <asp:TextBox ID="txtCustomerTel" runat="server" CssClass="input normal" datatype="*1-300" sucmsg=" " Text="" /></td>
             </tr>
         </table>
+        <div style="width: 100%; text-align: center">
+            <asp:Button ID="btnSearch" runat="server" Text="查询" CssClass="DingdanButton" OnClick="btnSearch_Click" />
+            <asp:Button ID="btnExport" runat="server" Text="导出Excel" CssClass="DingdanButton" />
+        </div>
         <!--工具栏-->
         <div class="toolbar-wrap">
             <div id="floatHead" class="toolbar">
@@ -105,10 +135,6 @@
                         <li>
                             <asp:LinkButton ID="btnDelete" runat="server" CssClass="del" OnClientClick="return ExePostBack('btnDelete');" OnClick="btnDelete_Click"><i></i><span>删除</span></asp:LinkButton></li>
                     </ul>
-                </div>
-                <div class="r-list">
-                    <asp:TextBox ID="txtKeywords" runat="server" CssClass="keyword" />
-                    <asp:LinkButton ID="lbtnSearch" runat="server" CssClass="btn-search" OnClick="btnSearch_Click">查询</asp:LinkButton>
                 </div>
             </div>
         </div>
