@@ -28,6 +28,20 @@ namespace WeiXinPF.Web.weixin.KNSHotel
         public decimal jiesheng = 0;
         public int roomid = 0;
 
+        public decimal totalPrice = 0;
+
+        public string truename = string.Empty;
+
+        public string tel = string.Empty;
+
+        public string dateline = string.Empty;
+
+        public int nums = 0;
+
+        public string IdentityNumber { get; set; }
+
+        public string OrderNumber { get; set; }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             hotelid = MyCommFun.RequestInt("hotelid");
@@ -64,29 +78,38 @@ namespace WeiXinPF.Web.weixin.KNSHotel
                
                     if(dingdan.orderStatus==0)
                     {
-                        zhuangtai = "<em class=\"no\">未处理</em>";
+                        zhuangtai = "<em class=\"no\">待确认</em>";
                        
                     }
                     else if (dingdan.orderStatus == 1)
                     {
-                        zhuangtai = "<em class=\"ok\">成功</em>";
+                        zhuangtai = "<em class=\"ok\">已确认</em>";
+                    }
+                    else if (dingdan.orderStatus == 2)
+                    {
+                        zhuangtai = "<em class=\"fail\">已拒绝</em>";
+                    }
+                    else if (dingdan.orderStatus == 3)
+                    {
+                        zhuangtai = "<em class=\"fail\">已付款</em>";
                     }
                     else
                     {
-                        zhuangtai = "<em class=\"fail\">失败</em>";
+                        return;
                     }
 
-                    this.truename.Value = dingdan.oderName;
-                    this.tel.Value = dingdan.tel;
-                    this.dateline.Value = dingdan.arriveTime.ToString();
+                    this.truename = dingdan.oderName;
+                    this.tel = dingdan.tel;
+                    this.dateline = dingdan.arriveTime.Value.ToString("yyyyMMdd");
+                this.IdentityNumber = dingdan.IdentityNumber;
+                this.OrderNumber = dingdan.OrderNumber;
                     roomtype = dingdan.roomType;
-                    this.nums.Value = dingdan.orderNum.ToString();
+                    this.nums = dingdan.orderNum.Value;
                     yuanjia = Convert.ToDecimal(dingdan.yuanjia);
                     price = Convert.ToDecimal(dingdan.price);
                     jiesheng = (yuanjia - price) * Convert.ToDecimal(dingdan.orderNum);
+                this.totalPrice = dingdan.price.Value * dingdan.orderNum.Value;
                     this.info.Value = dingdan.remark;
-
-
             }
         }
     }

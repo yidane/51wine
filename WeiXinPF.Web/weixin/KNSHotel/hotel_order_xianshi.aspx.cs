@@ -78,16 +78,24 @@ namespace WeiXinPF.Web.weixin.KNSHotel
 
                 if (dingdan.orderStatus == 0)
                 {
-                    zhuangtai = "<em class=\"no\">未处理</em>";
+                    zhuangtai = "<em class=\"no\">待确认</em>";
 
                 }
                 else if (dingdan.orderStatus == 1)
                 {
-                    zhuangtai = "<em class=\"ok\">成功</em>";
+                    zhuangtai = "<em class=\"ok\">已确认</em>";
+                }
+                else if (dingdan.orderStatus == 2)
+                {
+                    zhuangtai = "<em class=\"fail\">已拒绝</em>";
+                }
+                else if (dingdan.orderStatus == 3)
+                {
+                    zhuangtai = "<em class=\"fail\">已付款</em>";
                 }
                 else
                 {
-                    zhuangtai = "<em class=\"fail\">失败</em>";
+                    return;
                 }
 
                 truename = dingdan.oderName;

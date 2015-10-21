@@ -27,6 +27,12 @@ namespace WeiXinPF.Model
 		private int? _roomid;
 		private decimal? _yuanjia;
 		private string _remark;
+
+	    private string _identityNumber;
+
+	    private string _wxOrderNumber;
+
+	    private string _orderNumber;
 		/// <summary>
 		/// 编号
 		/// </summary>
@@ -163,8 +169,47 @@ namespace WeiXinPF.Model
 			set{ _remark=value;}
 			get{return _remark;}
 		}
-		#endregion Model
 
-	}
+	    public string IdentityNumber
+	    {
+	        get
+	        {
+	            return this._identityNumber;
+	        }
+	        set
+	        {
+	            this._identityNumber = value;
+	        }
+	    }
+
+	    public string WXOrderNumber
+	    {
+	        get
+	        {
+	            return this._wxOrderNumber;
+	        }
+	        set
+	        {
+	            this._wxOrderNumber = value;
+	        }
+	    }
+
+	    public string OrderNumber
+	    {
+	        get
+	        {
+	            return this._orderNumber;
+	        }
+	        set
+	        {
+	            this._orderNumber = value;
+	        }
+	    }
+
+	    #endregion Model
+
+
+
+    }
 }
 
