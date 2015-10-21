@@ -9,6 +9,9 @@ namespace WeiXinPF.Web.weixin.KNSHotel
 {
     using System.Data;
 
+    using OneGulp.WeChat.MP;
+    using OneGulp.WeChat.MP.AdvancedAPIs;
+
     using WeiXinPF.Common;
     using WeiXinPF.WeiXinComm;
 
@@ -26,6 +29,11 @@ namespace WeiXinPF.Web.weixin.KNSHotel
             hotelid = MyCommFun.RequestInt("hotelid");
             openid = MyCommFun.QueryString("openid");
             this.title = this.GetTitle();
+            string thisUrl = MyCommFun.getWebSite() + "/weixin/KNSHotel/index.aspx" + Request.Url.Query;
+            var bll = new BLL.wx_userweixin();
+            this.wid = MyCommFun.RequestWid();
+            Model.wx_userweixin uWeiXinModel = bll.GetModel(wid);
+            OAuth2BaseProc(uWeiXinModel, "index", thisUrl);
 
             if (!Page.IsPostBack)
             {
@@ -50,6 +58,36 @@ namespace WeiXinPF.Web.weixin.KNSHotel
                     } 
                 }
                                
+            }
+        }
+
+        /// <summary>
+        /// 授权判断，页面跳转
+        /// </summary>
+        /// <param name="state"></param>
+        /// <param name="targetUrl">目标地址</param>
+        public void OAuth2BaseProc(Model.wx_userweixin model, string state, string targetUrl)
+        {
+            var code = MyCommFun.QueryString("code");
+            openid = MyCommFun.QueryString("openid");
+
+            if (!string.IsNullOrEmpty(openid))
+                return;
+
+            //如果不存在code,表示尚未和微信平台OAuth2
+            if (string.IsNullOrEmpty(code))
+            {
+                if (targetUrl == null || targetUrl.Trim() == "")
+                {
+                    targetUrl = MyCommFun.getTotalUrl();
+                }
+                var newUrl = OAuthApi.GetAuthorizeUrl(model.AppId, targetUrl, state, OAuthScope.snsapi_base);
+                Response.Redirect(newUrl);
+            }
+            else
+            {
+                var result = OAuthApi.GetAccessToken(model.AppId, model.AppSecret, code);
+                Response.Redirect(string.Format("{0}&openid={1}", Request.Url, result.openid));
             }
         }
 
