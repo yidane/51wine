@@ -60,9 +60,9 @@
         </section>
         <section class="bottom-navigation" data-bind="visible:showNav">
             <div class="btn-group">
-                <a class="btn" href="map_address.html">当前位置</a>
+                <a class="btn" data-bind="attr:{href:'map_address.html?wid='+param.wid+'&uselocale=true'}">当前位置</a>
                 <a class="btn">身边服务</a>
-                <a class="btn" href="map_address.html">去哪儿玩</a>
+                <a class="btn" data-bind="attr:{href:'map_address.html?wid='+param.wid+'&showallmarker=true'}" >去哪儿玩</a>
             </div> 
         </section>
     </div>

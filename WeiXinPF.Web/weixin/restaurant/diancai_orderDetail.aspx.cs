@@ -120,6 +120,11 @@ namespace WeiXinPF.Web.weixin.restaurant
 
                     builder.Append("</div>");
                     builder.Append("</div>");
+                    builder.Append(@"<div class='full-w'>
+                        <p class='text-uppercase'>验证码：
+                        <strong id='ticketCode' class='text-danger item-pullleft'></strong>
+                        <strong class='text-danger pull-right item-pullleft'>未使用</strong>
+                      </p></div>");
                     builder.Append("</section>");
                 }
                 index++;
