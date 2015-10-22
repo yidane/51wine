@@ -53,11 +53,11 @@ namespace WeiXinPF.Web.admin.diancai
 
             if (model.is_lock == 0)
             {
-                cbIsLock.Checked = true;
+                cbIsLock.Checked = false;
             }
             else
             {
-                cbIsLock.Checked = false;
+                cbIsLock.Checked = true;
             }
 
             txtUserName.Text = model.user_name;

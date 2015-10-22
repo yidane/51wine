@@ -93,13 +93,14 @@
     <Compile Include="plugs\wx_hb_haibao.cs" />
     <Compile Include="plugs\wx_hb_imggroup.cs" />
     <Compile Include="plugs\wx_hb_typeImgGroup.cs" />
-    <Compile Include="plugs\wx_hotels_info.cs" />
-    <Compile Include="plugs\wx_hotel_dingdan.cs" />
-    <Compile Include="plugs\wx_hotel_form_control.cs" />
-    <Compile Include="plugs\wx_hotel_form_result.cs" />
-    <Compile Include="plugs\wx_hotel_pic.cs" />
-    <Compile Include="plugs\wx_hotel_room.cs" />
-    <Compile Include="plugs\wx_hotel_roompic.cs" />
+    <Compile Include="plugs\hotel\wx_hotels_info.cs" />
+    <Compile Include="plugs\hotel\wx_hotel_dingdan.cs" />
+    <Compile Include="plugs\hotel\wx_hotel_form_control.cs" />
+    <Compile Include="plugs\hotel\wx_hotel_form_result.cs" />
+    <Compile Include="plugs\hotel\wx_hotel_pic.cs" />
+    <Compile Include="plugs\hotel\wx_hotel_room.cs" />
+    <Compile Include="plugs\hotel\wx_hotel_roompic.cs" />
+    <Compile Include="plugs\hotel\wx_hotel_room_manage.cs" />
     <Compile Include="plugs\wx_my_tijian.cs" />
     <Compile Include="plugs\wx_my_user.cs" />
     <Compile Include="plugs\wx_mz_animate.cs" />
@@ -286,6 +287,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

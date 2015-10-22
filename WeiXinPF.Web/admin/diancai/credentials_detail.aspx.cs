@@ -31,7 +31,7 @@ namespace WeiXinPF.Web.admin.diancai
         #region 数据绑定=================================
         private void RptBind()
         {
-            int shopid = MXRequest.GetQueryInt("shopid");
+            int shopid = MXRequest.GetQueryInt("shopid")==0?GetShopId():MXRequest.GetQueryInt("shopid");
             string condition = "";
             if (!String.IsNullOrEmpty(startDate.Text.Trim()))
             {

@@ -96,6 +96,7 @@
                         <a href="caipin_manage.aspx?shopid=<%#Eval("id") %>">商品信息查看</a>
                         <a href="dingdan_manage.aspx?shopid=<%#Eval("id") %>">订单查看</a>
                         <a href="diancai_dingdanRefund_manage.aspx?shopid=<%#Eval("id") %>">退单查看</a>
+                        <a href="credentials_detail.aspx?shopid=<%#Eval("id") %>">服务凭据查看</a>
                         <%--<a  href='shop_setup.aspx?shopid=<%#Eval("id") %>&type=add'  >商城设置</a>--%>
                         <%--<a  href='caipin_category.aspx?shopid=<%#Eval("id") %>' ></a>--%>
                         <%--<a  href='desk_number.aspx?shopid=<%#Eval("id") %>' >桌号设置</a>--%>
@@ -105,7 +106,7 @@
                         <%--<a  href='message_edite.aspx?shopid=<%#Eval("id") %>' >打印机设置</a>--%>
                         <%--<a  href='diancai_form.aspx?shopid=<%#Eval("id") %>' >表单设计</a>--%>
                         <%--<a  href='../../weixin/diancai/diancai_Login.aspx?shopid=<%#Eval("id") %>' target="_blank" >手机端管理</a>--%>
-                    </td>
+                    </td> 
                 </tr>
             </ItemTemplate>
             <FooterTemplate>

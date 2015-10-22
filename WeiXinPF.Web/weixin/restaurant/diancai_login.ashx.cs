@@ -326,7 +326,7 @@ namespace WeiXinPF.Web.weixin.restaurant
                     scope.Complete();
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return new ProcessResult() { IsSuccess = false, Message = "保存订单出错" };
             }

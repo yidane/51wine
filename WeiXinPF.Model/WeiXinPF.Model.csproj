@@ -96,6 +96,7 @@
     <Compile Include="plugs\wx_hotel_pic.cs" />
     <Compile Include="plugs\wx_hotel_room.cs" />
     <Compile Include="plugs\wx_hotel_roompic.cs" />
+    <Compile Include="plugs\wx_hotel_room_manage.cs" />
     <Compile Include="plugs\wx_my_tijian.cs" />
     <Compile Include="plugs\wx_my_user.cs" />
     <Compile Include="plugs\wx_mz_animate.cs" />

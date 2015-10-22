@@ -35,7 +35,7 @@ var poiOptions = {
     hotel: {
         name: '周边酒店',
         ajaxUrl: '/WebServices/MapWebService.asmx/GetHotels',
-        detailUrl: '/weixin/hotel/index.aspx?wid={wid}&hotelid={id}'//&openid={openId}'
+        detailUrl: '/weixin/knshotel/index.aspx?wid={wid}&hotelid={id}'//&openid={openId}'
     }
 }
 

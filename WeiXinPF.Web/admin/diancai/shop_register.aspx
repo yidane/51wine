@@ -62,7 +62,7 @@
             <dl>
                 <dt>商户号：</dt>
                 <dd>
-                    <asp:Label ID="lblShopId" runat="server" Text="" Font-Bold="true">系统自动生成</asp:Label>
+                    <asp:Label ID="lblShopCode" runat="server" Text="" Font-Bold="true">系统自动生成</asp:Label>
                 </dd>
             </dl>
             <dl>

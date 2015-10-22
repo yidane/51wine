@@ -29,7 +29,7 @@ namespace WeiXinPF.Web.admin.diancai
                 Model.wx_userweixin weixin = GetWeiXinCode();
                 wid = weixin.id;
                 yuming = MyCommFun.getWebSite();
-                RptBind(CombSqlTxt(keywords), "createDate desc,id desc");
+                RptBind(CombSqlTxt(keywords), "id desc");
 
             }
         }

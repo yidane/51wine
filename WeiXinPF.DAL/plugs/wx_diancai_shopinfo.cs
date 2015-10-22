@@ -4,6 +4,10 @@ using System.Text;
 using System.Data.SqlClient;
 using WeiXinPF.DBUtility;
 using WeiXinPF.Common;//Please add references
+using Dapper;
+using System.Linq;
+using System.Collections.Generic;
+
 namespace WeiXinPF.DAL
 {
     /// <summary>
@@ -45,90 +49,102 @@ namespace WeiXinPF.DAL
         /// </summary>
         public int Add(WeiXinPF.Model.wx_diancai_shopinfo model)
         {
-            StringBuilder strSql = new StringBuilder();
-            strSql.Append("insert into wx_diancai_shopinfo(");
-            strSql.Append("wid,hotelName,hotelLogo,hoteltimeBegin,hoteltimeEnd,limiteOrder,dcRename,sendPrice,sendCost,freeSendcost,radius,sendArea,tel,address,personLimite,notice,hotelintroduction,email,emailpwd,stmp,css,createDate,kcType,miaoshu,xplace,yplace,hoteltimeBegin1,hoteltimeEnd1,hoteltimeBegin2,hoteltimeEnd2,Operator,Recommend,Mobile)");
-            strSql.Append(" values (");
-            strSql.Append("@wid,@hotelName,@hotelLogo,@hoteltimeBegin,@hoteltimeEnd,@limiteOrder,@dcRename,@sendPrice,@sendCost,@freeSendcost,@radius,@sendArea,@tel,@address,@personLimite,@notice,@hotelintroduction,@email,@emailpwd,@stmp,@css,@createDate,@kcType,@miaoshu,@xplace,@yplace,@hoteltimeBegin1,@hoteltimeEnd1,@hoteltimeBegin2,@hoteltimeEnd2,@Operator,@Recommend,@Mobile)");
-            strSql.Append(";select @@IDENTITY");
-            SqlParameter[] parameters = {
-                    new SqlParameter("@wid", SqlDbType.Int,4),
-                    new SqlParameter("@hotelName", SqlDbType.VarChar,500),
-                    new SqlParameter("@hotelLogo", SqlDbType.VarChar,200),
-                    new SqlParameter("@hoteltimeBegin", SqlDbType.DateTime),
-                    new SqlParameter("@hoteltimeEnd", SqlDbType.DateTime),
-                    new SqlParameter("@limiteOrder", SqlDbType.Bit,1),
-                    new SqlParameter("@dcRename", SqlDbType.VarChar,200),
-                    new SqlParameter("@sendPrice", SqlDbType.Float,8),
-                    new SqlParameter("@sendCost", SqlDbType.Float,8),
-                    new SqlParameter("@freeSendcost", SqlDbType.Int,4),
-                    new SqlParameter("@radius", SqlDbType.VarChar,200),
-                    new SqlParameter("@sendArea", SqlDbType.VarChar,200),
-                    new SqlParameter("@tel", SqlDbType.VarChar,100),
-                    new SqlParameter("@address", SqlDbType.VarChar,200),
-                    new SqlParameter("@personLimite", SqlDbType.Int,4),
-                    new SqlParameter("@notice", SqlDbType.VarChar,2000),
-                    new SqlParameter("@hotelintroduction", SqlDbType.VarChar,2000),
-                    new SqlParameter("@email", SqlDbType.VarChar,200),
-                    new SqlParameter("@emailpwd", SqlDbType.VarChar,100),
-                    new SqlParameter("@stmp", SqlDbType.VarChar,100),
-                    new SqlParameter("@css", SqlDbType.VarChar,200),
-                    new SqlParameter("@createDate", SqlDbType.DateTime),
-                    new SqlParameter("@kcType", SqlDbType.VarChar,4000),
-                    new SqlParameter("@miaoshu", SqlDbType.VarChar,200),
-                    new SqlParameter("@xplace", SqlDbType.Float,8),
-                    new SqlParameter("@yplace", SqlDbType.Float,8),
-                    new SqlParameter("@hoteltimeBegin1", SqlDbType.DateTime),
-                    new SqlParameter("@hoteltimeEnd1", SqlDbType.DateTime),
-                    new SqlParameter("@hoteltimeBegin2", SqlDbType.DateTime),
-                    new SqlParameter("@hoteltimeEnd2", SqlDbType.DateTime),
-                    new SqlParameter("@Operator", SqlDbType.VarChar),
-                    new SqlParameter("@Recommend", SqlDbType.Bit),
-                    new SqlParameter("@Mobile",SqlDbType.VarChar)
-            };
-            parameters[0].Value = model.wid;
-            parameters[1].Value = model.hotelName;
-            parameters[2].Value = model.hotelLogo;
-            parameters[3].Value = model.hoteltimeBegin;
-            parameters[4].Value = model.hoteltimeEnd;
-            parameters[5].Value = model.limiteOrder;
-            parameters[6].Value = model.dcRename;
-            parameters[7].Value = model.sendPrice;
-            parameters[8].Value = model.sendCost;
-            parameters[9].Value = model.freeSendcost;
-            parameters[10].Value = model.radius;
-            parameters[11].Value = model.sendArea;
-            parameters[12].Value = model.tel;
-            parameters[13].Value = model.address;
-            parameters[14].Value = model.personLimite;
-            parameters[15].Value = model.notice;
-            parameters[16].Value = model.hotelintroduction;
-            parameters[17].Value = model.email;
-            parameters[18].Value = model.emailpwd;
-            parameters[19].Value = model.stmp;
-            parameters[20].Value = model.css;
-            parameters[21].Value = model.createDate;
-            parameters[22].Value = model.kcType;
-            parameters[23].Value = model.miaoshu;
-            parameters[24].Value = model.xplace;
-            parameters[25].Value = model.yplace;
-            parameters[26].Value = model.hoteltimeBegin1;
-            parameters[27].Value = model.hoteltimeEnd1;
-            parameters[28].Value = model.hoteltimeBegin2;
-            parameters[29].Value = model.hoteltimeEnd2;
-            parameters[30].Value = model.Operator;
-            parameters[31].Value = model.Recommend;
-            parameters[32].Value = model.Mobile;
+            StringBuilder query = new StringBuilder();
+            query.Append("insert into wx_diancai_shopinfo(");
+            query.Append("wid,hotelName,hotelLogo,hoteltimeBegin,hoteltimeEnd,limiteOrder,dcRename,sendPrice,sendCost,freeSendcost,radius,sendArea,tel,address,personLimite,notice,hotelintroduction,email,emailpwd,stmp,css,createDate,kcType,miaoshu,xplace,yplace,hoteltimeBegin1,hoteltimeEnd1,hoteltimeBegin2,hoteltimeEnd2,Operator,Recommend,Mobile)");
+            query.Append(" values (");
+            query.Append("@wid,@hotelName,@hotelLogo,@hoteltimeBegin,@hoteltimeEnd,@limiteOrder,@dcRename,@sendPrice,@sendCost,@freeSendcost,@radius,@sendArea,@tel,@address,@personLimite,@notice,@hotelintroduction,@email,@emailpwd,@stmp,@css,@createDate,@kcType,@miaoshu,@xplace,@yplace,@hoteltimeBegin1,@hoteltimeEnd1,@hoteltimeBegin2,@hoteltimeEnd2,@Operator,@Recommend,@Mobile)");
+            query.Append("Select @Id=Scope_Identity();");
+            query.Append("Update dbo.wx_diancai_shopinfo Set ShopCode=Right('0000'+Cast(@Id As Varchar(10)),4) Where Id=@Id");
 
-            object obj = DbHelperSQL.GetSingle(strSql.ToString(), parameters);
-            if (obj == null)
+            using (IDbConnection db = DbFactory.GetOpenedConnection())
             {
-                return 0;
+                DynamicParameters dynamicParameters = new DynamicParameters();
+                dynamicParameters.AddDynamicParams(model);
+                dynamicParameters.Add("@Id", dbType: DbType.Int32, direction: ParameterDirection.Output);
+
+                db.Execute(query.ToString(), dynamicParameters);
+
+                return dynamicParameters.Get<int>("@Id");
             }
-            else
-            {
-                return Convert.ToInt32(obj);
-            }
+            //SqlParameter[] parameters = {
+            //        new SqlParameter("@wid", SqlDbType.Int,4),
+            //        new SqlParameter("@hotelName", SqlDbType.VarChar,500),
+            //        new SqlParameter("@hotelLogo", SqlDbType.VarChar,200),
+            //        new SqlParameter("@hoteltimeBegin", SqlDbType.DateTime),
+            //        new SqlParameter("@hoteltimeEnd", SqlDbType.DateTime),
+            //        new SqlParameter("@limiteOrder", SqlDbType.Bit,1),
+            //        new SqlParameter("@dcRename", SqlDbType.VarChar,200),
+            //        new SqlParameter("@sendPrice", SqlDbType.Float,8),
+            //        new SqlParameter("@sendCost", SqlDbType.Float,8),
+            //        new SqlParameter("@freeSendcost", SqlDbType.Int,4),
+            //        new SqlParameter("@radius", SqlDbType.VarChar,200),
+            //        new SqlParameter("@sendArea", SqlDbType.VarChar,200),
+            //        new SqlParameter("@tel", SqlDbType.VarChar,100),
+            //        new SqlParameter("@address", SqlDbType.VarChar,200),
+            //        new SqlParameter("@personLimite", SqlDbType.Int,4),
+            //        new SqlParameter("@notice", SqlDbType.VarChar,2000),
+            //        new SqlParameter("@hotelintroduction", SqlDbType.VarChar,2000),
+            //        new SqlParameter("@email", SqlDbType.VarChar,200),
+            //        new SqlParameter("@emailpwd", SqlDbType.VarChar,100),
+            //        new SqlParameter("@stmp", SqlDbType.VarChar,100),
+            //        new SqlParameter("@css", SqlDbType.VarChar,200),
+            //        new SqlParameter("@createDate", SqlDbType.DateTime),
+            //        new SqlParameter("@kcType", SqlDbType.VarChar,4000),
+            //        new SqlParameter("@miaoshu", SqlDbType.VarChar,200),
+            //        new SqlParameter("@xplace", SqlDbType.Float,8),
+            //        new SqlParameter("@yplace", SqlDbType.Float,8),
+            //        new SqlParameter("@hoteltimeBegin1", SqlDbType.DateTime),
+            //        new SqlParameter("@hoteltimeEnd1", SqlDbType.DateTime),
+            //        new SqlParameter("@hoteltimeBegin2", SqlDbType.DateTime),
+            //        new SqlParameter("@hoteltimeEnd2", SqlDbType.DateTime),
+            //        new SqlParameter("@Operator", SqlDbType.VarChar),
+            //        new SqlParameter("@Recommend", SqlDbType.Bit),
+            //        new SqlParameter("@Mobile",SqlDbType.VarChar)
+            //};
+            //parameters[0].Value = model.wid;
+            //parameters[1].Value = model.hotelName;
+            //parameters[2].Value = model.hotelLogo;
+            //parameters[3].Value = model.hoteltimeBegin;
+            //parameters[4].Value = model.hoteltimeEnd;
+            //parameters[5].Value = model.limiteOrder;
+            //parameters[6].Value = model.dcRename;
+            //parameters[7].Value = model.sendPrice;
+            //parameters[8].Value = model.sendCost;
+            //parameters[9].Value = model.freeSendcost;
+            //parameters[10].Value = model.radius;
+            //parameters[11].Value = model.sendArea;
+            //parameters[12].Value = model.tel;
+            //parameters[13].Value = model.address;
+            //parameters[14].Value = model.personLimite;
+            //parameters[15].Value = model.notice;
+            //parameters[16].Value = model.hotelintroduction;
+            //parameters[17].Value = model.email;
+            //parameters[18].Value = model.emailpwd;
+            //parameters[19].Value = model.stmp;
+            //parameters[20].Value = model.css;
+            //parameters[21].Value = model.createDate;
+            //parameters[22].Value = model.kcType;
+            //parameters[23].Value = model.miaoshu;
+            //parameters[24].Value = model.xplace;
+            //parameters[25].Value = model.yplace;
+            //parameters[26].Value = model.hoteltimeBegin1;
+            //parameters[27].Value = model.hoteltimeEnd1;
+            //parameters[28].Value = model.hoteltimeBegin2;
+            //parameters[29].Value = model.hoteltimeEnd2;
+            //parameters[30].Value = model.Operator;
+            //parameters[31].Value = model.Recommend;
+            //parameters[32].Value = model.Mobile;
+
+            //object obj = DbHelperSQL.GetSingle(strSql.ToString(), parameters);
+            //if (obj == null)
+            //{
+            //    return 0;
+            //}
+            //else
+            //{
+            //    return Convert.ToInt32(obj);
+            //}
         }
         /// <summary>
         /// 更新一条数据
@@ -348,23 +364,28 @@ namespace WeiXinPF.DAL
         public WeiXinPF.Model.wx_diancai_shopinfo GetModel(int id)
         {
 
-            StringBuilder strSql = new StringBuilder();
-            strSql.Append("select  top 1 id,wid,hotelName,hotelLogo,hoteltimeBegin,hoteltimeEnd,limiteOrder,dcRename,sendPrice,sendCost,freeSendcost,radius,sendArea,tel,address,personLimite,notice,hotelintroduction,email,emailpwd,stmp,css,createDate,kcType,miaoshu,xplace,yplace,hoteltimeBegin1,hoteltimeEnd1,hoteltimeBegin2,hoteltimeEnd2,Operator,Recommend,Mobile from wx_diancai_shopinfo ");
-            strSql.Append(" where id=@id");
-            SqlParameter[] parameters = {
-                    new SqlParameter("@id", SqlDbType.Int,4)
-            };
-            parameters[0].Value = id;
+            //StringBuilder strSql = new StringBuilder();
+            //strSql.Append("select  top 1 id,wid,hotelName,hotelLogo,hoteltimeBegin,hoteltimeEnd,limiteOrder,dcRename,sendPrice,sendCost,freeSendcost,radius,sendArea,tel,address,personLimite,notice,hotelintroduction,email,emailpwd,stmp,css,createDate,kcType,miaoshu,xplace,yplace,hoteltimeBegin1,hoteltimeEnd1,hoteltimeBegin2,hoteltimeEnd2,Operator,Recommend,Mobile from wx_diancai_shopinfo ");
+            //strSql.Append(" where id=@id");
+            //SqlParameter[] parameters = {
+            //        new SqlParameter("@id", SqlDbType.Int,4)
+            //};
+            //parameters[0].Value = id;
 
-            WeiXinPF.Model.wx_diancai_shopinfo model = new WeiXinPF.Model.wx_diancai_shopinfo();
-            DataSet ds = DbHelperSQL.Query(strSql.ToString(), parameters);
-            if (ds.Tables[0].Rows.Count > 0)
+            //WeiXinPF.Model.wx_diancai_shopinfo model = new WeiXinPF.Model.wx_diancai_shopinfo();
+            //DataSet ds = DbHelperSQL.Query(strSql.ToString(), parameters);
+            //if (ds.Tables[0].Rows.Count > 0)
+            //{
+            //    return DataRowToModel(ds.Tables[0].Rows[0]);
+            //}
+            //else
+            //{
+            //    return null;
+            //}
+            using (IDbConnection db = DbFactory.GetOpenedConnection())
             {
-                return DataRowToModel(ds.Tables[0].Rows[0]);
-            }
-            else
-            {
-                return null;
+                string query = "Select * From wx_diancai_shopinfo Where Id=@Id";
+                return db.Query<Model.wx_diancai_shopinfo>(query, new { Id = id }).FirstOrDefault();
             }
         }
 
@@ -530,16 +551,17 @@ namespace WeiXinPF.DAL
         /// <summary>
         /// 获得数据列表
         /// </summary>
-        public DataSet GetList(string strWhere)
+        public List<Model.wx_diancai_shopinfo> GetList(string strWhere)
         {
-            StringBuilder strSql = new StringBuilder();
-            strSql.Append("select id,wid,hotelName,hotelLogo,hoteltimeBegin,hoteltimeEnd,limiteOrder,dcRename,sendPrice,sendCost,freeSendcost,radius,sendArea,tel,address,personLimite,notice,hotelintroduction,email,emailpwd,stmp,css,createDate,kcType,miaoshu,xplace,yplace,hoteltimeBegin1,hoteltimeEnd1,hoteltimeBegin2,hoteltimeEnd2,Operator,Recommend,Mobile ");
-            strSql.Append(" FROM wx_diancai_shopinfo ");
+            string query = "Select * FROM wx_diancai_shopinfo";
             if (strWhere.Trim() != "")
             {
-                strSql.Append(" where " + strWhere);
+                query += " where " + strWhere;
             }
-            return DbHelperSQL.Query(strSql.ToString());
+            using (IDbConnection db = DbFactory.GetOpenedConnection())
+            {
+                return db.Query<Model.wx_diancai_shopinfo>(query).ToList();
+            }
         }
 
         /// <summary>
@@ -553,7 +575,7 @@ namespace WeiXinPF.DAL
             {
                 strSql.Append(" top " + Top.ToString());
             }
-            strSql.Append(" id,wid,hotelName,hotelLogo,hoteltimeBegin,hoteltimeEnd,limiteOrder,dcRename,sendPrice,sendCost,freeSendcost,radius,sendArea,tel,address,personLimite,notice,hotelintroduction,email,emailpwd,stmp,css,createDate,kcType,miaoshu,xplace,yplace,hoteltimeBegin1,hoteltimeEnd1,hoteltimeBegin2,hoteltimeEnd2 ");
+            strSql.Append(" id,wid,hotelName,hotelLogo,hoteltimeBegin,hoteltimeEnd,limiteOrder,dcRename,sendPrice,sendCost,freeSendcost,radius,sendArea,tel,address,personLimite,notice,hotelintroduction,email,emailpwd,stmp,css,createDate,kcType,miaoshu,xplace,yplace,hoteltimeBegin1,hoteltimeEnd1,hoteltimeBegin2,hoteltimeEnd2,Operator,Recommend,Mobile,ShopCode ");
             strSql.Append(" FROM wx_diancai_shopinfo ");
             if (strWhere.Trim() != "")
             {
@@ -584,6 +606,7 @@ namespace WeiXinPF.DAL
                 return Convert.ToInt32(obj);
             }
         }
+
         /// <summary>
         /// 分页获取数据列表
         /// </summary>
@@ -640,7 +663,7 @@ namespace WeiXinPF.DAL
         public DataSet GetList(int pageSize, int pageIndex, string strWhere, string filedOrder, out int recordCount)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select id,wid,hotelName,hotelLogo,hoteltimeBegin,hoteltimeEnd,limiteOrder,dcRename,sendPrice,sendCost,freeSendcost,radius,sendArea,tel,address,personLimite,notice,hotelintroduction,email,emailpwd,stmp,css,createDate,kcType,miaoshu,xplace,yplace,hoteltimeBegin1,hoteltimeEnd1,hoteltimeBegin2,hoteltimeEnd2 ");
+            strSql.Append("select id,wid,hotelName,hotelLogo,hoteltimeBegin,hoteltimeEnd,limiteOrder,dcRename,sendPrice,sendCost,freeSendcost,radius,sendArea,tel,address,personLimite,notice,hotelintroduction,email,emailpwd,stmp,css,createDate,kcType,miaoshu,xplace,yplace,hoteltimeBegin1,hoteltimeEnd1,hoteltimeBegin2,hoteltimeEnd2,Operator,Recommend,Mobile,ShopCode ");
             strSql.Append(" FROM wx_diancai_shopinfo ");
             if (strWhere.Trim() != "")
             {
@@ -656,7 +679,7 @@ namespace WeiXinPF.DAL
         public DataSet GetList()
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select id,wid,hotelName,hotelLogo,hoteltimeBegin,hoteltimeEnd,limiteOrder,dcRename,sendPrice,sendCost,freeSendcost,radius,sendArea,tel,address,personLimite,notice,hotelintroduction,email,emailpwd,stmp,css,createDate,kcType,miaoshu,xplace,yplace,hoteltimeBegin1,hoteltimeEnd1,hoteltimeBegin2,hoteltimeEnd2 ");
+            strSql.Append("select id,wid,hotelName,hotelLogo,hoteltimeBegin,hoteltimeEnd,limiteOrder,dcRename,sendPrice,sendCost,freeSendcost,radius,sendArea,tel,address,personLimite,notice,hotelintroduction,email,emailpwd,stmp,css,createDate,kcType,miaoshu,xplace,yplace,hoteltimeBegin1,hoteltimeEnd1,hoteltimeBegin2,hoteltimeEnd2,Operator,Recommend,Mobile,ShopCode ");
             strSql.Append(" FROM wx_diancai_shopinfo ");
 
             return DbHelperSQL.Query(strSql.ToString());
