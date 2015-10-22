@@ -91,6 +91,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Payment\PaymentInfo.cs" />
+    <Compile Include="Payment\PayNotifyInfo.cs" />
     <Compile Include="Payment\RefundmentInfo.cs" />
     <Compile Include="Photo\photoActionInfo.cs" />
     <Compile Include="Photo\photoScenesInfo.cs" />

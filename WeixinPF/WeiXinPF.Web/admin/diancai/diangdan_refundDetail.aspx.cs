@@ -6,6 +6,8 @@ using System.Text;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using OneGulp.WeChat.MP.AdvancedAPIs;
+using OneGulp.WeChat.MP.TenPayLibV3;
 using WeiXinPF.BLL;
 using WeiXinPF.Common;
 using WeiXinPF.Web.weixin.restaurant;
@@ -125,14 +127,32 @@ namespace WeiXinPF.Web.admin.diancai
         {
             try
             {
-                
+                var refundBll = new BLL.wx_diancai_tuidan_manage();
+                var refundResult = refundBll.GetWeChatRefundParams(shopid, orderID, refundCode);
 
-                var shopInfo = new BLL.wx_diancai_shopinfo().GetModel(shopid);
-                var wxModel = new BLL.wx_userweixin().GetModel((int)shopInfo.wid);
-                var certificatePath = string.Format(@"{0}{1}\{2}\apiclient_cert.p12", AppDomain.CurrentDomain.BaseDirectory, "Certificaters", wxModel.AppId);
-                if (System.IO.File.Exists(certificatePath))
+                //使用系统订单号退单
+                if (refundResult != null && refundResult.Tables.Count > 0 && refundResult.Tables[0].Rows.Count > 0)
                 {
+                    var orderNumber = refundResult.Tables[0].Rows[0]["orderNumber"].ToString();
+                    var refundAmount = Convert.ToInt32(refundResult.Tables[0].Rows[0]["refundAmount"]);
+                    var payAmount = Convert.ToInt32(refundResult.Tables[0].Rows[0]["payAmount"]);
 
+                    var shopInfo = new BLL.wx_diancai_shopinfo().GetModel(shopid);
+                    var wxModel = new BLL.wx_userweixin().GetModel((int)shopInfo.wid);
+                    var payInfo = new BLL.wx_payment_wxpay().GetModelByWid((int)shopInfo.wid);
+
+                    var requestHandler = new RequestHandler(null);
+                    requestHandler.SetParameter("out_trade_no", orderNumber);
+                    requestHandler.SetParameter("out_refund_no", refundCode);
+                    requestHandler.SetParameter("appid", wxModel.AppId);
+                    requestHandler.SetParameter("mch_id", payInfo.mch_id);//商户号
+                    requestHandler.SetParameter("nonce_str", Guid.NewGuid().ToString().Replace("-", ""));
+                    requestHandler.SetParameter("total_fee", payAmount.ToString());
+                    requestHandler.SetParameter("refund_fee", refundAmount.ToString());
+                    requestHandler.SetParameter("op_user_id", wxModel.AppId);
+                    requestHandler.SetParameter("sign", requestHandler.CreateMd5Sign("key", payInfo.paykey));
+
+                    var refundInfo = TenPayV3.Refund(requestHandler.ParseXML(), string.Format(@"{0}{1}", AppDomain.CurrentDomain.BaseDirectory, payInfo.certInfoPath), payInfo.cerInfoPwd);
                 }
             }
             catch (Exception exception)

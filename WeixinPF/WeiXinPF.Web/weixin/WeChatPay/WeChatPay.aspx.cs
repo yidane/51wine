@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Travel.Infrastructure.WeiXin.Advanced.Pay.Model;
 using WeiXinPF.Common;
 
 namespace WeiXinPF.Web.weixin.WeChatPay
@@ -29,7 +30,7 @@ namespace WeiXinPF.Web.weixin.WeChatPay
 
                         if (payDataModel != null)
                         {
-                            wid = payDataModel.wid;
+                            //wid = payDataModel.wid;
                             body = payDataModel.body;
                             attach = payDataModel.attach;
                             out_trade_no = payDataModel.out_trade_no;

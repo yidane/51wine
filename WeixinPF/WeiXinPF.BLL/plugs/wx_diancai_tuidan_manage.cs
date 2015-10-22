@@ -65,7 +65,7 @@ namespace WeiXinPF.BLL
         /// <returns></returns>
         public DataSet GetWeChatRefundParams(int shopId, int dingdanId, string refundCode)
         {
-            return null;
+            return dal.GetWeChatRefundParams(shopId, dingdanId, refundCode);
         }
     }
 }
