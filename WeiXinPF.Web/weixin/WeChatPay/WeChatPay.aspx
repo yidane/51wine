@@ -4,71 +4,15 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <script src="js/jquery-2.1.0.min.js"></script>
+    <title>微支付</title>
+    <meta http-equiv="Content-type" content="text/html; charset=GBK"/>
+    <meta content="application/xhtml+xml;charset=GBK" http-equiv="Content-Type"/>
+    <meta content="telephone=no, address=no" name="format-detection"/>
+    <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+    <script src="js/zepto.min.js"></script>
     <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
     <script type="text/javascript">
         var WeChatPayIsReady = true;
-
-        var PayManager =
-                {
-                    Pay: function () {
-                        WeChatPayIsReady = true;
-                        alert(WeChatPayIsReady);
-                        if (WeChatPayIsReady) {
-                            alert("pay");
-                            var payResult = false;
-                            $.ajax({
-                                url: "../WeChatPay/WeChatService.asmx/UnifiedOrder",
-                                type: "post",
-                                dataType: "json",
-                                async: false,
-                                data: { request: JSON.stringify(UnifiedOrderRequest) },
-                                success: function (result) {
-                                    if (result != null && result.IsSuccess) {
-                                        alert("prepay");
-                                        wx.chooseWXPay({
-                                            timestamp: result.Data.timeStamp,
-                                            nonceStr: result.Data.nonceStr,
-                                            package: result.Data.package,
-                                            signType: 'MD5',
-                                            paySign: result.Data.paySign,
-                                            success: function (res) {
-                                                payResult = true;
-                                                if (typeof UnifiedOrderRequest.afterSuccess === "function") {
-                                                    UnifiedOrderRequest.afterSuccess(result.Data.prepayid);
-                                                }
-                                            },
-                                            fail: function (res) {
-                                                alert("pay faild");
-                                                alert(res);
-                                                if (typeof UnifiedOrderRequest.afterFail === "function") {
-                                                    UnifiedOrderRequest.afterFail(result.Data.prepayid);
-                                                }
-                                            },
-                                            cancel: function (res) {
-                                                if (typeof UnifiedOrderRequest.afterCancel === "function") {
-                                                    UnifiedOrderRequest.afterCancel(result.Data.prepayid);
-                                                }
-                                            },
-                                            complete: function (res) {
-                                                if (typeof UnifiedOrderRequest.afterComplete === "function") {
-                                                    UnifiedOrderRequest.afterComplete(result.Data.prepayid);
-                                                }
-                                            }
-                                        });
-                                    }
-                                },
-                                error: function (error) {
-                                    alert(error);
-                                }
-                            });
-
-                            return payResult;
-                        } else {
-                            alert("支付状态正在初始化，请稍后再试");
-                        }
-                    }
-                };
 
         var UnifiedOrderRequest = {
             wid: parseInt(<%=wid%>),
@@ -82,77 +26,61 @@
             afterCancel: null,
             afterComplete: null
         };
+    </script>
 
-        function GetQueryString(name) {
-            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
-            var r = window.location.search.substr(1).match(reg);
-            if (r != null) return r[2]; return null;
+    <style type="text/css">
+        * {
+            margin: 0px;
+            padding: 0px;
+            -webkit-box-sizing: border-box;
         }
 
-        $(document).ready(function () {
-            $.ajax({
-                url: "../WeChatPay/WeChatService.asmx/WeChatConfigInit",
-                type: "post",
-                dataType: "json",
-                data: { "wid": parseInt(<%=wid%>), "url": document.location.href },
-                success: function (result) {
-                    if (result.IsSuccess) {
-                        wx.config({
-                            debug: true,
-                            appId: result.Data.appId,
-                            timestamp: result.Data.timestamp,
-                            nonceStr: result.Data.nonceStr,
-                            signature: result.Data.signature,
-                            jsApiList: [
-                                'chooseWXPay',
-                                'getNetworkType',
-                                'onMenuShareAppMessage',
-                                'onMenuShareTimeline',
-                                'onMenuShareQQ',
-                                'hideOptionMenu'
-                            ]
-                        });
-                        wx.ready(function () {
-                            WeChatPayIsReady = true;
-                            PayManager.Pay();
-                            //wx.hideOptionMenu();
+        .body {
+            text-align: center;
+            width: 100%;
+            padding: 60px 20px;
+        }
 
-                            //wx.onMenuShareAppMessage({
-                            //    title: window.share.title,
-                            //    desc: window.share.desc,
-                            //    link: window.share.link,
-                            //    imgUrl: window.share.imgUrl,
-                            //    success: function () {
-                            //        //成功回调
-                            //        window.share.appcallback();
+            .body .ordernum {
+                font-size: 14px;
+                line-height: 30px;
+            }
 
-                            //    }
-                            //});
+            .body .money {
+                font-size: 20px;
+                font-weight: bold;
+                line-height: 60px;
+            }
 
-                            //wx.onMenuShareTimeline({
-                            //    title: window.share.title,
-                            //    link: window.share.link,
-                            //    imgUrl: window.share.imgUrl
-                            //});
+            .body .time {
+                font-size: 16px;
+                font-weight: bold;
+                line-height: 30px;
+            }
 
-                            //wx.onMenuShareQQ({
-                            //    title: window.share.title,
-                            //    desc: window.share.desc,
-                            //    link: window.share.link,
-                            //    imgUrl: window.share.imgUrl
-                            //});
-
-                            //wx.error(function (res) {
-                            //    alert(res.err_code + "______" + res.err_desc + "______" + res.err_msg);
-                            //});
-                        });
-                    }
-                },
-                error: function () {
-
-                }
-            });
-        });
-    </script>
+            .body .btn {
+                display: block;
+                background: #25a52e;
+                text-decoration: none;
+                border-radius: 2px;
+                color: #fff;
+                height: 44px;
+                line-height: 44px;
+                font-size: 18px;
+                margin-top: 20px;
+            }
+    </style>
 </head>
+<body>
+    <form runat="server">
+        <section class="body">
+            <div class="ordernum">订单号：<asp:Literal ID="litout_trade_no" runat="server" EnableViewState="false"></asp:Literal></div>
+            <div class="money">共计金额￥<asp:Literal ID="litMoney" runat="server" EnableViewState="false"></asp:Literal></div>
+            <div class="time">下单时间：<asp:Literal ID="litDate" runat="server" EnableViewState="false"></asp:Literal></div>
+            <div class="paytype" style="display: none;">支付方式：微信支付</div>
+            <a href="javascript:void(0);" class="btn" id="getBrandWCPayRequest">确认支付</a>
+            <a href="javascript:void(0);" class="btn" id="reload" onclick="javascript:location.href=location.href>'">刷新</a>
+        </section>
+    </form>
+</body>
 </html>

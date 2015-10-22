@@ -9868,12 +9868,10 @@
     <Content Include="weixin\WeChatPay\images\catering.png" />
     <Content Include="weixin\WeChatPay\images\hotel.png" />
     <Content Include="weixin\WeChatPay\images\ticket.png" />
-    <Content Include="weixin\WeChatPay\js\jquery-2.1.0.min.js" />
-    <Content Include="weixin\WeChatPay\js\Pay.js" />
+    <Content Include="weixin\WeChatPay\js\zepto.min.js" />
     <Content Include="weixin\WeChatPay\MyOrderCenter.aspx" />
     <Content Include="weixin\WeChatPay\PayNotify.aspx" />
     <Content Include="weixin\WeChatPay\WeChatPay.aspx" />
-    <Content Include="weixin\WeChatPay\WeChatPay.html" />
     <Content Include="weixin\WeChatPay\WeChatService.asmx" />
     <Content Include="weixin\wfangchan\aboutWe.aspx" />
     <Content Include="weixin\wfangchan\css\back.css" />
