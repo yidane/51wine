@@ -96,15 +96,15 @@ namespace WeiXinPF.Web.weixin.WeChatPay
         /// <param name="wid"></param>
         /// <param name="orderId"></param>
         [WebMethod]
-        public void UnifiedOrder(string request, int wid, string orderId)
+        public void UnifiedOrder(string request)
         {
             try
             {
-                var requestModel = JSONHelper.Deserialize<UnifiedOrderRequest>(request);
+                var requestModel = JSONHelper.Deserialize<UnifiedOrderEntity>(request);
 
                 //通过wid获取公众号的信息
-                var wxModel = new BLL.wx_userweixin().GetModel(wid);
-                var wxPayInfo = new BLL.wx_payment_wxpay().GetModelByWid(wid);
+                var wxModel = new BLL.wx_userweixin().GetModel(requestModel.wid);
+                var wxPayInfo = new BLL.wx_payment_wxpay().GetModelByWid(requestModel.wid);
 
                 var packageReqHandler = new RequestHandler(null);
                 //初始化
@@ -144,13 +144,13 @@ namespace WeiXinPF.Web.weixin.WeChatPay
                 {
                     var paymentInfo = new PaymentInfo();
                     paymentInfo.PaymentId = Guid.NewGuid();
-                    paymentInfo.Wid = wid;
+                    paymentInfo.Wid = requestModel.wid;
                     paymentInfo.CreateTime = DateTime.Now;
                     paymentInfo.Description = "无";
                     paymentInfo.ShopName = requestModel.body;
                     paymentInfo.ModuleName = "餐饮点菜";
                     paymentInfo.OrderCode = requestModel.out_trade_no;
-                    paymentInfo.OrderId = orderId;
+                    paymentInfo.OrderId = requestModel.OrderId;
                     paymentInfo.Pid = requestModel.openid;
                     paymentInfo.PayAmount = requestModel.total_fee;
                     paymentInfo.WXOrderCode = rtnUnifiedOrderResult.prepay_id;
@@ -170,14 +170,29 @@ namespace WeiXinPF.Web.weixin.WeChatPay
                 HttpContext.Current.Response.Write(AjaxResult.Error(exception.Message));
             }
         }
-
-        [WebMethod]
-        public void RefundOrder(string request)
-        {
-
-        }
     }
 
+    /// <summary>
+    /// 统一下单对象
+    /// </summary>
+    [DataContract]
+    public class UnifiedOrderEntity
+    {
+        [DataMember]
+        public int wid { get; set; }
+        [DataMember]
+        public string body { get; set; }
+        [DataMember]
+        public string attach { get; set; }
+        [DataMember]
+        public string out_trade_no { get; set; }
+        [DataMember]
+        public int total_fee { get; set; }
+        [DataMember]
+        public string openid { get; set; }
+        [DataMember]
+        public string OrderId { get; set; }
+    }
 
     #region 注释掉
 
