@@ -51,7 +51,7 @@ namespace WeiXinPF.Web.admin.diancai
         {
             Model.wx_diancai_shopinfo model = bll.GetModel(id);
 
-            lblShopId.Text = model.id.ToString();
+            lblShopCode.Text = model.ShopCode;
             txtHotelName.Text = model.hotelName;
             ddlKcType.Value = model.kcType;
             txtOperator.Text = model.Operator;

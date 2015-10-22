@@ -36,7 +36,7 @@
                 <div class="l-list">
                     <ul class="icon-list">
                         <li>
-                            <a class="icon-btn add" href="shop_admin_edit.aspx?action=<%=WeiXinPF.Common.MXEnums.ActionEnum.Add %>&shopid=<%=shopid%>">
+                            <a class="icon-btn add" href="shop_admin_edit.aspx?action=<%=MXEnums.ActionEnum.Add %>&shopid=<%=shopid%>">
                                 <i></i>
                                 <span>新增管理员</span>
                             </a>
@@ -74,7 +74,7 @@
                     <td><%#string.Format("{0:g}",Eval("add_time"))%></td>
                     <td align="center"><%#Eval("is_lock").ToString().Trim() == "0" ? "正常" : "禁用"%></td>
                     <td align="center">
-                        <a href="shop_admin_edit.aspx?action=<%#MXEnums.ActionEnum.Edit %>&id=<%#Eval("id")%>">修改</a>
+                        <a href="shop_admin_edit.aspx?shopid=<%#shopid %>&action=<%#MXEnums.ActionEnum.Edit %>&id=<%#Eval("id")%>">修改</a>
                     </td>
                 </tr>
             </ItemTemplate>

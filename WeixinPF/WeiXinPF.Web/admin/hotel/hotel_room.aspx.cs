@@ -33,7 +33,6 @@ namespace WeiXinPF.Web.admin.hotel
         #region 数据绑定=================================
         private void RptBind(string _strWhere, string _orderby)
         {
-
             Model.wx_userweixin weixin = GetWeiXinCode();
 
             //判断是否已经设置了微留言基本信息
@@ -63,8 +62,6 @@ namespace WeiXinPF.Web.admin.hotel
             txtPageNum.Text = this.pageSize.ToString();
             string pageUrl = Utils.CombUrlTxt("hotel_list.aspx", "keywords={0}&page={1}", this.keywords, "__id__");
             PageContent.InnerHtml = Utils.OutPageList(this.pageSize, this.page, this.totalCount, pageUrl, 8);
-
-
         }
         #endregion
 
@@ -120,7 +117,6 @@ namespace WeiXinPF.Web.admin.hotel
         //批量删除
         protected void btnDelete_Click(object sender, EventArgs e)
         {
-            // ChkAdminLevel("manager_list", MXEnums.ActionEnum.Delete.ToString()); //检查权限
             int sucCount = 0;
             int errorCount = 0;
 
@@ -146,21 +142,23 @@ namespace WeiXinPF.Web.admin.hotel
         }
 
         /// <summary>
-        ///  
+        /// 审核通过
         /// </summary>
-        /// <param name="source"></param>
+        /// <param name="sender"></param>
         /// <param name="e"></param>
-        protected void rptList_ItemCommand(object source, RepeaterCommandEventArgs e)
+        protected void btnAudit_Click(object sender, EventArgs e)
         {
 
         }
 
-        protected void rptList_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        /// <summary>
+        /// 审核不通过
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void LinkButton1_Click(object sender, EventArgs e)
         {
-            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
-            {
 
-            }
         }
     }
 }

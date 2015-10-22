@@ -19,17 +19,21 @@ namespace WeiXinPF.Web.admin.hotel
         protected static int roomid = 0;
         protected int hotelid = 0;
         BLL.wx_hotel_room roomBll = new BLL.wx_hotel_room();
-        Model.wx_hotel_room room = new Model.wx_hotel_room();
+        //Model.wx_hotel_room room = new Model.wx_hotel_room();
 
         BLL.wx_hotel_roompic picBll = new BLL.wx_hotel_roompic();
         Model.wx_hotel_roompic pic = new Model.wx_hotel_roompic();
         wx_hotel_roompic iBll = new wx_hotel_roompic();
+
+        private string action = MXEnums.ActionEnum.Add.ToString();
 
         protected void Page_Load(object sender, EventArgs e)
         {
             hotelid = MyCommFun.RequestInt("hotelid");
             roomid = MyCommFun.RequestInt("roomid");
             editetype = MyCommFun.QueryString("type");
+
+            action = MyCommFun.QueryString("action");
             if (!IsPostBack)
             {
                 if (editetype == "edite")
@@ -41,20 +45,17 @@ namespace WeiXinPF.Web.admin.hotel
 
         public void list(int roomid)
         {
-            room = roomBll.GetModel(roomid);
+            Model.wx_hotel_room room = roomBll.GetModel(roomid);
             if (room != null)
             {
-                //this.hotelName.Text = hotel.hotelName;
-                //this.hotelAddress.Text = hotel.hotelAddress;
-                //this.hotelPhone.Text = hotel.hotelPhone;
-                //this.mobilPhone.Text = hotel.mobilPhone;
-                //this.noticeEmail.Text = hotel.noticeEmail;
+                this.lblRoomCode.Text = room.RoomCode;
                 this.roomType.Text = room.roomType;
                 this.indroduce.InnerText = room.indroduce;
                 this.roomPrice.Text = room.roomPrice.ToString();
                 this.salePrice.Text = room.salePrice.ToString();
-                this.sortid.Text = room.sortid.ToString();
-                this.facilities.Value = room.facilities;           
+                this.facilities.Value = room.facilities;
+                this.txtUsueIntroduction.Value = room.UseInstruction;
+                this.txtRefundRule.Value = room.RefundRule;
             }
 
             IList<Model.wx_hotel_roompic> itemlist = iBll.GetModelList("roomid=" + roomid + " order by id asc");
@@ -84,19 +85,17 @@ namespace WeiXinPF.Web.admin.hotel
 
         protected void save_room_Click(object sender, EventArgs e)
         {
-            editetype = MyCommFun.QueryString("type");
-            if (editetype == "add")
+            Model.wx_hotel_room room = new Model.wx_hotel_room();
+            if (action == MXEnums.ActionEnum.Add.ToString())
             {
                 room.hotelid = hotelid;
                 room.roomType = this.roomType.Text;
                 room.indroduce = this.indroduce.InnerText;
-                room.roomPrice = Convert.ToDecimal( this.roomPrice.Text);
-                room.salePrice = Convert.ToDecimal( this.salePrice.Text);
+                room.roomPrice = Convert.ToDecimal(this.roomPrice.Text);
+                room.salePrice = Convert.ToDecimal(this.salePrice.Text);
                 room.facilities = this.facilities.Value;
-                room.sortid = Convert.ToInt32( this.sortid.Text);
                 room.createDate = DateTime.Now;
-            
-
+                room.Status = Model.RoomStatus.Submit;
                 int id = roomBll.Add(room);
 
 
@@ -122,16 +121,14 @@ namespace WeiXinPF.Web.admin.hotel
                     }
                 }
                 AddAdminLog(MXEnums.ActionEnum.Add.ToString(), "添加房间类型，主键为" + id); //记录日志
-                JscriptMsg("添加成功！", "hotel_room.aspx?hotelid="+hotelid+"", "Success");
+                JscriptMsg("添加成功！", "hotel_room.aspx?hotelid=" + hotelid + "", "Success");
             }
 
-            else if (editetype == "edite")
+            else if (action == MXEnums.ActionEnum.Add.ToString())
             {
                 if (roomid == 0)
                 {
-
                     return;
-                    //操作失败！
                 }
 
                 room = roomBll.GetModel(roomid);
@@ -142,7 +139,7 @@ namespace WeiXinPF.Web.admin.hotel
                 room.roomPrice = Convert.ToDecimal(this.roomPrice.Text);
                 room.salePrice = Convert.ToDecimal(this.salePrice.Text);
                 room.facilities = this.facilities.Value;
-                room.sortid = Convert.ToInt32(this.sortid.Text);             
+                //room.sortid = Convert.ToInt32(this.sortid.Text);
 
                 roomBll.Update(room);
 
@@ -170,7 +167,6 @@ namespace WeiXinPF.Web.admin.hotel
                 }
                 AddAdminLog(MXEnums.ActionEnum.Edit.ToString(), "修改房间类型设置，主键为" + hotelid); //记录日志
                 JscriptMsg("修改成功！", "hotel_room.aspx?hotelid=" + hotelid + "", "Success");
-
             }
         }
     }

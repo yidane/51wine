@@ -45,6 +45,7 @@ namespace WeiXinPF.Model
         private string _operator;
         private bool? _recommend;
         private string _mobile;
+        private string _shopCode;
         /// <summary>
         /// 编号
         /// </summary>
@@ -323,6 +324,12 @@ namespace WeiXinPF.Model
         {
             get { return _mobile; }
             set { _mobile = value; }
+        }
+
+        public  string ShopCode
+        {
+            get { return _shopCode; }
+            set { _shopCode = value; }
         }
         #endregion Model
 

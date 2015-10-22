@@ -80,10 +80,10 @@ namespace WeiXinPF.BLL
 		/// <summary>
 		/// 获得数据列表
 		/// </summary>
-		public DataSet GetList(string strWhere)
-		{
-			return dal.GetList(strWhere);
-		}
+		//public DataSet GetList(string strWhere)
+		//{
+		//	return dal.GetList(strWhere);
+		//}
 		/// <summary>
 		/// 获得前几行数据
 		/// </summary>
@@ -96,8 +96,10 @@ namespace WeiXinPF.BLL
 		/// </summary>
 		public List<WeiXinPF.Model.wx_diancai_shopinfo> GetModelList(string strWhere)
 		{
-			DataSet ds = dal.GetList(strWhere);
-			return DataTableToList(ds.Tables[0]);
+
+            //DataSet ds = dal.GetList(strWhere);
+            //return DataTableToList(ds.Tables[0]);
+            return dal.GetList(strWhere);
 		}
 		/// <summary>
 		/// 获得数据列表
@@ -124,10 +126,10 @@ namespace WeiXinPF.BLL
 		/// <summary>
 		/// 获得数据列表
 		/// </summary>
-		public DataSet GetAllList()
-		{
-			return GetList("");
-		}
+		//public DataSet GetAllList()
+		//{
+		//	return GetList("");
+		//}
 
 		/// <summary>
 		/// 分页获取数据列表

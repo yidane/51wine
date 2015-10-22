@@ -89,7 +89,7 @@
 
                     if (hash != "#2") {
                         var autoDisplayNextPage = res.data.scenic.autoDisplayNextPage;
-                        var delay = res.result.scenic.delay || 10;
+                        var delay = res.data.scenic.delay || 10;
 
                         if (autoDisplayNextPage) {
                             var timer = setTimeout(showPage, delay * 1000);

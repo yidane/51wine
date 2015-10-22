@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
     <title>订单处理</title>
-        <script type="text/javascript" src="../../scripts/jquery/jquery-2.1.0.min.js"></script>
+    <script type="text/javascript" src="../../scripts/jquery/jquery-2.1.0.min.js"></script>
     <script type="text/javascript" src="../../scripts/jquery/Validform_v5.3.2_min.js"></script>
     <script type="text/javascript" src="../../scripts/lhgdialog/lhgdialog.js?skin=idialog"></script>
     <script type="text/javascript" src="../../scripts/datepicker/WdatePicker.js"></script>
@@ -47,33 +47,32 @@
 
     </script>
     <style>
-       a.shenghe {
-        color:red;
-        
+        a.shenghe {
+            color: red;
         }
     </style>
 </head>
 <body class="mainbody">
     <form id="form1" runat="server">
 
-            <div class="location">
+        <div class="location">
             <a href="hotel_list.aspx" class="home"><i></i><span>微酒店</span></a>
             <a href="hotel_dingdan_manage.aspx?hotelid=<%=hotelid %>" class="home">
-            <i class="arrow"></i>
-            <span>在线预定管理</span>
+                <i class="arrow"></i>
+                <span>在线预定管理</span>
             </a>
             <i class="arrow"></i>
-           <span>订单处理</span>
-   
+            <span>订单处理</span>
+
         </div>
         <div class="line10"></div>
 
 
-         <div class="content-tab-wrap">
+        <div class="content-tab-wrap">
             <div id="floatHead" class="content-tab">
                 <div class="content-tab-ul-wrap">
                     <ul>
-                        <li><a href="javascript:;" onclick="tabs(this);" class="selected">订单处理</a></li>                     
+                        <li><a href="javascript:;" onclick="tabs(this);" class="selected">订单处理</a></li>
                         <asp:HiddenField ID="hidId" runat="server" Value="0" />
                     </ul>
                 </div>
@@ -82,52 +81,52 @@
 
 
 
-  
+
         <!--/导航栏-->
 
-         <div class="tab-content">
+        <div class="tab-content">
 
-               <dl>
+            <dl>
                 <dt><%=ordername%>:</dt>
-                <dd>                 
+                <dd>
                     <%=openid %>
                 </dd>
             </dl>
-               <dl>
+            <dl>
                 <dt>电话:</dt>
-                <dd>                 
+                <dd>
                     <%=dingdan.tel %>
                 </dd>
             </dl>
-               <dl>
+            <dl>
                 <dt>入住/离店时间:</dt>
-                <dd>                 
+                <dd>
                     <%=dingdan.arriveTime.Value.ToShortDateString() %>~<%=dingdan.leaveTime.Value.ToShortDateString() %>
                 </dd>
             </dl>
-               <dl>
+            <dl>
                 <dt>房间类型:</dt>
-                <dd>                 
+                <dd>
                     <%=dingdan.roomType %>
                 </dd>
             </dl>
-               <dl>
+            <dl>
                 <dt>预定数量:</dt>
-                <dd>                 
+                <dd>
                     <%=dingdan.orderNum %>
                 </dd>
             </dl>
-               <dl>
+            <dl>
                 <dt>价格:</dt>
-                <dd>                 
+                <dd>
                     <%=dingdan.price %>
                 </dd>
             </dl>
 
 
-             <dl>
+            <dl>
                 <dt>备注:</dt>
-                <dd>                 
+                <dd>
                     <%=beizhu %>
                 </dd>
             </dl>
@@ -140,14 +139,14 @@
                         <asp:ListItem Text="确认" Value="1"></asp:ListItem>
                         <asp:ListItem Text="拒绝" Value="2"></asp:ListItem>
                     </asp:DropDownList>
-                    
+
                 </dd>
             </dl>
-         </div>
-      
-           <div class="page-footer">
+        </div>
+
+        <div class="page-footer">
             <div class="btn-list">
-                <asp:Button ID="save_groupbase" runat="server" CssClass="btn" Text="保存" OnClick="save_groupbase_Click"  />
+                <asp:Button ID="save_groupbase" runat="server" CssClass="btn" Text="保存" OnClick="save_groupbase_Click" />
             </div>
             <div class="clear"></div>
         </div>

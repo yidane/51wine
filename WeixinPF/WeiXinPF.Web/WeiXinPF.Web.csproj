@@ -125,6 +125,7 @@
     <Content Include="admin\scenic\scenic_picture_edit.aspx" />
     <Content Include="admin\scenic\scenic_picture_list.aspx" />
     <Content Include="admin\skin\default\loginbody.png" />
+    <Content Include="admin\skin\default\logo.png" />
     <Content Include="admin\weixin\baseSetting.aspx" />
     <Content Include="admin\zhanhui\110.png" />
     <Content Include="admin\agent\agent_edit.aspx" />
@@ -330,7 +331,7 @@
     <Content Include="admin\skin\default\loadimg.gif" />
     <Content Include="admin\skin\default\login_logo.png" />
     <Content Include="admin\skin\default\login_tit.png" />
-    <Content Include="admin\skin\default\logo.png" />
+    <Content Include="admin\skin\default\logo1.png" />
     <Content Include="admin\skin\default\icon_onload.gif" />
     <Content Include="admin\skin\default\order_speed.gif" />
     <Content Include="admin\skin\default\skin_icons.png" />
@@ -8018,7 +8019,6 @@
     <Folder Include="weixin\haibao\" />
     <Folder Include="weixin\sticket\js\" />
     <Folder Include="weixin\WeChatPay\css\" />
-    <Folder Include="weixin\WeChatPay\images\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="WebServices\CouponWebService.asmx" />
@@ -9861,6 +9861,13 @@
     <Content Include="weixin\vote\js\jquery.icheck.min.js" />
     <Content Include="weixin\vote\js\play.js" />
     <Content Include="weixin\vote\tp_result.aspx" />
+    <Content Include="weixin\WeChatPay\images\1.jpg" />
+    <Content Include="weixin\WeChatPay\images\2.jpg" />
+    <Content Include="weixin\WeChatPay\images\3.jpg" />
+    <Content Include="weixin\WeChatPay\images\4.jpg" />
+    <Content Include="weixin\WeChatPay\images\catering.png" />
+    <Content Include="weixin\WeChatPay\images\hotel.png" />
+    <Content Include="weixin\WeChatPay\images\ticket.png" />
     <Content Include="weixin\WeChatPay\js\jquery-2.1.0.min.js" />
     <Content Include="weixin\WeChatPay\js\Pay.js" />
     <Content Include="weixin\WeChatPay\MyOrderCenter.aspx" />
@@ -10196,6 +10203,7 @@
     <Content Include="css\font-awesome\scss\_rotated-flipped.scss" />
     <Content Include="css\font-awesome\scss\_stacked.scss" />
     <Content Include="css\font-awesome\scss\_variables.scss" />
+    <Content Include="App_Browsers\ie.browser" />
     <Content Include="Certificaters\wxdd6127bdb5e7611c\apiclient_cert.p12" />
     <None Include="Properties\PublishProfiles\jin.pubxml" />
     <None Include="Properties\PublishProfiles\jxiaox.pubxml" />

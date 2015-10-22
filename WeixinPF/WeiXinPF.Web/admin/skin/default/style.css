@@ -37,7 +37,7 @@ a:link, a:visited{ color:#2A72C5; text-decoration:none; }
 a:hover{ color:#0065D9; text-decoration:underline; }
 a:active{ color:#0065D9; text-decoration:none; }
 .header{ background:#33B5E5; }
-.logo{ display:block; float:left; width:180px; height:42px; background:url(logo.png) no-repeat center; border-right:1px solid #1da0d0; text-indent:-9999px; overflow:hidden; }
+.logo{ display:block; float:left; width:180px; height:42px; background:url(logo.png) no-repeat left center; background-size: 100%; border-right:1px solid #1da0d0; text-indent:-9999px; overflow:hidden; }
 /*顶部菜单*/
 .nav{ display:block; float:left; height:100%; border-right:1px solid #4dc4f0; }
 	.nav li{ display:block; float:left; margin:0; padding:0px 15px; border-left:1px solid #4dc4f0; border-right:1px solid #1da0d0; color:#fff; cursor:pointer; font-size:14px; height:42px; line-height:42px; vertical-align:middle; }

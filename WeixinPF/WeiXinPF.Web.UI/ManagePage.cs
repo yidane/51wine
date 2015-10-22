@@ -191,21 +191,39 @@ namespace WeiXinPF.Web.UI
 
         public int GetShopId()
         {
-            if (Session[MXKeys.WEIXIN_DIANCAI_SHOPID] != null)
+            if (IsAdminLogin())
             {
-                return MyCommFun.Obj2Int(Session[MXKeys.WEIXIN_DIANCAI_SHOPID]);
+                Model.manager admin = GetAdminInfo();
+                BLL.wx_diancai_admin shopAdminBll = new BLL.wx_diancai_admin();
+                Model.wx_diancai_admin shopAdmin = shopAdminBll.GetModel(admin.id);
+                if (shopAdmin != null)
+                {
+                    return shopAdmin.ShopId;
+                }
+                else
+                {
+                    return 0;
+                }
             }
             else
             {
-                //检查Cookies
-                string shopId = Utils.GetCookie(MXKeys.WEIXIN_DIANCAI_SHOPID, "WeiXinPF");
-                if (shopId != "")
-                {
-                    Session[MXKeys.WEIXIN_DIANCAI_SHOPID] = shopId;
-                    return MyCommFun.Str2Int(shopId);
-                }
                 return 0;
             }
+            //if (Session[MXKeys.WEIXIN_DIANCAI_SHOPID] != null)
+            //{
+            //    return MyCommFun.Obj2Int(Session[MXKeys.WEIXIN_DIANCAI_SHOPID]);
+            //}
+            //else
+            //{
+            //    //检查Cookies
+            //    string shopId = Utils.GetCookie(MXKeys.WEIXIN_DIANCAI_SHOPID, "WeiXinPF");
+            //    if (shopId != "")
+            //    {
+            //        Session[MXKeys.WEIXIN_DIANCAI_SHOPID] = shopId;
+            //        return MyCommFun.Str2Int(shopId);
+            //    }
+            //    return 0;
+            //}
         }
     }
 }
