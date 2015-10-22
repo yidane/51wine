@@ -55,5 +55,17 @@ namespace WeiXinPF.BLL
         {
             return dal.GetRefundDetail(shopId, orderId, refundCode);
         }
+
+        /// <summary>
+        /// 获取微信所必须的退单参数
+        /// </summary>
+        /// <param name="shopId"></param>
+        /// <param name="dingdanId"></param>
+        /// <param name="refundCode"></param>
+        /// <returns></returns>
+        public DataSet GetWeChatRefundParams(int shopId, int dingdanId, string refundCode)
+        {
+            return null;
+        }
     }
 }

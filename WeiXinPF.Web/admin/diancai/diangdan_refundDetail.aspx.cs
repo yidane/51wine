@@ -125,7 +125,15 @@ namespace WeiXinPF.Web.admin.diancai
         {
             try
             {
+                
 
+                var shopInfo = new BLL.wx_diancai_shopinfo().GetModel(shopid);
+                var wxModel = new BLL.wx_userweixin().GetModel((int)shopInfo.wid);
+                var certificatePath = string.Format(@"{0}{1}\{2}\apiclient_cert.p12", AppDomain.CurrentDomain.BaseDirectory, "Certificaters", wxModel.AppId);
+                if (System.IO.File.Exists(certificatePath))
+                {
+
+                }
             }
             catch (Exception exception)
             {

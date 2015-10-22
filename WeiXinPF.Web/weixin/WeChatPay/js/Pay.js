@@ -1,9 +1,10 @@
 ﻿/// <reference path="jquery-2.1.0.min.js" />
 
-function Pay(url, wid, body, attach, out_trade_no, total_fee, openid, afterSuccess, afterFail, afterCancel, afterComplete) {
+function Pay(orderId, url, wid, body, attach, out_trade_no, total_fee, openid, afterSuccess, afterFail, afterCancel, afterComplete) {
     var select = $("<div/>").appendTo($("body"));
     var unifiedOrderRequest =
     {
+        orderId: orderId,
         wid: wid,
         body: body,
         attach: attach,

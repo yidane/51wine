@@ -10196,6 +10196,7 @@
     <Content Include="css\font-awesome\scss\_rotated-flipped.scss" />
     <Content Include="css\font-awesome\scss\_stacked.scss" />
     <Content Include="css\font-awesome\scss\_variables.scss" />
+    <Content Include="Certificaters\wxdd6127bdb5e7611c\apiclient_cert.p12" />
     <None Include="Properties\PublishProfiles\jin.pubxml" />
     <None Include="Properties\PublishProfiles\jxiaox.pubxml" />
     <Content Include="weixin\yuyue\uploadhead.ashx" />
@@ -10222,6 +10223,7 @@
     <Content Include="weixin\WeChatPay\js\WeChatPay_3.0.js" />
     <Content Include="weixin\KNSHotel\hotel_info.ashx" />
     <Content Include="weixin\KNSHotel\KNSHotelMasterPage.Master" />
+    <Content Include="weixin\restaurant\ErCodeHandler.ashx" />
     <None Include="副本 Web.Debug.config">
       <DependentUpon>副本 Web.config</DependentUpon>
     </None>

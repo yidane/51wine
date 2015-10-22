@@ -224,7 +224,7 @@
                 $.post('diancai_login.ashx?openid=<%=openid%>&shopid=<%=shopid%>&wid=<%=wid%>', submitData,
                 function (data) {
                     if (data.ret == "ok") {
-                        var payResult= PayManager.Pay(data.shopname,"",data.orderNumber,data.payamount,data.openid,afterPaySuccess,afterPayFail,afterPayCancel,afterPayComplete);
+                        var payResult= PayManager.Pay(data.orderid,data.shopname,"",data.orderNumber,data.payamount,data.openid,afterPaySuccess,afterPayFail,afterPayCancel,afterPayComplete);
                         if (payResult) {
                             alert(data.content);
                             clearCache();
