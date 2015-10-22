@@ -143,12 +143,12 @@ namespace WeiXinPF.Web.weixin.WeChatPay
                     paymentInfo.PaymentId = Guid.NewGuid();
                     paymentInfo.Wid = requestModel.wid;
                     paymentInfo.CreateTime = DateTime.Now;
-                    paymentInfo.Description = "yidane Test";
+                    paymentInfo.Description = "无";
                     paymentInfo.ShopName = requestModel.body;
                     paymentInfo.ModuleName = "餐饮点菜";
                     paymentInfo.OrderCode = requestModel.out_trade_no;
-                    paymentInfo.OrderId = requestModel.out_trade_no;
-                    paymentInfo.Pid = "Pid";
+                    paymentInfo.OrderId = requestModel.OrderId;
+                    paymentInfo.Pid = requestModel.openid;
                     paymentInfo.PayAmount = requestModel.total_fee;
                     paymentInfo.WXOrderCode = rtnUnifiedOrderResult.prepay_id;
                     paymentInfo.ModifyTime = DateTime.Now;
@@ -193,6 +193,8 @@ namespace WeiXinPF.Web.weixin.WeChatPay
         public int total_fee { get; set; }
         [DataMember]
         public string openid { get; set; }
+        [DataMember]
+        public string OrderId { get; set; }
     }
 
     [DataContract]

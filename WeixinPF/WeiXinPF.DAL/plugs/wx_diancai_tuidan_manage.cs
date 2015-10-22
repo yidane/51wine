@@ -238,5 +238,17 @@ namespace WeiXinPF.DAL
             var result = DbHelperSQL.RunProcedure("usp_wx_diancai_tuidan_manage_Detail", sqlparams.ToArray(), "refundDetail");
             return result;
         }
+
+        public DataSet GetWeChatRefundParams(int shopId, int dingdanId, string refundCode)
+        {
+            SqlParameter[] sqlparams =
+                {
+                    new SqlParameter(){ParameterName = "@ShopID",SqlDbType = SqlDbType.Int,Value = shopId},
+                    new SqlParameter(){ParameterName = "@OrderID",SqlDbType = SqlDbType.Int,Value = dingdanId},
+                    new SqlParameter(){ParameterName = "@RefundCode",SqlDbType = SqlDbType.NVarChar,Value = refundCode} 
+                };
+
+            return DbHelperSQL.RunProcedure("usp_wx_diancai_tuidan_manage_WeChatDetail", sqlparams, "WeChatRefundDetail");
+        }
     }
 }

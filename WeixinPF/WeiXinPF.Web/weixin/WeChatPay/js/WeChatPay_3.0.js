@@ -5,6 +5,7 @@ if (wid == "" || wid == undefined) {
 }
 
 var UnifiedOrderRequest = {
+    orderId:"",
     wid: 0,
     body: "",
     attach: "",
@@ -86,8 +87,9 @@ $(document).ready(function () {
 
 var PayManager =
 {
-    Pay: function (body, attach, out_trade_no, total_fee, openid, afterSuccess, afterFail, afterCancel, afterComplete) {
+    Pay: function (orderId, body, attach, out_trade_no, total_fee, openid, afterSuccess, afterFail, afterCancel, afterComplete) {
         if (WeChatPayIsReady) {
+            UnifiedOrderRequest.orderId = orderId;
             UnifiedOrderRequest.wid = wid;
             UnifiedOrderRequest.body = body;
             UnifiedOrderRequest.attach = attach;
