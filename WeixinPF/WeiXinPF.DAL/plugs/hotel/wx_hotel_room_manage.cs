@@ -14,9 +14,9 @@ namespace WeiXinPF.DAL
         {
             StringBuilder query = new StringBuilder();
             query.Append("Insert Into[dbo].[wx_hotel_room_manage]");
-            query.Append("   ([RoomId],[Operator],[OperateName],[OprateTime],[Comment])");
+            query.Append("   ([RoomId],[Operator],[OperateName],[OperateTime],[Comment])");
             query.Append("Values");
-            query.Append("  (@RoomId, @Operator, @OperateName, @OprateTime, @Comment)");
+            query.Append("  (@RoomId, @Operator, @OperateName, @OperateTime, @Comment)");
             query.Append("Select @Id = Scope_Identity()");
 
             using(IDbConnection db = DbFactory.GetOpenedConnection())

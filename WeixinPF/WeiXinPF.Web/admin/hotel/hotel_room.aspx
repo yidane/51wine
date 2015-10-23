@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="hotel_room.aspx.cs" Inherits="WeiXinPF.Web.admin.hotel.hotel_room" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="hotel_room.aspx.cs" ValidateRequest="false" Inherits="WeiXinPF.Web.admin.hotel.hotel_room" %>
 
 <!DOCTYPE html>
 
@@ -11,17 +11,31 @@
     <link href="../skin/default/style.css" rel="stylesheet" type="text/css" />
     <link href="../skin/mystyle.css" rel="stylesheet" type="text/css" />
     <link href="../../css/pagination.css" rel="stylesheet" type="text/css" />
-
-    <script type="text/javascript">
-        function parentToIndex(id) {
-            parent.location.href = "/admin/Index.aspx?id=" + id;
+    <style type="text/css">
+        .badge {
+            display: inline-block;
+            min-width: 10px;
+            padding: 5px 8px;
+            font-size: 10px;
+            line-height: 1;
+            color: #fff;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: baseline;
+            background-color: #777;
+            border-radius: 10px;
         }
-        $(function () {
-        });
-    </script>
-    <style>
-        a.shenghe {
-            color: red;
+
+        .sbumit {
+            background-color: #5bc0de;
+        }
+
+        .agree {
+            background-color: #5cb85c;
+        }
+
+        .refuse {
+            background-color: #d9534f;
         }
     </style>
 </head>
@@ -36,24 +50,24 @@
             <div id="floatHead" class="toolbar">
                 <div class="l-list">
                     <ul class="icon-list">
-                        <li>
-                            <a class="icon-btn add" href="hotel_room_info.aspx?action=<%=WeiXinPF.Common.MXEnums.ActionEnum.Add %>&type=add&hotelid=<%=hotelid %>" id="itemAddButton">
+                        <li runat="server" id="barAdd">
+                            <a class="icon-btn add" href="hotel_room_info.aspx?action=<%=WeiXinPF.Common.MXEnums.ActionEnum.Add %>&hotelid=<%=hotelid %>">
                                 <i></i>
                                 <span>新增房间类型</span>
                             </a>
                         </li>
                         <li><a class="all" href="javascript:;" onclick="checkAll(this);"><i></i><span>全选</span></a></li>
-                        <li>
+                        <li runat="server" id="barDelete">
                             <asp:LinkButton ID="btnDelete" runat="server" CssClass="del" OnClientClick="return ExePostBack('btnDelete');" OnClick="btnDelete_Click">
                                 <i></i><span>删除</span>
                             </asp:LinkButton>
                         </li>
-                        <li>
-                            <asp:LinkButton ID="btnAudit" runat="server" OnClick="btnAudit_Click">审核通过</asp:LinkButton>
+                        <li runat="server" id="barAgree">
+                            <asp:LinkButton ID="btnAgree" runat="server" OnClick="btnAgree_Click">审核通过</asp:LinkButton>
                         </li>
-                        
-                        <li>
-                            <asp:LinkButton ID="LinkButton1" runat="server" OnClick="LinkButton1_Click">审核不通过</asp:LinkButton>
+
+                        <li runat="server" id="barRefuse">
+                            <asp:LinkButton ID="btnRefuse" runat="server" OnClick="btnRefuse_Click">审核不通过</asp:LinkButton>
                         </li>
                     </ul>
                 </div>
@@ -63,7 +77,7 @@
                 </div>
             </div>
         </div>
-        <asp:Repeater ID="rptList" runat="server">
+        <asp:Repeater ID="rptList" runat="server" OnItemCreated="rptList_ItemCreated" OnItemDataBound="rptList_ItemDataBound">
             <HeaderTemplate>
                 <table width="100%" border="0" cellspacing="0" cellpadding="0" class="ltable">
                     <thead>
@@ -83,15 +97,17 @@
                 <tr class="td_c">
                     <td>
                         <asp:CheckBox ID="chkId" CssClass="checkall" runat="server" Style="vertical-align: middle;" />
-                        <asp:HiddenField ID="hidId" Value='<%#Eval("id")%>' runat="server" />
+                        <asp:HiddenField ID="hidId" Value='<%# Eval("id")%>' runat="server" />
                     </td>
                     <td><%# Eval("RoomCode") %></td>
                     <td><%# Eval("roomType") %></td>
                     <td><%# Eval("roomPrice") %></td>
                     <td><%# Eval("salePrice") %></td>
-                    <td><%# Eval("Status") %></td>
+                    <td><%# Eval("StatusStr") %></td>
                     <td>
-                        <a href='hotel_room_info.aspx?roomid=<%#Eval("id") %>&type=edite&hotelid=<%=hotelid %>'>修改</a>
+                        <a href='hotel_room_info.aspx?roomid=<%#Eval("id") %>&action=<%=action %>&hotelid=<%=hotelid %>'>
+                            <%=action == MXEnums.ActionEnum.Audit.ToString() ? "审核" : "修改" %>
+                        </a>
                     </td>
                 </tr>
             </ItemTemplate>

@@ -227,6 +227,9 @@
         <div class="page-footer">
             <div class="btn-list">
                 <asp:Button ID="save_room" runat="server" CssClass="btn" Text="保存" OnClick="save_room_Click" />
+                <asp:Button ID="btnAgree" runat="server" CssClass="btn" Text="审核通过" OnClick="btnAgree_Click" />
+                <asp:Button ID="btnRefuse" runat="server" CssClass="btn" Text="审核不通过" OnClick="btnRefuse_Click" />
+
             </div>
             <div class="clear"></div>
         </div>

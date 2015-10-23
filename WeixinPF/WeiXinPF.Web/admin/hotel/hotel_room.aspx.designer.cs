@@ -31,6 +31,24 @@ namespace WeiXinPF.Web.admin.hotel {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
+        /// barAdd control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl barAdd;
+        
+        /// <summary>
+        /// barDelete control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl barDelete;
+        
+        /// <summary>
         /// btnDelete control.
         /// </summary>
         /// <remarks>
@@ -40,22 +58,40 @@ namespace WeiXinPF.Web.admin.hotel {
         protected global::System.Web.UI.WebControls.LinkButton btnDelete;
         
         /// <summary>
-        /// btnAudit control.
+        /// barAgree control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnAudit;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl barAgree;
         
         /// <summary>
-        /// LinkButton1 control.
+        /// btnAgree control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LinkButton1;
+        protected global::System.Web.UI.WebControls.LinkButton btnAgree;
+        
+        /// <summary>
+        /// barRefuse control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl barRefuse;
+        
+        /// <summary>
+        /// btnRefuse control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnRefuse;
         
         /// <summary>
         /// txtKeywords control.

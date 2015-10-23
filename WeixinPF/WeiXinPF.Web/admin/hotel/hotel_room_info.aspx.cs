@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Transactions;
 
 namespace WeiXinPF.Web.admin.hotel
 {
@@ -15,11 +16,10 @@ namespace WeiXinPF.Web.admin.hotel
         TextBox sortpicid;
         TextBox roomPic;
         TextBox roomPictz;
-        protected string editetype = "";
+
         protected static int roomid = 0;
         protected int hotelid = 0;
         BLL.wx_hotel_room roomBll = new BLL.wx_hotel_room();
-        //Model.wx_hotel_room room = new Model.wx_hotel_room();
 
         BLL.wx_hotel_roompic picBll = new BLL.wx_hotel_roompic();
         Model.wx_hotel_roompic pic = new Model.wx_hotel_roompic();
@@ -31,19 +31,19 @@ namespace WeiXinPF.Web.admin.hotel
         {
             hotelid = MyCommFun.RequestInt("hotelid");
             roomid = MyCommFun.RequestInt("roomid");
-            editetype = MyCommFun.QueryString("type");
-
             action = MyCommFun.QueryString("action");
+
             if (!IsPostBack)
             {
-                if (editetype == "edite")
+                SetControl();
+                if (action == MXEnums.ActionEnum.Edit.ToString() || action == MXEnums.ActionEnum.Audit.ToString())
                 {
-                    list(roomid);
+                    ShowInfo(roomid);
                 }
             }
         }
 
-        public void list(int roomid)
+        public void ShowInfo(int roomid)
         {
             Model.wx_hotel_room room = roomBll.GetModel(roomid);
             if (room != null)
@@ -124,7 +124,7 @@ namespace WeiXinPF.Web.admin.hotel
                 JscriptMsg("添加成功！", "hotel_room.aspx?hotelid=" + hotelid + "", "Success");
             }
 
-            else if (action == MXEnums.ActionEnum.Add.ToString())
+            else if (action == MXEnums.ActionEnum.Edit.ToString())
             {
                 if (roomid == 0)
                 {
@@ -167,6 +167,91 @@ namespace WeiXinPF.Web.admin.hotel
                 }
                 AddAdminLog(MXEnums.ActionEnum.Edit.ToString(), "修改房间类型设置，主键为" + hotelid); //记录日志
                 JscriptMsg("修改成功！", "hotel_room.aspx?hotelid=" + hotelid + "", "Success");
+            }
+        }
+
+        protected void btnAgree_Click(object sender, EventArgs e)
+        {
+
+            Model.wx_hotel_room model = roomBll.GetModel(roomid);
+            model.Status = Model.RoomStatus.Agree;
+
+            try
+            {
+                using (TransactionScope scope = new TransactionScope())
+                {
+                    roomBll.Update(model);
+
+                    BLL.wx_hotel_room_manage manageBll = new BLL.wx_hotel_room_manage();
+                    Model.wx_hotel_room_manage manageInfo = new Model.wx_hotel_room_manage();
+                    manageInfo.RoomId = model.id;
+                    manageInfo.Operator = GetAdminInfo().id;
+                    manageInfo.OperateName = "审核通过";
+                    manageInfo.OperateTime = DateTime.Now;
+                    manageInfo.Comment = "通过啊啊啊啊啊啊啊";
+                    manageBll.Add(manageInfo);
+
+                    scope.Complete();
+                }
+            }
+            catch (Exception ex)
+            {
+                JscriptMsg("操作失败！", Utils.CombUrlTxt("hotel_room.aspx", "action={0}&hotelid={1}", action, hotelid.ToString()), "Error");
+            }
+            AddAdminLog(MXEnums.ActionEnum.Audit.ToString(), string.Format("房间【id={0}】审核通过。",roomid)); //记录日志
+
+            JscriptMsg("操作成功！", Utils.CombUrlTxt("hotel_room.aspx", "action={0}&hotelid={1}", action, hotelid.ToString()), "Success");
+        }
+
+        protected void btnRefuse_Click(object sender, EventArgs e)
+        {
+          
+            try
+            {
+                Model.wx_hotel_room model = roomBll.GetModel(roomid);
+                model.Status = Model.RoomStatus.Refuse;
+
+                using (TransactionScope scope = new TransactionScope())
+                {
+                    roomBll.Update(model);
+
+                    BLL.wx_hotel_room_manage manageBll = new BLL.wx_hotel_room_manage();
+                    Model.wx_hotel_room_manage manageInfo = new Model.wx_hotel_room_manage();
+                    manageInfo.RoomId = model.id;
+                    manageInfo.Operator = GetAdminInfo().id;
+                    manageInfo.OperateName = "审核不通过";
+                    manageInfo.OperateTime = DateTime.Now;
+                    manageInfo.Comment = "不通过啊啊啊啊啊啊啊";
+                    manageBll.Add(manageInfo);
+
+                    scope.Complete();
+                }
+            }
+            catch (Exception ex)
+            {
+                JscriptMsg("操作失败！", Utils.CombUrlTxt("hotel_room.aspx", "action={0}&hotelid={1}", action, hotelid.ToString()), "Error");
+            }
+            AddAdminLog(MXEnums.ActionEnum.Audit.ToString(), string.Format("房间【id={0}】审核不通过。", roomid)); //记录日志
+
+            JscriptMsg("操作成功！", Utils.CombUrlTxt("hotel_room.aspx", "action={0}&hotelid={1}", action, hotelid.ToString()), "Success");
+        }
+
+        private void SetControl()
+        {
+            if (action == MXEnums.ActionEnum.Audit.ToString())
+            {
+                save_room.Visible = false;
+
+                btnAgree.Visible = true;
+                btnRefuse.Visible = true;
+            }
+
+            if (action == MXEnums.ActionEnum.Add.ToString() || action == MXEnums.ActionEnum.Edit.ToString())
+            {
+                save_room.Visible = true;
+
+                btnAgree.Visible = false;
+                btnRefuse.Visible = false;
             }
         }
     }

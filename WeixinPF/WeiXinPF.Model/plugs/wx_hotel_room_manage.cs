@@ -14,7 +14,7 @@ namespace WeiXinPF.Model
 	    public int RoomId { get; set; }
         public int Operator { get; set; }
         public string OperateName { get; set; }
-        public DateTime OprateTime { get; set; }
+        public DateTime OperateTime { get; set; }
         public string Comment { get; set; }
     }
 }
