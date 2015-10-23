@@ -45,6 +45,7 @@
       <HintPath>..\dll\OneGulp.WeChat.MP.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
@@ -68,6 +69,7 @@
     <Compile Include="LocationService.cs" />
     <Compile Include="MenuMgr.cs" />
     <Compile Include="ModelFunction.cs" />
+    <Compile Include="PayHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="threeInterface\weipaiInterface.cs" />
     <Compile Include="threeInterface\xjHongBao.cs" />

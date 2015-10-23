@@ -192,6 +192,11 @@ namespace WeiXinPF.Web.weixin.WeChatPay
         public string openid { get; set; }
         [DataMember]
         public string OrderId { get; set; }
+        /// <summary>
+        /// 额外参数
+        /// </summary>
+        [DataMember]
+        public Dictionary<string, string> Extra = new Dictionary<string, string>();
     }
 
     #region 注释掉

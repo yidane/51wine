@@ -118,5 +118,31 @@ namespace WeiXinPF.WeiXinComm
             }
             return rtnIVBuilder.ToString();
         }
+
+        /// <summary>
+        /// 有密码的AES加密，密码取自AppSettings["EncryptPassword"]
+        /// </summary>
+        /// <param name="text">明文</param>
+        /// <param name="iv">密钥</param>
+        /// <returns></returns>
+        public static string AESEncrypt(string text, string iv)
+        {
+            var password = System.Configuration.ConfigurationManager.AppSettings["EncryptPassword"];
+
+            return AESEncrypt(text, password, iv);
+        }
+
+        /// <summary>
+        /// 有密码的AES解密，密码取自AppSettings["EncryptPassword"]
+        /// </summary>
+        /// <param name="text"></param>
+        /// <param name="iv"></param>
+        /// <returns></returns>
+        public static string AESDecrypt(string text, string iv)
+        {
+            var password = System.Configuration.ConfigurationManager.AppSettings["EncryptPassword"];
+
+            return AESDecrypt(text, password, iv);
+        }
     }
 }

@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using Travel.Infrastructure.WeiXin.Advanced.Pay.Model;
 using WeiXinPF.Common;
+using WeiXinPF.WeiXinComm;
 
 namespace WeiXinPF.Web.weixin.WeChatPay
 {
@@ -17,11 +12,16 @@ namespace WeiXinPF.Web.weixin.WeChatPay
         public string out_trade_no = string.Empty;
         public int total_fee = 0;
         public string openid = string.Empty;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             var payData = Request.QueryString["payData"];
-            if (payData != null)
+            var ticket = Request.QueryString["ticket"];
+
+            if (!string.IsNullOrEmpty(payData) && !string.IsNullOrEmpty(ticket))
             {
+                payData = EncryptionManager.AESDecrypt(payData, ticket);
+
                 var payDataModel = JSONHelper.Deserialize<UnifiedOrderEntity>(payData);
 
                 if (payDataModel != null)
@@ -33,6 +33,16 @@ namespace WeiXinPF.Web.weixin.WeChatPay
                     total_fee = payDataModel.total_fee;
                     openid = payDataModel.openid;
                 }
+                else
+                {
+                    Response.Clear();
+                    Response.Write("无效的参数");
+                }
+            }
+            else
+            {
+                Response.Clear();
+                Response.Write("不完整的参数");
             }
         }
     }
