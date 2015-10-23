@@ -11,5 +11,32 @@ namespace WeiXinPF.Web.weixin.KNSHotel {
     
     
     public partial class hotel_form {
+        
+        /// <summary>
+        /// oderName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText oderName;
+        
+        /// <summary>
+        /// identityNumber control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText identityNumber;
+        
+        /// <summary>
+        /// tel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText tel;
     }
 }

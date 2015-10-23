@@ -17,15 +17,16 @@
 <div class="cardexplain"> 
 
   <!--普通用户登录时显示-->
+<div style="display: none">
 <%=numdingdan %>  
-
+    </div>
 <!--商家房价及类型-->
 <ul class="round">
 <%=yuding %>       
 </ul>
 
 <!--后台可控制是否显示-->
-<div class="detailcontent"><h2>订单说明</h2>
+<div class="detailcontent" style="display: none"><h2>订单说明</h2>
   <div class="content">
   <span style="color:#444444;font-family:'Microsoft YaHei', Helvitica, Verdana, Arial, san-serif;font-size:14px;font-weight:bold;line-height:21px;background-color:#FCFCFC;"><%=shuoming %></span></div>
   </div>

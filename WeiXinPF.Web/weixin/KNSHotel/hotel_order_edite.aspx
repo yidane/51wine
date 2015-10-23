@@ -32,7 +32,7 @@
     </div>
     <div class="cardexplain">
         <ul class="round">
-            <li class="title mb"><span class="none"><%=createtime %>订单详情<%=zhuangtai %></span></li>
+            <li class="title mb"><span class="none">订单号：<%=OrderNumber %><%=zhuangtai %></span></li>
             <li class="nob">
                 <div class="beizhu">此订单可重新修改后再提交！</div>
             </li>
@@ -66,19 +66,28 @@
             <li class="nob">
                 <table width="100%" border="0" cellspacing="0" cellpadding="0" class="kuang">
                     <tr>
-                        <th>入住时间</th>
+                        <th>到店日期</th>
                         <td>
-                            <input name="dateline" class="px datetimepicker" id="dateline" value="<%=dateline %>" type="text" placeholder="入住时间"/>
+                            <input name="dateline" class="px datetimepicker" id="dateline" value="<%=dateline %>" type="text" placeholder="到店日期"/>
                         </td>
                     </tr>
                 </table>
             </li>
-
+             <li class="nob">
+                <table width="100%" border="0" cellspacing="0" cellpadding="0" class="kuang">
+                    <tr>
+                        <th>离店日期</th>
+                        <td>
+                            <input name="leaveTime" class="px datetimepicker" id="leaveTime" value="<%=leaveTime %>" type="text" placeholder="离店日期"/>
+                        </td>
+                    </tr>
+                </table>
+            </li>
             <input type="hidden" name="formhash" id="formhash" value="77ee642e" />
             <li class="nob">
                 <table width="100%" border="0" cellspacing="0" cellpadding="0" class="kuang">
                     <tr>    
-                        <th>类型</th>
+                        <th>房型</th>
                         <td><%=roomtype %></td>
                     </tr>
                 </table>
@@ -87,7 +96,7 @@
             <li class="nob">
                 <table width="100%" border="0" cellspacing="0" cellpadding="0" class="kuang">
                     <tr>
-                        <th>预订数量</th>
+                        <th>数量</th>
                         <td>
                             <select name="nums" class="dropdown-select" id="nums" onchange="dothis(<%=nums %>)">
                                 <option value="1">1间</option>
@@ -153,7 +162,7 @@
 
         <div class="footReturn">
             <ul>
-                <li class="footerbtn"><a id="showcard2" class="del right3">删除订单</a></li>
+                <li class="footerbtn"><a id="showcard2" class="del right3">取消订单</a></li>
                 <li class="footerbtn"><a id="showcard" class="submit left3">提交订单</a></li>
             </ul>
             <div class="clr"></div>
@@ -190,7 +199,7 @@
 
                 $('.datetimepicker').datetimepicker({
                     minView: "month", //选择日期后，不会再跳转去选择时分秒 
-                    format: "yyyy-mm-dd", //选择日期后，文本框显示的日期格式 
+                    format: "yyyy/mm/dd", //选择日期后，文本框显示的日期格式 
                     language: 'zh-CN', //汉化 
                     autoclose: true //选择日期后自动关闭 
                 });
@@ -199,7 +208,7 @@
                     var truename = document.getElementById('truename').value;
                     var tel = document.getElementById('tel').value;
                     var dateline = document.getElementById('dateline').value;
-                    //var leaveTime = document.getElementById('leaveTime').value;
+                    var leaveTime = document.getElementById('leaveTime').value;
 
                     //var roomType = document.getElementById('roomtypenum').value;
                     var openid = '<%=string.IsNullOrEmpty(openid) ? "''" : openid %>';

@@ -7044,6 +7044,21 @@
     <Compile Include="weixin\groupbuy\purchase.aspx.designer.cs">
       <DependentUpon>purchase.aspx</DependentUpon>
     </Compile>
+    <Compile Include="weixin\KNSHotel\hotel_order_paycallback.aspx.cs">
+      <DependentUpon>hotel_order_paycallback.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="weixin\KNSHotel\hotel_order_paycallback.aspx.designer.cs">
+      <DependentUpon>hotel_order_paycallback.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="weixin\KNSHotel\hotel_userOrder.aspx.cs">
+      <DependentUpon>hotel_userOrder.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="weixin\KNSHotel\hotel_userOrder.aspx.designer.cs">
+      <DependentUpon>hotel_userOrder.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="weixin\KNSHotel\StatusManager.cs" />
     <Compile Include="weixin\KNSHotel\hotel_detail.aspx.cs">
       <DependentUpon>hotel_detail.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -8107,7 +8122,9 @@
     <Content Include="weixin\KNSHotel\hotel_order.aspx" />
     <Content Include="weixin\KNSHotel\hotel_order_edite.aspx" />
     <Content Include="weixin\KNSHotel\hotel_order_onlin.aspx" />
+    <Content Include="weixin\KNSHotel\hotel_order_paycallback.aspx" />
     <Content Include="weixin\KNSHotel\hotel_order_xianshi.aspx" />
+    <Content Include="weixin\KNSHotel\hotel_userOrder.aspx" />
     <Content Include="weixin\KNSHotel\images\3YQLfzfunJ.png" />
     <Content Include="weixin\KNSHotel\images\9uKCykhUSh.png" />
     <Content Include="weixin\KNSHotel\images\addr.png" />
@@ -8120,6 +8137,7 @@
     <Content Include="weixin\KNSHotel\index.aspx" />
     <Content Include="weixin\KNSHotel\js\iscroll.js" />
     <Content Include="weixin\KNSHotel\js\jquery.min.js" />
+    <Content Include="weixin\KNSHotel\js\paycallback.js" />
     <Content Include="weixin\KNSHotel\js\plugback.js" />
     <Content Include="weixin\map\css\bootstrap.min.css" />
     <Content Include="weixin\map\css\L.Control.Locate.ie.min.css" />

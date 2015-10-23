@@ -565,12 +565,74 @@ namespace WeiXinPF.DAL
             StringBuilder strSql = new StringBuilder();
             strSql.Append("select aa.*,bb.hotelName as hotelName FROM wx_hotel_dingdan  as aa inner join wx_hotels_info as bb on aa.hotelid=bb.id ");
 
-            strSql.Append(" and aa.openid='" + openid + "' and aa.isDelete='0'  and aa.hotelid='" + hotelid + "'  ");
+            strSql.Append(" and aa.openid='" + openid + "' and aa.isDelete='0'  and aa.hotelid='" + hotelid + "' order by orderTime  ");
 
             return DbHelperSQL.Query(strSql.ToString());
         }
 
 		#endregion  ExtensionMethod
+
+	    public DataSet GetListWithSql(string openid, int hotelid, string orderstatus,string orderby)
+	    {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("select aa.*,bb.hotelName as hotelName FROM wx_hotel_dingdan  as aa inner join wx_hotels_info as bb on aa.hotelid=bb.id ");
+
+            strSql.Append(" and aa.openid='" + openid + "' and aa.isDelete='0'  and aa.hotelid='" + hotelid + "'");
+
+	        if (!string.IsNullOrEmpty(orderstatus))
+	        {
+	            strSql.Append(orderstatus);
+	        }
+
+            if (!string.IsNullOrEmpty(orderby))
+            {
+                strSql.Append( orderby);
+            }
+
+            return DbHelperSQL.Query(strSql.ToString());
+        }
+
+	    public DataSet GetUserOrderList(string openid, int wid, string sqlWhere, string orderby)
+	    {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("select aa.*,bb.hotelName as hotelName FROM wx_hotel_dingdan  as aa inner join wx_hotels_info as bb on aa.hotelid=bb.id ");
+
+            strSql.Append(" and aa.openid='" + openid + "' and aa.isDelete='0'  and bb.wid='" + wid + "'");
+
+            if (!string.IsNullOrEmpty(sqlWhere))
+            {
+                strSql.Append(" and " + sqlWhere);
+            }
+
+            if (!string.IsNullOrEmpty(orderby))
+            {
+                strSql.Append(orderby);
+            }
+
+            return DbHelperSQL.Query(strSql.ToString());
+        }
+
+	    public Model.wx_hotel_dingdan GetLastUserModel(string openid)
+	    {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("select  top 1 * from wx_hotel_dingdan ");
+            strSql.Append(" where openid =@id and isDelete='0'  ORDER BY orderTime DESC ");
+            SqlParameter[] parameters = {
+                    new SqlParameter("@id", SqlDbType.VarChar,200)
+            };
+            parameters[0].Value = openid;
+
+            WeiXinPF.Model.wx_hotel_dingdan model = new WeiXinPF.Model.wx_hotel_dingdan();
+            DataSet ds = DbHelperSQL.Query(strSql.ToString(), parameters);
+            if (ds.Tables[0].Rows.Count > 0)
+            {
+                return DataRowToModel(ds.Tables[0].Rows[0]);
+            }
+            else
+            {
+                return null;
+            }
+        }
 	}
 }
 

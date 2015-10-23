@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using WeiXinPF.BLL;
 
 namespace WeiXinPF.Web.weixin.KNSHotel
 {
@@ -21,16 +22,21 @@ namespace WeiXinPF.Web.weixin.KNSHotel
 
         BLL.wx_hotel_roompic picbll = new BLL.wx_hotel_roompic();
 
+        BLL.wx_hotel_dingdan dingdanbll= new wx_hotel_dingdan();
+
         public int numdingdan = 0;
         public string roomtype = "";
         public string yuanjia = "";
         public string xianjia = "";
         public string peitao = "";
-        public string tel = "";
+        public string hoteltel = "";
         public string tupian = "";
         public string tabid = "";
- 
-     
+        public string jieshao = string.Empty;
+        public string UseInstruction = string.Empty;
+        public string RefundRule = string.Empty;
+
+
         public decimal price3 = 0;
 
         protected void Page_Load(object sender, EventArgs e)
@@ -41,9 +47,7 @@ namespace WeiXinPF.Web.weixin.KNSHotel
 
             if (!Page.IsPostBack)
             {
-
-
-                BLL.wx_hotel_dingdan dingdanbll = new BLL.wx_hotel_dingdan();
+                SetUserLastInfo(openid);
                 DataSet dr = dingdanbll.GetList(openid, hotelid);
                 if (dr.Tables[0].Rows.Count > 0)
                 {
@@ -59,13 +63,26 @@ namespace WeiXinPF.Web.weixin.KNSHotel
 
         }
 
+        private void SetUserLastInfo(string openid)
+        {
+            var dingdan = dingdanbll.GetLastUserModel(openid);
+            if (dingdan!=null)
+            {
+                oderName.Value = dingdan.oderName;
+                identityNumber.Value = dingdan.IdentityNumber;
+                tel.Value = dingdan.tel;
+            }
+        }
+
         public void list(int roomid, int hotelid)
         {
             room = roombll.GetModel(roomid);
             hotel = hotelbll.GetModel(hotelid);
             if (hotel!=null)
             {
-                tel = hotel.hotelPhone;
+                hoteltel = hotel.hotelPhone;
+                jieshao = hotel.hotelIntroduct;
+                
             }
             if (room!=null)
             {
@@ -75,6 +92,8 @@ namespace WeiXinPF.Web.weixin.KNSHotel
                 price3 = Convert.ToDecimal(yuanjia) - Convert.ToDecimal(xianjia);
                 peitao = room.facilities;
 
+                UseInstruction = room.UseInstruction;
+                RefundRule = room.RefundRule;
             }
             DataSet dr = picbll.GetList(roomid);
             if(dr.Tables[0].Rows.Count >0)
