@@ -123,7 +123,7 @@ namespace WeiXinPF.DAL
             query.Append("       ,[UseInstruction] = @UseInstruction");
             query.Append("       ,[RefundRule] = @RefundRule");
             query.Append("       ,[Status] = @Status");
-            query.Append("Where id=@Id");
+            query.Append(" Where id=@Id");
 
             using (IDbConnection db = DbFactory.GetOpenedConnection())
             {

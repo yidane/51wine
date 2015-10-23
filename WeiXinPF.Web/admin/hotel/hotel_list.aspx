@@ -81,7 +81,7 @@
                     <td>
                         <a href='hotel_dingdan_manage.aspx?hotelid=<%#Eval("id") %>'>订单管理</a>
                         <a href='hotel_info.aspx?hotelid=<%#Eval("id") %>&type=edite'>商家设置</a>
-                        <a href='hotel_room.aspx?hotelid=<%#Eval("id") %>'>房间设置</a>
+                        <a href='hotel_room.aspx?hotelid=<%#Eval("id") %>&action=<%=MXEnums.ActionEnum.Audit.ToString() %>'>房间设置</a>
                         <%--      <a  href='hotel_form.aspx?hotelid=<%#Eval("id") %>' >表单设计</a>--%>
                         <a href='hotel_dingdan_manage.aspx?hotelid=<%#Eval("id") %>'>打印机设置</a>
                     </td>
