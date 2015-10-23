@@ -54,7 +54,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IdentityCode\IdentityCodeInfo.cs" />
+    <Compile Include="IdentifyingCode\IdentifyingCodeInfo.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="Migrations\201509091103444_DBUpdate.cs" />
     <Compile Include="Migrations\201509091103444_DBUpdate.Designer.cs">
