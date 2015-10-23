@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using WeiXinPF.Web.weixin.WeChatPay;
+using WeiXinPF.WeiXinComm;
 
 namespace WeiXinPF.Web.weixin.restaurant
 {
@@ -59,7 +61,7 @@ namespace WeiXinPF.Web.weixin.restaurant
                 else
                 {
                     jsonDict.Add("ret", "fail");
-                    jsonDict.Add("content", "密码错误！");                    
+                    jsonDict.Add("content", "密码错误！");
 
                     context.Response.Write(MyCommFun.getJsonStr(jsonDict));
                 }
@@ -106,18 +108,37 @@ namespace WeiXinPF.Web.weixin.restaurant
 
                 if (order != null)
                 {
-                    this.jsonDict.Add("ret", "ok");
-                    this.jsonDict.Add("content", orderProcessResult.Message);
-                    this.jsonDict.Add("orderid", order.id.ToString());
-                    this.jsonDict.Add("ordercode", order.orderNumber);
-                    this.jsonDict.Add("openid", openid);
-                    this.jsonDict.Add("payamount", order.payAmount.ToString());
-                    this.jsonDict.Add("shopname", new BLL.wx_diancai_shopinfo().GetModel(this.shopid).hotelName);
-                    this.jsonDict.Add("wid", order.wid.ToString());
-                    this.jsonDict.Add("orderNumber", order.orderNumber);
-                    context.Response.Write(MyCommFun.getJsonStr(this.jsonDict));
+                    //this.jsonDict.Add("ret", "ok");
+                    //this.jsonDict.Add("content", orderProcessResult.Message);
+                    //this.jsonDict.Add("orderid", order.id.ToString());
+                    //this.jsonDict.Add("ordercode", order.orderNumber);
+                    //this.jsonDict.Add("openid", openid);
+                    //this.jsonDict.Add("payamount", order.payAmount.ToString());
+                    //this.jsonDict.Add("shopname", new BLL.wx_diancai_shopinfo().GetModel(this.shopid).hotelName);
+                    //this.jsonDict.Add("wid", order.wid.ToString());
+                    //this.jsonDict.Add("orderNumber", order.orderNumber);
+                    //context.Response.Write(MyCommFun.getJsonStr(this.jsonDict));
+
+                    var entity = new UnifiedOrderEntity
+                        {
+                            wid = order.wid,
+                            total_fee = order.payAmount == null ? 0 : (int)order.payAmount,
+                            out_trade_no = order.orderNumber,
+                            openid = openid,
+                            body = "",
+                            attach = string.Empty
+                        };
+
+                    entity.Extra.Add("content", orderProcessResult.Message);
+                    entity.Extra.Add("shopname", new BLL.wx_diancai_shopinfo().GetModel(this.shopid).hotelName);
+
+                    var ticket = EncryptionManager.CreateIV();
+                    var text = JSONHelper.Serialize(entity);
+                    var payData = EncryptionManager.AESEncrypt(text, ticket);
+
+                    context.Response.Write(AjaxResult.Success(PayHelper.GetPayUrl(payData, ticket)));
                 }
-                
+
                 context.Response.End();
             }
             else if (_action == "afterpayment")
@@ -138,14 +159,15 @@ namespace WeiXinPF.Web.weixin.restaurant
                     context.Response.Write(MyCommFun.getJsonStr(this.jsonDict));
                     context.Response.End();
                 }
-            }else if (_action == "productDetail")
+            }
+            else if (_action == "productDetail")
             {
                 var productId = MyCommFun.QueryString("productId");
                 var productDescription = string.Empty;
 
                 if (!string.IsNullOrEmpty(productId))
                 {
-                    productDescription = new BLL.wx_diancai_caipin_manage().GetModel(int.Parse(productId)).shopIntroduction;                    
+                    productDescription = new BLL.wx_diancai_caipin_manage().GetModel(int.Parse(productId)).shopIntroduction;
                 }
 
                 context.Response.Write(string.IsNullOrEmpty(productDescription) ? string.Empty : productDescription);
@@ -177,7 +199,7 @@ namespace WeiXinPF.Web.weixin.restaurant
                 return memberResult;
             }
 
-            return this.SaveOrder();            
+            return this.SaveOrder();
         }
 
         /// <summary>
@@ -238,7 +260,7 @@ namespace WeiXinPF.Web.weixin.restaurant
             }
 
             return new ProcessResult() { IsSuccess = true, Message = string.Empty };
-        }        
+        }
 
         /// <summary>
         /// The create order.
@@ -408,7 +430,7 @@ namespace WeiXinPF.Web.weixin.restaurant
                     catch (Exception)
                     {
                         return new ProcessResult() { IsSuccess = false, Message = "保存支付信息失败" };
-                    }                    
+                    }
                 }
                 else
                 {

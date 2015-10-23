@@ -9,7 +9,6 @@
     <link href="css/diancai.css" rel="stylesheet" type="text/css" />
     <script src="js/alert.js" type="text/javascript"></script>
     <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
-    <script src="../WeChatPay/js/WeChatPay_3.0.js"></script>
 </asp:Content>
 
 <asp:Content ID="c" ContentPlaceHolderID="content" runat="server">
@@ -222,13 +221,15 @@
                 };
            
                 $.post('diancai_login.ashx?openid=<%=openid%>&shopid=<%=shopid%>&wid=<%=wid%>', submitData,
-                function (data) {
-                    if (data.ret == "ok") {
-                        var payResult= PayManager.Pay(data.orderid,data.shopname,"",data.orderNumber,data.payamount,data.openid,afterPaySuccess,afterPayFail,afterPayCancel,afterPayComplete);
-                        if (payResult) {
-                            alert(data.content);
-                            clearCache();
-                        }
+                function (result) {
+                    if (result.IsSuccess) {
+
+                        clearCache();
+                        document.location.href = result.Data;
+                        //if (payResult) {
+                        //    alert(data.content);
+                        //    clearCache();
+                        //}
                     } else {
                         alert(data.content); }
                 },
