@@ -74,9 +74,15 @@
       <Project>{b2387b96-7302-4321-bbe3-a7c50f032939}</Project>
       <Name>WeiXinPF.Application.DomainModules</Name>
     </ProjectReference>
+    <ProjectReference Include="..\WeiXinPF.Infrastructure.DomainDataAccess\WeiXinPF.Infrastructure.DomainDataAccess.csproj">
+      <Project>{64c35e8a-f1c0-44db-aca6-3cc44ee9716b}</Project>
+      <Name>WeiXinPF.Infrastructure.DomainDataAccess</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

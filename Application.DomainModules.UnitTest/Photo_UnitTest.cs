@@ -6,6 +6,9 @@ using WeiXinPF.Application.DomainModules.Photo.DTOS;
 
 namespace Application.DomainModules.UnitTest
 {
+    using WeiXinPF.Infrastructure.DomainDataAccess;
+    using WeiXinPF.Infrastructure.DomainDataAccess.Payment;
+
     [TestClass]
     public class PhotoUnitTest
     {
@@ -54,6 +57,32 @@ namespace Application.DomainModules.UnitTest
             Assert.IsNotNull(dtos);
             Assert.IsTrue(dtos.list.Count > 0);
 
+        }
+
+        [TestMethod]
+        public void InsertIdentifyCode_Verification_ReturnTure()
+        {
+            var icode = new IdentifyingCodeInfo()
+                            {
+                                IdentifyingCodeId = Guid.NewGuid(),
+                                CreateTime = DateTime.Now,
+                                IdentifyingCode = "123",
+                                ModifyTime = DateTime.Now,
+                                ModuleName = "HotelTest",
+                                OrderCode = "H201510221656123456789",
+                                OrderId = "22222",
+                                ProductCode = "大床房",
+                                ProductId = "大床房",
+                                Status = 0
+                            };
+
+            var context = new WXDBContext();
+            var repository = new EFRepository<IdentifyingCodeInfo>(context);
+
+            var result = repository.Add(icode);
+            var Myobject = repository.Get(null);
+
+            Assert.IsTrue(result);
         }
     }
 }
