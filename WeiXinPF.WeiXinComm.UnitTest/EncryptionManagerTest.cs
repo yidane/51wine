@@ -10,8 +10,8 @@ namespace WeiXinPF.WeiXinComm.UnitTest
         public void AESEncryptTest()
         {
             var text = Guid.NewGuid().ToString();
-            var password = "yidane";
-            var vi = "123";
+            var password = "123123123123123123123123123123123";
+            var vi = EncryptionManager.CreateIV();
 
             var en = EncryptionManager.AESEncrypt(text, password, vi);
 
