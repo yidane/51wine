@@ -27,7 +27,7 @@ namespace WeiXinPF.WeiXinComm
 
             var pwdBytes = System.Text.Encoding.UTF8.GetBytes(password);
 
-            var keyBytes = new byte[16];
+            var keyBytes = new byte[24];
 
             var len = pwdBytes.Length;
 
@@ -71,7 +71,7 @@ namespace WeiXinPF.WeiXinComm
 
             var pwdBytes = System.Text.Encoding.UTF8.GetBytes(password);
 
-            var keyBytes = new byte[16];
+            var keyBytes = new byte[24];
 
             var len = pwdBytes.Length;
 
@@ -89,6 +89,34 @@ namespace WeiXinPF.WeiXinComm
             var plainText = transform.TransformFinalBlock(encryptedData, 0, encryptedData.Length);
 
             return Encoding.UTF8.GetString(plainText);
+        }
+
+        /// <summary>
+        /// 生成IV
+        /// </summary>
+        /// <returns></returns>
+        public static string CreateIV()
+        {
+            var rtnIVBuilder = new StringBuilder();
+            var rep = 0;
+            var num2 = DateTime.Now.Ticks + rep;
+            rep++;
+            var random = new Random(((int)(((ulong)num2) & 0xffffffffL)) | ((int)(num2 >> rep)));
+            for (var i = 0; i < 16; i++)
+            {
+                char ch;
+                var num = random.Next();
+                if ((num % 2) == 0)
+                {
+                    ch = (char)(0x30 + ((ushort)(num % 10)));
+                }
+                else
+                {
+                    ch = (char)(0x41 + ((ushort)(num % 0x1a)));
+                }
+                rtnIVBuilder.Append(ch);
+            }
+            return rtnIVBuilder.ToString();
         }
     }
 }
