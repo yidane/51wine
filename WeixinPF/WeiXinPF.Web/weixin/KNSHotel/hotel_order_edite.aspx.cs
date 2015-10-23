@@ -26,7 +26,7 @@ namespace WeiXinPF.Web.weixin.KNSHotel
         public decimal yuanjia = 0;
         public decimal price = 0;
         public decimal jiesheng = 0;
-        public int roomid = 0;
+        public int roomid = 0; 
 
         public decimal totalPrice = 0;
 
@@ -35,6 +35,7 @@ namespace WeiXinPF.Web.weixin.KNSHotel
         public string tel = string.Empty;
 
         public string dateline = string.Empty;
+        public string leaveTime = string.Empty;
 
         public int nums = 0;
 
@@ -75,32 +76,40 @@ namespace WeiXinPF.Web.weixin.KNSHotel
             if(dingdan!=null)
             {
                 createtime = dingdan.orderTime.ToString();
-               
-                    if(dingdan.orderStatus==0)
-                    {
-                        zhuangtai = "<em class=\"no\">待确认</em>";
-                       
-                    }
-                    else if (dingdan.orderStatus == 1)
-                    {
-                        zhuangtai = "<em class=\"ok\">已确认</em>";
-                    }
-                    else if (dingdan.orderStatus == 2)
-                    {
-                        zhuangtai = "<em class=\"fail\">已拒绝</em>";
-                    }
-                    else if (dingdan.orderStatus == 3)
-                    {
-                        zhuangtai = "<em class=\"fail\">已付款</em>";
-                    }
-                    else
-                    {
-                        return;
-                    }
 
-                    this.truename = dingdan.oderName;
+
+                if (dingdan.orderStatus != null)
+                {
+                    var status = StatusManager.OrderStatus.GetStatusDict(dingdan.orderStatus.Value);
+                    zhuangtai = "<em class=\"" + status.CssClass + "\">" + status.StatusName + "</em>";
+                }
+
+                //                    if(dingdan.orderStatus==0)
+                //                    {
+                //                        zhuangtai = "<em class=\"no\">待确认</em>";
+                //                       
+                //                    }
+                //                    else if (dingdan.orderStatus == 1)
+                //                    {
+                //                        zhuangtai = "<em class=\"ok\">已确认</em>";
+                //                    }
+                //                    else if (dingdan.orderStatus == 2)
+                //                    {
+                //                        zhuangtai = "<em class=\"fail\">已拒绝</em>";
+                //                    }
+                //                    else if (dingdan.orderStatus == 3)
+                //                    {
+                //                        zhuangtai = "<em class=\"fail\">已付款</em>";
+                //                    }
+                //                    else
+                //                    {
+                //                        return;
+                //                    }
+
+                this.truename = dingdan.oderName;
                     this.tel = dingdan.tel;
-                    this.dateline = dingdan.arriveTime.Value.ToString("yyyyMMdd");
+                    this.dateline = dingdan.arriveTime.Value.ToString("yyyy/MM/dd");
+                this.leaveTime= dingdan.leaveTime.Value.ToString("yyyy/MM/dd");
                 this.IdentityNumber = dingdan.IdentityNumber;
                 this.OrderNumber = dingdan.OrderNumber;
                     roomtype = dingdan.roomType;
@@ -110,6 +119,8 @@ namespace WeiXinPF.Web.weixin.KNSHotel
                     jiesheng = (yuanjia - price) * Convert.ToDecimal(dingdan.orderNum);
                 this.totalPrice = dingdan.price.Value * dingdan.orderNum.Value;
                     this.info.Value = dingdan.remark;
+
+                
             }
         }
     }

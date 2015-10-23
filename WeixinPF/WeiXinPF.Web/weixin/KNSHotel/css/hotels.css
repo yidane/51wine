@@ -1392,3 +1392,100 @@ text-align: center;
     float: left;
     font-size: 25px;
 }
+
+
+
+.menu_top {
+    color: #fff;
+    /* padding: 0 10px 0 10px; */
+    box-shadow: 0 0 5px #333;
+    border-top: 0 none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+}
+
+.Pay {
+    float: left;
+    left: 0px;
+    width: 33%;
+    text-align: center;
+    background-color: white;
+    border: 0;
+    margin: 0;
+}
+
+.menu-active {
+    background-color: #c32d32;
+    background: -webkit-gradient(linear,left top,left bottom,from(#fe444a),to(#c32d32));
+    border-bottom: 1px solid #700d00;
+    color: white;
+}
+.Refund {
+    float: right;
+    width: 34%;
+    text-align: center;
+    background-color: white;
+    border: 0;
+    margin: 0;
+}
+ 
+
+/*#region gdp */
+.gpd-item {
+    padding: 10px 0;
+}
+
+ .gpd-item-title {
+     height: 32px;
+    line-height: 32px;
+    vertical-align: middle;
+ }
+ .gpd-item-title .detailicon-ticket,.gpd-item-title .gpd-item-title-name {
+     float: left;
+ }
+
+.gp-icons {
+    background-image: url(../../restaurant/images/gp_icons.png);
+    background-size: 320px auto;
+}
+
+.gpd-up-icon {
+    float: right;
+    width: 44px;
+    height: 32px;
+    /* position: absolute; */
+    right: 0;
+    top: -2px;
+    /* top: 0; */
+    background-position: -34px -41px;
+}
+
+.gdp-curr .gpd-up-icon {
+    background-position: -34px 3px;
+}
+
+.gpd-content {
+    display: none;
+    padding: 20px;
+}
+
+.gdp-curr .gpd-content {
+    display: block;
+}
+
+.detailicon-ticket {
+    height: 32px;
+    width: 32px;
+}
+
+
+
+
+            
+
+/*#endregion */

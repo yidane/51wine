@@ -73,7 +73,7 @@ namespace WeiXinPF.Web.weixin.KNSHotel
 
             if (!string.IsNullOrEmpty(openid))
                 return;
-
+#if DEBUG
             //如果不存在code,表示尚未和微信平台OAuth2
             if (string.IsNullOrEmpty(code))
             {
@@ -89,6 +89,8 @@ namespace WeiXinPF.Web.weixin.KNSHotel
                 var result = OAuthApi.GetAccessToken(model.AppId, model.AppSecret, code);
                 Response.Redirect(string.Format("{0}&openid={1}", Request.Url, result.openid));
             }
+#endif
+
         }
 
         private string GetTitle()

@@ -10,6 +10,7 @@
 namespace WeiXinPF.Web.weixin.KNSHotel {
     
     
-    public partial class hotel_detail {
+    public partial class hotel_userOrder
+    {
     }
 }

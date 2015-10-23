@@ -61,34 +61,64 @@ namespace WeiXinPF.Web.weixin.KNSHotel
                 order += "  <ul class=\"round\"> ";
                 for(int i=0;i<dr.Tables[0].Rows.Count;i++)
                 {
-                   
+
+                    var time = DateTime.Parse(dr.Tables[0].Rows[i]["orderTime"].ToString());
+                    var orderTime = string.Format("{0:yyyy/MM/dd HH:mm}", time);
+                    var arriveTime = string.Format("{0:yyyy/MM/dd HH:mm}", DateTime.Parse(dr.Tables[0].Rows[i]["arriveTime"].ToString()));
                     if (dr.Tables[0].Rows[i]["orderStatus"].ToString() == "0")
                     {
-                        order += "<li class=\"title\"><a href=\"hotel_order_edite.aspx?dingdanid=" + dr.Tables[0].Rows[i]["id"].ToString() + "&hotelid=" + hotelid + "&roomid=" + roomid + "&openid=" + openid + "\"><span>" + dr.Tables[0].Rows[i]["createDate"].ToString() + "订单详情";//05月29日 9时39分
+                        order += "<li class=\"title\"><a href=\"hotel_order_edite.aspx?dingdanid="
+                            + dr.Tables[0].Rows[i]["id"].ToString() + "&hotelid=" + hotelid
+                            + "&roomid=" + roomid + "&openid=" + openid + "\"><span>"
+                           + "<b>" + orderTime + "</b>" + "<b style='margin-left:0.5rem'>" + dr.Tables[0].Rows[i]["hotelName"].ToString() + "</b>";//05月29日 9时39分
                     }
                     else
                     {
-                        order += "<li class=\"title\"><a href=\"hotel_order_xianshi.aspx?dingdanid=" + dr.Tables[0].Rows[i]["id"].ToString() + "&hotelid=" + hotelid + "&roomid=" + roomid + "&openid=" + openid + "\"><span>" + dr.Tables[0].Rows[i]["createDate"].ToString() + "订单详情";//05月29日 9时39分
+                        order += "<li class=\"title\"><a href=\"hotel_order_xianshi.aspx?dingdanid="
+                            + dr.Tables[0].Rows[i]["id"].ToString() + "&hotelid=" + hotelid
+                            + "&roomid=" + roomid + "&openid=" + openid + "\"><span>"
+                            + "<b>" + orderTime + "</b>" + "<b style='margin-left:0.5rem'>" + dr.Tables[0].Rows[i]["hotelName"].ToString() + "</b>";//05月29日 9时39分
                     }
 
-                 
-                    if(dr.Tables[0].Rows[i]["orderStatus"].ToString()=="1")
-                    {
-                        order += "<em class=\"ok\">成功</em></span>";  
-                    
-                    }
-                    else if (dr.Tables[0].Rows[i]["orderStatus"].ToString() == "0")
-                    {
-                        order += "<em class=\"no\">未处理</em></span>";  
-                    }
-                    else if (dr.Tables[0].Rows[i]["orderStatus"].ToString() == "2")
-                    {
-                        order += "<em class=\"error\">失败</em></span>";
-                    }
+                    var orderStatus = dr.Tables[0].Rows[i].Field<int>("orderStatus");
+                    var status = StatusManager.OrderStatus.GetStatusDict(orderStatus);
+                    order += "<em class=\"" + status.CssClass + "\">" + status.StatusName + "</em></span>";
+                    //                    if (dr.Tables[0].Rows[i]["orderStatus"].ToString() == "0")
+                    //                    {
+                    //                        order += "<li class=\"title\"><a href=\"hotel_order_edite.aspx?dingdanid=" + dr.Tables[0].Rows[i]["id"].ToString() + "&hotelid=" + hotelid + "&roomid=" + roomid + "&openid=" + openid + "\"><span>" + dr.Tables[0].Rows[i]["createDate"].ToString() + "订单详情";//05月29日 9时39分
+                    //                    }
+                    //                    else
+                    //                    {
+                    //                        order += "<li class=\"title\"><a href=\"hotel_order_xianshi.aspx?dingdanid=" + dr.Tables[0].Rows[i]["id"].ToString() + "&hotelid=" + hotelid + "&roomid=" + roomid + "&openid=" + openid + "\"><span>" + dr.Tables[0].Rows[i]["createDate"].ToString() + "订单详情";//05月29日 9时39分
+                    //                    }
+                    //
+                    //                 
+                    //                    if(dr.Tables[0].Rows[i]["orderStatus"].ToString()=="1")
+                    //                    {
+                    //                        order += "<em class=\"ok\">成功</em></span>";  
+                    //                    
+                    //                    }
+                    //                    else if (dr.Tables[0].Rows[i]["orderStatus"].ToString() == "0")
+                    //                    {
+                    //                        order += "<em class=\"no\">未处理</em></span>";  
+                    //                    }
+                    //                    else if (dr.Tables[0].Rows[i]["orderStatus"].ToString() == "2")
+                    //                    {
+                    //                        order += "<em class=\"error\">失败</em></span>";
+                    //                    }
 
-                    order += "</a></li><li><div class=\"text\"><p>预约商家：" + dr.Tables[0].Rows[i]["hotelName"].ToString() + "</p>";
-                    order += "<p>类型：" + dr.Tables[0].Rows[i]["roomType"].ToString() + "</p><p>预订数量：" + dr.Tables[0].Rows[i]["orderNum"].ToString() + "间</p>";
-                    order += "<p>预定日期：" + dr.Tables[0].Rows[i]["orderTime"].ToString() + "</p></div></li>";
+                    //                    order += "</a></li><li><div class=\"text\"><p>预约商家：" + dr.Tables[0].Rows[i]["hotelName"].ToString() + "</p>";
+                    //                    order += "<p>类型：" + dr.Tables[0].Rows[i]["roomType"].ToString() + "</p><p>预订数量：" + dr.Tables[0].Rows[i]["orderNum"].ToString() + "间</p>";
+                    //                    order += "<p>预定日期：" + dr.Tables[0].Rows[i]["orderTime"].ToString() + "</p></div></li>";
+
+                    order += "</a></li><li><div class=\"text\">";
+                    order += "<p>订单编号：" + dr.Tables[0].Rows[i]["OrderNumber"].ToString() + "</p>";
+                    order += "<p>预约商家：" + dr.Tables[0].Rows[i]["hotelName"].ToString() + "</p>";
+                    order += "<p>类型：" + dr.Tables[0].Rows[i]["roomType"].ToString() + "</p>";
+                    order += "<p>数量：" + dr.Tables[0].Rows[i]["orderNum"].ToString() + "间</p>";
+                    order += "<p>付款：" + dr.Tables[0].Rows[i]["price"].ToString() + "元</p>";
+                    order += "<p>到店日期：" + arriveTime + "</p>";
+                    order += "</div></li>";
                 }
 
                 order += " </ul> ";

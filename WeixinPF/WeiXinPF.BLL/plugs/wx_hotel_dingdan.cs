@@ -157,9 +157,25 @@ namespace WeiXinPF.BLL
         {
             return dal.GetList(pageSize, pageIndex, strWhere, filedOrder, out recordCount);
         }
-        public DataSet GetList(string openid,int hotelid)
+        public DataSet GetList(string openid,int hotelid,string type="all")
         {
-            return dal.GetList(openid,hotelid);
+            DataSet result = null;
+            if (type=="all")
+            {
+                result= dal.GetListWithSql(openid, hotelid, "", " order by orderTime  ");
+            }
+            else if (type== "pay")
+            {
+                
+                result = dal.GetListWithSql(openid, hotelid, " and   orderStatus =3", " order by orderTime  ");
+            }
+            else if (type== "refund")
+            {
+                result = dal.GetListWithSql(openid, hotelid, " and   orderStatus =7", " order by orderTime  ");
+            }
+            
+
+            return result;
         }
 
         public bool Updatehotel(WeiXinPF.Model.wx_hotel_dingdan model)
@@ -177,6 +193,47 @@ namespace WeiXinPF.BLL
             return dal.Update(dingdanid);
         }
 		#endregion  ExtensionMethod
-	}
+
+        /// <summary>
+        /// 获取用户订单
+        /// </summary>
+        /// <param name="openid"></param>
+        /// <param name="wid"></param>
+        /// <param name="type"></param>
+        /// <returns></returns>
+	    public DataSet GetUserOrderList(string openid, int wid, string type)
+	    {
+            DataSet result = null;
+            if (type == "all")
+            {
+                result = dal.GetUserOrderList(openid, wid,"", "");
+            }
+            else if (type == "pay")
+            {
+
+                result = dal.GetUserOrderList(openid, wid, " orderStatus =3", " order by orderTime  ");
+            }
+            else if (type == "refund")
+            {
+                result = dal.GetUserOrderList(openid, wid, " orderStatus =7", " order by orderTime  ");
+            }
+
+
+            return result;
+        }
+
+
+       /// <summary>
+       /// 获取用户保存过的信息
+       /// </summary>
+       /// <param name="openid"></param>
+       /// <returns></returns>
+        public WeiXinPF.Model.wx_hotel_dingdan GetLastUserModel(string openid)
+        {
+
+            return dal.GetLastUserModel(openid);
+        }
+
+    }
 }
 

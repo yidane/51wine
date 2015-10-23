@@ -3,6 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using WeiXinPF.BLL;
+using WeiXinPF.Web.weixin.qiangpiao;
+using WeiXinPF.Web.weixin.WeChatPay;
+using WeiXinPF.WeiXinComm;
 
 namespace WeiXinPF.Web.weixin.KNSHotel
 {
@@ -75,7 +79,20 @@ namespace WeiXinPF.Web.weixin.KNSHotel
                     dingdan.arriveTime = Convert.ToDateTime(MyCommFun.QueryString("dateline"));
                 }
 
-               
+                if (Convert.ToDateTime(MyCommFun.QueryString("leaveTime")) < dingdan.arriveTime)
+                {
+                    jsonDict.Add("ret", "faile");
+                    jsonDict.Add("content", "离店时间不能小于入住时间！");
+                    context.Response.Write(MyCommFun.getJsonStr(jsonDict));
+                    return;
+                }
+
+                if (MyCommFun.QueryString("leaveTime") != "")
+                {
+                    dingdan.leaveTime = Convert.ToDateTime(MyCommFun.QueryString("leaveTime"));
+                }
+
+
 
                 dingdan.orderNum = MyCommFun.RequestInt("nums");
                 dingdan.price = Convert.ToDecimal( MyCommFun.QueryString("xianjianum"));
@@ -92,12 +109,13 @@ namespace WeiXinPF.Web.weixin.KNSHotel
 
             if (_action == "dingdandelete")
             {
-                int ddid = MyCommFun.RequestInt("dingdanidnum");
-                dingdanbll.Update(ddid);
-                jsonDict.Add("ret", "ok");
-                jsonDict.Add("content", "删除成功！");
-                context.Response.Write(MyCommFun.getJsonStr(jsonDict));
-                return;
+                //                int ddid = MyCommFun.RequestInt("dingdanidnum");
+                //                dingdanbll.Update(ddid);
+                //                jsonDict.Add("ret", "ok");
+                //                jsonDict.Add("content", "删除成功！");
+                //                context.Response.Write(MyCommFun.getJsonStr(jsonDict));
+                UpdateOrder(dingdanbll, jsonDict, context, StatusManager.OrderStatus.Cancelled.StatusId, "订单取消成功！");
+                 
             }
             if (_action == "paymentSuccess")
             {
@@ -109,7 +127,87 @@ namespace WeiXinPF.Web.weixin.KNSHotel
                 return;
             }
 
+
+            if (_action == "dingdanPayed")
+            {
+                UpdateOrder(dingdanbll, jsonDict, context, StatusManager.OrderStatus.Payed.StatusId, "支付成功！");
+            }
+
+            if (_action == "dingdanPaying")
+            {
+                GetPayUrl(dingdanbll, context);
+            }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dingdanbll"></param>
+        /// <param name="jsonDict"></param>
+        /// <param name="context"></param>
+        private void GetPayUrl(wx_hotel_dingdan dingdanbll, HttpContext context)
+        {
+            int ddid = MyCommFun.RequestInt("dingdanidnum");
+            if (ddid>0)
+            {
+                var dingdan = dingdanbll.GetModel(ddid);
+                if (dingdan!=null)
+                {
+                    int wid = 0;
+                    if (dingdan.hotelid != null)
+                    {
+                        var hotelInfo = new BLL.wx_hotels_info().GetModel(dingdan.hotelid.Value);
+                        if (hotelInfo.wid != null) wid = hotelInfo.wid.Value;
+                    }
+
+                    var entity = new UnifiedOrderEntity
+                    {
+                        wid = wid,
+                        total_fee = dingdan.price == null ? 0 : (int)dingdan.price,
+                        out_trade_no = dingdan.OrderNumber,
+                        openid = dingdan.openid,
+                        body = string.Format("{0}间{1}",dingdan.orderNum,dingdan.roomType),
+                        attach = string.Empty
+                    };
+
+                    entity.Extra.Add("dingdanidnum", ddid.ToString()); 
+                    entity.Extra.Add("openid", dingdan.openid); 
+                    entity.Extra.Add("hotelid", dingdan. hotelid.ToString()); 
+                    entity.Extra.Add("roomid", dingdan. roomid.ToString());  
+
+                    var ticket = EncryptionManager.CreateIV();
+                    var text = JSONHelper.Serialize(entity);
+                    var payData = EncryptionManager.AESEncrypt(text, ticket);
+
+                    context.Response.Write(AjaxResult.Success(PayHelper.GetPayUrl(payData, ticket)));
+                }
+               
+            }
+            else
+            {
+                context.Response.Write(AjaxResult.Error("获取订单失败！"));
+            }
+            
+        }
+
+        /// <summary>
+        /// 修改状态
+        /// </summary>
+        /// <param name="dingdanbll"></param>
+        /// <param name="jsonDict"></param>
+        /// <param name="context"></param>
+        private void UpdateOrder(wx_hotel_dingdan dingdanbll, Dictionary<string, string> jsonDict,
+            HttpContext context, int statusId, string msg)
+        {
+            int ddid = MyCommFun.RequestInt("dingdanidnum");
+            dingdanbll.Update(ddid, statusId.ToString());
+            jsonDict.Add("ret", "ok");
+            jsonDict.Add("content", msg);
+            context.Response.Write(MyCommFun.getJsonStr(jsonDict));
+            return;
+        }
+
+
 
         public bool IsReusable
         {
