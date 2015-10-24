@@ -255,15 +255,16 @@ namespace WeiXinPF.Web.weixin.KNSHotel
         /// </summary>
         /// <param name="orderStatus"></param>
         public void ShowBtnStatus(int orderStatus)
-        {
+        { 
             switch (orderStatus)
             {
                 case 0:
+               
                 case 1:
-                    BtnShowStatus = 1;
+                    BtnShowStatus = 2;
                     break;
                 case 2:
-                    BtnShowStatus = 2;
+                    BtnShowStatus = 1;
                     break;
                 default:
                     BtnShowStatus = 0;

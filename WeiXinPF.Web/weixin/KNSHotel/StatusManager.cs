@@ -21,12 +21,12 @@ namespace WeiXinPF.Web.weixin.KNSHotel
             /// <summary>
             /// 已拒绝
             /// </summary>
-            public static StatusDict Refused = new StatusDict() { StatusId = 1, StatusName = "已拒绝", CssClass = "error" };
+            public static StatusDict Refused = new StatusDict() { StatusId = 2, StatusName = "已拒绝", CssClass = "error" };
 
             /// <summary>
             /// 已接收
             /// </summary>
-            public static StatusDict Accepted = new StatusDict() { StatusId = 2, StatusName = "已接受", CssClass = "ok" };
+            public static StatusDict Accepted = new StatusDict() { StatusId = 1, StatusName = "已接受", CssClass = "ok" };
 
             /// <summary>
             /// 已支付
