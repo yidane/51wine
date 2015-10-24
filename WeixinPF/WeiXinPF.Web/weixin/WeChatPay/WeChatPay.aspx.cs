@@ -51,6 +51,7 @@ namespace WeiXinPF.Web.weixin.WeChatPay
                     out_trade_no = payDataModel.out_trade_no;
                     total_fee = payDataModel.total_fee;
                     openid = payDataModel.openid;
+                    OrderID = payDataModel.OrderId;
                 }
             }
             else
