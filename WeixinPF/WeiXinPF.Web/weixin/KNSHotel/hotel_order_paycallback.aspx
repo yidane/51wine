@@ -9,39 +9,39 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="format-detection" content="telephone=no">
-    <script src="../../scripts/jquery/jquery-2.1.0.min.js"></script>
-    <script src="js/paycallback.js"></script>
+<%--    <script src="../../scripts/jquery/jquery-2.1.0.min.js"></script>--%>
+<%--    <script src="js/paycallback.js"></script>--%>
 </head>
 <body>
     <form id="form1" runat="server">
         <div id="paycallback">
-            调用支付成功！
+            
         </div>
 
-        <script>
-            $(document).ready(function () {
-                var status = getQueryString("status");
-                switch (status) {
-                    case 'success':
-                        wechatPayAfterSuccess();
-                        break;
-
-                    case 'fail':
-                        wechatPayAfterFail();
-                        break;
-
-                    case 'cancel':
-                        wechatPayAfterCancel();
-                        break;
-
-                    case 'wechatPayAfterComplete':
-                        wechatPayAfterComplete();
-                        break;
-
-                    default:
-                }
-            });
-        </script>
+<%--        <script>--%>
+<%--            $(document).ready(function () {--%>
+<%--                var status = getQueryString("status");--%>
+<%--                switch (status) {--%>
+<%--                    case 'success':--%>
+<%--                        wechatPayAfterSuccess();--%>
+<%--                        break;--%>
+<%----%>
+<%--                    case 'fail':--%>
+<%--                        wechatPayAfterFail();--%>
+<%--                        break;--%>
+<%----%>
+<%--                    case 'cancel':--%>
+<%--                        wechatPayAfterCancel();--%>
+<%--                        break;--%>
+<%----%>
+<%--                    case 'wechatPayAfterComplete':--%>
+<%--                        wechatPayAfterComplete();--%>
+<%--                        break;--%>
+<%----%>
+<%--                    default:--%>
+<%--                }--%>
+<%--            });--%>
+<%--        </script>--%>
     </form>
 </body>
 </html>

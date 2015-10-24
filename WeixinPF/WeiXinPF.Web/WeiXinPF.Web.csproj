@@ -7058,7 +7058,6 @@
     <Compile Include="weixin\KNSHotel\hotel_userOrder.aspx.designer.cs">
       <DependentUpon>hotel_userOrder.aspx</DependentUpon>
     </Compile>
-    <Compile Include="weixin\KNSHotel\StatusManager.cs" />
     <Compile Include="weixin\KNSHotel\hotel_detail.aspx.cs">
       <DependentUpon>hotel_detail.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

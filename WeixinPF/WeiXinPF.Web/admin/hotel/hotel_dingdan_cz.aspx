@@ -101,7 +101,7 @@
             <dl>
                 <dt>入住/离店时间:</dt>
                 <dd>
-                    <%=dingdan.arriveTime.Value.ToShortDateString() %>~<%=dingdan.leaveTime.Value.ToShortDateString() %>
+                    <%=arriveTime %>~<%=leaveTime %>
                 </dd>
             </dl>
             <dl>

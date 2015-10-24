@@ -17,6 +17,8 @@ namespace WeiXinPF.Web.admin.hotel
         public string openid = "";
         public string beizhu = "";
         public int hotelid = 0;
+        public string arriveTime = string.Empty;
+        public string leaveTime = string.Empty;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -31,6 +33,8 @@ namespace WeiXinPF.Web.admin.hotel
                     ordername = dingdan.oderName;
                     openid = dingdan.openid;
                     beizhu = dingdan.remark;
+                    arriveTime = string.Format("{0:yyyy/MM/dd HH:mm}", dingdan.arriveTime); 
+                    leaveTime = string.Format("{0:yyyy/MM/dd HH:mm}", dingdan.leaveTime);
                 }
                 else {
                     dingdan = new Model.wx_hotel_dingdan();

@@ -206,16 +206,16 @@ namespace WeiXinPF.BLL
             DataSet result = null;
             if (type == "all")
             {
-                result = dal.GetUserOrderList(openid, wid,"", "");
+                result = dal.GetUserOrderList(openid, wid,"", " order by orderTime  desc ");
             }
             else if (type == "pay")
             {
 
-                result = dal.GetUserOrderList(openid, wid, " orderStatus =3", " order by orderTime  ");
+                result = dal.GetUserOrderList(openid, wid, " orderStatus =3", " order by orderTime desc ");
             }
             else if (type == "refund")
             {
-                result = dal.GetUserOrderList(openid, wid, " orderStatus =7", " order by orderTime  ");
+                result = dal.GetUserOrderList(openid, wid, " orderStatus =7", " order by orderTime  desc ");
             }
 
 
