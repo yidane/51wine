@@ -1,13 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
-using System.Reflection;
 using System.Runtime.Serialization;
-using System.Security.Cryptography;
-using System.Text;
 using System.Web;
 using System.Web.Services;
-using System.Xml;
 using OneGulp.WeChat.MP;
 using OneGulp.WeChat.MP.AdvancedAPIs;
 using OneGulp.WeChat.MP.Helpers;
@@ -93,8 +88,6 @@ namespace WeiXinPF.Web.weixin.WeChatPay
         /// 统一下单
         /// </summary>
         /// <param name="request"></param>
-        /// <param name="wid"></param>
-        /// <param name="orderId"></param>
         [WebMethod]
         public void UnifiedOrder(string request)
         {
@@ -109,7 +102,6 @@ namespace WeiXinPF.Web.weixin.WeChatPay
                 var packageReqHandler = new RequestHandler(null);
                 //初始化
                 packageReqHandler.Init();
-                //packageReqHandler.SetKey(""/*TenPayV3Info.Key*/);
 
                 var timeStamp = TenPayV3Util.GetTimestamp();
                 var nonceStr = TenPayV3Util.GetNoncestr();
@@ -131,37 +123,40 @@ namespace WeiXinPF.Web.weixin.WeChatPay
                 packageReqHandler.SetParameter("trade_type", TenPayV3Type.JSAPI.ToString());//交易类型
                 packageReqHandler.SetParameter("openid", requestModel.openid);	                    //用户的openId
 
-                string sign = packageReqHandler.CreateMd5Sign("key", wxPayInfo.paykey);
+                var sign = packageReqHandler.CreateMd5Sign("key", wxPayInfo.paykey);
                 packageReqHandler.SetParameter("sign", sign);	                    //签名
 
-                string data = packageReqHandler.ParseXML();
+                var data = packageReqHandler.ParseXML();
 
+                //同意下单，获取到预付订单号
                 var unifiedOrderResult = TenPayV3.Unifiedorder(data);
                 var rtnUnifiedOrderResult = new UnifiedOrderResponse(unifiedOrderResult);
 
                 //下单成功，保存下单对象
                 if (rtnUnifiedOrderResult.IsSuccess)
                 {
-                    var paymentInfo = new PaymentInfo();
-                    paymentInfo.PaymentId = Guid.NewGuid();
-                    paymentInfo.Wid = requestModel.wid;
-                    paymentInfo.CreateTime = DateTime.Now;
-                    paymentInfo.Description = "无";
-                    paymentInfo.ShopName = requestModel.body;
-                    paymentInfo.ModuleName = "餐饮点菜";
-                    paymentInfo.OrderCode = requestModel.out_trade_no;
-                    paymentInfo.OrderId = requestModel.OrderId;
-                    paymentInfo.Pid = requestModel.openid;
-                    paymentInfo.PayAmount = requestModel.total_fee;
-                    paymentInfo.WXOrderCode = rtnUnifiedOrderResult.prepay_id;
-                    paymentInfo.ModifyTime = DateTime.Now;
-                    paymentInfo.Status = 0;
+                    var paymentInfo = new PaymentInfo
+                        {
+                            PaymentId = Guid.NewGuid(),
+                            Wid = requestModel.wid,
+                            CreateTime = DateTime.Now,
+                            Description = "无",
+                            ShopName = requestModel.body,
+                            ModuleName = "餐饮点菜",
+                            OrderCode = requestModel.out_trade_no,
+                            OrderId = requestModel.OrderId,
+                            Pid = requestModel.openid,
+                            PayAmount = requestModel.total_fee,
+                            WXOrderCode = rtnUnifiedOrderResult.prepay_id,
+                            ModifyTime = DateTime.Now,
+                            Status = 0
+                        };
 
                     paymentInfo.Add();
-
                 }
 
-                var jsApiParameters = rtnUnifiedOrderResult.GetJsApiParameters("4A5E7B87F3324A6DA22E55FDC12150B6");
+                //var jsApiParameters = rtnUnifiedOrderResult.GetJsApiParameters("4A5E7B87F3324A6DA22E55FDC12150B6");
+                var jsApiParameters = rtnUnifiedOrderResult.GetJsApiParameters(wxPayInfo.paykey);
 
                 HttpContext.Current.Response.Write(AjaxResult.Success(jsApiParameters));
             }
@@ -178,20 +173,78 @@ namespace WeiXinPF.Web.weixin.WeChatPay
     [DataContract]
     public class UnifiedOrderEntity
     {
+        /// <summary>
+        /// 微信号ID
+        /// </summary>
         [DataMember]
         public int wid { get; set; }
+
+        /// <summary>
+        /// 商品信息
+        /// </summary>
         [DataMember]
         public string body { get; set; }
+
+        /// <summary>
+        /// 附加数据
+        /// </summary>
         [DataMember]
         public string attach { get; set; }
+
+        /// <summary>
+        /// 商户订单号
+        /// </summary>
         [DataMember]
         public string out_trade_no { get; set; }
+
+        /// <summary>
+        /// 支付费用，单位：分
+        /// </summary>
         [DataMember]
         public int total_fee { get; set; }
+
+        /// <summary>
+        /// 支付的OpenID
+        /// </summary>
         [DataMember]
         public string openid { get; set; }
+
+        /// <summary>
+        /// 业务系统订单号
+        /// </summary>
         [DataMember]
         public string OrderId { get; set; }
+
+        /// <summary>
+        /// 支付前
+        /// </summary>
+        [DataMember]
+        public string BeforePay { get; set; }
+
+        /// <summary>
+        /// 支付成功
+        /// </summary>
+        [DataMember]
+        public string PaySuccess { get; set; }
+
+        /// <summary>
+        /// 支付失败
+        /// </summary>
+        [DataMember]
+        public string PayFail { get; set; }
+
+        /// <summary>
+        /// 支付取消
+        /// </summary>
+        [DataMember]
+        public string PayCancel { get; set; }
+
+        /// <summary>
+        /// 支付完成
+        /// </summary>
+        [DataMember]
+        public string PayComplete { get; set; }
+
         /// <summary>
         /// 额外参数
         /// </summary>
