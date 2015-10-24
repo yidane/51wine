@@ -127,7 +127,7 @@ namespace WeiXinPF.Web.weixin.restaurant
                         <p class='text-uppercase'>验证码：
                         <strong id='itemkey' class='text-danger item-pullleft'>{0}</strong>
                         <strong id='itemStatus' class='text-danger pull-right item-pullleft'>{1}</strong>
-                      </p></div>", pair.Value[0].identifyingcode, StatusManager.DishStatus.GetStatusDict(pair.Value[0].status));
+                      </p></div>", pair.Value[0].identifyingcode, StatusManager.DishStatus.GetStatusDict(pair.Value[0].status).StatusName);
                     builder.Append("</div>");
 
                     builder.Append("</section>");
