@@ -18,7 +18,7 @@
                 orderId: "<%=OrderID%>",
                 wid: parseInt(<%=wid%>),
                 body: "<%=body%>",
-                attach: "<%=attach%>",
+                payModuleID: "<%=payModuleID%>",
                 out_trade_no: "<%=out_trade_no%>",
                 total_fee: parseInt(<%=total_fee%>),
                 openid: "<%=openid%>"

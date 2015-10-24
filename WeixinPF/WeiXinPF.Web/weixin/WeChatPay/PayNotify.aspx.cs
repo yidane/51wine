@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using OneGulp.WeChat.MP.TenPayLibV3;
+using WeiXinPF.Web.weixin.WeChatPay.Notify;
 
 namespace WeiXinPF.Web.weixin.WeChatPay
 {
@@ -19,6 +20,7 @@ namespace WeiXinPF.Web.weixin.WeChatPay
                 if (!string.Equals(Request.HttpMethod, "POST", StringComparison.CurrentCultureIgnoreCase))
                     throw new Exception("Error HttpMethod");
 
+                var outMessage = string.Empty;
                 var s = Request.InputStream;
                 var count = 0;
                 var buffer = new byte[1024];
@@ -36,16 +38,33 @@ namespace WeiXinPF.Web.weixin.WeChatPay
                 var paymentNotify = new PaymentNotify(builder.ToString());
 
                 bool isSucceed = false;
+                //检测订单有效性
                 var response = paymentNotify.Report(out isSucceed);
                 if (isSucceed)
                 {
+
                     WriteLog("report Success");
                     //后台反馈微信信息
-                    //var wxPay = new WXPaymentOperate();
-                    //wxPay.GetPaymentCompleteInfomation(paymentNotify);
+                    var payModuleId = 0;
+                    if (int.TryParse(paymentNotify.attach, out payModuleId))
+                    {
+                        var message = string.Empty;
+                        if (PayNotifyManager.PayNotify((PayModuleEnum)payModuleId, paymentNotify, out message))
+                        {
+                            outMessage = PaymentNotify.ReportSuccess();
+                        }
+                        else
+                        {
+                            outMessage = PaymentNotify.ReportError(message);
+                        }
+                    }
+                    else
+                    {
+                        outMessage = PaymentNotify.ReportError("异常业务支付ID");
+                    }
                 }
 
-                ReturnResponse(response);
+                ReturnResponse(outMessage);
             }
             catch (Exception exception)
             {

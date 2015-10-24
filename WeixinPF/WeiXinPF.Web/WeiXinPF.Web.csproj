@@ -7410,10 +7410,6 @@
     <Compile Include="weixin\restaurant\index.aspx.designer.cs">
       <DependentUpon>index.aspx</DependentUpon>
     </Compile>
-    <Compile Include="weixin\restaurant\PayService.asmx.cs">
-      <DependentUpon>PayService.asmx</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="weixin\restaurant\Restaurant.Master.cs">
       <DependentUpon>Restaurant.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -7647,6 +7643,10 @@
     <Compile Include="weixin\WeChatPay\MyOrderCenter.aspx.designer.cs">
       <DependentUpon>MyOrderCenter.aspx</DependentUpon>
     </Compile>
+    <Compile Include="weixin\WeChatPay\Notify\HotelPayNotify.cs" />
+    <Compile Include="weixin\WeChatPay\Notify\IPayNotify.cs" />
+    <Compile Include="weixin\WeChatPay\Notify\PayNotifyManager.cs" />
+    <Compile Include="weixin\WeChatPay\Notify\RestaurantPayNotify.cs" />
     <Compile Include="weixin\WeChatPay\PayNotify.aspx.cs">
       <DependentUpon>PayNotify.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -9651,7 +9651,6 @@
     <Content Include="weixin\restaurant\js\jquery.min.js" />
     <Content Include="weixin\restaurant\js\shopCart.js" />
     <Content Include="weixin\restaurant\js\zepto.min.js" />
-    <Content Include="weixin\restaurant\PayService.asmx" />
     <Content Include="weixin\restaurant\zhaoshang_xiangq.aspx" />
     <Content Include="weixin\scenic\css\index.css" />
     <Content Include="weixin\scenic\css\swiper.min.css" />

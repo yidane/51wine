@@ -127,7 +127,7 @@ namespace WeiXinPF.Web.weixin.restaurant
                             out_trade_no = order.orderNumber,
                             openid = openid,
                             body = "买了东西",
-                            attach = string.Empty
+                            PayModuleID = (int)PayModuleEnum.Restaurant
                         };
 
                     entity.Extra.Add("content", orderProcessResult.Message);
@@ -200,7 +200,8 @@ namespace WeiXinPF.Web.weixin.restaurant
                 return memberResult;
             }
 
-            return this.SaveOrder();
+            string goodsDetail = string.Empty;
+            return this.SaveOrder(out goodsDetail);
         }
 
         /// <summary>
@@ -312,11 +313,11 @@ namespace WeiXinPF.Web.weixin.restaurant
         /// <returns>
         /// The <see cref="ProcessResult"/>.
         /// </returns>
-        private ProcessResult SaveOrder()
+        private ProcessResult SaveOrder(out string goodsDetail)
         {
             var bll = new BLL.wx_diancai_dingdan_caiping();
             Model.wx_diancai_dingdan_manage order = null;
-
+            goodsDetail = string.Empty;
             try
             {
                 using (var scope = new TransactionScope())

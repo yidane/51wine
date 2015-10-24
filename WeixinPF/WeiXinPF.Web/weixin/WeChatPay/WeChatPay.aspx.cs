@@ -18,7 +18,7 @@ namespace WeiXinPF.Web.weixin.WeChatPay
         //支付参数
         public int wid = 0;
         public string body = string.Empty;
-        public string attach = string.Empty;
+        public string payModuleID = string.Empty;
         public string out_trade_no = string.Empty;
         public int total_fee = 0;
         public string openid = string.Empty;
@@ -47,7 +47,7 @@ namespace WeiXinPF.Web.weixin.WeChatPay
                     //赋值支付参数
                     wid = payDataModel.wid;
                     body = payDataModel.body;
-                    attach = payDataModel.attach;
+                    payModuleID = payDataModel.PayModuleID.ToString();
                     out_trade_no = payDataModel.out_trade_no;
                     total_fee = payDataModel.total_fee;
                     openid = payDataModel.openid;
