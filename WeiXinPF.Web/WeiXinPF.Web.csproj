@@ -10258,7 +10258,6 @@
     <Content Include="css\font-awesome\scss\_stacked.scss" />
     <Content Include="css\font-awesome\scss\_variables.scss" />
     <Content Include="App_Browsers\ie.browser" />
-    <Content Include="Certificaters\wxdd6127bdb5e7611c\apiclient_cert.p12" />
     <None Include="Properties\PublishProfiles\jin.pubxml" />
     <None Include="Properties\PublishProfiles\jxiaox.pubxml" />
     <Content Include="weixin\yuyue\uploadhead.ashx" />

@@ -91,7 +91,7 @@
                 </td>
             </tr>
             <tr>
-                <td align="right">订单状态</td>
+                <td align="right">退单状态</td>
                 <td>
                     <%--<div class="rule-single-select">--%>
                     <asp:DropDownList runat="server" ID="dboRefundStatus" CssClass="select" Width="293">
@@ -143,7 +143,7 @@
                             <th>预定时间</th>
                             <th>退单商品</th>
                             <th>退款总额</th>
-                            <th>订单状态</th>
+                            <th>退单状态</th>
                             <th>操作</th>
                         </tr>
                     </thead>
