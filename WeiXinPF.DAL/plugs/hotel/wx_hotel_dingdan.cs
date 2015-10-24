@@ -481,7 +481,7 @@ namespace WeiXinPF.DAL
             StringBuilder strSql = new StringBuilder();
             strSql.Append("update wx_hotel_dingdan set ");
             strSql.Append("oderName=@oderName,");
-            strSql.Append("orderNumber=@orderNumber,");
+//            strSql.Append("orderNumber=@orderNumber,");
             strSql.Append("wxOrderNumber=@wxOrderNumber,");
             strSql.Append("identityNumber=@identityNumber,");
             strSql.Append("tel=@tel,");
@@ -500,7 +500,7 @@ namespace WeiXinPF.DAL
 					new SqlParameter("@yuanjia", SqlDbType.Float,8),
 					new SqlParameter("@remark", SqlDbType.NVarChar,100),
 					new SqlParameter("@id", SqlDbType.Int,4),
-                    new SqlParameter("@orderNumber", SqlDbType.NVarChar,50),
+//                    new SqlParameter("@orderNumber", SqlDbType.NVarChar,50),
                     new SqlParameter("@wxOrderNumber", SqlDbType.NVarChar,50),
                     new SqlParameter("@identityNumber", SqlDbType.NVarChar,50)};
             parameters[0].Value = model.oderName;
@@ -511,7 +511,7 @@ namespace WeiXinPF.DAL
             parameters[5].Value = model.yuanjia;
             parameters[6].Value = model.remark;
             parameters[7].Value = model.id;
-            parameters[8].Value = model.OrderNumber;
+//            parameters[8].Value = model.OrderNumber;
             parameters[9].Value = model.WXOrderNumber;
             parameters[10].Value = model.IdentityNumber;
 
