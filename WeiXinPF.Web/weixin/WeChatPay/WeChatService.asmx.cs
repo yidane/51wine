@@ -111,7 +111,7 @@ namespace WeiXinPF.Web.weixin.WeChatPay
                 packageReqHandler.SetParameter("mch_id", wxPayInfo.mch_id);		  //商户号
                 packageReqHandler.SetParameter("nonce_str", nonceStr);                    //随机字符串
                 packageReqHandler.SetParameter("body", requestModel.body);  //商品描述
-                packageReqHandler.SetParameter("attach", requestModel.attach);
+                packageReqHandler.SetParameter("attach", requestModel.PayModuleID.ToString()); //向微信传递系统支付模块ID
                 packageReqHandler.SetParameter("out_trade_no", requestModel.out_trade_no);		//商家订单号
 
                 //debug模式下，只需要付款一分钱
@@ -142,7 +142,7 @@ namespace WeiXinPF.Web.weixin.WeChatPay
                             CreateTime = DateTime.Now,
                             Description = "无",
                             ShopName = requestModel.body,
-                            ModuleName = "餐饮点菜",
+                            ModuleName = ((PayModuleEnum)requestModel.PayModuleID).ToString(),
                             OrderCode = requestModel.out_trade_no,
                             OrderId = requestModel.OrderId,
                             Pid = requestModel.openid,
@@ -180,16 +180,22 @@ namespace WeiXinPF.Web.weixin.WeChatPay
         public int wid { get; set; }
 
         /// <summary>
+        /// 支付模块ID
+        /// </summary>
+        [DataMember]
+        public int PayModuleID { get; set; }
+
+        /// <summary>
+        /// 业务系统订单号
+        /// </summary>
+        [DataMember]
+        public string OrderId { get; set; }
+
+        /// <summary>
         /// 商品信息
         /// </summary>
         [DataMember]
         public string body { get; set; }
-
-        /// <summary>
-        /// 附加数据
-        /// </summary>
-        [DataMember]
-        public string attach { get; set; }
 
         /// <summary>
         /// 商户订单号
@@ -208,12 +214,6 @@ namespace WeiXinPF.Web.weixin.WeChatPay
         /// </summary>
         [DataMember]
         public string openid { get; set; }
-
-        /// <summary>
-        /// 业务系统订单号
-        /// </summary>
-        [DataMember]
-        public string OrderId { get; set; }
 
         /// <summary>
         /// 支付前
@@ -250,6 +250,19 @@ namespace WeiXinPF.Web.weixin.WeChatPay
         /// </summary>
         [DataMember]
         public Dictionary<string, string> Extra = new Dictionary<string, string>();
+    }
+
+    public enum PayModuleEnum
+    {
+        /// <summary>
+        /// 餐饮
+        /// </summary>
+        Restaurant = 0,
+
+        /// <summary>
+        /// 酒店
+        /// </summary>
+        Hotel = 1
     }
 
     #region 注释掉

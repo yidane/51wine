@@ -29,41 +29,41 @@ namespace WeiXinPF.Web.weixin.KNSHotel
             string openid = MyCommFun.QueryString("openid");
             string oderName = MyCommFun.QueryString("oderName");
             string tel = MyCommFun.QueryString("tel");
-         
+
 
             if (_action == "dingdan")
             {
-                dingdan.hotelid = Convert.ToInt32( hotelid);
-                dingdan.roomid = Convert.ToInt32( roomid);
+                dingdan.hotelid = Convert.ToInt32(hotelid);
+                dingdan.roomid = Convert.ToInt32(roomid);
                 dingdan.openid = openid;
                 dingdan.oderName = oderName;
                 dingdan.tel = tel;
                 dingdan.orderStatus = 0;
-                dingdan.IdentityNumber = MyCommFun.QueryString("identityNumber");                
+                dingdan.IdentityNumber = MyCommFun.QueryString("identityNumber");
                 dingdan.arriveTime = Convert.ToDateTime(MyCommFun.QueryString("arriveTime"));
                 dingdan.leaveTime = Convert.ToDateTime(MyCommFun.QueryString("leaveTime"));
                 dingdan.roomType = MyCommFun.QueryString("roomType");
                 dingdan.orderTime = DateTime.Now;
                 dingdan.orderNum = MyCommFun.RequestInt("orderNum");
                 dingdan.isDelete = 0;
-                dingdan.price = MyCommFun.Str2Decimal( MyCommFun.QueryString("price"));
-                dingdan.yuanjia =MyCommFun.Str2Decimal(MyCommFun.QueryString("yuanjia"));
+                dingdan.price = MyCommFun.Str2Decimal(MyCommFun.QueryString("price"));
+                dingdan.yuanjia = MyCommFun.Str2Decimal(MyCommFun.QueryString("yuanjia"));
                 dingdan.remark = MyCommFun.QueryString("remark");
                 dingdan.OrderNumber = "H" + DateTime.Now.ToString("yyyyMMddHHmmssffff") + Utils.Number(5);
                 dingdanbll.Add(dingdan);
 
-               jsonDict.Add("ret", "ok");
-               jsonDict.Add("content", "提交成功！");
-               context.Response.Write(MyCommFun.getJsonStr(jsonDict));
-               return;
+                jsonDict.Add("ret", "ok");
+                jsonDict.Add("content", "提交成功！");
+                context.Response.Write(MyCommFun.getJsonStr(jsonDict));
+                return;
 
-             }
+            }
 
-            if (_action =="dingdanedite")
+            if (_action == "dingdanedite")
             {
 
                 dingdan.id = MyCommFun.RequestInt("dingdanidnum");
-                dingdan.oderName=MyCommFun.QueryString("truename");
+                dingdan.oderName = MyCommFun.QueryString("truename");
                 dingdan.tel = MyCommFun.QueryString("tel");
 
                 if (Convert.ToDateTime(MyCommFun.QueryString("dateline")) < DateTime.Now.AddDays(-1))
@@ -74,7 +74,7 @@ namespace WeiXinPF.Web.weixin.KNSHotel
                     return;
                 }
 
-                if (MyCommFun.QueryString("dateline")!="")
+                if (MyCommFun.QueryString("dateline") != "")
                 {
                     dingdan.arriveTime = Convert.ToDateTime(MyCommFun.QueryString("dateline"));
                 }
@@ -95,8 +95,8 @@ namespace WeiXinPF.Web.weixin.KNSHotel
 
 
                 dingdan.orderNum = MyCommFun.RequestInt("nums");
-                dingdan.price = Convert.ToDecimal( MyCommFun.QueryString("xianjianum"));
-                dingdan.yuanjia = Convert.ToDecimal( MyCommFun.QueryString("yuanjianum"));
+                dingdan.price = Convert.ToDecimal(MyCommFun.QueryString("xianjianum"));
+                dingdan.yuanjia = Convert.ToDecimal(MyCommFun.QueryString("yuanjianum"));
                 dingdan.remark = MyCommFun.QueryString("info");
                 dingdan.IdentityNumber = MyCommFun.QueryString("identityNumber");
                 dingdanbll.Updatehotel(dingdan);
@@ -115,7 +115,7 @@ namespace WeiXinPF.Web.weixin.KNSHotel
                 //                jsonDict.Add("content", "删除成功！");
                 //                context.Response.Write(MyCommFun.getJsonStr(jsonDict));
                 UpdateOrder(dingdanbll, jsonDict, context, StatusManager.OrderStatus.Cancelled.StatusId, "订单取消成功！");
-                 
+
             }
             if (_action == "paymentSuccess")
             {
@@ -148,10 +148,10 @@ namespace WeiXinPF.Web.weixin.KNSHotel
         private void GetPayUrl(wx_hotel_dingdan dingdanbll, HttpContext context)
         {
             int ddid = MyCommFun.RequestInt("dingdanidnum");
-            if (ddid>0)
+            if (ddid > 0)
             {
                 var dingdan = dingdanbll.GetModel(ddid);
-                if (dingdan!=null)
+                if (dingdan != null)
                 {
                     int wid = 0;
                     if (dingdan.hotelid != null)
@@ -166,14 +166,14 @@ namespace WeiXinPF.Web.weixin.KNSHotel
                         total_fee = dingdan.price == null ? 0 : (int)dingdan.price,
                         out_trade_no = dingdan.OrderNumber,
                         openid = dingdan.openid,
-                        body = string.Format("{0}间{1}",dingdan.orderNum,dingdan.roomType),
-                        attach = string.Empty
+                        body = string.Format("{0}间{1}", dingdan.orderNum, dingdan.roomType),
+                        PayModuleID = (int)PayModuleEnum.Hotel
                     };
 
-                    entity.Extra.Add("dingdanidnum", ddid.ToString()); 
-                    entity.Extra.Add("openid", dingdan.openid); 
-                    entity.Extra.Add("hotelid", dingdan. hotelid.ToString()); 
-                    entity.Extra.Add("roomid", dingdan. roomid.ToString());  
+                    entity.Extra.Add("dingdanidnum", ddid.ToString());
+                    entity.Extra.Add("openid", dingdan.openid);
+                    entity.Extra.Add("hotelid", dingdan.hotelid.ToString());
+                    entity.Extra.Add("roomid", dingdan.roomid.ToString());
 
                     var ticket = EncryptionManager.CreateIV();
                     var text = JSONHelper.Serialize(entity);
@@ -181,13 +181,13 @@ namespace WeiXinPF.Web.weixin.KNSHotel
 
                     context.Response.Write(AjaxResult.Success(PayHelper.GetPayUrl(payData, ticket)));
                 }
-               
+
             }
             else
             {
                 context.Response.Write(AjaxResult.Error("获取订单失败！"));
             }
-            
+
         }
 
         /// <summary>
