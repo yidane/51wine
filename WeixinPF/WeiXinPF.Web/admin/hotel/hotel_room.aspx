@@ -45,25 +45,15 @@
 </head>
 <body class="mainbody">
     <form id="form1" runat="server">
-        <div class="location">
-            <% if (IsWeiXinCode())
-                { %>
-            <a href="hotel_list.aspx" class="home"><i></i><span>商户或门店列表</span></a>
-            <i class="arrow"></i>
-            <%}%>
-            <%
-                else
-                {%>
-
-            <%} %>
-            <span>商品管理</span>
+        <div class="location" runat="server" id="divLocation">
+            
         </div>
         <div class="toolbar-wrap">
             <div id="floatHead" class="toolbar">
                 <div class="l-list">
                     <ul class="icon-list">
                         <li runat="server" id="barAdd">
-                            <a class="icon-btn add" href="hotel_room_info.aspx?action=<%=WeiXinPF.Common.MXEnums.ActionEnum.Add %>&hotelid=<%=hotelid %>">
+                            <a class="icon-btn add" href="hotel_room_info.aspx?action=<%=MXEnums.ActionEnum.Add %>&hotelid=<%=hotelid %>">
                                 <i></i>
                                 <span>新增房间类型</span>
                             </a>

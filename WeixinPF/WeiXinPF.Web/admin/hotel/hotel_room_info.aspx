@@ -41,12 +41,8 @@
 </head>
 <body class="mainbody">
     <form id="form1" runat="server">
-        <div class="location">
-            <a href="hotel_list.aspx" class="home"><i></i><span>商户或门店列表</span></a>
-            <i class="arrow"></i>
-            <span><a href="hotel_room.aspx?hotelid=<%=hotelid %>">商品管理</a></span>
-            <i class="arrow"></i>
-            <span>商品信息</span>
+        <div class="location" runat="server" id="divLocation">
+            
         </div>
         <div class="line10"></div>
         <div class="content-tab-wrap">
