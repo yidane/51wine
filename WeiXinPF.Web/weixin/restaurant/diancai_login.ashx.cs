@@ -121,11 +121,12 @@ namespace WeiXinPF.Web.weixin.restaurant
 
                     var entity = new UnifiedOrderEntity
                         {
+                            OrderId = order.id.ToString(),
                             wid = order.wid,
                             total_fee = order.payAmount == null ? 0 : (int)order.payAmount,
                             out_trade_no = order.orderNumber,
                             openid = openid,
-                            body = "",
+                            body = "买了东西",
                             attach = string.Empty
                         };
 
