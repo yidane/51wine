@@ -29,7 +29,7 @@ namespace WeiXinPF.Infrastructure.DomainDataAccess
             // Configure the primary key for the OfficeAssignment 
             modelBuilder.Entity<photoActionInfo>()
                 .HasKey(t => t.id);
-                
+
 
             // Map one-to-zero or one relationship 
             modelBuilder.Entity<photoScenesInfo>()
@@ -57,7 +57,7 @@ namespace WeiXinPF.Infrastructure.DomainDataAccess
         public virtual DbSet<photoUserParticipated> photoUserParticipated { get; set; }
 
         public virtual DbSet<PaymentInfo> PaymentInfo { get; set; }
-
+        public virtual DbSet<PayNotifyInfo> PayNotifyInfo { get; set; }
         public virtual DbSet<RefundmentInfo> RefundmentInfo { get; set; }
         public virtual DbSet<IdentifyingCodeInfo> IdentifyingCodeInfo { get; set; }
     }

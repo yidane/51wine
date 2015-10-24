@@ -118,11 +118,19 @@ namespace OneGulp.WeChat.HttpUtility
         /// <param name="timeOut"></param>
         /// <param name="checkValidationResult">验证服务器证书回调自动验证</param>
         /// <returns></returns>
-        public static string HttpPost(string url, CookieContainer cookieContainer = null, Stream postStream = null, Dictionary<string, string> fileDictionary = null, string refererUrl = null, Encoding encoding = null, int timeOut = Config.TIME_OUT, bool isUseCertificater = false, string certificaterPath = "", bool checkValidationResult = false)
+        public static string HttpPost(string url, CookieContainer cookieContainer = null, Stream postStream = null, Dictionary<string, string> fileDictionary = null, string refererUrl = null, Encoding encoding = null, int timeOut = Config.TIME_OUT, bool isUseCertificater = false, string certificaterPath = "", string certificaterPassword = "", bool checkValidationResult = false)
         {
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
             request.Method = "POST";
-            request.Timeout = timeOut;
+            if (timeOut <= 0)
+            {
+                request.Timeout = Config.TIME_OUT;
+            }
+            else
+            {
+                request.Timeout = timeOut;
+            }
+
 
             if (url.StartsWith("https", StringComparison.OrdinalIgnoreCase) || checkValidationResult)
             {
@@ -133,10 +141,10 @@ namespace OneGulp.WeChat.HttpUtility
             //是否使用证书
             if (isUseCertificater)
             {
-                string path = AppDomain.CurrentDomain.BaseDirectory + certificaterPath;
+                string path = certificaterPath;
                 if (!File.Exists(path))
-                    throw new FileNotFoundException(string.Format("在路径{0}找到相应的文件"), path);
-                var cert = new X509Certificate2(path);
+                    throw new FileNotFoundException(string.Format("在路径{0}找到相应的文件", path), path);
+                var cert = new X509Certificate2(path, certificaterPassword);
                 request.ClientCertificates.Add(cert);
             }
 
