@@ -123,6 +123,21 @@
             border-style: solid;
             padding: 10px;
         }
+
+        .refund-button {
+            display: block;
+            margin-bottom: 0;
+            font-size: 12px;
+            font-weight: 400;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: middle;
+            cursor: pointer;
+            border: 1px solid transparent;
+            border-radius: 4px;
+            background-color: green;
+            max-width: 60px;
+        }
     </style>
 </head>
 <body class="mode_webapp">
@@ -163,7 +178,7 @@
             </section>
             <div runat="server" id="detail">
             </div>
-            <section class="gpd-item ">
+            <section class="gpd-item gdp-curr">
                 <div class="gpd-item-title">
                     <img class="detailicon-ticket" src="images/info.png" />
                     <div class="gpd-item-title-name">联系人</div>
@@ -176,7 +191,7 @@
                     </div>
                 </div>
             </section>
-            <section class="gpd-item gdp-curr">
+            <section class="gpd-item">
                 <div class="gpd-item-title">
                     <img class="detailicon-ticket" src="images/info.png" />
                     <div class="gpd-item-title-name">店铺信息</div>
