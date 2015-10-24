@@ -113,7 +113,7 @@ namespace WeiXinPF.Web.weixin.restaurant
                         var status = StatusManager.DishStatus.GetStatusDict(detail.status);
                         builder.Append("<div class='swiper-slide'>");
                         builder.AppendFormat(
-                            "<img id='Img3' class='img-border' src=\"ErCodeHandler.ashx?key={0}\" key='{0}' status='{1}'>",
+                            "<img id='Img3' class='img-ercode' src=\"ErCodeHandler.ashx?key={0}\" key='{0}' status='{1}'>",
                             detail.identifyingcode, status.StatusName);
                         builder.Append("</div>");
                     }
