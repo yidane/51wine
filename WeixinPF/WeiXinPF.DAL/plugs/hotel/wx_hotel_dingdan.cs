@@ -530,7 +530,7 @@ namespace WeiXinPF.DAL
         {
 
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("update  wx_hotel_dingdan  set orderStatus='" + status + "'  where  id='"+id+"'  ");
+            strSql.Append("update  wx_hotel_dingdan  set orderStatus='" + status + "'  , orderTime=GETDATE()  where  id='" + id+"'  ");
             int rows = DbHelperSQL.ExecuteSql(strSql.ToString());
             if (rows > 0)
             {

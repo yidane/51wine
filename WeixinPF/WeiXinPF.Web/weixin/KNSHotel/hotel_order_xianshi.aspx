@@ -542,10 +542,10 @@
                  $.post('hotel_info.ashx', submitData,
                       function (result) {
                          if (result.IsSuccess) {
-  document.location.href = 'hotel_order_paycallback.aspx?status=success&dingdanidnum='+dingdanidnum+
-  '&openid=<%=openid%>&hotelid=<%=hotelid%>&roomid=<%=roomid%>';
+//  document.location.href = 'hotel_order_paycallback.aspx?status=success&dingdanidnum='+dingdanidnum+
+//  '&openid=<%=openid%>&hotelid=<%=hotelid%>&roomid=<%=roomid%>';
                       
-                      //  document.location.href = result.Data;
+                        document.location.href = result.Data;
                         //if (payResult) {
                         //    alert(data.content);
                         //    clearCache();
