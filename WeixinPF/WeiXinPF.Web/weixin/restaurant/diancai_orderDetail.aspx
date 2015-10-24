@@ -116,6 +116,13 @@
         .item-pullleft {
             margin-right: 10px;
         }
+
+        .img-ercode {
+            border: 1px;
+            border-color: wheat;
+            border-style: solid;
+            padding: 10px;
+        }
     </style>
 </head>
 <body class="mode_webapp">
