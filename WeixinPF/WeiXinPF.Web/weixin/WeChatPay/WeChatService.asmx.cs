@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using System.Text;
 using System.Web;
 using System.Web.Services;
 using OneGulp.WeChat.MP;
@@ -250,6 +251,52 @@ namespace WeiXinPF.Web.weixin.WeChatPay
         /// </summary>
         [DataMember]
         public Dictionary<string, string> Extra = new Dictionary<string, string>();
+
+        public string ToJson()
+        {
+            string message;
+            if (!CheckRequired(out message))
+            {
+                throw new Exception(message);
+            }
+
+            return JSONHelper.Serialize(this);
+        }
+
+        public bool CheckRequired(out string message)
+        {
+            var stringBuilder = new StringBuilder();
+            const string msg = "{0}必须赋值{1}";
+            if (wid <= 0)
+                stringBuilder.AppendFormat(msg, "wid", Environment.NewLine);
+
+            if (PayModuleID < 0)
+                stringBuilder.AppendFormat(msg, "PayModuleID", Environment.NewLine);
+
+            if (string.IsNullOrEmpty(OrderId))
+                stringBuilder.AppendFormat(msg, "OrderId", Environment.NewLine);
+
+            if (string.IsNullOrEmpty(body))
+                stringBuilder.AppendFormat(msg, "body", Environment.NewLine);
+
+            if (string.IsNullOrEmpty(out_trade_no))
+                stringBuilder.AppendFormat(msg, "out_trade_no", Environment.NewLine);
+
+            if (total_fee <= 0)
+                stringBuilder.AppendFormat(msg, "total_fee", Environment.NewLine);
+
+            if (string.IsNullOrEmpty(openid))
+                stringBuilder.AppendFormat(msg, "openid", Environment.NewLine);
+
+            if (stringBuilder.Length > 0)
+            {
+                message = stringBuilder.ToString();
+                return false;
+            }
+
+            message = string.Empty;
+            return true;
+        }
     }
 
     public enum PayModuleEnum

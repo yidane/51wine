@@ -29,7 +29,7 @@ namespace WeiXinPF.Web.weixin.KNSHotel
             string openid = MyCommFun.QueryString("openid");
             string oderName = MyCommFun.QueryString("oderName");
             string tel = MyCommFun.QueryString("tel");
-         
+
 
             if (_action == "dingdan")
             {
@@ -39,7 +39,7 @@ namespace WeiXinPF.Web.weixin.KNSHotel
                 dingdan.oderName = oderName;
                 dingdan.tel = tel;
                 dingdan.orderStatus = 0;
-                dingdan.IdentityNumber = MyCommFun.QueryString("identityNumber");                
+                dingdan.IdentityNumber = MyCommFun.QueryString("identityNumber");
                 dingdan.arriveTime = Convert.ToDateTime(MyCommFun.QueryString("arriveTime"));
                 dingdan.leaveTime = Convert.ToDateTime(MyCommFun.QueryString("leaveTime"));
                 dingdan.roomType = MyCommFun.QueryString("roomType");
@@ -52,12 +52,12 @@ namespace WeiXinPF.Web.weixin.KNSHotel
                 dingdan.OrderNumber = "H" + DateTime.Now.ToString("yyyyMMddHHmmssffff") + Utils.Number(5);
                 dingdanbll.Add(dingdan);
 
-               jsonDict.Add("ret", "ok");
-               jsonDict.Add("content", "提交成功！");
-               context.Response.Write(MyCommFun.getJsonStr(jsonDict));
-               return;
+                jsonDict.Add("ret", "ok");
+                jsonDict.Add("content", "提交成功！");
+                context.Response.Write(MyCommFun.getJsonStr(jsonDict));
+                return;
 
-             }
+            }
 
             if (_action =="dingdanedite")
             {
@@ -115,7 +115,7 @@ namespace WeiXinPF.Web.weixin.KNSHotel
                 //                jsonDict.Add("content", "删除成功！");
                 //                context.Response.Write(MyCommFun.getJsonStr(jsonDict));
                 UpdateOrder(dingdanbll, jsonDict, context, StatusManager.OrderStatus.Cancelled.StatusId, "订单取消成功！");
-                 
+
             }
 //            if (_action == "paymentSuccess")
 //            {
@@ -175,24 +175,21 @@ namespace WeiXinPF.Web.weixin.KNSHotel
                         PayModuleID = (int)PayModuleEnum.Hotel
                     };
 
-                    entity.Extra.Add("dingdanidnum", ddid.ToString()); 
-                    entity.Extra.Add("openid", dingdan.openid); 
+                    entity.Extra.Add("dingdanidnum", ddid.ToString());
+                    entity.Extra.Add("openid", dingdan.openid);
                     entity.Extra.Add("hotelid", dingdan. hotelid.ToString()); 
                     entity.Extra.Add("roomid", dingdan. roomid.ToString());  
 
                     var ticket = EncryptionManager.CreateIV();
-                    var text = JSONHelper.Serialize(entity);
-                    var payData = EncryptionManager.AESEncrypt(text, ticket);
+                    var payData = EncryptionManager.AESEncrypt(entity.ToJson(), ticket);
 
                     context.Response.Write(AjaxResult.Success(PayHelper.GetPayUrl(payData, ticket)));
                 }
-               
             }
             else
             {
                 context.Response.Write(AjaxResult.Error("获取支付状态失败！"));
             }
-            
         }
 
         /// <summary>
