@@ -10,13 +10,12 @@
     <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
     <script src="js/zepto.min.js"></script>
     <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
-    <script src="js/WeChatPay_3.0.js"></script>
     <script type="text/javascript">
         var WeChatPayIsReady = true;
-        
+
         function Pay() {
             var unifiedOrderRequest = {
-                orderId: <%=OrderID%>,
+                orderId: "<%=OrderID%>",
                 wid: parseInt(<%=wid%>),
                 body: "<%=body%>",
                 attach: "<%=attach%>",
@@ -24,28 +23,9 @@
                 total_fee: parseInt(<%=total_fee%>),
                 openid: "<%=openid%>"
             };
-            WeChatPay(unifiedOrderRequest,'<%=BeforePay%>','<%=PaySuccess%>','<%=PayFail%>','<%=PayCancel%>','<%=PayComplete%>');
-            
-            if (1=="<%=IsRegister%>") {
-                wx.config({
-                    debug: false,
-                    appId: "<%=appId%>",
-                    timestamp: "<%=timestamp%>",
-                    nonceStr: "<%=nonceStr%>",
-                    signature: "<%=signature%>",
-                    jsApiList: [
-                            'chooseWXPay',
-                            'getNetworkType',
-                            'onMenuShareAppMessage',
-                            'onMenuShareTimeline',
-                            'onMenuShareQQ',
-                            'hideOptionMenu'
-                    ]
-                });
-            }
 
-            
             function WeChatPay(UnifiedOrderRequest, beforePay, paySuccess, payFail, payCancel, payComplete) {
+                alert("WeChatPay");
                 $.ajax({
                     url: "../WeChatPay/WeChatService.asmx/UnifiedOrder",
                     type: "post",
@@ -61,13 +41,13 @@
                                 signType: 'MD5',
                                 paySign: result.Data.paySign,
                                 success: function (res) {
-                                    document.location.href = paySuccess;
+                                    //document.location.href = paySuccess;
                                 },
                                 fail: function (res) {
-                                    document.location.href = payFail;
+                                    //document.location.href = payFail;
                                 },
                                 cancel: function (res) {
-                                    document.location.href = payCancel;
+                                    //document.location.href = payCancel;
                                 },
                                 complete: function (res) {
                                     //不做处理
@@ -80,43 +60,76 @@
                 });
             }
 
-            wx.ready(function () {
-                Pay();
-                //wx.hideOptionMenu();
-
-                //wx.onMenuShareAppMessage({
-                //    title: window.share.title,
-                //    desc: window.share.desc,
-                //    link: window.share.link,
-                //    imgUrl: window.share.imgUrl,
-                //    success: function () {
-                //        //成功回调
-                //        window.share.appcallback();
-
-                //    }
-                //});
-
-                //wx.onMenuShareTimeline({
-                //    title: window.share.title,
-                //    link: window.share.link,
-                //    imgUrl: window.share.imgUrl
-                //});
-
-                //wx.onMenuShareQQ({
-                //    title: window.share.title,
-                //    desc: window.share.desc,
-                //    link: window.share.link,
-                //    imgUrl: window.share.imgUrl
-                //});
-
-                //wx.error(function (res) {
-                //    alert(res.err_code + "______" + res.err_desc + "______" + res.err_msg);
-                //});
-            });
+            WeChatPay(unifiedOrderRequest, '<%=BeforePay%>', '<%=PaySuccess%>', '<%=PayFail%>', '<%=PayCancel%>', '<%=PayComplete%>');
         }
+
+        $(document).ready(function () {
+            $.ajax({
+                url: "../WeChatPay/WeChatService.asmx/WeChatConfigInit",
+                type: "post",
+                dataType: "json",
+                data: { "wid": parseInt(<%=wid%>), "url": document.location.href },
+                success: function (result) {
+                    if (result.IsSuccess) {
+                        wx.config({
+                            debug: true,
+                            appId: result.Data.appId,
+                            timestamp: result.Data.timestamp,
+                            nonceStr: result.Data.nonceStr,
+                            signature: result.Data.signature,
+                            jsApiList: [
+                                'chooseWXPay',
+                                'getNetworkType',
+                                'onMenuShareAppMessage',
+                                'onMenuShareTimeline',
+                                'onMenuShareQQ',
+                                'hideOptionMenu'
+                            ]
+                        });
+                        wx.ready(function () {
+
+                            WeChatPayIsReady = true;
+                            Pay();
+                            //wx.hideOptionMenu();
+
+                            //wx.onMenuShareAppMessage({
+                            //    title: window.share.title,
+                            //    desc: window.share.desc,
+                            //    link: window.share.link,
+                            //    imgUrl: window.share.imgUrl,
+                            //    success: function () {
+                            //        //成功回调
+                            //        window.share.appcallback();
+
+                            //    }
+                            //});
+
+                            //wx.onMenuShareTimeline({
+                            //    title: window.share.title,
+                            //    link: window.share.link,
+                            //    imgUrl: window.share.imgUrl
+                            //});
+
+                            //wx.onMenuShareQQ({
+                            //    title: window.share.title,
+                            //    desc: window.share.desc,
+                            //    link: window.share.link,
+                            //    imgUrl: window.share.imgUrl
+                            //});
+
+                            //wx.error(function (res) {
+                            //    alert(res.err_code + "______" + res.err_desc + "______" + res.err_msg);
+                            //});
+                        });
+                    }
+                },
+                error: function () {
+
+                }
+            });
+        });
     </script>
 </head>
 <body>
-    <input type="hidden" id="wid" value="<%=wid %>" />
 </body>
 </html>
