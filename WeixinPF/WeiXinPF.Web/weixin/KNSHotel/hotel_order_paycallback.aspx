@@ -14,7 +14,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <div>
+        <div id="paycallback">
             调用支付成功！
         </div>
 

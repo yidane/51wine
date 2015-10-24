@@ -51,6 +51,10 @@ namespace WeiXinPF.Web.weixin.KNSHotel
         public string RefundRule = string.Empty;
         public string IdentityNumber = string.Empty;
 
+        public decimal totalyuanjia = 0;
+        public decimal totaljiesheng = 0;
+        public decimal totalPrice = 0;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             hotelid = MyCommFun.RequestInt("hotelid");
@@ -160,7 +164,13 @@ namespace WeiXinPF.Web.weixin.KNSHotel
                 IdentityNumber = dingdan.IdentityNumber;
                 if (dingdan.price != null) PayAmount = dingdan.price.Value;
 
-               
+
+                //总花费
+                var dateSpan = dingdan.leaveTime.Value - dingdan.arriveTime.Value;
+                this.totalPrice = dingdan.price.Value * dingdan.orderNum.Value * dateSpan.Days;
+                this.totalyuanjia = dingdan.yuanjia.Value * dingdan.orderNum.Value * dateSpan.Days;
+                this.totaljiesheng = totalyuanjia - totalPrice;
+
             }
         }
 

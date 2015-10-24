@@ -26,15 +26,17 @@ namespace WeiXinPF.Web.weixin.KNSHotel
         public decimal yuanjia = 0;
         public decimal price = 0;
         public decimal jiesheng = 0;
-        public int roomid = 0; 
+        public int roomid = 0;
 
+        public decimal totalyuanjia = 0;
+        public decimal totaljiesheng = 0;
         public decimal totalPrice = 0;
 
         public string truename = string.Empty;
 
         public string tel = string.Empty;
 
-        public string dateline = string.Empty;
+        public string arriveTime = string.Empty;
         public string leaveTime = string.Empty;
 
         public int nums = 0;
@@ -108,7 +110,7 @@ namespace WeiXinPF.Web.weixin.KNSHotel
 
                 this.truename = dingdan.oderName;
                     this.tel = dingdan.tel;
-                    this.dateline = dingdan.arriveTime.Value.ToString("yyyy/MM/dd");
+                    this.arriveTime = dingdan.arriveTime.Value.ToString("yyyy/MM/dd");
                 this.leaveTime= dingdan.leaveTime.Value.ToString("yyyy/MM/dd");
                 this.IdentityNumber = dingdan.IdentityNumber;
                 this.OrderNumber = dingdan.OrderNumber;
@@ -117,10 +119,17 @@ namespace WeiXinPF.Web.weixin.KNSHotel
                     yuanjia = Convert.ToDecimal(dingdan.yuanjia);
                     price = Convert.ToDecimal(dingdan.price);
                     jiesheng = (yuanjia - price) * Convert.ToDecimal(dingdan.orderNum);
-                this.totalPrice = dingdan.price.Value * dingdan.orderNum.Value;
+
+            
+             
                     this.info.Value = dingdan.remark;
 
-                
+                //总花费
+                var dateSpan = dingdan.leaveTime.Value- dingdan.arriveTime.Value ;
+                this.totalPrice = dingdan.price.Value * dingdan.orderNum.Value * dateSpan.Days;
+                this.totalyuanjia = dingdan.yuanjia.Value * dingdan.orderNum.Value * dateSpan.Days;
+                this.totaljiesheng = totalyuanjia- totalPrice;
+
             }
         }
     }

@@ -245,7 +245,7 @@
                     <tr>
                         <th>预订数量</th>
                         <td>
-                            <select name="orderNum" class="dropdown-select" id="orderNum" onchange="dothis(this.value)">
+                            <select name="orderNum" class="dropdown-select"  id="orderNum" onchange="dothis(this.value)">
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
@@ -270,37 +270,22 @@
                     </tr>
                 </table>
             </li>
-
-
-
-            <li class="nob">
+              <li class="nob">
                 <table width="100%" border="0" cellspacing="0" cellpadding="0" class="kuang">
                     <tr>
-                        <th>原价</th>
-                        <td class="userinfo" id="yuanjia">￥<%=yuanjia %></td>
+                        <th>单价</th>
+                        <td class="userinfo price" >￥<%=xianjia %></td>
                     </tr>
                 </table>
             </li>
+
+
+
+
             <li class="nob">
                 <table width="100%" border="0" cellspacing="0" cellpadding="0" class="kuang">
                     <tr>
-                        <th>现价</th>
-                        <td class="userinfo price" id="price">￥<%=xianjia %></td>
-                    </tr>
-                </table>
-            </li>
-            <li class="nob">
-                <table width="100%" border="0" cellspacing="0" cellpadding="0" class="kuang">
-                    <tr>
-                        <th>为你节省</th>
-                        <td class="userinfo price2" id="price3">￥<%=price3 %></td>
-                    </tr>
-                </table>
-            </li>
-            <li class="nob">
-                <table width="100%" border="0" cellspacing="0" cellpadding="0" class="kuang">
-                    <tr>
-                        <th valign="top" class="thtop">备注</th>
+                        <th valign="middle" class="thtop">备注</th>
                         <td>
                             <textarea name="remark" class="pxtextarea" style="height: 99px; overflow-y: visible" id="remark" placeholder="请输入备注信息"></textarea></td>
                     </tr>
@@ -308,10 +293,23 @@
             </li>
         </ul>
 
+         <div class="footer-money">
+
+                            <p>
+                                    <span class=" color-red">已优惠</span>
+                                                                               <span  id="price3" class="color-red discount-money">￥0</span>
+                            <span>共</span>
+                            <span  id="price" class="  total-money color-red">￥0</span>
+                            <span  id="yuanjia" class="  cost-money">￥0</span>
+
+                            </p>
+
+                        </div>
+
         <div class="footReturn">
             <a id="showcard" class="submit">提交订单</a>
             <div class="window" id="windowcenter">
-                <div id="title" class="wtitle">提交成功<span class="close" id="alertclose"></span></div>
+                <div id="title" class="wtitle">提示<span class="close" id="alertclose"></span></div>
                 <div class="content">
                     <div id="txt"></div>
                 </div>
@@ -387,6 +385,24 @@
 
             }
 
+            function checkDate(dateVal)
+            {
+                var result=false;
+             var date=  Date.parse(dateVal);
+                           var now=new Date();
+                           if(date>addDate(now,-1))
+                            {
+                    result=true;
+                            }
+
+                            return result;
+            }
+
+            function addDate(date,days){ 
+                var val=  date.setDate(date.getDate()+days); 
+                return val; 
+            }
+
             var oLay = document.getElementById("overlay");
             $(document).ready(function () {
 
@@ -402,18 +418,31 @@
                 if(ev.currentTarget.id=='arriveTime')
                 {
                 var arriveTime=$(ev.currentTarget).val();
-                    var leaveTime=$("#leaveTime").val();
-                    changePriceUseDate(arriveTime,leaveTime);
+                   if( checkDate(arriveTime))
+                   {
+                     var leaveTime=$("#leaveTime").val();
+                                       changePriceUseDate(arriveTime,leaveTime);
+                   }
+                   else{
+                    alert("入住时间不能小于今天！");
+                                                                   return false;
+                   }
+
                 }
               else  if(ev.currentTarget.id=='leaveTime')
                                 {
-                    var arriveTime=$("#arriveTime").val();
+
                     var leaveTime=$(ev.currentTarget).val();
-                    changePriceUseDate(arriveTime,leaveTime);
+                      if( checkDate(leaveTime))
+                                       {
+                                          var arriveTime=$("#arriveTime").val();
+                                                           changePriceUseDate(arriveTime,leaveTime);
+                                       }else{
+                                                            alert("离店时间不能小于今天！");
+                                                                                                           return false;
+                                                           }
+
                                 }
-//                    if (ev.date.valueOf() < date-start-display.valueOf()){
-//
-//                    };
 });
                 //显影
                 $(".gpd-item-title").click(function () {
@@ -430,24 +459,36 @@
                         alert('请勿重复提交！谢谢！');
                         return false;
                     }
-                
+                    var arriveTime=$("#arriveTime").val();
+                    var leaveTime=$("#leaveTime").val();
+                    if(!checkDate(arriveTime))
+                    {
+                        alert("入住时间不能小于今天！");
+                                                return false;
+                    }
 
-                    if ($("#arriveTime").val() >= $("#leaveTime").val())
+                     if(!checkDate(leaveTime))
+                                        {
+                                            alert("离店时间不能小于今天！");
+                                                                    return false;
+                                        }
+
+                    if (arriveTime >= leaveTime)
                     {
                         alert("离店时间不能小于入住时间！");
                         return false;
                        
                     }
 
-                    if ($("#oderName").val() == '') { alert('名字不能为空'); return; }
-                    if ($("#identityNumber").val() == '') { alert('身份证号码不能为空'); return; }
-                    if ($("#tel").val() == '') { alert('电话不能为空'); return; }                    
+                    if ($("#ctl00_content_oderName").val() == '') { alert('名字不能为空'); return; }
+                    if ($("#ctl00_content_identityNumber").val() == '') { alert('身份证号码不能为空'); return; }
+                    if ($("#ctl00_content_tel").val() == '') { alert('电话不能为空'); return; }
                     if ($("#arriveTime").val() == '') { alert('请选择入住时间'); return; }
                     if ($("#leaveTime").val() == '') { alert('请选择离店时间'); return; }
 
-                    var oderName = document.getElementById('oderName').value;
-                    var identityNumber = document.getElementById('identityNumber').value;
-                    var tel = document.getElementById('tel').value;
+                    var oderName = document.getElementById('ctl00_content_oderName').value;
+                    var identityNumber = document.getElementById('ctl00_content_identityNumber').value;
+                    var tel = document.getElementById('ctl00_content_tel').value;
                     var arriveTime = document.getElementById('arriveTime').value;
                     var leaveTime = document.getElementById('leaveTime').value;
 
