@@ -35,6 +35,7 @@ namespace WeiXinPF.Web.admin.hotel
 
             if (!IsPostBack)
             {
+                SetLocation();
                 SetControl();
                 if (action == MXEnums.ActionEnum.Edit.ToString() || action == MXEnums.ActionEnum.Audit.ToString())
                 {
@@ -121,7 +122,7 @@ namespace WeiXinPF.Web.admin.hotel
                     }
                 }
                 AddAdminLog(MXEnums.ActionEnum.Add.ToString(), "添加房间类型，主键为" + id); //记录日志
-                JscriptMsg("添加成功！", "hotel_room.aspx?action="+MXEnums.ActionEnum.Edit.ToString()+"&hotelid=" + hotelid + "", "Success");
+                JscriptMsg("添加成功！", "hotel_room.aspx?action=" + MXEnums.ActionEnum.Edit.ToString() + "&hotelid=" + hotelid + "", "Success");
             }
 
             else if (action == MXEnums.ActionEnum.Edit.ToString())
@@ -172,25 +173,25 @@ namespace WeiXinPF.Web.admin.hotel
 
         protected void btnAgree_Click(object sender, EventArgs e)
         {
-            
+
 
             try
             {
                 new BLL.wx_hotel_room_manage().ManageRoom(roomid, Model.RoomStatus.Agree, GetAdminInfo().id, "审核通过");
-               
+
             }
             catch (Exception ex)
             {
                 JscriptMsg("操作失败！", Utils.CombUrlTxt("hotel_room.aspx", "action={0}&hotelid={1}", MXEnums.ActionEnum.Audit.ToString(), hotelid.ToString()), "Error");
             }
-            AddAdminLog(MXEnums.ActionEnum.Audit.ToString(), string.Format("房间【id={0}】审核通过。",roomid)); //记录日志
+            AddAdminLog(MXEnums.ActionEnum.Audit.ToString(), string.Format("房间【id={0}】审核通过。", roomid)); //记录日志
 
             JscriptMsg("操作成功！", Utils.CombUrlTxt("hotel_room.aspx", "action={0}&hotelid={1}", MXEnums.ActionEnum.Audit.ToString(), hotelid.ToString()), "Success");
         }
 
         protected void btnRefuse_Click(object sender, EventArgs e)
         {
-          
+
             try
             {
                 new BLL.wx_hotel_room_manage().ManageRoom(roomid, Model.RoomStatus.Refuse, GetAdminInfo().id, "审核不通过");
@@ -221,6 +222,28 @@ namespace WeiXinPF.Web.admin.hotel
                 btnAgree.Visible = false;
                 btnRefuse.Visible = false;
             }
+        }
+
+        private void SetLocation()
+        {
+            string location = string.Empty;
+            if (GetHotelId() == 0)
+            {
+
+                location += "<a href = \"hotel_list.aspx\" class=\"home\"><i></i><span>商户或门店列表</span></a>";
+                location += "<i class=\"arrow\"></i>";
+                location += "<a href = \"hotel_room.aspx?action=" + MXEnums.ActionEnum.Audit.ToString() + "&hotelid=" + hotelid + "\" ><i></i><span>商品管理</span></a>";
+                location += "<i class=\"arrow\"></i>";
+                location += "<span>商品信息</span>";
+            }
+            else
+            {
+                location += "<a class=\"home\" href = \"hotel_room.aspx?action=" + MXEnums.ActionEnum.Edit.ToString() + "&hotelid=" + hotelid + "\" ><i></i><span>商品管理</span></a>";
+                location += "<i class=\"arrow\"></i>";
+                location += "<span>商品信息</span>";
+            }
+
+            divLocation.InnerHtml = location;
         }
     }
 }

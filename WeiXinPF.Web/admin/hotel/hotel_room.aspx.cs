@@ -34,6 +34,7 @@ namespace WeiXinPF.Web.admin.hotel
 
             if (!Page.IsPostBack)
             {
+                SetLocation();
                 SetControl();
                 RptBind(CombSqlTxt(keywords), "createDate desc,id desc");
             }
@@ -53,7 +54,7 @@ namespace WeiXinPF.Web.admin.hotel
 
                 ds.Tables[0].Columns.Add(new DataColumn("StatusStr", typeof(string)));
                 int count = ds.Tables[0].Rows.Count;
-                Model.RoomStatus status=Model.RoomStatus.None;
+                Model.RoomStatus status = Model.RoomStatus.None;
                 for (int i = 0; i < count; i++)
                 {
                     dr = ds.Tables[0].Rows[i];
@@ -236,21 +237,7 @@ namespace WeiXinPF.Web.admin.hotel
                     try
                     {
                         manageBll.ManageRoom(id, Model.RoomStatus.Refuse, GetAdminInfo().id, "审核不通过", "");
-                        //using (TransactionScope scope = new TransactionScope())
-                        //{
-                        //    roomBll.Update(model);
-
-                        //    Model.wx_hotel_room_manage manageInfo = new Model.wx_hotel_room_manage();
-                        //    manageInfo.RoomId = model.id;
-                        //    manageInfo.Operator = GetAdminInfo().id;
-                        //    manageInfo.OperateName = "审核不通过";
-                        //    manageInfo.OperateTime = DateTime.Now;
-                        //    manageInfo.Comment = "不通过啊啊啊啊啊";
-                        //    manageBll.Add(manageInfo);
-
-                        //    scope.Complete();
                         sucCount += 1;
-                        //}
                     }
                     catch (Exception ex)
                     {
@@ -261,6 +248,32 @@ namespace WeiXinPF.Web.admin.hotel
             AddAdminLog(MXEnums.ActionEnum.Audit.ToString(), "信息" + sucCount + "条，失败" + errorCount + "条"); //记录日志
 
             JscriptMsg("审核不通过，成功" + sucCount + "条，失败" + errorCount + "条！", Utils.CombUrlTxt("hotel_room.aspx", "action={0}&hotelid={1}&keywords={2}", action, hotelid.ToString(), this.keywords), "Success");
+        }
+
+        protected void rptList_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+            int id = MyCommFun.Obj2Int(e.CommandArgument);
+            switch (e.CommandName)
+            {
+                case "Edit":
+                    Response.Redirect(string.Format("hotel_room_info.aspx?action={0}&hotelid={1}&roomid={2}", MXEnums.ActionEnum.Edit.ToString(), hotelid, id));
+                    break;
+                case "Audit":
+                    Response.Redirect(string.Format("hotel_room_info.aspx?action={0}&hotelid={1}&roomid={2}", MXEnums.ActionEnum.Audit.ToString(), hotelid, id));
+                    break;
+                case "Publish":
+                    manageBll.ManageRoom(id, Model.RoomStatus.Publish, GetAdminInfo().id, "发布", "");
+                    AddAdminLog("Publish", string.Format("酒店商品【id={0}】发布。", id));
+
+                    JscriptMsg("发布成功！", Utils.CombUrlTxt("hotel_room.aspx", "action={0}&hotelid={1}&keywords={2}", action, hotelid.ToString(), this.keywords), "Success");
+                    break;
+                case "SoldOut":
+                    manageBll.ManageRoom(id, Model.RoomStatus.SoldOut, GetAdminInfo().id, "下架", "");
+                    AddAdminLog("SoldOut", string.Format("酒店商品【id={0}】下架。", id));
+
+                    JscriptMsg("下架成功！", Utils.CombUrlTxt("hotel_room.aspx", "action={0}&hotelid={1}&keywords={2}", action, hotelid.ToString(), this.keywords), "Success");
+                    break;
+            }
         }
 
         private void SetControl()
@@ -338,30 +351,22 @@ namespace WeiXinPF.Web.admin.hotel
             }
         }
 
-        protected void rptList_ItemCommand(object source, RepeaterCommandEventArgs e)
+        private void SetLocation()
         {
-            int id = MyCommFun.Obj2Int(e.CommandArgument);
-            switch (e.CommandName)
+            string location = string.Empty;
+            if (GetHotelId() == 0)
             {
-                case "Edit":
-                    Response.Redirect(string.Format("hotel_room_info.aspx?action={0}&hotelid={1}&roomid={2}", MXEnums.ActionEnum.Edit.ToString(), hotelid, id));
-                    break;
-                case "Audit":
-                    Response.Redirect(string.Format("hotel_room_info.aspx?action={0}&hotelid={1}&roomid={2}", MXEnums.ActionEnum.Audit.ToString(), hotelid, id));
-                    break;
-                case "Publish":
-                    manageBll.ManageRoom(id, Model.RoomStatus.Publish, GetAdminInfo().id, "发布", "");
-                    AddAdminLog("Publish", string.Format("酒店商品【id={0}】发布。",id)); 
 
-                    JscriptMsg("发布成功！", Utils.CombUrlTxt("hotel_room.aspx", "action={0}&hotelid={1}&keywords={2}", action, hotelid.ToString(), this.keywords), "Success");
-                    break;
-                case "SoldOut":
-                    manageBll.ManageRoom(id, Model.RoomStatus.SoldOut, GetAdminInfo().id, "下架", "");
-                    AddAdminLog("SoldOut", string.Format("酒店商品【id={0}】下架。", id));
-
-                    JscriptMsg("下架成功！", Utils.CombUrlTxt("hotel_room.aspx", "action={0}&hotelid={1}&keywords={2}", action, hotelid.ToString(), this.keywords), "Success");
-                    break;
+                location += "<a href = \"hotel_list.aspx\" class=\"home\"><i></i><span>商户或门店列表</span></a>";
+                location += "<i class=\"arrow\"></i>";
+                location += "<span>商品管理</span>";
             }
+            else
+            {
+                location += "<a class=\"home\"><i></i><span>商品管理</span></a>";
+            }
+
+            divLocation.InnerHtml = location;
         }
     }
 }

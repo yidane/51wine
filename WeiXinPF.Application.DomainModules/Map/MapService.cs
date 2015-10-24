@@ -169,7 +169,7 @@ namespace WeiXinPF.Application.DomainModules.Map
         {
             BLL.wx_hotels_info bll = new BLL.wx_hotels_info();
 
-            string strWhere = string.Format("wid={0}", wid);
+            string strWhere = string.Format("wid={0} ", wid);
 
             if (!string.IsNullOrEmpty(keywords))
             {
@@ -204,13 +204,13 @@ namespace WeiXinPF.Application.DomainModules.Map
         {
             List<POIDto> recommendPois = new List<POIDto>();
 
-            //默认都取第一个吧；
+            //暂时先取第一个；
             var scenics = GetScenics(wid, keywords);
             if (scenics != null && scenics.Any())
             {
                 recommendPois.Add(scenics.FirstOrDefault());
             }
-
+            
             var caterings = GetCateringShops(wid, keywords);
             if (caterings != null && caterings.Any())
             {
@@ -224,7 +224,6 @@ namespace WeiXinPF.Application.DomainModules.Map
             }
 
             return recommendPois;
-
         }
     }
 }

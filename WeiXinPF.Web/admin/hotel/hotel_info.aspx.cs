@@ -18,28 +18,24 @@ namespace WeiXinPF.Web.admin.hotel
         protected string editetype = "";
         protected static int hotelid = 0;
         BLL.wx_hotels_info hotelBll = new BLL.wx_hotels_info();
-        Model.wx_hotels_info hotel = new Model.wx_hotels_info();
 
         BLL.wx_hotel_pic picBll = new BLL.wx_hotel_pic();
         Model.wx_hotel_pic pic = new Model.wx_hotel_pic();
         wx_hotel_pic iBll = new wx_hotel_pic();
+
         protected void Page_Load(object sender, EventArgs e)
         {
             hotelid = MyCommFun.RequestInt("hotelid", GetHotelId());
-            editetype = MyCommFun.QueryString("type");
             if (!IsPostBack)
             {
-                if (editetype == "edite")
-                {
-                    list(hotelid);
-                }
+                list(hotelid);
             }
         }
 
 
         public void list(int hotelid)
         {
-            hotel = hotelBll.GetModel(hotelid);
+            Model.wx_hotels_info hotel = hotelBll.GetModel(hotelid);
             if (hotel != null)
             {
                 this.hotelName.Text = hotel.hotelName;
@@ -47,7 +43,6 @@ namespace WeiXinPF.Web.admin.hotel
                 this.hotelPhone.Text = hotel.hotelPhone;
                 this.mobilPhone.Text = hotel.mobilPhone;
                 this.noticeEmail.Text = hotel.noticeEmail;
-                //this.emailPws.Text = hotel.emailPws;
                 this.coverPic.Text = hotel.coverPic;
                 this.topPic.Text = hotel.topPic;
                 this.orderLimit.Text = hotel.orderLimit.ToString();
@@ -58,9 +53,11 @@ namespace WeiXinPF.Web.admin.hotel
                 this.orderRemark.Value = hotel.orderRemark;
                 this.txtLatXPoint.Text = hotel.xplace.ToString();
                 this.txtLngYPoint.Text = hotel.yplace.ToString();
-                ClientScript.RegisterStartupScript(GetType(), "message",
-                    "<script language='javascript'> $(\"#baiduframe\").attr(\"src\", \"../../weixin/map/qqmap/qqmap_getLocation.html?lng=" + hotel.yplace.Value.ToString() + "&lat=" + hotel.xplace.Value.ToString() + "\");</script>");
-
+                if (hotel.xplace.HasValue && hotel.yplace.HasValue)
+                {
+                    ClientScript.RegisterStartupScript(GetType(), "message",
+                        "<script language='javascript'> $(\"#baiduframe\").attr(\"src\", \"../../weixin/map/qqmap/qqmap_getLocation.html?lng=" + hotel.yplace.Value.ToString() + "&lat=" + hotel.xplace.Value.ToString() + "\");</script>");
+                }
             }
 
             IList<Model.wx_hotel_pic> itemlist = iBll.GetModelList("hotelid=" + hotelid + " order by id asc");
@@ -90,117 +87,51 @@ namespace WeiXinPF.Web.admin.hotel
 
         protected void save_hotel_Click(object sender, EventArgs e)
         {
-            editetype = MyCommFun.QueryString("type");
-            Model.wx_userweixin weixin = GetWeiXinCode();
-            int wid = weixin.id;
+            Model.wx_hotels_info hotel = hotelBll.GetModel(hotelid);
 
-            if (editetype == "add")
+            hotel.hotelName = this.hotelName.Text;
+            hotel.hotelAddress = this.hotelAddress.Text;
+            hotel.hotelPhone = this.hotelPhone.Text;
+            hotel.mobilPhone = this.mobilPhone.Text;
+            hotel.noticeEmail = this.noticeEmail.Text;
+            hotel.coverPic = this.coverPic.Text;
+            hotel.topPic = this.topPic.Text;
+            hotel.orderLimit = MyCommFun.Str2Int(this.orderLimit.Text);
+            hotel.listMode = Convert.ToBoolean(this.listMode.SelectedValue);
+            hotel.messageNotice = MyCommFun.Str2Int(this.messageNotice.Text);
+            hotel.pwd = this.pwd.Text;
+            hotel.hotelIntroduct = this.hotelIntroduct.Value;
+            hotel.orderRemark = this.orderRemark.Value;
+            hotel.xplace = MyCommFun.Str2Decimal(this.txtLatXPoint.Text);
+            hotel.yplace = MyCommFun.Str2Decimal(this.txtLngYPoint.Text);
+
+
+            hotelBll.Update(hotel);
+
+            picBll.Deletepic(hotelid);
+
+            for (int i = 1; i <= 6; i++)
             {
-                hotel.wid = wid;
-                hotel.hotelName = this.hotelName.Text;
-                hotel.hotelAddress = this.hotelAddress.Text;
-                hotel.hotelPhone = this.hotelPhone.Text;
-                hotel.mobilPhone = this.mobilPhone.Text;
-                hotel.noticeEmail = this.noticeEmail.Text;
-                //hotel.emailPws = this.emailPws.Text;
-                hotel.coverPic = this.coverPic.Text;
-                hotel.topPic = this.topPic.Text;
-                hotel.orderLimit = MyCommFun.Str2Int(this.orderLimit.Text);
-                hotel.listMode = Convert.ToBoolean(this.listMode.SelectedValue);
-                hotel.messageNotice = MyCommFun.Str2Int(this.messageNotice.Text);
-                hotel.pwd = this.pwd.Text;
-                hotel.hotelIntroduct = this.hotelIntroduct.Value;
-                hotel.orderRemark = this.orderRemark.Value;
-                hotel.createDate = DateTime.Now;
-                hotel.xplace = MyCommFun.Str2Decimal(this.txtLatXPoint.Text);
-                hotel.yplace = MyCommFun.Str2Decimal(this.txtLngYPoint.Text);
+                title = this.FindControl("title" + i) as TextBox;
+                sortid = this.FindControl("sortid" + i) as TextBox;
+                picUrl = this.FindControl("picUrl" + i) as TextBox;
+                picTiaozhuan = this.FindControl("picTiaozhuan" + i) as TextBox;
 
-
-                int id = hotelBll.Add(hotel);
-
-
-                for (int i = 1; i <= 6; i++)
+                if (title.Text.Trim() != "" && sortid.Text.Trim() != "")
                 {
-                    title = this.FindControl("title" + i) as TextBox;
-                    sortid = this.FindControl("sortid" + i) as TextBox;
-                    picUrl = this.FindControl("picUrl" + i) as TextBox;
-                    picTiaozhuan = this.FindControl("picTiaozhuan" + i) as TextBox;
 
-                    if (title.Text.Trim() != "" && sortid.Text.Trim() != "")
-                    {
+                    pic.hotelid = hotelid;
+                    pic.title = title.Text.ToString();
+                    pic.sortid = MyCommFun.Str2Int(sortid.Text.ToString());
+                    pic.picUrl = picUrl.Text.ToString();
+                    pic.picTiaozhuan = picTiaozhuan.Text.ToString();
+                    pic.createDate = DateTime.Now;
+                    picBll.Add(pic);
 
-                        pic.hotelid = id;
-                        pic.title = title.Text.ToString();
-                        pic.sortid = MyCommFun.Str2Int(sortid.Text.ToString());
-                        pic.picUrl = picUrl.Text.ToString();
-                        pic.picTiaozhuan = picTiaozhuan.Text.ToString();
-                        pic.createDate = DateTime.Now;
-                        picBll.Add(pic);
-
-                    }
                 }
-                AddAdminLog(MXEnums.ActionEnum.Add.ToString(), "添加商家设置，主键为" + id); //记录日志
-                JscriptMsg("添加成功！", "hotel_list.aspx", "Success");
-
             }
-
-            else if (editetype == "edite")
-            {
-                if (hotelid == 0)
-                {
-
-                    return;
-                    //操作失败！
-                }
-
-                hotel.id = hotelid;
-                hotel.wid = wid;
-                hotel.hotelName = this.hotelName.Text;
-                hotel.hotelAddress = this.hotelAddress.Text;
-                hotel.hotelPhone = this.hotelPhone.Text;
-                hotel.mobilPhone = this.mobilPhone.Text;
-                hotel.noticeEmail = this.noticeEmail.Text;
-                // hotel.emailPws = this.emailPws.Text;
-                hotel.coverPic = this.coverPic.Text;
-                hotel.topPic = this.topPic.Text;
-                hotel.orderLimit = MyCommFun.Str2Int(this.orderLimit.Text);
-                hotel.listMode = Convert.ToBoolean(this.listMode.SelectedValue);
-                hotel.messageNotice = MyCommFun.Str2Int(this.messageNotice.Text);
-                hotel.pwd = this.pwd.Text;
-                hotel.hotelIntroduct = this.hotelIntroduct.Value;
-                hotel.orderRemark = this.orderRemark.Value;
-                // hotel.createDate = DateTime.Now;
-                hotel.xplace = MyCommFun.Str2Decimal(this.txtLatXPoint.Text);
-                hotel.yplace = MyCommFun.Str2Decimal(this.txtLngYPoint.Text);
-
-
-                hotelBll.Update(hotel);
-
-                picBll.Deletepic(hotelid);
-
-                for (int i = 1; i <= 6; i++)
-                {
-                    title = this.FindControl("title" + i) as TextBox;
-                    sortid = this.FindControl("sortid" + i) as TextBox;
-                    picUrl = this.FindControl("picUrl" + i) as TextBox;
-                    picTiaozhuan = this.FindControl("picTiaozhuan" + i) as TextBox;
-
-                    if (title.Text.Trim() != "" && sortid.Text.Trim() != "")
-                    {
-
-                        pic.hotelid = hotelid;
-                        pic.title = title.Text.ToString();
-                        pic.sortid = MyCommFun.Str2Int(sortid.Text.ToString());
-                        pic.picUrl = picUrl.Text.ToString();
-                        pic.picTiaozhuan = picTiaozhuan.Text.ToString();
-                        pic.createDate = DateTime.Now;
-                        picBll.Add(pic);
-
-                    }
-                }
-                AddAdminLog(MXEnums.ActionEnum.Edit.ToString(), "修改商家设置，主键为" + hotelid); //记录日志
-                JscriptMsg("修改成功！", "hotel_list.aspx", "Success");
-            }
+            AddAdminLog(MXEnums.ActionEnum.Edit.ToString(), "修改商家设置，主键为" + hotelid); //记录日志
+            JscriptMsg("修改成功！", "hotel_list.aspx", "Success");
         }
     }
 }
