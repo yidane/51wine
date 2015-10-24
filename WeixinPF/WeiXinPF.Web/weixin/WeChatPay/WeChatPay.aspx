@@ -26,7 +26,6 @@
             };
 
             function WeChatPay(UnifiedOrderRequest, beforePay, paySuccess, payFail, payCancel, payComplete) {
-                alert("WeChatPay");
                 $.ajax({
                     url: "../WeChatPay/WeChatService.asmx/UnifiedOrder",
                     type: "post",
@@ -42,17 +41,14 @@
                                 signType: 'MD5',
                                 paySign: result.Data.paySign,
                                 success: function (res) {
-                                    //document.location.href = paySuccess;
                                     completeUrl = completeUrl + "success";
                                     document.location.href = completeUrl;
                                 },
                                 fail: function (res) {
-                                    //document.location.href = payFail;
                                     completeUrl = completeUrl + "fail";
                                     document.location.href = completeUrl;
                                 },
                                 cancel: function (res) {
-                                    //document.location.href = payCancel;
                                     completeUrl = completeUrl + "cancel";
                                     document.location.href = completeUrl;
                                 },
@@ -79,7 +75,7 @@
                 success: function (result) {
                     if (result.IsSuccess) {
                         wx.config({
-                            debug: true,
+                            debug: false,
                             appId: result.Data.appId,
                             timestamp: result.Data.timestamp,
                             nonceStr: result.Data.nonceStr,
@@ -136,7 +132,68 @@
             });
         });
     </script>
+
+    <style type="text/css">
+        .spinner {
+            margin: 100px auto 0;
+            width: 100%;
+            text-align: center;
+            position: absolute;
+            top: 50%;
+            margin-top: -50px;
+        }
+
+            .spinner > div {
+                width: 20px;
+                height: 20px;
+                background-color: #67CF22;
+                border-radius: 100%;
+                display: inline-block;
+                -webkit-animation: bouncedelay 1.4s infinite ease-in-out;
+                animation: bouncedelay 1.4s infinite ease-in-out;
+                /* Prevent first frame from flickering when animation starts */
+                -webkit-animation-fill-mode: both;
+                animation-fill-mode: both;
+            }
+
+            .spinner .bounce1 {
+                -webkit-animation-delay: -0.32s;
+                animation-delay: -0.32s;
+            }
+
+            .spinner .bounce2 {
+                -webkit-animation-delay: -0.16s;
+                animation-delay: -0.16s;
+            }
+
+        @-webkit-keyframes bouncedelay {
+            0%, 80%, 100% {
+                -webkit-transform: scale(0.0);
+            }
+
+            40% {
+                -webkit-transform: scale(1.0);
+            }
+        }
+
+        @keyframes bouncedelay {
+            0%, 80%, 100% {
+                transform: scale(0.0);
+                -webkit-transform: scale(0.0);
+            }
+
+            40% {
+                transform: scale(1.0);
+                -webkit-transform: scale(1.0);
+            }
+        }
+    </style>
 </head>
 <body>
+    <div class="spinner">
+        <div class="bounce1"></div>
+        <div class="bounce2"></div>
+        <div class="bounce3"></div>
+    </div>
 </body>
 </html>
