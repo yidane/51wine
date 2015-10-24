@@ -162,16 +162,16 @@ namespace WeiXinPF.BLL
             DataSet result = null;
             if (type=="all")
             {
-                result= dal.GetListWithSql(openid, hotelid, "", " order by orderTime  ");
+                result= dal.GetListWithSql(openid, hotelid, "", " order by orderTime  desc ");
             }
             else if (type== "pay")
             {
                 
-                result = dal.GetListWithSql(openid, hotelid, " and   orderStatus =3", " order by orderTime  ");
+                result = dal.GetListWithSql(openid, hotelid, " and   orderStatus =3", " order by orderTime   desc");
             }
             else if (type== "refund")
             {
-                result = dal.GetListWithSql(openid, hotelid, " and   orderStatus =7", " order by orderTime  ");
+                result = dal.GetListWithSql(openid, hotelid, " and   orderStatus =7", " order by orderTime  desc ");
             }
             
 
