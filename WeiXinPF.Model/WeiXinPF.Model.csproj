@@ -59,6 +59,7 @@
     <Compile Include="crm\wx_crm_users.cs" />
     <Compile Include="crm\wx_crm_users_tag.cs" />
     <Compile Include="express.cs" />
+    <Compile Include="KNSHotel\StatusManager.cs" />
     <Compile Include="mail_template.cs" />
     <Compile Include="agent\manager.cs" />
     <Compile Include="agent\manager_log.cs" />

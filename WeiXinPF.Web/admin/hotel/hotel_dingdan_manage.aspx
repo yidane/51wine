@@ -55,8 +55,11 @@
                 <table width="100%" border="0" cellspacing="0" cellpadding="0" class="ltable">
                     <thead>
                         <tr>
+                             
                             <th >选择</th>
                             <th >序号</th>
+                            <th >订单编号</th>
+                             <th >订单状态</th> 
                             <th >预定人</th>
                             <th >电话</th>
                             <th >入住/离店时间</th> 
@@ -64,7 +67,7 @@
                             <th >预定时间</th>    
                             <th >预定数量</th>   
                             <th >价格</th>   
-                            <th >订单状态</th>  
+                            
                             <th >用户是否删除</th>                 
                             <th >操作</th>
                         </tr>
@@ -77,12 +80,19 @@
                         <asp:CheckBox ID="chkId" CssClass="checkall" runat="server" Style="vertical-align: middle;" />
                         <asp:HiddenField ID="hidId" Value='<%#Eval("id")%>' runat="server" />
                     </td>
+                    
                     <td>
                         <%# Eval("id") %>
                     </td>
                       <td>
                         <%# Eval("oderName") %>
                     </td>
+                      <td>
+                        <%# Eval("orderNumber") %>
+                    </td>
+                      <td>
+                     <%# Eval("payStatusStr") %>
+                     </td>
                       <td>
                         <%# Eval("tel") %>
                     </td>
@@ -103,9 +113,7 @@
                       <td>
                      <%# Eval("price") %>
                      </td>
-                     <td>
-                     <%# Eval("payStatusStr") %>
-                     </td>
+                   
                       <td>
                     <%# Eval("isDelete").ToString().ToLower()=="1"?"已删除":"未删除" %>
                      </td>

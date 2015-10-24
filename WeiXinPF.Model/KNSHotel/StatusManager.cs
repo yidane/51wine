@@ -1,11 +1,11 @@
 ﻿using System;
 
-namespace WeiXinPF.Web.weixin.KNSHotel
+namespace WeiXinPF.Model.KNSHotel
 {
 
 
 
-    public class StatusManager
+    public class HotelStatusManager
     {
 
         /// <summary>

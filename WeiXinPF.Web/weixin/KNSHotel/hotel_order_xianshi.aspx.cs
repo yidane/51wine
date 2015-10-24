@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using WeiXinPF.Model;
+using WeiXinPF.Model.KNSHotel;
 
 namespace WeiXinPF.Web.weixin.KNSHotel
 {
@@ -113,7 +114,7 @@ namespace WeiXinPF.Web.weixin.KNSHotel
                 if (dingdan.orderStatus != null)
                 {
                     var orderStatus = dingdan.orderStatus.Value;
-                    var status = StatusManager.OrderStatus.GetStatusDict(orderStatus);
+                    var status = HotelStatusManager.OrderStatus.GetStatusDict(orderStatus);
                     zhuangtai = "<em class=\"" + status.CssClass + "\">" + status.StatusName + "</em></span>";
 
                     //判断按钮

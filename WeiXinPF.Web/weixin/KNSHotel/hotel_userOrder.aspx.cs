@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data;
 using WeiXinPF.Common;
+using WeiXinPF.Model.KNSHotel;
 
 namespace WeiXinPF.Web.weixin.KNSHotel
 {
@@ -105,7 +106,7 @@ namespace WeiXinPF.Web.weixin.KNSHotel
                     }
 
                     var orderStatus = dr.Tables[0].Rows[i].Field<int>("orderStatus");
-                    var status = StatusManager.OrderStatus.GetStatusDict(orderStatus);
+                    var status = HotelStatusManager.OrderStatus.GetStatusDict(orderStatus);
                     order += "<em class=\""+ status.CssClass +"\">" + status.StatusName + "</em></span>";
 
 //                    if (status.StatusID==1)
