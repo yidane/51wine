@@ -16,17 +16,17 @@
     <form id="form1" runat="server">
         <!--导航栏-->
         <div class="location">
-              <% if (IsWeiXinCode())
+            <% if (IsWeiXinCode())
                 {%>
-            <a    href="shop_list.aspx" class="home"><i></i><span>商户或门店列表</span></a>
-              <i class="arrow"></i>
-                <%}%>
-                <%
+            <a href="shop_list.aspx" class="home"><i></i><span>商户或门店列表</span></a>
+            <i class="arrow"></i>
+            <%}%>
+            <%
                 else
                 {%>
-               
-                <%} %>
-            <a href="manager_list.aspx"><i></i><span>管理员列表</span></a>
+
+            <%} %>
+            <a href="shop_admin_list.aspx?shopid=<%=shopid %>"><i></i><span>管理员列表</span></a>
             <i class="arrow"></i>
             <span>编辑管理员</span>
         </div>

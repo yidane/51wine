@@ -70,6 +70,8 @@
     <Compile Include="agent\manager_log.cs" />
     <Compile Include="agent\manager_role.cs" />
     <Compile Include="navigation.cs" />
+    <Compile Include="plugs\hotel\wx_hotel_admin.cs" />
+    <Compile Include="plugs\hotel\wx_hotel_user.cs" />
     <Compile Include="plugs\wx_diancai_admin.cs" />
     <Compile Include="plugs\wx_cards.cs" />
     <Compile Include="plugs\wx_cards_gl.cs" />

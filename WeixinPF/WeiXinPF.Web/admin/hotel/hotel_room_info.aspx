@@ -44,9 +44,9 @@
         <div class="location">
             <a href="hotel_list.aspx" class="home"><i></i><span>商户或门店列表</span></a>
             <i class="arrow"></i>
-            <span><a href="hotel_room.aspx?hotelid=<%=hotelid %>">房间类型</a></span>
+            <span><a href="hotel_room.aspx?hotelid=<%=hotelid %>">商品管理</a></span>
             <i class="arrow"></i>
-            <span>商家设置</span>
+            <span>商品信息</span>
         </div>
         <div class="line10"></div>
         <div class="content-tab-wrap">
@@ -105,7 +105,7 @@
                 </dd>
             </dl>
             <dl>
-                <dt>商品说明：</dt>
+                <dt>退单规则：</dt>
                 <dd>
                     <textarea name="refundRule" rows="2" cols="20" id="txtRefundRule" sucmsg=" " nullmsg=" " class="input" runat="server"></textarea>
                     <span class="Validform_checktip">*</span>
@@ -226,7 +226,7 @@
 
         <div class="page-footer">
             <div class="btn-list">
-                <asp:Button ID="save_room" runat="server" CssClass="btn" Text="保存" OnClick="save_room_Click" />
+                <asp:Button ID="save_room" runat="server" CssClass="btn" Text="保存并提交" OnClick="save_room_Click" />
                 <asp:Button ID="btnAgree" runat="server" CssClass="btn" Text="审核通过" OnClick="btnAgree_Click" />
                 <asp:Button ID="btnRefuse" runat="server" CssClass="btn" Text="审核不通过" OnClick="btnRefuse_Click" />
 

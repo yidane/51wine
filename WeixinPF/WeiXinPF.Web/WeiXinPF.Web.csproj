@@ -116,6 +116,11 @@
     <Content Include="admin\diancai\shop_register.aspx" />
     <Content Include="admin\diancai\shop_user_edit.aspx" />
     <Content Include="admin\diancai\shop_user_list.aspx" />
+    <Content Include="admin\hotel\hotel_admin_edit.aspx" />
+    <Content Include="admin\hotel\hotel_admin_list.aspx" />
+    <Content Include="admin\hotel\hotel_register.aspx" />
+    <Content Include="admin\hotel\hotel_user_edit.aspx" />
+    <Content Include="admin\hotel\hotel_user_list.aspx" />
     <Content Include="admin\photo\photoEdit.aspx" />
     <Content Include="admin\photo\photolist.aspx" />
     <Content Include="admin\scenic\scenic_detail_edit.aspx" />
@@ -4758,6 +4763,20 @@
     <Compile Include="admin\diancai\shop_list.aspx.designer.cs">
       <DependentUpon>shop_list.aspx</DependentUpon>
     </Compile>
+    <Compile Include="admin\hotel\hotel_admin_edit.aspx.cs">
+      <DependentUpon>hotel_admin_edit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\hotel\hotel_admin_edit.aspx.designer.cs">
+      <DependentUpon>hotel_admin_edit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\hotel\hotel_admin_list.aspx.cs">
+      <DependentUpon>hotel_admin_list.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\hotel\hotel_admin_list.aspx.designer.cs">
+      <DependentUpon>hotel_admin_list.aspx</DependentUpon>
+    </Compile>
     <Compile Include="admin\hotel\hotel_dingdan_cz.aspx.cs">
       <DependentUpon>hotel_dingdan_cz.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -4793,6 +4812,13 @@
     <Compile Include="admin\hotel\hotel_list.aspx.designer.cs">
       <DependentUpon>hotel_list.aspx</DependentUpon>
     </Compile>
+    <Compile Include="admin\hotel\hotel_register.aspx.cs">
+      <DependentUpon>hotel_register.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\hotel\hotel_register.aspx.designer.cs">
+      <DependentUpon>hotel_register.aspx</DependentUpon>
+    </Compile>
     <Compile Include="admin\hotel\hotel_room.aspx.cs">
       <DependentUpon>hotel_room.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -4806,6 +4832,20 @@
     </Compile>
     <Compile Include="admin\hotel\hotel_room_info.aspx.designer.cs">
       <DependentUpon>hotel_room_info.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\hotel\hotel_user_edit.aspx.cs">
+      <DependentUpon>hotel_user_edit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\hotel\hotel_user_edit.aspx.designer.cs">
+      <DependentUpon>hotel_user_edit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\hotel\hotel_user_list.aspx.cs">
+      <DependentUpon>hotel_user_list.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\hotel\hotel_user_list.aspx.designer.cs">
+      <DependentUpon>hotel_user_list.aspx</DependentUpon>
     </Compile>
     <Compile Include="admin\hunqing\editXitie.aspx.cs">
       <DependentUpon>editXitie.aspx</DependentUpon>

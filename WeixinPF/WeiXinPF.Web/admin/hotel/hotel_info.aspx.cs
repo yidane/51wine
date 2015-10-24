@@ -25,9 +25,9 @@ namespace WeiXinPF.Web.admin.hotel
         wx_hotel_pic iBll = new wx_hotel_pic();
         protected void Page_Load(object sender, EventArgs e)
         {
-            hotelid = MyCommFun.RequestInt("hotelid");
+            hotelid = MyCommFun.RequestInt("hotelid", GetHotelId());
             editetype = MyCommFun.QueryString("type");
-            if(!IsPostBack)
+            if (!IsPostBack)
             {
                 if (editetype == "edite")
                 {
@@ -90,9 +90,9 @@ namespace WeiXinPF.Web.admin.hotel
 
         protected void save_hotel_Click(object sender, EventArgs e)
         {
-              editetype = MyCommFun.QueryString("type");
-              Model.wx_userweixin weixin = GetWeiXinCode();
-              int wid = weixin.id;
+            editetype = MyCommFun.QueryString("type");
+            Model.wx_userweixin weixin = GetWeiXinCode();
+            int wid = weixin.id;
 
             if (editetype == "add")
             {
@@ -105,16 +105,16 @@ namespace WeiXinPF.Web.admin.hotel
                 //hotel.emailPws = this.emailPws.Text;
                 hotel.coverPic = this.coverPic.Text;
                 hotel.topPic = this.topPic.Text;
-                hotel.orderLimit = MyCommFun.Str2Int( this.orderLimit.Text);
-                hotel.listMode = Convert.ToBoolean( this.listMode.SelectedValue);
-                hotel.messageNotice =MyCommFun.Str2Int( this.messageNotice.Text);
+                hotel.orderLimit = MyCommFun.Str2Int(this.orderLimit.Text);
+                hotel.listMode = Convert.ToBoolean(this.listMode.SelectedValue);
+                hotel.messageNotice = MyCommFun.Str2Int(this.messageNotice.Text);
                 hotel.pwd = this.pwd.Text;
                 hotel.hotelIntroduct = this.hotelIntroduct.Value;
-                hotel.orderRemark = this.orderRemark.Value;           
+                hotel.orderRemark = this.orderRemark.Value;
                 hotel.createDate = DateTime.Now;
                 hotel.xplace = MyCommFun.Str2Decimal(this.txtLatXPoint.Text);
-                hotel.yplace=MyCommFun.Str2Decimal(this.txtLngYPoint.Text);
-    
+                hotel.yplace = MyCommFun.Str2Decimal(this.txtLngYPoint.Text);
+
 
                 int id = hotelBll.Add(hotel);
 
@@ -160,7 +160,7 @@ namespace WeiXinPF.Web.admin.hotel
                 hotel.hotelPhone = this.hotelPhone.Text;
                 hotel.mobilPhone = this.mobilPhone.Text;
                 hotel.noticeEmail = this.noticeEmail.Text;
-               // hotel.emailPws = this.emailPws.Text;
+                // hotel.emailPws = this.emailPws.Text;
                 hotel.coverPic = this.coverPic.Text;
                 hotel.topPic = this.topPic.Text;
                 hotel.orderLimit = MyCommFun.Str2Int(this.orderLimit.Text);
@@ -169,10 +169,10 @@ namespace WeiXinPF.Web.admin.hotel
                 hotel.pwd = this.pwd.Text;
                 hotel.hotelIntroduct = this.hotelIntroduct.Value;
                 hotel.orderRemark = this.orderRemark.Value;
-               // hotel.createDate = DateTime.Now;
+                // hotel.createDate = DateTime.Now;
                 hotel.xplace = MyCommFun.Str2Decimal(this.txtLatXPoint.Text);
                 hotel.yplace = MyCommFun.Str2Decimal(this.txtLngYPoint.Text);
-             
+
 
                 hotelBll.Update(hotel);
 

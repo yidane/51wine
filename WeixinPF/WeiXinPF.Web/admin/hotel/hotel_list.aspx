@@ -24,7 +24,7 @@
             <div id="floatHead" class="toolbar">
                 <div class="l-list">
                     <ul class="icon-list">
-                        <li><a class="icon-btn add" href="hotel_info.aspx?action=<%=WeiXinPF.Common.MXEnums.ActionEnum.Add %>&type=add" id="itemAddButton"><i></i><span>商户或门店入驻登记</span></a></li>
+                        <li><a class="icon-btn add" href="hotel_register.aspx?action=<%=MXEnums.ActionEnum.Add %>" id="itemAddButton"><i></i><span>商户或门店入驻登记</span></a></li>
                         <li><a class="all" href="javascript:;" onclick="checkAll(this);"><i></i><span>全选</span></a></li>
                         <li>
                             <asp:LinkButton ID="btnDelete" runat="server" CssClass="del" OnClientClick="return ExePostBack('btnDelete');" OnClick="btnDelete_Click"><i></i><span>删除</span></asp:LinkButton></li>
@@ -46,11 +46,11 @@
                     <thead>
                         <tr>
                             <th>选择</th>
-                            <th>商家名称</th>
-                            <th>地址</th>
-                            <th>电话</th>
-                            <th>创建时间</th>
-                            <th>外链代码</th>
+                            <th>编号</th>
+                            <th>名称</th>
+                            <th>运营人</th>
+                            <th>公司电话</th>
+                            <th>公司邮箱</th>
                             <th>操作</th>
                         </tr>
                     </thead>
@@ -63,27 +63,25 @@
                         <asp:HiddenField ID="hidId" Value='<%#Eval("id")%>' runat="server" />
                     </td>
                     <td>
+                        <%# Eval("HotelCode") %>
+                    </td>
+                    <td>
                         <%# Eval("hotelName") %>
                     </td>
                     <td>
-                        <%# Eval("hotelAddress") %>
+                        <%# Eval("Operator") %>
                     </td>
                     <td>
                         <%# Eval("hotelPhone") %>
                     </td>
                     <td>
-                        <%# Eval("createDate") %>
-                        
+                        <%# Eval("noticeEmail") %>
                     </td>
                     <td>
-                        <a href="javascript:;"><%=yuming%>/weixin/hotel/index.aspx?wid=<%=wid %>&hotelid=<%#Eval("id") %></a>
-                    </td>
-                    <td>
-                        <a href='hotel_dingdan_manage.aspx?hotelid=<%#Eval("id") %>'>订单管理</a>
-                        <a href='hotel_info.aspx?hotelid=<%#Eval("id") %>&type=edite'>商家设置</a>
-                        <a href='hotel_room.aspx?hotelid=<%#Eval("id") %>&action=<%=MXEnums.ActionEnum.Audit.ToString() %>'>房间设置</a>
-                        <%--      <a  href='hotel_form.aspx?hotelid=<%#Eval("id") %>' >表单设计</a>--%>
-                        <a href='hotel_dingdan_manage.aspx?hotelid=<%#Eval("id") %>'>打印机设置</a>
+                        <a href='hotel_register.aspx?hotelid=<%#Eval("id") %>&action=<%=MXEnums.ActionEnum.Edit.ToString() %>'>修改</a>
+                        <a href='hotel_admin_list.aspx?hotelid=<%#Eval("id") %>'>管理员设置</a>
+                        <a href='hotel_room.aspx?hotelid=<%#Eval("id") %>&action=<%=MXEnums.ActionEnum.Audit.ToString() %>'>商品信息审核</a>
+                        <a href='hotel_dingdan_manage.aspx?hotelid=<%#Eval("id") %>'>订单查看</a>
                     </td>
                 </tr>
             </ItemTemplate>

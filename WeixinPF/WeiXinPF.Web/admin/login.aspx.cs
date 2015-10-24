@@ -87,8 +87,8 @@ namespace WeiXinPF.Web.admin
             }
             else
             {
-                //餐饮 商铺管理员
-                if (IsShopAdmin(model.id))
+                //餐饮||酒店管理员
+                if (IsShopAdmin(model.id) || IsHotelAdmin(model.id))
                 {
                     Response.Redirect("index.aspx");
                 }
@@ -103,8 +103,8 @@ namespace WeiXinPF.Web.admin
             //餐饮 商铺管理员
             if (shopAdmin != null)
             {
-                Session[MXKeys.WEIXIN_DIANCAI_SHOPID] = shopAdmin.ShopId;
-                Utils.WriteCookie(MXKeys.WEIXIN_DIANCAI_SHOPID, "WeiXinPF", shopAdmin.ShopId.ToString());
+                //Session[MXKeys.WEIXIN_DIANCAI_SHOPID] = shopAdmin.ShopId;
+                //Utils.WriteCookie(MXKeys.WEIXIN_DIANCAI_SHOPID, "WeiXinPF", shopAdmin.ShopId.ToString());
 
                 return true;
             }
@@ -114,9 +114,30 @@ namespace WeiXinPF.Web.admin
 
             if (shopUser != null)
             {
-                Session[MXKeys.WEIXIN_DIANCAI_SHOPID] = shopUser.ShopId;
-                Utils.WriteCookie(MXKeys.WEIXIN_DIANCAI_SHOPID, "WeiXinPF", shopUser.ShopId.ToString());
+                //Session[MXKeys.WEIXIN_DIANCAI_SHOPID] = shopUser.ShopId;
+                //Utils.WriteCookie(MXKeys.WEIXIN_DIANCAI_SHOPID, "WeiXinPF", shopUser.ShopId.ToString());
 
+                return true;
+            }
+
+            return false;
+        }
+        private bool IsHotelAdmin(int id)
+        {
+            BLL.wx_hotel_admin dBll = new BLL.wx_hotel_admin();
+            Model.wx_hotel_admin hotelAdmin = dBll.GetModel(id);
+
+            //酒店管理员
+            if (hotelAdmin != null)
+            {
+                return true;
+            }
+
+            BLL.wx_hotel_user suBll = new BLL.wx_hotel_user();
+            Model.wx_hotel_user hotelUser = suBll.GetModel(id);
+
+            if (hotelUser != null)
+            {
                 return true;
             }
 

@@ -61,9 +61,7 @@
 <body class="mainbody">
     <form id="form1" runat="server">
         <div class="location">
-            <a href="hotel_list.aspx" class="home"><i></i><span>微酒店</span></a>
-            <i class="arrow"></i>
-            <span>商家设置</span>
+            <span>商户或门店信息设置</span>
         </div>
         <div class="line10"></div>
 
@@ -72,8 +70,8 @@
             <div id="floatHead" class="content-tab">
                 <div class="content-tab-ul-wrap">
                     <ul>
-                        <li><a href="javascript:;" onclick="tabs(this);" class="selected">商家设置</a></li>
-                        <li><a href="javascript:;" onclick="tabs(this);">商家图片</a></li>
+                        <li><a href="javascript:;" onclick="tabs(this);" class="selected">商户或门店信息</a></li>
+                        <li><a href="javascript:;" onclick="tabs(this);">商户或门店图片</a></li>
                         <asp:HiddenField ID="hidId" runat="server" Value="0" />
                     </ul>
                 </div>

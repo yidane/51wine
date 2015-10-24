@@ -14,7 +14,7 @@
     <style type="text/css">
         .badge {
             display: inline-block;
-            min-width: 10px;
+            min-width: 50px;
             padding: 5px 8px;
             font-size: 10px;
             line-height: 1;
@@ -31,20 +31,32 @@
         }
 
         .agree {
-            background-color: #5cb85c;
+            background-color: #428bca;
         }
 
         .refuse {
             background-color: #d9534f;
+        }
+
+        .publish {
+            background-color: #5cb85c;
         }
     </style>
 </head>
 <body class="mainbody">
     <form id="form1" runat="server">
         <div class="location">
-            <a href="hotel_list.aspx" class="home"><i></i><span>微酒店</span></a>
+            <% if (IsWeiXinCode())
+                { %>
+            <a href="hotel_list.aspx" class="home"><i></i><span>商户或门店列表</span></a>
             <i class="arrow"></i>
-            <span>房间类型信息</span>
+            <%}%>
+            <%
+                else
+                {%>
+
+            <%} %>
+            <span>商品管理</span>
         </div>
         <div class="toolbar-wrap">
             <div id="floatHead" class="toolbar">
@@ -77,7 +89,7 @@
                 </div>
             </div>
         </div>
-        <asp:Repeater ID="rptList" runat="server" OnItemCreated="rptList_ItemCreated" OnItemDataBound="rptList_ItemDataBound">
+        <asp:Repeater ID="rptList" runat="server" OnItemCommand="rptList_ItemCommand">
             <HeaderTemplate>
                 <table width="100%" border="0" cellspacing="0" cellpadding="0" class="ltable">
                     <thead>
@@ -105,9 +117,10 @@
                     <td><%# Eval("salePrice") %></td>
                     <td><%# Eval("StatusStr") %></td>
                     <td>
-                        <a href='hotel_room_info.aspx?roomid=<%#Eval("id") %>&action=<%=action %>&hotelid=<%=hotelid %>'>
-                            <%=action == MXEnums.ActionEnum.Audit.ToString() ? "审核" : "修改" %>
-                        </a>
+                        <asp:LinkButton ID="lbtEdit" runat="server" CommandName="Edit" CommandArgument='<%#Eval("id")%>'>修改</asp:LinkButton>
+                        <asp:LinkButton ID="lbtAudit" runat="server" CommandName="Audit" CommandArgument='<%#Eval("id")%>'>审核</asp:LinkButton>
+                        <asp:LinkButton ID="lbtPublish" runat="server" CommandName="Publish" CommandArgument='<%#Eval("id")%>'>发布</asp:LinkButton>
+                        <asp:LinkButton ID="lbtSoldOut" runat="server" CommandName="SoldOut" CommandArgument='<%#Eval("id")%>'>下架</asp:LinkButton>
                     </td>
                 </tr>
             </ItemTemplate>

@@ -38,6 +38,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
   </ItemGroup>
@@ -64,6 +65,8 @@
     <Compile Include="navigation.cs" />
     <Compile Include="plugs\ggkProc.cs" />
     <Compile Include="mail_template.cs" />
+    <Compile Include="plugs\hotel\wx_hotel_admin.cs" />
+    <Compile Include="plugs\hotel\wx_hotel_user.cs" />
     <Compile Include="plugs\wx_cards.cs" />
     <Compile Include="plugs\wx_cards_gl.cs" />
     <Compile Include="plugs\wx_diancai_admin.cs" />
@@ -87,14 +90,14 @@
     <Compile Include="plugs\wx_hb_haibao.cs" />
     <Compile Include="plugs\wx_hb_imggroup.cs" />
     <Compile Include="plugs\wx_hb_typeImgGroup.cs" />
-    <Compile Include="plugs\wx_hotels_info.cs" />
+    <Compile Include="plugs\hotel\wx_hotels_info.cs" />
+    <Compile Include="plugs\hotel\wx_hotel_form_control.cs" />
+    <Compile Include="plugs\hotel\wx_hotel_form_result.cs" />
+    <Compile Include="plugs\hotel\wx_hotel_pic.cs" />
+    <Compile Include="plugs\hotel\wx_hotel_room.cs" />
+    <Compile Include="plugs\hotel\wx_hotel_roompic.cs" />
+    <Compile Include="plugs\hotel\wx_hotel_room_manage.cs" />
     <Compile Include="plugs\wx_hotel_dingdan.cs" />
-    <Compile Include="plugs\wx_hotel_form_control.cs" />
-    <Compile Include="plugs\wx_hotel_form_result.cs" />
-    <Compile Include="plugs\wx_hotel_pic.cs" />
-    <Compile Include="plugs\wx_hotel_room.cs" />
-    <Compile Include="plugs\wx_hotel_roompic.cs" />
-    <Compile Include="plugs\wx_hotel_room_manage.cs" />
     <Compile Include="plugs\wx_my_tijian.cs" />
     <Compile Include="plugs\wx_my_user.cs" />
     <Compile Include="plugs\wx_mz_animate.cs" />

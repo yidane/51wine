@@ -21,12 +21,11 @@ namespace WeiXinPF.Web.admin.hotel
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            hotelid = MyCommFun.RequestInt("hotelid");
+            hotelid = MyCommFun.RequestInt("hotelid",GetHotelId());
             this.keywords = MXRequest.GetQueryString("keywords");
             this.pageSize = GetPageSize(10); //每页数量
             if (!Page.IsPostBack)
-            {
-                Model.wx_userweixin weixin = GetWeiXinCode();           
+            {         
                 RptBind(CombSqlTxt(keywords), "createDate desc,id desc");
             }
         }
@@ -34,10 +33,6 @@ namespace WeiXinPF.Web.admin.hotel
         #region 数据绑定=================================
         private void RptBind(string _strWhere, string _orderby)
         {
-
-            Model.wx_userweixin weixin = GetWeiXinCode();
-
-            //判断是否已经设置了微留言基本信息
             BLL.wx_hotel_dingdan sbll = new BLL.wx_hotel_dingdan();
 
             _strWhere = " hotelid=" + hotelid + " " + _strWhere;
@@ -45,7 +40,7 @@ namespace WeiXinPF.Web.admin.hotel
             this.page = MXRequest.GetQueryInt("page", 1);
             txtKeywords.Text = this.keywords;
             DataSet ds = gbll.GetList(this.pageSize, this.page, _strWhere, _orderby, out this.totalCount);
-            // DataSet ds = gbll.GetList( _strWhere);
+   
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
                 DataRow dr;
