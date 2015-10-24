@@ -39,6 +39,10 @@ namespace WeiXinPF.Web.weixin.KNSHotel
 
         public decimal price3 = 0;
 
+        public decimal totalyuanjia = 0;
+        public decimal ttaljiesheng = 0;
+        public decimal totalPrice = 0;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             hotelid = MyCommFun.RequestInt("hotelid");
@@ -94,6 +98,8 @@ namespace WeiXinPF.Web.weixin.KNSHotel
 
                 UseInstruction = room.UseInstruction;
                 RefundRule = room.RefundRule;
+
+                
             }
             DataSet dr = picbll.GetList(roomid);
             if(dr.Tables[0].Rows.Count >0)

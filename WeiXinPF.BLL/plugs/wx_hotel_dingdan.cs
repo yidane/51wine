@@ -234,6 +234,29 @@ namespace WeiXinPF.BLL
             return dal.GetLastUserModel(openid);
         }
 
-    }
+        /// <summary>
+        /// 支付完成后更新状态
+        /// </summary>
+        /// <param name="outTradeNo">订单号</param>
+	    public void PaySuccess(string outTradeNo)
+        {
+            var model = this.GetModel(outTradeNo);
+            if (model!=null)
+            {
+                this.Update(model.id, "3");
+            }
+	        
+	    }
+
+        /// <summary>
+        /// 根据订单号获取模型
+        /// </summary>
+        /// <param name="outTradeNo"></param>
+        /// <returns></returns>
+	    private WeiXinPF.Model.wx_hotel_dingdan GetModel(string outTradeNo)
+	    {
+            return dal.GetModel(outTradeNo);
+        }
+	}
 }
 

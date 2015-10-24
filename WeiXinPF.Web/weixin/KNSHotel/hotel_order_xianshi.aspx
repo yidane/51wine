@@ -240,10 +240,10 @@
                     </tr>
                 </table>
             </li>
-            <li class="nob" style="display: none">
+            <li class="nob" >
                 <table width="100%" border="0" cellspacing="0" cellpadding="0" class="kuang">
                     <tr>
-                        <th>现价</th>
+                        <th>单价</th>
                         <td class="userinfo price">￥<%=price %></td>
                     </tr>
                 </table>
@@ -278,10 +278,18 @@
             <%} %>
         </ul>
 
-         <div class="header">
-                    <span class="pCount"></span>
-                    <label><i>共计：</i><b id="totalPrice" class="duiqi"><%=PayAmount %></b><b class="duiqi">元</b></label>
-                </div>
+            <div class="footer-money">
+
+                                    <p>
+                                            <span class=" color-red">已优惠</span>
+                                                                                       <span  id="jiesheng" class="color-red discount-money">￥<%=totaljiesheng %></span>
+                                    <span>共</span>
+                                    <span  id="price" class="  total-money color-red">￥<%=totalPrice %></span>
+                                    <span  id="yuanjia" class="  cost-money">￥<%=totalyuanjia %></span>
+
+                                    </p>
+
+                                </div>
 
         <% if (isShowContent)
             {%>
@@ -364,7 +372,7 @@
             <% else if (BtnShowStatus == 2)
                 {%>
             <ul>
-                <li class="footerbtn"><a id="showcard" class="del right3">删除订单</a></li>
+                <li class="footerbtn"><a id="showcard" class="del right3">取消订单</a></li>
                 <li class="footerbtn"><a id="btn_payment" class="submit left3">微信支付</a></li>
             </ul>
             <div class="clr"></div>
@@ -534,9 +542,10 @@
                  $.post('hotel_info.ashx', submitData,
                       function (result) {
                          if (result.IsSuccess) {
-
+  document.location.href = 'hotel_order_paycallback.aspx?status=success&dingdanidnum='+dingdanidnum+
+  '&openid=<%=openid%>&hotelid=<%=hotelid%>&roomid=<%=roomid%>';
                       
-                        document.location.href = result.Data;
+                      //  document.location.href = result.Data;
                         //if (payResult) {
                         //    alert(data.content);
                         //    clearCache();

@@ -633,6 +633,28 @@ namespace WeiXinPF.DAL
                 return null;
             }
         }
+
+	    public Model.wx_hotel_dingdan GetModel(string outTradeNo)
+	    {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("select  top 1 id,hotelid,openid,oderName,orderNumber,wxOrderNumber,identityNumber,tel,arriveTime,leaveTime,roomType,orderTime,orderNum,price,orderStatus,isDelete,createDate,roomid,yuanjia,remark from wx_hotel_dingdan ");
+            strSql.Append(" where orderNumber=@orderNumber and isDelete='0' ");
+            SqlParameter[] parameters = {
+                    new SqlParameter("@orderNumber", SqlDbType.VarChar,50)
+            };
+            parameters[0].Value = outTradeNo;
+
+            WeiXinPF.Model.wx_hotel_dingdan model = new WeiXinPF.Model.wx_hotel_dingdan();
+            DataSet ds = DbHelperSQL.Query(strSql.ToString(), parameters);
+            if (ds.Tables[0].Rows.Count > 0)
+            {
+                return DataRowToModel(ds.Tables[0].Rows[0]);
+            }
+            else
+            {
+                return null;
+            }
+        }
 	}
 }
 

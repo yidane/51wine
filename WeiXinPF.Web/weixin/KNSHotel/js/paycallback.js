@@ -1,6 +1,8 @@
 ﻿//微信支付成功
 function wechatPayAfterSuccess(param) {
 
+    $("#paycallback").val("支付成功！");
+
     var dingdanidnum =getQueryString('dingdanidnum') ;
     var openid = getQueryString('openid');
     var hotelid = getQueryString('hotelid');
@@ -8,39 +10,73 @@ function wechatPayAfterSuccess(param) {
 
     var hotelUrl = getRootPath() + '/weixin/hotel/';
     var ajaxUrl = hotelUrl + 'hotel_info.ashx';
+
+    window.location.href = hotelUrl + "hotel_order.aspx?openid=" + openid +
+                 "&hotelid=" + hotelid + "&roomid=" + roomid;
     
-    var submitData = {
-
-        dingdanidnum: dingdanidnum,
-        myact: "dingdanPayed"
-    };
-    $.post(ajaxUrl, submitData,
-         function (data) {
-             if (data.ret == "ok") {
-                 alert(data.content);
-
-                 window.location.href = hotelUrl + "hotel_order.aspx?openid=" + openid +
-                     "&hotelid=" + hotelid + "&roomid="+roomid;
-
-             } else { alert(data.content); }
-         },
-   "json");
+//    var submitData = {
+//
+//        dingdanidnum: dingdanidnum,
+//        myact: "dingdanPayed"
+//    };
+//    $.post(ajaxUrl, submitData,
+//         function (data) {
+//             if (data.ret == "ok") {
+//                 alert(data.content);
+//
+//                 window.location.href = hotelUrl + "hotel_order.aspx?openid=" + openid +
+//                     "&hotelid=" + hotelid + "&roomid="+roomid;
+//
+//             } else { alert(data.content); }
+//         },
+//   "json");
      
 }
 
 //微信支付失败
 function wechatPayAfterFail(param) {
+    $("#paycallback").val("支付失败！");
 
+    var dingdanidnum = getQueryString('dingdanidnum');
+    var openid = getQueryString('openid');
+    var hotelid = getQueryString('hotelid');
+    var roomid = getQueryString('roomid');
+
+    var hotelUrl = getRootPath() + '/weixin/hotel/'; 
+
+    window.location.href = hotelUrl + "hotel_order_xianshi.aspx?dingdanid="+dingdanidnum +"&openid=" + openid +
+                 "&hotelid=" + hotelid + "&roomid=" + roomid;
 }
 
 //微信支付取消
 function wechatPayAfterCancel(param) {
+    $("#paycallback").val("支付取消！");
 
+    var dingdanidnum = getQueryString('dingdanidnum');
+    var openid = getQueryString('openid');
+    var hotelid = getQueryString('hotelid');
+    var roomid = getQueryString('roomid');
+
+    var hotelUrl = getRootPath() + '/weixin/hotel/'; 
+
+    window.location.href = hotelUrl + "hotel_order_xianshi.aspx?dingdanid=" + dingdanidnum + "&openid=" + openid +
+                 "&hotelid=" + hotelid + "&roomid=" + roomid;
 }
-
+ 
 //微信支付完成
 function wechatPayAfterComplete(param) {
+    $("#paycallback").val("支付完成！");
 
+    var dingdanidnum = getQueryString('dingdanidnum');
+    var openid = getQueryString('openid');
+    var hotelid = getQueryString('hotelid');
+    var roomid = getQueryString('roomid');
+
+    var hotelUrl = getRootPath() + '/weixin/hotel/';
+    var ajaxUrl = hotelUrl + 'hotel_info.ashx';
+
+    window.location.href = hotelUrl + "hotel_order.aspx?openid=" + openid +
+                 "&hotelid=" + hotelid + "&roomid=" + roomid;
 }
 
 
