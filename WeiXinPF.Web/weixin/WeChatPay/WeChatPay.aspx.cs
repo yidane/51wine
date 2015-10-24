@@ -44,24 +44,13 @@ namespace WeiXinPF.Web.weixin.WeChatPay
 
                 if (payDataModel != null)
                 {
-                    //生成脚本注册参数
-                    string errorMessage = string.Empty;
-
-                    if (RegisterJWeiXin(payDataModel.wid, out errorMessage))
-                    {
-                        //赋值支付参数
-                        wid = payDataModel.wid;
-                        body = payDataModel.body;
-                        attach = payDataModel.attach;
-                        out_trade_no = payDataModel.out_trade_no;
-                        total_fee = payDataModel.total_fee;
-                        openid = payDataModel.openid;
-                    }
-                }
-                else
-                {
-                    Response.Clear();
-                    Response.Write("无效的参数");
+                    //赋值支付参数
+                    wid = payDataModel.wid;
+                    body = payDataModel.body;
+                    attach = payDataModel.attach;
+                    out_trade_no = payDataModel.out_trade_no;
+                    total_fee = payDataModel.total_fee;
+                    openid = payDataModel.openid;
                 }
             }
             else

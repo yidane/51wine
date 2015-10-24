@@ -21,7 +21,7 @@ namespace WeiXinPF.WeiXinComm
 
             var port = WebHelper.GetHostPort();
 
-            return string.Format(@"{0}weixin/WeChatPay/WeChatPay.aspx?payData={1}&ticket={2}", port, GetPayData(payData), ticket);
+            return string.Format(@"{0}weixin/wechatpay/wechatpay.aspx?payData={1}&ticket={2}", port, GetPayData(payData), ticket);
         }
 
         /// <summary>
