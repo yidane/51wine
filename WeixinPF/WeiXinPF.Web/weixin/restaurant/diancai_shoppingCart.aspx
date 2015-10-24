@@ -223,13 +223,7 @@
                 $.post('diancai_login.ashx?openid=<%=openid%>&shopid=<%=shopid%>&wid=<%=wid%>', submitData,
                 function (result) {
                     if (result.IsSuccess) {
-
-                        clearCache();
                         document.location.href = result.Data;
-                        //if (payResult) {
-                        //    alert(data.content);
-                        //    clearCache();
-                        //}
                     } else {
                         alert(data.content); }
                 },

@@ -7338,6 +7338,13 @@
     <Compile Include="weixin\qiangpiao\uProcess.ashx.cs">
       <DependentUpon>uProcess.ashx</DependentUpon>
     </Compile>
+    <Compile Include="weixin\restaurant\AfterPay.aspx.cs">
+      <DependentUpon>AfterPay.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="weixin\restaurant\AfterPay.aspx.designer.cs">
+      <DependentUpon>AfterPay.aspx</DependentUpon>
+    </Compile>
     <Compile Include="weixin\restaurant\caidan_guanyu.aspx.cs">
       <DependentUpon>caidan_guanyu.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -8186,6 +8193,7 @@
     <Content Include="weixin\map\js\L.Control.Locate.min.js" />
     <Content Include="weixin\map\js\PoiViewModel.js" />
     <Content Include="weixin\map\poilist.html" />
+    <Content Include="weixin\restaurant\AfterPay.aspx" />
     <Content Include="weixin\restaurant\css\swiper.min.css" />
     <Content Include="weixin\restaurant\diancai_OrderList.aspx" />
     <Content Include="weixin\restaurant\diancai_refund.aspx" />

@@ -119,6 +119,7 @@ namespace WeiXinPF.Web.weixin.restaurant
                     //this.jsonDict.Add("orderNumber", order.orderNumber);
                     //context.Response.Write(MyCommFun.getJsonStr(this.jsonDict));
 
+                    var shopInfo = new BLL.wx_diancai_shopinfo().GetModel(this.shopid);
                     var entity = new UnifiedOrderEntity
                         {
                             OrderId = order.id.ToString(),
@@ -126,13 +127,15 @@ namespace WeiXinPF.Web.weixin.restaurant
                             total_fee = order.payAmount == null ? 0 : (int)order.payAmount,
                             out_trade_no = order.orderNumber,
                             openid = openid,
-                            body = new BLL.wx_diancai_shopinfo().GetModel(this.shopid).hotelName,
+                            body = shopInfo.hotelName,
                             PayModuleID = (int)PayModuleEnum.Restaurant,
-                            PayComplete = string.Format("../restaurant/diancai_oder.aspx?openid={0}&type=pay", openid)
+                            PayComplete = "../restaurant/AfterPay.aspx"
                         };
 
                     entity.Extra.Add("content", orderProcessResult.Message);
                     entity.Extra.Add("shopname", new BLL.wx_diancai_shopinfo().GetModel(this.shopid).hotelName);
+                    entity.Extra.Add("shopid", shopid.ToString());
+                    entity.Extra.Add("wid", shopInfo.wid.ToString());
 
                     var ticket = EncryptionManager.CreateIV();
                     var payData = EncryptionManager.AESEncrypt(entity.ToJson(), ticket);
