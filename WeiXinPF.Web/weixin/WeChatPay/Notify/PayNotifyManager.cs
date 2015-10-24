@@ -45,6 +45,7 @@ namespace WeiXinPF.Web.weixin.WeChatPay.Notify
             payNotifyInfo.cash_fee_type = paymentNotify.cash_fee_type;
             payNotifyInfo.coupon_count = paymentNotify.coupon_count;
             payNotifyInfo.coupon_fee = paymentNotify.coupon_fee;
+            payNotifyInfo.CreateTime = DateTime.Now;
             payNotifyInfo.device_info = paymentNotify.device_info;
             payNotifyInfo.err_code = paymentNotify.err_code;
             payNotifyInfo.err_code_des = paymentNotify.err_code_des;

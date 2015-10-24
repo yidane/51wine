@@ -108,6 +108,10 @@
     <Compile Include="Migrations\201510240728174_yidaneforpay1.Designer.cs">
       <DependentUpon>201510240728174_yidaneforpay1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201510240740497_yidaneforpay2.cs" />
+    <Compile Include="Migrations\201510240740497_yidaneforpay2.Designer.cs">
+      <DependentUpon>201510240740497_yidaneforpay2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Payment\PaymentInfo.cs" />
     <Compile Include="Payment\PayNotifyInfo.cs" />
@@ -163,6 +167,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201510240728174_yidaneforpay1.resx">
       <DependentUpon>201510240728174_yidaneforpay1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510240740497_yidaneforpay2.resx">
+      <DependentUpon>201510240740497_yidaneforpay2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />

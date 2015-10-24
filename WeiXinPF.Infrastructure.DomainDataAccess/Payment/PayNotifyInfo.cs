@@ -60,6 +60,8 @@ namespace WeiXinPF.Infrastructure.DomainDataAccess.Payment
         public string trade_type { get; set; }
         [MaxLength(50)]
         public string transaction_id { get; set; }
+        [Required]
+        public DateTime CreateTime { get; set; }
 
         public void Add()
         {
