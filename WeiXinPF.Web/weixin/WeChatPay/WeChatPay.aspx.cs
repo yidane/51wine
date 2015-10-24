@@ -52,6 +52,11 @@ namespace WeiXinPF.Web.weixin.WeChatPay
                     total_fee = payDataModel.total_fee;
                     openid = payDataModel.openid;
                     OrderID = payDataModel.OrderId;
+
+                    PayComplete = string.Format("{0}{1}{2}&payStatus=",
+                                                                        payDataModel.PayComplete,
+                                                                        payDataModel.PayComplete.IndexOf("?", System.StringComparison.Ordinal) > 0 ? "&" : "?",
+                                                                        Request.Url.Query.Substring(1));
                 }
             }
             else

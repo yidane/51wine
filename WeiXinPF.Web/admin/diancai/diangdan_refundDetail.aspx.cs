@@ -105,8 +105,17 @@ namespace WeiXinPF.Web.admin.diancai
                     tuidanBuilder.AppendFormat("<tr><td>退单人：{0}</td></tr>", result.Tables[1].Rows[0]["customerName"]);
                     tuidanBuilder.AppendFormat("<tr><td>电话：{0}</td></tr>", result.Tables[1].Rows[0]["customerTel"]);
                     var refundStatus = Convert.ToInt32(result.Tables[1].Rows[0]["refundStatus"]);
+                    var refundStatusDict = StatusManager.DishStatus.GetStatusDict(refundStatus);
+                    //设置操作权限，只有等待退单的状态才会显示操作按钮
+                    if (refundStatusDict.StatusID == StatusManager.DishStatus.PreRefund.StatusID)
+                    {
+                        this.btnAgreeRefund.Visible = true;
+                        this.btnDisAgreeRefund.Visible = true;
+                        this.btnAgreeRefund.Enabled = true;
+                        this.btnDisAgreeRefund.Enabled = true;
+                    }
 
-                    tuidanBuilder.AppendFormat("<tr><td>退单状态：<em  style='width:70px;' class='{0}'>{1}</em></td></tr>", "ok", StatusManager.DishStatus.GetStatusDict(refundStatus).StatusName);
+                    tuidanBuilder.AppendFormat("<tr><td>退单状态：<em  style='width:70px;' class='{0}'>{1}</em></td></tr>", "ok", refundStatusDict.StatusName);
                 }
                 else
                 {
@@ -159,11 +168,20 @@ namespace WeiXinPF.Web.admin.diancai
 
                     var refundInfo = TenPayV3.Refund(requestHandler.ParseXML(), string.Format(@"{0}{1}", AppDomain.CurrentDomain.BaseDirectory, payInfo.certInfoPath), payInfo.cerInfoPwd);
                     var refundOrderResponse = new RefundOrderResponse(refundInfo);
+                    if (refundOrderResponse.IsSuccess)
+                    {
+                        new BLL.wx_diancai_tuidan_manage().RefundComplete(refundCode);
+                        Response.Redirect("diancai_dingdanRefund_manage.aspx");
+                    }
+                    else
+                    {
+                        List();
+                    }
                 }
             }
             catch (Exception exception)
             {
-
+                List();
             }
         }
 
@@ -171,7 +189,8 @@ namespace WeiXinPF.Web.admin.diancai
         {
             try
             {
-
+                new BLL.wx_diancai_tuidan_manage().RefundFail(refundCode);
+                Response.Redirect("diancai_dingdanRefund_manage.aspx");
             }
             catch (Exception exception)
             {

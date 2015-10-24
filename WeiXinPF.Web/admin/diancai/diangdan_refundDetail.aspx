@@ -73,16 +73,16 @@
 <body class="mainbody">
     <form id="form1" runat="server">
         <div class="location">
-           <% if (IsWeiXinCode())
-                {%>
-            <a    href="#" class="home"><i></i><span>商户或门店列表</span></a>
-              <i class="arrow"></i>
-                <%}%>
-                <%
-                else
-                {%>
-               
-                <%} %> <span><a href="dingdan_manage.aspx?shopid=<%=shopid %>">退单管理</a></span>
+            <% if (IsWeiXinCode())
+               {%>
+            <a href="#" class="home"><i></i><span>商户或门店列表</span></a>
+            <i class="arrow"></i>
+            <%}%>
+            <%
+               else
+               {%>
+
+            <%} %> <span><a href="dingdan_manage.aspx?shopid=<%=shopid %>">退单管理</a></span>
             <i class="arrow"></i>
             <span>退单详情</span>
         </div>
@@ -128,8 +128,8 @@
 
         <div class="page-footer">
             <div class="btn-list" style="text-align: center">
-                <asp:Button ID="btnAgreeRefund" runat="server" CssClass="btn" Text="同意退单" OnClick="btnAgreeRefund_Click" />
-                <asp:Button ID="btnDisAgreeRefund" runat="server" CssClass="btn" Text="不同意退单" OnClick="btnDisAgreeRefund_Click" />
+                <asp:Button ID="btnAgreeRefund" runat="server" CssClass="btn" Text="同意退单" OnClick="btnAgreeRefund_Click" Enabled="False" Visible="False" />
+                <asp:Button ID="btnDisAgreeRefund" runat="server" CssClass="btn" Text="不同意退单" OnClick="btnDisAgreeRefund_Click" Enabled="False" Visible="False" />
             </div>
             <div class="clear"></div>
         </div>

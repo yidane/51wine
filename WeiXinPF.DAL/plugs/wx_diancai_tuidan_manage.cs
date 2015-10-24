@@ -80,7 +80,7 @@ namespace WeiXinPF.DAL
         }
 
         /// <summary>
-        /// 退款成功
+        /// 申请退款
         /// </summary>
         /// <param name="refundId"></param>
         public void Refund(int refundId)
@@ -89,6 +89,36 @@ namespace WeiXinPF.DAL
             SqlParameter[] sqlparams =
                 {
                     new SqlParameter(){ParameterName = "@RefundID",SqlDbType = SqlDbType.Int,Value = refundId} 
+                };
+
+            DbHelperSQL.ExecuteSql(sql, sqlparams);
+        }
+
+        /// <summary>
+        /// 退款完成
+        /// </summary>
+        /// <param name="refundCode"></param>
+        public void RefundComplete(string refundCode)
+        {
+            const string sql = "UPDATE dbo.wx_diancai_tuidan_manage SET refundStatus=3 WHERE refundcode=@RefundCode";
+            SqlParameter[] sqlparams =
+                {
+                    new SqlParameter(){ParameterName = "@RefundCode",SqlDbType = SqlDbType.NVarChar,Value = refundCode} 
+                };
+
+            DbHelperSQL.ExecuteSql(sql, sqlparams);
+        }
+
+        /// <summary>
+        /// 不同意退款
+        /// </summary>
+        /// <param name="refundCode"></param>
+        public void RefundFail(string refundCode)
+        {
+            const string sql = "UPDATE dbo.wx_diancai_tuidan_manage SET refundStatus=4 WHERE refundcode=@RefundCode";
+            SqlParameter[] sqlparams =
+                {
+                    new SqlParameter(){ParameterName = "@RefundCode",SqlDbType = SqlDbType.NVarChar,Value = refundCode} 
                 };
 
             DbHelperSQL.ExecuteSql(sql, sqlparams);
