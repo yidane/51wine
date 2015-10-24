@@ -66,9 +66,9 @@ namespace WeiXinPF.Web.weixin.KNSHotel
                     case 0:
                         return Pending;
                     case 1:
-                        return Refused;
+                        return Accepted ;
                     case 2:
-                        return Accepted;
+                        return Refused;
                     case 3:
                         return Payed;
                     case 4:
