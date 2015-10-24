@@ -127,7 +127,8 @@ namespace WeiXinPF.Web.weixin.restaurant
                             out_trade_no = order.orderNumber,
                             openid = openid,
                             body = "买了东西",
-                            PayModuleID = (int)PayModuleEnum.Restaurant
+                            PayModuleID = (int)PayModuleEnum.Restaurant,
+                            PayComplete = string.Format("../restaurant/diancai_oder.aspx?openid={0}&type=pay", openid)
                         };
 
                     entity.Extra.Add("content", orderProcessResult.Message);

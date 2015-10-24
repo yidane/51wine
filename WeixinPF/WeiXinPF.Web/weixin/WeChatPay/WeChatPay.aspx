@@ -12,6 +12,7 @@
     <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
     <script type="text/javascript">
         var WeChatPayIsReady = true;
+        var completeUrl = "<%=PayComplete%>";
 
         function Pay() {
             var unifiedOrderRequest = {
@@ -42,12 +43,18 @@
                                 paySign: result.Data.paySign,
                                 success: function (res) {
                                     //document.location.href = paySuccess;
+                                    completeUrl = completeUrl + "success";
+                                    document.location.href = completeUrl;
                                 },
                                 fail: function (res) {
                                     //document.location.href = payFail;
+                                    completeUrl = completeUrl + "fail";
+                                    document.location.href = completeUrl;
                                 },
                                 cancel: function (res) {
                                     //document.location.href = payCancel;
+                                    completeUrl = completeUrl + "cancel";
+                                    document.location.href = completeUrl;
                                 },
                                 complete: function (res) {
                                     //不做处理
