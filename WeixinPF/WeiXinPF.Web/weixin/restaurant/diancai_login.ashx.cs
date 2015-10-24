@@ -126,7 +126,7 @@ namespace WeiXinPF.Web.weixin.restaurant
                             total_fee = order.payAmount == null ? 0 : (int)order.payAmount,
                             out_trade_no = order.orderNumber,
                             openid = openid,
-                            body = "买了东西",
+                            body = new BLL.wx_diancai_shopinfo().GetModel(this.shopid).hotelName),
                             PayModuleID = (int)PayModuleEnum.Restaurant,
                             PayComplete = string.Format("../restaurant/diancai_oder.aspx?openid={0}&type=pay", openid)
                         };
@@ -200,8 +200,7 @@ namespace WeiXinPF.Web.weixin.restaurant
                 return memberResult;
             }
 
-            string goodsDetail = string.Empty;
-            return this.SaveOrder(out goodsDetail);
+            return this.SaveOrder();
         }
 
         /// <summary>
@@ -313,11 +312,11 @@ namespace WeiXinPF.Web.weixin.restaurant
         /// <returns>
         /// The <see cref="ProcessResult"/>.
         /// </returns>
-        private ProcessResult SaveOrder(out string goodsDetail)
+        private ProcessResult SaveOrder()
         {
             var bll = new BLL.wx_diancai_dingdan_caiping();
             Model.wx_diancai_dingdan_manage order = null;
-            goodsDetail = string.Empty;
+
             try
             {
                 using (var scope = new TransactionScope())
