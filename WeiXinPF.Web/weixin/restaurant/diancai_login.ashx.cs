@@ -134,8 +134,7 @@ namespace WeiXinPF.Web.weixin.restaurant
                     entity.Extra.Add("shopname", new BLL.wx_diancai_shopinfo().GetModel(this.shopid).hotelName);
 
                     var ticket = EncryptionManager.CreateIV();
-                    var text = JSONHelper.Serialize(entity);
-                    var payData = EncryptionManager.AESEncrypt(text, ticket);
+                    var payData = EncryptionManager.AESEncrypt(entity.ToJson(), ticket);
 
                     context.Response.Write(AjaxResult.Success(PayHelper.GetPayUrl(payData, ticket)));
                 }

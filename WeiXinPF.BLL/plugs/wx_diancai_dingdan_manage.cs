@@ -209,9 +209,9 @@ namespace WeiXinPF.BLL
             dal.RefundDiancai(shopinfiId, openid, wid, refundAmount, dingdanid, caiid, caipinIdList);
         }
 
-        public void PaySuccess(string prepayid)
+        public void PaySuccess(string orderNumber)
         {
-            dal.PaySuccess(prepayid);
+            dal.PaySuccess(orderNumber);
         }
 
         public bool Update(int id, decimal payAmount)

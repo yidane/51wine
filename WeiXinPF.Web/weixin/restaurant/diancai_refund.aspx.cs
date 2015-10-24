@@ -85,7 +85,7 @@ namespace WeiXinPF.Web.weixin.restaurant
                 if (caiidListArr.Length >= refundCount)
                 {
                     var refundCaiidList = new List<int>();
-                    for (int index = 0; index < caiidListArr.Length; index++)
+                    for (int index = 0; index < refundCount; index++)
                     {
                         refundCaiidList.Add(Convert.ToInt32(caiidListArr[index]));
                     }

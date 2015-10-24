@@ -776,14 +776,14 @@ namespace WeiXinPF.DAL
         /// <summary>
         /// 支付完成
         /// </summary>
-        /// <param name="prepayid"></param>
-        public void PaySuccess(string prepayid)
+        /// <param name="orderNumber"></param>
+        public void PaySuccess(string orderNumber)
         {
             //状态为2表示退款中
-            var sql = "UPDATE dbo.wx_diancai_dingdan_manage SET payStatus=1 WHERE orderNumber=(SELECT OrderId FROM [dbo].[wx_Payment_PaymentInfo] WHERE WXOrderCode=@PrepayID)";
+            const string sql = "UPDATE dbo.wx_diancai_dingdan_manage SET payStatus=1 WHERE orderNumber=@OrderNumber";
             SqlParameter[] sqlparams =
                 {
-                    new SqlParameter() {ParameterName = "@PrepayID", SqlDbType = SqlDbType.NVarChar, Value = prepayid}
+                    new SqlParameter() {ParameterName = "@OrderNumber", SqlDbType = SqlDbType.NVarChar, Value = orderNumber}
                 };
 
             DbHelperSQL.ExecuteSql(sql, sqlparams);
