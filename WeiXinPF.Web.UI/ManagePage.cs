@@ -209,21 +209,25 @@ namespace WeiXinPF.Web.UI
             {
                 return 0;
             }
-            //if (Session[MXKeys.WEIXIN_DIANCAI_SHOPID] != null)
-            //{
-            //    return MyCommFun.Obj2Int(Session[MXKeys.WEIXIN_DIANCAI_SHOPID]);
-            //}
-            //else
-            //{
-            //    //检查Cookies
-            //    string shopId = Utils.GetCookie(MXKeys.WEIXIN_DIANCAI_SHOPID, "WeiXinPF");
-            //    if (shopId != "")
-            //    {
-            //        Session[MXKeys.WEIXIN_DIANCAI_SHOPID] = shopId;
-            //        return MyCommFun.Str2Int(shopId);
-            //    }
-            //    return 0;
-            //}
+        }
+
+        public int GetHotelId()
+        {
+            if (IsAdminLogin())
+            {
+                Model.manager admin = GetAdminInfo();
+                BLL.wx_hotel_admin hotelAdminBll = new BLL.wx_hotel_admin();
+                Model.wx_hotel_admin hotelAdmin = hotelAdminBll.GetModel(admin.id);
+                if (hotelAdmin != null)
+                {
+                    return hotelAdmin.HotelId;
+                }
+                return 0;
+            }
+            else
+            {
+                return 0;
+            }
         }
     }
 }

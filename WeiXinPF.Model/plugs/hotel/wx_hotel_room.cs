@@ -141,7 +141,7 @@ namespace WeiXinPF.Model
         /// <summary>
         /// 状态不确定
         /// </summary>
-        None=0,
+        None = 0,
         /// <summary>
         /// 提交审核
         /// </summary>
@@ -154,8 +154,17 @@ namespace WeiXinPF.Model
         /// <summary>
         /// 审核不通过
         /// </summary>
-        Refuse = 3
+        Refuse = 3,
 
+        /// <summary>
+        ///  发布
+        /// </summary>
+        Publish = 4,
+
+        /// <summary>
+        /// 下架
+        /// </summary>
+        SoldOut = 5
     }
 }
 

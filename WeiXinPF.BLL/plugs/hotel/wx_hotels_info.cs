@@ -96,8 +96,7 @@ namespace WeiXinPF.BLL
         /// </summary>
         public List<WeiXinPF.Model.wx_hotels_info> GetModelList(string strWhere)
         {
-            DataSet ds = dal.GetList(strWhere);
-            return DataTableToList(ds.Tables[0]);
+            return dal.GetModelList(strWhere);
         }
         /// <summary>
         /// 获得数据列表

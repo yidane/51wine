@@ -25,9 +25,10 @@ namespace WeiXinPF.Web.admin.hotel
         protected string action = MXEnums.ActionEnum.Edit.ToString();
         protected void Page_Load(object sender, EventArgs e)
         {
+            hotelid = MyCommFun.RequestInt("hotelid", GetHotelId());
+
             action = MyCommFun.QueryString("action");
             keywords = MyCommFun.QueryString("keywords");
-            hotelid = MyCommFun.RequestInt("hotelid");
             page = MXRequest.GetQueryInt("page", 1);
             pageSize = GetPageSize(10); //每页数量
 
@@ -52,26 +53,36 @@ namespace WeiXinPF.Web.admin.hotel
 
                 ds.Tables[0].Columns.Add(new DataColumn("StatusStr", typeof(string)));
                 int count = ds.Tables[0].Rows.Count;
+                Model.RoomStatus status=Model.RoomStatus.None;
                 for (int i = 0; i < count; i++)
                 {
                     dr = ds.Tables[0].Rows[i];
-                    if (dr.Field<int>("Status") == 1)
+                    status = (Model.RoomStatus)Enum.Parse(typeof(Model.RoomStatus), dr.Field<int>("Status").ToString());
+
+                    switch (status)
                     {
-                        dr["StatusStr"] = "<span class=\"badge sbumit\">提交审核</span>";
-                    }
-                    else if (dr.Field<int>("Status") == 2)
-                    {
-                        dr["StatusStr"] = "<span class=\"badge agree\">审核通过</span>";
-                    }
-                    else if (dr.Field<int>("Status") == 3)
-                    {
-                        dr["StatusStr"] = "<span class=\"badge refuse\">审核不通过</span>";
+                        case Model.RoomStatus.Submit:
+                            dr["StatusStr"] = "<span class=\"badge sbumit\">提交审核</span>";
+                            break;
+                        case Model.RoomStatus.Agree:
+                            dr["StatusStr"] = "<span class=\"badge agree\">审核通过</span>";
+                            break;
+                        case Model.RoomStatus.Refuse:
+                            dr["StatusStr"] = "<span class=\"badge refuse\">审核不通过</span>";
+                            break;
+                        case Model.RoomStatus.Publish:
+                            dr["StatusStr"] = "<span class=\"badge publish\">已发布</span>";
+                            break;
+                        case Model.RoomStatus.SoldOut:
+                            dr["StatusStr"] = "<span class=\"badge\">已下架</span>";
+                            break;
                     }
                 }
                 ds.AcceptChanges();
             }
             this.rptList.DataSource = ds;
             this.rptList.DataBind();
+            EnableOperate();
 
             //绑定页码
             txtPageNum.Text = this.pageSize.ToString();
@@ -171,28 +182,29 @@ namespace WeiXinPF.Web.admin.hotel
                 CheckBox cb = (CheckBox)rptList.Items[i].FindControl("chkId");
                 if (cb.Checked)
                 {
-                    Model.wx_hotel_room model = roomBll.GetModel(id);
-                    model.Status = Model.RoomStatus.Agree;
+                    //Model.wx_hotel_room model = roomBll.GetModel(id);
+                    //model.Status = Model.RoomStatus.Agree;
 
                     try
                     {
-                        using (TransactionScope scope = new TransactionScope())
-                        {
-                            roomBll.Update(model);
+                        manageBll.ManageRoom(id, Model.RoomStatus.Agree, GetAdminInfo().id, "审核通过", "");
+                        //using (TransactionScope scope = new TransactionScope())
+                        //{
+                        //    roomBll.Update(model);
 
-                            Model.wx_hotel_room_manage manageInfo = new Model.wx_hotel_room_manage();
-                            manageInfo.RoomId = model.id;
-                            manageInfo.Operator = GetAdminInfo().id;
-                            manageInfo.OperateName = "审核通过";
-                            manageInfo.OperateTime = DateTime.Now;
-                            manageInfo.Comment = "通过啊啊啊啊啊啊啊";
-                            manageBll.Add(manageInfo);
+                        //    Model.wx_hotel_room_manage manageInfo = new Model.wx_hotel_room_manage();
+                        //    manageInfo.RoomId = model.id;
+                        //    manageInfo.Operator = GetAdminInfo().id;
+                        //    manageInfo.OperateName = "审核通过";
+                        //    manageInfo.OperateTime = DateTime.Now;
+                        //    manageInfo.Comment = "通过啊啊啊啊啊啊啊";
+                        //    manageBll.Add(manageInfo);
 
-                            scope.Complete();
-                            sucCount += 1;
-                        }
+                        //scope.Complete();
+                        sucCount += 1;
+                        //}
                     }
-                    catch(Exception ex)
+                    catch (Exception ex)
                     {
                         errorCount += 1;
                     }
@@ -218,26 +230,27 @@ namespace WeiXinPF.Web.admin.hotel
                 CheckBox cb = (CheckBox)rptList.Items[i].FindControl("chkId");
                 if (cb.Checked)
                 {
-                    Model.wx_hotel_room model = roomBll.GetModel(id);
-                    model.Status = Model.RoomStatus.Refuse;
+                    //Model.wx_hotel_room model = roomBll.GetModel(id);
+                    //model.Status = Model.RoomStatus.Refuse;
 
                     try
                     {
-                        using (TransactionScope scope = new TransactionScope())
-                        {
-                            roomBll.Update(model);
+                        manageBll.ManageRoom(id, Model.RoomStatus.Refuse, GetAdminInfo().id, "审核不通过", "");
+                        //using (TransactionScope scope = new TransactionScope())
+                        //{
+                        //    roomBll.Update(model);
 
-                            Model.wx_hotel_room_manage manageInfo = new Model.wx_hotel_room_manage();
-                            manageInfo.RoomId = model.id;
-                            manageInfo.Operator = GetAdminInfo().id;
-                            manageInfo.OperateName = "审核不通过";
-                            manageInfo.OperateTime = DateTime.Now;
-                            manageInfo.Comment = "不通过啊啊啊啊啊";
-                            manageBll.Add(manageInfo);
+                        //    Model.wx_hotel_room_manage manageInfo = new Model.wx_hotel_room_manage();
+                        //    manageInfo.RoomId = model.id;
+                        //    manageInfo.Operator = GetAdminInfo().id;
+                        //    manageInfo.OperateName = "审核不通过";
+                        //    manageInfo.OperateTime = DateTime.Now;
+                        //    manageInfo.Comment = "不通过啊啊啊啊啊";
+                        //    manageBll.Add(manageInfo);
 
-                            scope.Complete();
-                            sucCount += 1;
-                        }
+                        //    scope.Complete();
+                        sucCount += 1;
+                        //}
                     }
                     catch (Exception ex)
                     {
@@ -252,7 +265,7 @@ namespace WeiXinPF.Web.admin.hotel
 
         private void SetControl()
         {
-            if (action == MXEnums.ActionEnum.View.ToString())
+            if (action == MXEnums.ActionEnum.Edit.ToString())
             {
                 barAdd.Visible = true;
                 barDelete.Visible = true;
@@ -270,23 +283,85 @@ namespace WeiXinPF.Web.admin.hotel
             }
         }
 
-        protected void rptList_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        private void EnableOperate()
         {
-            var checkbox = e.Item.FindControl("chkId") as CheckBox;
-            if (checkbox != null)
+            for (int index = 0; index < rptList.Items.Count; index++)
             {
-                int id = Convert.ToInt32(((HiddenField)e.Item.FindControl("hidId")).Value);
+                int id = Convert.ToInt32(((HiddenField)rptList.Items[index].FindControl("hidId")).Value);
+                CheckBox cb = (CheckBox)rptList.Items[index].FindControl("chkId");
+                LinkButton lbtEidt = rptList.Items[index].FindControl("lbtEdit") as LinkButton;
+                LinkButton lbtAudit = rptList.Items[index].FindControl("lbtAudit") as LinkButton;
+                LinkButton lbtPublish = rptList.Items[index].FindControl("lbtPublish") as LinkButton;
+                LinkButton lbtSoldOut = rptList.Items[index].FindControl("lbtSoldOut") as LinkButton;
                 Model.wx_hotel_room room = roomBll.GetModel(id);
-                if (room.Status != Model.RoomStatus.Submit)
+
+                lbtPublish.Visible = false;
+                lbtSoldOut.Visible = false;
+                lbtAudit.Visible = false;
+                lbtEidt.Visible = false;
+                cb.Enabled = false;
+                switch (room.Status)
                 {
-                    checkbox.Enabled = false;
+                    case Model.RoomStatus.Submit:
+                        if (action == MXEnums.ActionEnum.Audit.ToString())
+                        {
+                            cb.Enabled = true;
+                            lbtAudit.Visible = true;
+                        }
+                        else if (action == MXEnums.ActionEnum.Edit.ToString())
+                        {
+                            lbtEidt.Visible = true;
+                        }
+                        break;
+                    case Model.RoomStatus.Agree:
+                        if (action == MXEnums.ActionEnum.Edit.ToString())
+                        {
+                            lbtPublish.Visible = true;
+                        }
+                        break;
+                    case Model.RoomStatus.Refuse:
+                        if (action == MXEnums.ActionEnum.Edit.ToString())
+                        {
+                            lbtEidt.Visible = true;
+                        }
+                        break;
+                    case Model.RoomStatus.Publish:
+                        if (action == MXEnums.ActionEnum.Edit.ToString())
+                        {
+                            lbtSoldOut.Visible = true;
+                        }
+                        break;
+                    case Model.RoomStatus.SoldOut:
+                        //删除放在这里？
+                        break;
                 }
             }
         }
 
-        protected void rptList_ItemCreated(object sender, RepeaterItemEventArgs e)
+        protected void rptList_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
-            var ss = e.Item.DataItem;
+            int id = MyCommFun.Obj2Int(e.CommandArgument);
+            switch (e.CommandName)
+            {
+                case "Edit":
+                    Response.Redirect(string.Format("hotel_room_info.aspx?action={0}&hotelid={1}&roomid={2}", MXEnums.ActionEnum.Edit.ToString(), hotelid, id));
+                    break;
+                case "Audit":
+                    Response.Redirect(string.Format("hotel_room_info.aspx?action={0}&hotelid={1}&roomid={2}", MXEnums.ActionEnum.Audit.ToString(), hotelid, id));
+                    break;
+                case "Publish":
+                    manageBll.ManageRoom(id, Model.RoomStatus.Publish, GetAdminInfo().id, "发布", "");
+                    AddAdminLog("Publish", string.Format("酒店商品【id={0}】发布。",id)); 
+
+                    JscriptMsg("发布成功！", Utils.CombUrlTxt("hotel_room.aspx", "action={0}&hotelid={1}&keywords={2}", action, hotelid.ToString(), this.keywords), "Success");
+                    break;
+                case "SoldOut":
+                    manageBll.ManageRoom(id, Model.RoomStatus.SoldOut, GetAdminInfo().id, "下架", "");
+                    AddAdminLog("SoldOut", string.Format("酒店商品【id={0}】下架。", id));
+
+                    JscriptMsg("下架成功！", Utils.CombUrlTxt("hotel_room.aspx", "action={0}&hotelid={1}&keywords={2}", action, hotelid.ToString(), this.keywords), "Success");
+                    break;
+            }
         }
     }
 }

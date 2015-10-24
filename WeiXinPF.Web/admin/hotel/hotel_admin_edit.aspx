@@ -1,10 +1,10 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="shop_user_edit.aspx.cs" Inherits="WeiXinPF.Web.admin.diancai.shop_user_edit" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="hotel_admin_edit.aspx.cs" Inherits="WeiXinPF.Web.admin.hotel.hotel_admin_edit" %>
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title></title>
+    <title>编辑管理员</title>
     <script type="text/javascript" src="../../scripts/jquery/jquery-1.10.2.min.js"></script>
     <script type="text/javascript" src="../../scripts/jquery/Validform_v5.3.2_min.js"></script>
     <script type="text/javascript" src="../../scripts/lhgdialog/lhgdialog.js?skin=idialog"></script>
@@ -12,17 +12,17 @@
     <link href="../skin/default/style.css" rel="stylesheet" type="text/css" />
     <link href="../skin/mystyle.css" rel="stylesheet" type="text/css" />
 </head>
-<body>
+<body class="mainbody">
     <form id="form1" runat="server">
         <!--导航栏-->
         <div class="location">
-            <a href="shop_user_list.aspx" class="back"><i></i><span>管理员列表</span></a>
+            <a href="hotel_list.aspx" class="home"><i></i><span>商户或门店列表</span></a>
             <i class="arrow"></i>
-            <span>编辑用户</span>
+            <a href="hotel_admin_list.aspx?hotelid=<%=hotelid %>"><i></i><span>管理员列表</span></a>
+            <i class="arrow"></i>
+            <span>编辑管理员</span>
         </div>
         <div class="line10"></div>
-        <!--/导航栏-->
-
 
         <!--内容-->
         <div class="content-tab-wrap">
@@ -34,14 +34,11 @@
                 </div>
             </div>
         </div>
-
         <div class="tab-content">
             <dl>
                 <dt>管理角色</dt>
                 <dd>
-                    <div class="rule-single-select">
-                        <asp:DropDownList ID="ddlRoleId" runat="server" datatype="*" errormsg="请选择管理员角色" sucmsg=" "></asp:DropDownList>
-                    </div>
+                    <asp:Label ID="lblRoleName" runat="server" Text="" Font-Bold="true"></asp:Label>
                 </dd>
             </dl>
             <dl>
@@ -78,8 +75,13 @@
             <dl>
                 <dt>是否启用</dt>
                 <dd>
-                    <div class="rule-single-checkbo">
-                        <asp:CheckBox ID="cbIsLock" runat="server" Checked="True" />
+                    <div class="rule-multi-radio">
+                        <div class="rule-multi-radio">
+                            <asp:RadioButtonList ID="rblIsLock" runat="server" RepeatDirection="Horizontal" RepeatLayout="Flow">
+                                <asp:ListItem Value="0" Selected="True">启用</asp:ListItem>
+                                <asp:ListItem Value="1">不启用</asp:ListItem>
+                            </asp:RadioButtonList>
+                        </div>
                     </div>
                     <span class="Validform_checktip">*不启用则无法使用该账户登录</span>
                 </dd>
@@ -88,6 +90,7 @@
                 <dt>备注</dt>
                 <dd>
                     <asp:TextBox ID="txtRemark" runat="server" CssClass="input normal" TextMode="MultiLine" Rows="4" datatype="*0-1500" nullmsg=" " sucmsg=" "></asp:TextBox>
+
                 </dd>
             </dl>
         </div>

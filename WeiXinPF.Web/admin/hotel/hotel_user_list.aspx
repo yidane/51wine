@@ -1,11 +1,9 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="shop_user_list.aspx.cs" Inherits="WeiXinPF.Web.admin.diancai.shop_user_list" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="hotel_user_list.aspx.cs" Inherits="WeiXinPF.Web.admin.hotel.hotel_user_list" %>
 
-<%@ Import Namespace="WeiXinPF.Common" %>
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>管理员列表</title>
     <script type="text/javascript" src="../../scripts/jquery/jquery-1.10.2.min.js"></script>
     <script type="text/javascript" src="../../scripts/lhgdialog/lhgdialog.js?skin=idialog"></script>
     <script type="text/javascript" src="../js/layout.js"></script>
@@ -16,7 +14,7 @@
     <form id="form1" runat="server">
         <!--导航栏-->
         <div class="location">
-            <a href="javascript:;" class="home"><i></i><span>管理员设置</span></a>
+             <a href="javascript:;" class="home"><i></i><span>管理员设置</span></a>
         </div>
         <div class="line10"></div>
 
@@ -26,7 +24,7 @@
                 <div class="l-list">
                     <ul class="icon-list">
                         <li>
-                            <a class="icon-btn add" href="shop_user_edit.aspx?action=<%=MXEnums.ActionEnum.Add %>&shopid=<%=shopid%>">
+                            <a class="icon-btn add" href="hotel_user_edit.aspx?action=<%=MXEnums.ActionEnum.Add %>&hotelid=<%=hotelid%>">
                                 <i></i>
                                 <span>新增管理人员</span>
                             </a>
@@ -64,7 +62,7 @@
                     <td><%#string.Format("{0:g}",Eval("add_time"))%></td>
                     <td align="center"><%#Eval("is_lock").ToString().Trim() == "0" ? "正常" : "禁用"%></td>
                     <td align="center">
-                        <a href="shop_user_edit.aspx?action=<%#MXEnums.ActionEnum.Edit %>&shopid=<%=shopid %>&id=<%#Eval("id")%>">修改</a>
+                        <a href="hotel_user_edit.aspx?action=<%#MXEnums.ActionEnum.Edit %>&hotelid=<%=hotelid %>&id=<%#Eval("id")%>">修改</a>
                     </td>
                 </tr>
             </ItemTemplate>
@@ -76,3 +74,4 @@
     </form>
 </body>
 </html>
+
