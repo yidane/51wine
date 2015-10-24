@@ -141,7 +141,7 @@
                     </span>
                     <span class="text">住宿订单</span>
                 </a>
-                <a class="item" href="../restaurant/diancai_oder.aspx?openid=<%=openid %>">
+                <a class="item" href="../restaurant/diancai_oder.aspx?openid=<%=openid %>&type=pay">
                     <span class="img">
                         <img src="images/catering.png" />
                     </span>

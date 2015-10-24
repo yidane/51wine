@@ -175,12 +175,15 @@ namespace WeiXinPF.Web.admin.diancai
                     }
                     else
                     {
+                        Response.Write(refundOrderResponse.return_msg);
                         List();
                     }
                 }
             }
             catch (Exception exception)
             {
+                Response.Write(exception.Message);
+                Response.Write(exception.StackTrace);
                 List();
             }
         }

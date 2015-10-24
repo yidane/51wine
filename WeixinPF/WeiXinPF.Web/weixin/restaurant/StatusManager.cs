@@ -90,9 +90,9 @@ namespace WeiXinPF.Web.weixin.restaurant
             public static StatusDict Refund = new StatusDict() { StatusID = 3, StatusName = "已退款" };
 
             /// <summary>
-            /// 退款失败
+            /// 退款不通过
             /// </summary>
-            public static StatusDict RefundFaild = new StatusDict() { StatusID = 4, StatusName = "退款失败" };
+            public static StatusDict RefundFaild = new StatusDict() { StatusID = 4, StatusName = "审核不通过" };
 
             public static StatusDict GetStatusDict(int statusId)
             {
