@@ -55,6 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IdentifyingCode\IdentifyingCodeInfo.cs" />
+    <Compile Include="IdentifyingCode\Repository\IdentifyingCodeRepository.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="Migrations\201509091103444_DBUpdate.cs" />
     <Compile Include="Migrations\201509091103444_DBUpdate.Designer.cs">
@@ -111,6 +112,10 @@
     <Compile Include="Migrations\201510240740497_yidaneforpay2.cs" />
     <Compile Include="Migrations\201510240740497_yidaneforpay2.Designer.cs">
       <DependentUpon>201510240740497_yidaneforpay2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201510241352413_gb1.cs" />
+    <Compile Include="Migrations\201510241352413_gb1.Designer.cs">
+      <DependentUpon>201510241352413_gb1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Payment\PaymentInfo.cs" />
@@ -170,6 +175,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201510240740497_yidaneforpay2.resx">
       <DependentUpon>201510240740497_yidaneforpay2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510241352413_gb1.resx">
+      <DependentUpon>201510241352413_gb1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />

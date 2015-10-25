@@ -497,17 +497,26 @@ namespace WeiXinPF.DAL
             return resultString.ToString();
         }
 
-        public DataSet GetCredentialsList(int shopid, string condition, out double totalAmount)
+        public DataSet GetCredentialsList(int shopid, string condition, string moduleName, out double totalAmount)
         {
-            StringBuilder strSql = new StringBuilder();
-            strSql.Append("SELECT * FROM (SELECT id,orderNumber,'已关闭' AS payStatus,(SELECT TOP 1 modifytime FROM wx_diancai_dingdan_commodity WHERE dingId=a.id ORDER BY modifytime DESC) AS modifyTime,customerName,payAmount FROM wx_diancai_dingdan_manage a ");
-            strSql.Append(" WHERE paystatus=2 AND shopinfoid=" + shopid + " ) AS dingList ");
-            if (!String.IsNullOrEmpty(condition))
-            {
-                strSql.Append(" where " + condition);
-            }
-            strSql.Append(" ORDER BY modifyTime DESC");
-            DataSet ds = DbHelperSQL.Query(strSql.ToString());
+            var strProc = "USP_Verification_GetCredentialList @ShopId, @ModuleName, @Condition";
+
+            var sqlParams = new List<SqlParameter>();
+
+            sqlParams.Add(new SqlParameter("@ShopId", SqlDbType.Int) {Value = shopid});
+            sqlParams.Add(new SqlParameter("@ModuleName", SqlDbType.VarChar, 50) { Value = moduleName });
+            sqlParams.Add(new SqlParameter("@Condition", SqlDbType.VarChar) { Value = condition });
+
+            var ds = DbHelperSQL.Query(strProc, sqlParams.ToArray());
+            //StringBuilder strSql = new StringBuilder();
+            //strSql.Append("SELECT * FROM (SELECT id,orderNumber,'已关闭' AS payStatus,(SELECT TOP 1 modifytime FROM wx_diancai_dingdan_commodity WHERE dingId=a.id ORDER BY modifytime DESC) AS modifyTime,customerName,payAmount FROM wx_diancai_dingdan_manage a ");
+            //strSql.Append(" WHERE paystatus=2 AND shopinfoid=" + shopid + " ) AS dingList ");
+            //if (!String.IsNullOrEmpty(condition))
+            //{
+            //    strSql.Append(" where " + condition);
+            //}
+            //strSql.Append(" ORDER BY modifyTime DESC");
+            //DataSet ds = DbHelperSQL.Query(strSql.ToString());
             DataTable dt = ds.Tables[0];
             totalAmount = 0.0;
             for (int row = 0; row < dt.Rows.Count; row++)
@@ -515,14 +524,16 @@ namespace WeiXinPF.DAL
             return ds;
         }
 
-        public DataSet GetCredentialsCommodityList(int dingId)
+        public DataSet GetCredentialsCommodityList(int dingId, string moduleName)
         {
-            StringBuilder strSql = new StringBuilder();
-            strSql.Append("SELECT (SELECT cpName FROM wx_diancai_caipin_manage WHERE id=a.caiId) AS caiName,'1' AS number,price,identifyingcode,(CASE STATUS WHEN 0 THEN '未支付' WHEN 1 THEN '已支付' WHEN 2 THEN '已使用' WHEN 3 THEN '申请退款' WHEN 4 THEN '已退款' END) AS status,ModifyTime FROM wx_diancai_dingdan_commodity a  ");
-            strSql.Append(" WHERE dingId=" + dingId);
-            strSql.Append(" ORDER BY modifyTime DESC");
-            DataSet ds = DbHelperSQL.Query(strSql.ToString());
-            return ds;
+            var strProc = "USP_Verification_GetCredentialDetailList @OrderId, @ModuleName";
+
+            var sqlParams = new List<SqlParameter>();
+
+            sqlParams.Add(new SqlParameter("@OrderId", SqlDbType.Int) { Value = dingId });
+            sqlParams.Add(new SqlParameter("@ModuleName", SqlDbType.VarChar, 50) { Value = moduleName });
+
+            return DbHelperSQL.Query(strProc, sqlParams.ToArray());            
         }
 
         public DataSet GetListList(string openid)
@@ -833,9 +844,16 @@ namespace WeiXinPF.DAL
 
         public DataSet Getcommodity(string cid)
         {
-            StringBuilder strSql = new StringBuilder();
-            strSql.Append(" select aa.id,aa.cpName as cpName,bb.price as price,bb.status as status from wx_diancai_caipin_manage  as aa ");
-            strSql.Append(" right join (select * from wx_diancai_dingdan_commodity where id='" + cid + "') as bb on aa.id=bb.caiId ");
+            var strSql = new StringBuilder();
+
+            strSql.Append("select a.id,a.cpName as cpName,c.price as price,b.status as status FROM wx_diancai_caipin_manage a INNER join ");
+            strSql.Append("(select IdentifyingCodeId,CAST(ProductId AS INT) AS ProductId,CAST(OrderId AS INT) AS OrderId,");
+            strSql.Append("Status FROM [wx_Verification_IdentifyingCodeInfo] WHERE IdentifyingCodeId='" +cid +"') as b");
+            strSql.Append(" ON a.id=b.ProductId INNER JOIN (SELECT price,caiId,dingId FROM dbo.wx_diancai_dingdan_caiping)c");
+            strSql.Append(" ON b.ProductId= c.caiId AND c.dingId= b.OrderId");
+
+            //strSql.Append(" select aa.id,aa.cpName as cpName,bb.price as price,bb.status as status from wx_diancai_caipin_manage  as aa ");
+            //strSql.Append(" right join (select * from wx_diancai_dingdan_commodity where id='" + cid + "') as bb on aa.id=bb.caiId ");
 
             return DbHelperSQL.Query(strSql.ToString());
         }
@@ -843,8 +861,15 @@ namespace WeiXinPF.DAL
         public DataSet GetcommodityTable(string did)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append(" select aa.id,aa.cpName as cpName,bb.price as price,bb.status from wx_diancai_caipin_manage  as aa ");
-            strSql.Append(" right join (select * from wx_diancai_dingdan_commodity where dingId='" + did + "') as bb on aa.id=bb.caiId ");
+
+            strSql.Append("select a.id,a.cpName as cpName,c.price as price,b.status as status FROM wx_diancai_caipin_manage a INNER join ");
+            strSql.Append("(select IdentifyingCodeId,CAST(ProductId AS INT) AS ProductId,CAST(OrderId AS INT) AS OrderId,");
+            strSql.Append("Status FROM [wx_Verification_IdentifyingCodeInfo] WHERE OrderId='" + did + "') as b");
+            strSql.Append(" ON a.id=b.ProductId INNER JOIN (SELECT price,caiId,dingId FROM dbo.wx_diancai_dingdan_caiping)c");
+            strSql.Append(" ON b.ProductId= c.caiId AND c.dingId= b.OrderId");
+
+            //strSql.Append(" select aa.id,aa.cpName as cpName,bb.price as price,bb.status from wx_diancai_caipin_manage  as aa ");
+            //strSql.Append(" right join (select * from wx_diancai_dingdan_commodity where dingId='" + did + "') as bb on aa.id=bb.caiId ");
 
             return DbHelperSQL.Query(strSql.ToString());
         }
@@ -1001,12 +1026,12 @@ namespace WeiXinPF.DAL
             }
         }
 
-        public bool UpdateCommodityStatusByOrderId(string orderId, string status)
+        public bool UpdateCommodityStatusByOrderCode(string orderCode, string status)
         {
             var strSql = new StringBuilder();
-            strSql.Append("update  wx_diancai_dingdan_commodity set status='" + status + "',modifytime=getdate()  ");
+            strSql.Append("update  wx_Verification_IdentifyingCodeInfo set status='" + status + "',modifytime=getdate()  ");
 
-            strSql.Append(" where dingId=" + orderId);
+            strSql.Append(" where OrderCode='" + orderCode + "'");
 
             int rows = DbHelperSQL.ExecuteSql(strSql.ToString());
             if (rows > 0)

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Collections.Generic;
+using System.Transactions;
 using System.Linq;
 using WeiXinPF.Common;
 using WeiXinPF.Model;
@@ -178,15 +179,15 @@ namespace WeiXinPF.BLL
             return dal.GetOrderCaipinDetail(orderId);
         }
 
-        public List<wx_diancai_credentials_detail> GetCredentialsList(int shopid, string condition, out double totalAmount)
+        public List<wx_diancai_credentials_detail> GetCredentialsList(int shopid, string condition, string moduleName, out double totalAmount)
         {
-            DataSet ds = dal.GetCredentialsList(shopid, condition, out totalAmount);
+            DataSet ds = dal.GetCredentialsList(shopid, condition, moduleName, out totalAmount);
             return ds.Tables[0].ToObject<wx_diancai_credentials_detail>().ToList();
         }
 
-        public DataSet GetCredentialsCommodityList(int dingId)
+        public DataSet GetCredentialsCommodityList(int dingId, string moduleName)
         {
-            return dal.GetCredentialsCommodityList(dingId);
+            return dal.GetCredentialsCommodityList(dingId, moduleName);
         }
 
         public DataSet GetListList(string openid)
@@ -211,7 +212,13 @@ namespace WeiXinPF.BLL
 
         public void PaySuccess(string orderNumber)
         {
-            dal.PaySuccess(orderNumber);
+            using (var scope = new TransactionScope())
+            {
+                dal.PaySuccess(orderNumber);
+                dal.UpdateCommodityStatusByOrderCode(orderNumber, "1");
+
+                scope.Complete();
+            }            
         }
 
         public bool Update(int id, decimal payAmount)
@@ -305,9 +312,9 @@ namespace WeiXinPF.BLL
             return result;
         }
 
-        public bool UpdateCommodityStatusByOrderId(string orderId, string status)
+        public bool UpdateCommodityStatusByOrderCode(string orderCode, string status)
         {
-            return dal.UpdateCommodityStatusByOrderId(orderId, status);
+            return dal.UpdateCommodityStatusByOrderCode(orderCode, status);
         }
 
         public bool Delete(string dingdan)

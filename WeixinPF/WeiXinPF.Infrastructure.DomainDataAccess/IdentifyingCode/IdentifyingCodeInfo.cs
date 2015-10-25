@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace WeiXinPF.Infrastructure.DomainDataAccess.Payment
+﻿namespace WeiXinPF.Infrastructure.DomainDataAccess.IdentifyingCode
 {
+    using System;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data.Entity;
 
     /// <summary>
     /// 核销功能所需的验证码
@@ -21,7 +16,7 @@ namespace WeiXinPF.Infrastructure.DomainDataAccess.Payment
         [Required]
         public int Wid { get; set; }
 
-        [Required]
+        [Required, MaxLength(50)]
         public string ShopId { get; set; }
 
         [Required, MaxLength(50)]

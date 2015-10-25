@@ -33,6 +33,8 @@ namespace WeiXinPF.Web.admin.diancai
         {
             int shopid = MXRequest.GetQueryInt("shopid")==0?GetShopId():MXRequest.GetQueryInt("shopid");
             string condition = "";
+            var moduleName = "restaurant";
+
             if (!String.IsNullOrEmpty(startDate.Text.Trim()))
             {
                 condition += " modifytime>'" + startDate.Text.Trim() + "' ";
@@ -67,7 +69,7 @@ namespace WeiXinPF.Web.admin.diancai
                     condition += " and ";
                 condition += " customerName LIKE '%" + orderperson.Text.Trim() + "%' ";
             }
-            this.rptList.DataSource = gbll.GetCredentialsList(shopid, condition, out this.totalAmount);
+            this.rptList.DataSource = gbll.GetCredentialsList(shopid, condition, moduleName, out this.totalAmount);
             this.rptList.DataBind();
 
 
@@ -87,12 +89,13 @@ namespace WeiXinPF.Web.admin.diancai
 
         protected void rptList_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
+            var moduleName = "restaurant";
             if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
             {
                 Repeater rp = e.Item.FindControl("rp") as Repeater;
                 wx_diancai_credentials_detail list = e.Item.DataItem as wx_diancai_credentials_detail;
 
-                rp.DataSource = gbll.GetCredentialsCommodityList(list.id);
+                rp.DataSource = gbll.GetCredentialsCommodityList(list.id, moduleName);
                 rp.DataBind();
             }
         }

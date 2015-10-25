@@ -82,50 +82,7 @@ namespace WeiXinPF.BLL.UnitTest
         [TestMethod]
         public void AfterPaymentProcess_diancaiOrderManage_ReturnSuccessProcess()
         {
-            var wid = 36;
-
-            // 订单id
-            var orderid = "7";
-            var result = false;
-
-            if (wid > 0 && !string.IsNullOrEmpty(orderid))
-            {
-                var bll = new BLL.wx_diancai_dingdan_manage();
-                var order = bll.GetModel(int.Parse(orderid));
-
-                if (order != null)
-                {
-                    order.wid = wid;
-                    order.payStatus = 1;
-                    order.oderTime = DateTime.Now;
-
-                    try
-                    {
-                        using (var scope = new TransactionScope())
-                        {
-                            bll.Update(order);
-                            bll.UpdateCommodityStatusByOrderId(orderid, "1");
-
-                            scope.Complete();
-                        }
-                    }
-                    catch (Exception)
-                    {
-                        result = false;
-                    }
-                }
-                else
-                {
-                    result = false;
-                }
-                result = true;
-            }
-            else
-            {
-                result = false;
-            }
-
-            Assert.IsTrue(result);
+            new BLL.wx_diancai_dingdan_manage().PaySuccess("2834367947316");
         }
     }
 }

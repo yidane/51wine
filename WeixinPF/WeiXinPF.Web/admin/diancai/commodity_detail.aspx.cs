@@ -9,6 +9,10 @@ using WeiXinPF.Common;
 
 namespace WeiXinPF.Web.admin.diancai
 {
+    using System.Transactions;
+
+    using WeiXinPF.Application.DomainModules.IdentifyingCode.Service;
+
     public partial class commodity_detail : Web.UI.ManagePage
     {
         BLL.wx_diancai_dingdan_manage managebll = new BLL.wx_diancai_dingdan_manage();
@@ -46,33 +50,47 @@ namespace WeiXinPF.Web.admin.diancai
             shopid = MyCommFun.RequestInt("shopid");
             string status = "2";
 
-            managebll.UpdateCommoditystatus(cid, status);
-            managebll.Updatestatus(id, "1");
-            UpdateDing(id);
+            Guid identifyingCodeId;
 
-            manage = managebll.GetModel(MyCommFun.Str2Int(id));
-
-
-
-
-            BLL.wx_diancai_member menbll = new BLL.wx_diancai_member();
-            if (status == "2")
+            if (Guid.TryParse(cid, out identifyingCodeId))
             {
+                var identifyingCodeObject = IdentifyingCodeService.GetIdentifyingCodeInfoByIdentifyingCodeId(identifyingCodeId);
 
-                menbll.Update(manage.openid);
-            }
-            if (status == "3" || status == "4")
-            {
+                if (identifyingCodeObject != null && identifyingCodeObject.ShopId.Equals(shopid.ToString()))
+                {
+                    identifyingCodeObject.Status = 2;
+                    identifyingCodeObject.ModifyTime = DateTime.Now;
 
-                menbll.Updatefail(manage.openid);
-            }
+                    using (var scope = new TransactionScope())
+                    {
+                        IdentifyingCodeService.ModifyIdentifyingCodeInfo(identifyingCodeObject);
+                        //managebll.UpdateCommoditystatus(cid, status);
+                        managebll.Updatestatus(id, "1");
+                        UpdateDing(id);
+
+                        scope.Complete();
+                    }
+                    manage = managebll.GetModel(MyCommFun.Str2Int(id));
+                    BLL.wx_diancai_member menbll = new BLL.wx_diancai_member();
+                    if (status == "2")
+                    {
+
+                        menbll.Update(manage.openid);
+                    }
+                    if (status == "3" || status == "4")
+                    {
+
+                        menbll.Updatefail(manage.openid);
+                    }
 
 
-            AddAdminLog(MXEnums.ActionEnum.Edit.ToString(), "修改支付状态，主键为" + id); //记录日志
-            //JscriptMsg("修改成功！", "dingdan_confirm.aspx?shopid=" + shopid + "", "Success");
-            //Response.Redirect("dingdan_confirm.aspx?shopid=" + shopid + "");
-            Response.Write("<script language='javascript' type='text/javascript'>alert('修改成功！');location.href = 'dingdan_confirm.aspx?shopid=" + shopid + "';</script>");
+                    AddAdminLog(MXEnums.ActionEnum.Edit.ToString(), "修改支付状态，主键为" + id); //记录日志
+                    //JscriptMsg("修改成功！", "dingdan_confirm.aspx?shopid=" + shopid + "", "Success");
+                    //Response.Redirect("dingdan_confirm.aspx?shopid=" + shopid + "");
+                    Response.Write("<script language='javascript' type='text/javascript'>alert('修改成功！');location.href = 'dingdan_confirm.aspx?shopid=" + shopid + "';</script>");
 
+                }
+            }                       
         }
 
         private void UpdateDing(string id)
@@ -121,16 +139,16 @@ namespace WeiXinPF.Web.admin.diancai
                 }
 
                 sjopmodel = shopinfo.GetModel(shopid);//配送费
-                decimal zongji = amount + Convert.ToDecimal(sjopmodel.sendCost);
-                if (sjopmodel != null)
-                {
-                    Dingdanlist += "<tr><td>商品总费</td><td class=\"cc\">￥" + amount + "</td>  <td class=\"cc\" >配送费</td><td class=\"rr\" >￥" + sjopmodel.sendCost + "</td></tr>";
-                }
-                else
-                {
-                    Dingdanlist += "<tr><td>商品总费</td><td class=\"cc\">￥" + amount + "</td>  <td class=\"cc\" >配送费</td><td class=\"rr\" >￥" + 0 + "</td></tr>";
-                }
-                Dingdanlist += "<tr><td>总计：</td><td ></td><td ></td><td class=\"rr\">￥" + zongji + "</td></tr>";
+                //decimal zongji = amount + Convert.ToDecimal(sjopmodel.sendCost);
+                //if (sjopmodel != null)
+                //{
+                //    Dingdanlist += "<tr><td>商品总费</td><td class=\"cc\">￥" + amount + "</td>  <td class=\"cc\" >配送费</td><td class=\"rr\" >￥" + sjopmodel.sendCost + "</td></tr>";
+                //}
+                //else
+                //{
+                //    Dingdanlist += "<tr><td>商品总费</td><td class=\"cc\">￥" + amount + "</td>  <td class=\"cc\" >配送费</td><td class=\"rr\" >￥" + 0 + "</td></tr>";
+                //}
+                Dingdanlist += "<tr><td>总计：</td><td ></td><td ></td><td class=\"rr\">￥" + amount + "</td></tr>";
 
             }
 
@@ -143,7 +161,7 @@ namespace WeiXinPF.Web.admin.diancai
                 dingdanren += "<tr> <td>下单时间：" + manage.oderTime + "</td></tr>";
                 dingdanren += "<tr><td>联系人：" + manage.customerName + "</td></tr>";
                 dingdanren += "<tr><td>联系电话：" + manage.customerTel + "</td></tr>";
-                dingdanren += "<tr><td>地址：" + manage.address + "</td></tr>";
+                //dingdanren += "<tr><td>地址：" + manage.address + "</td></tr>";
                 dingdanren += "<tr><td>备注 ：" + manage.oderRemark + "</td></tr>";
                 if (manage.payStatus == 2)
                 {
@@ -164,7 +182,7 @@ namespace WeiXinPF.Web.admin.diancai
                 dingdanren += "<tr> <td>下单时间：</td></tr>";
                 dingdanren += "<tr><td>联系人：</td></tr>";
                 dingdanren += "<tr><td>联系电话：</td></tr>";
-                dingdanren += "<tr><td>地址：</td></tr>";
+                //dingdanren += "<tr><td>地址：</td></tr>";
                 dingdanren += "<tr><td>备注 ：</td></tr>";
 
 

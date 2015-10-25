@@ -11,6 +11,8 @@ namespace WeiXinPF.Web.weixin.restaurant
     using System.Transactions;
     using System.Web.Util;
 
+    using WeiXinPF.Application.DomainModules.IdentifyingCode.Service;
+    using WeiXinPF.Infrastructure.DomainDataAccess.IdentifyingCode;
     using WeiXinPF.Model;
     using WeiXinPF.Web.weixin.product;
     using WeiXinPF.Web.weixin.qiangpiao;
@@ -144,25 +146,6 @@ namespace WeiXinPF.Web.weixin.restaurant
                 }
 
                 context.Response.End();
-            }
-            else if (_action == "afterpayment")
-            {
-                var afterPaymentProcessResult = this.AfterPaymentProcess();
-
-                if (!afterPaymentProcessResult.IsSuccess)
-                {
-                    this.jsonDict.Add("ret", "err");
-                    this.jsonDict.Add("content", afterPaymentProcessResult.Message);
-                    context.Response.Write(MyCommFun.getJsonStr(this.jsonDict));
-                    return;
-                }
-                else
-                {
-                    this.jsonDict.Add("ret", "ok");
-                    this.jsonDict.Add("content", afterPaymentProcessResult.Message);
-                    context.Response.Write(MyCommFun.getJsonStr(this.jsonDict));
-                    context.Response.End();
-                }
             }
             else if (_action == "productDetail")
             {
@@ -340,7 +323,22 @@ namespace WeiXinPF.Web.weixin.restaurant
 
                             for (var i = 0; i < item.num; i++)
                             {
-                                bll.AddCommodity(item);
+                                var iCode = new IdentifyingCodeInfo()
+                                                {
+                                                    IdentifyingCodeId = Guid.NewGuid(),
+                                                    CreateTime = DateTime.Now,
+                                                    IdentifyingCode = string.Empty,
+                                                    ModifyTime = DateTime.Now,
+                                                    ModuleName = "restaurant",
+                                                    OrderCode = order.orderNumber,
+                                                    OrderId = order.id.ToString(),
+                                                    ProductCode = item.caiId.ToString(),
+                                                    ProductId = item.caiId.ToString(),
+                                                    ShopId = order.shopinfoid.ToString(),
+                                                    Wid = order.wid,
+                                                    Status = 0
+                                                };
+                                IdentifyingCodeService.AddIdentifyingCode(iCode);
                             }
                         }
                     }
@@ -394,59 +392,6 @@ namespace WeiXinPF.Web.weixin.restaurant
             }
 
             return allGoods;
-        }
-
-        #endregion
-
-        #region 支付成功后处理程序
-
-        /// <summary>
-        /// The after payment process.
-        /// </summary>
-        /// <returns>
-        /// The <see cref="ProcessResult"/>.
-        /// </returns>
-        private ProcessResult AfterPaymentProcess()
-        {
-            // 订单code
-            var orderId = MyCommFun.QueryString("orderid");
-
-            if (!string.IsNullOrEmpty(orderId))
-            {
-                var bll = new BLL.wx_diancai_dingdan_manage();
-                var order = bll.GetModel(int.Parse(orderId));
-
-                if (order != null)
-                {
-                    order.payStatus = 1;
-                    order.oderTime = DateTime.Now;
-
-                    try
-                    {
-                        using (var scope = new TransactionScope())
-                        {
-                            bll.Update(order);
-                            bll.UpdateCommodityStatusByOrderId(orderId, "1");
-
-                            scope.Complete();
-                        }
-                    }
-                    catch (Exception)
-                    {
-                        return new ProcessResult() { IsSuccess = false, Message = "保存支付信息失败" };
-                    }
-                }
-                else
-                {
-                    return new ProcessResult() { IsSuccess = false, Message = "无效的订单号" };
-                }
-            }
-            else
-            {
-                return new ProcessResult() { IsSuccess = false, Message = "参数不能为空" };
-            }
-
-            return new ProcessResult() { IsSuccess = true, Message = string.Empty };
         }
 
         #endregion
