@@ -8163,6 +8163,7 @@
     <Content Include="weixin\cashred\js\alert.js" />
     <Content Include="weixin\KNSHotel\css\hotels.css" />
     <Content Include="weixin\KNSHotel\css\mystyle.css" />
+    <Content Include="weixin\KNSHotel\css\orderstyle.css" />
     <Content Include="weixin\KNSHotel\hotel_detail.aspx" />
     <Content Include="weixin\KNSHotel\hotel_form.aspx" />
     <Content Include="weixin\KNSHotel\hotel_order.aspx" />

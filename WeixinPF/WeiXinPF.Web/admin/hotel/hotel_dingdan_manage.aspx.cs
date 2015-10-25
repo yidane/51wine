@@ -7,6 +7,8 @@ using System.Text;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using WeiXinPF.BLL;
+using WeiXinPF.Model.KNSHotel;
 
 namespace WeiXinPF.Web.admin.hotel
 {
@@ -26,7 +28,7 @@ namespace WeiXinPF.Web.admin.hotel
             this.pageSize = GetPageSize(10); //每页数量
             if (!Page.IsPostBack)
             {         
-                RptBind(CombSqlTxt(keywords), "createDate desc,id desc");
+                RptBind(CombSqlTxt(keywords), "orderTime desc,id desc");
             }
         }
 
@@ -34,7 +36,8 @@ namespace WeiXinPF.Web.admin.hotel
         private void RptBind(string _strWhere, string _orderby)
         {
             BLL.wx_hotel_dingdan sbll = new BLL.wx_hotel_dingdan();
-
+            var bllhotel = new BLL.wx_hotels_info();
+            var hotel = bllhotel.GetModel(hotelid);
             _strWhere = " hotelid=" + hotelid + " " + _strWhere;
 
             this.page = MXRequest.GetQueryInt("page", 1);
@@ -43,25 +46,48 @@ namespace WeiXinPF.Web.admin.hotel
    
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
-                DataRow dr;
+                ds.Tables[0].Columns.Add("isRefund", typeof(System.String));
+                ds.Tables[0].Columns.Add("hotelName", typeof(System.String));
+                ds.Tables[0].Columns.Add("totalPrice", typeof(System.Decimal));
 
+                
+                DataRow dr;
+               
                 int count = ds.Tables[0].Rows.Count;
                 for (int i = 0; i < count; i++)
                 {
                     dr = ds.Tables[0].Rows[i];
-                    if (dr["orderStatus"].ToString() == "0")
+//                    if (dr["orderStatus"].ToString() == "0")
+//                    {
+//                        dr["payStatusStr"] = "未处理";
+//                    }
+//                    else if (dr["orderStatus"].ToString() == "1")
+//                    {
+//                        dr["payStatusStr"] = "已确认";
+//                    }
+//                    else
+//                    {
+//                        dr["payStatusStr"] = "已拒绝";
+//                    }
+                  var  status = HotelStatusManager.OrderStatus.GetStatusDict(MyCommFun.Obj2Int(dr["orderStatus"]));
+                    dr["payStatusStr"]= "<em  style='width:70px;' class='status " + status.CssClass
+                        + "'>" + status.StatusName + "</em>";
+
+                    if (status.StatusId== HotelStatusManager.OrderStatus.Refunding.StatusId
+                        || status.StatusId == HotelStatusManager.OrderStatus.Refunded.StatusId)
                     {
-                        dr["payStatusStr"] = "未处理";
-                    }
-                    else if (dr["orderStatus"].ToString() == "1")
-                    {
-                        dr["payStatusStr"] = "已确认";
+                        dr["isRefund"] = "<em  style='width:70px;' class='status ok'>是</em>";
                     }
                     else
                     {
-                        dr["payStatusStr"] = "已拒绝";
-                    }
+                        dr["isRefund"] = "<em  style='width:70px;' class='status no'>否</em>";
 
+                    }
+                    dr["hotelName"] = hotel.hotelName;
+                    //总花费
+                    var dateSpan = dr.Field<DateTime>("leaveTime")   - dr.Field<DateTime>("arriveTime")   ;
+                    var totalPrice = MyCommFun.Str2Decimal(dr["price"].ToString()) * dr.Field<int>("orderNum")   * dateSpan.Days;
+                    dr["totalPrice"] = totalPrice;
                 }
                 ds.AcceptChanges();
             }

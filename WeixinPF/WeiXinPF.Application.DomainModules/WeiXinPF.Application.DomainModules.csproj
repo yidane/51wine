@@ -77,6 +77,8 @@
     <Compile Include="Coupon\DTOS\CouponDTO.cs" />
     <Compile Include="Coupon\DTOS\CouponListDTO.cs" />
     <Compile Include="Coupon\DTOS\CouponPrizeDTO.cs" />
+    <Compile Include="Hotel\DTOS\TuidanDto.cs" />
+    <Compile Include="Hotel\HotelService.cs" />
     <Compile Include="IdentifyingCode\Service\IdentifyingCodeService.cs" />
     <Compile Include="Map\DTOS\MapDTO.cs" />
     <Compile Include="Map\DTOS\POIDto.cs" />

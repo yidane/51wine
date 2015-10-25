@@ -68,6 +68,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Photo_UnitTest.cs" />
+    <Compile Include="HotelUnitTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\WeiXinPF.Application.DomainModules\WeiXinPF.Application.DomainModules.csproj">
