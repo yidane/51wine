@@ -1,4 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="hotel_dingdan_cz.aspx.cs" Inherits="WeiXinPF.Web.admin.hotel.hotel_dingdan_cz" %>
+<%@ Import Namespace="WeiXinPF.Model.KNSHotel" %>
 
 <!DOCTYPE html>
 
@@ -16,7 +17,8 @@
     <script type="text/javascript" charset="utf-8" src="../../editor/lang/zh_CN.js"></script>
     <script type="text/javascript" src="../js/layout.js"></script>
     <link href="../skin/default/style.css" rel="stylesheet" type="text/css" />
-    <link href="../skin/mystyle.css" rel="stylesheet" type="text/css" />
+<%--    <link href="../skin/mystyle.css" rel="stylesheet" type="text/css" />--%>
+    <link href="../../weixin/KNSHotel/css/orderstyle.css" rel="stylesheet"  type="text/css"/>
     <script type="text/javascript">
         $(function () {
             //初始化表单验证
@@ -29,9 +31,21 @@
             $(".upload-album").each(function () {
                 $(this).InitSWFUpload({ btntext: "批量上传", btnwidth: 66, single: false, water: true, thumbnail: true, filesize: "2048", sendurl: "../../tools/upload_ajax.ashx", flashurl: "../../scripts/swfupload/swfupload.swf", filetypes: "*.jpg;*.jpge;*.png;*.gif;" });
             });
-            $(".attach-btn").click(function () {
+            $(".attach-button").click(function () {
                 showAttachDialog();
             });
+
+            $("#chkIsRefund").click(function () {
+                var button = $("#btnSaveRefund");
+                if (!button.attr("disabled")  ) {
+                 
+                    button.attr("disabled", true);
+                } else {
+                   
+                    button.attr("disabled", false);
+                }
+            });
+            
         });
     </script>
     <script type="text/javascript">
@@ -40,116 +54,281 @@
 
         }
 
-        $(function () {
-
-
-        });
+        
 
     </script>
     <style>
         a.shenghe {
             color: red;
         }
+
+        #StatusType tr td {
+            padding-right: 10px;
+        }
+
+         .text-danger {
+    color: #FF0000;
+}
+         .total-money {
+             font-size: 20px;
+         }
+
+        .button {
+            display: inline-block;
+            padding: 6px 12px;
+            margin-bottom: 0;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 1.42857143;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: middle;
+            -ms-touch-action: manipulation;
+            touch-action: manipulation;
+            cursor: pointer;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            background-image: none;
+            border: 1px solid transparent;
+            border-radius: 4px;
+        }
+
+        .button-primary {
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #2e6da4;
+}
+        .button-primary.active, .button-primary:active, .open>.dropdown-toggle.button-primary {
+    color: #fff;
+    background-color: #286090;
+    border-color: #204d74;
+}
+        .button-primary:hover {
+    color: #fff;
+    background-color: #286090;
+    border-color: #204d74;
+}
+
+    
+ 
+     .button-success {
+    color: #fff;
+    background-color: #5cb85c;
+    border-color: #4cae4c;
+}
+
+     .button-success.disabled, .button-success.disabled.active, .button-success.disabled.focus, .button-success.disabled:active, .button-success.disabled:focus, .button-success.disabled:hover, .button-success[disabled], .button-success[disabled].active, .button-success[disabled].focus, .button-success[disabled]:active, .button-success[disabled]:focus, .button-success[disabled]:hover, fieldset[disabled] .button-success, fieldset[disabled] .button-success.active, fieldset[disabled] .button-success.focus, fieldset[disabled] .button-success:active, fieldset[disabled] .button-success:focus, fieldset[disabled] .button-success:hover {
+    background-color: #5cb85c;
+    border-color: #4cae4c;
+}
+
+     .button.disabled, .button[disabled], fieldset[disabled] .button {
+    cursor: not-allowed;
+    filter: alpha(opacity=65);
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    opacity: .65;
+}
+
+
+    .button-success:hover {
+    color: #fff;
+    background-color: #449d44;
+    border-color: #398439;
+}
+    .button-success.active, .button-success:active, .open>.dropdown-toggle.button-success {
+    color: #fff;
+    background-color: #449d44;
+    border-color: #398439;
+}
+
     </style>
+  
 </head>
 <body class="mainbody">
     <form id="form1" runat="server">
-
-        <div class="location">
-            <a href="hotel_list.aspx" class="home"><i></i><span>微酒店</span></a>
-            <a href="hotel_dingdan_manage.aspx?hotelid=<%=hotelid %>" class="home">
-                <i class="arrow"></i>
-                <span>在线预定管理</span>
-            </a>
+        
+        
+           <div class="location">
+            <% if (isAdmin)
+               {%>
+            <a href="hotel_list.aspx" class="home"><i></i><span>酒店商户或门店管理</span></a>
             <i class="arrow"></i>
-            <span>订单处理</span>
+            <%}%>
+            <%
+               else
+               {%>
 
+            <%} %><span><a  href="hotel_dingdan_manage.aspx?hotelid=<%=hotelid %>">订单管理</a></span>
+            <i class="arrow"></i>
+            <span>订单详情</span>
         </div>
-        <div class="line10"></div>
-
-
-        <div class="content-tab-wrap">
-            <div id="floatHead" class="content-tab">
-                <div class="content-tab-ul-wrap">
-                    <ul>
-                        <li><a href="javascript:;" onclick="tabs(this);" class="selected">订单处理</a></li>
-                        <asp:HiddenField ID="hidId" runat="server" Value="0" />
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-
-
 
         <!--/导航栏-->
-
         <div class="tab-content">
+            <ul class="round">
+                <li class="title"><span class="none smallspan">订单详情</span></li>
+                <table width="100%" border="0" cellpadding="0" cellspacing="0" class="cpbiaoge">
 
-            <dl>
-                <dt><%=ordername%>:</dt>
-                <dd>
-                    <%=openid %>
-                </dd>
-            </dl>
-            <dl>
-                <dt>电话:</dt>
-                <dd>
-                    <%=dingdan.tel %>
-                </dd>
-            </dl>
-            <dl>
-                <dt>入住/离店时间:</dt>
-                <dd>
-                    <%=arriveTime %>~<%=leaveTime %>
-                </dd>
-            </dl>
-            <dl>
-                <dt>房间类型:</dt>
-                <dd>
-                    <%=dingdan.roomType %>
-                </dd>
-            </dl>
-            <dl>
-                <dt>预定数量:</dt>
-                <dd>
-                    <%=dingdan.orderNum %>
-                </dd>
-            </dl>
-            <dl>
-                <dt>价格:</dt>
-                <dd>
-                    <%=dingdan.price %>
-                </dd>
-            </dl>
+                    <%=Dingdanlist %>
+                </table>
+            </ul>
+            <ul class="round">
+                <li class="title"><span class="none smallspan">订单信息</span></li>
 
-
-            <dl>
-                <dt>备注:</dt>
-                <dd>
-                    <%=beizhu %>
-                </dd>
-            </dl>
-
-            <dl>
-                <dt>状态调整为：</dt>
-                <dd>
-                    <asp:DropDownList ID="StatusType" runat="server">
-                        <asp:ListItem Text="不处理" Value="0"></asp:ListItem>
-                        <asp:ListItem Text="确认" Value="1"></asp:ListItem>
-                        <asp:ListItem Text="拒绝" Value="2"></asp:ListItem>
-                    </asp:DropDownList>
-
-                </dd>
-            </dl>
+                <table width="100%" border="0" cellpadding="0" cellspacing="0" class="cpbiaoge">
+                    <%=Dingdanren %>
+                </table>
+            </ul>
         </div>
+        
+         <div class="tab-content">
+                 <% if (isAdmin)
+               {%>
+<%--            <dl>--%>
+<%--                <dt>订单状态：</dt>--%>
+<%--                <dd><span><%=status.StatusName %></span>--%>
+<%--                    --%>
+<%----%>
+<%--                </dd>--%>
+<%--             </dl>--%>
+             
+              
+               <%   if (orderStatus==HotelStatusManager.OrderStatus.Payed.StatusId)
+               {%>
+           
+             <dl>
+                 <dt>是否退款：</dt>
+                 <dd>
+                     <asp:CheckBox ID="chkIsRefund" runat="server" /></dd>
+             </dl>
+             
+              <dl>
+                 <dt>退款金额：</dt>
+                 <dd>   
+                     <asp:TextBox runat="server" ID="txtAmount" CssClass="input normal" sucmsg=" " nullmsg="" datatype="n" ></asp:TextBox>
+                      
+                    <span class="Validform_checktip">注：默认为订单全额，可修改。*</span>
 
-        <div class="page-footer">
-            <div class="btn-list">
-                <asp:Button ID="save_groupbase" runat="server" CssClass="btn" Text="保存" OnClick="save_groupbase_Click" />
-            </div>
-            <div class="clear"></div>
+                 </dd>
+             </dl>
+              <dl>
+                 <dt>备注：</dt>
+                 <dd>
+                       <textarea name="remarks" rows="2" cols="20" id="remarks" datatype="*1-2000" sucmsg=" " nullmsg=""  class="input" runat="server"></textarea>
+                        <span class="Validform_checktip">*</span>
+                 </dd>
+             </dl>
+            <%}%>
+
+
+            <%}%>
+            <%
+               else
+               {%>
+             
+             
+                <% if (orderStatus==HotelStatusManager.OrderStatus.Pending.StatusId)
+               {%>
+            <dl>
+                <dt>订单状态：</dt>
+                <dd>
+                    <asp:RadioButtonList ID="StatusType" runat="server" RepeatDirection="Horizontal"  CellPadding="10" CellSpacing="10">
+                         <asp:ListItem  Value="1">商家接收</asp:ListItem>
+            <asp:ListItem  Value="1">商家拒绝</asp:ListItem>
+                    </asp:RadioButtonList>
+                    
+
+                </dd>
+                
+            </dl>
+             
+            <%}%>
+            <%
+               else
+               {%>
+              <dl>
+                <dt>订单状态：</dt>
+                <dd><span><%=status.StatusName %></span>
+                    
+
+                </dd>
+                
+            </dl>
+            <%} %>
+             
+             
+          
+
+            <%} %>
+             
+               <% if (orderStatus==HotelStatusManager.OrderStatus.Pending.StatusId
+                       ||orderStatus==HotelStatusManager.OrderStatus.Refused.StatusId
+                       ||orderStatus==HotelStatusManager.OrderStatus.Accepted.StatusId)
+               {%>
+           
+             <dl>
+                 <dt>是否付款：</dt>
+                 <dd><span>未付款</span></dd>
+             </dl>
+            <%}%>
+
+         <% else if (orderStatus==HotelStatusManager.OrderStatus.Refunding.StatusId
+                 ||orderStatus==HotelStatusManager.OrderStatus.Refunded.StatusId)
+               {%>
+           
+             <dl>
+                 <dt>退款操作日期：</dt>
+                 <dd><span><%=tuidan.refundTime.ToString("yyyy/MM/dd") %></span></dd>
+             </dl>
+              <dl>
+                 <dt>退款操作人员：</dt>
+                 <dd><span><%=uName %>（<%=roleName %>）</span></dd>
+             </dl>
+              <dl>
+                 <dt>退款金额：</dt>
+                 <dd><span><%=tuidan.refundAmount %>元</span></dd>
+             </dl>
+            <%}%>
+            
         </div>
+        
+        
+         <% if (!isAdmin&&orderStatus==HotelStatusManager.OrderStatus.Pending.StatusId)
+               {%>
+            
+              <div style="width: 100%; text-align: center">
+            <asp:Button ID="save_groupbase" runat="server" CssClass="button button-success " Text="提交" OnClick="save_groupbase_Click" />
+          
+              </div>
+            <%}%>
+             
+         <%
+            else if (isAdmin&& orderStatus==HotelStatusManager.OrderStatus.Payed.StatusId)
+               {%>
+            
+              <div style="width: 100%; text-align: center">
+            <asp:Button ID="btnSaveRefund" runat="server" CssClass="button button-success " disabled="disabled" Text="提交" OnClick="btnSaveRefund_OnClick" />
+          
+              </div>
+            <%}%>
+       
+         <%
+            else 
+               {%>
+            
+              <div style="width: 100%; text-align: center">
+                   <asp:Button ID="btn_completed" runat="server" CssClass="button button-success " Text="订单完成"  OnClick="btn_completed_OnClick"   />
+          
+           
+                  
+             <button href="#" class="button button-primary" id="btn_return" onclick="history.go(-1)">返回</button>
+              </div>
+            <%}%>
+
+         
     </form>
 </body>
 </html>

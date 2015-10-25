@@ -45,6 +45,7 @@ namespace WeiXinPF.Web.weixin.KNSHotel
                 dingdan.leaveTime = Convert.ToDateTime(MyCommFun.QueryString("leaveTime"));
                 dingdan.roomType = MyCommFun.QueryString("roomType");
                 dingdan.orderTime = DateTime.Now;
+                dingdan.createDate = DateTime.Now;
                 dingdan.orderNum = MyCommFun.RequestInt("orderNum");
                 dingdan.isDelete = 0;
                 dingdan.price = MyCommFun.Str2Decimal( MyCommFun.QueryString("price"));

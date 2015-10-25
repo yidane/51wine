@@ -9,6 +9,16 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <meta name="format-detection" content="telephone=no">
 <link href="css/hotels.css" rel="stylesheet" type="text/css">
+    <style>
+ .break-word {
+     word-break: break-all !important;
+    white-space: -moz-pre-wrap !important;
+    white-space: -o-pre-wrap !important;
+    white-space: pre-wrap !important;
+    white-space: pre-line !important;
+    word-wrap: break-word !important;
+ }
+    </style>
 </asp:Content>
 
 

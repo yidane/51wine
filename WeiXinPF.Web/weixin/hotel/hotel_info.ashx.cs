@@ -62,6 +62,7 @@ namespace WeiXinPF.Web.weixin.hotel
                     dingdan.leaveTime = Convert.ToDateTime(MyCommFun.QueryString("leaveTime"));
                 }
                 dingdan.roomType = MyCommFun.QueryString("roomType");
+                dingdan.createDate = DateTime.Now;
                 dingdan.orderTime = DateTime.Now;
                 dingdan.orderNum = MyCommFun.RequestInt("orderNum");
                 dingdan.isDelete = 0;

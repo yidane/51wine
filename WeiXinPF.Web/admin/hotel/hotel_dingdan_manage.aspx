@@ -24,14 +24,40 @@
         color:red;
         
         }
+       .status {
+               border-radius: 3px;
+    color: #FFF;
+    font-size: 12px;
+    line-height: 12px;
+    padding: 2px 4px;
+    text-shadow: 0 0 #FFFFFF;
+    font-style: normal;
+       }
+       em.ok {
+    background-color: #1CC200;
+    color: #FFF !important;
+}
+
+em.error {
+    background-color: #FF6600;
+    color: #FFF !important;
+}
+
+em.no {
+    background-color: #BBBBBB;
+    color: #FFF !important;
+}
     </style>
 </head>
 <body class="mainbody">
     <form id="form1" runat="server">
         <div class="location">
-            <a href="hotel_list.aspx" class="home"><i></i><span>微酒店</span></a>
+           <% if (IsWeiXinCode())
+               {%>
+            <a href="hotel_list.aspx" class="home"><i></i><span>酒店商户或门店管理</span></a>
             <i class="arrow"></i>
-            <span>在线预定管理</span>
+            <%}%>
+         <span> 订单管理 </span>
         </div>
 
             <div class="toolbar-wrap">
@@ -60,15 +86,18 @@
                             <th >序号</th>
                             <th >订单编号</th>
                              <th >订单状态</th> 
+                              <th >是否退单</th> 
+                              <th >商户或门店名称</th> 
                             <th >预定人</th>
-                            <th >电话</th>
+                            <th >交易日期</th>   
+                            <th >商品名称</th> 
+                             <th >购买数量</th>   
+                             <th >商品价格</th>   
+                          
                             <th >入住/离店时间</th> 
-                            <th >房间类型</th>  
-                            <th >预定时间</th>    
-                            <th >预定数量</th>   
-                            <th >价格</th>   
-                            
-                            <th >用户是否删除</th>                 
+                              <th >支付金额</th>   
+                           
+                                     
                             <th >操作</th>
                         </tr>
                     </thead>
@@ -85,38 +114,46 @@
                         <%# Eval("id") %>
                     </td>
                       <td>
-                        <%# Eval("oderName") %>
-                    </td>
-                      <td>
                         <%# Eval("orderNumber") %>
                     </td>
                       <td>
                      <%# Eval("payStatusStr") %>
                      </td>
+                     <td>
+                     <%# Eval("isRefund") %>
+                     </td>
+                     <td>
+                        <%# Eval("hotelName") %>
+                    </td>
                       <td>
-                        <%# Eval("tel") %>
+                        <%# Eval("oderName") %>
                     </td>
-                     <td>
-                     <%# Eval("arriveTime") %>
-                     <br />
-                     <%# Eval("leaveTime") %>
-                    </td>
-                     <td>
+                      <td>
+                     <%# string.Format("{0:yyyy/MM/dd}",  Eval("createDate")) %>
+                     </td>
+                      <td>
                      <%# Eval("roomType") %>
                      </td>
                       <td>
-                     <%# Eval("orderTime") %>
-                     </td>
-                     <td>
                      <%# Eval("orderNum") %>
                      </td>
                       <td>
                      <%# Eval("price") %>
                      </td>
-                   
-                      <td>
-                    <%# Eval("isDelete").ToString().ToLower()=="1"?"已删除":"未删除" %>
+                     <td>
+                     <%# string.Format("{0:yyyy/MM/dd}", Eval("arriveTime")) %>
+                     <br />
+                     <%# string.Format("{0:yyyy/MM/dd}",  Eval("leaveTime"))  %>
+                    </td>
+                    
+                    
+                    
+                       <td>
+                           <span style="color: red;    font-weight: bold;"> <%# Eval("totalPrice") %></span>
+                    
                      </td>
+                       
+                     
                      <td>                     
                       <a  href='hotel_dingdan_cz.aspx?id=<%#Eval("id") %>&hotelid=<%=hotelid %>' >操作</a>
                                  

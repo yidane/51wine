@@ -6,6 +6,10 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using WeiXinPF.Application.DomainModules.IdentifyingCode.Service;
+using WeiXinPF.Infrastructure.DomainDataAccess;
+using WeiXinPF.Infrastructure.DomainDataAccess.IdentifyingCode;
+using WeiXinPF.Infrastructure.DomainDataAccess.Payment;
 using WeiXinPF.Model;
 using WeiXinPF.Model.KNSHotel;
 
@@ -181,7 +185,7 @@ namespace WeiXinPF.Web.weixin.KNSHotel
         /// <param name="orderStatus"></param>
         private void ShowContent(int orderStatus)
         {
-            if (orderStatus == 3)
+            if (orderStatus == HotelStatusManager.OrderStatus.Payed.StatusId)
             {
                 isShowContent = true;
             }
@@ -195,16 +199,20 @@ namespace WeiXinPF.Web.weixin.KNSHotel
         /// <param name="wxHotelDingdan"></param>
         private void GetVerificationCode(wx_hotel_dingdan wxHotelDingdan)
         {
-            if (wxHotelDingdan.orderStatus==3)
+            if (wxHotelDingdan.orderStatus == HotelStatusManager.OrderStatus.Payed.StatusId)
             {
-                for (int i = 0; i < 3; i++)
+                var wxHotelsInfo = new BLL.wx_hotels_info().GetModel(wxHotelDingdan.hotelid.Value);
+                var list=  IdentifyingCodeService.GetIdentifyingCodeInfoByOrderId
+                    (wxHotelDingdan.hotelid.Value, "hotel",
+                    wxHotelDingdan.OrderNumber, wxHotelsInfo.wid.Value);
+                foreach (var code in list)
                 {
-                    string code = i.ToString();
-                    int status = i+1;
                     VerificationCode += string.Format(@"<div class='swiper-slide'>
                                   <input type ='hidden' value='{0}' status='{1}' />
-                                   </div>", code, status);
+                                   </div>", code.IdentifyingCode, code.Status);
                 }
+
+                 
             }
             
             
@@ -212,30 +220,30 @@ namespace WeiXinPF.Web.weixin.KNSHotel
 
         private void ShowAlertMsg(int orderStatus)
         {
-            switch (orderStatus)
+            if (orderStatus == HotelStatusManager.OrderStatus.Refused.StatusId)
             {
-                case 1:
-                    AlertOrderMsg = @"
+                AlertOrderMsg = @"
         <div class='alert alert-warning' role='alert'>
       <strong> 抱歉!</strong> 您选购的房型商家已确认无房！欢迎您重新订购。
          </div>
      ";
-                    break;
-                case 2:
-                    AlertOrderMsg = @"
+            }
+            else if (orderStatus == HotelStatusManager.OrderStatus.Accepted.StatusId)
+            {
+                AlertOrderMsg = @"
         <div class='alert alert-warning' role='alert'>
       <strong> 特别提醒!</strong> 订单只为您保留1个小时，请您尽快支付！
          </div>
      ";
-                    break;
-                case 3:
-                    AlertOrderMsg = @"
+            }
+            else if (orderStatus == HotelStatusManager.OrderStatus.Payed.StatusId)
+            {
+                AlertOrderMsg = @"
         <div class='alert alert-warning' role='alert'>
       <strong> 特别提醒!</strong> 抱歉，由于景区酒店房源紧张，已付款订单不能申请退款，需电话联系酒店工作人员解决。
 
          </div>
      ";
-                    break;
             }
         }
 
@@ -245,7 +253,7 @@ namespace WeiXinPF.Web.weixin.KNSHotel
         /// <param name="orderStatus"></param>
         private void ShowQRCode(int orderStatus)
         {
-            if (orderStatus==3)
+            if (orderStatus== HotelStatusManager.OrderStatus.Accepted.StatusId)
             {
                 isShowQRCode = true;
             }
@@ -257,19 +265,18 @@ namespace WeiXinPF.Web.weixin.KNSHotel
         /// <param name="orderStatus"></param>
         public void ShowBtnStatus(int orderStatus)
         {
-            switch (orderStatus)
+            if (orderStatus == HotelStatusManager.OrderStatus.Pending.StatusId
+                || orderStatus == HotelStatusManager.OrderStatus.Refused.StatusId)
             {
-                case 0:
-                case 2:
-                    BtnShowStatus = 1;
-                    break;
-                case 1:
-                   BtnShowStatus = 2;
-                    break;
-              
-                default:
-                    BtnShowStatus = 0;
-                    break;
+                BtnShowStatus = 1;
+            }
+            else if (orderStatus == HotelStatusManager.OrderStatus.Accepted.StatusId )
+            {
+                BtnShowStatus = 2;
+            }
+            else
+            {
+                BtnShowStatus = 0;
             }
         }
     }

@@ -306,7 +306,7 @@
                 <ul id="nav" class="nav"></ul>
                 <div class="nav-right">
                     <div class="icon-info">
-                        <span>您好，<%=admin_info.user_name %><br />
+                        <span>您好，<%=admin_info.real_name %><br />
                             <%=new WeiXinPF.BLL.manager_role().GetTitle(admin_info.role_id) %>
                         </span>
                     </div>
