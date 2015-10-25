@@ -322,7 +322,7 @@
         </div>
 
         <script type="text/javascript">
-
+            var clickedBtn = false;
             function dothis(nums) {
                 if(checkValue())
                 {
@@ -459,10 +459,9 @@
 
                 $("#showcard").click(function () {
 
-                    if ($("#issub").val() == "1") {
-                        alert('请勿重复提交！谢谢！');
-                        return false;
-                    }
+                    
+                 
+
                     var arriveTime=$("#arriveTime").val();
                     var leaveTime=$("#leaveTime").val();
                     if(!checkDate(arriveTime))
@@ -489,6 +488,16 @@
                     if ($("#ctl00_content_tel").val() == '') { alert('电话不能为空'); return; }
                     if ($("#arriveTime").val() == '') { alert('请选择入住时间'); return; }
                     if ($("#leaveTime").val() == '') { alert('请选择离店时间'); return; }
+
+
+                       
+                    if (clickedBtn) {
+                        alert('请勿重复提交！谢谢！');
+                        return false;
+                    } else {
+                        clickedBtn = true;
+                    }
+
 
                     var oderName = document.getElementById('ctl00_content_oderName').value;
                     var identityNumber = document.getElementById('ctl00_content_identityNumber').value;

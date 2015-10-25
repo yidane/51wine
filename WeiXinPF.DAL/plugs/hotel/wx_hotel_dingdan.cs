@@ -455,7 +455,7 @@ namespace WeiXinPF.DAL
         public DataSet GetList(int pageSize, int pageIndex, string strWhere, string filedOrder, out int recordCount)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select id,hotelid,openid,oderName,orderNumber,wxOrderNumber,identityNumber,tel,arriveTime,leaveTime,roomType,orderTime,orderNum,price,orderStatus,isDelete,'' as payStatusStr,createDate ");
+            strSql.Append("select id,ROW_NUMBER() OVER(ORDER BY hotelid,orderTime desc) AS orderno,hotelid,openid,oderName,orderNumber,wxOrderNumber,identityNumber,tel,arriveTime,leaveTime,roomType,orderTime,orderNum,price,orderStatus,isDelete,'' as payStatusStr,createDate ");
             strSql.Append(" FROM wx_hotel_dingdan ");
             if (strWhere.Trim() != "")
             {
@@ -512,8 +512,8 @@ namespace WeiXinPF.DAL
             parameters[6].Value = model.remark;
             parameters[7].Value = model.id;
 //            parameters[8].Value = model.OrderNumber;
-            parameters[9].Value = model.WXOrderNumber;
-            parameters[10].Value = model.IdentityNumber;
+            parameters[8].Value = model.WXOrderNumber;
+            parameters[9].Value = model.IdentityNumber;
 
             int rows = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
             if (rows > 0)

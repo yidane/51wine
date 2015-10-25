@@ -50,6 +50,7 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Transactions" />
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -74,6 +75,10 @@
     <ProjectReference Include="..\WeiXinPF.Application.DomainModules\WeiXinPF.Application.DomainModules.csproj">
       <Project>{b2387b96-7302-4321-bbe3-a7c50f032939}</Project>
       <Name>WeiXinPF.Application.DomainModules</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WeiXinPF.BLL\WeiXinPF.BLL.csproj">
+      <Project>{ec27bba4-030c-4853-9fb2-a075654b28fa}</Project>
+      <Name>WeiXinPF.BLL</Name>
     </ProjectReference>
     <ProjectReference Include="..\WeiXinPF.Infrastructure.DomainDataAccess\WeiXinPF.Infrastructure.DomainDataAccess.csproj">
       <Project>{64c35e8a-f1c0-44db-aca6-3cc44ee9716b}</Project>
