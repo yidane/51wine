@@ -597,10 +597,10 @@ namespace WeiXinPF.DAL
         public DataSet GetDingdanRefundDetail(int shopid, int dingdanid, string openid, int caiid)
         {
             var strSql = new StringBuilder();
-            strSql.Append(@"SELECT vi.IdentifyingCodeId ,
+            strSql.Append(@"SELECT  vi.IdentifyingCodeId ,
                                             ds.hotelName ,
                                             dm.openid ,
-		                                      dm.orderNumber,
+                                            dm.orderNumber ,
                                             vi.IdentifyingCode ,
                                             cm.cpName ,
                                             dc.price ,
@@ -608,16 +608,17 @@ namespace WeiXinPF.DAL
                                             vi.IdentifyingCode ,
                                             dc.price ,
                                             vi.Status
-                                FROM    dbo.wx_diancai_dingdan_manage dm
-                                        INNER JOIN dbo.wx_diancai_dingdan_caiping dc ON dm.id = dc.dingId
-                                        INNER JOIN dbo.wx_Verification_IdentifyingCodeInfo vi ON vi.OrderId = dm.id
-                                        LEFT JOIN dbo.wx_diancai_caipin_manage cm ON vi.ProductId = cm.id
-		                                LEFT JOIN dbo.wx_diancai_shopinfo ds ON dm.shopinfoid=ds.id
-                                WHERE   vi.ModuleName = 'restaurant'
-                                       AND vi.Status=1 
-                                       AND dm.id = @DindanID
+                                    FROM    dbo.wx_diancai_dingdan_manage dm
+                                            INNER JOIN dbo.wx_diancai_dingdan_caiping dc ON dm.id = dc.dingId
+                                            LEFT JOIN dbo.wx_diancai_caipin_manage cm ON dc.caiId = cm.id
+                                            INNER JOIN dbo.wx_Verification_IdentifyingCodeInfo vi ON vi.OrderId = dm.id
+                                                                                                  AND vi.ModuleName = 'restaurant'
+                                                                                                  AND cm.id = vi.ProductId
+                                            LEFT JOIN dbo.wx_diancai_shopinfo ds ON dm.shopinfoid = ds.id
+                                    WHERE   vi.Status = 1  
+                                       AND vi.OrderID = @DindanID
 		                                AND dm.openid=@OpenID
-		                                AND dc.caiId=@CaiID
+		                                AND vi.ProductID=@CaiID
 		                                AND dm.shopinfoid=@ShopInfoID");
             SqlParameter[] sqlparams =
                 {
@@ -897,7 +898,7 @@ namespace WeiXinPF.DAL
                                                 LEFT JOIN dbo.wx_diancai_shopinfo s ON d.shopinfoid = s.id
                                         WHERE   d.id = @OrderID;
 
-                                            SELECT  cm.cpName ,
+                                            SELECT distinct  cm.cpName ,
                                                         vi.ProductId ,
                                                         vi.IdentifyingCode ,
                                                         dc.price ,
