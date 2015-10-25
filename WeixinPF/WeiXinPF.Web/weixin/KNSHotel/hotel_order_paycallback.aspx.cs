@@ -67,10 +67,10 @@ namespace WeiXinPF.Web.weixin.KNSHotel
                     {
                      var id=    WeiXinPF.Common.Utils.StrToInt(hotelid, 0);
                         var wxHotelsInfo = new BLL.wx_hotels_info().GetModel(id);
-                        url = "hotel_userOrder.aspx?type=all&openid=" + openid +
-               "&wid=" + wxHotelsInfo.wid + "&roomid=" + roomid;
+                        url = "hotel_order.aspx?openid=" + openid +
+               "&wid=" + wxHotelsInfo.wid + "&hotelid=" + hotelid;
                     }
-                    
+                   
                     break;
                 case "fail":
                 case "cancel":

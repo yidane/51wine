@@ -135,7 +135,7 @@
                     </span>
                     <span class="text">门票订单</span>
                 </a>
-                <a class="item">
+                <a class="item"  href="../KNSHotel/hotel_userOrder.aspx?openid=<%=openid %>&type=all&wid=1">
                     <span class="img">
                         <img src="images/hotel.png" />
                     </span>
