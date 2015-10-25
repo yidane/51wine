@@ -19,14 +19,14 @@ namespace WeiXinPF.Web.admin.diancai
         public string Dingdanlist = "";
         public string dingdanren = "";
 
-        BLL.wx_diancai_dingdan_manage manage = new BLL.wx_diancai_dingdan_manage();
-        Model.wx_diancai_dingdan_manage managemodel = new Model.wx_diancai_dingdan_manage();
-        BLL.wx_diancai_shopinfo shopinfo = new BLL.wx_diancai_shopinfo();
-        Model.wx_diancai_shopinfo sjopmodel = new Model.wx_diancai_shopinfo();
+        public int wid = 0;
+
+        public const string ModuleName = "restaurant";
         protected void Page_Load(object sender, EventArgs e)
         {
             id = MyCommFun.RequestInt("id");
             shopid = MyCommFun.RequestInt("shopid") == 0 ? GetShopId() : MyCommFun.RequestInt("shopid");
+            wid = MyCommFun.RequestInt("wid") == 0 ? this.GetWeiXinCode().id : MyCommFun.RequestInt("wid");
             openid = MyCommFun.QueryString("openid");
             confirmnumber.CausesValidation = true;
         }
@@ -37,7 +37,7 @@ namespace WeiXinPF.Web.admin.diancai
         {
             var number = this.confirmnumber.Text.Trim();
 
-            var identifyingCode = IdentifyingCodeService.GetConfirmIdentifyingCodeInfo(shopid, number);
+            var identifyingCode = IdentifyingCodeService.GetConfirmIdentifyingCodeInfo(shopid, number, ModuleName, wid);
 
             if (identifyingCode == null)
             {

@@ -54,6 +54,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IdentifyingCode\DTO\IdentifyingCodeDetailSearchDTO.cs" />
+    <Compile Include="IdentifyingCode\DTO\IdentifyingCodeDTO.cs" />
+    <Compile Include="IdentifyingCode\DTO\OrderDetailDTO.cs" />
     <Compile Include="Hotel\TuidanInfo.cs" />
     <Compile Include="IdentifyingCode\IdentifyingCodeInfo.cs" />
     <Compile Include="IdentifyingCode\Repository\IdentifyingCodeRepository.cs" />
@@ -181,7 +184,16 @@
       <DependentUpon>201510241352413_gb1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\WeiXinPF.Common\WeiXinPF.Common.csproj">
+      <Project>{20908989-7773-493b-b1bd-764be322a935}</Project>
+      <Name>WeiXinPF.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WeiXinPF.DBUtility\WeiXinPF.DBUtility.csproj">
+      <Project>{2cfdfca0-a3fc-4dde-8448-1769a6e24825}</Project>
+      <Name>WeiXinPF.DBUtility</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
