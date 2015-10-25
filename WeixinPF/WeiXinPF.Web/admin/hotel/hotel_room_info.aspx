@@ -222,6 +222,8 @@
 
         <div class="page-footer">
             <div class="btn-list">
+                <asp:Label runat="server" ID="lblComment" Font-Size="12px">审核意见：</asp:Label>
+                <asp:TextBox runat="server" ID="txtComment" CssClass="input txt"></asp:TextBox>
                 <asp:Button ID="save_room" runat="server" CssClass="btn" Text="保存并提交" OnClick="save_room_Click" />
                 <asp:Button ID="btnAgree" runat="server" CssClass="btn" Text="审核通过" OnClick="btnAgree_Click" />
                 <asp:Button ID="btnRefuse" runat="server" CssClass="btn" Text="审核不通过" OnClick="btnRefuse_Click" />

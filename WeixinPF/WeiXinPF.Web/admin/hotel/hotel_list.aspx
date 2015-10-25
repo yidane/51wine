@@ -80,6 +80,7 @@
                     <td>
                         <a href='hotel_register.aspx?hotelid=<%#Eval("id") %>&action=<%=MXEnums.ActionEnum.Edit.ToString() %>'>修改</a>
                         <a href='hotel_admin_list.aspx?hotelid=<%#Eval("id") %>'>管理员设置</a>
+                        <a href="hotel_info.aspx?action=<%=MXEnums.ActionEnum.View.ToString() %>&hotelid=<%#Eval("id") %>">商户或门店信息查看</a>
                         <a href='hotel_room.aspx?hotelid=<%#Eval("id") %>&action=<%=MXEnums.ActionEnum.Audit.ToString() %>'>商品信息审核</a>
                         <a href='hotel_dingdan_manage.aspx?hotelid=<%#Eval("id") %>'>订单查看</a>
                     </td>

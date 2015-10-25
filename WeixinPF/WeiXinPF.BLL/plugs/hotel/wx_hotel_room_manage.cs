@@ -44,5 +44,10 @@ namespace WeiXinPF.BLL
                 scope.Complete();
             }
         }
+
+        public string GetComment(int roomid)
+        {
+           return  _dal.GetComment(roomid);
+        }
     }
 }

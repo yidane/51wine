@@ -31,6 +31,15 @@ namespace WeiXinPF.Web.admin.hotel {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
+        /// divLocation control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divLocation;
+        
+        /// <summary>
         /// hidId control.
         /// </summary>
         /// <remarks>
@@ -40,13 +49,40 @@ namespace WeiXinPF.Web.admin.hotel {
         protected global::System.Web.UI.WebControls.HiddenField hidId;
         
         /// <summary>
-        /// hotelName control.
+        /// lblHotelCode control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox hotelName;
+        protected global::System.Web.UI.WebControls.Label lblHotelCode;
+        
+        /// <summary>
+        /// lblHotelName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblHotelName;
+        
+        /// <summary>
+        /// lblOperator control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblOperator;
+        
+        /// <summary>
+        /// lblHotelPhone control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblHotelPhone;
         
         /// <summary>
         /// hotelAddress control.
@@ -76,15 +112,6 @@ namespace WeiXinPF.Web.admin.hotel {
         protected global::System.Web.UI.WebControls.TextBox txtLngYPoint;
         
         /// <summary>
-        /// hotelPhone control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox hotelPhone;
-        
-        /// <summary>
         /// mobilPhone control.
         /// </summary>
         /// <remarks>
@@ -92,15 +119,6 @@ namespace WeiXinPF.Web.admin.hotel {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox mobilPhone;
-        
-        /// <summary>
-        /// noticeEmail control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox noticeEmail;
         
         /// <summary>
         /// coverPic control.
@@ -121,42 +139,6 @@ namespace WeiXinPF.Web.admin.hotel {
         protected global::System.Web.UI.WebControls.TextBox topPic;
         
         /// <summary>
-        /// orderLimit control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox orderLimit;
-        
-        /// <summary>
-        /// listMode control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList listMode;
-        
-        /// <summary>
-        /// messageNotice control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList messageNotice;
-        
-        /// <summary>
-        /// pwd control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox pwd;
-        
-        /// <summary>
         /// hotelIntroduct control.
         /// </summary>
         /// <remarks>
@@ -164,15 +146,6 @@ namespace WeiXinPF.Web.admin.hotel {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlTextArea hotelIntroduct;
-        
-        /// <summary>
-        /// orderRemark control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlTextArea orderRemark;
         
         /// <summary>
         /// title1 control.
