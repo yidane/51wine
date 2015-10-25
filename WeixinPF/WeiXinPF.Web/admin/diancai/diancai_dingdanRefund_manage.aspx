@@ -95,9 +95,9 @@
                 <td>
                     <%--<div class="rule-single-select">--%>
                     <asp:DropDownList runat="server" ID="dboRefundStatus" CssClass="select" Width="293">
-                        <asp:ListItem Text="退款审核中" Value="2"></asp:ListItem>
-                        <asp:ListItem Text="已退款" Value="3"></asp:ListItem>
-                        <asp:ListItem Text="退款失败" Value="4"></asp:ListItem>
+                        <asp:ListItem Text="退款审核中" Value="3"></asp:ListItem>
+                        <asp:ListItem Text="已退款" Value="4"></asp:ListItem>
+                        <asp:ListItem Text="退款失败" Value="5"></asp:ListItem>
                     </asp:DropDownList>
                     <%--</div>--%>
                 </td>
