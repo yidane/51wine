@@ -108,7 +108,7 @@
                 <dt>地址：</dt>
                 <dd>
                     <asp:TextBox runat="server" ID="hotelAddress" CssClass="input normal" sucmsg=" " nullmsg=" " datatype="*1-100"></asp:TextBox>
-                    <span class="Validform_checktip">*说明： 根据不同的类型：可以是商家地址：店铺地址：学校地址...</span>
+                    <span class="Validform_checktip">*请在下方地图中输入具体地点，即可获取该地点的具体坐标</span>
                 </dd>
                 <dd>纬度（x）: 
                  <asp:TextBox ID="txtLatXPoint" runat="server" Width="200px" Text="" CssClass="input small " datatype="*1-20" sucmsg=" " nullmsg=" "></asp:TextBox>
