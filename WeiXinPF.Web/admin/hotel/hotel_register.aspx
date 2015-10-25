@@ -93,8 +93,11 @@
             <dl>
                 <dt>是否推荐：</dt>
                 <dd>
-                    <div class="rule-single-checkbox">
-                        <asp:CheckBox ID="cbRecommend" runat="server" Checked="false" />
+                    <div class="rule-multi-radio">
+                        <asp:RadioButtonList ID="rblRecommend" runat="server" RepeatDirection="Horizontal" RepeatLayout="Flow">
+                            <asp:ListItem Value="1">推荐</asp:ListItem>
+                            <asp:ListItem Value="0" Selected="True">不推荐</asp:ListItem>
+                        </asp:RadioButtonList>
                     </div>
                     <span class="Validform_checktip">*设置为推荐将会在美食美宿首页显示。</span></dd>
             </dl>
