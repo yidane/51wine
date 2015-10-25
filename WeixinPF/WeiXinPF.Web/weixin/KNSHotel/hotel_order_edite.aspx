@@ -18,12 +18,16 @@
       <script type="text/javascript" src="../../scripts/bootstrap/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../../scripts/bootstrap/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
     <script type="text/javascript" src="../../scripts/bootstrap/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
-
+    <style>
+          .header-img {
+            max-height: 150px;
+        }
+    </style>
 </asp:Content>
 
 <asp:Content ID="c" ContentPlaceHolderID="content" runat="server" class="mode_webapp">
     <div class="qiandaobanner">
-        <img src="<%=image %>" /> 
+        <img class="header-img" src="<%=image %>" /> 
     </div>
     
 
