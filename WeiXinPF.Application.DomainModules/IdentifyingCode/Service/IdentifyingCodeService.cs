@@ -1,6 +1,8 @@
 ﻿namespace WeiXinPF.Application.DomainModules.IdentifyingCode.Service
 {
     using System;
+    using System.Collections;
+    using System.Collections.Generic;
     using System.Globalization;
     using System.Linq;
     using System.Runtime.Remoting.Messaging;
@@ -37,6 +39,11 @@
             }
 
             return false;
+        }
+
+        public static IList<IdentifyingCodeInfo> GetIdentifyingCodeInfoByOrderId(int shopId, string moduleName, string orderId)
+        {
+            return new List<IdentifyingCodeInfo>();
         }
 
         public static IdentifyingCodeInfo GetConfirmIdentifyingCodeInfo(int shopId, string identifyingCode)
