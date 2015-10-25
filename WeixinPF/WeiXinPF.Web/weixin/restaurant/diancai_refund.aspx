@@ -173,20 +173,36 @@
         </div>
 
         <script type="text/javascript">
-            var noUseCount = <%=NoUseCount %>;
-            
+            var noUseCount = parseInt(<%=NoUseCount %>);
+            var price = parseFloat(<%=Price%>);
+
             function addProduct() {
-                var currentCount =parseInt($("#txtRefundCount").val());
+                var currentCount = parseInt($("#txtRefundCount").val());
                 if (currentCount < noUseCount) {
-                    $("#txtRefundCount").val(++currentCount);
+                    currentCount = currentCount + 1;
+                    $("#txtRefundCount").val(currentCount);
+                    $("#txtRefundAmount").val(accMul(currentCount, price) + "元");
                 }
             }
-            
+
             function reduceProduct() {
                 var currentCount = parseInt($("#txtRefundCount").val());
                 if (currentCount > 1) {
-                    $("#txtRefundCount").val(--currentCount);
+                    currentCount = currentCount - 1;
+                    $("#txtRefundCount").val(currentCount);
+                    $("#txtRefundAmount").val(accMul(currentCount, price) + "元");
                 }
+            }
+
+            function accMul(arg1, arg2) {
+                var m = 0, s1 = arg1.toString(), s2 = arg2.toString();
+                try {
+                    m += s1.split('.')[1].length;
+                } catch (e) { }
+                try {
+                    m += s2.split('.')[1].length;
+                } catch (e) { }
+                return Number(s1.replace('.', '')) * Number(s2.replace('.', '')) / Math.pow(10, m);
             }
         </script>
     </form>

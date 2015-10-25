@@ -559,12 +559,14 @@ namespace WeiXinPF.DAL
                                         d.createDate
                                 FROM    wx_diancai_dingdan_manage d
                                         LEFT JOIN wx_diancai_shopinfo s ON d.shopinfoid = s.id
-                                WHERE payStatus=1");
+                                WHERE payStatus>0");
 
             if (openid.Trim() != "")
             {
                 strSql.Append(" and openid='" + openid + "'");
             }
+
+            strSql.Append(" ORDER BY d.createDate DESC");
             return DbHelperSQL.Query(strSql.ToString());
         }
 

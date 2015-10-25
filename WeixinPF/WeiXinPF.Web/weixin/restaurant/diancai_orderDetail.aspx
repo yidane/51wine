@@ -59,15 +59,14 @@
         }
 
         .alert {
-            padding: 15px;
+            padding: 10px;
             margin-bottom: 20px;
             border: 1px solid transparent;
             border-radius: 4px;
         }
 
         .top-alert {
-            height: 32px;
-            line-height: 32px;
+            line-height: 8px;
             vertical-align: middle;
         }
 
@@ -114,7 +113,7 @@
         }
 
         .item-pullleft {
-            margin-right: 10px;
+            margin-right: 1px;
         }
 
         .img-ercode {
@@ -137,7 +136,34 @@
             border-radius: 4px;
             background-color: green;
             max-width: 60px;
+            padding-right: 1px;
         }
+
+        .cp {
+            width: 100%;
+            text-align: left;
+            border-top: 1px solid #c6c6c6;
+        }
+
+            .cp .cc {
+                text-align: center !important;
+            }
+
+            .cp .rr {
+                text-align: right !important;
+            }
+
+            .cp th {
+                background-color: #f9f9f9;
+                font-size: 12px;
+                padding: 8px 10px 8px 10px;
+            }
+
+            .cp td {
+                border-top: 1px solid #E6E6E6;
+                font-size: 14px;
+                padding: 8px 1px 8px 1px;
+            }
     </style>
 </head>
 <body class="mode_webapp">
@@ -154,20 +180,14 @@
 
         <div id="contact_info" class="cardexplain">
             <div class="alert alert-success top-alert" role="alert">
-                <span style="float: left"><span class="top-alert-name">订单编号：</span> <%=OrderNumber %></span>
-                <span style="float: right"><span class="top-alert-name">总价：</span>
-                    <span class="label label-danger"><%=PayAmount %>元</span></span>
-
+                <span style="float: left"><span class="top-alert-name">订单编号:</span> <%=OrderNumber.Trim() %></span>
+                <span style="float: right"><span class="top-alert-name">总价:<strong style="color: red"><%=PayAmount.Trim() %>元</strong></span></span>
             </div>
-            <%--            <section class="alert alert-success">--%>
-            <%--                <div style="float: left">订单编号 <%=OrderNumber %></div>--%>
-            <%--                <div style="float: right"><strong style="font-size: 1.2em; right: 2px">总价 </strong>--%>
-            <%--                <span class="label label-primary"> <%=PayAmount %>元</span></div>--%>
-            <%--            </section>--%>
             <section>
                 <table width="100%" border="0" cellpadding="0" cellspacing="0" class="DishDetail table table-bordered">
                     <thead>
                         <tr>
+                            <th class="col" style="width: 5%"></th>
                             <th class="Col1" style="width: 33%">类型</th>
                             <th class="Col2" style="width: 17%">份数</th>
                             <th class="Col3" style="width: 25%">总价</th>
@@ -287,14 +307,15 @@
 
             $('.silde-background').each(function (i) {
                 var id = $(this).attr("id");
+                var caiId = $(this).attr("CaiID");
                 var swiper = new Swiper('#' + id + ' .swiper-container', {
                     loop: false,
                     pagination: '#' + id + ' .swiper-pagination ',
                     onTransitionEnd: function (swi) {
                         var current = swi.slides[swi.activeIndex];
                         var item = current.childNodes[0];
-                        $("#itemkey").html($(item).attr("key"));
-                        $("#itemStatus").html($(item).attr("status"));
+                        $("#itemkey_"+caiId).html($(item).attr("key"));
+                        $("#itemStatus_"+caiId).html($(item).attr("status"));
                     }
                 });
             });
