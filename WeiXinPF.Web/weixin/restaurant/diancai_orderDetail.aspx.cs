@@ -90,7 +90,7 @@ namespace WeiXinPF.Web.weixin.restaurant
                 if (pair.Value != null && pair.Value.Count > 0)
                 {
                     builder.Append(@"<section>");
-                    builder.Append("<table width=\"100%\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" class=\"cpbiaoge\">");
+                    builder.Append("<table width=\"100%\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" class=\"cp\">");
                     builder.Append("<tr>");
                     builder.AppendFormat("<td class=\"cc\" style=\"width: 5%\">{0}</td>", index);
                     builder.AppendFormat("<td class=\"cc\" style=\"width: 33%\">{0}</td>", pair.Value[0].cpName);
@@ -106,7 +106,7 @@ namespace WeiXinPF.Web.weixin.restaurant
                     builder.Append("</table>");
                     builder.Append("<div class=\"silde-background \" id='silde-module-" + pair.Key + "'>");
                     builder.Append("<div class=\"swiper-container gpd-ablum swiper-container-horizontal\">");
-                    builder.AppendFormat("<div class=\"swiper-wrapper silde-center\" style=\"transition-duration: 0ms; transform: translate3d(0px, 0px, 0px);\" id=\"div-{0}-{1}\">", orderId, pair.Key);
+                    builder.AppendFormat("<div class=\"swiper-wrapper silde-center\" style=\"transition-duration: 0ms; transform: translate3d(0px, 0px, 0px);\" id=\"div_{0}\" CaiID=\"{0}\">", pair.Key);
 
                     foreach (OrderCaipinDetail detail in pair.Value)
                     {
@@ -124,10 +124,10 @@ namespace WeiXinPF.Web.weixin.restaurant
                     builder.Append("</div>");
 
                     builder.AppendFormat(@"<div class='full-w'>
-                        <p class='text-uppercase'>验证码：
-                        <strong id='itemkey' class='text-danger item-pullleft'>{0}</strong>
-                        <strong id='itemStatus' class='text-danger pull-right item-pullleft'>{1}</strong>
-                      </p></div>", pair.Value[0].identifyingcode, StatusManager.DishStatus.GetStatusDict(pair.Value[0].status).StatusName);
+                        <p class='text-uppercase'>验证码:
+                        <strong id='itemkey_{2}' class='text-danger item-pullleft'>{0}</strong>
+                        <strong id='itemStatus_{2}' class='text-danger pull-right item-pullleft'>{1}</strong>
+                      </p></div>", pair.Value[0].identifyingcode, StatusManager.DishStatus.GetStatusDict(pair.Value[0].status).StatusName, pair.Key);
                     builder.Append("</div>");
 
                     builder.Append("</section>");
