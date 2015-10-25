@@ -37,7 +37,9 @@ namespace WeiXinPF.Web.admin.hotel
             {
                 SetLocation();
                 SetControl();
-                if (action == MXEnums.ActionEnum.Edit.ToString() || action == MXEnums.ActionEnum.Audit.ToString())
+                if (action == MXEnums.ActionEnum.Edit.ToString()
+                    || action == MXEnums.ActionEnum.Audit.ToString()
+                    || action == MXEnums.ActionEnum.View.ToString())
                 {
                     ShowInfo(roomid);
                 }
@@ -57,6 +59,13 @@ namespace WeiXinPF.Web.admin.hotel
                 this.facilities.Value = room.facilities;
                 this.txtUsueIntroduction.Value = room.UseInstruction;
                 this.txtRefundRule.Value = room.RefundRule;
+
+                if (room.Status != Model.RoomStatus.Submit)
+                {
+                    //获取审核意见
+                    var manageBll = new BLL.wx_hotel_room_manage();
+                    txtComment.Text = manageBll.GetComment(roomid);
+                }
             }
 
             IList<Model.wx_hotel_roompic> itemlist = iBll.GetModelList("roomid=" + roomid + " order by id asc");
@@ -140,7 +149,7 @@ namespace WeiXinPF.Web.admin.hotel
                 room.roomPrice = Convert.ToDecimal(this.roomPrice.Text);
                 room.salePrice = Convert.ToDecimal(this.salePrice.Text);
                 room.facilities = this.facilities.Value;
-                //room.sortid = Convert.ToInt32(this.sortid.Text);
+                room.Status = Model.RoomStatus.Submit;
 
                 roomBll.Update(room);
 
@@ -173,11 +182,9 @@ namespace WeiXinPF.Web.admin.hotel
 
         protected void btnAgree_Click(object sender, EventArgs e)
         {
-
-
             try
             {
-                new BLL.wx_hotel_room_manage().ManageRoom(roomid, Model.RoomStatus.Agree, GetAdminInfo().id, "审核通过");
+                new BLL.wx_hotel_room_manage().ManageRoom(roomid, Model.RoomStatus.Agree, GetAdminInfo().id, "审核通过", txtComment.Text.Trim());
 
             }
             catch (Exception ex)
@@ -191,10 +198,9 @@ namespace WeiXinPF.Web.admin.hotel
 
         protected void btnRefuse_Click(object sender, EventArgs e)
         {
-
             try
             {
-                new BLL.wx_hotel_room_manage().ManageRoom(roomid, Model.RoomStatus.Refuse, GetAdminInfo().id, "审核不通过");
+                new BLL.wx_hotel_room_manage().ManageRoom(roomid, Model.RoomStatus.Refuse, GetAdminInfo().id, "审核不通过", txtComment.Text.Trim());
             }
             catch (Exception ex)
             {
@@ -207,10 +213,16 @@ namespace WeiXinPF.Web.admin.hotel
 
         private void SetControl()
         {
+            save_room.Visible = false;
+            btnAgree.Visible = false;
+            btnRefuse.Visible = false;
+            lblComment.Visible = false;
+            txtComment.Visible = false;
+
             if (action == MXEnums.ActionEnum.Audit.ToString())
             {
-                save_room.Visible = false;
-
+                lblComment.Visible = true;
+                txtComment.Visible = true;
                 btnAgree.Visible = true;
                 btnRefuse.Visible = true;
             }
@@ -218,11 +230,20 @@ namespace WeiXinPF.Web.admin.hotel
             if (action == MXEnums.ActionEnum.Add.ToString() || action == MXEnums.ActionEnum.Edit.ToString())
             {
                 save_room.Visible = true;
+            }
 
-                btnAgree.Visible = false;
-                btnRefuse.Visible = false;
+            if (roomid != 0)
+            {
+                Model.wx_hotel_room room = roomBll.GetModel(roomid);
+                if (room.Status != Model.RoomStatus.Submit)
+                {
+                    lblComment.Visible = true;
+                    txtComment.Visible = true;
+                    txtComment.Enabled = false;
+                }
             }
         }
+
 
         private void SetLocation()
         {
@@ -232,7 +253,7 @@ namespace WeiXinPF.Web.admin.hotel
 
                 location += "<a href = \"hotel_list.aspx\" class=\"home\"><i></i><span>商户或门店列表</span></a>";
                 location += "<i class=\"arrow\"></i>";
-                location += "<a href = \"hotel_room.aspx?action=" + MXEnums.ActionEnum.Audit.ToString() + "&hotelid=" + hotelid + "\" ><i></i><span>商品管理</span></a>";
+                location += "<a href = \"hotel_room.aspx?action=" + MXEnums.ActionEnum.Audit.ToString() + "&hotelid=" + hotelid + "\" ><i></i><span>商品信息审核</span></a>";
                 location += "<i class=\"arrow\"></i>";
                 location += "<span>商品信息</span>";
             }

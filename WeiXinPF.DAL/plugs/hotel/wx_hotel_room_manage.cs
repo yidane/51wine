@@ -19,7 +19,7 @@ namespace WeiXinPF.DAL
             query.Append("  (@RoomId, @Operator, @OperateName, @OperateTime, @Comment)");
             query.Append("Select @Id = Scope_Identity()");
 
-            using(IDbConnection db = DbFactory.GetOpenedConnection())
+            using (IDbConnection db = DbFactory.GetOpenedConnection())
             {
                 DynamicParameters dynamicParameters = new DynamicParameters();
                 dynamicParameters.AddDynamicParams(model);
@@ -29,6 +29,25 @@ namespace WeiXinPF.DAL
 
                 return dynamicParameters.Get<int>("@Id");
 
+            }
+        }
+
+        public string GetComment(int roomid)
+        {
+            string query = @"Select 
+                                Top 1 * 
+                             From dbo.wx_hotel_room_manage 
+                             Where RoomId=@RoomId And (OperateName='审核通过' Or OperateName='审核不通过') 
+                             Order By OperateTime Desc";
+
+            using (IDbConnection db = DbFactory.GetOpenedConnection())
+            {
+                var model = db.Query<Model.wx_hotel_room_manage>(query, new { RoomId = roomid }).FirstOrDefault();
+                if (model == null)
+                {
+                    return string.Empty;
+                }
+                return model.Comment;
             }
         }
     }

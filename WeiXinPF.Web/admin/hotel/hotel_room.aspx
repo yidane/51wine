@@ -46,7 +46,6 @@
 <body class="mainbody">
     <form id="form1" runat="server">
         <div class="location" runat="server" id="divLocation">
-            
         </div>
         <div class="toolbar-wrap">
             <div id="floatHead" class="toolbar">
@@ -65,11 +64,11 @@
                             </asp:LinkButton>
                         </li>
                         <li runat="server" id="barAgree">
-                            <asp:LinkButton ID="btnAgree" runat="server" OnClick="btnAgree_Click">审核通过</asp:LinkButton>
+                            <asp:LinkButton ID="btnAgree" runat="server" OnClientClick="return ExePostBack('btnDelete');" OnClick="btnAgree_Click">审核通过</asp:LinkButton>
                         </li>
 
                         <li runat="server" id="barRefuse">
-                            <asp:LinkButton ID="btnRefuse" runat="server" OnClick="btnRefuse_Click">审核不通过</asp:LinkButton>
+                            <asp:LinkButton ID="btnRefuse" runat="server" OnClientClick="return ExePostBack('btnDelete');" OnClick="btnRefuse_Click">审核不通过</asp:LinkButton>
                         </li>
                     </ul>
                 </div>
@@ -107,6 +106,7 @@
                     <td><%# Eval("salePrice") %></td>
                     <td><%# Eval("StatusStr") %></td>
                     <td>
+                        <asp:LinkButton ID="lbtView" runat="server" CommandName="View" CommandArgument='<%#Eval("id") %>'>查看</asp:LinkButton>
                         <asp:LinkButton ID="lbtEdit" runat="server" CommandName="Edit" CommandArgument='<%#Eval("id")%>'>修改</asp:LinkButton>
                         <asp:LinkButton ID="lbtAudit" runat="server" CommandName="Audit" CommandArgument='<%#Eval("id")%>'>审核</asp:LinkButton>
                         <asp:LinkButton ID="lbtPublish" runat="server" CommandName="Publish" CommandArgument='<%#Eval("id")%>'>发布</asp:LinkButton>

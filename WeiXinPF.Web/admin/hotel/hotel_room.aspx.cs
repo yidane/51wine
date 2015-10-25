@@ -255,6 +255,9 @@ namespace WeiXinPF.Web.admin.hotel
             int id = MyCommFun.Obj2Int(e.CommandArgument);
             switch (e.CommandName)
             {
+                case "View":
+                    Response.Redirect(string.Format("hotel_room_info.aspx?action={0}&hotelid={1}&roomid={2}", MXEnums.ActionEnum.View.ToString(), hotelid, id));
+                    break;
                 case "Edit":
                     Response.Redirect(string.Format("hotel_room_info.aspx?action={0}&hotelid={1}&roomid={2}", MXEnums.ActionEnum.Edit.ToString(), hotelid, id));
                     break;
@@ -302,6 +305,7 @@ namespace WeiXinPF.Web.admin.hotel
             {
                 int id = Convert.ToInt32(((HiddenField)rptList.Items[index].FindControl("hidId")).Value);
                 CheckBox cb = (CheckBox)rptList.Items[index].FindControl("chkId");
+                //LinkButton lbtView = rptList.Items[index].FindControl("lbtView") as LinkButton;
                 LinkButton lbtEidt = rptList.Items[index].FindControl("lbtEdit") as LinkButton;
                 LinkButton lbtAudit = rptList.Items[index].FindControl("lbtAudit") as LinkButton;
                 LinkButton lbtPublish = rptList.Items[index].FindControl("lbtPublish") as LinkButton;
@@ -345,7 +349,6 @@ namespace WeiXinPF.Web.admin.hotel
                         }
                         break;
                     case Model.RoomStatus.SoldOut:
-                        //删除放在这里？
                         break;
                 }
             }
@@ -359,7 +362,7 @@ namespace WeiXinPF.Web.admin.hotel
 
                 location += "<a href = \"hotel_list.aspx\" class=\"home\"><i></i><span>商户或门店列表</span></a>";
                 location += "<i class=\"arrow\"></i>";
-                location += "<span>商品管理</span>";
+                location += "<span>商品信息审核</span>";
             }
             else
             {

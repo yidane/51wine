@@ -60,12 +60,12 @@
 </head>
 <body class="mainbody">
     <form id="form1" runat="server">
-        <div class="location">
-            <span>商户或门店信息设置</span>
+        <div class="location" runat="server" id="divLocation">
+            
         </div>
         <div class="line10"></div>
 
-        
+
         <div class="content-tab-wrap">
             <div id="floatHead" class="content-tab">
                 <div class="content-tab-ul-wrap">
@@ -79,12 +79,29 @@
         </div>
 
 
-         <div class="tab-content">
+        <div class="tab-content">
+            <dl>
+                <dt>编号：</dt>
+                <dd>
+                    <asp:Label runat="server" ID="lblHotelCode" Font-Bold="true"></asp:Label>
+                </dd>
+            </dl>
             <dl>
                 <dt>商家名称：</dt>
                 <dd>
-                    <asp:TextBox runat="server" ID="hotelName" CssClass="input normal" sucmsg=" " nullmsg=" " datatype="*1-100"></asp:TextBox>
-                    <span class="Validform_checktip">*</span>
+                    <asp:Label runat="server" ID="lblHotelName"></asp:Label>
+                </dd>
+            </dl>
+            <dl>
+                <dt>运营人：</dt>
+                <dd>
+                    <asp:Label runat="server" ID="lblOperator"></asp:Label>
+                </dd>
+            </dl>
+            <dl>
+                <dt>电话：</dt>
+                <dd>
+                    <asp:Label runat="server" ID="lblHotelPhone"></asp:Label>
                 </dd>
             </dl>
             <dl>
@@ -95,26 +112,16 @@
                 </dd>
                 <dd>纬度（x）: 
                  <asp:TextBox ID="txtLatXPoint" runat="server" Width="200px" Text="" CssClass="input small " datatype="*1-20" sucmsg=" " nullmsg=" "></asp:TextBox>
-                  <span class="Validform_checktip">*</span> &nbsp;&nbsp;&nbsp;
+                    <span class="Validform_checktip">*</span> &nbsp;&nbsp;&nbsp;
                 </dd>
                 <dd>经度（y）:
                       <asp:TextBox ID="txtLngYPoint" runat="server" Width="200px" Text="" CssClass="input small " datatype="*1-20" sucmsg=" " nullmsg=" "></asp:TextBox>
                     <span class="Validform_checktip">*</span>
                 </dd>
                 <dd>
-                    
-                    <iframe id="baiduframe" src="../../weixin/map/qqmap/qqmap_getLocation.html" height="400" width="600" style="border: 1px solid #e1e1e1;"></iframe>
+                    <iframe id="baiduframe" src="../../weixin/map/qqmap/qqmap_getLocation.html" height="380" width="600" style="border: 1px solid #e1e1e1;"></iframe>
                 </dd>
             </dl>
-
-            <dl>
-                <dt>电话：</dt>
-                <dd>
-                    <asp:TextBox runat="server" ID="hotelPhone" CssClass="input normal" sucmsg=" " nullmsg=" " datatype="*1-100"></asp:TextBox>
-                    <span class="Validform_checktip">*</span>
-                </dd>
-            </dl>
-
             <dl>
                 <dt>手机号：</dt>
                 <dd>
@@ -122,104 +129,32 @@
                     <span class="Validform_checktip">*</span>
                 </dd>
             </dl>
-            <dl style="display:none;">
-                <dt>通知邮箱：</dt>
+            <dl>
+                <dt>Logo：</dt>
                 <dd>
-                    <asp:TextBox runat="server" ID="noticeEmail" CssClass="input normal"   sucmsg=" " nullmsg=" "   datatype="*0-100"></asp:TextBox>
-                    <span class="Validform_checktip">*邮箱登入密码！</span>
-                </dd>
-            </dl>
-<%--               <dl>
-                <dt>邮箱密码：</dt>
-                <dd>
-                    <asp:TextBox runat="server" ID="emailPws" CssClass="input normal" sucmsg=" " nullmsg=" " ></asp:TextBox>
-                    <span class="Validform_checktip">*</span>
-                </dd>
-            </dl>--%>
-
-               <dl>
-                <dt>订房封面图片：</dt>
-                <dd>
-                    <asp:TextBox ID="coverPic" runat="server" CssClass="input normal upload-path"  datatype="*1-200" Style="width: 200px;" sucmsg=" " nullmsg=" " />
+                    <asp:TextBox ID="coverPic" runat="server" CssClass="input normal upload-path" datatype="*1-200"  sucmsg=" " nullmsg=" " />
                     <div class="upload-box upload-img"></div>
-                    <br />
-                    <span class="Validform_checktip">*填写图片外链地址，推荐大小为720x400</span>
-
+                    <span class="Validform_checktip">*</span>
                 </dd>
             </dl>
-                <dl>
-                <dt>订单页头部图片：</dt>
+            <dl>
+                <dt>首页封面：</dt>
                 <dd>
-                    <asp:TextBox ID="topPic" runat="server" CssClass="input normal upload-path"  datatype="*1-200" Style="width: 200px;" sucmsg=" " nullmsg=" " />
+                    <asp:TextBox ID="topPic" runat="server" CssClass="input normal upload-path" datatype="*1-200"  sucmsg=" " nullmsg=" " />
                     <div class="upload-box upload-img"></div>
-                    <br />
-                    <span class="Validform_checktip">*不会自定义请留空:填写图片外链地址，推荐大小为720x125，高度可根据自身需求调整。</span>
-
-                </dd>
-            </dl>
-
-               <dl>
-                <dt>每人每天提交订单次数：</dt>
-                <dd>
-                    <asp:TextBox runat="server" ID="orderLimit" CssClass="input normal" sucmsg=" " nullmsg=" " datatype="n"></asp:TextBox>
                     <span class="Validform_checktip">*</span>
                 </dd>
             </dl>
-
-                <dl>
-                <dt>列表模式：</dt>
-                <dd>
-                    <div class="rule-multi-radio">
-                        <asp:RadioButtonList ID="listMode" runat="server" RepeatDirection="Horizontal" RepeatLayout="Flow">
-                            <asp:ListItem Value="False" Selected="True">无图</asp:ListItem>
-                            <asp:ListItem Value="True">有图</asp:ListItem>
-
-                        </asp:RadioButtonList>
-                    </div>
-                </dd>
-            </dl>
-                <dl>
-                <dt>信息提醒：</dt>
-                <dd>
-                    <div class="rule-multi-radio">
-                        <asp:RadioButtonList ID="messageNotice" runat="server" RepeatDirection="Horizontal" RepeatLayout="Flow">
-                            <asp:ListItem Value="0" Selected="True">关闭时</asp:ListItem>
-                            <asp:ListItem Value="1">确认时</asp:ListItem>
-                            <asp:ListItem Value="2">下单和确认时</asp:ListItem>
-                        </asp:RadioButtonList>
-                    </div>
-                </dd>
-            </dl>
-            
-             <dl>
-                <dt>订单确认密码：</dt>
-                <dd>
-                    <asp:TextBox runat="server" ID="pwd" CssClass="input normal" sucmsg=" " nullmsg=" " datatype="*1-50"></asp:TextBox>
-                    <span class="Validform_checktip">*</span>
-                </dd>
-            </dl>
-
-            
-              <dl>
+            <dl>
                 <dt>商家介绍：</dt>
                 <dd>
                     <textarea id="hotelIntroduct" class="editor" style="visibility: hidden;" runat="server"></textarea>
                     <span class="Validform_checktip">*</span>
                 </dd>
             </dl>
-
-               <dl>
-                <dt>订房说明：</dt>
-                <dd>
-                     <textarea id="orderRemark" class="editor" style="visibility: hidden;" runat="server"></textarea>
-                    <span class="Validform_checktip">*</span>
-                </dd>
-            </dl>
-
-         </div>
-
-        <div class="tab-content" style="display:none">
-             <dl>
+        </div>
+        <div class="tab-content" style="display: none">
+            <dl>
                 <dt>文字描述：</dt>
                 <dd>
                     <asp:TextBox runat="server" ID="title1" CssClass="input normal" datatype="*1-100" sucmsg=" " nullmsg=" " Style="width: 100px;"></asp:TextBox>
@@ -231,11 +166,11 @@
                    <asp:TextBox ID="picUrl1" runat="server" CssClass="input normal upload-path" datatype="*1-100" Style="width: 100px;" sucmsg=" " nullmsg=" " />
                     <div class="upload-box upload-img"></div>
                     图片跳转地址：                  
-                   <asp:TextBox ID="picTiaozhuan1" runat="server" CssClass="input" Style="width: 100px;"  sucmsg=" " nullmsg=" " />
+                   <asp:TextBox ID="picTiaozhuan1" runat="server" CssClass="input" Style="width: 100px;" sucmsg=" " nullmsg=" " />
                     <span class="Validform_checktip">*</span>
                 </dd>
             </dl>
-               <dl>
+            <dl>
                 <dt>文字描述：</dt>
                 <dd>
                     <asp:TextBox runat="server" ID="title2" CssClass="input normal" datatype="*1-100" sucmsg=" " nullmsg=" " Style="width: 100px;"></asp:TextBox>
@@ -247,12 +182,12 @@
                    <asp:TextBox ID="picUrl2" runat="server" CssClass="input normal upload-path" datatype="*1-100" Style="width: 100px;" sucmsg=" " nullmsg=" " />
                     <div class="upload-box upload-img"></div>
                     图片跳转地址：                  
-                   <asp:TextBox ID="picTiaozhuan2" runat="server" CssClass="input" Style="width: 100px;"  sucmsg=" " nullmsg=" " />
+                   <asp:TextBox ID="picTiaozhuan2" runat="server" CssClass="input" Style="width: 100px;" sucmsg=" " nullmsg=" " />
                     <span class="Validform_checktip">*</span>
                 </dd>
             </dl>
 
-             <dl>
+            <dl>
                 <dt>文字描述：</dt>
                 <dd>
                     <asp:TextBox runat="server" ID="title3" CssClass="input normal" sucmsg=" " nullmsg=" " Style="width: 100px;"></asp:TextBox>
@@ -264,30 +199,28 @@
                    <asp:TextBox ID="picUrl3" runat="server" CssClass="input normal upload-path" Style="width: 100px;" sucmsg=" " nullmsg=" " />
                     <div class="upload-box upload-img"></div>
                     图片跳转地址：                  
-                   <asp:TextBox ID="picTiaozhuan3" runat="server" CssClass="input" Style="width: 100px;"  sucmsg=" " nullmsg=" " />
+                   <asp:TextBox ID="picTiaozhuan3" runat="server" CssClass="input" Style="width: 100px;" sucmsg=" " nullmsg=" " />
                     <span class="Validform_checktip">*</span>
                 </dd>
             </dl>
 
-               <dl>
+            <dl>
                 <dt>文字描述：</dt>
                 <dd>
                     <asp:TextBox runat="server" ID="title4" CssClass="input normal" sucmsg=" " nullmsg=" " Style="width: 100px;"></asp:TextBox>
                     <span class="Validform_checktip">*</span>
                     排序：         
-                   <asp:TextBox runat="server" ID="sortid4" CssClass="input normal" sucmsg=" " nullmsg=" "  Style="width: 50px;"></asp:TextBox>
+                   <asp:TextBox runat="server" ID="sortid4" CssClass="input normal" sucmsg=" " nullmsg=" " Style="width: 50px;"></asp:TextBox>
                     <span class="Validform_checktip">*</span>
                     图片地址：                  
                    <asp:TextBox ID="picUrl4" runat="server" CssClass="input normal upload-path" Style="width: 100px;" sucmsg=" " nullmsg=" " />
                     <div class="upload-box upload-img"></div>
                     图片跳转地址：                  
-                   <asp:TextBox ID="picTiaozhuan4" runat="server" CssClass="input" Style="width: 100px;"  sucmsg=" " nullmsg=" " />
+                   <asp:TextBox ID="picTiaozhuan4" runat="server" CssClass="input" Style="width: 100px;" sucmsg=" " nullmsg=" " />
                     <span class="Validform_checktip">*</span>
                 </dd>
             </dl>
-
-
-              <dl>
+            <dl>
                 <dt>文字描述：</dt>
                 <dd>
                     <asp:TextBox runat="server" ID="title5" CssClass="input normal" sucmsg=" " nullmsg=" " Style="width: 100px;"></asp:TextBox>
@@ -299,24 +232,24 @@
                    <asp:TextBox ID="picUrl5" runat="server" CssClass="input normal upload-path" Style="width: 100px;" sucmsg=" " nullmsg=" " />
                     <div class="upload-box upload-img"></div>
                     图片跳转地址：                  
-                   <asp:TextBox ID="picTiaozhuan5" runat="server" CssClass="input" Style="width: 100px;"  sucmsg=" " nullmsg=" " />
+                   <asp:TextBox ID="picTiaozhuan5" runat="server" CssClass="input" Style="width: 100px;" sucmsg=" " nullmsg=" " />
                     <span class="Validform_checktip">*</span>
                 </dd>
             </dl>
 
-               <dl>
+            <dl>
                 <dt>文字描述：</dt>
                 <dd>
                     <asp:TextBox runat="server" ID="title6" CssClass="input normal" sucmsg=" " nullmsg=" " Style="width: 100px;"></asp:TextBox>
                     <span class="Validform_checktip">*</span>
                     排序：         
-                   <asp:TextBox runat="server" ID="sortid6" CssClass="input normal" sucmsg=" " nullmsg=" "  Style="width: 50px;"></asp:TextBox>
+                   <asp:TextBox runat="server" ID="sortid6" CssClass="input normal" sucmsg=" " nullmsg=" " Style="width: 50px;"></asp:TextBox>
                     <span class="Validform_checktip">*</span>
                     图片地址：                  
                    <asp:TextBox ID="picUrl6" runat="server" CssClass="input normal upload-path" Style="width: 100px;" sucmsg=" " nullmsg=" " />
                     <div class="upload-box upload-img"></div>
                     图片跳转地址：                  
-                   <asp:TextBox ID="picTiaozhuan6" runat="server" CssClass="input" Style="width: 100px;"  sucmsg=" " nullmsg=" " />
+                   <asp:TextBox ID="picTiaozhuan6" runat="server" CssClass="input" Style="width: 100px;" sucmsg=" " nullmsg=" " />
                     <span class="Validform_checktip">*</span>
                 </dd>
             </dl>
@@ -325,7 +258,7 @@
 
         <div class="page-footer">
             <div class="btn-list">
-                <asp:Button ID="save_hotel" runat="server" CssClass="btn" Text="保存" OnClick="save_hotel_Click"  />
+                <asp:Button ID="save_hotel" runat="server" CssClass="btn" Text="保存" OnClick="save_hotel_Click" />
             </div>
             <div class="clear"></div>
         </div>
