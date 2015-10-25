@@ -85,5 +85,11 @@ namespace Application.DomainModules.UnitTest
 
             //Assert.IsTrue(result);
         }
+
+        [TestMethod]
+        public void AfterPaymentProcess_HotelOrderManage_ReturnSuccessProcess()
+        {
+            var isSuccess = IdentifyingCodeService.ModifyIdentifyingCodeInfoStatus("H20151025175559136498137", 1);
+        }
     }
 }
