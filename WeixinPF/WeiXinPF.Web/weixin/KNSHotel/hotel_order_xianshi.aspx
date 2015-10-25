@@ -394,12 +394,13 @@
         </div>
         <input type="hidden" runat="server" id="dingdanidnum" value="" />
         <script type="text/javascript">
+             var clickedBtn = false;
             var oLay = document.getElementById("overlay");
             //            <strong id="ticket_status" class="text-danger pull-right item-pullleft">未使用</strong>
             var statusArr = [
-                { status: 1, text: '未使用', css: ' #777' },
-                { status: 2, text: '已使用', css: '#3c763d' },
-                { status: 3, text: '已失效', css: '#a94442' }];
+            { status: 1, text: '未使用', css: ' #777' },
+            { status: 2, text: '已使用', css: '#3c763d' },
+            { status: 3, text: '已失效', css: '#a94442' }];
 
 
             $(document).ready(function () {
@@ -424,15 +425,15 @@
                         myact: "dingdandelete"
                     };
                     $.post('hotel_info.ashx', submitData,
-                     function (data) {
-                         if (data.ret == "ok") {
-                             alert(data.content);
+                        function (data) {
+                            if (data.ret == "ok") {
+                                alert(data.content);
 
-                             window.location.href = "hotel_order.aspx?openid=<%=openid%>&hotelid=<%=hotelid%>&roomid=<%=roomid%>";
+                                window.location.href = "hotel_order.aspx?openid=<%=openid%>&hotelid=<%=hotelid%>&roomid=<%=roomid%>";
 
-                         } else { alert(data.content); }
-                     },
-                "json");
+                            } else { alert(data.content); }
+                        },
+                        "json");
 
                     oLay.style.display = "block";
 
@@ -445,156 +446,165 @@
                 });
             });
 
-             $("#windowclosebutton").click(function () {
-                 $("#windowcenter").slideUp(500);
-                 oLay.style.display = "none";
+            $("#windowclosebutton").click(function () {
+                $("#windowcenter").slideUp(500);
+                oLay.style.display = "none";
 
-             });
-             $("#alertclose").click(function () {
-                 $("#windowcenter").slideUp(500);
-                 oLay.style.display = "none";
+            });
+            $("#alertclose").click(function () {
+                $("#windowcenter").slideUp(500);
+                oLay.style.display = "none";
 
-             });
+            });
 
-             function alert(title) {
+            function alert(title) {
 
-                 $("#windowcenter").slideToggle("slow");
-                 $("#txt").html(title);
-                 //$("#windowcenter").hide("slow"); 
-                 setTimeout('$("#windowcenter").slideUp(500)', 4000);
-             }
+                $("#windowcenter").slideToggle("slow");
+                $("#txt").html(title);
+                //$("#windowcenter").hide("slow"); 
+                setTimeout('$("#windowcenter").slideUp(500)', 4000);
+            }
 
-             function initswiper() {
-                 var swiper = new Swiper('.swiper-container', {
-                     //                     autoplay: 3000,
-                     loop: false,
-                     nextButton: '.swiper-button-next',
-                     prevButton: '.swiper-button-prev',
-                     pagination: '.swiper-pagination',
-                     paginationElement: 'li',
-                     onTransitionEnd: function (swi) {
-                         var current = swi.slides[swi.activeIndex];
-                         var t = $(current.children[0]);
-                         var code = t.val();
-                         $("#ticketCode").html(code);
-                         setStatus(t.attr('status'));
-                     }
-                 });
-             }
+            function initswiper() {
+                var swiper = new Swiper('.swiper-container', {
+                    //                     autoplay: 3000,
+                    loop: false,
+                    nextButton: '.swiper-button-next',
+                    prevButton: '.swiper-button-prev',
+                    pagination: '.swiper-pagination',
+                    paginationElement: 'li',
+                    onTransitionEnd: function (swi) {
+                        var current = swi.slides[swi.activeIndex];
+                        var t = $(current.children[0]);
+                        var code = t.val();
+                        $("#ticketCode").html(code);
+                        setStatus(t.attr('status'));
+                    }
+                });
+            }
 
-             function renderQrcode() {
-                 $(".swiper-container .swiper-slide").each(function () {
-                     var t = $(this).find('input:hidden').val();
-                     //                      var t = $(this).html();
-                     $(this).qrcode({
-                         "size": 200,
-                         "color": "#3a3",
-                         "text": t
-                     });
-                 });
-                 var first = $(".swiper-container .swiper-slide").eq(0).find('input:hidden');
+            function renderQrcode() {
+                $(".swiper-container .swiper-slide").each(function () {
+                    var t = $(this).find('input:hidden').val();
+                    //                      var t = $(this).html();
+                    $(this).qrcode({
+                        "size": 200,
+                        "color": "#3a3",
+                        "text": t
+                    });
+                });
+                var first = $(".swiper-container .swiper-slide").eq(0).find('input:hidden');
 
-                 $("#ticketCode").text(first.val());
-                 setStatus(first.attr('status'));
+                $("#ticketCode").text(first.val());
+                setStatus(first.attr('status'));
 
-             }
+            }
 
-             function getStatus(statusid) {
-                 for (var i = 0; i < statusArr.length; i++) {
-                     if (statusArr[i].status == statusid) {
-                         return statusArr[i];
-                     }
-                 }
-             }
+            function getStatus(statusid) {
+                for (var i = 0; i < statusArr.length; i++) {
+                    if (statusArr[i].status == statusid) {
+                        return statusArr[i];
+                    }
+                }
+            }
 
-             function setStatus(statusid) {
-                 var status = getStatus(statusid);
-                 if (status) {
-                     $("#ticket_status").text(status.text);
-                     $("#ticket_status").css('color', status.css);
-                     //$("#ticket_status").removeClass();
-                     //$("#ticket_status").addClass(status.css+' pull-right item-pullleft');
+            function setStatus(statusid) {
+                var status = getStatus(statusid);
+                if (status) {
+                    $("#ticket_status").text(status.text);
+                    $("#ticket_status").css('color', status.css);
+                    //$("#ticket_status").removeClass();
+                    //$("#ticket_status").addClass(status.css+' pull-right item-pullleft');
 
-                 }
+                }
 
-             }
-
-
-
-             //支付点击
-             function btn_paymentclick() {
-                 var dingdanidnum = document.getElementById('ctl00_content_dingdanidnum').value;
-                 //                 var url = '../WeChatPay/WeChatPay.html?openid='
-                 //                    + '  <%=openid%>&hotelid=<%=hotelid%>&roomid=<%=roomid%>' +
-                 //             '&dingdanidnum=' + dingdanidnum;
-                 //          var scriptsurl = getRootPath() + '/weixin/KNSHotel/js/paycallback.js';
-                 //          scriptsurl = scriptsurl.replace(/\//g, "%2F").replace(/\:/g, '%3A');
-                 //          url += '&scripts=' + scriptsurl;
-                 //
-                 //          window.location.href = url;
+            }
 
 
-                 var submitData = {
 
-                     dingdanidnum: dingdanidnum,
-                     myact: "dingdanPaying"
-                 };
-                 $.post('hotel_info.ashx', submitData,
-                      function (result) {
-                         if (result.IsSuccess) {
+            //支付点击
+            function btn_paymentclick() {
+
+
+                if (clickedBtn) {
+                    alert('请勿重复提交！谢谢！');
+                    return false;
+                } else {
+                    clickedBtn = true;
+                }
+
+                var dingdanidnum = document.getElementById('ctl00_content_dingdanidnum').value;
+                //                 var url = '../WeChatPay/WeChatPay.html?openid='
+                //                    + '  <%=openid%>&hotelid=<%=hotelid%>&roomid=<%=roomid%>' +
+                //             '&dingdanidnum=' + dingdanidnum;
+                //          var scriptsurl = getRootPath() + '/weixin/KNSHotel/js/paycallback.js';
+                //          scriptsurl = scriptsurl.replace(/\//g, "%2F").replace(/\:/g, '%3A');
+                //          url += '&scripts=' + scriptsurl;
+                //
+                //          window.location.href = url;
+
+
+                var submitData = {
+
+                    dingdanidnum: dingdanidnum,
+                    myact: "dingdanPaying"
+                };
+                $.post('hotel_info.ashx', submitData,
+                    function (result) {
+                        if (result.IsSuccess) {
 //  document.location.href = 'hotel_order_paycallback.aspx?status=success&dingdanidnum='+dingdanidnum+
 //  '&openid=<%=openid%>&hotelid=<%=hotelid%>&roomid=<%=roomid%>';
                       
-                        document.location.href = result.Data;
-                        //if (payResult) {
-                        //    alert(data.content);
-                        //    clearCache();
-                        //}
-                    } else {
-                        alert(data.content); }
-               },
-                "json");
+                            document.location.href = result.Data;
+                            //if (payResult) {
+                            //    alert(data.content);
+                            //    clearCache();
+                            //}
+                        } else {
+                            alert(data.content); }
+                    },
+                    "json");
 
 
-                 //          var submitData = {
-                 //
-                 //              dingdanidnum: dingdanidnum,
-                 //              myact: "dingdanPayed"
-                 //          };
-                 //          $.post('hotel_info.ashx', submitData,
-                 //               function (data) {
-                 //                   if (data.ret == "ok") {
-                 //                       alert(data.content);
-                 //
-                 //                       window.location.href = "hotel_order.aspx?openid=<%=openid%>&hotelid=<%=hotelid%>&roomid=<%=roomid%>";
-                 //
-                 //                          } else { alert(data.content); }
-                 //                      },
-                 //                "json");
+                //          var submitData = {
+                //
+                //              dingdanidnum: dingdanidnum,
+                //              myact: "dingdanPayed"
+                //          };
+                //          $.post('hotel_info.ashx', submitData,
+                //               function (data) {
+                //                   if (data.ret == "ok") {
+                //                       alert(data.content);
+                //
+                //                       window.location.href = "hotel_order.aspx?openid=<%=openid%>&hotelid=<%=hotelid%>&roomid=<%=roomid%>";
+                //
+                //                          } else { alert(data.content); }
+                //                      },
+                //                "json");
 
-                 oLay.style.display = "block";
-             }
+                oLay.style.display = "block";
+            }
 
 
 
-             //获取项目根路径
-             function getRootPath(hasProject) {
-                 //获取当前网址，如： http://localhost:8083/uimcardprj/share/meun.jsp
-                 var curWwwPath = window.document.location.href;
-                 //获取主机地址之后的目录，如： uimcardprj/share/meun.jsp
-                 var pathName = window.document.location.pathname;
-                 var pos = curWwwPath.indexOf(pathName);
-                 //获取主机地址，如： http://localhost:8083
-                 var localhostPaht = curWwwPath.substring(0, pos);
-                 var result = localhostPaht;
-                 if (hasProject) {
-                     //获取带"/"的项目名，如：/uimcardprj
-                     var projectName = pathName.substring(0, pathName.substr(1).indexOf('/') + 1);
-                     result += projectName;
-                 }
+            //获取项目根路径
+            function getRootPath(hasProject) {
+                //获取当前网址，如： http://localhost:8083/uimcardprj/share/meun.jsp
+                var curWwwPath = window.document.location.href;
+                //获取主机地址之后的目录，如： uimcardprj/share/meun.jsp
+                var pathName = window.document.location.pathname;
+                var pos = curWwwPath.indexOf(pathName);
+                //获取主机地址，如： http://localhost:8083
+                var localhostPaht = curWwwPath.substring(0, pos);
+                var result = localhostPaht;
+                if (hasProject) {
+                    //获取带"/"的项目名，如：/uimcardprj
+                    var projectName = pathName.substring(0, pathName.substr(1).indexOf('/') + 1);
+                    result += projectName;
+                }
 
-                 return (result);
-             }
+                return (result);
+            }
 
         </script>
     </div>

@@ -86,34 +86,35 @@ namespace WeiXinPF.Web.weixin.KNSHotel
                 yuding += "<li class=\"biaotou\" style='display:none'><table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\">";
                 yuding += "<tr><td>类型</td><td class=\"yuanjia\">原价</td><td class=\"youhuijia\">优惠价</td></tr></table></li>";
 
-                DataSet dr = roombll.GetList(hotelid);
-                if (dr.Tables[0].Rows.Count > 0)
+                var list = roombll.GetModelList(" hotelid= "+hotelid+" and Status=4");
+                if (list.Count > 0)
                 {
                     if (hotel.listMode == false)
                     {
-                        for (int i = 0; i < dr.Tables[0].Rows.Count; i++)
+                        for (int i = 0; i < list.Count; i++)
                         {
 
-                            yuding += "<li class=\"dandanb\"><a href=\"hotel_form.aspx?roomid=" + dr.Tables[0].Rows[i]["id"].ToString() + "&hotelid=" + hotel.id.ToString() + "&openid=" + openid + "\"><span>";
+                            yuding += "<li class=\"dandanb\"><a href=\"hotel_form.aspx?roomid=" + list[i].id + "&hotelid=" + hotel.id.ToString() + "&openid=" + openid + "\"><span>";
                             yuding += "<table class=\"jiagebiao\" width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\">";
-                            yuding += "<tr><td>" + dr.Tables[0].Rows[i]["roomType"].ToString() + "";
-                            yuding += " <p class='break-word'>" + dr.Tables[0].Rows[i]["indroduce"].ToString() + "</b></td>";
-                            yuding += " <td class=\"yuanjia\">￥" + dr.Tables[0].Rows[i]["roomPrice"].ToString() + "</td><td class=\"youhuijia\">￥" + dr.Tables[0].Rows[i]["salePrice"].ToString() + "</td>";
+                            yuding += "<tr><td>" + list[i].roomType  + "";
+                            yuding += " <p class='break-word'>" + list[i].indroduce  + "</b></td>";
+                            yuding += " <td class=\"yuanjia\">￥" + list[i].roomPrice  + "</td><td class=\"youhuijia\">￥" + list[i].salePrice   + "</td>";
                             yuding += "</tr></table></span></a></li>";
                         }
                     }
 
                     else
                     {
-                        for (int i = 0; i < dr.Tables[0].Rows.Count; i++)
+                        for (int i = 0; i < list.Count; i++)
                         {
-                            yuding += "   <li class=\"dandanb\"><a href=\"hotel_form.aspx?roomid=" + dr.Tables[0].Rows[i]["id"].ToString() + "&hotelid=" + hotel.id.ToString() + "&openid=" + openid + "\"><span>";
+                            yuding += "   <li class=\"dandanb\"><a href=\"hotel_form.aspx?roomid=" + list[i].id
+                                + "&hotelid=" + hotel.id.ToString() + "&openid=" + openid + "\"><span>";
                             yuding += " <table class=\"jiagebiao\" width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\">";
                             yuding += " <tr>";
-                            yuding += " <td><div>" + dr.Tables[0].Rows[i]["roomType"].ToString() + "</div>";
+                            yuding += " <td><div>" + list[i].roomType + "</div>";
 
                             BLL.wx_hotel_roompic roompic = new BLL.wx_hotel_roompic();
-                            DataSet pic = roompic.GetList(Convert.ToInt32(dr.Tables[0].Rows[i]["id"].ToString()));
+                            DataSet pic = roompic.GetList(list[i].id);
                             if (pic.Tables[0].Rows.Count > 0)
                             {
                                 yuding += " <div><img src=\"" + pic.Tables[0].Rows[0]["roompic"] + "\" class=\"showimg\">";
@@ -124,9 +125,9 @@ namespace WeiXinPF.Web.weixin.KNSHotel
                             }
 
 
-                            yuding += " <p class='break-word'>" + dr.Tables[0].Rows[i]["indroduce"].ToString() + "</p>";
-                            yuding += " <p>原价：<a class=\"yuanjia\">￥" + dr.Tables[0].Rows[i]["roomPrice"].ToString() + "</a></p>";
-                            yuding += " <p>优惠价：<a class=\"youhuijia\">￥" + dr.Tables[0].Rows[i]["salePrice"].ToString() + "</a></p></td>";
+                            yuding += " <p class='break-word'>" + list[i].indroduce + "</p>";
+                            yuding += " <p>原价：<a class=\"yuanjia\">￥" + list[i].roomPrice + "</a></p>";
+                            yuding += " <p>优惠价：<a class=\"youhuijia\">￥" + list[i].salePrice + "</a></p></td>";
                             yuding += " </tr>";
                             yuding += " </table>";
                             yuding += " </span></a>";

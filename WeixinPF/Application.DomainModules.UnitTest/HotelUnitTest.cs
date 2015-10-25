@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Transactions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using WeiXinPF.Application.DomainModules.Hotel;
 using WeiXinPF.Application.DomainModules.Hotel.DTOS;
+using WeiXinPF.Application.DomainModules.IdentifyingCode.Service;
 
 namespace Application.DomainModules.UnitTest
 {
@@ -31,6 +33,24 @@ namespace Application.DomainModules.UnitTest
             var model = hotelService.GetModel(tuidanDto.id);
             Assert.IsNotNull(model);
             Assert.AreEqual(model.dingdanid,tuidanDto.dingdanid);
+        }
+
+        [TestMethod]
+        public void AfterPaySuccess_ReturnTrue()
+        {
+            using (var scope = new TransactionScope())
+            {
+                string no = "H20151025221857350873926";
+                new WeiXinPF.BLL.wx_hotel_dingdan().PaySuccess(no);
+               var isModifySuccess = IdentifyingCodeService.ModifyIdentifyingCodeInfoStatus(no, 1);
+                Assert.IsTrue(isModifySuccess);
+                if (isModifySuccess)
+                {
+                    scope.Complete();
+                }
+            }
+          
+
         }
     }
 }

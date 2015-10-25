@@ -204,7 +204,7 @@ namespace WeiXinPF.Web.weixin.KNSHotel
                 var wxHotelsInfo = new BLL.wx_hotels_info().GetModel(wxHotelDingdan.hotelid.Value);
                 var list=  IdentifyingCodeService.GetIdentifyingCodeInfoByOrderId
                     (wxHotelDingdan.hotelid.Value, "hotel",
-                    wxHotelDingdan.OrderNumber, wxHotelsInfo.wid.Value);
+                    wxHotelDingdan.id.ToString(), wxHotelsInfo.wid.Value);
                 foreach (var code in list)
                 {
                     VerificationCode += string.Format(@"<div class='swiper-slide'>
@@ -253,7 +253,7 @@ namespace WeiXinPF.Web.weixin.KNSHotel
         /// <param name="orderStatus"></param>
         private void ShowQRCode(int orderStatus)
         {
-            if (orderStatus== HotelStatusManager.OrderStatus.Accepted.StatusId)
+            if (orderStatus== HotelStatusManager.OrderStatus.Payed.StatusId)
             {
                 isShowQRCode = true;
             }

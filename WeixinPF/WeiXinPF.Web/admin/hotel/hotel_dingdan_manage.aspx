@@ -111,7 +111,7 @@ em.no {
                     </td>
                     
                     <td>
-                        <%# Eval("id") %>
+                        <%# Eval("orderno") %>
                     </td>
                       <td>
                         <%# Eval("orderNumber") %>
