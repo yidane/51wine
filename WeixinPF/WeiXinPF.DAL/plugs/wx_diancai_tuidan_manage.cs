@@ -70,7 +70,7 @@ namespace WeiXinPF.DAL
         /// <param name="refundcode"></param>
         public void Refund(string refundcode)
         {
-            const string sql = "UPDATE dbo.wx_diancai_tuidan_manage SET refundStatus=1 WHERE refundCode=@RefundCode";
+            const string sql = "UPDATE dbo.wx_diancai_tuidan_manage SET refundStatus=2 WHERE refundCode=@RefundCode";
             SqlParameter[] sqlparams =
                 {
                     new SqlParameter(){ParameterName = "@RefundCode",SqlDbType = SqlDbType.NVarChar,Value = refundcode} 
@@ -85,7 +85,7 @@ namespace WeiXinPF.DAL
         /// <param name="refundId"></param>
         public void Refund(int refundId)
         {
-            const string sql = "UPDATE dbo.wx_diancai_tuidan_manage SET refundStatus=1 WHERE id=@RefundID";
+            const string sql = "UPDATE dbo.wx_diancai_tuidan_manage SET refundStatus=2 WHERE id=@RefundID";
             SqlParameter[] sqlparams =
                 {
                     new SqlParameter(){ParameterName = "@RefundID",SqlDbType = SqlDbType.Int,Value = refundId} 
@@ -100,7 +100,7 @@ namespace WeiXinPF.DAL
         /// <param name="refundCode"></param>
         public void RefundComplete(string refundCode)
         {
-            const string sql = "UPDATE dbo.wx_diancai_tuidan_manage SET refundStatus=3 WHERE refundcode=@RefundCode";
+            const string sql = "UPDATE dbo.wx_diancai_tuidan_manage SET refundStatus=4 WHERE refundcode=@RefundCode";
             SqlParameter[] sqlparams =
                 {
                     new SqlParameter(){ParameterName = "@RefundCode",SqlDbType = SqlDbType.NVarChar,Value = refundCode} 
@@ -115,7 +115,7 @@ namespace WeiXinPF.DAL
         /// <param name="refundCode"></param>
         public void RefundFail(string refundCode)
         {
-            const string sql = "UPDATE dbo.wx_diancai_tuidan_manage SET refundStatus=4 WHERE refundcode=@RefundCode";
+            const string sql = "UPDATE dbo.wx_diancai_tuidan_manage SET refundStatus=5 WHERE refundcode=@RefundCode";
             SqlParameter[] sqlparams =
                 {
                     new SqlParameter(){ParameterName = "@RefundCode",SqlDbType = SqlDbType.NVarChar,Value = refundCode} 
@@ -131,22 +131,23 @@ namespace WeiXinPF.DAL
         /// <returns></returns>
         public DataSet GetRefundList(string openId)
         {
-            const string sql = @"SELECT  tm.createDate ,
-                                            ds.hotelName ,
-                                            tm.refundCode ,
-                                            dm.orderNumber ,
-                                            tm.refundAmount ,
-                                            tm.refundStatus ,
-                                            tm.wid ,
-                                            tm.openid ,
-                                            tm.shopinfoid ,
-                                            dm.id AS dingdan
-                                    FROM    dbo.wx_diancai_tuidan_manage tm
-                                            INNER JOIN dbo.wx_diancai_dingdan_commodity dc ON tm.caipinid = dc.id
-                                            LEFT JOIN dbo.wx_diancai_shopinfo ds ON tm.shopinfoid = ds.id
-                                            INNER JOIN dbo.wx_diancai_dingdan_manage dm ON dc.dingId = dm.id
-		                                    WHERE dm.openid=@OpenID
-                                            Order by dm.CreateDate DESC";
+            const string sql = @"SELECT  distinct tm.createDate ,
+                                                ds.hotelName ,
+                                                tm.refundCode ,
+                                                dm.orderNumber ,
+                                                tm.refundAmount/100 as refundAmount,
+                                                tm.refundStatus ,
+                                                tm.wid ,
+                                                tm.openid ,
+                                                tm.shopinfoid ,
+                                                dm.id AS dingdan
+                                        FROM    dbo.wx_diancai_tuidan_manage tm
+                                                INNER JOIN dbo.wx_Verification_IdentifyingCodeInfo vi ON tm.caipinid = vi.IdentifyingCodeId
+                                                                                                      AND vi.ModuleName = 'restaurant'
+                                                LEFT JOIN dbo.wx_diancai_shopinfo ds ON tm.shopinfoid = ds.id
+                                                INNER JOIN dbo.wx_diancai_dingdan_manage dm ON vi.OrderId = dm.id
+                                        WHERE   dm.openid = @OpenID
+                                        ORDER BY tm.CreateDate DESC;";
 
             SqlParameter[] sqlparams =
                 {

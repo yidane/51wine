@@ -503,7 +503,7 @@ namespace WeiXinPF.DAL
 
             var sqlParams = new List<SqlParameter>();
 
-            sqlParams.Add(new SqlParameter("@ShopId", SqlDbType.Int) {Value = shopid});
+            sqlParams.Add(new SqlParameter("@ShopId", SqlDbType.Int) { Value = shopid });
             sqlParams.Add(new SqlParameter("@ModuleName", SqlDbType.VarChar, 50) { Value = moduleName });
             sqlParams.Add(new SqlParameter("@Condition", SqlDbType.VarChar) { Value = condition });
 
@@ -533,10 +533,10 @@ namespace WeiXinPF.DAL
             sqlParams.Add(new SqlParameter("@OrderId", SqlDbType.Int) { Value = dingId });
             sqlParams.Add(new SqlParameter("@ModuleName", SqlDbType.VarChar, 50) { Value = moduleName });
 
-            return DbHelperSQL.Query(strProc, sqlParams.ToArray());            
+            return DbHelperSQL.Query(strProc, sqlParams.ToArray());
         }
 
-        public DataSet GetListList(string openid)
+        public DataSet GetPayList(string openid)
         {
             StringBuilder strSql = new StringBuilder();
             //strSql.Append("select id,shopinfoid,openid,wid,orderNumber,deskNumber,customerName,customerTel,address,oderTime,oderRemark,payAmount,payStatus,createDate ");
@@ -606,25 +606,28 @@ namespace WeiXinPF.DAL
         public DataSet GetDingdanRefundDetail(int shopid, int dingdanid, string openid, int caiid)
         {
             var strSql = new StringBuilder();
-            strSql.Append(@"SELECT   c.id ,
-                                            s.hotelName,
-                                            openid ,
-                                            orderNumber ,
-                                            m.cpName,
-                                            c.price ,
-                                            identifyingcode ,
-                                            status
-                                    FROM    dbo.wx_diancai_dingdan_manage d
-                                            INNER JOIN dbo.wx_diancai_dingdan_commodity c ON d.id = c.dingId
-		                                    LEFT JOIN dbo.wx_diancai_shopinfo s
-		                                    ON d.shopinfoid=s.id
-		                                    LEFT JOIN dbo.wx_diancai_caipin_manage m
-		                                    ON c.caiId=m.id
-                                    WHERE   c.status = 0
-                                            AND d.id = @DindanID
-                                            AND d.openid = @OpenID
-                                            AND c.caiId = @CaiID
-                                            AND d.shopinfoid = @ShopInfoID;");
+            strSql.Append(@"SELECT vi.IdentifyingCodeId ,
+                                            ds.hotelName ,
+                                            dm.openid ,
+		                                      dm.orderNumber,
+                                            vi.IdentifyingCode ,
+                                            cm.cpName ,
+                                            dc.price ,
+                                            vi.ProductId ,
+                                            vi.IdentifyingCode ,
+                                            dc.price ,
+                                            vi.Status
+                                FROM    dbo.wx_diancai_dingdan_manage dm
+                                        INNER JOIN dbo.wx_diancai_dingdan_caiping dc ON dm.id = dc.dingId
+                                        INNER JOIN dbo.wx_Verification_IdentifyingCodeInfo vi ON vi.OrderId = dm.id
+                                        LEFT JOIN dbo.wx_diancai_caipin_manage cm ON vi.ProductId = cm.id
+		                                LEFT JOIN dbo.wx_diancai_shopinfo ds ON dm.shopinfoid=ds.id
+                                WHERE   vi.ModuleName = 'restaurant'
+                                       AND vi.Status=1 
+                                       AND dm.id = @DindanID
+		                                AND dm.openid=@OpenID
+		                                AND dc.caiId=@CaiID
+		                                AND dm.shopinfoid=@ShopInfoID");
             SqlParameter[] sqlparams =
                 {
                     new SqlParameter(){ParameterName = "@DindanID",SqlDbType = SqlDbType.Int,Value = dingdanid},
@@ -643,16 +646,16 @@ namespace WeiXinPF.DAL
 
                                     SELECT  @NoUseCaipinCount = COUNT(1)
                                     FROM    dbo.wx_diancai_dingdan_manage m
-                                            INNER JOIN dbo.wx_diancai_dingdan_commodity c ON m.id = c.dingId
-                                    WHERE   c.status = 0
+                                            INNER JOIN dbo.wx_Verification_IdentifyingCodeInfo vi ON m.id = vi.OrderId AND vi.ModuleName='restaurant'
+                                    WHERE   vi.status = 1
                                             AND m.id = @OrderID
                                             AND m.openid = @OpenID
-                                            AND c.CaiID = @CaiPinID;
+                                            AND vi.ProductId = @CaiPinID;
 
                                     SELECT  @NoUseAllCount = COUNT(1)
                                     FROM    dbo.wx_diancai_dingdan_manage m
-                                            INNER JOIN dbo.wx_diancai_dingdan_commodity c ON m.id = c.dingId
-                                    WHERE   c.status = 0
+                                            INNER JOIN dbo.wx_Verification_IdentifyingCodeInfo vi ON m.id = vi.OrderId AND vi.ModuleName='restaurant'
+                                    WHERE   vi.status = 1
                                             AND m.id = @OrderID
                                             AND m.openid = @OpenID;
 
@@ -681,7 +684,7 @@ namespace WeiXinPF.DAL
         /// <param name="caiid"></param>
         /// <param name="caipinIdList"></param>
         /// <returns></returns>
-        public bool RefundDiancai(int shopinfiId, string openid, int wid, int refundAmount, int dingdanid, int caiid, List<int> caipinIdList)
+        public bool RefundDiancai(int shopinfiId, string openid, int wid, int refundAmount, int dingdanid, int caiid, List<Guid> caipinIdList)
         {
             if (caipinIdList == null || caipinIdList.Count == 0)
                 return true;
@@ -706,25 +709,23 @@ namespace WeiXinPF.DAL
                 return true;
 
             //修改菜品状态
-            var refundCaiId = string.Empty;
+            var refundCaiId = new StringBuilder();
             for (int index = 0; index < caipinIdList.Count; index++)
             {
-                refundCaiId = index == caipinIdList.Count - 1
-                                  ? refundCaiId + caipinIdList[index].ToString()
-                                  : refundCaiId + caipinIdList[index].ToString() + ",";
+                refundCaiId.AppendFormat(index == caipinIdList.Count - 1 ? "'{0}'" : "'{0}',", caipinIdList[index].ToString());
             }
 
-            const string caipinModifySql = "UPDATE dbo.wx_diancai_dingdan_commodity  SET status=2,ModifyTime=GETDATE() WHERE dingId=@DingdanId AND caiId=@CaiID AND id IN (@RefundCaiID);";
+            string caipinModifySql = string.Format("UPDATE dbo.wx_Verification_IdentifyingCodeInfo SET Status=3,ModifyTime=GETDATE() WHERE OrderId=@DingdanId AND ProductId=@CaiID AND IdentifyingCodeId IN ({0});", refundCaiId.ToString());
             SqlParameter[] caipinModifysqlparams =
                 {
                     new SqlParameter(){ParameterName = "@DingdanId",SqlDbType = SqlDbType.Int,Value = dingdanid},
                     new SqlParameter(){ParameterName = "@CaiID",SqlDbType = SqlDbType.Int,Value = caiid},
-                    new SqlParameter(){ParameterName = "@RefundCaiID",SqlDbType = SqlDbType.NVarChar,Value = refundCaiId}
                 };
 
             var caipinModifyCommand = new CommandInfo() { CommandText = caipinModifySql, Parameters = caipinModifysqlparams };
             commandInfoList.Add(caipinModifyCommand);
 
+            var currentDate = DateTime.Now;
             //写入待退款记录
             const string insertTuidanSql = @"INSERT INTO dbo.wx_diancai_tuidan_manage
                                                                 ( shopinfoid ,
@@ -746,8 +747,8 @@ namespace WeiXinPF.DAL
                                                                   @RefundCode ,
                                                                   null ,
                                                                   @RefundAmount ,
-                                                                  2 ,
-                                                                  GETDATE()
+                                                                  3 ,
+                                                                  @CurrentDate
                                                                 )";
 
             foreach (var id in caipinIdList)
@@ -758,9 +759,10 @@ namespace WeiXinPF.DAL
                     new SqlParameter(){ParameterName = "@OpenID",SqlDbType = SqlDbType.NVarChar,Value = openid},
                     new SqlParameter(){ParameterName = "@Wid",SqlDbType = SqlDbType.Int,Value = wid},
                     new SqlParameter(){ParameterName = "@DingdanID",SqlDbType = SqlDbType.Int,Value = dingdanid},
-                    new SqlParameter(){ParameterName = "@CaiPinID",SqlDbType = SqlDbType.Int,Value = id},
+                    new SqlParameter(){ParameterName = "@CaiPinID",SqlDbType = SqlDbType.UniqueIdentifier,Value = id},
                     new SqlParameter(){ParameterName = "@RefundCode",SqlDbType = SqlDbType.NVarChar,Value = "T"+Utils.Number(13)}, 
-                    new SqlParameter(){ParameterName = "@RefundAmount",SqlDbType = SqlDbType.Int,Value = refundAmount} 
+                    new SqlParameter(){ParameterName = "@RefundAmount",SqlDbType = SqlDbType.Int,Value = refundAmount},
+                    new SqlParameter(){ParameterName = "@CurrentDate",SqlDbType = SqlDbType.DateTime,Value = currentDate}
                 };
 
                 commandInfoList.Add(new CommandInfo() { CommandText = insertTuidanSql, Parameters = insertTuidanParams });
@@ -783,7 +785,6 @@ namespace WeiXinPF.DAL
 
             return result > 0;
         }
-
 
 
         /// <summary>
@@ -850,7 +851,7 @@ namespace WeiXinPF.DAL
 
             strSql.Append("select a.id,a.cpName as cpName,c.price as price,b.status as status FROM wx_diancai_caipin_manage a INNER join ");
             strSql.Append("(select IdentifyingCodeId,CAST(ProductId AS INT) AS ProductId,CAST(OrderId AS INT) AS OrderId,");
-            strSql.Append("Status FROM [wx_Verification_IdentifyingCodeInfo] WHERE IdentifyingCodeId='" +cid +"') as b");
+            strSql.Append("Status FROM [wx_Verification_IdentifyingCodeInfo] WHERE IdentifyingCodeId='" + cid + "') as b");
             strSql.Append(" ON a.id=b.ProductId INNER JOIN (SELECT price,caiId,dingId FROM dbo.wx_diancai_dingdan_caiping)c");
             strSql.Append(" ON b.ProductId= c.caiId AND c.dingId= b.OrderId");
 
@@ -905,14 +906,17 @@ namespace WeiXinPF.DAL
                                                 LEFT JOIN dbo.wx_diancai_shopinfo s ON d.shopinfoid = s.id
                                         WHERE   d.id = @OrderID;
 
-                                        SELECT  cp.cpName ,
-                                                c.caiId ,
-                                                c.identifyingcode ,
-                                                c.price ,
-                                                c.status
-                                        FROM    [dbo].[wx_diancai_dingdan_commodity] c
-                                                INNER JOIN [dbo].[wx_diancai_caipin_manage] cp ON c.caiId = cp.id
-                                        WHERE   c.dingId = @OrderID");
+                                            SELECT  cm.cpName ,
+                                                        vi.ProductId ,
+                                                        vi.IdentifyingCode ,
+                                                        dc.price ,
+                                                        vi.Status
+                                                FROM    dbo.wx_diancai_dingdan_manage dm
+                                                        INNER JOIN dbo.wx_diancai_dingdan_caiping dc ON dm.id = dc.dingId
+                                                        INNER JOIN dbo.wx_Verification_IdentifyingCodeInfo vi ON vi.OrderId = dm.id
+                                                        LEFT JOIN dbo.wx_diancai_caipin_manage cm ON vi.ProductId = cm.id
+                                                WHERE   vi.ModuleName = 'restaurant'
+                                                        AND dm.id = @OrderID");
 
             SqlParameter[] sqlparams =
                 {

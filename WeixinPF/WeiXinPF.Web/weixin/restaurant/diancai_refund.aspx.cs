@@ -14,7 +14,7 @@ namespace WeiXinPF.Web.weixin.restaurant
         public string RestruantName = string.Empty;
         public string OrderNumber = string.Empty;
         public string CaiPinName = string.Empty;
-        public decimal Price = 0;
+        public double Price = 0;
         public int NoUseCount = 0;
 
         //请求参数
@@ -43,7 +43,7 @@ namespace WeiXinPF.Web.weixin.restaurant
                         RestruantName = result.Tables[0].Rows[0].Field<string>("hotelName");
                         OrderNumber = result.Tables[0].Rows[0].Field<string>("orderNumber");
                         CaiPinName = result.Tables[0].Rows[0].Field<string>("cpName");
-                        Price = result.Tables[0].Rows[0].Field<decimal>("price");
+                        Price = result.Tables[0].Rows[0].Field<double>("price");
                         NoUseCount = result.Tables[0].Rows.Count;
                         this.txtRefundAmount.Text = string.Format("{0}元", Price);
 
@@ -53,21 +53,26 @@ namespace WeiXinPF.Web.weixin.restaurant
                         {
                             if (result.Tables[0].Rows.IndexOf(row) == result.Tables[0].Rows.Count - 1)
                             {
-                                caiidListString = caiidListString + row.Field<int>("id");
+                                caiidListString = caiidListString + row.Field<Guid>("IdentifyingCodeId");
                             }
                             else
                             {
-                                caiidListString = caiidListString + row.Field<int>("id") + ",";
+                                caiidListString = caiidListString + row.Field<Guid>("IdentifyingCodeId") + ",";
                             }
                         }
 
                         this.caiidList.Value = caiidListString;
                     }
+                    else
+                    {
+                        OrderNumber = "该订单号不存在或该订单中不存在未消费的菜品";
+                        this.btnRefund.Visible = false;
+                    }
                 }
             }
             catch (Exception exception)
             {
-
+                Response.Write(exception.Message);
             }
         }
 
@@ -84,14 +89,14 @@ namespace WeiXinPF.Web.weixin.restaurant
 
                 if (caiidListArr.Length >= refundCount)
                 {
-                    var refundCaiidList = new List<int>();
+                    var refundCaiidList = new List<Guid>();
                     for (int index = 0; index < refundCount; index++)
                     {
-                        refundCaiidList.Add(Convert.ToInt32(caiidListArr[index]));
+                        refundCaiidList.Add(new Guid(caiidListArr[index]));
                     }
 
                     //(int shopinfiId, string openid, int wid, int refundAmount, int dingdanid, int caiid, List<int> caipinIdList)
-                    new BLL.wx_diancai_dingdan_manage().RefundDiancai(shopid, openid, wid, (int)(refundAmount * 100), dingdan, caiid, refundCaiidList);
+                    new BLL.wx_diancai_dingdan_manage().RefundDiancai(shopid, openid, wid, (int)(refundAmount * 100) * refundCount, dingdan, caiid, refundCaiidList);
 
                     Response.Redirect(string.Format("diancai_oder.aspx?openid={0}&type=refund", openid));
                 }

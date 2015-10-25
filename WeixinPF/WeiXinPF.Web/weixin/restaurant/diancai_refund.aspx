@@ -12,10 +12,9 @@
     <title><%=RestruantName %>餐饮订单</title>
     <link href="css/diancai.css" rel="stylesheet" type="text/css">
     <link href="css/swiper.min.css" rel="stylesheet" />
-    <script src="js/jquery.min.js" type="text/javascript"></script>
-    <script src="js/alert.js" type="text/javascript"></script>
-    <script src="js/swiper.min.js"></script>
     <script src="js/zepto.min.js"></script>
+    <script src="js/swiper.min.js"></script>
+    <script src="js/alert.js" type="text/javascript"></script>
     <style type="text/css">
         .gpd-ticket {
             margin-left: 50%;
@@ -156,7 +155,7 @@
                                     <label for="RefundCount" class="ui-input-text">退票数：</label></td>
                                 <td class="Orderchange">
                                     <a href="javascript:addProduct()" class="increase"><b class="ico_increase">加一份</b></a>
-                                    <asp:TextBox runat="server" ID="txtRefundCount" Text="1" Enabled="False" CssClass="count" BorderWidth="0"></asp:TextBox>
+                                    <asp:TextBox runat="server" ID="txtRefundCount" Text="1" CssClass="count" BorderWidth="0"></asp:TextBox>
                                     <a href="javascript:reduceProduct()" class="reduce"><b class="ico_reduce">减一份</b></a>
                                 </td>
                             </tr>
@@ -173,6 +172,34 @@
         </div>
 
         <script type="text/javascript">
+            $(document).ready(function () {
+                // 仅能输入数字
+                function isNumber(keyCode) {
+                    // 数字
+                    if (keyCode >= 48 && keyCode <= 57) return true;
+                    // 小数字键盘
+                    if (keyCode >= 96 && keyCode <= 105) return true;
+                    // Backspace键
+                    if (keyCode == 8) return true;
+                    return false;
+                }
+
+                $("#txtRefundCount").on("keydown", function (e) {
+                    var keyCode = e.keyCode;
+                    return isNumber(keyCode);
+                });
+
+                $("#txtRefundCount").change(function () {
+                    if ($(this).val() > parseInt(<%=NoUseCount%>)) {
+                        $(this).val(parseInt(<%=NoUseCount%>));
+                    }
+
+                    if ($(this).val() < 0) {
+                        $(this).val(0);
+                    }
+                });
+            });
+
             var noUseCount = parseInt(<%=NoUseCount %>);
             var price = parseFloat(<%=Price%>);
 

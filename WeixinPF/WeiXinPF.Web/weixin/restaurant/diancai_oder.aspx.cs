@@ -43,7 +43,7 @@ namespace WeiXinPF.Web.weixin.restaurant
         public void GetPay(string openID)
         {
             var managebll = new BLL.wx_diancai_dingdan_manage();
-            DataSet dr = managebll.GetListList(openID);
+            DataSet dr = managebll.GetPayList(openID);
             if (dr.Tables[0].Rows.Count > 0)
             {
                 for (int i = 0; i < dr.Tables[0].Rows.Count; i++)
@@ -108,17 +108,17 @@ namespace WeiXinPF.Web.weixin.restaurant
 
                     var refundStatus = Convert.ToInt32(dr.Tables[0].Rows[i]["refundStatus"]);
                     var statusDict = StatusManager.DishStatus.GetStatusDict(refundStatus);
-                    if (dr.Tables[0].Rows[i]["refundStatus"].ToString() == "1")
+                    if (string.Equals(dr.Tables[0].Rows[i]["refundStatus"].ToString(), StatusManager.DishStatus.PreRefund.StatusID.ToString()))
                     {
                         builder.AppendFormat("<em class=\"ok\">{0}</em>", statusDict.StatusName);
                     }
-                    else if (dr.Tables[0].Rows[i]["refundStatus"].ToString() == "2")
+                    else if (string.Equals(dr.Tables[0].Rows[i]["refundStatus"].ToString(), StatusManager.DishStatus.RefundFaild.StatusID.ToString()))
                     {
-                        builder.AppendFormat("<em class=\"error\">{0}</em>", statusDict.StatusName);
+                        builder.AppendFormat("<em class=\"no\">{0}</em>", statusDict.StatusName);
                     }
                     else
                     {
-                        builder.AppendFormat("<em class=\"no\">{0}</em>", statusDict.StatusName);
+                        builder.AppendFormat("<em class=\"error\">{0}</em>", statusDict.StatusName);
                     }
                     builder.Append(" </td></tr></table></ul>");
                 }

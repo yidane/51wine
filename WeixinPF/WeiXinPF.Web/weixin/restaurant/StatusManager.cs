@@ -70,43 +70,50 @@ namespace WeiXinPF.Web.weixin.restaurant
         public class DishStatus
         {
             /// <summary>
+            /// 未激活
+            /// </summary>
+            public static StatusDict NoActived = new StatusDict() { StatusID = 0, StatusName = "未激活" };
+
+            /// <summary>
             /// 未使用
             /// </summary>
-            public static StatusDict NoUsed = new StatusDict() { StatusID = 0, StatusName = "未使用" };
+            public static StatusDict NoUsed = new StatusDict() { StatusID = 1, StatusName = "未使用" };
 
             /// <summary>
             /// 已使用
             /// </summary>
-            public static StatusDict Used = new StatusDict() { StatusID = 1, StatusName = "已使用" };
+            public static StatusDict Used = new StatusDict() { StatusID = 2, StatusName = "未使用" };
 
             /// <summary>
             /// 退款审核中
             /// </summary>
-            public static StatusDict PreRefund = new StatusDict() { StatusID = 2, StatusName = "退款审核中" };
+            public static StatusDict PreRefund = new StatusDict() { StatusID = 3, StatusName = "退款审核中" };
 
             /// <summary>
             /// 已退款
             /// </summary>
-            public static StatusDict Refund = new StatusDict() { StatusID = 3, StatusName = "已退款" };
+            public static StatusDict Refund = new StatusDict() { StatusID = 4, StatusName = "已退款" };
 
             /// <summary>
             /// 退款不通过
             /// </summary>
-            public static StatusDict RefundFaild = new StatusDict() { StatusID = 4, StatusName = "审核不通过" };
+            public static StatusDict RefundFaild = new StatusDict() { StatusID = 5, StatusName = "审核不通过" };
 
             public static StatusDict GetStatusDict(int statusId)
             {
                 switch (statusId)
                 {
                     case 0:
-                        return NoUsed;
+                        return NoActived;
                     case 1:
-                        return Used;
+                        return NoUsed;
                     case 2:
-                        return PreRefund;
+                        return Used;
                     case 3:
-                        return Refund;
+                        return PreRefund;
                     case 4:
+                        return Refund;
+                    case 5:
                         return RefundFaild;
                     default:
                         throw new Exception("未知状态");
