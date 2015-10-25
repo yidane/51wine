@@ -7,6 +7,18 @@ namespace WeiXinPF.WeiXinComm
 {
     public class PayHelper
     {
+        private static bool? m_IsDebug = null;
+        public static bool IsDebug
+        {
+            get
+            {
+                if (m_IsDebug == null)
+                    m_IsDebug = string.Equals(System.Configuration.ConfigurationManager.AppSettings["RunMode"], "debug", StringComparison.CurrentCultureIgnoreCase);
+
+                return m_IsDebug.Value;
+            }
+        }
+
         /// <summary>
         /// 生成支付链接
         /// </summary>

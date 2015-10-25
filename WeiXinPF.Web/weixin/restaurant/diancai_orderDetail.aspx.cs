@@ -207,10 +207,10 @@ namespace WeiXinPF.Web.weixin.restaurant
                     foreach (DataRow row in orderCaipinTable.Rows)
                     {
                         var newOrderCaipinDetail = new OrderCaipinDetail();
-                        newOrderCaipinDetail.caiId = row.Field<int>("caiId");
+                        newOrderCaipinDetail.caiId = Convert.ToInt32(row.Field<string>("ProductID"));
                         newOrderCaipinDetail.identifyingcode = row.Field<string>("identifyingcode");
                         newOrderCaipinDetail.cpName = row.Field<string>("cpName");
-                        newOrderCaipinDetail.price = row.Field<decimal>("price");
+                        newOrderCaipinDetail.price =Convert.ToDecimal(row.Field<double>("price"));
                         newOrderCaipinDetail.status = row.Field<int>("status");
 
                         if (this.OrderCaipinDetail.ContainsKey(newOrderCaipinDetail.caiId))

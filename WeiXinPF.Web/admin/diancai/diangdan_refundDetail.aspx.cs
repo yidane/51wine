@@ -12,6 +12,7 @@ using Travel.Infrastructure.WeiXin.Advanced.Pay.Model;
 using WeiXinPF.BLL;
 using WeiXinPF.Common;
 using WeiXinPF.Web.weixin.restaurant;
+using WeiXinPF.WeiXinComm;
 
 namespace WeiXinPF.Web.admin.diancai
 {
@@ -159,10 +160,11 @@ namespace WeiXinPF.Web.admin.diancai
                     requestHandler.SetParameter("appid", wxModel.AppId);
                     requestHandler.SetParameter("mch_id", payInfo.mch_id);//商户号
                     requestHandler.SetParameter("nonce_str", Guid.NewGuid().ToString().Replace("-", ""));
-                    //requestHandler.SetParameter("total_fee", payAmount.ToString());
-                    //requestHandler.SetParameter("refund_fee", refundAmount.ToString());
-                    requestHandler.SetParameter("total_fee", "1");
-                    requestHandler.SetParameter("refund_fee", "1");
+
+                    //退款金额
+                    requestHandler.SetParameter("total_fee", payAmount.ToString());
+                    requestHandler.SetParameter("refund_fee", refundAmount.ToString());
+
                     requestHandler.SetParameter("op_user_id", wxModel.AppId);
                     requestHandler.SetParameter("sign", requestHandler.CreateMd5Sign("key", payInfo.paykey));
 

@@ -27,18 +27,6 @@ namespace WeiXinPF.Web.weixin.WeChatPay
     // [System.Web.Script.Services.ScriptService]
     public class WeChatService : System.Web.Services.WebService
     {
-        private static bool? m_IsDebug = null;
-        private bool IsDebug
-        {
-            get
-            {
-                if (m_IsDebug == null)
-                    m_IsDebug = string.Equals(System.Configuration.ConfigurationManager.AppSettings["RunMode"], "debug", StringComparison.CurrentCultureIgnoreCase);
-
-                return m_IsDebug.Value;
-            }
-        }
-
         /// <summary>
         /// jsapi初始化
         /// </summary>
@@ -115,8 +103,8 @@ namespace WeiXinPF.Web.weixin.WeChatPay
                 packageReqHandler.SetParameter("attach", requestModel.PayModuleID.ToString()); //向微信传递系统支付模块ID
                 packageReqHandler.SetParameter("out_trade_no", requestModel.out_trade_no);		//商家订单号
 
-                //debug模式下，只需要付款一分钱
-                packageReqHandler.SetParameter("total_fee", IsDebug ? "1" : (requestModel.total_fee * 100).ToString());
+                //debug模式下，穿的单位为分
+                packageReqHandler.SetParameter("total_fee", PayHelper.IsDebug ? requestModel.total_fee.ToString() : (requestModel.total_fee * 100).ToString());
 
                 //packageReqHandler.SetParameter("spbill_create_ip", wxPayInfo);   //用户的公网ip，不是商户服务器IP
 

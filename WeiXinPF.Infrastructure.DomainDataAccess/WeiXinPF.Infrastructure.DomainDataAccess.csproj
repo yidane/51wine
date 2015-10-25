@@ -118,10 +118,6 @@
     <Compile Include="Migrations\201510241352413_gb1.Designer.cs">
       <DependentUpon>201510241352413_gb1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201510250751560_Tuidan.cs" />
-    <Compile Include="Migrations\201510250751560_Tuidan.Designer.cs">
-      <DependentUpon>201510250751560_Tuidan.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Payment\PaymentInfo.cs" />
     <Compile Include="Payment\PayNotifyInfo.cs" />
@@ -183,9 +179,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201510241352413_gb1.resx">
       <DependentUpon>201510241352413_gb1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201510250751560_Tuidan.resx">
-      <DependentUpon>201510250751560_Tuidan.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
