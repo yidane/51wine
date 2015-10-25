@@ -104,6 +104,8 @@ namespace WeiXinPF.Web.admin.hotel
                 room.roomPrice = Convert.ToDecimal(this.roomPrice.Text);
                 room.salePrice = Convert.ToDecimal(this.salePrice.Text);
                 room.facilities = this.facilities.Value;
+                room.UseInstruction = txtUsueIntroduction.Value;
+                room.RefundRule = this.txtRefundRule.Value;
                 room.createDate = DateTime.Now;
                 room.Status = Model.RoomStatus.Submit;
                 int id = roomBll.Add(room);
