@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="hotel_info.aspx.cs" Inherits="WeiXinPF.Web.admin.hotel.hotel_info" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" ValidateRequest="false" CodeBehind="hotel_info.aspx.cs" Inherits="WeiXinPF.Web.admin.hotel.hotel_info" %>
 
 <!DOCTYPE html>
 
