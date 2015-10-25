@@ -83,7 +83,7 @@ namespace WeiXinPF.Web.weixin.KNSHotel
                 tel = hotel.hotelPhone;
 
                 yuding += " <li class=\"title\"><span class=\"none\">" + hotel.hotelName.ToString() + "</span></li>";
-                yuding += "<li class=\"biaotou\" style='display:none'><table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\">";
+                yuding += "<li class=\"biaotou\"><table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\">";
                 yuding += "<tr><td>类型</td><td class=\"yuanjia\">原价</td><td class=\"youhuijia\">优惠价</td></tr></table></li>";
 
                 var list = roombll.GetModelList(" hotelid= "+hotelid+" and Status=4");
