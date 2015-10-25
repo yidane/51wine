@@ -55,7 +55,7 @@ namespace WeiXinPF.Web.admin.hotel
             txtTel.Text = model.hotelPhone;
             txtEmail.Text = model.noticeEmail;
 
-            cbRecommend.Checked = model.Recommend.HasValue && model.Recommend.Value;
+            rblRecommend.SelectedValue = model.Recommend.HasValue && model.Recommend.Value ? "1" : "0";
         }
 
         private bool DoAdd()
@@ -68,7 +68,7 @@ namespace WeiXinPF.Web.admin.hotel
             model.Operator = txtOperator.Text.ToString();
             model.hotelPhone = txtTel.Text.ToString();
             model.noticeEmail = txtEmail.Text.ToString();
-            model.Recommend = cbRecommend.Checked;
+            model.Recommend = rblRecommend.SelectedValue == "1";
 
             if (bll.Add(model) > 0)
             {
@@ -87,7 +87,7 @@ namespace WeiXinPF.Web.admin.hotel
             model.Operator = txtOperator.Text.ToString();
             model.hotelPhone = txtTel.Text.ToString();
             model.noticeEmail = txtEmail.Text.ToString();
-            model.Recommend = cbRecommend.Checked;
+            model.Recommend = rblRecommend.SelectedValue == "1";
 
             if (bll.Update(model))
             {

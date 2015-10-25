@@ -76,13 +76,13 @@ namespace WeiXinPF.Web.admin.hotel {
         protected global::System.Web.UI.WebControls.TextBox txtEmail;
         
         /// <summary>
-        /// cbRecommend control.
+        /// rblRecommend control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox cbRecommend;
+        protected global::System.Web.UI.WebControls.RadioButtonList rblRecommend;
         
         /// <summary>
         /// btnSubmit control.
