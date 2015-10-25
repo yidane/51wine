@@ -22,7 +22,7 @@ namespace WeiXinPF.Model
         private string _coverpic;
         private string _toppic;
         private int? _orderlimit;
-        private bool _listmode;
+        private bool _listmode = true;
         private int? _messagenotice;
         private string _pwd;
         private string _hotelintroduct;
