@@ -11,6 +11,11 @@ using WeiXinPF.WeiXinComm;
 
 namespace WeiXinPF.Web.weixin.KNSHotel
 {
+    using System.Transactions;
+
+    using WeiXinPF.Application.DomainModules.IdentifyingCode.Service;
+    using WeiXinPF.Infrastructure.DomainDataAccess.IdentifyingCode;
+
     /// <summary>
     /// hotel_info 的摘要说明
     /// </summary>
@@ -25,37 +30,21 @@ namespace WeiXinPF.Web.weixin.KNSHotel
 
             BLL.wx_hotel_dingdan dingdanbll = new BLL.wx_hotel_dingdan();
             Model.wx_hotel_dingdan dingdan = new Model.wx_hotel_dingdan();
-            string hotelid = MyCommFun.QueryString("hotelid");
-            string roomid = MyCommFun.QueryString("roomid");
-            string openid = MyCommFun.QueryString("openid");
-            string oderName = MyCommFun.QueryString("oderName");
-            string tel = MyCommFun.QueryString("tel");
          
-
             if (_action == "dingdan")
             {
-                dingdan.hotelid = Convert.ToInt32( hotelid);
-                dingdan.roomid = Convert.ToInt32( roomid);
-                dingdan.openid = openid;
-                dingdan.oderName = oderName;
-                dingdan.tel = tel;
-                dingdan.orderStatus = 0;
-                dingdan.IdentityNumber = MyCommFun.QueryString("identityNumber");                
-                dingdan.arriveTime = Convert.ToDateTime(MyCommFun.QueryString("arriveTime"));
-                dingdan.leaveTime = Convert.ToDateTime(MyCommFun.QueryString("leaveTime"));
-                dingdan.roomType = MyCommFun.QueryString("roomType");
-                dingdan.orderTime = DateTime.Now;
-                dingdan.createDate = DateTime.Now;
-                dingdan.orderNum = MyCommFun.RequestInt("orderNum");
-                dingdan.isDelete = 0;
-                dingdan.price = MyCommFun.Str2Decimal( MyCommFun.QueryString("price"));
-                dingdan.yuanjia =MyCommFun.Str2Decimal(MyCommFun.QueryString("yuanjia"));
-                dingdan.remark = MyCommFun.QueryString("remark");
-                dingdan.OrderNumber = "H" + DateTime.Now.ToString("yyyyMMddHHmmssffff") + Utils.Number(5);
-                dingdanbll.Add(dingdan);
+               var isSuccess = this.CreateOrderProcess();
 
+                if (isSuccess)
+                {
                jsonDict.Add("ret", "ok");
                jsonDict.Add("content", "提交成功！");
+                }
+                else
+                {
+                    jsonDict.Add("ret", "err");
+                    jsonDict.Add("content", "创建订单失败");
+                }
                context.Response.Write(MyCommFun.getJsonStr(jsonDict));
                return;
 
@@ -140,6 +129,82 @@ namespace WeiXinPF.Web.weixin.KNSHotel
                 GetPayUrl(dingdanbll, context);
             }
         }
+
+        private bool CreateOrderProcess()
+        {
+            var hotel = new BLL.wx_hotels_info().GetModel(Convert.ToInt32(MyCommFun.QueryString("hotelid")));
+            var isSuccess = false;
+
+            if (hotel == null)
+            {
+                return false;
+            }
+
+            using (var scope = new TransactionScope())
+            {
+                var order = this.CreateOrder();
+
+                if (order != null)
+                {
+                    for (var i = 0; i < order.orderNum; i++)
+                    {
+                        var iCode = new IdentifyingCodeInfo()
+                        {
+                            IdentifyingCodeId = Guid.NewGuid(),
+                            CreateTime = DateTime.Now,
+                            IdentifyingCode = string.Empty,
+                            ModifyTime = DateTime.Now,
+                            ModuleName = "hotel",
+                            OrderCode = order.OrderNumber,
+                            OrderId = order.id.ToString(),
+                            ProductCode = order.roomType,
+                            ProductId = order.roomid.ToString(),
+                            ShopId = order.hotelid.Value.ToString(),
+                            Wid = hotel.wid.Value,
+                            Status = 0
+                        };
+                        IdentifyingCodeService.AddIdentifyingCode(iCode);
+                    }
+
+                    scope.Complete();
+                    isSuccess = true;
+                }                
+            }
+
+            return isSuccess;
+        }
+
+        private Model.wx_hotel_dingdan CreateOrder()
+        {
+            var dingdan = new Model.wx_hotel_dingdan
+                              {
+                                  hotelid = Convert.ToInt32(MyCommFun.QueryString("hotelid")),
+                                  roomid = Convert.ToInt32(MyCommFun.QueryString("roomid")),
+                                  openid = MyCommFun.QueryString("openid"),
+                                  oderName = MyCommFun.QueryString("oderName"),
+                                  tel = MyCommFun.QueryString("tel"),
+                                  orderStatus = 0,
+                                  IdentityNumber = MyCommFun.QueryString("identityNumber"),
+                                  arriveTime =
+                                      Convert.ToDateTime(MyCommFun.QueryString("arriveTime")),
+                                  leaveTime =
+                                      Convert.ToDateTime(MyCommFun.QueryString("leaveTime")),
+                                  roomType = MyCommFun.QueryString("roomType"),
+                                  orderTime = DateTime.Now,
+                                  orderNum = MyCommFun.RequestInt("orderNum"),
+                                  isDelete = 0,
+                                  price = MyCommFun.Str2Decimal(MyCommFun.QueryString("price")),
+                                  yuanjia = MyCommFun.Str2Decimal(MyCommFun.QueryString("yuanjia")),
+                                  remark = MyCommFun.QueryString("remark"),
+                                  OrderNumber =
+                                      "H" + DateTime.Now.ToString("yyyyMMddHHmmssffff") + Utils.Number(5)
+                              };
+
+            dingdan.id = new BLL.wx_hotel_dingdan().Add(dingdan);
+
+            return dingdan;
+        }
+
 
         /// <summary>
         /// 

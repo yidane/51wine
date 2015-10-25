@@ -91,5 +91,19 @@ namespace Application.DomainModules.UnitTest
         {
             //var isSuccess = IdentifyingCodeService.ModifyIdentifyingCodeInfoStatus("H20151025175559136498137", 1);
         }
+
+        [TestMethod]
+        public void SearchIdentifyingCodeDetailForSearch_IdentifyingCode_ReturnDTO()
+        {
+            var db = new WXDBContext();
+            var obj = new IdentifyingCodeInfo() { ModuleName = "restaurant", IdentifyingCodeId = Guid.Parse("15EB49FB-B41D-4101-B882-29DDF746F0B0") };
+            var result = new IdentifyingCodeRepository(db).GetIdentifyingCodeDetailById(obj);
+        }
+
+        [TestMethod]
+        public void GetOrderDetailForSearch_IdentifyingCode_ReturnDTO()
+        {
+            var result = IdentifyingCodeService.GetOrderDetail(8, "restaurant", "");
+        }
     }
 }

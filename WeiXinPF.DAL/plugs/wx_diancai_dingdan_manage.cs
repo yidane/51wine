@@ -508,15 +508,6 @@ namespace WeiXinPF.DAL
             sqlParams.Add(new SqlParameter("@Condition", SqlDbType.VarChar) { Value = condition });
 
             var ds = DbHelperSQL.Query(strProc, sqlParams.ToArray());
-            //StringBuilder strSql = new StringBuilder();
-            //strSql.Append("SELECT * FROM (SELECT id,orderNumber,'已关闭' AS payStatus,(SELECT TOP 1 modifytime FROM wx_diancai_dingdan_commodity WHERE dingId=a.id ORDER BY modifytime DESC) AS modifyTime,customerName,payAmount FROM wx_diancai_dingdan_manage a ");
-            //strSql.Append(" WHERE paystatus=2 AND shopinfoid=" + shopid + " ) AS dingList ");
-            //if (!String.IsNullOrEmpty(condition))
-            //{
-            //    strSql.Append(" where " + condition);
-            //}
-            //strSql.Append(" ORDER BY modifyTime DESC");
-            //DataSet ds = DbHelperSQL.Query(strSql.ToString());
             DataTable dt = ds.Tables[0];
             totalAmount = 0.0;
             for (int row = 0; row < dt.Rows.Count; row++)

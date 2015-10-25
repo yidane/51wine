@@ -121,6 +121,9 @@
     <Content Include="admin\hotel\hotel_register.aspx" />
     <Content Include="admin\hotel\hotel_user_edit.aspx" />
     <Content Include="admin\hotel\hotel_user_list.aspx" />
+    <Content Include="admin\hotel\Verification\commodity_detail.aspx" />
+    <Content Include="admin\hotel\Verification\credentials_detail.aspx" />
+    <Content Include="admin\hotel\Verification\dingdan_confirm.aspx" />
     <Content Include="admin\photo\photoEdit.aspx" />
     <Content Include="admin\photo\photolist.aspx" />
     <Content Include="admin\scenic\scenic_detail_edit.aspx" />
@@ -4846,6 +4849,27 @@
     </Compile>
     <Compile Include="admin\hotel\hotel_user_list.aspx.designer.cs">
       <DependentUpon>hotel_user_list.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\hotel\Verification\commodity_detail.aspx.cs">
+      <DependentUpon>commodity_detail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\hotel\Verification\commodity_detail.aspx.designer.cs">
+      <DependentUpon>commodity_detail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\hotel\Verification\credentials_detail.aspx.cs">
+      <DependentUpon>credentials_detail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\hotel\Verification\credentials_detail.aspx.designer.cs">
+      <DependentUpon>credentials_detail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\hotel\Verification\dingdan_confirm.aspx.cs">
+      <DependentUpon>dingdan_confirm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\hotel\Verification\dingdan_confirm.aspx.designer.cs">
+      <DependentUpon>dingdan_confirm.aspx</DependentUpon>
     </Compile>
     <Compile Include="admin\hunqing\editXitie.aspx.cs">
       <DependentUpon>editXitie.aspx</DependentUpon>

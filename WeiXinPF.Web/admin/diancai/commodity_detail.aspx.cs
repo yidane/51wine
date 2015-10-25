@@ -27,12 +27,16 @@ namespace WeiXinPF.Web.admin.diancai
         public int ids = 0;
         public int shopid = 0;
         public string openid = "";
+        public int wid = 0;
+
+        public const string ModuleName = "restaurant";
         protected void Page_Load(object sender, EventArgs e)
         {
             ids = MyCommFun.RequestInt("id");
             id = MyCommFun.QueryString("id");
             cid = MyCommFun.QueryString("cid");
-            shopid = MyCommFun.RequestInt("shopid");
+            shopid = MyCommFun.RequestInt("shopid") == 0 ? GetShopId() : MyCommFun.RequestInt("shopid");
+            wid = MyCommFun.RequestInt("wid") == 0 ? this.GetWeiXinCode().id : MyCommFun.RequestInt("wid");
             if (!IsPostBack)
             {
 
@@ -54,7 +58,7 @@ namespace WeiXinPF.Web.admin.diancai
 
             if (Guid.TryParse(cid, out identifyingCodeId))
             {
-                var identifyingCodeObject = IdentifyingCodeService.GetIdentifyingCodeInfoByIdentifyingCodeId(identifyingCodeId);
+                var identifyingCodeObject = IdentifyingCodeService.GetIdentifyingCodeInfoByIdentifyingCodeId(identifyingCodeId, ModuleName, wid);
 
                 if (identifyingCodeObject != null && identifyingCodeObject.ShopId.Equals(shopid.ToString()))
                 {
