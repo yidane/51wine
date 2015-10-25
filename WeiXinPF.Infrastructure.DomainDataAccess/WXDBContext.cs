@@ -8,6 +8,7 @@ using WeiXinPF.Infrastructure.DomainDataAccess.User;
 
 namespace WeiXinPF.Infrastructure.DomainDataAccess
 {
+    using WeiXinPF.Infrastructure.DomainDataAccess.IdentifyingCode;
     using WeiXinPF.Infrastructure.DomainDataAccess.Payment;
 
     public class WXDBContext : DbContext

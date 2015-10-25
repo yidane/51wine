@@ -6,7 +6,10 @@ using WeiXinPF.Application.DomainModules.Photo.DTOS;
 
 namespace Application.DomainModules.UnitTest
 {
+    using WeiXinPF.Application.DomainModules.IdentifyingCode.Service;
     using WeiXinPF.Infrastructure.DomainDataAccess;
+    using WeiXinPF.Infrastructure.DomainDataAccess.IdentifyingCode;
+    using WeiXinPF.Infrastructure.DomainDataAccess.IdentifyingCode.Repository;
     using WeiXinPF.Infrastructure.DomainDataAccess.Payment;
 
     [TestClass]
@@ -66,23 +69,21 @@ namespace Application.DomainModules.UnitTest
                             {
                                 IdentifyingCodeId = Guid.NewGuid(),
                                 CreateTime = DateTime.Now,
-                                IdentifyingCode = "123",
+                                IdentifyingCode = "1256978741253",
                                 ModifyTime = DateTime.Now,
                                 ModuleName = "HotelTest",
                                 OrderCode = "H201510221656123456789",
                                 OrderId = "22222",
                                 ProductCode = "大床房",
                                 ProductId = "大床房",
-                                Status = 0
+                                Status = 0,
+                                ShopId = "12",
+                                Wid = 12
                             };
 
-            var context = new WXDBContext();
-            var repository = new EFRepository<IdentifyingCodeInfo>(context);
+            var service = IdentifyingCodeService.AddIdentifyingCode(icode);
 
-            var result = repository.Add(icode);
-            var Myobject = repository.Get(null);
-
-            Assert.IsTrue(result);
+            //Assert.IsTrue(result);
         }
     }
 }
