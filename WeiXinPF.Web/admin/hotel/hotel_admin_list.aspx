@@ -15,7 +15,7 @@
     <form id="form1" runat="server">
         <!--导航栏-->
         <div class="location">
-            <a href="shop_list.aspx" class="home"><i></i><span>商户或门店列表</span></a>
+            <a href="hotel_list.aspx" class="home"><i></i><span>商户或门店列表</span></a>
             <i class="arrow"></i>
             <span>管理员设置</span>
         </div>
