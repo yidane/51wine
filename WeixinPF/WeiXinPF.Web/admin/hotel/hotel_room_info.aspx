@@ -89,8 +89,8 @@
             <dl>
                 <dt>商品说明：</dt>
                 <dd>
-                    <textarea name="indroduce" rows="2" cols="20" id="indroduce" sucmsg=" " nullmsg=" " class="input" runat="server"></textarea>
-                    <span class="Validform_checktip">*</span>
+                    <textarea name="indroduce" rows="2" cols="20" id="indroduce" sucmsg=" " nullmsg=" " datatype="*1-50" class="input" runat="server"></textarea>
+                    <span class="Validform_checktip">*最多输入50个字</span>
                 </dd>
             </dl>
             <dl>
