@@ -107,7 +107,7 @@ namespace WeiXinPF.Web.weixin.KNSHotel
                 int j = 0;
                 for (int i = 0; i < dr.Tables[0].Rows.Count;i++ )
                 {
-                    tupian += "  <li><p>" + dr.Tables[0].Rows[i]["title"].ToString() + "</p><a href=\"" + dr.Tables[0].Rows[i]["roomPictz"].ToString() + "\"><img src=\"" + dr.Tables[0].Rows[i]["roomPic"].ToString() + "\"></a></li>";
+                    tupian += "  <li><p>" + dr.Tables[0].Rows[i]["title"].ToString() + "</p><a href=\"" + dr.Tables[0].Rows[i]["roomPictz"].ToString() + "\"><img class='header-img' src=\"" + dr.Tables[0].Rows[i]["roomPic"].ToString() + "\"></a></li>";
                     j += 1;
                     if (i==0)
                     {

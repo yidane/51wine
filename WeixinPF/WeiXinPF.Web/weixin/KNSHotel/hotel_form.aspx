@@ -48,6 +48,10 @@
             border: 1px solid transparent;
             border-radius: 10px;
         }
+
+        .header-img {
+            max-height: 150px;
+        }
     </style>
     <script type="text/javascript">
         var myScroll;
