@@ -41,7 +41,7 @@
             return false;
         }
 
-        public static IList<IdentifyingCodeInfo> GetIdentifyingCodeInfoByOrderId(int shopId, string moduleName, string orderId)
+        public static IList<IdentifyingCodeInfo> GetIdentifyingCodeInfoByOrderId(int shopId, string moduleName, string orderId, int wid)
         {
             return new List<IdentifyingCodeInfo>();
         }
