@@ -9,9 +9,7 @@
     <script src="js/shopCart.js" type="text/javascript"></script>
     <script type="text/javascript">
         var cart = new OAK.Shop.Cart(<%=shopid %>);
-        if ("success" == "<%=payStatus%>") {
-            cart.clear();
-        }
+        <%=clearCache%>
 
         setTimeout(function () {
             document.location.href = "<%=newUrl%>";

@@ -23,7 +23,7 @@ namespace WeiXinPF.Web.weixin.restaurant
         protected void Page_Load(object sender, EventArgs e)
         {
             //OAuth2
-            string thisUrl = MyCommFun.getWebSite() + "/weixin/restaurant/diancai_shoppingCart.aspx" + Request.Url.Query;
+            string thisUrl = MyCommFun.getWebSite() + "/weixin/restaurant/index.aspx" + Request.Url.Query;
             var bll = new BLL.wx_userweixin();
             int widInt = MyCommFun.RequestWid();
             Model.wx_userweixin uWeiXinModel = bll.GetModel(widInt);
