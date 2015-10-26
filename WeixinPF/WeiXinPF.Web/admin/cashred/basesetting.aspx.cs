@@ -1,14 +1,4 @@
-﻿/**************************************
- *
- * A_uthor:Li~ Pu
- * company:上—海-沐-雪-科-技-有-限-公-司-版@权-所-有
- * qq: 2_3_0_0_2_8_0_7
- * createDate:2015-8-1
- * update:2015-8-1
- * 
- ***********************************/
-
-using System;
+﻿using System;
 using System.Data;
 using System.Collections.Generic;
 using System.Web;
