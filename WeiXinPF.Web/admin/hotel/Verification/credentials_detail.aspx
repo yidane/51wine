@@ -89,6 +89,32 @@
         a.shenghe {
             color: red;
         }
+
+        .DingdanButton {
+            border: 1px solid #3d810c;
+            box-shadow: 0 1px 1px #aaa;
+            -moz-box-shadow: 0 1px 1px #aaa;
+            -webkit-box-shadow: 0 1px 1px #aaa;
+            padding: 5px 20px;
+            cursor: pointer;
+            display: inline-block;
+            text-align: center;
+            vertical-align: bottom;
+            overflow: visible;
+            border-radius: 3px;
+            -moz-border-radius: 3px;
+            -webkit-border-radius: 3px;
+            *zoom: 1;
+            background-color: #f1f1f1;
+            background-image: linear-gradient(bottom, #DCDADA 3%, #f9f9f9 97%, #fff 100%);
+            background-image: -moz-linear-gradient(bottom, #DCDADA 3%, #f9f9f9 97%, #fff 100%);
+            background-image: -webkit-linear-gradient(bottom, #DCDADA 3%, #f9f9f9 97%, #fff 100%);
+            color: #000;
+            border: 1px solid #AAA;
+            font-size: 14px;
+            line-height: 1.5;
+            background-color: #16a0d3;
+        }
     </style>
 </head>
 <body class="mainbody">
@@ -111,39 +137,38 @@
         <!--工具栏-->
         <div class="toolbar-wrap">
             <div id="floatHead" class="toolbar">
-                <table style="border: 0; width: 100%; text-align: left;">
+                <table border="0" cellspacing="0" cellpadding="0" class="border-table" width="98%">
                     <tr>
-                        <td style="width: 65%">
-                            <div class="credentials-condition">
-                                <span class="label-left">订单关闭日期范围</span>
-                                <asp:TextBox ID="startDate" runat="server" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" datatype="*1-50" errormsg="请选择正确的日期" sucmsg=" " nullmsg=" "></asp:TextBox>至<asp:TextBox ID="endDate" runat="server" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" datatype="*1-50" errormsg="请选择正确的日期" sucmsg=" " nullmsg=" "></asp:TextBox>
-                            </div>
+                        <td align="right">订单关闭日期范围
                         </td>
                         <td>
-                            <div class="credentials-condition">
-                                <span class="label-left">订单编号</span>
-                                <asp:TextBox ID="dingdanId" runat="server"></asp:TextBox>
-                            </div>
+                                <asp:TextBox ID="startDate" runat="server" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" datatype="*1-50" errormsg="请选择正确的日期" sucmsg=" " nullmsg=" "></asp:TextBox>
+                                 至
+                                <asp:TextBox ID="endDate" runat="server" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" datatype="*1-50" errormsg="请选择正确的日期" sucmsg=" " nullmsg=" "></asp:TextBox>
+                        <td align="right">订单编号</td>
+                        <td>
+                            <asp:TextBox ID="dingdanId" runat="server"></asp:TextBox>
+                        <td align="right">预约人</td>
+                        <td>
+                            <asp:TextBox ID="orderperson" runat="server"></asp:TextBox>
                         </td>
                     </tr>
                     <tr>
+                        <td align="right">订单支付金额</td>
                         <td>
-                            <div class="credentials-condition">
-                                <span class="label-left">订单支付金额</span>
-                                <asp:TextBox ID="paidmin" runat="server"></asp:TextBox>至<asp:TextBox ID="paidmax" runat="server"></asp:TextBox>
-                            </div>
+                            <asp:TextBox ID="paidmin" runat="server"></asp:TextBox>
+                            至
+                            <asp:TextBox ID="paidmax" runat="server"></asp:TextBox>
                         </td>
-
+                        <td align="right"></td>
                         <td>
-                            <div class="credentials-condition">
-                                <span class="label-left">预约人</span>
-                                <asp:TextBox ID="orderperson" runat="server"></asp:TextBox>
-                            </div>
-                        </td>
+                        <td align="right"></td>
+                        <td>
                     </tr>
                 </table>
+                                
                 <div class="center-button">
-                    <asp:Button ID="serch" runat="server" Text="查询" OnClick="serch_OnClick"></asp:Button>
+                    <asp:Button ID="serch" runat="server" Text="查询" CssClass="DingdanButton" OnClick="serch_OnClick"></asp:Button>
                     <%--<asp:Button ID="Button2" runat="server" Text="导出Excel"></asp:Button>--%>
                 </div>
             </div>

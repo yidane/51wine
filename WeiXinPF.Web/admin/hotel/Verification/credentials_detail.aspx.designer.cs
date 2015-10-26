@@ -58,6 +58,15 @@ namespace WeiXinPF.Web.admin.hotel.Verification {
         protected global::System.Web.UI.WebControls.TextBox dingdanId;
         
         /// <summary>
+        /// orderperson 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox orderperson;
+        
+        /// <summary>
         /// paidmin 控件。
         /// </summary>
         /// <remarks>
@@ -74,15 +83,6 @@ namespace WeiXinPF.Web.admin.hotel.Verification {
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox paidmax;
-        
-        /// <summary>
-        /// orderperson 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox orderperson;
         
         /// <summary>
         /// serch 控件。
