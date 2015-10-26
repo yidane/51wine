@@ -25,9 +25,9 @@ namespace WeiXinPF.Web.admin.diancai
         {
             if (!Page.IsPostBack)
             {
-
-                RptBind();
-
+                startDate.Text = DateTime.Now.ToString("yyyy-MM-dd");
+                endDate.Text = DateTime.Now.ToString("yyyy-MM-dd");
+                RptBind();                
             }
         }
 
