@@ -26,42 +26,15 @@
         .l-list {
         }
 
-.reduce {
-    top: 50%;
-    right: 40px;
-}
 
-
-
-.reduce b {
-    position: relative;
-    display: block;
-    width: 25px;
-    height: 25px;
-    /*margin: 10px 5px 10px 10px;*/
-    background: #D00A0A;
-    border-radius: 50%;
-    text-indent: -9999px;
-}
-
-.reduce b:after {
-        position: absolute;
-        top: 11px;
-        left: 5px;
-        content: "";
-        display: block;
-        width: 15px;
-        height: 3px;
-        background: #FFFFFF;
-    }
-.reduce {
+.increase, .reduce {
         display: inline-block;
         width: 35px;
         height: 38px;
         vertical-align: -2px;
     }
 
-.ico_reduce {
+.ico_increase, .ico_reduce {
         position: relative;
         display: block;
         width: 25px;
@@ -72,11 +45,11 @@
         text-indent: -9999px;
     }
 
-.ico_reduce {
+.ico_increase, .ico_reduce {
         background: #D00A0A;
     }
 
-.ico_reduce:after {
+.ico_increase:after, .ico_reduce:after {
             position: absolute;
             top: 11px;
             left: 5px;
@@ -86,6 +59,17 @@
             height: 3px;
             background: #FFFFFF;
         }
+
+.ico_increase:before {
+        position: absolute;
+        top: 5px;
+        left: 11px;
+        content: "";
+        display: block;
+        width: 3px;
+        height: 15px;
+        background: #FFFFFF;
+    }
     </style>
     <script type="text/javascript">
         function parentToIndex(id) {
@@ -188,7 +172,8 @@
                 <tr class="td_c">
                     <td style="width: 10%">
                         <asp:HiddenField ID="HiddenField1" Value='<%#Eval("Id")%>' runat="server" />
-                        <a href="javascript:f_Display(this);" class="reduce"><b class="ico_reduce">加一份</b></a>
+                        <a id="notdisplay<%#Eval("Id")%>" href="javascript:f_NotDisplay(<%#Eval("Id")%>);" class="reduce" style="display: none;"><b class="ico_reduce">加一份</b></a>
+                        <a id="display<%#Eval("Id")%>" href="javascript:f_Display(<%#Eval("Id")%>);" class="increase"><b class="ico_increase">加一份</b></a>
                         <%# Eval("OrderNumber") %>
                     </td>
                     <td style="width: 10%">
@@ -206,7 +191,7 @@
                     </td>
                     <td></td>
                 </tr>
-                <tr class="rpSubMenu" style="display: none;">
+                <tr class="rpSubMenu<%#Eval("Id")%>" style="display: none;">
                     <td colspan="4"></td>
                     <td colspan="2">
                         <asp:Repeater runat="server" ID="rp">
@@ -276,10 +261,16 @@
     </form>
     
     <script type="text/javascript">
-        function f_Display(e) {
-            debugger;
-            $(e).pa
-            e.parent
+        function f_NotDisplay(e) {            
+            $(".rpSubMenu" + e).attr("style", "display: none;");
+            $("#notdisplay" + e).attr("style", "display: none;");
+            $("#display" + e).attr("style", "");
+        }
+
+        function f_Display(e) {            
+            $(".rpSubMenu" + e).attr("style", "");
+            $("#notdisplay" + e).attr("style", "");
+            $("#display" + e).attr("style", "display: none;");
         }
     </script>
 </body>
