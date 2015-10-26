@@ -54,7 +54,7 @@
                         <li runat="server" id="barAdd">
                             <a class="icon-btn add" href="hotel_room_info.aspx?action=<%=MXEnums.ActionEnum.Add %>&hotelid=<%=hotelid %>">
                                 <i></i>
-                                <span>新增房间类型</span>
+                                <span>新增商品</span>
                             </a>
                         </li>
                         <li><a class="all" href="javascript:;" onclick="checkAll(this);"><i></i><span>全选</span></a></li>
