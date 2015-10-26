@@ -134,7 +134,7 @@ namespace WeiXinPF.Web.admin.diancai
                 Dingdanlist += "<tr><th>菜品名称</th><th class=\"cc\">单价</th><th class=\"cc\">购买份数</th><th class=\"rr\">价格</th> </tr>";
                 for (int i = 0; i < dr.Tables[0].Rows.Count; i++)
                 {
-                    Dingdanlist += " <tr><td>" + dr.Tables[0].Rows[i]["cpName"] + "</td>";
+                    Dingdanlist += " <tr><td  class=\"cc\">" + dr.Tables[0].Rows[i]["cpName"] + "</td>";
                     Dingdanlist += "<td class=\"cc\">" + dr.Tables[0].Rows[i]["price"] + "</td>";
                     Dingdanlist += "<td class=\"cc\">" + 1 + "</td>";
                     Dingdanlist += "<td class=\"rr\">￥" + dr.Tables[0].Rows[i]["price"] + "</td></tr>";
