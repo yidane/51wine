@@ -46,35 +46,46 @@ namespace WeiXinPF.Web.weixin.restaurant
             DataSet dr = managebll.GetPayList(openID);
             if (dr.Tables[0].Rows.Count > 0)
             {
+                var detailBuilder = new StringBuilder();
                 for (int i = 0; i < dr.Tables[0].Rows.Count; i++)
                 {
-                    str += "<ul class=\"round\">";
-                    str += "<li class=\"title\"><a href=\"diancai_orderDetail.aspx?wid=" + dr.Tables[0].Rows[i]["wid"].ToString() + "&shopid=" + dr.Tables[0].Rows[i]["shopinfoid"].ToString() + "&dingdan=" + dr.Tables[0].Rows[i]["id"].ToString() + "&openid=" + openId + "\"><span>" + dr.Tables[0].Rows[i]["oderTime"].ToString() + "  " + dr.Tables[0].Rows[i].Field<string>("hotelName") + "</span></a></li>";
-                    str += " <table width=\"100%\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" class=\"cpbiaoge\">";
-                    str += "<tr><th>订单编号</th>";
-                    str += "<th width=\"70\" class=\"cc\">订单金额</th><th width=\"55\" class=\"cc\">订单状态</th></tr>";
-                    str += "<tr><td  class=\"cc\">" + dr.Tables[0].Rows[i]["orderNumber"].ToString() + "</td><td class=\"cc\">" + dr.Tables[0].Rows[i]["payAmount"].ToString() + "元</td>";
-                    str += "<td class=\"cc\"> ";
+                    detailBuilder.Append("<ul class=\"round\">");
+                    detailBuilder.AppendFormat("<li class=\"title\"><a href=\"diancai_orderDetail.aspx?wid={0}&shopid={1}&dingdan={2}&openid={3}\"><span>{4}  {5}</span></a></li>",
+                                                                    dr.Tables[0].Rows[i]["wid"].ToString(),
+                                                                    dr.Tables[0].Rows[i]["shopinfoid"].ToString(),
+                                                                    dr.Tables[0].Rows[i]["id"].ToString(),
+                                                                    openId,
+                                                                    dr.Tables[0].Rows[i]["oderTime"].ToString(),
+                                                                    dr.Tables[0].Rows[i].Field<string>("hotelName"));
+                    detailBuilder.Append(" <table width=\"100%\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" class=\"cpbiaoge\">");
+                    detailBuilder.Append("<tr><th>订单编号</th>");
+                    detailBuilder.Append("<th width=\"70\" class=\"cc\">订单金额</th><th width=\"55\" class=\"cc\">订单状态</th></tr>");
+                    detailBuilder.AppendFormat("<tr><td  class=\"cc\">{0}</td><td class=\"cc\">{1}元</td>",
+                                                                    dr.Tables[0].Rows[i]["orderNumber"].ToString(),
+                                                                    dr.Tables[0].Rows[i]["payAmount"].ToString());
+                    detailBuilder.Append("<td class=\"cc\"> ");
                     var payStatus = dr.Tables[0].Rows[i]["payStatus"].ToString();
                     switch (payStatus)
                     {
                         case "1":
-                            str += "<em class=\"ok\">等待使用</em>";
+                            detailBuilder.Append("<em class=\"ok\">等待使用</em>");
                             break;
                         case "2":
                         case "4": //部分退款
-                            str += "<em class=\"ok\">部分使用</em>";
+                            detailBuilder.Append("<em class=\"ok\">部分使用</em>");
                             break;
                         case "3":
                         case "5"://全部退款
-                            str += "<em class=\"error\">全部使用</em>";
+                            detailBuilder.Append("<em class=\"error\">全部使用</em>");
                             break;
                         default:
-                            str += "<em class=\"no\">未处理</em>";
+                            detailBuilder.Append("<em class=\"no\">未处理</em>");
                             break;
                     }
-                    str += " </td></tr></table></ul>";
+                    detailBuilder.Append(" </td></tr></table></ul>");
                 }
+
+                str = detailBuilder.ToString();
             }
         }
 

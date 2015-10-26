@@ -30,8 +30,11 @@ namespace WeiXinPF.Web.weixin.restaurant
                     //支付成功，清空购物车，跳转到当前店铺订单列表
                     newUrl =
                         string.Format(
-                            "../restaurant/diancai_dingdan.aspx?shopid={0}&dingdan={1}&openid={2}",
-                            payDataModel.Extra["shopid"], payDataModel.OrderId, payDataModel.openid);
+                            "../restaurant/diancai_orderDetail.aspx?wid={0}&shopid={1}&dingdan={2}&openid={3}",
+                            payDataModel.wid,
+                            payDataModel.Extra["shopid"],
+                            payDataModel.OrderId,
+                            payDataModel.openid);
                     break;
                 case "fail":
                 case "cancel":
