@@ -7,7 +7,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="format-detection" content="telephone=no">
-    <title><%=RestruantName %>餐饮订单</title>
+    <title>我的订单</title>
     <link href="css/diancai.css" rel="stylesheet" type="text/css">
     <link href="css/swiper.min.css" rel="stylesheet" />
     <script src="js/zepto.min.js"></script>

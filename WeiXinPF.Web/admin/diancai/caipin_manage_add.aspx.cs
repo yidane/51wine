@@ -51,7 +51,7 @@ namespace WeiXinPF.Web.admin.diancai
         protected void BindCaiPingType()
         {
             BLL.wx_diancai_caipin_category cBll = new BLL.wx_diancai_caipin_category();
-            IList<Model.wx_diancai_caipin_category> cateList = cBll.GetModelList("shopid=" + shopid);
+            IList<Model.wx_diancai_caipin_category> cateList = cBll.GetModelList("shopid=" + shopid + " and isStart=1");
             dllCategoryName.DataValueField = "id";
             dllCategoryName.DataTextField = "categoryName";
             dllCategoryName.DataSource = cateList;
@@ -62,74 +62,86 @@ namespace WeiXinPF.Web.admin.diancai
 
         protected void save_caidanmanage_Click(object sender, EventArgs e)
         {
-
-
-
-            if (type == "add")
+            try
             {
-                manage.shopid = shopid;
-                manage.categoryid = Convert.ToInt32(this.dllCategoryName.SelectedItem.Value);
-                manage.categoryName = this.dllCategoryName.SelectedItem.Text;
-                manage.cpName = this.cpName.Text;
-                manage.cpPrice = Convert.ToDecimal(this.cpPrice.Text);
-                manage.zkPrice = Convert.ToDecimal(this.zkPrice.Text);
-                manage.priceUnite = this.priceUnite.Text;
-                manage.cpPic = this.cpPic.Text;
-                manage.picUrl = this.picUrl.Text;
-                manage.detailContent = this.detailContent.InnerText;
-                manage.createDate = DateTime.Now;
-
-                manage.sortid = Convert.ToInt32(this.sortid.Text);
-
-                //喀纳斯添加--
-                manage.beginDate = DateTime.Parse(this.txtbeginDate.Text);
-                manage.endDate = DateTime.Parse(this.txtendDate.Text);
-                manage.instructions = this.instructions.InnerText;
-                manage.shopIntroduction = this.shopIntroduction.InnerText;
-                manage.chargeback = this.chargeback.InnerText;
-
-                int id = managebll.Add(manage);
-                if (id > 0)
+                if (type == "add")
                 {
-                    manage = managebll.GetModel(id);
-                    this.number.Text = manage.number;
+                    manage.shopid = shopid;
+                    manage.categoryid = Convert.ToInt32(this.dllCategoryName.SelectedItem.Value);
+                    manage.categoryName = this.dllCategoryName.SelectedItem.Text;
+                    manage.cpName = this.cpName.Text;
+                    manage.cpPrice = Convert.ToDecimal(this.cpPrice.Text);
+                    manage.zkPrice = Convert.ToDecimal(this.zkPrice.Text);
+                    manage.priceUnite = this.priceUnite.Text;
+                    manage.cpPic = this.cpPic.Text;
+                    manage.picUrl = this.picUrl.Text;
+                    manage.detailContent = this.detailContent.InnerText;
+                    manage.createDate = DateTime.Now;
+
+                    manage.sortid = Convert.ToInt32(this.sortid.Text);
+
+                    //喀纳斯添加--
+                    manage.beginDate = DateTime.Parse(this.txtbeginDate.Text);
+                    manage.endDate = DateTime.Parse(this.txtendDate.Text);
+
+                    //校验日期范围
+                    if (manage.beginDate > manage.endDate)
+                        throw new Exception("使用有效期开始时间不能大于结束时间");
+
+                    manage.instructions = this.instructions.InnerText;
+                    manage.shopIntroduction = this.shopIntroduction.InnerText;
+                    manage.chargeback = this.chargeback.InnerText;
+
+                    int id = managebll.Add(manage);
+                    if (id > 0)
+                    {
+                        manage = managebll.GetModel(id);
+                        this.number.Text = manage.number;
+                    }
+
+                    AddAdminLog(MXEnums.ActionEnum.Add.ToString(), "添加商品信息管理，主键为" + id); //记录日志
+                    JscriptMsg("增加成功！", Utils.CombUrlTxt("caipin_manage.aspx?shopid=" + shopid, "keywords={0}", ""), "Success");
+
                 }
 
-                AddAdminLog(MXEnums.ActionEnum.Add.ToString(), "添加商品信息管理，主键为" + id); //记录日志
-                JscriptMsg("增加成功！", Utils.CombUrlTxt("caipin_manage.aspx?shopid=" + shopid, "keywords={0}", ""), "Success");
+                if (type == "edite")
+                {
+                    shopid = MyCommFun.RequestInt("shopid");
+                    manage = managebll.GetModel(ids);
 
+                    manage.shopid = shopid;
+                    manage.categoryid = Convert.ToInt32(this.dllCategoryName.SelectedItem.Value);
+                    manage.categoryName = this.dllCategoryName.SelectedItem.Text;
+                    manage.cpName = this.cpName.Text;
+                    manage.cpPrice = Convert.ToDecimal(this.cpPrice.Text);
+                    manage.zkPrice = Convert.ToDecimal(this.zkPrice.Text);
+                    manage.priceUnite = this.priceUnite.Text;
+                    manage.cpPic = this.cpPic.Text;
+                    manage.picUrl = this.picUrl.Text;
+                    manage.detailContent = this.detailContent.InnerText;
+                    manage.sortid = Convert.ToInt32(this.sortid.Text);
+
+                    //喀纳斯添加--
+                    manage.beginDate = DateTime.Parse(this.txtbeginDate.Text);
+                    manage.endDate = DateTime.Parse(this.txtendDate.Text);
+
+                    //校验日期范围
+                    if (manage.beginDate > manage.endDate)
+                        throw new Exception("使用有效期开始时间不能大于结束时间");
+
+                    manage.instructions = this.instructions.InnerText;
+                    manage.shopIntroduction = this.shopIntroduction.InnerText;
+                    manage.chargeback = this.chargeback.InnerText;
+
+                    managebll.Update(manage);
+
+                    AddAdminLog(MXEnums.ActionEnum.Edit.ToString(), "修改商品信息管理，主键为" + ids); //记录日志
+                    JscriptMsg("修改成功！", Utils.CombUrlTxt("caipin_manage.aspx?shopid=" + shopid + "&manage=managetype", "keywords={0}", ""), "Success");
+                }
             }
-
-            if (type == "edite")
+            catch (Exception exception)
             {
-                shopid = MyCommFun.RequestInt("shopid");
-                manage = managebll.GetModel(ids);
-
-                manage.shopid = shopid;
-                manage.categoryid = Convert.ToInt32(this.dllCategoryName.SelectedItem.Value);
-                manage.categoryName = this.dllCategoryName.SelectedItem.Text;
-                manage.cpName = this.cpName.Text;
-                manage.cpPrice = Convert.ToDecimal(this.cpPrice.Text);
-                manage.zkPrice = Convert.ToDecimal(this.zkPrice.Text);
-                manage.priceUnite = this.priceUnite.Text;
-                manage.cpPic = this.cpPic.Text;
-                manage.picUrl = this.picUrl.Text;
-                manage.detailContent = this.detailContent.InnerText;
-                manage.sortid = Convert.ToInt32(this.sortid.Text);
-
-                //喀纳斯添加--
-                manage.beginDate = DateTime.Parse(this.txtbeginDate.Text);
-                manage.endDate = DateTime.Parse(this.txtendDate.Text);
-                manage.instructions = this.instructions.InnerText;
-                manage.shopIntroduction = this.shopIntroduction.InnerText;
-                manage.chargeback = this.chargeback.InnerText;
-
-                managebll.Update(manage);
-
-                AddAdminLog(MXEnums.ActionEnum.Edit.ToString(), "修改商品信息管理，主键为" + ids); //记录日志
-                JscriptMsg("修改成功！", Utils.CombUrlTxt("caipin_manage.aspx?shopid=" + shopid + "&manage=managetype", "keywords={0}", ""), "Success");
-
-
+                JscriptMsg(exception.Message, "", "");
             }
         }
     }
