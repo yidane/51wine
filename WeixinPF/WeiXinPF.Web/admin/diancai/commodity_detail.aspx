@@ -43,9 +43,9 @@
                 else
                 {%>
                
-                <%} %> <span><a href="dingdan_confirm.aspx?shopid=<%=shopid %>">订单验证</a></span>
+                <%} %> <span><a href="dingdan_confirm.aspx?shopid=<%=shopid %>">服务码验证</a></span>
             <i class="arrow"></i>            
-            <span>菜品处理</span>
+            <span>商品处理</span>
         </div>
       
         <!--/导航栏-->
@@ -71,25 +71,9 @@
 </ul>  
 
 </div>
-         <%--<div class="tab-content">
-            <dl>
-                <dt>该菜品状态为：</dt>
-                <dd>
-                    <asp:DropDownList ID="ddlStatusType" runat="server">
-                        <asp:ListItem Text="未处理" Value="0"></asp:ListItem>
-                        <asp:ListItem Text="支付成功" Value="1"></asp:ListItem>
-                        <asp:ListItem Text="已使用" Value="2"></asp:ListItem>
-                        <asp:ListItem Text="退款审核" Value="3"></asp:ListItem>
-                        <asp:ListItem Text="已退款" Value="4"></asp:ListItem>
-                    </asp:DropDownList>
-                    
-                </dd>
-            </dl>
-         </div>--%>
-
            <div class="page-footer">
             <div class="btn-list">
-                <asp:Button ID="save_groupbase" runat="server" CssClass="btn" Text="验证" OnClick="save_groupbase_Click"  />
+                <asp:Button ID="save_groupbase" runat="server" CssClass="btn" Text="确定核销" OnClick="save_groupbase_Click"  />
             </div>
             <div class="clear"></div>
         </div>

@@ -113,7 +113,7 @@
                 {%>
                
                 <%} %>
-            <span>订单验证</span>
+            <span>服务码验证</span>
         </div>
         <!--/导航栏-->
         <div class="mytips">

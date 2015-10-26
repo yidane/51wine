@@ -88,7 +88,7 @@ namespace WeiXinPF.Web.admin.diancai
                     AddAdminLog(MXEnums.ActionEnum.Edit.ToString(), "修改支付状态，主键为" + id); //记录日志
                     //JscriptMsg("修改成功！", "dingdan_confirm.aspx?shopid=" + shopid + "", "Success");
                     //Response.Redirect("dingdan_confirm.aspx?shopid=" + shopid + "");
-                    Response.Write("<script language='javascript' type='text/javascript'>alert('修改成功！');location.href = 'dingdan_confirm.aspx?shopid=" + shopid + "';</script>");
+                    Response.Write("<script language='javascript' type='text/javascript'>alert('核销成功！');location.href = 'dingdan_confirm.aspx?shopid=" + shopid + "';</script>");
 
                 }
             }                       

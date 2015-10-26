@@ -72,7 +72,7 @@
 </div>
            <div class="page-footer">
             <div class="btn-list">
-                <asp:Button ID="save_groupbase" runat="server" CssClass="btn" Text="验证" OnClick="save_groupbase_Click"  />
+                <asp:Button ID="save_groupbase" runat="server" CssClass="btn" Text="确认核销" OnClick="save_groupbase_Click"  />
             </div>
             <div class="clear"></div>
         </div>

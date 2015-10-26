@@ -10,7 +10,6 @@ using WeiXinPF.Common;
 namespace WeiXinPF.Web.admin.hotel.Verification
 {
     using System.Globalization;
-    using System.Transactions;
 
     using WeiXinPF.Application.DomainModules.IdentifyingCode.Service;
     using WeiXinPF.Model.KNSHotel;
@@ -46,8 +45,6 @@ namespace WeiXinPF.Web.admin.hotel.Verification
 
         protected void save_groupbase_Click(object sender, EventArgs e)
         {
-            const string status = "2";
-
             Guid identifyingCodeId;
 
             if (Guid.TryParse(this.cid, out identifyingCodeId))
@@ -64,7 +61,7 @@ namespace WeiXinPF.Web.admin.hotel.Verification
                     AddAdminLog(MXEnums.ActionEnum.Edit.ToString(), "修改支付状态，主键为" + id); //记录日志
                     //JscriptMsg("修改成功！", "dingdan_confirm.aspx?shopid=" + shopid + "", "Success");
                     //Response.Redirect("dingdan_confirm.aspx?shopid=" + shopid + "");
-                    Response.Write("<script language='javascript' type='text/javascript'>alert('修改成功！');location.href = 'dingdan_confirm.aspx?shopid=" + hotelid + "';</script>");
+                    Response.Write("<script language='javascript' type='text/javascript'>alert('核销成功！');location.href = 'dingdan_confirm.aspx?shopid=" + hotelid + "';</script>");
 
                 }
             }                       
