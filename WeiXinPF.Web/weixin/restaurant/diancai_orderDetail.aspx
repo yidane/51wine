@@ -196,13 +196,13 @@
 
             $('.silde-background').each(function (i) {
                 var id = $(this).attr("id");
-                var caiId = $(this).attr("CaiID");
                 var swiper = new Swiper('#' + id + ' .swiper-container', {
                     loop: false,
                     pagination: '#' + id + ' .swiper-pagination ',
                     onTransitionEnd: function (swi) {
                         var current = swi.slides[swi.activeIndex];
                         var item = current.childNodes[0];
+                        var caiId = $(item).attr("CaiID");
                         $("#itemkey_"+caiId).html($(item).attr("key"));
                         $("#itemStatus_"+caiId).html($(item).attr("status"));
                     }
