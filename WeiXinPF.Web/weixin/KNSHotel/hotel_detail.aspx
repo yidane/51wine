@@ -8,7 +8,11 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="format-detection" content="telephone=no">
     <link href="css/hotels.css" rel="stylesheet" type="text/css">
-
+     <style>
+          .header-img {
+            height: 200px;
+        }
+    </style>
     <script src="js/iscroll.js" type="text/javascript"></script>
     <script type="text/javascript">
         var myScroll;

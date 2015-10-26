@@ -20,7 +20,7 @@
     <script type="text/javascript" src="../../scripts/bootstrap/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
     <style>
           .header-img {
-            max-height: 150px;
+            height: 200px;
         }
     </style>
 </asp:Content>

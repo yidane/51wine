@@ -18,6 +18,10 @@
     white-space: pre-line !important;
     word-wrap: break-word !important;
  }
+
+ .header-img {
+            height: 200px;
+        }
     </style>
 </asp:Content>
 
@@ -26,7 +30,7 @@
 <div class="qiandaobanner">  
 <%--    <a href="hotel_order_onlin.aspx?openid=<%=openid %>" >--%>
     
-     <img   src="<%=image %>"  />
+     <img class="header-img"   src="<%=image %>"  />
 <%--</a> --%>
 
 </div>
