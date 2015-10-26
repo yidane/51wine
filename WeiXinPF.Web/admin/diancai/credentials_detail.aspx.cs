@@ -12,6 +12,9 @@ using WeiXinPF.Web.UI;
 
 namespace WeiXinPF.Web.admin.diancai
 {
+    using WeiXinPF.Application.DomainModules.IdentifyingCode.Service;
+    using WeiXinPF.Infrastructure.DomainDataAccess.IdentifyingCode.DTO;
+
     public partial class credentials_detail : ManagePage
     {
         protected double totalAmount=0.0;
@@ -69,9 +72,11 @@ namespace WeiXinPF.Web.admin.diancai
                     condition += " and ";
                 condition += " customerName LIKE '%" + orderperson.Text.Trim() + "%' ";
             }
-            this.rptList.DataSource = gbll.GetCredentialsList(shopid, condition, moduleName, out this.totalAmount);
-            this.rptList.DataBind();
 
+            var detail = IdentifyingCodeService.GetOrderDetail(shopid, moduleName, condition);
+            this.rptList.DataSource = detail; //gbll.GetCredentialsList(shopid, condition, moduleName, out this.totalAmount);
+            this.rptList.DataBind();
+            this.totalAmount = detail.Sum(item => item.PayAmount);
 
         }
         #endregion
@@ -93,9 +98,9 @@ namespace WeiXinPF.Web.admin.diancai
             if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
             {
                 Repeater rp = e.Item.FindControl("rp") as Repeater;
-                wx_diancai_credentials_detail list = e.Item.DataItem as wx_diancai_credentials_detail;
+                var list = e.Item.DataItem as OrderDetailDTO;
 
-                rp.DataSource = gbll.GetCredentialsCommodityList(list.id, moduleName);
+                rp.DataSource = IdentifyingCodeService.GetIdentifyingCodeDTO(moduleName, list.Id); //gbll.GetCredentialsCommodityList(list.id, moduleName);
                 rp.DataBind();
             }
         }
