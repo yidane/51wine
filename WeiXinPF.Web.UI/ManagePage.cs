@@ -183,16 +183,25 @@ namespace WeiXinPF.Web.UI
             }
             else
             {
-                BLL.wx_userweixin bll = new BLL.wx_userweixin();
-                Model.wx_userweixin model = bll.GetModel(1);
-                if (model != null)
+                int shopid = GetShopId();
+                if (shopid != 0)
                 {
-                    Session["nowweixin"] = model;
-                    return model;
+                    BLL.wx_diancai_shopinfo shopBll = new BLL.wx_diancai_shopinfo();
+                    Model.wx_diancai_shopinfo shop = shopBll.GetModel(shopid);
+
+                    return new BLL.wx_userweixin().GetModel(shop.wid.Value);
                 }
 
-                //Response.Write("<script>parent.location.href='http://" + HttpContext.Current.Request.Url.Authority + "/admin/weixin/myweixinlist.aspx'</script>");
-                //Response.End();
+                int hotelid = GetHotelId();
+                if (hotelid != 0)
+                {
+                    BLL.wx_hotels_info hotelBll = new BLL.wx_hotels_info();
+                    Model.wx_hotels_info hotel = hotelBll.GetModel(hotelid);
+
+                    return new BLL.wx_userweixin().GetModel(hotel.wid.Value);
+                }
+                Response.Write("<script>parent.location.href='http://" + HttpContext.Current.Request.Url.Authority + "/admin/weixin/myweixinlist.aspx'</script>");
+                Response.End();
             }
             return null;
         }

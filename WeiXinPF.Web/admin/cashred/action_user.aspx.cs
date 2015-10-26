@@ -1,14 +1,4 @@
-﻿/**************************************
- *
- * Author:李朴
- * Compan~y:沐*雪
- * ｑｑ:２３００２８０７
- * createDate:2015-8-2
- * update:2015-8-2
- * 
- ***********************************/
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
