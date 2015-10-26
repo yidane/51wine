@@ -132,7 +132,7 @@ namespace WeiXinPF.Web.admin.hotel
                 }
             }
             AddAdminLog(MXEnums.ActionEnum.Edit.ToString(), "修改商家设置，主键为" + hotelid); //记录日志
-            JscriptMsg("修改成功！", "hotel_list.aspx", "Success");
+           // JscriptMsg("修改成功！", "hotel_list.aspx", "Success");
         }
 
         private void SetLocation()
