@@ -25,6 +25,67 @@
 
         .l-list {
         }
+
+.reduce {
+    top: 50%;
+    right: 40px;
+}
+
+
+
+.reduce b {
+    position: relative;
+    display: block;
+    width: 25px;
+    height: 25px;
+    /*margin: 10px 5px 10px 10px;*/
+    background: #D00A0A;
+    border-radius: 50%;
+    text-indent: -9999px;
+}
+
+.reduce b:after {
+        position: absolute;
+        top: 11px;
+        left: 5px;
+        content: "";
+        display: block;
+        width: 15px;
+        height: 3px;
+        background: #FFFFFF;
+    }
+.reduce {
+        display: inline-block;
+        width: 35px;
+        height: 38px;
+        vertical-align: -2px;
+    }
+
+.ico_reduce {
+        position: relative;
+        display: block;
+        width: 25px;
+        height: 25px;
+        margin: 6px 0 0 5px;
+        background: #D00A0A;
+        border-radius: 50%;
+        text-indent: -9999px;
+    }
+
+.ico_reduce {
+        background: #D00A0A;
+    }
+
+.ico_reduce:after {
+            position: absolute;
+            top: 11px;
+            left: 5px;
+            content: "";
+            display: block;
+            width: 15px;
+            height: 3px;
+            background: #FFFFFF;
+        }
     </style>
     <script type="text/javascript">
         function parentToIndex(id) {
@@ -127,6 +188,7 @@
                 <tr class="td_c">
                     <td style="width: 10%">
                         <asp:HiddenField ID="HiddenField1" Value='<%#Eval("Id")%>' runat="server" />
+                        <a href="javascript:f_Display(this);" class="reduce"><b class="ico_reduce">加一份</b></a>
                         <%# Eval("OrderNumber") %>
                     </td>
                     <td style="width: 10%">
@@ -144,7 +206,7 @@
                     </td>
                     <td></td>
                 </tr>
-                <tr>
+                <tr class="rpSubMenu" style="display: none;">
                     <td colspan="4"></td>
                     <td colspan="2">
                         <asp:Repeater runat="server" ID="rp">
@@ -212,6 +274,14 @@
             <div id="PageContent" runat="server" class="default"></div>
         </div>
     </form>
+    
+    <script type="text/javascript">
+        function f_Display(e) {
+            debugger;
+            $(e).pa
+            e.parent
+        }
+    </script>
 </body>
 </html>
 
