@@ -49,8 +49,8 @@
             <div id="floatHead" class="content-tab">
                 <div class="content-tab-ul-wrap">
                     <ul>
-                        <li><a href="javascript:;" onclick="tabs(this);" class="selected">房间类型设置</a></li>
-                        <li><a href="javascript:;" onclick="tabs(this);">商家图片</a></li>
+                        <li><a href="javascript:;" onclick="tabs(this);" class="selected">编辑商品</a></li>
+                        <li><a href="javascript:;" onclick="tabs(this);">商品图片</a></li>
                         <asp:HiddenField ID="hidId" runat="server" Value="0" />
                     </ul>
                 </div>
