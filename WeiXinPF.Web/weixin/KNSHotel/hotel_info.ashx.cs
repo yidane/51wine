@@ -108,21 +108,31 @@ namespace WeiXinPF.Web.weixin.KNSHotel
                 UpdateOrder(dingdanbll, jsonDict, context, HotelStatusManager.OrderStatus.Cancelled.StatusId, "订单取消成功！");
                  
             }
-//            if (_action == "paymentSuccess")
-//            {
-//                int ddid = MyCommFun.RequestInt("dingdanidnum");
-//                dingdanbll.Update(ddid, "3");
-//                jsonDict.Add("ret", "ok");
-//                jsonDict.Add("content", "订单支付成功！");
-//                context.Response.Write(MyCommFun.getJsonStr(jsonDict));
-//                return;
-//            }
+            if (_action == "dingdancompleted")
+            {
+                //                int ddid = MyCommFun.RequestInt("dingdanidnum");
+                //                dingdanbll.Update(ddid);
+                //                jsonDict.Add("ret", "ok");
+                //                jsonDict.Add("content", "删除成功！");
+                //                context.Response.Write(MyCommFun.getJsonStr(jsonDict));
+                UpdateOrder(dingdanbll, jsonDict, context, HotelStatusManager.OrderStatus.Completed.StatusId, "操作成功！");
+
+            }
+            //            if (_action == "paymentSuccess")
+            //            {
+            //                int ddid = MyCommFun.RequestInt("dingdanidnum");
+            //                dingdanbll.Update(ddid, "3");
+            //                jsonDict.Add("ret", "ok");
+            //                jsonDict.Add("content", "订单支付成功！");
+            //                context.Response.Write(MyCommFun.getJsonStr(jsonDict));
+            //                return;
+            //            }
 
 
-//            if (_action == "dingdanPayed")
-//            {
-//                UpdateOrder(dingdanbll, jsonDict, context, StatusManager.OrderStatus.Payed.StatusId, "订单支付成功！");
-//            }
+            //            if (_action == "dingdanPayed")
+            //            {
+            //                UpdateOrder(dingdanbll, jsonDict, context, StatusManager.OrderStatus.Payed.StatusId, "订单支付成功！");
+            //            }
 
             if (_action == "dingdanPaying")
             {

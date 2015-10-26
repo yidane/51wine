@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Transactions;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.MobileControls;
@@ -11,6 +12,7 @@ using OneGulp.WeChat.MP.TenPayLibV3;
 using Travel.Infrastructure.WeiXin.Advanced.Pay.Model;
 using WeiXinPF.Application.DomainModules.Hotel;
 using WeiXinPF.Application.DomainModules.Hotel.DTOS;
+using WeiXinPF.Application.DomainModules.IdentifyingCode.Service;
 using WeiXinPF.Model;
 using WeiXinPF.Model.KNSHotel;
 using WeiXinPF.WeiXinComm;
@@ -36,6 +38,7 @@ namespace WeiXinPF.Web.admin.hotel
         public TuidanDto tuidan = new TuidanDto();
         public string uName = string.Empty;
         public string roleName = string.Empty;
+        public string ordermsg=String.Empty;
 
 
 
@@ -45,10 +48,10 @@ namespace WeiXinPF.Web.admin.hotel
             dingdanid = MyCommFun.RequestInt("id");
             hotelid = MyCommFun.RequestInt("hotelid");
             GetData(dingdanid);
-//            if (!IsPostBack)
-//            {
-//                GetData(dingdanid);
-//            }
+            if (!IsPostBack)
+            {
+                GetOrderStatusMsg(dingdan);
+            }
         }
 
         private void GetData(int dingdanid)
@@ -56,7 +59,7 @@ namespace WeiXinPF.Web.admin.hotel
             dingdan = dingdanbll.GetModel(dingdanid);
             GetOrderList(dingdanid);
             GetUserMsg(dingdan);
-            GetOrderStatusMsg(dingdan);
+//            GetOrderStatusMsg(dingdan);
         }
 
         /// <summary>
@@ -67,15 +70,11 @@ namespace WeiXinPF.Web.admin.hotel
         {
             orderStatus = dingdan.orderStatus.Value;
             //支付状态下默认退款金额为订单总额
-            if (isAdmin && orderStatus == HotelStatusManager.OrderStatus.Payed.StatusId)
+            if ( orderStatus == HotelStatusManager.OrderStatus.Payed.StatusId)
             {
+                var result = GetPrice(dingdan);
 
-
-
-                //总花费
-                var dateSpan = dingdan.leaveTime.Value - dingdan.arriveTime.Value;
-                var totalPrice = dingdan.price.Value * dingdan.orderNum.Value * dateSpan.Days;
-                txtAmount.Text = totalPrice.ToString();
+                txtAmount.Value = result.ToString();
             }
             else if (orderStatus == HotelStatusManager.OrderStatus.Refunding.StatusId
                      || orderStatus == HotelStatusManager.OrderStatus.Refunded.StatusId)
@@ -89,6 +88,63 @@ namespace WeiXinPF.Web.admin.hotel
                     roleName = new WeiXinPF.BLL.manager_role().GetTitle(manager.role_id);
                 }
             }
+        }
+
+        /// <summary>
+        /// 获取最大可退价格
+        /// </summary>
+        /// <param name="dingdan"></param>
+        private decimal GetPrice(wx_hotel_dingdan dingdan)
+        {
+            decimal result = 0;
+
+            var count = GetCodeCount(dingdan);
+            //总花费
+            var dateSpan = dingdan.leaveTime.Value - dingdan.arriveTime.Value;
+            var totalPrice = dingdan.price.Value * (dingdan.orderNum.Value - count) * dateSpan.Days;
+            result = totalPrice;
+            return result;
+        }
+
+        /// <summary>
+        /// 获取验证码剩余数量
+        /// </summary>
+        /// <returns></returns>
+        private int GetCodeCount(wx_hotel_dingdan dingdan )
+        {
+            var count = 0;
+
+            var wxHotelsInfo = new BLL.wx_hotels_info().GetModel(dingdan.hotelid.Value);
+            var listCodes = IdentifyingCodeService.GetIdentifyingCodeInfoByOrderId
+               (dingdan.hotelid.Value, "hotel",
+               dingdan.id.ToString(), wxHotelsInfo.wid.Value);
+
+            //查询状态为已使用的
+            var usedCode = listCodes.Where(t => t.Status == 2);
+           
+            if (usedCode.Any())
+            {
+                count = dingdan.orderNum.Value - usedCode.Count();
+
+
+            }
+            else
+            {
+                count = dingdan.orderNum.Value;
+            }
+
+            if (count<=0)
+            {
+//                ordermsg = "房间已全部入住";
+//                ordermsg = string.Format(@"  <div class='alert alert-warning' role='alert'>
+//      <strong> 提示!</strong>  {0}
+//         </div>", ordermsg);
+            }
+            else
+            {
+                
+            }
+            return count;
         }
 
         /// <summary>
@@ -196,55 +252,63 @@ namespace WeiXinPF.Web.admin.hotel
             }
             if (chkIsRefund.Checked)
             {
-                double money = MyCommFun.Str2Float(txtAmount.Text);
+                double money = MyCommFun.Str2Float(txtAmount.Value);
                 var hotelService = new HotelService();
                 dingdan = dingdanbll.GetModel(dingdanid);
 
                 var hotel = new BLL.wx_hotels_info().GetModel(dingdan.hotelid.Value);
 
-                var dto = new TuidanDto()
+                using (var scope = new TransactionScope())
                 {
+                    var dto = new TuidanDto()
+                    {
 
-                    dingdanid = dingdan.id,
-                    hotelid = dingdan.hotelid.Value,
-                    roomid = dingdan.roomid.Value,
-                    openid = dingdan.openid,
-                    wid = hotel.wid.Value,
-                    operateUser = wxUserweixin.id,
-                    refundAmount = money,
-                    refundTime = DateTime.Now,
-                    remarks = this.remarks.InnerText,
-                    refundCode= "HT" + DateTime.Now.ToString("yyyyMMddHHmmssffff") + Utils.Number(5)
+                        dingdanid = dingdan.id,
+                        hotelid = dingdan.hotelid.Value,
+                        roomid = dingdan.roomid.Value,
+                        openid = dingdan.openid,
+                        wid = hotel.wid.Value,
+                        operateUser = wxUserweixin.id,
+                        refundAmount = money,
+                        refundTime = DateTime.Now,
+                        remarks = this.remarks.InnerText,
+                        refundCode = "HT" + DateTime.Now.ToString("yyyyMMddHHmmssffff") + Utils.Number(5)
 
-                };
-                hotelService.AddTuidan(dto);
+                    };
+                    hotelService.AddTuidan(dto);
 
-                string return_msg=String.Empty;
-                
-                if (WeChatRefund(dingdan, dto, hotel.wid.Value, out return_msg))
-                {
-                    new BLL.wx_hotel_dingdan().RefundComplete(dingdan.OrderNumber);
-                    Response.Redirect("hotel_dingdan_manage.aspx?hotelid=" + hotelid );
-                }
-                else
-                {
-                    Response.Write(return_msg);
-                    GetData(dingdanid);
-                }
+                    string return_msg = String.Empty;
 
-
-
-
-
-
-
-
-                dingdanbll.Update(dingdan.id, HotelStatusManager.OrderStatus.Refunding.StatusId.ToString());
-
-                AddAdminLog(MXEnums.ActionEnum.Edit.ToString(), "修改酒店状态为" +
+                    if (WeChatRefund(dingdan, dto, hotel.wid.Value, out return_msg))
+                    {
+                        new BLL.wx_hotel_dingdan().RefundComplete(dingdan.OrderNumber);
+                       
+                        AddAdminLog(MXEnums.ActionEnum.Edit.ToString(), "修改酒店状态为" +
                     HotelStatusManager.OrderStatus.Refunding.StatusName
                     + HotelStatusManager.OrderStatus.Refunding.StatusId + "，主键为" + dingdanid); //记录日志
-                JscriptMsg("退款成功！", "hotel_dingdan_manage.aspx?hotelid=" + hotelid + "", "Success");
+                        JscriptMsg("退款成功！", "hotel_dingdan_manage.aspx?hotelid=" + hotelid + "", "Success");
+                    }
+                    else
+                    {
+                        Response.Write(return_msg);
+                        GetData(dingdanid);
+                    }
+//                    dingdanbll.Update(dingdan.id, HotelStatusManager.OrderStatus.Refunding.StatusId.ToString());
+
+                
+
+                    scope.Complete();
+                }
+
+
+
+
+
+
+
+
+
+              
             }
         }
 
@@ -285,8 +349,8 @@ namespace WeiXinPF.Web.admin.hotel
                 //退款金额
                 if (PayHelper.IsDebug)
                 {
-                    requestHandler.SetParameter("total_fee", (payAmount  ).ToString());
-                    requestHandler.SetParameter("refund_fee", (refundAmount ).ToString());
+                    requestHandler.SetParameter("total_fee", (payAmount).ToString());
+                    requestHandler.SetParameter("refund_fee", (refundAmount).ToString());
                 }
                 else
                 {
@@ -318,6 +382,13 @@ namespace WeiXinPF.Web.admin.hotel
                    HotelStatusManager.OrderStatus.Completed.StatusName
                    + HotelStatusManager.OrderStatus.Completed.StatusId + "，主键为" + dingdanid); //记录日志
             JscriptMsg("修改成功！", "hotel_dingdan_manage.aspx?hotelid=" + hotelid + "", "Success");
+        }
+
+       
+
+        protected void btn_return_OnClick(object sender, EventArgs e)
+        {
+            Response.Redirect("hotel_dingdan_manage.aspx?hotelid=" + hotelid);
         }
     }
 }

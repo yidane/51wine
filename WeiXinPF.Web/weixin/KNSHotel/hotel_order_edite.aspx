@@ -32,6 +32,18 @@
     
 
     <div class="cardexplain">
+         <div class="footer-money">
+
+                                    <p>
+                                            <span class=" color-red">已优惠</span>
+                                                                                       <span  id="jiesheng" class="color-red discount-money">￥<%=totaljiesheng %></span>
+                                    <span>共</span>
+                                    <span  id="price" class="  total-money color-red">￥<%=totalPrice %></span>
+                                    <span  id="yuanjia" class="  cost-money">￥<%=totalyuanjia %></span>
+
+                                    </p>
+
+                                </div>
         <ul class="round">
             <li class="title mb"><span class="none">订单号：<%=OrderNumber %><%=zhuangtai %></span></li>
             <li class="nob">
@@ -144,18 +156,7 @@
             </li>
         </ul>
 
-         <div class="footer-money">
-
-                                    <p>
-                                            <span class=" color-red">已优惠</span>
-                                                                                       <span  id="jiesheng" class="color-red discount-money">￥<%=totaljiesheng %></span>
-                                    <span>共</span>
-                                    <span  id="price" class="  total-money color-red">￥<%=totalPrice %></span>
-                                    <span  id="yuanjia" class="  cost-money">￥<%=totalyuanjia %></span>
-
-                                    </p>
-
-                                </div>
+        
 
         <div class="footReturn">
             <ul>

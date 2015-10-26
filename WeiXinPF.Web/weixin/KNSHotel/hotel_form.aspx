@@ -186,6 +186,18 @@
          <div class='alert alert-warning' role='alert'>
       <strong>提示</strong> 填写入住其中一人的真实信息即可。
          </div>
+          <div class="footer-money">
+
+                            <p>
+                                    <span class=" color-red">已优惠</span>
+                                                                               <span  id="price3" class="color-red discount-money">￥0</span>
+                            <span>共</span>
+                            <span  id="price" class="  total-money color-red">￥0</span>
+                            <span  id="yuanjia" class="  cost-money">￥0</span>
+
+                            </p>
+
+                        </div>
         <ul class="round">
             <li class="title mb"><span class="none">请认真填写在线订单</span></li>
             <li class="nob">
@@ -297,18 +309,7 @@
             </li>
         </ul>
 
-         <div class="footer-money">
-
-                            <p>
-                                    <span class=" color-red">已优惠</span>
-                                                                               <span  id="price3" class="color-red discount-money">￥0</span>
-                            <span>共</span>
-                            <span  id="price" class="  total-money color-red">￥0</span>
-                            <span  id="yuanjia" class="  cost-money">￥0</span>
-
-                            </p>
-
-                        </div>
+       
 
         <div class="footReturn">
             <a id="showcard" class="submit">提交订单</a>

@@ -11,6 +11,9 @@
     <meta name="format-detection" content="telephone=no">
 <%--    <script src="../../scripts/jquery/jquery-2.1.0.min.js"></script>--%>
 <%--    <script src="js/paycallback.js"></script>--%>
+     setTimeout(function () {
+            document.location.href = "<%=newUrl%>";
+        }, 500);
 </head>
 <body>
     <form id="form1" runat="server">

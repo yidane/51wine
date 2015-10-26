@@ -141,6 +141,20 @@ namespace WeiXinPF.Web.UI
             ClientScript.RegisterClientScriptBlock(Page.GetType(), "JsPrint", msbox, true);
         }
 
+        /// <summary>
+        /// 带确认按钮的提示
+        /// </summary>
+        /// <param name="msgtitle">提示文字</param>
+        /// <param name="url">返回地址</param>
+        /// <param name="msgcss">CSS样式</param>
+        /// <param name="callback">JS回调函数</param>
+        protected void JscriptConfirmMsg(string msgtitle, string url, string msgcss, string callback)
+        {
+            string msbox = "parent.jsconfirm(\"" + msgtitle + "\", \"" + url + "\", \"" + msgcss + "\", " + callback + ")";
+            ClientScript.RegisterClientScriptBlock(Page.GetType(), "JsConfirm", msbox, true);
+        }
+
+
         #endregion 
         public bool IsWeiXinCode()
         {

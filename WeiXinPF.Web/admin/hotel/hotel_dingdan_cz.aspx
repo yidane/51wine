@@ -47,6 +47,16 @@
                 }
             });
 
+
+            parent.$.dialog({
+                content: '如果定义了回调函数才会出现相应的按钮',
+                ok: function () {
+                    this.title('3秒后自动关闭').time(3);
+                    return false;
+                },
+                cancelVal: '关闭',
+                cancel: true /*为true等价于function(){}*/
+            });
         });
     </script>
     <script type="text/javascript">
@@ -148,6 +158,38 @@
             background-color: #449d44;
             border-color: #398439;
         }
+
+             .alert-success {
+            color: #3c763d;
+            background-color: #dff0d8;
+            border-color: #d6e9c6;
+        }
+
+        .alert-danger {
+            color: #a94442;
+            background-color: #f2dede;
+            border-color: #ebccd1;
+        }
+
+        .alert-warning {
+            color: #8a6d3b;
+            background-color: #fcf8e3;
+            border-color: #faebcc;
+        }
+
+        .alert-info {
+            color: #31708f;
+            background-color: #d9edf7;
+            border-color: #bce8f1;
+        }
+
+        .alert {
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid transparent;
+            border-radius: 10px;
+        }
+
     </style>
 
 </head>
@@ -212,8 +254,8 @@
             <dl>
                 <dt>退款金额：</dt>
                 <dd>
-                    <asp:TextBox runat="server" ID="txtAmount" CssClass="input normal" sucmsg=" " nullmsg="" datatype="n"></asp:TextBox>
-
+                
+                    <input id="txtAmount" type="text" class="input normal"  runat="server"  sucmsg=" " nullmsg="" datatype="n" />
                     <span class="Validform_checktip">注：默认为订单全额，可修改。*</span>
 
                 </dd>
@@ -324,16 +366,17 @@
         <div style="width: 100%; text-align: center">
             <% if (!isAdmin && orderStatus == HotelStatusManager.OrderStatus.Payed.StatusId)
                 {%>
-
-
+                <%=ordermsg %>
+         
+          
             <asp:Button ID="btn_completed" runat="server" CssClass="button button-success " Text="订单完成" OnClick="btn_completed_OnClick" />
 
             <%}%>
 
 
 
-
-            <button href="#" class="button button-primary" id="btn_return" onclick="history.go(-1)">返回</button>
+              <asp:Button ID="btn_return" runat="server" CssClass="button  button-primary " Text="返回"  OnClick="btn_return_OnClick" />
+ 
         </div>
         <%}%>
     </form>
