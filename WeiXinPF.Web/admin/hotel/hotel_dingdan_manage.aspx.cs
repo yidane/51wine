@@ -96,7 +96,7 @@ namespace WeiXinPF.Web.admin.hotel
 
             //绑定页码
             txtPageNum.Text = this.pageSize.ToString();
-            string pageUrl = Utils.CombUrlTxt("hotel_list.aspx", "keywords={0}&page={1}", this.keywords, "__id__");
+            string pageUrl = Utils.CombUrlTxt("hotel_dingdan_manage.aspx", "keywords={0}&page={1}", this.keywords, "__id__");
             PageContent.InnerHtml = Utils.OutPageList(this.pageSize, this.page, this.totalCount, pageUrl, 8);
 
 

@@ -69,7 +69,7 @@
                     <tr>
                         <th>到店日期</th>
                         <td>
-                            <input name="arriveTime" class="px datetimepicker" id="arriveTime" value="<%=arriveTime %>" type="text" placeholder="到店日期"/>
+                            <input name="arriveTime" class="px datetimepicker" id="arriveTime"  readonly="readonly"  value="<%=arriveTime %>" type="text" placeholder="到店日期"/>
                         </td>
                     </tr>
                 </table>
@@ -79,7 +79,7 @@
                     <tr>
                         <th>离店日期</th>
                         <td>
-                            <input name="leaveTime" class="px datetimepicker" id="leaveTime" value="<%=leaveTime %>" type="text" placeholder="离店日期"/>
+                            <input name="leaveTime" class="px datetimepicker" id="leaveTime"  readonly="readonly"  value="<%=leaveTime %>" type="text" placeholder="离店日期"/>
                         </td>
                     </tr>
                 </table>
