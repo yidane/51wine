@@ -183,8 +183,16 @@ namespace WeiXinPF.Web.UI
             }
             else
             {
-                Response.Write("<script>parent.location.href='http://" + HttpContext.Current.Request.Url.Authority + "/admin/weixin/myweixinlist.aspx'</script>");
-                Response.End();
+                BLL.wx_userweixin bll = new BLL.wx_userweixin();
+                Model.wx_userweixin model = bll.GetModel(1);
+                if (model != null)
+                {
+                    Session["nowweixin"] = model;
+                    return model;
+                }
+
+                //Response.Write("<script>parent.location.href='http://" + HttpContext.Current.Request.Url.Authority + "/admin/weixin/myweixinlist.aspx'</script>");
+                //Response.End();
             }
             return null;
         }
