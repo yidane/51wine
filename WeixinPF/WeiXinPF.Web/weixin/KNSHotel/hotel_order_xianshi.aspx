@@ -134,7 +134,19 @@
         <%--            <span style="float: right"><span class="top-alert-name">总价：</span>--%>
         <%--                <span class="label label-danger"><%=PayAmount %>元</span></span>--%>
         <%--        </div>--%>
+        
+                    <div class="footer-money">
 
+                                    <p>
+                                            <span class=" color-red">已优惠</span>
+                                                                                       <span  id="jiesheng" class="color-red discount-money">￥<%=totaljiesheng %></span>
+                                    <span>共</span>
+                                    <span  id="price" class="  total-money color-red">￥<%=totalPrice %></span>
+                                    <span  id="yuanjia" class="  cost-money">￥<%=totalyuanjia %></span>
+
+                                    </p>
+
+                                </div>
         <ul class="round">
             <li class="title"><span class="none">订单号：<%=OrderNumber %><%=zhuangtai %></span></li>
             <li class="dandanb" style="display: <% if (isShowQRCode)
@@ -278,18 +290,7 @@
             <%} %>
         </ul>
 
-            <div class="footer-money">
 
-                                    <p>
-                                            <span class=" color-red">已优惠</span>
-                                                                                       <span  id="jiesheng" class="color-red discount-money">￥<%=totaljiesheng %></span>
-                                    <span>共</span>
-                                    <span  id="price" class="  total-money color-red">￥<%=totalPrice %></span>
-                                    <span  id="yuanjia" class="  cost-money">￥<%=totalyuanjia %></span>
-
-                                    </p>
-
-                                </div>
 
         <% if (isShowContent)
             {%>

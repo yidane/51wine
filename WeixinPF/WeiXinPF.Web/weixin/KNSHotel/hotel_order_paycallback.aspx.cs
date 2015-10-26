@@ -17,6 +17,7 @@ namespace WeiXinPF.Web.weixin.KNSHotel
         private string openid ; 
         private string hotelid  ;
         private string roomid  ;
+        protected string newUrl = string.Empty;
         protected void Page_Load(object sender, EventArgs e)
         {
             var payData = Request.QueryString["payData"];
@@ -78,7 +79,8 @@ namespace WeiXinPF.Web.weixin.KNSHotel
                               "&hotelid=" + hotelid + "&roomid=" + roomid;
                     break;
             }
-            Response.Redirect(url);
+            newUrl = url;
+//            Response.Redirect(url);
         }
 
          

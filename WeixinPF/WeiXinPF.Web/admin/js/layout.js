@@ -145,6 +145,42 @@ function jsdialog(msgtitle, msgcontent, url, msgcss, callback) {
         }
     });
 }
+
+//弹出一个带确认按钮Dialog窗口
+function jsconfirm(msgtitle, msgcontent, url, msgcss, okcallback) {
+    var iconurl = "";
+    var argnum = arguments.length;
+    switch (msgcss) {
+        case "Success":
+            iconurl = "success.gif";
+            break;
+        case "Error":
+            iconurl = "error.gif";
+            break;
+        default:
+            iconurl = "alert.gif";
+            break;
+    }
+    var dialog = $.dialog({
+        title: msgtitle,
+            content: msgcontent,
+            fixed: true,
+            min: false,
+            max: false,
+            lock: true,
+            icon: iconurl,
+            ok: function() {
+                //执行回调函数
+                if (argnum == 5) {
+                    callback();
+                }
+                return false;
+            },
+            cancelVal: '关闭',
+            cancel: true /*为true等价于function(){}*/
+            });
+            }
+
 //打开一个最大化的Dialog
 function ShowMaxDialog(tit, url) {
     $.dialog({

@@ -207,9 +207,26 @@ namespace WeiXinPF.Web.weixin.KNSHotel
                     wxHotelDingdan.id.ToString(), wxHotelsInfo.wid.Value);
                 foreach (var code in list)
                 {
+                    //根据验证码状态， 显示在界面的状态
+                    int showStatus = 0;
+                    switch (code.Status)
+                    {
+                        case 0:
+                        case 1:
+                            showStatus = 1;
+                            break;
+                        case 2:
+                            showStatus = 2;
+                            break;
+                        case 3:
+                        case 4:
+                            showStatus = 3;
+                            break;
+
+                    }
                     VerificationCode += string.Format(@"<div class='swiper-slide'>
                                   <input type ='hidden' value='{0}' status='{1}' />
-                                   </div>", code.IdentifyingCode, code.Status);
+                                   </div>", code.IdentifyingCode, showStatus);
                 }
 
                  
