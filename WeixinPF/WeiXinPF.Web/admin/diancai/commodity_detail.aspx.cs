@@ -35,8 +35,8 @@ namespace WeiXinPF.Web.admin.diancai
             ids = MyCommFun.RequestInt("id");
             id = MyCommFun.QueryString("id");
             cid = MyCommFun.QueryString("cid");
-            shopid = MyCommFun.RequestInt("shopid") == 0 ? GetShopId() : MyCommFun.RequestInt("shopid");
-            wid = MyCommFun.RequestInt("wid") == 0 ? this.GetWeiXinCode().id : MyCommFun.RequestInt("wid");
+            shopid = GetShopId();
+            wid = this.GetWeiXinCode().id;
             if (!IsPostBack)
             {
 
@@ -49,9 +49,6 @@ namespace WeiXinPF.Web.admin.diancai
 
         protected void save_groupbase_Click(object sender, EventArgs e)
         {
-            id = MyCommFun.QueryString("id");
-            cid = MyCommFun.QueryString("cid");
-            shopid = MyCommFun.RequestInt("shopid");
             string status = "2";
 
             Guid identifyingCodeId;
@@ -143,15 +140,6 @@ namespace WeiXinPF.Web.admin.diancai
                 }
 
                 sjopmodel = shopinfo.GetModel(shopid);//配送费
-                //decimal zongji = amount + Convert.ToDecimal(sjopmodel.sendCost);
-                //if (sjopmodel != null)
-                //{
-                //    Dingdanlist += "<tr><td>商品总费</td><td class=\"cc\">￥" + amount + "</td>  <td class=\"cc\" >配送费</td><td class=\"rr\" >￥" + sjopmodel.sendCost + "</td></tr>";
-                //}
-                //else
-                //{
-                //    Dingdanlist += "<tr><td>商品总费</td><td class=\"cc\">￥" + amount + "</td>  <td class=\"cc\" >配送费</td><td class=\"rr\" >￥" + 0 + "</td></tr>";
-                //}
                 Dingdanlist += "<tr><td>总计：</td><td ></td><td ></td><td class=\"rr\">￥" + amount + "</td></tr>";
 
             }
