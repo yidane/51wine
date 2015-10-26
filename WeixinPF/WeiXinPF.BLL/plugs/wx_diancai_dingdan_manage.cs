@@ -218,7 +218,7 @@ namespace WeiXinPF.BLL
                 dal.UpdateCommodityStatusByOrderCode(orderNumber, "1");
 
                 scope.Complete();
-            }            
+            }
         }
 
         public bool Update(int id, decimal payAmount)
@@ -229,6 +229,11 @@ namespace WeiXinPF.BLL
         public DataSet Getcaopin(string dingdan)
         {
             return dal.Getcaopin(dingdan);
+        }
+
+        public void AfterVerification(int wid, int shopId, int orderID)
+        {
+            dal.AfterVerification(wid, shopId, orderID);
         }
 
         public DataSet Getcaopin(int id)

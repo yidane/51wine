@@ -827,6 +827,18 @@ namespace WeiXinPF.DAL
             return DbHelperSQL.Query(strSql.ToString());
         }
 
+        public void AfterVerification(int wid, int shopId, int orderID)
+        {
+            SqlParameter[] sqlparams =
+                {
+                    new SqlParameter(){ParameterName = "@wid",SqlDbType = SqlDbType.Int,Value = wid}, 
+                    new SqlParameter(){ParameterName = "@ShopID",SqlDbType = SqlDbType.Int,Value = shopId}, 
+                    new SqlParameter(){ParameterName = "@OrderID",SqlDbType = SqlDbType.Int,Value = orderID},
+                };
+
+            DbHelperSQL.RunProcedure("usp_diancai_AfterVerification", sqlparams);
+        }
+
 
         public DataSet Getcaopin(int id)
         {
