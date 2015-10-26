@@ -108,15 +108,15 @@ namespace WeiXinPF.Web.weixin.restaurant
                     builder.Append("</table>");
                     builder.Append("<div class=\"silde-background \" id='silde-module-" + pair.Key + "'>");
                     builder.Append("<div class=\"swiper-container gpd-ablum swiper-container-horizontal\">");
-                    builder.AppendFormat("<div class=\"swiper-wrapper silde-center\" style=\"transition-duration: 0ms; transform: translate3d(0px, 0px, 0px);\" id=\"div_{0}\" CaiID=\"{0}\">", pair.Key);
+                    builder.AppendFormat("<div class=\"swiper-wrapper silde-center\" style=\"transition-duration: 0ms; transform: translate3d(0px, 0px, 0px);\" id=\"div_{0}\" >", pair.Key);
 
                     foreach (OrderCaipinDetail detail in pair.Value)
                     {
                         var status = StatusManager.DishStatus.GetStatusDict(detail.status);
                         builder.Append("<div class='swiper-slide'>");
                         builder.AppendFormat(
-                            "<img id='Img3' class='img-ercode' src=\"ErCodeHandler.ashx?key={0}\" key='{0}' status='{1}'>",
-                            detail.identifyingcode, status.StatusName);
+                            "<img id='Img3' class='img-ercode' src=\"ErCodeHandler.ashx?key={0}\" key='{0}' status='{1}' caiid={2}>",
+                            detail.identifyingcode, status.StatusName, pair.Key);
                         builder.Append("</div>");
                     }
 
