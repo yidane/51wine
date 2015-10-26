@@ -18,14 +18,14 @@ namespace WeiXinPF.Web.admin.hotel.Verification
     public partial class credentials_detail : ManagePage
     {
         protected double totalAmount=0.0;
-        BLL.wx_diancai_dingdan_manage gbll = new BLL.wx_diancai_dingdan_manage();
         protected string keywords = string.Empty;
 
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
             {
-
+                startDate.Text = DateTime.Now.ToString("yyyy-MM-dd");
+                endDate.Text = DateTime.Now.ToString("yyyy-MM-dd");
                 RptBind();
 
             }
