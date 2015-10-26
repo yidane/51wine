@@ -126,20 +126,21 @@
             <ItemTemplate>
                 <tr class="td_c">
                     <td style="width: 10%">
-                        <asp:HiddenField ID="HiddenField1" Value='<%#Eval("id")%>' runat="server" />
-                        <%# Eval("orderNumber") %>
+                        <asp:HiddenField ID="HiddenField1" Value='<%#Eval("Id")%>' runat="server" />
+                        <%# Eval("OrderNumber") %>
                     </td>
                     <td style="width: 10%">
-                        <%# Eval("payStatus") %>
+                        <%# Eval("PayStatus") %>
                     </td>
                     <td style="width: 10%">
-                        <%# Eval("modifyTime") %>                        
+                        <%# Eval("ModifyTime") %>                        
                     </td>
                     <td style="width: 10%">
-                        <%# Eval("customerName") %>                        
+                        <%# Eval("CustomerName") %>                        
                     </td>
                     <td style="width: 10%">
-                        <%# Eval("payAmount") %>                        
+                        <span style="color: #ff0000"><%# Eval("PayAmount") %></span>
+                         元                       
                     </td>
                     <td></td>
                 </tr>
@@ -167,19 +168,19 @@
                             <ItemTemplate>
                                 <tr>
                                     <td>
-                                        <%# Eval("caiName") %>
+                                        <%# Eval("ProductName") %>
                                     </td>
                                     <td>
-                                        <%# Eval("number") %>
+                                        <%# Eval("Number") %>
                                     </td>
                                     <td>
-                                        <%# Eval("price") %>
+                                        <%# Eval("Price") %>
                                     </td>
                                     <td>
-                                        <%# Eval("identifyingcode") %>
+                                        <%# Eval("IdentifyingCode") %>
                                     </td>
                                     <td>
-                                        <%# Eval("status") %>
+                                        <%# Eval("Status") %>
                                     </td>
                                     <td>
                                         <%# Eval("ModifyTime") %>
@@ -205,8 +206,8 @@
         <!--内容底部-->
         <div class="line20"></div>
         <div class="pagelist">
-            <div class="footer-right">
-                <span>总计</span><span><%=totalAmount %></span><span>元</span>
+            <div style="float: right">
+                <span>总计</span><span style="color: #ff0000"><%=totalAmount %></span><span>元</span>
             </div>
             <div id="PageContent" runat="server" class="default"></div>
         </div>
