@@ -17,7 +17,7 @@ namespace WeiXinPF.Web.admin.diancai
         protected int pageSize;
         BLL.wx_diancai_caipin_category gbll = new BLL.wx_diancai_caipin_category();
         protected string keywords = string.Empty;
-        protected  int shopid;
+        protected int shopid;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -28,13 +28,7 @@ namespace WeiXinPF.Web.admin.diancai
             {
                 //shopid = MyCommFun.RequestInt("shopid");
                 string manage = MyCommFun.QueryString("manage");
-                if (manage == "managetype")
-                {
-                }
-                else
-                {
-                    shopid = MyCommFun.RequestInt("shopid")==0?GetShopId(): MyCommFun.RequestInt("shopid");
-                }
+                shopid = MyCommFun.RequestInt("shopid") == 0 ? GetShopId() : MyCommFun.RequestInt("shopid");
                 RptBind(CombSqlTxt(keywords), "sortid asc,id desc");
 
             }
@@ -43,7 +37,7 @@ namespace WeiXinPF.Web.admin.diancai
         private void RptBind(string _strWhere, string _orderby)
         {
 
-           // Model.wx_userweixin weixin = GetWeiXinCode();
+            // Model.wx_userweixin weixin = GetWeiXinCode();
 
             //判断是否已经设置了微留言基本信息
             BLL.wx_diancai_caipin_category sbll = new BLL.wx_diancai_caipin_category();

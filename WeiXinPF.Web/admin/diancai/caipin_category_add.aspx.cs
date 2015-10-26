@@ -50,7 +50,7 @@ namespace WeiXinPF.Web.admin.diancai
             caipin.createDate = DateTime.Now;
             int id = caipinbll.Add(caipin);
             AddAdminLog(MXEnums.ActionEnum.Add.ToString(), "添加商品分类，主键为" + id); //记录日志
-            JscriptMsg("增加成功！", Utils.CombUrlTxt("caipin_category.aspx?shopid='" + shopid + "'&manage=managetype", "keywords={0}", ""), "Success");
+            JscriptMsg("增加成功！", Utils.CombUrlTxt("caipin_category.aspx?shopid='" + shopid , "keywords={0}", ""), "Success");
            }
 
            if (type == "edite")
