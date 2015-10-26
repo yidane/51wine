@@ -25,6 +25,8 @@ namespace WeiXinPF.Infrastructure.DomainDataAccess.Hotel
         public double refundAmount { get; set; }
         public int operateUser { get; set; }
         public string remarks { get; set; }
+        public string refundCode { get; set; }
+
     }
 
     public partial class TuidanInfo

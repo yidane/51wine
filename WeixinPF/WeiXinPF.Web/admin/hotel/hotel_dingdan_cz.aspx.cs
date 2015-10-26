@@ -4,11 +4,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
+using System.Web.UI.MobileControls;
 using System.Web.UI.WebControls;
+using OneGulp.WeChat.MP.AdvancedAPIs;
+using OneGulp.WeChat.MP.TenPayLibV3;
+using Travel.Infrastructure.WeiXin.Advanced.Pay.Model;
 using WeiXinPF.Application.DomainModules.Hotel;
 using WeiXinPF.Application.DomainModules.Hotel.DTOS;
 using WeiXinPF.Model;
 using WeiXinPF.Model.KNSHotel;
+using WeiXinPF.WeiXinComm;
 
 namespace WeiXinPF.Web.admin.hotel
 {
@@ -39,14 +44,25 @@ namespace WeiXinPF.Web.admin.hotel
             isAdmin = IsWeiXinCode();
             dingdanid = MyCommFun.RequestInt("id");
             hotelid = MyCommFun.RequestInt("hotelid");
-            if (!IsPostBack)
-            {
-                GetOrderList(dingdanid);
-                GetUserMsg(dingdan);
-                GetOrderStatusMsg(dingdan);
-            }
+            GetData(dingdanid);
+//            if (!IsPostBack)
+//            {
+//                GetData(dingdanid);
+//            }
         }
 
+        private void GetData(int dingdanid)
+        {
+            dingdan = dingdanbll.GetModel(dingdanid);
+            GetOrderList(dingdanid);
+            GetUserMsg(dingdan);
+            GetOrderStatusMsg(dingdan);
+        }
+
+        /// <summary>
+        /// 获取订单状态
+        /// </summary>
+        /// <param name="dingdan"></param>
         private void GetOrderStatusMsg(wx_hotel_dingdan dingdan)
         {
             orderStatus = dingdan.orderStatus.Value;
@@ -75,10 +91,14 @@ namespace WeiXinPF.Web.admin.hotel
             }
         }
 
+        /// <summary>
+        /// 获取订单详情
+        /// </summary>
+        /// <param name="dingdanid"></param>
         private void GetOrderList(int dingdanid)
         {
 
-            dingdan = dingdanbll.GetModel(dingdanid);
+//            dingdan = dingdanbll.GetModel(dingdanid);
             //            if (dingdan != null)
             //            {
             //                ordername = dingdan.oderName;
@@ -179,6 +199,9 @@ namespace WeiXinPF.Web.admin.hotel
                 double money = MyCommFun.Str2Float(txtAmount.Text);
                 var hotelService = new HotelService();
                 dingdan = dingdanbll.GetModel(dingdanid);
+
+                var hotel = new BLL.wx_hotels_info().GetModel(dingdan.hotelid.Value);
+
                 var dto = new TuidanDto()
                 {
 
@@ -186,13 +209,35 @@ namespace WeiXinPF.Web.admin.hotel
                     hotelid = dingdan.hotelid.Value,
                     roomid = dingdan.roomid.Value,
                     openid = dingdan.openid,
+                    wid = hotel.wid.Value,
                     operateUser = wxUserweixin.id,
                     refundAmount = money,
                     refundTime = DateTime.Now,
-                    remarks = this.remarks.InnerText
+                    remarks = this.remarks.InnerText,
+                    refundCode= "HT" + DateTime.Now.ToString("yyyyMMddHHmmssffff") + Utils.Number(5)
 
                 };
                 hotelService.AddTuidan(dto);
+
+                string return_msg=String.Empty;
+                
+                if (WeChatRefund(dingdan, dto, hotel.wid.Value, out return_msg))
+                {
+                    new BLL.wx_hotel_dingdan().RefundComplete(dingdan.OrderNumber);
+                    Response.Redirect("hotel_dingdan_manage.aspx?hotelid=" + hotelid );
+                }
+                else
+                {
+                    Response.Write(return_msg);
+                    GetData(dingdanid);
+                }
+
+
+
+
+
+
+
 
                 dingdanbll.Update(dingdan.id, HotelStatusManager.OrderStatus.Refunding.StatusId.ToString());
 
@@ -201,6 +246,65 @@ namespace WeiXinPF.Web.admin.hotel
                     + HotelStatusManager.OrderStatus.Refunding.StatusId + "，主键为" + dingdanid); //记录日志
                 JscriptMsg("退款成功！", "hotel_dingdan_manage.aspx?hotelid=" + hotelid + "", "Success");
             }
+        }
+
+       /// <summary>
+       /// 微信退单
+       /// </summary>
+       /// <param name="dingdan"></param>
+       /// <param name="dto"></param>
+       /// <param name="returnMsg"></param>
+       /// <returns></returns>
+        private bool WeChatRefund(wx_hotel_dingdan dingdan, TuidanDto dto,int wid, out string returnMsg)
+        {
+            bool result = false;
+            returnMsg = null;
+           
+            var refundResult = dingdanbll.GetWeChatRefundParams(wid, dingdan.hotelid.Value,  dingdan.id, dto.refundCode);
+
+            //使用系统订单号退单
+            if (refundResult != null && refundResult.Tables.Count > 0 && refundResult.Tables[0].Rows.Count > 0)
+            {
+                var orderNumber = refundResult.Tables[0].Rows[0]["orderNumber"].ToString();
+                var transaction_id = refundResult.Tables[0].Rows[0]["transaction_id"].ToString();
+                var refundAmount = Convert.ToInt32(refundResult.Tables[0].Rows[0]["refundAmount"]);
+                var payAmount = Convert.ToInt32(refundResult.Tables[0].Rows[0]["payAmount"]);
+
+
+                var wxModel = new BLL.wx_userweixin().GetModel(wid);
+                var payInfo = new BLL.wx_payment_wxpay().GetModelByWid(wid);
+
+                var requestHandler = new RequestHandler(null);
+                requestHandler.SetParameter("out_trade_no", orderNumber);
+                //requestHandler.SetParameter("transaction_id", transaction_id);
+                requestHandler.SetParameter("out_refund_no", dto.refundCode);
+                requestHandler.SetParameter("appid", wxModel.AppId);
+                requestHandler.SetParameter("mch_id", payInfo.mch_id);//商户号
+                requestHandler.SetParameter("nonce_str", Guid.NewGuid().ToString().Replace("-", ""));
+
+                //退款金额
+                if (PayHelper.IsDebug)
+                {
+                    requestHandler.SetParameter("total_fee", (payAmount  ).ToString());
+                    requestHandler.SetParameter("refund_fee", (refundAmount ).ToString());
+                }
+                else
+                {
+                    requestHandler.SetParameter("total_fee", (payAmount *100).ToString());
+                    requestHandler.SetParameter("refund_fee", (refundAmount * 100).ToString());
+                }
+
+                requestHandler.SetParameter("op_user_id", wxModel.AppId);
+                requestHandler.SetParameter("sign", requestHandler.CreateMd5Sign("key", payInfo.paykey));
+
+                var refundInfo = TenPayV3.Refund(requestHandler.ParseXML(), string.Format(@"{0}{1}", AppDomain.CurrentDomain.BaseDirectory, payInfo.certInfoPath), payInfo.cerInfoPwd);
+                var refundOrderResponse = new RefundOrderResponse(refundInfo);
+
+                result = refundOrderResponse.IsSuccess;
+                returnMsg = refundOrderResponse.return_msg;
+            }
+           
+            return result;
         }
 
 

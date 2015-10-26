@@ -655,6 +655,22 @@ namespace WeiXinPF.DAL
                 return null;
             }
         }
-	}
+
+
+
+        public DataSet GetWeChatRefundParams(int wid, int hotelid, int dingdanId,string refundCode, string modelName)
+        {
+            SqlParameter[] sqlparams =
+                {
+                    new SqlParameter(){ParameterName = "@HotelID",SqlDbType = SqlDbType.Int,Value = hotelid},
+                    new SqlParameter(){ParameterName = "@wid",SqlDbType = SqlDbType.Int,Value = wid},
+                    new SqlParameter(){ParameterName = "@OrderID",SqlDbType = SqlDbType.Int,Value = dingdanId},
+                    new SqlParameter(){ParameterName = "@refundCode",SqlDbType = SqlDbType.NVarChar,Value = refundCode},
+                    new SqlParameter(){ParameterName = "@modelName",SqlDbType = SqlDbType.NVarChar,Value = modelName}
+                };
+
+            return DbHelperSQL.RunProcedure("usp_wx_hotel_tuidan_manage_WeChatDetail", sqlparams, "WeChatRefundDetail");
+        }
+    }
 }
 

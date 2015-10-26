@@ -3,6 +3,8 @@ using System.Data;
 using System.Collections.Generic;
 using WeiXinPF.Common;
 using WeiXinPF.Model;
+using WeiXinPF.Model.KNSHotel;
+
 namespace WeiXinPF.BLL
 {
 	/// <summary>
@@ -243,7 +245,7 @@ namespace WeiXinPF.BLL
             var model = this.GetModel(outTradeNo);
             if (model!=null)
             {
-                this.Update(model.id, "3");
+                this.Update(model.id,  HotelStatusManager.OrderStatus.Payed.StatusId.ToString() );
             }
 	        
 	    }
@@ -256,6 +258,33 @@ namespace WeiXinPF.BLL
 	    private WeiXinPF.Model.wx_hotel_dingdan GetModel(string outTradeNo)
 	    {
             return dal.GetModel(outTradeNo);
+        }
+
+        /// <summary>
+        /// 获取微信所必须的退单参数
+        /// </summary>
+        /// <param name="wid"></param>
+        /// <param name="hotelid"></param>
+        /// <param name="dingdanId"></param>
+        /// <param name="modelName"></param>
+        /// <returns></returns>
+        public DataSet GetWeChatRefundParams(int wid, int hotelid, int dingdanId,string refundCode, string modelName= "Hotel")
+        {
+            return dal.GetWeChatRefundParams(wid, hotelid, dingdanId, refundCode, modelName);
+ 
+        }
+
+        /// <summary>
+        /// 退单完成后改变订单状态
+        /// </summary>
+        /// <param name="refundCode">订单号</param>
+	    public void RefundComplete(string outTradeNo)
+	    {
+            var model = this.GetModel(outTradeNo);
+            if (model != null)
+            {
+                this.Update(model.id, HotelStatusManager.OrderStatus.Refunded.StatusId.ToString());
+            }
         }
 	}
 }
