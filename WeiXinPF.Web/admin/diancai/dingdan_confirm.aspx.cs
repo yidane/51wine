@@ -14,8 +14,6 @@ namespace WeiXinPF.Web.admin.diancai
     public partial class dingdan_confirm : Web.UI.ManagePage
     {
         public int shopid = 0;
-        public string openid = "";
-        public int id = 0;
         public string Dingdanlist = "";
         public string dingdanren = "";
 
@@ -24,10 +22,8 @@ namespace WeiXinPF.Web.admin.diancai
         public const string ModuleName = "restaurant";
         protected void Page_Load(object sender, EventArgs e)
         {
-            id = MyCommFun.RequestInt("id");
-            shopid = MyCommFun.RequestInt("shopid") == 0 ? GetShopId() : MyCommFun.RequestInt("shopid");
-            wid = MyCommFun.RequestInt("wid") == 0 ? this.GetWeiXinCode().id : MyCommFun.RequestInt("wid");
-            openid = MyCommFun.QueryString("openid");
+            shopid = GetShopId();
+            wid = this.GetWeiXinCode().id;
             confirmnumber.CausesValidation = true;
         }
 
@@ -51,29 +47,6 @@ namespace WeiXinPF.Web.admin.diancai
             {
                 Response.Redirect("commodity_detail.aspx?cid=" + identifyingCode.IdentifyingCodeId + "&shopid=" + identifyingCode.ShopId + "&id=" + identifyingCode.OrderId);
             }
-
-            //string condition = "identifyingcode='" + number + "'";
-            //DataSet ds = manage.GetCommodityList(condition);
-            //DataTable table = ds.Tables[0];
-            //if (table.Rows.Count >= 1)
-            //{
-            //    if (table.Rows[0]["shopinfoid"].ToString() == shopid.ToString())
-            //    {
-            //        string icode = number;
-            //        string id = table.Rows[0]["id"].ToString();
-            //        string cid = table.Rows[0]["cid"].ToString();
-            //        string url = "commodity_detail.aspx?cid=" + cid + "&shopid=" + shopid + "&id=" + id;
-            //        Response.Redirect(url);
-            //    }
-            //    else
-            //    {
-            //        Response.Write("<script language='javascript' type='text/javascript'>alert('该订单非本店订单，请确认！')</script>");
-            //    }
-            //}
-            //else
-            //{
-            //    Response.Write("<script language='javascript' type='text/javascript'>alert('该订单不存在或未付款，请确认！')</script>");
-            //}
         }
 
         protected void confirmnumber_Validating()
