@@ -82,7 +82,7 @@ namespace WeiXinPF.Web.weixin.restaurant
             /// <summary>
             /// 已使用
             /// </summary>
-            public static StatusDict Used = new StatusDict() { StatusID = 2, StatusName = "未使用" };
+            public static StatusDict Used = new StatusDict() { StatusID = 2, StatusName = "已使用" };
 
             /// <summary>
             /// 退款审核中

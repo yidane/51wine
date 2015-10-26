@@ -25,6 +25,7 @@ namespace WeiXinPF.Web.weixin.restaurant
             payData = EncryptionManager.AESDecrypt(payData, ticket);
             var payDataModel = JSONHelper.Deserialize<UnifiedOrderEntity>(payData);
 
+            shopid = Convert.ToInt32(payDataModel.Extra["shopid"]);
             switch (payStatus.ToLower())
             {
                 case "success":

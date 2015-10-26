@@ -12,9 +12,9 @@ namespace WeiXinPF.Web.admin.diancai
     {
         BLL.wx_diancai_caipin_manage managebll = new BLL.wx_diancai_caipin_manage();
         Model.wx_diancai_caipin_manage manage = new Model.wx_diancai_caipin_manage();
-        protected  int shopid = 0;
-        public  string type = "";
-        public  int ids = 0;
+        protected int shopid = 0;
+        public string type = "";
+        public int ids = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
             type = MyCommFun.QueryString("type");
@@ -41,9 +41,9 @@ namespace WeiXinPF.Web.admin.diancai
                     this.sortid.Text = manage.sortid.ToString();
                     this.chargeback.InnerText = manage.chargeback;
                     if (manage.beginDate != null)
-                        this.txtbeginDate.Text=manage.beginDate.Value.ToString("yyyy-MM-dd HH:mm:ss");
+                        this.txtbeginDate.Text = manage.beginDate.Value.ToString("yyyy-MM-dd HH:mm:ss");
                     if (manage.endDate != null)
-                        this.txtendDate.Text=manage.endDate.Value.ToString("yyyy-MM-dd HH:mm:ss");
+                        this.txtendDate.Text = manage.endDate.Value.ToString("yyyy-MM-dd HH:mm:ss");
                 }
             }
         }
@@ -89,14 +89,14 @@ namespace WeiXinPF.Web.admin.diancai
                 manage.chargeback = this.chargeback.InnerText;
 
                 int id = managebll.Add(manage);
-                if (id>0)
+                if (id > 0)
                 {
                     manage = managebll.GetModel(id);
                     this.number.Text = manage.number;
                 }
 
                 AddAdminLog(MXEnums.ActionEnum.Add.ToString(), "添加商品信息管理，主键为" + id); //记录日志
-                JscriptMsg("增加成功！", Utils.CombUrlTxt("caipin_manage.aspx?shopid=" + shopid + "&manage=managetype", "keywords={0}", ""), "Success");
+                JscriptMsg("增加成功！", Utils.CombUrlTxt("caipin_manage.aspx?shopid=" + shopid, "keywords={0}", ""), "Success");
 
             }
 
@@ -104,7 +104,7 @@ namespace WeiXinPF.Web.admin.diancai
             {
                 shopid = MyCommFun.RequestInt("shopid");
                 manage = managebll.GetModel(ids);
-              
+
                 manage.shopid = shopid;
                 manage.categoryid = Convert.ToInt32(this.dllCategoryName.SelectedItem.Value);
                 manage.categoryName = this.dllCategoryName.SelectedItem.Text;
