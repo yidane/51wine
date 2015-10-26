@@ -44,7 +44,7 @@
                
                 <%} %> <span><a href="dingdan_confirm.aspx?shopid=<%=hotelid %>">服务码验证</a></span>
             <i class="arrow"></i>            
-            <span>菜品处理</span>
+            <span>商品处理</span>
         </div>
       
         <!--/导航栏-->

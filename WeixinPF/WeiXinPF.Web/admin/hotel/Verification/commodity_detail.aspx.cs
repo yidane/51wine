@@ -17,11 +17,6 @@ namespace WeiXinPF.Web.admin.hotel.Verification
 
     public partial class commodity_detail : Web.UI.ManagePage
     {
-        BLL.wx_diancai_dingdan_manage managebll = new BLL.wx_diancai_dingdan_manage();
-        Model.wx_diancai_dingdan_manage manage = new Model.wx_diancai_dingdan_manage();
-        BLL.wx_diancai_shopinfo shopinfo = new BLL.wx_diancai_shopinfo();
-        Model.wx_diancai_shopinfo sjopmodel = new Model.wx_diancai_shopinfo();
-
         public string Dingdanlist = "";
         public string dingdanren = "";
         public string id = "";
@@ -38,11 +33,10 @@ namespace WeiXinPF.Web.admin.hotel.Verification
             ids = MyCommFun.RequestInt("id");
             id = MyCommFun.QueryString("id");
             cid = MyCommFun.QueryString("cid");
-            hotelid = MyCommFun.RequestInt("shopid") == 0 ? this.GetHotelId() : MyCommFun.RequestInt("shopid");
-            wid = MyCommFun.RequestInt("wid") == 0 ? this.GetWeiXinCode().id : MyCommFun.RequestInt("wid");
+            hotelid = this.GetHotelId();
+            wid = this.GetWeiXinCode().id;
             if (!IsPostBack)
             {
-
                 if (ids != 0)
                 {
                     List(ids);
@@ -104,13 +98,11 @@ namespace WeiXinPF.Web.admin.hotel.Verification
                     Dingdanlist += "<td class=\"rr\">￥" + item.Price + "</td></tr>";
                     amount += Convert.ToDecimal(item.Price);
                 }
-
-                sjopmodel = shopinfo.GetModel(hotelid);//配送费
                 Dingdanlist += "<tr><td>总计：</td><td ></td><td ></td><td class=\"rr\">￥" + amount + "</td></tr>";
             }
 
             var hotelOrder = new BLL.wx_hotel_dingdan().GetModel(int.Parse(id));
-            //manage = managebll.GetModeldingdan(id);
+            
             //订单信息
             if (hotelOrder != null)
             {
@@ -131,7 +123,6 @@ namespace WeiXinPF.Web.admin.hotel.Verification
                 dingdanren += "<tr><td>订单状态：<em  style='width:70px;' class='no'>未使用</em></td></tr>";
 
             }
-
 
             dingdanren += "<tr><td>商家留言：</td></tr> <tr> <td></td></tr>";
         }

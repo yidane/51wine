@@ -8,8 +8,6 @@
     public partial class dingdan_confirm : Web.UI.ManagePage
     {
         public int hotelid = 0;
-        public string openid = "";
-        public int id = 0;
         public string Dingdanlist = "";
         public string dingdanren = "";
 
@@ -19,10 +17,8 @@
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            id = MyCommFun.RequestInt("id");
-            hotelid = MyCommFun.RequestInt("shopid") == 0 ? this.GetHotelId() : MyCommFun.RequestInt("shopid");
-            wid = MyCommFun.RequestInt("wid") == 0 ? this.GetWeiXinCode().id : MyCommFun.RequestInt("wid");
-            openid = MyCommFun.QueryString("openid");
+            hotelid = this.GetHotelId();
+            wid = this.GetWeiXinCode().id;
             confirmnumber.CausesValidation = true;
         }
 
