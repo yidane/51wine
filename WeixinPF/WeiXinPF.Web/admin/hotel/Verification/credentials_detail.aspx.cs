@@ -72,9 +72,11 @@ namespace WeiXinPF.Web.admin.hotel.Verification
                     condition += " and ";
                 condition += " customerName LIKE '%" + orderperson.Text.Trim() + "%' ";
             }
-            this.rptList.DataSource = IdentifyingCodeService.GetOrderDetail(shopid, moduleName, condition); // gbll.GetCredentialsList(shopid, condition, moduleName, out this.totalAmount);
-            this.rptList.DataBind();
 
+            var detail = IdentifyingCodeService.GetOrderDetail(shopid, moduleName, condition);
+            this.rptList.DataSource = detail; // gbll.GetCredentialsList(shopid, condition, moduleName, out this.totalAmount);
+            this.rptList.DataBind();
+            this.totalAmount = detail.Sum(item => item.PayAmount);
 
         }
         #endregion

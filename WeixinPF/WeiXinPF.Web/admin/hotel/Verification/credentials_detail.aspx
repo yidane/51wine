@@ -117,6 +117,11 @@
                             <th style="width: 10%">订单状态</th>
                             <th style="width: 10%">订单关闭日期</th>
                             <th style="width: 10%">预约人</th>
+                            <th style="width: 10%">数量</th>
+                            <th style="width: 10%">商品名称</th>
+                            <th style="width: 10%">入住日期</th>
+                            <th style="width: 10%">离店日期</th>
+                            <th style="width: 10%">商品单价</th>
                             <th style="width: 10%">总计</th>
                             <th></th>
                         </tr>
@@ -125,7 +130,7 @@
             </HeaderTemplate>
             <ItemTemplate>
                 <tr class="td_c">
-                    <td style="width: 10%">
+                    <td style="width: 15%">
                         <asp:HiddenField ID="HiddenField1" Value='<%#Eval("Id")%>' runat="server" />
                         <%# Eval("OrderNumber") %>
                     </td>
@@ -138,24 +143,33 @@
                     <td style="width: 10%">
                         <%# Eval("CustomerName") %>                        
                     </td>
+                    <td style="width: 5%">
+                        <%# Eval("Number") %>                        
+                    </td>
                     <td style="width: 10%">
-                        <%# Eval("PayAmount") %>                        
+                        <%# Eval("ProductName") %>                        
+                    </td>
+                    <td style="width: 10%">
+                        <%# Eval("ArriveTime").ToString().Substring(0,10) %>                        
+                    </td>
+                    <td style="width: 10%">
+                        <%# Eval("LeaveTime").ToString().Substring(0,10) %>                        
+                    </td>
+                    <td style="width: 10%">
+                        <%# Eval("Price") %>                        
+                    </td>
+                    <td style="width: 10%">
+                        <%# Eval("PayAmount") %> 元                        
                     </td>
                     <td></td>
                 </tr>
                 <tr>
-                    <td colspan="4"></td>
-                    <td colspan="2">
+                    <td colspan="7"></td>
+                    <td colspan="3">
                         <asp:Repeater runat="server" ID="rp">
                             <HeaderTemplate>
                                 <table cellspacing="0" rules="all" border="1" id="CommodityList" style="border-collapse: collapse; width: 90%; margin: 1px 0px 5px 33px;" class="Repeater">
-                                    <tr>
-                                        <th scope="col">商品名称
-                                        </th>
-                                        <th scope="col">数量
-                                        </th>
-                                        <th scope="col">价格
-                                        </th>
+                                    <tr>                                        
                                         <th scope="col">验证码
                                         </th>
                                         <th scope="col">验证码状态
@@ -165,16 +179,7 @@
                                     </tr>
                             </HeaderTemplate>
                             <ItemTemplate>
-                                <tr>
-                                    <td>
-                                        <%# Eval("ProductName") %>
-                                    </td>
-                                    <td>
-                                        <%# Eval("Number") %>
-                                    </td>
-                                    <td>
-                                        <%# Eval("Price") %>
-                                    </td>
+                                <tr>                                    
                                     <td>
                                         <%# Eval("IdentifyingCode") %>
                                     </td>
@@ -205,8 +210,8 @@
         <!--内容底部-->
         <div class="line20"></div>
         <div class="pagelist">
-            <div class="footer-right">
-                <span>总计</span><span><%=totalAmount %></span><span>元</span>
+            <div style="float: right">
+                <span>总计</span><span style="color: #ff0000"><%=totalAmount %></span><span>元</span>
             </div>
             <div id="PageContent" runat="server" class="default"></div>
         </div>
