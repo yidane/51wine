@@ -112,10 +112,7 @@
                 else
                 {%>
                
-                <%} %><span>
-<a href="dingdan_manage.aspx?shopid=<%=shopid %>" >订单管理</a>
-</span>
-            <i class="arrow"></i>
+                <%} %>
             <span>订单验证</span>
         </div>
         <!--/导航栏-->
