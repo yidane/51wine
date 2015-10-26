@@ -89,7 +89,7 @@ namespace WeiXinPF.Web.admin.hotel.Verification
                 Dingdanlist += "<tr><th>商品名称</th><th class=\"cc\">单价</th><th class=\"cc\">购买数量</th><th class=\"rr\">价格</th> </tr>";
                 foreach (var item in identifyingCodeDetails)
                 {
-                    Dingdanlist += " <tr><td>" + item.ProductName + "</td>";
+                    Dingdanlist += " <tr><td class=\"cc\">" + item.ProductName + "</td>";
                     Dingdanlist += "<td class=\"cc\">" + item.Price + "</td>";
                     Dingdanlist += "<td class=\"cc\">" + 1 + "</td>";
                     Dingdanlist += "<td class=\"rr\">￥" + item.Price + "</td></tr>";
