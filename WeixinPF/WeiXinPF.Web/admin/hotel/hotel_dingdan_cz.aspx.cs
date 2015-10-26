@@ -101,7 +101,8 @@ namespace WeiXinPF.Web.admin.hotel
             var count = GetCodeCount(dingdan);
             //总花费
             var dateSpan = dingdan.leaveTime.Value - dingdan.arriveTime.Value;
-            var totalPrice = dingdan.price.Value * (dingdan.orderNum.Value - count) * dateSpan.Days;
+//            var totalPrice = dingdan.price.Value * (dingdan.orderNum.Value - count) * dateSpan.Days;
+            var totalPrice = dingdan.price.Value * (dingdan.orderNum.Value) * dateSpan.Days;
             result = totalPrice;
             return result;
         }
@@ -240,7 +241,7 @@ namespace WeiXinPF.Web.admin.hotel
             dingdanbll.Update(dingdanid, status);
 
             AddAdminLog(MXEnums.ActionEnum.Edit.ToString(), "修改酒店状态为" + status + "，主键为" + dingdanid); //记录日志
-            JscriptMsg("订单修改成功！", "hotel_dingdan_manage.aspx?hotelid=" + hotelid + "", "Success");
+            JscriptMsg("状态修改成功！", "hotel_dingdan_manage.aspx?hotelid=" + hotelid + "", "Success");
         }
 
         protected void btnSaveRefund_OnClick(object sender, EventArgs e)

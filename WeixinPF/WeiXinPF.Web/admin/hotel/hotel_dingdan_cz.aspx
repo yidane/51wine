@@ -48,15 +48,7 @@
             });
 
 
-            parent.$.dialog({
-                content: '如果定义了回调函数才会出现相应的按钮',
-                ok: function () {
-                    this.title('3秒后自动关闭').time(3);
-                    return false;
-                },
-                cancelVal: '关闭',
-                cancel: true /*为true等价于function(){}*/
-            });
+            
         });
     </script>
     <script type="text/javascript">

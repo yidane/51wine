@@ -83,7 +83,7 @@
 
 
         <ul class="round">
-            <li class="addr"><a href="http://api.map.baidu.com/marker?location=<%=xplace %>,<%=yplace %>&amp;title=<%=address %>&amp;content=<%=address %>&amp;output=html"><span><%=address %></span></a></li>
+            <li class="addr"><a href="/weixin/map/map_address.html?type=hotel&id=<%=hotelid %>"><span><%=address %></span></a></li>
             <li class="tel"><a href="tel:<%=tel %>"><span><%=tel %> 电话预订</span></a></li>
         </ul>
         <div class="detailcontent">
