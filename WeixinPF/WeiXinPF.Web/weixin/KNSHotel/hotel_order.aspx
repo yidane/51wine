@@ -14,7 +14,7 @@
 <asp:Content ID="c" ContentPlaceHolderID="content" runat="server" class="mode_webapp">
 <div class="qiandaobanner"> 
 <%--     <a href="hotel_order_onlin.aspx?openid=<%=openid %>" >--%>
-          <img   src="<%=image %>"  />
+          <img  class="header-img"    src="<%=image %>"  />
 <%--     </a>--%>
 
 </div>
