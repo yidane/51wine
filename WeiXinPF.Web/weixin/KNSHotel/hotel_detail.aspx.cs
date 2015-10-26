@@ -68,7 +68,7 @@
                         {
                             tupian += " <a href=\"#\">";
                         }
-                       tupian+="  <img src=\"" + dr.Tables[0].Rows[i]["picUrl"].ToString() + "\"></a></li>";
+                       tupian+= "  <img class='header-img' src=\"" + dr.Tables[0].Rows[i]["picUrl"].ToString() + "\"></a></li>";
 
                         j += 1;
                         tabid += "<li   >" + j.ToString() + "</li>";
