@@ -123,10 +123,10 @@
 </asp:Content>
 
 <asp:Content ID="c" ContentPlaceHolderID="content" runat="server" class="mode_webapp">
-    <div class="qiandaobanner">
-        <a href="index.php?ac=hotelslist&amp;c=o99epjjmjWhMPNzoQbo9r6DAEYds&amp;tid=1563">
-            <img src="http://img.ishangtong.com/images/RTqs2yHIc9.jpg" /></a>
-    </div>
+<%--    <div class="qiandaobanner">--%>
+<%--        <a href="index.php?ac=hotelslist&amp;c=o99epjjmjWhMPNzoQbo9r6DAEYds&amp;tid=1563">--%>
+<%--            <img src="http://img.ishangtong.com/images/RTqs2yHIc9.jpg" /></a>--%>
+<%--    </div>--%>
     <div class="cardexplain">
         <%=AlertOrderMsg %>
         <%--        <div class="alert alert-success top-alert" role="alert">--%>

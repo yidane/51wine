@@ -220,7 +220,7 @@
                     <tr>
                         <th>入住时间</th>
                         <td>
-                            <input name="arriveTime" class="px datetimepicker" id="arriveTime" value="" type="text" placeholder="入住时间" />
+                            <input name="arriveTime" class="px datetimepicker" id="arriveTime" value=""  readonly="readonly"  type="text" placeholder="入住时间" />
                         </td>
                     </tr>
                 </table>
@@ -230,7 +230,7 @@
                     <tr>
                         <th>离店时间</th>
                         <td>
-                            <input name="leaveTime" class="px datetimepicker" id="leaveTime" value="" type="text" placeholder="离店时间" />
+                            <input name="leaveTime" class="px datetimepicker" id="leaveTime" value=""  readonly="readonly"  type="text" placeholder="离店时间" />
                         </td>
                     </tr>
                 </table>
