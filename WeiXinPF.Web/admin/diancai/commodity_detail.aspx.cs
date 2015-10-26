@@ -66,8 +66,10 @@ namespace WeiXinPF.Web.admin.diancai
                     {
                         IdentifyingCodeService.ModifyIdentifyingCodeInfo(identifyingCodeObject);
                         //managebll.UpdateCommoditystatus(cid, status);
-                        managebll.Updatestatus(id, "1");
-                        UpdateDing(id);
+                        managebll.AfterVerification(wid,shopid, int.Parse(identifyingCodeObject.OrderId));
+
+                        //managebll.Updatestatus(id, "1");
+                        //UpdateDing(id);
 
                         scope.Complete();
                     }
