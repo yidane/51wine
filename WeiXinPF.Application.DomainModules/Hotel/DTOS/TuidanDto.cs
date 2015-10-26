@@ -15,5 +15,6 @@ namespace WeiXinPF.Application.DomainModules.Hotel.DTOS
         public double refundAmount { get; set; }
         public int operateUser { get; set; } 
         public string remarks { get; set; }
+        public string refundCode { get; set; }
     }
 }

@@ -118,8 +118,20 @@
       <DependentUpon>201510240740497_yidaneforpay2.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\201510241352413_gb1.cs" />
-    <Compile Include="Migrations\201510241352413_gb1.Designer.cs">
+    <Compile Include="Migrations\201510241352413_gb1.designer.cs">
       <DependentUpon>201510241352413_gb1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201510250751560_Tuidan.cs" />
+    <Compile Include="Migrations\201510250751560_Tuidan.Designer.cs">
+      <DependentUpon>201510250751560_Tuidan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201510250841068_yidane201510251640.cs" />
+    <Compile Include="Migrations\201510250841068_yidane201510251640.Designer.cs">
+      <DependentUpon>201510250841068_yidane201510251640.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201510260928012_tuidan1.cs" />
+    <Compile Include="Migrations\201510260928012_tuidan1.Designer.cs">
+      <DependentUpon>201510260928012_tuidan1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Payment\PaymentInfo.cs" />
@@ -182,6 +194,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201510241352413_gb1.resx">
       <DependentUpon>201510241352413_gb1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510250751560_Tuidan.resx">
+      <DependentUpon>201510250751560_Tuidan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510250841068_yidane201510251640.resx">
+      <DependentUpon>201510250841068_yidane201510251640.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510260928012_tuidan1.resx">
+      <DependentUpon>201510260928012_tuidan1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
