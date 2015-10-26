@@ -22,7 +22,7 @@ namespace WeiXinPF.Web.weixin.restaurant
         private int dingdan = 0;
         private string openid = string.Empty;
         private int caiid = 0;
-        private int wid = 0;
+        public int wid = 0;
 
         protected void Page_Load(object sender, EventArgs e)
         {

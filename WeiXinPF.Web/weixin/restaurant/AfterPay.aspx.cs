@@ -15,6 +15,7 @@ namespace WeiXinPF.Web.weixin.restaurant
         protected int shopid = 0;
         protected string payStatus = string.Empty;
         protected string newUrl = string.Empty;
+        protected string clearCache = string.Empty;
         protected void Page_Load(object sender, EventArgs e)
         {
             payStatus = Request.QueryString["PayStatus"];
@@ -28,6 +29,7 @@ namespace WeiXinPF.Web.weixin.restaurant
             {
                 case "success":
                     //支付成功，清空购物车，跳转到当前店铺订单列表
+                    clearCache = "cart.clear();";
                     newUrl =
                         string.Format(
                             "../restaurant/diancai_orderDetail.aspx?wid={0}&shopid={1}&dingdan={2}&openid={3}",

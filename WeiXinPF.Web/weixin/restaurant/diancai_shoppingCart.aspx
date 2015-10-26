@@ -89,7 +89,7 @@
         </div>
 
         <div class="footReturn" style="margin-bottom: 70px;">
-            <a id="showcard" class="submit" href="javascript:submitOrder();" runat="server">确定提交</a>
+            <a id="showcard" class="submit" href="javascript:submitOrder();" runat="server">微信支付</a>
         </div>
     </form>
 
@@ -125,7 +125,7 @@
 
                 }
                 liststr += "<li class=\"ccbg2\" id=\"li_" + products[i].id + "_" + products[i].specId + "\">" +
-                    "<div class=\"orderdish\"><span class=\"\">" + products[i].name + "</span><p><span class=\"price\" id=\"v_0\">" + products[i].price + "</span><span class=\"price\">元</span></p></div>" +
+                    "<div class=\"orderdish\"><span class=\"\">" + products[i].name + "</span><span class=\"price\" id=\"v_0\">  " + products[i].price + "</span><span class=\"price\">元</span></div>" +
                     "<div class=\"orderchange\">" +
                     "<a href=\"javascript:addProduct(" + products[i].id + "," + products[i].specId + ",\'" + products[i].name + "\'," + products[i].price + "," + products[i].categoryId + ",1" + ")\" class=\"increase\"><b class=\"ico_increase\">加一份</b></a>" +
                     "<span class=\"count\" id=\"num_" + products[i].id + "_" + products[i].specId + "\">" + products[i].number + "</span>" +

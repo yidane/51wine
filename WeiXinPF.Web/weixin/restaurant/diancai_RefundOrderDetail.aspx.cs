@@ -30,6 +30,7 @@ namespace WeiXinPF.Web.weixin.restaurant
         public string orderRange = string.Empty;
         public string RestruantLocation = string.Empty;
         public string RestruantPhone = string.Empty;
+        public int wid = 0;
         public double lat;
         public double lng;
         protected void Page_Load(object sender, EventArgs e)
@@ -39,6 +40,7 @@ namespace WeiXinPF.Web.weixin.restaurant
                 shopid = MyCommFun.RequestInt("shopid");
                 openid = MyCommFun.QueryString("openid");
                 dingdan = MyCommFun.RequestInt("dingdan");
+                wid = MyCommFun.RequestInt("wid");
                 refundCode = MyCommFun.QueryString("RefundCode");
 
                 var shopinfo = new BLL.wx_diancai_shopinfo().GetModel(shopid);

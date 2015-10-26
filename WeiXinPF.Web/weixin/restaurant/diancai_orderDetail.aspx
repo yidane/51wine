@@ -58,7 +58,9 @@
         }
 
         .alert {
-            padding: 10px;
+            padding-bottom: 10px;
+            padding-right: 10px;
+            padding-top: 10px;
             margin-bottom: 20px;
             border: 1px solid transparent;
             border-radius: 4px;
@@ -259,7 +261,7 @@
             <div class="gpd-content">
                 <div style="width: 78%; float: left">
                     <p><%=RestruantName %></p>
-                    <p>喀纳斯地点。。。</p>
+                    <p><%=RestruantLocation %></p>
                     <p class="distince" id="detail_distince"></p>
                 </div>
                 <div style="float: right">
@@ -276,14 +278,12 @@
                 <div class="gp-icons gpd-up-icon"></div>
             </div>
             <div class="gpd-content">
-                <p>【取票方式】</p>
-                <p>喀纳斯景区内所有景点，注：家房屋需单独购票</p>
-                <p><span>【购票条件】</span></p>
-                <p>特惠半价票，适用于1.2米以下的儿童以及65-70岁老人</p>
-                <p>【入园】</p>
-                <p>微信购票后凭电子票二维码扫码入园</p>
-                <p>【发票】</p>
-                <p>微信购票暂不支持开具发票，敬请期待后续优化</p>
+                <p>【营业时间】</p>
+                <p>11:00-20:00</p>
+                <p><span>【使用条件】</span></p>
+                <p>· 无须预约，消费高峰时可能需要等位</p>
+                <p>· 堂食外带均可，可以打包，打包费详情咨询商家</p>
+                <p>· 提供免费wifi</p>
             </div>
         </section>
         <section class="gpd-item ">
@@ -293,11 +293,6 @@
                 <div class="gp-icons gpd-up-icon"></div>
             </div>
             <div class="gpd-content">
-                <p>1、支付成功后，可在票据有效期内申请退票，过期则视为作废不予受理退票</p>
-                <p>2、可在我的订单中申请退票，申请后会先审核</p>
-                <p>3、工作人员会在1~2个工作日内处理您的退票申请</p>
-                <p>4、审核通过后，支付款额会自动退回微信钱包</p>
-                <p>5、微信门票一经扫码入园后，不予退票，如二进票入园一次后即不予退票</p>
             </div>
         </section>
 

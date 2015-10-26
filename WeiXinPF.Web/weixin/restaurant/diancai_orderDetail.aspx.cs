@@ -31,6 +31,8 @@ namespace WeiXinPF.Web.weixin.restaurant
         public string customerTel = string.Empty;
         public string orderRange = string.Empty;
         public string RestruantLocation = string.Empty;
+        public string RestruantNotice = string.Empty;
+        public string RestruantRefundRule = string.Empty;
         public string RestruantPhone = string.Empty;
         public double lat;
         public double lng;
@@ -210,7 +212,7 @@ namespace WeiXinPF.Web.weixin.restaurant
                         newOrderCaipinDetail.caiId = Convert.ToInt32(row.Field<string>("ProductID"));
                         newOrderCaipinDetail.identifyingcode = row.Field<string>("identifyingcode");
                         newOrderCaipinDetail.cpName = row.Field<string>("cpName");
-                        newOrderCaipinDetail.price =Convert.ToDecimal(row.Field<double>("price"));
+                        newOrderCaipinDetail.price = Convert.ToDecimal(row.Field<double>("price"));
                         newOrderCaipinDetail.status = row.Field<int>("status");
 
                         if (this.OrderCaipinDetail.ContainsKey(newOrderCaipinDetail.caiId))

@@ -99,7 +99,7 @@
             <div class="menu_topbar">
                 <strong style="float: left; margin-left: 80px">餐饮订单</strong>
                 <span class="head_btn_left"><a href="javascript:history.go(-1);"><span>返回</span></a><b></b></span>
-                <a class="head_btn_right" href="caidan_shangjia.aspx?shopid=4&openid=1">
+                <a class="head_btn_right" href="../map/poilist.html?type=catering&wid=<%=wid %>">
                     <span><i class="menu_header_home"></i></span><b></b>
                 </a>
             </div>
