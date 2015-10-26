@@ -1622,13 +1622,13 @@ em.no {
     display: block;
     position: absolute;
     top: 19px;
-    left: 22px;
+    right: 28px;
     z-index: 2;
 }
 
 .listimg .count, .listimg .count_zero {
-    top: 19px;
-    left: 19px;
+    top: 30px;
+    
 }
 
 .listimg .count_zero {
@@ -1663,7 +1663,7 @@ em.no {
 
 .list .count {
     margin-left: -19px;
-    margin-top: -11px;
+    /*margin-top: -11px;*/
     width: 28px;
     height: 28px;
     border-radius: 4px;
@@ -1728,7 +1728,7 @@ em.no {
 
 .list .reduce {
     top: 50%;
-    right: 40px;
+    right: 50px;
 }
 
 
