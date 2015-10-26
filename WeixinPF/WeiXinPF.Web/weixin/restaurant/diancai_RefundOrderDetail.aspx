@@ -110,7 +110,6 @@
                 <span style="float: left"><span class="top-alert-name">订单编号：</span> <%=OrderNumber %></span>
                 <span style="float: right"><span class="top-alert-name">总价：</span>
                     <span class="label label-danger"><%=PayAmount %>元</span></span>
-
             </div>
             <section class="gpd-item  gdp-curr">
                 <div class="gpd-item-title">
@@ -121,12 +120,10 @@
                 <div class="gpd-content">
                     <div runat="server" id="detail">
                     </div>
-
                 </div>
-
             </section>
 
-            <section class="gpd-item  gdp-curr">
+            <section class="gpd-item">
                 <div class="gpd-item-title">
                     <img class="detailicon-ticket" src="images/info.png" />
                     <div class="gpd-item-title-name">联系人</div>
@@ -136,45 +133,24 @@
                     <div style="width: 100%; float: left">
                         <p>联系人：<%=customeName %></p>
                         <p>联系电话:<%= customerTel%></p>
-
-
-
                     </div>
-
                 </div>
-
             </section>
-            <section class="gpd-item gdp-curr">
+            <section class="gpd-item">
                 <div class="gpd-item-title">
                     <img class="detailicon-ticket" src="images/info.png" />
                     <div class="gpd-item-title-name">店铺信息</div>
-
                     <div class="gp-icons gpd-up-icon"></div>
                 </div>
                 <div class="gpd-content">
                     <div style="width: 78%; float: left">
                         <p><%=RestruantName %></p>
-                        <p>喀纳斯地点。。。</p>
+                        <p><%=RestruantLocation %></p>
                         <p class="distince" id="detail_distince"></p>
-
-
-                    </div>
-                    <div style="float: right">
-                        <a href="tel:<%=RestruantPhone %>">
-                            <img src="images/telephone.png" />
-                        </a>
                     </div>
                 </div>
-
-
-
             </section>
-
-
         </div>
-
-
-
     </form>
     <script type="text/javascript">
         //获取当前位置的坐标
@@ -188,30 +164,23 @@
             var lng = position.coords.longitude;
             var currentLatlng = new qq.maps.LatLng(lat, lng);
             var poiLatlng = new qq.maps.LatLng(<%=lat %>, <%=lng %>);
-                  var distince = Math.round(qq.maps.geometry.spherical.computeDistanceBetween(currentLatlng, poiLatlng) / 1000);
+            var distince = Math.round(qq.maps.geometry.spherical.computeDistanceBetween(currentLatlng, poiLatlng) / 1000);
 
-                  $("#detail_distince"  ).text(distince + 'km');
+            $("#detail_distince"  ).text(distince + 'km');
+            var timer = setInterval(function () {
+                $("#detail_distince"  ).text('店铺距离：'+distince + 'km');
+                clearInterval(timer);
+            }, 500);
+        }
 
-                  var timer = setInterval(function () {
-                     
-                      $("#detail_distince"  ).text('店铺距离：'+distince + 'km');
-
-                      clearInterval(timer);
-                  }, 500);
-              }
-
-              Zepto(function ($) {
-             
-
-
-            
-                  $(".gp-icons.gpd-up-icon").click(function () {
-                      var zThis = $(this);
-                      var zThisParent = zThis.parents(".gpd-item");
-                      zThisParent.toggleClass("gdp-curr");
-                      zThisParent.siblings(".gpd-item").removeClass("gdp-curr");
-                  });
-              });
+        Zepto(function ($) {
+            $(".gp-icons.gpd-up-icon").click(function () {
+                var zThis = $(this);
+                var zThisParent = zThis.parents(".gpd-item");
+                zThisParent.toggleClass("gdp-curr");
+                zThisParent.siblings(".gpd-item").removeClass("gdp-curr");
+            });
+        });
     </script>
 </body>
 </html>
