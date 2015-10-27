@@ -5,14 +5,12 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title></title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;" />
+    <meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
     <meta name="format-detection" content="telephone=no" />
-    <link href="../../scripts/swiper/swiper.min.css" rel="stylesheet" />
+    <link href="css/animate.css" rel="stylesheet" />
     <style type="text/css">
         * {
             margin: 0;
@@ -61,57 +59,109 @@
             height: 100%;
         }
 
-        .banner {
+        .order {
+            position: relative;
+            display: block;
             width: 100%;
-            height: 200px;
-        }
-
-            .banner img {
-                width: 100%;
-                height: 200px;
-            }
-
-        .list {
-            width: 100%;
-            padding: 10px;
+            height: 33.3333333333%;
+            padding: 2px;
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
             box-sizing: border-box;
+            background: rgba(0,0,0,0.15);
+            z-index:3;
         }
 
-            .list .item {
-                display: block;
-                width: 100%;
-                height: 96px;
-                margin-bottom: 15px;
-                box-shadow: 0 0 5px rgba(0,0,0,0.15);
-                overflow: hidden;
+            .order:nth-child(2) {
+                z-index:2;
+                -webkit-animation-delay: 0.3s;
+                animation-delay: 0.3s;
             }
 
-                .list .item .img {
-                    float: left;
-                    width: 60%;
-                    height: 96px;
-                }
+            .order:nth-child(3) {
+                z-index:1;
+                -webkit-animation-delay: 0.6s;
+                animation-delay: 0.6s;
+            }
 
-                    .list .item .img img {
-                        width: 100%;
-                        height: 100%;
-                    }
+        .order-cover {
+            width: 100%;
+            height: 100%;
+            border-radius: 5px;
+            box-shadow: 0 0 20px rgba(0,0,0,.15);
+        }
 
-                .list .item .text {
-                    display: block;
-                    margin-left: 60%;
-                    height: 96px;
-                    line-height: 96px;
-                    font-size: 24px;
-                    text-align: center;
-                    background: -webkit-gradient(linear,left top,left bottom,from(#fff),to(#cdcdcd));
-                }
+            .order-cover img {
+                width: 100%;
+                height: 100%;
+                border-radius: 5px;
+            }
+
+        .circle-text {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            top: 50%;
+            left: 50%;
+            margin-top: -50px;
+            margin-left: -50px;
+            /*-webkit-animation-delay: 1s !important;
+            animation-delay: 1s !important;*/
+        }
+
+            .circle-text > img {
+                width: 100%;
+                height: 100%;
+            }
+
+        .text {
+            position: absolute;
+            width: 170px;
+            height: 50px;
+            bottom: 10px;
+            left: 50%;
+            -webkit-transform: translate3d(-50%,0,0);
+            transform: translate3d(-50%,0,0);
+        }
     </style>
 </head>
 <body>
-    <form id="form1" runat="server">
-        <div class="container">
-            <div class="swiper-container banner">
+    <%--<form id="form1" runat="server">--%>
+    <div class="container">
+        <a class="order animated fadeInDown" href="<%=MyCommFun.getWebSite()%>/travel/order/myorderlist.html">
+            <div class="order-cover">
+                <img src="images/bg_play.png" />
+            </div>
+            <div class="circle-text">
+                <img src="images/circle_text_play.png" />
+            </div>
+            <div class="text">
+                <img src="images/text_play.png" />
+            </div>
+        </a>
+        <a class="order animated fadeInDown" href="../KNSHotel/hotel_userOrder.aspx?openid=<%=openid %>&type=all&wid=1">
+            <div class="order-cover">
+                <img src="images/bg_reside.png" />
+            </div>
+            <div class="circle-text">
+                <img src="images/circle_text_reside.png" />
+            </div>
+            <div class="text">
+                <img src="images/text_reside.png" />
+            </div>
+        </a>
+        <a class="order animated fadeInDown" href="../restaurant/diancai_oder.aspx?openid=<%=openid %>&type=pay">
+            <div class="order-cover">
+                <img src="images/bg_eat.png" />
+            </div>
+            <div class="circle-text">
+                <img src="images/circle_text_eat.png" />
+            </div>
+            <div class="text">
+                <img src="images/text_eat.png" />
+            </div>
+        </a>
+        <%--<div class="swiper-container banner">
                 <div class="swiper-wrapper">
                     <div class="swiper-slide">
                         <img class="" src="images/1.jpg" />
@@ -135,7 +185,7 @@
                     </span>
                     <span class="text">门票订单</span>
                 </a>
-                <a class="item"  href="../KNSHotel/hotel_userOrder.aspx?openid=<%=openid %>&type=all&wid=1">
+                <a class="item" href="../KNSHotel/hotel_userOrder.aspx?openid=<%=openid %>&type=all&wid=1">
                     <span class="img">
                         <img src="images/hotel.png" />
                     </span>
@@ -147,21 +197,10 @@
                     </span>
                     <span class="text">餐饮订单</span>
                 </a>
-            </div>
-        </div>
-        <%--<div>
-            <a class="Order" href="../restaurant/diancai_oder.aspx?openid=<%=openid %>">
-                <div class="OrderText">门票订单</div>
-            </a>
-            <a class="Order" href="../restaurant/diancai_oder.aspx?openid=<%=openid %>">
-                <div class="OrderText">酒店订单</div>
-            </a>
-            <a class="Order" href="../restaurant/diancai_oder.aspx?openid=<%=openid %>">
-                <div class="OrderText">餐饮订单</div>
-            </a>
-        </div>--%>
-    </form>
-    <script src="../../scripts/jquery/zepto.min.js"></script>
+            </div>--%>
+    </div>
+    <%--</form>--%>
+    <%--    <script src="../../scripts/jquery/zepto.min.js"></script>
     <script src="../../scripts/swiper/swiper.min.js"></script>
     <script>
         $(function () {
@@ -171,6 +210,6 @@
                 pagination: '.swiper-pagination',
             });
         })
-    </script>
+    </script>--%>
 </body>
 </html>

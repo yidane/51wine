@@ -8103,7 +8103,6 @@
     <Folder Include="weixin\dzp\js\" />
     <Folder Include="weixin\haibao\" />
     <Folder Include="weixin\sticket\js\" />
-    <Folder Include="weixin\WeChatPay\css\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="WebServices\CouponWebService.asmx" />
@@ -9950,12 +9949,22 @@
     <Content Include="weixin\vote\js\jquery.icheck.min.js" />
     <Content Include="weixin\vote\js\play.js" />
     <Content Include="weixin\vote\tp_result.aspx" />
+    <Content Include="weixin\WeChatPay\css\animate.css" />
     <Content Include="weixin\WeChatPay\images\1.jpg" />
     <Content Include="weixin\WeChatPay\images\2.jpg" />
     <Content Include="weixin\WeChatPay\images\3.jpg" />
     <Content Include="weixin\WeChatPay\images\4.jpg" />
+    <Content Include="weixin\WeChatPay\images\bg_eat.png" />
+    <Content Include="weixin\WeChatPay\images\bg_play.png" />
+    <Content Include="weixin\WeChatPay\images\bg_reside.png" />
     <Content Include="weixin\WeChatPay\images\catering.png" />
+    <Content Include="weixin\WeChatPay\images\circle_text_eat.png" />
+    <Content Include="weixin\WeChatPay\images\circle_text_play.png" />
+    <Content Include="weixin\WeChatPay\images\circle_text_reside.png" />
     <Content Include="weixin\WeChatPay\images\hotel.png" />
+    <Content Include="weixin\WeChatPay\images\text_eat.png" />
+    <Content Include="weixin\WeChatPay\images\text_play.png" />
+    <Content Include="weixin\WeChatPay\images\text_reside.png" />
     <Content Include="weixin\WeChatPay\images\ticket.png" />
     <Content Include="weixin\WeChatPay\js\zepto.min.js" />
     <Content Include="weixin\WeChatPay\MyOrderCenter.aspx" />
