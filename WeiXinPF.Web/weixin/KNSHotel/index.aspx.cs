@@ -28,6 +28,7 @@ namespace WeiXinPF.Web.weixin.KNSHotel
         public string tel = "";
         public string numdingdan = "";
         public int dingdannum = 0;
+        public bool listMode = false;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -81,14 +82,20 @@ namespace WeiXinPF.Web.weixin.KNSHotel
                 yplace = hotel.yplace.ToString();
                 image = hotel.coverPic;
                 tel = hotel.hotelPhone;
-
+                listMode = hotel.listMode;
                 yuding += " <li class=\"title\"><span class=\"none\">" + hotel.hotelName.ToString() + "</span></li>";
-                yuding += "<li class=\"biaotou\"><table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\">";
-                yuding += "<tr><td>类型</td><td class=\"yuanjia\">原价</td><td class=\"youhuijia\">优惠价</td></tr></table></li>";
+
+                if (!hotel.listMode)
+                {
+                    yuding += "<li class=\"biaotou\"><table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\">";
+                    yuding += "<tr><td>类型</td><td class=\"yuanjia\">原价</td><td class=\"youhuijia\">优惠价</td></tr></table></li>";
+                }
+               
 
                 var list = roombll.GetModelList(" hotelid= "+hotelid+" and Status=4");
                 if (list.Count > 0)
                 {
+
                     if (hotel.listMode == false)
                     {
                         for (int i = 0; i < list.Count; i++)

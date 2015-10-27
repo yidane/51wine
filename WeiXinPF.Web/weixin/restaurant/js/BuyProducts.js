@@ -56,7 +56,7 @@ function showShopCartProductsNumber() {
 function showProductNumberWithBought(productId, specId, num) {
 
     if (num > 0) {
-        g("num_" + productId + "_" + specId).className = "count";
+        g("num_" + productId + "_" + specId).className = "count number";
         g("del_" + productId + "_" + specId).style.display = "";
     } else {
         g("num_" + productId + "_" + specId).className = "count_zero";

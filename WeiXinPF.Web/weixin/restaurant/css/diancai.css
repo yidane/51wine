@@ -320,7 +320,7 @@ a, button, input {
 #mymenu .biaodan {
     margin: 0 8px 8px 8px;
     border: 1px solid #C6C6C6;
-    padding: 12px 3px;
+    padding: 12px 3px 0 3px;
     background-color: #FFF;
 }
 
@@ -1779,6 +1779,9 @@ em.no {
     border-top: 1px solid #DBDBDB;
     font-size: 16px;
     padding: 5px 105px 5px 0;
+    height: 30px;
+    line-height: 35px;
+    vertical-align: middle;
 }
 
 .orderlist .dish {
@@ -1794,18 +1797,19 @@ em.no {
     position: absolute;
     right: 0;
     top: 50%;
-    margin-top: -16px;
+     margin-top: -18px;
+   
     width: 103px;
     line-height: 30px;
 }
 
     .orderchange .count {
         display: inline-block;
-        width: 28px;
-        height: 28px;
+        width: 20px;
+        height: 20px;
         border-radius: 4px;
         background: #697077;
-        line-height: 28px;
+        line-height: 20px;
         text-align: center;
         color: #FFFFFF;
         text-shadow: 0 1px 2px rgba(0,0,0,0.2);
@@ -2009,3 +2013,30 @@ font-size:16px;*/
     margin: auto 10px;
 }
 /*#endregion */
+
+
+
+
+
+ 
+        .orderfood .plus {
+              right: 0px;
+        }
+
+        .orderfood .minus {
+              right: 55px;
+        }
+
+          .orderfood .number {
+             top: 9px;
+    /* margin-right: 5px; */
+    right: 35px;
+    height: 20px;
+    width: 20px;
+    line-height: 20px;
+        }
+
+           .orderfood .plus, .orderfood .minus,.orderfood .number {
+              float: right;
+    position: absolute;
+           }
