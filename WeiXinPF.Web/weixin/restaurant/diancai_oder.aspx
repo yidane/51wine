@@ -48,9 +48,9 @@
         }
 
         .menu-active {
-            color: red;
+           color: white;
             background: -webkit-gradient(linear,left top,left bottom,from(#fe444a),to(#c32d32));
-            border-bottom: 2px solid #62b900;
+           
         }
     </style>
 </head>
