@@ -18,7 +18,7 @@
     <script type="text/javascript" src="../../scripts/bootstrap/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
     <script type="text/javascript" src="../../scripts/bootstrap/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
     <style>
-            .alert-success {
+        .alert-success {
             color: #3c763d;
             background-color: #dff0d8;
             border-color: #d6e9c6;
@@ -143,14 +143,14 @@
 
             <div class="content gpd-content">
                 <%=UseInstruction %>
-<%--                <p>【取票方式】</p>--%>
-<%--                <p>喀纳斯景区内所有景点，注：家房屋需单独购票</p>--%>
-<%--                <p><span>【购票条件】</span></p>--%>
-<%--                <p>特惠半价票，适用于1.2米以下的儿童以及65-70岁老人</p>--%>
-<%--                <p>【入园】</p>--%>
-<%--                <p>微信购票后凭电子票二维码扫码入园</p>--%>
-<%--                <p>【发票】</p>--%>
-<%--                <p>微信购票暂不支持开具发票，敬请期待后续优化</p>--%>
+                <%--                <p>【取票方式】</p>--%>
+                <%--                <p>喀纳斯景区内所有景点，注：家房屋需单独购票</p>--%>
+                <%--                <p><span>【购票条件】</span></p>--%>
+                <%--                <p>特惠半价票，适用于1.2米以下的儿童以及65-70岁老人</p>--%>
+                <%--                <p>【入园】</p>--%>
+                <%--                <p>微信购票后凭电子票二维码扫码入园</p>--%>
+                <%--                <p>【发票】</p>--%>
+                <%--                <p>微信购票暂不支持开具发票，敬请期待后续优化</p>--%>
             </div>
         </div>
 
@@ -165,11 +165,11 @@
 
             <div class="content gpd-content">
                 <%=RefundRule %>
-<%--                <p>1、支付成功后，可在票据有效期内申请退票，过期则视为作废不予受理退票</p>--%>
-<%--                <p>2、可在我的订单中申请退票，申请后会先审核</p>--%>
-<%--                <p>3、工作人员会在1~2个工作日内处理您的退票申请</p>--%>
-<%--                <p>4、审核通过后，支付款额会自动退回微信钱包</p>--%>
-<%--                <p>5、微信门票一经扫码入园后，不予退票，如二进票入园一次后即不予退票</p>--%>
+                <%--                <p>1、支付成功后，可在票据有效期内申请退票，过期则视为作废不予受理退票</p>--%>
+                <%--                <p>2、可在我的订单中申请退票，申请后会先审核</p>--%>
+                <%--                <p>3、工作人员会在1~2个工作日内处理您的退票申请</p>--%>
+                <%--                <p>4、审核通过后，支付款额会自动退回微信钱包</p>--%>
+                <%--                <p>5、微信门票一经扫码入园后，不予退票，如二进票入园一次后即不予退票</p>--%>
             </div>
         </div>
 
@@ -182,22 +182,22 @@
 
         <input type="hidden" name="formhash" id="formhash" value="7de8fa52" />
         <input type="hidden" name="issub" id="issub" value="0" />
-        
-         <div class='alert alert-warning' role='alert'>
-      <strong>提示</strong> 填写入住其中一人的真实信息即可。
-         </div>
-          <div class="footer-money">
 
-                            <p>
-                                    <span class=" color-red">已优惠</span>
-                                                                               <span  id="price3" class="color-red discount-money">￥0</span>
-                            <span>共</span>
-                            <span  id="price" class="  total-money color-red">￥0</span>
-                            <span  id="yuanjia" class="  cost-money">￥0</span>
+        <div class='alert alert-warning' role='alert'>
+            <strong>提示</strong> 填写入住其中一人的真实信息即可。
+        </div>
+        <div class="footer-money">
 
-                            </p>
+            <p>
+                <span class=" color-red">已优惠</span>
+                <span id="price3" class="color-red discount-money">￥0</span>
+                <span>共</span>
+                <span id="price" class="  total-money color-red">￥0</span>
+                <span id="yuanjia" class="  cost-money">￥0</span>
 
-                        </div>
+            </p>
+
+        </div>
         <ul class="round">
             <li class="title mb"><span class="none">请认真填写在线订单</span></li>
             <li class="nob">
@@ -214,7 +214,7 @@
                     <tr>
                         <th>身份证号</th>
                         <td>
-                            <input name="identityNumber" type="text" class="px"  runat="server" id="identityNumber" value="" placeholder="请输入您的身份证号" /></td>
+                            <input name="identityNumber" type="text" class="px" runat="server" onblur="checkidcard()" required id="identityNumber" value="" placeholder="请输入您的身份证号" /></td>
                     </tr>
                 </table>
             </li>
@@ -223,7 +223,7 @@
                     <tr>
                         <th>联系电话</th>
                         <td>
-                            <input name="tel" type="text" class="px" id="tel"  runat="server" value="" placeholder="请输入您的电话" /></td>
+                            <input name="tel" type="text" class="px" id="tel" runat="server" value="" onblur="checkphone()" required placeholder="请输入您的电话" /></td>
                     </tr>
                 </table>
             </li>
@@ -232,7 +232,7 @@
                     <tr>
                         <th>入住时间</th>
                         <td>
-                            <input name="arriveTime" class="px datetimepicker" id="arriveTime" value=""  readonly="readonly"  type="text" placeholder="入住时间" />
+                            <input name="arriveTime" class="px datetimepicker" id="arriveTime" value="" readonly="readonly" type="text" placeholder="入住时间" />
                         </td>
                     </tr>
                 </table>
@@ -242,7 +242,7 @@
                     <tr>
                         <th>离店时间</th>
                         <td>
-                            <input name="leaveTime" class="px datetimepicker" id="leaveTime" value=""  readonly="readonly"  type="text" placeholder="离店时间" />
+                            <input name="leaveTime" class="px datetimepicker" id="leaveTime" value="" readonly="readonly" type="text" placeholder="离店时间" />
                         </td>
                     </tr>
                 </table>
@@ -261,7 +261,7 @@
                     <tr>
                         <th>预订数量</th>
                         <td>
-                            <select name="orderNum" class="dropdown-select"  id="orderNum" onchange="dothis(this.value)">
+                            <select name="orderNum" class="dropdown-select" id="orderNum" onchange="dothis(this.value)">
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
@@ -286,11 +286,11 @@
                     </tr>
                 </table>
             </li>
-              <li class="nob">
+            <li class="nob">
                 <table width="100%" border="0" cellspacing="0" cellpadding="0" class="kuang">
                     <tr>
                         <th>单价</th>
-                        <td class="userinfo price" >￥<%=xianjia %></td>
+                        <td class="userinfo price">￥<%=xianjia %></td>
                     </tr>
                 </table>
             </li>
@@ -309,7 +309,7 @@
             </li>
         </ul>
 
-       
+
 
         <div class="footReturn">
             <a id="showcard" class="submit">提交订单</a>
@@ -327,11 +327,11 @@
             function dothis(nums) {
                 if(checkValue())
                 {
-                 var arriveTime=$("#arriveTime").val();
-                                var leaveTime=$("#leaveTime").val();
-                var span=Date.parse(leaveTime)-Date.parse(arriveTime);
-                var days=Math.floor(span/(24*3600*1000));
-                changeprice(nums,days);
+                    var arriveTime=$("#arriveTime").val();
+                    var leaveTime=$("#leaveTime").val();
+                    var span=Date.parse(leaveTime)-Date.parse(arriveTime);
+                    var days=Math.floor(span/(24*3600*1000));
+                    changeprice(nums,days);
 
                 }
 
@@ -341,24 +341,24 @@
             {
                 if(!nums||nums<=0)
                 {
-                  //  alert('请选择数量');
+                    //  alert('请选择数量');
                     return;
                 }
                 if(!timespan||timespan<=0)
                 {
-                 alert("离店时间不能小于入住时间！");
-                                        return ;
+                    alert("离店时间不能小于入住时间！");
+                    return ;
                 }
                 var yuanjia = <%=yuanjia %>  ;
                 var xianjia = <%=xianjia %>  ;
                 var price3 = <%=price3 %>  ;
 
-            var str1 = yuanjia * nums*timespan;
-                            var str2 = xianjia * nums*timespan;
-                            var str3 = price3 * nums*timespan;
-                            $("#yuanjia").text("￥" + str1);
-                            $("#price").text("￥" + str2);
-                            $("#price3").text("￥" + str3);
+                var str1 = yuanjia * nums*timespan;
+                var str2 = xianjia * nums*timespan;
+                var str3 = price3 * nums*timespan;
+                $("#yuanjia").text("￥" + str1);
+                $("#price").text("￥" + str2);
+                $("#price3").text("￥" + str3);
             }
 
 
@@ -368,10 +368,10 @@
                 var arriveTime=$("#arriveTime").val();
                 var leaveTime=$("#leaveTime").val();
                 var orderNum=$("#orderNum").val();
-               if(arriveTime&&leaveTime&&orderNum)
-                            {
-                                result=true;
-                            }
+                if(arriveTime&&leaveTime&&orderNum)
+                {
+                    result=true;
+                }
                 return result;
             }
 
@@ -379,11 +379,11 @@
             {
                 if(checkValue())
                 {
-                     var span=Date.parse(leaveTime)-Date.parse(arriveTime);
-                      var days=Math.floor(span/(24*3600*1000));
-                      var orderNum=$("#orderNum").val();
+                    var span=Date.parse(leaveTime)-Date.parse(arriveTime);
+                    var days=Math.floor(span/(24*3600*1000));
+                    var orderNum=$("#orderNum").val();
 
-                      changeprice(orderNum,days);
+                    changeprice(orderNum,days);
                 }
 
 
@@ -393,14 +393,14 @@
             function checkDate(dateVal)
             {
                 var result=false;
-             var date=  Date.parse(dateVal);
-                           var now=new Date();
-                           if(date>addDate(now,-1))
-                            {
+                var date=  Date.parse(dateVal);
+                var now=new Date();
+                if(date>addDate(now,-1))
+                {
                     result=true;
-                            }
+                }
 
-                            return result;
+                return result;
             }
 
             function addDate(date,days){ 
@@ -420,35 +420,35 @@
                     autoclose: true //选择日期后自动关闭
                 })
                 .on('changeDate', function(ev){
-                if(ev.currentTarget.id=='arriveTime')
-                {
-                var arriveTime=$(ev.currentTarget).val();
-                   if( checkDate(arriveTime))
-                   {
-                     var leaveTime=$("#leaveTime").val();
-                                       changePriceUseDate(arriveTime,leaveTime);
-                   }
-                   else{
-                    alert("入住时间不能小于今天！");
-                                                                   return false;
-                   }
+                    if(ev.currentTarget.id=='arriveTime')
+                    {
+                        var arriveTime=$(ev.currentTarget).val();
+                        if( checkDate(arriveTime))
+                        {
+                            var leaveTime=$("#leaveTime").val();
+                            changePriceUseDate(arriveTime,leaveTime);
+                        }
+                        else{
+                            alert("入住时间不能小于今天！");
+                            return false;
+                        }
 
-                }
-              else  if(ev.currentTarget.id=='leaveTime')
-                                {
+                    }
+                    else  if(ev.currentTarget.id=='leaveTime')
+                    {
 
-                    var leaveTime=$(ev.currentTarget).val();
-                      if( checkDate(leaveTime))
-                                       {
-                                          var arriveTime=$("#arriveTime").val();
-                                                           changePriceUseDate(arriveTime,leaveTime);
-                                       }else{
-                                                            alert("离店时间不能小于今天！");
-                                                                                                           return false;
-                                                           }
+                        var leaveTime=$(ev.currentTarget).val();
+                        if( checkDate(leaveTime))
+                        {
+                            var arriveTime=$("#arriveTime").val();
+                            changePriceUseDate(arriveTime,leaveTime);
+                        }else{
+                            alert("离店时间不能小于今天！");
+                            return false;
+                        }
 
-                                }
-});
+                    }
+                });
                 //显影
                 $(".gpd-item-title").click(function () {
                     var zThis = $(this);
@@ -468,14 +468,14 @@
                     if(!checkDate(arriveTime))
                     {
                         alert("入住时间不能小于今天！");
-                                                return false;
+                        return false;
                     }
 
-                     if(!checkDate(leaveTime))
-                                        {
-                                            alert("离店时间不能小于今天！");
-                                                                    return false;
-                                        }
+                    if(!checkDate(leaveTime))
+                    {
+                        alert("离店时间不能小于今天！");
+                        return false;
+                    }
 
                     if (arriveTime >= leaveTime)
                     {
@@ -483,13 +483,28 @@
                         return false;
                        
                     }
-
                     if ($("#ctl00_content_oderName").val() == '') { alert('名字不能为空'); return; }
-                    if ($("#ctl00_content_identityNumber").val() == '') { alert('身份证号码不能为空'); return; }
-                    if ($("#ctl00_content_tel").val() == '') { alert('电话不能为空'); return; }
+                    //验证身份证
+                    if(!checkidcard())
+                    {
+                        return;
+                    }
+
+
+                    //验证电话
+                    if(!checkphone())
+                    {
+                        return;
+                    }
+                 
                     if ($("#arriveTime").val() == '') { alert('请选择入住时间'); return; }
                     if ($("#leaveTime").val() == '') { alert('请选择离店时间'); return; }
 
+
+
+                   
+
+                  
 
                        
                     if (clickedBtn) {
@@ -578,6 +593,123 @@
                  $("#thelist img").css("width", document.body.clientWidth);
                  $("#scroller").css("width", document.body.clientWidth * count);
              };
+
+
+
+             function checkphone()
+             {
+                 var result=true;
+                 //验证电话
+                 var zPhone = $('#ctl00_content_tel');
+                 var zPhoneVal = zPhone.val();
+                 if (zPhoneVal == "") {
+                     alert('电话不能为空');
+                     result=false;
+                 }
+                 if (!(VI.regPhone.test(zPhoneVal))) {
+                     alert('电话号码错误');
+                     result=false;
+
+                 }
+                 return result;
+             }
+
+
+             function checkidcard()
+             {
+                 var result=true;
+                 //验证身份证
+
+                 var zIDCard = $('#ctl00_content_identityNumber');
+                 var zIDCardVal = zIDCard.val();
+                 if (zIDCardVal == "") {
+                     alert('身份证号码不能为空');
+                     result=false;
+                 }
+                 if (!VI.idCard(zIDCardVal)) {
+                     alert('身份证号错误');
+                     result=false;
+
+                 }
+
+                 return result;
+             }
+
+
+             var VI = {
+               
+                 regPhone: /^1[3|4|5|8|9][0-9]\d{8}$/ 
+             };
+
+             VI.idCard = function (str) {
+                 var wi = [7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2],
+                     xi = [1, 0, "X", 9, 8, 7, 6, 5, 4, 3, 2],
+                     pi = [11, 12, 13, 14, 15, 21, 22, 23, 31, 32, 33, 34, 35, 36, 37, 41, 42, 43, 44, 45, 46, 50, 51, 52, 53, 54, 61, 62, 63, 64, 65, 71, 81, 82, 91];
+
+                 if (str.match(/^\d{14,17}(\d|X)$/gi) == null) return false;
+
+                 var brithday18 = function (tmpl) {
+                     var year = parseFloat(tmpl.substr(6, 4));
+                     var month = parseFloat(tmpl.substr(10, 2));
+                     var day = parseFloat(tmpl.substr(12, 2));
+                     var checkDay = new Date(year, month - 1, day);
+                     var nowDay = new Date();
+                     if (1900 <= year && year <= nowDay.getFullYear() && month == (checkDay.getMonth() + 1) && day == checkDay.getDate()) {
+                         return true;
+                     }
+                     ;
+
+                     return false;
+                 };
+
+                 var brithday15 = function (tmpl) {
+                     var year = parseFloat(tmpl.substr(6, 2));
+                     var month = parseFloat(tmpl.substr(8, 2));
+                     var day = parseFloat(tmpl.substr(10, 2));
+                     var checkDay = new Date(year, month - 1, day);
+                     if (month == (checkDay.getMonth() + 1) && day == checkDay.getDate()) {
+                         return true;
+                     }
+                     ;
+
+                     return false;
+                 };
+
+                 var validate = function (tmpl) {
+
+                     var aIdCard = tmpl.split("");
+                     var sum = 0;
+                     for (var i = 0; i < wi.length; i++) {
+                         sum += wi[i] * aIdCard[i]; //线性加权求和  
+                     }
+                     ;
+                     var index = sum % 11; //求模，可能为0~10,可求对应的校验码是否于身份证的校验码匹配  
+                     if (xi[index] == aIdCard[17].toUpperCase()) {
+                         return true;
+                     }
+                     ;
+
+                     return false;
+                 };
+
+                 var province = function (tmpl) {
+                     var p2 = tmpl.substr(0, 2);
+                     for (var i = 0; i < pi.length; i++) {
+                         if (pi[i] == p2) {
+                             return true;
+                         };
+                     };
+
+                     return false;
+                 };
+
+                 if (str.length == 18 && province(str) && brithday18(str) && validate(str)) return true;
+
+                 if (str.length == 15 && province(str) && brithday15(str)) return true;
+
+                 return false;
+             };
+
         </script>
     </div>
     <script type="text/javascript">
