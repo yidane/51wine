@@ -96,6 +96,7 @@ namespace WeiXinPF.Web.weixin.restaurant
                     return "美食选购";
                 case "diancai_shoppingCart.aspx":
                     return "商铺购物车";
+                case "diancai_orderDetail.aspx":
                 case "diancai_dingdan.aspx":
                 case "diancai_OrderList.aspx":
                     return "我的订单";
