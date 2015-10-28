@@ -8,7 +8,11 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <meta name="format-detection" content="telephone=no">
 <link href="css/hotels.css" rel="stylesheet" type="text/css">
- 
+  <style>
+          .header-img {
+            height: 200px;
+        }
+    </style>
 </asp:Content>
 
 <asp:Content ID="c" ContentPlaceHolderID="content" runat="server" class="mode_webapp">

@@ -380,51 +380,54 @@
     <div class="map_location_status_text" data-bind="text:statusbox.text"></div>
     <div class="map_location_status_ok" data-bind="click:statusbox.close">确 定</div>
 </div>
-<div id="info_pop" style="display: none" data-bind="visible:info">
+<div style="display: none">
+    <div id="info_pop" style="display: none" data-bind="visible:info">
 
 
-    <div class="map_bubble_pop"
-         style=" cursor: default; background-color: rgb(255, 255, 255);width:180px;" data-bind="with:info">
-        <div class="map_bubble_top" style="border-bottom:1px solid #ccc;height:31px">
-            <div class="map_bubble_title"
-                 style="line-height: 30px; overflow: hidden; height: 30px; white-space: nowrap; width: 345px; background-color: rgb(249, 249, 249);">
+        <div class="map_bubble_pop"
+             style=" cursor: default; background-color: rgb(255, 255, 255);width:180px;" data-bind="with:info">
+            <div class="map_bubble_top" style="border-bottom:1px solid #ccc;height:31px">
+                <div class="map_bubble_title"
+                     style="line-height: 30px; overflow: hidden; height: 30px; white-space: nowrap; width: 345px; background-color: rgb(249, 249, 249);">
 
-                <p class="iw_poi_title " data-bind="attr:{title:name}">
-                    <span class="susIconSetFlag"></span><span class="title" data-bind="text:name"></span>
-                </p>
-            </div>
-
-        </div>
-        <div class="map_bubble_center" style="z-index: 3;width: 100%; position: relative;">
-            <div class="map_bubble_content" style=" overflow: hidden;width: 100%;">
-                <div class="iw_poi_conTop">
-                    <div class="iw_poi_content iw_poi_content_search">
-                        <table cellspacing="0" class="table_addr_tel">
-                            <tbody>
-                            <tr tid="iw_poi_addr">
-                                <th>描述：&nbsp;</th>
-                                <td>
-                                    <p data-bind="text:remark"></p>
-                                </td>
-                            </tr>
-                            <tr tid="iw_poi_addr">
-                                <th>地址：&nbsp;</th>
-                                <td>
-                                    <p data-bind="text:address"></p>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="iw_btn_con suspendContainer"></div>
-                    <div class="iw_btn_con"></div>
+                    <p class="iw_poi_title " data-bind="attr:{title:name}">
+                        <span class="susIconSetFlag"></span><span class="title" data-bind="text:name"></span>
+                    </p>
                 </div>
 
+            </div>
+            <div class="map_bubble_center" style="z-index: 3;width: 100%; position: relative;">
+                <div class="map_bubble_content" style=" overflow: hidden;width: 100%;">
+                    <div class="iw_poi_conTop">
+                        <div class="iw_poi_content iw_poi_content_search">
+                            <table cellspacing="0" class="table_addr_tel">
+                                <tbody>
+                                    <tr tid="iw_poi_addr">
+                                        <th>描述：&nbsp;</th>
+                                        <td>
+                                            <p data-bind="text:remark"></p>
+                                        </td>
+                                    </tr>
+                                    <tr tid="iw_poi_addr">
+                                        <th>地址：&nbsp;</th>
+                                        <td>
+                                            <p data-bind="text:address"></p>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="iw_btn_con suspendContainer"></div>
+                        <div class="iw_btn_con"></div>
+                    </div>
 
+
+                </div>
             </div>
         </div>
     </div>
 </div>
+
 <!--<div class="bottom-navigation">-->
     <div class="btn-group btn-group-justified bottom-navigation">
         <a class="btn btn-default" data-bind="css:{active:menuType=='locale'},attr:{href:'map_address.html?wid='+params().wid +'&uselocale=true'}"  >当前位置</a>

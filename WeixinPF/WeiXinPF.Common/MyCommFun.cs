@@ -53,6 +53,13 @@ namespace WeiXinPF.Common
                     break;
                 case RequestObjType.stringType:
                     break;
+                case RequestObjType.dateType:
+                    DateTime tmpTimeInt  = DateTime.MinValue;
+                    if (!DateTime.TryParse(pValue, out tmpTimeInt))
+                    {
+                        return false;
+                    }
+                    break;
                 default:
                     break;
             }
@@ -942,6 +949,6 @@ namespace WeiXinPF.Common
 
     public enum RequestObjType
     {
-        intType, stringType, floatType
+        intType, stringType, floatType, dateType
     }
 }
