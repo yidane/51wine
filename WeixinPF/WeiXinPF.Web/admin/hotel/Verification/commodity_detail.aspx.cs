@@ -86,16 +86,17 @@ namespace WeiXinPF.Web.admin.hotel.Verification
                     save_groupbase.Enabled = false;
                     save_groupbase.Style.Value = "";
                 }
-                Dingdanlist += "<tr><th>商品名称</th><th class=\"cc\">单价</th><th class=\"cc\">购买数量</th><th class=\"rr\">价格</th> </tr>";
+                Dingdanlist += "<tr><th>商品名称</th><th class=\"cc\">购买数量</th><th class=\"cc\">单价</th><th class=\"cc\">入住时间</th><th class=\"cc\">离店时间</th></tr>";
                 foreach (var item in identifyingCodeDetails)
                 {
                     Dingdanlist += " <tr><td class=\"cc\">" + item.ProductName + "</td>";
-                    Dingdanlist += "<td class=\"cc\">" + item.Price + "</td>";
-                    Dingdanlist += "<td class=\"cc\">" + 1 + "</td>";
-                    Dingdanlist += "<td class=\"rr\">￥" + item.Price + "</td></tr>";
-                    amount += Convert.ToDecimal(item.Price);
+                    Dingdanlist += "<td class=\"cc\">" + item.Number + "</td>";
+                    Dingdanlist += "<td class=\"cc\">" + item.Price + "</td>";                    
+                    Dingdanlist += "<td class=\"cc\">" + item.ArriveTime + "</td>";
+                    Dingdanlist += "<td class=\"cc\">" + item.LeaveTime + "</td></tr>";
+                    amount += Convert.ToDecimal(item.TotelPrice);
                 }
-                Dingdanlist += "<tr><td>总计：</td><td ></td><td ></td><td class=\"rr\">￥" + amount + "</td></tr>";
+                Dingdanlist += "<tr><td></td><td ></td><td ></td><td ></td><td class=\"rr\">总计：￥" + amount + "</td></tr>";
             }
 
             var hotelOrder = new BLL.wx_hotel_dingdan().GetModel(int.Parse(id));
