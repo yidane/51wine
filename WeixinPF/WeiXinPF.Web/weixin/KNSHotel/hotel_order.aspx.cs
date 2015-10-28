@@ -112,14 +112,14 @@ namespace WeiXinPF.Web.weixin.KNSHotel
                     //                    order += "<p>类型：" + dr.Tables[0].Rows[i]["roomType"].ToString() + "</p><p>预订数量：" + dr.Tables[0].Rows[i]["orderNum"].ToString() + "间</p>";
                     //                    order += "<p>预定日期：" + dr.Tables[0].Rows[i]["orderTime"].ToString() + "</p></div></li>";
 
-                    order += "</a></li><li><div class=\"text\">";
+                    order += "</li><li><div class=\"text\">";
                     order += "<p>订单编号：" + dr.Tables[0].Rows[i]["OrderNumber"].ToString() + "</p>";
                     order += "<p>预约商家：" + dr.Tables[0].Rows[i]["hotelName"].ToString() + "</p>";
                     order += "<p>类型：" + dr.Tables[0].Rows[i]["roomType"].ToString() + "</p>";
                     order += "<p>数量：" + dr.Tables[0].Rows[i]["orderNum"].ToString() + "间</p>";
                     order += "<p>付款：" + dr.Tables[0].Rows[i]["price"].ToString() + "元</p>";
                     order += "<p>到店日期：" + arriveTime + "</p>";
-                    order += "</div></li>";
+                    order += "</div></a></li>";
                 }
 
                 order += " </ul> ";
