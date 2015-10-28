@@ -65,11 +65,7 @@ namespace WeiXinPF.Web.admin.diancai
                     using (var scope = new TransactionScope())
                     {
                         IdentifyingCodeService.ModifyIdentifyingCodeInfo(identifyingCodeObject);
-                        //managebll.UpdateCommoditystatus(cid, status);
                         managebll.AfterVerification(wid,shopid, int.Parse(identifyingCodeObject.OrderId));
-
-                        //managebll.Updatestatus(id, "1");
-                        //UpdateDing(id);
 
                         scope.Complete();
                     }
@@ -96,21 +92,6 @@ namespace WeiXinPF.Web.admin.diancai
             }                       
         }
 
-        private void UpdateDing(string id)
-        {
-            DataSet dr = managebll.GetcommodityTable(id);
-            DataTable dt = dr.Tables[0];
-            if (dt.Rows.Count >= 0)
-            {
-                for (int i = 0; i < dt.Rows.Count; i++)
-                {
-                    if (dt.Rows[i]["status"].ToString() == "0" || dt.Rows[i]["status"].ToString() == "1")
-                        return;
-                }
-                managebll.Updatestatus(id, "2");
-            }
-        }
-
         public void List(int ids)
         {
 
@@ -131,17 +112,16 @@ namespace WeiXinPF.Web.admin.diancai
                     save_groupbase.Enabled = false;
                     save_groupbase.Style.Value = "";
                 }
-                Dingdanlist += "<tr><th>菜品名称</th><th class=\"cc\">单价</th><th class=\"cc\">购买份数</th><th class=\"rr\">价格</th> </tr>";
+                Dingdanlist += "<tr><th>套餐名称</th><th class=\"cc\">购买份数</th><th class=\"cc\">单价</th><th class=\"rr\">总价</th> </tr>";
                 for (int i = 0; i < dr.Tables[0].Rows.Count; i++)
                 {
                     Dingdanlist += " <tr><td  class=\"cc\">" + dr.Tables[0].Rows[i]["cpName"] + "</td>";
-                    Dingdanlist += "<td class=\"cc\">" + dr.Tables[0].Rows[i]["price"] + "</td>";
                     Dingdanlist += "<td class=\"cc\">" + 1 + "</td>";
+                    Dingdanlist += "<td class=\"cc\">" + dr.Tables[0].Rows[i]["price"] + "</td>";                    
                     Dingdanlist += "<td class=\"rr\">￥" + dr.Tables[0].Rows[i]["price"] + "</td></tr>";
                     amount += Convert.ToDecimal(dr.Tables[0].Rows[i]["price"]);
                 }
 
-                sjopmodel = shopinfo.GetModel(shopid);//配送费
                 Dingdanlist += "<tr><td>总计：</td><td ></td><td ></td><td class=\"rr\">￥" + amount + "</td></tr>";
 
             }
@@ -152,7 +132,7 @@ namespace WeiXinPF.Web.admin.diancai
             if (manage != null)
             {
                 dingdanren += "<tr><td width=\"70\">订单编号： " + manage.orderNumber + "</td></tr>";
-                dingdanren += "<tr> <td>下单时间：" + manage.oderTime + "</td></tr>";
+                dingdanren += "<tr> <td>预订日期：" + manage.oderTime + "</td></tr>";
                 dingdanren += "<tr><td>联系人：" + manage.customerName + "</td></tr>";
                 dingdanren += "<tr><td>联系电话：" + manage.customerTel + "</td></tr>";
                 //dingdanren += "<tr><td>地址：" + manage.address + "</td></tr>";
@@ -173,7 +153,7 @@ namespace WeiXinPF.Web.admin.diancai
             else
             {
                 dingdanren += "<tr><td width=\"70\">订单编号：</td></tr>";
-                dingdanren += "<tr> <td>下单时间：</td></tr>";
+                dingdanren += "<tr> <td>预订日期：</td></tr>";
                 dingdanren += "<tr><td>联系人：</td></tr>";
                 dingdanren += "<tr><td>联系电话：</td></tr>";
                 //dingdanren += "<tr><td>地址：</td></tr>";
