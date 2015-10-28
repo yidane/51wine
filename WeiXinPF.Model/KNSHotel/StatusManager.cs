@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace WeiXinPF.Model.KNSHotel
 {
@@ -84,6 +85,23 @@ namespace WeiXinPF.Model.KNSHotel
                     default:
                         throw new Exception("未知状态");
                 }
+            }
+
+            public static List<StatusDict> GetList()
+            {
+                List<StatusDict> result=new List<StatusDict>();
+
+                result.Add(Pending);
+                result.Add(Refused);
+                result.Add(Accepted);
+                result.Add(Payed);
+                result.Add(Cancelled);
+                result.Add(Refunding);
+                result.Add(Refunded);
+                result.Add(Completed); 
+
+
+                return result;
             }
         }
     }

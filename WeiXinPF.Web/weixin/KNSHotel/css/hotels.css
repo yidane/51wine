@@ -1410,13 +1410,18 @@ text-align: center;
     text-align: center;
 }
 
+.menu_top a {
+  border: solid #C6C6C6;
+        border-width: 0  1px 0 0;
+}
+
 .Pay {
     float: left;
     left: 0px;
     width: 33%;
     text-align: center;
     background-color: white;
-    border: 0;
+    border-right: 1px;
     margin: 0;
 }
 
@@ -1428,7 +1433,7 @@ text-align: center;
 }
 .Refund {
     float: right;
-    width: 34%;
+   width: 33.28%;
     text-align: center;
     background-color: white;
     border: 0;
