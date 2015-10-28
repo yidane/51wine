@@ -105,7 +105,7 @@
         <div class="location">
            <% if (IsWeiXinCode())
                 {%>
-            <a    href="hotel_list.aspx" class="home"><i></i><span>商户或门店列表</span></a>
+            <a    href="../hotel_list.aspx" class="home"><i></i><span>商户或门店列表</span></a>
               <i class="arrow"></i>
                 <%}%>
                 <%
@@ -116,7 +116,7 @@
             <span>服务码验证</span>
         </div>
         <!--/导航栏-->
-        <div class="mytips">
+        <div class="mytips" style="display: none;">
             1、确认订单后，用户不能再取消该订单；被设置为无效的订单，将成为失败订单！
              <br />
             2、交易成功的订单会计入销售统计；交易失败的订单不会计入销售统计，多次交易失败的客户建议加入黑名单！

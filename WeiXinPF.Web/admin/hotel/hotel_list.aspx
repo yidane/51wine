@@ -1,4 +1,5 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="hotel_list.aspx.cs" Inherits="WeiXinPF.Web.admin.hotel.hotel_list" %>
+﻿<%@ Import Namespace="WeiXinPF.Common" %>
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="hotel_list.aspx.cs" Inherits="WeiXinPF.Web.admin.hotel.hotel_list" %>
 
 <%@ Import Namespace="WeiXinPF.Common" %>
 
