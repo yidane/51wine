@@ -50,7 +50,7 @@ namespace WeiXinPF.Web.weixin.restaurant
                 for (int i = 0; i < dr.Tables[0].Rows.Count; i++)
                 {
                     detailBuilder.Append("<ul class=\"round\">");
-                    detailBuilder.AppendFormat("<li class=\"title\"><a href=\"diancai_orderDetail.aspx?wid={0}&shopid={1}&dingdan={2}&openid={3}\"><span>{4}  {5}</span></a></li>",
+                    detailBuilder.AppendFormat("<li class=\"title\"><a href=\"diancai_orderDetail.aspx?wid={0}&shopid={1}&dingdan={2}&openid={3}\"><span>{4}  {5}</span>",
                                                                     dr.Tables[0].Rows[i]["wid"].ToString(),
                                                                     dr.Tables[0].Rows[i]["shopinfoid"].ToString(),
                                                                     dr.Tables[0].Rows[i]["id"].ToString(),
@@ -82,7 +82,7 @@ namespace WeiXinPF.Web.weixin.restaurant
                             detailBuilder.Append("<em class=\"no\">未处理</em>");
                             break;
                     }
-                    detailBuilder.Append(" </td></tr></table></ul>");
+                    detailBuilder.Append(" </td></tr></table></a></li></ul>");
                 }
 
                 str = detailBuilder.ToString();
@@ -110,8 +110,8 @@ namespace WeiXinPF.Web.weixin.restaurant
                     builder.AppendFormat("<span>{0}  {1}</span>",
                                                                 dr.Tables[0].Rows[i]["createDate"].ToString(),
                                                                 dr.Tables[0].Rows[i].Field<string>("hotelName"));
-                    builder.Append("</a>");
-                    builder.Append("</li>");
+
+
                     builder.Append("<table width=\"100%\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" class=\"cpbiaoge\">");
                     builder.Append("<tr><th>退单编号</th>");
                     builder.Append("<th width=\"50\" class=\"cc\">退款总额</th><th width=\"40\" class=\"cc\">状态</th></tr>");
@@ -134,7 +134,10 @@ namespace WeiXinPF.Web.weixin.restaurant
                     {
                         builder.AppendFormat("<em class=\"error\">{0}</em>", statusDict.StatusName);
                     }
-                    builder.Append(" </td></tr></table></ul>");
+                    builder.Append(" </td></tr></table>");
+                    builder.Append("</a>");
+                    builder.Append("</li>");
+                    builder.Append("</ul>");
                 }
 
                 str = builder.ToString();
