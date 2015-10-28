@@ -1,4 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="hotel_room.aspx.cs" ValidateRequest="false" Inherits="WeiXinPF.Web.admin.hotel.hotel_room" %>
+<%@ Import Namespace="WeiXinPF.Common" %>
 
 <!DOCTYPE html>
 
