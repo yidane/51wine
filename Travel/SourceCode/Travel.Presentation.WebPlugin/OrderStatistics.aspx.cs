@@ -147,10 +147,10 @@ namespace Travel.Presentation.WebPlugin
                 if (!string.IsNullOrEmpty(this.txtendDate.Text))
                     DateTime.TryParse(this.txtendDate.Text.Trim(), out endDate);
 
-                if (this.ddlTicketCategory.SelectedIndex != 0)
+                if (this.ddlTicketCategory.SelectedIndex != -1)
                     rtnSearchParameter.TicketCategoryID = new Guid(this.ddlTicketCategory.SelectedValue);
 
-                if (this.ddlCategoryStatus.SelectedIndex != 0)
+                if (this.ddlCategoryStatus.SelectedIndex != -1)
                     rtnSearchParameter.OrderStatus = ddlCategoryStatus.SelectedValue;
 
                 rtnSearchParameter.BeginDate = beginDate;
