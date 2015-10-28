@@ -65,11 +65,11 @@
                             </asp:LinkButton>
                         </li>
                         <li runat="server" id="barAgree">
-                            <asp:LinkButton ID="btnAgree" runat="server" OnClientClick="return ExePostBack('btnDelete');" OnClick="btnAgree_Click">审核通过</asp:LinkButton>
+                            <asp:LinkButton ID="btnAgree" runat="server" OnClientClick="return ExePostBack('btnAgree', '是否确认通过审核？');" OnClick="btnAgree_Click">审核通过</asp:LinkButton>
                         </li>
 
                         <li runat="server" id="barRefuse">
-                            <asp:LinkButton ID="btnRefuse" runat="server" OnClientClick="return ExePostBack('btnDelete');" OnClick="btnRefuse_Click">审核不通过</asp:LinkButton>
+                            <asp:LinkButton ID="btnRefuse" runat="server" OnClientClick="return ExePostBack('btnRefuse', '是否确认拒绝申请？');" OnClick="btnRefuse_Click">审核不通过</asp:LinkButton>
                         </li>
                     </ul>
                 </div>
