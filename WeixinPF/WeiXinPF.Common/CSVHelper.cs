@@ -277,27 +277,38 @@ namespace WeiXinPF.Common
         /// <param name="csvDataString"></param>
         private static void DownloadCSV(string fileName, string csvDataString)
         {
-            //using (var stream = new MemoryStream())
-            //{
-            //    using (var sw = new StreamWriter(stream, System.Text.Encoding.UTF8))
-            //    {
-            //写入SCV文件流
-            //sw.Write(csvDataString);
-            //HttpContext.Current.Response.Clear();
-            //HttpContext.Current.Response.Buffer = true;
-            //HttpContext.Current.Response.Charset = "utf-8";
+            ////using (var stream = new MemoryStream())
+            ////{
+            ////    using (var sw = new StreamWriter(stream, System.Text.Encoding.UTF8))
+            ////    {
+            ////写入SCV文件流
+            ////sw.Write(csvDataString);
+            ////HttpContext.Current.Response.Clear();
+            ////HttpContext.Current.Response.Buffer = true;
+            ////HttpContext.Current.Response.Charset = "utf-8";
 
+            //HttpContext.Current.Response.AppendHeader("content-disposition", string.Format("attachment;filename={0}.csv", fileName));
+            //HttpContext.Current.Response.ContentEncoding = System.Text.Encoding.Default;
+
+            ////response.contenttype指定文件类型 能为application/ms-excel || application/ms-word || application/ms-txt || application/ms-html || 或其他浏览器可直接支持文件 
+            //HttpContext.Current.Response.ContentType = "application/ms-excel";
+            ////HttpContext.Current.Response.BinaryWrite(stream.ToArray());
+            //HttpContext.Current.Response.Write(csvDataString);
+            ////HttpContext.Current.Response.Flush();
+            ////HttpContext.Current.Response.End();
+            ////    }
+            ////}
+
+            HttpContext.Current.Response.Clear();
+            HttpContext.Current.Response.Buffer = true;
+            HttpContext.Current.Response.Charset = "utf-8";
             HttpContext.Current.Response.AppendHeader("content-disposition", string.Format("attachment;filename={0}.csv", fileName));
             HttpContext.Current.Response.ContentEncoding = System.Text.Encoding.Default;
 
             //response.contenttype指定文件类型 能为application/ms-excel || application/ms-word || application/ms-txt || application/ms-html || 或其他浏览器可直接支持文件 
-            HttpContext.Current.Response.ContentType = "application/ms-excel";
-            //HttpContext.Current.Response.BinaryWrite(stream.ToArray());
+            HttpContext.Current.Response.ContentType = "application/ms-txt";
             HttpContext.Current.Response.Write(csvDataString);
-            //HttpContext.Current.Response.Flush();
-            //HttpContext.Current.Response.End();
-            //    }
-            //}
+            HttpContext.Current.Response.End();
         }
         #endregion
 
