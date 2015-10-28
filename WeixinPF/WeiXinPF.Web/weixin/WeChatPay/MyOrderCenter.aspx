@@ -69,17 +69,17 @@
             -webkit-box-sizing: border-box;
             box-sizing: border-box;
             background: rgba(0,0,0,0.15);
-            z-index:3;
+            z-index: 3;
         }
 
             .order:nth-child(2) {
-                z-index:2;
+                z-index: 2;
                 -webkit-animation-delay: 0.3s;
                 animation-delay: 0.3s;
             }
 
             .order:nth-child(3) {
-                z-index:1;
+                z-index: 1;
                 -webkit-animation-delay: 0.6s;
                 animation-delay: 0.6s;
             }
@@ -161,55 +161,6 @@
                 <img src="images/text_eat.png" />
             </div>
         </a>
-        <%--<div class="swiper-container banner">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                        <img class="" src="images/1.jpg" />
-                    </div>
-                    <div class="swiper-slide">
-                        <img class="" src="images/2.jpg" />
-                    </div>
-                    <div class="swiper-slide">
-                        <img class="" src="images/3.jpg" />
-                    </div>
-                    <div class="swiper-slide">
-                        <img class="" src="images/4.jpg" />
-                    </div>
-                </div>
-                <div class="swiper-pagination"></div>
-            </div>
-            <div class="list">
-                <a class="item" href="<%=MyCommFun.getWebSite()%>/travel/order/myorderlist.html">
-                    <span class="img">
-                        <img src="images/ticket.png" />
-                    </span>
-                    <span class="text">门票订单</span>
-                </a>
-                <a class="item" href="../KNSHotel/hotel_userOrder.aspx?openid=<%=openid %>&type=all&wid=1">
-                    <span class="img">
-                        <img src="images/hotel.png" />
-                    </span>
-                    <span class="text">住宿订单</span>
-                </a>
-                <a class="item" href="../restaurant/diancai_oder.aspx?openid=<%=openid %>&type=pay">
-                    <span class="img">
-                        <img src="images/catering.png" />
-                    </span>
-                    <span class="text">餐饮订单</span>
-                </a>
-            </div>--%>
     </div>
-    <%--</form>--%>
-    <%--    <script src="../../scripts/jquery/zepto.min.js"></script>
-    <script src="../../scripts/swiper/swiper.min.js"></script>
-    <script>
-        $(function () {
-            var swiper = new Swiper('.swiper-container', {
-                autoplay: 3000,
-                loop: true,
-                pagination: '.swiper-pagination',
-            });
-        })
-    </script>--%>
 </body>
 </html>
