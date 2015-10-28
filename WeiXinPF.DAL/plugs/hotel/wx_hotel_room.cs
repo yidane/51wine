@@ -56,7 +56,7 @@ namespace WeiXinPF.DAL
             query.Append("Values");
             query.Append("(@hotelid, @roomType, @indroduce, @roomPrice, @salePrice, @facilities, @createDate, @sortid, @RoomCode, @UseInstruction, @RefundRule, @Status);");
             query.Append("Select @Id = Scope_Identity()");
-            query.Append("Update dbo.wx_hotel_room Set RoomCode=Right('0000'+Cast(@Id As Varchar(10)),4) Where Id=@Id");
+            //query.Append("Update dbo.wx_hotel_room Set RoomCode=Right('0000'+Cast(@Id As Varchar(10)),4) Where Id=@Id");
             using (IDbConnection db = DbFactory.GetOpenedConnection())
             {
                 DynamicParameters dynamicParameters = new DynamicParameters();
@@ -67,39 +67,6 @@ namespace WeiXinPF.DAL
 
                 return dynamicParameters.Get<int>("@Id");
             }
-            //StringBuilder strSql=new StringBuilder();
-            //strSql.Append("insert into wx_hotel_room(");
-            //strSql.Append("hotelid,roomType,indroduce,roomPrice,salePrice,facilities,createDate,sortid)");
-            //strSql.Append(" values (");
-            //strSql.Append("@hotelid,@roomType,@indroduce,@roomPrice,@salePrice,@facilities,@createDate,@sortid)");
-            //strSql.Append(";select @@IDENTITY");
-            //SqlParameter[] parameters = {  
-            //		new SqlParameter("@hotelid", SqlDbType.Int,4),
-            //		new SqlParameter("@roomType", SqlDbType.VarChar,200),
-            //		new SqlParameter("@indroduce", SqlDbType.VarChar,300),
-            //		new SqlParameter("@roomPrice", SqlDbType.Float,8),
-            //		new SqlParameter("@salePrice", SqlDbType.Float,8),
-            //		new SqlParameter("@facilities", SqlDbType.VarChar,500),
-            //		new SqlParameter("@createDate", SqlDbType.DateTime),
-            //		new SqlParameter("@sortid", SqlDbType.Int,4)};
-            //parameters[0].Value = model.hotelid;
-            //parameters[1].Value = model.roomType;
-            //parameters[2].Value = model.indroduce;
-            //parameters[3].Value = model.roomPrice;
-            //parameters[4].Value = model.salePrice;
-            //parameters[5].Value = model.facilities;
-            //parameters[6].Value = model.createDate;
-            //parameters[7].Value = model.sortid;
-
-            //object obj = DbHelperSQL.GetSingle(strSql.ToString(),parameters);
-            //if (obj == null)
-            //{
-            //	return 0;
-            //}
-            //else
-            //{
-            //	return Convert.ToInt32(obj);
-            //}
         }
 
 
@@ -129,45 +96,6 @@ namespace WeiXinPF.DAL
             {
                 return db.Execute(query.ToString(), model) > 0;
             }
-            //strSql.Append("update wx_hotel_room set ");
-            //strSql.Append("hotelid=@hotelid,");
-            //strSql.Append("roomType=@roomType,");
-            //strSql.Append("indroduce=@indroduce,");
-            //strSql.Append("roomPrice=@roomPrice,");
-            //strSql.Append("salePrice=@salePrice,");
-            //strSql.Append("facilities=@facilities,");
-            //strSql.Append("createDate=@createDate,");
-            //strSql.Append("sortid=@sortid");
-            //strSql.Append(" where id=@id");
-            //SqlParameter[] parameters = {
-            //        new SqlParameter("@hotelid", SqlDbType.Int,4),
-            //        new SqlParameter("@roomType", SqlDbType.VarChar,200),
-            //        new SqlParameter("@indroduce", SqlDbType.VarChar,300),
-            //        new SqlParameter("@roomPrice", SqlDbType.Float,8),
-            //        new SqlParameter("@salePrice", SqlDbType.Float,8),
-            //        new SqlParameter("@facilities", SqlDbType.VarChar,500),
-            //        new SqlParameter("@createDate", SqlDbType.DateTime),
-            //        new SqlParameter("@sortid", SqlDbType.Int,4),
-            //        new SqlParameter("@id", SqlDbType.Int,4)};
-            //parameters[0].Value = model.hotelid;
-            //parameters[1].Value = model.roomType;
-            //parameters[2].Value = model.indroduce;
-            //parameters[3].Value = model.roomPrice;
-            //parameters[4].Value = model.salePrice;
-            //parameters[5].Value = model.facilities;
-            //parameters[6].Value = model.createDate;
-            //parameters[7].Value = model.sortid;
-            //parameters[8].Value = model.id;
-
-            //int rows = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
-            //if (rows > 0)
-            //{
-            //    return true;
-            //}
-            //else
-            //{
-            //    return false;
-            //}
         }
 
         /// <summary>
@@ -224,24 +152,6 @@ namespace WeiXinPF.DAL
             {
                 return db.Query<Model.wx_hotel_room>(query, new { Id = id }).FirstOrDefault();
             }
-            //StringBuilder strSql = new StringBuilder();
-            //strSql.Append("select  top 1 id,hotelid,roomType,indroduce,roomPrice,salePrice,facilities,createDate,sortid from wx_hotel_room ");
-            //strSql.Append(" where id=@id");
-            //SqlParameter[] parameters = {
-            //        new SqlParameter("@id", SqlDbType.Int,4)
-            //};
-            //parameters[0].Value = id;
-
-            //WeiXinPF.Model.wx_hotel_room model = new WeiXinPF.Model.wx_hotel_room();
-            //DataSet ds = DbHelperSQL.Query(strSql.ToString(), parameters);
-            //if (ds.Tables[0].Rows.Count > 0)
-            //{
-            //    return DataRowToModel(ds.Tables[0].Rows[0]);
-            //}
-            //else
-            //{
-            //    return null;
-            //}
         }
 
         public List<Model.wx_hotel_room> GetModelList(string strWhere)
@@ -391,30 +301,7 @@ namespace WeiXinPF.DAL
             return DbHelperSQL.Query(strSql.ToString());
         }
 
-        /*
-		/// <summary>
-		/// 分页获取数据列表
-		/// </summary>
-		public DataSet GetList(int PageSize,int PageIndex,string strWhere)
-		{
-			SqlParameter[] parameters = {
-					new SqlParameter("@tblName", SqlDbType.VarChar, 255),
-					new SqlParameter("@fldName", SqlDbType.VarChar, 255),
-					new SqlParameter("@PageSize", SqlDbType.Int),
-					new SqlParameter("@PageIndex", SqlDbType.Int),
-					new SqlParameter("@IsReCount", SqlDbType.Bit),
-					new SqlParameter("@OrderType", SqlDbType.Bit),
-					new SqlParameter("@strWhere", SqlDbType.VarChar,1000),
-					};
-			parameters[0].Value = "wx_hotel_room";
-			parameters[1].Value = "id";
-			parameters[2].Value = PageSize;
-			parameters[3].Value = PageIndex;
-			parameters[4].Value = 0;
-			parameters[5].Value = 0;
-			parameters[6].Value = strWhere;	
-			return DbHelperSQL.RunProcedure("UP_GetRecordByPage",parameters,"ds");
-		}*/
+
 
         #endregion  BasicMethod
         #region  ExtensionMethod
@@ -439,6 +326,21 @@ namespace WeiXinPF.DAL
             strSql.Append(" FROM wx_hotel_room  where hotelid='" + hotelid + "'  order by  createDate desc,id desc  ");
 
             return DbHelperSQL.Query(strSql.ToString());
+        }
+
+        public string GetRoomCode(int hotelid)
+        {
+
+            SqlParameter[] parameters = {
+                    new SqlParameter("@HotelId", SqlDbType.Int)
+            };
+            parameters[0].Value = hotelid;
+
+            SqlDataReader sr = DbHelperSQL.RunProcedure("usp_hotel_room_getCode", parameters);
+            sr.Read();
+            string roomCode = sr[0].ToString();
+            sr.Close();
+            return roomCode;
         }
         #endregion  ExtensionMethod
     }

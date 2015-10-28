@@ -161,7 +161,11 @@ namespace WeiXinPF.BLL
         {
             return dal.GetList(hotelid);
         }
-		#endregion  ExtensionMethod
-	}
+        public string GetRoomCode(int hotelid)
+        {
+            return dal.GetRoomCode(hotelid);
+        }
+        #endregion  ExtensionMethod
+    }
 }
 

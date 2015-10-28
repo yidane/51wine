@@ -100,6 +100,7 @@ namespace WeiXinPF.Web.admin.hotel
             {
                 room.hotelid = hotelid;
                 room.roomType = this.roomType.Text;
+                room.RoomCode = roomBll.GetRoomCode(hotelid);
                 room.indroduce = this.indroduce.InnerText;
                 room.roomPrice = Convert.ToDecimal(this.roomPrice.Text);
                 room.salePrice = Convert.ToDecimal(this.salePrice.Text);
