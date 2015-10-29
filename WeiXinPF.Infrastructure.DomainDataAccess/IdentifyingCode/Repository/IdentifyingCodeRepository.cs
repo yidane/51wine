@@ -64,8 +64,9 @@ namespace WeiXinPF.Infrastructure.DomainDataAccess.IdentifyingCode.Repository
                 strSql.Append(" ON b.ProductId= c.caiId AND c.dingId= b.OrderId");
             }else if (code.ModuleName.Equals("hotel"))
             {
-                strSql.Append("select a.id AS OrderId,a.roomid AS ProductId,a.roomType as ProductName,a.price as Price,b.status as Status FROM dbo.wx_hotel_dingdan a INNER join ");
-                strSql.Append("(select IdentifyingCodeId,CAST(OrderId AS INT) AS OrderId,Status FROM [wx_Verification_IdentifyingCodeInfo] ");
+                strSql.Append("select a.id AS OrderId,a.roomid AS ProductId,a.roomType as ProductName,a.price as Price,b.status as Status,a.orderNum AS Number,");
+                strSql.Append("CONVERT(varchar(10),a.arriveTime,120) as ArriveTime,CONVERT(varchar(10),a.leaveTime,120) as LeaveTime, DATEDIFF(DAY,a.arriveTime,a.leaveTime)*a.price*a.orderNum as TotalPrice ");
+                strSql.Append("FROM dbo.wx_hotel_dingdan a INNER join (select IdentifyingCodeId,CAST(OrderId AS INT) AS OrderId,Status FROM [wx_Verification_IdentifyingCodeInfo] ");
                 strSql.Append("WHERE IdentifyingCodeId='" + code.IdentifyingCodeId +"') as b ON a.id=b.OrderId ");
             }
 
