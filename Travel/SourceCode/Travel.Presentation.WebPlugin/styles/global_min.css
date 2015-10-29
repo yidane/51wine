@@ -93,7 +93,7 @@ a:hover{text-decoration:underline;}
 .tab-subnav{height:38px;margin-bottom:-1px;overflow:hidden;position:relative;}
 .tab-subnav a{float:left;padding:0 20px;margin-right:-1px;line-height:36px;color:#222222;border:1px solid #cccccc;}
 .tab-subnav a:hover{color:#222222;text-decoration:none;}
-.tab-subnav .on{line-height:35px;border-top:3px solid #70b213;background:#f3f3f3}
+.tab-subnav .on{line-height:35px;background:#f3f3f3}
 .tab-subcon{padding:20px 20px 10px;background:#f3f3f3;border:1px solid #cccccc;}
 
 /* 分隔*/
