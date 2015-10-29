@@ -12,5 +12,12 @@
 
         public int Status { get; set; }
 
+        public int Number { get; set; }
+
+        public string LeaveTime { get; set; }
+
+        public string ArriveTime { get; set; }
+
+        public double TotelPrice { get; set; }
     }
 }
