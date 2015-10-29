@@ -66,20 +66,24 @@ namespace WeiXinPF.Web.weixin.KNSHotel
                     var time = DateTime.Parse(dr.Tables[0].Rows[i]["orderTime"].ToString());
                     var orderTime = string.Format("{0:yyyy/MM/dd HH:mm}", time);
                     var arriveTime = string.Format("{0:yyyy/MM/dd HH:mm}", DateTime.Parse(dr.Tables[0].Rows[i]["arriveTime"].ToString()));
+                    var alink = string.Empty;
+                    order += "<li class=\"title\">";
                     if (dr.Tables[0].Rows[i]["orderStatus"].ToString() == "0")
                     {
-                        order += "<li class=\"title\"><a href=\"hotel_order_edite.aspx?dingdanid="
-                            + dr.Tables[0].Rows[i]["id"].ToString() + "&hotelid=" + hotelid
-                            + "&roomid=" + roomid + "&openid=" + openid + "\"><span>"
-                           + "<b>" + orderTime + "</b>" + "<b style='margin-left:0.5rem'>" + dr.Tables[0].Rows[i]["hotelName"].ToString() + "</b>";//05月29日 9时39分
+                        alink = "<a href=\"hotel_order_edite.aspx?dingdanid="
+                                + dr.Tables[0].Rows[i]["id"].ToString() + "&hotelid=" + hotelid
+                                + "&roomid=" + roomid + "&openid=" + openid + "\">";
                     }
                     else
                     {
-                        order += "<li class=\"title\"><a href=\"hotel_order_xianshi.aspx?dingdanid="
-                            + dr.Tables[0].Rows[i]["id"].ToString() + "&hotelid=" + hotelid
-                            + "&roomid=" + roomid + "&openid=" + openid + "\"><span>"
-                            + "<b>" + orderTime + "</b>" + "<b style='margin-left:0.5rem'>" + dr.Tables[0].Rows[i]["hotelName"].ToString() + "</b>";//05月29日 9时39分
+                        alink = "<a href=\"hotel_order_xianshi.aspx?dingdanid="
+                                + dr.Tables[0].Rows[i]["id"].ToString() + "&hotelid=" + hotelid
+                                + "&roomid=" + roomid + "&openid=" + openid + "\">";
                     }
+
+                    order += alink;
+                    order += "<span><b>" + orderTime + "</b>" + "<b style='margin-left:0.5rem'>" + dr.Tables[0].Rows[i]["hotelName"].ToString() + "</b>";//05月29日 9时39分
+
 
                     var orderStatus = dr.Tables[0].Rows[i].Field<int>("orderStatus");
                     var status = HotelStatusManager.OrderStatus.GetStatusDict(orderStatus);
@@ -112,7 +116,8 @@ namespace WeiXinPF.Web.weixin.KNSHotel
                     //                    order += "<p>类型：" + dr.Tables[0].Rows[i]["roomType"].ToString() + "</p><p>预订数量：" + dr.Tables[0].Rows[i]["orderNum"].ToString() + "间</p>";
                     //                    order += "<p>预定日期：" + dr.Tables[0].Rows[i]["orderTime"].ToString() + "</p></div></li>";
 
-                    order += "</li><li><div class=\"text\">";
+                    order += "</a></li>";
+                    order += "<li>" + alink + "<div class=\"text\">";
                     order += "<p>订单编号：" + dr.Tables[0].Rows[i]["OrderNumber"].ToString() + "</p>";
                     order += "<p>预约商家：" + dr.Tables[0].Rows[i]["hotelName"].ToString() + "</p>";
                     order += "<p>类型：" + dr.Tables[0].Rows[i]["roomType"].ToString() + "</p>";

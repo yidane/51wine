@@ -224,7 +224,7 @@ namespace WeiXinPF.Web.weixin.KNSHotel
                             break;
 
                     }
-                    VerificationCode += string.Format(@"<div class='swiper-slide'>
+                    VerificationCode += string.Format(@"<div class='swiper-slide swiper-image'>
                                   <input type ='hidden' value='{0}' status='{1}' />
                                    </div>", code.IdentifyingCode, showStatus);
                 }

@@ -119,6 +119,11 @@
             vertical-align: baseline;
             border-radius: .25em;
         }
+
+
+        .swiper-image {
+            height: 230px;
+        }
     </style>
 </asp:Content>
 
