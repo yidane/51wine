@@ -165,6 +165,10 @@
                 font-size: 14px;
                 padding: 8px 1px 8px 1px;
             }
+
+             .swiper-image {
+            height: 220px;
+        }
     </style>
     <script type="text/javascript">
         //获取当前位置的坐标
