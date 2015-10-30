@@ -246,7 +246,7 @@ $.fn.initValidform = function () {
                 curform为当前form对象;
                 cssctl:内置的提示信息样式控制函数，该函数需传入两个参数：显示提示信息的对象 和 当前提示的状态（既形参o中的type）；*/
                 //全部验证通过提交表单时o.obj为该表单对象;
-                if (!o.obj.is("form")) {
+                 if (!o.obj.is("form")) {
                     //定位到相应的Tab页面
                     if (o.obj.is(o.curform.find(".Validform_error:first"))) {
                         var tabobj = o.obj.parents(".tab-content"); //显示当前的选项

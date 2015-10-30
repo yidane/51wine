@@ -75,14 +75,14 @@
             <dl>
                 <dt>原价：</dt>
                 <dd>
-                    <asp:TextBox runat="server" ID="roomPrice" CssClass="input normal" sucmsg=" " nullmsg=" " datatype="n"></asp:TextBox>
+                    <asp:TextBox runat="server" ID="roomPrice" CssClass="input normal" sucmsg=" " nullmsg=" " datatype="num"></asp:TextBox>
                     <span class="Validform_checktip">*</span>
                 </dd>
             </dl>
             <dl>
                 <dt>优惠价：</dt>
                 <dd>
-                    <asp:TextBox runat="server" ID="salePrice" CssClass="input normal" sucmsg=" " nullmsg=" " datatype="n"></asp:TextBox>
+                    <asp:TextBox runat="server" ID="salePrice" CssClass="input normal" sucmsg=" " nullmsg=" " datatype="num"></asp:TextBox>
                     <span class="Validform_checktip">*</span>
                 </dd>
             </dl>
