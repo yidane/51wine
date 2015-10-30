@@ -98,7 +98,7 @@ namespace WeiXinPF.Web.admin.hotel.Verification
                 }
                 Dingdanlist += "<tr><td></td><td ></td><td ></td><td ></td><td class=\"rr\">总计：￥" + amount + "</td></tr>";
             }
-
+            
             var hotelOrder = new BLL.wx_hotel_dingdan().GetModel(int.Parse(id));
             
             //订单信息

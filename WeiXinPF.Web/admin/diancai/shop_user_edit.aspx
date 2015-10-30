@@ -78,8 +78,11 @@
             <dl>
                 <dt>是否启用</dt>
                 <dd>
-                    <div class="rule-single-checkbo">
-                        <asp:CheckBox ID="cbIsLock" runat="server" Checked="True" />
+                    <div class="rule-multi-radio">
+                        <asp:RadioButtonList ID="rblIsLock" runat="server">
+                            <asp:ListItem Value="0" Selected="True">启用</asp:ListItem>
+                            <asp:ListItem Value="1">不启用</asp:ListItem>
+                        </asp:RadioButtonList>
                     </div>
                     <span class="Validform_checktip">*不启用则无法使用该账户登录</span>
                 </dd>

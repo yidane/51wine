@@ -50,15 +50,8 @@ namespace WeiXinPF.Web.admin.diancai
             BLL.manager bll = new BLL.manager();
 
             Model.manager model = bll.GetModel(id);
-
-            if (model.is_lock == 0)
-            {
-                cbIsLock.Checked = false;
-            }
-            else
-            {
-                cbIsLock.Checked = true;
-            }
+            
+            rblIsLock.SelectedValue = model.is_lock.ToString();
 
             txtUserName.Text = model.user_name;
             txtUserName.ReadOnly = true;
@@ -82,15 +75,8 @@ namespace WeiXinPF.Web.admin.diancai
 
             model.role_id = shop_admin_role;
             model.role_type = new BLL.manager_role().GetModel(model.role_id).role_type;
-
-            if (cbIsLock.Checked == true)
-            {
-                model.is_lock = 0;
-            }
-            else
-            {
-                model.is_lock = 1;
-            }
+            
+            model.is_lock = MyCommFun.Str2Int(rblIsLock.SelectedValue);
 
             //检测用户名是否重复
             if (bll.Exists(txtUserName.Text.Trim()))
@@ -151,14 +137,7 @@ namespace WeiXinPF.Web.admin.diancai
             BLL.manager bll = new BLL.manager();
             Model.manager model = bll.GetModel(id);
 
-            if (cbIsLock.Checked == true)
-            {
-                model.is_lock = 0;
-            }
-            else
-            {
-                model.is_lock = 1;
-            }
+            model.is_lock = MyCommFun.Str2Int(rblIsLock.SelectedValue);
 
             //判断密码是否更改
             if (txtPassword.Text.Trim() != "")
