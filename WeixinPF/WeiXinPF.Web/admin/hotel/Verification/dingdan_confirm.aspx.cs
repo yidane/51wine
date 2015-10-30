@@ -17,7 +17,7 @@
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            hotelid = this.GetHotelId();
+            hotelid =  this.GetHotelId();
             wid = this.GetWeiXinCode().id;
             confirmnumber.CausesValidation = true;
         }

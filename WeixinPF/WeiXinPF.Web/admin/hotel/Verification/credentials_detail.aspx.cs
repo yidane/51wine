@@ -34,7 +34,7 @@ namespace WeiXinPF.Web.admin.hotel.Verification
         #region 数据绑定=================================
         private void RptBind()
         {
-            int shopid = MXRequest.GetQueryInt("shopid")==0?this.GetHotelId():MXRequest.GetQueryInt("shopid");
+            int shopid = MXRequest.GetQueryInt("hotelid")==0?this.GetHotelId():MXRequest.GetQueryInt("hotelid");
             string condition = "";
             var moduleName = "hotel";
 

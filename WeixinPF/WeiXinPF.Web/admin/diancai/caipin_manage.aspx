@@ -43,7 +43,7 @@
             <span>商品信息查看</span>
         </div>
        <div class="mytips">        
-            提醒：请先设置好商品分类，再添加新的商品，点击设置商品分类
+            提醒：请先设置好商品分类，再添加新的商品。
          </div>
        <div class="toolbar-wrap">
             <div id="floatHead" class="toolbar">

@@ -49,7 +49,7 @@
             <span>商品分类管理</span>
         </div>
        <div class="mytips">        
-            提醒：设置好商品分类后，再添加商品，点击进入商品查看。
+            提醒：设置好商品分类后，请点击商品管理菜单来添加您的商品。
          </div>
        <div class="toolbar-wrap">
             <div id="floatHead" class="toolbar">

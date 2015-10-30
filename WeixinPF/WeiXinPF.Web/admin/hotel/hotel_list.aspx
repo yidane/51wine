@@ -1,4 +1,5 @@
 ﻿<%@ Import Namespace="WeiXinPF.Common" %>
+
 <%@ Page Language="C#" AutoEventWireup="true" CodeBehind="hotel_list.aspx.cs" Inherits="WeiXinPF.Web.admin.hotel.hotel_list" %>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -84,6 +85,7 @@
                         <a href="hotel_info.aspx?action=<%=MXEnums.ActionEnum.View.ToString() %>&hotelid=<%#Eval("id") %>">商户或门店信息查看</a>
                         <a href='hotel_room.aspx?hotelid=<%#Eval("id") %>&action=<%=MXEnums.ActionEnum.Audit.ToString() %>'>商品信息审核</a>
                         <a href='hotel_dingdan_manage.aspx?hotelid=<%#Eval("id") %>'>订单查看</a>
+                        <a href="Verification/credentials_detail.aspx?hotelid=<%#Eval("id") %>">服务码验证查询</a>
                     </td>
                 </tr>
             </ItemTemplate>

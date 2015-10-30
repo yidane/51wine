@@ -48,6 +48,9 @@
     <form id="form1" runat="server">
         <div class="location" runat="server" id="divLocation">
         </div>
+        <div class="mytips">
+            审核通过后得商品请记得发布哟，这样商品才能上架出售~~~
+        </div>
         <div class="toolbar-wrap">
             <div id="floatHead" class="toolbar">
                 <div class="l-list">
@@ -89,7 +92,7 @@
                             <th>商品名称</th>
                             <th>原价</th>
                             <th>优惠价</th>
-                            <th>审核状态</th>
+                            <th>状态</th>
                             <th>操作</th>
                         </tr>
                     </thead>
