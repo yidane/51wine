@@ -21,7 +21,7 @@ namespace WeiXinPF.WebService
         /// <param name="aid"></param>
         /// <param name="wid"></param>
         [WebMethod(EnableSession = true)]
-        public void GetBaseCouponInfo(int aid, int wid, string code,string url)
+        public void GetBaseCouponInfo(int aid, int wid, string code, string url)
         {
             OAuthUserInfo user = null;
             try
@@ -32,7 +32,7 @@ namespace WeiXinPF.WebService
 
                 if (Session["User"] == null)
                 {
-                    user = GetUser(wid, "coupon",code,url);
+                    user = GetUser(wid, "coupon", code, url);
                     if (user != null)
                     {
                         Session["User"] = user;
@@ -42,9 +42,9 @@ namespace WeiXinPF.WebService
                 else
                 {
                     user = Session["User"] as OAuthUserInfo;
-                     
+
                 }
-                var info = service.GetCouponBaseInfo(aid,user);
+                var info = service.GetCouponBaseInfo(aid, user);
                 if (info != null)
                 {
                     BLL.wx_dzpAwardItem itemBll = new BLL.wx_dzpAwardItem();
@@ -56,7 +56,7 @@ namespace WeiXinPF.WebService
                     //初始话jsskd
                     var signatureDto = jssdkInit(uWeiXinModel, url);
                     signatureDto.fxContent = info.brief;
-                    signatureDto.fxImg =  info.beginPic;
+                    signatureDto.fxImg = info.beginPic;
                     signatureDto.fxTitle = info.actName;
                     var data = new
                     {
@@ -75,14 +75,14 @@ namespace WeiXinPF.WebService
 
 
             }
-            catch (JsonException jsEx)
+            catch (UnAuthException jsEx)
             {
 
-                Context.Response.Write(AjaxResult.Error(jsEx.Message, jsEx.ErrorType));
+                Context.Response.Write(AjaxResult.Error(jsEx.Message, jsEx.Code));
             }
             catch (Exception ex)
             {
-               
+
                 Context.Response.Write(AjaxResult.Error(ex.Message));
             }
         }
@@ -91,7 +91,7 @@ namespace WeiXinPF.WebService
         /// 获取随机优惠券
         /// </summary>
         [WebMethod(EnableSession = true)]
-        public void GetRandomCoupon(int aid, int wid,string openid)
+        public void GetRandomCoupon(int aid, int wid, string openid)
         {
 
             OAuthUserInfo user = null;
@@ -112,14 +112,14 @@ namespace WeiXinPF.WebService
 
                 if (Session["openid"] == null)
                 {
-                    
+
                     if (!string.IsNullOrEmpty(thisOpenid))
                     {
                         Session["openid"] = thisOpenid;
                     }
 
                 }
-                
+
 
 
 
@@ -148,7 +148,7 @@ namespace WeiXinPF.WebService
                     {
                         jpname = jpname,
                         jxname = jxname,
-                        getTime=DateTime.Now.ToString("yy-MM-dd HH-mm-ss")
+                        getTime = DateTime.Now.ToString("yy-MM-dd HH-mm-ss")
 
                     };
                 }
@@ -178,7 +178,7 @@ namespace WeiXinPF.WebService
         /// </summary>
         /// <param name="access_code"></param>
         [WebMethod(EnableSession = true)]
-        public void GetCouponList(string code,int wid,string url)
+        public void GetCouponList(string code, int wid, string url)
         {
             string openid = string.Empty;
             try
@@ -203,7 +203,7 @@ namespace WeiXinPF.WebService
                     openid = Session["openid"] as string;
 
                 }
-                CouponListDTO dto = service.GetCouponList( wid, openid);
+                CouponListDTO dto = service.GetCouponList(wid, openid);
                 if (dto != null)
                 {
                     var data = new
@@ -243,16 +243,16 @@ namespace WeiXinPF.WebService
         /// <param name="access_code"></param>
         /// <param name="couponId"></param>
         [WebMethod]
-        public void GetCoupon(string openId,int  id)
+        public void GetCoupon(string openId, int id)
         {
             try
             {
 
 
-              
+
                 var service = new CouponService();
-           
-                var coupon = service.GetCouponDetail(openId,id);
+
+                var coupon = service.GetCouponDetail(openId, id);
                 var data = new
                 {
                     coupon = coupon
@@ -268,6 +268,6 @@ namespace WeiXinPF.WebService
             }
         }
 
-        
+
     }
 }

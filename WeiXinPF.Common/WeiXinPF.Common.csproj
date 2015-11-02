@@ -62,7 +62,7 @@
     <Compile Include="MXRequest.cs" />
     <Compile Include="MessageBox.cs" />
     <Compile Include="MyCommFun.cs" />
-    <Compile Include="OAuth2Exception.cs" />
+    <Compile Include="UnAuthException.cs" />
     <Compile Include="PageTemplate.cs" />
     <Compile Include="PagingHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
