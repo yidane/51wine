@@ -92,7 +92,7 @@
             </ul>
         </div>
         <div style="width: 100%; text-align: center">
-            <asp:Button ID="btnSearch" runat="server" Text="订单完成" CssClass="DingdanButton" OnClick="OnOrderFinishClick" />
+            <asp:Button ID="btnFinish" runat="server" Text="订单完成" CssClass="DingdanButton" OnClick="OnOrderFinishClick" />
         </div>
     </form>
 </body>

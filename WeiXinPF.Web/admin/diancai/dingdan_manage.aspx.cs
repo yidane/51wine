@@ -144,7 +144,7 @@ namespace WeiXinPF.Web.admin.diancai
             try
             {
                 var result = QueryData();
-                CSVHelper.DownloadAsSCV("订单管理", null, null, result.Tables[0]);
+                CSVHelper.DownloadAsSCV(Response, "订单管理", null, null, result.Tables[0]);
             }
             catch (Exception exception)
             {
