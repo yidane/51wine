@@ -7074,6 +7074,13 @@
     <Compile Include="weixin\dzp\index.aspx.designer.cs">
       <DependentUpon>index.aspx</DependentUpon>
     </Compile>
+    <Compile Include="weixin\WeChatPay\getopenId.aspx.cs">
+      <DependentUpon>getopenId.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="weixin\WeChatPay\getopenId.aspx.designer.cs">
+      <DependentUpon>getopenId.aspx</DependentUpon>
+    </Compile>
     <Compile Include="weixin\ggk\end.aspx.cs">
       <DependentUpon>end.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -8184,6 +8191,7 @@
     <Content Include="weixin\cashred\images\title-bg-red.png" />
     <Content Include="weixin\cashred\index.aspx" />
     <Content Include="weixin\cashred\js\alert.js" />
+    <Content Include="weixin\WeChatPay\getopenId.aspx" />
     <Content Include="weixin\KNSHotel\css\hotels.css" />
     <Content Include="weixin\KNSHotel\css\mystyle.css" />
     <Content Include="weixin\KNSHotel\css\orderstyle.css" />

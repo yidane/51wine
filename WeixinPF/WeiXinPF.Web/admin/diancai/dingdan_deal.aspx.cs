@@ -82,15 +82,24 @@ namespace WeiXinPF.Web.admin.diancai
                 dingdanren += "<tr> <td>预约日期：" + manage.oderTime + "</td></tr>";
                 dingdanren += "<tr><td>预约人：" + manage.customerName + "</td></tr>";
                 dingdanren += "<tr><td>电话：" + manage.customerTel + "</td></tr>";
-                //                dingdanren += "<tr><td>地址：" + manage.address + "</td></tr>";
-                //                dingdanren += "<tr><td>备注 ：" + manage.oderRemark + "</td></tr>";
-                if (manage.payStatus == 1)
+
+                switch (manage.payStatus)
                 {
-                    dingdanren += "<tr><td>订单状态：<em  style='width:70px;' class='ok'>已处理</em></td></tr>";
-                }
-                else
-                {
-                    dingdanren += "<tr><td>订单状态：<em  style='width:70px;' class='no'>未处理</em></td></tr>";
+                    case 1:
+                        dingdanren += "<tr><td>订单状态：<em  style='width:70px;' class='ok'>等待使用</em></td></tr>";
+                        break;
+                    case 2:
+                    case 4: //部分退款
+                        dingdanren += "<tr><td>订单状态：<em  style='width:70px;' class='ok'>部分使用</em></td></tr>";
+                        break;
+                    case 3:
+                    case 5://全部退款
+                        dingdanren += "<tr><td>订单状态：<em  style='width:70px;' class='ok'>全部使用</em></td></tr>";
+                        this.btnFinish.Visible = false;
+                        break;
+                    default:
+                        dingdanren += "<tr><td>订单状态：<em  style='width:70px;' class='no'>未处理</em></td></tr>";
+                        break;
                 }
             }
             else
