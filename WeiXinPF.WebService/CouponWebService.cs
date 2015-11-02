@@ -78,7 +78,7 @@ namespace WeiXinPF.WebService
             catch (UnAuthException jsEx)
             {
 
-                Context.Response.Write(AjaxResult.Error(jsEx.Message, jsEx.Code));
+                Context.Response.Write(AjaxResult.Error(jsEx.RedirectUrl, jsEx.Code));
             }
             catch (Exception ex)
             {
