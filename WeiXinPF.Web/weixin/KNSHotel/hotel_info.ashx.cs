@@ -190,6 +190,7 @@ namespace WeiXinPF.Web.weixin.KNSHotel
                               {
                                   hotelid = Convert.ToInt32(MyCommFun.QueryString("hotelid")),
                                   roomid = Convert.ToInt32(MyCommFun.QueryString("roomid")),
+                                  createDate = DateTime.Now,
                                   openid = MyCommFun.QueryString("openid"),
                                   oderName = MyCommFun.QueryString("oderName"),
                                   tel = MyCommFun.QueryString("tel"),

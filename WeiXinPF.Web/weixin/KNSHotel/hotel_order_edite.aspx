@@ -369,7 +369,7 @@
                         var xianjianum = <%=price %>;
                         var yuanjianum = <%=yuanjia %>;
                         var dingdanidnum = <%=dingdanid %>;
-                        var info = document.getElementById('ctl00_content_info').value;
+                        var info = document.getElementById('<%= info.ClientID %>').value;
                         var identitiyNumber =document.getElementById('identityNumber').value;
 
 
