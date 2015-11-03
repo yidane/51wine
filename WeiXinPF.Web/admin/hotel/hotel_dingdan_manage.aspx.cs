@@ -41,7 +41,7 @@ namespace WeiXinPF.Web.admin.hotel
             this.pageSize = GetPageSize(10); //每页数量
 
             _strWhere = " hotelid=" + hotelid + " " + _strWhere;
-            _strWhere = CombSqlTxt(keywords);
+            _strWhere += CombSqlTxt(keywords);
             _orderby = "orderTime desc,id desc";
             if (!Page.IsPostBack)
             {
