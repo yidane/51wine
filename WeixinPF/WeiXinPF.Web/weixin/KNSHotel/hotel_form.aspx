@@ -483,7 +483,7 @@
                         return false;
                        
                     }
-                    if ($("#ctl00_content_oderName").val() == '') { alert('名字不能为空'); return; }
+                    if ($('#<%= oderName.ClientID %>').val() == '') { alert('名字不能为空'); return; }
                     //验证身份证
                     if(!checkidcard())
                     {
@@ -514,10 +514,10 @@
                         clickedBtn = true;
                     }
 
-
-                    var oderName = document.getElementById('ctl00_content_oderName').value;
-                    var identityNumber = document.getElementById('ctl00_content_identityNumber').value;
-                    var tel = document.getElementById('ctl00_content_tel').value;
+                   
+                    var oderName = document.getElementById('<%= oderName.ClientID %>').value;
+                    var identityNumber = document.getElementById('<%= identityNumber.ClientID %>').value;
+                    var tel = document.getElementById('<%= tel.ClientID %>').value;
                     var arriveTime = document.getElementById('arriveTime').value;
                     var leaveTime = document.getElementById('leaveTime').value;
 
@@ -600,7 +600,8 @@
              {
                  var result=true;
                  //验证电话
-                 var zPhone = $('#ctl00_content_tel');
+                 
+                 var zPhone = $('#<%= tel.ClientID %>');
                  var zPhoneVal = zPhone.val();
                  if (zPhoneVal == "") {
                      alert('电话不能为空');
@@ -620,7 +621,7 @@
                  var result=true;
                  //验证身份证
 
-                 var zIDCard = $('#ctl00_content_identityNumber');
+                 var zIDCard = $('#<%= identityNumber.ClientID %>');
                  var zIDCardVal = zIDCard.val();
                  if (zIDCardVal == "") {
                      alert('身份证号码不能为空');

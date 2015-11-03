@@ -427,7 +427,7 @@
                 });
 
                 $("#showcard").click(function () {
-                    var dingdanidnum = document.getElementById('ctl00_content_dingdanidnum').value;
+                    var dingdanidnum = document.getElementById('<%= dingdanidnum.ClientID %>').value;
                     var submitData = {
                         dingdanidnum: dingdanidnum,
                         myact: "dingdandelete"
@@ -541,7 +541,7 @@
                     clickedBtn = true;
                 }
 
-                var dingdanidnum = document.getElementById('ctl00_content_dingdanidnum').value;
+                var dingdanidnum = document.getElementById('<%= dingdanidnum.ClientID %>').value;
                 //                 var url = '../WeChatPay/WeChatPay.html?openid='
                 //                    + '  <%=openid%>&hotelid=<%=hotelid%>&roomid=<%=roomid%>' +
                 //             '&dingdanidnum=' + dingdanidnum;
