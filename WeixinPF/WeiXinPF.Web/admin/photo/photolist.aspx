@@ -14,7 +14,7 @@
        <link href="../skin/default/style.css" rel="stylesheet" type="text/css" />
      <link href="../skin/mystyle.css" rel="stylesheet" type="text/css" />
     <link href="../../css/pagination.css" rel="stylesheet" type="text/css" />
-
+     <link href="../skin/btn-group.css" rel="stylesheet" type="text/css"/>
     <script type="text/javascript">
         function parentToIndex(id) {
             parent.location.href = "/admin/Index.aspx?id=" + id;
@@ -94,8 +94,10 @@
                           <%# Eval("status_s") %>
                     </td>
                      <td>
-                        <a  href='photoEdit.aspx?id=<%#Eval("id") %>&action=<%=MXEnums.ActionEnum.Edit %>' class="operator">编辑</a>
+                              <div class="btn-group" role="group" aria-label="...">
+                        <a  class="btn btn-default"  href='photoEdit.aspx?id=<%#Eval("id") %>&action=<%=MXEnums.ActionEnum.Edit %>' class="operator">编辑</a>
                           <%--<a  href='luckyMoneyAwardUser.aspx?id=<%#Eval("id") %>'  >获奖用户</a>--%>
+                                     </div>
                     </td>
                 </tr>
             </ItemTemplate>

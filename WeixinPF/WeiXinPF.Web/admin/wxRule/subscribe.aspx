@@ -17,6 +17,7 @@
     <script type="text/javascript" src="../js/layout.js"></script>
     <link href="../skin/default/style.css" rel="stylesheet" type="text/css" />
     <link href="../skin/mystyle.css" rel="stylesheet" type="text/css" />
+    <link href="../skin/btn-group.css" rel="stylesheet" type="text/css"/>
     <script type="text/javascript">
         $(function () {
             //初始化表单验证
@@ -99,7 +100,7 @@
 
             var rid = $("#hidId").val();
             var act = $("#lblact").text();
-            
+
             var contenturl = "";
             if (id == 0) {
                 contenturl = "url:wxRule/addNews.aspx?option=add&rid=" + rid + "&act=" + act;
@@ -129,10 +130,10 @@
             var objid = obj.id;
             re = new RegExp("_", "g");
             var objid = objid.replace(re, "$");
-            
+
             var msg = "删除记录后不可恢复，您确定吗？";
             $.dialog.confirm(msg, function () {
-                
+
                 __doPostBack(objid, '');
             });
             return false;
@@ -146,11 +147,11 @@
 <body class="mainbody">
     <form id="form1" runat="server">
         <!--导航栏-->
-        <div class="location" style="display:none;">
+        <div class="location" style="display: none;">
 
             <a href="javascript:;" class="home"><i></i><span>
                 <asp:Literal ID="litNowPosition" runat="server" Text="关注时回复"></asp:Literal>
-                </span></a>
+            </span></a>
 
         </div>
         <div class="line10"></div>
@@ -158,13 +159,14 @@
 
         <!--内容-->
         <asp:HiddenField ID="hidId" runat="server" Value="0" />
-         <asp:Label ID="lblact" runat="server" Text="" Style="display: none;"></asp:Label>
+        <asp:Label ID="lblact" runat="server" Text="" Style="display: none;"></asp:Label>
         <asp:Label ID="lblreqestType" runat="server" Text="" Style="display: none;"></asp:Label>
         <div class="content-tab-wrap">
             <div id="floatHead" class="content-tab">
                 <div class="content-tab-ul-wrap">
                     <ul>
-                        <li><a href="javascript:;" onclick="tabs(this);" class="selected"><asp:Literal ID="litNowPosition2" runat="server" Text="关注时回复"></asp:Literal></a></li>
+                        <li><a href="javascript:;" onclick="tabs(this);" class="selected">
+                            <asp:Literal ID="litNowPosition2" runat="server" Text="关注时回复"></asp:Literal></a></li>
                     </ul>
                 </div>
             </div>
@@ -235,10 +237,10 @@
                             <tr>
 
                                 <th width="20%">图片</th>
-                                <th width="40%">标题</th>
+                                <th width="30%">标题</th>
                                 <th width="25%">链接</th>
                                 <th width="5%">排序</th>
-                                <th width="10%">操作</th>
+                                <th width="20%">操作</th>
                             </tr>
                         </thead>
                         <tbody id="var_box">
@@ -260,9 +262,12 @@
 
                                         </td>
                                         <td>
-                                            <a title="编辑" href="javascript:;"  onclick='showGuiZeDialog(<%#Eval("id")%>);'>编辑</a>
-                                            <asp:LinkButton ID="LinkButton1" runat="server"  OnClientClick="return DelExePostBack(this);" CommandName="delete" CommandArgument='<%#Eval("id")%>'>删除</asp:LinkButton>
-                                            
+                                            <div class="btn-group" role="group" aria-label="...">
+                                                <a class="btn btn-default" title="编辑" href="javascript:;" onclick='showGuiZeDialog(<%#Eval("id")%>);'>编辑</a>
+                                                <asp:LinkButton CssClass="btn btn-default" ID="LinkButton1" runat="server" OnClientClick="return DelExePostBack(this);" CommandName="delete" CommandArgument='<%#Eval("id")%>'>删除</asp:LinkButton>
+
+                                            </div>
+
                                         </td>
                                     </tr>
                                 </ItemTemplate>
@@ -283,7 +288,7 @@
         <div class="page-footer" runat="server" id="div_gongju">
             <div class="btn-list">
                 <asp:Button ID="btnSubmit" runat="server" Text="提交保存" CssClass="btn" OnClick="btnSubmit_Click" />
-                
+
             </div>
             <div class="clear"></div>
         </div>

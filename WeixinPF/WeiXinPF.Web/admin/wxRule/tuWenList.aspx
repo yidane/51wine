@@ -11,9 +11,10 @@
     <script type="text/javascript" src="../../scripts/jquery/jquery-1.10.2.min.js"></script>
     <script type="text/javascript" src="../../scripts/lhgdialog/lhgdialog.js?skin=idialog"></script>
     <script type="text/javascript" src="../js/layout.js"></script>
-       <link href="../skin/default/style.css" rel="stylesheet" type="text/css" />
-     <link href="../skin/mystyle.css" rel="stylesheet" type="text/css" />
+    <link href="../skin/default/style.css" rel="stylesheet" type="text/css" />
+    <link href="../skin/mystyle.css" rel="stylesheet" type="text/css" />
     <link href="../../css/pagination.css" rel="stylesheet" type="text/css" />
+    <link href="../skin/btn-group.css" rel="stylesheet" type="text/css"/>
     <script type="text/javascript">
         function parentToIndex(id) {
             parent.location.href = "/admin/Index.aspx?id=" + id;
@@ -31,9 +32,9 @@
 
         //创建图文的窗口
         function showGuiZeDialog(id) {
-           
+
             var contenturl = "url:wxRule/editKWRule.aspx?rid=" + id;
-             
+
             var m = $.dialog({
                 id: 'dialogKWGuiZe',
                 fixed: true,
@@ -70,7 +71,7 @@
             <div id="floatHead" class="toolbar">
                 <div class="l-list">
                     <ul class="icon-list">
-                        <li><a class="icon-btn add"  id="itemAddButton"><i></i><span>添加图文回复规则</span></a></li>
+                        <li><a class="icon-btn add" id="itemAddButton"><i></i><span>添加图文回复规则</span></a></li>
                         <li><a class="all" href="javascript:;" onclick="checkAll(this);"><i></i><span>全选</span></a></li>
                         <li>
                             <asp:LinkButton ID="btnDelete" runat="server" CssClass="del" OnClientClick="return ExePostBack('btnDelete');" OnClick="btnDelete_Click"><i></i><span>删除</span></asp:LinkButton></li>
@@ -93,9 +94,9 @@
                         <tr>
                             <th width="5%">选择</th>
                             <th width="20%">关键词</th>
-                            
-                            <th width="8%">修改</th>
-                            <th width="8%">编辑内容</th>
+
+                           
+                            <th width="16%">操作</th>
                         </tr>
                     </thead>
                     <tbody class="ltbody">
@@ -110,12 +111,13 @@
                         <asp:Image ID="imgIsLikeSearch" runat="server" ImageUrl="~/admin/skin/default/wan.png" ToolTip='<%#Eval("isLikeSearch")%>' />
                         <%# Eval("reqKeywords") %>
                     </td>
-                   
+
+                     
                     <td>
-                        <a  onclick='showGuiZeDialog(<%#Eval("id")%>);' class="operator" href="javascript:;">修改</a>
-                    </td>
-                     <td>
-                        <a  href='tuwenMgr.aspx?rid=<%#Eval("id") %>' class="operator">编辑内容</a>
+                        <div class="btn-group" role="group" aria-label="...">
+                             <a  class="btn btn-default  operator" onclick='showGuiZeDialog(<%#Eval("id")%>);'  href="javascript:;">修改</a>
+                            <a class="btn btn-default  operator" href='tuwenMgr.aspx?rid=<%#Eval("id") %>'>编辑内容</a>
+                        </div>
                     </td>
                 </tr>
             </ItemTemplate>

@@ -14,6 +14,89 @@
     <script type="text/javascript" src="../js/layout.js"></script>
     <link href="../skin/default/style.css" rel="stylesheet" type="text/css" />
     <link href="../../css/pagination.css" rel="stylesheet" type="text/css" />
+    <style>
+        .btn-group, .btn-group-vertical {
+            position: relative;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+
+            .btn-group > .btn:first-child:not(:last-child):not(.dropdown-toggle) {
+                border-top-right-radius: 0;
+                border-bottom-right-radius: 0;
+            }
+
+            .btn-group > .btn:not(:first-child):not(:last-child):not(.dropdown-toggle) {
+                border-radius: 0;
+            }
+
+            .btn-group > .btn:last-child:not(:first-child), .btn-group > .dropdown-toggle:not(:first-child) {
+                border-top-left-radius: 0;
+                border-bottom-left-radius: 0;
+            }
+
+            .btn-group .btn + .btn, .btn-group .btn + .btn-group, .btn-group .btn-group + .btn, .btn-group .btn-group + .btn-group {
+                margin-left: -2px;
+            }
+
+            .btn-group-vertical > .btn, .btn-group > .btn {
+                position: relative;
+                float: left;
+            }
+
+                .btn-group > .btn:first-child {
+                    margin-left: 0;
+                }
+
+            .btn-group-vertical > .btn, .btn-group > .btn {
+                position: relative;
+                float: left;
+            }
+
+        .btn-default {
+            color: #333 !important;
+            background-color: #fff !important;
+            border-color: #ccc !important;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 6px 12px;
+            margin-bottom: 0;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 1.42857143;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: middle;
+            -ms-touch-action: manipulation;
+            touch-action: manipulation;
+            cursor: pointer;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            background-image: none;
+            border: 1px solid transparent;
+            border-radius: 4px;
+        }
+
+        .btn-group-vertical > .btn.active, .btn-group-vertical > .btn:active, .btn-group-vertical > .btn:focus, .btn-group-vertical > .btn:hover, .btn-group > .btn.active, .btn-group > .btn:active, .btn-group > .btn:focus, .btn-group > .btn:hover {
+            z-index: 2;
+        }
+
+        .btn-default:hover {
+            color: #333 !important;
+            background-color: #e6e6e6 !important;
+            border-color: #adadad !important;
+        }
+
+        .btn.focus, .btn:focus, .btn:hover {
+            color: #333 !important;
+            text-decoration: none !important;
+        }
+    </style>
 </head>
 <body class="mainbody">
     <form id="form1" runat="server">
@@ -62,8 +145,11 @@
                     <td style="text-align: center;"><%#Eval("Name") %></td>
                     <td><%=MyCommFun.getWebSite() %>/weixin/scenic/index.aspx?id=<%#Eval("Id") %></td>
                     <td style="text-align: center">
-                        <a style="display: none;" href="scenic_edit.aspx?action=<%#MXEnums.ActionEnum.Edit %>&id=<%#Eval("Id")%>">修改</a>
-                        <a href="scenic_detail_list.aspx?scenicId=<%#Eval("Id")%>">添加景点</a>
+                            <a class="btn btn-default" style="display: none;" href="scenic_edit.aspx?action=<%#MXEnums.ActionEnum.Edit %>&id=<%#Eval("Id")%>">修改</a>
+                        
+                        <div class="btn-group" role="group" aria-label="...">
+                            <a class="btn btn-default" href="scenic_detail_list.aspx?scenicId=<%#Eval("Id")%>">添加景点</a>
+                        </div>
                     </td>
                 </tr>
             </ItemTemplate>

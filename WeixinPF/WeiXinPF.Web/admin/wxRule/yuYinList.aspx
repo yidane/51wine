@@ -14,6 +14,7 @@
        <link href="../skin/default/style.css" rel="stylesheet" type="text/css" />
      <link href="../skin/mystyle.css" rel="stylesheet" type="text/css" />
     <link href="../../css/pagination.css" rel="stylesheet" type="text/css" />
+   <link href="../skin/btn-group.css" rel="stylesheet" type="text/css"/>
     <script type="text/javascript">
         function parentToIndex(id) {
             parent.location.href = "/admin/Index.aspx?id=" + id;
@@ -63,7 +64,7 @@
                             <th width="20%">关键词</th>
                             <th width="20%">标题</th>
                             <th>语音链接</th>
-                            <th width="8%">修改</th>
+                            <th width="8%">操作</th>
                         </tr>
                     </thead>
                     <tbody class="ltbody">
@@ -85,8 +86,10 @@
                         <%# Eval("mediaUrl") %>
                     </td>
                     <td>
-                        <a href="editYuYin.aspx?action=<%#MXEnums.ActionEnum.Edit %>&id=<%#Eval("id")%>" class=" operator">修改</a>
-                    </td>
+                            <div class="btn-group" role="group" aria-label="...">
+                        <a  class="btn btn-default"  href="editYuYin.aspx?action=<%#MXEnums.ActionEnum.Edit %>&id=<%#Eval("id")%>" class=" operator">修改</a>
+                  </div>
+                                  </td>
                 </tr>
             </ItemTemplate>
             <FooterTemplate>
