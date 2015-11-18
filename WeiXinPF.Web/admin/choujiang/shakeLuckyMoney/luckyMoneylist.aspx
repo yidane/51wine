@@ -14,7 +14,7 @@
        <link href="../../skin/default/style.css" rel="stylesheet" type="text/css" />
      <link href="../../skin/mystyle.css" rel="stylesheet" type="text/css" />
     <link href="../../../css/pagination.css" rel="stylesheet" type="text/css" />
-
+    <link href="../../skin/btn-group.css" rel="stylesheet" type="text/css"/>
     <script type="text/javascript">
         function parentToIndex(id) {
             parent.location.href = "/admin/Index.aspx?id=" + id;
@@ -59,13 +59,13 @@
                         <tr>
                             <th width="5%">选择</th>
                              <th>活动名称</th>
-                            <th width="10%">关键词</th>
+                            <th width="5%">关键词</th>
                             <th width="15%">开始时间/结束时间</th>
                            
                             <th width="15%" >链接地址</th>
                             <th width="15%" >我的奖券链接地址</th>
                              <th width="5%">状态</th>
-                            <th width="12%">操作</th>
+                            <th width="15%">操作</th>
                         </tr>
                     </thead>
                     <tbody class="ltbody">
@@ -98,8 +98,10 @@
                           <%# Eval("status_s") %>
                     </td>
                      <td>
-                        <a  href='luckyMoneyEdit.aspx?id=<%#Eval("id") %>&action=<%=MXEnums.ActionEnum.Edit %>' class="operator">编辑</a>
-                          <a  href='luckyMoneyAwardUser.aspx?id=<%#Eval("id") %>'  >获奖用户</a>
+                            <div class="btn-group" role="group" aria-label="...">
+                        <a class="btn btn-default"   href='luckyMoneyEdit.aspx?id=<%#Eval("id") %>&action=<%=MXEnums.ActionEnum.Edit %>' class="operator">编辑</a>
+                          <a  class="btn btn-default"  href='luckyMoneyAwardUser.aspx?id=<%#Eval("id") %>'  >获奖用户</a>
+                                </div>
                     </td>
                 </tr>
             </ItemTemplate>

@@ -133,6 +133,7 @@
     <Content Include="admin\scenic\scenic_edit.aspx" />
     <Content Include="admin\scenic\scenic_picture_edit.aspx" />
     <Content Include="admin\scenic\scenic_picture_list.aspx" />
+    <Content Include="admin\skin\btn-group.css" />
     <Content Include="admin\skin\default\loginbody.png" />
     <Content Include="admin\skin\default\logo.png" />
     <Content Include="admin\skin\notify.css" />
