@@ -83,6 +83,8 @@
     <Compile Include="Map\DTOS\MapDTO.cs" />
     <Compile Include="Map\DTOS\POIDto.cs" />
     <Compile Include="Map\MapService.cs" />
+    <Compile Include="Notify\DTOS\NotifyDTO.cs" />
+    <Compile Include="Notify\NotifyService.cs" />
     <Compile Include="Photo\DTOS\photoActionDTO.cs" />
     <Compile Include="Photo\PhotoService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

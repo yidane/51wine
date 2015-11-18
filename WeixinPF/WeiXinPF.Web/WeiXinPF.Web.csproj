@@ -124,6 +124,7 @@
     <Content Include="admin\hotel\Verification\commodity_detail.aspx" />
     <Content Include="admin\hotel\Verification\credentials_detail.aspx" />
     <Content Include="admin\hotel\Verification\dingdan_confirm.aspx" />
+    <Content Include="admin\index - Copy.aspx" />
     <Content Include="admin\photo\photoEdit.aspx" />
     <Content Include="admin\photo\photolist.aspx" />
     <Content Include="admin\scenic\scenic_detail_edit.aspx" />
@@ -134,6 +135,7 @@
     <Content Include="admin\scenic\scenic_picture_list.aspx" />
     <Content Include="admin\skin\default\loginbody.png" />
     <Content Include="admin\skin\default\logo.png" />
+    <Content Include="admin\skin\notify.css" />
     <Content Include="admin\weixin\baseSetting.aspx" />
     <Content Include="admin\zhanhui\110.png" />
     <Content Include="admin\agent\agent_edit.aspx" />
@@ -4905,6 +4907,13 @@
     </Compile>
     <Compile Include="admin\hunqing\xitieZhuFu.aspx.designer.cs">
       <DependentUpon>xitieZhuFu.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\index - Copy.aspx.cs">
+      <DependentUpon>index - Copy.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\index - Copy.aspx.designer.cs">
+      <DependentUpon>index - Copy.aspx</DependentUpon>
     </Compile>
     <Compile Include="admin\index.aspx.cs">
       <DependentUpon>index.aspx</DependentUpon>
