@@ -69,13 +69,6 @@ namespace WeiXinPF.Web.admin.diancai
             this.page = MXRequest.GetQueryInt("page", 1);
             var result = gbll.GetOrderList(shopid, this.pageSize, this.page, beginDate, endDate, payAmountMin,
                                            payAmountMax, orderNumber, customerName, customerTel, out this.totalCount);
-
-            return result;
-        }
-
-        private void BindResult()
-        {
-            var result = QueryData();
             var sbll = new BLL.wx_diancai_dingdan_manage();
             if (result != null && result.Tables.Count > 0 && result.Tables[0].Rows.Count > 0)
             {
@@ -94,6 +87,14 @@ namespace WeiXinPF.Web.admin.diancai
 
                 result.AcceptChanges();
             }
+
+            return result;
+        }
+
+        private void BindResult()
+        {
+            var result = QueryData();
+
             this.rptList.DataSource = result;
             this.rptList.DataBind();
 
@@ -144,7 +145,17 @@ namespace WeiXinPF.Web.admin.diancai
             try
             {
                 var result = QueryData();
-                CSVHelper.DownloadAsSCV(Response, "订单管理", null, null, result.Tables[0]);
+                var headerList = new List<string>()
+                    {
+                        "订单号",
+                        "预订人",
+                        "电话",
+                        "预定时间",
+                        "总价",
+                        "预订套餐",
+                    };
+                var columnIndex = new List<int>() { 2, 3, 5, 4, 6, 8 };
+                CSVHelper.DownloadAsSCV(Response, "订单管理", result.Tables[0], columnIndex, headerList);
             }
             catch (Exception exception)
             {

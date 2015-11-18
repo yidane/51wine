@@ -356,7 +356,7 @@ namespace WeiXinPF.Web.admin.hotel
                     "商户或门店名称","	预定人","交易日期","商品名称","购买数量","商品价格","入住时间"
                     ,"离店时间","支付金额" };
                 List<int> columnIndexList = new List<int>() { 1, 5, 15, 19, 20, 4, 18, 11, 13, 14, 9, 10, 21 };
-                CSVHelper.DownloadAsSCV(Response, "酒店订单管理", headerList, columnIndexList, result.Tables[0]);
+                CSVHelper.DownloadAsSCV(Response, "酒店订单管理", result.Tables[0], columnIndexList, headerList);
             }
             catch (Exception exception)
             {
