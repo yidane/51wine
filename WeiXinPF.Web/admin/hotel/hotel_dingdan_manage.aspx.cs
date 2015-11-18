@@ -34,17 +34,17 @@ namespace WeiXinPF.Web.admin.hotel
         protected void Page_Load(object sender, EventArgs e)
         {
             hotelid = MyCommFun.RequestInt("hotelid", GetHotelId());
-
-            //获取参数
-            GetQueryString();
-
-            this.pageSize = GetPageSize(10); //每页数量
-
-            _strWhere = " hotelid=" + hotelid + " " + _strWhere;
-            _strWhere += CombSqlTxt(keywords);
-            _orderby = "orderTime desc,id desc";
+            
             if (!Page.IsPostBack)
             {
+                //获取参数
+                GetQueryString();
+
+                this.pageSize = GetPageSize(10); //每页数量
+
+                _strWhere = " hotelid=" + hotelid + " " + _strWhere;
+                _strWhere += CombSqlTxt(keywords);
+                _orderby = "orderTime desc,id desc";
 
                 BindDropBox();
                 RptBind();
@@ -59,44 +59,44 @@ namespace WeiXinPF.Web.admin.hotel
             if (MyCommFun.IsRequestStr("beginDate", RequestObjType.dateType))
             {
                 this.beginDate = MXRequest.GetQueryString("beginDate");
-                //                txtbeginDate.Text = this.beginDate;
+                txtbeginDate.Text = this.beginDate;
             }
             if (MyCommFun.IsRequestStr("endDate", RequestObjType.dateType))
             {
                 this.endDate = MXRequest.GetQueryString("endDate");
-                //                txtendDate.Text = this.endDate;
+                txtendDate.Text = this.endDate;
 
             }
             if (MyCommFun.IsRequestStr("orderStatus", RequestObjType.intType))
             {
                 this.orderStatus = MXRequest.GetQueryInt("orderStatus");
-                //                ddlOrderStatus.SelectedValue = this.orderStatus.ToString();
+                ddlOrderStatus.SelectedValue = this.orderStatus.ToString();
 
             }
             this.payAmountMin = MXRequest.GetQueryDecimal("payAmountMin", -1);
-            //            if (this.payAmountMin > -1)
-            //            {
-            //                txtPayAmountMin.Text = this.payAmountMin.ToString();
-            //            }
+            if (this.payAmountMin > -1)
+            {
+                txtPayAmountMin.Text = this.payAmountMin.ToString();
+            }
             this.payAmountMax = MXRequest.GetQueryDecimal("payAmountMax", -1);
-            //            if (this.payAmountMax > -1)
-            //            {
-            //                txtPayAmountMax.Text = this.payAmountMax.ToString();
-            //            }
+            if (this.payAmountMax > -1)
+            {
+                txtPayAmountMax.Text = this.payAmountMax.ToString();
+            }
             this.orderNumber = MXRequest.GetQueryString("orderNumber");
-            //            if (!string.IsNullOrEmpty(orderNumber))
-            //            {
-            //                txtOrderNumber.Text = this.orderNumber;
-            //            }
+            if (!string.IsNullOrEmpty(orderNumber))
+            {
+                txtOrderNumber.Text = this.orderNumber;
+            }
 
             this.keywords = MXRequest.GetQueryString("keywords");
         }
 
         //获取查询结果url
-        private string GetNewUrl()
+        private string GetNewUrl(string page)
         {
             var queryStringBuilder = new StringBuilder();
-            queryStringBuilder.AppendFormat("hotel_dingdan_manage.aspx?hotelid={0}", hotelid);
+            queryStringBuilder.AppendFormat("hotel_dingdan_manage.aspx?hotelid={0}&page={1}&keywords={2}", this.hotelid, page, this.keywords);
 
             if (!string.IsNullOrEmpty(this.ddlOrderStatus.SelectedValue) && this.ddlOrderStatus.SelectedValue != "-1")
                 queryStringBuilder.AppendFormat("&orderStatus={0}", this.ddlOrderStatus.SelectedValue.Trim());
@@ -131,7 +131,7 @@ namespace WeiXinPF.Web.admin.hotel
 
             //绑定页码
             txtPageNum.Text = this.pageSize.ToString();
-            string pageUrl = Utils.CombUrlTxt("hotel_dingdan_manage.aspx", "keywords={0}&page={1}", this.keywords, "__id__");
+            string pageUrl = this.GetNewUrl("__id__"); //Utils.CombUrlTxt("hotel_dingdan_manage.aspx", "keywords={0}&page={1}&hotelid={2}", this.keywords, "__id__", hotelid.ToString());
             PageContent.InnerHtml = Utils.OutPageList(this.pageSize, this.page, this.totalCount, pageUrl, 8);
 
 
@@ -155,7 +155,6 @@ namespace WeiXinPF.Web.admin.hotel
             ddlOrderStatus.DataTextField = "StatusName";
             ddlOrderStatus.DataBind();
         }
-
 
         /// <summary>
         /// 获取查询结果
@@ -296,7 +295,7 @@ namespace WeiXinPF.Web.admin.hotel
         //关健字查询
         protected void btnSearch_Click(object sender, EventArgs e)
         {
-            Response.Redirect(GetNewUrl());
+            Response.Redirect(GetNewUrl("1"));
         }
 
         //设置分页数量
@@ -313,7 +312,7 @@ namespace WeiXinPF.Web.admin.hotel
             Response.Redirect(Utils.CombUrlTxt("hotel_list.aspx", "keywords={0}", this.keywords));
         }
 
-        //批量删除
+        //批量删除 
         protected void btnDelete_Click(object sender, EventArgs e)
         {
             // ChkAdminLevel("manager_list", MXEnums.ActionEnum.Delete.ToString()); //检查权限
