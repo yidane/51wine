@@ -15,7 +15,90 @@
         a.shenghe {
             color: red;
         }
+
+        .btn-group, .btn-group-vertical {
+            position: relative;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+
+            .btn-group > .btn:first-child:not(:last-child):not(.dropdown-toggle) {
+                border-top-right-radius: 0;
+                border-bottom-right-radius: 0;
+            }
+
+            .btn-group > .btn:not(:first-child):not(:last-child):not(.dropdown-toggle) {
+                border-radius: 0;
+            }
+
+            .btn-group > .btn:last-child:not(:first-child), .btn-group > .dropdown-toggle:not(:first-child) {
+                border-top-left-radius: 0;
+                border-bottom-left-radius: 0;
+            }
+
+            .btn-group .btn + .btn, .btn-group .btn + .btn-group, .btn-group .btn-group + .btn, .btn-group .btn-group + .btn-group {
+                margin-left: -2px;
+            }
+
+            .btn-group-vertical > .btn, .btn-group > .btn {
+                position: relative;
+                float: left;
+            }
+
+                .btn-group > .btn:first-child {
+                    margin-left: 0;
+                }
+
+            .btn-group-vertical > .btn, .btn-group > .btn {
+                position: relative;
+                float: left;
+            }
+
+        .btn-default {
+            color: #333 !important;
+            background-color: #fff !important;
+            border-color: #ccc !important;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 6px 12px;
+            margin-bottom: 0;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 1.42857143;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: middle;
+            -ms-touch-action: manipulation;
+            touch-action: manipulation;
+            cursor: pointer;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            background-image: none;
+            border: 1px solid transparent;
+            border-radius: 4px;
+        }
+
+        .btn-group-vertical > .btn.active, .btn-group-vertical > .btn:active, .btn-group-vertical > .btn:focus, .btn-group-vertical > .btn:hover, .btn-group > .btn.active, .btn-group > .btn:active, .btn-group > .btn:focus, .btn-group > .btn:hover {
+            z-index: 2;
+        }
+
+        .btn-default:hover {
+            color: #333 !important;
+            background-color: #e6e6e6!important;
+            border-color: #adadad!important;
+        }
+
+        .btn.focus, .btn:focus, .btn:hover {
+            color: #333 !important;
+            text-decoration: none!important;
+        }
     </style>
+
 </head>
 <body class="mainbody">
     <form id="form1" runat="server">
@@ -80,12 +163,16 @@
                         <%# Eval("noticeEmail") %>
                     </td>
                     <td>
-                        <a href='hotel_register.aspx?hotelid=<%#Eval("id") %>&action=<%=MXEnums.ActionEnum.Edit.ToString() %>'>修改</a>
-                        <a href='hotel_admin_list.aspx?hotelid=<%#Eval("id") %>'>管理员设置</a>
-                        <a href="hotel_info.aspx?action=<%=MXEnums.ActionEnum.View.ToString() %>&hotelid=<%#Eval("id") %>">商户或门店信息查看</a>
-                        <a href='hotel_room.aspx?hotelid=<%#Eval("id") %>&action=<%=MXEnums.ActionEnum.Audit.ToString() %>'>商品信息审核</a>
-                        <a href='hotel_dingdan_manage.aspx?hotelid=<%#Eval("id") %>'>订单查看</a>
-                        <a href="Verification/credentials_detail.aspx?hotelid=<%#Eval("id") %>">服务码验证查询</a>
+                        <div class="btn-group" role="group" aria-label="...">
+                            <a class="btn btn-default" href='hotel_register.aspx?hotelid=<%#Eval("id") %>&action=<%=MXEnums.ActionEnum.Edit.ToString() %>'>修改</a>
+                            <a class="btn btn-default" href='hotel_admin_list.aspx?hotelid=<%#Eval("id") %>'>管理员设置</a>
+                            <a class="btn btn-default" href="hotel_info.aspx?action=<%=MXEnums.ActionEnum.View.ToString() %>&hotelid=<%#Eval("id") %>">商户或门店信息查看</a>
+                            <a class="btn btn-default" href='hotel_room.aspx?hotelid=<%#Eval("id") %>&action=<%=MXEnums.ActionEnum.Audit.ToString() %>'>商品信息审核</a>
+                            <a class="btn btn-default" href='hotel_dingdan_manage.aspx?hotelid=<%#Eval("id") %>'>订单查看</a>
+                            <a class="btn btn-default" href="Verification/credentials_detail.aspx?hotelid=<%#Eval("id") %>">服务码验证查询</a>
+
+                        </div>
+
                     </td>
                 </tr>
             </ItemTemplate>
