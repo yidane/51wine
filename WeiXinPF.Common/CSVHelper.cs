@@ -125,43 +125,13 @@ namespace WeiXinPF.Common
         }
 
         /// <summary>
-        /// 保存CSV文件
-        /// </summary>
-        /// <param name="headerList"></param>
-        /// <param name="dataTable"></param>
-        /// <returns></returns>
-        public static string SaveAsCSV(List<string> headerList, DataTable dataTable)
-        {
-            if (dataTable == null || dataTable.Rows.Count == 0 || dataTable.Columns.Count == 0)
-                return string.Empty;
-
-            var columnIndexList = new List<int>();
-            if (headerList != null && headerList.Count > 0)
-            {
-                for (var index = 0; index < headerList.Count; index++)
-                {
-                    columnIndexList.Add(index);
-                }
-            }
-            else
-            {
-                for (var index = 0; index < dataTable.Columns.Count; index++)
-                {
-                    columnIndexList.Add(index);
-                }
-            }
-
-            return SaveAsCSV(headerList, columnIndexList, dataTable);
-        }
-
-        /// <summary>
         /// 保存SCV文件
         /// </summary>
+        /// <param name="dataTable">数据源</param>
         /// <param name="headerList">表头</param>
         /// <param name="columnIndexList">数据源筛选</param>
-        /// <param name="dataTable">数据源</param>
         /// <returns></returns>
-        public static string SaveAsCSV(List<string> headerList, List<int> columnIndexList, DataTable dataTable)
+        public static string SaveAsCSV(DataTable dataTable, List<int> columnIndexList = null, List<string> headerList = null)
         {
             if (dataTable == null || dataTable.Rows.Count == 0 || dataTable.Columns.Count == 0)
                 return string.Empty;
@@ -170,75 +140,65 @@ namespace WeiXinPF.Common
             const string scvSplitChar = ",";
             const string specialSplitChar = "'";
 
-            var columnCount = 0;
-            //组装Header
+            #region 组装ColumnIndex
+            //如果ColumnIndexList为空
+            if (columnIndexList == null || columnIndexList.Count == 0)
+            {
+                columnIndexList = new List<int>();
+                for (var columnIndex = 0; columnIndex < dataTable.Columns.Count; columnIndex++)
+                {
+                    columnIndexList.Add(columnIndex);
+                }
+            }
+            #endregion
+
+            #region 组装Header
+            //自定义了Header，则采用自定义表头
             if (headerList != null && headerList.Count > 0)
             {
-                columnCount = headerList.Count;
                 for (var index = 0; index < headerList.Count; index++)
                 {
-                    if (index == columnCount - 1)
-                    {
-                        outputBuilder.AppendFormat("{0}{1}", headerList[index], Environment.NewLine);
-                    }
-                    else
-                    {
-                        outputBuilder.AppendFormat("{0}{1}", headerList[index], scvSplitChar);
-                    }
+                    outputBuilder.AppendFormat("{0}{1}", headerList[index], index == headerList.Count - 1 ? Environment.NewLine : scvSplitChar);
                 }
             }
             else
             {
-                columnCount = dataTable.Columns.Count;
-                for (var index = 0; index < dataTable.Columns.Count; index++)
+                for (var index = 0; index < columnIndexList.Count; index++)
                 {
-                    if (index == columnCount - 1)
-                    {
-                        outputBuilder.AppendFormat("{0}{1}", dataTable.Columns[index].ColumnName, Environment.NewLine);
-                    }
-                    else
-                    {
-                        outputBuilder.AppendFormat("{0}{1}", dataTable.Columns[index].ColumnName, scvSplitChar);
-                    }
+                    outputBuilder.AppendFormat("{0}{1}", dataTable.Columns[columnIndexList[index]].ColumnName, index == columnIndexList.Count - 1 ? Environment.NewLine : scvSplitChar);
                 }
             }
+            #endregion
 
+            #region 组装数据
             //组装数据
+            var dataSourceColumnCount = dataTable.Columns.Count;
             foreach (DataRow row in dataTable.Rows)
             {
-                for (var index = 0; index < columnCount; index++)
+                for (var index = 0; index < columnIndexList.Count; index++)
                 {
-                    //包含的索引才会输出
-                    if (!columnIndexList.Contains(index)) continue;
-                    var dataField = row[index];
+                    var dataField = columnIndexList[index] > 0 && columnIndexList[index] < dataSourceColumnCount
+                                    ? row[columnIndexList[index]]
+                                    : string.Empty;
+                    var dataFieldString = string.Empty;
+
                     if (dataField != null && dataField != DBNull.Value)
                     {
-                        var datafieldString = dataField.ToString();
-                        if (IsNumberic(datafieldString) && datafieldString.Length > 8)
+                        dataFieldString = dataField.ToString();
+                        if (dataFieldString.Length > 8)
                         {
-                            outputBuilder.AppendFormat("{0}{1}", datafieldString, specialSplitChar);
+                            dataFieldString = string.Format("{0}{1}", dataFieldString, specialSplitChar);
                         }
                         else
                         {
-                            outputBuilder.AppendFormat("{0}", datafieldString);
+                            dataFieldString = dataField.ToString();
                         }
                     }
-                    else
-                    {
-                        outputBuilder.AppendFormat("{0}", string.Empty);
-                    }
 
-                    //判断是否行结尾
-                    if (index == columnIndexList[columnIndexList.Count - 1])
-                    {
-                        outputBuilder.Append(Environment.NewLine);
-                    }
-                    else
-                    {
-                        outputBuilder.AppendFormat(scvSplitChar);
-                    }
+                    outputBuilder.AppendFormat("\"{0}\"{1}", dataFieldString, index < columnIndexList.Count - 1 ? scvSplitChar : Environment.NewLine);
                 }
             }
+            #endregion
 
             return outputBuilder.ToString();
         }
@@ -251,9 +211,9 @@ namespace WeiXinPF.Common
         /// <param name="headerList"></param>
         /// <param name="columnIndexList"></param>
         /// <param name="dataTable"></param>
-        public static void DownloadAsSCV(HttpResponse response, string fileName, List<string> headerList, List<int> columnIndexList, DataTable dataTable)
+        public static void DownloadAsSCV(HttpResponse response, string fileName, DataTable dataTable, List<int> columnIndexList = null, List<string> headerList = null)
         {
-            string csvDataString = columnIndexList == null ? SaveAsCSV(headerList, dataTable) : SaveAsCSV(headerList, columnIndexList, dataTable);
+            string csvDataString = SaveAsCSV(dataTable, columnIndexList, headerList);
 
             DownloadCSV(response, fileName, csvDataString);
         }
@@ -278,36 +238,32 @@ namespace WeiXinPF.Common
         /// <param name="csvDataString"></param>
         private static void DownloadCSV(HttpResponse response, string fileName, string csvDataString)
         {
-            //using (var stream = new MemoryStream())
-            //{
-            //    using (var sw = new StreamWriter(stream, System.Text.Encoding.UTF8))
-            //    {
-            //        //写入SCV文件流
-            //        sw.Write(csvDataString);
-            //        response.Clear();
-            //        response.Buffer = true;
-            //        response.Charset = "utf-8";
+            using (var stream = new MemoryStream())
+            {
+                using (var sw = new StreamWriter(stream, System.Text.Encoding.UTF8))
+                {
+                    //写入SCV文件流
+                    sw.Write(csvDataString);
+                    sw.Flush();
 
-            //        response.ContentType = "application/ms-excel";
-            //        response.AppendHeader("content-disposition", string.Format("attachment;filename={0}.csv", fileName));
-            //        response.ContentEncoding = System.Text.Encoding.Default;
+                    //清理掉原始数据流
+                    response.Clear();
+                    response.ClearContent();
+                    response.ClearHeaders();
 
-            //        //response.contenttype指定文件类型 能为application/ms-excel || application/ms-word || application/ms-txt || application/ms-html || 或其他浏览器可直接支持文件 
-            //        response.BinaryWrite(stream.ToArray());
-            //        //response.Write(csvDataString);
-            //        response.Flush();
-            //        //response.End();
-            //    }
-            //}
+                    response.Buffer = true;
+                    response.Charset = "utf-8";
 
-            var file = new FileInfo(@"E:\CodeDataBase\CodePlex\51wine\WeixinPF\WeiXinPF.Web\mxweixinpf.pfx");
-
-            response.ContentEncoding = System.Text.Encoding.GetEncoding("gb2312");
-            response.AddHeader("Content-Disposition", "attachment; filename=" + file.Name); //解决中文文件名乱码    
-            response.AddHeader("Content-length", file.Length.ToString());
-            response.ContentType = "appliction/octet-stream";
-            response.WriteFile(file.FullName);
-            response.End();
+                    response.ContentType = "application/ms-excel";
+                    response.AppendHeader("content-disposition", string.Format("attachment;filename={0}.csv", HttpUtility.UrlEncode(fileName)));
+                    response.ContentType = "application/octet-stream";
+                    response.AddHeader("Content-Length", stream.Length.ToString());
+                    response.ContentEncoding = System.Text.Encoding.Default;
+                    response.BinaryWrite(stream.ToArray());
+                    response.Flush();
+                    response.End();
+                }
+            }
         }
         #endregion
 

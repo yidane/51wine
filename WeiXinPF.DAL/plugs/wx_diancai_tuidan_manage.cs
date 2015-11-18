@@ -120,7 +120,12 @@ namespace WeiXinPF.DAL
         /// <param name="refundCode"></param>
         public void RefundFail(string refundCode)
         {
-            const string sql = "UPDATE dbo.wx_diancai_tuidan_manage SET refundStatus=5 WHERE refundcode=@RefundCode";
+            const string sql = @"UPDATE dbo.wx_diancai_tuidan_manage SET refundStatus=5 WHERE refundcode=@RefundCode;
+                                       UPDATE  dbo.wx_Verification_IdentifyingCodeInfo
+                                        SET     Status = 5
+                                        WHERE   IdentifyingCodeId = ( SELECT    caipinid
+                                                                      FROM      dbo.wx_diancai_tuidan_manage
+                                                                      WHERE     refundCode = @RefundCode)";
             SqlParameter[] sqlparams =
                 {
                     new SqlParameter(){ParameterName = "@RefundCode",SqlDbType = SqlDbType.NVarChar,Value = refundCode} 
