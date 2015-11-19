@@ -534,31 +534,38 @@ namespace WeiXinPF.DAL
             //strSql.Append(" FROM wx_diancai_dingdan_manage ");
 
             strSql.Append(@"SELECT  d.id ,
-                                        shopinfoid ,
-                                        s.hotelName ,
-                                        openid ,
-                                        d.wid ,
-                                        orderNumber ,
-                                        deskNumber ,
-                                        customerName ,
-                                        customerTel ,
-                                        d.address ,
-                                        oderTime ,
-                                        oderRemark ,
-                                        payAmount ,
-                                        payStatus ,
-                                        d.createDate
-                                FROM    wx_diancai_dingdan_manage d
-                                        LEFT JOIN wx_diancai_shopinfo s ON d.shopinfoid = s.id
-                                WHERE payStatus>0");
+                                            shopinfoid ,
+                                            s.hotelName ,
+                                            openid ,
+                                            d.wid ,
+                                            t.orderNumber ,
+                                            deskNumber ,
+                                            customerName ,
+                                            customerTel ,
+                                            d.address ,
+                                            CONVERT(VARCHAR(10), oderTime, 120) AS oderTime ,
+                                            oderRemark ,
+                                            payAmount ,
+                                            payStatus ,
+                                            CONVERT(VARCHAR(10), d.createDate, 120) AS CreateDate ,
+		                                      t.OrderCount
+                                    FROM    ( SELECT    orderNumber ,
+                                                        COUNT(1) AS OrderCount
+                                              FROM      dbo.wx_diancai_dingdan_manage dm
+                                                        INNER JOIN dbo.wx_Verification_IdentifyingCodeInfo vi ON dm.orderNumber = vi.OrderCode
+                                                                                                  AND vi.ModuleName = 'restaurant'
+                                              WHERE     openid = @OpenID
+                                              GROUP BY  orderNumber
+                                            ) t
+                                            INNER JOIN wx_diancai_dingdan_manage d ON d.orderNumber = t.orderNumber
+                                            LEFT JOIN wx_diancai_shopinfo s ON d.shopinfoid = s.id
+                                    WHERE   payStatus > 0");
+            SqlParameter[] sqlparams =
+                {
+                    new SqlParameter(){ParameterName = "@OpenID",SqlDbType = SqlDbType.NVarChar,Value = openid}
+                };
 
-            if (openid.Trim() != "")
-            {
-                strSql.Append(" and openid='" + openid + "'");
-            }
-
-            strSql.Append(" ORDER BY d.createDate DESC");
-            return DbHelperSQL.Query(strSql.ToString());
+            return DbHelperSQL.Query(strSql.ToString(), sqlparams);
         }
 
         public DataSet GetMyOrderInShop(string openid, int shopid)

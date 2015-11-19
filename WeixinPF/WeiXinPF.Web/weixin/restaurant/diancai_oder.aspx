@@ -7,7 +7,11 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="format-detection" content="telephone=no">
-    <link href="css/diancai.css" rel="stylesheet" type="text/css">
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+    <meta content="telephone=no" name="format-detection" />
+    <meta content="email=no" name="format-detection" />
+    <link href="css/orderlist.css" rel="stylesheet" />
     <script src="js/jquery.min.js" type="text/javascript"></script>
     <script src="js/alert.js" type="text/javascript"></script>
     <style>
@@ -32,10 +36,6 @@
 
         .menu_top {
             color: #fff;
-            /*background-color: #c32d32;
-            background: -webkit-gradient(linear,left top,left bottom,from(#fe444a),to(#c32d32));
-            border-bottom: 1px solid #700d00;*/
-            /*padding: 0 10px 0 10px;*/
             box-shadow: 0 0 5px #333;
             border-top: 0 none;
             position: fixed;
@@ -48,73 +48,23 @@
         }
 
         .menu-active {
-           color: white;
+            color: white;
             background: -webkit-gradient(linear,left top,left bottom,from(#fe444a),to(#c32d32));
-           
         }
     </style>
 </head>
-<body class="mode_webapp">
-    <div class="menu_header">
-        <div class="menu_top">
+<body>
+    <div class="personal_center">
+        <ul id="myTab0">
             <%=menuStr %>
-
-            <%--            <a class="Pay menu-active" href="diancai_oder.aspx?openid=<%=openid %>&type=pay">已付款</a>--%>
-            <%--            <a class="Refund" href="diancai_oder.aspx?openid=<%=openid %>&type=refund">退单</a>--%>
+        </ul>
+        <div class="personal_info">
+            <div class="order_list" id="ResultList">
+                <%=str %>
+            </div>
         </div>
     </div>
-
-    <div class="cardexplain">
-
-        <!--超过预订时间3天后自动删掉预订记录，免得占服务器资源！-->
-        <%=str %>
-    </div>
-
-
-
-    <!--页码-->
-
-
-
-    <%--<div class="footermenu">
-        <ul>
-            <li>
-                <a href="caidan_guanyu.aspx?shopid=<%=shopid %>&openid=<%=openid %>">
-                    <img src="images/xxyX63YryG.png">
-                    <p>关于</p>
-                </a>
-            </li>
-            <li>
-                <a href="index.aspx?shopid=<%=shopid %>&openid=<%=openid %>">
-                    <img src="images/Lngjm86JQq.png">
-                    <p>点单</p>
-                </a>
-            </li>
-            <li>
-                <a href="diancai_shoppingCart.aspx?shopid=<%=shopid %>&openid=<%=openid %>">
-                    <span class="num" id="cartN2">0</span>
-                    <img src="images/2yFKO6TwKI.png">
-                    <p>购物车</p>
-                </a>
-            </li>
-            <li>
-                <a class="active" href="diancai_oder.aspx?shopid=<%=shopid %>&openid=<%=openid %>">
-                    <img src="images/s22KaR0Wtc.png">
-                    <p>订单</p>
-                </a>
-            </li>
-            <li>
-                <a href="diancai_geren.aspx?shopid=<%=shopid %>&openid=<%=openid %>">
-                    <img src="images/J0uZbXQWvJ.png">
-                    <p>我的</p>
-                </a>
-            </li>
-        </ul>
-    </div>--%>
-
     <script type="text/javascript">
-
-
         document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
             WeixinJSBridge.call('hideToolbar');
         });

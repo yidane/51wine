@@ -23,17 +23,16 @@ namespace WeiXinPF.Web.weixin.restaurant
                 var type = MyCommFun.QueryString("type");
                 if (!string.IsNullOrEmpty(openId))
                 {
-
                     if (!string.Equals(type, "Pay", StringComparison.CurrentCultureIgnoreCase))
                     {
-                        menuStr = string.Format(
-                    @"<a class='Pay' href='diancai_oder.aspx?openid={0}&type=pay'>已付款</a><a class='Refund menu-active' href='diancai_oder.aspx?openid={0}&type=refund'>退单</a>", openId);
+                        menuStr = string.Format(@"<li class='normal'><a href='diancai_oder.aspx?openid={0}&type=pay'>已付款</a></li>
+                                                        <li class='active'><a href='diancai_oder.aspx?openid={0}&type=refund'>退单</a></li>", openId);
                         GetRefund(openId);
                     }
                     else
                     {
-                        menuStr = string.Format(
-                  @"<a class='Pay menu-active' href='diancai_oder.aspx?openid={0}&type=pay'>已付款</a><a class='Refund' href='diancai_oder.aspx?openid={0}&type=refund'>退单</a>", openId);
+                        menuStr = string.Format(@"<li class='active'><a href='diancai_oder.aspx?openid={0}&type=pay'>已付款</a></li>
+                                                        <li class='normal'><a href='diancai_oder.aspx?openid={0}&type=refund'>退单</a></li>", openId);
                         GetPay(openId);
                     }
                 }
@@ -49,40 +48,51 @@ namespace WeiXinPF.Web.weixin.restaurant
                 var detailBuilder = new StringBuilder();
                 for (int i = 0; i < dr.Tables[0].Rows.Count; i++)
                 {
-                    detailBuilder.Append("<ul class=\"round\">");
-                    detailBuilder.AppendFormat("<li class=\"title\"><a href=\"diancai_orderDetail.aspx?wid={0}&shopid={1}&dingdan={2}&openid={3}\"><span>{4}  {5}</span>",
+                    detailBuilder.Append("<ul>");
+                    detailBuilder.Append("<li>");
+                    detailBuilder.AppendFormat("<a href=\"diancai_orderDetail.aspx?wid={0}&shopid={1}&dingdan={2}&openid={3}\">",
                                                                     dr.Tables[0].Rows[i]["wid"].ToString(),
                                                                     dr.Tables[0].Rows[i]["shopinfoid"].ToString(),
                                                                     dr.Tables[0].Rows[i]["id"].ToString(),
-                                                                    openId,
-                                                                    dr.Tables[0].Rows[i]["oderTime"].ToString(),
-                                                                    dr.Tables[0].Rows[i].Field<string>("hotelName"));
-                    detailBuilder.Append(" <table width=\"100%\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" class=\"cpbiaoge\">");
-                    detailBuilder.Append("<tr><th>订单编号</th>");
-                    detailBuilder.Append("<th width=\"70\" class=\"cc\">订单金额</th><th width=\"55\" class=\"cc\">订单状态</th></tr>");
-                    detailBuilder.AppendFormat("<tr><td  class=\"cc\">{0}</td><td class=\"cc\">{1}元</td>",
-                                                                    dr.Tables[0].Rows[i]["orderNumber"].ToString(),
-                                                                    dr.Tables[0].Rows[i]["payAmount"].ToString());
-                    detailBuilder.Append("<td class=\"cc\"> ");
+                                                                    openId
+                                                                  );
+                    detailBuilder.Append("<div class=\"info_01\">");
+                    detailBuilder.AppendFormat("<h3>{0}</h3>", dr.Tables[0].Rows[i].Field<string>("hotelName"));
+                    detailBuilder.AppendFormat("<p>实付<b>￥{0}</b>共<b>{1}</b>件商品</p>", dr.Tables[0].Rows[i]["payAmount"].ToString(), dr.Tables[0].Rows[i]["OrderCount"].ToString());
+                    detailBuilder.Append("<span class=\"wave_blue_icon\"></span>");
+                    detailBuilder.Append("</div>");
+                    detailBuilder.Append("<div class=\"info_02\">");
+                    detailBuilder.Append("<dl>");
+                    detailBuilder.AppendFormat("<dd><b class=\"i_gray_icon\"></b>订单编号 {0}</dd>", dr.Tables[0].Rows[i]["orderNumber"].ToString());
+                    detailBuilder.AppendFormat("<dd><b class=\"time_gray_icon\"></b>购票日期 {0}</dd>", dr.Tables[0].Rows[i]["oderTime"].ToString());
+                    //此处应该有购票日期
+                    detailBuilder.Append("</dl>");
+                    detailBuilder.Append("</div>");
+                    detailBuilder.Append("<div class=\"info_03\">");
                     var payStatus = dr.Tables[0].Rows[i]["payStatus"].ToString();
+                    string payStatusText;
                     switch (payStatus)
                     {
                         case "1":
-                            detailBuilder.Append("<em class=\"ok\">等待使用</em>");
+                            payStatusText = "等待使用";
                             break;
                         case "2":
                         case "4": //部分退款
-                            detailBuilder.Append("<em class=\"ok\">部分使用</em>");
+                            payStatusText = "部分使用";
                             break;
                         case "3":
                         case "5"://全部退款
-                            detailBuilder.Append("<em class=\"error\">全部使用</em>");
+                            payStatusText = "全部使用";
                             break;
                         default:
-                            detailBuilder.Append("<em class=\"no\">未处理</em>");
+                            payStatusText = "未处理";
                             break;
                     }
-                    detailBuilder.Append(" </td></tr></table></a></li></ul>");
+                    detailBuilder.AppendFormat("<span>{0}</span>", payStatusText);
+                    detailBuilder.Append("</div>");
+                    detailBuilder.Append("</a>");
+                    detailBuilder.Append("</li>");
+                    detailBuilder.Append("</ul>");
                 }
 
                 str = detailBuilder.ToString();
@@ -99,42 +109,33 @@ namespace WeiXinPF.Web.weixin.restaurant
                 var builder = new StringBuilder();
                 for (int i = 0; i < dr.Tables[0].Rows.Count; i++)
                 {
-                    builder.Append("<ul class=\"round\">");
-                    builder.Append("<li class=\"title\">");
+                    builder.Append("<ul>");
+                    builder.Append("<li>");
                     builder.AppendFormat("<a href=\"diancai_RefundOrderDetail.aspx?wid={0}&shopid={1}&dingdan={2}&refundCode={3}&openid={4}\">",
-                                                                dr.Tables[0].Rows[i]["wid"].ToString(),
-                                                                dr.Tables[0].Rows[i]["shopinfoid"].ToString(),
-                                                                dr.Tables[0].Rows[i]["dingdan"].ToString(),
-                                                                dr.Tables[0].Rows[i]["refundCode"].ToString(),
-                                                                openId);
-                    builder.AppendFormat("<span>{0}  {1}</span>",
-                                                                dr.Tables[0].Rows[i]["createDate"].ToString(),
-                                                                dr.Tables[0].Rows[i].Field<string>("hotelName"));
-
-
-                    builder.Append("<table width=\"100%\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" class=\"cpbiaoge\">");
-                    builder.Append("<tr><th>退单编号</th>");
-                    builder.Append("<th width=\"50\" class=\"cc\">退款总额</th><th width=\"40\" class=\"cc\">状态</th></tr>");
-                    builder.AppendFormat("<tr><td class=\"cc\">{0}</td><td class=\"cc\">{1}元</td>",
-                                                                dr.Tables[0].Rows[i]["refundCode"].ToString(),
-                                                                dr.Tables[0].Rows[i]["refundAmount"].ToString());
-                    builder.Append("<td class=\"cc\">");
-
+                                                                            dr.Tables[0].Rows[i]["wid"].ToString(),
+                                                                            dr.Tables[0].Rows[i]["shopinfoid"].ToString(),
+                                                                            dr.Tables[0].Rows[i]["dingdan"].ToString(),
+                                                                            dr.Tables[0].Rows[i]["refundCode"].ToString(),
+                                                                            openId);
+                    builder.Append("<div class=\"info_01\">");
+                    builder.AppendFormat("<h3>{0}</h3>", dr.Tables[0].Rows[i].Field<string>("hotelName"));
+                    builder.AppendFormat("<p>退款<b>￥{0}</b>共<b>{1}</b>件商品</p>", dr.Tables[0].Rows[i]["refundAmount"].ToString(), dr.Tables[0].Rows[i]["RefundCount"].ToString());
+                    builder.Append("<span class=\"wave_blue_icon\"></span>");
+                    builder.Append("</div>");
+                    builder.Append("<div class=\"info_02\">");
+                    builder.Append("<dl>");
+                    builder.AppendFormat("<dd><b class=\"i_gray_icon\"></b>订单编号 {0}</dd>", dr.Tables[0].Rows[i]["orderNumber"].ToString());
+                    builder.AppendFormat("<dd><b class=\"i_gray_icon\"></b>退单编号 {0}</dd>", dr.Tables[0].Rows[i]["refundCode"].ToString());
+                    builder.AppendFormat("<dd><b class=\"time_gray_icon\"></b>退单日期 {0}</dd>", dr.Tables[0].Rows[i]["createDate"].ToString());
+                    //此处应该有购票日期
+                    builder.Append("</dl>");
+                    builder.Append("</div>");
+                    builder.Append("<div class=\"info_03\">");
                     var refundStatus = Convert.ToInt32(dr.Tables[0].Rows[i]["refundStatus"]);
                     var statusDict = StatusManager.DishStatus.GetStatusDict(refundStatus);
-                    if (string.Equals(dr.Tables[0].Rows[i]["refundStatus"].ToString(), StatusManager.DishStatus.PreRefund.StatusID.ToString()))
-                    {
-                        builder.AppendFormat("<em class=\"ok\">{0}</em>", statusDict.StatusName);
-                    }
-                    else if (string.Equals(dr.Tables[0].Rows[i]["refundStatus"].ToString(), StatusManager.DishStatus.RefundFaild.StatusID.ToString()))
-                    {
-                        builder.AppendFormat("<em class=\"no\">{0}</em>", statusDict.StatusName);
-                    }
-                    else
-                    {
-                        builder.AppendFormat("<em class=\"error\">{0}</em>", statusDict.StatusName);
-                    }
-                    builder.Append(" </td></tr></table>");
+
+                    builder.AppendFormat("<span>{0}</span>", statusDict.StatusName);
+                    builder.Append("</div>");
                     builder.Append("</a>");
                     builder.Append("</li>");
                     builder.Append("</ul>");
@@ -145,6 +146,3 @@ namespace WeiXinPF.Web.weixin.restaurant
         }
     }
 }
-
-
-
