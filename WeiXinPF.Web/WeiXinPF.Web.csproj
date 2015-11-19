@@ -8201,6 +8201,10 @@
     <Content Include="weixin\cashred\images\title-bg-red.png" />
     <Content Include="weixin\cashred\index.aspx" />
     <Content Include="weixin\cashred\js\alert.js" />
+    <Content Include="weixin\restaurant\css\orderlist.css" />
+    <Content Include="weixin\restaurant\images\i_gray_icon.png" />
+    <Content Include="weixin\restaurant\images\time_gray_icon.png" />
+    <Content Include="weixin\restaurant\images\wave_blue_icon.svg" />
     <Content Include="weixin\WeChatPay\getopenId.aspx" />
     <Content Include="weixin\KNSHotel\css\hotels.css" />
     <Content Include="weixin\KNSHotel\css\mystyle.css" />

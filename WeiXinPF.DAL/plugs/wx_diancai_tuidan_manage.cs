@@ -141,23 +141,32 @@ namespace WeiXinPF.DAL
         /// <returns></returns>
         public DataSet GetRefundList(string openId)
         {
-            const string sql = @"SELECT  distinct tm.createDate ,
+            const string sql = @"SELECT  DISTINCT
+                                                CONVERT(VARCHAR(10), tm.createDate, 120) AS CreateDate ,
                                                 ds.hotelName ,
                                                 tm.refundCode ,
                                                 dm.orderNumber ,
-                                                tm.refundAmount/100 as refundAmount,
+                                                tm.refundAmount / 100 AS refundAmount ,
                                                 tm.refundStatus ,
                                                 tm.wid ,
                                                 tm.openid ,
                                                 tm.shopinfoid ,
-                                                dm.id AS dingdan
-                                        FROM    dbo.wx_diancai_tuidan_manage tm
+                                                dm.id AS dingdan,
+		                                          t.RefundCount
+                                        FROM    ( SELECT    refundCode ,
+                                                            COUNT(1) AS RefundCount
+                                                  FROM      dbo.wx_diancai_tuidan_manage tm
+                                                            INNER JOIN dbo.wx_Verification_IdentifyingCodeInfo vi ON tm.caipinid = vi.IdentifyingCodeId
+                                                                                                      AND vi.ModuleName = 'restaurant'
+                                                  WHERE     tm.openid = @OpenID
+                                                  GROUP BY  refundCode
+                                                ) t
+                                                INNER JOIN dbo.wx_diancai_tuidan_manage tm ON t.refundCode = tm.refundCode
                                                 INNER JOIN dbo.wx_Verification_IdentifyingCodeInfo vi ON tm.caipinid = vi.IdentifyingCodeId
                                                                                                       AND vi.ModuleName = 'restaurant'
                                                 LEFT JOIN dbo.wx_diancai_shopinfo ds ON tm.shopinfoid = ds.id
                                                 INNER JOIN dbo.wx_diancai_dingdan_manage dm ON vi.OrderId = dm.id
-                                        WHERE   dm.openid = @OpenID
-                                        ORDER BY tm.CreateDate DESC;";
+                                        ORDER BY CreateDate DESC;";
 
             SqlParameter[] sqlparams =
                 {
