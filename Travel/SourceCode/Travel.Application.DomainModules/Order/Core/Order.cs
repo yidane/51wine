@@ -8,6 +8,7 @@ namespace Travel.Application.DomainModules.Order.Core
 {
     using System.Collections.Specialized;
     using System.Data;
+    using System.Data.Odbc;
     using System.Globalization;
     using System.IO;
     using System.Security.Cryptography;
@@ -592,6 +593,18 @@ namespace Travel.Application.DomainModules.Order.Core
         protected string CreateRefundOrderCode()
         {
             return "T" + DateTime.Now.ToString("yyyyMMddHHmmssffff") + this.GetRandom();
+        }
+
+        #endregion
+
+        #region 未支付订单
+
+        public static IList<OrderEntity> GetOverTimeOrder(int overtimeSeconds)
+        {
+            return OrderEntity.GetOrders(
+                    item =>
+                        item.OrderStatus.Equals(OrderStatus.OrderStatus_WaitPay)
+                        && item.CreateTime.AddSeconds(overtimeSeconds).CompareTo(DateTime.Now) < 0);
         }
 
         #endregion

@@ -184,6 +184,19 @@
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="conditions"></param>
+        /// <returns></returns>
+        public static IList<OrderEntity> GetOrders(Func<OrderEntity, bool> conditions)
+        {
+            using (var db = new TravelDBContext())
+            {
+                return db.Order.Where(conditions).ToList();
+            }
+        }
+
         public static IList<OrderEntity> GetMyOrders(string openId)
         {
             using (var db = new TravelDBContext())

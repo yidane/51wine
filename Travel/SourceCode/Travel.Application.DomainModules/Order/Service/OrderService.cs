@@ -663,5 +663,31 @@ namespace Travel.Application.DomainModules.Order.Service
                 throw new ArgumentNullException("订单号不能为空");
             }
         }
+
+        public void OrderReleaseProcess(int overtimeSeconds)
+        {
+            var overtimeOrders = Core.Order.GetOverTimeOrder(overtimeSeconds);
+
+            if (overtimeOrders.Any())
+            {
+                foreach (var order in overtimeOrders)
+                {
+                    var result = OTAOrderOperate.OrderRelease(order.OrderId.ToString());
+
+                    if (result.IsTrue)
+                    {
+                        order.OrderStatus = OrderStatus.OrderStatus_Released;
+
+                        foreach (var ticket in order.Tickets)
+                        {
+                            ticket.TicketStatus = OrderStatus.TicketStatus_Released;
+                            ticket.LatestModifyTime = DateTime.Now;
+                        }
+
+                        order.ModifyOrder();
+                    }
+                }
+            }
+        }
     }
 }

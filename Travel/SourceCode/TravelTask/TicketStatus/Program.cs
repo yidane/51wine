@@ -16,7 +16,24 @@ namespace TicketStatus
         {
             Console.WriteLine("3秒钟后启动。");
 
-#if DEBUG
+
+
+            var windowsTimeSpan = WebConfigureHelper.Appsettings.WindowsConfig.WindowsTimeSpan;
+
+            var tmr = new Timer(doWork, "获取门票状态......", 3000, windowsTimeSpan * 60 * 1000);
+            var tmr2 = new Timer(ReleaseOvertimeOrders, 30 * 60, 3000, 30 * 60 * 1000);
+
+            Console.WriteLine("按任意键退出.");
+            Console.ReadLine();
+            Console.WriteLine("按任意键确认退出.");
+            Console.ReadLine();
+            tmr.Dispose();
+            tmr2.Dispose();
+
+        }
+
+        private static void doWork(object data)
+        {
             var service = new OrderService();
             Console.WriteLine("开始获取票务状态。");
             try
@@ -31,29 +48,15 @@ namespace TicketStatus
                 Console.WriteLine(ex.StackTrace);
                 //throw;
             }
-            Console.WriteLine("按任意键退出.");
-            Console.ReadLine();
-#else
-
-            var windowsTimeSpan = WebConfigureHelper.Appsettings.WindowsConfig.WindowsTimeSpan;
-
-            var tmr = new Timer(doWork, "获取门票状态......", 3000, windowsTimeSpan * 60 * 1000);
-
-            Console.WriteLine("按任意键退出.");
-            Console.ReadLine();
-            Console.WriteLine("按任意键确认退出.");
-            Console.ReadLine();
-            tmr.Dispose();
-#endif
         }
 
-        private static void doWork(object data)
+        private static void ReleaseOvertimeOrders(object data)
         {
             var service = new OrderService();
-            Console.WriteLine("开始获取票务状态。");
+            Console.WriteLine("开始处理超时订单。");
             try
             {
-                service.SearchTicketStatus(100);
+                service.OrderReleaseProcess(int.Parse(data.ToString()));
             }
             catch (Exception ex)
             {

@@ -171,6 +171,12 @@ namespace Travel.Application.OrderUnitTest
         }
 
         [Test]
+        public void FindOvertimeOrders_Orders_ReturnOrderEntityList()
+        {
+            var overtimeOrders = Order.GetOverTimeOrder(30 * 60);
+        }
+
+        [Test]
         public void procedureTest()
         {
             var t = new List<TicketEntity>()

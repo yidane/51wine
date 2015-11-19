@@ -26,6 +26,7 @@ namespace Travel.Infrastructure.DomainDataAccess.Order
         public const string OrderStatus_WaitRefund = "OS20004";
         public const string OrderStatus_WaitUse = "OS20005";
         public const string OrderStatus_Used = "OS20006";
+        public const string OrderStatus_Released = "OS20007";
         public const string DateTicketStatus_Init = "DTS10001";
         public const string DateTicketStatus_Lock = "DTS10002";
         public const string DateTicketStatus_PayComplete = "DTS10003";
@@ -71,6 +72,11 @@ namespace Travel.Infrastructure.DomainDataAccess.Order
         /// 已使用
         /// </summary>
         public const string TicketStatus_Used = "TS30008";
+
+        /// <summary>
+        /// 已释放
+        /// </summary>
+        public const string TicketStatus_Released = "TS30010";
 
         /// <summary>
         /// 退票队列初始状态
