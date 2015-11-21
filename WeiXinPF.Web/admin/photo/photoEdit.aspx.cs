@@ -65,7 +65,8 @@ namespace WeiXinPF.Web.admin.photo
             hidid.Value = id.ToString();
 
             var dto = _service.GetModel(id);
-
+            Model.wx_requestRule rule = rBll.GetModelList("modelFunctionName='湖怪' and modelFunctionId=" + id)[0];
+            txtKW.Text = rule.reqKeywords;
             txtactName.Text = dto.actName;
             txtactContent.Value = dto.actContent;
             txtbrief.Value = dto.brief;

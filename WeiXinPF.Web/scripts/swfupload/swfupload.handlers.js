@@ -7,6 +7,7 @@ $(function () {
         thumbnail: false, //是否生成缩略图
         sendurl: null, //发送地址
         filetypes: "*.jpg;*.jpge;*.png;*.gif;", //文件类型
+        file_types_description: "JPG Images",
         filesize: "2048", //文件大小
         btntext: "浏览...", //上传按钮的文字
         btnwidth: 48, //上传按钮的宽度
@@ -40,7 +41,7 @@ $(function () {
             upload_url: p.sendurl, //上传地址
             file_size_limit: p.filesize, //文件大小
             file_types: p.filetypes, //文件类型
-            file_types_description: "JPG Images",
+            file_types_description: p.file_types_description,
             file_upload_limit: "0", //一次能上传的文件数量
 
             file_queue_error_handler: fileQueueError,
