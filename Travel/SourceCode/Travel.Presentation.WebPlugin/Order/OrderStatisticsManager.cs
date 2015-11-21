@@ -104,7 +104,7 @@ namespace Travel.Presentation.WebPlugin.Order
             {
                 rtnTicketStatusEntityList.Add(new TicketStatusEntity()
                 {
-                    StatusCode = "yidane",
+                    StatusCode = "",
                     StatusDesc = "所有类型"
                 });
 

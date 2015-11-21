@@ -115,6 +115,10 @@ namespace Travel.Presentation.WebPlugin.UserStatistics
                     rtnUserStatisticsList.Add(newUserStatistics);
                 }
             }
+            else
+            {
+                return new List<UserStatisticsInfo>();
+            }
 
             ////计算净值，平滑总关注数据曲线
             //foreach (UserStatisticsInfo info in rtnUserStatisticsList)
