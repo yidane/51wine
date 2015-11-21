@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using WeiXinPF.Common;
+using WeiXinPF.Web.weixin.restaurant;
 
 namespace WeiXinPF.Web.admin.diancai
 {
@@ -49,7 +50,7 @@ namespace WeiXinPF.Web.admin.diancai
 
         protected void save_groupbase_Click(object sender, EventArgs e)
         {
-            string status = "2";
+            var status = StatusManager.DishStatus.Used.StatusID;
 
             Guid identifyingCodeId;
 
@@ -59,7 +60,7 @@ namespace WeiXinPF.Web.admin.diancai
 
                 if (identifyingCodeObject != null && identifyingCodeObject.ShopId.Equals(shopid.ToString()))
                 {
-                    identifyingCodeObject.Status = 2;
+                    identifyingCodeObject.Status = StatusManager.DishStatus.Used.StatusID;
                     identifyingCodeObject.ModifyTime = DateTime.Now;
 
                     using (var scope = new TransactionScope())
@@ -71,12 +72,12 @@ namespace WeiXinPF.Web.admin.diancai
                     }
                     manage = managebll.GetModel(MyCommFun.Str2Int(id));
                     BLL.wx_diancai_member menbll = new BLL.wx_diancai_member();
-                    if (status == "2")
+                    if (status == StatusManager.DishStatus.Used.StatusID)
                     {
 
                         menbll.Update(manage.openid);
                     }
-                    if (status == "3" || status == "4")
+                    if (status == StatusManager.DishStatus.PreRefund.StatusID || status == StatusManager.DishStatus.Refund.StatusID)
                     {
 
                         menbll.Updatefail(manage.openid);
@@ -122,7 +123,7 @@ namespace WeiXinPF.Web.admin.diancai
                     amount += Convert.ToDecimal(dr.Tables[0].Rows[i]["price"]);
                 }
 
-                Dingdanlist += "<tr><td>总计：</td><td ></td><td ></td><td class=\"rr\">￥" + amount + "</td></tr>";
+                Dingdanlist += "<tr><td></td><td ></td><td ></td><td class=\"rr\" style=\"color: red; font-weight:bold;\">总计：￥" + amount + "</td></tr>";
 
             }
 
@@ -133,17 +134,21 @@ namespace WeiXinPF.Web.admin.diancai
             {
                 dingdanren += "<tr><td width=\"70\">订单编号： " + manage.orderNumber + "</td></tr>";
                 dingdanren += "<tr> <td>预订日期：" + manage.oderTime + "</td></tr>";
-                dingdanren += "<tr><td>联系人：" + manage.customerName + "</td></tr>";
-                dingdanren += "<tr><td>联系电话：" + manage.customerTel + "</td></tr>";
+                dingdanren += "<tr><td>预约人：" + manage.customerName + "</td></tr>";
+                dingdanren += "<tr><td>电话：" + manage.customerTel + "</td></tr>";
                 //dingdanren += "<tr><td>地址：" + manage.address + "</td></tr>";
-                dingdanren += "<tr><td>备注 ：" + manage.oderRemark + "</td></tr>";
-                if (manage.payStatus == 2)
+                //dingdanren += "<tr><td>备注 ：" + manage.oderRemark + "</td></tr>";
+                if (manage.payStatus == StatusManager.PayStatus.Payed.StatusID)
                 {
-                    dingdanren += "<tr><td>订单状态：<em  style='width:70px;' class='ok'>已使用</em></td></tr>";
+                    dingdanren += "<tr><td>订单状态：<em  style='width:70px;' class='ok'>等待使用</em></td></tr>";
                 }
-                else if (manage.payStatus == 1)
+                else if (manage.payStatus == StatusManager.PayStatus.PartUsed.StatusID)
                 {
                     dingdanren += "<tr><td>订单状态：<em  style='width:70px;' class='ok'>部分使用</em></td></tr>";
+                }
+                else if (manage.payStatus == StatusManager.PayStatus.PartRefund.StatusID)
+                {
+                    dingdanren += "<tr><td>订单状态：<em  style='width:70px;' class='ok'>部分退款</em></td></tr>";
                 }
                 else
                 {
@@ -154,18 +159,15 @@ namespace WeiXinPF.Web.admin.diancai
             {
                 dingdanren += "<tr><td width=\"70\">订单编号：</td></tr>";
                 dingdanren += "<tr> <td>预订日期：</td></tr>";
-                dingdanren += "<tr><td>联系人：</td></tr>";
-                dingdanren += "<tr><td>联系电话：</td></tr>";
+                dingdanren += "<tr><td>预约人：</td></tr>";
+                dingdanren += "<tr><td>电话：</td></tr>";
                 //dingdanren += "<tr><td>地址：</td></tr>";
-                dingdanren += "<tr><td>备注 ：</td></tr>";
+                //dingdanren += "<tr><td>备注 ：</td></tr>";
 
 
                 dingdanren += "<tr><td>订单状态：<em  style='width:70px;' class='no'>未使用</em></td></tr>";
 
             }
-
-
-            dingdanren += "<tr><td>商家留言：</td></tr> <tr> <td></td></tr>";
         }
     }
 }
