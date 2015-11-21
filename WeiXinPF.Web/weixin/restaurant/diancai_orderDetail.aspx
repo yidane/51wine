@@ -2,11 +2,16 @@
 
 
 <asp:Content ID="h" ContentPlaceHolderID="head" runat="server">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;" />
+    <%--    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="format-detection" content="telephone=no"/>
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+    <meta content="telephone=no" name="format-detection" />
+    <meta content="email=no" name="format-detection" />--%>
+
     <title>我的订单</title>
     <link href="css/diancai.css" rel="stylesheet" type="text/css">
     <link href="css/swiper.min.css" rel="stylesheet" />
@@ -18,7 +23,7 @@
     <style>
         .table > thead > tr > th {
             vertical-align: bottom;
-            border-bottom: 2px solid #ddd;
+            border-bottom: 1px solid red;
         }
 
         .label-primary {
@@ -52,8 +57,6 @@
         }
 
         .alert-success {
-            color: #3c763d;
-            background-color: #dff0d8;
             border-color: #d6e9c6;
         }
 
@@ -81,6 +84,8 @@
             padding-top: 10px;
             height: 32px;
             line-height: 32px;
+            margin-bottom: 10px;
+            padding-bottom: 6px;
         }
 
             .gpd-item-title .detailicon-ticket, .gpd-item-title .gpd-item-title-name {
@@ -143,7 +148,6 @@
         .cp {
             width: 100%;
             text-align: left;
-            border-top: 1px solid #c6c6c6;
         }
 
             .cp .cc {
@@ -166,7 +170,7 @@
                 padding: 8px 1px 8px 1px;
             }
 
-             .swiper-image {
+        .swiper-image {
             height: 220px;
         }
     </style>
@@ -224,8 +228,8 @@
 <asp:Content ID="c" ContentPlaceHolderID="content" runat="server" class="mode_webapp">
     <div class="cardexplain" id="contact_info" runat="server" style="margin-bottom: 50px">
         <div class="alert alert-success top-alert" role="alert">
-            <span style="float: left"><span class="top-alert-name">订单编号:</span> <%=OrderNumber.Trim() %></span>
-            <span style="float: right"><span class="top-alert-name">总价:<strong style="color: red"><%=PayAmount.Trim() %>元</strong></span></span>
+            <span style="float: left"><span>订单编号:</span> <%=OrderNumber.Trim() %></span>
+            <span style="float: right"><span class="top-alert-name">总价  <strong style="color: red"><%=PayAmount.Trim() %>元</strong></span></span>
         </div>
         <section>
             <table width="100%" border="0" cellpadding="0" cellspacing="0" class="DishDetail table table-bordered">
