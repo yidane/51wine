@@ -9,11 +9,11 @@ namespace WeiXinPF.Web.admin
 {
     public partial class center : Web.UI.ManagePage
     {
-        private string _userType = String.Empty;
+        public string _userType = String.Empty;
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!Page.IsPostBack)
-            {
+//            if (!Page.IsPostBack)
+//            {
                 Model.manager admin_info = GetAdminInfo(); //管理员信息
                 //登录信息
                 if (admin_info != null)
@@ -52,7 +52,7 @@ namespace WeiXinPF.Web.admin
                 //Utils.GetDomainStr("dt_cache_domain_info", "http://www.WeiXinPF.net/upgrade.ashx?u=" + Request.Url.DnsSafeHost + "&i=" + Request.ServerVariables["LOCAL_ADDR"]);
 
               
-            }
+//            }
         }
 
         private bool IsShopAdmin(int id)

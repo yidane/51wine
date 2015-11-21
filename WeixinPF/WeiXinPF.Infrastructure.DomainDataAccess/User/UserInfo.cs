@@ -99,7 +99,7 @@ namespace WeiXinPF.Infrastructure.DomainDataAccess.User
             UserInfoEntity result = null;
             using (var db = new WXDBContext())
             {
-                result = db.UserInfo.Find(openid);
+                result = db.UserInfo.FirstOrDefault(c=>c.openid== openid);
                 
             }
             return result;

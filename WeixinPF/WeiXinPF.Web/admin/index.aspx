@@ -167,7 +167,7 @@
                 //绑定树菜单事件.结束
             });
             //定位或跳转到相应的菜单
-            linkMenuTree(islink);
+//            linkMenuTree(islink);
         }
         //定位或跳转到相应的菜单
         function linkMenuTree(islink, navid) {
@@ -219,7 +219,11 @@
                 }
                 //检查是否需要跳转链接
                 if (islink == true) {
-                    frames["mainframe"].location.href = cookieObj.attr("href");
+//                    frames["mainframe"].location.href = cookieObj.attr("href"); 
+// document.getElementById("mainframe").src=cookieObj.attr("href");
+                    $("#mainframe").attr('src', cookieObj.attr("href"));
+                    $("#mainframe").attr('src', cookieObj.attr("href"));
+//$("#mainframe").reload();
                 }
             } else if (argument == 2) {
                 //删除所有的选中样式

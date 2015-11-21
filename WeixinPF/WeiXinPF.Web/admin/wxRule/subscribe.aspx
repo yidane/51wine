@@ -17,15 +17,24 @@
     <script type="text/javascript" src="../js/layout.js"></script>
     <link href="../skin/default/style.css" rel="stylesheet" type="text/css" />
     <link href="../skin/mystyle.css" rel="stylesheet" type="text/css" />
-    <link href="../skin/btn-group.css" rel="stylesheet" type="text/css"/>
+    <link href="../skin/btn-group.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript">
         $(function () {
             //初始化表单验证
             $("#form1").initValidform();
 
-            //初始化上传控件
-            $(".upload-img").each(function () {
-                $(this).InitSWFUpload({ sendurl: "../../tools/upload_ajax.ashx", flashurl: "../../scripts/swfupload/swfupload.swf" });
+            //            //初始化上传控件
+            //            $(".upload-img").each(function () {
+            //                $(this).InitSWFUpload({ sendurl: "../../tools/upload_ajax.ashx", flashurl: "../../scripts/swfupload/swfupload.swf" });
+            //            });
+
+            //初始化音频上传控件
+            $(".upload-audio").each(function () {
+                $(this).InitSWFUpload({
+                    sendurl: "../../tools/upload_ajax.ashx", flashurl: "../../scripts/swfupload/swfupload.swf",
+                    filetypes: "*.mp3;*.wav;",//音频类型
+                    file_types_description: "mp3"
+                });
             });
 
             $("input[name='rblResponseType']").click(function () {
@@ -128,13 +137,21 @@
         //执行回传函数
         function DelExePostBack(obj) {
             var objid = obj.id;
-            re = new RegExp("_", "g");
-            var objid = objid.replace(re, "$");
+            
+            var href = obj.href;
+            var re = new RegExp("_", "g");
+            objid = objid.replace(re, "$");
 
             var msg = "删除记录后不可恢复，您确定吗？";
+            //            'rpnewsList_LinkButton1_0'
+            //            'rpnewsList$ctl00$LinkButton1'
             $.dialog.confirm(msg, function () {
+                //                document.getElementById('<%=btnSubmit.ClientID%>').click();
+                //                __doPostBack(objid, '');
 
-                __doPostBack(objid, '');
+                eval(href);
+                //                __doPostBack('rpnewsList$ctl00$LinkButton1', '');
+
             });
             return false;
         }
@@ -209,7 +226,7 @@
                 <dt>音乐链接</dt>
                 <dd>
                     <asp:TextBox ID="txtMusicFile" runat="server" CssClass="input normal upload-path" />
-                    <div class="upload-box upload-img"></div>
+                    <div class="upload-box upload-audio"></div>
                     <span class="Validform_checktip">*支持mp3格式，可以填写网上的链接，也可以本地上传！</span>
                 </dd>
             </dl>
@@ -264,7 +281,8 @@
                                         <td>
                                             <div class="btn-group" role="group" aria-label="...">
                                                 <a class="btn btn-default" title="编辑" href="javascript:;" onclick='showGuiZeDialog(<%#Eval("id")%>);'>编辑</a>
-                                                <asp:LinkButton CssClass="btn btn-default" ID="LinkButton1" runat="server" OnClientClick="return DelExePostBack(this);" CommandName="delete" CommandArgument='<%#Eval("id")%>'>删除</asp:LinkButton>
+                                                <asp:LinkButton CssClass="btn btn-default" runat="server"
+                                                    OnClientClick="return DelExePostBack(this);" CommandName="delete" CommandArgument='<%#Eval("id")%>'>删除</asp:LinkButton>
 
                                             </div>
 

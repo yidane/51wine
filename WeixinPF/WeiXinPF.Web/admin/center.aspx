@@ -135,429 +135,7 @@
             color: #ffffff !important;
         }
 
-        .bg-black {
-            background: #000000 !important;
-        }
 
-        .bg-white {
-            background: #ffffff !important;
-        }
-
-        .bg-lime {
-            background: #a4c400 !important;
-        }
-
-        .bg-green {
-            background: #60a917 !important;
-        }
-
-        .bg-emerald {
-            background: #008a00 !important;
-        }
-
-        .bg-teal {
-            background: #00aba9 !important;
-        }
-
-        .bg-cyan {
-            background: #1ba1e2 !important;
-        }
-
-        .bg-cobalt {
-            background: #0050ef !important;
-        }
-
-        .bg-indigo {
-            background: #6a00ff !important;
-        }
-
-        .bg-violet {
-            background: #aa00ff !important;
-        }
-
-        .bg-pink {
-            background: #dc4fad !important;
-        }
-
-        .bg-magenta {
-            background: #d80073 !important;
-        }
-
-        .bg-crimson {
-            background: #a20025 !important;
-        }
-
-        .bg-red {
-            background: #ce352c !important;
-        }
-
-        .bg-orange {
-            background: #fa6800 !important;
-        }
-
-        .bg-amber {
-            background: #f0a30a !important;
-        }
-
-        .bg-yellow {
-            background: #e3c800 !important;
-        }
-
-        .bg-brown {
-            background: #825a2c !important;
-        }
-
-        .bg-olive {
-            background: #6d8764 !important;
-        }
-
-        .bg-steel {
-            background: #647687 !important;
-        }
-
-        .bg-mauve {
-            background: #76608a !important;
-        }
-
-        .bg-taupe {
-            background: #87794e !important;
-        }
-
-        .bg-gray {
-            background: #555555 !important;
-        }
-
-        .bg-dark {
-            background: #333333 !important;
-        }
-
-        .bg-darker {
-            background: #222222 !important;
-        }
-
-        .bg-transparent {
-            background: transparent !important;
-        }
-
-        .bg-darkBrown {
-            background: #63362f !important;
-        }
-
-        .bg-darkCrimson {
-            background: #640024 !important;
-        }
-
-        .bg-darkMagenta {
-            background: #81003c !important;
-        }
-
-        .bg-darkIndigo {
-            background: #4b0096 !important;
-        }
-
-        .bg-darkCyan {
-            background: #1b6eae !important;
-        }
-
-        .bg-darkCobalt {
-            background: #00356a !important;
-        }
-
-        .bg-darkTeal {
-            background: #004050 !important;
-        }
-
-        .bg-darkEmerald {
-            background: #003e00 !important;
-        }
-
-        .bg-darkGreen {
-            background: #128023 !important;
-        }
-
-        .bg-darkOrange {
-            background: #bf5a15 !important;
-        }
-
-        .bg-darkRed {
-            background: #9a1616 !important;
-        }
-
-        .bg-darkPink {
-            background: #9a165a !important;
-        }
-
-        .bg-darkViolet {
-            background: #57169a !important;
-        }
-
-        .bg-darkBlue {
-            background: #16499a !important;
-        }
-
-        .bg-lightBlue {
-            background: #4390df !important;
-        }
-
-        .bg-lightRed {
-            background: #da5a53 !important;
-        }
-
-        .bg-lightGreen {
-            background: #7ad61d !important;
-        }
-
-        .bg-lighterBlue {
-            background: #00ccff !important;
-        }
-
-        .bg-lightTeal {
-            background: #45fffd !important;
-        }
-
-        .bg-lightOlive {
-            background: #78aa1c !important;
-        }
-
-        .bg-lightOrange {
-            background: #ffc194 !important;
-        }
-
-        .bg-lightPink {
-            background: #f472d0 !important;
-        }
-
-        .bg-grayDark {
-            background: #333333 !important;
-        }
-
-        .bg-grayDarker {
-            background: #222222 !important;
-        }
-
-        .bg-grayLight {
-            background: #999999 !important;
-        }
-
-        .bg-grayLighter {
-            background: #eeeeee !important;
-        }
-
-        .bg-blue {
-            background: #00aff0 !important;
-        }
-
-        .fg-black {
-            color: #000000 !important;
-        }
-
-        .fg-white {
-            color: #ffffff !important;
-        }
-
-        .fg-lime {
-            color: #a4c400 !important;
-        }
-
-        .fg-green {
-            color: #60a917 !important;
-        }
-
-        .fg-emerald {
-            color: #008a00 !important;
-        }
-
-        .fg-teal {
-            color: #00aba9 !important;
-        }
-
-        .fg-cyan {
-            color: #1ba1e2 !important;
-        }
-
-        .fg-cobalt {
-            color: #0050ef !important;
-        }
-
-        .fg-indigo {
-            color: #6a00ff !important;
-        }
-
-        .fg-violet {
-            color: #aa00ff !important;
-        }
-
-        .fg-pink {
-            color: #dc4fad !important;
-        }
-
-        .fg-magenta {
-            color: #d80073 !important;
-        }
-
-        .fg-crimson {
-            color: #a20025 !important;
-        }
-
-        .fg-red {
-            color: #ce352c !important;
-        }
-
-        .fg-orange {
-            color: #fa6800 !important;
-        }
-
-        .fg-amber {
-            color: #f0a30a !important;
-        }
-
-        .fg-yellow {
-            color: #e3c800 !important;
-        }
-
-        .fg-brown {
-            color: #825a2c !important;
-        }
-
-        .fg-olive {
-            color: #6d8764 !important;
-        }
-
-        .fg-steel {
-            color: #647687 !important;
-        }
-
-        .fg-mauve {
-            color: #76608a !important;
-        }
-
-        .fg-taupe {
-            color: #87794e !important;
-        }
-
-        .fg-gray {
-            color: #555555 !important;
-        }
-
-        .fg-dark {
-            color: #333333 !important;
-        }
-
-        .fg-darker {
-            color: #222222 !important;
-        }
-
-        .fg-transparent {
-            color: transparent !important;
-        }
-
-        .fg-darkBrown {
-            color: #63362f !important;
-        }
-
-        .fg-darkCrimson {
-            color: #640024 !important;
-        }
-
-        .fg-darkMagenta {
-            color: #81003c !important;
-        }
-
-        .fg-darkIndigo {
-            color: #4b0096 !important;
-        }
-
-        .fg-darkCyan {
-            color: #1b6eae !important;
-        }
-
-        .fg-darkCobalt {
-            color: #00356a !important;
-        }
-
-        .fg-darkTeal {
-            color: #004050 !important;
-        }
-
-        .fg-darkEmerald {
-            color: #003e00 !important;
-        }
-
-        .fg-darkGreen {
-            color: #128023 !important;
-        }
-
-        .fg-darkOrange {
-            color: #bf5a15 !important;
-        }
-
-        .fg-darkRed {
-            color: #9a1616 !important;
-        }
-
-        .fg-darkPink {
-            color: #9a165a !important;
-        }
-
-        .fg-darkViolet {
-            color: #57169a !important;
-        }
-
-        .fg-darkBlue {
-            color: #16499a !important;
-        }
-
-        .fg-lightBlue {
-            color: #4390df !important;
-        }
-
-        .fg-lighterBlue {
-            color: #00ccff !important;
-        }
-
-        .fg-lightTeal {
-            color: #45fffd !important;
-        }
-
-        .fg-lightOlive {
-            color: #78aa1c !important;
-        }
-
-        .fg-lightOrange {
-            color: #ffc194 !important;
-        }
-
-        .fg-lightPink {
-            color: #f472d0 !important;
-        }
-
-        .fg-lightRed {
-            color: #da5a53 !important;
-        }
-
-        .fg-lightGreen {
-            color: #7ad61d !important;
-        }
-
-        .fg-grayDark {
-            color: #333333 !important;
-        }
-
-        .fg-grayDarker {
-            color: #222222 !important;
-        }
-
-        .fg-grayLight {
-            color: #999999 !important;
-        }
-
-        .fg-grayLighter {
-            color: #eeeeee !important;
-        }
-
-        .fg-blue {
-            color: #00aff0 !important;
-        }
 
         .tile-area-scheme-dark [class*=tile] {
             outline-color: #373737;
@@ -658,7 +236,7 @@
             }
 
             .tile-step-icon.focus, .tile-step-icon:focus, .tile-step-icon:hover {
-                color: #333;
+                color: #fff;
                 text-decoration: none;
             }
 
@@ -670,11 +248,11 @@
             }
 
 
-        .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open .dropdown-toggle.btn-primary {
+        /*.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open .dropdown-toggle.btn-primary {
             color: #fff;
             background-color: #428bca;
             border-color: #357ebd;
-        }
+        }*/
 
         .btn {
             border: 0 solid transparent;
@@ -712,7 +290,7 @@
             </ul>
             <h3><i class="msg"></i>官方消息</h3>
             <ul>
-               <asp:Literal ID="LitNotice" runat="server" /> 
+               <asp:Literal ID="LitNotice" runat="server" />
             </ul>
         </div>--%>
         <!--/内容-->
@@ -728,14 +306,16 @@
             </p>
         </div>
 
-
+        <% if (_userType == "HotelAdmin")
+            {%>
         <ol class="ol-decimal text-indet">
             <li>
                 <strong class="tile-title" data-toggle="collapse" href="#collapseLi1" aria-expanded="true" aria-controls="collapseLi1">信息初始化</strong>
                 <div class="in" id="collapseLi1" aria-expanded="true">
                     <div class="well metro-height">
-                        <button class="tile btn btn-primary" data-role="tile"
-                            onclick="alert(2)"
+
+                        <div class="tile btn btn-primary" data-role="tile"
+                            onclick="javascript:jumpUrl('hotel_info');"
                             style="opacity: 1; transform: scale(1); transition: 0.3s;">
                             <p class="tile-step">
                                 <strong>STEP<span class="badge">1</span></strong>
@@ -744,30 +324,32 @@
                                 <span class="icon fa fa-credit-card"></span>
                             </div>
                             <span class="tile-label">
-                                <strong>商家或门店设置</strong>
+                                <strong>商户或门店设置</strong>
                             </span>
-                            <a href="#" class="tile-step-icon" onclick="javascript:alert(1)">
+                            <a href="#" class="tile-step-icon" onclick="javascript:jumpdirect('usehelp/酒店管理员/商户或门店设置.htm');">
                                 <i class="fa fa-question fa-lg"></i>
                             </a>
 
-                        </button>
-                        <button class="tile btn btn-primary" data-role="tile"
-                            onclick="alert(2)"
+                        </div>
+
+
+                        <div class="tile btn btn-primary" data-role="tile"
+                            onclick="javascript:jumpUrl('hotel_room');"
                             style="opacity: 1; transform: scale(1); transition: 0.3s;">
                             <p class="tile-step">
                                 <strong>STEP<span class="badge">2</span></strong>
                             </p>
                             <div class="tile-content iconic">
-                                <span class="icon fa fa-cubes"></span>
+                                <span class="icon fa fa-bed"></span>
                             </div>
                             <span class="tile-label">
                                 <strong>商品管理</strong>
                             </span>
-                            <a href="#" class="tile-step-icon" onclick="javascript:alert(1)">
+                            <a href="#" class="tile-step-icon" onclick="javascript:jumpdirect('usehelp/酒店管理员/商品管理.htm');">
                                 <i class="fa fa-question fa-lg"></i>
                             </a>
 
-                        </button>
+                        </div>
                     </div>
                 </div>
             </li>
@@ -777,21 +359,21 @@
                     aria-expanded="true" aria-controls="collapseLi2">用户下单了，要怎么做？</strong>
                 <div class="in" id="collapseLi2" aria-expanded="true">
                     <div class="well metro-height">
-                        <button class="tile btn btn-primary" data-role="tile"
-                            onclick="alert(2)"
+                        <div class="tile btn btn-primary" data-role="tile"
+                            onclick="javascript:jumpUrl('hotel_dingdan_manage');"
                             style="opacity: 1; transform: scale(1); transition: 0.3s;">
-                           
+
                             <div class="tile-content iconic">
                                 <span class="icon fa fa-file-text"></span>
                             </div>
                             <span class="tile-label">
                                 <strong>订单管理</strong>
                             </span>
-                            <a href="#" class="tile-step-icon" onclick="javascript:alert(1)">
+                            <a href="#" class="tile-step-icon" onclick="javascript:jumpdirect('usehelp/酒店管理员/订单管理.htm');">
                                 <i class="fa fa-question fa-lg"></i>
                             </a>
 
-                        </button>
+                        </div>
 
                     </div>
                 </div>
@@ -802,35 +384,35 @@
                     aria-expanded="true" aria-controls="collapseLi3">用户到店了，要怎么做？</strong>
                 <div class="in" id="collapseLi3" aria-expanded="true">
                     <div class="well metro-height">
-                        <button class="tile btn btn-primary" data-role="tile"
-                            onclick="alert(2)"
+                        <div class="tile btn btn-primary" data-role="tile"
+                            onclick="javascript:jumpUrl('dingdan_confirm');"
                             style="opacity: 1; transform: scale(1); transition: 0.3s;">
-                           
+
                             <div class="tile-content iconic">
-                                <span class="icon fa fa-barcode"></span>
+                                <span class="icon fa fa-qrcode"></span>
                             </div>
                             <span class="tile-label">
                                 <strong>服务码验证</strong>
                             </span>
-                            <a href="#" class="tile-step-icon" onclick="javascript:alert(1)">
+                            <a href="#" class="tile-step-icon" onclick="javascript:jumpdirect('usehelp/酒店管理员/订单管理.htm');">
                                 <i class="fa fa-question fa-lg"></i>
                             </a>
 
-                        </button>
+                        </div>
 
                     </div>
                 </div>
             </li>
-            
+
             <li>
                 <strong class="tile-title" data-toggle="collapse" href="#collapseLi4"
                     aria-expanded="true" aria-controls="collapseLi4">如何和景区结算？</strong>
                 <div class="in" id="collapseLi4" aria-expanded="true">
                     <div class="well metro-height">
-                        <button class="tile btn btn-primary" data-role="tile"
-                            onclick="alert(2)"
+                        <div class="tile btn btn-primary" data-role="tile"
+                            onclick="javascript:jumpUrl('hotel_dingdan_manage');"
                             style="opacity: 1; transform: scale(1); transition: 0.3s;">
-                             <p class="tile-step">
+                            <p class="tile-step">
                                 <strong>STEP<span class="badge">1</span></strong>
                             </p>
                             <div class="tile-content iconic">
@@ -839,83 +421,622 @@
                             <span class="tile-label">
                                 <strong>订单管理</strong>
                             </span>
-                            <a href="#" class="tile-step-icon" onclick="javascript:alert(1)">
+                            <a href="#" class="tile-step-icon" onclick="javascript:jumpdirect('usehelp/酒店管理员/订单管理.htm');">
                                 <i class="fa fa-question fa-lg"></i>
                             </a>
 
-                        </button>
-                        <button class="tile btn btn-primary" data-role="tile"
-                            onclick="alert(2)"
+                        </div>
+                        <div class="tile btn btn-primary" data-role="tile"
+                            onclick="javascript:jumpUrl('hotelcredentials_detail');"
                             style="opacity: 1; transform: scale(1); transition: 0.3s;">
                             <p class="tile-step">
                                 <strong>STEP<span class="badge">2</span></strong>
                             </p>
                             <div class="tile-content iconic">
-                                <span class="icon fa fa-barcode"></span>
+                                <span class="icon fa fa-qrcode"></span>
                             </div>
                             <span class="tile-label">
-                                <strong>服务验证查询</strong>
+                                <strong>服务凭据查询</strong>
                             </span>
-                            <a href="#" class="tile-step-icon" onclick="javascript:alert(1)">
+                            <a href="#" class="tile-step-icon" onclick="javascript:jumpdirect('usehelp/酒店管理员/服务凭据查询.htm');">
                                 <i class="fa fa-question fa-lg"></i>
                             </a>
 
-                        </button>
+                        </div>
                     </div>
                 </div>
             </li>
-            
-             <li>
+
+            <li>
                 <strong class="tile-title" data-toggle="collapse" href="#collapseLi5"
                     aria-expanded="true" aria-controls="collapseLi5">如何设置管理员</strong>
                 <div class="in" id="collapseLi5" aria-expanded="true">
                     <div class="well metro-height">
-                        <button class="tile btn btn-primary" data-role="tile"
-                            onclick="alert(2)"
+                        <div class="tile btn btn-primary" data-role="tile"
+                            onclick="javascript:jumpUrl('hotel_user');"
                             style="opacity: 1; transform: scale(1); transition: 0.3s;">
-                            
+
                             <div class="tile-content iconic">
                                 <span class="icon fa fa-cog"></span>
                             </div>
                             <span class="tile-label">
                                 <strong>管理员设置</strong>
                             </span>
-                            <a href="#" class="tile-step-icon" onclick="javascript:alert(1)">
+                            <a href="#" class="tile-step-icon" onclick="javascript:jumpdirect('usehelp/酒店管理员/管理员设置.htm');">
                                 <i class="fa fa-question fa-lg"></i>
                             </a>
 
-                        </button>
-                       
+                        </div>
+
                     </div>
                 </div>
             </li>
-             <li>
+            <li>
                 <strong class="tile-title" data-toggle="collapse" href="#collapseLi6"
                     aria-expanded="true" aria-controls="collapseLi6">如何修改密码？</strong>
                 <div class="in" id="collapseLi6" aria-expanded="true">
                     <div class="well metro-height">
-                        <button class="tile btn btn-primary" data-role="tile"
-                            onclick="alert(2)"
+                        <div class="tile btn btn-primary" data-role="tile"
+                            onclick="javascript:jumpdirect('manager/manager_pwd.aspx');"
                             style="opacity: 1; transform: scale(1); transition: 0.3s;">
-                           
+
                             <div class="tile-content iconic">
                                 <span class="icon fa fa-unlock-alt"></span>
                             </div>
                             <span class="tile-label">
                                 <strong>密码修改</strong>
                             </span>
-                            <a href="#" class="tile-step-icon" onclick="javascript:alert(1)">
+                            <a href="#" class="tile-step-icon" onclick="javascript:jumpdirect('usehelp/酒店管理员/密码修改.htm');">
                                 <i class="fa fa-question fa-lg"></i>
                             </a>
 
-                        </button>
-                       
+                        </div>
+
                     </div>
                 </div>
             </li>
         </ol>
+        <%   } %>
 
+        <% else if (_userType == "ShopAdmin")
+            {%>
+        <ol class="ol-decimal text-indet">
+            <li>
+                <strong class="tile-title" data-toggle="collapse" href="#collapseLi1" aria-expanded="true" aria-controls="collapseLi1">信息初始化</strong>
+                <div class="in" id="collapseLi1" aria-expanded="true">
+                    <div class="well metro-height">
+                        <div class="tile btn btn-primary" data-role="tile"
+                            onclick="javascript:jumpUrl('shop_add');"
+                            style="opacity: 1; transform: scale(1); transition: 0.3s;">
+                            <p class="tile-step">
+                                <strong>STEP<span class="badge">1</span></strong>
+                            </p>
+                            <div class="tile-content iconic">
+                                <span class="icon fa fa-credit-card"></span>
+                            </div>
+                            <span class="tile-label">
+                                <strong>商户或门店设置</strong>
+                            </span>
+                            <a href="#" class="tile-step-icon" onclick="javascript:jumpdirect('usehelp/餐饮管理员/商户或门店设置.htm');">
+                                <i class="fa fa-question fa-lg"></i>
+                            </a>
+
+                        </div>
+                        <div class="tile btn btn-primary" data-role="tile"
+                            onclick="javascript:jumpUrl('caipin_category');"
+                            style="opacity: 1; transform: scale(1); transition: 0.3s;">
+                            <p class="tile-step">
+                                <strong>STEP<span class="badge">2</span></strong>
+                            </p>
+                            <div class="tile-content iconic">
+                                <span class="icon fa fa-cubes"></span>
+                            </div>
+                            <span class="tile-label">
+                                <strong>商品分类管理</strong>
+                            </span>
+                            <a href="#" class="tile-step-icon" onclick="javascript:jumpdirect('usehelp/餐饮管理员/商品分类管理.htm');">
+                                <i class="fa fa-question fa-lg"></i>
+                            </a>
+
+                        </div>
+                        <div class="tile btn btn-primary" data-role="tile"
+                            onclick="javascript:jumpUrl('caipin_manage');"
+                            style="opacity: 1; transform: scale(1); transition: 0.3s;">
+                            <p class="tile-step">
+                                <strong>STEP<span class="badge">3</span></strong>
+                            </p>
+                            <div class="tile-content iconic">
+                                <span class="icon fa fa-cutlery"></span>
+                            </div>
+                            <span class="tile-label">
+                                <strong>商品管理</strong>
+                            </span>
+                            <a href="#" class="tile-step-icon" onclick="javascript:jumpdirect('usehelp/餐饮管理员/商品管理.htm');">
+                                <i class="fa fa-question fa-lg"></i>
+                            </a>
+
+                        </div>
+                    </div>
+                </div>
+            </li>
+
+            <li>
+                <strong class="tile-title" data-toggle="collapse" href="#collapseLi2"
+                    aria-expanded="true" aria-controls="collapseLi2">用户下单了，要怎么做？</strong>
+                <div class="in" id="collapseLi2" aria-expanded="true">
+                    <div class="well metro-height">
+                        <div class="tile btn btn-primary" data-role="tile"
+                            onclick="javascript:jumpUrl('dingdan_manage');"
+                            style="opacity: 1; transform: scale(1); transition: 0.3s;">
+
+                            <div class="tile-content iconic">
+                                <span class="icon fa fa-file-text"></span>
+                            </div>
+                            <span class="tile-label">
+                                <strong>订单管理</strong>
+                            </span>
+                            <a href="#" class="tile-step-icon" onclick="javascript:jumpdirect('usehelp/餐饮管理员/订单管理.htm');">
+                                <i class="fa fa-question fa-lg"></i>
+                            </a>
+
+                        </div>
+
+                    </div>
+                </div>
+            </li>
+            <li>
+                <strong class="tile-title" data-toggle="collapse" href="#collapseLi8"
+                    aria-expanded="true" aria-controls="collapseLi8">用户退单了，要怎么做？</strong>
+                <div class="in" id="collapseLi8" aria-expanded="true">
+                    <div class="well metro-height">
+                        <div class="tile btn btn-primary" data-role="tile"
+                            onclick="javascript:jumpUrl('dingdanRefund_manage');"
+                            style="opacity: 1; transform: scale(1); transition: 0.3s;">
+
+                            <div class="tile-content iconic">
+                                <span class="icon fa fa-hand-o-left"></span>
+                            </div>
+                            <span class="tile-label">
+                                <strong>退单管理</strong>
+                            </span>
+                            <a href="#" class="tile-step-icon" onclick="javascript:jumpdirect('usehelp/餐饮管理员/退单管理.htm');">
+                                <i class="fa fa-question fa-lg"></i>
+                            </a>
+
+                        </div>
+
+                    </div>
+                </div>
+            </li>
+
+          
+                <li>
+                    <strong class="tile-title" data-toggle="collapse" href="#collapseLi3"
+                        aria-expanded="true" aria-controls="collapseLi3">用户到店了，要怎么做？</strong>
+                    <div class="in" id="collapseLi3" aria-expanded="true">
+                        <div class="well metro-height">
+                            <div class="tile btn btn-primary" data-role="tile"
+                                onclick="javascript:jumpUrl('dingdanconfirm');"
+                                style="opacity: 1; transform: scale(1); transition: 0.3s;">
+
+                                <div class="tile-content iconic">
+                                    <span class="icon fa fa-qrcode"></span>
+                                </div>
+                                <span class="tile-label">
+                                    <strong>服务码验证</strong>
+                                </span>
+                                <a href="#" class="tile-step-icon" onclick="javascript:jumpdirect('usehelp/餐饮管理员/服务码验证.htm');">
+                                    <i class="fa fa-question fa-lg"></i>
+                                </a>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </li>
+
+                <li>
+                    <strong class="tile-title" data-toggle="collapse" href="#collapseLi4"
+                        aria-expanded="true" aria-controls="collapseLi4">如何和景区结算？</strong>
+                    <div class="in" id="collapseLi4" aria-expanded="true">
+                        <div class="well metro-height">
+                            <div class="tile btn btn-primary" data-role="tile"
+                                onclick="javascript:jumpUrl('dingdan_manage');"
+                                style="opacity: 1; transform: scale(1); transition: 0.3s;">
+                                <p class="tile-step">
+                                    <strong>STEP<span class="badge">1</span></strong>
+                                </p>
+                                <div class="tile-content iconic">
+                                    <span class="icon fa fa-file-text"></span>
+                                </div>
+                                <span class="tile-label">
+                                    <strong>订单管理</strong>
+                                </span>
+                                <a href="#" class="tile-step-icon" onclick="javascript:jumpdirect('usehelp/餐饮管理员/订单管理.htm');">
+                                    <i class="fa fa-question fa-lg"></i>
+                                </a>
+
+                            </div>
+                            <div class="tile btn btn-primary" data-role="tile"
+                                onclick="javascript:jumpUrl('diancai_credentials_detail');"
+                                style="opacity: 1; transform: scale(1); transition: 0.3s;">
+                                <p class="tile-step">
+                                    <strong>STEP<span class="badge">2</span></strong>
+                                </p>
+                                <div class="tile-content iconic">
+                                    <span class="icon fa fa-qrcode"></span>
+                                </div>
+                                <span class="tile-label">
+                                    <strong>服务凭据查询</strong>
+                                </span>
+                                <a href="#" class="tile-step-icon" onclick="javascript:jumpdirect('usehelp/餐饮管理员/服务凭据查询.htm');">
+                                    <i class="fa fa-question fa-lg"></i>
+                                </a>
+
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+                <li>
+                    <strong class="tile-title" data-toggle="collapse" href="#collapseLi5"
+                        aria-expanded="true" aria-controls="collapseLi5">如何设置管理员</strong>
+                    <div class="in" id="collapseLi5" aria-expanded="true">
+                        <div class="well metro-height">
+                            <div class="tile btn btn-primary" data-role="tile"
+                                onclick="javascript:jumpUrl('sysadmin');"
+                                style="opacity: 1; transform: scale(1); transition: 0.3s;">
+
+                                <div class="tile-content iconic">
+                                    <span class="icon fa fa-cog"></span>
+                                </div>
+                                <span class="tile-label">
+                                    <strong>管理员设置</strong>
+                                </span>
+                                <a href="#" class="tile-step-icon" onclick="javascript:jumpdirect('usehelp/餐饮管理员/管理员设置.htm');">
+                                    <i class="fa fa-question fa-lg"></i>
+                                </a>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <strong class="tile-title" data-toggle="collapse" href="#collapseLi6"
+                        aria-expanded="true" aria-controls="collapseLi6">如何修改密码？</strong>
+                    <div class="in" id="collapseLi6" aria-expanded="true">
+                        <div class="well metro-height">
+                            <div class="tile btn btn-primary" data-role="tile"
+                                onclick="javascript:jumpdirect('manager/manager_pwd.aspx');"
+                                style="opacity: 1; transform: scale(1); transition: 0.3s;">
+
+                                <div class="tile-content iconic">
+                                    <span class="icon fa fa-unlock-alt"></span>
+                                </div>
+                                <span class="tile-label">
+                                    <strong>密码修改</strong>
+                                </span>
+                                <a href="#" class="tile-step-icon" onclick="javascript:jumpdirect('usehelp/餐饮管理员/密码修改.htm');">
+                                    <i class="fa fa-question fa-lg"></i>
+                                </a>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </li>
+        </ol>
+        <%   } %>
+
+        <% else if (_userType == "ScenicAdmin")
+            {%>
+        <ol class="ol-decimal text-indet">
+            <li>
+                <strong class="tile-title" data-toggle="collapse"
+                     href="#collapseLi1" aria-expanded="true" aria-controls="collapseLi1">如何设置公众号自动消息回复？</strong>
+                <div class="in" id="collapseLi1" aria-expanded="true">
+                    <div class="well metro-height">
+                        <div class="tile btn btn-primary" data-role="tile"
+                            onclick="javascript:jumpUrl('weixin_huifu_subscibe');"
+                            style="opacity: 1; transform: scale(1); transition: 0.3s;">
+                            
+                            <div class="tile-content iconic">
+                                <span class="icon fa fa-eye"></span>
+                            </div>
+                            <span class="tile-label">
+                                <strong>关注时回复</strong>
+                            </span>
+                            <a href="#" class="tile-step-icon" onclick="javascript:jumpdirect('usehelp/景区管理员/关注时回复.htm');">
+                                <i class="fa fa-question fa-lg"></i>
+                            </a>
+
+                        </div>
+                        <div class="tile btn btn-primary" data-role="tile"
+                            onclick="javascript:jumpUrl('weixin_huifu_default');"
+                            style="opacity: 1; transform: scale(1); transition: 0.3s;">
+                           
+                            <div class="tile-content iconic">
+                                <span class="icon fa fa-file-code-o"></span>
+                            </div>
+                            <span class="tile-label">
+                                <strong>默认回复</strong>
+                            </span>
+                            <a href="#" class="tile-step-icon" onclick="javascript:jumpdirect('usehelp/景区管理员/默认回复.htm');">
+                                <i class="fa fa-question fa-lg"></i>
+                            </a>
+
+                        </div>
+                        <div class="tile btn btn-primary" data-role="tile"
+                            onclick="javascript:jumpUrl('weixin_huifu_wenben');"
+                            style="opacity: 1; transform: scale(1); transition: 0.3s;">
+                            
+                            <div class="tile-content iconic">
+                                <span class="icon fa fa-file-word-o"></span>
+                            </div>
+                            <span class="tile-label">
+                                <strong>文本回复</strong>
+                            </span>
+                            <a href="#" class="tile-step-icon" onclick="javascript:jumpdirect('usehelp/景区管理员/文本回复.htm');">
+                                <i class="fa fa-question fa-lg"></i>
+                            </a>
+
+                        </div>
+                        <div class="tile btn btn-primary" data-role="tile"
+                            onclick="javascript:jumpUrl('weixin_huifu_tuwen');"
+                            style="opacity: 1; transform: scale(1); transition: 0.3s;">
+                            
+                            <div class="tile-content iconic">
+                                <span class="icon fa fa-file-photo-o"></span>
+                            </div>
+                            <span class="tile-label">
+                                <strong>图文回复</strong>
+                            </span>
+                            <a href="#" class="tile-step-icon" onclick="javascript:jumpdirect('usehelp/景区管理员/图文回复.htm');">
+                                <i class="fa fa-question fa-lg"></i>
+                            </a>
+
+                        </div>
+                        <div class="tile btn btn-primary" data-role="tile"
+                            onclick="javascript:jumpUrl('weixin_huifu_yuyin');"
+                            style="opacity: 1; transform: scale(1); transition: 0.3s;">
+                           
+                            <div class="tile-content iconic">
+                                <span class="icon fa fa-file-audio-o"></span>
+                            </div>
+                            <span class="tile-label">
+                                <strong>语音回复</strong>
+                            </span>
+                            <a href="#" class="tile-step-icon" onclick="javascript:jumpdirect('usehelp/景区管理员/语音回复.htm');">
+                                <i class="fa fa-question fa-lg"></i>
+                            </a>
+
+                        </div>
+                    </div>
+                </div>
+            </li>
+
+            <li>
+                <strong class="tile-title" data-toggle="collapse" href="#collapseLi2"
+                    aria-expanded="true" aria-controls="collapseLi2">菜单设置</strong>
+                <div class="in" id="collapseLi2" aria-expanded="true">
+                    <div class="well metro-height">
+                        <div class="tile btn btn-primary" data-role="tile"
+                            onclick="javascript:jumpUrl('weixin_caidan_setting');"
+                            style="opacity: 1; transform: scale(1); transition: 0.3s;">
+
+                            <div class="tile-content iconic">
+                                <span class="icon fa fa-book"></span>
+                            </div>
+                            <span class="tile-label">
+                                <strong>菜单设置</strong>
+                            </span>
+                            <a href="#" class="tile-step-icon" onclick="javascript:jumpdirect('usehelp/景区管理员/菜单设置.htm');">
+                                <i class="fa fa-question fa-lg"></i>
+                            </a>
+
+                        </div>
+
+                    </div>
+                </div>
+            </li>
+            
+
+            
+                <li>
+                    <strong class="tile-title" data-toggle="collapse" href="#collapseLi3"
+                        aria-expanded="true" aria-controls="collapseLi3">如何在公众号景区导览中添加新的景点？</strong>
+                    <div class="in" id="collapseLi3" aria-expanded="true">
+                        <div class="well metro-height">
+                            <div class="tile btn btn-primary" data-role="tile"
+                                onclick="javascript:jumpUrl('scenic');"
+                                style="opacity: 1; transform: scale(1); transition: 0.3s;">
+
+                                <div class="tile-content iconic">
+                                    <span class="icon fa fa-image"></span>
+                                </div>
+                                <span class="tile-label">
+                                    <strong>景区导览</strong>
+                                </span>
+                                <a href="#" class="tile-step-icon" onclick="javascript:jumpdirect('usehelp/景区管理员/景区导览.htm');">
+                                    <i class="fa fa-question fa-lg"></i>
+                                </a>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </li>
+
+                <li>
+                    <strong class="tile-title" data-toggle="collapse" href="#collapseLi4"
+                        aria-expanded="true" aria-controls="collapseLi4">如何为公众号增加摇一摇活动？</strong>
+                    <div class="in" id="collapseLi4" aria-expanded="true">
+                        <div class="well metro-height">
+                            <div class="tile btn btn-primary" data-role="tile"
+                                onclick="javascript:jumpUrl('shakeLuckyMoney');"
+                                style="opacity: 1; transform: scale(1); transition: 0.3s;">
+                                <p class="tile-step">
+                                    <strong>STEP<span class="badge">1</span></strong>
+                                </p>
+                                <div class="tile-content iconic">
+                                    <span class="icon fa fa-hand-rock-o"></span>
+                                </div>
+                                <span class="tile-label">
+                                    <strong>摇一摇</strong>
+                                </span>
+                                <a href="#" class="tile-step-icon" onclick="javascript:jumpdirect('usehelp/景区管理员/摇一摇.htm');">
+                                    <i class="fa fa-question fa-lg"></i>
+                                </a>
+
+                            </div>
+                            <div class="tile btn btn-primary" data-role="tile"
+                                onclick="javascript:jumpUrl('weixin_caidan_setting');"
+                                style="opacity: 1; transform: scale(1); transition: 0.3s;">
+                                <p class="tile-step">
+                                    <strong>STEP<span class="badge">2</span></strong>
+                                </p>
+                                <div class="tile-content iconic">
+                                    <span class="icon fa fa-book"></span>
+                                </div>
+                                <span class="tile-label">
+                                    <strong>菜单设置</strong>
+                                </span>
+                                <a href="#" class="tile-step-icon" onclick="javascript:jumpdirect('usehelp/景区管理员/菜单设置.htm');">
+                                    <i class="fa fa-question fa-lg"></i>
+                                </a>
+
+                            </div>
+                        </div>
+                    </div>
+                </li>
+             <li>
+                    <strong class="tile-title" data-toggle="collapse" href="#collapseLi5"
+                        aria-expanded="true" aria-controls="collapseLi5">如何查询、统计门票订单？</strong>
+                    <div class="in" id="collapseLi5" aria-expanded="true">
+                        <div class="well metro-height">
+                            <div class="tile btn btn-primary" data-role="tile"
+                                onclick="javascript:jumpUrl('dingdantongji');"
+                                style="opacity: 1; transform: scale(1); transition: 0.3s;">
+                              
+                                <div class="tile-content iconic">
+                                    <span class="icon fa fa-bar-chart"></span>
+                                </div>
+                                <span class="tile-label">
+                                    <strong>门票订单统计</strong>
+                                </span>
+                                <a href="#" class="tile-step-icon" onclick="javascript:jumpdirect('usehelp/景区管理员/门票订单统计.htm');">
+                                    <i class="fa fa-question fa-lg"></i>
+                                </a>
+
+                            </div>
+        
+                        </div>
+                    </div>
+                </li>
+             <li>
+                    <strong class="tile-title" data-toggle="collapse" href="#collapseLi6"
+                        aria-expanded="true" aria-controls="collapseLi6">如何管理酒店商户或门店？</strong>
+                    <div class="in" id="collapseLi6" aria-expanded="true">
+                        <div class="well metro-height">
+                            <div class="tile btn btn-primary" data-role="tile"
+                                onclick="javascript:jumpUrl('wHotel');"
+                                style="opacity: 1; transform: scale(1); transition: 0.3s;">
+                              
+                                <div class="tile-content iconic">
+                                    <span class="icon fa fa-bed"></span>
+                                </div>
+                                <span class="tile-label">
+                                    <strong>酒店管理</strong>
+                                </span>
+                                <a href="#" class="tile-step-icon" onclick="javascript:jumpdirect('usehelp/景区管理员/酒店管理.htm');">
+                                    <i class="fa fa-question fa-lg"></i>
+                                </a>
+
+                            </div>
+        
+                        </div>
+                    </div>
+                </li>
+             <li>
+                    <strong class="tile-title" data-toggle="collapse" href="#collapseLi7"
+                        aria-expanded="true" aria-controls="collapseLi7">如何管理餐饮商户或门店？</strong>
+                    <div class="in" id="collapseLi7" aria-expanded="true">
+                        <div class="well metro-height">
+                            <div class="tile btn btn-primary" data-role="tile"
+                                onclick="javascript:jumpUrl('diancai');"
+                                style="opacity: 1; transform: scale(1); transition: 0.3s;">
+                              
+                                <div class="tile-content iconic">
+                                    <span class="icon fa fa-cutlery"></span>
+                                </div>
+                                <span class="tile-label">
+                                    <strong>餐饮管理</strong>
+                                </span>
+                                <a href="#" class="tile-step-icon" onclick="javascript:jumpdirect('usehelp/景区管理员/餐饮管理.htm');">
+                                    <i class="fa fa-question fa-lg"></i>
+                                </a>
+
+                            </div>
+        
+                        </div>
+                    </div>
+                </li>
+                
+                <li>
+                    <strong class="tile-title" data-toggle="collapse" href="#collapseLi8"
+                        aria-expanded="true" aria-controls="collapseLi8">如何修改密码？</strong>
+                    <div class="in" id="collapseLi8" aria-expanded="true">
+                        <div class="well metro-height">
+                            <div class="tile btn btn-primary" data-role="tile"
+                                onclick="javascript:jumpdirect('manager/manager_pwd.aspx');"
+                                style="opacity: 1; transform: scale(1); transition: 0.3s;">
+
+                                <div class="tile-content iconic">
+                                    <span class="icon fa fa-unlock-alt"></span>
+                                </div>
+                                <span class="tile-label">
+                                    <strong>密码修改</strong>
+                                </span>
+                                <a href="#" class="tile-step-icon" onclick="javascript:jumpdirect('usehelp/景区管理员/密码修改.htm');">
+                                    <i class="fa fa-question fa-lg"></i>
+                                </a>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </li>
+        </ol>
+        <%   } %>
     </form>
     <script src="../scripts/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        function jumpUrl(navid) {
+//            alert(navid);
+            parent.linkMenuTree(true, navid);
+            $(top.document).find('.main-sidebar .list-group').find('a').each(function() {
+                var a = $(this);
+                if (a.attr('navid') && a.attr('navid') == navid) {
+//                    console.log(a);
+                    jumpdirect(a.attr('href'));
+                }
+            }); 
+        }
+
+        function jumpdirect(url) {
+            top.frames["mainframe"].location.href = url;
+
+
+            var e = window.event || event;
+
+            if (e.stopPropagation) { //如果提供了事件对象，则这是一个非IE浏览器 
+                e.stopPropagation();
+            } else {
+                //兼容IE的方式来取消事件冒泡 
+                window.event.cancelBubble = true;
+            }
+        }
+    </script>
 </body>
 </html>
