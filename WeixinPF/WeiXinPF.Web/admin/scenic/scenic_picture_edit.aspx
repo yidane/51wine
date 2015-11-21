@@ -100,7 +100,7 @@
         <div class="page-footer">
             <div class="btn-list">
                 <asp:Button ID="btnSubmit" runat="server" Text="提交保存" CssClass="btn" OnClick="btnSubmit_Click" />
-                <a href="scenic_piture_list.aspx?detailId=<%=DetailId %>"><span class="btn yellow">返回上一页</span></a>
+                <a href="scenic_picture_list.aspx?detailId=<%=DetailId %>"><span class="btn yellow">返回上一页</span></a>
 
             </div>
             <div class="clear"></div>

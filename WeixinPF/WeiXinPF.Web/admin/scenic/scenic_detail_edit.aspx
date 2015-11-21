@@ -62,8 +62,8 @@
             <dl>
                 <dt>名称</dt>
                 <dd>
-                    <asp:TextBox ID="txtName" runat="server" CssClass="input normal" datatype="*2-100" sucmsg=" " />
-                    <span class="Validform_checktip">*名称最多100个字符</span>
+                    <asp:TextBox ID="txtName" runat="server" CssClass="input normal" datatype="*2-20" sucmsg=" " />
+                    <span class="Validform_checktip">*名称最多20个字符</span>
                 </dd>
             </dl>
             <dl>
@@ -131,7 +131,7 @@
         <div class="page-footer">
             <div class="btn-list">
                 <asp:Button ID="btnSubmit" runat="server" Text="提交保存" CssClass="btn" OnClick="btnSubmit_Click" />
-                <a href="scenic_list.aspx"><span class="btn yellow">返回上一页</span></a>
+                <a href="scenic_detail_list.aspx?scenicId=<%=ScenicId %>"><span class="btn yellow">返回上一页</span></a>
             </div>
             <div class="clear"></div>
         </div>

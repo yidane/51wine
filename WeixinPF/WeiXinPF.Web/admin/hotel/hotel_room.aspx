@@ -1,4 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="hotel_room.aspx.cs" ValidateRequest="false" Inherits="WeiXinPF.Web.admin.hotel.hotel_room" %>
+
 <%@ Import Namespace="WeiXinPF.Common" %>
 
 <!DOCTYPE html>
@@ -48,7 +49,8 @@
     <form id="form1" runat="server">
         <div class="location" runat="server" id="divLocation">
         </div>
-        <div class="mytips">
+        <div class="line10"></div>
+        <div class="mytips" id="divTips" runat="server">
             审核通过后得商品请记得发布哟，这样商品才能上架出售~~~
         </div>
         <div class="toolbar-wrap">

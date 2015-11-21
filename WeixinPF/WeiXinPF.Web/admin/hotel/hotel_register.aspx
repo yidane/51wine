@@ -49,8 +49,8 @@
             <dl>
                 <dt>商户或门店名称：</dt>
                 <dd>
-                    <asp:TextBox runat="server" ID="txtHotelName" CssClass="input normal" sucmsg=" " nullmsg="" datatype="*1-100"></asp:TextBox>
-                    <span class="Validform_checktip">*</span>
+                    <asp:TextBox runat="server" ID="txtHotelName" CssClass="input normal" sucmsg=" " nullmsg="" datatype="*1-20"></asp:TextBox>
+                    <span class="Validform_checktip">*控制再20字以内。</span>
                 </dd>
             </dl>
             <dl>
@@ -71,8 +71,8 @@
             <dl>
                 <dt>运营人：</dt>
                 <dd>
-                    <asp:TextBox runat="server" ID="txtOperator" CssClass="input normal" sucmsg=" " nullmsg=" " datatype="*1-100"></asp:TextBox>
-                    <span class="Validform_checktip">*</span>
+                    <asp:TextBox runat="server" ID="txtOperator" CssClass="input normal" sucmsg=" " nullmsg=" " datatype="*1-10"></asp:TextBox>
+                    <span class="Validform_checktip">*控制再10字以内。</span>
                 </dd>
             </dl>
             <dl>

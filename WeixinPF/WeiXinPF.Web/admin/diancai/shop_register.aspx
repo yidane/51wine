@@ -68,8 +68,8 @@
             <dl>
                 <dt>商户或门店名称：</dt>
                 <dd>
-                    <asp:TextBox runat="server" ID="txtHotelName" CssClass="input normal" sucmsg=" " nullmsg="" datatype="*1-100"></asp:TextBox>
-                    <span class="Validform_checktip">*</span>
+                    <asp:TextBox runat="server" ID="txtHotelName" CssClass="input normal" sucmsg=" " nullmsg="" datatype="*1-20"></asp:TextBox>
+                    <span class="Validform_checktip">*控制在20字以内</span>
                 </dd>
             </dl>
             <dl>
@@ -113,8 +113,8 @@
             <dl>
                 <dt>运营人：</dt>
                 <dd>
-                    <asp:TextBox runat="server" ID="txtOperator" CssClass="input normal" sucmsg=" " nullmsg=" " datatype="*1-100"></asp:TextBox>
-                    <span class="Validform_checktip">*</span>
+                    <asp:TextBox runat="server" ID="txtOperator" CssClass="input normal" sucmsg=" " nullmsg=" " datatype="*1-10"></asp:TextBox>
+                    <span class="Validform_checktip">*控制在10字以内</span>
                 </dd>
             </dl>
             <dl>
@@ -135,8 +135,11 @@
             <dl>
                 <dt>是否推荐：</dt>
                 <dd>
-                    <div class="rule-single-checkbox">
-                        <asp:CheckBox ID="cbRecommend" runat="server" Checked="false" />
+                     <div class="rule-multi-radio">
+                        <asp:RadioButtonList ID="rblRecommend" runat="server">
+                            <asp:ListItem Value="1" >推荐</asp:ListItem>
+                            <asp:ListItem Value="0" Selected="True">不推荐</asp:ListItem>
+                        </asp:RadioButtonList>
                     </div>
                     <span class="Validform_checktip">*设置为推荐将会在美食美宿首页显示。</span></dd>
             </dl>

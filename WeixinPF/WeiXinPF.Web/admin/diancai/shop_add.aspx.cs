@@ -16,30 +16,28 @@ namespace WeiXinPF.Web.admin.diancai
         TextBox picUrl;
         TextBox pictzUrl;
         protected string editetype = "";
-        protected  int shopid = 0;
+        protected int shopid = 0;
         BLL.wx_diancai_shopinfo hotelBll = new BLL.wx_diancai_shopinfo();
         Model.wx_diancai_shopinfo hotel = new Model.wx_diancai_shopinfo();
 
         BLL.wx_diancai_shoppic picBll = new BLL.wx_diancai_shoppic();
         Model.wx_diancai_shoppic pic = new Model.wx_diancai_shoppic();
         wx_diancai_shoppic iBll = new wx_diancai_shoppic();
-         
+
 
         protected void Page_Load(object sender, EventArgs e)
         {
             shopid = MyCommFun.RequestInt("shopid") == 0 ? GetShopId() : MyCommFun.RequestInt("shopid");
 
+            editetype = MyCommFun.QueryString("type");
             if (!IsPostBack)
             {
-
-                editetype = MyCommFun.QueryString("type");
+                SetControl();
 
                 if (editetype == "edite")
                 {
                     list(shopid);
                 }
-
-
             }
         }
 
@@ -290,8 +288,8 @@ namespace WeiXinPF.Web.admin.diancai
                     hotel.freeSendcost = Convert.ToInt32(this.freeSendcost.Text);
                 }
 
-                
-                
+
+
                 hotel.radius = this.radius.Text;
                 hotel.sendArea = this.sendArea.Text;
                 hotel.tel = this.tel.Text;
@@ -301,7 +299,7 @@ namespace WeiXinPF.Web.admin.diancai
                 {
                     hotel.personLimite = Convert.ToInt32(this.personLimite.Text);
                 }
-                
+
                 hotel.notice = this.notice.InnerText;
                 hotel.hotelintroduction = this.hotelintroduction.InnerText;
                 hotel.email = this.email.Text;
@@ -355,10 +353,13 @@ namespace WeiXinPF.Web.admin.diancai
                 AddAdminLog(MXEnums.ActionEnum.Edit.ToString(), "修改商户设置，主键为" + shopid); //记录日志
                 JscriptMsg("修改成功！", "shop_add.aspx?type=edite", "Success");
             }
-
-
-
-
+        }
+        private void SetControl()
+        {
+            if (GetShopId() == 0)
+            {
+                save_groupbase.Visible = false;
+            }
         }
     }
 }
