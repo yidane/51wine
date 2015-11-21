@@ -11,6 +11,11 @@
     <script type="text/javascript" src="../js/layout.js"></script>
     <link href="../skin/default/style.css" rel="stylesheet" type="text/css" />
     <link href="../skin/mystyle.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript">
+        $(function() {
+            $('#form1').initValidform();
+        });
+    </script>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -47,7 +52,7 @@
             <dl>
                 <dt>登录名</dt>
                 <dd>
-                    <asp:TextBox ID="txtUserName" runat="server" CssClass="input normal" datatype="/^[a-zA-Z0-9\-\_]{2,50}$/" sucmsg=" " ajaxurl="../../tools/admin_ajax.ashx?action=manager_validate"></asp:TextBox>
+                    <asp:TextBox ID="txtUserName" runat="server" CssClass="input normal" datatype="/^[a-zA-Z0-9\-\_]{2,50}$/" nullmsg="请填写用户名" sucmsg=" " ajaxurl="../../tools/admin_ajax.ashx?action=manager_validate"></asp:TextBox>
                     <span class="Validform_checktip">*字母、下划线，不可修改</span></dd>
             </dl>
             <dl>
@@ -60,7 +65,7 @@
             <dl>
                 <dt>姓名</dt>
                 <dd>
-                    <asp:TextBox ID="txtRealName" runat="server" CssClass="input normal" datatype="*1-50" nullmsg=" " sucmsg=" "></asp:TextBox></dd>
+                    <asp:TextBox ID="txtRealName" runat="server" CssClass="input normal" datatype="*1-50" nullmsg="请填写姓名" sucmsg=" "></asp:TextBox></dd>
             </dl>
             <dl>
                 <dt>电话</dt>

@@ -41,19 +41,19 @@
 <body class="mainbody">
     <form id="form1" runat="server">
         <div class="location">
-            
-                <% if (IsWeiXinCode())
+
+            <% if (IsWeiXinCode())
                 {%>
-                 <a    href="shop_list.aspx" class="home"><i></i><span>商户或门店列表</span></a>
-                <i class="arrow"></i>
-                <%}%>
-                <%
+            <a href="shop_list.aspx" class="home"><i></i><span>商户或门店列表</span></a>
+            <i class="arrow"></i>
+            <%}%>
+            <%
                 else
                 {%>
-             
-                <%} %>
-                
-        
+
+            <%} %>
+
+
             <span>商户或门店信息设置</span>
         </div>
         <div class="line10"></div>
@@ -85,14 +85,9 @@
                     <asp:TextBox ID="hotelLogo" runat="server" CssClass="input normal upload-path" datatype="*1-200" Style="width: 200px;" sucmsg=" " nullmsg="" />
                     <div class="upload-box upload-img"></div>
                     <br />
-                    <span class="red">外链地址(图片尺寸100x100
-                    </span>
-
+                    <span class="red">请注意使用尺寸大小为100*100的图片</span>
                 </dd>
             </dl>
-
-
-
             <dl>
                 <dt>商户或门店邮箱：</dt>
                 <dd>
@@ -317,17 +312,6 @@
                     <span class="Validform_checktip">*</span>
                 </dd>
             </dl>
-
-
-
-
-
-
-
-
-
-
-
             <dl style="display: none">
                 <dt>邮箱登录密码：</dt>
                 <dd>

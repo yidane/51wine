@@ -296,6 +296,8 @@ namespace WeiXinPF.Web.admin.hotel
 
                 barAgree.Visible = true;
                 barRefuse.Visible = true;
+
+                divTips.Visible = false;
             }
         }
 

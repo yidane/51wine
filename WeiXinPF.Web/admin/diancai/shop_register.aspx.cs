@@ -24,7 +24,7 @@ namespace WeiXinPF.Web.admin.diancai
 
             if (!string.IsNullOrEmpty(action) && action == MXEnums.ActionEnum.Edit.ToString())
             {
-                if (id<=0)
+                if (id <= 0)
                 {
                     JscriptMsg("传输参数不正确！", "back", "Error");
                     return;
@@ -58,7 +58,7 @@ namespace WeiXinPF.Web.admin.diancai
             txtTel.Text = model.tel;
             txtEmail.Text = model.email;
 
-            cbRecommend.Checked = model.Recommend.HasValue && model.Recommend.Value;
+            rblRecommend.SelectedValue = model.Recommend.HasValue && model.Recommend.Value ? "1" : "0";
         }
 
         private bool DoAdd()
@@ -71,7 +71,7 @@ namespace WeiXinPF.Web.admin.diancai
             model.Operator = txtOperator.Text.ToString();
             model.tel = txtTel.Text.ToString();
             model.email = txtEmail.Text.ToString();
-            model.Recommend = cbRecommend.Checked;
+            model.Recommend = rblRecommend.SelectedValue == "1";
 
             if (bll.Add(model) > 0)
             {
@@ -90,7 +90,7 @@ namespace WeiXinPF.Web.admin.diancai
             model.Operator = txtOperator.Text.ToString();
             model.tel = txtTel.Text.ToString();
             model.email = txtEmail.Text.ToString();
-            model.Recommend = cbRecommend.Checked;
+            model.Recommend = rblRecommend.SelectedValue == "1";
 
             if (bll.Update(model))
             {
@@ -111,7 +111,7 @@ namespace WeiXinPF.Web.admin.diancai
                 }
                 JscriptMsg("修改商户或门店信息成功！", "shop_list.aspx", "Success");
             }
-            else if(action == MXEnums.ActionEnum.Add.ToString()) //添加
+            else if (action == MXEnums.ActionEnum.Add.ToString()) //添加
             {
                 if (!DoAdd())
                 {

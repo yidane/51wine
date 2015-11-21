@@ -79,7 +79,7 @@
         $(function () {
             renderViewport();
             $.ajax({
-                url: 'scenic.ashx',
+                url: 'scenic.ashx?rid='+Math.random(),
                 data: { action: 'GetScenic', id: <%=MyCommFun.RequestInt("id") %> },
                 dataType: "json"
             }).done(function (res) {

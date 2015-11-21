@@ -93,8 +93,9 @@ namespace WeiXinPF.Application.DomainModules.Map
         /// </summary>
         /// <param name="wid"></param>
         /// <param name="keywords"></param>
+        /// <param name="recommend"></param>
         /// <returns></returns>
-        public List<POIDto> GetScenics(int wid, string keywords)
+        public List<POIDto> GetScenics(int wid, string keywords, bool recommend = false)
         {
             BLL.wx_travel_marker bll = new BLL.wx_travel_marker();
 
@@ -104,6 +105,12 @@ namespace WeiXinPF.Application.DomainModules.Map
             {
                 strWhere += string.Format("  And Name Like '%{0}%'", keywords);
             }
+
+            if (recommend)
+            {
+                strWhere += " And Recommend=1";
+            }
+
             var markers = bll.GetModelList(strWhere);
 
             if (markers.Any())
@@ -129,8 +136,9 @@ namespace WeiXinPF.Application.DomainModules.Map
         /// </summary>
         /// <param name="wid"></param>
         /// <param name="keywords"></param>
+        /// <param name="recommend"></param>
         /// <returns></returns>
-        public List<POIDto> GetCateringShops(int wid, string keywords)
+        public List<POIDto> GetCateringShops(int wid, string keywords, bool recommend = false)
         {
             BLL.wx_diancai_shopinfo bll = new BLL.wx_diancai_shopinfo();
 
@@ -140,6 +148,12 @@ namespace WeiXinPF.Application.DomainModules.Map
             {
                 strWhere += string.Format("  And hotelName Like '%{0}%'", keywords);
             }
+
+            if (recommend)
+            {
+                strWhere += " And Recommend=1";
+            }
+
             var shops = bll.GetModelList(strWhere);
 
             if (shops.Any())
@@ -164,8 +178,9 @@ namespace WeiXinPF.Application.DomainModules.Map
         /// </summary>
         /// <param name="wid"></param>
         /// <param name="keywords"></param>
+        /// <param name="recommend"></param>
         /// <returns></returns>
-        public List<POIDto> GetHotels(int wid, string keywords)
+        public List<POIDto> GetHotels(int wid, string keywords, bool recommend = false)
         {
             BLL.wx_hotels_info bll = new BLL.wx_hotels_info();
 
@@ -175,6 +190,12 @@ namespace WeiXinPF.Application.DomainModules.Map
             {
                 strWhere += string.Format("  And hotelName Like '%{0}%'", keywords);
             }
+
+            if (recommend)
+            {
+                strWhere += " And Recommend=1";
+            }
+
             var hotels = bll.GetModelList(strWhere);
 
             if (hotels.Any())
@@ -205,22 +226,22 @@ namespace WeiXinPF.Application.DomainModules.Map
             List<POIDto> recommendPois = new List<POIDto>();
 
             //暂时先取第一个；
-            var scenics = GetScenics(wid, keywords);
+            var scenics = GetScenics(wid, keywords, true);
             if (scenics != null && scenics.Any())
             {
-                recommendPois.Add(scenics.FirstOrDefault());
-            }
-            
-            var caterings = GetCateringShops(wid, keywords);
-            if (caterings != null && caterings.Any())
-            {
-                recommendPois.Add(caterings.FirstOrDefault());
+                recommendPois.AddRange(scenics);
             }
 
-            var hotels = GetHotels(wid, keywords);
+            var caterings = GetCateringShops(wid, keywords, true);
+            if (caterings != null && caterings.Any())
+            {
+                recommendPois.AddRange(caterings);
+            }
+
+            var hotels = GetHotels(wid, keywords, true);
             if (hotels != null && hotels.Any())
             {
-                recommendPois.Add(hotels.FirstOrDefault());
+                recommendPois.AddRange(hotels);
             }
 
             return recommendPois;

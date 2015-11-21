@@ -49,5 +49,7 @@ namespace WeiXinPF.Model
         public string extStr2 { get; set; }
         public int? extInt1 { get; set; }
         public int? extInt2 { get; set; }
+
+        public bool? Recommend { get; set; }
     }
 }
