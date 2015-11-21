@@ -13,8 +13,10 @@ namespace Travel.Presentation.WebPlugin
     {
         protected int m_PageIndex;
         protected int m_PageSize;
-        protected string m_TicketCategoryId;
+        protected Guid m_TicketCategoryId;
         protected string m_TicketStatusId;
+        protected DateTime m_BeginTime = DateTime.MinValue;
+        protected DateTime m_EndiTime = DateTime.MinValue;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -23,10 +25,20 @@ namespace Travel.Presentation.WebPlugin
                 InitControls();
 
                 var searchParameter = CreateSearchParameter();
-                searchParameter.PageIndex = 0;
-                searchParameter.PageSize = 10;
 
-                txtPageNum.Text = "10";
+                if (m_PageSize > 0)
+                {
+                    searchParameter.PageSize = m_PageSize;
+                    txtPageNum.Text = m_PageSize.ToString();
+                }
+                else
+                {
+                    searchParameter.PageSize = 10;
+                    txtPageNum.Text = "10";
+                }
+
+                searchParameter.PageIndex = m_PageIndex;
+
                 Search(searchParameter);
             }
         }
@@ -49,15 +61,45 @@ namespace Travel.Presentation.WebPlugin
 
         private void InitQueryString()
         {
-            m_TicketCategoryId = Request.QueryString["TicketCategoryID"];
-            m_TicketStatusId = Request.QueryString["TicketStatus"];
+            var ticketCategoryId = Request.QueryString["TicketCategoryID"];
+            var ticketStatus = Request.QueryString["TicketStatus"];
+            var beginTime = Request.QueryString["BeginTime"];
+            var endTime = Request.QueryString["EndTime"];
+            var pageSize = Request.QueryString["PageSize"];
+            var pageIndex = Request.QueryString["PageIndex"];
+
+            if (!string.IsNullOrEmpty(ticketCategoryId))
+                Guid.TryParse(ticketCategoryId, out m_TicketCategoryId);
+
+            if (!string.IsNullOrEmpty(ticketStatus))
+                m_TicketStatusId = ticketStatus;
+
+            if (!string.IsNullOrEmpty(beginTime))
+                DateTime.TryParse(beginTime, out m_BeginTime);
+
+            if (!string.IsNullOrEmpty(endTime))
+                DateTime.TryParse(endTime, out m_EndiTime);
+
+            if (!string.IsNullOrEmpty(pageSize))
+                int.TryParse(pageSize, out m_PageSize);
+
+            if (!string.IsNullOrEmpty(pageIndex))
+                int.TryParse(pageIndex, out m_PageIndex);
         }
 
         private void InitDateRange()
         {
-            var currentDate = DateTime.Now;
-            this.txtbeginDate.Text = currentDate.AddDays(-7).ToString("yyyy-MM-dd");
-            this.txtendDate.Text = currentDate.ToString("yyyy-MM-dd");
+            if (DateTime.Equals(m_BeginTime, DateTime.MinValue) || DateTime.Equals(m_EndiTime, DateTime.MinValue))
+            {
+                var currentDate = DateTime.Now;
+                this.txtbeginDate.Text = currentDate.AddDays(-7).ToString("yyyy-MM-dd");
+                this.txtendDate.Text = currentDate.ToString("yyyy-MM-dd");
+            }
+            else
+            {
+                this.txtbeginDate.Text = m_BeginTime.ToString("yyyy-MM-dd");
+                this.txtendDate.Text = m_EndiTime.ToString("yyyy-MM-dd");
+            }
         }
 
         private void InitTicketCategory()
@@ -67,6 +109,12 @@ namespace Travel.Presentation.WebPlugin
             this.ddlTicketCategory.DataValueField = "TicketCategoryID";
             this.ddlTicketCategory.DataSource = result;
             this.ddlTicketCategory.DataBind();
+
+            //设置选定项
+            if (result.Any(item => item.TicketCategoryID == m_TicketCategoryId))
+            {
+                this.ddlTicketCategory.SelectedValue = m_TicketCategoryId.ToString();
+            }
         }
 
         private void InitTicketStatus()
@@ -76,6 +124,12 @@ namespace Travel.Presentation.WebPlugin
             this.ddlCategoryStatus.DataValueField = "StatusCode";
             this.ddlCategoryStatus.DataSource = result;
             this.ddlCategoryStatus.DataBind();
+
+            //设定选择项
+            if (result.Any(item => item.StatusCode == m_TicketStatusId))
+            {
+                this.ddlCategoryStatus.SelectedValue = m_TicketStatusId;
+            }
         }
         #endregion
 
@@ -180,8 +234,14 @@ namespace Travel.Presentation.WebPlugin
             this.rptList.DataSource = result.OrderList;
             this.rptList.DataBind();
 
-            string pageUrl = string.Format("OrderStatistics.aspx?ticketName={0}&ticketStatus={1}&page={2}", searchParameter.TicketCategoryID.ToString(), searchParameter.OrderStatus, this.m_PageIndex);
-            PageContent.InnerHtml = OutPageList(this.m_PageSize, this.m_PageIndex, result.Total, pageUrl, 8);
+            string pageUrl = string.Format("OrderStatistics.aspx?BeginTime={0}&EndTime={1}&TicketCategoryID={2}&ticketStatus={3}&pageSize={4}pageIndex={5}",
+                                                                searchParameter.BeginDate.ToString("yyyy-MM-dd"),
+                                                                searchParameter.EndDate.ToString("yyyy-MM-dd"),
+                                                                searchParameter.TicketCategoryID.ToString(),
+                                                                searchParameter.OrderStatus,
+                                                                searchParameter.PageSize,
+                                                                "__id__");
+            PageContent.InnerHtml = OutPageList(searchParameter.PageSize, searchParameter.PageIndex, result.Total, pageUrl, 8);
         }
 
         /// <summary>
@@ -195,6 +255,7 @@ namespace Travel.Presentation.WebPlugin
         /// <returns></returns>
         public static string OutPageList(int pageSize, int pageIndex, int totalCount, string linkUrl, int centSize)
         {
+            totalCount = 100;
             //计算页数
             if (totalCount < 1 || pageSize < 1)
             {
