@@ -45,7 +45,7 @@ namespace WeiXinPF.WeiXinComm
         /// <returns></returns>
         public IResponseMessageBase GetResponseMessageeMusic(RequestMessageText requestMessage, int Indexid, int wid)
         {
-            
+
             var responseMessage = ResponseMessageBase.CreateFromRequestMessage<ResponseMessageMusic>(requestMessage);
             Model.wx_requestRuleContent model_wx = getDataMusicComm(wid, Indexid);
             if (model_wx == null)
@@ -54,7 +54,14 @@ namespace WeiXinPF.WeiXinComm
             }
             else
             {
-                responseMessage.Music.MusicUrl = model_wx.mediaUrl;
+                if (model_wx.mediaUrl.StartsWith("http"))
+                {
+                    responseMessage.Music.MusicUrl = model_wx.mediaUrl;
+                }
+                else
+                {
+                    responseMessage.Music.MusicUrl = MyCommFun.getWebSite() + model_wx.mediaUrl;
+                }
                 responseMessage.Music.Title = model_wx.rContent;
                 responseMessage.Music.Description = model_wx.rContent2;
                 wxResponseBaseMgr.Add(wid, requestMessage.FromUserName, requestMessage.MsgType.ToString(), requestMessage.Content, "music", "音乐链接：" + model_wx.mediaUrl + "|标题：" + model_wx.rContent + "|描述：" + model_wx.rContent2, requestMessage.ToUserName);
@@ -65,7 +72,7 @@ namespace WeiXinPF.WeiXinComm
         }
 
 
-      
+
 
 
         /// <summary>
@@ -104,13 +111,13 @@ namespace WeiXinPF.WeiXinComm
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public IResponseMessageBase GetResponseMessageTxtByContent(RequestMessageText requestMessage, string content,int wid)
+        public IResponseMessageBase GetResponseMessageTxtByContent(RequestMessageText requestMessage, string content, int wid)
         {
 
             var responseMessage = ResponseMessageBase.CreateFromRequestMessage<ResponseMessageText>(requestMessage);
             var locationService = new LocationService();
             responseMessage.Content = content;
-            wxResponseBaseMgr.Add(wid, requestMessage.FromUserName, requestMessage.MsgType.ToString(), requestMessage.Content, "text","文字请求，推送纯粹文字，内容为："+ content, requestMessage.ToUserName);
+            wxResponseBaseMgr.Add(wid, requestMessage.FromUserName, requestMessage.MsgType.ToString(), requestMessage.Content, "text", "文字请求，推送纯粹文字，内容为：" + content, requestMessage.ToUserName);
             return responseMessage;
         }
         /// <summary>
@@ -125,7 +132,7 @@ namespace WeiXinPF.WeiXinComm
 
             var responseMessage = ResponseMessageBase.CreateFromRequestMessage<ResponseMessageText>(requestMessage);
             var locationService = new LocationService();
-           
+
             //wxResponseBaseMgr.Add(wid, requestMessage.FromUserName, requestMessage.MsgType.ToString(), requestMessage.Content, "text", "文字请求，推送纯粹文字，内容为：" + content, requestMessage.ToUserName);
             return responseMessage;
         }
@@ -200,12 +207,20 @@ namespace WeiXinPF.WeiXinComm
             Model.wx_requestRuleContent model = getDataMusicComm(wid, Indexid);
             if (model == null)
             {
-              
+
                 wxResponseBaseMgr.Add(wid, requestMessage.FromUserName, requestMessage.MsgType.ToString(), EventName, "music", "-1", requestMessage.ToUserName);
             }
             else
             {
-                responseMessage.Music.MusicUrl = model.mediaUrl;
+                if (model.mediaUrl.StartsWith("http"))
+                {
+
+                    responseMessage.Music.MusicUrl = model.mediaUrl;
+                }
+                else
+                {
+                    responseMessage.Music.MusicUrl = MyCommFun.getWebSite()+ model.mediaUrl;
+                }
                 responseMessage.Music.Title = model.rContent;
                 responseMessage.Music.Description = model.rContent2;
                 wxResponseBaseMgr.Add(wid, requestMessage.FromUserName, requestMessage.MsgType.ToString(), EventName, "music", "音乐链接：" + model.mediaUrl + "|标题：" + model.rContent + "|描述：" + model.rContent2, requestMessage.ToUserName);
@@ -260,7 +275,7 @@ namespace WeiXinPF.WeiXinComm
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public IResponseMessageBase GetResponseMessageTxtByContent(RequestMessageEventBase requestMessage, string content,int wid,string EventName)
+        public IResponseMessageBase GetResponseMessageTxtByContent(RequestMessageEventBase requestMessage, string content, int wid, string EventName)
         {
 
             var responseMessage = ResponseMessageBase.CreateFromRequestMessage<ResponseMessageText>(requestMessage);
@@ -300,13 +315,13 @@ namespace WeiXinPF.WeiXinComm
 
             IList<Model.ResponseContentEntity> responselist = new List<Model.ResponseContentEntity>();
 
-             responselist= PanDuanMoudle(modelFunctionName, modelFunctionId, openid, apiid);
-             if (responselist == null || responselist.Count <= 0)
-             {
-                 var responseMessage = ResponseMessageBase.CreateFromRequestMessage<ResponseMessageText>(requestMessage);
-                  responseMessage.Content = "【" + modelFunctionName + "】功能模块未获得到数据";
-                  return responseMessage;
-             }
+            responselist = PanDuanMoudle(modelFunctionName, modelFunctionId, openid, apiid);
+            if (responselist == null || responselist.Count <= 0)
+            {
+                var responseMessage = ResponseMessageBase.CreateFromRequestMessage<ResponseMessageText>(requestMessage);
+                responseMessage.Content = "【" + modelFunctionName + "】功能模块未获得到数据";
+                return responseMessage;
+            }
             Model.ReponseContentType responseType = responselist[0].rcType;
             if (responseType == Model.ReponseContentType.text)
             {
@@ -326,7 +341,7 @@ namespace WeiXinPF.WeiXinComm
                     article = new Article();
                     article.Title = response.rContent;
                     article.Description = response.rContent2;
-                    article.Url =getWXApiUrl(response.detailUrl, token, openid) + getWxUrl_suffix();
+                    article.Url = getWXApiUrl(response.detailUrl, token, openid) + getWxUrl_suffix();
                     if (response.picUrl == null || response.picUrl.ToString().Trim() == "")
                     {
                         article.PicUrl = "";
@@ -347,7 +362,7 @@ namespace WeiXinPF.WeiXinComm
                 }
 
                 responseMessage.Articles.AddRange(rArticlelist);
-                wxResponseBaseMgr.Add(apiid, requestMessage.FromUserName, requestMessage.MsgType.ToString(), requestMessage.Content, "txtpic", "这次发了" + rArticlelist.Count+ "条图文", requestMessage.ToUserName);
+                wxResponseBaseMgr.Add(apiid, requestMessage.FromUserName, requestMessage.MsgType.ToString(), requestMessage.Content, "txtpic", "这次发了" + rArticlelist.Count + "条图文", requestMessage.ToUserName);
 
                 return responseMessage;
 
@@ -356,7 +371,7 @@ namespace WeiXinPF.WeiXinComm
             {
                 return null;
             }
-           
+
 
         }
 
@@ -375,27 +390,27 @@ namespace WeiXinPF.WeiXinComm
             string token = ConvertDateTimeInt(DateTime.Now).ToString();
 
             IList<Model.ResponseContentEntity> responselist = new List<Model.ResponseContentEntity>();
-                
-           responselist= PanDuanMoudle( modelFunctionName,  modelFunctionId, openid,  apiid);
-           if (responselist == null || responselist.Count <= 0)
-           {
-               var responseMessage = ResponseMessageBase.CreateFromRequestMessage<ResponseMessageText>(requestMessage);
-               responseMessage.Content = "【" + modelFunctionName + "】功能模块未获得到数据";
-               return responseMessage;
-           }
 
-           Model.ReponseContentType responseType = responselist[0].rcType;
+            responselist = PanDuanMoudle(modelFunctionName, modelFunctionId, openid, apiid);
+            if (responselist == null || responselist.Count <= 0)
+            {
+                var responseMessage = ResponseMessageBase.CreateFromRequestMessage<ResponseMessageText>(requestMessage);
+                responseMessage.Content = "【" + modelFunctionName + "】功能模块未获得到数据";
+                return responseMessage;
+            }
 
-           if (responseType == Model.ReponseContentType.text)
+            Model.ReponseContentType responseType = responselist[0].rcType;
+
+            if (responseType == Model.ReponseContentType.text)
             {
                 var responseMessage = ResponseMessageBase.CreateFromRequestMessage<ResponseMessageText>(requestMessage);
 
                 responseMessage.Content = responselist[0].rContent.ToString();
                 return responseMessage;
             }
-           else if (responseType == Model.ReponseContentType.txtpic)
+            else if (responseType == Model.ReponseContentType.txtpic)
             {
-                  var responseMessage = ResponseMessageBase.CreateFromRequestMessage<ResponseMessageNews>(requestMessage);
+                var responseMessage = ResponseMessageBase.CreateFromRequestMessage<ResponseMessageNews>(requestMessage);
                 IList<Article> rArticlelist = new List<Article>();
                 Article article = new Article();
                 foreach (Model.ResponseContentEntity response in responselist)
@@ -429,11 +444,11 @@ namespace WeiXinPF.WeiXinComm
             {
                 return null;
             }
-            
+
 
         }
-       
-      
+
+
 
 
 
@@ -510,7 +525,7 @@ namespace WeiXinPF.WeiXinComm
                     if (twList[i].picUrl.Contains("http://"))
                     {
                         article.PicUrl = twList[i].picUrl;
-                       
+
                     }
                     else
                     {
@@ -613,7 +628,7 @@ namespace WeiXinPF.WeiXinComm
 
         public string getWXApiUrl(string url, string token, string openid)
         {
-            
+
             string ret = "";
             if (url.Contains("?"))
             {
@@ -623,7 +638,7 @@ namespace WeiXinPF.WeiXinComm
             {
                 ret = url + "?token=" + token + "&openid=" + openid;
             }
-           
+
             return ret;
         }
 
