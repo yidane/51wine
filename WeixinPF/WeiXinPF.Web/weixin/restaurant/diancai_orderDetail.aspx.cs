@@ -113,10 +113,51 @@ namespace WeiXinPF.Web.weixin.restaurant
                     foreach (OrderCaipinDetail detail in pair.Value)
                     {
                         var status = StatusManager.DishStatus.GetStatusDict(detail.status);
+
                         builder.Append("<div class='swiper-slide swiper-image'>");
-                        builder.AppendFormat(
-                            "<img id='Img3' class='img-ercode' src=\"ErCodeHandler.ashx?key={0}\" key='{0}' status='{1}' caiid={2}>",
-                            detail.identifyingcode, status.StatusName, pair.Key);
+                        //未使用或退款不同意的，才能使用
+                        if (status.StatusID == StatusManager.DishStatus.NoUsed.StatusID || status.StatusID == StatusManager.DishStatus.RefundFaild.StatusID)
+                        {
+                            builder.AppendFormat("<img id='Img3' class='img-ercode' src=\"ErCodeHandler.ashx?key={0}\" key='{0}' status='{1}' caiid={2}>",
+                                                                    detail.identifyingcode,
+                                                                    status.StatusName,
+                                                                    pair.Key);
+                        }
+                        else
+                        {
+                            if (status.StatusID == StatusManager.DishStatus.Used.StatusID)
+                            {
+                                //已使用
+                                builder.AppendFormat("<img id='Img3' class='img-ercode' src=\"images/refundTicket.png\" key='{0}' status='{1}' caiid={2}>",
+                                                                    detail.identifyingcode,
+                                                                    status.StatusName,
+                                                                    pair.Key);
+                            }
+                            else if (status.StatusID == StatusManager.DishStatus.PreRefund.StatusID)
+                            {
+                                //退款中
+                                builder.AppendFormat("<img id='Img3' class='img-ercode' src=\"images/refundTicket.png\" key='{0}' status='{1}' caiid={2}>",
+                                                                    detail.identifyingcode,
+                                                                    status.StatusName,
+                                                                    pair.Key);
+                            }
+                            else if (status.StatusID == StatusManager.DishStatus.Refund.StatusID)
+                            {
+                                //已退款
+                                builder.AppendFormat("<img id='Img3' class='img-ercode' src=\"images/refundTicket.png\" key='{0}' status='{1}' caiid={2}>",
+                                                                    detail.identifyingcode,
+                                                                    status.StatusName,
+                                                                    pair.Key);
+                            }
+                            else if (status.StatusID == StatusManager.DishStatus.NoActived.StatusID)
+                            {
+                                //未激活
+                                builder.AppendFormat("<img id='Img3' class='img-ercode' src=\"images/refundTicket.png\" key='{0}' status='{1}' caiid={2}>",
+                                                                        detail.identifyingcode,
+                                                                        status.StatusName,
+                                                                        pair.Key);
+                            }
+                        }
                         builder.Append("</div>");
                     }
 

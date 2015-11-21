@@ -8203,6 +8203,9 @@
     <Content Include="weixin\cashred\js\alert.js" />
     <Content Include="weixin\restaurant\css\orderlist.css" />
     <Content Include="weixin\restaurant\images\i_gray_icon.png" />
+    <Content Include="weixin\restaurant\images\refundAll.png" />
+    <Content Include="weixin\restaurant\images\refundPart.png" />
+    <Content Include="weixin\restaurant\images\refundTicket.png" />
     <Content Include="weixin\restaurant\images\time_gray_icon.png" />
     <Content Include="weixin\restaurant\images\wave_blue_icon.svg" />
     <Content Include="weixin\WeChatPay\getopenId.aspx" />
