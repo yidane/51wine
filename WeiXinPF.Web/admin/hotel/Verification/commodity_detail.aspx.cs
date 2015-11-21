@@ -96,7 +96,7 @@ namespace WeiXinPF.Web.admin.hotel.Verification
                     Dingdanlist += "<td class=\"cc\">" + item.LeaveTime + "</td></tr>";
                     amount += Convert.ToDecimal(item.TotelPrice);
                 }
-                Dingdanlist += "<tr><td></td><td ></td><td ></td><td ></td><td class=\"rr\">总计：￥" + amount + "</td></tr>";
+                Dingdanlist += "<tr><td></td><td ></td><td ></td><td ></td><td class=\"rr\" style=\"color: red; font-weight:bold;\">支付总计：￥" + amount + "</td></tr>";
             }
             
             var hotelOrder = new BLL.wx_hotel_dingdan().GetModel(int.Parse(id));
@@ -105,24 +105,17 @@ namespace WeiXinPF.Web.admin.hotel.Verification
             if (hotelOrder != null)
             {
                 dingdanren += "<tr><td width=\"70\">订单编号： " + hotelOrder.OrderNumber + "</td></tr>";
-                dingdanren += "<tr> <td>下单时间：" + hotelOrder.orderTime + "</td></tr>";
-                dingdanren += "<tr><td>联系人：" + hotelOrder.oderName + "</td></tr>";
-                dingdanren += "<tr><td>联系电话：" + hotelOrder.tel + "</td></tr>";
-                dingdanren += "<tr><td>备注 ：" + hotelOrder.remark + "</td></tr>";
-                dingdanren += "<tr><td>订单状态：<em  style='width:70px;' class='ok'>" + HotelStatusManager.OrderStatus.GetStatusDict(hotelOrder.orderStatus.Value).StatusName + "</em></td></tr>";
+                dingdanren += "<tr> <td>交易日期：" + hotelOrder.orderTime + "</td></tr>";
+                dingdanren += "<tr><td>预定人：" + hotelOrder.oderName + "</td></tr>";
+                dingdanren += "<tr><td>电话：" + hotelOrder.tel + "</td></tr>";
             }
             else
             {
                 dingdanren += "<tr><td width=\"70\">订单编号：</td></tr>";
-                dingdanren += "<tr> <td>下单时间：</td></tr>";
-                dingdanren += "<tr><td>联系人：</td></tr>";
-                dingdanren += "<tr><td>联系电话：</td></tr>";
-                dingdanren += "<tr><td>备注 ：</td></tr>";
-                dingdanren += "<tr><td>订单状态：<em  style='width:70px;' class='no'>未使用</em></td></tr>";
-
+                dingdanren += "<tr> <td>交易日期：</td></tr>";
+                dingdanren += "<tr><td>预定人：</td></tr>";
+                dingdanren += "<tr><td>电话：</td></tr>";
             }
-
-            dingdanren += "<tr><td>商家留言：</td></tr> <tr> <td></td></tr>";
         }
     }
 }
