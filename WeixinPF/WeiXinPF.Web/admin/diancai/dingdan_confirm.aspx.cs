@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using WeiXinPF.Common;
+using WeiXinPF.Web.weixin.restaurant;
 
 namespace WeiXinPF.Web.admin.diancai
 {
@@ -39,7 +40,8 @@ namespace WeiXinPF.Web.admin.diancai
             {
                 Response.Write("<script language='javascript' type='text/javascript'>alert('该订单不存在或未付款，请确认！')</script>");
             }
-            else if (identifyingCode.Status != 1)
+            else if (identifyingCode.Status != StatusManager.DishStatus.NoUsed.StatusID 
+                && identifyingCode.Status != StatusManager.DishStatus.RefundFaild.StatusID)
             {
                 Response.Write("<script language='javascript' type='text/javascript'>alert('该商品已消费或者退单，请确认！')</script>");
             }
