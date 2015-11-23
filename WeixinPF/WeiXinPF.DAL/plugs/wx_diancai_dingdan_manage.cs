@@ -559,7 +559,8 @@ namespace WeiXinPF.DAL
                                             ) t
                                             INNER JOIN wx_diancai_dingdan_manage d ON d.orderNumber = t.orderNumber
                                             LEFT JOIN wx_diancai_shopinfo s ON d.shopinfoid = s.id
-                                    WHERE   payStatus > 0");
+                                    WHERE   payStatus > 0
+                                    ORDER BY d.createDate DESC");
             SqlParameter[] sqlparams =
                 {
                     new SqlParameter(){ParameterName = "@OpenID",SqlDbType = SqlDbType.NVarChar,Value = openid}
