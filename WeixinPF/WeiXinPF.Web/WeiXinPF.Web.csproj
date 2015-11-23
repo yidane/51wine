@@ -62,9 +62,8 @@
     <Reference Include="Gma.QrCodeNet.Encoding">
       <HintPath>..\dll\Gma.QrCodeNet.Encoding.dll</HintPath>
     </Reference>
-    <Reference Include="LitJSON, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\LitJSON.dll</HintPath>
+    <Reference Include="LitJSON">
+      <HintPath>..\dll\LitJSON.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.JScript" />
     <Reference Include="OneGulp.WeChat">
