@@ -18,6 +18,28 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OneGulp.WeChat.MP.Test", "0 Test\OneGulp.WeChat.MP.Test\OneGulp.WeChat.MP.Test.csproj", "{2C273CF9-2463-4B0E-A902-9F18DAEA2AC6}"
 EndProject
 Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 5
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs20
+		SccProjectUniqueName0 = 0\u0020Test\\OneGulp.WeChat.MP.Test\\OneGulp.WeChat.MP.Test.csproj
+		SccProjectTopLevelParentUniqueName0 = OneGulp.sln
+		SccProjectName0 = 0\u0020Test/OneGulp.WeChat.MP.Test
+		SccLocalPath0 = 0\u0020Test\\OneGulp.WeChat.MP.Test
+		SccLocalPath1 = .
+		SccProjectUniqueName2 = 1\u0020Common\\OneGulp.Common.Util\\OneGulp.Common.Util.csproj
+		SccProjectTopLevelParentUniqueName2 = OneGulp.sln
+		SccProjectName2 = 1\u0020Common/OneGulp.Common.Util
+		SccLocalPath2 = 1\u0020Common\\OneGulp.Common.Util
+		SccProjectUniqueName3 = 2\u0020WeChat\\OneGulp.WeChat\\OneGulp.WeChat.csproj
+		SccProjectTopLevelParentUniqueName3 = OneGulp.sln
+		SccProjectName3 = 2\u0020WeChat/OneGulp.WeChat
+		SccLocalPath3 = 2\u0020WeChat\\OneGulp.WeChat
+		SccProjectUniqueName4 = 2\u0020WeChat\\OneGulp.WeChat.MP\\OneGulp.WeChat.MP.csproj
+		SccProjectTopLevelParentUniqueName4 = OneGulp.sln
+		SccProjectName4 = 2\u0020WeChat/OneGulp.WeChat.MP
+		SccLocalPath4 = 2\u0020WeChat\\OneGulp.WeChat.MP
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU

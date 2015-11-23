@@ -12,6 +12,10 @@
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -302,6 +306,14 @@
     <Compile Include="TenPayLibV3\TenPayV3Info.cs" />
     <Compile Include="TenPayLibV3\TenPayV3InfoCollection.cs" />
     <Compile Include="TenPayLibV3\TenPayV3Util.cs" />
+    <Compile Include="TenPayLibV3\TenPayV3\JsApiPay.cs" />
+    <Compile Include="TenPayLibV3\TenPayV3\Model\PaymentNotify.cs" />
+    <Compile Include="TenPayLibV3\TenPayV3\Model\RefundOrderRequest.cs" />
+    <Compile Include="TenPayLibV3\TenPayV3\Model\RefundOrderResponse.cs" />
+    <Compile Include="TenPayLibV3\TenPayV3\Model\RefundQueryRequest.cs" />
+    <Compile Include="TenPayLibV3\TenPayV3\Model\RefundQueryResponse.cs" />
+    <Compile Include="TenPayLibV3\TenPayV3\Model\UnifiedOrderRequest.cs" />
+    <Compile Include="TenPayLibV3\TenPayV3\Model\UnifiedOrderResponse.cs" />
     <Compile Include="TenPayLibV3\TenPayV3\TenPayV3.cs" />
     <Compile Include="TenPayLibV3\TenPayV3\TenPayV3Result.cs" />
     <Compile Include="TenPayLib\CheckRequestHandler.cs" />
