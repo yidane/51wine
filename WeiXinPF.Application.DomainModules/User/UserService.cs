@@ -1,52 +1,64 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using AutoMapper;
 using WeiXinPF.Application.DomainModules.User.DTOS;
+using WeiXinPF.BLL;
 using WeiXinPF.Common;
-using WeiXinPF.Infrastructure.DomainDataAccess.Photo;
 using WeiXinPF.Infrastructure.DomainDataAccess.User;
 
 namespace WeiXinPF.Application.DomainModules.User
 {
-   public  class UserService
+    public class UserService : IUserService
     {
-       public UserService()
+        private readonly BLL.manager _managerDal;
+        public UserService()
         {
-            Mapper.CreateMap<UserInfoEntity, UserDTO>();
-            Mapper.CreateMap<UserDTO, UserInfoEntity>();
+            _managerDal = new manager();
+            Mapper.CreateMap<WeiXinPF.Model.manager, UserDto>()
+                .ForMember(dto => dto.UserId, u => u.MapFrom(m => m.id))
+                .ForMember(dto => dto.LoginName, u => u.MapFrom(m => m.user_name))
+                .ForMember(dto => dto.DisplayName, u => u.MapFrom(m => m.real_name));
+
+            Mapper.CreateMap<UserDto, WeiXinPF.Model.manager>()
+                .ForMember(dto => dto.id, u => u.MapFrom(m => m.UserId))
+                .ForMember(dto => dto.user_name, u => u.MapFrom(m => m.LoginName))
+                .ForMember(dto => dto.real_name, u => u.MapFrom(m => m.DisplayName));
         }
 
-       /// <summary>
-       /// 保存用户
-       /// </summary>
-       /// <param name="userDto"></param>
-       public void SaveUser(UserDTO userDto)
-       {
-           if (userDto!=null)
-           {
-               var user = Mapper.Map<UserDTO, UserInfoEntity>(userDto);
-               user.SaveUser();
-               
-           }
-       }
+        public UserDto Get(int userId)
+        {
+            UserDto user = null;
+            var account = _managerDal.GetModel(userId);
 
-       /// <summary>
-       /// 获取用户
-       /// </summary>
-       /// <param name="openid"></param>
-       /// <returns></returns>
-       public UserDTO GetModel(string openid)
-       {
-           UserDTO result = null;
-           var info = UserInfoEntity.GetModel(openid);
-           if (info != null)
-           {
-               result = Mapper.Map<UserInfoEntity, UserDTO>(info);
-           }
-           return result;
-       }
+            if (account != null)
+            {
+                user = Mapper.Map<Model.manager, UserDto>(account);
+            }
+            return user;
+        }
 
+        public UserDto Get(string loginName, string password)
+        {
+            UserDto user = null;
+            Model.manager account = _managerDal.GetModel(loginName, password);
+
+
+
+            if (account != null)
+            {
+                user = Mapper.Map<Model.manager, UserDto>(account);
+            }
+            return user;
+        }
+
+        public UserDto Mapping(Model.manager user)
+        {
+            return user.MapTo<UserDto>();
+        }
+
+        public UserInfoEntity Get(string openid)
+        {
+            return UserInfoEntity.GetModel(openid);
+
+        }
     }
 }

@@ -125,6 +125,7 @@
     <Content Include="admin\hotel\Verification\credentials_detail.aspx" />
     <Content Include="admin\hotel\Verification\dingdan_confirm.aspx" />
     <Content Include="admin\index - Copy.aspx" />
+    <Content Include="admin\js\message-vm.js" />
     <Content Include="admin\photo\photoEdit.aspx" />
     <Content Include="admin\photo\photolist.aspx" />
     <Content Include="admin\scenic\scenic_detail_edit.aspx" />

@@ -65,6 +65,9 @@
     <Compile Include="MapWebService.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="MessageWebService.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="MonsterWebService.cs">
       <SubType>Component</SubType>
     </Compile>

@@ -2,14 +2,23 @@
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>后台管理中心 版本号：<%=WeiXinPF.Common.MXKeys.ASSEMBLY_VERSION %></title>
+    <link href="../scripts/bootstrap/css/bootstrap.min.css" />
     <link href="skin/default/style.css" rel="stylesheet" type="text/css" />
+    <link href="../css/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="skin/notify.css" rel="stylesheet" />
+
     <script type="text/javascript" src="../scripts/jquery/jquery-1.10.2.min.js"></script>
     <script type="text/javascript" src="../scripts/jquery/jquery.nicescroll.js"></script>
     <script type="text/javascript" src="../scripts/lhgdialog/lhgdialog.js?skin=idialog"></script>
+    <script type="text/javascript" src="../scripts/bootstrap/js/bootstrap.min.js"></script>
+
     <script type="text/javascript" src="js/layout.js"></script>
+
     <script type="text/javascript">
         //页面加载完成时
         $(function () {
@@ -167,7 +176,7 @@
                 //绑定树菜单事件.结束
             });
             //定位或跳转到相应的菜单
-//            linkMenuTree(islink);
+            linkMenuTree(islink);
         }
         //定位或跳转到相应的菜单
         function linkMenuTree(islink, navid) {
@@ -219,11 +228,7 @@
                 }
                 //检查是否需要跳转链接
                 if (islink == true) {
-//                    frames["mainframe"].location.href = cookieObj.attr("href"); 
-// document.getElementById("mainframe").src=cookieObj.attr("href");
-                    $("#mainframe").attr('src', cookieObj.attr("href"));
-                    $("#mainframe").attr('src', cookieObj.attr("href"));
-//$("#mainframe").reload();
+                    frames["mainframe"].location.href = cookieObj.attr("href");
                 }
             } else if (argument == 2) {
                 //删除所有的选中样式
@@ -287,10 +292,57 @@
                 $(".nav li span").show();
             }
         }
+
+        var timer;
+        //点击消息弹窗
+        function openmsg() {
+            var count = $("#msg_count").text();
+            if (count && count > 0) {
+                $.dialog({
+                    id: 'msg',
+                    init: function () {
+                        var that = this, i = 10;
+                        var fn = function () {
+                            that.title('消息提醒(' + i + '秒后关闭)');
+                            !i && that.close();
+                            i--;
+                        };
+                        timer = setInterval(fn, 1000);
+                        fn();
+                    },
+                    close: function () {
+                        clearInterval(timer);
+                    },
+                    //                    title: '消息提醒',
+                    content: '喀纳斯山庄于2015/10/17 15:19:00提交商品编号为：1003，名称为：商务标准间的商品请您审核！',
+                    width: 310,
+
+                    left: '99.5%',
+                    top: '100%',
+
+                    fixed: true,
+                    drag: false,
+                    min: false,
+                    max: false,
+                    resize: false,
+
+                    button: [
+                            {
+                                name: '马上审核',
+                                callback: function () {
+                                    this.content('你同意了').time(2);
+                                    return false;
+                                },
+                                focus: true
+                            }
+                    ]
+                });
+            }
+        }
     </script>
 </head>
 
-<body class="indexbody">
+<body class="indexbody skin-blue">
     <form id="form1" runat="server">
         <!--全局菜单-->
         <a class="btn-paograms" onclick="triggerMenu(true);"></a>
@@ -304,32 +356,85 @@
         </div>
         <!--/全局菜单-->
 
-        <div class="header">
-            <div class="header-box">
+        <div class="header main-header">
+            <div class="header-box navbar ">
                 <a href="index.aspx" id="indexUrl" runat="server"><span class="logo"></span></a>
                 <ul id="nav" class="nav"></ul>
-                <div class="nav-right">
-                    <div class="icon-info">
-                        <span>您好，<%=admin_info.real_name %><br />
-                            <%=new WeiXinPF.BLL.manager_role().GetTitle(admin_info.role_id) %>
-                        </span>
-                    </div>
-                    <div class="icon-option">
-                        <i></i>
-                        <div class="drop-box">
-                            <div class="arrow"></div>
-                            <ul class="drop-item">
-                                <li id="mygzh" runat="server"><a navid="list_weixin" href="weixin/myweixinlist.aspx" target="mainframe" class="item selected">
-                                    <span>我的公众帐号</span>
-                                </a>
-                                </li>
-                                <li><a href="center.aspx" target="mainframe">管理中心</a></li>
-                                <li><a onclick="linkMenuTree(false, '');" href="manager/manager_pwd.aspx" target="mainframe">修改密码</a></li>
+                <div class=" navbar-custom-menu">
+
+                    <ul class="nav navbar-nav" >
+                        <li class="dropdown messages-menu " id="menu_msg">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                <i class="fa fa-envelope-o"></i>
+                                <span class="label label-warning">3</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="header" data-bind="text: '您有' + shortmsgCount() + '条消息提醒'">您有0条消息提醒</li>
                                 <li>
-                                    <asp:LinkButton ID="lbtnExit" runat="server" OnClick="lbtnExit_Click">注销登录</asp:LinkButton></li>
+                                    <ul class="menu" data-bind="foreach: shotmsgList">
+                                        <li>
+                                            <a href="#">
+                                                <h4>
+                                                    <!--ko text:msg.fromSystem.systemName-->
+                                                    <!--/ko-->
+
+                                                    <small><i class="fa fa-clock-o"></i>
+                                                        <!--ko text:msg.createTime-->
+                                                        <!--/ko-->
+                                                    </small>
+                                                </h4>
+                                                <p>
+                                                    来自<span style="font-weight: bolder;" data-bind="text: msg.fromUser.displayName "></span>
+                                                    的<!--ko text:count--><!--/ko-->条新消息，
+                                                    <span style="color: #3c8dbc" data-bind="click: $parent.shortmsgViewDetail">点击查看</span>！
+                                                </p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="footer"><a href="#" data-bind="click: $root.LoadMessage">查看所有消息</a></li>
                             </ul>
-                        </div>
-                    </div>
+                        </li>
+
+                        <li class="dropdown dropdown-nochild user user-menu">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="user-image"></i>
+                                <!--<img src="/images/avatar.png" class="user-image" alt="User Image">-->
+                                <span class="hidden-xs">您好，<%=admin_info.real_name %><br />
+                                    <%=new WeiXinPF.BLL.manager_role().GetTitle(admin_info.role_id) %></span>
+                                <!--<i  class="user-icon-dropdown"></i>-->
+                                <i class="user-icon-dropdown fa fa-angle-down fa-2x"></i>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <div class="arrow"></div>
+                                <!-- User image -->
+                                <li id="mygzh" runat="server">
+                                    <a navid="list_weixin" href="weixin/myweixinlist.aspx" target="mainframe" class="item selected">我的公众帐号
+                                    </a>
+                                </li>
+                                <li><a class="item" href="center.aspx" target="mainframe">管理中心</a></li>
+                                <li><a class="item" onclick="linkMenuTree(false, '');" href="manager/manager_pwd.aspx" target="mainframe">修改密码</a></li>
+                                <li>
+                                    <asp:LinkButton ID="lbtnExit" class="item" runat="server" OnClick="lbtnExit_Click">注销登录</asp:LinkButton></li>
+
+                            </ul>
+                        </li>
+                        <!--<li>-->
+                        <!--<a href="#" data-toggle="control-sidebar">-->
+                        <!--<i class="fa fa-angle-down fa-2x"></i></a>-->
+                        <!--</li>-->
+                    </ul>
+
+
+                    <%--<div class="dropdown messages-menu">--%>
+                    <%--<a href="#" class="dropdown-toggle" title="您有0条新消息" data-toggle="dropdown" aria-expanded="false" onclick="javascript:openmsg()">--%>
+                    <%--<i class="fa fa-envelope-o fa-lg"></i>--%>
+                    <%--<span id="msg_count" class="label label-danger">1</span>--%>
+
+
+                    <%--</a>--%>
+                    <%----%>
+                    <%--</div>--%>
                 </div>
             </div>
         </div>
@@ -344,5 +449,20 @@
             <iframe id="mainframe" name="mainframe" frameborder="0" src="center.aspx"></iframe>
         </div>
     </form>
+    <script src="js/message-vm.js" type="text/javascript"></script>
+   <script type="text/javascript">
+        var systemMenu;
+        var myMessageDetailViewModel;
+        $(function () {
+            
+
+
+            if ($.isEmptyObject(myMessageDetailViewModel)) {
+                myMessageDetailViewModel = new MessageViewModel();
+                ko.applyBindings(myMessageDetailViewModel, document.getElementById("menu_msg"));
+                myMessageDetailViewModel.loadData();
+            }
+        });
+    </script>
 </body>
 </html>

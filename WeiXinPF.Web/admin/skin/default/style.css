@@ -39,23 +39,24 @@ a:active{ color:#0065D9; text-decoration:none; }
 .header{ background:#33B5E5; }
 .logo{ display:block; float:left; width:180px; height:42px; background:url(logo.png) no-repeat left center; background-size: 100%; border-right:1px solid #1da0d0; text-indent:-9999px; overflow:hidden; }
 /*顶部菜单*/
-.nav{ display:block; float:left; height:100%; border-right:1px solid #4dc4f0; }
-	.nav li{ display:block; float:left; margin:0; padding:0px 15px; border-left:1px solid #4dc4f0; border-right:1px solid #1da0d0; color:#fff; cursor:pointer; font-size:14px; height:42px; line-height:42px; vertical-align:middle; }
-	.nav li:hover{ background:#50c0e9; }
-	.nav .selected{ background:#16a0d3; }
+.header-box> .nav{ display:block; float:left; height:100%; border-right:1px solid #4dc4f0; }
+.header-box >	.nav li{ display:block; float:left; margin:0; padding:0px 15px; border-left:1px solid #4dc4f0; border-right:1px solid #1da0d0; color:#fff; cursor:pointer; font-size:14px; height:42px; line-height:42px; vertical-align:middle; }
+.header-box> 	.nav li:hover{ background:#50c0e9; }
+.header-box> 	.nav .selected{ background:#16a0d3; }
 	.nav .icon-0,.nav .icon-1,.nav .icon-2,.nav .icon-3,.nav .icon-4,.nav .icon-5,
-	.nav .icon-6,.nav .icon-7,.nav .icon-8{ display:block; background:url(skin_icons.png) no-repeat; float:left; height:42px; width:20px; }
-	.nav .icon-0{ background-position:2px -305px;  }
-	.nav .icon-4{ background-position:-38px -305px; }
+ 	.nav .icon-6,.nav .icon-7,.nav .icon-8{ display:block; background:url(default/skin_icons.png) no-repeat; float:left; height:42px; width:20px; }
+ 	.nav .icon-0{ background-position:2px -305px;  }
+ .nav .icon-4{ background-position:-38px -305px; }
 	.nav .icon-2{ background-position:-78px -305px; }
-	.nav .icon-3{ background-position:-118px -305px; }
-	.nav .icon-1{ background-position:-158px -305px; }
-	.nav .icon-5{ background-position:-198px -305px; }
-	.nav .icon-6{ background-position:-238px -305px; }
-    .nav .icon-7{ background-position:-158px -305px; }
-    .nav .icon-8{ background-position:-158px -305px; }
+ 	.nav .icon-3{ background-position:-118px -305px; }
+ .nav .icon-1{ background-position:-158px -305px; }
+ 	.nav .icon-5{ background-position:-198px -305px; }
+ .nav .icon-6{ background-position:-238px -305px; }
+   .nav .icon-7{ background-position:-158px -305px; }
+   .nav .icon-8{ background-position:-158px -305px; }
 
-	.nav li span{ padding-left:5px; line-height:40px; }
+.header-box >	.nav li span{ padding-left:5px; line-height:40px; }
+
 /*顶部右边导航*/
 .nav-right{ float:right; }
 	.nav-right .icon-info{ float:left; padding:0 10px 0 34px; height:42px; line-height:42px; border-right:1px solid #1da0d0; background:url(skin_icons.png) no-repeat 0 -429px; }

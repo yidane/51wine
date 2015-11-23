@@ -5,10 +5,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>微信帐号管理 版本号：<%=WeiXinPF.Common.MXKeys.ASSEMBLY_VERSION %></title>
+    <link href="../scripts/bootstrap/css/bootstrap.min.css" />
     <link href="skin/default/style.css" rel="stylesheet" type="text/css" />
+
+    <link href="../css/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="skin/notify.css" rel="stylesheet" />
     <script type="text/javascript" src="../scripts/jquery/jquery-1.10.2.min.js"></script>
     <script type="text/javascript" src="../scripts/jquery/jquery.nicescroll.js"></script>
     <script type="text/javascript" src="../scripts/lhgdialog/lhgdialog.js?skin=idialog"></script>
+    
+    <script type="text/javascript" src="../scripts/bootstrap/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/layout.js"></script>
     <script type="text/javascript">
         //页面加载完成时
@@ -20,7 +26,7 @@
 
             //初始化导航菜单
             initMenuTree(true);
-          
+
             //设置左边导航滚动条
             $("#sidebar-nav").niceScroll({ touchbehavior: false, cursorcolor: "#7C7C7C", cursoropacitymax: 0.6, cursorwidth: 5 });
             $("#pop-menu .list-box").niceScroll({ touchbehavior: false, cursorcolor: "#7C7C7C", cursoropacitymax: 0.6, cursorwidth: 5 });
@@ -35,7 +41,7 @@
             navresize();
         });
 
-       
+
         //初始化导航菜单
         function initMenuTree(islink) {
             //先清空NAV菜单内容
@@ -150,7 +156,7 @@
                 //绑定树菜单事件.结束
             });
             //定位或跳转到相应的菜单
-            
+
         }
 
         //导航菜单显示和隐藏
@@ -165,32 +171,81 @@
 
     </script>
 </head>
-<body class="indexbody">
+<body class="indexbody skin-blue">
     <form id="form1" runat="server">
-        <div class="header">
-            <div class="header-box">
-              <a href="wxIndex.aspx">  <h1 class="logo"></h1></a>
+ 
+        
+        
+        
+        
+        
+        <div class="header main-header">
+            <div class="header-box navbar ">
+                <a href="index.aspx" id="indexUrl" runat="server"><span class="logo"></span></a>
                 <ul id="nav" class="nav"></ul>
-                <div class="nav-right">
-                    <div class="icon-info">
-                        <span>您好，<%=admin_info.user_name %><br />
-                            <%=new WeiXinPF.BLL.manager_role().GetTitle(admin_info.role_id) %>
-                        </span>
-                    </div>
-                    <div class="icon-option">
-                        <i></i>
-                        <div class="drop-box">
-                            <div class="arrow"></div>
-                            <ul class="drop-item">
+                <div class=" navbar-custom-menu">
+
+                    <ul class="nav navbar-nav" >
+                        <li class="dropdown messages-menu " id="menu_msg">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                <i class="fa fa-envelope-o"></i>
+                                <span class="label label-warning">3</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="header" data-bind="text: '您有' + shortmsgCount() + '条消息提醒'">您有0条消息提醒</li>
+                                <li>
+                                    <ul class="menu" data-bind="foreach: shotmsgList">
+                                        <li>
+                                            <a href="#">
+                                                <h4>
+                                                    <!--ko text:msg.fromSystem.systemName-->
+                                                    <!--/ko-->
+
+                                                    <small><i class="fa fa-clock-o"></i>
+                                                        <!--ko text:msg.createTime-->
+                                                        <!--/ko-->
+                                                    </small>
+                                                </h4>
+                                                <p>
+                                                    来自<span style="font-weight: bolder;" data-bind="text: msg.fromUser.displayName "></span>
+                                                    的<!--ko text:count--><!--/ko-->条新消息，
+                                                    <span style="color: #3c8dbc" data-bind="click: $parent.shortmsgViewDetail">点击查看</span>！
+                                                </p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="footer"><a href="#" data-bind="click: $root.LoadMessage">查看所有消息</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="dropdown dropdown-nochild user user-menu">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="user-image"></i>
+                                <!--<img src="/images/avatar.png" class="user-image" alt="User Image">-->
+                                <span class="hidden-xs">您好，<%=admin_info.real_name %><br />
+                                    <%=new WeiXinPF.BLL.manager_role().GetTitle(admin_info.role_id) %></span>
+                                <!--<i  class="user-icon-dropdown"></i>-->
+                                <i class="user-icon-dropdown fa fa-angle-down fa-2x"></i>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <div class="arrow"></div>
                                 <li><a onclick="linkMenuTree(false, '');" href="manager/manager_pwd.aspx" target="mainframe">修改密码</a></li>
                                 <li>
                                     <asp:LinkButton ID="lbtnExit" runat="server" OnClick="lbtnExit_Click">注销登录</asp:LinkButton></li>
                             </ul>
-                        </div>
-                    </div>
+                        </li>
+                      
+                    </ul>
+
+
+            
                 </div>
             </div>
         </div>
+
+        
+
 
         <div class="main-sidebar">
             <div id="sidebar-nav" class="sidebar-nav">
@@ -198,7 +253,7 @@
                     <div class="list-group" name="微信帐号管理" style="display: block;">
                         <h2>微信帐号管理<i></i></h2>
                         <ul style="display: block;">
-                             <%--<li>
+                            <%--<li>
                                 <a navid="myinfoedit" href="manager/editormyinfo.aspx" target="mainframe" class="item ">
                                     
                                     <span>个人资料修改</span>
@@ -209,7 +264,7 @@
                                     <span>我的公众帐号</span>
                                 </a>
                             </li>
-<%--                            <li>
+                            <%--                            <li>
                                 <a navid="add_weixin" href="weixin/editorWeiXin.aspx" target="mainframe" class="item">
                                     <span>添加公众帐号</span>
                                 </a>
@@ -224,9 +279,24 @@
             <iframe id="mainframe" name="mainframe" frameborder="0" src="weixin/myweixinlist.aspx"></iframe>
         </div>
     </form>
+    <script src="js/message-vm.js"></script>
+        <script type="text/javascript">
+        var systemMenu;
+        var myMessageDetailViewModel;
+        $(function () {
+            
+
+
+            if ($.isEmptyObject(myMessageDetailViewModel)) {
+                myMessageDetailViewModel = new MessageViewModel();
+                ko.applyBindings(myMessageDetailViewModel, document.getElementById("menu_msg"));
+                myMessageDetailViewModel.loadData();
+            }
+        });
+    </script>
 </body>
 
-    
+
 
 
 </html>

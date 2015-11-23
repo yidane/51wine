@@ -83,12 +83,19 @@
     <Compile Include="Map\DTOS\MapDTO.cs" />
     <Compile Include="Map\DTOS\POIDto.cs" />
     <Compile Include="Map\MapService.cs" />
+    <Compile Include="Message\Dtos\ListMsgWithCount.cs" />
+    <Compile Include="Message\Dtos\MessageDto.cs" />
+    <Compile Include="Message\Dtos\ShortMsgDto.cs" />
+    <Compile Include="Message\Dtos\ShortMsgWithCountDto.cs" />
+    <Compile Include="Message\IShortMsgService.cs" />
+    <Compile Include="Message\ShortMsgService.cs" />
     <Compile Include="Notify\DTOS\NotifyDTO.cs" />
     <Compile Include="Notify\NotifyService.cs" />
     <Compile Include="Photo\DTOS\photoActionDTO.cs" />
     <Compile Include="Photo\PhotoService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="User\DTOS\UserDTO.cs" />
+    <Compile Include="User\IUserService.cs" />
     <Compile Include="User\UserService.cs" />
   </ItemGroup>
   <ItemGroup>

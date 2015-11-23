@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using WeiXinPF.Infrastructure.DomainDataAccess.Hotel;
+using WeiXinPF.Infrastructure.DomainDataAccess.Message;
 using WeiXinPF.Infrastructure.DomainDataAccess.Photo;
 using WeiXinPF.Infrastructure.DomainDataAccess.User;
 
@@ -64,6 +65,6 @@ namespace WeiXinPF.Infrastructure.DomainDataAccess
         public virtual DbSet<IdentifyingCodeInfo> IdentifyingCodeInfo { get; set; }
         public virtual DbSet<TuidanInfo> TuidanInfo { get; set; }
 
-         
+//        public virtual DbSet<ShortMsg> ShortMsg { get; set; }
     }
 }
