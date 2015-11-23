@@ -36,6 +36,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper">
+      <HintPath>..\packages\AutoMapper.4.0.4\lib\net40\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\dll\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -52,6 +55,7 @@
     <Compile Include="CacheHelper.cs" />
     <Compile Include="ColumnAttribute.cs" />
     <Compile Include="CSVHelper.cs" />
+    <Compile Include="DatatablesResult.cs" />
     <Compile Include="DataTableToEntity.cs" />
     <Compile Include="DESEncrypt.cs" />
     <Compile Include="JsonException.cs" />

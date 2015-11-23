@@ -9,13 +9,14 @@ using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Web;
-using System.Web.Script.Serialization; 
+using System.Web.Script.Serialization;
+using AutoMapper;
 using Newtonsoft.Json;
  
 
 namespace WeiXinPF.Common
 {
-    public class MyCommFun
+    public static class MyCommFun
     {
         #region request参数处理
 
@@ -944,7 +945,42 @@ namespace WeiXinPF.Common
 
             return ret;
         }
-       
+
+        /// <summary>
+        /// Converts an object to another using AutoMapper library. Creates a new object of <see cref="TDestination"/>.
+        /// There must be a mapping between objects before calling this method.
+        /// </summary>
+        /// <typeparam name="TDestination">Type of the destination object</typeparam>
+        /// <param name="source">Source object</param>
+        public static TDestination MapTo<TDestination>(this object source)
+        {
+            return Mapper.Map<TDestination>(source);
+        }
+
+        /// <summary>
+        /// Execute a mapping from the source object to the existing destination object
+        /// There must be a mapping between objects before calling this method.
+        /// </summary>
+        /// <typeparam name="TSource">Source type</typeparam>
+        /// <typeparam name="TDestination">Destination type</typeparam>
+        /// <param name="source">Source object</param>
+        /// <param name="destination">Destination object</param>
+        /// <returns></returns>
+        public static TDestination MapTo<TSource, TDestination>(this TSource source, TDestination destination)
+        {
+            return Mapper.Map(source, destination);
+        }
+
+
+        public static int ToInt(this string str)
+        {
+            int i = 0;
+            if (!int.TryParse(str,out i))
+            {
+                throw new Exception("转换string成int失败");
+            }
+            return i;
+        }
     }
 
     public enum RequestObjType

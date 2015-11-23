@@ -63,7 +63,7 @@ namespace WeiXinPF.Web.admin.choujiang.shakeLuckyMoney
                     var openid = dr["openid"].ToString();
                     if (!string.IsNullOrEmpty(openid))
                     {
-                        var userDto = _userService.GetModel(openid);
+                        var userDto = _userService.Get(openid);
                         if (userDto!=null)
                         {
                             dr["nickName"] = userDto.nickname;
