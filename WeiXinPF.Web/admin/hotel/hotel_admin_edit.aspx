@@ -11,6 +11,9 @@
     <script type="text/javascript" src="../js/layout.js"></script>
     <link href="../skin/default/style.css" rel="stylesheet" type="text/css" />
     <link href="../skin/mystyle.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript">
+        $("#form1").initValidform();
+    </script>
 </head>
 <body class="mainbody">
     <form id="form1" runat="server">
@@ -42,13 +45,13 @@
                 </dd>
             </dl>
             <dl>
-                <dt>登录名</dt>
+                <dt>用户名</dt>
                 <dd>
-                    <asp:TextBox ID="txtUserName" runat="server" CssClass="input normal" datatype="/^[a-zA-Z0-9\-\_]{2,50}$/" sucmsg=" " ajaxurl="../../tools/admin_ajax.ashx?action=manager_validate"></asp:TextBox>
+                    <asp:TextBox ID="txtUserName" runat="server" CssClass="input normal" datatype="/^[a-zA-Z0-9\-\_]{2,50}$/" nullmsg="请输入用户名" sucmsg=" " ajaxurl="../../tools/admin_ajax.ashx?action=manager_validate"></asp:TextBox>
                     <span class="Validform_checktip">*字母、下划线，不可修改</span></dd>
             </dl>
             <dl>
-                <dt>登录密码</dt>
+                <dt>密码</dt>
                 <dd>
                     <asp:TextBox ID="txtPassword" runat="server" CssClass="input normal" datatype="*0-20" nullmsg="请设置密码" errormsg="密码范围在6-20位之间" sucmsg=" "></asp:TextBox>
                     <span class="Validform_checktip">*密码范围在6-20位之间。<asp:Literal ID="litpwdtip" runat="server"></asp:Literal></span></dd>
@@ -57,7 +60,7 @@
             <dl>
                 <dt>姓名</dt>
                 <dd>
-                    <asp:TextBox ID="txtRealName" runat="server" CssClass="input normal" datatype="*1-50" nullmsg=" " sucmsg=" "></asp:TextBox></dd>
+                    <asp:TextBox ID="txtRealName" runat="server" CssClass="input normal" datatype="*1-50" nullmsg="请输入姓名" sucmsg=" "></asp:TextBox></dd>
             </dl>
             <dl>
                 <dt>电话</dt>
