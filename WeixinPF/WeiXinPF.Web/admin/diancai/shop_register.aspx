@@ -22,19 +22,6 @@
         $(function () {
             //初始化表单验证
             $("#form1").initValidform();
-
-            //初始化上传控件
-            $(".upload-img").each(function () {
-                $(this).InitSWFUpload({ sendurl: "../../tools/upload_ajax.ashx", flashurl: "../../scripts/swfupload/swfupload.swf" });
-            });
-            $(".upload-album").each(function () {
-                $(this).InitSWFUpload({ btntext: "批量上传", btnwidth: 66, single: false, water: true, thumbnail: true, filesize: "2048", sendurl: "../../tools/upload_ajax.ashx", flashurl: "../../scripts/swfupload/swfupload.swf", filetypes: "*.jpg;*.jpge;*.png;*.gif;" });
-            });
-            $(".attach-btn").click(function () {
-                showAttachDialog();
-            });
-
-
         });
     </script>
 </head>
@@ -46,7 +33,7 @@
             <span>商户或门店入驻登记</span>
         </div>
         <div class="line10"></div>
-        <!--/导航栏-->
+        <!--/导航栏--> 
 
         <div class="content-tab-wrap">
             <div id="floatHead" class="content-tab">
@@ -135,13 +122,13 @@
             <dl>
                 <dt>是否推荐：</dt>
                 <dd>
-                     <div class="rule-multi-radio">
+                    <div class="rule-multi-radio">
                         <asp:RadioButtonList ID="rblRecommend" runat="server">
-                            <asp:ListItem Value="1" >推荐</asp:ListItem>
+                            <asp:ListItem Value="1">推荐</asp:ListItem>
                             <asp:ListItem Value="0" Selected="True">不推荐</asp:ListItem>
                         </asp:RadioButtonList>
                     </div>
-                    <span class="Validform_checktip">*设置为推荐将会在美食美宿首页显示。</span></dd>
+                    <span class="Validform_checktip">*设置为推荐将会在美食美宿首页热门推荐栏目中显示。</span></dd>
             </dl>
         </div>
         <div class="page-footer">

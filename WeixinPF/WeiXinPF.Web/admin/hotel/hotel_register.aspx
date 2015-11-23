@@ -99,7 +99,7 @@
                             <asp:ListItem Value="0" Selected="True">不推荐</asp:ListItem>
                         </asp:RadioButtonList>
                     </div>
-                    <span class="Validform_checktip">*设置为推荐将会在美食美宿首页显示。</span></dd>
+                    <span class="Validform_checktip">*设置为推荐将会在美食美宿首页热门推荐栏目中显示。</span></dd>
             </dl>
         </div>
         <div class="page-footer">
