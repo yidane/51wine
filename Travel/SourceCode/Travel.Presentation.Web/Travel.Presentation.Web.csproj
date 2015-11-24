@@ -298,6 +298,8 @@
     <Content Include="Styles\style.css" />
     <Content Include="Styles\swiper.min.css" />
     <Content Include="TicketImages\coupons_bg.png" />
+    <Content Include="Ticket\images\app.png" />
+    <Content Include="Ticket\TicketClient.html" />
     <Content Include="Ticket\TicketConfirm.html" />
     <Content Include="Ticket\TicketDetail.html" />
     <Content Include="TicketImages\1.jpg" />
