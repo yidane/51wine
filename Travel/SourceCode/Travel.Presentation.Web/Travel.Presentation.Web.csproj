@@ -308,6 +308,7 @@
     <Content Include="Styles\TicketList.css" />
     <Content Include="TicketList.html" />
     <Content Include="Ticket\BookingTicket.html" />
+    <Content Include="Ticket\TicketExtend.html" />
     <Content Include="Web.config" />
     <Content Include="introduction.html" />
     <Content Include="WebService\CouponWebService.asmx" />
