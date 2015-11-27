@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Web;
 
 namespace WeiXinPF.WeiXinComm
 {
@@ -55,7 +56,8 @@ namespace WeiXinPF.WeiXinComm
         /// <returns></returns>
         private static string GetPayData(string payData)
         {
-            return payData.Replace("+", "%2B");
+            //return payData.Replace("+", "%2B");
+            return HttpUtility.HtmlEncode(payData);
         }
     }
 }
