@@ -40,7 +40,6 @@ namespace WeiXinPF.Web.admin.diancai
             wid = this.GetWeiXinCode().id;
             if (!IsPostBack)
             {
-
                 if (ids != 0)
                 {
                     List(ids);
@@ -66,7 +65,7 @@ namespace WeiXinPF.Web.admin.diancai
                     using (var scope = new TransactionScope())
                     {
                         IdentifyingCodeService.ModifyIdentifyingCodeInfo(identifyingCodeObject);
-                        managebll.AfterVerification(wid,shopid, int.Parse(identifyingCodeObject.OrderId));
+                        managebll.AfterVerification(wid, shopid, int.Parse(identifyingCodeObject.OrderId));
 
                         scope.Complete();
                     }
@@ -90,14 +89,12 @@ namespace WeiXinPF.Web.admin.diancai
                     Response.Write("<script language='javascript' type='text/javascript'>alert('核销成功！');location.href = 'dingdan_confirm.aspx?shopid=" + shopid + "';</script>");
 
                 }
-            }                       
+            }
         }
 
         public void List(int ids)
         {
-
             //订单
-
             Dingdanlist = "";
             dingdanren = "";
 
@@ -105,7 +102,6 @@ namespace WeiXinPF.Web.admin.diancai
             if (dr.Tables[0].Rows.Count > 0)
             {
                 decimal amount = 0;
-
 
                 if (dr.Tables[0].Rows[0]["status"].ToString() == "2")
                 {
@@ -118,22 +114,42 @@ namespace WeiXinPF.Web.admin.diancai
                 {
                     Dingdanlist += " <tr><td  class=\"cc\">" + dr.Tables[0].Rows[i]["cpName"] + "</td>";
                     Dingdanlist += "<td class=\"cc\">" + 1 + "</td>";
-                    Dingdanlist += "<td class=\"cc\">" + dr.Tables[0].Rows[i]["price"] + "</td>";                    
+                    Dingdanlist += "<td class=\"cc\">" + dr.Tables[0].Rows[i]["price"] + "</td>";
                     Dingdanlist += "<td class=\"rr\">￥" + dr.Tables[0].Rows[i]["price"] + "</td></tr>";
                     amount += Convert.ToDecimal(dr.Tables[0].Rows[i]["price"]);
                 }
 
                 Dingdanlist += "<tr><td></td><td ></td><td ></td><td class=\"rr\" style=\"color: red; font-weight:bold;\">总计：￥" + amount + "</td></tr>";
-
             }
 
-
             manage = managebll.GetModeldingdan(id);
+            //获取菜品有效期
+            string caipinRange = string.Empty;
+            bool isInRange = true;
+            var caipinManager = new BLL.wx_diancai_caipin_manage().GetModel(ids);
+            if (caipinManager != null)
+            {
+                if (caipinManager.beginDate != null && caipinManager.endDate != null)
+                {
+                    caipinRange = string.Format("{0}至{1}", caipinManager.beginDate.Value.ToString("yyyy-MM-dd"), caipinManager.endDate.Value.ToString("yyyy-MM-dd"));
+                    if (manage.createDate > caipinManager.endDate.Value)
+                    {
+                        isInRange = false;
+                    }
+                }
+            }
+
             //订单信息
             if (manage != null)
             {
                 dingdanren += "<tr><td width=\"70\">订单编号： " + manage.orderNumber + "</td></tr>";
                 dingdanren += "<tr> <td>预订日期：" + manage.oderTime + "</td></tr>";
+
+                if (!string.IsNullOrEmpty(caipinRange))
+                {
+                    dingdanren += "<tr> <td>订单有效期：" + caipinRange + "</td></tr>";
+                }
+
                 dingdanren += "<tr><td>预约人：" + manage.customerName + "</td></tr>";
                 dingdanren += "<tr><td>电话：" + manage.customerTel + "</td></tr>";
                 //dingdanren += "<tr><td>地址：" + manage.address + "</td></tr>";
@@ -154,6 +170,12 @@ namespace WeiXinPF.Web.admin.diancai
                 {
                     dingdanren += "<tr><td>订单状态：<em  style='width:70px;' class='no'>未使用</em></td></tr>";
                 }
+
+                //如果订单已经过期，提醒管理员
+                if (!isInRange)
+                {
+                    dingdanren += "<tr><td>订单状态：<em  style='width:70px;font-size:1.3em' class='error'>当前订单已经过期</em></td></tr>";
+                }
             }
             else
             {
@@ -164,9 +186,7 @@ namespace WeiXinPF.Web.admin.diancai
                 //dingdanren += "<tr><td>地址：</td></tr>";
                 //dingdanren += "<tr><td>备注 ：</td></tr>";
 
-
                 dingdanren += "<tr><td>订单状态：<em  style='width:70px;' class='no'>未使用</em></td></tr>";
-
             }
         }
     }
