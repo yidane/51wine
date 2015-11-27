@@ -108,7 +108,7 @@
             <dl>
                 <dt>不同意退单理由：</dt>
                 <dd>
-                    <textarea name="reason" rows="2" cols="20" id="instructions" datatype="*1-1000" sucmsg=" " nullmsg="" class="input" runat="server"></textarea>
+                    <textarea id="txtRefundReason" name="reason" rows="2" cols="20" datatype="*1-1000" sucmsg=" " nullmsg="" class="input" runat="server" disabled="True"></textarea>
                 </dd>
             </dl>
         </div>
