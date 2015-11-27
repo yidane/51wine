@@ -98,6 +98,9 @@ namespace WeiXinPF.Web.admin.diancai
                 var tuidanBuilder = new StringBuilder();
                 if (result.Tables.Count > 1 && result.Tables[1].Rows.Count > 0)
                 {
+                    //绑定退款原因
+                    this.txtRefundReason.Value = result.Tables[1].Rows[0]["refundReason"].ToString();
+
                     tuidanBuilder.AppendFormat("<tr><td width=\"70\">退单编号： {0}</td></tr>", result.Tables[1].Rows[0]["refundCode"]);
                     tuidanBuilder.AppendFormat("<tr> <td>退单日期：{0}</td></tr>", result.Tables[1].Rows[0]["createDate"]);
 
@@ -114,6 +117,7 @@ namespace WeiXinPF.Web.admin.diancai
                         this.btnDisAgreeRefund.Visible = true;
                         this.btnAgreeRefund.Enabled = true;
                         this.btnDisAgreeRefund.Enabled = true;
+                        this.txtRefundReason.Disabled = false;
                     }
 
                     tuidanBuilder.AppendFormat("<tr><td>退单状态：<em  style='width:70px;' class='{0}'>{1}</em></td></tr>", "ok", refundStatusDict.StatusName);

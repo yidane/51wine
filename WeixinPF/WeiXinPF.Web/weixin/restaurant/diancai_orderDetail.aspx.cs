@@ -101,7 +101,7 @@ namespace WeiXinPF.Web.weixin.restaurant
                     builder.Append("<td class=\"cc\" style=\"width: 23%\">");
 
                     //存在未使用的，则添加退款按钮
-                    if (pair.Value.Any(item => item.status == StatusManager.DishStatus.NoUsed.StatusID))
+                    if (pair.Value.Any(item => item.status == StatusManager.DishStatus.NoUsed.StatusID || item.status == StatusManager.DishStatus.RefundFaild.StatusID))
                         builder.AppendFormat("<a class='refund-button' href=\"diancai_refund.aspx?wid={4}&shopid={0}&dingdan={1}&openid={2}&caiid={3}\">申请退款</a>", shopid, orderId, openid, pair.Key, wid);//组合订单ID和菜品ID作为Button的主键
                     builder.Append("</td>");
                     builder.Append("</tr>");
