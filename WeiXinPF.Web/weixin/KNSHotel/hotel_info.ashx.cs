@@ -3,11 +3,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using WeiXinPF.Application.DomainModules.Message;
+using WeiXinPF.Application.DomainModules.Message.Dtos;
 using WeiXinPF.BLL;
 using WeiXinPF.Model.KNSHotel;
+using WeiXinPF.Model.message;
 using WeiXinPF.Web.weixin.qiangpiao;
 using WeiXinPF.Web.weixin.WeChatPay;
 using WeiXinPF.WeiXinComm;
+using wx_hotels_info = WeiXinPF.Model.wx_hotels_info;
 
 namespace WeiXinPF.Web.weixin.KNSHotel
 {
@@ -21,6 +25,7 @@ namespace WeiXinPF.Web.weixin.KNSHotel
     /// </summary>
     public class hotel_info : IHttpHandler
     {
+        readonly IShortMsgService _shortMsgService = new ShortMsgService();
 
         public void ProcessRequest(HttpContext context)
         {
@@ -176,12 +181,51 @@ namespace WeiXinPF.Web.weixin.KNSHotel
                         IdentifyingCodeService.AddIdentifyingCode(iCode);
                     }
 
+                    SendMsg(order, hotel);
+
                     scope.Complete();
                     isSuccess = true;
                 }                
             }
 
             return isSuccess;
+        }
+
+        /// <summary>
+        /// 发送消息给酒店
+        /// </summary>
+        /// <param name="order"></param>
+        /// <param name="hotel"></param>
+        private void SendMsg(Model.wx_hotel_dingdan order, wx_hotels_info hotel)
+        {
+            BLL.wx_hotel_admin dBll = new BLL.wx_hotel_admin();
+            Model.wx_hotel_admin hotelAdmin = null;
+            var users = dBll.GetModelList(String.Format(" HotelId={0}", order.hotelid));
+            hotelAdmin = users.FirstOrDefault();
+            if (hotelAdmin != null)
+            {
+                var msg = new ShortMsgDto()
+                {
+                    Title = "订单管理",
+                    Content = String.Format("订单编号为{0}的订单需订购{1}至{2}{3}{4}间，请您确认是否接受！",
+                        order.OrderNumber,order.arriveTime.Value.ToString("yyyy/MM/dd"),
+                        order.leaveTime.Value.ToString("yyyy/MM/dd"),
+                        order.roomType,order.orderNum
+                        ),
+                    Type = "HotelOrder",
+                    MenuType = "hotel_room",
+                    IsShowButton = true,
+                    ButtonText = "马上去处理",
+                    ButtonUrl = String.Format("/admin/hotel/hotel_dingdan_cz.aspx?id={0}&hotelid={1}",
+                        order.id,order.hotelid),
+                    ButtonMutipleUrl = "/admin/hotel/hotel_dingdan_manage.aspx",
+                    FromUserId = order.openid,
+                    ToUserId = hotelAdmin.ManagerId.ToString(),
+                    MsgToUserType = MsgUserType.Hotel,
+                    MsgFromUserType = MsgUserType.WeChatCustomer
+                };
+                _shortMsgService.SendMsg(msg);
+            }
         }
 
         private Model.wx_hotel_dingdan CreateOrder()

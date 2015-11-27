@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using AutoMapper;
 using WeiXinPF.Application.DomainModules.Message.Dtos;
 using WeiXinPF.Application.DomainModules.User;
@@ -8,19 +9,20 @@ using WeiXinPF.Application.DomainModules.User.DTOS;
 using WeiXinPF.Common;
 using WeiXinPF.Infrastructure.DomainDataAccess;
 using WeiXinPF.Infrastructure.DomainDataAccess.Message;
+using WeiXinPF.Model.message;
 
 namespace WeiXinPF.Application.DomainModules.Message
 {
     public class ShortMsgService : IShortMsgService
     {
-        private readonly IUserService _userService;
+        private readonly IUserManagerService _userService;
         private readonly IShortMsgRepository _msgRepository;
 
         public ShortMsgService()
         {
             var context = new WXDBContext();
             _msgRepository = new ShortMsgRepository(context);
-            _userService = new UserService();
+            _userService = new UserManagerService();
             CreateMapping();
         }
 
@@ -28,8 +30,14 @@ namespace WeiXinPF.Application.DomainModules.Message
         {
             Mapper.CreateMap<ShortMsg, ShortMsgDto>()
                 .ForMember(dto => dto.FromUser, msg => { msg.Ignore(); })
-                .ForMember(dto => dto.ToUser, msg => { msg.Ignore(); });
-            Mapper.CreateMap<ShortMsgDto, ShortMsg>();
+                .ForMember(dto => dto.ToUser, msg => { msg.Ignore(); })
+                .ForMember(dto => dto.CreateTime, msg => msg.MapFrom(m => m.CreateTime.ToString("yyyy-MM-dd HH:mm:ss")))
+                .ForMember(dto => dto.MsgToUserType,
+                msg => msg.MapFrom(m => Enum.GetName(typeof(MsgUserType), m.MsgToUserType)))
+                ;
+            Mapper.CreateMap<ShortMsgDto, ShortMsg>()
+                 .ForMember(msg => msg.CreateTime, dto => { dto.Ignore(); })
+               ;
 
         }
 
@@ -64,7 +72,7 @@ namespace WeiXinPF.Application.DomainModules.Message
         }
 
 
-        public List<ShortMsgDto> GetMsgList(UserDto toUserDto)
+        public List<ShortMsgDto> GetMsgList(UserManagerDto toUserDto)
         {
             List<ShortMsgDto> result = null;
             var entityList = _msgRepository.GetAllList(c =>
@@ -74,7 +82,7 @@ namespace WeiXinPF.Application.DomainModules.Message
             return result;
         }
 
-        public List<ShortMsgDto> GetMsgList(UserDto toUserDto, UserDto fromUserDto)
+        public List<ShortMsgDto> GetMsgList(UserManagerDto toUserDto, UserManagerDto fromUserDto)
         {
             List<ShortMsgDto> result = null;
             var entityList = _msgRepository.GetAllList(c =>
@@ -87,7 +95,7 @@ namespace WeiXinPF.Application.DomainModules.Message
             return result;
         }
 
-        private List<ShortMsgDto> MapData(IQueryable<ShortMsg> entityList, UserDto user
+        private List<ShortMsgDto> MapData(IQueryable<ShortMsg> entityList, UserManagerDto user
             , bool isToUser = true)
         {
             List<ShortMsgDto> result = null;
@@ -98,8 +106,8 @@ namespace WeiXinPF.Application.DomainModules.Message
                 list.ForEach(m =>
                 {
 
-                    m.FromUser = isToUser ? GetUser(m.FromUserId) : user;
-                    m.ToUser = isToUser ? user : GetUser(m.ToUserId);
+                    m.FromUser = isToUser ? GetUser(m.FromUserId, m.MsgFromUserType) : user;
+                    m.ToUser = isToUser ? user : GetUser(m.ToUserId, m.MsgToUserType);
                 }
                );
                 result = list;
@@ -109,7 +117,7 @@ namespace WeiXinPF.Application.DomainModules.Message
             return result;
         }
 
-        public List<ShortMsgDto> GetMsgList(UserDto toUserDto, int showCount)
+        public List<ShortMsgDto> GetMsgList(UserManagerDto toUserDto, int showCount)
         {
             List<ShortMsgDto> result = null;
             var entityList = _msgRepository.GetAllList(c =>
@@ -120,7 +128,7 @@ namespace WeiXinPF.Application.DomainModules.Message
             return result;
         }
 
-        public int GetMsgCount(UserDto toUserDto)
+        public int GetMsgCount(UserManagerDto toUserDto)
         {
             int result = 0;
 
@@ -134,7 +142,7 @@ namespace WeiXinPF.Application.DomainModules.Message
             return result;
         }
 
-        public List<ShortMsgDto> GetSendMsgList(UserDto fromUserDto)
+        public List<ShortMsgDto> GetSendMsgList(UserManagerDto fromUserDto)
         {
             List<ShortMsgDto> result = null;
             var entityList = _msgRepository.GetAllList(c =>
@@ -160,8 +168,8 @@ namespace WeiXinPF.Application.DomainModules.Message
             {
                 result = entity.MapTo<ShortMsgDto>();
 
-                result.FromUser = GetUser(result.FromUserId);
-                result.ToUser = GetUser(result.ToUserId);
+                result.FromUser = GetUser(result.FromUserId,result.MsgFromUserType);
+                result.ToUser = GetUser(result.ToUserId, result.MsgToUserType);
             }
 
 
@@ -180,14 +188,31 @@ namespace WeiXinPF.Application.DomainModules.Message
             }
         }
 
-        public ShortMsgDto GetLastNewMsg(UserDto toUserDto, int toUserId = 0)
+        public ShortMsgDto GetLastNewMsg(UserManagerDto toUserDto, string fromUserId="")
         {
             ShortMsgDto result = null;
 
             if (toUserDto != null)
             {
-                var list = _msgRepository.GetAllList(c =>
-                    c.ToUserId == toUserDto.UserId && c.IsRead == false && (toUserId == 0 || c.FromUserId == toUserId));
+
+                var userType = _userService.GetUserType(toUserDto);
+                Expression<Func<ShortMsg, bool>> func;
+                if (userType != MsgUserType.User)
+                {
+                    func = c =>
+                        c.MsgToUserType == (int)userType && c.IsRead == false &&
+                        (fromUserId == "" || c.FromUserId == fromUserId.ToString());
+
+                }
+                else
+                {
+                    func = c =>
+                        c.ToUserId == toUserDto.UserId && c.IsRead == false &&
+                        (fromUserId == "" || c.FromUserId == fromUserId.ToString());
+                }
+
+
+                var list = _msgRepository.GetAllList(func);
                 var entity = list.OrderByDescending(c => c.CreateTime).FirstOrDefault();
 
 
@@ -195,7 +220,7 @@ namespace WeiXinPF.Application.DomainModules.Message
                 {
                     result = entity.MapTo<ShortMsgDto>();
 
-                    result.FromUser = GetUser(result.FromUserId);
+                    result.FromUser = GetUser(result.FromUserId,result.MsgFromUserType);
                     result.ToUser = toUserDto;
                 }
 
@@ -209,14 +234,14 @@ namespace WeiXinPF.Application.DomainModules.Message
         /// 通过最新消息，来阅读所有未读消息
         /// </summary> 
         /// <param name="userId"></param>
-        public void ReadAllNewMsg(int userId)
+        public void ReadAllNewMsg(string userId)
         {
 
-            if (userId > 0)
+            if (!string.IsNullOrEmpty(userId))
             {
 
                 var shortMsgs = _msgRepository.GetAllList(c => c.IsRead == false
-                && c.ToUserId == userId).ToList();
+                && c.ToUserId == userId.ToString()).ToList();
                 shortMsgs.ForEach(c =>
                 {
                     c.IsRead = true;
@@ -226,13 +251,38 @@ namespace WeiXinPF.Application.DomainModules.Message
             }
         }
 
-        public void ReadAllNewMsg(int userId, int fromUserId)
+        public List<ShortMsgDto> GetAllNewMsg(UserManagerDto toUserDto)
         {
-            if (userId > 0 && fromUserId > 0)
+            List<ShortMsgDto> result = null;
+
+            var userType = _userService.GetUserType(toUserDto);
+            Expression<Func<ShortMsg, bool>> func;
+            if (userType != MsgUserType.User)
+            {
+                func = c =>
+                    c.MsgToUserType == (int)userType && c.IsRead == false;
+
+            }
+            else
+            {
+                func = c =>
+                    c.ToUserId == toUserDto.UserId && c.IsRead == false;
+            }
+            var entityList = _msgRepository.GetAllList(func).OrderByDescending(c => c.CreateTime);
+            result = MapData(entityList, toUserDto);
+
+
+            return result;
+        }
+
+        public void ReadAllNewMsg(string userId, string fromUserId)
+        {
+            if (!string.IsNullOrEmpty(userId ) && !string.IsNullOrEmpty(fromUserId))
             {
 
-                var shortMsgs = _msgRepository.GetAllList(c => c.IsRead == false && c.ToUserId == userId
-                && c.FromUserId == fromUserId).ToList();
+                var shortMsgs = _msgRepository.GetAllList(c => c.IsRead == false 
+                && c.ToUserId == userId.ToString()
+                && c.FromUserId == fromUserId.ToString()).ToList();
                 shortMsgs.ForEach(c =>
                 {
                     c.IsRead = true;
@@ -243,32 +293,101 @@ namespace WeiXinPF.Application.DomainModules.Message
             }
         }
 
-        public List<ShortMsgWithCountDto> GetAllLastNewMsg(UserDto toUserDto)
+        public List<ShortMsgWithCountDto> GetAllLastNewMsg(UserManagerDto toUserDto)
         {
-            List<ShortMsgWithCountDto> result = null;
-
+            List<ShortMsgWithCountDto> result = new List<ShortMsgWithCountDto>();
             if (toUserDto != null)
             {
-                var list = _msgRepository.GetAllList(c =>
-                    c.ToUserId == toUserDto.UserId && c.IsRead == false).GroupBy(c => c.FromUserId)
-                    .Select(c =>
-                    new
-                    {
-                        Count = c.Count(),
-                        Key = c.Key
-                    }).ToList();
+
+                var userType = _userService.GetUserType(toUserDto);
+                Expression<Func<ShortMsg, bool>> func;
+                if (userType != MsgUserType.User)
+                {
+                    func = c =>
+                        c.MsgToUserType == (int)userType && c.IsRead == false;
+
+                }
+                else
+                {
+
+                    func = c =>
+                        c.ToUserId == toUserDto.UserId && c.IsRead == false;
+
+
+
+                }
+                var msgList = _msgRepository.GetAllList(func);
+                //todo:判断组合方法
+                //现在是如果不是微信用户发的，就按发送人分组
+                //是微信用户发的直接分组
+                var list = msgList.Where(c => (MsgUserType)c.MsgFromUserType
+                != MsgUserType.WeChatCustomer).GroupBy(c => c.FromUserId)
+               .Select(c =>
+               new
+               {
+                   Count = c.Count(),
+                   Key = c.Key
+               }).ToList();
 
                 if (list.Any())
                 {
-                    result = list.Select(c => new ShortMsgWithCountDto
+                    var listReslut = list.Select(c => new ShortMsgWithCountDto
                     {
                         Count = c.Count,
                         Msg = GetLastNewMsg(toUserDto, c.Key)
                     }).ToList();
+
+                    //多个商品在商品描述上加上xx等5件商品
+                    listReslut.ForEach(c =>
+                    {
+                        if (c.Count > 1)
+                        {
+                            var index = c.Msg.Content.LastIndexOf(']');
+
+                            c.Msg.Content = c.Msg.Content.Insert(index + 1,
+                                String.Format("等{0}件商品", c.Count));
+                        }
+                    });
+                    result.AddRange(listReslut);
                 }
 
+                //添加是微信用户发的直接分组的
+                if (msgList.Any(c=>(MsgUserType)c.MsgFromUserType== MsgUserType.WeChatCustomer))
+                {
+                    var wxlist = msgList.Where(c => (MsgUserType)c.MsgFromUserType
+                == MsgUserType.WeChatCustomer).GroupBy(c => c.MsgFromUserType)
+               .Select(c =>
+               new
+               {
+                   Count = c.Count(),
+                   Key = c.Max(u=>u.Id)
+               }).ToList();
 
+                    if (wxlist.Any())
+                    {
+                        var listReslut = wxlist.Select(c => new ShortMsgWithCountDto
+                        {
+                            Count = c.Count,
+                            Msg = GetMsg(c.Key)
+                        }).ToList();
 
+                        //多个订单在商品描述上加上xx等5件订单
+                        listReslut.ForEach(c =>
+                        {
+                            if (c.Count > 1)
+                            {
+                                var index = c.Msg.Content.LastIndexOf("的订单");
+                                var msgContent = c.Msg.Content.Substring(0, index);
+                                var msgHz = c.Msg.Content.Substring(c.Msg.Content.LastIndexOf("，"));
+                                //todo:写死的判断多个时后缀
+                                var hz = c.Msg.Type.ToLower().Contains("order") ? "订单" : "";
+                                c.Msg.Content = String.Format("{2}等{0}个{1}{3}", c.Count, hz, msgContent, msgHz);
+                            }
+                        });
+                        result.AddRange(listReslut);
+                    }
+                }
+                
             }
 
             return result;
@@ -277,10 +396,20 @@ namespace WeiXinPF.Application.DomainModules.Message
 
 
 
-        private UserDto GetUser(int userId)
+        private UserManagerDto GetUser(string userId, MsgUserType msgUserType)
         {
-            UserDto result = null;
-            result = _userService.Get(userId);
+            UserManagerDto result = null;
+
+            if (msgUserType != MsgUserType.WeChatCustomer)
+            {
+                result = _userService.Get(userId.ToInt());
+            }
+            else
+            {
+                //todo:加上判断获取微信用户
+            }
+
+
 
             return result;
         }

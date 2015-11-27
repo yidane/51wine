@@ -7,6 +7,11 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Transactions;
+using WeiXinPF.Application.DomainModules.Message;
+using WeiXinPF.Application.DomainModules.Message.Dtos;
+using WeiXinPF.Model.message;
+using wx_hotels_info = WeiXinPF.Model.wx_hotels_info;
+using wx_userweixin = WeiXinPF.Model.wx_userweixin;
 
 namespace WeiXinPF.Web.admin.hotel
 {
@@ -20,6 +25,7 @@ namespace WeiXinPF.Web.admin.hotel
         protected static int roomid = 0;
         protected int hotelid = 0;
         BLL.wx_hotel_room roomBll = new BLL.wx_hotel_room();
+        IShortMsgService _shortMsgService = new ShortMsgService();
 
         BLL.wx_hotel_roompic picBll = new BLL.wx_hotel_roompic();
         Model.wx_hotel_roompic pic = new Model.wx_hotel_roompic();
@@ -135,6 +141,34 @@ namespace WeiXinPF.Web.admin.hotel
                 }
                 AddAdminLog(MXEnums.ActionEnum.Add.ToString(), "添加房间类型，主键为" + id); //记录日志
                 JscriptMsg("添加成功！", "hotel_room.aspx?action=" + MXEnums.ActionEnum.Edit.ToString() + "&hotelid=" + hotelid + "", "Success");
+
+                //发送消息：提交审核
+
+                var scenicUser = GetWeiXinCode();
+                if (scenicUser != null)
+                {
+                    var manager = GetAdminInfo();
+                    var hotelsInfo = new BLL.wx_hotels_info().GetModel(hotelid);
+                   
+                    var msg = new ShortMsgDto()
+                    {
+                        Title = hotelsInfo.hotelName,
+                        Content = String.Format("编号为[{0}]的商品[{1}]请您审核！", room.RoomCode, room.roomType),
+                        Type = "HotelRoom",
+                        MenuType = "wHotel",
+                        IsShowButton = true,
+                        ButtonText = "马上去审核",
+                        ButtonUrl = String.Format("/admin/hotel/hotel_room_info.aspx?action=Audit&hotelid={0}&roomid={1}",
+                   hotelid, id),
+                        ButtonMutipleUrl = String.Format("/admin/hotel/hotel_room.aspx?hotelid={0}&action=Audit",hotelid),
+                        FromUserId = manager.id.ToString(),
+                        ToUserId = scenicUser.uId.ToString(),
+                        MsgToUserType = MsgUserType.Scenic,
+                        MsgFromUserType = MsgUserType.Hotel
+                    };
+                    _shortMsgService.SendMsg(msg);
+                }
+
             }
 
             else if (action == MXEnums.ActionEnum.Edit.ToString())
@@ -187,7 +221,39 @@ namespace WeiXinPF.Web.admin.hotel
         {
             try
             {
-                new BLL.wx_hotel_room_manage().ManageRoom(roomid, Model.RoomStatus.Agree, GetAdminInfo().id, "审核通过", txtComment.Text.Trim());
+                var manager = GetAdminInfo();
+                new BLL.wx_hotel_room_manage().ManageRoom(roomid, Model.RoomStatus.Agree, manager.id, "审核通过", txtComment.Text.Trim());
+
+                //发送消息：审核通过
+                BLL.wx_hotel_admin dBll = new BLL.wx_hotel_admin();
+                Model.wx_hotel_admin hotelAdmin = null;
+                var users = dBll.GetModelList(String.Format(" HotelId={0}", hotelid));
+                hotelAdmin = users.FirstOrDefault();
+                if (hotelAdmin != null)
+                {
+                    var wxUserweixin = GetWeiXinCode();
+//                    var role = new BLL.manager_role().GetModel(manager.role_id);
+                    //                    var hotelsInfo = new BLL.wx_hotels_info().GetModel(hotelid);
+                    var msg = new ShortMsgDto()
+                    {
+                        Title = wxUserweixin.wxName,
+                        Content = String.Format("编号为[{0}]的商品[{1}]已审核通过，可以发布啦！",
+                        this.lblRoomCode.Text, this.roomType.Text),
+                        Type = "HotelRoom",
+                        MenuType = "hotel_room",
+                        IsShowButton = true,
+                        ButtonText = "马上去发布",
+                        ButtonUrl = String.Format("/admin/hotel/hotel_room_info.aspx?action=View&hotelid={0}&roomid={1}",
+                   hotelid, roomid),
+                        ButtonMutipleUrl = "/admin/hotel/hotel_room.aspx?action=Edit",
+                        FromUserId = manager.id.ToString(),
+                        ToUserId = hotelAdmin.ManagerId.ToString(),
+                        MsgToUserType = MsgUserType.Hotel,
+                        MsgFromUserType = MsgUserType.Scenic
+                    };
+                    _shortMsgService.SendMsg(msg);
+                }
+
 
             }
             catch (Exception ex)

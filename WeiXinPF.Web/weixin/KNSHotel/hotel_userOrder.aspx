@@ -9,61 +9,49 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="format-detection" content="telephone=no">
-    <link href="css/hotels.css" rel="stylesheet" type="text/css">
+<%--    <link href="css/hotels.css" rel="stylesheet" type="text/css">--%>
+     <link href="../restaurant/css/orderlist.css" rel="stylesheet" />
+     <style>
+         .personal_center #myTab0 li {
+             width: 33.333333333%;
+         }
+     </style>
 </head>
 
 <body id="hotelslist" class="mode_webapp">
-    <div class="menu_header">
-        <div class="menu_top">
+ <div class="personal_center">
+        <ul id="myTab0">
             <%=menuStr %>
-            <%--             <a class="Pay menu-active" href="hotel_order.aspx?openid=<%=openid %>&hotelid=<%=hotelid%>&type=all">全部</a>--%>
-            <%--            <a class="Pay" href="hotel_order.aspx?openid=<%=openid %>&hotelid=<%=hotelid%>&type=pay">已付款</a>--%>
-            <%--            <a class="Refund" href="hotel_order.aspx?openid=<%=openid %>&hotelid=<%=hotelid%>&type=refund">退单</a>--%>
+        </ul>
+        <div class="personal_info">
+            <div class="order_list" id="ResultList">
+                <%=order %>
+            </div>
         </div>
     </div>
-    <%--<div class="qiandaobanner">  <a href="hotel_order_onlin.aspx?openid=<%=openid %>" > <img   src="<%=image %>"  /></a> </div>--%>
-    <div class="cardexplain" style="margin-top: 45px">
-
-        <!--超过预订时间3天后自动删掉预订记录，免得占服务器资源！-->
 
 
-        <%=order %>
-    </div>
+
+<%--    <div class="menu_header">--%>
+<%--        <div class="menu_top">--%>
+<%--            <%=menuStr %>--%>
+<%--               </div>--%>
+<%--    </div>--%>
+<%--    $1$<div class="qiandaobanner">  <a href="hotel_order_onlin.aspx?openid=<%=openid %>" > <img   src="<%=image %>"  /></a> </div>#1#--%>
+<%--    <div class="cardexplain" style="margin-top: 45px">--%>
+<%----%>
+<%--        <!--超过预订时间3天后自动删掉预订记录，免得占服务器资源！-->--%>
+<%----%>
+<%----%>
+<%--        <%=order %>--%>
+<%--    </div>--%>
     <script>
         function dourl(url) {
             location.href = url;
         }
     </script>
     <script src="js/plugback.js" type="text/javascript"></script>
-    <%----%>
-    <%--<div class="footermenu">--%>
-    <%--    <ul>--%>
-    <%--    <li>--%>
-    <%--            <a href="javascript:history.go(-1);">--%>
-    <%--            <img src="images/9uKCykhUSh.png">--%>
-    <%--            <p>返回</p>--%>
-    <%--            </a>--%>
-    <%--        </li>--%>
-    <%--    <li>--%>
-    <%--            <a href="index.aspx?openid=<%=openid %>&hotelid=<%=hotelid%>">--%>
-    <%--            <img src="images/3YQLfzfunJ.png">--%>
-    <%--            <p>首页</p>--%>
-    <%--            </a>--%>
-    <%--        </li>--%>
-    <%--        <li>--%>
-    <%--            <a  href="hotel_detail.aspx?openid=<%=openid %>&hotelid=<%=hotelid%>">--%>
-    <%--            <img src="images/xxyX63YryG.png">--%>
-    <%--            <p>关于</p>--%>
-    <%--            </a>--%>
-    <%--        </li>--%>
-    <%--        <li>--%>
-    <%--            <a class="active" href="hotel_order.aspx?openid=<%=openid %>&hotelid=<%=hotelid%>">--%>
-    <%--            <span class="num" ><%=numdingdan %></span>  <img src="images/s22KaR0Wtc.png">--%>
-    <%--            <p>订单</p>--%>
-    <%--            </a>--%>
-    <%--        </li>--%>
-    <%--    </ul>--%>
-    <%--</div>--%>
+   
     <script type="text/javascript">
         document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
             WeixinJSBridge.call('hideToolbar');

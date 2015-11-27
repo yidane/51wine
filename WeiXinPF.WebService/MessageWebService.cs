@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web;
+using System.Web.Services;
 using WeiXinPF.Application.DomainModules.Message;
 using WeiXinPF.Application.DomainModules.Message.Dtos;
 using WeiXinPF.Application.DomainModules.User;
+using WeiXinPF.Application.DomainModules.User.DTOS;
 using WeiXinPF.Common;
 
 namespace WeiXinPF.WebService
@@ -13,11 +15,11 @@ namespace WeiXinPF.WebService
     public class MessageWebService : BaseWebService
     {
         private readonly IShortMsgService _msgService;
-        private readonly IUserService _userService;
+        private readonly IUserManagerService _userService;
         public MessageWebService()
         {
             _msgService = new ShortMsgService();
-            _userService = new UserService();
+            _userService = new UserManagerService();
         }
 
 
@@ -26,6 +28,7 @@ namespace WeiXinPF.WebService
         /// 发送消息
         /// </summary> 
         /// <returns></returns> 
+        [Obsolete("方法已经停用，以后再用")]
         public void SendMsg(string strMsg)
         {
             try
@@ -37,19 +40,19 @@ namespace WeiXinPF.WebService
                     throw new Exception("用户未登陆！");
                 }
                 var msg = JSONHelper.Deserialize<ShortMsgDto>(strMsg);
-                msg.FromUserId = user.id;
+                msg.FromUserId = user.id.ToString();
                 _msgService.SendMsg(msg);
-                Context.Response.Write(AjaxResult.Success(null));
+                Context.Response.Write(AjaxResult.Success(null).ToCamelString() );
             }
             catch (UnAuthException jsEx)
             {
 
-                Context.Response.Write(AjaxResult.Error(jsEx.RedirectUrl, jsEx.Code));
+                Context.Response.Write(AjaxResult.Error(jsEx.RedirectUrl, jsEx.Code).ToCamelString());
             }
             catch (Exception ex)
             {
 
-                Context.Response.Write(AjaxResult.Error(ex.Message));
+                Context.Response.Write(AjaxResult.Error(ex.Message).ToCamelString());
             }
         }
 
@@ -92,6 +95,8 @@ namespace WeiXinPF.WebService
         /// <param name="userId"></param>
         /// <param name="count"></param>
         /// <returns></returns>
+        [Obsolete("方法已经停用，以后再用")]
+
         public void GetMsgListWithCount(int count)
         {
 
@@ -110,12 +115,12 @@ namespace WeiXinPF.WebService
             catch (UnAuthException jsEx)
             {
 
-                Context.Response.Write(AjaxResult.Error(jsEx.RedirectUrl, jsEx.Code));
+                Context.Response.Write(AjaxResult.Error(jsEx.RedirectUrl, jsEx.Code).ToCamelString());
             }
             catch (Exception ex)
             {
 
-                Context.Response.Write(AjaxResult.Error(ex.Message));
+                Context.Response.Write(AjaxResult.Error(ex.Message).ToCamelString());
             }
         }
 
@@ -125,7 +130,8 @@ namespace WeiXinPF.WebService
         /// </summary>
         /// <param name="userId"></param>
         /// <returns></returns>
-        
+        [Obsolete("方法已经停用，以后再用")]
+
         public void GetNewMsgCount()
         { 
             try
@@ -138,17 +144,17 @@ namespace WeiXinPF.WebService
                 }
                 var userDto = _userService.Get(user.id);
                 var count = _msgService.GetMsgCount(userDto);
-                Context.Response.Write(AjaxResult.Success(count));
+                Context.Response.Write(AjaxResult.Success(count).ToCamelString());
             }
             catch (UnAuthException jsEx)
             {
 
-                Context.Response.Write(AjaxResult.Error(jsEx.RedirectUrl, jsEx.Code));
+                Context.Response.Write(AjaxResult.Error(jsEx.RedirectUrl, jsEx.Code).ToCamelString());
             }
             catch (Exception ex)
             {
 
-                Context.Response.Write(AjaxResult.Error(ex.Message));
+                Context.Response.Write(AjaxResult.Error(ex.Message).ToCamelString());
             }
         }
 
@@ -157,7 +163,8 @@ namespace WeiXinPF.WebService
         /// </summary>
         /// <param name="userId"></param>
         /// <returns></returns>
-//        [HttpGet]
+             [Obsolete("方法已经停用，以后再用")]
+
         public void GetNewMsg()
         {
             try
@@ -198,7 +205,8 @@ namespace WeiXinPF.WebService
         /// </summary>
         /// <param name="userId"></param>
         /// <returns></returns>
-        //        [HttpGet]
+        [Obsolete("方法已经停用，以后再用")]
+
         public void GetNewMsg(int id)
         {
             
@@ -221,17 +229,17 @@ namespace WeiXinPF.WebService
 
                 }
                 result.Count = count;
-                Context.Response.Write(AjaxResult.Success(result));
+                Context.Response.Write(AjaxResult.Success(result).ToCamelString());
             }
             catch (UnAuthException jsEx)
             {
 
-                Context.Response.Write(AjaxResult.Error(jsEx.RedirectUrl, jsEx.Code));
+                Context.Response.Write(AjaxResult.Error(jsEx.RedirectUrl, jsEx.Code).ToCamelString());
             }
             catch (Exception ex)
             {
 
-                Context.Response.Write(AjaxResult.Error(ex.Message));
+                Context.Response.Write(AjaxResult.Error(ex.Message).ToCamelString());
             }
         }
 
@@ -240,7 +248,8 @@ namespace WeiXinPF.WebService
         /// </summary>
         /// <param name="msgId"></param>
         /// <returns></returns>
-        
+        [Obsolete("方法已经停用，以后再用")]
+
         public void ReadNewMsg(int msgId)
         {
             try
@@ -252,17 +261,17 @@ namespace WeiXinPF.WebService
                     throw new Exception("用户未登陆！");
                 }
                 _msgService.ReadNewMsg(msgId);
-                Context.Response.Write(AjaxResult.Success(null));
+                Context.Response.Write(AjaxResult.Success(null).ToCamelString());
             }
             catch (UnAuthException jsEx)
             {
 
-                Context.Response.Write(AjaxResult.Error(jsEx.RedirectUrl, jsEx.Code));
+                Context.Response.Write(AjaxResult.Error(jsEx.RedirectUrl, jsEx.Code).ToCamelString());
             }
             catch (Exception ex)
             {
 
-                Context.Response.Write(AjaxResult.Error(ex.Message));
+                Context.Response.Write(AjaxResult.Error(ex.Message).ToCamelString());
             }
         }
 
@@ -271,8 +280,8 @@ namespace WeiXinPF.WebService
         /// </summary> 
         /// <param name="fromUserId"></param>
         /// <returns></returns>
-        
-        public void ReadAllNewMsg(int fromUserId)
+        [WebMethod(EnableSession = true)]
+        public void ReadAllNewMsg(string fromUserId)
         {
             
             try
@@ -283,18 +292,18 @@ namespace WeiXinPF.WebService
                 {
                     throw new Exception("用户未登陆！");
                 }
-                _msgService.ReadAllNewMsg(user.id, fromUserId);
-                Context.Response.Write(AjaxResult.Success(null));
+                _msgService.ReadAllNewMsg(user.id.ToString(), fromUserId);
+                Context.Response.Write(AjaxResult.Success(null).ToCamelString());
             }
             catch (UnAuthException jsEx)
             {
 
-                Context.Response.Write(AjaxResult.Error(jsEx.RedirectUrl, jsEx.Code));
+                Context.Response.Write(AjaxResult.Error(jsEx.RedirectUrl, jsEx.Code).ToCamelString());
             }
             catch (Exception ex)
             {
 
-                Context.Response.Write(AjaxResult.Error(ex.Message));
+                Context.Response.Write(AjaxResult.Error(ex.Message).ToCamelString());
             }
         }
 
@@ -303,13 +312,14 @@ namespace WeiXinPF.WebService
         /// 获取所有接收的新消息（用户维度）
         /// </summary> 
         /// <returns></returns>
-        
+        [WebMethod(EnableSession = true)]
         public void GetAllLastNewMsg()
         {
  
 
             try
             {
+
                 var reult = new ListMsgWithCount() { Count = 0 };
                 var user = Session[MXKeys.SESSION_ADMIN_INFO] as Model.manager;
                 if (user == null)
@@ -322,19 +332,19 @@ namespace WeiXinPF.WebService
                 if (list != null && list.Any())
                 {
                     reult.Count = list.Sum(c => c.Count);
-                    reult.Msgs = list.Take(3).ToList();//首页只显示3条
+                    reult.Msgs = list; 
                 }
-                Context.Response.Write(AjaxResult.Success(reult));
+                Context.Response.Write(AjaxResult.Success(reult).ToCamelString());
             }
             catch (UnAuthException jsEx)
             {
 
-                Context.Response.Write(AjaxResult.Error(jsEx.RedirectUrl, jsEx.Code));
+                Context.Response.Write(AjaxResult.Error(jsEx.RedirectUrl, jsEx.Code).ToCamelString());
             }
             catch (Exception ex)
             {
 
-                Context.Response.Write(AjaxResult.Error(ex.Message));
+                Context.Response.Write(AjaxResult.Error(ex.Message).ToCamelString());
             }
         }
 
@@ -344,7 +354,9 @@ namespace WeiXinPF.WebService
         /// <param name="toUserId"></param>
         /// <param name="fromUserId"></param>
         /// <returns></returns> 
-        public void GetAllLastNewMsg(int fromUserId)
+        [Obsolete("方法已经停用，以后再用")]
+
+        public void GetAllLastNewMsg(string fromUserId)
         {
             try
             {
@@ -356,19 +368,19 @@ namespace WeiXinPF.WebService
                 }
 
                 var userDto = _userService.Get(user.id);
-                var fromUserDto = _userService.Get(fromUserId);
+                var fromUserDto = new UserManagerDto() {UserId = fromUserId};
                 var list = _msgService.GetMsgList(userDto, fromUserDto);
-                Context.Response.Write(AjaxResult.Success(list));
+                Context.Response.Write(AjaxResult.Success(list).ToCamelString());
             }
             catch (UnAuthException jsEx)
             {
 
-                Context.Response.Write(AjaxResult.Error(jsEx.RedirectUrl, jsEx.Code));
+                Context.Response.Write(AjaxResult.Error(jsEx.RedirectUrl, jsEx.Code).ToCamelString());
             }
             catch (Exception ex)
             {
 
-                Context.Response.Write(AjaxResult.Error(ex.Message));
+                Context.Response.Write(AjaxResult.Error(ex.Message).ToCamelString());
             }
         }
 
@@ -378,14 +390,9 @@ namespace WeiXinPF.WebService
         /// 获取所有类型消息列表(短消息、邮件、待办等)
         /// </summary> 
         /// <returns></returns>
-         
+        [Obsolete("方法已经停用，以后再用")]
         public void GetAllMsgList()
         {
-            
-            
-
- 
-
 
             try
             {
@@ -443,17 +450,17 @@ namespace WeiXinPF.WebService
 
 
                 returnData.Draw = draw;
-                Context.Response.Write(AjaxResult.Success(returnData));
+                Context.Response.Write(AjaxResult.Success(returnData).ToCamelString());
             }
             catch (UnAuthException jsEx)
             {
 
-                Context.Response.Write(AjaxResult.Error(jsEx.RedirectUrl, jsEx.Code));
+                Context.Response.Write(AjaxResult.Error(jsEx.RedirectUrl, jsEx.Code).ToCamelString());
             }
             catch (Exception ex)
             {
 
-                Context.Response.Write(AjaxResult.Error(ex.Message));
+                Context.Response.Write(AjaxResult.Error(ex.Message).ToCamelString());
             }
         }
     }

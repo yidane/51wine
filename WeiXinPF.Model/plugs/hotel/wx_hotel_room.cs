@@ -24,6 +24,8 @@ namespace WeiXinPF.Model
         private string _useInstruction;
         private string _refundRule;
         private RoomStatus _status;
+        private int? _createUser;
+
         /// <summary>
         /// 编号
         /// </summary>
@@ -88,6 +90,14 @@ namespace WeiXinPF.Model
             set { _createdate = value; }
             get { return _createdate; }
         }
+
+
+//        public int? createUser
+//        {
+//            get { return _createUser; }
+//            set { _createUser = value; }
+//        }
+
         /// <summary>
         /// 排序号
         /// </summary>

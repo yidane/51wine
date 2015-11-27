@@ -18,13 +18,13 @@ namespace WeiXinPF.Infrastructure.DomainDataAccess.Message
         public void Add(ShortMsg entity)
         {
              
-//            _context.ShortMsg.Add(entity);
+            _context.ShortMsg.Add(entity);
 //            _context.SaveChanges();
         }
 
         public void Modify(ShortMsg entity)
         {
-//            _context.ShortMsg.Attach(entity);
+            _context.ShortMsg.Attach(entity);
             _context.Entry(entity).State = EntityState.Modified;
 //            _context.SaveChanges();
         }
@@ -32,45 +32,45 @@ namespace WeiXinPF.Infrastructure.DomainDataAccess.Message
         public void Delete(int entityId)
         {
             var entity = Get(entityId);
-//            _context.ShortMsg.Remove(entity);
+            _context.ShortMsg.Remove(entity);
 //            _context.SaveChanges();
         }
 
         public void Delete(Expression<Func<ShortMsg, bool>> predicate)
         {
             var systementitys = GetAllList(predicate);
-//            _context.ShortMsg.RemoveRange(systementitys);
+            _context.ShortMsg.RemoveRange(systementitys);
         }
 
         public IQueryable<ShortMsg> GetAllList(Expression<Func<ShortMsg, bool>> predicate)
         {
-//            return _context.ShortMsg.Where(predicate);
+            return _context.ShortMsg.Where(predicate);
 
             return null;
         }
 
         public IQueryable<ShortMsg> GetAllList()
         {
-//                        return _context.ShortMsg;
+                        return _context.ShortMsg;
             return null;
         }
 
         public ShortMsg Get(int id)
         {
-            //                        return _context.ShortMsg.SingleOrDefault(b => b.Id == id);
+                                    return _context.ShortMsg.SingleOrDefault(b => b.Id == id);
             return null;
         }
 
         public void Delete(ShortMsg entity)
         {
-//            _context.ShortMsg.Remove(entity);
+            _context.ShortMsg.Remove(entity);
             //            _context.SaveChanges();
            
         }
 
         public void DeleteList(List<ShortMsg> list)
         {
-//                        _context.ShortMsg.RemoveRange(list);
+                        _context.ShortMsg.RemoveRange(list);
             //            _context.SaveChanges();
             
         }
@@ -101,7 +101,7 @@ namespace WeiXinPF.Infrastructure.DomainDataAccess.Message
             shortMsgs.ToList().ForEach(c =>
             {
                
-//                _context.ShortMsg.Attach(c);
+                _context.ShortMsg.Attach(c);
                 _context.Entry(c).State = EntityState.Modified;
             })
             ;

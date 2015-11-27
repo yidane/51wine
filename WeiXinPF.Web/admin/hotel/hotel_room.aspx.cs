@@ -8,6 +8,11 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Transactions;
+using WeiXinPF.Application.DomainModules.Message;
+using WeiXinPF.Application.DomainModules.Message.Dtos;
+using WeiXinPF.Model;
+using WeiXinPF.Model.message;
+using manager_role = WeiXinPF.BLL.manager_role;
 
 namespace WeiXinPF.Web.admin.hotel
 {
@@ -18,7 +23,7 @@ namespace WeiXinPF.Web.admin.hotel
         protected int pageSize;
         protected string keywords = string.Empty;
         public int hotelid = 0;
-
+        IShortMsgService _shortMsgService = new ShortMsgService();
         BLL.wx_hotel_room roomBll = new BLL.wx_hotel_room();
         BLL.wx_hotel_room_manage manageBll = new BLL.wx_hotel_room_manage();
 
@@ -177,6 +182,7 @@ namespace WeiXinPF.Web.admin.hotel
         {
             int sucCount = 0;
             int errorCount = 0;
+            var manager = GetAdminInfo();
             for (int i = 0; i < rptList.Items.Count; i++)
             {
                 int id = Convert.ToInt32(((HiddenField)rptList.Items[i].FindControl("hidId")).Value);
@@ -188,7 +194,7 @@ namespace WeiXinPF.Web.admin.hotel
 
                     try
                     {
-                        manageBll.ManageRoom(id, Model.RoomStatus.Agree, GetAdminInfo().id, "审核通过", "");
+                        manageBll.ManageRoom(id, Model.RoomStatus.Agree, manager.id, "审核通过", "");
                         //using (TransactionScope scope = new TransactionScope())
                         //{
                         //    roomBll.Update(model);
@@ -203,6 +209,40 @@ namespace WeiXinPF.Web.admin.hotel
 
                         //scope.Complete();
                         sucCount += 1;
+
+
+
+                        //发送消息：审核后发送消息
+                        Model.wx_hotel_room room = roomBll.GetModel(id);
+                        BLL.wx_hotel_admin dBll = new BLL.wx_hotel_admin();
+                        Model.wx_hotel_admin hotelAdmin = null;
+                        var users = dBll.GetModelList(String.Format(" HotelId={0}", hotelid));
+                        hotelAdmin = users.FirstOrDefault();
+                        if (hotelAdmin != null)
+                        {
+                            var wxUserweixin = GetWeiXinCode();
+//                            var role = new BLL.manager_role().GetModel(manager.role_id);
+                            //                            var hotelsInfo = new BLL.wx_hotels_info().GetModel(hotelid);
+                            var msg = new ShortMsgDto()
+                            {
+                                Title = wxUserweixin.wxName,
+                                Content = String.Format("编号为[{0}]的商品[{1}]已审核通过，可以发布啦！",
+                        room.RoomCode, room.roomType),
+                                Type = "HotelRoom",
+                                MenuType = "hotel_room",
+                                IsShowButton = true,
+                                ButtonText = "马上去发布",
+                                ButtonUrl = String.Format(
+                                    "/admin/hotel/hotel_room_info.aspx?action=View&hotelid={0}&roomid={1}",
+                                hotelid, id),
+                                ButtonMutipleUrl = "/admin/hotel/hotel_room.aspx?action=Edit",
+                                FromUserId = manager.id.ToString(),
+                                ToUserId = hotelAdmin.ManagerId.ToString(),
+                                MsgToUserType = MsgUserType.Hotel,
+                                MsgFromUserType = MsgUserType.Scenic
+                            };
+                            _shortMsgService.SendMsg(msg);
+                        }
                         //}
                     }
                     catch (Exception ex)
@@ -211,6 +251,39 @@ namespace WeiXinPF.Web.admin.hotel
                     }
                 }
             }
+
+            //            if (sucCount > 0)
+            //            {
+            //                int id = Convert.ToInt32(((HiddenField)rptList.Items[0].FindControl("hidId")).Value);
+            //                Model.wx_hotel_room room = roomBll.GetModel(id);
+            //                //发送消息：审核后发送消息
+            //
+            //                BLL.wx_hotel_admin dBll = new BLL.wx_hotel_admin();
+            //                Model.wx_hotel_admin hotelAdmin = null;
+            //                var users = dBll.GetModelList(String.Format(" HotelId={0}", hotelid));
+            //                hotelAdmin = users.FirstOrDefault();
+            //                if (hotelAdmin != null)
+            //                {
+            //                    var hotelsInfo = new BLL.wx_hotels_info().GetModel(hotelid);
+            //                    var msg = new ShortMsgDto()
+            //                    {
+            //                        Title = hotelsInfo.hotelName,
+            //                        Content = String.Format("编号为[{0}]的[{1}]等{2}件商品已审核通过，可以发布啦！",
+            //                        room.RoomCode, room.roomType, sucCount),
+            //                        Type = "hotel",
+            //                        IsShowButton = true,
+            //                        ButtonText = "马上去发布",
+            //                        ButtonUrl = "/admin/hotel/hotel_room.aspx?action=Edit",
+            //                        FromUserId = manager.id,
+            //                        ToUserId = hotelAdmin.ManagerId,
+            //                        MsgToUserType = MsgUserType.Hotel,
+            //                        MsgFromUserType = MsgUserType.Scenic
+            //                    };
+            //                    _shortMsgService.SendMsg(msg);
+            //                }
+            //            }
+
+
             AddAdminLog(MXEnums.ActionEnum.Audit.ToString(), "信息" + sucCount + "条，失败" + errorCount + "条"); //记录日志
 
             JscriptMsg("审核通过，成功" + sucCount + "条，失败" + errorCount + "条！", Utils.CombUrlTxt("hotel_room.aspx", "action={0}&hotelid={1}&keywords={2}", action, hotelid.ToString(), this.keywords), "Success");

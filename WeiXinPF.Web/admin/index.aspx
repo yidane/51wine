@@ -362,11 +362,11 @@
                 <ul id="nav" class="nav"></ul>
                 <div class=" navbar-custom-menu">
 
-                    <ul class="nav navbar-nav" >
+                    <ul class="nav navbar-nav">
                         <li class="dropdown messages-menu " id="menu_msg">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                                 <i class="fa fa-envelope-o"></i>
-                                <span class="label label-warning">3</span>
+                                <span class="label label-warning" data-bind="text: shortmsgCount">0</span>
                             </a>
                             <ul class="dropdown-menu">
                                 <li class="header" data-bind="text: '您有' + shortmsgCount() + '条消息提醒'">您有0条消息提醒</li>
@@ -375,7 +375,7 @@
                                         <li>
                                             <a href="#">
                                                 <h4>
-                                                    <!--ko text:msg.fromSystem.systemName-->
+                                                    <!--ko text:msg.title-->
                                                     <!--/ko-->
 
                                                     <small><i class="fa fa-clock-o"></i>
@@ -384,15 +384,28 @@
                                                     </small>
                                                 </h4>
                                                 <p>
-                                                    来自<span style="font-weight: bolder;" data-bind="text: msg.fromUser.displayName "></span>
-                                                    的<!--ko text:count--><!--/ko-->条新消息，
-                                                    <span style="color: #3c8dbc" data-bind="click: $parent.shortmsgViewDetail">点击查看</span>！
+
+                                                    <!--ko text:msg.content-->
+                                                    <!--/ko-->
+
+                                                    <span style="color: #3c8dbc" data-bind="
+    visible: msg.isShowButton,
+    click: $parent.shortmsgViewDetail
+                                                        , text: msg.buttonText"></span>
+
+
+
+
+
+
                                                 </p>
                                             </a>
                                         </li>
                                     </ul>
                                 </li>
-                                <li class="footer"><a href="#" data-bind="click: $root.LoadMessage">查看所有消息</a></li>
+<%--                                <li class="footer">--%>
+<%--                                    <a href="#" data-bind="click: $root.LoadMessage">查看所有消息</a>--%>
+<%--                                </li>--%>
                             </ul>
                         </li>
 
@@ -406,6 +419,7 @@
                                 <i class="user-icon-dropdown fa fa-angle-down fa-2x"></i>
                             </a>
                             <ul class="dropdown-menu">
+                                <div class="arrow-background"></div>
                                 <div class="arrow"></div>
                                 <!-- User image -->
                                 <li id="mygzh" runat="server">
@@ -449,12 +463,13 @@
             <iframe id="mainframe" name="mainframe" frameborder="0" src="center.aspx"></iframe>
         </div>
     </form>
+    <script src="../scripts/knockout/knockout-3.3.0.js" type="text/javascript"></script>
     <script src="js/message-vm.js" type="text/javascript"></script>
-   <script type="text/javascript">
+    <script type="text/javascript">
         var systemMenu;
         var myMessageDetailViewModel;
         $(function () {
-            
+            userMenuWidth();
 
 
             if ($.isEmptyObject(myMessageDetailViewModel)) {
@@ -462,7 +477,21 @@
                 ko.applyBindings(myMessageDetailViewModel, document.getElementById("menu_msg"));
                 myMessageDetailViewModel.loadData();
             }
+
+            
         });
+
+        function userMenuWidth() {
+            var liUser = $(".user.user-menu");
+            var userWidth = liUser.width() - 21;
+            var ulMenu = liUser.find(".dropdown-menu");
+            ulMenu.css('right', userWidth / 2 - ulMenu.width() / 2);
+            ulMenu.find(".arrow-background").width(userWidth);
+            var arrow = ulMenu.find(".arrow");
+            arrow.css('right', userWidth / 2 - ulMenu.width() / 2 + arrow.width() / 2);
+        }
+
+
     </script>
 </body>
 </html>

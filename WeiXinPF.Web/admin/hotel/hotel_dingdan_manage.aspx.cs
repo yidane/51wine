@@ -56,18 +56,18 @@ namespace WeiXinPF.Web.admin.hotel
         /// </summary>
         private void GetQueryString()
         {
-            if (MyCommFun.IsRequestStr("beginDate", RequestObjType.dateType))
+            if (MyCommFun.IsRequestStr("beginDate", MyCommFun.RequestObjType.dateType))
             {
                 this.beginDate = MXRequest.GetQueryString("beginDate");
                 txtbeginDate.Text = this.beginDate;
             }
-            if (MyCommFun.IsRequestStr("endDate", RequestObjType.dateType))
+            if (MyCommFun.IsRequestStr("endDate", MyCommFun.RequestObjType.dateType))
             {
                 this.endDate = MXRequest.GetQueryString("endDate");
                 txtendDate.Text = this.endDate;
 
             }
-            if (MyCommFun.IsRequestStr("orderStatus", RequestObjType.intType))
+            if (MyCommFun.IsRequestStr("orderStatus", MyCommFun.RequestObjType.intType))
             {
                 this.orderStatus = MXRequest.GetQueryInt("orderStatus");
                 ddlOrderStatus.SelectedValue = this.orderStatus.ToString();

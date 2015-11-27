@@ -66,8 +66,13 @@ namespace WeiXinPF.Web.admin.choujiang.shakeLuckyMoney
                         var userDto = _userService.Get(openid);
                         if (userDto!=null)
                         {
+                            var headImg = MyCommFun.getWebSite() + "/images/weichatDefaultHeadImg.jpg";
+                            if (!string.IsNullOrEmpty(userDto.headimgurl))
+                            {
+                                headImg = userDto.headimgurl;
+                            }
                             dr["nickName"] = userDto.nickname;
-                            dr["headimgurl"] = userDto.headimgurl;
+                            dr["headimgurl"] = headImg;
                         }
                     }
                     

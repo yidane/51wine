@@ -48,7 +48,7 @@
             });
 
 
-            
+
         });
     </script>
     <script type="text/javascript">
@@ -151,7 +151,7 @@
             border-color: #398439;
         }
 
-             .alert-success {
+        .alert-success {
             color: #3c763d;
             background-color: #dff0d8;
             border-color: #d6e9c6;
@@ -181,7 +181,6 @@
             border: 1px solid transparent;
             border-radius: 10px;
         }
-
     </style>
 
 </head>
@@ -246,8 +245,8 @@
             <dl>
                 <dt>退款金额：</dt>
                 <dd>
-                
-                    <input id="txtAmount" type="text" class="input normal"  runat="server"  sucmsg=" " nullmsg="" datatype="n" />
+
+                    <input id="txtAmount" type="text" class="input normal" runat="server" sucmsg=" " nullmsg="" datatype="n" />
                     <span class="Validform_checktip">注：默认为订单全额，可修改。*</span>
 
                 </dd>
@@ -303,8 +302,8 @@
             <%} %>
 
             <% if (orderStatus == HotelStatusManager.OrderStatus.Pending.StatusId
-                         || orderStatus == HotelStatusManager.OrderStatus.Refused.StatusId
-                         || orderStatus == HotelStatusManager.OrderStatus.Accepted.StatusId)
+                               || orderStatus == HotelStatusManager.OrderStatus.Refused.StatusId
+                               || orderStatus == HotelStatusManager.OrderStatus.Accepted.StatusId)
                 {%>
 
             <dl>
@@ -314,7 +313,7 @@
             <%}%>
 
             <% else if (orderStatus == HotelStatusManager.OrderStatus.Refunding.StatusId
-                   || orderStatus == HotelStatusManager.OrderStatus.Refunded.StatusId)
+                         || orderStatus == HotelStatusManager.OrderStatus.Refunded.StatusId)
                 {%>
 
             <dl>
@@ -355,22 +354,31 @@
         <%
             else
             {%>
+
         <div style="width: 100%; text-align: center">
             <% if (!isAdmin && orderStatus == HotelStatusManager.OrderStatus.Payed.StatusId)
                 {%>
-                <%=ordermsg %>
-         
-          
-            <asp:Button ID="btn_completed" runat="server" CssClass="button button-success " Text="订单完成" OnClick="btn_completed_OnClick" />
+            <%=ordermsg %>
+            <div class="alert alert-warning " role="alert" style="margin-top: 10px; text-align: left;">
+
+                <strong>请注意!</strong>顾客到店完成验证码的验证并提供服务后，点击【订单完成】按钮。只有执行了订单完成操作的订单方可通过“服务凭据查询”功能与景区结算。
+            </div>
+
+            <asp:Button ID="btn_completed" runat="server" CssClass="button button-success " Text="订单完成"
+                OnClientClick="return ConfirmPostBack('btn_completed', '请确认顾客已到店核销验证码，确定执行【订单完成】操作？');"
+                OnClick="btn_completed_OnClick" />
 
             <%}%>
 
 
 
-              <asp:Button ID="btn_return" runat="server" CssClass="button  button-primary " Text="返回"  OnClick="btn_return_OnClick" />
- 
+            <asp:Button ID="btn_return" runat="server" CssClass="button  button-primary " Text="返回" OnClick="btn_return_OnClick" />
+
         </div>
         <%}%>
+
+        <input type="hidden" name="__EVENTTARGET" value="">
+        <input type="hidden" name="__EVENTARGUMENT" value="">
     </form>
 </body>
 </html>

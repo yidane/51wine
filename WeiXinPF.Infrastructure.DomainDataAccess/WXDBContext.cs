@@ -65,6 +65,6 @@ namespace WeiXinPF.Infrastructure.DomainDataAccess
         public virtual DbSet<IdentifyingCodeInfo> IdentifyingCodeInfo { get; set; }
         public virtual DbSet<TuidanInfo> TuidanInfo { get; set; }
 
-//        public virtual DbSet<ShortMsg> ShortMsg { get; set; }
+        public virtual DbSet<ShortMsg> ShortMsg { get; set; }
     }
 }
