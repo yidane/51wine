@@ -92,8 +92,17 @@
             </ul>
         </div>
         <div style="width: 100%; text-align: center">
-            <asp:Button ID="btnFinish" runat="server" Text="订单完成" CssClass="DingdanButton" OnClick="OnOrderFinishClick" />
+            <div class="alert alert-warning " role="alert" style="margin-top: 10px; text-align: left;">
+
+                <strong>请注意!</strong>顾客到店完成验证码的验证并提供服务后，点击【订单完成】按钮。只有执行了订单完成操作的订单方可通过“服务凭据查询”功能与景区结算。
+            </div>
+            <asp:Button ID="btnFinish" runat="server" Text="订单完成" CssClass="DingdanButton"
+                OnClientClick="return ConfirmPostBack('btnFinish', '请确认顾客已到店核销验证码，确定执行【订单完成】操作？');"
+                 OnClick="OnOrderFinishClick" />
         </div>
+        
+         <input type="hidden" name="__EVENTTARGET" value="">
+        <input type="hidden" name="__EVENTARGUMENT" value="">
     </form>
 </body>
 </html>

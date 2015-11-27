@@ -13,6 +13,7 @@
     <link href="../skin/default/style.css" rel="stylesheet" type="text/css" />
     <link href="../skin/mystyle.css" rel="stylesheet" type="text/css" />
     <link href="../../css/pagination.css" rel="stylesheet" type="text/css" />
+     <link href="../skin/btn-group.css" rel="stylesheet" type="text/css"/>
     <style type="text/css">
         .badge {
             display: inline-block;
@@ -112,11 +113,13 @@
                     <td><%# Eval("salePrice") %></td>
                     <td><%# Eval("StatusStr") %></td>
                     <td>
-                        <asp:LinkButton ID="lbtView" runat="server" CommandName="View" CommandArgument='<%#Eval("id") %>'>查看</asp:LinkButton>
-                        <asp:LinkButton ID="lbtEdit" runat="server" CommandName="Edit" CommandArgument='<%#Eval("id")%>'>修改</asp:LinkButton>
-                        <asp:LinkButton ID="lbtAudit" runat="server" CommandName="Audit" CommandArgument='<%#Eval("id")%>'>审核</asp:LinkButton>
-                        <asp:LinkButton ID="lbtPublish" runat="server" CommandName="Publish" CommandArgument='<%#Eval("id")%>'>发布</asp:LinkButton>
-                        <asp:LinkButton ID="lbtSoldOut" runat="server" CommandName="SoldOut" CommandArgument='<%#Eval("id")%>'>下架</asp:LinkButton>
+                        <div class="btn-group" role="group" aria-label="...">
+                            <asp:LinkButton ID="lbtView" CssClass="btn btn-default"  runat="server" CommandName="View" CommandArgument='<%#Eval("id") %>'>查看</asp:LinkButton>
+                            <asp:LinkButton ID="lbtEdit" CssClass="btn btn-default" runat="server" CommandName="Edit" CommandArgument='<%#Eval("id")%>'>修改</asp:LinkButton>
+                            <asp:LinkButton ID="lbtAudit" CssClass="btn btn-default" runat="server" CommandName="Audit" CommandArgument='<%#Eval("id")%>'>审核</asp:LinkButton>
+                            <asp:LinkButton ID="lbtPublish" CssClass="btn btn-default" runat="server" CommandName="Publish" CommandArgument='<%#Eval("id")%>'>发布</asp:LinkButton>
+                            <asp:LinkButton ID="lbtSoldOut" CssClass="btn btn-default" runat="server" CommandName="SoldOut" CommandArgument='<%#Eval("id")%>'>下架</asp:LinkButton>
+                        </div>
                     </td>
                 </tr>
             </ItemTemplate>

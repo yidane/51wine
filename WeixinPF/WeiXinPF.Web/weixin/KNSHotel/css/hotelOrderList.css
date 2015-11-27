@@ -1,0 +1,2836 @@
+﻿@charset "utf-8";
+/* CSS Document */
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, p, blockquote, th, td, span {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+* {
+    font-size: 14px;
+    font-family: "Helvetica Neue", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", "黑体", Arial, sans-serif;
+    margin: 0px;
+    padding: 0px;
+    outline: 0px none;
+    word-wrap: break-word;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+img, a img {
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+a, img, button, input, textarea, span {
+    -webkit-tap-highlight-color: rgba(255,255,255,0);
+}
+
+a {
+    font-size: 14px;
+    color: #333;
+    text-decoration: none;
+}
+
+    a:hover {
+        text-decoration: none;
+    }
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    padding: 0;
+    font-size: 100%;
+}
+
+ul, ol, li {
+    list-style: none;
+}
+
+table, td, input {
+    font-size: 14px;
+    padding: 0;
+}
+
+select, input, img {
+    vertical-align: middle;
+}
+
+textarea {
+    resize: none;
+}
+
+.none {
+    display: none;
+}
+
+body {
+    background: #eaeaea;
+}
+
+div, a, button, input, textarea, span {
+    -webkit-tap-highlight-color: rgba(255,255,255,0);
+}
+/*商品列表*/
+.menu {
+    width: 100%;
+    z-index: 9999;
+    position: fixed;
+}
+
+    .menu ul {
+        width: 100%;
+        background: rgba(255,255,255,0.95);
+        box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);
+        float: left;
+    }
+
+        .menu ul li {
+            width: 33%;
+            border-bottom: 2px solid #FFF;
+            cursor: pointer;
+            padding: 8px 0 8px 0;
+            text-align: center;
+            float: left;
+        }
+
+            .menu ul li:nth-child(1) {
+                width: 34%;
+            }
+
+            .menu ul li.actived {
+                border-bottom: 2px solid #fe4e62;
+            }
+
+                .menu ul li.actived a {
+                    color: #fe4e62;
+                }
+
+            .menu ul li:hover {
+                border-bottom: 2px solid #fe4e62;
+            }
+
+            .menu ul li a {
+                width: 100%;
+                font-size: 16px;
+                color: rgba(51,51,51,0.70);
+                float: left;
+            }
+
+                .menu ul li a b {
+                    font-weight: normal;
+                    color: rgba(0,0,0,0.1);
+                    float: left;
+                }
+
+.info_list {
+    padding: 0 10px;
+}
+
+    .info_list ul {
+        width: 100%;
+        margin: 40px 0 10px 0;
+        padding-top: 10px;
+        float: left;
+    }
+
+        .info_list ul li {
+            width: 100%;
+            float: left;
+            position: relative;
+            margin-bottom: 10px;
+        }
+
+            .info_list ul li .bg_img {
+                width: 100%;
+                float: left;
+            }
+
+                .info_list ul li .bg_img img {
+                    width: 100%;
+                    -webkit-border-radius: 5px;
+                    -moz-border-radius: 5px;
+                    border-radius: 5px;
+                    float: left;
+                }
+
+            .info_list ul li .save_down_icon {
+                width: 36px;
+                height: 23px;
+                right: -5px;
+                top: 10px;
+                background: url(../../restaurant/images/save_down_icon.png) no-repeat;
+                background-size: 100%;
+                position: absolute;
+            }
+
+            .info_list ul li a {
+                width: 100%;
+                height: 100%;
+                font-size: 18px;
+                background: linear-gradient(left, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0) 100%);
+                background: -o-linear-gradient(left, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0) 100%);
+                background: -ms-linear-gradient(left, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, 0) 100%);
+                background: -moz-linear-gradient(left, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0) 100%);
+                background: -webkit-linear-gradient(left, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0) 100%);
+                -webkit-border-radius: 5px;
+                -moz-border-radius: 5px;
+                border-radius: 5px;
+                left: 0;
+                color: #FFF;
+                position: absolute;
+            }
+
+                .info_list ul li a h3 {
+                    padding: 10px 30px 10px 10px;
+                    font-size: 18px;
+                    font-weight: normal;
+                    text-shadow: 0px 1px 4px rgba(0, 0, 0, 0.3);
+                    float: left;
+                }
+
+                .info_list ul li a p {
+                    width: 100%;
+                    float: left;
+                }
+
+                    .info_list ul li a p b {
+                        margin: 0 5px 0 10px;
+                        width: 4px;
+                        height: 20px;
+                        float: left;
+                    }
+
+                    .info_list ul li a p .green_color_icon {
+                        background: #00c6ff;
+                    }
+
+                    .info_list ul li a p .blue_color_icon {
+                        background: #00c6ff;
+                    }
+
+                    .info_list ul li a p label {
+                        font-size: 14px;
+                        float: left;
+                    }
+
+                .info_list ul li a .price_info {
+                    left: 10px;
+                    bottom: 5px;
+                    position: absolute;
+                }
+
+                .info_list ul li a .new_price {
+                    font-size: 16px;
+                    text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.3);
+                    float: left;
+                }
+
+                    .info_list ul li a .new_price b {
+                        font-size: 30px;
+                        text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.3);
+                        font-weight: normal;
+                    }
+
+                .info_list ul li a .old_price {
+                    margin-left: 5px;
+                    margin-top: 15px;
+                    font-size: 14px;
+                    color: rgba(255, 255, 255, 0.7);
+                    text-decoration: line-through;
+                    float: left;
+                }
+
+    .info_list .button_white {
+        padding: 10px;
+        background: #FFF;
+        display: list-item;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+    }
+
+    .info_list .pink_bg {
+        width: 100%;
+        margin-left: -1px;
+        border: 1px solid #fe4e62;
+        text-align: center;
+        height: 40px;
+        line-height: 40px;
+        background: #FFF;
+        font-size: 16px;
+        color: #fe4e62;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+        display: inline-block;
+    }
+/*门票详情*/
+.ticket_details {
+    width: 100%;
+    float: left;
+}
+
+    .ticket_details .main_visual {
+        width: 100%;
+        overflow: hidden;
+        position: relative;
+        float: left;
+    }
+
+    .ticket_details .main_image {
+        position: relative;
+        width: 100%;
+        display: list-item;
+        margin: 0 auto;
+    }
+
+        .ticket_details .main_image:after {
+            content: '';
+            display: block;
+            width: 100%;
+            padding-top: 50%;
+        }
+
+        .ticket_details .main_image ul {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .ticket_details .main_image li {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+            .ticket_details .main_image li .bg_img {
+                width: 100%;
+            }
+
+            .ticket_details .main_image li img {
+                position: absolute;
+                width: 100%;
+            }
+
+        .ticket_details .main_image .ticket_con {
+            width: 100%;
+            height: 100%;
+            left: 0;
+            top: 0;
+            font-size: 18px;
+            background: linear-gradient(left, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0) 100%);
+            background: -o-linear-gradient(left, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0) 100%);
+            background: -ms-linear-gradient(left, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0) 100%);
+            background: -moz-linear-gradient(left, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0) 100%);
+            background: -webkit-linear-gradient(left, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0) 100%);
+            color: #FFF;
+            position: absolute;
+        }
+
+            .ticket_details .main_image .ticket_con h3 {
+                padding: 10px 30px 10px 10px;
+                font-size: 18px;
+                font-weight: normal;
+                text-shadow: 0px 1px 4px rgba(0, 0, 0, 0.3);
+                float: left;
+            }
+
+            .ticket_details .main_image .ticket_con p {
+                width: 100%;
+                float: left;
+            }
+
+                .ticket_details .main_image .ticket_con p b {
+                    margin: 0 5px 0 10px;
+                    width: 4px;
+                    height: 20px;
+                    float: left;
+                }
+
+                .ticket_details .main_image .ticket_con p .green_color_icon {
+                    background: #00c6ff;
+                }
+
+                .ticket_details .main_image .ticket_con p .blue_color_icon {
+                    background: #00c6ff;
+                }
+
+                .ticket_details .main_image .ticket_con p label {
+                    font-size: 14px;
+                    float: left;
+                }
+
+            .ticket_details .main_image .ticket_con .price_info {
+                left: 10px;
+                bottom: 5px;
+                position: absolute;
+            }
+
+            .ticket_details .main_image .ticket_con .new_price {
+                font-size: 16px;
+                text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.3);
+                float: left;
+            }
+
+                .ticket_details .main_image .ticket_con .new_price b {
+                    font-size: 30px;
+                    text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.3);
+                    font-weight: normal;
+                }
+
+            .ticket_details .main_image .ticket_con .old_price {
+                margin-left: 5px;
+                margin-top: 15px;
+                font-size: 14px;
+                color: rgba(255, 255, 255, 0.7);
+                text-decoration: line-through;
+                float: left;
+            }
+
+    .ticket_details .flicking_con {
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        z-index: 999;
+        height: 10px;
+    }
+
+        .ticket_details .flicking_con a {
+            float: left;
+            width: 8px;
+            height: 8px;
+            -webkit-border-radius: 4px;
+            -moz-border-radius: 4px;
+            border-radius: 4px;
+            margin: 0 3px;
+            padding: 0;
+            background: #999;
+            display: block;
+        }
+
+            .ticket_details .flicking_con a.on {
+                background: #FFF;
+            }
+
+    .ticket_details .ticket_text {
+        width: 100%;
+        line-height: 20px;
+        font-size: 10px;
+        color: #999;
+        text-align: center;
+    }
+
+    .ticket_details .ticket_tips {
+        padding: 0 10px;
+        border-bottom: 1px solid #d9d9d9;
+        background: #FFF;
+    }
+
+        .ticket_details .ticket_tips ul {
+            width: 100%;
+            display: -webkit-box;
+            display: -moz-box;
+            display: box;
+        }
+
+            .ticket_details .ticket_tips ul li {
+                font-size: 12px;
+                color: #666;
+                padding: 8px 0 4px 0;
+                height: 18px;
+                line-height: 18px;
+                -webkit-box-pack: justify;
+                -webkit-box-flex: 1;
+                -moz-box-pack: justify;
+                -moz-box-flex: 1;
+                box-pack: justify;
+                box-flex: 1;
+            }
+
+                .ticket_details .ticket_tips ul li .right_green_icon {
+                    margin: 3px;
+                    float: left;
+                    width: 12px;
+                    height: 12px;
+                    overflow: hidden;
+                    background: url(../../restaurant/images/right_green_icon.png) no-repeat;
+                    background-size: 100%;
+                }
+
+        .ticket_details .ticket_tips p {
+            border-top: 1px dashed #d9d9d9;
+            width: 100%;
+            padding: 12px 0;
+            font-size: 14px;
+            color: #333;
+        }
+
+    .ticket_details .ticket_info {
+        width: 100%;
+        margin-top: 10px;
+        border-top: 1px solid #d9d9d9;
+        border-bottom: 1px solid #d9d9d9;
+        background: #FFF;
+        float: left;
+    }
+
+        .ticket_details .ticket_info dl {
+            padding-left: 10px;
+        }
+
+            .ticket_details .ticket_info dl dd {
+                width: 100%;
+                border-bottom: 1px solid #d9d9d9;
+                float: left;
+            }
+
+            .ticket_details .ticket_info dl dt {
+                width: 100%;
+                float: left;
+            }
+
+        .ticket_details .ticket_info .text_title {
+            width: 100%;
+            cursor: pointer;
+            float: left;
+        }
+
+    .ticket_details .i_green_icon {
+        width: 18px;
+        height: 18px;
+        margin: 14px 0;
+        background: url(../../restaurant/images/i_green_icon.png) no-repeat;
+        background-size: 100%;
+        float: left;
+    }
+
+    .ticket_details .text_green_icon {
+        width: 16px;
+        height: 18px;
+        margin: 14px 1px;
+        background: url(../../restaurant/images/text_green_icon.png) no-repeat;
+        background-size: 100%;
+        float: left;
+    }
+
+    .ticket_details .back_green_icon {
+        width: 18px;
+        height: 18px;
+        margin: 14px 0;
+        background: url(../../restaurant/images/back_green_icon.png) no-repeat center;
+        background-size: 100%;
+        float: left;
+    }
+
+    .ticket_details .time_green_icon {
+        width: 18px;
+        height: 18px;
+        margin: 14px 0;
+        background: url(../../restaurant/images/time_green_icon.png) no-repeat;
+        background-size: 100%;
+        float: left;
+    }
+
+    .ticket_details .ticket_info dl h3 {
+        padding: 14px 5px;
+        font-weight: normal;
+        line-height: 18px;
+        font-size: 14px;
+        color: #333;
+        float: left;
+    }
+
+    .ticket_details .ticket_info .text_title p {
+        padding: 14px 20px 14px 0;
+        line-height: 18px;
+        font-size: 12px;
+        color: #666;
+        float: right;
+    }
+
+    .ticket_details .ticket_info .text_info {
+        width: 100%;
+        padding: 10px 0;
+        line-height: 20px;
+        font-size: 14px;
+        color: #666;
+        border-top: 1px dashed #d9d9d9;
+        float: left;
+    }
+
+        .ticket_details .ticket_info .text_info pre {
+            padding: 0 10px 0 0;
+            font-size: 12px;
+            white-space: pre-wrap;
+        }
+
+    .ticket_details .ticket_info .date_info {
+        padding: 14px 20px 14px 0;
+        line-height: 18px;
+        font-size: 12px;
+        color: #666;
+        float: right;
+    }
+
+    .ticket_details .up_gray_icon {
+        width: 18px;
+        height: 18px;
+        padding: 9px;
+        margin-right: 10px;
+        background: url(../../restaurant/images/up_gray_icon.png) no-repeat center center;
+        background-size: 50%;
+        cursor: pointer;
+        float: right;
+    }
+
+    .ticket_details .down_gray_icon {
+        width: 18px;
+        height: 18px;
+        padding: 9px;
+        margin-right: 10px;
+        background: url(../../restaurant/images/down_gray_icon.png) no-repeat center center;
+        background-size: 50%;
+        cursor: pointer;
+        float: right;
+    }
+
+    .ticket_details .info_onclick {
+        width: 18px;
+        height: 18px;
+        padding: 9px;
+        margin-right: 10px;
+        background: url(../../restaurant/images/up_gray_icon.png) no-repeat center center;
+        background-size: 50%;
+        cursor: pointer;
+        float: right;
+    }
+
+    .ticket_details .actived .info_onclick {
+        width: 18px;
+        height: 18px;
+        padding: 9px;
+        margin: 5px 10px;
+        background: url(../../restaurant/images/down_gray_icon.png) no-repeat center center;
+        background-size: 50%;
+        cursor: pointer;
+        float: right;
+    }
+
+    .ticket_details .actived .text_info {
+        display: none;
+    }
+
+    .ticket_details .order_info {
+        width: 100%;
+        float: left;
+    }
+
+        .ticket_details .order_info h3 {
+            padding: 10px;
+            font-size: 14px;
+            font-weight: normal;
+            color: #999;
+            display: list-item;
+        }
+
+        .ticket_details .order_info ul {
+            padding-left: 10px;
+            border-top: 1px solid #d9d9d9;
+            border-bottom: 1px solid #d9d9d9;
+            background: #FFF;
+            display: list-item;
+        }
+
+            .ticket_details .order_info ul li {
+                width: 100%;
+                height: 46px;
+                overflow: hidden;
+                border-top: 1px solid #d9d9d9;
+                position: relative;
+            }
+
+                .ticket_details .order_info ul li:nth-child(1) {
+                    border: 0;
+                }
+
+                .ticket_details .order_info ul li .name_icon {
+                    padding: 0 10px 0 5px;
+                    line-height: 46px;
+                    font-size: 14px;
+                    color: #333;
+                    float: left;
+                }
+
+                    .ticket_details .order_info ul li .name_icon b {
+                        margin: 0 5px;
+                        line-height: 46px;
+                        color: #F00;
+                        display: inline-block;
+                    }
+
+                .ticket_details .order_info ul li .price_icon {
+                    float: left;
+                }
+
+                    .ticket_details .order_info ul li .price_icon .new_price {
+                        font-weight: bold;
+                        line-height: 46px;
+                        color: #fe4e62;
+                        font-size: 12px;
+                        float: left;
+                    }
+
+                        .ticket_details .order_info ul li .price_icon .new_price b {
+                            font-size: 16px;
+                            font-weight: normal;
+                        }
+
+                    .ticket_details .order_info ul li .price_icon .old_price {
+                        line-height: 46px;
+                        margin-left: 5px;
+                        font-size: 12px;
+                        color: #c5c5c5;
+                        text-decoration: line-through;
+                        float: left;
+                    }
+
+    .ticket_details .cmp_wrap {
+        padding: 0 10px;
+        position: absolute;
+        right: 0;
+    }
+
+    .ticket_details .quantity_wrapper {
+        float: left;
+    }
+
+#decrease, #increase {
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    padding: 13px 10px;
+    background-size: 50%;
+    float: left;
+}
+
+.min_gray_icon {
+    background: url(../../restaurant/images/min_gray_icon.png) no-repeat center center;
+}
+
+.min_pink_icon {
+    background: url(../../restaurant/images/min_pink_icon.png) no-repeat center center;
+}
+
+.max_gray_icon {
+    background: url(../../restaurant/images/max_gray_icon.png) no-repeat center center;
+}
+
+.max_pink_icon {
+    background: url(../../restaurant/images/max_pink_icon.png) no-repeat center center;
+}
+
+.quantity {
+    border: 0;
+    background: #FFF;
+    width: 20px;
+    margin: 13px 10px;
+    text-align: center;
+    font-size: 16px;
+    color: #666;
+    height: 20px;
+    line-height: 20px;
+    float: left;
+}
+
+.input_icon {
+    padding: 13px 10px;
+    float: right;
+}
+
+    .input_icon input {
+        border: 0;
+        background: #FFF;
+        text-align: right;
+        padding: 0 10px;
+        font-size: 14px;
+        color: #666;
+        height: 20px;
+        line-height: 20px;
+        float: right;
+    }
+
+        .input_icon input.text {
+            width: 170px;
+        }
+
+        .input_icon input.date {
+            width: auto;
+        }
+
+.bale_info {
+    margin-top: 10px;
+    border-top: 1px solid #d9d9d9;
+    border-bottom: 1px solid #d9d9d9;
+    width: 100%;
+    background: #FFF;
+    float: left;
+}
+
+.bale_shop {
+    width: 100%;
+    padding: 13px 0;
+    float: left;
+    position: relative;
+}
+
+    .bale_shop .tag_pink_icon {
+        margin-left: 10px;
+        width: 19px;
+        height: 20px;
+        background: url(../../restaurant/images/tag_pink_icon.png) no-repeat;
+        background-size: 100%;
+        float: left;
+    }
+
+    .bale_shop .coupon_pink_icon {
+        margin-left: 10px;
+        width: 20px;
+        height: 20px;
+        background: url(../../restaurant/images/coupon_pink_icon.png) no-repeat center;
+        background-size: 100%;
+        float: left;
+    }
+
+    .bale_shop h3 {
+        padding-left: 10px;
+        line-height: 20px;
+        font-size: 14px;
+        font-weight: normal;
+        color: #333;
+        float: left;
+    }
+
+    .bale_shop p {
+        line-height: 20px;
+        padding-right: 50px;
+        font-size: 14px;
+        font-weight: normal;
+        color: #FE4E62;
+        float: right;
+    }
+
+    .bale_shop .right_gray_icon {
+        width: 12px;
+        height: 18px;
+        padding: 9px 6px;
+        background: url(../../restaurant/images/right_gray_icon.png) no-repeat center;
+        background-size: 50%;
+        position: absolute;
+        top: 5px;
+        right: 15px;
+    }
+
+.bale_shop_order {
+    width: 98%;
+    margin-left: 2%;
+    border-top: 1px solid #d9d9d9;
+    display: inline-block;
+}
+
+    .bale_shop_order .name_icon {
+        line-height: 40px;
+        color: #333;
+        float: left;
+    }
+
+    .bale_shop_order .price_icon {
+        float: left;
+    }
+
+        .bale_shop_order .price_icon .new_price {
+            line-height: 40px;
+            color: #fe4e62;
+            font-size: 12px;
+            float: left;
+        }
+
+            .bale_shop_order .price_icon .new_price b {
+                font-size: 14px;
+                font-weight: normal;
+            }
+
+        .bale_shop_order .price_icon .old_price {
+            line-height: 40px;
+            margin-left: 5px;
+            font-size: 12px;
+            color: #c5c5c5;
+            text-decoration: line-through;
+            float: left;
+        }
+
+.bale_shop_con {
+    width: 98%;
+    margin-left: 2%;
+    padding: 10px 0;
+    border-top: 1px dashed #d9d9d9;
+    display: inline-block;
+}
+
+    .bale_shop_con p {
+        padding-right: 10px;
+        float: left;
+    }
+
+.bale_shop_date {
+    width: 98%;
+    margin-left: 2%;
+    padding: 10px 0;
+    border-top: 1px solid #d9d9d9;
+    display: inline-block;
+}
+
+    .bale_shop_date p {
+        padding-right: 10px;
+        float: left;
+    }
+
+.tel_info {
+    width: 100%;
+    margin: 10px 0 60px 0;
+    padding: 13px 0;
+    border-top: 1px solid #d9d9d9;
+    border-bottom: 1px solid #d9d9d9;
+    background: #FFF;
+    float: left;
+}
+
+    .tel_info a {
+        width: 100%;
+        float: left;
+    }
+
+    .tel_info .tel_gray_icon {
+        margin-left: 10px;
+        width: 19px;
+        height: 20px;
+        background: url(../../restaurant/images/tel_gray_icon.png) no-repeat;
+        background-size: 100%;
+        float: left;
+    }
+
+    .tel_info h3 {
+        padding-left: 10px;
+        line-height: 20px;
+        font-size: 14px;
+        font-weight: normal;
+        color: #333;
+        float: left;
+    }
+
+    .tel_info p {
+        padding-right: 20px;
+        line-height: 20px;
+        font-size: 14px;
+        color: #333;
+        float: right;
+    }
+
+.buy_btn {
+    width: 100%;
+    height: 50px;
+    bottom: 0;
+    background: linear-gradient(top, rgb(64, 63, 66), rgb(26, 25, 31) 100%);
+    background: -moz-linear-gradient(top, rgb(64, 63, 66), rgb(26, 25, 31) 100%);
+    background: -webkit-linear-gradient(top, rgb(64, 63, 66), rgb(26, 25, 31) 100%);
+    position: fixed;
+}
+
+    .buy_btn span {
+        padding-left: 10px;
+        line-height: 50px;
+        font-size: 16px;
+        color: #FFF;
+        float: left;
+    }
+
+        .buy_btn span b {
+            font-size: 24px;
+            font-weight: normal;
+        }
+
+    .buy_btn a {
+        margin-right: 10px;
+        margin-top: 5px;
+        padding: 0 30px;
+        height: 40px;
+        line-height: 40px;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+        font-size: 16px;
+        font-weight: bold;
+        color: #FFF;
+        float: right;
+    }
+
+        .buy_btn a.pink_color {
+            background: #fe4e62;
+            color: #FFF;
+        }
+
+        .buy_btn a.gray_color {
+            background: #eee;
+            color: #fe4e62;
+        }
+
+.coupon_info {
+    padding: 0 10px;
+}
+
+    .coupon_info ul {
+        width: 100%;
+        float: left;
+    }
+
+        .coupon_info ul li {
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 10px 0;
+            font-size: 14px;
+            color: #FFF;
+            position: relative;
+            background: #f36652;
+            height: 30px;
+            overflow: hidden;
+            float: left;
+        }
+
+            .coupon_info ul li h3 {
+                margin-left: 20px;
+                width: 60%;
+                font-size: 14px;
+                line-height: 16px;
+                float: left;
+            }
+
+            .coupon_info ul li p {
+                font-size: 12px;
+                color: rgba(255, 255, 255, 0.7);
+                line-height: 14px;
+                margin-left: 20px;
+                float: left;
+            }
+
+            .coupon_info ul li .checkbox {
+                top: 18px;
+                right: 20px;
+                position: absolute;
+            }
+
+                .coupon_info ul li .checkbox label {
+                    font-size: 12px;
+                }
+
+            .coupon_info ul li .left_white_icon {
+                width: 20px;
+                height: 20px;
+                left: -10px;
+                top: 15px;
+                -webkit-border-radius: 10px;
+                -moz-border-radius: 10px;
+                border-radius: 10px;
+                background: #FFF;
+                position: absolute;
+            }
+
+            .coupon_info ul li .right_white_icon {
+                width: 20px;
+                height: 20px;
+                right: -10px;
+                top: 15px;
+                -webkit-border-radius: 10px;
+                -moz-border-radius: 10px;
+                border-radius: 10px;
+                background: #FFF;
+                position: absolute;
+            }
+
+    .coupon_info .status {
+        width: 60px;
+        height: 20px;
+        line-height: 20px;
+        text-align: center;
+        top: 14px;
+        right: 20px;
+        font-size: 12px;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+        position: absolute;
+        border: 1px solid #FFF;
+        color: #FFF;
+    }
+
+    .coupon_info .text_con {
+        margin-bottom: 10px;
+        font-size: 12px;
+        color: #999;
+        float: left;
+        width: 100%;
+    }
+/*订单详情*/
+.order_details {
+    width: 100%;
+    float: left;
+}
+
+    .order_details .main_visual {
+        height: 300px;
+        overflow: hidden;
+        background: #FFF;
+        border-bottom: 1px solid #d9d9d9;
+        position: relative;
+    }
+
+        .order_details .main_visual h3 {
+            width: 100%;
+            line-height: 50px;
+            font-size: 16px;
+            font-weight: normal;
+            color: #333;
+            text-align: center;
+        }
+
+            .order_details .main_visual h3 b {
+                font-size: 14px;
+                font-weight: normal;
+            }
+
+    .order_details .main_image {
+        width: 100%;
+        height: 260px;
+        position: relative;
+    }
+
+        .order_details .main_image ul {
+            width: 100%;
+            height: 260px;
+            text-align: center;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .order_details .main_image li {
+            width: 100%;
+            height: 260px;
+            overflow: hidden;
+            position: absolute;
+        }
+
+            .order_details .main_image li .qrcode_img {
+                width: 200px;
+                height: 200px;
+                overflow: hidden;
+                margin: 0 auto;
+                cursor: pointer;
+            }
+
+                .order_details .main_image li .qrcode_img img {
+                    width: 190px;
+                    height: 190px;
+                    padding: 4px;
+                    border: 1px solid #d9d9d9;
+                    display: list-item;
+                }
+
+            .order_details .main_image li .qrcode_title {
+                width: 100%;
+                height: 30px;
+                line-height: 30px;
+                overflow: hidden;
+                top: 200px;
+                position: absolute;
+                cursor: pointer;
+            }
+
+    .order_details .flicking_con {
+        position: absolute;
+        top: 280px;
+        width: 100%;
+        text-align: center;
+        z-index: 999;
+        float: left;
+    }
+
+        .order_details .flicking_con a {
+            width: 8px;
+            height: 8px;
+            -webkit-border-radius: 4px;
+            -moz-border-radius: 4px;
+            border-radius: 4px;
+            margin: 3px;
+            padding: 0;
+            background: #999; /*display: -webkit-box; display: -moz-box; display: box;*/
+            display: -moz-inline-box;
+            display: -webkit-inline-box;
+            display: inline-box;
+        }
+
+            .order_details .flicking_con a.on {
+                background: #4eca9d;
+            }
+
+    .order_details .use_state {
+        width: 200px;
+        height: 200px;
+        margin: 0 auto;
+        background: rgba(255,255,255,0.8);
+        top: 0;
+        position: absolute;
+    }
+
+        .order_details .use_state .used_icon {
+            width: 40px;
+            height: 40px;
+            background: url(../../restaurant/images/used_green_icon.png) no-repeat;
+            background-size: 100%;
+            margin: 60px 80px 0 80px;
+            float: left;
+        }
+
+        .order_details .use_state .timeout_icon {
+            width: 40px;
+            height: 40px;
+            background: url(../../restaurant/images/timeout_icon.png) no-repeat;
+            background-size: 100%;
+            margin: 60px 80px 0 80px;
+            float: left;
+        }
+
+        .order_details .use_state h3 {
+            font-size: 14px;
+            font-weight: normal;
+            color: #333;
+        }
+
+    .order_details .price_info {
+        width: 100%;
+        height: 40px;
+        line-height: 40px;
+        font-size: 14px;
+        color: #999;
+        text-align: center;
+        display: inline-block;
+    }
+
+    .order_details .order_info {
+        margin-bottom: 10px;
+        border-top: 1px solid #d9d9d9;
+        border-bottom: 1px solid #d9d9d9;
+        padding-left: 10px;
+        background: #FFF;
+        display: list-item;
+    }
+
+        .order_details .order_info ul {
+            width: 100%;
+            display: inline-block;
+        }
+
+            .order_details .order_info ul li {
+                width: 100%;
+                border-top: 1px solid #d9d9d9;
+                float: left;
+            }
+
+                .order_details .order_info ul li:nth-child(1) {
+                    border: 0;
+                }
+
+                .order_details .order_info ul li .text_title {
+                    width: 100%;
+                    cursor: pointer;
+                    float: left;
+                }
+
+        .order_details .order_info .text_title {
+            width: 100%;
+            cursor: pointer;
+            float: left;
+        }
+
+        .order_details .order_info ul li h3 {
+            line-height: 46px;
+            font-size: 14px;
+            font-weight: normal;
+            color: #333;
+            float: left;
+        }
+
+        .order_details .order_info ul li .i_green_icon {
+            width: 20px;
+            height: 20px;
+            margin: 13px 10px 13px 0;
+            background: url(../../restaurant/images/i_green_icon.png) no-repeat;
+            background-size: 100%;
+            float: left;
+        }
+
+        .order_details .order_info ul li .text_green_icon {
+            width: 18px;
+            height: 20px;
+            margin: 13px 12px 13px 0;
+            background: url(../../restaurant/images/text_green_icon.png) no-repeat;
+            background-size: 100%;
+            float: left;
+        }
+
+        .order_details .order_info ul li .right_gray_icon {
+            margin-top: 3px;
+            margin-right: 10px;
+            width: 12px;
+            height: 20px;
+            padding: 10px 6px;
+            background: url(../../restaurant/images/right_gray_icon.png) no-repeat center;
+            background-size: 50%;
+            float: right;
+        }
+
+        .order_details .order_info ul li p {
+            padding-right: 10px;
+            line-height: 46px;
+            font-size: 14px;
+            color: #333;
+            float: right;
+        }
+
+    .order_details .up_gray_icon {
+        width: 18px;
+        height: 18px;
+        padding: 9px;
+        margin-right: 10px;
+        background: url(../../restaurant/images/up_gray_icon.png) no-repeat center center;
+        background-size: 50%;
+        cursor: pointer;
+        float: right;
+    }
+
+    .order_details .down_gray_icon {
+        width: 18px;
+        height: 18px;
+        padding: 9px;
+        margin-right: 10px;
+        background: url(../../restaurant/images/down_gray_icon.png) no-repeat center center;
+        background-size: 50%;
+        cursor: pointer;
+        float: right;
+    }
+
+    .order_details .info_onclick {
+        width: 18px;
+        height: 18px;
+        padding: 9px;
+        margin: 5px 10px;
+        background: url(../../restaurant/images/up_gray_icon.png) no-repeat center center;
+        background-size: 50%;
+        cursor: pointer;
+        float: right;
+    }
+
+    .order_details .actived .info_onclick {
+        width: 18px;
+        height: 18px;
+        padding: 9px;
+        margin: 5px 10px;
+        background: url(../../restaurant/images/down_gray_icon.png) no-repeat center center;
+        background-size: 50%;
+        cursor: pointer;
+        float: right;
+    }
+
+    .order_details .actived .text_info {
+        display: none;
+    }
+
+    .order_details .text_info {
+        width: 100%;
+        border-top: 1px dashed #d9d9d9;
+        float: left;
+    }
+
+        .order_details .text_info .use_info {
+            padding: 10px 10px 10px 0;
+            font-size: 12px;
+            color: #666;
+            float: left;
+        }
+
+        .order_details .text_info dl {
+            width: 100%;
+            padding: 10px 0;
+            float: left;
+        }
+
+            .order_details .text_info dl dt {
+                width: 100%;
+                float: left;
+            }
+
+                .order_details .text_info dl dt .order_title {
+                    width: 100%;
+                    font-size: 12px;
+                    color: #666;
+                    float: left;
+                }
+
+                .order_details .text_info dl dt .order_number {
+                    padding-right: 40px;
+                    color: #666;
+                    font-size: 12px;
+                    float: left;
+                }
+
+                .order_details .text_info dl dt .order_price {
+                    padding-right: 40px;
+                    color: #666;
+                    font-size: 12px;
+                    float: left;
+                }
+
+                .order_details .text_info dl dt .order_used {
+                    color: #fe4e62;
+                    font-size: 12px;
+                    float: left;
+                }
+
+                .order_details .text_info dl dt .order_unused {
+                    color: #666;
+                    font-size: 12px;
+                    float: left;
+                }
+
+                .order_details .text_info dl dt .ticket_title {
+                    color: #666;
+                    font-size: 12px;
+                    float: left;
+                }
+
+                .order_details .text_info dl dt .ticket_date {
+                    padding-right: 10px;
+                    margin-top: 2px;
+                    font-size: 12px;
+                    color: #666;
+                    float: right;
+                }
+
+    .order_details .back_gray_icon {
+        width: 20px;
+        height: 14px;
+        margin: 13px 10px 13px 0;
+        background: url(../../restaurant/images/back_gray_icon.png) no-repeat;
+        background-size: 100%;
+        float: left;
+    }
+
+    .order_details .help_gray_icon {
+        width: 21px;
+        height: 20px;
+        margin: 13px 10px 10px 0;
+        background: url(../../restaurant/images/help_gray_icon.png) no-repeat;
+        background-size: 100%;
+        float: left;
+    }
+
+    .order_details .tel_gray_icon {
+        width: 19px;
+        height: 20px;
+        margin: 13px 10px 10px 0;
+        background: url(../../restaurant/images/tel_gray_icon.png) no-repeat;
+        background-size: 100%;
+        float: left;
+    }
+
+    .order_details .text_info .text_p {
+        padding: 10px 10px 10px 0;
+        line-height: 24px;
+        white-space: pre-wrap;
+        float: left;
+    }
+
+    .order_details .order_bottom {
+        padding: 0 10px 5px 10px;
+        display: list-item;
+    }
+
+        .order_details .order_bottom a {
+            width: 100%;
+            margin: 5px 0;
+            text-align: center;
+            height: 40px;
+            line-height: 40px;
+            font-size: 16px;
+            font-weight: bold;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+            display: inline-block;
+        }
+
+            .order_details .order_bottom a.pink_bg {
+                background: #fe4e62;
+                color: #FFF;
+            }
+
+            .order_details .order_bottom a.white_bg {
+                background: #FFF;
+                color: #666;
+            }
+
+    .order_details .edit_info {
+        margin-bottom: 10px;
+        width: 100%;
+        border-top: 1px solid #d9d9d9;
+        border-bottom: 1px solid #d9d9d9;
+        background: #FFF;
+        float: left;
+    }
+
+        .order_details .edit_info a {
+            width: 100%;
+            float: left;
+        }
+
+        .order_details .edit_info .msg_icon {
+            width: 19px;
+            height: 20px;
+            margin: 13px 11px 13px 10px;
+            background: url(../../restaurant/images/msg_icon.png) no-repeat;
+            background-size: 100%;
+            float: left;
+        }
+
+        .order_details .edit_info p {
+            padding-left: 10px;
+            line-height: 46px;
+            font-size: 14px;
+            color: #333;
+            float: left;
+        }
+
+        .order_details .edit_info .right_gray_icon {
+            margin-top: 3px;
+            margin-right: 10px;
+            width: 12px;
+            height: 20px;
+            padding: 10px 6px;
+            background: url(../../restaurant/images/right_gray_icon.png) no-repeat center;
+            background-size: 50%;
+            float: right;
+        }
+
+    .order_details .text_info dl dt .name_h3 {
+        color: #666;
+        font-size: 12px;
+        float: left;
+    }
+
+    .order_details .text_info dl dt .time_p {
+        color: #666;
+        font-size: 12px;
+        padding-right: 10px;
+        float: right;
+    }
+
+    .order_details .text_info .price_p {
+        padding: 10px 0;
+        color: #666;
+        font-size: 12px;
+        float: left;
+    }
+/*个人中心*/
+.personal_center {
+    width: 100%;
+    float: left;
+}
+
+    .personal_center #myTab0 {
+        width: 100%;
+        background: rgba(255,255,255,0.95);
+        box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);
+        float: left;
+        z-index: 9999;
+        position: fixed;
+    }
+
+        .personal_center #myTab0 li {
+            width: 50%;
+            cursor: pointer;
+            padding: 8px 0 8px 0;
+            text-align: center;
+            float: left;
+        }
+
+            .personal_center #myTab0 li.active {
+                border-bottom: 2px solid #62b900;
+            }
+
+            .personal_center #myTab0 li.normal {
+                border-bottom: 2px solid #FFF;
+            }
+
+            .personal_center #myTab0 li a {
+                font-size: 14px;
+                color: rgba(51,51,51,0.70);
+            }
+
+            .personal_center #myTab0 li.active a {
+                color: #fe4e62;
+            }
+
+            .personal_center #myTab0 li a b {
+                font-weight: normal;
+                color: rgba(0,0,0,0.1);
+                float: left;
+            }
+
+.circle_pink_icon {
+    width: 6px;
+    height: 6px;
+    margin-left: 3px;
+    margin-top: 8px;
+    overflow: hidden;
+    background: #F00;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    position: absolute;
+}
+
+.personal_info {
+    width: 100%;
+    margin-top: 40px;
+    float: left;
+}
+
+.order_list {
+    padding: 10px;
+}
+
+    .order_list ul {
+        width: 100%;
+        float: left;
+    }
+
+        .order_list ul li {
+            width: 100%;
+            height: 180px;
+            background: #FFF;
+            -webkit-border-radius: 10px;
+            -moz-border-radius: 10px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            position: relative;
+        }
+
+            .order_list ul li:nth-child(n+1) .info_01 {
+                background: #32b5da;
+            }
+
+            .order_list ul li:nth-child(2n+1) .info_01 {
+                background: #4eca9d;
+            }
+
+.info_01 {
+    width: 100%;
+    -webkit-border-top-left-radius: 10px;
+    -webkit-border-top-right-radius: 10px;
+    -moz-border-radius-topleft: 10px;
+    -moz-border-radius-topright: 10px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    text-align: center;
+    float: left;
+    position: relative;
+}
+
+    .info_01 h3 {
+        overflow: hidden;
+        height: 25px;
+        font-size: 18px;
+        font-weight: normal;
+        text-shadow: 0px 1px 4px rgba(0, 0, 0, 0.3);
+        color: #FFF;
+    }
+
+    .info_01 p {
+        padding: 10px 0 20px 0;
+        font-size: 14px;
+        color: rgba(0, 0, 0, 0.5);
+    }
+
+        .info_01 p b {
+            padding: 0 5px;
+            color: #FFF;
+        }
+
+.wave_blue_icon {
+    width: 100%;
+    height: 5px;
+    left: 0;
+    bottom: 0;
+    background: url(../../restaurant/images/wave_blue_icon.svg) repeat-x;
+    position: absolute;
+}
+
+.info_02 {
+    padding: 0 10px;
+    display: list-item;
+}
+
+    .info_02 dl {
+        width: 100%;
+        padding: 10px 0;
+        float: left;
+    }
+
+        .info_02 dl dd {
+            width: 100%;
+            padding: 5px 0;
+            font-size: 14px;
+            color: #CCC;
+            float: left;
+        }
+
+            .info_02 dl dd .i_gray_icon {
+                width: 18px;
+                height: 18px;
+                margin-right: 5px;
+                background: url(../../restaurant/images/i_gray_icon.png) no-repeat;
+                background-size: 100%;
+                float: left;
+            }
+
+            .info_02 dl dd .time_gray_icon {
+                width: 18px;
+                height: 18px;
+                margin-right: 5px;
+                background: url(../../restaurant/images/time_gray_icon.png) no-repeat;
+                background-size: 100%;
+                float: left;
+            }
+
+.info_03 {
+    right: 0px;
+    bottom: 13px;
+    position: absolute;
+}
+
+    .info_03 span {
+        width: 80px;
+        height: 30px;
+        line-height: 30px;
+        text-align: center;
+        float: left;
+    }
+
+.unused {
+    background: #fe4e62;
+    color: #FFF;
+}
+
+.personal_info .button_white {
+    padding: 10px;
+    background: #FFF;
+    display: list-item;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.personal_info .pink_bg {
+    width: 100%;
+    margin-left: -1px;
+    border: 1px solid #fe4e62;
+    text-align: center;
+    height: 40px;
+    line-height: 40px;
+    background: #FFF;
+    font-size: 16px;
+    color: #fe4e62;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    display: inline-block;
+}
+/*支付失败*/
+.pay_fail {
+    padding: 10px;
+    display: list-item;
+}
+
+.pay_fail_info {
+    width: 100%;
+    margin: 100px 0;
+    font-size: 14px;
+    color: #666;
+    text-align: center;
+}
+
+.btn_info {
+    width: 100%;
+    display: inline-block;
+}
+
+    .btn_info a {
+        width: 100%;
+        height: 40px;
+        line-height: 40px;
+        font-size: 16px;
+        text-align: center;
+        margin: 5px 0;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+        float: left;
+    }
+
+.pink_bg {
+    background: #fe4e62;
+    color: #FFF;
+}
+
+.white_bg {
+    background: #FFF;
+    color: #666;
+}
+/*完善信息*/
+.perfect_info {
+    width: 100%;
+    float: left;
+}
+
+.info_04 {
+    padding: 15px 10px;
+    line-height: 20px;
+    border-bottom: 1px solid #d9d9d9;
+    background: #FFF;
+    font-size: 14px;
+    color: #333;
+    display: list-item;
+}
+
+.info_05 {
+    width: 100%;
+    margin-top: 10px;
+    border-top: 1px solid #d9d9d9;
+    border-bottom: 1px solid #d9d9d9;
+    background: #FFF;
+    float: left;
+}
+
+    .info_05 ul {
+        padding-left: 10px;
+    }
+
+        .info_05 ul li {
+            width: 100%;
+            border-top: 1px solid #d9d9d9;
+            float: left;
+        }
+
+            .info_05 ul li:nth-child(1) {
+                border: 0;
+            }
+
+            .info_05 ul li h3 {
+                line-height: 50px;
+                font-size: 14px;
+                color: #333;
+                float: left;
+            }
+
+            .info_05 ul li span {
+                padding-right: 10px;
+                line-height: 50px;
+                font-size: 14px;
+                color: #666;
+                float: right;
+            }
+
+            .info_05 ul li p {
+                width: 100%;
+                border-top: 1px dashed #d9d9d9;
+                float: left;
+            }
+
+            .info_05 ul li input {
+                margin: 10px 0;
+                height: 30px;
+                border: 0;
+                float: left;
+            }
+
+            .info_05 ul li .text {
+                width: 100%;
+            }
+
+.info_06 {
+    padding: 10px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    color: #333;
+    float: left;
+}
+
+.perfect_info .btn_info1 {
+    padding: 10px;
+    display: list-item;
+}
+
+    .perfect_info .btn_info1 .pink_bg {
+        background: url(../../restaurant/images/pink_bg.png);
+        border: 0;
+        color: #FFF;
+        width: 100%;
+        height: 40px;
+        line-height: 40px;
+        font-size: 16px;
+        text-align: center;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        border-radius: 10px;
+        display: block;
+    }
+/*错误提示*/
+.error_text {
+    width: 240px;
+    padding: 20px 0;
+    text-align: center;
+    font-size: 16px;
+    top: 40%;
+    left: 50%;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    margin-left: -120px;
+    background: #FFF;
+    -webkit-box-shadow: 0 1px 5px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0 1px 5px rgba(0,0,0,0.75);
+    box-shadow: 0 1px 5px rgba(0,0,0,0.75);
+    position: fixed;
+}
+
+.error_gray_icon {
+    width: 20px;
+    height: 20px;
+    margin: 0 20px;
+    background: url(../../restaurant/images/error_gray_icon.png) no-repeat;
+    background-size: 100%;
+    float: left;
+}
+/*评价*/
+.comment_details {
+    width: 100%;
+    float: left;
+}
+
+.comment_title {
+    padding: 10px;
+    background: #FFF;
+    border-bottom: 1px solid #d9d9d9;
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #333;
+}
+
+.comment_list {
+    padding-left: 10px;
+    border-top: 1px solid #d9d9d9;
+    border-bottom: 1px solid #d9d9d9;
+    background: #FFF;
+    display: list-item;
+}
+
+    .comment_list ul {
+        width: 100%;
+        display: inline-block;
+    }
+
+        .comment_list ul li {
+            width: 100%;
+            padding: 10px 0;
+            border-top: 1px solid #d9d9d9;
+            display: inline-block;
+        }
+
+            .comment_list ul li:nth-child(1) {
+                border: 0;
+            }
+
+            .comment_list ul li label {
+                line-height: 20px;
+                float: left;
+            }
+
+            .comment_list ul li .five_star {
+                width: 120px;
+                height: 20px;
+                margin-right: 10px;
+                background: url(../../restaurant/images/star_gray_icon.png) no-repeat;
+                background-size: 100%;
+                float: right;
+            }
+
+                .comment_list ul li .five_star span {
+                    cursor: pointer;
+                    width: 100%;
+                    height: 20px;
+                    background: url(../../restaurant/images/star_yellow_icon.png) no-repeat;
+                    float: left;
+                }
+
+            .comment_list ul li .comment_info {
+                width: 100%;
+                margin-top: 10px;
+                float: left;
+            }
+
+                .comment_list ul li .comment_info textarea {
+                    width: 98%;
+                    height: 75px;
+                    line-height: 25px;
+                    font-size: 14px;
+                    color: #333;
+                    float: left;
+                }
+
+.comment_con {
+    padding: 10px;
+    font-size: 14px;
+    color: #333;
+    display: list-item;
+}
+
+.comment_details .btn_info1 {
+    padding: 10px;
+    display: list-item;
+}
+
+    .comment_details .btn_info1 .pink_bg {
+        background: #fe4e62;
+        color: #FFF;
+        width: 100%;
+        height: 40px;
+        line-height: 40px;
+        font-size: 16px;
+        text-align: center;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        border-radius: 10px;
+        display: inline-block;
+    }
+/*船票详情*/
+.bale_shop_order1 {
+    width: 100%;
+    border-bottom: 1px dashed #d9d9d9;
+    display: inline-block;
+}
+
+    .bale_shop_order1 h3 {
+        line-height: 40px;
+        font-size: 14px;
+        color: #333;
+        float: left;
+    }
+
+    .bale_shop_order1 a {
+        line-height: 20px;
+        height: 20px;
+        padding: 0 20px;
+        margin: 10px;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+        font-size: 12px;
+        background: #4eca9d;
+        color: #FFF;
+        float: right;
+    }
+
+#maskLevel {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    text-align: center;
+    z-index: 1;
+    background: rgba(0, 0, 0, 0.25);
+    width: 100%;
+    height: 100%;
+}
+
+.shop_detail_box {
+    position: fixed;
+    top: 5%;
+    left: 5%;
+    z-index: 1001;
+    background: #FFF;
+    width: 90%;
+    height: auto;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+    .shop_detail_box span {
+        padding: 10px 10px 0 10px;
+        font-size: 14px;
+        color: #333;
+        float: left;
+    }
+
+    .shop_detail_box ul {
+        padding: 10px;
+        display: inline-block;
+    }
+
+        .shop_detail_box ul li {
+            width: 100%;
+            float: left;
+        }
+
+            .shop_detail_box ul li .i_green_icon {
+                width: 20px;
+                height: 20px;
+                margin-right: 10px;
+                background: url(../../restaurant/images/i_green_icon.png) no-repeat;
+                background-size: 100%;
+                float: left;
+            }
+
+            .shop_detail_box ul li .text_green_icon {
+                width: 18px;
+                height: 20px;
+                margin-right: 12px;
+                background: url(../../restaurant/images/text_green_icon.png) no-repeat;
+                background-size: 100%;
+                float: left;
+            }
+
+            .shop_detail_box ul li .back_green_icon {
+                width: 20px;
+                height: 14px;
+                margin-right: 10px;
+                background: url(../../restaurant/images/back_green_icon.png) no-repeat;
+                background-size: 100%;
+                float: left;
+            }
+
+            .shop_detail_box ul li .time_green_icon {
+                width: 20px;
+                height: 20px;
+                margin-right: 10px;
+                background: url(../../restaurant/images/time_green_icon.png) no-repeat;
+                background-size: 100%;
+                float: left;
+            }
+
+            .shop_detail_box ul li h3 {
+                height: 20px;
+                font-size: 14px;
+                color: #333;
+            }
+
+            .shop_detail_box ul li p {
+                padding-left: 30px;
+                padding-bottom: 10px;
+                font-size: 14px;
+                color: #666;
+            }
+/*个人中心新版*/
+.user_info {
+    width: 96%;
+    padding: 0 2%;
+    background: #FFF;
+    float: left;
+}
+
+.user_top {
+    margin: 20px 0;
+    width: 100%;
+    float: left;
+}
+
+.user_logo {
+    width: 50px;
+    height: 50px;
+    margin: 0 20px 0 10px;
+    float: left;
+}
+
+    .user_logo img {
+        width: 50px;
+        height: 50px;
+        -webkit-border-radius: 25px;
+        -moz-border-radius: 25px;
+        border-radius: 25px;
+        float: left;
+    }
+
+.user_name {
+    margin-top: 5px;
+    font-size: 16px;
+    color: #333;
+}
+
+.user_integral {
+    font-size: 12px;
+    color: #b3b3b3;
+}
+
+    .user_integral b {
+        width: 12px;
+        height: 12px;
+        background: url(../../restaurant/images/gray_circle.png) no-repeat;
+        margin: 2px 5px 0 0;
+        background-size: 100%;
+        float: left;
+    }
+
+.user_list {
+    width: 100%;
+    float: left;
+}
+
+    .user_list ul {
+        width: 100%;
+        float: left;
+    }
+
+        .user_list ul li {
+            width: 20%;
+            padding-bottom: 10px;
+            text-align: center;
+            float: left;
+        }
+
+            .user_list ul li.active {
+                border-bottom: 4px solid #fe4e62;
+            }
+
+            .user_list ul li.normal {
+                border-bottom: 4px solid #FFF;
+            }
+
+            .user_list ul li.active a {
+                font-size: 14px;
+                color: #fe4e62;
+            }
+
+            .user_list ul li.normal a {
+                font-size: 14px;
+                color: #333;
+            }
+
+.list_info {
+    width: 100%;
+    float: left;
+}
+
+.card_ticket {
+    width: 96%;
+    padding: 0 2%;
+    float: left;
+}
+
+    .card_ticket ul {
+        width: 100%;
+        padding: 5px 0;
+        float: left;
+    }
+
+        .card_ticket ul li {
+            width: 100%;
+            position: relative;
+            margin: 5px 0;
+            float: left;
+        }
+
+            .card_ticket ul li.orange_card {
+                background: #f36652;
+            }
+
+            .card_ticket ul li.yellow_card {
+                background: #f3cb3d;
+            }
+
+            .card_ticket ul li.green_card {
+                background: #7cc78f;
+            }
+
+            .card_ticket ul li .left_gray_icon {
+                width: 20px;
+                height: 20px;
+                left: -10px;
+                top: 18px;
+                -webkit-border-radius: 10px;
+                -moz-border-radius: 10px;
+                border-radius: 10px;
+                background: #eaeaea;
+                position: absolute;
+            }
+
+            .card_ticket ul li .right_gray_icon {
+                width: 20px;
+                height: 20px;
+                right: -10px;
+                top: 18px;
+                -webkit-border-radius: 10px;
+                -moz-border-radius: 10px;
+                border-radius: 10px;
+                background: #eaeaea;
+                position: absolute;
+            }
+
+            .card_ticket ul li h3 {
+                margin-left: 30px;
+                color: #FFF;
+                margin-top: 10px;
+            }
+
+            .card_ticket ul li p {
+                font-size: 12px;
+                color: #FFF;
+                margin-bottom: 10px;
+                margin-left: 30px;
+            }
+
+            .card_ticket ul li .status {
+                width: 60px;
+                height: 20px;
+                line-height: 20px;
+                text-align: center;
+                top: 18px;
+                right: 30px;
+                font-size: 14px;
+                -webkit-border-radius: 5px;
+                -moz-border-radius: 5px;
+                border-radius: 5px;
+                position: absolute;
+            }
+
+            .card_ticket ul li.orange_card .status {
+                border: 2px solid #FFF;
+                color: #FFF;
+            }
+
+            .card_ticket ul li.yellow_card .status {
+                border: 2px solid #f3cb3d;
+                color: #FFF;
+            }
+
+            .card_ticket ul li.green_card .status {
+                border: 2px solid #7cc78f;
+                color: #578e65;
+            }
+
+            .card_ticket ul li .valid {
+                width: 100%;
+                padding: 8px 0;
+                color: #c5c5c5;
+                background: #FFF;
+                float: left;
+            }
+
+                .card_ticket ul li .valid .time_gray_icon {
+                    width: 18px;
+                    height: 18px;
+                    margin: 2px 5px 0 30px;
+                    background: url(../../restaurant/images/time_gray_icon.png) no-repeat;
+                    background-size: 100%;
+                    float: left;
+                }
+
+.uncard_ticket {
+    width: 100%;
+    float: left;
+}
+
+    .uncard_ticket pre {
+        width: 100%;
+        padding: 100px 0;
+        font-size: 16px;
+        color: #666;
+        text-align: center;
+        float: left;
+    }
+
+    .uncard_ticket a {
+        background: url(../../restaurant/images/pink_bg.png);
+        border: 0;
+        color: #FFF;
+        width: 96%;
+        margin: 0 2%;
+        height: 40px;
+        line-height: 40px;
+        font-size: 16px;
+        text-align: center;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        border-radius: 10px;
+        left: 0;
+        bottom: 10px;
+        position: absolute;
+    }
+/*追加积分*/
+.bale_item_info {
+    padding-left: 10px;
+    border-bottom: 1px solid #d9d9d9;
+    border-top: 1px solid #d9d9d9;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    background: #fff;
+    float: left;
+    margin-top: 10px;
+    width: 100%;
+}
+
+.integral_info {
+    border-top: 1px solid #d9d9d9;
+    height: 42px;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    line-height: 42px;
+}
+
+.grey {
+    color: #c2c2c2;
+}
+
+.bale_shop p.grey {
+    color: #c2c2c2;
+}
+
+.bale_shop p.red {
+    color: #fe4e62;
+}
+
+.bale_item_info .bale_shop h3, .integral_info h3 {
+    color: #333;
+    float: left;
+    font-size: 14px;
+    font-weight: normal;
+    padding-left: 0px!important;
+}
+
+.integral_info span.grey {
+    padding-left: 15px;
+}
+
+.integral_info p {
+    position: absolute;
+    right: 15px;
+    top: 8px;
+}
+
+.switch_off, .switch_on {
+    display: inline-block;
+    width: 42px;
+    height: 24px;
+    background: url(../../restaurant/images/switch_ico.png) no-repeat;
+    background-size: 42px 48px;
+}
+
+.switch_off {
+    background-position: 0px -24px;
+}
+/*个人主页*/
+.home_header_img {
+    display: block;
+    width: 100%;
+    max-height: 194px;
+    display: block;
+    margin: auto;
+}
+
+.home_infoBar {
+    position: absolute;
+    top: 50px;
+    width: 100%;
+}
+
+.infoBar_pic {
+    width: 75px;
+    height: 75px;
+    margin: 0 auto;
+    overflow: hidden;
+    border: 2px solid #FFF;
+    border-radius: 50%;
+}
+
+    .infoBar_pic img {
+        width: 75px;
+        height: 75px;
+        display: block;
+        border-radius: 50%;
+    }
+
+.infoBar_name {
+    margin: 5px 0 10px;
+    text-align: center;
+    font-size: 15px;
+    color: #FFF;
+}
+
+.block_item i {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+.myintegral_gray_icon {
+    background: url(../../restaurant/images/myintegral_gray_icon.png) no-repeat 0 0 / 100% auto;
+}
+
+.integral_gray_icon {
+    background: url(../../restaurant/images/integral_gray_icon.png) no-repeat 0 0 / 100% auto;
+}
+
+.order_gray_icon {
+    background: url(../../restaurant/images/order_gray_icon.png) no-repeat 0 0 / 100% auto;
+    height: 22px!important;
+}
+
+.phone_gray_icon {
+    background: url(../../restaurant/images/phone_gray_icon.png) no-repeat 0 0 / 100% auto;
+    vertical-align: -3px!important;
+}
+
+.list_item {
+    background: #fff;
+    border-bottom: 1px solid #d9d9d9;
+    border-top: 1px solid #d9d9d9;
+    display: block;
+    position: relative;
+    margin-top: 10px;
+    padding-left: 20px;
+}
+
+.block_item {
+    padding: 10px 10px 10px 0;
+    font-size: 14px;
+    color: #333;
+    position: relative;
+    display: block;
+    line-height: 22px;
+    border-width: 0 0 1px;
+}
+
+    .block_item .right_gray_icon {
+        width: 12px;
+        height: 18px;
+        padding: 9px 6px;
+        background: url(../../restaurant/images/right_gray_icon.png) no-repeat center;
+        background-size: 50%;
+        position: absolute;
+        top: 4px;
+        right: 15px;
+    }
+
+    .block_item em {
+        float: right;
+        font-size: 14px;
+        padding-right: 40px;
+        font-style: normal;
+    }
+/*后加公用部分*/
+.b_b, .b_t, .integral_content li, .block_item, .question_block li {
+    border-style: solid;
+    -webkit-border-image: url(../../restaurant/images/border-image.png) 2 2 stretch;
+    -moz-border-image: url(../../restaurant/images/border-image.png) 2 2 stretch;
+    border-image: url(../../restaurant/images/border-image.png) 2 2 stretch;
+}
+
+.b_b, .question_block li {
+    border-width: 0 0 1px;
+}
+
+.b_t {
+    border-width: 1px 0px 0px;
+}
+
+.block_item:last-of-type, .integral_content li:last-of-type, .question_block li:last-of-type {
+    border-bottom: 0px;
+}
+
+.f10 {
+    font-size: 10px;
+}
+
+.f12 {
+    font-size: 12px;
+}
+
+.ellips {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: breakall;
+    width: 100%;
+}
+
+.loading {
+    font-size: 13px;
+    text-align: center;
+    color: #999999;
+    margin: 10px 0px;
+}
+
+.mt5 {
+    margin-top: 5px;
+}
+
+.mt8 {
+    margin-top: 8px;
+}
+
+.m10 {
+    margin: 10px;
+}
+
+.mt10 {
+    margin-top: 10px;
+}
+
+.mt20 {
+    margin-top: 20px;
+}
+
+.t_c {
+    text-align: center;
+}
+
+.fl {
+    float: left;
+}
+
+.fr {
+    float: right;
+}
+/*我的积分*/
+.integral_hd {
+    background: #fff;
+    border-bottom: 1px solid #d9d9d9;
+    padding: 20px 20px;
+}
+
+.question_ico {
+    background: url(../../restaurant/images/question_ico.png) no-repeat 0 0 / 100% auto;
+    width: 13px;
+    height: 13px;
+    display: inline-block;
+    vertical-align: -1px;
+    margin-right: 5px;
+}
+
+.integral_instr {
+    font-size: 11px;
+    color: #666;
+    padding: 10px;
+    display: inline-block;
+    margin: -10px -10px 0px 0px;
+}
+
+.integral_score {
+    color: #3cbe5a;
+    font-size: 35px;
+    line-height: 1em;
+    margin-top: 5px;
+}
+
+    .integral_score em {
+        font-size: 12px;
+        font-style: normal;
+    }
+
+.tit_head {
+    color: #999;
+    display: list-item;
+    font-size: 14px;
+    font-weight: normal;
+    padding: 10px 10px 10px 20px;
+}
+
+.bwhite {
+    background: #fff;
+    border-bottom: 1px solid #d9d9d9;
+    border-top: 1px solid #d9d9d9;
+    display: block;
+    position: relative;
+    padding-left: 20px;
+}
+
+.integral_content li {
+    border-width: 0 0 1px;
+    padding: 15px 20px 15px 0px;
+    line-height: 1.4em;
+}
+
+.integral_con_ld h3 {
+    font-size: 15px;
+    color: #333;
+}
+
+.integral_con_ld {
+    padding-right: 85px;
+}
+
+.integral_con_rd {
+    float: right;
+    max-width: 75px;
+    text-align: right;
+}
+
+    .integral_con_rd .dec {
+        color: #3cbe5a;
+    }
+/*获取积分*/
+.question_block {
+    margin: 10px 0px;
+}
+
+    .question_block li {
+        padding: 15px 15px 20px 25px;
+    }
+
+        .question_block li p {
+            position: relative;
+            font-size: 15px;
+        }
+
+            .question_block li p.as {
+                color: #999999;
+                margin-top: 5px;
+            }
+
+        .question_block li i {
+            font-style: normal;
+            position: absolute;
+            left: -25px;
+        }
+/*赚积分*/
+.z_integral {
+    color: #666;
+    font-size: 12px;
+    padding: 15px 20px;
+    background: #fff;
+    border-bottom: 1px solid #d9d9d9;
+}
+
+.integral_roduct ul {
+    margin: 0px 0px 10px 0px!important;
+}
+/*申请分销客*/
+.block_item .red {
+    color: #fe4e62;
+}
+
+.block_item label {
+    width: 80px;
+    display: block;
+    position: absolute;
+    left: 0px;
+}
+
+.b_btn .pink_color {
+    background: #fe4e62;
+    color: #FFF;
+}
+
+.block_item .form-detail {
+    margin-left: 80px;
+}
+
+.input_px, .textarea_px {
+    border: 0;
+    color: #666;
+    display: block;
+    position: relative;
+    width: 100%;
+    word-wrap: break-word;
+}
+
+.textarea_px {
+    height: 58px;
+}
+
+.file_div {
+    height: 80px;
+    position: relative;
+    width: 80px;
+}
+
+    .file_div img {
+        position: absolute;
+        width: 80px;
+        height: 80px;
+        display: block;
+        left: 0px;
+        top: 0px;
+    }
+
+    .file_div .photofile {
+        filter: alpha(opacity:0);
+        opacity: 0;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        display: block;
+        cursor: pointer;
+    }
+
+.btn {
+    padding: 0 30px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #FFF;
+    display: block;
+    text-align: center;
+    background: #fe4e62;
+    color: #fff;
+}
+
+.agreement {
+    color: #333;
+    font-size: 12px;
+    text-align: center;
+    margin: 20px 0px 10px;
+}
+
+    .agreement a {
+        color: #3092d1;
+    }
+
+.btn_dis {
+    background: #ccc;
+}

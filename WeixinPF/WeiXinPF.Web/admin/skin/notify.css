@@ -187,6 +187,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
                     position: absolute;
                     top: 0px;
                     right: 0px;
+                    margin-top: 3px;
                 }
 
     .navbar-nav > .notifications-menu > .dropdown-menu > li.footer > a, .navbar-nav > .messages-menu > .dropdown-menu > li.footer > a, .navbar-nav > .tasks-menu > .dropdown-menu > li.footer > a {
@@ -333,12 +334,24 @@ p {
 .dropdown-menu .arrow {
     position: absolute;
     display: block;
-    top: -11px;
-    right: 77px;
+    top: -10px;
+    right: 14px;
     width: 21px;
-    height: 11px;
+    height: 10px;
     text-indent: -999999px;
     background: url(default/skin_icons.png) no-repeat 0 -356px;
+    z-index: 2;
+}
+.dropdown-menu .arrow-background {
+     position: absolute;
+    display: block;
+    top: -10px;
+    right: 14px;
+    width: 21px;
+    height: 10px;
+    text-indent: -999999px;
+    /* background: url(default/skin_icons.png) no-repeat 0 -356px; */
+    background: transparent;
 }
 
 
@@ -414,11 +427,20 @@ p {
     white-space: nowrap;
 }
 
-
+.navbar-nav>.messages-menu>.dropdown-menu>li .menu>li>a>p {
+    margin: 5px 0 5px 45px;
+    font-size: 12px;
+    color: #888;
+    -moz-word-break: break-all;
+    -o-word-break: break-all;
+    word-break: break-all;
+    white-space: normal;
+}
 
 .navbar-nav > .messages-menu > .dropdown-menu > li .menu > li > a > h4,
 .navbar-nav > .messages-menu > .dropdown-menu > li .menu > li > a > p {
     margin: 0;
+    margin-bottom: 5px;
 }
 
 .navbar-nav > .notifications-menu > .dropdown-menu > li .menu > li > a > h3 {
@@ -430,4 +452,11 @@ p {
 
 .navbar-nav > .notifications-menu > .dropdown-menu > li .menu > li > a > p {
     margin: 0;
+}
+
+
+/*修改bootstrap-dropdown 使鼠标移上去就显示菜单*/
+.dropdown:hover .dropdown-menu {
+    display: block;
+    margin-top: 0; // remove the gap so it doesn't close
 }

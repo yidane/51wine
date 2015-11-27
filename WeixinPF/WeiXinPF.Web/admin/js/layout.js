@@ -231,6 +231,26 @@ function ExeNoCheckPostBack(objId, objmsg) {
     });
     return false;
 }
+
+function ConfirmPostBack(objId, objmsg) {
+    $.dialog.confirm(objmsg, function () {
+        __doPostBack(objId, '');
+    });
+    return false;
+}
+
+function __doPostBack(eventTarget, eventArgument) {
+
+    var theForm = document.forms[0]; //指runat=server的form
+
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+
+}
+
 //======================以上基于lhgdialog插件======================
 
 //========================基于Validform插件========================

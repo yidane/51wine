@@ -13,7 +13,7 @@
     <script type="text/javascript" src="../scripts/jquery/jquery-1.10.2.min.js"></script>
     <script type="text/javascript" src="../scripts/jquery/jquery.nicescroll.js"></script>
     <script type="text/javascript" src="../scripts/lhgdialog/lhgdialog.js?skin=idialog"></script>
-    
+
     <script type="text/javascript" src="../scripts/bootstrap/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/layout.js"></script>
     <script type="text/javascript">
@@ -173,51 +173,20 @@
 </head>
 <body class="indexbody skin-blue">
     <form id="form1" runat="server">
- 
-        
-        
-        
-        
-        
+
+
+
+
+
+
         <div class="header main-header">
             <div class="header-box navbar ">
                 <a href="index.aspx" id="indexUrl" runat="server"><span class="logo"></span></a>
                 <ul id="nav" class="nav"></ul>
                 <div class=" navbar-custom-menu">
 
-                    <ul class="nav navbar-nav" >
-                        <li class="dropdown messages-menu " id="menu_msg">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                <i class="fa fa-envelope-o"></i>
-                                <span class="label label-warning">3</span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li class="header" data-bind="text: '您有' + shortmsgCount() + '条消息提醒'">您有0条消息提醒</li>
-                                <li>
-                                    <ul class="menu" data-bind="foreach: shotmsgList">
-                                        <li>
-                                            <a href="#">
-                                                <h4>
-                                                    <!--ko text:msg.fromSystem.systemName-->
-                                                    <!--/ko-->
+                    <ul class="nav navbar-nav">
 
-                                                    <small><i class="fa fa-clock-o"></i>
-                                                        <!--ko text:msg.createTime-->
-                                                        <!--/ko-->
-                                                    </small>
-                                                </h4>
-                                                <p>
-                                                    来自<span style="font-weight: bolder;" data-bind="text: msg.fromUser.displayName "></span>
-                                                    的<!--ko text:count--><!--/ko-->条新消息，
-                                                    <span style="color: #3c8dbc" data-bind="click: $parent.shortmsgViewDetail">点击查看</span>！
-                                                </p>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="footer"><a href="#" data-bind="click: $root.LoadMessage">查看所有消息</a></li>
-                            </ul>
-                        </li>
 
                         <li class="dropdown dropdown-nochild user user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -229,22 +198,23 @@
                                 <i class="user-icon-dropdown fa fa-angle-down fa-2x"></i>
                             </a>
                             <ul class="dropdown-menu">
+                                <div class="arrow-background"></div>
                                 <div class="arrow"></div>
-                                <li><a onclick="linkMenuTree(false, '');" href="manager/manager_pwd.aspx" target="mainframe">修改密码</a></li>
+                                <li><a class="item"  onclick="linkMenuTree(false, '');" href="manager/manager_pwd.aspx" target="mainframe">修改密码</a></li>
                                 <li>
-                                    <asp:LinkButton ID="lbtnExit" runat="server" OnClick="lbtnExit_Click">注销登录</asp:LinkButton></li>
+                                    <asp:LinkButton CssClass="item" ID="lbtnExit" runat="server" OnClick="lbtnExit_Click">注销登录</asp:LinkButton></li>
                             </ul>
                         </li>
-                      
+
                     </ul>
 
 
-            
+
                 </div>
             </div>
         </div>
 
-        
+
 
 
         <div class="main-sidebar">
@@ -278,21 +248,25 @@
         <div class="main-container">
             <iframe id="mainframe" name="mainframe" frameborder="0" src="weixin/myweixinlist.aspx"></iframe>
         </div>
-    </form>
-    <script src="js/message-vm.js"></script>
-        <script type="text/javascript">
-        var systemMenu;
-        var myMessageDetailViewModel;
+    </form> 
+    <script type="text/javascript">
+        var systemMenu; 
         $(function () {
-            
 
+            userMenuWidth();
 
-            if ($.isEmptyObject(myMessageDetailViewModel)) {
-                myMessageDetailViewModel = new MessageViewModel();
-                ko.applyBindings(myMessageDetailViewModel, document.getElementById("menu_msg"));
-                myMessageDetailViewModel.loadData();
-            }
+             
         });
+
+        function userMenuWidth() {
+            var liUser = $(".user.user-menu");
+            var userWidth = liUser.width() - 21;
+            var ulMenu = liUser.find(".dropdown-menu");
+            ulMenu.css('right', userWidth / 2 - ulMenu.width() / 2);
+            ulMenu.find(".arrow-background").width(userWidth);
+            var arrow = ulMenu.find(".arrow");
+            arrow.css('right', userWidth / 2 - ulMenu.width() / 2 + arrow.width() / 2);
+        }
     </script>
 </body>
 

@@ -12,7 +12,7 @@ using System.Web;
 using System.Web.Script.Serialization;
 using AutoMapper;
 using Newtonsoft.Json;
- 
+
 
 namespace WeiXinPF.Common
 {
@@ -55,7 +55,7 @@ namespace WeiXinPF.Common
                 case RequestObjType.stringType:
                     break;
                 case RequestObjType.dateType:
-                    DateTime tmpTimeInt  = DateTime.MinValue;
+                    DateTime tmpTimeInt = DateTime.MinValue;
                     if (!DateTime.TryParse(pValue, out tmpTimeInt))
                     {
                         return false;
@@ -83,7 +83,7 @@ namespace WeiXinPF.Common
             ret = ret.Replace(",", "");
             ret = ret.Replace("'", "");
             ret = ret.Replace(";", "");
-             
+
             return ret;
         }
 
@@ -155,10 +155,10 @@ namespace WeiXinPF.Common
             {
                 ret = "loseopenid";
             }
-             ret = ret.Replace(",", "");
-             ret = ret.Replace("'", "");
-             ret = ret.Replace(";", "");
-            
+            ret = ret.Replace(",", "");
+            ret = ret.Replace("'", "");
+            ret = ret.Replace(";", "");
+
             return ret;
         }
 
@@ -166,9 +166,9 @@ namespace WeiXinPF.Common
         /// 获得参数wid
         /// </summary>
         /// <returns></returns>
-        public static int  RequestWid()
+        public static int RequestWid()
         {
-            int ret=  RequestInt("wid");
+            int ret = RequestInt("wid");
             return ret;
         }
 
@@ -183,6 +183,7 @@ namespace WeiXinPF.Common
             }
             return ret;
         }
+
         #endregion
 
         #region 判断数据类型和处理数据类型转换
@@ -347,6 +348,7 @@ namespace WeiXinPF.Common
                 return 0;
             }
         }
+
         /// <summary>
         /// 字符串转变成数字，如果转行失败，则返回defaultInt
         /// </summary>
@@ -386,10 +388,10 @@ namespace WeiXinPF.Common
         /// </summary>
         /// <param name="o"></param>
         /// <returns></returns>
-        public static decimal Obj2Decimal(object obj,decimal defaultDec=0)
+        public static decimal Obj2Decimal(object obj, decimal defaultDec = 0)
         {
             decimal tmpDecimal = 0;
-            if (obj == null || obj.ToString().Trim()=="")
+            if (obj == null || obj.ToString().Trim() == "")
             {
                 return defaultDec;
             }
@@ -411,7 +413,7 @@ namespace WeiXinPF.Common
         /// <param name="obj"></param>
         /// <param name="defaultInt"></param>
         /// <returns></returns>
-        public static int Obj2Int(object obj,int defaultInt)
+        public static int Obj2Int(object obj, int defaultInt)
         {
             if (isNumber(obj))
             {
@@ -426,9 +428,9 @@ namespace WeiXinPF.Common
 
         public static float Str2Float(string str)
         {
-            if(str==null || str.Trim().Length<=0)
+            if (str == null || str.Trim().Length <= 0)
             {
-              return   0;
+                return 0;
             }
             float tmpFloat = 0;
             if (float.TryParse(str, out tmpFloat))
@@ -439,7 +441,7 @@ namespace WeiXinPF.Common
             {
                 return 0;
             }
-        
+
         }
 
 
@@ -484,7 +486,7 @@ namespace WeiXinPF.Common
         /// <param name="obj"></param>
         /// <param name="defaultValue"></param>
         /// <returns></returns>
-        public static DateTime Obj2DateTime(object obj,DateTime defaultValue)
+        public static DateTime Obj2DateTime(object obj, DateTime defaultValue)
         {
             if (isDateTime(obj))
             {
@@ -500,14 +502,14 @@ namespace WeiXinPF.Common
         public static decimal decimalF2(decimal num)
         {
             decimal ret = 0;
-            ret =decimal.Parse( num.ToString("f2"));
+            ret = decimal.Parse(num.ToString("f2"));
 
             return ret;
         }
 
         #endregion
 
-         
+
 
         #region 微信后缀操作
 
@@ -582,6 +584,7 @@ namespace WeiXinPF.Common
         #endregion
 
         #region 站点的基本url信息
+
         /// <summary>
         /// 获得网站的根目录的url,比如http://www.baidu.com
         /// </summary>
@@ -597,7 +600,7 @@ namespace WeiXinPF.Common
         /// </summary>
         /// <param name="url"></param>
         /// <returns></returns>
-        public static string  ImgAddHttp(string url)
+        public static string ImgAddHttp(string url)
         {
             string ret = "";
             if (url == null || url.Length <= 0)
@@ -616,6 +619,7 @@ namespace WeiXinPF.Common
 
             return ret;
         }
+
         /// <summary>
         /// 设当前页完整地址 
         /// 比如：http://www.jb51.net/aaa/bbb.aspx?id=5&name=kelli 
@@ -627,6 +631,7 @@ namespace WeiXinPF.Common
             return url;
 
         }
+
         /// <summary>
         /// 取得网站根目录的物理路径
         /// </summary>
@@ -648,7 +653,7 @@ namespace WeiXinPF.Common
             return AppPath;
         }
 
-      
+
 
 
         #endregion
@@ -660,7 +665,7 @@ namespace WeiXinPF.Common
         /// <param name="url"></param>
         /// <param name="newPageNum"></param>
         /// <returns></returns>
-        public  static string ChangePageNum(string url, int newPageNum)
+        public static string ChangePageNum(string url, int newPageNum)
         {
             string newUrl = "";
             string canshu = "page";
@@ -671,7 +676,7 @@ namespace WeiXinPF.Common
             }
             if (!url.Contains("page="))
             {
-                newUrl = url + beforZ+"page=" + newPageNum;
+                newUrl = url + beforZ + "page=" + newPageNum;
             }
             else
             {
@@ -689,12 +694,14 @@ namespace WeiXinPF.Common
         }
 
         #region json转换
+
         public static string SwitchToJson<T>(IList<T> li) where T : class
         {
             if (li.Count <= 0) return "";
-            Type tp = typeof(T);
-            BindingFlags bf = BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Static;//反射标识 
-            PropertyInfo[] proInfo = tp.GetProperties(bf);//获取T的属性 
+            Type tp = typeof (T);
+            BindingFlags bf = BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Static;
+                //反射标识 
+            PropertyInfo[] proInfo = tp.GetProperties(bf); //获取T的属性 
             StringBuilder sb = new StringBuilder();
             StringWriter sw = new StringWriter(sb);
             using (JsonWriter jsonWriter = new JsonTextWriter(sw))
@@ -704,10 +711,10 @@ namespace WeiXinPF.Common
                 foreach (T i in li)
                 {
                     jsonWriter.WriteStartObject();
-                    foreach (PropertyInfo info in proInfo)//遍历对象属性 
+                    foreach (PropertyInfo info in proInfo) //遍历对象属性 
                     {
                         jsonWriter.WritePropertyName(info.Name);
-                        object value = info.GetValue(i, null);//通过属性获取当前对象的属性值
+                        object value = info.GetValue(i, null); //通过属性获取当前对象的属性值
                         jsonWriter.WriteValue(value.ToString());
                     }
                     jsonWriter.WriteEndObject();
@@ -720,6 +727,7 @@ namespace WeiXinPF.Common
             }
 
         }
+
         #endregion
 
         #region json 处理
@@ -800,7 +808,7 @@ namespace WeiXinPF.Common
         /// </summary>
         /// <param name="timeStamp"></param>
         /// <returns></returns>
-        public static  DateTime GetTime(string timeStamp)
+        public static DateTime GetTime(string timeStamp)
         {
             DateTime dtStart = TimeZone.CurrentTimeZone.ToLocalTime(new DateTime(1970, 1, 1));
             long lTime = long.Parse(timeStamp + "0000000");
@@ -817,7 +825,7 @@ namespace WeiXinPF.Common
         {
             long intResult = 0;
             System.DateTime startTime = TimeZone.CurrentTimeZone.ToLocalTime(new System.DateTime(1970, 1, 1));
-            intResult = (long)(time - startTime).TotalSeconds;
+            intResult = (long) (time - startTime).TotalSeconds;
             return intResult;
         }
 
@@ -904,7 +912,7 @@ namespace WeiXinPF.Common
                 return "";
             }
             switch (wxtype.ToString())
-            { 
+            {
                 case "0":
                     ret = "未认证的订阅号";
                     break;
@@ -975,16 +983,22 @@ namespace WeiXinPF.Common
         public static int ToInt(this string str)
         {
             int i = 0;
-            if (!int.TryParse(str,out i))
+            if (!int.TryParse(str, out i))
             {
                 throw new Exception("转换string成int失败");
             }
             return i;
         }
-    }
 
-    public enum RequestObjType
-    {
-        intType, stringType, floatType, dateType
+
+
+
+        public enum RequestObjType
+        {
+            intType,
+            stringType,
+            floatType,
+            dateType
+        }
     }
 }

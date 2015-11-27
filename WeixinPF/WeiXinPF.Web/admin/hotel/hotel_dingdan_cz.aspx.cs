@@ -44,10 +44,17 @@ namespace WeiXinPF.Web.admin.hotel
 
         protected void Page_Load(object sender, EventArgs e)
         {
+           
             isAdmin = IsWeiXinCode();
             dingdanid = MyCommFun.RequestInt("id");
             hotelid = MyCommFun.RequestInt("hotelid");
+            if (Request.Form["__EVENTTARGET"] == "btn_completed")
+            {
+                // Fire event
+                btn_completed_OnClick(this, new EventArgs());
+            }
             GetData(dingdanid);
+            
             if (!IsPostBack)
             {
                 GetOrderStatusMsg(dingdan);

@@ -11,7 +11,7 @@ using System.Linq.Expressions;
 
 namespace WeiXinPF.Infrastructure.DomainDataAccess.Message
 {
-    [Table("ShortMsg")]
+    [Table("dt_common_ShortMsg")]
     public partial class ShortMsg
     {
         #region Propetries
@@ -23,20 +23,33 @@ namespace WeiXinPF.Infrastructure.DomainDataAccess.Message
         [Required, MaxLength(2000)]
         public string Content { get; set; }
 
+        [MaxLength(128)]
+        public string Type { get; set; }
+
+        [MaxLength(128)]
+        public string MenuType { get; set; }
+
         [Required, DefaultValue(false)]
         public bool IsShowButton { get; set; }
 
         public string ButtonText { get; set; }
         public string ButtonUrl { get; set; }
+        public string ButtonMutipleUrl { get; set; }
 
         [Required]
         public DateTime CreateTime { get; set; }
         [Required, DefaultValue(false)]
         public bool IsRead { get; set; }
+
         [Required]
-        public int FromUserId { get; set; }
+        public string FromUserId { get; set; }
         [Required]
-        public int ToUserId { get; set; } 
+        public int MsgToUserType { get; set; }
+
+        [Required]
+        public int MsgFromUserType { get; set; }
+        [Required]
+        public string ToUserId { get; set; } 
         #endregion
     }
 

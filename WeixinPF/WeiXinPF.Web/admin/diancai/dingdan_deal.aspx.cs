@@ -28,6 +28,11 @@ namespace WeiXinPF.Web.admin.diancai
             ids = MyCommFun.RequestInt("id");
             id = MyCommFun.QueryString("id");
             shopid = MyCommFun.RequestInt("shopid");
+            if (Request.Form["__EVENTTARGET"] == "btnFinish")
+            {
+                // Fire event
+                OnOrderFinishClick(this, new EventArgs());
+            }
             if (!IsPostBack)
             {
                 if (ids != 0)

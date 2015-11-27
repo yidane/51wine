@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data;
+using System.Text;
 using WeiXinPF.Common;
 using WeiXinPF.Model.KNSHotel;
 
@@ -34,28 +35,7 @@ namespace WeiXinPF.Web.weixin.KNSHotel
 
             if (!Page.IsPostBack)
             {
-                if (string.Equals(type, "pay"))
-                {
-                    menuStr = string.Format(
-                @"<a class='Pay' href='hotel_userOrder.aspx?openid={0}&wid={1}&type=all'>全部</a>
-            <a class='Pay menu-active' href='hotel_userOrder.aspx?openid={0}&wid={1}&type=pay'>已付款</a>
-            <a class='Refund' href='hotel_userOrder.aspx?openid={0}&wid={1}&type=refund'>退单</a>", openid, wid);
-                     
-                }
-                else if (string.Equals(type, "refund"))
-                {
-                    menuStr = string.Format(
-               @"<a class='Pay' href='hotel_userOrder.aspx?openid={0}&wid={1}&type=all'>全部</a>
-            <a class='Pay' href='hotel_userOrder.aspx?openid={0}&wid={1}&type=pay'>已付款</a>
-            <a class='Refund menu-active' href='hotel_userOrder.aspx?openid={0}&wid={1}&type=refund'>退单</a>", openid, wid);
-                }
-                else
-                {
-                    menuStr = string.Format(
-               @" <a class='Pay menu-active' href='hotel_userOrder.aspx?openid={0}&wid={1}&type=all'>全部</a>
-            <a class='Pay' href='hotel_userOrder.aspx?openid={0}&wid={1}&type=pay'>已付款</a>
-            <a class='Refund' href='hotel_userOrder.aspx?openid={0}&wid={1}&type=refund'>退单</a>", openid, wid);
-                }
+                menuStr = GetMenuStr(openid, wid, type);
                 BLL.wx_hotels_info infobll = new BLL.wx_hotels_info();
                 Model.wx_hotels_info info = new Model.wx_hotels_info();
                 
@@ -77,69 +57,95 @@ namespace WeiXinPF.Web.weixin.KNSHotel
             }
         }
 
+        private string GetMenuStr(string openid,int wid, string type)
+        {
+            string cssPay = "normal", cssRefund = "normal", cssAll ="normal";
+            if (string.Equals(type, "pay"))
+            {
+                cssPay = "active";
+            }
+            else if (string.Equals(type, "refund"))
+            {
+                cssRefund = "active";
+            }
+            else
+            {
+                cssAll = "active";
+            }
+            return  string.Format(
+               @"<li class='{2}'><a href='hotel_userOrder.aspx?openid={0}&wid={1}&type=all'>全部</a></li>
+            <li class='{3}'><a href='hotel_userOrder.aspx?openid={0}&wid={1}&type=pay'>已付款</a></li>
+            <li class='{4}'><a href='hotel_userOrder.aspx?openid={0}&wid={1}&type=refund'>退单</a></li>"
+            , openid, wid, cssAll, cssPay,cssRefund);
+        }
+
         public void List(string openid,int wid)
         {
 
             DataSet dr = dingdanbll.GetUserOrderList(openid, wid, type);
-            if(dr.Tables[0].Rows.Count >0)
+            DataTable dataTable = dr.Tables[0];
+            if(dataTable.Rows.Count >0)
             {
-                order += "  <ul class=\"round\"> ";
-                for(int i=0;i<dr.Tables[0].Rows.Count;i++)
+                var detailBuilder = new StringBuilder();
+                
+                for(int i=0;i<dataTable.Rows.Count;i++)
                 {
-                    int hotelid = dr.Tables[0].Rows[i].Field<int>("hotelid");
-                    var time = DateTime.Parse(dr.Tables[0].Rows[i]["orderTime"].ToString());
+                    int id = dataTable.Rows[i].Field<int>("id");
+                    int hotelid = dataTable.Rows[i].Field<int>("hotelid");
+                    var time = DateTime.Parse(dataTable.Rows[i]["orderTime"].ToString());
+                    var arriveTime = DateTime.Parse(dataTable.Rows[i]["arriveTime"].ToString());
+                    var leaveTime = DateTime.Parse(dataTable.Rows[i]["leaveTime"].ToString());
+                    var price = dataTable.Rows[i].Field<double>("price");
+                    var orderNumber = dataTable.Rows[i].Field<string>("orderNumber");
+                    var orderNum= dataTable.Rows[i].Field<int>("orderNum");
+                    var hotelName = dataTable.Rows[i].Field<string>("hotelName");
+                    //总花费
+                    var dateSpan = leaveTime - arriveTime;
+                    var totalPrice = price * orderNum * dateSpan.Days;
                     var orderTime = string.Format("{0:yyyy/MM/dd HH:mm}", time);
-                    var arriveTime = string.Format("{0:yyyy/MM/dd HH:mm}", DateTime.Parse(dr.Tables[0].Rows[i]["arriveTime"].ToString()));
+//                    var strArriveTime= string.Format("{0:yyyy/MM/dd HH:mm}",arriveTime);
+//                    var strLeaveTime= string.Format("{0:yyyy/MM/dd HH:mm}",leaveTime);
+                    var orderStatus = dataTable.Rows[i].Field<int>("orderStatus");
+                    var status = HotelStatusManager.OrderStatus.GetStatusDict(orderStatus);
 
-                    var alink = string.Empty;
-                    order += "<li class=\"title\">";
-                    if (dr.Tables[0].Rows[i]["orderStatus"].ToString() == "0")
+
+                    string alink;
+                    detailBuilder.Append("<ul><li>"); 
+                    if (dataTable.Rows[i]["orderStatus"].ToString() == "0")
                     {
-                        alink = "<a href=\"hotel_order_edite.aspx?dingdanid="
-                                + dr.Tables[0].Rows[i]["id"].ToString() + "&hotelid=" + hotelid
-                                + "&roomid=" + roomid + "&openid=" + openid + "\">";
+                        alink = string.Format("<a href=\"hotel_order_edite.aspx?dingdanid={0}&hotelid={1}&roomid={2}&openid={3}\">"
+                            , id, hotelid, roomid, openid);
                     }
                     else
                     {
-                        alink = "<a href=\"hotel_order_xianshi.aspx?dingdanid="
-                                + dr.Tables[0].Rows[i]["id"].ToString() + "&hotelid=" + hotelid
-                                + "&roomid=" + roomid + "&openid=" + openid + "\">";
+                        alink = string.Format("<a href=\"hotel_order_xianshi.aspx?dingdanid={0}&hotelid={1}&roomid={2}&openid={3}\">"
+                            , id, hotelid, roomid, openid);
                     }
-
-                    order += alink;
-                    order += "<span><b>" + orderTime + "</b>" + "<b style='margin-left:0.5rem'>" + dr.Tables[0].Rows[i]["hotelName"].ToString() + "</b>";//05月29日 9时39分
-                    
-
-                    var orderStatus = dr.Tables[0].Rows[i].Field<int>("orderStatus");
-                    var status = HotelStatusManager.OrderStatus.GetStatusDict(orderStatus);
-                    order += "<em class=\""+ status.CssClass +"\">" + status.StatusName + "</em></span>";
-
-//                    if (status.StatusID==1)
-//                    {
-//                        order += "<em class=\"ok\">"+ status.StatusName+ "</em></span>";  
-//                    
-//                    }
-//                    else if (status.StatusID == 0)
-//                    {
-//                        order += "<em class=\"no\">" + status.StatusName + "</em></span>";  
-//                    }
-//                    else if (status.StatusID ==2)
-//                    {
-//                        order += "<em class=\"error\">" + status.StatusName + "</em></span>";
-//                    }
-
-                    order += "</a></li>";
-                    order+="<li>"+ alink + "<div class=\"text\">";
-                    order += "<p>订单编号：" + dr.Tables[0].Rows[i]["OrderNumber"].ToString() + "</p>";
-                    order += "<p>预约商家：" + dr.Tables[0].Rows[i]["hotelName"].ToString() + "</p>";
-                    order += "<p>类型：" + dr.Tables[0].Rows[i]["roomType"].ToString() + "</p>";
-                    order += "<p>数量：" + dr.Tables[0].Rows[i]["orderNum"].ToString() + "间</p>";
-                    order += "<p>付款：" + dr.Tables[0].Rows[i]["price"].ToString() + "元</p>";
-                    order += "<p>到店日期：" + arriveTime + "</p>";
-                    order += "</div></a></li>";
+                     
+                    detailBuilder.Append(alink);
+                    detailBuilder.Append("<div class=\"info_01\">");
+                    detailBuilder.AppendFormat("<h3>{0}</h3>", hotelName);
+                    detailBuilder.AppendFormat("<p>实付<b>￥{0}</b>共<b>{1}</b>件商品</p>", totalPrice, orderNum);
+                    detailBuilder.Append("<span class=\"wave_blue_icon\"></span>");
+                    detailBuilder.Append("</div>");
+                    detailBuilder.Append("<div class=\"info_02\">");
+                    detailBuilder.Append("<dl>");
+                    detailBuilder.AppendFormat("<dd><b class=\"i_gray_icon\"></b>订单编号 {0}</dd>", orderNumber);
+                    detailBuilder.AppendFormat("<dd><b class=\"time_gray_icon\"></b>购票日期 {0}</dd>", orderTime);
+                    //此处应该有购票日期
+                    detailBuilder.Append("</dl>");
+                    detailBuilder.Append("</div>");
+                    detailBuilder.Append("<div class=\"info_03\">");
+                     
+                    detailBuilder.AppendFormat("<span>{0}</span>", status.StatusName);
+                    detailBuilder.Append("</div>");
+                    detailBuilder.Append("</a>");
+                    detailBuilder.Append("</li>");
+                    detailBuilder.Append("</ul>");
+                     
                 }
 
-                order += " </ul> ";
+                order = detailBuilder.ToString();
             }
         }
     }

@@ -135,6 +135,18 @@
     <Compile Include="Migrations\201510260928012_tuidan1.Designer.cs">
       <DependentUpon>201510260928012_tuidan1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201511250746218_ShortMsg.cs" />
+    <Compile Include="Migrations\201511250746218_ShortMsg.Designer.cs">
+      <DependentUpon>201511250746218_ShortMsg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201511250750260_ShortMsg1.cs" />
+    <Compile Include="Migrations\201511250750260_ShortMsg1.Designer.cs">
+      <DependentUpon>201511250750260_ShortMsg1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201511260853596_ShortMsg2.cs" />
+    <Compile Include="Migrations\201511260853596_ShortMsg2.Designer.cs">
+      <DependentUpon>201511260853596_ShortMsg2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Payment\PaymentInfo.cs" />
     <Compile Include="Payment\PayNotifyInfo.cs" />
@@ -206,6 +218,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201510260928012_tuidan1.resx">
       <DependentUpon>201510260928012_tuidan1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511250746218_ShortMsg.resx">
+      <DependentUpon>201511250746218_ShortMsg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511250750260_ShortMsg1.resx">
+      <DependentUpon>201511250750260_ShortMsg1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511260853596_ShortMsg2.resx">
+      <DependentUpon>201511260853596_ShortMsg2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
