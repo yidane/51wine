@@ -8573,7 +8573,12 @@
     <Content Include="weixin\restaurant\images\refundPart.png" />
     <Content Include="weixin\restaurant\images\refundTicket.png" />
     <Content Include="weixin\restaurant\images\time_gray_icon.png" />
+    <Content Include="weixin\restaurant\images\usedTicket.png" />
     <Content Include="weixin\restaurant\images\wave_blue_icon.svg" />
+    <Content Include="weixin\restaurant\images\该二维码已使用.png" />
+    <Content Include="weixin\restaurant\images\该二维码已退款.png" />
+    <Content Include="weixin\restaurant\images\该二维码未激活.png" />
+    <Content Include="weixin\restaurant\images\退票中无法使用.png" />
     <Content Include="weixin\WeChatPay\getopenId.aspx" />
     <Content Include="weixin\KNSHotel\css\hotels.css" />
     <Content Include="weixin\KNSHotel\css\mystyle.css" />

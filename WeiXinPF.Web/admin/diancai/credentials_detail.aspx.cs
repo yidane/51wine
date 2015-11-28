@@ -17,7 +17,7 @@ namespace WeiXinPF.Web.admin.diancai
 
     public partial class credentials_detail : ManagePage
     {
-        protected double totalAmount=0.0;
+        protected double totalAmount = 0.0;
         BLL.wx_diancai_dingdan_manage gbll = new BLL.wx_diancai_dingdan_manage();
         protected string keywords = string.Empty;
 
@@ -27,14 +27,22 @@ namespace WeiXinPF.Web.admin.diancai
             {
                 startDate.Text = DateTime.Now.ToString("yyyy-MM-dd");
                 endDate.Text = DateTime.Now.ToString("yyyy-MM-dd");
-                RptBind();                
+                RptBind();
             }
         }
 
         #region 数据绑定=================================
         private void RptBind()
         {
-            int shopid = MXRequest.GetQueryInt("shopid")==0?GetShopId():MXRequest.GetQueryInt("shopid");
+            var data = SearchData();
+            this.rptList.DataSource = data; //gbll.GetCredentialsList(shopid, condition, moduleName, out this.totalAmount);
+            this.rptList.DataBind();
+            this.totalAmount = data.Sum(item => item.PayAmount);
+        }
+
+        private IList<OrderDetailDTO> SearchData()
+        {
+            int shopid = MXRequest.GetQueryInt("shopid") == 0 ? GetShopId() : MXRequest.GetQueryInt("shopid");
             string condition = "";
             var moduleName = "restaurant";
 
@@ -73,15 +81,46 @@ namespace WeiXinPF.Web.admin.diancai
                 condition += " customerName LIKE '%" + orderperson.Text.Trim() + "%' ";
             }
 
-            var detail = IdentifyingCodeService.GetOrderDetail(shopid, moduleName, condition);
-            this.rptList.DataSource = detail; //gbll.GetCredentialsList(shopid, condition, moduleName, out this.totalAmount);
-            this.rptList.DataBind();
-            this.totalAmount = detail.Sum(item => item.PayAmount);
+            var result = IdentifyingCodeService.GetOrderDetail(shopid, moduleName, condition);
 
+            return result;
         }
+
+        private void DownloadExcel()
+        {
+            var dataTable=new DataTable();
+            dataTable.Columns.Add("序号");
+            dataTable.Columns.Add("订单编号");
+            dataTable.Columns.Add("订单状态");
+            dataTable.Columns.Add("订单关闭日期");
+            dataTable.Columns.Add("预约人");
+            dataTable.Columns.Add("总计");
+
+            var data = SearchData();
+            if (data != null && data.Count > 0)
+            {
+
+                DataRow newRow = null;
+                for (int index = 0; index < data.Count; index++)
+                {
+                    newRow = dataTable.NewRow();
+                    newRow[0] = index + 1;
+                    newRow[1] = data[index].OrderNumber;
+                    newRow[2] = data[index].PayStatus;
+                    newRow[3] = data[index].ModifyTime;
+                    newRow[4] = data[index].CustomerName;
+                    newRow[5] = data[index].PayAmount;
+
+                    dataTable.Rows.Add(newRow);
+                }
+            }
+
+            CSVHelper.DownloadAsSCV(Response,"餐饮服务验证码",dataTable);
+        }
+
         #endregion
 
-       
+
         /// <summary>
         ///  
         /// </summary>
@@ -108,6 +147,18 @@ namespace WeiXinPF.Web.admin.diancai
         protected void serch_OnClick(object sender, EventArgs e)
         {
             RptBind();
+        }
+
+        protected void btnDownloadExcel_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                this.DownloadExcel();
+            }
+            catch (Exception exception)
+            {
+                
+            }
         }
     }
 }

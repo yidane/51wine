@@ -48,6 +48,29 @@ namespace WeiXinPF.Web.weixin.restaurant
                 var detailBuilder = new StringBuilder();
                 for (int i = 0; i < dr.Tables[0].Rows.Count; i++)
                 {
+                    var payStatus = dr.Tables[0].Rows[i]["payStatus"].ToString();
+                    string payStatusText;
+                    string payStatusCss = string.Empty;
+                    switch (payStatus)
+                    {
+                        case "1":
+                            payStatusText = "等待使用";
+                            break;
+                        case "2":
+                        case "4": //部分退款
+                            payStatusText = "部分使用";
+                            payStatusCss = "status-refundPart";
+                            break;
+                        case "3":
+                        case "5"://全部退款
+                            payStatusText = "全部使用";
+                            payStatusCss = "status-refundAll";
+                            break;
+                        default:
+                            payStatusText = "未处理";
+                            break;
+                    }
+
                     detailBuilder.Append("<ul>");
                     detailBuilder.Append("<li>");
                     detailBuilder.AppendFormat("<a href=\"diancai_orderDetail.aspx?wid={0}&shopid={1}&dingdan={2}&openid={3}\">",
@@ -57,6 +80,10 @@ namespace WeiXinPF.Web.weixin.restaurant
                                                                     openId
                                                                   );
                     detailBuilder.Append("<div class=\"info_01\">");
+
+                    if (!string.IsNullOrEmpty(payStatusCss))
+                        detailBuilder.AppendFormat("<i class=\"{0} i-status\"></i>", payStatusCss);
+
                     detailBuilder.AppendFormat("<h3>{0}</h3>", dr.Tables[0].Rows[i].Field<string>("hotelName"));
                     detailBuilder.AppendFormat("<p>实付<b>￥{0}</b>共<b>{1}</b>件商品</p>", dr.Tables[0].Rows[i]["payAmount"].ToString(), dr.Tables[0].Rows[i]["OrderCount"].ToString());
                     detailBuilder.Append("<span class=\"wave_blue_icon\"></span>");
@@ -69,25 +96,6 @@ namespace WeiXinPF.Web.weixin.restaurant
                     detailBuilder.Append("</dl>");
                     detailBuilder.Append("</div>");
                     detailBuilder.Append("<div class=\"info_03\">");
-                    var payStatus = dr.Tables[0].Rows[i]["payStatus"].ToString();
-                    string payStatusText;
-                    switch (payStatus)
-                    {
-                        case "1":
-                            payStatusText = "等待使用";
-                            break;
-                        case "2":
-                        case "4": //部分退款
-                            payStatusText = "部分使用";
-                            break;
-                        case "3":
-                        case "5"://全部退款
-                            payStatusText = "全部使用";
-                            break;
-                        default:
-                            payStatusText = "未处理";
-                            break;
-                    }
                     detailBuilder.AppendFormat("<span>{0}</span>", payStatusText);
                     detailBuilder.Append("</div>");
                     detailBuilder.Append("</a>");

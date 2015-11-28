@@ -41,6 +41,10 @@ namespace WeiXinPF.Web.admin.diancai
             this.customerName = MyCommFun.QueryString("CustomerName");
             this.customerTel = MyCommFun.QueryString("customerTel");
 
+            //获取页码
+            this.page = MXRequest.GetQueryInt("page", 1);
+            this.totalCount = MXRequest.GetQueryInt("totalCount");
+
             this.pageSize = GetPageSize(10); //每页数量
             if (!Page.IsPostBack)
             {
@@ -73,10 +77,19 @@ namespace WeiXinPF.Web.admin.diancai
         #region 数据绑定=================================
         private void BindResult()
         {
-            //判断是否已经设置了微留言基本信息
-            this.page = MXRequest.GetQueryInt("page", 1);
+            var result = GetData();
+            this.rptList.DataSource = result;
+            this.rptList.DataBind();
 
-            var result = refundManager.GetRefundList(shopid, this.pageSize, this.page,
+            //绑定页码
+            txtPageNum.Text = this.pageSize.ToString();
+            string pageUrl = this.GetNewUrl(true);
+            PageContent.InnerHtml = Utils.OutPageList(this.pageSize, this.page, this.totalCount, pageUrl, 8);
+        }
+
+        private DataSet GetData(bool isDownload = false)
+        {
+            var result = refundManager.GetRefundList(shopid, isDownload ? totalCount : this.pageSize, isDownload ? 1 : this.page,
                                                                                     beginDate, endDate, payAmountMin,
                                                                                     payAmountMax, refundNumber, orderNumber,
                                                                                     customerName, customerTel, refundStatus, out this.totalCount);
@@ -101,13 +114,8 @@ namespace WeiXinPF.Web.admin.diancai
 
                 result.AcceptChanges();
             }
-            this.rptList.DataSource = result;
-            this.rptList.DataBind();
 
-            //绑定页码
-            txtPageNum.Text = this.pageSize.ToString();
-            string pageUrl = this.GetNewUrl();
-            PageContent.InnerHtml = Utils.OutPageList(this.pageSize, this.page, this.totalCount, pageUrl, 8);
+            return result;
         }
         #endregion
 
@@ -146,7 +154,7 @@ namespace WeiXinPF.Web.admin.diancai
             Response.Redirect(GetNewUrl());
         }
 
-        private string GetNewUrl()
+        private string GetNewUrl(bool isCommon = false)
         {
             var queryStringBuilder = new StringBuilder();
             queryStringBuilder.AppendFormat("diancai_dingdanRefund_manage.aspx?shopid={0}", shopid);
@@ -154,13 +162,6 @@ namespace WeiXinPF.Web.admin.diancai
                 queryStringBuilder.AppendFormat("&beginDate={0}", this.txtbeginDate.Text.Trim());
             if (!string.IsNullOrEmpty(this.txtEndDate.Text))
                 queryStringBuilder.AppendFormat("&endDate={0}", this.txtEndDate.Text);
-            /*
-            if (!string.IsNullOrEmpty(this.txtPayAmountMax.Text))
-                queryStringBuilder.AppendFormat("&payAmountMax={0}", this.txtPayAmountMax.Text);
-            if (!string.IsNullOrEmpty(this.txtPayAmountMin.Text))
-                queryStringBuilder.AppendFormat("&payAmountMin={0}", this.txtPayAmountMin.Text);
-            if (!string.IsNullOrEmpty(this.txtOrderNumber.Text))
-             */
             if (this.dboRefundStatus.SelectedIndex > -1)
                 queryStringBuilder.AppendFormat("&refundStatus={0}", this.dboRefundStatus.SelectedIndex);
             queryStringBuilder.AppendFormat("&orderNumber={0}", this.txtOrderNumber.Text);
@@ -168,6 +169,10 @@ namespace WeiXinPF.Web.admin.diancai
                 queryStringBuilder.AppendFormat("&customerName={0}", this.txtCustomerName.Text);
             if (!string.IsNullOrEmpty(this.txtCustomerTel.Text))
                 queryStringBuilder.AppendFormat("&customerTel={0}", this.txtCustomerTel.Text);
+
+            //页码
+            queryStringBuilder.AppendFormat("&page={0}", isCommon ? "__id__" : this.page.ToString());
+            queryStringBuilder.AppendFormat("&totalCount={0}", totalCount);
 
             return queryStringBuilder.ToString();
         }
@@ -227,10 +232,6 @@ namespace WeiXinPF.Web.admin.diancai
 
         protected void rptList_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
-            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
-            {
-
-            }
         }
 
         public string shenghestr(object id, object hasSH)
@@ -248,5 +249,29 @@ namespace WeiXinPF.Web.admin.diancai
 
         }
 
+        protected void btnExport_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                var result = GetData(true);
+                var headerList = new List<string>()
+                    {
+                            "序号",
+                            "退单号",
+                            "订单号",
+                            "预订人",
+                            "电话",
+                            "预定时间",
+                            "退单商品",
+                            "退款总额",
+                            "退单状态"
+                    };
+                var columnIndex = new List<int>() { 11, 2, 3, 4, 5, 6, 7, 8, 10 };
+                CSVHelper.DownloadAsSCV(Response, "退单管理", result.Tables[0], columnIndex, headerList);
+            }
+            catch (Exception)
+            {
+            }
+        }
     }
 }

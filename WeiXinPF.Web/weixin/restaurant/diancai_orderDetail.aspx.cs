@@ -128,7 +128,7 @@ namespace WeiXinPF.Web.weixin.restaurant
                             if (status.StatusID == StatusManager.DishStatus.Used.StatusID)
                             {
                                 //已使用
-                                builder.AppendFormat("<img id='Img3' class='img-ercode' src=\"images/refundTicket.png\" key='{0}' status='{1}' caiid={2}>",
+                                builder.AppendFormat("<img id='Img3' class='img-ercode' src=\"images/orderUsed.png\" key='{0}' status='{1}' caiid={2}>",
                                                                     detail.identifyingcode,
                                                                     status.StatusName,
                                                                     pair.Key);
@@ -136,7 +136,7 @@ namespace WeiXinPF.Web.weixin.restaurant
                             else if (status.StatusID == StatusManager.DishStatus.PreRefund.StatusID)
                             {
                                 //退款中
-                                builder.AppendFormat("<img id='Img3' class='img-ercode' src=\"images/refundTicket.png\" key='{0}' status='{1}' caiid={2}>",
+                                builder.AppendFormat("<img id='Img3' class='img-ercode' src=\"images/orderFefunding.png\" key='{0}' status='{1}' caiid={2}>",
                                                                     detail.identifyingcode,
                                                                     status.StatusName,
                                                                     pair.Key);
@@ -144,7 +144,7 @@ namespace WeiXinPF.Web.weixin.restaurant
                             else if (status.StatusID == StatusManager.DishStatus.Refund.StatusID)
                             {
                                 //已退款
-                                builder.AppendFormat("<img id='Img3' class='img-ercode' src=\"images/refundTicket.png\" key='{0}' status='{1}' caiid={2}>",
+                                builder.AppendFormat("<img id='Img3' class='img-ercode' src=\"images/orderRefunded.png\" key='{0}' status='{1}' caiid={2}>",
                                                                     detail.identifyingcode,
                                                                     status.StatusName,
                                                                     pair.Key);
@@ -152,7 +152,7 @@ namespace WeiXinPF.Web.weixin.restaurant
                             else if (status.StatusID == StatusManager.DishStatus.NoActived.StatusID)
                             {
                                 //未激活
-                                builder.AppendFormat("<img id='Img3' class='img-ercode' src=\"images/refundTicket.png\" key='{0}' status='{1}' caiid={2}>",
+                                builder.AppendFormat("<img id='Img3' class='img-ercode' src=\"images/orderNoActived.png\" key='{0}' status='{1}' caiid={2}>",
                                                                         detail.identifyingcode,
                                                                         status.StatusName,
                                                                         pair.Key);
