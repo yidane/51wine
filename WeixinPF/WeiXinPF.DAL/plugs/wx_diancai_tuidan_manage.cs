@@ -98,9 +98,10 @@ namespace WeiXinPF.DAL
         /// 退款完成
         /// </summary>
         /// <param name="refundCode"></param>
-        public void RefundComplete(string refundCode)
+        /// <param name="refundReason"></param>
+        public void RefundComplete(string refundCode, string refundReason)
         {
-            const string sql = @"UPDATE dbo.wx_diancai_tuidan_manage SET refundStatus=4 WHERE refundcode=@RefundCode;
+            const string sql = @"UPDATE dbo.wx_diancai_tuidan_manage SET refundStatus=4,refundReason=@RefundReason WHERE refundcode=@RefundCode;
                                UPDATE  dbo.wx_Verification_IdentifyingCodeInfo
                                 SET     Status = 4
                                 WHERE   IdentifyingCodeId IN ( SELECT   caipinid
@@ -108,7 +109,8 @@ namespace WeiXinPF.DAL
                                                                WHERE    refundCode = @RefundCode ) ";
             SqlParameter[] sqlparams =
                 {
-                    new SqlParameter(){ParameterName = "@RefundCode",SqlDbType = SqlDbType.NVarChar,Value = refundCode} 
+                    new SqlParameter(){ParameterName = "@RefundCode",SqlDbType = SqlDbType.NVarChar,Value = refundCode},
+                    new SqlParameter(){ParameterName = "@RefundReason",SqlDbType = SqlDbType.NVarChar,Value = refundReason}
                 };
 
             DbHelperSQL.ExecuteSql(sql, sqlparams);
@@ -118,9 +120,10 @@ namespace WeiXinPF.DAL
         /// 不同意退款
         /// </summary>
         /// <param name="refundCode"></param>
-        public void RefundFail(string refundCode)
+        /// <param name="refundReason"></param>
+        public void RefundFail(string refundCode, string refundReason)
         {
-            const string sql = @"UPDATE dbo.wx_diancai_tuidan_manage SET refundStatus=5 WHERE refundcode=@RefundCode;
+            const string sql = @"UPDATE dbo.wx_diancai_tuidan_manage SET refundStatus=5,refundReason=@RefundReason WHERE refundcode=@RefundCode;
                                        UPDATE  dbo.wx_Verification_IdentifyingCodeInfo
                                         SET     Status = 5
                                         WHERE   IdentifyingCodeId = ( SELECT    caipinid
@@ -128,7 +131,8 @@ namespace WeiXinPF.DAL
                                                                       WHERE     refundCode = @RefundCode)";
             SqlParameter[] sqlparams =
                 {
-                    new SqlParameter(){ParameterName = "@RefundCode",SqlDbType = SqlDbType.NVarChar,Value = refundCode} 
+                    new SqlParameter(){ParameterName = "@RefundCode",SqlDbType = SqlDbType.NVarChar,Value = refundCode} ,
+                    new SqlParameter(){ParameterName = "@RefundReason",SqlDbType = SqlDbType.NVarChar,Value = refundReason}
                 };
 
             DbHelperSQL.ExecuteSql(sql, sqlparams);

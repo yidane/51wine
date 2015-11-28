@@ -25,14 +25,14 @@ namespace WeiXinPF.BLL
             dal.Refund(refundId);
         }
 
-        public void RefundComplete(string refundCode)
+        public void RefundComplete(string refundCode, string refundReason)
         {
-            dal.RefundComplete(refundCode);
+            dal.RefundComplete(refundCode, refundReason);
         }
 
-        public void RefundFail(string refundCode)
+        public void RefundFail(string refundCode, string refundReason)
         {
-            dal.RefundFail(refundCode);
+            dal.RefundFail(refundCode, refundReason);
         }
 
         public DataSet GetRefundList(string openId)
