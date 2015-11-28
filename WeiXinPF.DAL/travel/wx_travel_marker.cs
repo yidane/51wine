@@ -90,5 +90,7 @@ namespace WeiXinPF.DAL
                 return db.Query<Model.wx_travel_marker>("Select * From [dbo].[wx_travel_marker] " + strWhere).ToList();
             }
         }
+
+        
     }
 }
