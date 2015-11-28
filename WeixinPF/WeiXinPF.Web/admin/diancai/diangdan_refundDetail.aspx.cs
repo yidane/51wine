@@ -184,7 +184,7 @@ namespace WeiXinPF.Web.admin.diancai
                     var refundOrderResponse = new RefundOrderResponse(refundInfo);
                     if (refundOrderResponse.IsSuccess)
                     {
-                        new BLL.wx_diancai_tuidan_manage().RefundComplete(refundCode);
+                        new BLL.wx_diancai_tuidan_manage().RefundComplete(refundCode, this.txtRefundReason.Value.Trim());
                         Response.Redirect("diancai_dingdanRefund_manage.aspx");
                     }
                     else
@@ -206,7 +206,7 @@ namespace WeiXinPF.Web.admin.diancai
         {
             try
             {
-                new BLL.wx_diancai_tuidan_manage().RefundFail(refundCode);
+                new BLL.wx_diancai_tuidan_manage().RefundFail(refundCode, this.txtRefundReason.Value.Trim());
                 Response.Redirect("diancai_dingdanRefund_manage.aspx");
             }
             catch (Exception exception)

@@ -111,7 +111,7 @@
         </table>
         <div style="width: 100%; text-align: center">
             <asp:Button ID="btnSearch" runat="server" Text="查询" CssClass="DingdanButton" OnClick="btnSearch_Click" />
-            <asp:Button ID="btnExport" runat="server" Text="导出Excel" CssClass="DingdanButton" />
+            <asp:Button ID="btnExport" runat="server" Text="导出Excel" CssClass="DingdanButton" OnClick="btnExport_OnClick" />
         </div>
         <!--工具栏-->
         <div class="toolbar-wrap">

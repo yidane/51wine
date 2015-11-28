@@ -51,6 +51,27 @@
             color: white;
             background: -webkit-gradient(linear,left top,left bottom,from(#fe444a),to(#c32d32));
         }
+
+        .i-status {
+            float: right;
+            width: 109px;
+            position: absolute;
+            height: 83px;
+            top: 1px;
+            right: -8px;
+        }
+
+        .status-refundAll {
+            background-image: url(images/refundAll.png);
+            background-size: 90%;
+            background-repeat: no-repeat;
+        }
+
+        .status-refundPart {
+            background-image: url(images/refundPart.png);
+            background-size: 90%;
+            background-repeat: no-repeat;
+        }
     </style>
 </head>
 <body>
