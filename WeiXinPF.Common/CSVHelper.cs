@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
-using System.Linq;
 using System.Reflection;
 using System.Text;
-using System.IO;
 using System.Web;
 
 namespace WeiXinPF.Common
@@ -133,7 +131,7 @@ namespace WeiXinPF.Common
         /// <returns></returns>
         public static string SaveAsCSV(DataTable dataTable, List<int> columnIndexList = null, List<string> headerList = null)
         {
-            if (dataTable == null || dataTable.Rows.Count == 0 || dataTable.Columns.Count == 0)
+            if (dataTable == null || dataTable.Columns.Count == 0)
                 return string.Empty;
 
             var outputBuilder = new StringBuilder();
