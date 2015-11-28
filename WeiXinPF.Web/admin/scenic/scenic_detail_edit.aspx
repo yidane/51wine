@@ -23,7 +23,7 @@
 
             //初始化上传控件
             $(".upload-img").each(function () {
-                $(this).InitSWFUpload({ sendurl: "../../tools/upload_ajax.ashx", flashurl: "../../scripts/swfupload/swfupload.swf", filetypes: "*.jpg;*.jpge;*.png;*.gif;*.mp3;" });
+                $(this).InitSWFUpload({ sendurl: "../../tools/upload_ajax.ashx", flashurl: "../../scripts/swfupload/swfupload.swf", filetypes: "*.mp3" });
             });
 
             var editor = KindEditor.create('.editor', {
@@ -67,7 +67,7 @@
                 </dd>
             </dl>
             <dl>
-                <dt>封面图片</dt>
+                <dt>景点列表显示图</dt>
                 <dd>
                     <asp:TextBox ID="txtCover" runat="server" datatype="*2-100" CssClass="input normal upload-path" />
                     <div class="upload-box upload-img"></div>
@@ -75,9 +75,9 @@
                 </dd>
             </dl>
             <dl>
-                <dt>首页背景图片</dt>
+                <dt>景点背景图</dt>
                 <dd>
-                    <asp:TextBox ID="txtBackgroundImage" runat="server" datatype="*2-100" CssClass="input normal upload-path" />
+                    <asp:TextBox ID="txtBackgroundImage" runat="server" datatype="*2-100" CssClass="input normal upload-path" Text="/weixin/scenic/images/bg.png" />
                     <div class="upload-box upload-img"></div>
                     <%--<span class="Validform_checktip"></span>--%>
                 </dd>
@@ -92,7 +92,7 @@
                 <dt>正文</dt>
                 <dd>
                     <textarea id="txtContent" class="editor" style="visibility: hidden;" runat="server"></textarea>
-                    <%--<asp:TextBox ID="txtContent" runat="server" CssClass="input normal" />--%>
+
                 </dd>
             </dl>
             <dl>
@@ -100,7 +100,6 @@
                 <dd>
                     <asp:TextBox ID="txtAudio" runat="server" datatype="*2-100" CssClass="input normal upload-path" />
                     <div class="upload-box upload-img"></div>
-                    <%--<span class="Validform_checktip"></span>--%>
                 </dd>
             </dl>
             <dl>
