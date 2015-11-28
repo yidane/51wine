@@ -21,7 +21,7 @@ namespace WeiXinPF.DAL
                 queryBuilder.Append("Insert Into dbo.wx_travel_marker");
                 queryBuilder.Append("   (wid,Name,Remark,[Left],[Top],Lng,Lat,Url,Description,extStr1,extStr2,extInt1,extInt2,Recommend)");
                 queryBuilder.Append("Values ");
-                queryBuilder.Append("   (@wid,@Name,@Remark,@[Left],@[Top],@Lng,@Lat,@Url,@Description,@extStr1,@extStr2,@extInt1,@extInt2,@Recommend)");
+                queryBuilder.Append("   (@wid,@Name,@Remark,@Left,@Top,@Lng,@Lat,@Url,@Description,@extStr1,@extStr2,@extInt1,@extInt2,@Recommend)");
                 queryBuilder.Append("Select @Id=Scope_Identity()");
 
                 DynamicParameters dynamicParameters = new DynamicParameters();
