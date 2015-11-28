@@ -48,11 +48,17 @@ namespace WeiXinPF.WebService
         /// <summary>
         /// 获取所有景点信息
         /// </summary>
-        [WebMethod]
+        [WebMethod(EnableSession = true)]
         public void GetMarkers(int wid)
         {
             try
             {
+                //后台登陆的通过session获取wid
+                Model.wx_userweixin model = Session["nowweixin"] as Model.wx_userweixin;
+                if (model != null)
+                {
+                    wid = model.id;
+                }
                 BLL.wx_travel_marker bll = new BLL.wx_travel_marker();
                 var markers = bll.GetModelList(string.Format("wid={0}", wid));
 
@@ -67,6 +73,33 @@ namespace WeiXinPF.WebService
             catch
             {
                 Context.Response.Write(AjaxResult.Error("获取景点信息失败").ToCamelString());
+            }
+        }
+
+        /// <summary>
+        /// 删除手绘图景点
+        /// </summary>
+        /// <param name="id"></param>
+        [WebMethod(EnableSession = true)]
+        public void DeleteMarker(int id)
+        {
+            try
+            {
+                //后台登陆的通过session获取wid
+                Model.wx_userweixin model = Session["nowweixin"] as Model.wx_userweixin;
+                if (model == null)
+                {
+                    throw new Exception("用户为空!");
+                }
+                BLL.wx_travel_marker bll = new BLL.wx_travel_marker();
+                bll.Delete(id);
+
+
+                Context.Response.Write(AjaxResult.Success(true).ToCamelString());
+            }
+            catch
+            {
+                Context.Response.Write(AjaxResult.Error("删除景点信息失败").ToCamelString());
             }
         }
 
@@ -129,7 +162,7 @@ namespace WeiXinPF.WebService
         }
 
         [WebMethod]
-        public void GetRecommendPoi(int wid,string keywords)
+        public void GetRecommendPoi(int wid, string keywords)
         {
             try
             {
@@ -138,7 +171,7 @@ namespace WeiXinPF.WebService
 
                 Context.Response.Write(AjaxResult.Success(pois).ToCamelString());
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Context.Response.Write(AjaxResult.Error("获取周边推荐信息失败。").ToCamelString());
             }

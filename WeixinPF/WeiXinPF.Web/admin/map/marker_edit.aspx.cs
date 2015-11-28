@@ -58,6 +58,7 @@ namespace WeiXinPF.Web.admin.map
             Model.wx_travel_marker model = new Model.wx_travel_marker();
 
             model.wid = GetWeiXinCode().id;
+            model.Name = txtName.Text;
             model.Remark = txtRemark.Text;
             model.Url = txtUrl.Text;
             model.Description = txtDescription.Text;

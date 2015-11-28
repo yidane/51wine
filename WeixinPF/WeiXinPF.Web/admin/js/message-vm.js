@@ -60,9 +60,12 @@ var MessageViewModel = function (params) {
             {
                 json=json.data;
                 if (json) {
-                    var count = json.count;
-
-
+                    //var count = json.count;
+                    var count = 0;
+                    if(json.msgs)
+                    {
+                        count=json.msgs.length;
+                    }
                     self.shortmsgCount(count);
                     self.shotmsgList(json.msgs);
 //                if (json.msgs.length > 0) self.thisUser(json.msgs[0].msg.toUser);
@@ -126,7 +129,9 @@ var MessageViewModel = function (params) {
         self.shotmsgList.remove(msgWithCount);
         if(self.shortmsgCount()>0)
         {
-            self.shortmsgCount(self.shortmsgCount() - count);
+            self.shortmsgCount(self.shortmsgCount() - 1);
+
+            //self.shortmsgCount(self.shortmsgCount() - count);
         }
     };
 

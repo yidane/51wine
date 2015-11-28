@@ -40,5 +40,7 @@ namespace WeiXinPF.BLL
         {
             return _dal.GetModelList(strWhere);
         }
+
+        
     }
 }

@@ -34,18 +34,16 @@ namespace WeiXinPF.Web.admin.hotel
         protected void Page_Load(object sender, EventArgs e)
         {
             hotelid = MyCommFun.RequestInt("hotelid", GetHotelId());
-            
+            _orderby = "orderTime desc,id desc";
+            //获取参数
+            GetQueryString();
+
+            this.pageSize = GetPageSize(10); //每页数量
+
+            _strWhere = " hotelid=" + hotelid + " " + _strWhere;
+            _strWhere += CombSqlTxt(keywords);
             if (!Page.IsPostBack)
             {
-                //获取参数
-                GetQueryString();
-
-                this.pageSize = GetPageSize(10); //每页数量
-
-                _strWhere = " hotelid=" + hotelid + " " + _strWhere;
-                _strWhere += CombSqlTxt(keywords);
-                _orderby = "orderTime desc,id desc";
-
                 BindDropBox();
                 RptBind();
             }
@@ -176,9 +174,11 @@ namespace WeiXinPF.Web.admin.hotel
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
                 ds.Tables[0].Columns.Add("isRefund", typeof(System.String));
+               
                 ds.Tables[0].Columns.Add("hotelName", typeof(System.String));
                 ds.Tables[0].Columns.Add("totalPrice", typeof(System.Decimal));
-
+                ds.Tables[0].Columns.Add("statusName", typeof(System.String));
+                ds.Tables[0].Columns.Add("strisRefund", typeof(System.String));
 
                 DataRow dr;
 
@@ -186,30 +186,22 @@ namespace WeiXinPF.Web.admin.hotel
                 for (int i = 0; i < count; i++)
                 {
                     dr = ds.Tables[0].Rows[i];
-                    //                    if (dr["orderStatus"].ToString() == "0")
-                    //                    {
-                    //                        dr["payStatusStr"] = "未处理";
-                    //                    }
-                    //                    else if (dr["orderStatus"].ToString() == "1")
-                    //                    {
-                    //                        dr["payStatusStr"] = "已确认";
-                    //                    }
-                    //                    else
-                    //                    {
-                    //                        dr["payStatusStr"] = "已拒绝";
-                    //                    }
-                    var status = HotelStatusManager.OrderStatus.GetStatusDict(MyCommFun.Obj2Int(dr["orderStatus"]));
+
+                    var status = HotelStatusManager.OrderStatus.GetStatusDict(
+                        MyCommFun.Obj2Int(dr["orderStatus"]));
                     dr["payStatusStr"] = "<em  style='width:70px;' class='status " + status.CssClass
                         + "'>" + status.StatusName + "</em>";
-
+                    dr["statusName"] = status.StatusName;
                     if (status.StatusId == HotelStatusManager.OrderStatus.Refunding.StatusId
                         || status.StatusId == HotelStatusManager.OrderStatus.Refunded.StatusId)
                     {
                         dr["isRefund"] = "<em  style='width:70px;' class='status ok'>是</em>";
+                        dr["strisRefund"] = "是";
                     }
                     else
                     {
                         dr["isRefund"] = "<em  style='width:70px;' class='status no'>否</em>";
+                        dr["strisRefund"] = "否";
 
                     }
                     dr["hotelName"] = hotel.hotelName;
@@ -349,15 +341,15 @@ namespace WeiXinPF.Web.admin.hotel
         protected void btnExport_OnClick(object sender, EventArgs e)
         {
             try
-            {
+                {
                 var result = GetQueryData();
                 List<string> headerList = new List<string>() { "序号", "订单编号", "订单状态", "是否退单",
                     "商户或门店名称","	预定人","交易日期","商品名称","购买数量","商品价格","入住时间"
                     ,"离店时间","支付金额" };
-                List<int> columnIndexList = new List<int>() { 1, 5, 15, 19, 20, 4, 18, 11, 13, 14, 9, 10, 21 };
+                List<int> columnIndexList = new List<int>() { 1, 5, 22, 23, 20, 4, 18, 11, 13, 14, 9, 10, 21 };
                 CSVHelper.DownloadAsSCV(Response, "酒店订单管理", result.Tables[0], columnIndexList, headerList);
             }
-            catch (Exception exception)
+            catch 
             {
 
             }
