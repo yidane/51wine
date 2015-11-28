@@ -94,16 +94,17 @@ namespace WeiXinPF.Web.weixin.restaurant
                     builder.Append(@"<section>");
                     builder.Append("<table width=\"100%\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" class=\"cp\">");
                     builder.Append("<tr>");
-                    builder.AppendFormat("<td class=\"cc\" style=\"width: 5%\">{0}</td>", index);
-                    builder.AppendFormat("<td class=\"cc\" style=\"width: 33%\">{0}</td>", pair.Value[0].cpName);
-                    builder.AppendFormat("<td class=\"cc\" style=\"width: 17%\">{0}</td>", pair.Value.Count);
-                    builder.AppendFormat("<td class=\"cc\" style=\"width: 25%\">{0}元</td>", pair.Value.Count * pair.Value[0].price);
-                    builder.Append("<td class=\"cc\" style=\"width: 23%\">");
+                    //builder.AppendFormat("<td class=\"cc\" style=\"width: 5%\">{0}</td>", index);
+                    builder.AppendFormat("<td class=\"cc\" style=\"width: 35%\">{0}</td>", pair.Value[0].cpName);
+                    builder.AppendFormat("<td class=\"cc\" style=\"width: 30%\">{0}</td>", pair.Value.Count);
+                    builder.AppendFormat("<td class=\"cc\" style=\"width: 35%\">{0}元</td>", pair.Value.Count * pair.Value[0].price);
+                    //builder.Append("<td class=\"cc\" style=\"width: 23%\">");
 
                     //存在未使用的，则添加退款按钮
-                    if (pair.Value.Any(item => item.status == StatusManager.DishStatus.NoUsed.StatusID || item.status == StatusManager.DishStatus.RefundFaild.StatusID))
-                        builder.AppendFormat("<a class='refund-button' href=\"diancai_refund.aspx?wid={4}&shopid={0}&dingdan={1}&openid={2}&caiid={3}\">申请退款</a>", shopid, orderId, openid, pair.Key, wid);//组合订单ID和菜品ID作为Button的主键
-                    builder.Append("</td>");
+                    //if (pair.Value.Any(item => item.status == StatusManager.DishStatus.NoUsed.StatusID || item.status == StatusManager.DishStatus.RefundFaild.StatusID))
+                    //   builder.AppendFormat("<a class='refund-button' href=\"diancai_refund.aspx?wid={4}&shopid={0}&dingdan={1}&openid={2}&caiid={3}\">申请退款</a>", shopid, orderId, openid, pair.Key, wid);//组合订单ID和菜品ID作为Button的主键
+
+                    //builder.Append("</td>");
                     builder.Append("</tr>");
                     builder.Append("</table>");
                     builder.Append("<div class=\"silde-background \" id='silde-module-" + pair.Key + "'>");
@@ -167,10 +168,18 @@ namespace WeiXinPF.Web.weixin.restaurant
                     builder.Append("</div>");
 
                     builder.AppendFormat(@"<div class='full-w'>
-                        <p class='text-uppercase'>验证码:
-                        <strong id='itemkey_{2}' class='text-danger item-pullleft'>{0}</strong>
-                        <strong id='itemStatus_{2}' class='text-danger pull-right item-pullleft'>{1}</strong>
-                      </p></div>", pair.Value[0].identifyingcode, StatusManager.DishStatus.GetStatusDict(pair.Value[0].status).StatusName, pair.Key);
+                        <p>验证码:
+                        <strong id='itemkey_{2}' class='text-danger'>{0}</strong>
+                        <strong id='itemStatus_{2}' class='text-danger pull-right'>{1}</strong>
+                      </p>", pair.Value[0].identifyingcode, StatusManager.DishStatus.GetStatusDict(pair.Value[0].status).StatusName, pair.Key);
+                    /*添加查看详情 和 退款申请按钮*/
+                    builder.Append("<div class=\"butto-wapper\">");
+                    builder.Append("<a href=\"\"#>套餐详情</a>");
+                    builder.Append("<a href=\"\"# class=\"btn-refund\">申请退款</a>");
+                    builder.Append("</div>");
+
+                    builder.Append("</div>"); //.full_w;
+
                     builder.Append("</div>");
 
                     builder.Append("</section>");

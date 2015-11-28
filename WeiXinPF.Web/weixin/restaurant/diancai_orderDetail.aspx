@@ -13,7 +13,7 @@
     <meta content="email=no" name="format-detection" />--%>
 
     <title>我的订单</title>
-    <link href="css/diancai.css" rel="stylesheet" type="text/css">
+    <link href="css/diancai.css" rel="stylesheet" type="text/css" />
     <link href="css/swiper.min.css" rel="stylesheet" />
     <script src="js/zepto.min.js"></script>
     <script src="js/alert.js" type="text/javascript"></script>
@@ -173,6 +173,34 @@
         .swiper-image {
             height: 220px;
         }
+
+        .full-w {
+            padding: 10px;
+        }
+
+        .butto-wapper {
+            width: 100%;
+            margin-top: 10px;
+        }
+
+            .butto-wapper a {
+                display: inline-block;
+                width: 45%;
+                height: 30px;
+                line-height: 30px;
+                background-color: #c32d32;
+                background-image: url(images/icon-xiangqing.png);
+                background-repeat: no-repeat;
+                background-position: 10px center;
+                text-align: center;
+                color: #fff;
+            }
+
+            .butto-wapper .btn-refund {
+                margin-left: 10%;
+                background-image: url(images/icon-tuikuan.png);
+                background-color: #ccc;
+            }
     </style>
     <script type="text/javascript">
         //获取当前位置的坐标
@@ -235,11 +263,11 @@
             <table width="100%" border="0" cellpadding="0" cellspacing="0" class="DishDetail table table-bordered">
                 <thead>
                     <tr>
-                        <th class="col" style="width: 5%"></th>
-                        <th class="Col1" style="width: 33%">类型</th>
-                        <th class="Col2" style="width: 17%">份数</th>
-                        <th class="Col3" style="width: 25%">总价</th>
-                        <th class="Col4" style="width: 23%"></th>
+                        <%--<th class="col" style="width: 5%"></th>--%>
+                        <th class="Col1" style="width: 35%">类型</th>
+                        <th class="Col2" style="width: 30%">份数</th>
+                        <th class="Col3" style="width: 35%">总价</th>
+                        <%--<th class="Col4" style="width: 23%"></th>--%>
                     </tr>
                 </thead>
             </table>
@@ -279,7 +307,7 @@
                 </div>
             </div>
         </section>
-        <section class="gpd-item ">
+        <%--<section class="gpd-item ">
             <div class="gpd-item-title">
                 <img class="detailicon-ticket" src="images/info.png" />
                 <div class="gpd-item-title-name">使用须知</div>
@@ -307,9 +335,9 @@
         <section class="gpd-item" style="padding-bottom: 110px">
             <div class="gpd-item-title">
                 <img class="detailicon-ticket" src="images/time.png" />
-                <div class="gpd-item-title-name">订单有效期</div>
+                <div class="gpd-item-title-name">套餐有效期</div>
                 <div style="float: right" id="dateRange"><%=orderRange %></div>
             </div>
-        </section>
+        </section>--%>
     </div>
 </asp:Content>

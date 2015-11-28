@@ -52,6 +52,13 @@ namespace WeiXinPF.Common
                         return false;
                     }
                     break;
+                case RequestObjType.doubleType:
+                    double tmpDouble = 0;
+                    if (!double.TryParse(pValue, out tmpDouble))
+                    {
+                        return false;
+                    }
+                    break;
                 case RequestObjType.stringType:
                     break;
                 case RequestObjType.dateType:
@@ -131,6 +138,18 @@ namespace WeiXinPF.Common
             if (IsRequestStr(param, RequestObjType.floatType))
             {
                 return float.Parse(HttpContext.Current.Request[param]);
+            }
+            else
+            {
+                return defaultFloat;
+            }
+        }
+
+        public static double RequestDouble(string param, double defaultFloat=0)
+        {
+            if (IsRequestStr(param, RequestObjType.doubleType))
+            {
+                return double.Parse(HttpContext.Current.Request[param]);
             }
             else
             {
@@ -998,7 +1017,8 @@ namespace WeiXinPF.Common
             intType,
             stringType,
             floatType,
-            dateType
+            dateType,
+            doubleType
         }
     }
 }
