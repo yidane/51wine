@@ -484,7 +484,7 @@ namespace WeiXinPF.DAL
 			strSql.Append(" FROM wx_diancai_caipin_manage ");
             if (cateid != 0)
 			{
-                strSql.Append(" where categoryid=" + cateid + " ");
+                strSql.Append(" where categoryid=" + cateid + " AND DATEDIFF(DAY,beginDate,GETDATE())>=0 AND DATEDIFF(DAY,endDate,GETDATE())<=0");
 			}
             strSql.Append(" order by  sortid asc,id desc ");
 			return DbHelperSQL.Query(strSql.ToString());
