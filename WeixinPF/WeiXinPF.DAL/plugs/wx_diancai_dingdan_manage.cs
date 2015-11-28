@@ -925,10 +925,9 @@ namespace WeiXinPF.DAL
                                                         vi.Status
                                                 FROM    dbo.wx_diancai_dingdan_manage dm
                                                         INNER JOIN dbo.wx_diancai_dingdan_caiping dc ON dm.id = dc.dingId
-                                                        INNER JOIN dbo.wx_Verification_IdentifyingCodeInfo vi ON vi.OrderId = dm.id
+                                                        INNER JOIN dbo.wx_Verification_IdentifyingCodeInfo vi ON vi.OrderId = dm.id and vi.ModuleName = 'restaurant' and dc.caiId=vi.ProductId
                                                         LEFT JOIN dbo.wx_diancai_caipin_manage cm ON vi.ProductId = cm.id
-                                                WHERE   vi.ModuleName = 'restaurant'
-                                                        AND dm.id = @OrderID");
+                                                WHERE   dm.id = @OrderID");
 
             SqlParameter[] sqlparams =
                 {
