@@ -8568,6 +8568,8 @@
     <Content Include="weixin\cashred\js\alert.js" />
     <Content Include="weixin\photo\end.aspx" />
     <Content Include="weixin\restaurant\css\orderlist.css" />
+    <Content Include="weixin\restaurant\images\icon-tuikuan.png" />
+    <Content Include="weixin\restaurant\images\icon-xiangqing.png" />
     <Content Include="weixin\restaurant\images\i_gray_icon.png" />
     <Content Include="weixin\restaurant\images\refundAll.png" />
     <Content Include="weixin\restaurant\images\refundPart.png" />
