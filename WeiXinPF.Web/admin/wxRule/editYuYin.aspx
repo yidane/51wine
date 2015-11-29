@@ -27,8 +27,12 @@
             $("#form1").initValidform();
 
             //初始化上传控件
-            $(".upload-img").each(function () {
-                $(this).InitSWFUpload({ sendurl: "../../tools/upload_ajax.ashx", flashurl: "../../scripts/swfupload/swfupload.swf" });
+            $(".upload-audio").each(function () {
+                $(this).InitSWFUpload({
+                    sendurl: "../../tools/upload_ajax.ashx",
+                    filetypes: "*.mp3;*.wav;",//音频类型
+                    flashurl: "../../scripts/swfupload/swfupload.swf"
+                });
             });
             $(".upload-album").each(function () {
                 $(this).InitSWFUpload({ btntext: "批量上传", btnwidth: 66, single: false, water: true, thumbnail: true, filesize: "2048", sendurl: "../../tools/upload_ajax.ashx", flashurl: "../../scripts/swfupload/swfupload.swf", filetypes: "*.jpg;*.jpge;*.png;*.gif;" });
@@ -68,7 +72,7 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="tab-content">
 
             <dl>
@@ -89,26 +93,30 @@
 
                 </dd>
             </dl>
-             <dl>
+            <dl>
                 <dt>标题</dt>
                 <dd>
                     <asp:TextBox ID="txtTitle" runat="server" CssClass="input" TextMode="MultiLine" datatype="*0-1000" sucmsg=" " nullmsg="标题"></asp:TextBox>
                     <span class="Validform_checktip">*</span></dd>
             </dl>
-             <dl>
+            <dl>
                 <dt>语音链接</dt>
                 <dd>
-                    <asp:TextBox ID="txtMediaUrl" runat="server" CssClass="input" TextMode="MultiLine" datatype="*1-1000" sucmsg=" " nullmsg="语音链接"></asp:TextBox>
-                    <span class="Validform_checktip">*</span></dd>
+                    <%--<asp:TextBox ID="txtMediaUrl" runat="server" CssClass="input" TextMode="MultiLine" datatype="*1-1000" sucmsg=" " nullmsg="语音链接"></asp:TextBox>
+                    <span class="Validform_checktip">*</span>--%>
+                    <asp:TextBox ID="txtMediaUrl" runat="server" CssClass="input normal upload-path" />
+                    <div class="upload-box upload-audio"></div>
+                    <span class="Validform_checktip">*支持mp3格式，可以填写网上的链接，也可以本地上传！</span>
+                </dd>
             </dl>
 
             <dl>
                 <dt>音乐描述</dt>
                 <dd>
-                    <asp:TextBox ID="txtrContent" runat="server" CssClass="input" TextMode="MultiLine" datatype="*0-1000" sucmsg=" "  ></asp:TextBox>
+                    <asp:TextBox ID="txtrContent" runat="server" CssClass="input" TextMode="MultiLine" datatype="*0-1000" sucmsg=" "></asp:TextBox>
                     <span class="Validform_checktip"></span></dd>
             </dl>
-            
+
         </div>
         <!--/内容-->
 
@@ -116,8 +124,8 @@
         <div class="page-footer">
             <div class="btn-list">
                 <asp:Button ID="btnSubmit" runat="server" Text="提交保存" CssClass="btn" OnClick="btnSubmit_Click" />
-                 <a href="wenBenList.aspx"  > <span class="btn yellow">返回上一页</span></a>
-                
+                <a href="wenBenList.aspx"><span class="btn yellow">返回上一页</span></a>
+
             </div>
             <div class="clear"></div>
         </div>
