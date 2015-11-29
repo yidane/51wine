@@ -343,12 +343,16 @@
         <%}%>
 
         <%
-            else if (isAdmin && orderStatus == HotelStatusManager.OrderStatus.Payed.StatusId)
-            {%>
+    else if (isAdmin && orderStatus == HotelStatusManager.OrderStatus.Payed.StatusId)
+       
+    {%>
 
+        
         <div style="width: 100%; text-align: center">
             <asp:Button ID="btnSaveRefund" runat="server" CssClass="button button-success " disabled="disabled" 
-                
+                 OnClientClick="return ConfirmPostBack('btnSaveRefund',           
+                $('#hidConfirmStr').val()
+                );"
                 Text="提交" OnClick="btnSaveRefund_OnClick" />
 
         </div>
@@ -379,7 +383,7 @@
 
         </div>
         <%}%>
-
+        <input type="hidden" id="hidConfirmStr" runat="server" />
         <input type="hidden" name="__EVENTTARGET" value="">
         <input type="hidden" name="__EVENTARGUMENT" value="">
     </form>
