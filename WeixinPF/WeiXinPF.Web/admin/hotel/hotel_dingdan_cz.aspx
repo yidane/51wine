@@ -254,8 +254,7 @@
             <dl>
                 <dt>备注：</dt>
                 <dd>
-                    <textarea name="remarks" rows="2" cols="20" id="remarks" datatype="*1-2000" sucmsg=" " nullmsg="" class="input" runat="server"></textarea>
-                    <span class="Validform_checktip">*</span>
+                    <textarea name="remarks" rows="2" cols="20" id="remarks"  class="input" runat="server"></textarea>
                 </dd>
             </dl>
             <%}%>
@@ -274,7 +273,7 @@
                 <dd>
                     <asp:RadioButtonList ID="StatusType" runat="server" RepeatDirection="Horizontal" CellPadding="10" CellSpacing="10">
                         <asp:ListItem Value="1">商家接收</asp:ListItem>
-                        <asp:ListItem Value="1">商家拒绝</asp:ListItem>
+                        <asp:ListItem Value="2">商家拒绝</asp:ListItem>
                     </asp:RadioButtonList>
 
 
@@ -336,7 +335,9 @@
             {%>
 
         <div style="width: 100%; text-align: center">
-            <asp:Button ID="save_groupbase" runat="server" CssClass="button button-success " Text="提交" OnClick="save_groupbase_Click" />
+            <asp:Button ID="save_groupbase" runat="server" CssClass="button button-success "
+                
+                 Text="提交" OnClick="save_groupbase_Click" />
 
         </div>
         <%}%>
@@ -346,7 +347,9 @@
             {%>
 
         <div style="width: 100%; text-align: center">
-            <asp:Button ID="btnSaveRefund" runat="server" CssClass="button button-success " disabled="disabled" Text="提交" OnClick="btnSaveRefund_OnClick" />
+            <asp:Button ID="btnSaveRefund" runat="server" CssClass="button button-success " disabled="disabled" 
+                
+                Text="提交" OnClick="btnSaveRefund_OnClick" />
 
         </div>
         <%}%>
