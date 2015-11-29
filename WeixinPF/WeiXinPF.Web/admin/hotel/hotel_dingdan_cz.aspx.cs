@@ -38,8 +38,7 @@ namespace WeiXinPF.Web.admin.hotel
         public TuidanDto tuidan = new TuidanDto();
         public string uName = string.Empty;
         public string roleName = string.Empty;
-        public string ordermsg=String.Empty;
-
+        public string ordermsg= string.Empty; 
 
 
         protected void Page_Load(object sender, EventArgs e)
@@ -57,9 +56,9 @@ namespace WeiXinPF.Web.admin.hotel
             
             if (!IsPostBack)
             {
+        }
                 GetOrderStatusMsg(dingdan);
             }
-        }
 
         private void GetData(int dingdanid)
         {
@@ -82,10 +81,20 @@ namespace WeiXinPF.Web.admin.hotel
                 var result = GetPrice(dingdan);
 
                 txtAmount.Value = result.ToString();
+                if (isAdmin)
+                {
+                    hidConfirmStr.Value = "确定执行【退款】操作吗？";
+                    var listCode = IdentifyingCodeService.GetIdentifyingCodeDTO("hotel", dingdan.id);
+                    if (listCode != null && listCode.Any(c => c.Status == "2"))//订单中有验证码已使用
+                    {
+                        hidConfirmStr.Value = string.Format("{0}，{1}", "订单中有验证码已使用", hidConfirmStr.Value);
+                    }
+                }
             }
             else if (orderStatus == HotelStatusManager.OrderStatus.Refunding.StatusId
                      || orderStatus == HotelStatusManager.OrderStatus.Refunded.StatusId)
             {
+               
                 var hotelService = new HotelService();
                 tuidan = hotelService.GetModel(dingdan.id, dingdan.hotelid.Value);
                 if (tuidan.operateUser > 0)

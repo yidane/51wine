@@ -10770,6 +10770,7 @@
     <Content Include="weixin\cashred\images\lottery.psd" />
     <Content Include="weixin\scenic\scenic.ashx" />
     <Content Include="weixin\restaurant\diancai_login.ashx" />
+    <None Include="Properties\PublishProfiles\jxiaoxmac.pubxml" />
     <None Include="Properties\PublishProfiles\Yidane.pubxml" />
     <Content Include="weixin\restaurant\Restaurant.Master" />
     <Content Include="weixin\WeChatPay\js\WeChatPay_3.0.js" />
