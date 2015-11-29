@@ -328,7 +328,7 @@ namespace WeiXinPF.WeiXinComm
                 //responseMessage.Music.Description = model.rContent2;
                 //wxResponseBaseMgr.Add(wid, requestMessage.FromUserName, requestMessage.MsgType.ToString(), enevtName, "voice", "音乐链接：" + model.mediaUrl + "|标题：" + model.rContent + "|描述：" + model.rContent2, requestMessage.ToUserName);
 
-                responseMessage.Voice = new Voice() { MediaId = "jrXTNzykO9cBAU-4nZJlF9F5kojnOZWlQ9MeHmwhu-M" };
+                responseMessage.Voice = new Voice() { MediaId = model.extStr};
 
                 wxResponseBaseMgr.Add(wid, requestMessage.FromUserName, requestMessage.MsgType.ToString(), enevtName, "voice", "音乐链接：" + model.mediaUrl + "|标题：" + model.rContent + "|描述：" + model.rContent2, requestMessage.ToUserName);
             }

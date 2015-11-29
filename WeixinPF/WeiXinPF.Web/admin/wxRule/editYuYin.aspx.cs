@@ -4,8 +4,10 @@ using System.Collections.Generic;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using OneGulp.WeChat.MP.AdvancedAPIs;
 using WeiXinPF.Common;
 using WeiXinPF.BLL;
+using WeiXinPF.WeiXinComm;
 
 
 namespace WeiXinPF.Web.admin.wxRule
@@ -122,6 +124,7 @@ namespace WeiXinPF.Web.admin.wxRule
             rc.rContent = txtTitle.Text.Trim();
             rc.rContent2 = txtrContent.Text.Trim();
             rc.mediaUrl = txtMediaUrl.Text.Trim();
+            rc.extStr = UploadForeverMedia(weixin.id, rc.mediaUrl);
             rc.createDate = DateTime.Now;
             int rcId = rcBll.Add(rc);
 
@@ -173,6 +176,23 @@ namespace WeiXinPF.Web.admin.wxRule
 
                 ruleContent.rContent = txtTitle.Text.Trim();
                 ruleContent.rContent2 = txtrContent.Text.Trim();
+
+                if (ruleContent.mediaUrl.Equals(txtMediaUrl.Text.Trim()))
+                {
+                    //如果不存在media_id,上传微信服务器，获取media_id
+                    if (string.IsNullOrEmpty(ruleContent.extStr))
+                    {
+                        Model.wx_userweixin weixin = GetWeiXinCode();
+                        ruleContent.extStr = UploadForeverMedia(weixin.id, ruleContent.mediaUrl);
+                    }
+                }
+                else
+                {
+                    ruleContent.mediaUrl = txtMediaUrl.Text.Trim();
+                    Model.wx_userweixin weixin = GetWeiXinCode();
+                    ruleContent.extStr = UploadForeverMedia(weixin.id, ruleContent.mediaUrl);
+                }
+
                 ruleContent.mediaUrl = txtMediaUrl.Text.Trim();
                 ret = rcBll.Update(ruleContent);
             }
@@ -182,6 +202,15 @@ namespace WeiXinPF.Web.admin.wxRule
                 return true;
             }
             return false;
+        }
+
+        private string UploadForeverMedia(int wid,string mediaPath)
+        {
+            string err;
+            var token = WeiXinCRMComm.getAccessToken(wid, out err);
+            if (!string.IsNullOrEmpty(err)) return string.Empty;
+            var result = MediaApi.UploadForeverMedia(token, Server.MapPath(mediaPath));
+            return result.media_id;
         }
         #endregion
 

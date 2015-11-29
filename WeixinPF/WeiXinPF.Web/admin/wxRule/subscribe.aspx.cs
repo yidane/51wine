@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using OneGulp.WeChat.MP.AdvancedAPIs;
 using WeiXinPF.Common;
 using WeiXinPF.BLL;
+using WeiXinPF.WeiXinComm;
 
 namespace WeiXinPF.Web.admin.wxRule
 {
@@ -13,13 +16,13 @@ namespace WeiXinPF.Web.admin.wxRule
     {
         wx_requestRule rBll = new wx_requestRule();
         wx_requestRuleContent rcBll = new wx_requestRuleContent();
-        
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
             {
                 // ChkAdminLevel("site_config", MXEnums.ActionEnum.View.ToString()); //检查权限
-                 
+
                 string act = MyCommFun.QueryString("act");
                 lblact.Text = act;
                 if (act == "subscribe")
@@ -68,7 +71,7 @@ namespace WeiXinPF.Web.admin.wxRule
                     case 2:
                         //图文
                         rblResponseType.SelectedValue = "1";
-                        IList<Model.wx_requestRuleContent> rclist = rcBll.GetModelList("rId=" + ruleList[0].id+" order by seq");
+                        IList<Model.wx_requestRuleContent> rclist = rcBll.GetModelList("rId=" + ruleList[0].id + " order by seq");
                         rpnewsList.DataSource = rclist;
                         rpnewsList.DataBind();
                         MessageBox.ResponseScript(this, "$(\".picnews\").show(); $(\"#div_gongju\").hide();");
@@ -84,7 +87,7 @@ namespace WeiXinPF.Web.admin.wxRule
                         MessageBox.ResponseScript(this, "$(\".music\").show();");
                         break;
                     default:
-                         rblResponseType.SelectedValue = "0";
+                        rblResponseType.SelectedValue = "0";
                         MessageBox.ResponseScript(this, "$(\".wenben\").show();");
                         break;
 
@@ -114,7 +117,7 @@ namespace WeiXinPF.Web.admin.wxRule
             {
                 //保存之前，删除以前的数据
                 int requestType = int.Parse(lblreqestType.Text);//请求的类别
-              
+
                 if (requestType == 6)
                 {
                     ruleName = "关注时的触发内容";
@@ -123,7 +126,7 @@ namespace WeiXinPF.Web.admin.wxRule
                 {
                     ruleName = "默认回复内容";
                 }
-                else if(requestType == 7)
+                else if (requestType == 7)
                 {
                     ruleName = "取消关注时的触发内容";
                 }
@@ -135,7 +138,7 @@ namespace WeiXinPF.Web.admin.wxRule
                 rule.uId = manager.id;
                 rule.wId = weixin.id;
                 rule.ruleName = ruleName;
-                rule.reqestType = requestType; 
+                rule.reqestType = requestType;
                 rule.isDefault = false;
                 rule.createDate = DateTime.Now;
 
@@ -178,10 +181,28 @@ namespace WeiXinPF.Web.admin.wxRule
                         return;
                     }
 
-
                     //规则
                     rule.responseType = 3;//回复的类型:文本1，图文2，语音3，视频4,第三方接口5
                     int rId = rBll.Add(rule);
+
+                    //Modify by Yidane
+                    //语音先上传微信服务器，获取到media_id，保存到数据库
+                    if (File.Exists(Server.MapPath(txtMusicFile.Text)))
+                    {
+                        try
+                        {
+                            var err = string.Empty;
+                            var token = WeiXinCRMComm.getAccessToken(weixin.id, out err);
+                            if (string.IsNullOrEmpty(err))
+                            {
+                                var result = MediaApi.UploadForeverMedia(token, Server.MapPath(txtMusicFile.Text));
+                                rc.extStr = result.media_id;
+                            }
+                        }
+                        catch (Exception)
+                        {
+                        }
+                    }
 
                     //内容
                     rc.rId = rId;
@@ -192,6 +213,10 @@ namespace WeiXinPF.Web.admin.wxRule
                     rc.remark = txtMusicRemark.Text;
                     rcBll.Add(rc);
 
+                    if (string.IsNullOrEmpty(rc.extStr))
+                    {
+                        JscriptMsg("编辑" + ruleName + "有问题！", "subscribe.aspx?act=" + MyCommFun.QueryString("act"), "Error");
+                    }
                 }
                 AddAdminLog(MXEnums.ActionEnum.Edit.ToString(), "编辑" + ruleName); //记录日志
                 JscriptMsg("编辑" + ruleName + "成功！", "subscribe.aspx?act=" + MyCommFun.QueryString("act"), "Success");
