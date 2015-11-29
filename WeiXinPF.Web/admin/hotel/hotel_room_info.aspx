@@ -42,7 +42,6 @@
 <body class="mainbody">
     <form id="form1" runat="server">
         <div class="location" runat="server" id="divLocation">
-            
         </div>
         <div class="line10"></div>
         <div class="content-tab-wrap">
@@ -83,6 +82,22 @@
                 <dt>优惠价：</dt>
                 <dd>
                     <asp:TextBox runat="server" ID="salePrice" CssClass="input normal" sucmsg=" " nullmsg=" " datatype="num"></asp:TextBox>
+                    <span class="Validform_checktip">*</span>
+                </dd>
+            </dl>
+            <dl>
+                <dt>使用有效期</dt>
+                <dd>
+                    <div class="input-date">
+                        <asp:TextBox ID="txtExpiryDate_Begin" runat="server" CssClass="input date" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" datatype="*1-50" errormsg="请选择正确的日期" sucmsg=" " nullmsg=" " />
+                        <i>开始时间</i>
+                    </div>
+                    到
+                  
+                    <div class="input-date">
+                        <asp:TextBox ID="txtExpiryDate_End" runat="server" CssClass="input date" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" datatype="*1-50" errormsg="请选择正确的日期" sucmsg=" " nullmsg=" " />
+                        <i>结束时间</i>
+                    </div>
                     <span class="Validform_checktip">*</span>
                 </dd>
             </dl>

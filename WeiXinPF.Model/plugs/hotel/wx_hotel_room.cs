@@ -92,11 +92,11 @@ namespace WeiXinPF.Model
         }
 
 
-//        public int? createUser
-//        {
-//            get { return _createUser; }
-//            set { _createUser = value; }
-//        }
+        //        public int? createUser
+        //        {
+        //            get { return _createUser; }
+        //            set { _createUser = value; }
+        //        }
 
         /// <summary>
         /// 排序号
@@ -142,6 +142,9 @@ namespace WeiXinPF.Model
             get { return _status; }
             set { _status = value; }
         }
+
+        public DateTime? ExpiryDate_Begin { get; set; }
+        public DateTime? ExpiryDate_End { get; set; }
         #endregion Model
 
     }

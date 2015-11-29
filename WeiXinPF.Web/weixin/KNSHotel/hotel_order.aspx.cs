@@ -17,9 +17,9 @@ namespace WeiXinPF.Web.weixin.KNSHotel
         public string openid = "";
         public string image = "";
         BLL.wx_hotel_dingdan dingdanbll = new BLL.wx_hotel_dingdan();
-        public string order="";
+        public string order = "";
         public int numdingdan = 0;
- 
+
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -32,9 +32,9 @@ namespace WeiXinPF.Web.weixin.KNSHotel
                 BLL.wx_hotels_info infobll = new BLL.wx_hotels_info();
                 Model.wx_hotels_info info = new Model.wx_hotels_info();
                 info = infobll.GetModel(hotelid);
-                if (info!=null)
-                {               
-                image = info.topPic;
+                if (info != null)
+                {
+                    image = info.topPic;
                 }
 
                 BLL.wx_hotel_dingdan dingdanbll = new BLL.wx_hotel_dingdan();
@@ -53,14 +53,14 @@ namespace WeiXinPF.Web.weixin.KNSHotel
             }
         }
 
-        public void List(string openid,int hotelid)
+        public void List(string openid, int hotelid)
         {
 
-            DataSet dr = dingdanbll.GetList(openid,hotelid);
-            if(dr.Tables[0].Rows.Count >0)
+            DataSet dr = dingdanbll.GetList(openid, hotelid);
+            if (dr.Tables[0].Rows.Count > 0)
             {
                 order += "  <ul class=\"round\"> ";
-                for(int i=0;i<dr.Tables[0].Rows.Count;i++)
+                for (int i = 0; i < dr.Tables[0].Rows.Count; i++)
                 {
 
                     var time = DateTime.Parse(dr.Tables[0].Rows[i]["orderTime"].ToString());
@@ -122,13 +122,22 @@ namespace WeiXinPF.Web.weixin.KNSHotel
                     order += "<p>预约商家：" + dr.Tables[0].Rows[i]["hotelName"].ToString() + "</p>";
                     order += "<p>类型：" + dr.Tables[0].Rows[i]["roomType"].ToString() + "</p>";
                     order += "<p>数量：" + dr.Tables[0].Rows[i]["orderNum"].ToString() + "间</p>";
-                    order += "<p>付款：" + dr.Tables[0].Rows[i]["price"].ToString() + "元</p>";
+                    order += "<p>付款：" + GetPrice(dr.Tables[0].Rows[i]) + "元</p>";
                     order += "<p>到店日期：" + arriveTime + "</p>";
                     order += "</div></a></li>";
                 }
 
                 order += " </ul> ";
             }
+        }
+
+        private double GetPrice(DataRow row)
+        {
+            int orderDays = (row.Field<DateTime>("leaveTime") - row.Field<DateTime>("arriveTime")).Days;
+            int orderNum = row.Field<int>("orderNum");
+            double price = row.Field<double>("price");
+
+            return orderDays * orderNum * price;
         }
     }
 }

@@ -66,6 +66,8 @@ namespace WeiXinPF.Web.admin.hotel
                 this.txtUsueIntroduction.Value = room.UseInstruction;
                 this.txtRefundRule.Value = room.RefundRule;
 
+                this.txtExpiryDate_Begin.Text = room.ExpiryDate_Begin.HasValue ? room.ExpiryDate_Begin.Value.ToString("yyyy-MM-dd") : "";
+                this.txtExpiryDate_End.Text = room.ExpiryDate_End.HasValue ? room.ExpiryDate_End.Value.ToString("yyyy-MM-dd") : "";
                 if (room.Status != Model.RoomStatus.Submit)
                 {
                     //获取审核意见
@@ -115,6 +117,15 @@ namespace WeiXinPF.Web.admin.hotel
                 room.RefundRule = this.txtRefundRule.Value;
                 room.createDate = DateTime.Now;
                 room.Status = Model.RoomStatus.Submit;
+
+                room.ExpiryDate_Begin = DateTime.Parse(txtExpiryDate_Begin.Text);
+                room.ExpiryDate_End = DateTime.Parse(txtExpiryDate_End.Text);
+
+                if (DateTime.Compare(room.ExpiryDate_Begin.Value, room.ExpiryDate_End.Value) > 0)
+                {
+                    JscriptMsg("使用有效期开始时间不能大于结束时间。", "", "error");
+                }
+
                 int id = roomBll.Add(room);
 
 
@@ -149,7 +160,7 @@ namespace WeiXinPF.Web.admin.hotel
                 {
                     var manager = GetAdminInfo();
                     var hotelsInfo = new BLL.wx_hotels_info().GetModel(hotelid);
-                   
+
                     var msg = new ShortMsgDto()
                     {
                         Title = hotelsInfo.hotelName,
@@ -160,7 +171,7 @@ namespace WeiXinPF.Web.admin.hotel
                         ButtonText = "马上去审核",
                         ButtonUrl = String.Format("/admin/hotel/hotel_room_info.aspx?action=Audit&hotelid={0}&roomid={1}",
                    hotelid, id),
-                        ButtonMutipleUrl = String.Format("/admin/hotel/hotel_room.aspx?hotelid={0}&action=Audit",hotelid),
+                        ButtonMutipleUrl = String.Format("/admin/hotel/hotel_room.aspx?hotelid={0}&action=Audit", hotelid),
                         FromUserId = manager.id.ToString(),
                         ToUserId = scenicUser.uId.ToString(),
                         MsgToUserType = MsgUserType.Scenic,
@@ -187,6 +198,14 @@ namespace WeiXinPF.Web.admin.hotel
                 room.salePrice = Convert.ToDecimal(this.salePrice.Text);
                 room.facilities = this.facilities.Value;
                 room.Status = Model.RoomStatus.Submit;
+
+                room.ExpiryDate_Begin = DateTime.Parse(txtExpiryDate_Begin.Text);
+                room.ExpiryDate_End = DateTime.Parse(txtExpiryDate_End.Text);
+
+                if (DateTime.Compare(room.ExpiryDate_Begin.Value, room.ExpiryDate_End.Value) > 0)
+                {
+                    JscriptMsg("使用有效期开始时间不能大于结束时间。", "", "error");
+                }
 
                 roomBll.Update(room);
 
@@ -232,7 +251,7 @@ namespace WeiXinPF.Web.admin.hotel
                 if (hotelAdmin != null)
                 {
                     var wxUserweixin = GetWeiXinCode();
-//                    var role = new BLL.manager_role().GetModel(manager.role_id);
+                    //                    var role = new BLL.manager_role().GetModel(manager.role_id);
                     //                    var hotelsInfo = new BLL.wx_hotels_info().GetModel(hotelid);
                     var msg = new ShortMsgDto()
                     {
