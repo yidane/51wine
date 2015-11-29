@@ -125,7 +125,6 @@
     <Content Include="admin\hotel\Verification\dingdan_confirm.aspx" />
     <Content Include="admin\index - Copy.aspx" />
     <Content Include="admin\js\message-vm.js" />
-    <Content Include="admin\map\map_scenic.html" />
     <Content Include="admin\map\marker_edit.aspx" />
     <Content Include="admin\photo\photoEdit.aspx" />
     <Content Include="admin\photo\photolist.aspx" />
@@ -8476,7 +8475,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="admin\map\js\" />
     <Folder Include="admin\usehelp\酒店管理员\订单管理（针对用户下单了要怎么做）.files\" />
     <Folder Include="aspx\" />
     <Folder Include="html\" />
@@ -8568,11 +8566,8 @@
     <Content Include="weixin\cashred\images\title-bg-red.png" />
     <Content Include="weixin\cashred\index.aspx" />
     <Content Include="weixin\cashred\js\alert.js" />
-    <Content Include="weixin\map\css\mapScenic.css" />
     <Content Include="weixin\photo\end.aspx" />
     <Content Include="weixin\restaurant\css\orderlist.css" />
-    <Content Include="weixin\restaurant\images\icon-tuikuan.png" />
-    <Content Include="weixin\restaurant\images\icon-xiangqing.png" />
     <Content Include="weixin\restaurant\images\i_gray_icon.png" />
     <Content Include="weixin\restaurant\images\refundAll.png" />
     <Content Include="weixin\restaurant\images\refundPart.png" />
@@ -8580,10 +8575,6 @@
     <Content Include="weixin\restaurant\images\time_gray_icon.png" />
     <Content Include="weixin\restaurant\images\usedTicket.png" />
     <Content Include="weixin\restaurant\images\wave_blue_icon.svg" />
-    <Content Include="weixin\restaurant\images\该二维码已使用.png" />
-    <Content Include="weixin\restaurant\images\该二维码已退款.png" />
-    <Content Include="weixin\restaurant\images\该二维码未激活.png" />
-    <Content Include="weixin\restaurant\images\退票中无法使用.png" />
     <Content Include="weixin\WeChatPay\getopenId.aspx" />
     <Content Include="weixin\KNSHotel\css\hotels.css" />
     <Content Include="weixin\KNSHotel\css\mystyle.css" />

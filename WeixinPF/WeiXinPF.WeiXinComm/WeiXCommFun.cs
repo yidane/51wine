@@ -186,7 +186,7 @@ namespace WeiXinPF.WeiXinComm
         }
 
         /// <summary>
-        /// 处理语音请求
+        /// 处理音乐请求
         /// </summary>
         /// <param name="requestMessage"></param>
         /// <returns></returns>
@@ -219,7 +219,7 @@ namespace WeiXinPF.WeiXinComm
                 }
                 else
                 {
-                    responseMessage.Music.MusicUrl = MyCommFun.getWebSite()+ model.mediaUrl;
+                    responseMessage.Music.MusicUrl = MyCommFun.getWebSite() + model.mediaUrl;
                 }
                 responseMessage.Music.Title = model.rContent;
                 responseMessage.Music.Description = model.rContent2;
@@ -295,6 +295,45 @@ namespace WeiXinPF.WeiXinComm
             return responseMessage;
         }
 
+        /// <summary>
+        /// 推送语音请求
+        /// </summary>
+        /// <param name="requestMessage"></param>
+        /// <param name="indexid"></param>
+        /// <param name="wid"></param>
+        /// <param name="enevtName"></param>
+        /// <returns></returns>
+        public IResponseMessageBase GetResponseMessageVoice(RequestMessageEventBase requestMessage, int indexid, int wid, string enevtName)
+        {
+            var responseMessage = ResponseMessageBase.CreateFromRequestMessage<ResponseMessageVoice>(requestMessage);
+
+            Model.wx_requestRuleContent model = getDataMusicComm(wid, indexid);
+            if (model == null)
+            {
+
+                wxResponseBaseMgr.Add(wid, requestMessage.FromUserName, requestMessage.MsgType.ToString(), enevtName, "voice", "-1", requestMessage.ToUserName);
+            }
+            else
+            {
+                //if (model.mediaUrl.StartsWith("http"))
+                //{
+
+                //    responseMessage.Music.MusicUrl = model.mediaUrl;
+                //}
+                //else
+                //{
+                //    responseMessage.Music.MusicUrl = MyCommFun.getWebSite() + model.mediaUrl;
+                //}
+                //responseMessage.Music.Title = model.rContent;
+                //responseMessage.Music.Description = model.rContent2;
+                //wxResponseBaseMgr.Add(wid, requestMessage.FromUserName, requestMessage.MsgType.ToString(), enevtName, "voice", "音乐链接：" + model.mediaUrl + "|标题：" + model.rContent + "|描述：" + model.rContent2, requestMessage.ToUserName);
+
+                responseMessage.Voice = new Voice() { MediaId = "jrXTNzykO9cBAU-4nZJlF9F5kojnOZWlQ9MeHmwhu-M" };
+
+                wxResponseBaseMgr.Add(wid, requestMessage.FromUserName, requestMessage.MsgType.ToString(), enevtName, "voice", "音乐链接：" + model.mediaUrl + "|标题：" + model.rContent + "|描述：" + model.rContent2, requestMessage.ToUserName);
+            }
+            return responseMessage;
+        }
 
         #endregion
 
@@ -484,6 +523,20 @@ namespace WeiXinPF.WeiXinComm
         /// <param name="Indexid"></param>
         /// <returns></returns>
         public Model.wx_requestRuleContent getDataMusicComm(int wid, int Indexid)
+        {
+
+            Model.wx_requestRuleContent model = rcBll.GetMusicContent(Indexid);
+            return model;
+
+        }
+
+        /// <summary>
+        /// 从数据库里取语音类型的值
+        /// </summary>
+        /// <param name="wid">微帐号主键Id</param>
+        /// <param name="Indexid"></param>
+        /// <returns></returns>
+        public Model.wx_requestRuleContent getDataVoiceComm(int wid, int Indexid)
         {
 
             Model.wx_requestRuleContent model = rcBll.GetMusicContent(Indexid);
