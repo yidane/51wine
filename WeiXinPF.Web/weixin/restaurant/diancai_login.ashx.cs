@@ -154,10 +154,19 @@ namespace WeiXinPF.Web.weixin.restaurant
 
                 if (!string.IsNullOrEmpty(productId))
                 {
-                    productDescription = new BLL.wx_diancai_caipin_manage().GetModel(int.Parse(productId)).shopIntroduction;
+                    var model = new BLL.wx_diancai_caipin_manage().GetModel(int.Parse(productId));
+                    productDescription = model.shopIntroduction;
+                    var data = new {
+                        shopIntroduction=model.shopIntroduction,
+                        detailContent = model.detailContent,
+                        instructions=model.instructions,
+                        chargeback=model.chargeback
+
+                    };
+                    context.Response.Write(AjaxResult.Success(data).ToCamelString());
+                    
                 }
 
-                context.Response.Write(string.IsNullOrEmpty(productDescription) ? string.Empty : productDescription);
                 context.Response.End();
             }
         }
