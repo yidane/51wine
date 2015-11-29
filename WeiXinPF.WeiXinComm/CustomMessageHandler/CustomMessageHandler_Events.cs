@@ -221,7 +221,7 @@ namespace WeiXinPF.WeiXinComm.CustomMessageHandler
             int apiid = wxcomm.getApiid();
             //------印美图接口 begin------
             //threeInterface.weipaiInterface wxcf = new threeInterface.weipaiInterface();
-            
+
             //wxcf.weipaiSubscribe(requestMessage.FromUserName, apiid);
             //------印美图接口 end------
             xjHongBao xjMgr = new xjHongBao();
@@ -286,7 +286,8 @@ namespace WeiXinPF.WeiXinComm.CustomMessageHandler
                     break;
                 case 3:
                     //发送语音
-                    reponseMessage = wxcomm.GetResponseMessageeMusic(requestMessage, rid, apiid, EventName);
+                    //reponseMessage = wxcomm.GetResponseMessageeMusic(requestMessage, rid, apiid, EventName);
+                    reponseMessage = wxcomm.GetResponseMessageVoice(requestMessage, rid, apiid, EventName);
                     break;
                 default:
                     break;
