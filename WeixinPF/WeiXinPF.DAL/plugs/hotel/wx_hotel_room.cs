@@ -52,9 +52,9 @@ namespace WeiXinPF.DAL
         {
             StringBuilder query = new StringBuilder();
             query.Append("Insert Into[dbo].[wx_hotel_room]");
-            query.Append("([hotelid],[roomType],[indroduce],[roomPrice],[salePrice],[facilities],[createDate],[sortid],[RoomCode],[UseInstruction],[RefundRule],[Status])");
+            query.Append("([hotelid],[roomType],[indroduce],[roomPrice],[salePrice],[facilities],[createDate],[sortid],[RoomCode],[UseInstruction],[RefundRule],[Status],[ExpiryDate_Begin],[ExpiryDate_End])");
             query.Append("Values");
-            query.Append("(@hotelid, @roomType, @indroduce, @roomPrice, @salePrice, @facilities, @createDate, @sortid, @RoomCode, @UseInstruction, @RefundRule, @Status);");
+            query.Append("(@hotelid, @roomType, @indroduce, @roomPrice, @salePrice, @facilities, @createDate, @sortid, @RoomCode, @UseInstruction, @RefundRule, @Status,@ExpiryDate_Begin,@ExpiryDate_End);");
             query.Append("Select @Id = Scope_Identity()");
             //query.Append("Update dbo.wx_hotel_room Set RoomCode=Right('0000'+Cast(@Id As Varchar(10)),4) Where Id=@Id");
             using (IDbConnection db = DbFactory.GetOpenedConnection())
@@ -90,6 +90,8 @@ namespace WeiXinPF.DAL
             query.Append("       ,[UseInstruction] = @UseInstruction");
             query.Append("       ,[RefundRule] = @RefundRule");
             query.Append("       ,[Status] = @Status");
+            query.Append("       ,[ExpiryDate_Begin] = @ExpiryDate_Begin");
+            query.Append("       ,[ExpiryDate_End] = @ExpiryDate_End");
             query.Append(" Where id=@Id");
 
             using (IDbConnection db = DbFactory.GetOpenedConnection())
