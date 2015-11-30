@@ -192,9 +192,12 @@ namespace WeiXinPF.Web.admin.hotel
                         {
                             isUserd = "是";
                         }
+                        var codeCount = code.IdentifyingCode.Length - 4;
+                        var icode = string.Format("****************{0}",
+                            code.IdentifyingCode.Substring(codeCount, 4));
                         sb.Append(string.Format(" <tr><td>{0}</td>", dingdan.roomType));
                         sb.Append(string.Format("<td class=\"cc\">￥{0}</td>", dingdan.price));
-                        sb.Append(string.Format("<td class=\"cc\">{0}</td>", code.IdentifyingCode));
+                        sb.Append(string.Format("<td class=\"cc\">{0}</td>", icode));
                         sb.Append(string.Format("<td class=\"cc\">{0}</td>", isUserd));
 
                         sb.Append(string.Format("<td class=\"cc\">{0}</td>", arriveTime));
