@@ -8568,6 +8568,7 @@
     <Content Include="weixin\cashred\images\title-bg-red.png" />
     <Content Include="weixin\cashred\index.aspx" />
     <Content Include="weixin\cashred\js\alert.js" />
+    <Content Include="weixin\map\css\mapScenic.css" />
     <Content Include="weixin\photo\end.aspx" />
     <Content Include="weixin\restaurant\css\orderlist.css" />
     <Content Include="weixin\restaurant\images\i_gray_icon.png" />
