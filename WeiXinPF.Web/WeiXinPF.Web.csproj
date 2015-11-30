@@ -125,6 +125,7 @@
     <Content Include="admin\hotel\Verification\dingdan_confirm.aspx" />
     <Content Include="admin\index - Copy.aspx" />
     <Content Include="admin\js\message-vm.js" />
+    <Content Include="admin\map\map_scenic.html" />
     <Content Include="admin\map\marker_edit.aspx" />
     <Content Include="admin\photo\photoEdit.aspx" />
     <Content Include="admin\photo\photolist.aspx" />
@@ -8475,6 +8476,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="admin\map\js\" />
     <Folder Include="admin\usehelp\酒店管理员\订单管理（针对用户下单了要怎么做）.files\" />
     <Folder Include="aspx\" />
     <Folder Include="html\" />
