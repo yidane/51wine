@@ -245,8 +245,9 @@
             <dl>
                 <dt>退款金额：</dt>
                 <dd>
-
-                    <input id="txtAmount" type="text" class="input normal" runat="server" sucmsg=" " nullmsg="" datatype="n" />
+                    <asp:TextBox ID="txtAmount"  CssClass="input normal" runat="server" sucmsg=" "
+                         nullmsg="" datatype="n"></asp:TextBox>
+ 
                     <span class="Validform_checktip">注：默认为订单全额，可修改。*</span>
 
                 </dd>

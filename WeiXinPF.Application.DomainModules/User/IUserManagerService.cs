@@ -8,7 +8,8 @@ namespace WeiXinPF.Application.DomainModules.User
         UserManagerDto Get(int userId);
         UserManagerDto Get(string loginName, string password);
 
-        UserManagerDto Mapping(Model.manager user);
+        UserManagerDto Get(Model.manager user);
+         
 
         MsgUserType GetUserType(UserManagerDto user);
     }
