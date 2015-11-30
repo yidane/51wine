@@ -72,7 +72,24 @@ namespace WeiXinPF.WeiXinComm
         }
 
 
+        public IResponseMessageBase GetResponseMessageeVoice(RequestMessageText requestMessage, int Indexid, int wid)
+        {
 
+            var responseMessage = ResponseMessageBase.CreateFromRequestMessage<ResponseMessageVoice>(requestMessage);
+            Model.wx_requestRuleContent model_wx = getDataMusicComm(wid, Indexid);
+            if (model_wx == null)
+            {
+                wxResponseBaseMgr.Add(wid, requestMessage.FromUserName, requestMessage.MsgType.ToString(), requestMessage.Content, "music", "-1", requestMessage.ToUserName);
+            }
+            else
+            {
+                responseMessage.Voice = new Voice() { MediaId = model_wx.extStr };
+                wxResponseBaseMgr.Add(wid, requestMessage.FromUserName, requestMessage.MsgType.ToString(), requestMessage.Content, "music", "音乐链接：" + model_wx.mediaUrl + "|标题：" + model_wx.rContent + "|描述：" + model_wx.rContent2, requestMessage.ToUserName);
+
+            }
+
+            return responseMessage;
+        }
 
 
         /// <summary>

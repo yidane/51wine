@@ -88,7 +88,7 @@ namespace WeiXinPF.WeiXinComm.CustomMessageHandler
                         break;
                     case 3:
                         //发送语音
-                        IR = wxcomm.GetResponseMessageeMusic(requestMessage, ruleId, apiid);
+                        IR = wxcomm.GetResponseMessageeVoice(requestMessage, ruleId, apiid);
                         break;
                     default:
                         break;
