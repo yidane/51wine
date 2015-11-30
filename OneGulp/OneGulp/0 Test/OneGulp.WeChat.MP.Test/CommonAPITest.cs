@@ -6,11 +6,8 @@ using System.Collections.Generic;
 namespace OneGulp.WeChat.MP.Test
 {
     [TestClass]
-    public class CommonAPITest
+    public class CommonAPITest : WeChatAppAcount
     {
-        string appId = "wxdd6127bdb5e7611c";
-        string appSecret = "78fb32f17d30a6ade836319283ccf118";
-
         [TestMethod]
         public void GetTokenTest()
         {

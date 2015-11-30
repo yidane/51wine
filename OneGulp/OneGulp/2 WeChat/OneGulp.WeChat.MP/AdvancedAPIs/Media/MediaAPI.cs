@@ -24,7 +24,7 @@
 ----------------------------------------------------------------*/
 
 /*
-    接口详见：http://mp.WeChat.qq.com/wiki/index.php?title=%E4%B8%8A%E4%BC%A0%E4%B8%8B%E8%BD%BD%E5%A4%9A%E5%AA%92%E4%BD%93%E6%96%87%E4%BB%B6
+    接口详见：http://mp.WeiXin.qq.com/wiki/index.php?title=%E4%B8%8A%E4%BC%A0%E4%B8%8B%E8%BD%BD%E5%A4%9A%E5%AA%92%E4%BD%93%E6%96%87%E4%BB%B6
  */
 
 using System;
@@ -59,11 +59,10 @@ namespace OneGulp.WeChat.MP.AdvancedAPIs
         {
             return ApiHandlerWapper.TryCommonApi(accessToken =>
             {
-                var url = string.Format("http://api.WeiXin.qq.com/cgi-bin/media/upload?access_token={0}&type={1}", accessToken, type.ToString());
+                var url = string.Format("https://api.WeiXin.qq.com/cgi-bin/media/upload?access_token={0}&type={1}", accessToken, type.ToString());
                 var fileDictionary = new Dictionary<string, string>();
                 fileDictionary["media"] = file;
                 return HttpUtility.Post.PostFileGetJson<UploadTemporaryMediaResult>(url, null, fileDictionary, null, timeOut: timeOut);
-
             }, accessTokenOrAppId);
         }
 
@@ -136,10 +135,10 @@ namespace OneGulp.WeChat.MP.AdvancedAPIs
         /// 新增其他类型永久素材(图片（image）、语音（voice）和缩略图（thumb）)
         /// </summary>
         /// <param name="accessTokenOrAppId"></param>
-        /// <param name="file">文件路径</param>
+        /// <param name="filePath">文件路径</param>
         /// <param name="timeOut">代理请求超时时间（毫秒）</param>
         /// <returns></returns>
-        public static UploadForeverMediaResult UploadForeverMedia(string accessTokenOrAppId, string file, int timeOut = Config.TIME_OUT)
+        public static UploadForeverMediaResult UploadForeverMedia(string accessTokenOrAppId, string filePath, int timeOut = Config.TIME_OUT)
         {
             return ApiHandlerWapper.TryCommonApi(accessToken =>
             {
@@ -151,7 +150,7 @@ namespace OneGulp.WeChat.MP.AdvancedAPIs
 
                 var fileDictionary = new Dictionary<string, string>();
                 //fileDictionary["type"] = UploadMediaFileType.image.ToString();//不提供此参数也可以上传成功
-                fileDictionary["media"] = file;
+                fileDictionary["media"] = filePath;
                 return HttpUtility.Post.PostFileGetJson<UploadForeverMediaResult>(url, null, fileDictionary, null, timeOut: timeOut);
 
             }, accessTokenOrAppId);

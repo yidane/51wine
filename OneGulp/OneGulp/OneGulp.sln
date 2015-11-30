@@ -17,6 +17,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0 Test", "0 Test", "{D29EA6
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OneGulp.WeChat.MP.Test", "0 Test\OneGulp.WeChat.MP.Test\OneGulp.WeChat.MP.Test.csproj", "{2C273CF9-2463-4B0E-A902-9F18DAEA2AC6}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3 ServicePlatform", "3 ServicePlatform", "{64EEEEB9-4063-407A-96AC-5E6B28F34532}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
 		SccNumberOfProjects = 5

@@ -64,15 +64,8 @@ namespace OneGulp.WeChat.XmlUtility
         {
             MemoryStream Stream = new MemoryStream();
             XmlSerializer xml = new XmlSerializer(typeof(T));
-            try
-            {
-                //序列化对象
-                xml.Serialize(Stream, obj);
-            }
-            catch (InvalidOperationException)
-            {
-                throw;
-            }
+            //序列化对象
+            xml.Serialize(Stream, obj);
             Stream.Position = 0;
             StreamReader sr = new StreamReader(Stream);
             string str = sr.ReadToEnd();

@@ -45,12 +45,12 @@ namespace OneGulp.WeChat.HttpUtility
         /// <returns></returns>
         public static T GetResult<T>(string returnText)
         {
-            JavaScriptSerializer js = new JavaScriptSerializer();
+            var js = new JavaScriptSerializer();
 
             if (returnText.Contains("errcode"))
             {
                 //可能发生错误
-                WxJsonResult errorResult = js.Deserialize<WxJsonResult>(returnText);
+                var errorResult = js.Deserialize<WxJsonResult>(returnText);
                 if (errorResult.errcode != ReturnCode.请求成功)
                 {
                     //发生错误
@@ -62,7 +62,7 @@ namespace OneGulp.WeChat.HttpUtility
                 }
             }
 
-            T result = js.Deserialize<T>(returnText);
+            var result = js.Deserialize<T>(returnText);
             return result;
         }
 
@@ -72,14 +72,19 @@ namespace OneGulp.WeChat.HttpUtility
         /// <typeparam name="T">返回数据类型（Json对应的实体）</typeparam>
         /// <param name="url">请求Url</param>
         /// <param name="cookieContainer">CookieContainer，如果不需要则设为null</param>
+        /// <param name="encoding"></param>
         /// <param name="timeOut">代理请求超时时间（毫秒）</param>
+        /// <param name="fileDictionary"></param>
+        /// <param name="postDataDictionary"></param>
         /// <returns></returns>
         public static T PostFileGetJson<T>(string url, CookieContainer cookieContainer = null, Dictionary<string, string> fileDictionary = null, Dictionary<string, string> postDataDictionary = null, Encoding encoding = null, int timeOut = Config.TIME_OUT)
         {
-            using (MemoryStream ms = new MemoryStream())
+            using (var ms = new MemoryStream())
             {
+
+
                 postDataDictionary.FillFormDataStream(ms); //填充formData
-                string returnText = HttpUtility.RequestUtility.HttpPost(url, cookieContainer, ms, fileDictionary, null, encoding, timeOut: timeOut);
+                var returnText = HttpUtility.RequestUtility.HttpPost(url, cookieContainer, ms, fileDictionary, null, encoding, timeOut: timeOut);
                 var result = GetResult<T>(returnText);
                 return result;
             }
