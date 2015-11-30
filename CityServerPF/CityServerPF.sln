@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CityServerPF.Web", "SourceCode\CityServerPF.Web\CityServerPF.Web.csproj", "{98BEC83E-8D65-4B52-9BA0-DBFECBE4B2E4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CityServerPF.Client.Web", "SourceCode\CityServerPF.Client.Web\CityServerPF.Client.Web.csproj", "{98BEC83E-8D65-4B52-9BA0-DBFECBE4B2E4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1-Client", "1-Client", "{690D6ED3-9C12-48B3-BCE9-C73D71FE9755}"
 EndProject
@@ -45,13 +45,13 @@ Global
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs20
 		SccLocalPath0 = .
-		SccProjectUniqueName1 = SourceCode\\CityServerPF.Web\\CityServerPF.Web.csproj
+		SccProjectUniqueName1 = SourceCode\\CityServerPF.Server.WaterSupply\\CityServerPF.Server.WaterSupply.xproj
 		SccProjectTopLevelParentUniqueName1 = CityServerPF.sln
-		SccProjectName1 = SourceCode/CityServerPF.Web
-		SccLocalPath1 = SourceCode\\CityServerPF.Web
-		SccProjectUniqueName2 = SourceCode\\CityServerPF.Server.WaterSupply\\CityServerPF.Server.WaterSupply.xproj
+		SccProjectName1 = SourceCode/CityServerPF.Server.WaterSupply
+		SccLocalPath1 = SourceCode\\CityServerPF.Server.WaterSupply
+		SccProjectUniqueName2 = SourceCode\\CityServerPF.Web\\CityServerPF.Client.Web.csproj
 		SccProjectTopLevelParentUniqueName2 = CityServerPF.sln
-		SccProjectName2 = SourceCode/CityServerPF.Server.WaterSupply
-		SccLocalPath2 = SourceCode\\CityServerPF.Server.WaterSupply
+		SccProjectName2 = SourceCode/CityServerPF.Web
+		SccLocalPath2 = SourceCode\\CityServerPF.Web
 	EndGlobalSection
 EndGlobal
