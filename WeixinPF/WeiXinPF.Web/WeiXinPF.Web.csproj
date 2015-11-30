@@ -3425,6 +3425,7 @@
     <Content Include="images\ub1.png" />
     <Content Include="images\user.png" />
     <Content Include="images\wechatlogo.jpg" />
+    <Content Include="images\weichatDefaultHeadImg.jpg" />
     <Content Include="images\wxpic\wx_dzp.jpg" />
     <Content Include="images\wxpic\wx_ggk.jpg" />
     <Content Include="images\wxpic\wx_ms.jpg" />
