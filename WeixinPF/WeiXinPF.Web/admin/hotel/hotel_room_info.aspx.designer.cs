@@ -85,24 +85,6 @@ namespace WeiXinPF.Web.admin.hotel {
         protected global::System.Web.UI.WebControls.TextBox salePrice;
         
         /// <summary>
-        /// txtExpiryDate_Begin 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtExpiryDate_Begin;
-        
-        /// <summary>
-        /// txtExpiryDate_End 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtExpiryDate_End;
-        
-        /// <summary>
         /// indroduce 控件。
         /// </summary>
         /// <remarks>

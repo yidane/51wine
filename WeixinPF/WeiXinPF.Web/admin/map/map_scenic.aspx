@@ -1,13 +1,13 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <title>景区导航设置</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="map_scenic.aspx.cs" Inherits="WeiXinPF.Web.admin.map.map_scenic" %>
 
-    <meta charset="utf-8" />
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>景区导航设置</title>
     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-1.0.0-b1/leaflet.css" />
-     
-    <link href="//cdn.bootcss.com/font-awesome/4.4.0/css/font-awesome.css" rel="stylesheet">
+
+    <link href="//cdn.bootcss.com/font-awesome/4.4.0/css/font-awesome.css" rel="stylesheet" />
     <link rel="stylesheet" href="../../weixin/map/css/L.Control.Locate.min.css" />
     <!--[if lt IE 9]>
     <link rel="stylesheet" href="../../weixin/map/css/L.Control.Locate.ie.min.css"/>
@@ -15,18 +15,20 @@
     <link href="../../scripts/lhgdialog/skins/idialog.css" rel="stylesheet" />
     <link href="../../weixin/map/css/mapScenic.css" rel="stylesheet" />
     <style>
-        html,body {
+        html, body {
             width: 100%;
             height: 100%;
             overflow: hidden;
         }
-         .mainbody {
+
+        .mainbody {
             padding: 10px 15px;
         }
-         #map {
-             height: 92%;
-             width: 98%;
-         }
+
+        #map {
+            height: 92%;
+            width: 98%;
+        }
 
 
         .tip-bottom ul li {
@@ -41,97 +43,89 @@
             font-size: 12px;
             color: #333;
         }
-        .location a.back {
-            margin-right: 15px;
-        }
-        .location a {
-            display: inline-block;
-            color: #333;
-            text-decoration: none;
-        }
 
-        .location a.home i {
-            background-position: -28px 0;
-        }
-        .location a i {
-            display: inline-block;
-            margin-right: 5px;
-            width: 14px;
-            height: 14px;
-            text-indent: -999em;
-            background: url(../skin/default/skin_icons.png) no-repeat;
-            vertical-align: middle;
-        }
-       
-        .tip-content {
-            width: 200px;
-        }
+            .location a.back {
+                margin-right: 15px;
+            }
+
+            .location a {
+                display: inline-block;
+                color: #333;
+                text-decoration: none;
+            }
+
+                .location a.home i {
+                    background-position: -28px 0;
+                }
+
+                .location a i {
+                    display: inline-block;
+                    margin-right: 5px;
+                    width: 14px;
+                    height: 14px;
+                    text-indent: -999em;
+                    background: url(../skin/default/skin_icons.png) no-repeat;
+                    vertical-align: middle;
+                }
     </style>
-
-
 </head>
-
 <body class="mainbody">
     <div class="location">
         <a class="home" href="javascript:;"><i></i><span>景区导航设置</span></a>
     </div>
-    <div id="map"></div> 
-<div style="display: none">
-    <div class="marker-list" data-bind="foreach:markers">
-        <div class="marker" data-bind="click:$root.showtip">
-            <i class="point"></i>
-            <div data-bind="template: { name: 'marker-template', data: $data }"></div>
+    <div id="map"></div>
+    <div style="display: none">
+        <div class="marker-list" data-bind="foreach: markers">
+            <div class="marker" data-bind="click: $root.showtip">
+                <i class="point"></i>
+                <div data-bind="template: { name: 'marker-template', data: $data }"></div>
+            </div>
         </div>
+
+
     </div>
-
-
-</div>
     <div style="display: none" id="div_newMarker" data-bind="template: { name: 'marker-template', data: newMarker }">
-
     </div>
 
     <script type="text/html" id="marker-template">
-         <div class="tip" data-bind="attr:{id:'tip_'+id}">
-                <div class="tip-title">                   
-                    <h3 data-bind="text:name"></h3>
-
-                </div>
-                <div class="tip-content" data-bind="text:remark"></div>
-                <div class="tip-bottom">
-                    <ul>
-                        <li data-bind=" enable: id<=0">
-                            <a href="#" data-bind="attr:{'data-left':left,'data-top':top}"
-                               onclick="addRemark($(this).attr('data-left'),$(this).attr('data-top'))">
-                                <i class="fa fa-plus fa-lg" style="color: #1d9d74;margin-right: 5px;"></i>
-                                <span>添加</span>
-                            </a>
-                        </li>
-                        <li data-bind=" enable: id>0">
-                            <a href="#" data-bind="attr:{'data-id':id}"
-                               onclick="editRemark($(this).attr('data-id'))">
-                                <i class="fa fa-edit fa-lg" style="color: #337ab7;
-                                                                                                                                                                                                                                                             margin-right: 5px;"></i><span>修改</span>
-                            </a>
-                        </li>
-                        <li data-bind=" enable: id>0">
-                            <a href="#"
-                               data-bind="attr:{'data-id':id,'data-name':name}"
-                               onclick="deleteRemark($(this).attr('data-id'), $(this).attr('data-name'))"
-                            >
-                                <i class="fa fa-trash fa-lg" style="color: #c9302c;
-                                                                                                                                                                                                                                                                                                                       margin-right: 5px;"></i><span>删除</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
+        <div class="tip" data-bind="attr: { id: 'tip_' + id }">
+            <div class="tip-title">
+                <h3 data-bind="text: name"></h3>
 
             </div>
+            <div class="tip-content" data-bind="text: remark"></div>
+            <div class="tip-bottom">
+                <ul>
+                    <li data-bind=" enable: id <= 0">
+                        <a href="#" data-bind="attr: { 'data-left': left, 'data-top': top }"
+                            onclick="addRemark($(this).attr('data-left'),$(this).attr('data-top'))">
+                            <i class="fa fa-plus fa-lg" style="color: #1d9d74; margin-right: 5px;"></i>
+                            <span>添加</span>
+                        </a>
+                    </li>
+                    <li data-bind=" enable: id > 0">
+                        <a href="#" data-bind="attr: { 'data-id': id }"
+                            onclick="editRemark($(this).attr('data-id'))">
+                            <i class="fa fa-edit fa-lg" style="color: #337ab7; margin-right: 5px;"></i><span>修改</span>
+                        </a>
+                    </li>
+                    <li data-bind=" enable: id > 0">
+                        <a href="#"
+                            data-bind="attr: { 'data-id': id, 'data-name': name }"
+                            onclick="deleteRemark($(this).attr('data-id'), $(this).attr('data-name'))">
+                            <i class="fa fa-trash fa-lg" style="color: #c9302c; margin-right: 5px;"></i><span>删除</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
     </script>
 
-     
-<script src="http://cdn.leafletjs.com/leaflet-1.0.0-b1/leaflet.js"></script> 
+
+    <script src="http://cdn.leafletjs.com/leaflet-1.0.0-b1/leaflet.js"></script>
     <script src="../../weixin/map/js/bouncemarker.js"></script>
-<script src="../../scripts/jquery/jquery-2.1.0.min.js"></script>
+    <script src="../../scripts/jquery/jquery-2.1.0.min.js"></script>
     <script src="../../scripts/lhgdialog/lhgdialog.js"></script>
     <script src="../../scripts/knockout/knockout-3.3.0.js"></script>
 
@@ -142,23 +136,19 @@
             this.map = ko.observable();
             this.mapborder = ko.observable();
             this.markers = ko.observableArray();
-            this.newMarker=ko.observable({
-                id:0,
-                name:'',
-                remark:'',
-                left:0,
-                top:0
+            this.newMarker = ko.observable({
+                id: 0,
+                name: '',
+                remark: '',
+                left: 0,
+                top: 0
             });
-            
-          
+
+
 
             this.init = function () {
                 self.initmap(40.0625, 116.34375);
-                //                self.initmap(39.99530029296875, 116.35028839111328);
-                //     self.initmap(39.99530029296875, 116.35028839111328);
-                //                self.addlocation();//添加定位服务
-                var imageurl = "http://www.cloudorg.com.cn/weixin/map/images/map.jpg";
-                //                self.addScenicLayer(imageurl);//添加景区图层
+                var imageurl = "/weixin/map/images/map.jpg";
                 self.addtileLayer();//添加缩放图层
                 self.bindevent();//添加绑定事件
 
@@ -175,8 +165,6 @@
                     crs: L.CRS.Simple
                 });
                 var mapsize = self.getMapSize();
-                //                var _mapCenter =map.unproject([mapsize.width/2,mapsize.height/2], mapMaxZoom);
-                //                var _mapCenter =map.unproject([3146,3034], mapMaxZoom);
                 var _mapCenter = map.unproject([1612, 1462], mapMaxZoom);
                 map.setView(_mapCenter, mapMinZoom + 1);
                 self.map(map);
@@ -188,11 +176,10 @@
             this.getborderlatlng = function () {
                 return { lat: 39.99848, lng: 116.3469 };
             };
-            
+
             this.addtileLayer = function () {
                 var map = self.map();
                 var mapsize = self.getMapSize();
-                //                var latlng = self.getborderlatlng();
                 var mapMinZoom = map.getMinZoom();
                 var mapMaxZoom = map.getMaxZoom();
                 var mapBounds;
@@ -200,12 +187,6 @@
                     var southWest = map.unproject([0, mapsize.height], map.getMaxZoom());
                     var northEast = map.unproject([mapsize.width, 0], map.getMaxZoom());
 
-
-                    //移动地图到景区
-                    //                    southWest.lat += latlng.lat;
-                    //                    southWest.lng += latlng.lng;
-                    //                    northEast.lat += latlng.lat;
-                    //                    northEast.lng += latlng.lng;
                     mapBounds = new L.LatLngBounds(southWest, northEast);
                     self.setborder(mapBounds);
                 }
@@ -214,16 +195,8 @@
                 }
                 L.tileLayer('../../weixin/map/images/map/{z}/{x}/{y}.png', {
                     minZoom: mapMinZoom, maxZoom: mapMaxZoom,
-                    bounds: mapBounds,
-                    //                    attribution: 'Rendered with <a href="http://www.maptiler.com/">MapTiler</a>',
-                    noWrap: true
+                    bounds: mapBounds,noWrap: true
                 }).addTo(map);
-                //                L.tileLayer('images/map/{z}/{x}/{y}.png', {
-                //                    minZoom: mapMinZoom, maxZoom: mapMaxZoom,
-                //                    bounds: mapBounds,
-                //                   // attribution: '由 <a href="https://twitter.com/jxiaox">jxiaox</a>提供',
-                //                    noWrap: true
-                //                }).addTo(map);
 
 
             };
@@ -237,12 +210,7 @@
                 var southWest = map.unproject([0, mapsize.height], map.getMaxZoom());
                 var northEast = map.unproject([mapsize.width, 0], map.getMaxZoom());
 
-                //                //移动地图到景区
-                //                southWest.lat += latlng.lat;
-                //                southWest.lng += latlng.lng;
-                //                northEast.lat += latlng.lat;
-                //                northEast.lng += latlng.lng;
-
+               
                 var bounds = new L.LatLngBounds(southWest, northEast);
                 self.mapborder(bounds);
                 self.setborder(bounds);
@@ -289,14 +257,14 @@
                             console.log(point);
                             //                            console.log(event.containerPoint);
 
-//                            var marker = L.marker(event.latlng).addTo(map);
-                            var newMarker=self.newMarker();
-                            newMarker.name='提示';
+                            //                            var marker = L.marker(event.latlng).addTo(map);
+                            var newMarker = self.newMarker();
+                            newMarker.name = '提示';
                             newMarker.remark = '请点击[添加]按钮添加景点';
-                            newMarker.left=point.x;
-                            newMarker.top=point.y;
-                        self.newMarker(newMarker);
-                        var content = $('#div_newMarker').html(); 
+                            newMarker.left = point.x;
+                            newMarker.top = point.y;
+                            self.newMarker(newMarker);
+                            var content = $('#div_newMarker').html();
                             var popup = self.getPopup(content);
                             popup
                                 .setLatLng(event.latlng)
@@ -376,27 +344,27 @@
                         lng = (x * mapsize.width + (maxSize - mapsize.width) / 2) / maxSize;
                 return [-256 * lat, 256 * lng];
             };
-            
+
             self.jumpUrl = function (url) {
                 document.location.href = url;
             };
 
-           
+
             this.init();
 
         };
-          function addRemark( left, top) {
-           
-            
+        function addRemark(left, top) {
+
+
             var url = 'marker_edit.aspx?action=Add&top=' + top + '&left=' + left;
-              jumpdirect(url);
+            jumpdirect(url);
         }
-         function editRemark(id) {
-            
-             var url ='marker_edit.aspx?action=Edit&id='+id;
-             jumpdirect(url);
+        function editRemark(id) {
+
+            var url = 'marker_edit.aspx?action=Edit&id=' + id;
+            jumpdirect(url);
         }
-        function deleteRemark(id,name) {
+        function deleteRemark(id, name) {
             console.log(id);
             $.dialog.confirm('确认删除[' + name + ']吗？', function () {
                 $.ajax({
@@ -405,7 +373,7 @@
                     data: { id: id },
                     success: function (res) {
                         if (res.isSuccess) {
-                             
+
                             jumpdirect("map_scenic.html");
 
                         } else {
@@ -437,7 +405,7 @@
     <script>
         var params = { wid: 0 };
         $(function () {
-            
+
             $('.content').scrollTop(100);
             $('.content').scrollLeft(400);
             var wid = getQueryString('wid');
@@ -455,7 +423,7 @@
             return null;
         }
 
-        
+
 
     </script>
 </body>
