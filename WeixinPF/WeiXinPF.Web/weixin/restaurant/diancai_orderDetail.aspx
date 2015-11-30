@@ -200,7 +200,7 @@
                 margin-left: 10%;
                 background-image: url(images/icon-tuikuan.png);
                 background-color: #ccc;
-            }
+            } 
     </style>
     <script type="text/javascript">
         //获取当前位置的坐标
