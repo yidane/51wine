@@ -71,6 +71,11 @@ body {
 .tip-content {
     padding: 15px;
     font-size: 14px;
+    -moz-min-width: 200px;
+    -ms-min-width: 200px;
+    -o-min-width: 200px;
+    -webkit-min-width: 200px;
+    min-width: 200px;
 }
 
 .tip-bottom {
@@ -106,14 +111,13 @@ body {
                 color: #2c3e50;
             }
 
-                .tip-bottom ul li[disabled] {
-                     
-                    cursor: not-allowed;
-                    filter: alpha(opacity=65);
-                    -webkit-box-shadow: none;
-                    box-shadow: none;
-                    opacity: .65;
-                }
+            .tip-bottom ul li[disabled] {
+                cursor: not-allowed;
+                filter: alpha(opacity=65);
+                -webkit-box-shadow: none;
+                box-shadow: none;
+                opacity: .65;
+            }
 
 .triangle {
     width: 0;
