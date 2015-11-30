@@ -114,7 +114,7 @@
 
             <section class="gpd-item  gdp-curr">
                 <div class="gpd-item-title">
-                    <img class="detailicon-ticket" src="images/info.png" />
+                    <img class="detailicon-ticket" src="images/reason.png" />
                     <div class="gpd-item-title-name">审核意见</div>
                     <div class="gp-icons gpd-up-icon"></div>
                 </div>
@@ -138,7 +138,7 @@
 
             <section class="gpd-item">
                 <div class="gpd-item-title">
-                    <img class="detailicon-ticket" src="images/info.png" />
+                    <img class="detailicon-ticket" src="images/user.png" />
                     <div class="gpd-item-title-name">联系人</div>
                     <div class="gp-icons gpd-up-icon"></div>
                 </div>
@@ -151,7 +151,7 @@
             </section>
             <section class="gpd-item">
                 <div class="gpd-item-title">
-                    <img class="detailicon-ticket" src="images/info.png" />
+                    <img class="detailicon-ticket" src="images/shop.png" />
                     <div class="gpd-item-title-name">店铺信息</div>
                     <div class="gp-icons gpd-up-icon"></div>
                 </div>
