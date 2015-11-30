@@ -174,8 +174,8 @@ namespace WeiXinPF.Web.weixin.restaurant
                       </p>", pair.Value[0].identifyingcode, StatusManager.DishStatus.GetStatusDict(pair.Value[0].status).StatusName, pair.Key);
                     /*添加查看详情 和 退款申请按钮*/
                     builder.Append("<div class=\"butto-wapper\">");
-                    builder.Append("<a href=\"\"#>套餐详情</a>");
-                    builder.Append("<a href=\"\"# class=\"btn-refund\">申请退款</a>");
+                    builder.AppendFormat("<a href=\"javascript:htmlit({0},{1})\">套餐详情</a>", shopid, pair.Value[0].caiId);
+                    builder.AppendFormat("<a href=\"diancai_refund.aspx?wid={4}&shopid={0}&dingdan={1}&openid={2}&caiid={3}\" class=\"btn-refund\">申请退款</a>", shopid, orderId, openid, pair.Key, wid);
                     builder.Append("</div>");
 
                     builder.Append("</div>"); //.full_w;
@@ -185,7 +185,7 @@ namespace WeiXinPF.Web.weixin.restaurant
                     builder.Append("</section>");
                 }
                 index++;
-            } 
+            }
 
             this.detail.InnerHtml = builder.ToString();
         }

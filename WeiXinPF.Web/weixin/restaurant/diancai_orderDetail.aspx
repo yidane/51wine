@@ -200,9 +200,35 @@
                 margin-left: 10%;
                 background-image: url(images/icon-tuikuan.png);
                 background-color: #ccc;
-            } 
+            }
     </style>
     <script type="text/javascript">
+        function htmlit(shopId,caipinId) {
+            $.ajax({
+                url: "diancai_login.ashx",
+                type: "post",
+                dataType: "json",
+                async: false,
+                data: { shopId:shopId, caipinId: caipinId, myact:'caipinDetail'},
+                success: function (result) {
+                    if (result.IsSuccess) {
+                        document.getElementById('mcover').style.display = 'block';
+                        document.getElementById('Popup').style.display = 'block';
+                        document.getElementById("picsrc").src = result.Data.Url;
+                        document.getElementById("picsrc").className = '';
+                        document.getElementById("h3title").innerHTML = result.Data.Name;
+                        document.getElementById("jianjie").innerHTML = result.Data.Intruduce;
+                    } else {
+                        alert("无法获取此商品的详情");
+                        return;
+                    }
+                },
+                error: function (error) {
+                    alert("无法获取此商品的详情");
+                }
+            });            
+        }
+
         //获取当前位置的坐标
         function getLocation() {
             if (navigator.geolocation) {
@@ -255,6 +281,17 @@
 </asp:Content>
 <asp:Content ID="c" ContentPlaceHolderID="content" runat="server" class="mode_webapp">
     <div class="cardexplain" id="contact_info" runat="server" style="margin-bottom: 50px">
+        <div id="mcover" onclick="document.getElementById('mcover').style.display='';">
+            <div id="Popup">
+                <div class="imgPopup">
+                    <img id="picsrc" class="pic-loading" src=""/><h3 id="h3title"></h3>
+                    <p class="jianjie" id="jianjie"></p>
+                    <p class="jianjie" id="useRange"></p>
+                    <p class="jianjie" id="tuidanRule"></p>
+                </div>
+            </div>
+            <a class="close" onclick="document.getElementById('mcover').style.display='';">X</a>
+        </div>
         <div class="alert alert-success top-alert" role="alert">
             <span style="float: left"><span>订单编号:</span> <%=OrderNumber.Trim() %></span>
             <span style="float: right"><span class="top-alert-name">总价  <strong style="color: red"><%=PayAmount.Trim() %>元</strong></span></span>
