@@ -217,7 +217,8 @@
                         document.getElementById("picsrc").src = result.Data.Url;
                         document.getElementById("picsrc").className = '';
                         document.getElementById("h3title").innerHTML = result.Data.Name;
-                        document.getElementById("jianjie").innerHTML = result.Data.Intruduce;
+                        document.getElementById("useRange").innerHTML = result.Data.Range;
+                        document.getElementById("tuidanRule").innerHTML = result.Data.Rule;
                     } else {
                         alert("无法获取此商品的详情");
                         return;
@@ -284,9 +285,11 @@
         <div id="mcover" onclick="document.getElementById('mcover').style.display='';">
             <div id="Popup">
                 <div class="imgPopup">
-                    <img id="picsrc" class="pic-loading" src=""/><h3 id="h3title"></h3>
-                    <p class="jianjie" id="jianjie"></p>
+                    <h3 id="h3title"></h3>
+                    <img id="picsrc" class="pic-loading" src=""/>
+                    <h4>有效期</h4>
                     <p class="jianjie" id="useRange"></p>
+                    <h4>退单规则</h4>
                     <p class="jianjie" id="tuidanRule"></p>
                 </div>
             </div>
