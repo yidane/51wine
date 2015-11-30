@@ -15,8 +15,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2.1-WaterSupply", "2.1-Wate
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.1-Web", "1.1-Web", "{23DA1A83-0969-413C-9E08-64B2733D2F96}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CityServer.Client.Web", "SourceCode\CityServer.Client.Web\CityServer.Client.Web.csproj", "{BCD5F186-A9F2-4097-A7F4-B46B549836F0}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CityServerPF.Server.WaterSupply", "SourceCode\CityServerPF.Server.WaterSupply\CityServerPF.Server.WaterSupply.csproj", "{0C8491F6-84B7-4EDB-AE2C-4DABB2D8AC4A}"
 EndProject
 Global
@@ -25,10 +23,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{BCD5F186-A9F2-4097-A7F4-B46B549836F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BCD5F186-A9F2-4097-A7F4-B46B549836F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BCD5F186-A9F2-4097-A7F4-B46B549836F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BCD5F186-A9F2-4097-A7F4-B46B549836F0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0C8491F6-84B7-4EDB-AE2C-4DABB2D8AC4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0C8491F6-84B7-4EDB-AE2C-4DABB2D8AC4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0C8491F6-84B7-4EDB-AE2C-4DABB2D8AC4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -40,21 +34,16 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{516DC7EE-3CE8-4D06-BD32-859374412D2C} = {F0D2FDCF-DCD6-44D6-96D5-F967ADFE6387}
 		{23DA1A83-0969-413C-9E08-64B2733D2F96} = {690D6ED3-9C12-48B3-BCE9-C73D71FE9755}
-		{BCD5F186-A9F2-4097-A7F4-B46B549836F0} = {23DA1A83-0969-413C-9E08-64B2733D2F96}
 		{0C8491F6-84B7-4EDB-AE2C-4DABB2D8AC4A} = {516DC7EE-3CE8-4D06-BD32-859374412D2C}
 	EndGlobalSection
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 3
+		SccNumberOfProjects = 2
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs20
 		SccLocalPath0 = .
-		SccProjectUniqueName1 = SourceCode\\CityServer.Client.Web\\CityServer.Client.Web.csproj
+		SccProjectUniqueName1 = SourceCode\\CityServerPF.Server.WaterSupply\\CityServerPF.Server.WaterSupply.csproj
 		SccProjectTopLevelParentUniqueName1 = CityServerPF.sln
-		SccProjectName1 = SourceCode/CityServer.Client.Web
-		SccLocalPath1 = SourceCode\\CityServer.Client.Web
-		SccProjectUniqueName2 = SourceCode\\CityServerPF.Server.WaterSupply\\CityServerPF.Server.WaterSupply.csproj
-		SccProjectTopLevelParentUniqueName2 = CityServerPF.sln
-		SccProjectName2 = SourceCode/CityServerPF.Server.WaterSupply
-		SccLocalPath2 = SourceCode\\CityServerPF.Server.WaterSupply
+		SccProjectName1 = SourceCode/CityServerPF.Server.WaterSupply
+		SccLocalPath1 = SourceCode\\CityServerPF.Server.WaterSupply
 	EndGlobalSection
 EndGlobal
