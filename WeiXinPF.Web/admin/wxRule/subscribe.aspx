@@ -227,7 +227,7 @@
                 <dd>
                     <asp:TextBox ID="txtMusicFile" runat="server" CssClass="input normal upload-path" />
                     <div class="upload-box upload-audio"></div>
-                    <span class="Validform_checktip">*支持mp3格式，可以填写网上的链接，也可以本地上传！</span>
+                    <span class="Validform_checktip">*支持mp3、wma、wav、amr格式，语音大小不超过5M，长度不超过60秒！</span>
                 </dd>
             </dl>
             <dl id="div_music_remark" style="display: none;" class="music">
