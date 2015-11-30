@@ -132,7 +132,7 @@ namespace WeiXinPF.Web.weixin.KNSHotel
         }
 
         private double GetPrice(DataRow row)
-        {
+        { 
             int orderDays = (row.Field<DateTime>("leaveTime") - row.Field<DateTime>("arriveTime")).Days;
             int orderNum = row.Field<int>("orderNum");
             double price = row.Field<double>("price");
