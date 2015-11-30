@@ -56,8 +56,8 @@ namespace WeiXinPF.WeiXinComm
         /// <returns></returns>
         private static string GetPayData(string payData)
         {
-            //return payData.Replace("+", "%2B");
-            return HttpUtility.HtmlEncode(payData);
+            return payData.Replace("+", "%2B");
+            //return HttpUtility.HtmlEncode(payData);
         }
     }
 }
