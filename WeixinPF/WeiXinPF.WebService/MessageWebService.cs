@@ -326,7 +326,7 @@ namespace WeiXinPF.WebService
                 {
                     throw new Exception("用户未登陆！");
                 }
-                var userDto = _userService.Get(user.id);
+                var userDto = _userService.Get(user);
                 var list = _msgService.GetAllLastNewMsg(userDto);
                 //            list = list.Take(3).ToList();
                 if (list != null && list.Any())
@@ -411,7 +411,7 @@ namespace WeiXinPF.WebService
                 string search = MyCommFun.QueryString("search.value");
                 var returnData = new DatatablesResult<List<MessageDto>>();
                 //获取短消息
-                var userDto = _userService.Mapping(currentLoginUser);
+                var userDto = _userService.Get(currentLoginUser);
                 var list = _msgService.GetAllLastNewMsg(userDto);
                 if (list != null && list.Any())
                 {

@@ -18,11 +18,16 @@ namespace WeiXinPF.Application.DomainModules.User
             Mapper.CreateMap<WeiXinPF.Model.manager, UserManagerDto>()
                 .ForMember(dto => dto.UserId, u => u.MapFrom(m => m.id.ToString()))
                 .ForMember(dto => dto.LoginName, u => u.MapFrom(m => m.user_name))
-                .ForMember(dto => dto.DisplayName, u => u.MapFrom(m => m.real_name));
+                .ForMember(dto => dto.DisplayName, u => u.MapFrom(m => m.real_name))
+                .ForMember(dto => dto.RoleId, u => u.MapFrom(m => m.role_id))
+                .ForMember(dto => dto.RoleType, u => u.MapFrom(m => m.role_type))
+                ;
 
             Mapper.CreateMap<UserManagerDto, WeiXinPF.Model.manager>()
                 .ForMember(dto => dto.id, u => u.MapFrom(m => int.Parse(m.UserId)))
                 .ForMember(dto => dto.user_name, u => u.MapFrom(m => m.LoginName))
+                .ForMember(dto => dto.role_id, u => u.MapFrom(m => m.RoleId))
+                .ForMember(dto => dto.role_type, u => u.MapFrom(m => m.RoleType))
                 .ForMember(dto => dto.real_name, u => u.MapFrom(m => m.DisplayName));
         }
 
@@ -52,10 +57,12 @@ namespace WeiXinPF.Application.DomainModules.User
             return user;
         }
 
-        public UserManagerDto Mapping(Model.manager user)
+        public UserManagerDto Get(Model.manager user)
         {
             return user.MapTo<UserManagerDto>();
         }
+
+        
 
         public MsgUserType GetUserType(UserManagerDto user)
         {

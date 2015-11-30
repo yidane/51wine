@@ -6,6 +6,7 @@ using AutoMapper;
 using WeiXinPF.Application.DomainModules.Message.Dtos;
 using WeiXinPF.Application.DomainModules.User;
 using WeiXinPF.Application.DomainModules.User.DTOS;
+using WeiXinPF.BLL;
 using WeiXinPF.Common;
 using WeiXinPF.Infrastructure.DomainDataAccess;
 using WeiXinPF.Infrastructure.DomainDataAccess.Message;
@@ -303,8 +304,47 @@ namespace WeiXinPF.Application.DomainModules.Message
                 Expression<Func<ShortMsg, bool>> func;
                 if (userType != MsgUserType.User)
                 {
+                    var userids = new List<string>();
+                    var hotelBll = new BLL.wx_hotel_admin();
+                    var diancaiBll=new BLL.wx_diancai_admin();
+                    switch (userType)
+                    {
+                        case MsgUserType.Hotel:
+                            var listU = hotelBll.GetModelList(String.Format(
+                                "HotelId=(SELECT HotelId FROM dbo.wx_hotel_admin WHERE ManagerId={0})"
+                                , toUserDto.UserId));
+                            if (listU!=null&&listU.Any())
+                            {
+                                userids = listU.Select(i => i.ManagerId.ToString()).ToList();
+                            }
+                            break;
+                            case MsgUserType.Shop:
+                            var listD = diancaiBll.GetModelList(String.Format(
+                                "ShopId=(SELECT ShopId FROM dbo.wx_diancai_admin WHERE ManagerId={0})"
+                                , toUserDto.UserId));
+                            if (listD != null && listD.Any())
+                            {
+                                userids = listD.Select(i => i.ManagerId.ToString()).ToList();
+                            }
+                            break;
+                        case MsgUserType.Scenic:
+                        default:
+                            //景区管理员
+                            var count = new wx_userweixin().GetUserWxNumCount(toUserDto.UserId.ToInt());
+                            if (count > 0)
+                            {
+                                userids.Add(toUserDto.UserId);
+                                 
+                            }
+                           
+                            break;
+                    }
+
+
                     func = c =>
-                        c.MsgToUserType == (int)userType && c.IsRead == false;
+                        c.MsgToUserType == (int)userType
+                        && userids.Contains(c.ToUserId)  
+                        && c.IsRead == false;
 
                 }
                 else
