@@ -200,7 +200,7 @@
                     </tr>
                 </table>
             </li>
-              <li class="dandanb"><a href="tel:12345678977"><span>
+              <li class="dandanb"><a href="tel:<%=tel %>"><span>
                 <table width="100%" border="0" cellspacing="0" cellpadding="0" class="kuang">
                     <tr>
                         <th>联系电话</th>
@@ -288,7 +288,7 @@
             <li class="addr">
                 <a href="/weixin/map/map_address.html?type=hotel&id=<%=hotelid %>">
                 <span><%=address %></span></a></li>
-            <li class="tel"><a href="tel:<%=tel %>"><span><%=tel %> 电话预订</span></a></li>
+            <li class="tel"><a href="tel:<%=hotelTel %>"><span><%=hotelTel %> 电话预订</span></a></li>
             <%}%>
             <%
                 else

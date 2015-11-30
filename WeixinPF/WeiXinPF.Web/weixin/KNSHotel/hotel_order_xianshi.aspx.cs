@@ -55,6 +55,7 @@ namespace WeiXinPF.Web.weixin.KNSHotel
         public string UseInstruction = string.Empty;
         public string RefundRule = string.Empty;
         public string IdentityNumber = string.Empty;
+        public string hotelTel=String.Empty;
 
         public decimal totalyuanjia = 0;
         public decimal totaljiesheng = 0;
@@ -79,6 +80,7 @@ namespace WeiXinPF.Web.weixin.KNSHotel
                 address = info.hotelAddress;
                 xplace = info.xplace.ToString();
                 yplace = info.yplace.ToString();
+                hotelTel = info.hotelPhone;
 
                 BLL.wx_hotel_dingdan dingdanbll = new BLL.wx_hotel_dingdan();
                 DataSet dr = dingdanbll.GetList(openid, hotelid);
