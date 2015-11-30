@@ -185,7 +185,7 @@ namespace WeiXinPF.Web.weixin.restaurant
                     builder.Append("</section>");
                 }
                 index++;
-            }
+            } 
 
             this.detail.InnerHtml = builder.ToString();
         }
