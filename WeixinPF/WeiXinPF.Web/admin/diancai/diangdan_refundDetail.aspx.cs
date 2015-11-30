@@ -113,11 +113,14 @@ namespace WeiXinPF.Web.admin.diancai
                     //设置操作权限，只有等待退单的状态才会显示操作按钮
                     if (refundStatusDict.StatusID == StatusManager.DishStatus.PreRefund.StatusID)
                     {
-                        this.btnAgreeRefund.Visible = true;
-                        this.btnDisAgreeRefund.Visible = true;
-                        this.btnAgreeRefund.Enabled = true;
-                        this.btnDisAgreeRefund.Enabled = true;
-                        this.txtRefundReason.Disabled = false;
+                        if (!IsAdminLogin())
+                        {
+                            this.btnAgreeRefund.Visible = true;
+                            this.btnDisAgreeRefund.Visible = true;
+                            this.btnAgreeRefund.Enabled = true;
+                            this.btnDisAgreeRefund.Enabled = true;
+                            this.txtRefundReason.Disabled = false;
+                        }
                     }
 
                     tuidanBuilder.AppendFormat("<tr><td>退单状态：<em  style='width:70px;' class='{0}'>{1}</em></td></tr>", "ok", refundStatusDict.StatusName);
