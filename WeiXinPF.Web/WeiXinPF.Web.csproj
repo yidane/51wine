@@ -125,6 +125,7 @@
     <Content Include="admin\hotel\Verification\dingdan_confirm.aspx" />
     <Content Include="admin\index - Copy.aspx" />
     <Content Include="admin\js\message-vm.js" />
+    <Content Include="admin\map\map_scenic.aspx" />
     <Content Include="admin\map\map_scenic.html" />
     <Content Include="admin\map\marker_edit.aspx" />
     <Content Include="admin\photo\photoEdit.aspx" />
@@ -5455,6 +5456,13 @@
     </Compile>
     <Compile Include="admin\manager\wxcode_edit.aspx.designer.cs">
       <DependentUpon>wxcode_edit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\map\map_scenic.aspx.cs">
+      <DependentUpon>map_scenic.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\map\map_scenic.aspx.designer.cs">
+      <DependentUpon>map_scenic.aspx</DependentUpon>
     </Compile>
     <Compile Include="admin\map\marker_edit.aspx.cs">
       <DependentUpon>marker_edit.aspx</DependentUpon>

@@ -113,7 +113,7 @@ namespace WeiXinPF.Web.admin.map
                     JscriptMsg("修改过程中发生错误啦！", "", "Error");
                     return;
                 }
-                //JscriptMsg("修改信息成功！", "scenic_list.aspx", "Success");
+                JscriptMsg("修改信息成功！", "map_scenic.html", "Success");
             }
             else if (_action == MXEnums.ActionEnum.Add.ToString()) //添加
             {
@@ -122,7 +122,7 @@ namespace WeiXinPF.Web.admin.map
                     JscriptMsg("保存过程中发生错误啦！", "", "Error");
                     return;
                 }
-                //JscriptMsg("添加信息成功！", "scenic_list.aspx", "Success");
+                JscriptMsg("添加信息成功！", "map_scenic.html", "Success");
             }
         }
     }

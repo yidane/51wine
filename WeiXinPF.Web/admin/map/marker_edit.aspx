@@ -28,7 +28,7 @@
     <form id="form1" runat="server">
         <!--导航栏-->
         <div class="location">
-            <a href="#" class="home"><i></i><span>手绘图</span></a>
+            <a href="map_scenic.html" class="home"><i></i><span>景区导航设置</span></a>
             <i class="arrow"></i>
             <span>景点编辑</span>
         </div>
@@ -108,7 +108,7 @@
         <div class="page-footer">
             <div class="btn-list">
                 <asp:Button ID="btnSubmit" runat="server" Text="提交保存" CssClass="btn" OnClick="btnSubmit_Click" />
-                <a href="#"><span class="btn yellow">返回上一页</span></a>
+                <a href="map_scenic.html"><span class="btn yellow">返回上一页</span></a>
             </div>
             <div class="clear"></div>
         </div>

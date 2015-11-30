@@ -66,8 +66,8 @@ namespace WeiXinPF.Web.admin.hotel
                 this.txtUsueIntroduction.Value = room.UseInstruction;
                 this.txtRefundRule.Value = room.RefundRule;
 
-                this.txtExpiryDate_Begin.Text = room.ExpiryDate_Begin.HasValue ? room.ExpiryDate_Begin.Value.ToString("yyyy-MM-dd") : "";
-                this.txtExpiryDate_End.Text = room.ExpiryDate_End.HasValue ? room.ExpiryDate_End.Value.ToString("yyyy-MM-dd") : "";
+                //this.txtExpiryDate_Begin.Text = room.ExpiryDate_Begin.HasValue ? room.ExpiryDate_Begin.Value.ToString("yyyy-MM-dd") : "";
+                //this.txtExpiryDate_End.Text = room.ExpiryDate_End.HasValue ? room.ExpiryDate_End.Value.ToString("yyyy-MM-dd") : "";
                 if (room.Status != Model.RoomStatus.Submit)
                 {
                     //获取审核意见
@@ -118,13 +118,13 @@ namespace WeiXinPF.Web.admin.hotel
                 room.createDate = DateTime.Now;
                 room.Status = Model.RoomStatus.Submit;
 
-                room.ExpiryDate_Begin = DateTime.Parse(txtExpiryDate_Begin.Text);
-                room.ExpiryDate_End = DateTime.Parse(txtExpiryDate_End.Text);
+                //room.ExpiryDate_Begin = DateTime.Parse(txtExpiryDate_Begin.Text);
+                //room.ExpiryDate_End = DateTime.Parse(txtExpiryDate_End.Text);
 
-                if (DateTime.Compare(room.ExpiryDate_Begin.Value, room.ExpiryDate_End.Value) > 0)
-                {
-                    JscriptMsg("使用有效期开始时间不能大于结束时间。", "", "error");
-                }
+                //if (DateTime.Compare(room.ExpiryDate_Begin.Value, room.ExpiryDate_End.Value) > 0)
+                //{
+                //    JscriptMsg("使用有效期开始时间不能大于结束时间。", "", "error");
+                //}
 
                 int id = roomBll.Add(room);
 
@@ -199,13 +199,13 @@ namespace WeiXinPF.Web.admin.hotel
                 room.facilities = this.facilities.Value;
                 room.Status = Model.RoomStatus.Submit;
 
-                room.ExpiryDate_Begin = DateTime.Parse(txtExpiryDate_Begin.Text);
-                room.ExpiryDate_End = DateTime.Parse(txtExpiryDate_End.Text);
+                //room.ExpiryDate_Begin = DateTime.Parse(txtExpiryDate_Begin.Text);
+                //room.ExpiryDate_End = DateTime.Parse(txtExpiryDate_End.Text);
 
-                if (DateTime.Compare(room.ExpiryDate_Begin.Value, room.ExpiryDate_End.Value) > 0)
-                {
-                    JscriptMsg("使用有效期开始时间不能大于结束时间。", "", "error");
-                }
+                //if (DateTime.Compare(room.ExpiryDate_Begin.Value, room.ExpiryDate_End.Value) > 0)
+                //{
+                //    JscriptMsg("使用有效期开始时间不能大于结束时间。", "", "error");
+                //}
 
                 roomBll.Update(room);
 
