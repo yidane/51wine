@@ -180,7 +180,7 @@ namespace WeiXinPF.Web.weixin.restaurant
                 var result = new
                 {
                     Name = caipinModel.cpName,
-                    Url = string.Format("{0}", pictureUrl),
+                    Url = MapUrl(pictureUrl),
                     Range = useRange,
                     Intruduce = jianjie,
                     Rule = tuidanRule
@@ -189,6 +189,29 @@ namespace WeiXinPF.Web.weixin.restaurant
                 context.Response.Write(AjaxResult.Success(result));
                 context.Response.End();
             }
+        }
+
+        public static string GetHostPort()
+        {
+            if (HttpContext.Current.Request.Url.Port == 80)
+                return string.Format("http://{0}{1}/",
+                HttpContext.Current.Request.Url.Host,
+                HttpContext.Current.Request.ApplicationPath.TrimEnd('/'));
+            else
+                return string.Format("http://{0}:{1}{2}/",
+                    HttpContext.Current.Request.Url.Host,
+                    HttpContext.Current.Request.Url.Port,
+                    HttpContext.Current.Request.ApplicationPath.TrimEnd('/'));
+        }
+
+        /// <summary>
+        /// 得到完整路径
+        /// </summary>
+        /// <param name="url">相对url</param>
+        /// <returns></returns>
+        public static string MapUrl(string url)
+        {
+            return string.Format("{0}{1}", GetHostPort(), url);
         }
 
         #region 处理订单
