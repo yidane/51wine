@@ -113,7 +113,7 @@ namespace WeiXinPF.Web.admin.diancai
                     //设置操作权限，只有等待退单的状态才会显示操作按钮
                     if (refundStatusDict.StatusID == StatusManager.DishStatus.PreRefund.StatusID)
                     {
-                        if (!IsAdminLogin())
+                        if (GetShopId() != 0)
                         {
                             this.btnAgreeRefund.Visible = true;
                             this.btnDisAgreeRefund.Visible = true;
