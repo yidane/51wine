@@ -87,6 +87,7 @@ namespace WeiXinPF.Web.weixin.restaurant
                     GoodsCount = table1.Rows.Count;
                     customeName = table1.Rows[0].Field<string>("customerName");
                     customerTel = table1.Rows[0].Field<string>("customerTel");
+                    refundReason.InnerHtml = table1.Rows[0].Field<string>("refundReason");
                 }
 
                 var detailBuilder = new StringBuilder();
