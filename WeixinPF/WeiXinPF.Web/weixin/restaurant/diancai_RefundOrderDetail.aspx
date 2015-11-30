@@ -111,7 +111,20 @@
                 <span style="float: right"><span class="top-alert-name">总价：</span>
                     <span class="label label-danger"><%=PayAmount %>元</span></span>
             </div>
+
             <section class="gpd-item  gdp-curr">
+                <div class="gpd-item-title">
+                    <img class="detailicon-ticket" src="images/info.png" />
+                    <div class="gpd-item-title-name">审核意见</div>
+                    <div class="gp-icons gpd-up-icon"></div>
+                </div>
+                <div class="gpd-content">
+                    <div runat="server" id="refundReason">
+                    </div>
+                </div>
+            </section>
+
+            <section class="gpd-item">
                 <div class="gpd-item-title">
                     <img class="detailicon-ticket" src="images/info.png" />
                     <div class="gpd-item-title-name">详细信息</div>
