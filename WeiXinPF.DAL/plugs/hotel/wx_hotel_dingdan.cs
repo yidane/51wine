@@ -486,6 +486,7 @@ namespace WeiXinPF.DAL
             strSql.Append("identityNumber=@identityNumber,");
             strSql.Append("tel=@tel,");
             strSql.Append("arriveTime=@arriveTime,");
+            strSql.Append("leaveTime=@leaveTime,");
             strSql.Append("orderNum=@orderNum,");
             strSql.Append("price=@price,");
             strSql.Append("yuanjia=@yuanjia,");
@@ -495,7 +496,8 @@ namespace WeiXinPF.DAL
 					new SqlParameter("@oderName", SqlDbType.VarChar,100),
 					new SqlParameter("@tel", SqlDbType.VarChar,100),
 					new SqlParameter("@arriveTime", SqlDbType.DateTime),
-					new SqlParameter("@orderNum", SqlDbType.Int,4),
+					new SqlParameter("@leaveTime", SqlDbType.DateTime),
+                    new SqlParameter("@orderNum", SqlDbType.Int,4),
 					new SqlParameter("@price", SqlDbType.Float,8),
 					new SqlParameter("@yuanjia", SqlDbType.Float,8),
 					new SqlParameter("@remark", SqlDbType.NVarChar,100),

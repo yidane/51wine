@@ -357,8 +357,7 @@
 
                         var truename = document.getElementById('truename').value;
                         var tel = document.getElementById('tel').value;
-                        var arriveTime = document.getElementById('arriveTime').value;
-                        var leaveTime = document.getElementById('leaveTime').value;
+                      
 
                         //var roomType = document.getElementById('roomtypenum').value;
                         var openid = '<%=string.IsNullOrEmpty(openid) ? "''" : openid %>';
