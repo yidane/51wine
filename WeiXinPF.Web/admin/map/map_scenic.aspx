@@ -295,12 +295,7 @@
 
 
 
-            self.view = function (marker) {
-                document.location.href = marker.url;
-            };
-            self.goto = function (marker) {
-                document.location.href = 'map_address.html?id=' + marker.id;
-            };
+            
             self.addmarkers = function () {
                 var map = self.map();
                 for (var i = 0; i < self.markers().length; i++) {
@@ -374,7 +369,7 @@
                     success: function (res) {
                         if (res.isSuccess) {
 
-                            jumpdirect("map_scenic.html");
+                            jumpdirect("map_scenic.aspx");
 
                         } else {
                             console.log(res.message);
