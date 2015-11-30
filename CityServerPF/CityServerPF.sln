@@ -19,6 +19,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CityServerPF.Server.WaterSu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CityServerPF.Client.Web", "SourceCode\CityServerPF.Client.Web\CityServerPF.Client.Web.csproj", "{BF30F404-ECAC-4660-A75A-376995C08A6F}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2.2-Xinfang", "2.2-Xinfang", "{C0031E11-CEC1-4A90-9633-286E3037884E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CityServerPF.Server.Xinfang", "SourceCode\CityServerPF.Server.Xinfang\CityServerPF.Server.Xinfang.csproj", "{ECD8EC3A-6912-4516-8049-2FCF0CAEF156}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2.3-AirQuality", "2.3-AirQuality", "{85887E06-7CDD-4FAA-B579-5D71BC452875}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CityServerPF.Server.AirQuality", "SourceCode\CityServerPF.Server.AirQuality\CityServerPF.Server.AirQuality.csproj", "{9F05BF13-D444-49C6-8659-94C2E9518C41}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +41,14 @@ Global
 		{BF30F404-ECAC-4660-A75A-376995C08A6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BF30F404-ECAC-4660-A75A-376995C08A6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BF30F404-ECAC-4660-A75A-376995C08A6F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ECD8EC3A-6912-4516-8049-2FCF0CAEF156}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ECD8EC3A-6912-4516-8049-2FCF0CAEF156}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ECD8EC3A-6912-4516-8049-2FCF0CAEF156}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ECD8EC3A-6912-4516-8049-2FCF0CAEF156}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F05BF13-D444-49C6-8659-94C2E9518C41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F05BF13-D444-49C6-8659-94C2E9518C41}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F05BF13-D444-49C6-8659-94C2E9518C41}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F05BF13-D444-49C6-8659-94C2E9518C41}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -42,9 +58,13 @@ Global
 		{23DA1A83-0969-413C-9E08-64B2733D2F96} = {690D6ED3-9C12-48B3-BCE9-C73D71FE9755}
 		{0C8491F6-84B7-4EDB-AE2C-4DABB2D8AC4A} = {516DC7EE-3CE8-4D06-BD32-859374412D2C}
 		{BF30F404-ECAC-4660-A75A-376995C08A6F} = {23DA1A83-0969-413C-9E08-64B2733D2F96}
+		{C0031E11-CEC1-4A90-9633-286E3037884E} = {F0D2FDCF-DCD6-44D6-96D5-F967ADFE6387}
+		{ECD8EC3A-6912-4516-8049-2FCF0CAEF156} = {C0031E11-CEC1-4A90-9633-286E3037884E}
+		{85887E06-7CDD-4FAA-B579-5D71BC452875} = {F0D2FDCF-DCD6-44D6-96D5-F967ADFE6387}
+		{9F05BF13-D444-49C6-8659-94C2E9518C41} = {85887E06-7CDD-4FAA-B579-5D71BC452875}
 	EndGlobalSection
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 3
+		SccNumberOfProjects = 5
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs20
 		SccLocalPath0 = .
@@ -56,5 +76,13 @@ Global
 		SccProjectTopLevelParentUniqueName2 = CityServerPF.sln
 		SccProjectName2 = SourceCode/CityServerPF.Client.Web
 		SccLocalPath2 = SourceCode\\CityServerPF.Client.Web
+		SccProjectUniqueName3 = SourceCode\\CityServerPF.Server.Xinfang\\CityServerPF.Server.Xinfang.csproj
+		SccProjectTopLevelParentUniqueName3 = CityServerPF.sln
+		SccProjectName3 = SourceCode/CityServerPF.Server.Xinfang
+		SccLocalPath3 = SourceCode\\CityServerPF.Server.Xinfang
+		SccProjectUniqueName4 = SourceCode\\CityServerPF.Server.AirQuality\\CityServerPF.Server.AirQuality.csproj
+		SccProjectTopLevelParentUniqueName4 = CityServerPF.sln
+		SccProjectName4 = SourceCode/CityServerPF.Server.AirQuality
+		SccLocalPath4 = SourceCode\\CityServerPF.Server.AirQuality
 	EndGlobalSection
 EndGlobal
