@@ -154,19 +154,39 @@ namespace WeiXinPF.Web.weixin.restaurant
 
                 if (!string.IsNullOrEmpty(productId))
                 {
-                    var model = new BLL.wx_diancai_caipin_manage().GetModel(int.Parse(productId));
-                    productDescription = model.shopIntroduction;
-                    var data = new {
-                        shopIntroduction=model.shopIntroduction,
-                        detailContent = model.detailContent,
-                        instructions=model.instructions,
-                        chargeback=model.chargeback
-
-                    };
-                    context.Response.Write(AjaxResult.Success(data).ToCamelString());
-                    
+                    productDescription = new BLL.wx_diancai_caipin_manage().GetModel(int.Parse(productId)).shopIntroduction;
                 }
 
+                context.Response.Write(string.IsNullOrEmpty(productDescription) ? string.Empty : productDescription);
+                context.Response.End();
+            }
+            else if (_action == "caipinDetail")
+            {
+                var caipinId = MyCommFun.RequestInt("caipinId");
+                var caipinModel = new BLL.wx_diancai_caipin_manage().GetModel(caipinId);
+
+                String useRange = string.Empty;
+                if (caipinModel.beginDate.HasValue || caipinModel.endDate.HasValue)
+                {
+                    useRange = string.Format("{0}至{1}",
+                                                                    caipinModel.beginDate.HasValue ? caipinModel.beginDate.Value.ToString("yyyy-MMMM-dd") : string.Empty,
+                                                                    caipinModel.endDate.HasValue ? caipinModel.endDate.Value.ToString("yyyy-MM-dd") : string.Empty);
+                }
+
+                String jianjie = caipinModel.shopIntroduction;
+                String tuidanRule = caipinModel.chargeback;
+                string pictureUrl = caipinModel.picUrl;
+
+                var result = new
+                {
+                    Name = caipinModel.cpName,
+                    Url = string.Format("{0}", pictureUrl),
+                    Range = useRange,
+                    Intruduce = jianjie,
+                    Rule = tuidanRule
+                };
+
+                context.Response.Write(AjaxResult.Success(result));
                 context.Response.End();
             }
         }
