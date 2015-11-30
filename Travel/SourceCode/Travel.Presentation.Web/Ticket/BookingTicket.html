@@ -168,19 +168,20 @@
             <li>门票</li>
             <li>车票</li>
         </ul>
-        <div id="tabs-container" class="swiper-container tabs-container">
+        <div id="tabs-container" class="swiper-container tabs-container" style="display: none" data-bind="visible: Data">
             <div class="swiper-wrapper" data-bind='foreach: Data'>
                 <div class="swiper-slide">
                     <ul class="ticket-list" data-bind='foreach: content'>
-<li>
-                            <a data-bind="attr: { 'href': 'TicketDetail.html?ticketid=' + ticketCategoryId + '&ticketName=' + ticketName + '&price=' + price+'&code='+$root.access_code }">
-                                <div class="ticket-detail" data-bind="style:{backgroundImage:image}">
+                        <li>
+                            <a data-bind="attr: { 'href': 'TicketDetail.html?ticketid=' + ticketCategoryId + '&ticketName=' + ticketName + '&price=' + price + '&code=' + $root.access_code }">
+                                <div class="ticket-detail" data-bind="style: { backgroundImage: image }">
                                     <span class="title">
                                         <!--ko text: ticketName-->
                                         <!--/ko-->
                                         <span class="price">
                                             <!--ko text: price-->
-                                            <!--/ko-->元
+                                            <!--/ko-->
+                                            元
                                         </span>
                                     </span>
                                 </div>
@@ -208,7 +209,6 @@
                 dataType: 'json',
                 success: function (result) {
                     if (result.IsSuccess) {
-
                         result.access_code = getCode();
                         ko.applyBindings(result);
                         initSwiper();
