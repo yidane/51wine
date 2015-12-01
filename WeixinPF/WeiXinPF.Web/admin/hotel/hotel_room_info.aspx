@@ -226,7 +226,7 @@
                 <asp:Button ID="save_room" runat="server" CssClass="btn" Text="保存并提交" OnClick="save_room_Click" />
                 <asp:Button ID="btnAgree" runat="server" CssClass="btn" Text="审核通过" OnClick="btnAgree_Click" />
                 <asp:Button ID="btnRefuse" runat="server" CssClass="btn" Text="审核不通过" OnClick="btnRefuse_Click" />
-
+                <asp:Button ID="btnPublish" runat="server" CssClass="btn" Text="发布" OnClick="btnPublish_Click" />
             </div>
             <div class="clear"></div>
         </div>

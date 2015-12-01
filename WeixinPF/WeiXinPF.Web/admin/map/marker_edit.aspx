@@ -33,7 +33,7 @@
                     title: "选择模型",
                     content: "url:/admin/map/select_scenic.aspx?txt=txtUrl",
                     height: 400,
-                    width: 440
+                    width: 450
                 });
             });
         });
@@ -77,7 +77,7 @@
             <dl>
                 <dt>景点介绍</dt>
                 <dd>
-                    <asp:TextBox ID="txtUrl" runat="server" datatype="*2-100" ReadOnly="true" CssClass="input normal upload-path" />
+                    <asp:TextBox ID="txtUrl" runat="server" datatype="*2-100" CssClass="input normal upload-path" />
                     <input id="txtSelectUrl" type="button" value="选择" class="btn" />
                     <span class="Validform_checktip">*</span>
                 </dd>
