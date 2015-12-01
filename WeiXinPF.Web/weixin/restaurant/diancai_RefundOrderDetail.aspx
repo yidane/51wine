@@ -107,7 +107,7 @@
 
         <div id="contact_info" class="cardexplain" style="margin-top: 50px;">
             <div class="alert alert-success top-alert" role="alert" style="margin-bottom: 0;">
-                <span style="float: left"><span class="top-alert-name">订单编号：</span> <%=OrderNumber %></span>
+                <span style="float: left"><span class="top-alert-name">退单编号：</span> <%=refundCode %></span>
                 <span style="float: right"><span class="top-alert-name">总价：</span>
                     <span class="label label-danger"><%=PayAmount %>元</span></span>
             </div>

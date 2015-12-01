@@ -218,6 +218,7 @@
                         document.getElementById("picsrc").className = '';
                         document.getElementById("h3title").innerHTML = result.Data.Name;
                         document.getElementById("useRange").innerHTML = result.Data.Range;
+                        document.getElenmentById("Intruduce").innerHTML = result.Data.Intruduce;
                         document.getElementById("tuidanRule").innerHTML = result.Data.Rule;
                     } else {
                         alert("无法获取此商品的详情");
@@ -289,6 +290,8 @@
                     <img id="picsrc" class="pic-loading" src=""/>
                     <h4>有效期</h4>
                     <p class="jianjie" id="useRange"></p>
+                    <h4>使用须知</h4>
+                    <p class="jianjie" id="Intruduce"></p>
                     <h4>退单规则</h4>
                     <p class="jianjie" id="tuidanRule"></p>
                 </div>
