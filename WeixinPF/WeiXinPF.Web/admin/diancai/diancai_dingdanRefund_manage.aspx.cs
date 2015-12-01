@@ -43,7 +43,7 @@ namespace WeiXinPF.Web.admin.diancai
 
             //获取页码
             this.page = MXRequest.GetQueryInt("page", 1);
-            this.totalCount = MXRequest.GetQueryInt("totalCount");
+            this.totalCount = int.Parse(this.total.Value);
 
             this.pageSize = GetPageSize(10); //每页数量
             if (!Page.IsPostBack)
@@ -93,6 +93,8 @@ namespace WeiXinPF.Web.admin.diancai
                                                                                     beginDate, endDate, payAmountMin,
                                                                                     payAmountMax, refundNumber, orderNumber,
                                                                                     customerName, customerTel, refundStatus, out this.totalCount);
+
+            this.total.Value = totalCount.ToString();
 
             if (result != null && result.Tables.Count > 0 && result.Tables[0].Rows.Count > 0)
             {

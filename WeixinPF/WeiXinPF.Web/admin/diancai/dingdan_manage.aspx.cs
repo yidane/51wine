@@ -39,6 +39,7 @@ namespace WeiXinPF.Web.admin.diancai
             this.customerTel = MyCommFun.QueryString("customerTel");
 
             this.pageSize = GetPageSize(10); //每页数量
+            this.totalCount = int.Parse(this.total.Value);
             if (!Page.IsPostBack)
             {
                 BindControls();
@@ -63,12 +64,15 @@ namespace WeiXinPF.Web.admin.diancai
 
         #region 数据绑定=================================
 
-        private DataSet QueryData()
+        private DataSet QueryData(bool isDownLoad = false)
         {
             //判断是否已经设置了微留言基本信息
             this.page = MXRequest.GetQueryInt("page", 1);
-            var result = gbll.GetOrderList(shopid, this.pageSize, this.page, beginDate, endDate, payAmountMin,
+            var result = gbll.GetOrderList(shopid, isDownLoad ? this.totalCount : this.pageSize, isDownLoad ? 1 : this.page, beginDate, endDate, payAmountMin,
                                            payAmountMax, orderNumber, customerName, customerTel, out this.totalCount);
+
+            this.total.Value = totalCount.ToString();
+
             var sbll = new BLL.wx_diancai_dingdan_manage();
             if (result != null && result.Tables.Count > 0 && result.Tables[0].Rows.Count > 0)
             {
@@ -144,7 +148,7 @@ namespace WeiXinPF.Web.admin.diancai
         {
             try
             {
-                var result = QueryData();
+                var result = QueryData(true);
                 var headerList = new List<string>()
                     {
                         "订单号",

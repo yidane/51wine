@@ -209,6 +209,7 @@
             </div>
             <div id="PageContent" runat="server" class="default"></div>
         </div>
+        <asp:HiddenField runat="server" ID="total" Value="0"/>
     </form>
 </body>
 </html>

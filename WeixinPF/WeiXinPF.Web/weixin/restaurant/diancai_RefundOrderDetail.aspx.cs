@@ -17,7 +17,7 @@ namespace WeiXinPF.Web.weixin.restaurant
         private int shopid = 0;
         private string openid = string.Empty;
         private int dingdan = 0;
-        private string refundCode = string.Empty;
+        public string refundCode = string.Empty;
 
         //订单基本信息参数
         public string OrderNumber = string.Empty;
