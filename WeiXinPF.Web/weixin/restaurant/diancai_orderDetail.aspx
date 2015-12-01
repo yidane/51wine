@@ -22,7 +22,7 @@
 
     <style>
         .table > thead > tr > th {
-            vertical-align: bottom;
+            vertical-align: bottom; 
             border-bottom: 1px solid red;
         }
 
