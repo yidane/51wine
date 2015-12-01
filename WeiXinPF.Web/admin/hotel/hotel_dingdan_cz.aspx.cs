@@ -187,10 +187,10 @@ namespace WeiXinPF.Web.admin.hotel
                     sb.Append("<tr><th>商品名称</th><th class=\"cc\">单价</th><th class=\"cc\">验证码</th><th class=\"cc\">是否验证</th><th class=\"cc\">入住时间</th><th class=\"cc\">离店时间</th> </tr>");
                     foreach (var code in listCode)
                     {
-                        var isUserd = "否";
+                        var isUserd = "未验证";
                         if (code.Status== "已使用")
                         {
-                            isUserd = "是";
+                            isUserd = "已验证";
                         }
                         var codeCount = code.IdentifyingCode.Length - 4;
                         var icode = string.Format("****************{0}",
