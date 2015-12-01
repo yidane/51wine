@@ -49,6 +49,7 @@ namespace WeiXinPF.Web.weixin.restaurant
                 shopinfo = shopBll.GetModel(shopid);
                 RestruantName = shopinfo.hotelName;
                 rename = shopinfo.dcRename;
+                RestruantPhone = shopinfo.tel;
                 if (dingdan > 0)
                 {
                     var orderDetail = new OrderDetail();
@@ -56,6 +57,7 @@ namespace WeiXinPF.Web.weixin.restaurant
                     lat = orderDetail.xplace;
                     lng = orderDetail.yplace;
                     BindOrderDetail(orderDetail);
+
                 }
             }
         }
