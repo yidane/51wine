@@ -4,14 +4,10 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>景区导航设置</title>
-    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-1.0.0-b1/leaflet.css" />
+    <title>景区导航设置</title> 
+     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-1.0.0-b1/leaflet.css" />
 
     <link href="//cdn.bootcss.com/font-awesome/4.4.0/css/font-awesome.css" rel="stylesheet" />
-    <link rel="stylesheet" href="../../weixin/map/css/L.Control.Locate.min.css" />
-    <!--[if lt IE 9]>
-    <link rel="stylesheet" href="../../weixin/map/css/L.Control.Locate.ie.min.css"/>
-    <![endif]-->
     <link href="../../scripts/lhgdialog/skins/idialog.css" rel="stylesheet" />
     <link href="../../weixin/map/css/mapScenic.css" rel="stylesheet" />
     <style>
@@ -69,7 +65,8 @@
                 }
     </style>
 </head>
-<body class="mainbody">
+<body class="mainbody"> 
+
     <div class="location">
         <a class="home" href="javascript:;"><i></i><span>景区导航设置</span></a>
     </div>
@@ -78,15 +75,14 @@
         <div class="marker-list" data-bind="foreach: markers">
             <div class="marker" data-bind="click: $root.showtip">
                 <i class="point"></i>
-                <div data-bind="template: { name: 'marker-template', data: $data }"></div>
+                <div data-bind="template: { name: 'marker-template', if: $data, data: $data }"></div>
             </div>
         </div>
 
 
     </div>
-    <div style="display: none" id="div_newMarker" data-bind="template: { name: 'marker-template', data: newMarker }">
+    <div style="display: none" id="div_newMarker" data-bind="template: { name: 'marker-template', if: newMarker, data: newMarker }">
     </div>
-
     <script type="text/html" id="marker-template">
         <div class="tip" data-bind="attr: { id: 'tip_' + id }">
             <div class="tip-title">
@@ -96,23 +92,24 @@
             <div class="tip-content" data-bind="text: remark"></div>
             <div class="tip-bottom">
                 <ul>
-                    <li data-bind=" enable: id <= 0">
-                        <a href="#" data-bind="attr: { 'data-left': left, 'data-top': top }"
-                            onclick="addRemark($(this).attr('data-left'),$(this).attr('data-top'))">
+                    <li data-bind=" myDisabled: id <= 0">
+                    
+                        <a href="#" data-bind="attr: { 'data-left': left, 'data-top': top }, myDisabled: id <= 0"
+                            onclick="addRemark($(this),$(this).attr('data-left'),$(this).attr('data-top'))">
                             <i class="fa fa-plus fa-lg" style="color: #1d9d74; margin-right: 5px;"></i>
                             <span>添加</span>
                         </a>
                     </li>
-                    <li data-bind=" enable: id > 0">
-                        <a href="#" data-bind="attr: { 'data-id': id }"
-                            onclick="editRemark($(this).attr('data-id'))">
+                    <li data-bind=" myDisabled: id > 0">
+                        <a href="#" data-bind="attr: { 'data-id': id }, myDisabled: id > 0"
+                            onclick="editRemark($(this),$(this).attr('data-id'))">
                             <i class="fa fa-edit fa-lg" style="color: #337ab7; margin-right: 5px;"></i><span>修改</span>
                         </a>
                     </li>
-                    <li data-bind=" enable: id > 0">
+                    <li data-bind=" myDisabled: id > 0">
                         <a href="#"
-                            data-bind="attr: { 'data-id': id, 'data-name': name }"
-                            onclick="deleteRemark($(this).attr('data-id'), $(this).attr('data-name'))">
+                            data-bind="attr: { 'data-id': id, 'data-name': name }, myDisabled: id > 0"
+                            onclick="deleteRemark($(this),$(this).attr('data-id'), $(this).attr('data-name'))">
                             <i class="fa fa-trash fa-lg" style="color: #c9302c; margin-right: 5px;"></i><span>删除</span>
                         </a>
                     </li>
@@ -121,21 +118,37 @@
 
         </div>
     </script>
-
-
-    <script src="http://cdn.leafletjs.com/leaflet-1.0.0-b1/leaflet.js"></script>
-    <script src="../../weixin/map/js/bouncemarker.js"></script>
     <script src="../../scripts/jquery/jquery-2.1.0.min.js"></script>
+    <script src="../../scripts/jquery/jquery.blockUI.js"></script>
     <script src="../../scripts/lhgdialog/lhgdialog.js"></script>
+    <script>
+        $(function () {
+
+
+            $.blockUI({
+                css: {
+                    border: 'none',
+                    padding: '15px',
+                    backgroundColor: '#000',
+                    'border-radius': '10px',
+                    opacity: .5,
+                    color: '#fff'
+                }, message: '<h3>数据加载中......</h3>'
+            });
+        });
+
+    </script>
     <script src="../../scripts/knockout/knockout-3.3.0.js"></script>
 
+  <script src="http://cdn.leafletjs.com/leaflet-1.0.0-b1/leaflet.js"></script>
+    <script src="../../weixin/map/js/bouncemarker.js"></script>
     <script type="text/javascript">
         var ViewModel = function (params) {
             var self = this;
             this.params = ko.observable(params);
             this.map = ko.observable();
             this.mapborder = ko.observable();
-            this.markers = ko.observableArray();
+            this.markers = ko.observableArray(); 
             this.newMarker = ko.observable({
                 id: 0,
                 name: '',
@@ -194,9 +207,13 @@
                     mapBounds = self.mapborder();
                 }
                 L.tileLayer('../../weixin/map/images/map/{z}/{x}/{y}.png', {
-                    minZoom: mapMinZoom, maxZoom: mapMaxZoom,
-                    bounds: mapBounds,noWrap: true
-                }).addTo(map);
+                    minZoom: mapMinZoom,
+                    maxZoom: mapMaxZoom,
+                    bounds: mapBounds,
+                    noWrap: true
+                }).addTo(map).on('load', function (event) {
+                    $.unblockUI();
+                });
 
 
             };
@@ -210,7 +227,7 @@
                 var southWest = map.unproject([0, mapsize.height], map.getMaxZoom());
                 var northEast = map.unproject([mapsize.width, 0], map.getMaxZoom());
 
-               
+
                 var bounds = new L.LatLngBounds(southWest, northEast);
                 self.mapborder(bounds);
                 self.setborder(bounds);
@@ -295,7 +312,7 @@
 
 
 
-            
+
             self.addmarkers = function () {
                 var map = self.map();
                 for (var i = 0; i < self.markers().length; i++) {
@@ -345,21 +362,28 @@
             };
 
 
-            this.init();
+
 
         };
-        function addRemark(left, top) {
-
+        function addRemark($element,left, top) {
+            if ($element.is("[disabled]")) {
+                return;
+            }
 
             var url = 'marker_edit.aspx?action=Add&top=' + top + '&left=' + left;
             jumpdirect(url);
         }
-        function editRemark(id) {
-
+        function editRemark($element, id) {
+            if ($element.is("[disabled]")) {
+                return;
+            }
             var url = 'marker_edit.aspx?action=Edit&id=' + id;
             jumpdirect(url);
         }
-        function deleteRemark(id, name) {
+        function deleteRemark($element, id, name) {
+            if ($element.is("[disabled]")) {
+                return;
+            }
             console.log(id);
             $.dialog.confirm('确认删除[' + name + ']吗？', function () {
                 $.ajax({
@@ -408,8 +432,30 @@
                 params.wid = wid;
             }
 
+            $.blockUI({
+                css: {
+                    border: 'none',
+                    padding: '15px',
+                    backgroundColor: '#000',
+                    'border-radius': '10px',
+                    opacity: .5,
+                    color: '#fff'
+                }, message: '<h3>数据加载中......</h3>'
+            });
+
             var viewModel = new ViewModel(params);
             ko.applyBindings(viewModel);
+            ko.bindingHandlers.myDisabled = {
+                update: function (element, valueAccessor) {
+                    var value = !ko.utils.unwrapObservable(valueAccessor());
+                    ko.bindingHandlers.css.update(element, function () { return { disabled: value }; });
+                    ko.bindingHandlers.disable.update(element, valueAccessor);
+                    if (value) {
+                        $(element).attr('disabled','disabled'); 
+                    }
+                }
+            };
+            viewModel.init();
         });
         function getQueryString(name) {
             var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
