@@ -304,6 +304,9 @@ namespace WeiXinPF.Web.admin.hotel
             save_room.Visible = false;
             btnAgree.Visible = false;
             btnRefuse.Visible = false;
+
+            btnPublish.Visible = false;
+
             lblComment.Visible = false;
             txtComment.Visible = false;
 
@@ -329,6 +332,11 @@ namespace WeiXinPF.Web.admin.hotel
                     txtComment.Visible = true;
                     txtComment.Enabled = false;
                 }
+
+                if (room.Status == Model.RoomStatus.Agree&& GetHotelId()!=0)
+                {
+                    btnPublish.Visible = true;
+                }
             }
         }
 
@@ -353,6 +361,19 @@ namespace WeiXinPF.Web.admin.hotel
             }
 
             divLocation.InnerHtml = location;
+        }
+
+        protected void btnPublish_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                new BLL.wx_hotel_room_manage().ManageRoom(roomid, Model.RoomStatus.Publish, GetAdminInfo().id, "发布", "");
+                JscriptMsg("发布成功！", Utils.CombUrlTxt("hotel_room.aspx", "action={0}&hotelid={1}", MXEnums.ActionEnum.Edit.ToString(), hotelid.ToString()), "Success");
+            }
+            catch
+            {
+                JscriptMsg("发布失败！", Utils.CombUrlTxt("hotel_room.aspx", "action={0}&hotelid={1}", MXEnums.ActionEnum.Edit.ToString(), hotelid.ToString()), "Error");
+            }
         }
     }
 }
