@@ -39,11 +39,12 @@
         </section>
         <section class="page bg2">
             <img alt="" src="{{:scenic.secondBgImg}}" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1" />
-            <div class="info">
-                {{:scenic.description}}
-            </div>
-            <ul class="scenic-list" data-bind="foreach: details">
-                {{for details}}
+            <div class="page-wapper">
+                <div class="info">
+                    {{:scenic.description}}
+                </div>
+                <ul class="scenic-list" data-bind="foreach: details">
+                    {{for details}}
                 <li>
                     <a href="detail.aspx?id={{:id}}">
                         <div class="annular-round">
@@ -52,8 +53,9 @@
                         <span>{{:name}}</span>
                     </a>
                 </li>
-                {{/for}}
-            </ul>
+                    {{/for}}
+                </ul>
+            </div>
         </section>
     </script>
     <script src="../../scripts/jquery/jquery-2.1.0.min.js"></script>

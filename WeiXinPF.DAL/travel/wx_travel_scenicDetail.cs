@@ -100,5 +100,14 @@ namespace WeiXinPF.DAL
                 return db.Query<Model.wx_travel_scenicDetail>(query, new { ScenicId = scenicId }).ToList();
             }
         }
+
+        public List<Model.wx_travel_scenicDetail> GetModelByWid(int wid)
+        {
+            using (IDbConnection db = DbFactory.GetOpenedConnection())
+            {
+                string query = @"Select b.* From dbo.wx_travel_scenic a Inner Join dbo.wx_travel_scenicDetail b On a.Id=b.ScenicId Where a.wid=@wid";
+                return db.Query<Model.wx_travel_scenicDetail>(query, new { wid = wid }).ToList();
+            }
+        } 
     }
 }

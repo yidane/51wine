@@ -63,7 +63,7 @@
             <dl>
                 <dt>登录密码</dt>
                 <dd>
-                    <asp:TextBox ID="txtPassword" runat="server" CssClass="input normal" datatype="*0-20" nullmsg="请设置密码" errormsg="密码范围在6-20位之间" sucmsg=" "></asp:TextBox>
+                    <asp:TextBox ID="txtPassword" runat="server" CssClass="input normal" datatype="*6-20" nullmsg="请设置密码" errormsg="密码范围在6-20位之间" sucmsg=" "></asp:TextBox>
                     <span class="Validform_checktip">*密码范围在6-20位之间。<asp:Literal ID="litpwdtip" runat="server"></asp:Literal></span></dd>
             </dl>
 

@@ -12,7 +12,9 @@
     <link href="../skin/default/style.css" rel="stylesheet" type="text/css" />
     <link href="../skin/mystyle.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript">
-        $("#form1").initValidform();
+        $(function () {
+            $('#form1').initValidform();
+        });
     </script>
 </head>
 <body class="mainbody">
@@ -53,7 +55,7 @@
             <dl>
                 <dt>密码</dt>
                 <dd>
-                    <asp:TextBox ID="txtPassword" runat="server" CssClass="input normal" datatype="*0-20" nullmsg="请设置密码" errormsg="密码范围在6-20位之间" sucmsg=" "></asp:TextBox>
+                    <asp:TextBox ID="txtPassword" runat="server" CssClass="input normal" datatype="*6-20" nullmsg="请设置密码" errormsg="密码范围在6-20位之间" sucmsg=" "></asp:TextBox>
                     <span class="Validform_checktip">*密码范围在6-20位之间。<asp:Literal ID="litpwdtip" runat="server"></asp:Literal></span></dd>
             </dl>
 

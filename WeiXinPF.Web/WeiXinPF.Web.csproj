@@ -128,6 +128,7 @@
     <Content Include="admin\map\map_scenic.aspx" />
     <Content Include="admin\map\map_scenic.html" />
     <Content Include="admin\map\marker_edit.aspx" />
+    <Content Include="admin\map\select_scenic.aspx" />
     <Content Include="admin\photo\photoEdit.aspx" />
     <Content Include="admin\photo\photolist.aspx" />
     <Content Include="admin\scenic\scenic_detail_edit.aspx" />
@@ -5475,6 +5476,13 @@
     </Compile>
     <Compile Include="admin\map\marker_edit.aspx.designer.cs">
       <DependentUpon>marker_edit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\map\select_scenic.aspx.cs">
+      <DependentUpon>select_scenic.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\map\select_scenic.aspx.designer.cs">
+      <DependentUpon>select_scenic.aspx</DependentUpon>
     </Compile>
     <Compile Include="admin\message\AddMessage.aspx.cs">
       <DependentUpon>AddMessage.aspx</DependentUpon>
