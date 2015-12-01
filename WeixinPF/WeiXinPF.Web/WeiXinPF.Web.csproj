@@ -3508,10 +3508,14 @@
     <Content Include="scripts\city.min.js" />
     <Content Include="scripts\cloud.js" />
     <Content Include="scripts\jquery\jquery-1.10.1.min.js" />
+    <Content Include="scripts\jquery\jquery.blockUI.js" />
     <Content Include="scripts\jquery\jquery.qrcode-0.12.0.min.js" />
     <Content Include="scripts\jquery\zepto.min.js" />
     <Content Include="scripts\jsrender.min.js" />
     <Content Include="scripts\knockout\knockout-extend.js" />
+    <Content Include="scripts\leaflet\leaflet-src.js" />
+    <Content Include="scripts\leaflet\leaflet.css" />
+    <Content Include="scripts\leaflet\leaflet.js" />
     <Content Include="scripts\qrcode\jquery.qrcode.min.js" />
     <Content Include="scripts\jquery\jquery.url.js" />
     <Content Include="scripts\qrcode\qrcode.min.js" />
@@ -8490,6 +8494,7 @@
     <Folder Include="aspx\" />
     <Folder Include="html\" />
     <Folder Include="scripts\datepicker\skin\whyGreen\" />
+    <Folder Include="scripts\leaflet\images\" />
     <Folder Include="shopmgr\order\" />
     <Folder Include="templates\index\qiche\css\" />
     <Folder Include="templates\index\qiche\js\" />
@@ -10796,6 +10801,7 @@
     <Content Include="weixin\KNSHotel\hotel_info.ashx" />
     <Content Include="weixin\KNSHotel\KNSHotelMasterPage.Master" />
     <Content Include="weixin\restaurant\ErCodeHandler.ashx" />
+    <Content Include="scripts\leaflet\leaflet-src.map" />
     <None Include="副本 Web.Debug.config">
       <DependentUpon>副本 Web.config</DependentUpon>
     </None>

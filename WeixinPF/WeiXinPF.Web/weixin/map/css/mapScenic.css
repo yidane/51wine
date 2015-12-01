@@ -111,7 +111,7 @@ body {
                 color: #2c3e50;
             }
 
-            .tip-bottom ul li[disabled] {
+            .tip-bottom ul li[disabled],.tip-bottom ul li a[disabled] {
                 cursor: not-allowed;
                 filter: alpha(opacity=65);
                 -webkit-box-shadow: none;
