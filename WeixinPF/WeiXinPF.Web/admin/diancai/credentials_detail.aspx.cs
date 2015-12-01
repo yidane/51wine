@@ -48,13 +48,13 @@ namespace WeiXinPF.Web.admin.diancai
 
             if (!String.IsNullOrEmpty(startDate.Text.Trim()))
             {
-                condition += " modifytime>='" + startDate.Text.Trim() + "' ";
+                condition += " FinishTime>='" + startDate.Text.Trim() + "' ";
             }
             if (!String.IsNullOrEmpty(endDate.Text.Trim()))
             {
                 if (!String.IsNullOrEmpty(condition))
                     condition += " and ";
-                condition += " modifytime<='" + endDate.Text.Trim() + "' ";
+                condition += " FinishTime<='" + endDate.Text.Trim() + "' ";
             }
             if (!String.IsNullOrEmpty(dingdanId.Text.Trim()))
             {

@@ -221,6 +221,11 @@ namespace WeiXinPF.BLL
             }
         }
 
+        public void OrderFinish(int shopId,int orderId)
+        {
+            dal.OrderFinish(shopId, orderId);
+        }
+
         public bool Update(int id, decimal payAmount)
         {
             return dal.Update(id, payAmount);
