@@ -179,7 +179,7 @@ namespace WeiXinPF.Web.weixin.restaurant
                 if (caipinModel.beginDate.HasValue || caipinModel.endDate.HasValue)
                 {
                     useRange = string.Format("{0}至{1}",
-                                                                    caipinModel.beginDate.HasValue ? caipinModel.beginDate.Value.ToString("yyyy-MMMM-dd") : string.Empty,
+                                                                    caipinModel.beginDate.HasValue ? caipinModel.beginDate.Value.ToString("yyyy-MM-dd") : string.Empty,
                                                                     caipinModel.endDate.HasValue ? caipinModel.endDate.Value.ToString("yyyy-MM-dd") : string.Empty);
                 }
 
