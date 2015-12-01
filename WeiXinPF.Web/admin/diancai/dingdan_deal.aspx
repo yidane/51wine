@@ -79,13 +79,11 @@
             <ul class="round">
                 <li class="title"><span class="none smallspan">订单详情</span></li>
                 <table width="100%" border="0" cellpadding="0" cellspacing="0" class="cpbiaoge">
-
                     <%=Dingdanlist %>
                 </table>
             </ul>
             <ul class="round">
                 <li class="title"><span class="none smallspan">订单信息</span></li>
-
                 <table width="100%" border="0" cellpadding="0" cellspacing="0" class="cpbiaoge">
                     <%=dingdanren %>
                 </table>
@@ -98,10 +96,10 @@
             </div>
             <asp:Button ID="btnFinish" runat="server" Text="订单完成" CssClass="DingdanButton"
                 OnClientClick="return ConfirmPostBack('btnFinish', '请确认顾客已到店核销验证码，确定执行【订单完成】操作？');"
-                 OnClick="OnOrderFinishClick" />
+                OnClick="btnFinish_OnClick" />
         </div>
-        
-         <input type="hidden" name="__EVENTTARGET" value="">
+
+        <input type="hidden" name="__EVENTTARGET" value="">
         <input type="hidden" name="__EVENTARGUMENT" value="">
     </form>
 </body>
