@@ -204,7 +204,7 @@ namespace WeiXinPF.DAL
         {
 
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select  top 1 id,shopinfoid,openid,wid,orderNumber,deskNumber,customerName,customerTel,address,oderTime,oderRemark,payAmount,payStatus,createDate from wx_diancai_dingdan_manage ");
+            strSql.Append("select  top 1 * from wx_diancai_dingdan_manage ");
             strSql.Append(" where id=@id");
             SqlParameter[] parameters = {
 					new SqlParameter("@id", SqlDbType.Int,4)
@@ -957,7 +957,7 @@ namespace WeiXinPF.DAL
         {
 
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select  top 1 id,shopinfoid,openid,wid,orderNumber,deskNumber,customerName,customerTel,address,oderTime,oderRemark,payAmount,payStatus,createDate,IsFinish from wx_diancai_dingdan_manage ");
+            strSql.Append("select  top 1 * from wx_diancai_dingdan_manage ");
             strSql.Append(" where id=@dingdan");
             SqlParameter[] parameters = {
 					new SqlParameter("@dingdan", SqlDbType.NVarChar,200)
@@ -981,7 +981,7 @@ namespace WeiXinPF.DAL
         {
 
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select  top 1 id,shopinfoid,openid,wid,orderNumber,deskNumber,customerName,customerTel,address,oderTime,oderRemark,payAmount,payStatus,createDate from wx_diancai_dingdan_manage ");
+            strSql.Append("select  top 1 * from wx_diancai_dingdan_manage ");
             strSql.Append(" where id=@id");
             SqlParameter[] parameters = {
 					new SqlParameter("@id", SqlDbType.Int,4)
