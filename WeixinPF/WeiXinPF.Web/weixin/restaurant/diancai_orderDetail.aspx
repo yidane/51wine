@@ -218,7 +218,7 @@
                         document.getElementById("picsrc").className = '';
                         document.getElementById("h3title").innerHTML = result.Data.Name;
                         document.getElementById("useRange").innerHTML = result.Data.Range;
-                        document.getElenmentById("Intruduce").innerHTML = result.Data.Intruduce;
+                        document.getElementById("Intruduce").innerHTML = result.Data.Intruduce;
                         document.getElementById("tuidanRule").innerHTML = result.Data.Rule;
                     } else {
                         alert("无法获取此商品的详情");
