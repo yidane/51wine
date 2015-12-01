@@ -448,8 +448,8 @@
             ko.bindingHandlers.myDisabled = {
                 update: function (element, valueAccessor) {
                     var value = !ko.utils.unwrapObservable(valueAccessor());
-                    ko.bindingHandlers.css.update(element, function () { return { disabled: value }; });
-                    ko.bindingHandlers.disable.update(element, valueAccessor);
+//                    ko.bindingHandlers.css.update(element, function () { return { disabled: value }; });
+//                    ko.bindingHandlers.disable.update(element, valueAccessor);
                     if (value) {
                         $(element).attr('disabled','disabled'); 
                     }
