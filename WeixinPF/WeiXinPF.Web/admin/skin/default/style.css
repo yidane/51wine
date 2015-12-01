@@ -331,7 +331,7 @@ textarea.input{ width:300px; height:65px; }
 	.tab-content dl:after,.div-content dl:after{clear:both;content:".";display:block;height:0;visibility:hidden;}
 	.tab-content dl:first-child{ border-top:none; }
 	.tab-content dl dt{ display:block; float:left; width:150px; text-align:right; color:#333; }
-	.tab-content dl dd{ margin-left:170px; }
+	.tab-content dl dd{ margin-left:210px; }
 	
 /*上传样式*/
 .upload-box{ position:relative; display:inline-block; height:32px; vertical-align:middle; *display:inline;}

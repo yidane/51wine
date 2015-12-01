@@ -43,6 +43,11 @@ namespace WeiXinPF.BLL
             return _dal.GetModelByScenicId(scenicId);
         }
 
+        public List<Model.wx_travel_scenicDetail> GetModelByWid(int wid)
+        {
+            return _dal.GetModelByWid(wid);
+        }
+
         public DataSet GetPageList(int pageSize, int pageIndex, string strWhere, string filedOrder, out int recordCount)
         {
             return _dal.GetPageList(pageSize, pageIndex, strWhere, filedOrder, out recordCount);

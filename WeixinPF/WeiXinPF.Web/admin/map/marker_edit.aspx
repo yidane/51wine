@@ -21,6 +21,21 @@
         $(function () {
             //初始化表单验证
             $("#form1").initValidform();
+
+            $("#txtSelectUrl").on("click", function () {
+                $.dialog({
+                    id: 'selectmodule',
+                    fixed: true,
+                    lock: true,
+                    max: false,
+                    min: false,
+
+                    title: "选择模型",
+                    content: "url:/admin/map/select_scenic.aspx?txt=txtUrl",
+                    height: 400,
+                    width: 440
+                });
+            });
         });
     </script>
 </head>
@@ -28,7 +43,7 @@
     <form id="form1" runat="server">
         <!--导航栏-->
         <div class="location">
-            <a href="map_scenic.html" class="home"><i></i><span>景区导航设置</span></a>
+            <a href="map_scenic.aspx" class="home"><i></i><span>景区导航设置</span></a>
             <i class="arrow"></i>
             <span>景点编辑</span>
         </div>
@@ -62,7 +77,8 @@
             <dl>
                 <dt>景点介绍</dt>
                 <dd>
-                    <asp:TextBox ID="txtUrl" runat="server" datatype="*2-100" CssClass="input normal upload-path" />
+                    <asp:TextBox ID="txtUrl" runat="server" datatype="*2-100" ReadOnly="true" CssClass="input normal upload-path" />
+                    <input id="txtSelectUrl" type="button" value="选择" class="btn" />
                     <span class="Validform_checktip">*</span>
                 </dd>
             </dl>
@@ -108,7 +124,7 @@
         <div class="page-footer">
             <div class="btn-list">
                 <asp:Button ID="btnSubmit" runat="server" Text="提交保存" CssClass="btn" OnClick="btnSubmit_Click" />
-                <a href="map_scenic.html"><span class="btn yellow">返回上一页</span></a>
+                <a href="map_scenic.aspx"><span class="btn yellow">返回上一页</span></a>
             </div>
             <div class="clear"></div>
         </div>
