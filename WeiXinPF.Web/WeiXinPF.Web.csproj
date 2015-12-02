@@ -3654,6 +3654,8 @@
     <Content Include="scripts\swfupload\swfupload.js" />
     <Content Include="scripts\swfupload\swfupload.queue.js" />
     <Content Include="scripts\swfupload\swfupload.swf" />
+    <Content Include="scripts\swiper\animate.min.css" />
+    <Content Include="scripts\swiper\swiper.animate1.0.2.min.js" />
     <Content Include="scripts\swiper\swiper.min.css" />
     <Content Include="scripts\swiper\swiper.min.js" />
     <Content Include="scripts\weixin\wxcomm.js" />
@@ -8607,6 +8609,8 @@
     <Content Include="weixin\restaurant\images\usedTicket.png" />
     <Content Include="weixin\restaurant\images\user.png" />
     <Content Include="weixin\restaurant\images\wave_blue_icon.svg" />
+    <Content Include="weixin\scenic\images\bottom.png" />
+    <Content Include="weixin\scenic\images\btn_arrow.png" />
     <Content Include="weixin\WeChatPay\getopenId.aspx" />
     <Content Include="weixin\KNSHotel\css\hotels.css" />
     <Content Include="weixin\KNSHotel\css\mystyle.css" />
