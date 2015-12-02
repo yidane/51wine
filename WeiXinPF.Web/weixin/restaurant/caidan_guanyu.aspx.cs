@@ -1,6 +1,7 @@
 ﻿using WeiXinPF.Common;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -14,7 +15,7 @@ namespace WeiXinPF.Web.weixin.restaurant
         public int shopid = 0;
         BLL.wx_diancai_shopinfo shopBll = new BLL.wx_diancai_shopinfo();
         Model.wx_diancai_shopinfo shopinfo = new Model.wx_diancai_shopinfo();
-
+        BLL.wx_diancai_shoppic picBll = new BLL.wx_diancai_shoppic();
         public string kcType = "";
         public decimal sendPrice = 0;
         public string radius = "";
@@ -39,6 +40,8 @@ namespace WeiXinPF.Web.weixin.restaurant
         public string openid = "";
         public string notice = "";
         public string rename = "";
+        public string tupian = "";
+        public string tabid = "";
         protected void Page_Load(object sender, EventArgs e)
         {
             openid = MyCommFun.QueryString("openid");
@@ -52,6 +55,26 @@ namespace WeiXinPF.Web.weixin.restaurant
                 {
                     return;
                 }
+                var list = picBll.GetModelList(String.Format(" shopid={0}",shopid));
+                if (list!=null&&list.Any())
+                {
+                    int j = 0;
+                    foreach (var pic in list)
+                    {
+                        tupian += string.Format("  <li><p>{0}</p><a href=\"{1}\"><img class='header-img' src=\"{2}\"></a></li>", pic. description, pic.pictzUrl, pic.picUrl);
+                        j++;
+                        if (j==1)
+                        {
+                            tabid += string.Format("<li class='active'>{0}</li>", j);
+                        }
+                        else
+                        {
+                            tabid += string.Format("<li>{0}</li>", j);
+                        }
+                    }
+                   
+                }
+                 
                 kcType = shopinfo.kcType;
                 sendPrice = Convert.ToDecimal( shopinfo.sendPrice);
                 radius = shopinfo.radius;

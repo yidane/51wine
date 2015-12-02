@@ -80,7 +80,7 @@ namespace WeiXinPF.Web.weixin.KNSHotel
                 dizhi = hotel.hotelAddress;
                 xplace = hotel.xplace.ToString();
                 yplace = hotel.yplace.ToString();
-                image = hotel.coverPic;
+                image = hotel.topPic;
                 tel = hotel.hotelPhone;
                 listMode = hotel.listMode;
                 yuding += " <li class=\"title\"><span class=\"none\">" + hotel.hotelName.ToString() + "</span></li>";

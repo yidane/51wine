@@ -147,6 +147,7 @@
                   <dd>
                    <asp:TextBox ID="picUrl" runat="server" CssClass="input normal upload-path"  style="width:200px;"  sucmsg=" " nullmsg=""  />
                     <div class="upload-box upload-img"></div>
+                       <span >建议：为保证图片清晰的显示，建议您上传的图片尺寸为400*200</span>
                   </dd>
               </dl>
              
