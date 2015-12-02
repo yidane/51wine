@@ -18,6 +18,38 @@
     <script type="text/javascript" src="../js/layout.js"></script>
     <link href="../skin/default/style.css" rel="stylesheet" type="text/css" />
     <link href="../skin/mystyle.css" rel="stylesheet" type="text/css" />
+    <style>
+          .alert-success {
+            color: #3c763d;
+            background-color: #dff0d8;
+            border-color: #d6e9c6;
+        }
+
+        .alert-danger {
+            color: #a94442;
+            background-color: #f2dede;
+            border-color: #ebccd1;
+        }
+
+        .alert-warning {
+            color: #8a6d3b;
+            background-color: #fcf8e3;
+            border-color: #faebcc;
+        }
+
+        .alert-info {
+            color: #31708f;
+            background-color: #d9edf7;
+            border-color: #bce8f1;
+        }
+
+        .alert {
+            padding: 15px;
+            padding-left: 85px;
+            border: 1px solid transparent;
+            border-radius: 10px;
+        }
+    </style>
     <script type="text/javascript">
         $(function () {
             //初始化表单验证
@@ -115,6 +147,9 @@
             </dl>
         </div>
         <div class="tab-content" style="display: none">
+            <div class="alert alert-warning " role="alert" style="text-align: left;">
+
+                <strong>建议：</strong>为保证图片清晰的显示，建议您上传的图片尺寸为400*200</div>
             <dl>
                 <dt>文字描述：</dt>
                 <dd>

@@ -18,6 +18,38 @@
     <script type="text/javascript" src="../js/layout.js"></script>
     <link href="../skin/default/style.css" rel="stylesheet" type="text/css" />
     <link href="../skin/mystyle.css" rel="stylesheet" type="text/css" />
+        <style>
+          .alert-success {
+            color: #3c763d;
+            background-color: #dff0d8;
+            border-color: #d6e9c6;
+        }
+
+        .alert-danger {
+            color: #a94442;
+            background-color: #f2dede;
+            border-color: #ebccd1;
+        }
+
+        .alert-warning {
+            color: #8a6d3b;
+            background-color: #fcf8e3;
+            border-color: #faebcc;
+        }
+
+        .alert-info {
+            color: #31708f;
+            background-color: #d9edf7;
+            border-color: #bce8f1;
+        }
+
+        .alert {
+            padding: 15px;
+            padding-left: 85px;
+            border: 1px solid transparent;
+            border-radius: 10px;
+        }
+    </style>
     <script type="text/javascript">
         $(function () {
             //初始化表单验证
@@ -80,12 +112,11 @@
                 </dd>
             </dl>
             <dl>
-                <dt>商户或门店Logo：</dt>
+                <dt>首页封面：</dt>
                 <dd>
                     <asp:TextBox ID="hotelLogo" runat="server" CssClass="input normal upload-path" datatype="*1-200" Style="width: 200px;" sucmsg=" " nullmsg="" />
-                    <div class="upload-box upload-img"></div>
-                    <br />
-                    <span class="red">请注意使用尺寸大小为100*100的图片</span>
+                    <div class="upload-box upload-img"></div> 
+                    <span>建议：为保证图片清晰的显示，建议您上传的图片尺寸为400*200</span>
                 </dd>
             </dl>
             <dl>

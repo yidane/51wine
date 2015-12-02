@@ -205,7 +205,7 @@ namespace WeiXinPF.Application.DomainModules.Map
                     Id = h.id,
                     Name = h.hotelName,
                     Introduction = h.hotelIntroduct,
-                    Logo = h.coverPic,
+                    Logo = h.topPic,
                     Lat = (double)(h.xplace.HasValue ? h.xplace.Value : 0),
                     Lng = (double)(h.yplace.HasValue ? h.yplace.Value : 0),
                     PoiType = "hotel"

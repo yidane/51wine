@@ -50,7 +50,7 @@
         }
 
         .header-img {
-            max-height: 150px;
+            max-height: 200px;
         }
     </style>
     <script type="text/javascript">
