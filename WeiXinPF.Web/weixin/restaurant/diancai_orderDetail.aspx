@@ -201,6 +201,13 @@
                 background-image: url(images/icon-tuikuan.png);
                 background-color: #ccc;
             }
+
+
+            .detailcontent h2 {
+                padding: 3px 0 3px 0;
+            }
+
+
     </style>
     <script type="text/javascript">
         function htmlit(shopId,caipinId) {
@@ -220,6 +227,9 @@
                         document.getElementById("useRange").innerHTML = result.Data.Range;
                         document.getElementById("Intruduce").innerHTML = result.Data.Intruduce;
                         document.getElementById("tuidanRule").innerHTML = result.Data.Rule;
+                        document.getElementById("suoming").innerHTML = result.Data.suoming;
+                        document.getElementById("jianjie").innerHTML = result.Data.shopIntroduction;
+                        
                     } else {
                         alert("无法获取此商品的详情");
                         return;
@@ -272,29 +282,74 @@
                     }
                 });
             });
-            $(".gp-icons.gpd-up-icon").click(function () {
+            $(".gpd-item-title").click(function () {
                 var zThis = $(this);
                 var zThisParent = zThis.parents(".gpd-item");
                 zThisParent.toggleClass("gdp-curr");
                 zThisParent.siblings(".gpd-item").removeClass("gdp-curr");
+            });
+
+            //显影
+            $(".gpd-item-title").click(function () {
+                var zThis = $(this);
+                var zThisParent = zThis.parents(".detailcontent");
+                zThisParent.toggleClass("gdp-curr");
+                zThisParent.siblings(".detailcontent").removeClass("gdp-curr");
             });
         });
     </script>
 </asp:Content>
 <asp:Content ID="c" ContentPlaceHolderID="content" runat="server" class="mode_webapp">
     <div class="cardexplain" id="contact_info" runat="server" style="margin-bottom: 50px">
-        <div id="mcover" onclick="document.getElementById('mcover').style.display='';">
+        <div id="mcover" >
             <div id="Popup">
                 <div class="imgPopup">
                     <h3 id="h3title"></h3>
                     <img id="picsrc" class="pic-loading" src=""/>
-                    <h4>有效期</h4>
-                    <p class="jianjie" id="useRange"></p>
-                    <h4>使用须知</h4>
-                    <p class="jianjie" id="Intruduce"></p>
-                    <h4>退单规则</h4>
-                    <p class="jianjie" id="tuidanRule"></p>
+                    <p class="jianjie" id="jianjie"></p>
                 </div>
+
+                 <div class="detailcontent">
+                <h2 class="gpd-item-title">
+                    <img class="detailicon-ticket" src="images/time.png" />
+                    <span class="gpd-item-title-name">有效期</span>
+                    <span class="gp-icons gpd-up-icon"></span>
+                </h2>
+                <div class="content  gpd-content" id="useRange"></div>
+            </div>
+                 <div class="detailcontent">
+                <h2 class="gpd-item-title">
+                    <img class="detailicon-ticket" src="images/info.png" />
+                    <span class="gpd-item-title-name">商品说明</span>
+                    <span class="gp-icons gpd-up-icon"></span>
+                </h2>
+                <div class="content  gpd-content" id="suoming"></div>
+            </div>
+
+            <div class="detailcontent">
+                <h2 class="gpd-item-title">
+                    <img class="detailicon-ticket" src="images/info.png" />
+                    <span class="gpd-item-title-name">使用须知</span>
+                    <span class="gp-icons gpd-up-icon"></span>
+
+                </h2>
+
+                <div class="content gpd-content" id="Intruduce">
+                </div>
+            </div>
+
+
+            <div class="detailcontent">
+                <h2 class="gpd-item-title">
+                    <img class="detailicon-ticket" src="images/undo.png" />
+                    <span class="gpd-item-title-name">退单规则</span>
+                    <span class="gp-icons gpd-up-icon"></span>
+
+                </h2>
+
+                <div class="content gpd-content" id="tuidanRule">
+                </div>
+            </div>
             </div>
             <a class="close" onclick="document.getElementById('mcover').style.display='';">X</a>
         </div>

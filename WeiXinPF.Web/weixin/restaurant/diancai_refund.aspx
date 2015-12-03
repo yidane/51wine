@@ -103,7 +103,8 @@
             color: red;
         }
 
-        .submit { 
+        .submit {
+            width: 100%;
 	padding:10px 20px;
 	font-size:16px;
 	text-decoration:none;
@@ -199,10 +200,13 @@
                     </table>
                 </li>
             </ul>
-            <asp:Button runat="server" ID="btnRefund" Text="提交" OnClick="btnRefund_Click" CssClass="submit" />
-            <asp:HiddenField runat="server" ID="caiidList" />
+          
+           
         </div>
-
+        <div class="footReturn">
+             <asp:Button runat="server" ID="btnRefund" Text="提交" OnClick="btnRefund_Click" CssClass="submit" />
+             <asp:HiddenField runat="server" ID="caiidList" />
+        </div>
         <script type="text/javascript">
             $(document).ready(function () {
                 // 仅能输入数字

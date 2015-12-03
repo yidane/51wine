@@ -29,7 +29,7 @@ namespace WeiXinPF.Web.weixin.restaurant
         public string PayAmount = string.Empty;
         public string customeName = string.Empty;
         public string customerTel = string.Empty;
-        public string orderRange = string.Empty;
+        public string orderRange = string.Empty; 
         public string RestruantLocation = string.Empty;
         public string RestruantNotice = string.Empty;
         public string RestruantRefundRule = string.Empty;
@@ -49,7 +49,7 @@ namespace WeiXinPF.Web.weixin.restaurant
                 shopinfo = shopBll.GetModel(shopid);
                 RestruantName = shopinfo.hotelName;
                 rename = shopinfo.dcRename;
-                RestruantPhone = shopinfo.tel;
+                RestruantPhone = shopinfo.tel; 
                 if (dingdan > 0)
                 {
                     var orderDetail = new OrderDetail();
@@ -73,7 +73,7 @@ namespace WeiXinPF.Web.weixin.restaurant
             customeName = orderDetail.customerName;
             customerTel = orderDetail.customerTel;
             orderRange = string.Format("{0}-{1}", orderDetail.oderTime.ToString("yyyy-MM-dd"), orderDetail.OrderDeadTime.ToString("yyyy-MM-dd"));
-
+            
             BindOrderCaiPinDetail(orderDetail.OrderID, orderDetail.OrderCaipinDetail);
         }
 
