@@ -14,145 +14,145 @@
             background-size: 50px 50px;
         }
 
-      .orderfood {
-    margin-top: -16px;
-}
+        .orderfood {
+            margin-top: -16px;
+        }
 
 
-      .detailcontent {
-border: 1px solid #C6C6C6;
-background-color: rgba(255, 255, 255, 1);
-text-align: left;
-font-size: 14px;
-line-height: 22px;
-border-radius: 5px;
-box-shadow: 0 1px 1px #f6f6f6;
-box-shadow:0 1px 1px #f6f6f6;
-margin-bottom: 11px;
-}
-.detailcontent h2 {
-border-bottom: 1px solid #C6C6C6;
-background-color: #E1E1E1;
-background: -webkit-gradient( linear, left bottom, left top, color-stop(0, #E7E7E7), color-stop(1, #f9f9f9) );
-box-shadow: 0 1px 0 #FFFFFF inset, 0 1px 0 #EEEEEE;
-border-radius: 5px 5px 0 0;
-padding: 0px 10px 0px 10px;
-font-size: 14px;
-text-shadow:0 1px #FFF;
-}
-.detailcontent .content {
-	padding:10px;
-	font-size:14px;
-	line-height:22px;
-}
-.detailcontent .content  img{
-	max-width:100%;
-	border:0;
-}
+        .detailcontent {
+            border: 1px solid #C6C6C6;
+            background-color: rgba(255, 255, 255, 1);
+            text-align: left;
+            font-size: 14px;
+            line-height: 22px;
+            border-radius: 5px;
+            box-shadow: 0 1px 1px #f6f6f6;
+            box-shadow: 0 1px 1px #f6f6f6;
+            margin-bottom: 11px;
+        }
+
+            .detailcontent h2 {
+                border-bottom: 1px solid #C6C6C6;
+                background-color: #E1E1E1;
+                background: -webkit-gradient( linear, left bottom, left top, color-stop(0, #E7E7E7), color-stop(1, #f9f9f9) );
+                box-shadow: 0 1px 0 #FFFFFF inset, 0 1px 0 #EEEEEE;
+                border-radius: 5px 5px 0 0;
+                padding: 0px 10px 0px 10px;
+                font-size: 14px;
+                text-shadow: 0 1px #FFF;
+            }
+
+            .detailcontent .content {
+                padding: 10px;
+                font-size: 14px;
+                line-height: 22px;
+            }
+
+                .detailcontent .content img {
+                    max-width: 100%;
+                    border: 0;
+                }
 
 
-/*#region gdp */
-.gpd-item {
-    padding: 10px 0;
-}
+        /*#region gdp */
+        .gpd-item {
+            padding: 10px 0;
+        }
 
- .gpd-item-title {
-     height: 32px;
-    line-height: 32px;
-    vertical-align: middle;
- }
- .gpd-item-title .detailicon-ticket,.gpd-item-title .gpd-item-title-name {
-     float: left;
- }
+        .gpd-item-title {
+            height: 32px;
+            line-height: 32px;
+            vertical-align: middle;
+        }
 
-.gp-icons {
-    background-image: url(images/gp_icons.png);
-    background-size: 320px auto;
-}
+            .gpd-item-title .detailicon-ticket, .gpd-item-title .gpd-item-title-name {
+                float: left;
+            }
 
-.gpd-up-icon {
-    float: right;
-    width: 44px;
-    height: 32px;
-    /* position: absolute; */
-    right: 0;
-    top: -2px;
-    /* top: 0; */
-    background-position: -34px -41px;
-}
+        .gp-icons {
+            background-image: url(images/gp_icons.png);
+            background-size: 320px auto;
+        }
 
-.gdp-curr .gpd-up-icon {
-    background-position: -34px 3px;
-}
+        .gpd-up-icon {
+            float: right;
+            width: 44px;
+            height: 32px;
+            /* position: absolute; */
+            right: 0;
+            top: -2px;
+            /* top: 0; */
+            background-position: -34px -41px;
+        }
 
-.gpd-content {
-    display: none;
-    padding: 20px;
-}
+        .gdp-curr .gpd-up-icon {
+            background-position: -34px 3px;
+        }
 
-.gdp-curr .gpd-content {
-    display: block;
-}
+        .gpd-content {
+            display: none;
+            padding: 20px;
+        }
 
-.detailicon-ticket {
-    height: 32px;
-    width: 32px;
-}
+        .gdp-curr .gpd-content {
+            display: block;
+        }
+
+        .detailicon-ticket {
+            height: 32px;
+            width: 32px;
+        }
 
 
 
 
-            
 
-/*#endregion */
+
+        /*#endregion */
     </style>
 </asp:Content>
 <asp:Content ID="c" ContentPlaceHolderID="content" runat="server" class="mode_webapp">
     <input type="hidden" name="formhash" id="formhash" value="52ebc03e" />
-    <div id="mcover" >
+    <div id="mcover">
         <div id="Popup">
             <div class="imgPopup">
                 <img id="picsrc" class="pic-loading" src=""><h3 id="h3title"></h3>
                 <p class="jianjie" id="jianjie">
-
             </div>
 
-                 <div class="detailcontent">
-            <h2 class="gpd-item-title">
-                <img class="detailicon-ticket" src="../restaurant/images/info.png" />
-                <span class="gpd-item-title-name">商品说明</span>
-                <span class="gp-icons gpd-up-icon"></span>
-            </h2>
-            <div class="content  gpd-content" id="suoming"> </div>
-        </div>
-
-        <div class="detailcontent">
-            <h2 class="gpd-item-title">
-                <img class="detailicon-ticket" src="../restaurant/images/info.png" />
-                <span class="gpd-item-title-name">使用须知</span>
-                <span class="gp-icons gpd-up-icon"></span>
-
-            </h2>
-
-            <div class="content gpd-content" id="shiyongxuzhi">
-                
-                
+            <div class="detailcontent">
+                <h2 class="gpd-item-title">
+                    <img class="detailicon-ticket" src="images/info.png" />
+                    <span class="gpd-item-title-name">商品说明</span>
+                    <span class="gp-icons gpd-up-icon"></span>
+                </h2>
+                <div class="content  gpd-content" id="suoming"></div>
             </div>
-        </div>
 
+            <div class="detailcontent">
+                <h2 class="gpd-item-title">
+                    <img class="detailicon-ticket" src="images/info.png" />
+                    <span class="gpd-item-title-name">使用须知</span>
+                    <span class="gp-icons gpd-up-icon"></span>
 
-        <div class="detailcontent">
-            <h2 class="gpd-item-title">
-                <img class="detailicon-ticket" src="../restaurant/images/undo.png" />
-                <span class="gpd-item-title-name">退单规则</span>
-                <span class="gp-icons gpd-up-icon"></span>
+                </h2>
 
-            </h2>
-
-            <div class="content gpd-content" id="tuidanguizhe"> 
-                
+                <div class="content gpd-content" id="shiyongxuzhi">
+                </div>
             </div>
-        </div>
+
+
+            <div class="detailcontent">
+                <h2 class="gpd-item-title">
+                    <img class="detailicon-ticket" src="images/undo.png" />
+                    <span class="gpd-item-title-name">退单规则</span>
+                    <span class="gp-icons gpd-up-icon"></span>
+
+                </h2>
+
+                <div class="content gpd-content" id="tuidanguizhe">
+                </div>
+            </div>
         </div>
         <a class="close" onclick="document.getElementById('mcover').style.display='';">X</a>
     </div>

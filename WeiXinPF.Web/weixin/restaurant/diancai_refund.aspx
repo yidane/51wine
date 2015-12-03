@@ -102,6 +102,38 @@
             border: 0px;
             color: red;
         }
+
+        .submit { 
+	padding:10px 20px;
+	font-size:16px;
+	text-decoration:none;
+	border:1px solid #700d00;
+	background-color: #c32d32;
+    background: -webkit-gradient(linear,left top,left bottom,from(#fe444a),to(#c32d32)); 
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	-o-border-radius: 5px;
+	border-radius: 5px;
+	color: #ffffff;
+	display:block;
+	text-align:center;
+	text-shadow:0 1px rgba(0, 0, 0, 0.2);
+}
+.submit:active {
+	padding-bottom:9px;
+	padding-left:20px;
+	padding-right:20px;
+	padding-top:11px;
+	top:0px;
+	border:1px solid #700d00;
+	background-color: #c32d32;
+    background: -webkit-gradient(linear,left top,left bottom,from(#fe444a),to(#700d00)); 
+    -webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	-o-border-radius: 5px;
+	border-radius: 5px;
+}
+.submit img{ width:15px; margin:-4px 10px 0 0;}
     </style>
 </head>
 <body class="mode_webapp">
@@ -167,7 +199,7 @@
                     </table>
                 </li>
             </ul>
-            <asp:Button runat="server" ID="btnRefund" Text="提交" OnClick="btnRefund_Click" CssClass="gpd-ticket" />
+            <asp:Button runat="server" ID="btnRefund" Text="提交" OnClick="btnRefund_Click" CssClass="submit" />
             <asp:HiddenField runat="server" ID="caiidList" />
         </div>
 
