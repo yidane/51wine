@@ -29,16 +29,16 @@
                     <div class="swiper-wrapper">
                     </div>
                     <div class="btn-prev-inner">
-                        <img src="images/btn_arrow.png" alt="" class="small-botton prev" />
+                        <img src="images/btn_arrow.png" alt="" class="small-botton" />
                     </div>
                     <div class="btn-next-inner">
-                        <img src="images/btn_arrow.png" alt="" class="small-botton next" />
+                        <img src="images/btn_arrow.png" alt="" class="small-botton" />
                     </div>
                 </div>
             </section>
         </div>
         <a id="btnNext">
-            <img src="images/btn_arrow.png" alt="" class="bottom" />
+            <img src="images/btn_arrow.png" alt="" class="small-botton" />
         </a>
     </div>
     <script src="../../scripts/jquery/jquery-2.1.0.min.js"></script>

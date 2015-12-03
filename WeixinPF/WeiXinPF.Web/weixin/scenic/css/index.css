@@ -126,38 +126,21 @@ a {
             font-size: 16px;
         }
 
-.bottom {
-    position: fixed;
-    bottom: 5px;
-    width: 24px;
-    height: 14px;
-    margin-left: -12px;
-    left: 50%;
-    z-index: 2015;
-    -webkit-animation: start 1.5s infinite ease-in-out;
-    animation: start 1.5s infinite ease-in-out;
-}
-
 .small-botton {
-    position: absolute;
     width: 24px;
     height: 14px;
     z-index: 2015;
     opacity: 0.6;
+    -webkit-animation: start 1.5s infinite ease-in-out;
+    animation: start 1.5s infinite ease-in-out;
 }
 
 .prev {
     left: 0;
-    -webkit-animation: start 1.5s infinite ease-in-out;
-    animation: start 1.5s infinite ease-in-out;
 }
 
 .next {
     right: 0;
-    -webkit-animation: start 1.5s infinite ease-in-out;
-    -moz-animation: start 1.5s infinite ease-in-out;
-    -o-animation: start 1.5s infinite ease-in-out;
-    animation: start 1.5s infinite ease-in-out;
 }
 
 #swiper-outter {
@@ -175,19 +158,37 @@ a {
 }
 
 .btn-prev-inner {
+    margin-top: -24px;
     left: 5px;
-    -webkit-transform: rotate(-90deg);
-    transform: rotate(-90deg);
-}
-
-.btn-next-inner {
-    right: 5px;
     -webkit-transform: rotate(90deg);
     transform: rotate(90deg);
 }
 
+.btn-next-inner {
+    margin-top: -24px;
+    right: 5px;
+    -webkit-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+}
+
     .btn-next-inner.swiper-button-disabled, .btn-prev-inner.swiper-button-disabled {
         display: none;
+    }
+
+#btnNext {
+    position: absolute;
+    bottom: 5px;
+    width: 24px;
+    height: 14px;
+    margin-left: -12px;
+    left: 50%;
+    z-index: 2015;
+}
+
+
+    #btnNext.swiper-button-disabled {
+        -webkit-transform: rotate(180deg);
+        transform: rotate(180deg);
     }
 
 @-webkit-keyframes start {
