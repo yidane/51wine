@@ -123,16 +123,16 @@ namespace WeiXinPF.Web.weixin.restaurant
 
                     var shopInfo = new BLL.wx_diancai_shopinfo().GetModel(this.shopid);
                     var entity = new UnifiedOrderEntity
-                        {
-                            OrderId = order.id.ToString(),
-                            wid = order.wid,
-                            total_fee = order.payAmount == null ? 0 : (int)order.payAmount,
-                            out_trade_no = order.orderNumber,
-                            openid = openid,
-                            body = shopInfo.hotelName,
-                            PayModuleID = (int)PayModuleEnum.Restaurant,
-                            PayComplete = "../restaurant/AfterPay.aspx"
-                        };
+                    {
+                        OrderId = order.id.ToString(),
+                        wid = order.wid,
+                        total_fee = order.payAmount == null ? 0 : (int)order.payAmount,
+                        out_trade_no = order.orderNumber,
+                        openid = openid,
+                        body = shopInfo.hotelName,
+                        PayModuleID = (int)PayModuleEnum.Restaurant,
+                        PayComplete = "../restaurant/AfterPay.aspx"
+                    };
 
                     entity.Extra.Add("content", orderProcessResult.Message);
                     entity.Extra.Add("shopname", new BLL.wx_diancai_shopinfo().GetModel(this.shopid).hotelName);
@@ -150,18 +150,25 @@ namespace WeiXinPF.Web.weixin.restaurant
             else if (_action == "productDetail")
             {
                 var productId = MyCommFun.QueryString("productId");
-                 
+
 
                 if (!string.IsNullOrEmpty(productId))
                 {
                     var model = new BLL.wx_diancai_caipin_manage().GetModel(int.Parse(productId));
-                    
+                    String useRange = string.Empty;
+                    if (model.beginDate.HasValue || model.endDate.HasValue)
+                    {
+                        useRange = string.Format("{0}至{1}",
+                        model.beginDate.HasValue ? model.beginDate.Value.ToString("yyyy-MM-dd") : string.Empty,
+                        model.endDate.HasValue ? model.endDate.Value.ToString("yyyy-MM-dd") : string.Empty);
+                    }
                     var data = new
                     {
                         shopIntroduction = model.shopIntroduction,
                         detailContent = model.detailContent,
                         instructions = model.instructions,
-                        chargeback = model.chargeback
+                        chargeback = model.chargeback,
+                        useRange= useRange
 
                     };
                     context.Response.Write(AjaxResult.Success(data).ToCamelString());
@@ -193,7 +200,9 @@ namespace WeiXinPF.Web.weixin.restaurant
                     Url = MapUrl(pictureUrl),
                     Range = useRange,
                     Intruduce = jianjie,
-                    Rule = tuidanRule
+                    Rule = tuidanRule,
+                    suoming=caipinModel.detailContent,
+                    shopIntroduction=caipinModel.shopIntroduction
                 };
 
                 context.Response.Write(AjaxResult.Success(result));
@@ -386,20 +395,20 @@ namespace WeiXinPF.Web.weixin.restaurant
                             for (var i = 0; i < item.num; i++)
                             {
                                 var iCode = new IdentifyingCodeInfo()
-                                                {
-                                                    IdentifyingCodeId = Guid.NewGuid(),
-                                                    CreateTime = DateTime.Now,
-                                                    IdentifyingCode = string.Empty,
-                                                    ModifyTime = DateTime.Now,
-                                                    ModuleName = "restaurant",
-                                                    OrderCode = order.orderNumber,
-                                                    OrderId = order.id.ToString(),
-                                                    ProductCode = item.caiId.ToString(),
-                                                    ProductId = item.caiId.ToString(),
-                                                    ShopId = order.shopinfoid.ToString(),
-                                                    Wid = order.wid,
-                                                    Status = 0
-                                                };
+                                {
+                                    IdentifyingCodeId = Guid.NewGuid(),
+                                    CreateTime = DateTime.Now,
+                                    IdentifyingCode = string.Empty,
+                                    ModifyTime = DateTime.Now,
+                                    ModuleName = "restaurant",
+                                    OrderCode = order.orderNumber,
+                                    OrderId = order.id.ToString(),
+                                    ProductCode = item.caiId.ToString(),
+                                    ProductId = item.caiId.ToString(),
+                                    ShopId = order.shopinfoid.ToString(),
+                                    Wid = order.wid,
+                                    Status = 0
+                                };
                                 IdentifyingCodeService.AddIdentifyingCode(iCode);
                             }
                         }
@@ -444,13 +453,13 @@ namespace WeiXinPF.Web.weixin.restaurant
                 var sAr = arrGoods[i].Split(',');
 
                 allGoods.Add(new wx_diancai_dingdan_caiping()
-                                 {
-                                     dingId = order.id,
-                                     caiId = Convert.ToInt32(sAr[0]), // 菜品ID
-                                     num = Convert.ToInt32(sAr[1]), // 菜品件数
-                                     price = Convert.ToDecimal(sAr[2]), // 菜品单价
-                                     totpric = Convert.ToInt32(sAr[1]) * Convert.ToDecimal(sAr[2]) // 总价
-                                 });
+                {
+                    dingId = order.id,
+                    caiId = Convert.ToInt32(sAr[0]), // 菜品ID
+                    num = Convert.ToInt32(sAr[1]), // 菜品件数
+                    price = Convert.ToDecimal(sAr[2]), // 菜品单价
+                    totpric = Convert.ToInt32(sAr[1]) * Convert.ToDecimal(sAr[2]) // 总价
+                });
             }
 
             return allGoods;

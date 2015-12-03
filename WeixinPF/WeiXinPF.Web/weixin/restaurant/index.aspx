@@ -119,7 +119,14 @@
                 <img id="picsrc" class="pic-loading" src=""><h3 id="h3title"></h3>
                 <p class="jianjie" id="jianjie">
             </div>
-
+             <div class="detailcontent">
+                <h2 class="gpd-item-title">
+                    <img class="detailicon-ticket" src="images/time.png" />
+                    <span class="gpd-item-title-name">有效期</span>
+                    <span class="gp-icons gpd-up-icon"></span>
+                </h2>
+                <div class="content  gpd-content" id="useRange"></div>
+            </div>
             <div class="detailcontent">
                 <h2 class="gpd-item-title">
                     <img class="detailicon-ticket" src="images/info.png" />
@@ -182,6 +189,9 @@
                         document.getElementById("suoming").innerHTML = data.detailContent;
                         document.getElementById("shiyongxuzhi").innerHTML = data.instructions;
                         document.getElementById("tuidanguizhe").innerHTML = data.chargeback;
+                        document.getElementById("useRange").innerHTML = data.useRange;
+
+                        
                     }
                     
                    
