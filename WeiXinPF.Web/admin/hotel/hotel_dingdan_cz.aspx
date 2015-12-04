@@ -273,7 +273,7 @@
                 <dt>订单状态：</dt>
                 <dd>
                     <asp:RadioButtonList ID="StatusType" runat="server" RepeatDirection="Horizontal" CellPadding="10" CellSpacing="10">
-                        <asp:ListItem Value="1">商家接收</asp:ListItem>
+                        <asp:ListItem Value="1" Selected="True">商家接收</asp:ListItem>
                         <asp:ListItem Value="2">商家拒绝</asp:ListItem>
                     </asp:RadioButtonList>
 

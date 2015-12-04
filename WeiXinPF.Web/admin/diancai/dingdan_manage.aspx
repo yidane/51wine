@@ -127,7 +127,7 @@
             <asp:Button ID="btnExport" runat="server" Text="导出Excel" CssClass="DingdanButton" OnClick="btnExport_Click" />
         </div>
         <!--工具栏-->
-        <div class="toolbar-wrap">
+        <div class="toolbar-wrap"  style="display: none">
             <div id="floatHead" class="toolbar">
                 <div class="l-list">
                     <ul class="icon-list">
