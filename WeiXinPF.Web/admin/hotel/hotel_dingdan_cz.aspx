@@ -364,7 +364,7 @@
             {%>
 
         <div style="width: 100%; text-align: center">
-            <% if (!isAdmin && orderStatus == HotelStatusManager.OrderStatus.Payed.StatusId)
+            <% if (!isAdmin && (orderStatus == HotelStatusManager.OrderStatus.Payed.StatusId||orderStatus == HotelStatusManager.OrderStatus.Refunded.StatusId))
                 {%>
             <%=ordermsg %>
             <div class="alert alert-warning " role="alert" style="margin-top: 10px; text-align: left;">

@@ -4,6 +4,7 @@ using System.Data;
 using System.IO;
 using System.Reflection;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Web;
 
 namespace WeiXinPF.Common
@@ -26,11 +27,11 @@ namespace WeiXinPF.Common
                 const BindingFlags bindingFlags = BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Static; //反射标识
                 var objType = typeof(T);
                 var propInfoArr = objType.GetProperties(bindingFlags);
-                var header = string.Empty;
+                var header = String.Empty;
                 var propertyList = new List<string>();
                 foreach (PropertyInfo info in propInfoArr)
                 {
-                    if (System.String.CompareOrdinal(info.Name.ToUpper(), "ID") != 0) //不考虑自增长的id或者自动生成的guid等
+                    if (String.CompareOrdinal(info.Name.ToUpper(), "ID") != 0) //不考虑自增长的id或者自动生成的guid等
                     {
                         if (!propertyList.Contains(info.Name))
                         {
@@ -43,49 +44,49 @@ namespace WeiXinPF.Common
 
                 foreach (T model in listModel)
                 {
-                    string strModel = string.Empty;
+                    string strModel = String.Empty;
                     foreach (string strProp in propertyList)
                     {
                         foreach (PropertyInfo propInfo in propInfoArr)
                         {
-                            if (System.String.CompareOrdinal(propInfo.Name.ToUpper(), strProp.ToUpper()) == 0)
+                            if (String.CompareOrdinal(propInfo.Name.ToUpper(), strProp.ToUpper()) == 0)
                             {
                                 PropertyInfo modelProperty = model.GetType().GetProperty(propInfo.Name);
                                 if (modelProperty != null)
                                 {
                                     var objResult = modelProperty.GetValue(model, null);
-                                    var result = (objResult ?? string.Empty).ToString().Trim();
+                                    var result = (objResult ?? String.Empty).ToString().Trim();
                                     if (result.IndexOf(',') != -1)
                                     {
                                         result = "\"" + result.Replace("\"", "\"\"") + "\""; //特殊字符处理 ？
                                         //result = result.Replace("\"", "“").Replace(',', '，') + "\"";
                                     }
-                                    if (!string.IsNullOrEmpty(result))
+                                    if (!String.IsNullOrEmpty(result))
                                     {
                                         Type valueType = modelProperty.PropertyType;
                                         if (valueType == typeof(decimal?))
                                         {
-                                            result = decimal.Parse(result).ToString("#.#");
+                                            result = Decimal.Parse(result).ToString("#.#");
                                         }
                                         else if (valueType == typeof(decimal))
                                         {
-                                            result = decimal.Parse(result).ToString("#.#");
+                                            result = Decimal.Parse(result).ToString("#.#");
                                         }
                                         else if (valueType == typeof(double?))
                                         {
-                                            result = double.Parse(result).ToString("#.#");
+                                            result = Double.Parse(result).ToString("#.#");
                                         }
                                         else if (valueType == typeof(double))
                                         {
-                                            result = double.Parse(result).ToString("#.#");
+                                            result = Double.Parse(result).ToString("#.#");
                                         }
                                         else if (valueType == typeof(float?))
                                         {
-                                            result = float.Parse(result).ToString("#.#");
+                                            result = Single.Parse(result).ToString("#.#");
                                         }
                                         else if (valueType == typeof(float))
                                         {
-                                            result = float.Parse(result).ToString("#.#");
+                                            result = Single.Parse(result).ToString("#.#");
                                         }
                                     }
                                     strModel += result + ",";
@@ -132,7 +133,7 @@ namespace WeiXinPF.Common
         public static string SaveAsCSV(DataTable dataTable, List<int> columnIndexList = null, List<string> headerList = null)
         {
             if (dataTable == null || dataTable.Columns.Count == 0)
-                return string.Empty;
+                return String.Empty;
 
             var outputBuilder = new StringBuilder();
             const string scvSplitChar = ",";
@@ -177,15 +178,15 @@ namespace WeiXinPF.Common
                 {
                     var dataField = columnIndexList[index] > 0 && columnIndexList[index] < dataSourceColumnCount
                                     ? row[columnIndexList[index]]
-                                    : string.Empty;
-                    var dataFieldString = string.Empty;
+                                    : String.Empty;
+                    var dataFieldString = String.Empty;
 
                     if (dataField != null && dataField != DBNull.Value)
                     {
                         dataFieldString = dataField.ToString();
                         if (dataFieldString.Length > 8)
                         {
-                            dataFieldString = string.Format("{0}{1}", dataFieldString, specialSplitChar);
+                            dataFieldString = String.Format("{0}{1}", dataFieldString, specialSplitChar);
                         }
                         else
                         {
@@ -216,6 +217,24 @@ namespace WeiXinPF.Common
             DownloadCSV(response, fileName, csvDataString);
         }
 
+
+        /// <summary>
+        /// 生成SCV文件
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="response"></param>
+        /// <param name="fileName"></param>
+        /// <param name="list"></param>
+        /// <param name="columnIndexList"></param>
+        /// <param name="headerList"></param>
+        public static void DownloadAsSCV<T>(HttpResponse response, string fileName, IList<T> list, List<int> columnIndexList = null, List<string> headerList = null) where T : class, new()
+        {
+            var dataTable = ToDataTable(list);
+            string csvDataString = SaveAsCSV(dataTable, columnIndexList, headerList);
+
+            DownloadCSV(response, fileName, csvDataString);
+        }
+
         #region Private Functions
         /// <summary>
         /// 判断是否数字字符串
@@ -224,7 +243,7 @@ namespace WeiXinPF.Common
         /// <returns></returns>
         private static bool IsNumberic(string numbericString)
         {
-            var rex = new System.Text.RegularExpressions.Regex(@"^\d+$");
+            var rex = new Regex(@"^\d+$");
             return rex.IsMatch(numbericString);
         }
 
@@ -238,7 +257,7 @@ namespace WeiXinPF.Common
         {
             using (var stream = new MemoryStream())
             {
-                using (var sw = new StreamWriter(stream, System.Text.Encoding.UTF8))
+                using (var sw = new StreamWriter(stream, Encoding.UTF8))
                 {
                     //写入SCV文件流
                     sw.Write(csvDataString);
@@ -253,17 +272,46 @@ namespace WeiXinPF.Common
                     response.Charset = "utf-8";
 
                     response.ContentType = "application/ms-excel";
-                    response.AppendHeader("content-disposition", string.Format("attachment;filename={0}.csv", HttpUtility.UrlEncode(fileName)));
+                    response.AppendHeader("content-disposition", String.Format("attachment;filename={0}.csv", HttpUtility.UrlEncode(fileName)));
                     response.ContentType = "application/octet-stream";
                     response.AddHeader("Content-Length", stream.Length.ToString());
-                    response.ContentEncoding = System.Text.Encoding.Default;
+                    response.ContentEncoding = Encoding.Default;
                     response.BinaryWrite(stream.ToArray());
                     response.Flush();
                     response.End();
                 }
             }
         }
-        #endregion
 
+        /// <summary>
+        /// list转datatable
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="list"></param>
+        /// <returns></returns>
+        private static DataTable ToDataTable<T>(IEnumerable<T> list)
+        {
+
+            //创建属性的集合    
+            List<PropertyInfo> pList = new List<PropertyInfo>();
+            //获得反射的入口    
+
+            Type type = typeof(T);
+            DataTable dt = new DataTable();
+            //把所有的public属性加入到集合 并添加DataTable的列    
+            Array.ForEach<PropertyInfo>(type.GetProperties(), p => { pList.Add(p); dt.Columns.Add(p.Name, p.PropertyType); });
+            foreach (var item in list)
+            {
+                //创建一个DataRow实例    
+                DataRow row = dt.NewRow();
+                //给row 赋值    
+                pList.ForEach(p => row[p.Name] = p.GetValue(item, null));
+                //加入到DataTable    
+                dt.Rows.Add(row);
+            }
+            return dt;
+        }
+
+        #endregion
     }
 }

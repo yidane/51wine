@@ -90,7 +90,7 @@
                             <a class="btn btn-default" href="hotel_info.aspx?action=<%=MXEnums.ActionEnum.View.ToString() %>&hotelid=<%#Eval("id") %>">商户或门店信息查看</a>
                             <a class="btn btn-default" href='hotel_room.aspx?hotelid=<%#Eval("id") %>&action=<%=MXEnums.ActionEnum.Audit.ToString() %>'>商品信息审核</a>
                             <a class="btn btn-default" href='hotel_dingdan_manage.aspx?hotelid=<%#Eval("id") %>'>订单查看</a>
-                            <a class="btn btn-default" href="Verification/credentials_detail.aspx?hotelid=<%#Eval("id") %>">服务码验证查询</a>
+                            <a class="btn btn-default" href="Verification/credentials_detail.aspx?hotelid=<%#Eval("id") %>">服务凭据查询</a>
 
                         </div>
 

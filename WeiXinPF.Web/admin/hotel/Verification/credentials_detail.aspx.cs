@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Web;
 using System.Web.UI;
@@ -34,7 +35,20 @@ namespace WeiXinPF.Web.admin.hotel.Verification
         #region 数据绑定=================================
         private void RptBind()
         {
-            int shopid = MXRequest.GetQueryInt("hotelid")==0?this.GetHotelId():MXRequest.GetQueryInt("hotelid");
+            var detail = GetData();
+            this.rptList.DataSource = detail; // gbll.GetCredentialsList(shopid, condition, moduleName, out this.totalAmount);
+            this.rptList.DataBind();
+            this.totalAmount = detail.Sum(item => item.PayAmount);
+
+        }
+
+        /// <summary>
+        /// 获取数据
+        /// </summary>
+        /// <returns></returns>
+        private IList<OrderDetailDTO> GetData()
+        {
+            int shopid = MXRequest.GetQueryInt("hotelid") == 0 ? this.GetHotelId() : MXRequest.GetQueryInt("hotelid");
             string condition = "";
             var moduleName = "hotel";
 
@@ -74,11 +88,9 @@ namespace WeiXinPF.Web.admin.hotel.Verification
             }
 
             var detail = IdentifyingCodeService.GetOrderDetail(shopid, moduleName, condition);
-            this.rptList.DataSource = detail; // gbll.GetCredentialsList(shopid, condition, moduleName, out this.totalAmount);
-            this.rptList.DataBind();
-            this.totalAmount = detail.Sum(item => item.PayAmount);
-
+            return detail;
         }
+
         #endregion
 
        
@@ -108,6 +120,28 @@ namespace WeiXinPF.Web.admin.hotel.Verification
         protected void serch_OnClick(object sender, EventArgs e)
         {
             RptBind();
+        }
+
+        protected void btnExport_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                var result = GetData();
+                if (result.Any()|| result.Any())
+                {
+                    List<string> headerList = new List<string>() {  "订单编号", "订单状态", "订单关闭日期",
+                    "预约人","数量","商品名称","入住时间"
+                    ,"离店时间","商品单价","总计" };
+                    List<int> columnIndexList = new List<int>() { 3, 2, 11, 4, 5, 6, 7, 8, 9, 10 };
+                    CSVHelper.DownloadAsSCV<OrderDetailDTO>(Response, "服务凭据查询", result,
+                        columnIndexList, headerList);
+                }
+              
+            }
+            catch
+            {
+
+            }
         }
     }
 }
