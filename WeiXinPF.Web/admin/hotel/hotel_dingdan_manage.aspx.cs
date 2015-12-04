@@ -33,17 +33,19 @@ namespace WeiXinPF.Web.admin.hotel
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            hotelid = MyCommFun.RequestInt("hotelid", GetHotelId());
-            _orderby = "orderTime desc,id desc";
-            //获取参数
-            GetQueryString();
+             hotelid = MyCommFun.RequestInt("hotelid", GetHotelId());
 
-            this.pageSize = GetPageSize(10); //每页数量
-
-            _strWhere = " hotelid=" + hotelid + " " + _strWhere;
-            _strWhere += CombSqlTxt(keywords);
             if (!Page.IsPostBack)
             {
+                //获取参数
+                GetQueryString();
+
+                this.pageSize = GetPageSize(10); //每页数量
+
+                _strWhere = " hotelid=" + hotelid + " " + _strWhere;
+                _strWhere += CombSqlTxt(keywords);
+                _orderby = "orderTime desc,id desc";
+
                 BindDropBox();
                 RptBind();
             }
@@ -237,12 +239,12 @@ namespace WeiXinPF.Web.admin.hotel
 
             if (!string.IsNullOrEmpty(beginDate))
             {
-                strTemp.Append(" AND   createDate >=" + beginDate + " ");
+                strTemp.Append(" AND orderTime >='" + beginDate + "' ");
             }
 
             if (!string.IsNullOrEmpty(endDate))
             {
-                strTemp.Append(" AND  createDate <=" + endDate + " ");
+                strTemp.Append(" AND  orderTime <='" + endDate + "' ");
             }
 
             if (payAmountMin >= 0)
