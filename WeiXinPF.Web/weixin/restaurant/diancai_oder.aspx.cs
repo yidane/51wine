@@ -60,7 +60,7 @@ namespace WeiXinPF.Web.weixin.restaurant
                         case "4": //部分退款
                             payStatusText = "未使用";
                             payStatusCss = "status-refundPart";
-                            break;
+                            break; 
                         case "3":
                             payStatusText = "已使用";
                             //payStatusCss = "status-refundAll";
