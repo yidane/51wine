@@ -45,8 +45,11 @@ namespace WeiXinPF.Web.admin.hotel
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
-            isAdmin = IsWeiXinCode();
+            var adminInfo = GetAdminInfo();
+            if (adminInfo != null)
+            {
+                isAdmin = adminInfo.role_id == 13;//景区管理员
+            }
             dingdanid = MyCommFun.RequestInt("id");
             hotelid = MyCommFun.RequestInt("hotelid");
             if (Request.Form["__EVENTTARGET"] == "btn_completed")
