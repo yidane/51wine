@@ -169,7 +169,8 @@
                                 
                 <div class="center-button">
                     <asp:Button ID="serch" runat="server" Text="查询" CssClass="DingdanButton" OnClick="serch_OnClick"></asp:Button>
-                    <%--<asp:Button ID="Button2" runat="server" Text="导出Excel"></asp:Button>--%>
+                     <asp:Button ID="btnExport" runat="server" Text="导出Excel" CssClass="DingdanButton" OnClick="btnExport_OnClick" />
+      
                 </div>
             </div>
         </div>
