@@ -58,12 +58,15 @@ namespace WeiXinPF.Web.weixin.restaurant
                             break;
                         case "2":
                         case "4": //部分退款
-                            payStatusText = "部分使用";
+                            payStatusText = "未使用";
                             payStatusCss = "status-refundPart";
                             break;
                         case "3":
+                            payStatusText = "已使用";
+                            //payStatusCss = "status-refundAll";
+                            break;
                         case "5"://全部退款
-                            payStatusText = "全部使用";
+                            payStatusText = "未使用";
                             payStatusCss = "status-refundAll";
                             break;
                         default:

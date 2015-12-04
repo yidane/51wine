@@ -88,7 +88,6 @@ namespace WeiXinPF.Web.weixin.restaurant
 
             var builder = new StringBuilder();
 
-            int index = 1;
             foreach (KeyValuePair<int, List<OrderCaipinDetail>> pair in caipinDetail)
             {
                 if (pair.Value != null && pair.Value.Count > 0)
@@ -113,6 +112,8 @@ namespace WeiXinPF.Web.weixin.restaurant
                     builder.Append("<div class=\"swiper-container gpd-ablum swiper-container-horizontal\">");
                     builder.AppendFormat("<div class=\"swiper-wrapper silde-center\" style=\"transition-duration: 0ms; transform: translate3d(0px, 0px, 0px);\" id=\"div_{0}\" >", pair.Key);
 
+                    //TODO:解决无餐可退时候，按钮还可以点击。先隐藏。
+                    var canRefund = true;
                     foreach (OrderCaipinDetail detail in pair.Value)
                     {
                         var status = StatusManager.DishStatus.GetStatusDict(detail.status);
@@ -121,6 +122,7 @@ namespace WeiXinPF.Web.weixin.restaurant
                         //未使用或退款不同意的，才能使用
                         if (status.StatusID == StatusManager.DishStatus.NoUsed.StatusID || status.StatusID == StatusManager.DishStatus.RefundFaild.StatusID)
                         {
+                            canRefund = true;
                             builder.AppendFormat("<img id='Img3' class='img-ercode' src=\"ErCodeHandler.ashx?key={0}\" key='{0}' status='{1}' caiid={2}>",
                                                                     detail.identifyingcode,
                                                                     status.StatusName,
@@ -177,7 +179,14 @@ namespace WeiXinPF.Web.weixin.restaurant
                     /*添加查看详情 和 退款申请按钮*/
                     builder.Append("<div class=\"butto-wapper\">");
                     builder.AppendFormat("<a href=\"javascript:htmlit({0},{1})\">套餐详情</a>", shopid, pair.Value[0].caiId);
-                    builder.AppendFormat("<a href=\"diancai_refund.aspx?wid={4}&shopid={0}&dingdan={1}&openid={2}&caiid={3}\" class=\"btn-refund\">申请退款</a>", shopid, orderId, openid, pair.Key, wid);
+                    if (canRefund)
+                    {
+                        builder.AppendFormat("<a href=\"diancai_refund.aspx?wid={4}&shopid={0}&dingdan={1}&openid={2}&caiid={3}\" class=\"btn-refund\">申请退款</a>", shopid, orderId, openid, pair.Key, wid);
+                    }
+                    else
+                    {
+                        builder.Append("<a href=\"javascript:void(0)\" class=\"btn-refund\"></a>");
+                    }
                     builder.Append("</div>");
 
                     builder.Append("</div>"); //.full_w;
@@ -186,7 +195,6 @@ namespace WeiXinPF.Web.weixin.restaurant
 
                     builder.Append("</section>");
                 }
-                index++;
             }
 
             this.detail.InnerHtml = builder.ToString();
