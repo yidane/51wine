@@ -9,6 +9,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using WeiXinPF.BLL;
 using WeiXinPF.Model.KNSHotel;
+using WeiXinPF.Application.DomainModules.Hotel;
 
 namespace WeiXinPF.Web.admin.hotel
 {
@@ -165,6 +166,7 @@ namespace WeiXinPF.Web.admin.hotel
         /// <returns></returns>
         private DataSet GetQueryData()
         {
+            var hotelService = new HotelService();
             var bllhotel = new BLL.wx_hotels_info();
             var hotel = bllhotel.GetModel(hotelid);
 
@@ -189,6 +191,8 @@ namespace WeiXinPF.Web.admin.hotel
                 {
                     dr = ds.Tables[0].Rows[i];
 
+                    int id = dr.Field<int>("id");
+                    int hotelId= dr.Field<int>("hotelId");
                     var status = HotelStatusManager.OrderStatus.GetStatusDict(
                         MyCommFun.Obj2Int(dr["orderStatus"]));
                     dr["payStatusStr"] = "<em  style='width:70px;' class='status " + status.CssClass
@@ -199,6 +203,20 @@ namespace WeiXinPF.Web.admin.hotel
                     {
                         dr["isRefund"] = "<em  style='width:70px;' class='status ok'>是</em>";
                         dr["strisRefund"] = "是";
+                    }
+                    else if(status.StatusId == HotelStatusManager.OrderStatus.Completed.StatusId)
+                    {
+                        var tuidanDto = hotelService.GetModel(id, hotelId);
+                        if (tuidanDto != null)
+                        {
+                            dr["isRefund"] = "<em  style='width:70px;' class='status ok'>是</em>";
+                            dr["strisRefund"] = "是";
+                        }
+                        else
+                        {
+                            dr["isRefund"] = "<em  style='width:70px;' class='status no'>否</em>";
+                            dr["strisRefund"] = "否";
+                        }
                     }
                     else
                     {
