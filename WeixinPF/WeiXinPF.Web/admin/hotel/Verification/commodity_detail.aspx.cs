@@ -51,18 +51,44 @@ namespace WeiXinPF.Web.admin.hotel.Verification
             {
                 var identifyingCodeObject = IdentifyingCodeService.GetIdentifyingCodeInfoByIdentifyingCodeId(identifyingCodeId, ModuleName, this.wid);
 
-                if (identifyingCodeObject != null && identifyingCodeObject.ShopId.Equals(this.hotelid.ToString(CultureInfo.InvariantCulture)))
+                if (identifyingCodeObject != null)
                 {
-                    identifyingCodeObject.Status = 2;
-                    identifyingCodeObject.ModifyTime = DateTime.Now;
+                    var order = new BLL.wx_hotel_dingdan().GetModel(int.Parse(identifyingCodeObject.OrderId));
 
-                    IdentifyingCodeService.ModifyIdentifyingCodeInfo(identifyingCodeObject);
-                    
-                    AddAdminLog(MXEnums.ActionEnum.Edit.ToString(), "修改支付状态，主键为" + id); //记录日志
-                    //JscriptMsg("修改成功！", "dingdan_confirm.aspx?shopid=" + shopid + "", "Success");
-                    //Response.Redirect("dingdan_confirm.aspx?shopid=" + shopid + "");
-                    Response.Write("<script language='javascript' type='text/javascript'>alert('核销成功！');location.href = 'dingdan_confirm.aspx?shopid=" + hotelid + "';</script>");
+                    if (order != null)
+                    {
+                        if (order.orderStatus.Value.Equals(HotelStatusManager.OrderStatus.Refunded.StatusId) ||
+                            order.orderStatus.Value.Equals(HotelStatusManager.OrderStatus.Refunding.StatusId))
+                        {
+                            this.Response.Write(
+                                "<script language='javascript' type='text/javascript'>alert('该订单已进行退单处理，不能进行验证！')</script>");
+                        }
+                        else if(identifyingCodeObject.ShopId.Equals(this.hotelid.ToString(CultureInfo.InvariantCulture)))
+                        {
+                            identifyingCodeObject.Status = 2;
+                            identifyingCodeObject.ModifyTime = DateTime.Now;
 
+                            IdentifyingCodeService.ModifyIdentifyingCodeInfo(identifyingCodeObject);
+
+                            AddAdminLog(MXEnums.ActionEnum.Edit.ToString(), "修改支付状态，主键为" + id); //记录日志
+                                                                                                //JscriptMsg("修改成功！", "dingdan_confirm.aspx?shopid=" + shopid + "", "Success");
+                                                                                                //Response.Redirect("dingdan_confirm.aspx?shopid=" + shopid + "");
+                            Response.Write("<script language='javascript' type='text/javascript'>alert('核销成功！');location.href = 'dingdan_confirm.aspx?shopid=" + hotelid + "';</script>");
+
+                        }
+                        else
+                        {
+                            this.Response.Write("<script language='javascript' type='text/javascript'>alert('核销失败。')</script>");
+                        }
+                    }
+                    else
+                    {
+                        this.Response.Write("<script language='javascript' type='text/javascript'>alert('该订单不存在或未付款，请确认！')</script>");
+                    }
+                }
+                else
+                {
+                    this.Response.Write("<script language='javascript' type='text/javascript'>alert('该订单不存在或未付款，请确认！')</script>");
                 }
             }                       
         }
