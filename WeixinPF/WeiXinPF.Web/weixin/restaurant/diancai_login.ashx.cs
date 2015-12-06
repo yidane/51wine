@@ -129,7 +129,7 @@ namespace WeiXinPF.Web.weixin.restaurant
                         total_fee = order.payAmount == null ? 0 : (int)order.payAmount,
                         out_trade_no = order.orderNumber,
                         openid = openid,
-                        body = shopInfo.hotelName,
+                        body =string.Format("订单编号{0} {1}",order.orderNumber, shopInfo.hotelName),
                         PayModuleID = (int)PayModuleEnum.Restaurant,
                         PayComplete = "../restaurant/AfterPay.aspx"
                     };
