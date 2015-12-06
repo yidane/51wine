@@ -37,7 +37,7 @@ namespace WeiXinPF.Web.admin.diancai
             var data = SearchData();
             this.rptList.DataSource = data; //gbll.GetCredentialsList(shopid, condition, moduleName, out this.totalAmount);
             this.rptList.DataBind();
-            this.totalAmount = data.Sum(item => item.PayAmount);
+            this.totalAmount = data.Sum(item => item.RealAmount);
         }
 
         private IList<OrderDetailDTO> SearchData()

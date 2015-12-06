@@ -19,6 +19,7 @@ namespace WeiXinPF.Web.admin.hotel.Verification
     public partial class credentials_detail : ManagePage
     {
         protected double totalAmount=0.0;
+        protected double refundAmount = 0.0;
         protected string keywords = string.Empty;
 
         protected void Page_Load(object sender, EventArgs e)
@@ -38,8 +39,7 @@ namespace WeiXinPF.Web.admin.hotel.Verification
             var detail = GetData();
             this.rptList.DataSource = detail; // gbll.GetCredentialsList(shopid, condition, moduleName, out this.totalAmount);
             this.rptList.DataBind();
-            this.totalAmount = detail.Sum(item => item.PayAmount);
-
+            this.totalAmount = detail.Sum(item => item.RealAmount);
         }
 
         /// <summary>

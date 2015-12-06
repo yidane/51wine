@@ -30,5 +30,8 @@ namespace WeiXinPF.Infrastructure.DomainDataAccess.IdentifyingCode.DTO
         public double PayAmount { get; set; }
 
         public DateTime ModifyTime { get; set; }
+
+        public double RefundAmount { get; set; }
+        public double RealAmount { get; set; }
     }
 }
