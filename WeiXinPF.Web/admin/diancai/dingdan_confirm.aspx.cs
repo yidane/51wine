@@ -47,7 +47,23 @@ namespace WeiXinPF.Web.admin.diancai
             }
             else
             {
-                Response.Redirect("commodity_detail.aspx?cid=" + identifyingCode.IdentifyingCodeId + "&shopid=" + identifyingCode.ShopId + "&id=" + identifyingCode.OrderId);
+                var order = new BLL.wx_diancai_dingdan_manage().GetModel(int.Parse(identifyingCode.OrderId));
+                
+                if (order != null && order.payStatus != null)
+                {
+                    if (order.payStatus.Value.Equals(StatusManager.DishStatus.PreRefund.StatusID)
+                        || order.payStatus.Value.Equals(StatusManager.DishStatus.Refund.StatusID)
+                        || order.payStatus.Value.Equals(StatusManager.DishStatus.Used.StatusID)
+                        || order.IsFinish)
+                    {
+                        this.Response.Write(
+                            "<script language='javascript' type='text/javascript'>alert('该订单已完成或进行退单处理，不能进行验证！')</script>");
+                    }
+                }
+                else
+                {
+                    Response.Redirect("commodity_detail.aspx?cid=" + identifyingCode.IdentifyingCodeId + "&shopid=" + identifyingCode.ShopId + "&id=" + identifyingCode.OrderId);
+                }
             }
         }
 

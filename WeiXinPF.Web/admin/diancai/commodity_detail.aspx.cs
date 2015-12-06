@@ -59,34 +59,53 @@ namespace WeiXinPF.Web.admin.diancai
 
                 if (identifyingCodeObject != null && identifyingCodeObject.ShopId.Equals(shopid.ToString()))
                 {
-                    identifyingCodeObject.Status = StatusManager.DishStatus.Used.StatusID;
-                    identifyingCodeObject.ModifyTime = DateTime.Now;
+                    var order = new BLL.wx_diancai_dingdan_manage().GetModel(int.Parse(identifyingCodeObject.OrderId));
 
-                    using (var scope = new TransactionScope())
+                    if (order != null && order.payStatus != null)
                     {
-                        IdentifyingCodeService.ModifyIdentifyingCodeInfo(identifyingCodeObject);
-                        managebll.AfterVerification(wid, shopid, int.Parse(identifyingCodeObject.OrderId));
+                        if (order.payStatus.Value.Equals(StatusManager.DishStatus.PreRefund.StatusID)
+                            || order.payStatus.Value.Equals(StatusManager.DishStatus.Refund.StatusID)
+                            || order.payStatus.Value.Equals(StatusManager.DishStatus.Used.StatusID)
+                            || order.IsFinish)
+                        {
+                            this.Response.Write(
+                                "<script language='javascript' type='text/javascript'>alert('该订单已完成或进行退单处理，不能进行验证！')</script>");
+                        }
+                        else
+                        {
+                            identifyingCodeObject.Status = StatusManager.DishStatus.Used.StatusID;
+                            identifyingCodeObject.ModifyTime = DateTime.Now;
 
-                        scope.Complete();
+                            using (var scope = new TransactionScope())
+                            {
+                                IdentifyingCodeService.ModifyIdentifyingCodeInfo(identifyingCodeObject);
+                                managebll.AfterVerification(wid, shopid, int.Parse(identifyingCodeObject.OrderId));
+
+                                scope.Complete();
+                            }
+                            manage = managebll.GetModel(MyCommFun.Str2Int(id));
+                            BLL.wx_diancai_member menbll = new BLL.wx_diancai_member();
+                            if (status == StatusManager.DishStatus.Used.StatusID)
+                            {
+
+                                menbll.Update(manage.openid);
+                            }
+                            if (status == StatusManager.DishStatus.PreRefund.StatusID || status == StatusManager.DishStatus.Refund.StatusID)
+                            {
+
+                                menbll.Updatefail(manage.openid);
+                            }
+
+
+                            AddAdminLog(MXEnums.ActionEnum.Edit.ToString(), "修改支付状态，主键为" + id); //记录日志
+                            //JscriptMsg("修改成功！", "dingdan_confirm.aspx?shopid=" + shopid + "", "Success");
+                            //Response.Redirect("dingdan_confirm.aspx?shopid=" + shopid + "");
+                            Response.Write("<script language='javascript' type='text/javascript'>alert('核销成功！');location.href = 'dingdan_confirm.aspx?shopid=" + shopid + "';</script>");
+
+                        }
                     }
-                    manage = managebll.GetModel(MyCommFun.Str2Int(id));
-                    BLL.wx_diancai_member menbll = new BLL.wx_diancai_member();
-                    if (status == StatusManager.DishStatus.Used.StatusID)
-                    {
+                    
 
-                        menbll.Update(manage.openid);
-                    }
-                    if (status == StatusManager.DishStatus.PreRefund.StatusID || status == StatusManager.DishStatus.Refund.StatusID)
-                    {
-
-                        menbll.Updatefail(manage.openid);
-                    }
-
-
-                    AddAdminLog(MXEnums.ActionEnum.Edit.ToString(), "修改支付状态，主键为" + id); //记录日志
-                    //JscriptMsg("修改成功！", "dingdan_confirm.aspx?shopid=" + shopid + "", "Success");
-                    //Response.Redirect("dingdan_confirm.aspx?shopid=" + shopid + "");
-                    Response.Write("<script language='javascript' type='text/javascript'>alert('核销成功！');location.href = 'dingdan_confirm.aspx?shopid=" + shopid + "';</script>");
 
                 }
             }
