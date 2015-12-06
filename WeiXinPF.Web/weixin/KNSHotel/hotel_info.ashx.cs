@@ -275,10 +275,11 @@ namespace WeiXinPF.Web.weixin.KNSHotel
                 var dingdan = dingdanbll.GetModel(ddid);
                 if (dingdan!=null)
                 {
+                    Model.wx_hotels_info hotelInfo=new wx_hotels_info();
                     int wid = 0;
                     if (dingdan.hotelid != null)
                     {
-                        var hotelInfo = new BLL.wx_hotels_info().GetModel(dingdan.hotelid.Value);
+                        hotelInfo = new BLL.wx_hotels_info().GetModel(dingdan.hotelid.Value);
                         if (hotelInfo.wid != null) wid = hotelInfo.wid.Value;
                     }
                     //总花费
@@ -295,7 +296,7 @@ namespace WeiXinPF.Web.weixin.KNSHotel
                         openid = dingdan.openid,
                         OrderId = dingdan.id.ToString(),
                         body = string.Format("订单编号{2}{3}{0}间{1}",dingdan.orderNum,dingdan.roomType
-                        ,dingdan.OrderNumber, Environment.NewLine),
+                        ,dingdan.OrderNumber, hotelInfo.hotelName),
                         PayModuleID = (int)PayModuleEnum.Hotel,
                         PayComplete = url
                     };
