@@ -58,10 +58,11 @@ namespace WeiXinPF.Web.admin.hotel.Verification
                     if (order != null)
                     {
                         if (order.orderStatus.Value.Equals(HotelStatusManager.OrderStatus.Refunded.StatusId) ||
-                            order.orderStatus.Value.Equals(HotelStatusManager.OrderStatus.Refunding.StatusId))
+                            order.orderStatus.Value.Equals(HotelStatusManager.OrderStatus.Refunding.StatusId)
+                            || order.orderStatus.Value.Equals(HotelStatusManager.OrderStatus.Completed))
                         {
                             this.Response.Write(
-                                "<script language='javascript' type='text/javascript'>alert('该订单已进行退单处理，不能进行验证！')</script>");
+                                "<script language='javascript' type='text/javascript'>alert('该订单已完成或进行退单处理，不能进行验证！')</script>");
                         }
                         else if(identifyingCodeObject.ShopId.Equals(this.hotelid.ToString(CultureInfo.InvariantCulture)))
                         {
