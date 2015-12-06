@@ -16,9 +16,11 @@
         .label-left {
             width: 200px;
         }
+
         .serchbtn {
             margin: auto;
         }
+
         .center-button {
             text-align: center;
         }
@@ -27,64 +29,49 @@
         }
 
         .increase, .reduce {
-        display: inline-block;
-        width: 35px;
-        height: 38px;
-        vertical-align: -2px;
-    }
+            display: inline-block;
+            width: 35px;
+            height: 38px;
+            vertical-align: -2px;
+        }
 
-.ico_increase, .ico_reduce {
-        position: relative;
-        display: block;
-        width: 25px;
-        height: 25px;
-        margin: 6px 0 0 5px;
-        background: #D00A0A;
-        border-radius: 50%;
-        text-indent: -9999px;
-    }
-
-.ico_increase, .ico_reduce {
-        background: #D00A0A;
-    }
-
-.ico_increase:after, .ico_reduce:after {
-            position: absolute;
-            top: 11px;
-            left: 5px;
-            content: "";
+        .ico_increase, .ico_reduce {
+            position: relative;
             display: block;
-            width: 15px;
-            height: 3px;
-            background: #FFFFFF;
+            width: 25px;
+            height: 25px;
+            margin: 6px 0 0 5px;
+            background: #D00A0A;
+            border-radius: 50%;
+            text-indent: -9999px;
         }
 
-.ico_increase:before {
-        position: absolute;
-        top: 5px;
-        left: 11px;
-        content: "";
-        display: block;
-        width: 3px;
-        height: 15px;
-        background: #FFFFFF;
-    }
+        .ico_increase, .ico_reduce {
+            background: #D00A0A;
+        }
+
+            .ico_increase:after, .ico_reduce:after {
+                position: absolute;
+                top: 11px;
+                left: 5px;
+                content: "";
+                display: block;
+                width: 15px;
+                height: 3px;
+                background: #FFFFFF;
+            }
+
+            .ico_increase:before {
+                position: absolute;
+                top: 5px;
+                left: 11px;
+                content: "";
+                display: block;
+                width: 3px;
+                height: 15px;
+                background: #FFFFFF;
+            }
     </style>
-    <script type="text/javascript">
-        function parentToIndex(id) {
-            parent.location.href = "/admin/Index.aspx?id=" + id;
-
-        }
-
-        $(function () {
-
-
-        });
-
-
-
-
-    </script>
     <style>
         a.shenghe {
             color: red;
@@ -120,16 +107,16 @@
 <body class="mainbody">
     <form id="form1" runat="server">
         <div class="location">
-           <% if (IsWeiXinCode())
-                {%>
-            <a    href="#" class="home"><i></i><span>商户或门店列表</span></a>
-              <i class="arrow"></i>
-                <%}%>
-                <%
-                else
-                {%>
-               
-                <%} %> 
+            <% if (IsWeiXinCode())
+               {%>
+            <a href="#" class="home"><i></i><span>商户或门店列表</span></a>
+            <i class="arrow"></i>
+            <%}%>
+            <%
+               else
+               {%>
+
+            <%} %>
             <span>服务凭据查询</span>
         </div>
         <!--/导航栏-->
@@ -142,16 +129,16 @@
                         <td align="right">订单关闭日期范围
                         </td>
                         <td>
-                                <asp:TextBox ID="startDate" runat="server" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" datatype="*1-50" errormsg="请选择正确的日期" sucmsg=" " nullmsg=" "></asp:TextBox>
-                                 至
+                            <asp:TextBox ID="startDate" runat="server" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" datatype="*1-50" errormsg="请选择正确的日期" sucmsg=" " nullmsg=" "></asp:TextBox>
+                            至
                                 <asp:TextBox ID="endDate" runat="server" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" datatype="*1-50" errormsg="请选择正确的日期" sucmsg=" " nullmsg=" "></asp:TextBox>
-                        <td align="right">订单编号</td>
-                        <td>
-                            <asp:TextBox ID="dingdanId" runat="server"></asp:TextBox>
-                        <td align="right">预约人</td>
-                        <td>
-                            <asp:TextBox ID="orderperson" runat="server"></asp:TextBox>
-                        </td>
+                            <td align="right">订单编号</td>
+                            <td>
+                                <asp:TextBox ID="dingdanId" runat="server"></asp:TextBox>
+                                <td align="right">预约人</td>
+                                <td>
+                                    <asp:TextBox ID="orderperson" runat="server"></asp:TextBox>
+                                </td>
                     </tr>
                     <tr>
                         <td align="right">订单支付金额</td>
@@ -162,15 +149,15 @@
                         </td>
                         <td align="right"></td>
                         <td>
-                        <td align="right"></td>
-                        <td>
+                            <td align="right"></td>
+                            <td>
                     </tr>
                 </table>
-                                
+
                 <div class="center-button">
                     <asp:Button ID="serch" runat="server" Text="查询" CssClass="DingdanButton" OnClick="serch_OnClick"></asp:Button>
-                     <asp:Button ID="btnExport" runat="server" Text="导出Excel" CssClass="DingdanButton" OnClick="btnExport_OnClick" />
-      
+                    <asp:Button ID="btnExport" runat="server" Text="导出Excel" CssClass="DingdanButton" OnClick="btnExport_OnClick" />
+
                 </div>
             </div>
         </div>
@@ -183,66 +170,72 @@
                 <table width="100%" border="0" cellspacing="0" cellpadding="0" class="ltable">
                     <thead>
                         <tr>
-                            <th style="width: 10%">订单编号</th>
-                            <th style="width: 10%">订单状态</th>
-                            <th style="width: 10%">订单关闭日期</th>
-                            <th style="width: 10%">预约人</th>
-                            <th style="width: 10%">数量</th>
-                            <th style="width: 10%">商品名称</th>
-                            <th style="width: 10%">入住日期</th>
-                            <th style="width: 10%">离店日期</th>
-                            <th style="width: 10%">商品单价</th>
-                            <th style="width: 10%">总计</th>
-                            <th></th>
+                            <th style="width: 250px">订单编号</th>
+                            <th style="width: 100px">订单状态</th>
+                            <th style="width: 100px">订单关闭日期</th>
+                            <th style="width: 100px">预约人</th>
+                            <th style="width: 50px">数量</th>
+                            <th style="width: 100px">商品名称</th>
+                            <th style="width: 100px">入住日期</th>
+                            <th style="width: 100px">离店日期</th>
+                            <th style="width: 100px">商品单价</th>
+                            <th style="width: 100px">支付总额</th>
+                            <th style="width: 100px">退款总额</th>
+                            <th style="width: 100px">实际交易总额</th>
                         </tr>
                     </thead>
                     <tbody class="ltbody">
             </HeaderTemplate>
             <ItemTemplate>
                 <tr class="td_c">
-                    <td style="width: 15%">
+                    <td >
                         <asp:HiddenField ID="HiddenField1" Value='<%#Eval("Id")%>' runat="server" />
                         <a id="notdisplay<%#Eval("Id")%>" href="javascript:f_NotDisplay(<%#Eval("Id")%>);" class="reduce" style="display: none;"><b class="ico_reduce">加一份</b></a>
                         <a id="display<%#Eval("Id")%>" href="javascript:f_Display(<%#Eval("Id")%>);" class="increase"><b class="ico_increase">加一份</b></a>
 
                         <%# Eval("OrderNumber") %>
                     </td>
-                    <td style="width: 10%">
+                    <td >
                         <%# Eval("PayStatus") %>
                     </td>
-                    <td style="width: 10%">
+                    <td >
                         <%# Eval("ModifyTime") %>                        
                     </td>
-                    <td style="width: 10%">
+                    <td >
                         <%# Eval("CustomerName") %>                        
                     </td>
-                    <td style="width: 5%">
+                    <td >
                         <%# Eval("Number") %>                        
                     </td>
-                    <td style="width: 10%">
+                    <td >
                         <%# Eval("ProductName") %>                        
                     </td>
-                    <td style="width: 10%">
+                    <td>
                         <%# Eval("ArriveTime").ToString().Substring(0,10) %>                        
                     </td>
-                    <td style="width: 10%">
+                    <td >
                         <%# Eval("LeaveTime").ToString().Substring(0,10) %>                        
                     </td>
-                    <td style="width: 10%">
+                    <td >
                         <%# Eval("Price") %>                        
                     </td>
-                    <td style="width: 10%">
+                    <td >
                         <%# Eval("PayAmount") %> 元                        
                     </td>
-                    <td></td>
+                    <td>
+                        <%# Eval("RefundAmount") %>元
+                    </td>
+                    <td>
+                        <%# Eval("RealAmount") %>元
+                    </td>
                 </tr>
                 <tr class="rpSubMenu<%#Eval("Id")%>" style="display: none;">
-                    <td colspan="7"></td>
+                    <td colspan="9"></td>
                     <td colspan="3">
                         <asp:Repeater runat="server" ID="rp">
                             <HeaderTemplate>
                                 <table cellspacing="0" rules="all" border="1" id="CommodityList" style="border-collapse: collapse; width: 90%; margin: 1px 0px 5px 33px;" class="Repeater">
-                                    <tr>                                        
+                                    <tr>
                                         <th scope="col">验证码
                                         </th>
                                         <th scope="col">验证码状态
@@ -252,7 +245,7 @@
                                     </tr>
                             </HeaderTemplate>
                             <ItemTemplate>
-                                <tr>                                    
+                                <tr>
                                     <td>
                                         <%# Eval("IdentifyingCode") %>
                                     </td>
@@ -272,7 +265,7 @@
                 </tr>
             </ItemTemplate>
             <FooterTemplate>
-                <%#rptList.Items.Count == 0 ? "<tr><td align=\"center\" colspan=\"6\">暂无记录</td></tr>" : ""%>
+                <%#rptList.Items.Count == 0 ? "<tr><td align=\"center\" colspan=\"13\">暂无记录</td></tr>" : ""%>
                  </tbody>
                 </table>
             </FooterTemplate>
@@ -284,24 +277,24 @@
         <div class="line20"></div>
         <div class="pagelist">
             <div style="float: right">
-                <span>总计</span><span style="color: #ff0000"><%=totalAmount %></span><span>元</span>
+                <span>总计实际交易金额</span><span style="color: #ff0000"><%=totalAmount %></span><span>元</span>
             </div>
             <div id="PageContent" runat="server" class="default"></div>
         </div>
     </form>
-    
-        <script type="text/javascript">
-            function f_NotDisplay(e) {
-                $(".rpSubMenu" + e).attr("style", "display: none;");
-                $("#notdisplay" + e).attr("style", "display: none;");
-                $("#display" + e).attr("style", "");
-            }
 
-            function f_Display(e) {
-                $(".rpSubMenu" + e).attr("style", "");
-                $("#notdisplay" + e).attr("style", "");
-                $("#display" + e).attr("style", "display: none;");
-            }
+    <script type="text/javascript">
+        function f_NotDisplay(e) {
+            $(".rpSubMenu" + e).attr("style", "display: none;");
+            $("#notdisplay" + e).attr("style", "display: none;");
+            $("#display" + e).attr("style", "");
+        }
+
+        function f_Display(e) {
+            $(".rpSubMenu" + e).attr("style", "");
+            $("#notdisplay" + e).attr("style", "");
+            $("#display" + e).attr("style", "display: none;");
+        }
     </script>
 </body>
 </html>

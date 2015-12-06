@@ -155,7 +155,7 @@ namespace WeiXinPF.Web.UI
         }
 
 
-        #endregion 
+        #endregion
         public bool IsWeiXinCode()
         {
 
@@ -231,15 +231,17 @@ namespace WeiXinPF.Web.UI
                 {
                     return shopAdmin.ShopId;
                 }
-                else
+
+                BLL.wx_diancai_shop_user suBll = new BLL.wx_diancai_shop_user();
+                Model.wx_diancai_shop_user shopUser = suBll.GetModel(admin.id);
+
+                if (shopUser != null)
                 {
-                    return 0;
+                    return shopUser.ShopId;
                 }
-            }
-            else
-            {
                 return 0;
             }
+            return 0;
         }
 
         public int GetHotelId()
@@ -253,12 +255,19 @@ namespace WeiXinPF.Web.UI
                 {
                     return hotelAdmin.HotelId;
                 }
+
+                BLL.wx_hotel_user suBll = new BLL.wx_hotel_user();
+                Model.wx_hotel_user hotelUser = suBll.GetModel(admin.id);
+
+                if (hotelUser != null)
+                {
+                    return hotelUser.HotelId;
+                }
+
                 return 0;
             }
-            else
-            {
-                return 0;
-            }
+            return 0;
+
         }
     }
 }
