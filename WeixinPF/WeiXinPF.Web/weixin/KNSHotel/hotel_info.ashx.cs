@@ -294,7 +294,8 @@ namespace WeiXinPF.Web.weixin.KNSHotel
                         out_trade_no = dingdan.OrderNumber,
                         openid = dingdan.openid,
                         OrderId = dingdan.id.ToString(),
-                        body = string.Format("{0}间{1}",dingdan.orderNum,dingdan.roomType),
+                        body = string.Format("订单编号{2}/r/n{0}间{1}",dingdan.orderNum,dingdan.roomType
+                        ,dingdan.OrderNumber),
                         PayModuleID = (int)PayModuleEnum.Hotel,
                         PayComplete = url
                     };
