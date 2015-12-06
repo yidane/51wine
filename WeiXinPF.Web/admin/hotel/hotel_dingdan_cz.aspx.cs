@@ -304,7 +304,7 @@ namespace WeiXinPF.Web.admin.hotel
 
                     string return_msg = String.Empty;
 
-                    if (true)//WeChatRefund(dingdan, dto, hotel.wid.Value, out return_msg)
+                    if (WeChatRefund(dingdan, dto, hotel.wid.Value, out return_msg))//
                     {
                         new BLL.wx_hotel_dingdan().RefundComplete(dingdan.OrderNumber);
 
