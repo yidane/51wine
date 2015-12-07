@@ -78,7 +78,7 @@ namespace Travel.Infrastructure.DomainDataAccess.Order
                                         ProductPrice = item.ProductPrice,
                                         ProductType = item.ProductType
                                     }).ToList();
-                                    gb(dailyProducts);
+                                    SetDailyProducts(dailyProducts);
                                     _dailyProducts = dailyProducts;
                                     _currentDate = DateTime.Now.Date;
                                 }
