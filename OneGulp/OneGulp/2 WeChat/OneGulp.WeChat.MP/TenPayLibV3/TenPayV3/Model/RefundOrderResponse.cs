@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Xml;
 
-namespace Travel.Infrastructure.WeiXin.Advanced.Pay.Model
+namespace OneGulp.WeChat.MP.TenPayLibV3.TenPayV3.Model
 {
     public class RefundOrderResponse
     {

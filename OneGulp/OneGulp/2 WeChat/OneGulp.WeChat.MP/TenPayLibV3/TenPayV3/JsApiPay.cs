@@ -1,11 +1,6 @@
-﻿using OneGulp.WeChat.MP.AdvancedAPIs;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Travel.Infrastructure.WeiXin.Advanced.Pay.Model;
+﻿using OneGulp.WeChat.MP.TenPayLibV3.TenPayV3.Model;
 
-namespace OneGulp.WeChat.MP.TenPayLibV3
+namespace OneGulp.WeChat.MP.TenPayLibV3.TenPayV3
 {
     public class JsApiPay
     {
@@ -42,7 +37,7 @@ namespace OneGulp.WeChat.MP.TenPayLibV3
 
             string data = packageReqHandler.ParseXML();
 
-            var unifiedOrderResult = TenPayV3.Unifiedorder(data);
+            var unifiedOrderResult = TenPayV3Helper.Unifiedorder(data);
             var rtnUnifiedOrderResult = new UnifiedOrderResponse(unifiedOrderResult);
 
             return rtnUnifiedOrderResult;
@@ -56,7 +51,7 @@ namespace OneGulp.WeChat.MP.TenPayLibV3
         public RefundOrderResponse Refund(RefundOrderRequest request)
         {
             var payData = request.CreatePayData();
-            var result = TenPayV3.Refund(payData.ParseXML(), request.CertificaterPath, request.CertificaterPassword);
+            var result = TenPayV3Helper.Refund(payData.ParseXML(), request.CertificaterPath, request.CertificaterPassword);
             return new RefundOrderResponse(result);
         }
 
@@ -69,7 +64,7 @@ namespace OneGulp.WeChat.MP.TenPayLibV3
         {
             var req = new RequestHandler(null);
             req.SetParameter("transaction_id", transaction_id);
-            var res = TenPayV3.OrderQuery(req.ParseXML());
+            var res = TenPayV3Helper.OrderQuery(req.ParseXML());
             //if (res.GetValue("return_code").ToString() == "SUCCESS" &&
             //    res.GetValue("result_code").ToString() == "SUCCESS")
             //{
@@ -91,7 +86,7 @@ namespace OneGulp.WeChat.MP.TenPayLibV3
         public RefundQueryResponse RefundQuery(RefundQueryRequest request)
         {
             var refundQueryRequest = request.CreatePayData();
-            var result = TenPayV3.RefundQuery(refundQueryRequest.ParseXML());
+            var result = TenPayV3Helper.RefundQuery(refundQueryRequest.ParseXML());
             return new RefundQueryResponse(result);
         }
     }

@@ -17,7 +17,7 @@ namespace OneGulp.WeChat.MP.Test
         [TestMethod]
         public void TestUploadForeverMedia()
         {
-            var filePath = "..\\..\\Media\\1.mp3";
+            var filePath = "..\\Media\\1.mp3";
             var result = MediaApi.UploadForeverMedia(access_token, filePath);
         }
     }

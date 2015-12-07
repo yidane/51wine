@@ -13,6 +13,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using System.Text;
 using System.Web;
 using OneGulp.WeChat.MP.Helpers;
@@ -141,5 +142,18 @@ namespace OneGulp.WeChat.MP.TenPayLibV3
             return str;
         }
 
+        public static string MakeSign(string str)
+        {
+            MD5 mD = MD5.Create();
+            byte[] array = mD.ComputeHash(Encoding.UTF8.GetBytes(str));
+            StringBuilder stringBuilder = new StringBuilder();
+            byte[] array2 = array;
+            for (int i = 0; i < array2.Length; i++)
+            {
+                byte b = array2[i];
+                stringBuilder.Append(b.ToString("x2"));
+            }
+            return stringBuilder.ToString().ToUpper();
+        }
     }
 }

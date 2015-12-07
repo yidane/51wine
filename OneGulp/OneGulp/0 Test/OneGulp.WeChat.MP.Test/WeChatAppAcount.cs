@@ -10,8 +10,13 @@ namespace OneGulp.WeChat.MP.Test
     public class WeChatAppAcount
     {
         #region 华清蜃景账户密码
-        protected static string appId = "wxdd6127bdb5e7611c";
-        protected static string appSecret = "78fb32f17d30a6ade836319283ccf118";
+        //protected static string appId = "wxdd6127bdb5e7611c";
+        //protected static string appSecret = "78fb32f17d30a6ade836319283ccf118";
+        #endregion
+
+        #region MyRegion
+        protected static string appId = "wx4986bb37d9c48302";
+        protected static string appSecret = "02b5f776b089dcef370daefa1ee42b50";
         #endregion
 
         protected string access_token

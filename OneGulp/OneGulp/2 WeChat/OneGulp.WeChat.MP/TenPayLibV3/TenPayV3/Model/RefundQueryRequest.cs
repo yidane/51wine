@@ -1,10 +1,6 @@
-﻿using OneGulp.WeChat.MP.TenPayLibV3;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System;
 
-namespace Travel.Infrastructure.WeiXin.Advanced.Pay.Model
+namespace OneGulp.WeChat.MP.TenPayLibV3.TenPayV3.Model
 {
     public class RefundQueryRequest
     {
@@ -24,28 +20,44 @@ namespace Travel.Infrastructure.WeiXin.Advanced.Pay.Model
             if (!string.IsNullOrEmpty(transaction_id))
             {
                 rtnRequestHandler.SetParameter("transaction_id", transaction_id);
-                return rtnRequestHandler;
             }
 
             if (!string.IsNullOrEmpty(out_trade_no))
             {
                 rtnRequestHandler.SetParameter("out_trade_no", out_trade_no);
-                return rtnRequestHandler;
             }
 
             if (!string.IsNullOrEmpty(out_refund_no))
             {
                 rtnRequestHandler.SetParameter("out_refund_no", out_refund_no);
-                return rtnRequestHandler;
             }
 
             if (!string.IsNullOrEmpty(refund_id))
             {
                 rtnRequestHandler.SetParameter("refund_id", refund_id);
-                return rtnRequestHandler;
             }
 
-            throw new Exception("退款查询接口中，out_refund_no、out_trade_no、transaction_id、refund_id四个参数必填一个！");
+            if (rtnRequestHandler.GetAllParameters().Count == 0)
+                throw new Exception("退款查询接口中，out_refund_no、out_trade_no、transaction_id、refund_id四个参数必填一个！");
+
+            if (string.IsNullOrEmpty(appid))
+                throw new Exception("退款查询接口中，appId参数必填");
+            if (string.IsNullOrEmpty(mch_id))
+                throw new Exception("退款查询接口中，mch_id参数必填");
+            if (string.IsNullOrEmpty(nonce_str))
+                throw new Exception("退款查询接口中，nonce_str参数必填");
+            if (string.IsNullOrEmpty(sign))
+                throw new Exception("退款查询接口中，sign参数必填");
+
+            rtnRequestHandler.SetParameter("appid", appid);
+            rtnRequestHandler.SetParameter("mch_id", mch_id);
+            rtnRequestHandler.SetParameter("nonce_str", nonce_str);
+            rtnRequestHandler.SetParameter("sign", sign);
+
+            if (!string.IsNullOrEmpty(device_info))
+                rtnRequestHandler.SetParameter("device_info", device_info);
+
+            return rtnRequestHandler;
         }
     }
 }

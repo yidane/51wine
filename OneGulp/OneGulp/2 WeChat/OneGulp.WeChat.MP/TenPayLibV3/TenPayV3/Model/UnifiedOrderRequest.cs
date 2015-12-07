@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Travel.Infrastructure.WeiXin.Advanced.Pay.Model
+namespace OneGulp.WeChat.MP.TenPayLibV3.TenPayV3.Model
 {
     public class UnifiedOrderRequest
     {

@@ -15,22 +15,16 @@
     官方API：https://mp.WeChat.qq.com/paymch/readtemplate?t=mp/business/course2_tmpl&lang=zh_CN&token=25857919#4
  */
 
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Security.Cryptography;
 using System.Text;
-using OneGulp.WeChat.MP.CommonAPIs;
-using OneGulp.WeChat.MP.Entities;
-using OneGulp.WeChat.MP.Helpers;
+using OneGulp.WeChat.HttpUtility;
 
-namespace OneGulp.WeChat.MP.AdvancedAPIs
+namespace OneGulp.WeChat.MP.TenPayLibV3.TenPayV3
 {
     /// <summary>
     /// 微信支付接口，官方API：https://mp.WeChat.qq.com/paymch/readtemplate?t=mp/business/course2_tmpl&lang=zh_CN&token=25857919#4
     /// </summary>
-    public static class TenPayV3
+    public static class TenPayV3Helper
     {
         /// <summary>
         /// 统一支付接口
@@ -178,6 +172,16 @@ namespace OneGulp.WeChat.MP.AdvancedAPIs
             ms.Write(formDataBytes, 0, formDataBytes.Length);
             ms.Seek(0, SeekOrigin.Begin);//设置指针读取位置
             return OneGulp.WeChat.HttpUtility.RequestUtility.HttpPost(urlFormat, null, ms);
+        }
+
+        public static string Refund(string data, string certificaterPath, string certificaterPassword)
+        {
+            string url = "https://api.mch.WeiXin.qq.com/secapi/pay/refund";
+            byte[] array = (data == null) ? new byte[0] : Encoding.UTF8.GetBytes(data);
+            MemoryStream memoryStream = new MemoryStream();
+            memoryStream.Write(array, 0, array.Length);
+            memoryStream.Seek(0L, SeekOrigin.Begin);
+            return RequestUtility.HttpPost(url, null, memoryStream, null, null, null, 0, true, certificaterPath, certificaterPassword, false);
         }
     }
 }

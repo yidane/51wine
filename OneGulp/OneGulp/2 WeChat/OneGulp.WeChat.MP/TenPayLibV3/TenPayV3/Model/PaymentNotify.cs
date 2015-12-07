@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Xml;
 
-namespace OneGulp.WeChat.MP.TenPayLibV3
+namespace OneGulp.WeChat.MP.TenPayLibV3.TenPayV3.Model
 {
     public class PaymentNotify
     {

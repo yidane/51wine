@@ -41,6 +41,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Web" />
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -56,8 +57,9 @@
   </Choose>
   <ItemGroup>
     <Compile Include="CommonAPITest.cs" />
+    <Compile Include="Pay\PayTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="MediaTest.cs" />
+    <Compile Include="Media\MediaTest.cs" />
     <Compile Include="WeChatAppAcount.cs" />
   </ItemGroup>
   <ItemGroup>
