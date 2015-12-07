@@ -105,37 +105,6 @@ namespace Travel.Infrastructure.DomainDataAccess.Order
             }
         }
 
-        /// <summary>
-        /// 判断当日票是否在产品类型中存在
-        /// </summary>
-        /// <param name="dailyProduct"></param>
-        /// <returns></returns>
-        public static bool IsProductCategoryExists(DailyProductEntity dailyProduct)
-        {
-            ProductCategoryEntity productCategory = null;
-
-            using (var db = new TravelDBContext())
-            {
-                productCategory = db.ProductCategory.FirstOrDefault(
-                                        item =>
-                                        item.ProductId.Equals(dailyProduct.ProductId)
-                                        && item.ProductPackageId.Equals(dailyProduct.ProductPackageId)
-                                        && item.ProductSource.Equals(dailyProduct.ProductSource));
-            }
-            
-
-            if (productCategory != null)
-            {
-                dailyProduct.ProductCategoryId = productCategory.ProductCategoryId;
-
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
         public static void RefreshProductCategory()
         {
             using (var db = new TravelDBContext())

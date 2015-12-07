@@ -78,7 +78,7 @@ namespace Travel.Infrastructure.DomainDataAccess.Order
                                         ProductPrice = item.ProductPrice,
                                         ProductType = item.ProductType
                                     }).ToList();
-                                    SetDailyProducts(dailyProducts);
+                                    gb(dailyProducts);
                                     _dailyProducts = dailyProducts;
                                     _currentDate = DateTime.Now.Date;
                                 }
@@ -122,12 +122,15 @@ namespace Travel.Infrastructure.DomainDataAccess.Order
 
         public static void SetDailyProducts(IList<DailyProductEntity> dailyProducts)
         {
-            var hasNewProductCategory = false;
             if (dailyProducts.Any())
             {
+                var products = ProductCategoryEntity.ProductCategory;
+
                 foreach (var dailyProduct in dailyProducts)
                 {
-                    if (!ProductCategoryEntity.IsProductCategoryExists(dailyProduct))
+                    if (!products.Any(item => item.ProductId.Equals(dailyProduct.ProductId)
+                                        && item.ProductPackageId.Equals(dailyProduct.ProductPackageId)
+                                        && item.ProductSource.Equals(dailyProduct.ProductSource)))
                     {
                         var productCategory = new ProductCategoryEntity()
                         {
@@ -149,14 +152,9 @@ namespace Travel.Infrastructure.DomainDataAccess.Order
                         };
 
                         productCategory.SaveProductCategory();
+                        products.Add(productCategory);
                         dailyProduct.ProductCategoryId = productCategory.ProductCategoryId;
-                        hasNewProductCategory = true;
                     }
-                }
-
-                if (hasNewProductCategory)
-                {
-                    ProductCategoryEntity.RefreshProductCategory();
                 }
 
                 using (var db = new TravelDBContext())
