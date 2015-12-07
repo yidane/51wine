@@ -1,0 +1,230 @@
+﻿<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+    <meta content="telephone=no" name="format-detection" />
+    <meta content="email=no" name="format-detection" />
+    <title>我的奖券</title>
+    <link href="styles/reset.css" rel="stylesheet" type="text/css" />
+    <link href="styles/ticket.css" rel="stylesheet" type="text/css" />
+    <link href="styles/myCoupons.css" rel="stylesheet" />
+    <style>
+        html {
+            font-size: 12px;
+        }
+
+
+
+
+        @media screen and (max-height:481px) {
+            html {
+                font-size: 11px;
+            }
+        }
+
+
+        @media screen and (min-height:481px) and (max-height:569px) {
+            html {
+                font-size: 11px;
+            }
+        }
+
+        @media screen and (min-height:570px) and (max-height:668px) {
+            html {
+                font-size: 12px;
+            }
+        }
+
+
+        /*@media screen and (max-width:320px) {
+                .price .fl {
+                font-size:
+                }
+        }
+
+        @media screen and (min-width:320px) and (max-width:400px) {
+            .phone {
+                width: 62%;
+            }
+
+            .moneyWrapper p {
+                top: 18%;
+                font-size: 1.3rem;
+            }
+
+            #money {
+                font-size: 1.3rem;
+                left: 47%;
+                top: 30%;
+            }
+        }*/
+    </style>
+
+</head>
+
+
+
+<body class="bg">
+
+
+    <!--loading-->
+    <div id="loadingBox">
+        <div id="loading"></div>
+        <div id="loadingTips">0%</div>
+    </div>
+
+    <div id="div_content" style="display:none">
+        <ul class="tab coupons-tab" id="menu">
+            <li class="active" data-bind="css:{active:selectedType()=='unExpired'},click: changeCoupon.bind($data, 'unExpired')">
+                <a href="javascript:void(0);" data-bind="text:'未过期('+ unExpiredCoupons().length+')'">未过期(0)</a>
+            </li>
+            <li data-bind="css:{active:selectedType()=='used'},click: changeCoupon.bind($data, 'used')">
+                <a href="javascript:void(0);" data-bind="text:'已使用('+ usedCoupons().length+')'">已使用(0)</a>
+            </li>
+            <li data-bind="css:{active:selectedType()=='expired'},click: changeCoupon.bind($data, 'expired')">
+                <a href="javascript:void(0);" data-bind="text:'已过期('+ expiredCoupons().length+')'">已过期(0)</a>
+            </li>
+        </ul>
+        <div data-bind="visible:selectedType()=='unExpired'">
+            <ul class="coupons-list" data-bind="foreach:unExpiredCoupons ,visible:unExpiredCoupons().length>0" style="display: none;">
+                <li class="clearfix fadeInRight">
+                    <a class="coupons-a used" data-bind="attr:{href:'couponDetail.html?openId='+$root.openId()+'&wid='+$root.param().wid+'&code='+$root.param().access_code+'&id='+id}">
+
+                        <div class="top clearfix">
+                            <span class="price fl"><em>￥</em>   <!-- ko text:jpname --><!-- /ko--></span>
+                            <div class="info">
+                                <h3 data-bind="text:jxname"></h3>
+                                <!--<p>满50元可使用</p>-->
+                            </div>
+                        </div>
+                        <p class="coupons-handle">
+                            <!-- ko text:'有效期：'+ beginDate +' 至 '+endDate --><!-- /ko-->
+
+                        </p>
+                    </a>
+
+                </li>
+
+            </ul>
+            <div data-bind="visible:unExpiredCoupons().length<0">
+                <div class="noAccord"></div>
+                <div class="noAccordTitle">您还没有符合条件的奖券</div>
+                <div class="noAccordTitle2">暂时没有相关数据</div>
+            </div>
+        </div>
+
+
+        <div data-bind="visible:selectedType()=='used'" style="display: none;">
+            <ul class="coupons-list" data-bind="foreach:usedCoupons ,visible:usedCoupons().length>0"
+                style="display: none;">
+                <li class="clearfix fadeInRight">
+
+
+                    <a class="coupons-a used" data-bind="attr:{href:'couponDetail.html?openId='+$root.openId()+'&wid='+$root.param().wid+'&code='+$root.param().access_code+'&id='+id+'&type=used'}">
+                        <div class="top clearfix">
+                            <span class="price fl"><em>￥</em>   <!-- ko text:jpname --><!-- /ko--></span>
+                            <div class="info">
+                                <h3 data-bind="text:jxname"></h3>
+                                <!--<p>满50元可使用</p>-->
+                            </div>
+                        </div>
+                        <p class="coupons-handle">
+                            <!-- ko text:'有效期：'+ beginDate +' 至 '+endDate --><!-- /ko-->
+
+                        </p>
+                        <i class="status-used i-status"></i>
+                    </a>
+                </li>
+
+            </ul>
+            <div data-bind="visible:usedCoupons().length<0">
+                <div class="noAccord"></div>
+                <div class="noAccordTitle">您还没有符合条件的奖券</div>
+                <div class="noAccordTitle2">暂时没有相关数据</div>
+            </div>
+        </div>
+
+        <div data-bind="visible:selectedType()=='expired'" style="display: none;">
+            <ul class="coupons-list" data-bind="foreach:expiredCoupons ,visible:expiredCoupons().length>0" style="display: none;">
+                <li class="fail clearfix fadeInRight">
+                    <a class="coupons-a used" data-bind="attr:{href:'couponDetail.html?openId='+$root.openId()+'&wid='+$root.param().wid+'&code='+$root.param().access_code+'&id='+id+'&type=expired'}">
+
+                        <div class="top clearfix">
+                            <span class="price fl"><em>￥</em>   <!-- ko text:jpname --><!-- /ko--></span>
+                            <div class="info">
+                                <h3 data-bind="text:jxname"></h3>
+                                <!--<p>满50元可使用</p>-->
+                            </div>
+                        </div>
+                        <p class="coupons-handle">
+                            <!-- ko text:'有效期：'+ beginDate +' 至 '+endDate --><!-- /ko-->
+
+                        </p>
+                        <i class="status-expired i-status"></i>
+                    </a>
+
+                </li>
+
+            </ul>
+            <div data-bind="visible:expiredCoupons().length<0">
+                <div class="noAccord"></div>
+                <div class="noAccordTitle">您还没有符合条件的奖券</div>
+                <div class="noAccordTitle2">暂时没有相关数据</div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="../../scripts/jquery/jquery-2.1.0.min.js"></script>
+    <script src="../../scripts/jquery/jquery.url.js"></script>
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+
+    <script src="../../scripts/pre-loader.js"></script>
+    <script src="../../scripts/knockout/knockout-3.2.0.debug.js"></script>
+    <!--<script src="../../scripts/oAuth2.js"></script>-->
+    <script src="js/myCoupons-vm.js"></script>
+    <script>
+    function getBaseUrl() {
+        var re = new RegExp(/^.*\//);
+        return re.exec(window.location.href);
+    }
+    var access_code = $.url.param("code")?$.url.param("code"):'';
+//    var aid = $.url.param("aid");
+    var wid = $.url.param("wid");
+
+    var param = {
+        wid:wid,
+        access_code: access_code
+    };
+    var baseurl = getBaseUrl();
+    var imagesArray = [baseurl + 'images/coupons_bg.png',
+        baseurl + 'images/img_coupondetail_used_207x160.png'];
+
+
+    new preLoader(imagesArray, {
+        onProgress: function (src, element, index) {
+
+            var percent = Math.floor((100 / this.queue.length) * this.completed.length);
+
+            // update the progress element
+            $("#loadingTips").text(percent + '%');
+
+
+        },
+        onComplete: function (loaded, errors) {
+            var myCouponsVM = new MyCouponsViewModel(null, param);
+            ko.applyBindings(myCouponsVM);
+            $("#div_content").show();
+            $('#loadingBox').hide();
+
+        }
+    });
+
+
+
+    </script>
+</body>
+</html>

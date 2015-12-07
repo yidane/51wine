@@ -1,0 +1,375 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta id="eqMobileViewport" name="viewport" content="width=device-width,
+          initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="format-detection" content="email=no">
+    <title>景区介绍</title>
+    <link href="../styles/page-animation.css" rel="stylesheet" type="text/css">
+
+    <style type="text/css">
+        * {
+            margin: 0;
+            outline: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: rgba(0,0,0,0);
+        }
+
+        a {
+            text-decoration: none;
+            -webkit-tap-highlight-color: rgba(0,0,0,.35);
+        }
+
+        html {
+            height: 100%;
+            -webkit-text-size-adjust: 100%;
+        }
+
+        body {
+            width: 100%;
+            height: 100%;
+            font-family: 'Microsoft Yahei',Tahoma,Helvetica,Arial,sans-serif;
+            font-size: 62.5%;
+            font-weight: 300;
+            line-height: 1.231;
+            position: relative;
+            text-align: center;
+        }
+
+        ul, li {
+            list-style: none;
+        }
+
+        a {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .container {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+
+        .bg1 {
+            background-image: url(images/bg1.png);
+            background-repeat: no-repeat;
+            z-index: 1;
+        }
+
+        .circle {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            left: 50%;
+            top: 50%;
+            margin-left: -100px;
+            margin-top: -100px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255,0.4);
+            -webkit-animation: zoomIn 4s 1s 1 linear normal both;
+        }
+
+        .scenic-name {
+            position: absolute;
+            width: 160px;
+            height: 115px;
+            top: -10px;
+            left: -20px;
+        }
+
+        .stamp {
+            position: absolute;
+            width: 50px;
+            height: 65px;
+            top: 60px;
+            left: 135px;
+        }
+
+        .poetry {
+            position: absolute;
+            width: 190px;
+            height: 50px;
+            top: 130px;
+            left: 18px;
+        }
+
+        .trigger {
+            position: fixed;
+            width: 40px;
+            height: 40px;
+            right: 10px;
+            bottom: 10px;
+        }
+
+            .trigger .icon {
+                -webkit-transform-origin: 50% 50%;
+                transform-origin: 50% 50%;
+                -webkit-transition: opacity 0.3s, -webkit-transform 0.3s;
+                transition: opacity 0.3s, transform 0.3s;
+            }
+
+                .trigger .icon rect {
+                    stroke: #dbdbdb;
+                    stroke-width: 2px;
+                    -webkit-animation: fadeIn 4s 0s infinite ease-in-out both;
+                    animation: fadeIn 4s 0s infinite ease-in-out both;
+                }
+
+
+        @-webkit-keyframes fadeIn {
+            0% {
+                fill: rgba(0,0,0,0);
+            }
+
+            25% {
+                fill: rgba(0,0,0,0.25);
+            }
+
+            50% {
+                fill: rgba(0,0,0,0.5);
+            }
+
+            75% {
+                fill: rgba(0,0,0,0.25);
+            }
+
+            100% {
+                fill: rgba(0,0,0,0);
+            }
+        }
+
+        @keyframes fadeIn {
+            0% {
+                fill: rgba(0,0,0,0);
+            }
+
+            25% {
+                fill: rgba(0,0,0,0.25);
+            }
+
+            50% {
+                fill: rgba(0,0,0,0.5);
+            }
+
+            75% {
+                fill: rgba(0,0,0,0.25);
+            }
+
+            100% {
+                fill: rgba(0,0,0,0);
+            }
+        }
+
+
+        .bg2 {
+            background-image: url(images/bg.png);
+            background-repeat: no-repeat;
+            z-index: 2;
+        }
+
+        .info {
+            padding: 2% 6%;
+            color: #fafafa;
+            line-height: 150%;
+            clear: both;
+            font-size: 12px;
+            text-align: justify;
+        }
+
+        .scenic-list {
+            margin: 15px 0 10px;
+            padding: 2%;
+        }
+
+            .scenic-list li {
+                margin: 1%;
+                width: 47%;
+                border-radius: 5px;
+                height: 150px;
+                display: inline-block;
+                position: relative;
+            }
+
+                .scenic-list li .annular-round {
+                    border-radius: 50%;
+                    width: 110px;
+                    height: 110px;
+                    padding: 2px;
+                    top: 8px;
+                    left: 50%;
+                    margin-left: -54px;
+                    background-color: rgba(255, 255, 255,0.5);
+                    position: absolute;
+                }
+
+                .scenic-list li img {
+                    border-radius: 50%;
+                    width: 100%;
+                    height: 100%;
+                }
+
+                .scenic-list li span {
+                    left: 0;
+                    top: 130px;
+                    width: 100%;
+                    text-align: center;
+                    color: #fff;
+                    position: absolute;
+                    font-family: KaiTi;
+                    z-index: 1;
+                    font-size: 16px;
+                }
+
+        .slide-down {
+            -webkit-animation: slideDown 2s 0.8s 1 linear normal both;
+            animation: slideDown 2s 0.8s 1 linear normal both;
+        }
+
+        /*@media screen and (max-height: 490px) {
+            .info {
+                font-size: 12px;
+            }
+        }
+
+        @media screen and (max-height: 550px) and (min-height:490px) {
+            .info {
+                font-size: 14px;
+            }
+        }*/
+
+        @-webkit-keyframes zoomIn {
+            0% {
+                -webkit-transform: scale3d(0, 0, 1);
+                opacity: 0.6;
+            }
+
+            100% {
+                -webkit-transform: scale3d(1, 1, 1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes zoomIn {
+            0% {
+                -webkit-transform: scale3d(0, 0, 1);
+                opacity: 0.6;
+            }
+
+            100% {
+                -webkit-transform: scale3d(1, 1, 1);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <section class="page bg1">
+            <div class="circle">
+                <img class="scenic-name" src="images/scenic_name.png" />
+                <img class="stamp" src="images/stamp.png" />
+                <img class="poetry" src="images/poetry.png" />
+            </div>
+            <span class="trigger">
+                <svg width="100%" height="100%" viewBox="0 0 60 60" preserveAspectRatio="none">
+                    <g class="icon">
+                        <rect x="32.5" y="5.5" width="22" height="22" />
+                        <rect x="4.5" y="5.5" width="22" height="22" />
+                        <rect x="32.5" y="33.5" width="22" height="22" />
+                        <rect x="4.5" y="33.5" width="22" height="22" />
+                    </g>
+                </svg>
+            </span>
+        </section>
+        <section class="page bg2" style="display:none;">
+            <ul class="scenic-list">
+                <li>
+                    <a href="wolongwan.html">
+                        <div class="annular-round">
+                            <img src="images/scenic1.jpg" />
+                        </div>
+                        <span>卧龙湾</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="yueliangwan.html">
+                        <div class="annular-round">
+                            <img src="images/scenic2.jpg" />
+                        </div>
+                        <span>月亮湾</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="shenxianwan.html">
+                        <div class="annular-round">
+                            <img src="images/scenic3.jpg" />
+                        </div>
+                        <span>神仙湾</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="guanyutai.html">
+                        <div class="annular-round">
+                            <img src="images/scenic4.jpg" />
+                        </div>
+                        <span>观鱼台</span>
+                    </a>
+                </li>
+            </ul>
+            <div class="info"><span style="font-size: 16px; font-weight: bold;">&nbsp;&nbsp;&nbsp;&nbsp;喀纳斯</span>，一个美丽富饶、神秘莫测的地方，在这里壮观的冰川映衬着宁静的湖水、茫茫的草原包容着幽深的原始森林。神秘的湖怪、古朴的土瓦人、变换的湖水、眩人的风景会让人痴迷。生活在都市的你，可以适时的停下脚步，背上背包，在这片净土上和自己的心来一次徒步之旅。</div>
+        </section>
+    </div>
+    <script src="../javaScripts/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript">
+        var hash = document.location.hash;
+        function renderViewport() {
+            var f = 1,
+                e,
+                g = $(document).width(),
+                h = $(document).height();
+            g / h >= 320 / 486 ? (f = h / 486) : (f = g / 320, e = (h / f - 486) / 2);
+            $("#eqMobileViewport").attr("content", "width=320, initial-scale=" + f + ", maximum-scale=" + f + ", user-scalable=no");
+        }
+
+        function showPage() {
+            if (!hash) {
+                document.location.hash = "page2";
+            }
+            $(".bg2").addClass("slide-down").show();
+        }
+
+        $(function () {
+            renderViewport();
+            if (hash == "#page2") {
+                $('.bg1').hide();
+                $('.bg2').show();
+            }
+            else {
+                var timer = setTimeout(showPage, 10000);
+                $(".trigger").on('click', function () {
+                    if (timer) {
+                        clearTimeout(timer);
+                    }
+                    showPage();
+                });
+            }
+        });
+    </script>
+</body>
+</html>

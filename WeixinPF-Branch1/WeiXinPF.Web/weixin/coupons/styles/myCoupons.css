@@ -1,0 +1,219 @@
+
+body {
+    background-color: #F2F2F2
+}
+
+#loadingBox {
+    position: fixed;
+    z-index: 99;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    background-color: rgba(0, 0, 0, .7)
+}
+
+#loading {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    height: 50px;
+    width: 50px;
+    margin: -25px 0 0 -25px;
+    -webkit-border-radius: 60px;
+    border-radius: 60px;
+    border: 4px solid #FFF86B;
+    border-right-color: #eee;
+    border-bottom: 4px solid #eee;
+    -webkit-animation: rotate360 1s infinite linear;
+    animation: rotate360 1s infinite linear
+}
+
+#loadingTips {
+    position: relative;
+    text-align: center;
+    color: #FAE477;
+    top: 60%;
+    text-indent: .5em;
+    font-size: 20px
+}
+
+@-webkit-keyframes rotate360 {
+    0% {
+        -webkit-transform: rotate(0deg)
+    }
+    100% {
+        -webkit-transform: rotate(360deg)
+    }
+}
+
+
+@-webkit-keyframes fadeInRight {
+    0% {
+        opacity: 0;
+        -webkit-transform: translate3d(100%, 0, 0);
+        transform: translate3d(100%, 0, 0)
+    }
+    100% {
+        opacity: 1;
+        -webkit-transform: none;
+        transform: none
+    }
+}
+
+@keyframes fadeInRight {
+    0% {
+        opacity: 0;
+        -webkit-transform: translate3d(100%, 0, 0);
+        transform: translate3d(100%, 0, 0)
+    }
+    100% {
+        opacity: 1;
+        -webkit-transform: none;
+        transform: none
+    }
+}
+
+.coupons-list > li.fadeInRight {
+    opacity: 1;
+    -webkit-animation-name: fadeInRight;
+    animation-name: fadeInRight;
+    -webkit-animation-duration: .65s;
+    animation-duration: .65s
+}
+
+
+
+@-webkit-keyframes stamp {
+    0% {
+        -webkit-transform: scale(20);
+    }
+
+    100% {
+        -webkit-transform: scale(1);
+    }
+}
+
+@keyframes stamp {
+    0% {
+        transform: scale(20);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.stamp {
+    animation: stamp 1s ease-in;
+    -webkit-animation: stamp 1s ease-in;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+@-webkit-keyframes bounceInDown {
+    0% {
+        opacity: 0;
+        -webkit-transform: translateY(-3000px);
+    }
+
+    60% {
+        opacity: 1;
+        -webkit-transform: translateY(25px);
+    }
+
+    75% {
+        -webkit-transform: translateY(-10px);
+    }
+
+    90% {
+        -webkit-transform: translateY(5px);
+    }
+
+    100% {
+        -webkit-transform: translateY(0);
+    }
+}
+
+@keyframes bounceInDown {
+    0% {
+        opacity: 0;
+        transform: translateY(-3000px);
+    }
+
+    60% {
+        opacity: 1;
+        transform: translateY(25px);
+    }
+
+    75% {
+        transform: translateY(-10px);
+    }
+
+    90% {
+        transform: translateY(5px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.bounceInDown {
+    -webkit-animation: bounceInDown 1s linear;
+    animation: bounceInDown 1s linear;
+}
+
+@-webkit-keyframes bounceInUp {
+    0% {
+        opacity: 0;
+        -webkit-transform: translateY(3000px);
+    }
+
+    60% {
+        opacity: 1;
+        -webkit-transform: translateY(-20px);
+    }
+
+    75% {
+        -webkit-transform: translateY(10px);
+    }
+
+    90% {
+        -webkit-transform: translateY(-5px);
+    }
+
+    100% {
+        -webkit-transform: translateY(0);
+    }
+}
+
+@keyframes bounceInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(3000px);
+    }
+
+    60% {
+        opacity: 1;
+        transform: translateY(-20px);
+    }
+
+    75% {
+        transform: translateY(10px);
+    }
+
+    90% {
+        transform: translateY(-5px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.bounceInUp {
+    -webkit-animation: bounceInUp 1s linear;
+    animation: bounceInUp 1s linear;
+}

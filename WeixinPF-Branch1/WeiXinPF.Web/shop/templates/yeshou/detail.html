@@ -1,0 +1,271 @@
+﻿<!DOCTYPE html>
+<!--[if lt IE 7]>    <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="zh-cn" > <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="zh-cn" > <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="zh-cn" ><![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="zh-cn">
+<!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>{$model.productName}</title>
+    <meta name="keywords" content="{$model.productName}" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1.0, user-scalable=no">
+    <!-- 加载js/css -->
+    <link type="text/css" rel="stylesheet" href="/shop/templates/yeshou/css/font-awesome.min.css?v=3">
+    <link type="text/css" rel="stylesheet" href="/shop/templates/yeshou/css/wapmain.css?v=232">
+    <script type="text/javascript" src="/shop/templates/yeshou/js/zepto.min.js?v=3"></script>
+    <script type="text/javascript" src="/shop/templates/yeshou/js/jquery-2.0.2.min.js?v=3"></script>
+    <script>
+        var _hmt = _hmt || [];
+        (function () {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?7c10355ee0f6b21af208947325fd4ad7";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body>
+    <div id="J_Wrappear">
+        <div class="lay-wrap J_MenuBody" id="J_MenuSwipe">
+            <!--顶部-->
+            <vt:template id="header" file="_header.html" charset="utf-8" />
+            <!--end顶部-->
+            <script>
+                $(document).ready(function () {
+                    initCart();
+
+                    //数量的加减
+                    var input_num = $("#sum");
+                    var curnum = 0;
+                    $("#minus").click(function () {
+                        curnum = parseInt(input_num.val());
+                        if (curnum <= 1) {
+                            alert("购物车数量为1，不能再减少");
+                            return;
+                        }
+                        input_num.val(--curnum);
+                    })
+                    $("#plus").click(function () {
+                        curnum = parseInt(input_num.val());
+                        curnum = input_num.val();
+                        input_num.val(++curnum);
+                    })
+                    //end数量的加减
+
+                });
+
+                /**重新加载购物车数量和总价**/
+                function initCart() {
+                    $.ajax({
+                        url: '/shop/shopmgr.ashx?myact=pcount&ss=' + Math.random(),
+                        dataType: 'json',
+                        data: { wid: "{$wid}", openid: "{$openid}" },
+                        async: false,
+                        success: function (data) {
+                            if (data.data > 0) {
+                                var num = data.data;
+                                var cart_a_link = $(".m-shop-cart");
+                                if (num != 'undefined') {
+                                    if (cart_a_link.find("i.shop-num").length > 0) {
+                                        cart_a_link.find("i.shop-num").text(num);
+                                    } else {
+                                        cart_a_link.prepend($("<i class=\"shop-num\">" + num + "</i>"));
+                                    }
+                                }
+                            }
+                        }
+                    });
+                }
+            </script>
+
+            <div class="lay-til J_MenuBody" id="J_SubHead">
+                <div class="header-con">
+                    <i class="arrow-back" onclick="history.go(-1)">
+                        <img src="/shop/templates/yeshou/images/pay_03.png" alt="" /></i>
+                    <h1>商品详情</h1>
+                </div>
+            </div>
+            <div class="lay-body lay-body2" id="J_MainBody">
+                <div class="list">
+                    <!--产品详情-->
+                    <div class="banner-container">
+                        <div class="swiper-wrapper">
+                            <vt:foreach from="$model.albums" item="albums"> 
+                            <div class="swiper-slide">
+                                <img src="{$albums.original_path}">
+                            </div>
+                            </vt:foreach>
+                        </div>
+
+                        <div class="pagination1" style="background-color: none;"></div>
+                    </div>
+                    <div class="detail-head">
+                        <!--<h1>THE BEAST</h1>-->
+                        <h2>{$model.productName}</h2>
+                        <h3>{$model.shortDesc}</h3>
+                    </div>
+                    <div class="detail-price clearfix">
+                        <p class="fl" id="itemPriceFl">
+                            ￥ 
+			   		{$model.salePrice} 
+			       
+                        </p>
+                        <div class="num fr" style="padding: 0px;">
+                            <button type="button" class="num-handle minus J_Minus" id="minus"><i class="icon-minus"></i></button>
+                            <input type="text" class="J_In" value="1" min="1" id="sum" disabled />
+                            <button type="button" class="num-handle add J_Add" id="plus"><i class="icon-plus"></i></button>
+                        </div>
+                        <!--<p class="fl" id="jsnum">
+                            <img src="/shop/templates/yeshou/images/minus.jpg" id="minus" /><input type="text" id="sum" disabled="disabled" value="1" /><img src="/shop/templates/yeshou/images/plus.jpg" id="plus" />
+                        </p>-->
+                    </div>
+                    <input type="hidden" value="" name="selSubItem" id="selSubItem">
+                    <div class="m-detail-info">
+                        <div class="info-til J_DetailToggle">
+                            <h3>简短介绍 <span>DETAILS</span></h3>
+                            <i class="minus-sign"></i>
+                        </div>
+                        <div class="info-container J_Node">
+                            <p>
+                                <p>
+                                    <vt:foreach from="$model.skulist" item="skulist">
+                                    {$skulist.attrName}：{$skulist.attributeValue}<br />
+                                    </vt:foreach>
+                                    <vt:foreach from="$model.attrs" item="attrs">
+                                        {$attrs.attrName}：{$attrs.paValue}<br />
+                                    </vt:foreach>
+                                </p>
+                            </p>
+                        </div>
+                    </div>
+                    <!--页脚产品推荐-->
+
+                </div>
+                <footer class="lay-foot J_MenuBody">
+                    <p class="fl" id="footPriceFl">
+                        ￥  {$model.salePrice}  
+                    </p>
+                    <button class="foot-btn" id="Baidu_AddCart" onclick="_hmt.push(['_trackEvent', 'wap_addCart', 'click']);">加入购物车</button>
+                </footer>
+            </div>
+        </div>
+        <div class="m-mask J_MenuBody" id="J_Mask"></div>
+        <!--左边菜单-->
+        <vt:template id="_bottom" file="_bottom.html" charset="utf-8" />
+        <!--end左边菜单-->
+        <script type="text/javascript" src="/shop/templates/yeshou/js/main.js?v=1"></script>
+        <script type="text/javascript" src="/shop/templates/yeshou/js/idangerous.swiper.min.js"></script>
+        <!-- End Piwik Code -->
+    </div>
+
+    <script src="../../../scripts/jquery/jquery.query.js"></script>
+    <script type="text/javascript">
+        var mySwiper = new Swiper('.banner-container', {
+            pagination: '.pagination1',
+            loop: false,
+            grabCursor: true,
+            paginationClickable: true
+        });
+        $('.pagination1').eq(0).css({ marginLeft: -$('.pagination1').width() / 2 + 'px' });
+        $('.banner-container').on('swipeLeft', function (e) { e.stopPropagation(); });
+        $('.banner-container').on('swipeRight', function (e) { e.stopPropagation(); });
+
+        /*脚部切换产品*/
+        (function () {
+            function Switch(ele) {
+                this.ele = ele;
+                this.init();
+            }
+            Switch.prototype = {
+                init: function () {
+                    var that = this,
+                            ul = this.ele.find('ul').eq(0),
+                            li = this.ele.find('li'),
+                            screenWidth = $('body').width() - 20;
+                    li.width(screenWidth / 3);
+                    ul.width(screenWidth / 3 * li.length);
+                    this.ele.on('swipeLeft', function () {
+                        var ul = that.ele.find('ul').eq(0), li = that.ele.find('li');
+                        that.left(li, ul, screenWidth);
+                    });
+                    this.ele.on('swipeRight', function () {
+                        var ul = that.ele.find('ul').eq(0), li = that.ele.find('li');
+                        that.right(li, ul, screenWidth);
+                    });
+                },
+                left: function (li, ul, screenWidth) {
+                    li.eq(0).animate({ marginLeft: -screenWidth / 3 + 'px' }, 400, '', function () {
+                        ul.append(li.eq(0)), li.eq(0).css({ marginLeft: 0 });
+                    });
+                },
+                right: function (li, ul, screenWidth) {
+                    li.eq(li.length - 1).css({ marginLeft: -screenWidth / 3 + 'px' }), ul.prepend(li.eq(li.length - 1));
+                    li.eq(li.length - 1).animate({ marginLeft: 0 }, 400);
+                }
+            };
+
+            $.fn.switch = function (opt) {
+                opt = $.extend({}, opt);
+                this.each(function () {
+                    console.log($(this));
+                    return new Switch($(this));
+                });
+            }
+        })();
+
+        $('.J_Switch').switch();
+
+        /**信息显示/隐藏**/
+        $('.J_DetailToggle').on('click', function () {
+
+            if ($(this).siblings('.J_Node').eq(0).css('display') == 'none') {
+                $(this).find('i').eq(0).removeClass('plus-sign').addClass('minus-sign');
+                $(this).siblings('.J_Node').eq(0).css({ display: 'block' });
+            } else {
+                $(this).find('i').eq(0).addClass('plus-sign').removeClass('minus-sign');
+                $(this).siblings('.J_Node').eq(0).css({ display: 'none' });
+            }
+        });
+        /**加入购物车**/
+        $('.foot-btn').on('click', function () {
+            //检测库存 
+            var id = $.query.get("pid");
+            var curnum = parseInt($("#sum").val());
+            $.getJSON("/shop/shop.ashx?wid={$wid}&id=" + id + "&myact=checkid", function (d, status) {
+                if (typeof (d.data) == "undefined") {
+                    location.href = "{$indexurl}";
+                    return;
+                } else if (d.data <= 0) {
+                    $("#Baidu_AddCart").text("暂时缺货").css({ "background-color": "#cfcfcf" }).prop("disabled", "false");
+                    return;
+                } else if (d.data < curnum) {
+                    alert("数量不足，请重新选择数量");
+                    return;
+                } else {
+                    //加入购物车
+                    $.ajax({
+                        url: '/shop/shopmgr.ashx?myact=addCart',
+                        dataType: 'json',
+                        data: { openid: "{$openid}", mid: 0, wid: "{$wid}", productid: id, bc: curnum, attr: "", totprice: "{$model.salePrice}" },
+                        success: function (data) {
+                            if (data.success == false) {
+                                alert(data.message);
+                            } else {
+                                initCart();
+                                alert('成功加入购物车');
+                            }
+                        }
+                    });
+                }
+            });
+
+
+        });
+
+
+    </script>
+</body>
+</html>

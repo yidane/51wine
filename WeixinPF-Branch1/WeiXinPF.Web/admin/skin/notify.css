@@ -1,0 +1,462 @@
+﻿a {
+    background-color: transparent;
+    text-decoration: none;
+}
+
+a {
+    color: #337ab7;
+    text-decoration: none;
+}
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+.main-header .navbar-custom-menu, .main-header .navbar-right {
+    float: right;
+}
+
+
+.navbar-nav {
+    margin: 7.5px -15px;
+}
+
+.nav {
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none;
+}
+
+.navbar-custom-menu > .navbar-nav > li {
+    position: relative;
+}
+
+.navbar-nav > .notifications-menu, .navbar-nav > .messages-menu, .navbar-nav > .tasks-menu {
+    position: relative;
+}
+
+.nav > li {
+    position: relative;
+    display: block;
+}
+
+.dropup, .dropdown {
+    position: relative;
+}
+
+.skin-blue .main-header .navbar .nav > li > a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.navbar-nav > li > a {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    /*line-height: 20px;*/
+}
+
+.nav > li > a {
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+}
+
+.navbar-custom-menu > .navbar-nav > li > .dropdown-menu {
+    position: absolute;
+    right: 0;
+    left: auto;
+    margin-top: 10px;
+    padding: 10px;
+    border: 1px solid #b1b1b1;
+    background: #fff;
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.2);
+}
+
+    .navbar-custom-menu > .navbar-nav > li > .dropdown-menu > li > .item {
+        display: block;
+        padding: 8px 15px;
+        color: #222;
+        font-size: 12px;
+        line-height: 1em;
+        text-align: center;
+        white-space: nowrap;
+    }
+
+.navbar-nav > .notifications-menu > .dropdown-menu, .navbar-nav > .messages-menu > .dropdown-menu, .navbar-nav > .tasks-menu > .dropdown-menu {
+    width: 280px;
+    padding: 0 0 0 0 !important;
+    margin: 0 !important;
+    top: 100%;
+}
+
+.navbar-nav > li > .dropdown-menu {
+    margin-top: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.navbar-nav .dropdown-menu {
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+}
+
+.dropdown-menu {
+    box-shadow: none;
+    border-color: #eee;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    display: none;
+    float: left;
+    min-width: 110px;
+    padding: 5px 0;
+    margin: 2px 0 0;
+    font-size: 14px;
+    text-align: left;
+    list-style: none;
+    background-color: #fff;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    border: 1px solid #ccc;
+    border: 1px solid rgba(0, 0, 0, .15);
+    border-radius: 4px;
+    -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+}
+
+.main-header .navbar .nav > li > a > .label {
+    position: absolute;
+    top: 9px;
+    right: 6px;
+    text-align: center;
+    font-size: 9px;
+    padding: 2px 3px;
+    line-height: .9;
+}
+
+.navbar-nav > .notifications-menu > .dropdown-menu > li.menu-header, .navbar-nav > .messages-menu > .dropdown-menu > li.menu-header, .navbar-nav > .tasks-menu > .dropdown-menu > li.menu-header {
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    background-color: #ffffff;
+    padding: 7px 10px;
+    border-bottom: 1px solid #f4f4f4;
+    color: #444444;
+    font-size: 14px;
+}
+
+.navbar-nav > .notifications-menu > .dropdown-menu > li, .navbar-nav > .messages-menu > .dropdown-menu > li, .navbar-nav > .tasks-menu > .dropdown-menu > li {
+    position: relative;
+}
+
+    .navbar-nav > .notifications-menu > .dropdown-menu > li .menu, .navbar-nav > .messages-menu > .dropdown-menu > li .menu, .navbar-nav > .tasks-menu > .dropdown-menu > li .menu {
+        max-height: 200px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        overflow-x: hidden;
+    }
+
+        .navbar-nav > .messages-menu > .dropdown-menu > li .menu > li > a {
+            margin: 0px;
+            padding: 10px 10px;
+        }
+
+        .navbar-nav > .notifications-menu > .dropdown-menu > li .menu > li > a, .navbar-nav > .messages-menu > .dropdown-menu > li .menu > li > a, .navbar-nav > .tasks-menu > .dropdown-menu > li .menu > li > a {
+            display: block;
+            white-space: nowrap;
+            border-bottom: 1px solid #f4f4f4;
+        }
+
+            .navbar-nav > .messages-menu > .dropdown-menu > li .menu > li > a > h4 {
+                padding: 0;
+                margin: 0 0 0 45px;
+                color: #444444;
+                font-size: 15px;
+                position: relative;
+            }
+
+                .navbar-nav > .messages-menu > .dropdown-menu > li .menu > li > a > h4 > small {
+                    color: #999999;
+                    font-size: 10px;
+                    position: absolute;
+                    top: 0px;
+                    right: 0px;
+                    margin-top: 3px;
+                }
+
+    .navbar-nav > .notifications-menu > .dropdown-menu > li.footer > a, .navbar-nav > .messages-menu > .dropdown-menu > li.footer > a, .navbar-nav > .tasks-menu > .dropdown-menu > li.footer > a {
+        border-top-left-radius: 0px;
+        border-top-right-radius: 0px;
+        border-bottom-right-radius: 4px;
+        border-bottom-left-radius: 4px;
+        font-size: 12px;
+        background-color: #fff;
+        padding: 7px 10px;
+        border-bottom: 1px solid #eeeeee;
+        color: #444 !important;
+        text-align: center;
+    }
+
+    .navbar-nav > .messages-menu > .dropdown-menu > li .menu > li > a > p {
+        margin: 5px 0 5px 45px;
+        font-size: 12px;
+        color: #888888;
+    }
+
+.navbar-nav > .user-menu > .dropdown-menu, .navbar-nav > .user-menu > .dropdown-menu > .user-body {
+    border-bottom-right-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+
+.navbar-nav > .user-menu > .dropdown-menu {
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+    padding: 1px 0 0 0;
+    border-top-width: 0;
+    /*width: 280px;*/
+}
+
+    .navbar-nav > .user-menu > .dropdown-menu > li.user-header {
+        height: 175px;
+        padding: 10px;
+        text-align: center;
+    }
+
+.skin-blue .main-header li.user-header {
+    background-color: #3c8dbc;
+}
+
+.navbar-nav > .user-menu > .dropdown-menu > .user-footer {
+    background-color: #f9f9f9;
+    padding: 10px;
+}
+
+.navbar-nav > .user-menu > .dropdown-menu > li.user-header > img {
+    z-index: 5;
+    height: 90px;
+    width: 90px;
+    border: 3px solid;
+    border-color: transparent;
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.img-circle {
+    border-radius: 50%;
+}
+
+img {
+    vertical-align: middle;
+}
+
+.navbar-nav > .user-menu > .dropdown-menu > li.user-header > p {
+    z-index: 5;
+    color: #fff;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 17px;
+    margin-top: 10px;
+}
+
+p {
+    margin: 0 0 10px;
+}
+
+.pull-right {
+    float: right;
+}
+
+
+.navbar-nav > .user-menu .user-image {
+    float: left;
+    width: 30px;
+    height: 38px;
+    /* border-radius: 50%; */
+    margin-right: 10px;
+    margin-top: -2px;
+    display: block;
+    background: url(default/skin_icons.png) no-repeat 0 -429px !important;
+}
+
+.navbar-nav > .user-menu > a {
+    padding-top: 0;
+    padding-bottom: 5px;
+}
+
+
+    .navbar-nav > .user-menu > a > .user-icon-dropdown {
+        margin-top: 6px;
+        margin-left: 5px;
+    }
+
+.open > .dropdown-menu {
+    display: block;
+}
+
+
+
+.navbar-custom-menu > .navbar-nav > li {
+    /*padding: 0px 15px;*/
+    border-left: 1px solid #4dc4f0;
+    border-right: 1px solid #1da0d0;
+}
+
+    .navbar-custom-menu > .navbar-nav > li:hover, .navbar-custom-menu > .navbar-nav > li:active {
+        background: #50c0e9;
+    }
+
+.navbar-custom-menu > .navbar-nav > .dropdown.dropdown-nochild > .dropdown-menu > li:hover, .navbar-custom-menu > .navbar-nav > .dropdown.dropdown-nochild > .dropdown-menu > li:active {
+    background: #50c0e9;
+}
+
+.navbar-custom-menu > .navbar-nav > li a:hover, .navbar-custom-menu > .navbar-nav > li a:active {
+    /*background: #50c0e9;*/
+    color: #fff !important;
+    text-decoration: none;
+}
+
+.navbar-custom-menu > .navbar-nav > li span {
+    /*display: flex;*/
+    padding-top: 6px;
+    color: #ebebeb;
+    font-size: 12px;
+    line-height: 1.2em;
+}
+
+.navbar-custom-menu > .navbar-nav > li > a > span {
+    float: left;
+}
+
+.dropdown-menu .arrow {
+    position: absolute;
+    display: block;
+    top: -10px;
+    right: 14px;
+    width: 21px;
+    height: 10px;
+    text-indent: -999999px;
+    background: url(default/skin_icons.png) no-repeat 0 -356px;
+    z-index: 2;
+}
+.dropdown-menu .arrow-background {
+     position: absolute;
+    display: block;
+    top: -10px;
+    right: 14px;
+    width: 21px;
+    height: 10px;
+    text-indent: -999999px;
+    /* background: url(default/skin_icons.png) no-repeat 0 -356px; */
+    background: transparent;
+}
+
+
+.navbar-custom-menu > .navbar-nav > li > .control-sidebar i {
+    margin-top: -10px;
+    /* width: 20px; */
+    /* height: 42px; */
+    width: 30px;
+    height: 45px;
+    /* border-radius: 50%; */
+    margin-right: 10px;
+    margin-top: -2px;
+}
+
+
+.navbar-nav > .notifications-menu > .dropdown-menu > li.header, .navbar-nav > .messages-menu > .dropdown-menu > li.header, .navbar-nav > .tasks-menu > .dropdown-menu > li.header {
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    background-color: #fff;
+    padding: 7px 10px;
+    border-bottom: 1px solid #f4f4f4;
+    color: #444;
+    font-size: 14px;
+    height: auto;
+    width: auto;
+}
+
+@media (min-width: 768px) {
+    .navbar-nav {
+        float: left;
+        margin: 0;
+    }
+
+        .navbar-nav > li {
+            float: left;
+        }
+
+            .navbar-nav > li > a {
+                padding-top: 15px;
+                /*padding-bottom: 15px;*/
+            }
+}
+
+
+
+.label-warning {
+    background-color: #f0ad4e;
+}
+
+.label {
+    display: inline;
+    padding: .2em .6em .3em;
+    font-size: 75%;
+    font-weight: bold;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: .25em;
+}
+
+
+.dropdown-menu > li > a {
+    display: block;
+    padding: 3px 20px;
+    clear: both;
+    font-weight: normal;
+    line-height: 1.428571429;
+    color: #333;
+    white-space: nowrap;
+}
+
+.navbar-nav>.messages-menu>.dropdown-menu>li .menu>li>a>p {
+    margin: 5px 0 5px 45px;
+    font-size: 12px;
+    color: #888;
+    -moz-word-break: break-all;
+    -o-word-break: break-all;
+    word-break: break-all;
+    white-space: normal;
+}
+
+.navbar-nav > .messages-menu > .dropdown-menu > li .menu > li > a > h4,
+.navbar-nav > .messages-menu > .dropdown-menu > li .menu > li > a > p {
+    margin: 0;
+    margin-bottom: 5px;
+}
+
+.navbar-nav > .notifications-menu > .dropdown-menu > li .menu > li > a > h3 {
+    font-size: 14px;
+    font-weight: 700;
+    padding: 0;
+    margin: 0 0 10px 0;
+}
+
+.navbar-nav > .notifications-menu > .dropdown-menu > li .menu > li > a > p {
+    margin: 0;
+}
+
+
+/*修改bootstrap-dropdown 使鼠标移上去就显示菜单*/
+.dropdown:hover .dropdown-menu {
+    display: block;
+    margin-top: 0; // remove the gap so it doesn't close
+}

@@ -1,0 +1,241 @@
+﻿<!DOCTYPE html>
+<!--[if lt IE 7]>    <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="zh-cn" > <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="zh-cn" > <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="zh-cn" ><![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="zh-cn">
+<!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>订单确认</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1.0, user-scalable=no">
+
+    <!-- 加载js/css -->
+    <link type="text/css" rel="stylesheet" href="/shop/templates/yeshou/css/font-awesome.min.css?v=3">
+    <link type="text/css" rel="stylesheet" href="/shop/templates/yeshou/css/wapmain.css?v=5">
+    <script type="text/javascript" src="/shop/templates/yeshou/js/zepto.min.js?v=3"></script>
+    <script>
+        var _hmt = _hmt || [];
+        (function () {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?7c10355ee0f6b21af208947325fd4ad7";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+    <script src="../../../scripts/jquery/jquery-2.1.0.min.js"></script>
+    <script type="text/javascript">
+        var errorMsg = "";
+        if (errorMsg != "") {
+            alert("购买下单失败[" + errorMsg + "]");
+        }
+    </script>
+
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=585f1ae50e9ab4e523b2f598be3003a7"></script>
+</head>
+<body>
+    <div id="J_Wrappear">
+        <div class="lay-wrap J_MenuBody" id="J_MenuSwipe">
+            <!--顶部-->
+            <vt:template id="header" file="_header.html" charset="utf-8" />
+            <!--end顶部-->
+            <script>
+                $(document).ready(function () {
+                    initCart();
+                    var addr = "{$addrinfo}";
+                    if (addr != null && addr != "") {
+                        $("#n_addr").hide();
+                        $("#y_addr").show();
+                    }
+                });
+
+                /**重新加载购物车数量和总价**/
+                function initCart() {
+                    $.ajax({
+                        url: '/shop/shopmgr.ashx?myact=pcount',
+                        dataType: 'json',
+                        data: { wid: "{$wid}", openid: "{$openid}", v: Math.random() },
+                        async: false,
+                        success: function (data) {
+                            if (data.data > 0) {
+                                var num = data.data;
+                                var cart_a_link = $(".m-shop-cart");
+                                if (num != 'undefined') {
+                                    if (cart_a_link.find("i.shop-num").length > 0) {
+                                        cart_a_link.find("i.shop-num").text(num);
+                                    } else {
+                                        cart_a_link.prepend($("<i class=\"shop-num\">" + num + "</i>"));
+                                    }
+                                }
+                            }
+                        }
+                    });
+                }
+            </script>
+
+            <div class="lay-til J_MenuBody" id="J_SubHead">
+                <div class="header-con">
+                    <i class="arrow-back" onclick="history.go(-1)">
+                        <img src="/shop/templates/yeshou/images/pay_03.png" alt="" /></i>
+                    <h1>确认订单</h1>
+                </div>
+            </div>
+            <div class="lay-body lay-body2" id="J_MainBody">
+                <form action="/wap/order/create.htm" method="post" id="createorderform">
+                    <div class="order">
+                        <div class="order-addr" id="n_addr">
+                            <a href="/shop/editaddr.aspx?wid={$wid}&openid={$openid}&frompage=confirmOrder.aspx" class="new-address-btn">添加新地址</a>
+                        </div>
+                        <div class="order-addr" onclick="location.href='/wap/order/changeAddress.htm'" id="y_addr" style="display: none">
+                            <p>收件人：{$addrinfo.contractPerson}&nbsp;&nbsp;&nbsp;  <span class="phone">{$addrinfo.tel}</span></p>
+                            <p class="atxt">地址：{$addrinfo.province} {$addrinfo.city} {$addrinfo.area}   {$addrinfo.addrDetail}   </p>
+                            <a href="/shop/editaddr.aspx?wid={$wid}&openid={$openid}&frompage=confirmOrder.aspx" class="order-addr-btn">更换地址</a>
+                        </div>
+                        <vt:foreach from="$cartlist" item="cproduct" index="i">
+                        <div class="order-detail">
+                            <p>本单包含：</p>
+                            <div class="order-pro"> 
+                                <div class="pic">
+                                    <img src="{$cproduct.productPic}" /></div> 
+                                <div class="txt">
+                                    <p class="en">{$cproduct.productName}</p>
+                                    <p class="cn">{$cproduct.productName}</p>
+                                </div>
+                                <div class="price" id="itempircediv"> 
+                                    <p class="old-price" name="normalprice20966" id="normalprice20966" style="display: none" itemquantity="1" itemprice="160.0" itemcart="20966">￥{$cproduct.avgPrice}</p>
+                                    <p class="cur-price" name="vipprice20966" id="vipprice20966" itemquantity="1" itemprice="160.0" itemcart="20966">¥{$cproduct.avgPrice}</p> 
+                                    <p class="number">X{$cproduct.productNum}</p>
+                                </div>
+                            </div>
+                        </div> 
+                        </vt:foreach>
+                        <div class="create-choose order-detail">
+                            <p>支付方式：</p>
+                            <select evttag="changePay" class="create-choose" id="payid" style="width: 80%">
+                                <option value="-1">请选择支付方式</option>
+                                <vt:foreach from="$payment" item="pay" index="i">
+                                 <option value="{$pay.pTypeId}" ">{$pay.title}</option>
+                                </vt:foreach>
+                            </select>
+                        </div>
+                        <div class="create-choose order-detail">
+                            <p>配送方式：</p>
+                            <select class="create-choose" id="select_shipFee" style="width: 80%">
+                                <vt:foreach from="$express" item="exp" index="i">
+                                 <option value="{$exp.express_fee}" mtype="{$exp.id}" ptype="0">{$exp.title}: ￥{$exp.express_fee}元</option>
+                                 </vt:foreach>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <footer class="lay-foot J_MenuBody">
+                <p class="fl" id="totalFeePs">总计：￥{$alltot_y}</p>
+                <div class="events fl">
+                    <p id="postFeeP"></p>
+                    <p id="limitPfP"></p>
+                </div>
+                <button type="button" class="foot-btn" id="orderSubmit">确定</button>
+            </footer>
+        </div>
+        <div class="m-mask J_MenuBody" id="J_Mask"></div>
+        <!--侧面菜单-->
+        <vt:template id="_bottom" file="_bottom.html" charset="utf-8" />
+        <!--end侧面菜单-->
+        <script type="text/javascript" src="/shop/templates/yeshou/js/main.js?v=1"></script>
+        <script type="text/javascript" src="/shop/templates/yeshou/js/idangerous.swiper.min.js"></script>
+        <script>
+            $(function () {
+                var shopnum = "{$cartlist.Count}";
+                if (shopnum <= 0) {
+                    $("#orderSubmit").hide();
+                }
+                //运费累加
+                $("#select_shipFee").change(function () {
+                    var yunfei = $("#select_shipFee").val();
+                    //应付金额
+                    var zji = "{$alltot_y}";
+                    yifu = parseInt(yunfei) + parseInt(zji);
+                    $("#totalFeePs").text("总计：￥" + parseInt(yifu));
+
+                });
+
+                //表单提交
+                $("#orderSubmit").click(function () {
+                    var type = $("#select_shipFee option:selected").attr('mtype');
+                    var pay = $("#payid").val();
+                    if (!checkOrderForm()) {
+                        return false;
+                    }
+                    var rpage = window.basePath + "/shop/userinfo.aspx?wid={$wid}&openid={$openid}";
+
+                    $(this).hide();
+                    $.getJSON("/shop/shopmgr.ashx?wid={$wid}&mtype=" + type + "&pc=" + pay + "&openid={$openid}&myact=order_save&v=" + Math.random(), function (d, status) {
+                        if (d.errCode) {
+                            if (d.payType == 1) {
+                                location.href = "/shop/order_success.aspx?wid={$wid}&orderid=" + d.orderid + "&openid={$openid}&rpage=" + escape(rpage) + "";
+                            }
+                            else {  
+                                location.href = "/api/payment/paypage.aspx?showwxpaytitle=1&paytype=shop&wid={$wid}&orderid=" + d.orderid + "&rpage=" + escape(rpage) + "";
+
+                            }
+                        }
+                    }); 
+                })
+            });
+
+            function serchItems() {
+                var skeywordVal = document.getElementById('skeyword').value;
+                if (skeywordVal != '') {
+                    window.location.href = "/wap/item/search.htm?searchKeyword=" + skeywordVal;
+                } else {
+                    alert('请输入搜索词');
+                }
+            }
+
+            function checkOrderForm() {
+                var type = $("#select_shipFee").attr('mtype');
+                if (type < 0) {
+                    alert("请选择配送方式");
+                    return false;
+                }
+
+                var pay = $("#payid").val();
+                if (pay < 0 || pay == "") {
+                    alert("请选择支付方式");
+                    return false;
+                }
+
+                return true;
+            }
+
+            $("#skeyword").keydown(function (event) {
+                if (event.keyCode == 13) {
+                    serchItems();
+                }
+            });
+        </script>
+        <noscript>
+            <p>
+                <img src="//www.thebeastshop.com/piwik/piwik.php?idsite=1" style="border: 0;" alt="" />
+            </p>
+        </noscript>
+        <!-- End Piwik Code -->
+    </div>
+    <script>
+
+        /**判断浏览器版本**/
+        (function (window) {
+            var ua = navigator.userAgent, vs = parseInt(ua.slice(ua.indexOf('iPhone OS') + 10, ua.indexOf('iPhone OS') + 11));
+            if (vs < 8) {
+                $('.lay-head,.lay-til').css({ position: 'absolute' }), $('.lay-foot').css({ position: 'static' });
+            } else {
+                return false;
+            }
+        })(window);
+    </script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <style type="text/css">
+        body, html {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            font-family: "微软雅黑";
+        }
+
+        #allmap {
+            width: 100%;
+            height: 500px;
+        }
+
+        p {
+            margin-left: 5px;
+            font-size: 14px;
+        }
+    </style>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=ZtOic4MnOSLOCAH4WqkeyWuQ"></script>
+    <title>圆形区域搜索</title>
+</head>
+<body>
+    <div>
+        关键字：  <input id="keyword" type="textbox" value="酒店">
+        搜索范围 <input id="radius" type="textbox" value="2000" />
+        <input type="button" value="search" onclick="searchKeyword()">
+    </div>
+<div id="allmap"></div><p>输入关键词，点击search查寻，查寻范围这一个圆形区域。</p>
+</body>
+</html>
+<script type="text/javascript">
+    // 百度地图API功能
+    var map = new BMap.Map("allmap");            // 创建Map实例
+    var mPoint = new BMap.Point(87.04778, 48.665286);
+    map.enableScrollWheelZoom();
+    map.centerAndZoom(mPoint, 15);
+
+    var circle = new BMap.Circle(mPoint, 1000,
+        { fillColor: "blue", strokeWeight: 1, fillOpacity: 0.3, strokeOpacity: 0.3 });
+    map.addOverlay(circle);
+    var local = new BMap.LocalSearch(map, { renderOptions: { map: map, autoViewport: false } });
+   // local.searchNearby('餐馆', mPoint, 1000);
+
+
+    function searchKeyword() {
+        var keyword = document.getElementById("keyword").value;
+       // var region = new qq.maps.LatLng(48.6589239484962, 87.04087972640991);
+        var radius = document.getElementById("radius").value;
+        circle.setRadius(radius);
+        //mapCircel.radius = radius;
+        local.searchNearby(keyword, mPoint, parseInt(radius));
+        local.setSearchCompleteCallback(function() {
+            var result = local.getResults();
+        });
+    }
+
+    searchKeyword();
+</script>

@@ -1,0 +1,158 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <title>会议礼券详细</title>
+    <meta property="language" content="en">
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="format-detection" content="email=no">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0">
+
+    <link href="styles/mobile_reset.min.css" rel="stylesheet" />
+     
+    <link href="../../css/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="styles/aimbase.min.css" rel="stylesheet" />
+    <link href="styles/mine_detail.min.css" rel="stylesheet" />
+    <style type="text/css">
+        body {
+            padding-bottom: 36px;
+        }
+
+        .bottom_back {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            height: 50px;
+            width: 100%;
+            z-index: 9999;
+            background-image: url(images/ticket.png);
+            background-repeat: repeat-x;
+        }
+
+        .bottom_back .btn1{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-left: -50px;
+            margin-top: -15px;
+            width: 100px;
+            height: 30px;
+            text-align: center;
+            line-height: 30px;
+            background: #62b900;
+            border-radius: 8px;
+
+        }
+    </style>
+
+
+
+
+</head>
+
+<body>
+
+    <!--loading-->
+    <div id="loadingBox" style="display: none;">
+        <div id="loading"></div>
+        <div id="loadingTips">100%</div>
+    </div>
+    <div class="qrcode" id="qrcode1">
+    </div>
+
+    <div id="main-container" style="opacity: 1;">
+        <div data-bind="with:coupon">
+            <div id="banner" style="background-color: #62b900;">
+                <a href="javascript:void(0);" class="icon-box fa fa-angle-left fl"
+                   id="icon-list" data-bind="click:$root.btnGobackClick"></a>
+
+                <div class="banner-logo"
+                     style="background-image:
+     url(images/logo.png)"></div>
+                <h1 class="banner-title" data-bind="text:jpname"></h1>
+
+                <p class="banner-detail" data-bind="text:jxname">会议礼品券</p>
+                <span class="banner-time" data-bind="text:'有效期'+ beginDate+'到'+endDate"></span>
+                <span class="banner-bottom"></span>
+            </div>
+            <div id="qrcode-container">
+                <div class="qrcode img" id="qrcode" style="margin:0 auto">
+
+                </div>
+                <span class="qrcode-num" data-bind="text:sn"></span>
+
+                <p class="qrcode-tips">使用时请出示二维码</p>
+                <span class="qrcode-stamp  stamp" style="display: none;"
+                      data-bind="css:$parent.profitStatus,visible:$parent.profitStatus()!=''"></span>
+
+            </div>
+        </div>
+        <article id="rule-container">
+            <header>
+                <h2 class="rule-title">使用规则</h2>
+            </header>
+            <div class="rule-detail">
+                <p style="white-space: normal;">1.出示此会议礼品券供景区扫描</p>
+
+                <p style="white-space: normal;">2.会议礼品券过期作废、使用后作废&nbsp;</p>
+
+                <p><br></p>
+            </div>
+        </article>
+        <div id="confirm-cover" class="confirm-cover" style="display: none;">
+            <div class="confirm-cover-main" on>
+                <h2 class="confirm-cover-title">请在商家指导下使用</h2>
+
+                <p class="confirm-cover-text">确定后此券将失效</p>
+                <a id="btn-cancel" href="javascript:void(0);" class="btn"
+                   data-bind="click:btnCancelClick.bind($data, $('#confirm-cover'),$('.confirm-cover-main'))">取消</a>
+                <a id="btn-sure" href="javascript:void(0);" class="btn"
+                   data-bind="click:btnSureClick.bind($data, $('#confirm-cover') )">确定</a>
+            </div>
+        </div>
+        <!--<section class="bottom_back">
+            <a id="btn-use" class="btn1" href="javascript:;" style="display:none"
+               data-bind="click:btnUseClick.bind($data, $('#confirm-cover'),$('.confirm-cover-main')),visible:profitStatus()==''">使用</a>
+        </section>-->
+    </div>
+    <script src="../../scripts/jquery/jquery-2.1.0.min.js"></script>
+    <script src="../../scripts/jquery/jquery.url.js"></script> 
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>  
+    <script src="../../scripts/qrcode/jquery.qrcode.min.js"></script>
+    <script src="../../scripts/qrcode/qrcode.min.js"></script> 
+    <script src="../../scripts/pre-loader.js"></script>  
+    <script src="../../scripts/knockout/knockout-3.2.0.debug.js"></script>
+    <!--<script src="../../scripts/oAuth2.js"></script>-->  
+    <script src="js/couponDetail-vm.js"></script>
+    <script>
+
+        var openId = "";
+        var access_code = $.url.param("code") ? $.url.param("code") : '';
+        openId = $.url.param("openId");
+        var id = $.url.param("id");
+        var wid = $.url.param("wid");
+        var param = {
+            // access_code: access_code,
+            id: id,
+            access_code: access_code,
+            openId: openId,
+            wid: wid
+        };
+        var $doms = {
+            $qrcode: $("#qrcode1")
+        };
+        //$('.confirm-cover-main').on("webkitAnimationEnd animationend", function () {
+        //    $('#confirm-cover').css("background-color", "rgba(0,0,0,0)").hide();
+        //});
+        var detailVM = new DetailViewModel($doms, param);
+        ko.applyBindings(detailVM);
+    </script>
+
+
+
+</body>
+</html>

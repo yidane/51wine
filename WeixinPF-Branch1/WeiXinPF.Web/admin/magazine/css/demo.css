@@ -1,0 +1,113 @@
+
+body {
+    background: white;
+    font-weight: 500;
+    font-size: 1em;
+} 
+
+.content {
+    max-width: 1290px;
+    padding: 0 1em;
+    margin: 0 auto;
+    text-align: center;
+    margin-top:20px;
+}
+
+/*¶¯»­Í¼Æ¬²Ù×÷¿ò*/
+.component {
+    position: relative; 
+    height: 500px; 
+    width: 320px;
+    overflow: hidden;
+    float: left;
+    border:1px solid rgba(0, 0, 0,0.2);
+}
+
+/*¶¯»­ÏêÇé*/
+.tm_bz {
+    position: absolute;
+    bottom: 0px;
+    left: 5%;
+    background-color: rgba(0,0,0,0.4);
+    color: white;
+    line-height: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+
+.animate_dl {
+    width: 400px;
+    float: right; 
+}
+
+    .animate_dl input {
+        font-size: 13px;
+    }
+
+    .animate_dl > .addEle {
+        width: 100%;
+        height: 30px;
+        line-height: 30px;
+        clear: both;
+        font-size: 13px;
+        color: #207ebd;
+        border:1px solid rgba(0, 0, 0,0.2);
+    }
+
+    .animate_dl > dl {
+        width: 94%;
+        float: left;
+        margin-bottom: 10px;
+        text-align: left;
+        padding: 10px;
+        position: relative;
+        border:1px solid rgba(0, 0, 0,0.2);
+    }
+
+        /*¹Ø±Õdl*/
+        .animate_dl > dl > dd.rem_dl {
+            position: absolute;
+            right: -10px;
+            top: -10px;
+            background: rgba(0, 0, 0,0.2);
+            border-radius: 50px;
+            width: 20px;
+            height: 20px;
+            color: white;
+            text-align: center;
+            display: none;
+        }
+
+            .animate_dl > dl > dd.rem_dl:hover {
+                background: rgba(0, 0, 0,0.9);
+                cursor: pointer;
+            }
+
+        .animate_dl > dl > dt {
+            width: 40%;
+            height: 200px;
+            float: left;
+            position: relative;
+            text-align: center;
+        }
+
+        .animate_dl > dl > dd {
+            float: left;
+            width: 55%;
+            margin-top: 5px;
+        }
+
+        .animate_dl > dl > dt .newimg {
+            font-size: 13px;
+            color: #207ebd;
+        }
+
+@media screen and (max-width: 27em) {
+    .codrops-icon {
+        font-size: 1.5em;
+    }
+
+        .codrops-icon span {
+            display: none;
+        }
+}

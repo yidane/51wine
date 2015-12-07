@@ -1,0 +1,397 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <title>与湖怪合影</title>
+    <!--<link href="../Styles/monster.css" rel="stylesheet" />-->
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul,
+        ol {
+            list-style: none;
+        }
+
+        html {
+            width: 100%;
+            height: 100%;
+            text-size-adjust: 100%;
+            font-size: 87.5%;
+        }
+
+        body {
+            width: 100%;
+            height: 100%;
+            font-family: 'Microsoft YaHei', Tahoma, Arial, '\5b8b\4f53', sans-serif;
+            line-height: 1.5;
+            /*background-color: #000;*/
+            color: #333;
+        }
+
+        .container {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            background-size: cover;
+            background-repeat: no-repeat;
+            display: none;
+        }
+
+      
+
+        .monster {
+            position: absolute;
+            top: 30%;
+            left: 70%;
+            margin-left: -70.5px;
+            margin-top: -82.5px;
+            width: 141px;
+            height: 165px;
+            background-image: url(images/monster.png);
+            background-size: cover;
+            opacity: 0.8;
+            -webkit-animation: bounceInUp 2.5s ease-out 0s both;
+            animation: bounceInUp 2.5s ease-out 0s both;
+            -webkit-transform: rotate(-35deg);
+            transform: rotate(-35deg);
+        }
+
+        .cartoon {
+            position: absolute;
+            width: 107px;
+            height: 134.5px;
+            top: 50%;
+            left: 15%;
+            background-image: url(images/avatar2.png);
+            background-size: cover;
+        }
+
+            .cartoon .face {
+                position: absolute;
+                top: -97px;
+                left: 20px;
+                width: 100px;
+                height: 100px;
+                border-radius: 50%;
+                animation: shake infinite 2s;
+                -webkit-animation: shake infinite 2s;
+            }
+
+        .btn {
+            width: 100%;
+            position: absolute;
+            height: 40px;
+            left: 0;
+            bottom: 10%;
+            overflow: hidden;
+        }
+
+            .btn a {
+                position: absolute;
+                top: 0;
+                width: 40%;
+                height: 40px;
+                background-color: #62b900;
+                line-height: 40px;
+                color: #fff;
+                text-align: center;
+                font-size: 16px;
+                border-radius: 5px;
+                text-decoration: none;
+                -webkit-tap-highlight-color: transparent;
+            }
+
+            .btn .left {
+                left: 5%;
+            }
+
+            .btn .right {
+                right: 5%;
+            }
+
+
+        @-webkit-keyframes shake {
+            0% {
+                -webkit-transform: rotate(0);
+            }
+
+            50% {
+                -webkit-transform: rotate(15deg);
+            }
+
+            100% {
+                -webkit-transform: rotate(0);
+            }
+        }
+
+        @keyframes shake {
+            0% {
+                transform: rotate(0);
+            }
+
+            50% {
+                transform: rotate(15deg);
+            }
+
+            100% {
+                transform: rotate(0);
+            }
+        }
+    </style>
+
+    <style type="text/css">
+        #loading {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 10;
+            top: 0;
+            left: 0;
+            background: rgba(0, 0, 0,.1);
+            -webkit-transition: all .8s ease;
+            transition: all .8s ease;
+        }
+
+        .loader {
+            width: 3px;
+            height: 3px;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin-top: -1.5px;
+            margin-left: -1.5px;
+            border-radius: 100%; /* 圆角 */
+            box-shadow: 0 -10px 0 1px #81a8d7, /* 上, 1px 扩展 */
+            10px 0 #81a8d7, /* 右 */
+            0 10px #81a8d7, /* 下 */
+            -10px 0 #81a8d7, /* 左 */
+            -7px -7px 0 .5px #81a8d7, /* 左上, 0.5px扩展 */
+            7px -7px 0 1.5px #81a8d7, /* 右上, 1.5px扩展 */
+            7px 7px #81a8d7, /* 右下 */
+            -7px 7px #81a8d7; /* 左下 */
+            -webkit-transform: rotate(360deg);
+            -webkit-animation: spin 1s linear infinite;
+            transform: rotate(360deg);
+            animation: spin 1s linear infinite;
+        }
+
+        @-webkit-keyframes spin {
+            from {
+                -webkit-transform: rotate(0deg);
+            }
+
+            to {
+                -webkit-transform: rotate(360deg);
+            }
+        }
+
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+</head>
+<body>
+    <div style="display:none">
+        <img src="images/wolongwan.jpg" />
+        <img src="images/shenxianwan.jpg" />
+        <img src="images/yueliangwan.jpg" />
+        <img src="images/monster.png" />
+    </div>
+    <div id="loading">
+        <div class="loader"></div>
+    </div>
+    <div class="container">
+        <div class="monster">
+        </div>
+
+        <div class="cartoon">
+            <img class="face" src="images/intro-background.jpg" />
+        </div>
+        <div class="btn">
+            <a href="javascript:void(0);" id="btn_replay" class="left" onclick="javascript: ui.playAgain();">在玩一次</a>
+            <a id="introduce" class="right">景点介绍</a>
+        </div>
+    </div>
+
+    <script src="../../scripts/jquery/zepto.min.js"></script> 
+
+    <script>
+        document.onreadystatechange = loading;
+        function loading() {
+            if (document.readyState == "complete") {
+                setTimeout(function () {
+                    loaded();
+                }, 600);
+            }
+            setTimeout(function () {
+                loaded();
+            }, 8000);
+
+            function loaded() {
+                $("#loading").hide();
+                $(".container").show();
+                $(".slideshow").show();
+            }
+        }
+
+        function getQueryString(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return (r[2]); return null;
+        }
+
+        var wid=getQueryString('wid');
+    </script>
+    <script src="Scripts/WeiXinSdk.js"></script>
+    <script type="text/javascript">
+       
+
+        function getBaseUrl() {
+            var re = new RegExp(/^.*\//);
+            return re.exec(window.location.href);
+        }
+        var baseurl = getBaseUrl();
+
+       
+
+        var ui = {
+            scenics: [
+                {
+                    name: '卧龙湾',
+                    'background-image': 'url(images/wolongwan.jpg)',
+                    url: '../Guide/wolongwan.html'
+                }, {
+                    name: '月亮湾',
+                    'background-image': 'url(images/wolongwan.jpg)',
+                    url: '../Guide/yueliangwan.html'
+                }, {
+                    name: '神仙湾',
+                    'background-image': 'url(images/wolongwan.jpg)',
+                    url: '../Guide/shenxianwan.html'
+                }
+            ],
+            cartoon: ['avatar-box1', 'avatar-box2'],
+
+            getScenics: function (param) {
+
+                $.ajax({
+                    url: "../../WebServices/MonsterWebService.asmx/GetScenics",
+                    data: {
+                        wid: param.wid
+                    },
+                    type: 'post',
+                    dataType: 'json',
+                    success: function (json) {
+                        console.log(json);
+                        if (json.IsSuccess) {
+                            ui.scenics = json.Data;
+                            ui.setScenic(param.scenic == null ? 0 : param.scenic);
+                        }
+                        else {
+                            console.log(json.Message);
+                        }
+                    },
+                    error: function (a, b, c) {
+                        //$("#token").html(a.response);
+                    }
+                });
+
+
+              
+            },
+
+            getRandom: function(seed) {
+                return Math.round(Math.random() * seed);
+            },
+            setScenic: function(i) {
+                var scenic = ui.scenics[i];
+                $('.container').css({ 'background-image': scenic.img, 'background-size': '100% 100%' }).attr('alt', scenic.name);
+                $('#introduce').attr('href', scenic.url);
+            },
+            //setCartoon: function (i) {
+            //    $('.avatar-box').addClass(ui.cartoon[i]);
+            //},
+            setPhoto: function(img) {
+                $('.face').attr('src', 'uploadimages/' + img + '.jpg');
+            },
+
+            playAgain: function() {
+                var param = this.getParams();
+                var url = 'MakePhoto.html?wid={0}&aid={1}';
+
+                document.location.href = formatString(url,param.wid, param.aid);
+            },
+
+            getParams: function() {
+                return {
+                    img: getQueryString('img'),
+                    scenic: getQueryString('scenic'),
+                    //cartoon: getQueryString('cartoon'),
+                    share: getQueryString('share'),
+                    wid: getQueryString('wid'),
+                    aid: getQueryString('aid'),
+                    shareTitle: getQueryString('shareTitle')
+                };
+            },
+            init: function() {
+                var param = this.getParams();
+                //ui.setCartoon(param.cartoon == null ? 0 : param.cartoon);
+                ui.getScenics(param);
+                //ui.setScenic(param.scenic == null ? 0 : param.scenic);
+                ui.setPhoto(param.img);
+
+                if (param.share) {
+                    $("#btn_replay").text('我也要玩');
+                }
+
+                wxsdk.initWxConfig(false);
+                var title = "~~~啊啊啊啊，湖怪出现了，小伙伴们速速来合影！！！";
+                if (param&&param.shareTitle) {
+                    title = param.shareTitle;
+                }
+                var shareMsg = {
+                    title: title, // 分享标题
+                    link: document.location.href + "&share=1", // 分享链接
+                    imgUrl: baseurl+"uploadimages/" + param.img + ".jpg" // 分享图标
+                }
+
+                wxsdk.shareMessage(shareMsg);
+                wxsdk.hideAllNonBaseMenuItem();
+                if (!param.share) {
+                    wxsdk.showShareMenu();
+                }
+            }
+        };
+
+        function formatString() {
+            if (arguments.length < 1) {
+                return null;
+            }
+
+            var str = arguments[0];
+
+            for (var i = 1; i < arguments.length; i++) {
+                var placeHolder = '{' + (i - 1) + '}';
+                str = str.replace(placeHolder, arguments[i]);
+            }
+
+            return str;
+        };
+
+        $(function () {
+            ui.init();
+        });
+    </script>
+</body>
+</html>

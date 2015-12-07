@@ -1,0 +1,167 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>身边服务</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link href="../../css/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="css/poi.css" rel="stylesheet" />
+</head>
+<body>
+    <header class="header">
+        <div class="text" data-bind="text:title">身边服务</div>
+    </header>
+    <div class="content">
+        <section class="search-wrapper" data-bind="enterkey:search">
+            <input class="input" type="search" maxlength="20" placeholder="输入关键字搜素" data-bind="value:keywords">
+            <i class="botton fa fa-search" data-bind="click:search"></i>
+        </section>
+        <section class="poi-type-list-view">
+            <ul data-bind="foreach:poitypes">
+                <li>
+                    <a data-bind="click:$root.showDetail">
+                        <i data-bind="attr:{class:cls}"></i>
+                        <label class="poi-type-text" data-bind="text:name"></label>
+                    </a>
+                </li>
+            </ul>
+        </section>
+        <section class="poi-list">
+            <h3 class="poi-list-title">热门推荐</h3>
+            <div class="poi-list-container" data-bind="foreach:pois">
+                <div class="poi-item" data-bind="click:$root.view,attr:{id:'poi_'+id}">
+                    <div class="img-wapper">
+                        <img data-bind="attr:{ src:logo }" />
+                    </div>
+                    <div class="info-wapper">
+                        <div class="info-title">
+                            <div class="title" data-bind="text:name"></div>
+                            <div class="distince"></div>
+                        </div>
+                        <div class="info-desc"  data-bind="html:introduction"></div>
+                        <div class="info-botton">
+                            <span class="button" data-bind="click:$root.view">
+                                <!--ko if: poiType =='scenic' -->
+                                <i class="fa fa-bullhorn"></i>
+                                介绍
+                                <!--/ko-->
+                                <!--ko if: poiType !='scenic' -->
+                                <i class="fa fa-money"></i>
+                                预定
+                                <!--/ko-->
+                            </span>
+                            <span class="button" data-bind="click:$root.go,clickBubble:false">
+                                <i class="fa fa-location-arrow"></i> 去这
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="bottom-navigation" data-bind="visible:showNav">
+            <div class="btn-group">
+                <a class="btn" data-bind="attr:{href:'map_address.html?wid='+param.wid+'&uselocale=true'}">当前位置</a>
+                <a class="btn">身边服务</a>
+                <a class="btn" data-bind="attr:{href:'map_address.html?wid='+param.wid+'&showallmarker=true'}" >去哪儿玩</a>
+            </div> 
+        </section>
+    </div>
+    <script src="../../scripts/jquery/jquery-2.1.0.min.js"></script>
+    <script src="../../scripts/jquery/jquery.url.js"></script>
+    <script src="../../scripts/knockout/knockout-3.3.0.js"></script>
+    <script src="../../scripts/knockout/knockout-extend.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            var param = {
+                wid: $.url.param('wid'),
+                nav: $.url.param('nav')
+            }
+            var viewModel = new ViewModel(param);
+            ko.applyBindings(viewModel);
+        });
+
+        var ViewModel = function (param) {
+            var self = this;
+
+            //this.title = ko.observable();
+            this.keywords = ko.observable('');
+            this.pois = ko.observableArray();
+            this.param = param;
+
+            this.showNav = ko.pureComputed(function () {
+                return param.nav;
+            });
+
+            this.title = ko.pureComputed(function () {
+                var title = ""
+                if (param.nav) {
+                    title = "身边服务";
+                }
+                else {
+                    title = "美食美宿";
+                }
+                document.title = title;
+                return title;
+            });
+
+            this.poitypes = [{
+                name: '景点',
+                cls: 'poi-type-img fa fa-tree',
+                type: 'scenic'
+            }, {
+                name: '酒店',
+                cls: 'poi-type-img fa fa-hotel',
+                type: 'hotel'
+            }, {
+                name: '餐饮',
+                cls: 'poi-type-img fa fa-cutlery',
+                type: 'catering'
+            }];
+
+            var loadData = function () {
+                $.ajax({
+                    url: '/WebServices/MapWebService.asmx/GetRecommendPoi',
+                    dataType: "json",
+                    data: { wid: self.param.wid, keywords: self.keywords() }
+                }).done(function (res) {
+                    if (res.isSuccess) {
+                        self.pois(res.data);
+                    }
+                    else {
+                        alert(res.message);
+                    }
+                }).fail(function (a, b, c) {
+                    alert(JSON.stringify(a));
+                    alert(b)
+                });
+            };
+
+            self.search = function () {
+                loadData();
+            };
+
+            self.view = function (poi) {
+                if (poi.poiType == "scenic") {
+                    document.location.href = poi.url;
+                }
+                if (poi.poiType == "catering") {
+                    document.location.href = '/weixin/restaurant/index.aspx?wid=' + param.wid + '&shopid=' + poi.id;
+                }
+                if (poi.poiType == "hotel") {
+                    document.location.href = '/weixin/knshotel/index.aspx?wid=' + param.wid + '&hotelid=' + poi.id;
+                }
+            }
+
+            self.go = function (poi) {
+                document.location.href = 'map_address.html?type=' + poi.poiType + '&id=' + poi.id;
+            }
+
+            self.showDetail = function (poitype) {
+                document.location.href = 'poilist.html?type=' + poitype.type + '&wid=' + param.wid;
+            }
+
+            loadData();
+        }
+    </script>
+</body>
+</html>

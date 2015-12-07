@@ -1,0 +1,87 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>身边服务</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+</head>
+<body>
+
+<div style="display: none">
+    <div class="marker-list" data-bind="foreach:markers">
+        <div class="marker" data-bind="click:$root.showtip">
+            <i class="point"></i>
+            <div class="tip" data-bind="attr:{id:'tip_'+id}">
+                <div class="tip-title">
+                    <h3 data-bind="text:name"></h3>
+
+                </div>
+                <div class="tip-content" data-bind="text:remark"></div>
+
+
+            </div>
+        </div>
+    </div>
+
+
+</div>
+<script src="../../scripts/jquery/zepto.min.js"></script>
+<script src="../../scripts/knockout/knockout-3.3.0.js"></script>
+<script charset="utf-8" src="http://map.qq.com/api/js?v=2.exp&libraries=place&key=XQSBZ-MYPKU-EJSVT-4XWSN-QWJXH-2TBDM"></script>
+<script>
+    var ViewModel = function() {
+        var self = this;
+        this.map=ko.observable();
+
+        this.markers = ko.observableArray();
+        this.loadData=function(){
+            $.ajax({
+                url: '/WebServices/MapWebService.asmx/GetMarkers',
+                dataType: "json",
+                data: { wid: 1 },
+                success: function(res) {
+                    if (res.success) {
+                        self.markers(res.result);
+                        self.addmarkers();
+
+                    } else {
+                        alert(res.error.message);
+                    }
+                }
+            });
+        };
+        self.addmarkers=function(){
+            var map=self.map();
+            for(var i=0;i<self.markers().length;i++)
+            {
+                var data=self.markers()[i];
+
+                var point = new qq.maps.LatLng(data.lat, data.lng);
+
+                //marker
+                var marker = new qq.maps.Marker({
+
+                    map: self.map(),
+                    position: point
+                });
+
+                //marker-click
+                qq.maps.event.addListener(marker, "click", function (e) {
+
+                    if (!self.isSetInfo()) {
+                        self.isSetInfo(true);
+                        self.setinfo();
+                    }
+                    self.infoWin().open();
+                    var content = self.$doms().$info_pop;
+                    content.show();
+                });
+
+            }
+        };
+    };
+</script>
+
+</body>
+</html>
