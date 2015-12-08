@@ -128,9 +128,13 @@ namespace Travel.Infrastructure.DomainDataAccess.Order
 
                 foreach (var dailyProduct in dailyProducts)
                 {
-                    if (!products.Any(item => item.ProductId.Equals(dailyProduct.ProductId)
-                                        && item.ProductPackageId.Equals(dailyProduct.ProductPackageId)
-                                        && item.ProductSource.Equals(dailyProduct.ProductSource)))
+                    var product = products.FirstOrDefault(item => item.ProductId.Equals(dailyProduct.ProductId)
+                                                                  &&
+                                                                  item.ProductPackageId.Equals(
+                                                                      dailyProduct.ProductPackageId)
+                                                                  &&
+                                                                  item.ProductSource.Equals(dailyProduct.ProductSource));
+                    if (product == null)
                     {
                         var productCategory = new ProductCategoryEntity()
                         {
@@ -154,6 +158,10 @@ namespace Travel.Infrastructure.DomainDataAccess.Order
                         productCategory.SaveProductCategory();
                         products.Add(productCategory);
                         dailyProduct.ProductCategoryId = productCategory.ProductCategoryId;
+                    }
+                    else
+                    {
+                        dailyProduct.ProductCategoryId =product.ProductCategoryId;
                     }
                 }
 

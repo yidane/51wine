@@ -54,6 +54,7 @@
     <Compile Include="Coupon\CouponService.cs" />
     <Compile Include="Coupon\DTOS\CouponDTO.cs" />
     <Compile Include="Coupon\DTOS\CouponListDTO.cs" />
+    <Compile Include="LogHelper.cs" />
     <Compile Include="Order\Core\Interface\IOrderOperate.cs" />
     <Compile Include="Order\Core\Interface\IPaymentOperate.cs" />
     <Compile Include="Order\Core\Order.cs" />

@@ -22,12 +22,7 @@ namespace Travel.Services.WebService.Test
         [TestMethod]
         public void SelectTest()
         {
-            var list = new List<int>();
-            for (int i = 0; i < 10; i++)
-            {
-                list.Add(i);
-            }
-            var result = list.Select(item => item < 5);
+            new OrderService().GetTicketCategoryList();
         }
     }
 }
