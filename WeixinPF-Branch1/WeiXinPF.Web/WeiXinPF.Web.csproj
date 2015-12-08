@@ -10994,6 +10994,7 @@
     <Content Include="weixin\travel\WebService\ErCodeHandler.ashx" />
     <Content Include="weixin\travel\Web.config" />
     <Content Include="weixin\travel\javaScripts\concat" />
+    <None Include="Properties\PublishProfiles\YidaneHome.pubxml" />
     <None Include="副本 Web.Debug.config">
       <DependentUpon>副本 Web.config</DependentUpon>
     </None>
