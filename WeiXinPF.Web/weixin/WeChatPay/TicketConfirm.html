@@ -1,0 +1,306 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>订票信息</title>
+    <style type="text/css">
+        .swiper-wrapper .swiper-slide:nth-child(n+2) {
+            margin-left: 0;
+        }
+    </style>
+    <style type="text/css">
+        #loading {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 10;
+            top: 0;
+            left: 0;
+            background: rgba(0, 0, 0,.1);
+            -webkit-transition: all .8s ease;
+            transition: all .8s ease;
+        }
+
+        .loader {
+            width: 3px;
+            height: 3px;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin-top: -1.5px;
+            margin-left: -1.5px;
+            border-radius: 100%; /* 圆角 */
+            box-shadow: 0 -10px 0 1px #81a8d7, /* 上, 1px 扩展 */
+            10px 0 #81a8d7, /* 右 */
+            0 10px #81a8d7, /* 下 */
+            -10px 0 #81a8d7, /* 左 */
+            -7px -7px 0 .5px #81a8d7, /* 左上, 0.5px扩展 */
+            7px -7px 0 1.5px #81a8d7, /* 右上, 1.5px扩展 */
+            7px 7px #81a8d7, /* 右下 */
+            -7px 7px #81a8d7; /* 左下 */
+            -webkit-transform: rotate(360deg);
+            -webkit-animation: spin 1s linear infinite;
+            transform: rotate(360deg);
+            animation: spin 1s linear infinite;
+        }
+
+        @-webkit-keyframes spin {
+            from {
+                -webkit-transform: rotate(0deg);
+            }
+
+            to {
+                -webkit-transform: rotate(360deg);
+            }
+        }
+
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+
+    <link href="../travel/style/normalize.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="loading" style="display: none">
+        <div class="loader"></div>
+    </div>
+    <div id="container" class="container">
+        <div class="row">
+            <section>
+                <div class="swiper-container gpd-ablum">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <img class="" src="../travel/images/ticket1.jpg">
+                        </div>
+                        <div class="swiper-slide">
+                            <img class="" src="../travel/images/ticket2.jpg">
+                        </div>
+                        <div class="swiper-slide">
+                            <img class="" src="../travel/images/ticket3.jpg">
+                        </div>
+                        <div class="swiper-slide">
+                            <img class="" src="../travel/images/ticket4.jpg">
+                        </div>
+                        <div class="swiper-slide">
+                            <img class="" src="../travel/images/ticket5.jpg">
+                        </div>
+                        <div class="swiper-slide">
+                            <img class="" src="../travel/images/ticket6.jpg">
+                        </div>
+                    </div>
+                    <div class="swiper-pagination"></div>
+                </div>
+            </section>
+
+            <div class="gpd-ticket">
+                <a id="confirmPayBtn" href="javascript:void(0);">微信支付</a>
+            </div>
+            <!--订购信息-->
+            <div class="gpd-order">
+                <div class="gpd-item ">
+                    <div class="gpd-order-content">
+                        <span class="gpd-left" id="ticketName"></span>
+                        <span class="gpd-right" id="price">元</span>
+                    </div>
+                </div>
+                <div class="gpd-item">
+                    <div class="gpd-form-group-right">
+                        <label class="gpd-left">订票数量<span class="gpd-red">*</span></label>
+                        <div class="gpd-num-group">
+                            <em id="ticketNumSub" class="gp-icons gpd-num-subtract num-gray gpd-num-1"></em>
+                            <input type="tel" id="ticketNum" name="ticketNum" value="1" />
+                            <em id="ticketNumAdd" class="gp-icons gpd-num-add gpd-num-1"></em>
+                        </div>
+                    </div>
+                    <div class="gpd-form-group-right">
+                        <label class="gpd-left">订票总价<span class="gpd-red">*</span></label>
+                        <span class="gpd-right gpd-red"><span id="gpdMoney"></span>元</span>
+                    </div>
+                    <div class="gpd-form-group-right">
+                        <label class="gpd-left">姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名<span class="gpd-red">*</span></label>
+                        <input type="text" id="name" name="name" value="" />
+                    </div>
+                    <div class="gpd-form-group-right">
+                        <label class="gpd-left">手机号码<span class="gpd-red">*</span></label>
+                        <input type="tel" id="phone" name="phone" value="" maxlength="11" />
+                    </div>
+                    <div class="gpd-form-group-right">
+                        <label class="gpd-left">身份证号<span class="gpd-red">*</span></label>
+                        <input type="text" id="idcard" name="idcard" value="" />
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="gpd-phone call-phone">
+                <div class="gpd-form-group gpd-phone-label">
+                    <img class="detailicon-ticket" src="../images/tel.png" /><a class="yyd-item yyd-tel" href="tel:010-58677719" style="text-align: center">咨询电话 010-58677719</a>
+                    <div class="line-title"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<link href="../travel/style/swiper.min.css" rel="stylesheet" />
+<script src="../travel/javaScripts/zepto.min.js"></script>
+
+<script src="../travel/javaScripts/json2.js"></script>
+<script src="../travel/javaScripts/template.js"></script>
+<script src="../travel/javaScripts/swiper.min.js"></script>
+<script src="../travel/javaScripts/vi.js"></script>
+
+
+    <script type="text/javascript">
+    VI.assets_url = 'http://longmen.qqdyw.cn'; VI.base_url = 'http://longmen.qqdyw.cn'; VI.curr_site_url = 'http://longmen.qqdyw.cn/plugins/goods/front';
+
+    function GetQueryString(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) return r[2]; return null;
+    }
+
+    window.share = {
+        title: '喀纳斯湖',
+        desc: '喀纳斯湖欢迎您！',
+        link: window.location.href,
+        imgUrl: '',
+        appcallback: function () { }
+    };
+
+    $(document).ready(function () {
+        $.ajax({
+            url: "../WebService/UserWebService.asmx/GetContract",
+            type: "post",
+            dataType: "json",
+            data: { code: GetQueryString("code") },
+            success: function (result) {
+                if (result.IsSuccess) {
+                    if (result.Data.HasValue) {
+                        $("#name").val(result.Data.Value.UserName);
+                        $("#phone").val(result.Data.Value.Mobile);
+                        $("#idcard").val(result.Data.Value.IdCard);
+                    }
+                }
+            }
+        });
+
+        $.ajax({
+            url: "../WebService/WeChatWebService.asmx/WeChatConfigInit",
+            type: "post",
+            dataType: "json",
+            data: { url: document.location.href },
+            success: function (result) {
+                if (result.IsSuccess) {
+                    wx.config({
+                        debug: false,
+                        appId: result.Data.appId,
+                        timestamp: result.Data.timestamp,
+                        nonceStr: result.Data.nonceStr,
+                        signature: result.Data.signature,
+                        jsApiList: [
+                            'chooseWXPay',
+                            'getNetworkType',
+                            'onMenuShareAppMessage',
+                            'onMenuShareTimeline',
+                            'onMenuShareQQ',
+                            'hideOptionMenu'
+                        ]
+                    });
+                    wx.ready(function () {
+                        wx.hideOptionMenu();
+
+                        //wx.onMenuShareAppMessage({
+                        //    title: window.share.title,
+                        //    desc: window.share.desc,
+                        //    link: window.share.link,
+                        //    imgUrl: window.share.imgUrl,
+                        //    success: function () {
+                        //        //成功回调
+                        //        window.share.appcallback();
+
+                        //    }
+                        //});
+
+                        //wx.onMenuShareTimeline({
+                        //    title: window.share.title,
+                        //    link: window.share.link,
+                        //    imgUrl: window.share.imgUrl
+                        //});
+
+                        //wx.onMenuShareQQ({
+                        //    title: window.share.title,
+                        //    desc: window.share.desc,
+                        //    link: window.share.link,
+                        //    imgUrl: window.share.imgUrl
+                        //});
+
+                        //wx.error(function (res) {
+                        //    alert(res.err_code + "______" + res.err_desc + "______" + res.err_msg);
+                        //});
+                    });
+                }
+            },
+            error: function () {
+
+            }
+        });
+    });
+
+</script>
+
+
+
+
+<script type="text/javascript">
+
+    var swiper = new Swiper('.swiper-container', {
+        autoplay: 3000,
+        loop: true,
+        pagination: '.swiper-pagination',
+    });
+
+    Zepto(function ($) {
+        $(".gp-icons.gpd-up-icon").click(function () {
+            var zThis = $(this);
+            var zThisParent = zThis.parents(".gpd-item");
+            zThisParent.toggleClass("gdp-curr");
+        });
+
+        var ticketName = GetQueryString("ticketName");
+        while (ticketName.indexOf("%") > -1) {
+            ticketName = decodeURI(ticketName);
+        }
+
+        $("#ticketName").html(ticketName);
+
+        var vPay = new VPay({
+            'id': '#confirmPayBtn',
+            'price': GetQueryString("price"),
+            'max': 10,
+            'ticketName': ticketName,
+            'ticketId': GetQueryString("ticketid"),
+            'orid': '',
+            'gid': '1'
+        });
+    });
+
+    window.share.title = "喀纳斯湖全价票，120元";
+    window.share.desc = "喀纳斯湖欢迎您!";
+
+</script>
+<script type="text/javascript" src="http://tajs.qq.com/stats?sId=46683389" charset="UTF-8"></script>
+</html>

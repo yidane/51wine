@@ -7,7 +7,7 @@ namespace WeiXinPF.Web.weixin.WeChatPay.Notify
 {
     public class RestaurantPayNotify : IPayNotify
     {
-        public bool PayNotify(OneGulp.WeChat.MP.TenPayLibV3.PaymentNotify paymentNotify, out string message)
+        public bool PayNotify(OneGulp.WeChat.MP.TenPayLibV3.TenPayV3.Model.PaymentNotify paymentNotify, out string message)
         {
             message = string.Empty;
 
