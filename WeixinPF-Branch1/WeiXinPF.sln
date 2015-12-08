@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
-MinimumVisualStudioVersion = 10.0.40219.1
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeiXinPF.Web", "WeiXinPF.Web\WeiXinPF.Web.csproj", "{6DB1BDD3-4EE3-4259-B459-62F54591995E}"
 	ProjectSection(ProjectDependencies) = postProject
 		{20B8FB5A-4362-48F8-BD3A-245FDAF9BCAC} = {20B8FB5A-4362-48F8-BD3A-245FDAF9BCAC}
@@ -69,12 +67,26 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeiXinPF.DBUtility", "WeiXi
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "dll", "dll", "{CF6C4727-717B-4832-B7C7-A320EE672903}"
 	ProjectSection(SolutionItems) = preProject
+		dll\Beyondbit.Framework.WebControl.dll = dll\Beyondbit.Framework.WebControl.dll
+		dll\EntityFramework.dll = dll\EntityFramework.dll
+		dll\EntityFramework.SqlServer.dll = dll\EntityFramework.SqlServer.dll
 		dll\Gma.QrCodeNet.Encoding.dll = dll\Gma.QrCodeNet.Encoding.dll
+		dll\HtmlAgilityPack.dll = dll\HtmlAgilityPack.dll
+		dll\JuraScriptLibrary.dll = dll\JuraScriptLibrary.dll
+		dll\Jurassic.dll = dll\Jurassic.dll
 		dll\LitJSON.dll = dll\LitJSON.dll
 		dll\Newtonsoft.Json.dll = dll\Newtonsoft.Json.dll
 		dll\OneGulp.WeChat.dll = dll\OneGulp.WeChat.dll
 		dll\OneGulp.WeChat.MP.dll = dll\OneGulp.WeChat.MP.dll
+		dll\Senparc.Weixin.Open.dll = dll\Senparc.Weixin.Open.dll
 		dll\ThoughtWorks.QRCode.dll = dll\ThoughtWorks.QRCode.dll
+		dll\Travel.Application.DomainModules.dll = dll\Travel.Application.DomainModules.dll
+		dll\Travel.Infrastructure.CommonFunctions.dll = dll\Travel.Infrastructure.CommonFunctions.dll
+		dll\Travel.Infrastructure.DomainDataAccess.dll = dll\Travel.Infrastructure.DomainDataAccess.dll
+		dll\Travel.Infrastructure.OTAWebService.dll = dll\Travel.Infrastructure.OTAWebService.dll
+		dll\Travel.Infrastructure.WeiXin.dll = dll\Travel.Infrastructure.WeiXin.dll
+		dll\Travel.Presentation.Web.dll = dll\Travel.Presentation.Web.dll
+		dll\Travel.Services.WebService.dll = dll\Travel.Services.WebService.dll
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeiXinPF.WebService", "WeiXinPF.WebService\WeiXinPF.WebService.csproj", "{1AEC7785-0F53-4678-80CC-8D6EA1038A74}"
