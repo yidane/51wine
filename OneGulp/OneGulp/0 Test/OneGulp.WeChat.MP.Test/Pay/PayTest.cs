@@ -18,8 +18,9 @@ namespace OneGulp.WeChat.MP.Test.Pay
             //T2015100216032662785285 OK
             //T2015110313561153962627 OK
             //T2015100216032444424530 OK
+            //T2015120716004120118359 Processing 2003800113201512070094790952
             var mch_id = "1260203301";
-            var out_refund_no = "T2015100216032444424530";
+            var out_refund_no = "T2015120716004120118359";
             var nonce_str = TenPayV3Util.GetNoncestr();
 
             var requestHandler = new RequestHandler(null);
