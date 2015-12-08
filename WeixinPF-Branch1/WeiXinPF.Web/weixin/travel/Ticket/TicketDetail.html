@@ -1,0 +1,393 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>订票信息</title>
+    <link href="../style/swiper.min.css" rel="stylesheet" />
+    <style type="text/css">
+        .swiper-wrapper .swiper-slide:nth-child(n+2) {
+            margin-left: 0;
+        }
+    </style>
+
+    <style>
+        body {
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-size: 14px;
+            line-height: 1.42857143;
+            color: #333;
+            background-color: #999999;
+            background-repeat: repeat-y;
+            background-size: 100% auto;
+        }
+
+        * {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        .ticket {
+            margin-right: 8rem;
+            height: 100%;
+            width: 100%;
+            border: 0;
+        }
+
+            .ticket section {
+                background-color: white;
+            }
+
+        .full-w {
+            width: 100%;
+        }
+
+        .silde-background {
+            background: url(../images/bg2.jpg) 100% no-repeat;
+        }
+
+        .silde-center {
+            margin-bottom: 30px;
+            margin-top: 25px;
+            text-align: center;
+        }
+
+        .img-border {
+            border: 10px;
+            border-color: #6666FF;
+            border-style: solid;
+        }
+
+        .text-uppercase {
+            text-transform: uppercase;
+        }
+
+        p {
+            margin: 10px;
+        }
+
+        b, strong {
+            font-weight: 700;
+        }
+
+        .text-danger {
+            color: #a94442;
+        }
+
+        .text-success {
+            color: #3c763d;
+        }
+
+        .text-muted {
+            color: #777;
+        }
+
+        .text-right {
+            text-align: right;
+        }
+
+        .pull-left {
+            float: left !important;
+        }
+
+        .pull-right {
+            float: right !important;
+        }
+
+        .item-pullleft {
+            margin-right: 10px;
+        }
+
+
+        .btn-primary {
+            color: #fff;
+            background-color: #337ab7;
+            border-color: #2e6da4;
+        }
+
+        .btn-no-border-radius {
+            border-radius: 0;
+        }
+
+        .gpd-item {
+            padding: 10px 0;
+        }
+
+        .gpd-item-title {
+            font-size: 18px;
+            position: relative;
+            border-bottom: 1px solid #d7c38c;
+            padding-bottom: 6px;
+            padding-bottom: 6px;
+        }
+
+        .gp-icons {
+            background-image: url(../images/gp_icons.png);
+            background-size: 320px auto;
+        }
+
+        .gpd-up-icon {
+            width: 44px;
+            height: 32px;
+            position: absolute;
+            right: 0;
+            top: -2px;
+            background-position: -34px -41px;
+        }
+
+        .gdp-curr .gpd-up-icon {
+            background-position: -34px 3px;
+        }
+
+        .gpd-content {
+            display: none;
+        }
+
+        .gdp-curr .gpd-content {
+            display: block;
+        }
+
+        .lk-mask {
+            position: fixed;
+            width: 250px;
+            background-color: white;
+            left: 50%;
+            top: 50%;
+            margin: -125px;
+            z-index: 1000;
+            -moz-border-radius: 6px; /* Gecko browsers */
+            -webkit-border-radius: 6px; /* Webkit browsers */
+            border-radius: 6px; /* W3C syntax */
+        }
+
+        .ik-btn {
+            width: 80px;
+            height: 20px;
+            text-align: center;
+            background-color: #62b900;
+            -moz-border-radius: 6px; /* Gecko browsers */
+            -webkit-border-radius: 6px; /* Webkit browsers */
+            border-radius: 6px; /* W3C syntax */
+            line-height: 20px;
+            color: #fff;
+            display: inline-block;
+            margin-bottom: 5px;
+            margin-left: 85px;
+        }
+
+        .lk-title {
+            top: 0px;
+            background-color: #90908f;
+            height: 35px;
+            line-height: 35px;
+            font-size: 1.5em;
+            width: 100%;
+            text-align: left;
+            text-indent: 1.5em;
+            color: white;
+            -moz-border-radius: 5px 5px 0px 0px; /* Gecko browsers */
+            -webkit-border-radius: 5px 5px 0px 0px; /* Webkit browsers */
+            border-radius: 5px 5px 0px 0px; /* W3C syntax */
+        }
+
+        .lk-text {
+            color: #fc1e1e;
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+    </style>
+    <link href="../style/normalize.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="ticket">
+        <section>
+            <div class="swiper-container gpd-ablum">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <img class="" src="../images/ticket1.jpg">
+                    </div>
+                    <div class="swiper-slide">
+                        <img class="" src="../images/ticket2.jpg">
+                    </div>
+                    <div class="swiper-slide">
+                        <img class="" src="../images/ticket3.jpg">
+                    </div>
+                    <div class="swiper-slide">
+                        <img class="" src="../images/ticket4.jpg">
+                    </div>
+                    <div class="swiper-slide">
+                        <img class="" src="../images/ticket5.jpg">
+                    </div>
+                    <div class="swiper-slide">
+                        <img class="" src="../images/ticket6.jpg">
+                    </div>
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </section>
+
+        <section class="gpd-ticket">
+            <span><strong id="price"></strong></span>
+            <a id="payBtn" href="javascript:GotoConfirm();">立即购票</a>
+        </section>
+
+        <hr style="border: 1px dotted; width: 100%; margin: auto" />
+        <section class="info-ticket">
+            <p id="ticketInfo">
+            </p>
+        </section>
+        <div class="segmentation"></div>
+        <!--详情-->
+        <section class="gpd-item">
+            <div class="gpd-item-title">
+                <img class="detailicon-ticket" src="../images/introduction.png" />景区介绍<div class="gp-icons gpd-up-icon" id="gp-icons-auto"></div>
+            </div>
+            <div class="gpd-content">
+                <p>喀纳斯湖位于新疆维吾尔族自治区阿勒泰地区布尔津县境内北部，北起卡勒玛虚，南至何乌特，东接铁外壳，西到阿尔圭萨拉。纬48°81′46″，东经87°04′10″，距布尔津县城150公里，面积45.75k㎡，平均水深120米，最深处达到188.5米，蓄水量达53.8亿立方米，是一个坐落在阿尔泰深山密林中的高山湖泊。</p>
+            </div>
+        </section>
+
+        <section class="gpd-item">
+            <div class="gpd-item-title">
+                <img class="detailicon-ticket" src="../images/info.png" />使用须知<div class="gp-icons gpd-up-icon"></div>
+            </div>
+            <div class="gpd-content">
+                <p>【取票方式】</p>
+                <p>喀纳斯景区内所有景点，注：家房屋需单独购票</p>
+                <p><span>【购票条件】</span></p>
+                <p>特惠半价票，适用于1.2米以下的儿童以及65-70岁老人</p>
+                <p>【入园】</p>
+                <p>微信购票后凭电子票二维码扫码入园</p>
+                <p>【发票】</p>
+                <p>微信购票暂不支持开具发票，敬请期待后续优化</p>
+            </div>
+        </section>
+
+        <section class="gpd-item ">
+            <div class="gpd-item-title">
+                <img class="detailicon-ticket" src="../images/undo.png" />退票规则<div class="gp-icons gpd-up-icon"></div>
+            </div>
+            <div class="gpd-content">
+                <p>1、支付成功后，可在票据有效期内申请退票，过期则视为作废不予受理退票</p>
+                <p>2、可在我的订单中申请退票，申请后会先审核</p>
+                <p>3、工作人员会在1~2个工作日内处理您的退票申请</p>
+                <p>4、审核通过后，支付款额会自动退回微信钱包</p>
+                <p>5、微信门票一经扫码入园后，不予退票，如二进票入园一次后即不予退票</p>
+            </div>
+        </section>
+
+        <section class="gpd-item ">
+            <div class="gpd-item-title">
+                <img class="detailicon-ticket" src="../images/time.png" />票有效期 <span style="float: right" id="dateRange"></span>
+                <div class="line-title"></div>
+            </div>
+        </section>
+
+        <div class="segmentation"></div>
+        <div class="gpd-phone">
+            <div class="gpd-form-group gpd-phone-label">
+                <img class="detailicon-ticket" src="../images/tel.png" /><a class="yyd-item yyd-tel" href="tel:010-58677719" style="text-align: center">咨询电话 010-58677719</a>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script src="../javaScripts/zepto.min.js"></script>
+<script src="../javaScripts/swiper.min.js"></script>
+<script src="../javaScripts/Moment.js"></script>
+<script language="javascript">
+    
+    function GetQueryString(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) return r[2]; return null;
+    }
+    var access_code = GetQueryString('code');
+    //加载票信息
+    $(document).ready(function () {
+        //计算票有效期
+        var currentDate = moment();
+        var nextDate = moment().add(365, 'day');
+        $("#dateRange").html(currentDate.format("YYYY-MM-DD") + "至" + nextDate.format("YYYY-MM-DD"));
+
+        //获取票价
+        $("#price").html("￥" + GetQueryString("price") + "元");
+
+        var ticketName = GetQueryString("ticketName");
+        while (ticketName.indexOf("%") > -1) {
+            ticketName = decodeURI(ticketName);
+        }
+        var needTip = false;
+        if (ticketName.indexOf("老年") > -1) {
+            needTip = true;
+            $("#ticketInfo").html("【本套票为半价票，1.2米以下的儿童以及65~70岁老人适用，仅包含入园门票，车票需单独购买】");
+        }
+        else if (ticketName.indexOf("儿童") > -1) {
+            needTip = true;
+            $("#ticketInfo").html("【本套票为半价票，1.2米以下的儿童以及65~70岁老人适用，仅包含入园门票，车票需单独购买】");
+        }
+        else if (ticketName.indexOf("学生") > -1) {
+            needTip = true;
+            $("#ticketInfo").html("【本套票为学生优惠票，仅包含入园门票，车票需单独购买；购买后凭学生证及二维码电子票直接扫码入园】");
+        }
+        else if (ticketName.indexOf("残疾") > -1) {
+            needTip = true;
+            $("#ticketInfo").html("【本套票为残疾人优惠票，仅包含入园门票，车票需单独购买；购买后凭残疾证及二维码电子票直接扫码入园】");
+        }
+
+        //判断是否需要弹出消息
+        if (needTip) {
+            var html = '<div class="lk-mask">\
+						<div class="lk-title">提示</div>\
+						<div class="gpd-alert-body alert-p-distance">\
+							<p>优惠票入园前，需持有关证件验证，请诚信购票</p>\
+							<p class="lk-text">因不符合优惠票规定导致无法入园引起的纠纷和损失，由订票人自己承担。</p>\
+						</div>\
+						<div>\
+							<div class="ik-btn">知道了</div>\
+						</div>\
+				</div>';
+            $('.lk-mask').remove();
+
+            var zHtml = $(html);
+
+            $('body').append(zHtml);
+
+            $('.ik-btn').click(function () {
+                $('.lk-mask').hide();
+            });
+        }
+
+        var zAuto = $("#gp-icons-auto");
+        var zThisParent = zAuto.parents(".gpd-item");
+        zThisParent.toggleClass("gdp-curr");
+        zThisParent.siblings(".gpd-item").removeClass("gdp-curr");
+    });
+
+    function GotoConfirm() {
+        document.location.href = "../../WeChatPay/TicketConfirm.html" + document.location.search;
+    }
+
+    var swiper = new Swiper('.swiper-container', {
+        autoplay: 3000,
+        loop: true,
+        pagination: '.swiper-pagination',
+    });
+
+    Zepto(function ($) {
+        $(".gp-icons.gpd-up-icon").click(function () {
+            var zThis = $(this);
+            var zThisParent = zThis.parents(".gpd-item");
+            zThisParent.toggleClass("gdp-curr");
+            zThisParent.siblings(".gpd-item").removeClass("gdp-curr");
+        });
+    });
+
+
+</script>
+</html>

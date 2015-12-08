@@ -22,6 +22,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Xml.Linq;
+using OneGulp.WeChat.MP.TenPayLibV3.TenPayV3;
 
 namespace WeiXinPF.Web.api.payment
 {
@@ -170,7 +171,7 @@ namespace WeiXinPF.Web.api.payment
 
             string data = packageReqHandler.ParseXML();
      
-            var result = TenPayV3.Unifiedorder(data);
+            var result = TenPayV3Helper.Unifiedorder(data);
 
             var res = XDocument.Parse(result);
             prepayId = res.Element("xml").Element("prepay_id").Value;
