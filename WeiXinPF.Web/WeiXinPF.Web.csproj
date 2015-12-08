@@ -7487,6 +7487,13 @@
     <Compile Include="weixin\photo\end.aspx.designer.cs">
       <DependentUpon>end.aspx</DependentUpon>
     </Compile>
+    <Compile Include="weixin\travel\Message\MessageNotify.aspx.cs">
+      <DependentUpon>MessageNotify.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="weixin\travel\Message\MessageNotify.aspx.designer.cs">
+      <DependentUpon>MessageNotify.aspx</DependentUpon>
+    </Compile>
     <Compile Include="weixin\travel\WebService\ErCodeHandler.ashx.cs">
       <DependentUpon>ErCodeHandler.ashx</DependentUpon>
     </Compile>
@@ -8763,6 +8770,7 @@
     <Content Include="weixin\travel\javaScripts\vi.js" />
     <Content Include="weixin\travel\javaScripts\zepto.min.js" />
     <Content Include="weixin\travel\javaScripts\_mubt.min.js" />
+    <Content Include="weixin\travel\Message\MessageNotify.aspx" />
     <Content Include="weixin\travel\Order\ApplyRefund.html" />
     <Content Include="weixin\travel\Order\MyOrderList.html" />
     <Content Include="weixin\travel\Order\OrderDetail.html" />
