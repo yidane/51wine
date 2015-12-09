@@ -1159,7 +1159,7 @@ VPay.prototype.order = function () {
 
     VI.ajax({
         type: "post",
-        url: '../WebService/TicketWebService.asmx/CreateOrder',
+        url: '../travel/WebService/TicketWebService.asmx/CreateOrder',
         dataType: 'json',
         data: { code: GetQueryString('code'), ticketCategoryId: ticketId, ticketName: ticketName, ticketCount: zNumVal, couponId: 0, couponCount: 0, orderNo: options.orid, contractName: zNameVal, contractPhone: zPhoneVal, contractIdCard: zIDCardVal },
         success: function (result) {

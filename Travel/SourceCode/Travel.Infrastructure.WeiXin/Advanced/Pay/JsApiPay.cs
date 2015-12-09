@@ -10,6 +10,7 @@ using LitJson;
 using OneGulp.WeChat.MP;
 using OneGulp.WeChat.MP.AdvancedAPIs;
 using OneGulp.WeChat.MP.TenPayLibV3;
+using OneGulp.WeChat.MP.TenPayLibV3.TenPayV3;
 using Travel.Infrastructure.WeiXin.Advanced.Pay.Model;
 using Travel.Infrastructure.WeiXin.Log;
 
@@ -75,7 +76,7 @@ namespace Travel.Infrastructure.WeiXin.Advanced.Pay
 
             string data = packageReqHandler.ParseXML();
 
-            var unifiedOrderResult = TenPayV3.Unifiedorder(data);
+            var unifiedOrderResult = TenPayV3Helper.Unifiedorder(data);
             var rtnUnifiedOrderResult = new UnifiedOrderResult(unifiedOrderResult);
 
             return rtnUnifiedOrderResult;
