@@ -183,7 +183,7 @@
 
     $(document).ready(function () {
         $.ajax({
-            url: "../WebService/UserWebService.asmx/GetContract",
+            url: "../travel/WebService/UserWebService.asmx/GetContract",
             type: "post",
             dataType: "json",
             data: { code: GetQueryString("code") },
@@ -199,7 +199,7 @@
         });
 
         $.ajax({
-            url: "../WebService/WeChatWebService.asmx/WeChatConfigInit",
+            url: "../travel/WebService/WeChatWebService.asmx/WeChatConfigInit",
             type: "post",
             dataType: "json",
             data: { url: document.location.href },
