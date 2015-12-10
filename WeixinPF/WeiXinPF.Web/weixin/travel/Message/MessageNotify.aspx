@@ -1,0 +1,1 @@
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="MessageNotify.aspx.cs" Inherits="WeiXinPF.Web.weixin.travel.Message.MessageNotify" %>

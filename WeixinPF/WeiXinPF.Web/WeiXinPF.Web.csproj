@@ -66,10 +66,12 @@
       <HintPath>..\dll\LitJSON.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.JScript" />
-    <Reference Include="OneGulp.WeChat">
+    <Reference Include="OneGulp.WeChat, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\dll\OneGulp.WeChat.dll</HintPath>
     </Reference>
-    <Reference Include="OneGulp.WeChat.MP">
+    <Reference Include="OneGulp.WeChat.MP, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\dll\OneGulp.WeChat.MP.dll</HintPath>
     </Reference>
     <Reference Include="System" />
@@ -92,6 +94,23 @@
     <Reference Include="System.Xml.Linq" />
     <Reference Include="ThoughtWorks.QRCode">
       <HintPath>..\dll\ThoughtWorks.QRCode.dll</HintPath>
+    </Reference>
+    <Reference Include="Travel.Application.DomainModules">
+      <HintPath>..\dll\Travel.Application.DomainModules.dll</HintPath>
+    </Reference>
+    <Reference Include="Travel.Infrastructure.CommonFunctions, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\dll\Travel.Infrastructure.CommonFunctions.dll</HintPath>
+    </Reference>
+    <Reference Include="Travel.Infrastructure.DomainDataAccess">
+      <HintPath>..\dll\Travel.Infrastructure.DomainDataAccess.dll</HintPath>
+    </Reference>
+    <Reference Include="Travel.Infrastructure.WeiXin, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\dll\Travel.Infrastructure.WeiXin.dll</HintPath>
+    </Reference>
+    <Reference Include="Travel.Services.WebService">
+      <HintPath>..\dll\Travel.Services.WebService.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -7465,6 +7484,16 @@
     <Compile Include="weixin\photo\end.aspx.designer.cs">
       <DependentUpon>end.aspx</DependentUpon>
     </Compile>
+    <Compile Include="weixin\travel\Message\MessageNotify.aspx.cs">
+      <DependentUpon>MessageNotify.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="weixin\travel\Message\MessageNotify.aspx.designer.cs">
+      <DependentUpon>MessageNotify.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="weixin\travel\WebService\ErCodeHandler.ashx.cs">
+      <DependentUpon>ErCodeHandler.ashx</DependentUpon>
+    </Compile>
     <Compile Include="weixin\WeChatPay\getopenId.aspx.cs">
       <DependentUpon>getopenId.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -8604,6 +8633,164 @@
     <Content Include="weixin\restaurant\images\wave_blue_icon.svg" />
     <Content Include="weixin\scenic\images\bottom.png" />
     <Content Include="weixin\scenic\images\btn_arrow.png" />
+    <Content Include="weixin\travel\images\1.jpg" />
+    <Content Include="weixin\travel\images\2.jpg" />
+    <Content Include="weixin\travel\images\3.jpg" />
+    <Content Include="weixin\travel\images\4.jpg" />
+    <Content Include="weixin\travel\images\5.jpg" />
+    <Content Include="weixin\travel\images\arrow.png" />
+    <Content Include="weixin\travel\images\avatar1.png" />
+    <Content Include="weixin\travel\images\avatar2.png" />
+    <Content Include="weixin\travel\images\back.jpg" />
+    <Content Include="weixin\travel\images\bgcj.png" />
+    <Content Include="weixin\travel\images\bj.png" />
+    <Content Include="weixin\travel\images\btn01_arrow.png" />
+    <Content Include="weixin\travel\images\caidai.png" />
+    <Content Include="weixin\travel\images\caution.png" />
+    <Content Include="weixin\travel\images\cj.png" />
+    <Content Include="weixin\travel\images\coupon.jpg" />
+    <Content Include="weixin\travel\images\coupon_background.png" />
+    <Content Include="weixin\travel\images\gift.png" />
+    <Content Include="weixin\travel\images\gp_icons.png" />
+    <Content Include="weixin\travel\images\hand.png" />
+    <Content Include="weixin\travel\images\img_coupondetail_bannerbottom_640x4.png" />
+    <Content Include="weixin\travel\images\index-bg1.jpg" />
+    <Content Include="weixin\travel\images\index-bg1.png" />
+    <Content Include="weixin\travel\images\info.png" />
+    <Content Include="weixin\travel\images\intro-background.jpg" />
+    <Content Include="weixin\travel\images\introduction.png" />
+    <Content Include="weixin\travel\images\i_gray_icon.png" />
+    <Content Include="weixin\travel\images\logo.png" />
+    <Content Include="weixin\travel\images\logo_with_name.png" />
+    <Content Include="weixin\travel\images\m.png" />
+    <Content Include="weixin\travel\images\m1.png" />
+    <Content Include="weixin\travel\images\mmodel-speech-album-detail-colon.png" />
+    <Content Include="weixin\travel\images\mmodel-speech-album-detail-default-bg.png" />
+    <Content Include="weixin\travel\images\mmodel-speech-album-detail-ellipsis.png" />
+    <Content Include="weixin\travel\images\money.png" />
+    <Content Include="weixin\travel\images\monster.jpg" />
+    <Content Include="weixin\travel\images\monster.png" />
+    <Content Include="weixin\travel\images\monster_transparent.png" />
+    <Content Include="weixin\travel\images\orderDetail.png" />
+    <Content Include="weixin\travel\images\part4.jpg" />
+    <Content Include="weixin\travel\images\pic.jpg" />
+    <Content Include="weixin\travel\images\qrbg.jpg" />
+    <Content Include="weixin\travel\images\qrcode.png" />
+    <Content Include="weixin\travel\images\qrcode\gongzhonghao.jpg" />
+    <Content Include="weixin\travel\images\refundAll.png" />
+    <Content Include="weixin\travel\images\refundPart.png" />
+    <Content Include="weixin\travel\images\refundTicket.png" />
+    <Content Include="weixin\travel\images\s.png" />
+    <Content Include="weixin\travel\images\scenic1.png" />
+    <Content Include="weixin\travel\images\scenic2.jpg" />
+    <Content Include="weixin\travel\images\scenic2.png" />
+    <Content Include="weixin\travel\images\scenic3.png" />
+    <Content Include="weixin\travel\images\scenic4.jpg" />
+    <Content Include="weixin\travel\images\scenic4.png" />
+    <Content Include="weixin\travel\images\scenic\coupons_bg-fail.png" />
+    <Content Include="weixin\travel\images\scenic\coupons_bg.png" />
+    <Content Include="weixin\travel\images\scenic\get-coupons.png" />
+    <Content Include="weixin\travel\images\scenic\gq.png" />
+    <Content Include="weixin\travel\images\scenic\img_coupondetail_bannerbottom_640x4.png" />
+    <Content Include="weixin\travel\images\scenic\img_coupondetail_overdue_207x160.png" />
+    <Content Include="weixin\travel\images\scenic\img_coupondetail_used_207x160.png" />
+    <Content Include="weixin\travel\images\scenic\img_mycard_border_useless_6x208.png" />
+    <Content Include="weixin\travel\images\scenic\img_mycard_stamp_overdue_130x120.png" />
+    <Content Include="weixin\travel\images\scenic\img_mycard_stamp_used_130x120.png" />
+    <Content Include="weixin\travel\images\scenic\sy.png" />
+    <Content Include="weixin\travel\images\scenic\yhico.png" />
+    <Content Include="weixin\travel\images\shake-hand.png" />
+    <Content Include="weixin\travel\images\shake_background.png" />
+    <Content Include="weixin\travel\images\shenxian.jpg" />
+    <Content Include="weixin\travel\images\star.png" />
+    <Content Include="weixin\travel\images\t.png" />
+    <Content Include="weixin\travel\images\tel.png" />
+    <Content Include="weixin\travel\images\ticket.png" />
+    <Content Include="weixin\travel\images\ticket1.jpg" />
+    <Content Include="weixin\travel\images\ticket2.jpg" />
+    <Content Include="weixin\travel\images\ticket3.jpg" />
+    <Content Include="weixin\travel\images\ticket4.jpg" />
+    <Content Include="weixin\travel\images\ticket5.jpg" />
+    <Content Include="weixin\travel\images\ticket6.jpg" />
+    <Content Include="weixin\travel\images\ticket7.jpg" />
+    <Content Include="weixin\travel\images\ticket8.jpg" />
+    <Content Include="weixin\travel\images\ticket_background.png" />
+    <Content Include="weixin\travel\images\time.png" />
+    <Content Include="weixin\travel\images\time_gray_icon.png" />
+    <Content Include="weixin\travel\images\undo.png" />
+    <Content Include="weixin\travel\images\usedTicket.png" />
+    <Content Include="weixin\travel\images\wave_blue_icon.svg" />
+    <Content Include="weixin\travel\images\wolong.jpg" />
+    <Content Include="weixin\travel\images\xx.png" />
+    <Content Include="weixin\travel\images\yueliang.jpg" />
+    <Content Include="weixin\travel\images\友谊峰.png" />
+    <Content Include="weixin\travel\images\喀纳斯河.png" />
+    <Content Include="weixin\travel\images\图瓦村.png" />
+    <Content Include="weixin\travel\images\导览背景.png" />
+    <Content Include="weixin\travel\images\文字名称.png" />
+    <Content Include="weixin\travel\images\活动结束.png" />
+    <Content Include="weixin\travel\images\白湖.png" />
+    <Content Include="weixin\travel\images\禾木草原.png" />
+    <Content Include="weixin\travel\images\背景1.png" />
+    <Content Include="weixin\travel\images\背景2.png" />
+    <Content Include="weixin\travel\images\背景3.png" />
+    <Content Include="weixin\travel\javaScripts\classie.js" />
+    <Content Include="weixin\travel\javaScripts\couponDetail-vm.js" />
+    <Content Include="weixin\travel\javaScripts\detail.js" />
+    <Content Include="weixin\travel\javaScripts\H5FullscreenPage.js" />
+    <Content Include="weixin\travel\javaScripts\jquery-1.8.2.min.js" />
+    <Content Include="weixin\travel\javaScripts\jquery-2.1.4.min.js" />
+    <Content Include="weixin\travel\javaScripts\jquery-tmpl.js" />
+    <Content Include="weixin\travel\javaScripts\jquery.easing.1.3.js" />
+    <Content Include="weixin\travel\javaScripts\jquery.Jcrop.min.js" />
+    <Content Include="weixin\travel\javaScripts\jquery.url.js" />
+    <Content Include="weixin\travel\javaScripts\json2.js" />
+    <Content Include="weixin\travel\javaScripts\jweixin-1.0.0.js" />
+    <Content Include="weixin\travel\javaScripts\knockout-3.2.0.debug.js" />
+    <Content Include="weixin\travel\javaScripts\knockout-3.3.0.js" />
+    <Content Include="weixin\travel\javaScripts\lizard.seed.js" />
+    <Content Include="weixin\travel\javaScripts\main.js" />
+    <Content Include="weixin\travel\javaScripts\mobilePhoneShake.min.js" />
+    <Content Include="weixin\travel\javaScripts\Moment.js" />
+    <Content Include="weixin\travel\javaScripts\myCoupons-vm.js" />
+    <Content Include="weixin\travel\javaScripts\oAuth2.js" />
+    <Content Include="weixin\travel\javaScripts\page_scroll_bx.js" />
+    <Content Include="weixin\travel\javaScripts\pre-loader.js" />
+    <Content Include="weixin\travel\javaScripts\require.config.js" />
+    <Content Include="weixin\travel\javaScripts\scenicDetail-vm.js" />
+    <Content Include="weixin\travel\javaScripts\shakeLuckyMoney-vm.js" />
+    <Content Include="weixin\travel\javaScripts\swiper.min.js" />
+    <Content Include="weixin\travel\javaScripts\template.js" />
+    <Content Include="weixin\travel\javaScripts\ui.scroll.js" />
+    <Content Include="weixin\travel\javaScripts\ui.scroll.layer.js" />
+    <Content Include="weixin\travel\javaScripts\ui.warning404.js" />
+    <Content Include="weixin\travel\javaScripts\vi.js" />
+    <Content Include="weixin\travel\javaScripts\zepto.min.js" />
+    <Content Include="weixin\travel\javaScripts\_mubt.min.js" />
+    <Content Include="weixin\travel\Message\MessageNotify.aspx" />
+    <Content Include="weixin\travel\Order\ApplyRefund.html" />
+    <Content Include="weixin\travel\Order\MyOrderList.html" />
+    <Content Include="weixin\travel\Order\OrderDetail.html" />
+    <Content Include="weixin\travel\script\common\common.js" />
+    <Content Include="weixin\travel\script\common\jquery.pageItem.js" />
+    <Content Include="weixin\travel\script\common\jsRender.min.js" />
+    <Content Include="weixin\travel\script\common\main.js" />
+    <Content Include="weixin\travel\style\css\orderlist.css" />
+    <Content Include="weixin\travel\style\css\style.css" />
+    <Content Include="weixin\travel\style\normalize.css" />
+    <Content Include="weixin\travel\style\swiper.min.css" />
+    <Content Include="weixin\travel\style\TicketList.css" />
+    <Content Include="weixin\travel\Ticket\BookingTicket.html" />
+    <Content Include="weixin\travel\Ticket\images\app.png" />
+    <Content Include="weixin\travel\Ticket\TicketClient.html" />
+    <Content Include="weixin\travel\Ticket\TicketDetail.html" />
+    <Content Include="weixin\travel\Ticket\TicketExtend.html" />
+    <Content Include="weixin\travel\WebService\CouponWebService.asmx" />
+    <Content Include="weixin\travel\WebService\MonsterService.asmx" />
+    <Content Include="weixin\travel\WebService\OrderWebService.asmx" />
+    <Content Include="weixin\travel\WebService\TicketWebService.asmx" />
+    <Content Include="weixin\travel\WebService\UserWebService.asmx" />
+    <Content Include="weixin\travel\WebService\WeChatWebService.asmx" />
     <Content Include="weixin\WeChatPay\getopenId.aspx" />
     <Content Include="weixin\KNSHotel\css\hotels.css" />
     <Content Include="weixin\KNSHotel\css\mystyle.css" />
@@ -10807,6 +10994,10 @@
     <Content Include="weixin\KNSHotel\KNSHotelMasterPage.Master" />
     <Content Include="weixin\restaurant\ErCodeHandler.ashx" />
     <Content Include="scripts\leaflet\leaflet-src.map" />
+    <Content Include="weixin\travel\javaScripts\concat" />
+    <Content Include="weixin\travel\script\common\jsRender.min" />
+    <Content Include="weixin\travel\Web.config" />
+    <Content Include="weixin\travel\WebService\ErCodeHandler.ashx" />
     <None Include="副本 Web.Debug.config">
       <DependentUpon>副本 Web.config</DependentUpon>
     </None>

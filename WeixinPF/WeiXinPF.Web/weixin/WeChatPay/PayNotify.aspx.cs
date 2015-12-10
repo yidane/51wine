@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using OneGulp.WeChat.MP.TenPayLibV3;
+using OneGulp.WeChat.MP.TenPayLibV3.TenPayV3.Model;
 using WeiXinPF.Web.weixin.WeChatPay.Notify;
 
 namespace WeiXinPF.Web.weixin.WeChatPay

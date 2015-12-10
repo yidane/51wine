@@ -1,0 +1,387 @@
+﻿<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link rel="stylesheet" href="style/css/style.css" />
+    <link href="../Styles/swiper.min.css" rel="stylesheet" />
+    <script src="http://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <script src="script/common/main.js"></script>
+    <script src="script/common/common.js"></script>
+    <script src="script/common/jquery.pageItem.js"></script>
+    <!--    <script src="../js/oAuth2.js"></script>-->
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+    <meta content="telephone=no" name="format-detection" />
+    <meta content="email=no" name="format-detection" />
+    <title>我的订单</title>
+    <link href="../styles/normalize.css" rel="stylesheet" />
+    <style>
+        body {
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-size: 14px;
+            line-height: 1.42857143;
+            color: #333;
+            background-color: #999999;
+            background-repeat: repeat-y;
+            background-size: 100% auto;
+            background-image: url(../img/yyhc_bg.jpg);
+        }
+
+        * {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        .ticket {
+            margin-right: 8rem;
+            height: 100%;
+            width: 100%;
+        }
+
+            .ticket section {
+                background-color: white;
+            }
+
+        .full-w {
+            width: 100%;
+            padding:0 10px;
+            margin-bottom: 10px;
+            overflow: hidden;
+        }
+
+        .silde-background {
+            /*background: url(../images/bg2.jpg) 100% no-repeat;*/
+        }
+
+        .silde-center {
+            text-align: center;
+        }
+
+        .img-border {
+            border: 10px;
+            border-color: white;
+            border-style: solid;
+            padding: 20px;
+        }
+
+        .text-uppercase {
+            text-transform: uppercase;
+        }
+
+        p {
+            margin: 10px;
+        }
+
+        b, strong {
+            font-weight: 700;
+        }
+
+        .text-danger {
+            color: #a94442;
+        }
+
+        .text-success {
+            color: #3c763d;
+        }
+
+        .text-muted {
+            color: #777;
+        }
+
+        .text-right {
+            text-align: right;
+        }
+
+
+        .pull-left {
+            float: left !important;
+        }
+
+        .pull-right {
+            float: right !important;
+        }
+
+        .item-pullleft {
+            margin-right: 10px;
+        }
+
+
+        .btn-primary {
+            color: #fff;
+            background-color: #337ab7;
+            border-color: #2e6da4;
+        }
+
+        .btn-no-border-radius {
+            border-radius: 0;
+        }
+
+        .gpd-item {
+            padding: 10px 0;
+        }
+
+        .gpd-item-title {
+            font-size: 18px;
+            position: relative;
+            border-bottom: 1px solid #d7c38c;
+            padding-bottom: 6px;
+            padding-bottom: 6px;
+        }
+
+        .gp-icons {
+            background-image: url(../images/gp_icons.png);
+            background-size: 320px auto;
+        }
+
+        .gpd-up-icon {
+            width: 44px;
+            height: 32px;
+            position: absolute;
+            right: 0;
+            top: -2px;
+            background-position: -34px -41px;
+        }
+
+        .gdp-curr .gpd-up-icon {
+            background-position: -34px 3px;
+        }
+
+        .gpd-content {
+            display: none;
+        }
+
+        .gdp-curr .gpd-content {
+            display: block;
+        }
+
+        #btnRefund {
+            width: 150px;
+            height: 30px;
+            display: inline-block;
+            background: #62b900;
+            text-align: center;
+            line-height: 30px;
+            font-size: 1.3em;
+            font-family: "Microsoft YaHei";
+            color: white;
+            position: fixed;
+            margin-top: 10px;
+            left: 50%;
+            margin-left: -75px;
+            -moz-border-radius: 15px;
+            -webkit-border-radius: 15px;
+            border-radius: 15px;
+            border: solid 1px #62b900;
+            background: #62b900;
+            background: -webkit-gradient(linear, left top, left bottom, from(#62b900), to(#62b900));
+            background: -moz-linear-gradient(top, #62b900, #62b900);
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#62b900', endColorstr='#62b900');
+        }
+
+        .ticket-code {
+            float: left;
+        }
+
+            .ticket-code span {
+                color: #a94442;
+                font-weight: 700;
+            }
+
+            .ticket-status{
+                float:right;
+                color: #a94442;
+                font-weight: 700;
+            }
+    </style>
+</head>
+
+<body>
+
+    <div class="ticket">
+        <section>
+            <div class="silde-background">
+                <div class="swiper-container gpd-ablum swiper-container-horizontal">
+                    <div class="swiper-wrapper silde-center" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px);" id="swiperContain">
+                    </div>
+                    <div class="swiper-pagination" id="swiperFooter">
+                    </div>
+                </div>
+            </div>
+            <div class="full-w">
+                <div class="ticket-code">
+                    票号：<span id="ticketCode"></span>
+                </div>
+                <span id="ticketStatus" class="ticket-status"></span>
+                <!--<p class="text-uppercase">
+                    票号：<strong id="ticketCode" class="text-danger item-pullleft"></strong><strong class="text-danger pull-right item-pullleft" id="ticketStatus"></strong>
+                </p>-->
+            </div>
+        </section>
+
+        <section class="gpd-ticket">
+            <a id="btnRefund" href="ApplyRefund.html">申请退票</a>
+        </section>
+        <section class="gpd-item ">
+            <div class="gpd-item-title">
+                <img class="detailicon-ticket" src="../images/info.png" />使用须知
+                <div class="gp-icons gpd-up-icon"></div>
+            </div>
+            <div class="gpd-content">
+                <p>【取票方式】</p>
+                <p>喀纳斯景区内所有景点，注：家房屋需单独购票</p>
+                <p><span>【购票条件】</span></p>
+                <p>特惠半价票，适用于1.2米以下的儿童以及65-70岁老人</p>
+                <p>【入园】</p>
+                <p>微信购票后凭电子票二维码扫码入园</p>
+                <p>【发票】</p>
+                <p>微信购票暂不支持开具发票，敬请期待后续优化</p>
+            </div>
+        </section>
+
+        <section class="gpd-item ">
+            <div class="gpd-item-title">
+                <img class="detailicon-ticket" src="../images/orderDetail.png" />订单明细
+                <div class="gp-icons gpd-up-icon"></div>
+            </div>
+            <div class="gpd-content">
+                <p>微信订单号：<span id="weChatOrderNo"></span></p>
+                <p>购买手机号：<span id="payPhone"></span></p>
+                <p>提交时间：<span id="payTime2"></span></p>
+                <p>数量：<span id="count"></span></p>
+                <p>总价：<span id="total"></span></p>
+            </div>
+        </section>
+
+        <section class="gpd-item ">
+            <div class="gpd-item-title">
+                <img class="detailicon-ticket" src="../images/undo.png" />退票规则
+                <div class="gp-icons gpd-up-icon"></div>
+            </div>
+            <div class="gpd-content">
+                <p>1、支付成功后，可在票据有效期内申请退票，过期则视为作废不予受理退票</p>
+                <p>2、可在我的订单中申请退票，申请后会先审核</p>
+                <p>3、工作人员会在1~2个工作日内处理您的退票申请</p>
+                <p>4、审核通过后，支付款额会自动退回微信钱包</p>
+                <p>5、微信门票一经扫码入园后，不予退票，如二进票入园一次后即不予退票</p>
+            </div>
+        </section>
+        <section class="gpd-item " style="padding-bottom: 0;">
+            <div class="gpd-item-title">
+                <img class="detailicon-ticket" src="../images/time.png" />票有效期 <span style="float: right" id="ticketUseRange"></span>
+                <div class="line-title"></div>
+            </div>
+        </section>
+
+        <section class="gpd-item " style="padding-bottom: 0; margin-top: 10px; text-align: center;">
+            <div class="gpd-item-title">
+                电话咨询：010-58677719
+            </div>
+        </section>
+
+        <!--订购信息-->
+        <section class="gpd-order" style="display: none;">
+            <div class="gpd-order-title">
+                <div style="background-color: #CCCCCC; width: 100%; height: 4em; line-height: 4em; overflow: hidden; text-indent: 20px">
+                    订票信息
+                </div>
+            </div>
+            <div class="gpd-form">
+                <div class="gpd-form-group">
+                    <label>数&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;量<span class="gpd-red">*</span></label>
+                    <div class="gpd-num-group">
+                        <em id="ticketNumSub" class="gp-icons gpd-num-subtract num-gray gpd-num-1"></em>
+                        <input type="tel" id="ticketNum" name="ticketNum" value="1" />
+                        <em id="ticketNumAdd" class="gp-icons gpd-num-add gpd-num-1"></em>
+                    </div>
+                </div>
+                <div class="gpd-form-group">
+                    <label>姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名<span class="gpd-red">*</span></label>
+                    <input type="text" id="name" name="name" value="" />
+                </div>
+                <div class="gpd-form-group">
+                    <label>手机号码<span class="gpd-red">*</span></label>
+                    <input type="tel" id="phone" name="phone" value="" maxlength="11" />
+                </div>
+                <div class="gpd-form-group">
+                    <label>身份证号<span class="gpd-red">*</span></label>
+                    <input type="text" id="idcard" name="idcard" value="" />
+                </div>
+            </div>
+        </section>
+    </div>
+    <script src="../javaScripts/swiper.min.js"></script>
+    <script>
+        $(function () {
+            $.ajax({
+                url: "../WebService/OrderWebService.asmx/GetOrderWithDetailList",
+                type: "post",
+                dataType: "json",
+                data: { orderId: GetQueryString("orderId") },
+                success: function (result) {
+                    if (result.IsSuccess) {
+                        $("#name").html(result.Data.UserName);
+                        $("#phone").html(result.Data.Mobile);
+                        $("#payPhone").html(result.Data.MobilePhoneNumber);
+                        $("#weChatOrderNo").html(result.Data.OrderCode);
+                        $("#idcard").html(result.Data.IdCard);
+                        $("#contractAll").html(result.Data.UserName + "    " + result.Data.Mobile + "  " + result.Data.IdCard);
+                        $("#singlePrice").html(result.Data.SinglePrice);
+                        $("#count").html(result.Data.Count);
+                        $("#total").html(result.Data.TotalPrice);
+                        $("#payTime").html(result.Data.PayTime);
+                        $("#payTime2").html(result.Data.PayTime);
+                        $("#orderNo").html(result.Data.OrderNo);
+                        $("#ticketUseRange").html(result.Data.UseRange);
+                        var ercodeHtml = "";
+                        var ercodefoothtml = "";
+                        for (var i = 0; i < result.Data.TicketCodeList.length; i++) {
+                            ercodeHtml = ercodeHtml + "<div class='swiper-slide'><img id='" + result.Data.TicketCodeList[i].Code + "_" + result.Data.TicketCodeList[i].StatusDesc + "' class='img-border' src='" + result.Data.TicketCodeList[i].Url + "'></div>";
+                            if (i == 0) {
+                                $("#ticketStatus").html(result.Data.TicketCodeList[i].StatusDesc);
+                                $("#ticketCode").html(result.Data.TicketCodeList[i].Code);
+                            }
+                        }
+
+                        $("#swiperContain").html(ercodeHtml);
+                        $("#swiperFooter").html(ercodefoothtml);
+                        $("#btnRefund").attr("href", "ApplyRefund.html?OrderId=" + GetQueryString("orderId") + "&SingleTicketPrice=" + result.Data.SinglePrice + "&TicketName=" + result.Data.TicketName);
+                        initswiper();
+                    }
+                }
+            });
+
+            $(".gp-icons.gpd-up-icon").click(function () {
+                var zThis = $(this);
+                var zThisParent = zThis.parents(".gpd-item");
+                zThisParent.toggleClass("gdp-curr");
+                //zThisParent.siblings(".gpd-item").removeClass("gdp-curr");
+            });
+        });
+
+        function initswiper() {
+            var swiper = new Swiper('.swiper-container', {
+                loop: false,
+                pagination: '.swiper-pagination',
+                onTransitionEnd: function (swi) {
+                    var current = swi.slides[swi.activeIndex];
+                    var ticketid = current.childNodes[0].id;
+                    $("#ticketCode").html(ticketid.split('_')[0]);
+                    $("#ticketStatus").html(ticketid.split('_')[1]);
+                }
+            });
+        }
+
+        function GetQueryString(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return r[2]; return null;
+        }
+
+    </script>
+</body>
+</html>

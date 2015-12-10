@@ -8,6 +8,8 @@ using OneGulp.WeChat.MP;
 using OneGulp.WeChat.MP.AdvancedAPIs;
 using OneGulp.WeChat.MP.Helpers;
 using OneGulp.WeChat.MP.TenPayLibV3;
+using OneGulp.WeChat.MP.TenPayLibV3.TenPayV3;
+using OneGulp.WeChat.MP.TenPayLibV3.TenPayV3.Model;
 using Travel.Infrastructure.WeiXin.Advanced.Pay.Model;
 using WeiXinPF.Common;
 using WeiXinPF.Infrastructure.DomainDataAccess.Payment;
@@ -118,7 +120,7 @@ namespace WeiXinPF.Web.weixin.WeChatPay
                 var data = packageReqHandler.ParseXML();
 
                 //同意下单，获取到预付订单号
-                var unifiedOrderResult = TenPayV3.Unifiedorder(data);
+                var unifiedOrderResult = TenPayV3Helper.Unifiedorder(data);
                 var rtnUnifiedOrderResult = new UnifiedOrderResponse(unifiedOrderResult);
 
                 //下单成功，保存下单对象
