@@ -128,7 +128,7 @@
 <body>
     <%--<form id="form1" runat="server">--%>
     <div class="container">
-        <a class="order animated fadeInDown" href="<%=MyCommFun.getWebSite()%>/travel/order/myorderlist.html">
+        <a class="order animated fadeInDown" href="../travel/order/myorderlist.html">
             <div class="order-cover">
                 <img src="images/bg_play.png" />
             </div>
