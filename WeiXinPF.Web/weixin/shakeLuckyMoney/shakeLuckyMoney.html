@@ -137,7 +137,7 @@
 <body>
 
     <!--loading-->
-    <div id="loadingBox" style="display:block">
+    <div id="loadingBox" style="display:none">
         <div id="loading"></div>
         <div id="loadingTips">0%</div>
     </div>
@@ -184,7 +184,7 @@
                     </div>
                 </div>
             </div>
-            <div class="botton main-center top-zIndex" id="botton" data-bind="click:$root.afterShake">马上领取</div>
+<!--            <div class="botton main-center top-zIndex" id="botton" data-bind="click:$root.afterShake">马上领取</div>-->
             <AUDIO id="musicBox" src="audios/shake.wav" preload="metadata"></AUDIO>
             <AUDIO id="endMp3" src="audios/end.mp3" preload="metadata"></AUDIO>
         </div>
@@ -247,67 +247,63 @@
 
     <script src="../../scripts/jquery/jquery-2.1.0.min.js"></script>
     <script src="../../scripts/jquery/jquery.url.js"></script>
-    <script src="../../scripts/mobilePhoneShake.min.js"></script>
-    <script src="../../scripts/pre-loader.js"></script>
+
+    <script src="../../scripts/shake.js"></script>
+    <script src="../../scripts/jquery/jquery.blockUI.js"></script>
     <script src="../../scripts/knockout/knockout-3.3.0.js"></script>
     <!--<script src="../../scripts/oAuth2.js"></script>-->
     <script src="js/shakeLuckyMoney-vm.js?v=1.1"></script>
     <script>
+
         function getBaseUrl() {
             var re = new RegExp(/^.*\//);
             return re.exec(window.location.href);
         }
-
-        var access_code = $.url.param("code") ? $.url.param("code") : '';
-        var aid = $.url.param("aid");
-        var wid = $.url.param("wid");
-        var baseurl = getBaseUrl();
-       // $("body").html(access_code);
-        //alert(access_code);
-        var imagesArray = [baseurl + 'images/shake_background.png',
-            baseurl + 'images/hand.png',
-            baseurl + 'images/back.jpg',
-            baseurl + 'images/coupon.jpg',
-            baseurl + 'images/活动结束.png'
-        ];
-
-        new preLoader(imagesArray, {
-            onProgress: function (src, element, index) {
-
-                var percent = Math.floor((100 / this.queue.length) * this.completed.length);
-
-                // update the progress element
-                $("#loadingTips").text(percent + '%');
+        $(function () {
 
 
-            },
-            onComplete: function (loaded, errors) {
-                $("#div_content").show();
-                $('#loadingBox').hide();
-                var $domParm = {
-                    $musicBox: $('#musicBox'),
-                    $endMp3: $('#endMp3'),
-                    $hand: $('.hand'),
-                    $money: $('.money'),
-                    $receiveBtn: $('#receiveBtn')
-                };
-                var param = {
-                    access_code: access_code,
-                    aid: aid,
-                    wid: wid
-                    //,
-                    //onAfterLoadData:function(){
-                    //    $("#div_content").show();
-                    //    $('#loadingBox').hide();
-                    // }
-                };
-                var luckyMoneyVM = new LuckyMoneyViewModel($domParm, param);
+            $.blockUI({
+                css: {
+                    border: 'none',
+                    padding: '15px',
+                    backgroundColor: '#000',
+                    'border-radius': '10px',
+                    opacity: .5,
+                    color: '#fff'
+                }, message: '<h3>数据加载中......</h3>'
+            });
 
-                ko.applyBindings(luckyMoneyVM);
+            var access_code = $.url.param("code") ? $.url.param("code") : '';
+            var aid = $.url.param("aid");
+            var wid = $.url.param("wid");
+            var baseurl = getBaseUrl();
+            // $("body").html(access_code);
+            //alert(access_code);
+
+            $("#div_content").show();
+            $('#loadingBox').hide();
+            var $domParm = {
+                $musicBox: $('#musicBox'),
+                $endMp3: $('#endMp3'),
+                $hand: $('.hand'),
+                $money: $('.money'),
+                $receiveBtn: $('#receiveBtn')
+            };
+            var param = {
+                access_code: access_code,
+                aid: aid,
+                wid: wid
+                //,
+                //onAfterLoadData:function(){
+                //    $("#div_content").show();
+                //    $('#loadingBox').hide();
+                // }
+            };
+            var luckyMoneyVM = new LuckyMoneyViewModel($domParm, param);
+
+            ko.applyBindings(luckyMoneyVM);
 
 
-
-            }
         });
 
 

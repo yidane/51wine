@@ -14,6 +14,7 @@ var LuckyMoneyViewModel = function ($domParam, param) {
     this.coupon = ko.observable();
     this.user = ko.observable();
     this._message = ko.observable('');
+    this.hasShaked=ko.observable(false);
     this.message = ko.pureComputed({
         read: function () {
 
@@ -69,12 +70,9 @@ var LuckyMoneyViewModel = function ($domParam, param) {
 
 
     this.init = function () {
-        //self.initWeChat();
-        self.initShake();
         self.getCouponBaseInfo();
-        //$("#div_content").show();
-        //$('#loadingBox').hide();
-        //self.param().onAfterLoadData();
+        self.initShake();
+        
     };
 
     //------------wechat
@@ -89,12 +87,6 @@ var LuckyMoneyViewModel = function ($domParam, param) {
 
     this.onWeChatReady = function (wxConfig) {
         wx.ready(function () {
-            //wx.checkJsApi({
-            //    jsApiList: wxConfig.jsApiList,
-            //    success: function (res) {
-            //        alert(JSON.stringify(res));
-            //    }
-            //});
 
             self.hideWeChatBtn();
             
@@ -177,49 +169,47 @@ var LuckyMoneyViewModel = function ($domParam, param) {
 
     //------------shake
     this.initShake = function () {
-//        var yy = new mobilePhoneShake({
-//            speed: 2000,//阀值，值越小，能检测到摇动的手机摆动幅度越小
-//            callback: function (x, y, z) {//将设备放置在水平表面，屏幕向上，则其x,y,z信息如下：{x: 0,y: 0,z: 9.81};
-//                self.afterShake();
-//                self.shakeObj().stop();
-//                self.shakeObj(null);
-//            },
-//            onchange: function (x, y, z) {
-//                //document.getElementById("msg").innerHTML="x:"+x+"<br>y:"+y+"<br>z:"+z;
-//            }
-//        });
-//
-//        yy.start();
-        //        self.shakeObj(yy);
 
 
         //create a new instance of shake.js.
         var myShakeEvent = new Shake({
-            threshold: 15
+            threshold: 15, // optional shake strength threshold
+            timeout: 1000 // optional, determines the frequency of event generation
         });
-
+        self.shakeObj(myShakeEvent);
         // start listening to device motion
         myShakeEvent.start();
 
         // register a shake event
-        window.addEventListener('shake', function() {
-            //shake event callback
-            self.afterShake();
-        }, false);
+        window.addEventListener('shake', self.afterShake, false);
 
-        
+        //alert('beginshake');
     };
     this.afterShake = function () {
+
+        //stop listening for shake events
+        self.shakeObj().stop();
+        window.removeEventListener('shake', self.afterShake, false);
+
 
         self.$DomParm().$musicBox.bind('ended', self.musicEnded);
 
         self.$DomParm().$musicBox[0].play();
+        //如果声音不播放，则添加判断
+        setTimeout(function(){
+
+            if(!self.hasShaked()&&self.$DomParm().$musicBox[0].paused)
+            {
+                self.musicEnded();
+            }
+        },2000);
 
     };
     this.musicEnded = function () {
         //显影
         // self.stage("money");
-        // alert(1);
+        self.hasShaked(true);
+         //alert(1);
         self.getRandomCoupon();
 
 
@@ -243,7 +233,9 @@ var LuckyMoneyViewModel = function ($domParam, param) {
                 
             })
             .done(function (json) {
+                $.unblockUI();
                 console.log(json);
+                //$(".fullpage").text(JSON.stringify(json));
                 if (json.IsSuccess) {
                     document.title = json.Data.info.actName;
                     self.user(json.Data.user);
@@ -268,6 +260,10 @@ var LuckyMoneyViewModel = function ($domParam, param) {
                             self.$DomParm().$endMp3[0].play();
 
                         }, 1000);
+                    }
+                    else
+                    {
+                        //$(".fullpage").text(JSON.stringify(json));
                     }
 
                     console.log(json.Message);
@@ -374,6 +370,5 @@ var LuckyMoneyViewModel = function ($domParam, param) {
     self.init();
 };
 
-
-
+ 
 

@@ -69,7 +69,12 @@ namespace WeiXinPF.WebService
                 }
                 else
                 {
-                    throw new Exception("参数异常");
+                    var str = string.Empty;
+                    if (user!=null)
+                    {
+                        str = user.openid;
+                    }
+                    throw new Exception("参数异常"+ str);
                 }
 
 
