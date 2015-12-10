@@ -82,11 +82,11 @@
                     <span class="Validform_checktip">*</span>
                 </dd>
             </dl>
-            <dl>
+            <dl style="display: none">
                 <dt>引路说明</dt>
                 <dd>
                     <asp:TextBox ID="txtDescription" TextMode="MultiLine" runat="server" CssClass="input normal" />
-                    <span class="Validform_checktip">*</span>
+<%--                    <span class="Validform_checktip">*</span>--%>
                 </dd>
             </dl>
             <dl>

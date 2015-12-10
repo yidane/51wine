@@ -156,9 +156,9 @@ namespace WeiXinPF.WeiXinComm
 //            else
 //            { 
                 //活动正在进行中 
-                responseEntity.rcType = Model.ReponseContentType.text;
-                responseEntity.rContent = actModel.brief;
-//                responseEntity.rContent2 = actModel.brief;
+                responseEntity.rcType = Model.ReponseContentType.txtpic;
+                responseEntity.rContent = actModel.actName;
+                responseEntity.rContent2 = actModel.brief;
                 responseEntity.detailUrl = MyCommFun.getWebSite() + "/weixin/photo/MakePhoto.html?wid=" + apiid + "&aid=" + id;
 //                responseEntity.picUrl = actModel.beginPic;
 //            }

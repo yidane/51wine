@@ -19,7 +19,7 @@ namespace WeiXinPF.Application.DomainModules.Map
             Mapper.CreateMap<Model.wx_travel_marker, MapDTO>()
             .ForMember(dto => dto.id, opt => opt.MapFrom(marker => marker.Id))
             .ForMember(dto => dto.name, opt => opt.MapFrom(marker => marker.Name))
-            .ForMember(dto => dto.address, opt => opt.MapFrom(marker => marker.Description))
+            .ForMember(dto => dto.address, opt => opt.MapFrom(marker => marker.extStr1))
             .ForMember(dto => dto.remark, opt => opt.MapFrom(marker => marker.Remark))
             .AfterMap((maker, dto) => dto.position = new Position()
             {
