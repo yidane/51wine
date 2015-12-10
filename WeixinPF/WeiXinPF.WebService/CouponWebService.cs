@@ -30,18 +30,18 @@ namespace WeiXinPF.WebService
 
                 var service = new CouponService();
 
-                if (Session["User"] == null)
+                if (Session["OAuthUser"] == null)
                 {
                     user = GetUser(wid, "coupon", code, url);
                     if (user != null)
                     {
-                        Session["User"] = user;
+                        Session["OAuthUser"] = user;
                     }
 
                 }
                 else
                 {
-                    user = Session["User"] as OAuthUserInfo;
+                    user = Session["OAuthUser"] as OAuthUserInfo;
 
                 }
                 var info = service.GetCouponBaseInfo(aid, user);
@@ -98,7 +98,7 @@ namespace WeiXinPF.WebService
             try
             {
                 var thisOpenid = string.Empty;
-                if (Session["User"] == null)
+                if (Session["OAuthUser"] == null)
                 {
                     thisOpenid = openid;
 
@@ -106,7 +106,7 @@ namespace WeiXinPF.WebService
                 }
                 else
                 {
-                    user = Session["User"] as OAuthUserInfo;
+                    user = Session["OAuthUser"] as OAuthUserInfo;
                     thisOpenid = user.openid;
                 }
 

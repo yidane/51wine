@@ -123,7 +123,6 @@
     <Content Include="admin\hotel\Verification\commodity_detail.aspx" />
     <Content Include="admin\hotel\Verification\credentials_detail.aspx" />
     <Content Include="admin\hotel\Verification\dingdan_confirm.aspx" />
-    <Content Include="admin\index - Copy.aspx" />
     <Content Include="admin\js\message-vm.js" />
     <Content Include="admin\map\map_scenic.aspx" />
     <Content Include="admin\map\map_scenic.html" />
@@ -3650,6 +3649,7 @@
     <Content Include="scripts\lhgdialog\skins\jtop.css" />
     <Content Include="scripts\lhgdialog\skins\mac.css" />
     <Content Include="scripts\pre-loader.js" />
+    <Content Include="scripts\shake.js" />
     <Content Include="scripts\swfupload\swfupload.handlers.js" />
     <Content Include="scripts\swfupload\swfupload.js" />
     <Content Include="scripts\swfupload\swfupload.queue.js" />
@@ -5268,13 +5268,6 @@
     </Compile>
     <Compile Include="admin\hunqing\xitieZhuFu.aspx.designer.cs">
       <DependentUpon>xitieZhuFu.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="admin\index - Copy.aspx.cs">
-      <DependentUpon>index - Copy.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="admin\index - Copy.aspx.designer.cs">
-      <DependentUpon>index - Copy.aspx</DependentUpon>
     </Compile>
     <Compile Include="admin\index.aspx.cs">
       <DependentUpon>index.aspx</DependentUpon>

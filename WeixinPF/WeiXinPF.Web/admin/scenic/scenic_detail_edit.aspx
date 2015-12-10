@@ -71,7 +71,7 @@
                 <dd>
                     <asp:TextBox ID="txtCover" runat="server" datatype="*2-100" CssClass="input normal upload-path" />
                     <div class="upload-box upload-img"></div>
-                    <%--<span class="Validform_checktip"></span>--%>
+                    <span class="Validform_checktip">建议：为保证图片清晰的显示，建议您上传的图片尺寸为200*200<</span>
                 </dd>
             </dl>
             <dl>
@@ -79,7 +79,7 @@
                 <dd>
                     <asp:TextBox ID="txtBackgroundImage" runat="server" datatype="*2-100" CssClass="input normal upload-path" Text="/weixin/scenic/images/bg.png" />
                     <div class="upload-box upload-img"></div>
-                    <%--<span class="Validform_checktip"></span>--%>
+                    <span class="Validform_checktip">建议：为保证图片清晰的显示，建议您上传的图片尺寸为500*800<</span>
                 </dd>
             </dl>
             <dl>
@@ -98,8 +98,11 @@
             <dl>
                 <dt>音频文件</dt>
                 <dd>
-                    <asp:TextBox ID="txtAudio" runat="server" datatype="*2-100" CssClass="input normal upload-path" />
+                    <asp:TextBox ID="txtAudio" runat="server" datatype="*2-100" 
+                        Text="/upload/201509/16/201509161003510954.mp3"
+                        CssClass="input normal upload-path" />
                     <div class="upload-box upload-img"></div>
+                    <span class="Validform_checktip">若修改音频文件，建议音频文件的大小请控制在2M以内</span>
                 </dd>
             </dl>
             <dl>

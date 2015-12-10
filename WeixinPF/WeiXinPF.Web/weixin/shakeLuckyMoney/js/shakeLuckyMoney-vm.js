@@ -177,20 +177,37 @@ var LuckyMoneyViewModel = function ($domParam, param) {
 
     //------------shake
     this.initShake = function () {
-        var yy = new mobilePhoneShake({
-            speed: 2000,//阀值，值越小，能检测到摇动的手机摆动幅度越小
-            callback: function (x, y, z) {//将设备放置在水平表面，屏幕向上，则其x,y,z信息如下：{x: 0,y: 0,z: 9.81};
-                self.afterShake();
-                self.shakeObj().stop();
-                self.shakeObj(null);
-            },
-            onchange: function (x, y, z) {
-                //document.getElementById("msg").innerHTML="x:"+x+"<br>y:"+y+"<br>z:"+z;
-            }
+//        var yy = new mobilePhoneShake({
+//            speed: 2000,//阀值，值越小，能检测到摇动的手机摆动幅度越小
+//            callback: function (x, y, z) {//将设备放置在水平表面，屏幕向上，则其x,y,z信息如下：{x: 0,y: 0,z: 9.81};
+//                self.afterShake();
+//                self.shakeObj().stop();
+//                self.shakeObj(null);
+//            },
+//            onchange: function (x, y, z) {
+//                //document.getElementById("msg").innerHTML="x:"+x+"<br>y:"+y+"<br>z:"+z;
+//            }
+//        });
+//
+//        yy.start();
+        //        self.shakeObj(yy);
+
+
+        //create a new instance of shake.js.
+        var myShakeEvent = new Shake({
+            threshold: 15
         });
 
-        yy.start();
-        self.shakeObj(yy);
+        // start listening to device motion
+        myShakeEvent.start();
+
+        // register a shake event
+        window.addEventListener('shake', function() {
+            //shake event callback
+            self.afterShake();
+        }, false);
+
+        
     };
     this.afterShake = function () {
 
