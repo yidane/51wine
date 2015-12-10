@@ -92,7 +92,7 @@
             <div class="tip-content" data-bind="text: remark"></div>
             <div class="tip-bottom">
                 <ul>
-                    <li data-bind=" myDisabled: id <= 0">
+                     <li data-bind=" myDisabled: id <= 0">
                     
                         <a href="#" data-bind="attr: { 'data-left': left, 'data-top': top }, myDisabled: id <= 0"
                             onclick="addRemark($(this),$(this).attr('data-left'),$(this).attr('data-top'))">
