@@ -8,7 +8,8 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using OneGulp.WeChat.MP.AdvancedAPIs;
 using OneGulp.WeChat.MP.TenPayLibV3;
-using Travel.Infrastructure.WeiXin.Advanced.Pay.Model;
+using OneGulp.WeChat.MP.TenPayLibV3.TenPayV3;
+using OneGulp.WeChat.MP.TenPayLibV3.TenPayV3.Model;
 using WeiXinPF.BLL;
 using WeiXinPF.Common;
 using WeiXinPF.Web.weixin.restaurant;
@@ -183,7 +184,7 @@ namespace WeiXinPF.Web.admin.diancai
                     requestHandler.SetParameter("op_user_id", wxModel.AppId);
                     requestHandler.SetParameter("sign", requestHandler.CreateMd5Sign("key", payInfo.paykey));
 
-                    var refundInfo = TenPayV3.Refund(requestHandler.ParseXML(), string.Format(@"{0}{1}", AppDomain.CurrentDomain.BaseDirectory, payInfo.certInfoPath), payInfo.cerInfoPwd);
+                    var refundInfo = TenPayV3Helper.Refund(requestHandler.ParseXML(), string.Format(@"{0}{1}", AppDomain.CurrentDomain.BaseDirectory, payInfo.certInfoPath), payInfo.cerInfoPwd);
                     var refundOrderResponse = new RefundOrderResponse(refundInfo);
                     if (refundOrderResponse.IsSuccess)
                     {

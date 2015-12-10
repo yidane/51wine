@@ -1,0 +1,224 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <script src="http://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <link rel="stylesheet" href="../style/TicketList.css" />
+    <script src="../script/common/main.js"></script>
+    <script src="../script/common/common.js"></script>
+    <script src="../script/common/jquery.pageItem.js"></script>
+    <script src="../script/common/jsRender.min.js"></script>
+    <script src="../javaScripts/Moment.js"></script>
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+    <meta content="telephone=no" name="format-detection" />
+    <meta content="email=no" name="format-detection" />
+    <link href="../style/swiper.min.css" rel="stylesheet" />
+    <link href="../style/css/orderlist.css" rel="stylesheet" />
+    <script src="../javaScripts/swiper.min.js"></script>
+    <title>我的订单</title>
+    <style>
+        .ticket-list li {
+            border-bottom: 1px solid #000000;
+        }
+
+        .i-status {
+            float: right;
+            width: 109px;
+            position: absolute;
+            height: 83px;
+            top: 1px;
+            right: -8px;
+        }
+
+        .status-refundAll {
+            background-image: url(../images/refundAll.png);
+            background-size: 90%;
+            background-repeat: no-repeat;
+        }
+
+        .status-refundPart {
+            background-image: url(../images/refundPart.png);
+            background-size: 90%;
+            background-repeat: no-repeat;
+        }
+    </style>
+</head>
+<body>
+    <div class="personal_center">
+        <ul id="myTab0">
+            <li class="active" id="payed"><a href="MyOrderList.html?payStatus=payed">已付款</a></li>
+            <li class="normal" id="refund"><a href="MyOrderList.html?payStatus=refund">退票</a></li>
+        </ul>
+        <div class="personal_info">
+            <div class="order_list" id="ResultList">
+            </div>
+        </div>
+    </div>
+
+    <script src="../javaScripts/zepto.min.js"></script>
+    <script src="../javaScripts/oAuth2.js"></script>
+    <script src="../javaScripts/knockout-3.2.0.debug.js"></script>
+
+    <script id="ResultTemplateOrder" type="text/x-jsrender">
+        <ul>
+            <li>
+                <a href="OrderDetail.html?orderId={{:OrderID}}&code={{:access_code}}">
+                    <div class="info_01">
+                        <h3>{{:TicketName}}</h3>
+                        <p>实付<b>￥{{:TicketTotalPrice}}</b>共<b>{{:TicketCount}}</b>件商品</p>
+                        <span class="wave_blue_icon"></span>
+                    </div>
+                    <div class="info_02">
+                        <dl>
+                            <dd><b class="i_gray_icon"></b>订单编号 {{:OrderNo}}</dd>
+                            <dd><b class="time_gray_icon"></b>购票日期 {{:BuyTime}}</dd>
+                            <dd><b class="time_gray_icon"></b>有效期至 {{:LastUseDate}}</dd>
+                        </dl>
+                    </div>
+                    <div class="info_03">
+                        <span>{{:OrderStatus}}</span>
+                    </div>
+                    <i class="{{:RefundStatus}} i-status"></i>
+                </a>
+            </li>
+        </ul>
+    </script>
+
+    <script id="ResultTemplateTicket" type="text/x-jsrender">
+        <ul>
+            <li>
+                <div class="info_01">
+                    <h3>{{:TicketName}}</h3>
+                    <p>实付<b>￥{{:TicketTotalPrice}}</b>共<b>{{:TicketCount}}</b>件商品</p>
+                    <span class="wave_blue_icon"></span>
+                </div>
+                <div class="info_02">
+                    <dl>
+                        <dd><b class="i_gray_icon"></b>退单编号 {{:RefundCode}}</dd>
+                        <dd><b class="i_gray_icon"></b>订单编号 {{:OrderNo}}</dd>
+                        <dd><b class="time_gray_icon"></b>购票日期 {{:LastUseDate}}</dd>
+                    </dl>
+                </div>
+                <div class="info_03">
+                    <span>{{:TicketStatus}}</span>
+                </div>
+
+            </li>
+        </ul>
+    </script>
+
+<script>
+    function GetOrderList() {
+        $.ajax({
+            type: "post",
+            url: '../WebService/OrderWebService.asmx/MyOrders',
+            dataType: 'json',
+            data: { code: GetQueryString('code') },
+            success: function (result) {
+                if (result.IsSuccess) {
+                    var data = [];
+                    var access_code = getCode();
+
+
+
+                    $(result.Data).each(function (index, obj) {
+
+                        var item = { access_code: access_code, OrderNo: obj.OrderCode, OrderID: obj.OrderId, TicketImageUrl: '../TicketImages/1.jpg', TicketName: obj.TicketName, BuyTime: obj.BuyTime, LastUseDate: obj.DeadTime, TicketPrice: obj.singleTicketPrice, TicketCount: obj.TicketCount, TicketTotalPrice: obj.TotelFee, OperateUrl: '', OrderStatus: obj.OrderStatus };
+
+                        //todo:测试数据，请替换未服务对应的数据
+                        //是否退票
+                        if (obj.hasRefundTicket) {
+                            switch (obj.RefundType) {
+                                case '部分退票':
+                                    item.RefundStatus = "status-refundPart";
+                                    break;
+                                case '全部退票':
+                                    item.RefundStatus = "status-refundAll";
+                                    break;
+
+                                default:
+                                    item.RefundStatus = '';
+                            }
+                        }
+
+
+
+                        data.push(item);
+                    });
+
+                    var template = $.templates("#ResultTemplateOrder");
+                    var htmlOutput = template.render(data);
+                    $("#ResultList").html(htmlOutput);
+                } else {
+                    alert(result.Message);
+                }
+            }
+        });
+    }
+
+    function MyRefundTickets() {
+        $.ajax({
+            type: "post",
+            url: '../WebService/OrderWebService.asmx/MyRefundTickets',
+            dataType: 'json',
+            data: { code: GetQueryString('code') },
+            success: function (result) {
+                if (result.IsSuccess) {
+                    var data = [];
+                    $(result.Data).each(function (index, obj) {
+                        data.push({ OrderNo: obj.OrderCode, RefundCode: obj.RefundCode, TicketName: obj.TicketName, TicketPrice: obj.Price, TicketCount: 1, TicketTotalPrice: obj.Price, LastUseDate: obj.BuyTime, TicketStatus: obj.TicketStatus });
+                    });
+
+                    var template = $.templates("#ResultTemplateTicket");
+                    var htmlOutput = template.render(data);
+                    $("#ResultList").html(htmlOutput);
+                } else {
+                    alert(result.Message);
+                }
+            }
+        });
+    }
+    $(document).ready(function () {
+        var status = GetQueryString('payStatus');
+        if (status === "payed") {
+            $("#payed").removeClass("normal");
+            $("#payed").addClass("active");
+            $("#refund").removeClass("active");
+            $("#refund").addClass("normal");
+
+            GetOrderList();
+        } else if (status === "refund") {
+            $("#refund").removeClass("normal");
+            $("#refund").addClass("active");
+            $("#payed").removeClass("active");
+            $("#payed").addClass("normal");
+
+            MyRefundTickets();
+        } else {
+            $("#payed").removeClass("normal");
+            $("#payed").addClass("active");
+            $("#refund").removeClass("active");
+            $("#refund").addClass("normal");
+
+            GetOrderList();
+        }
+    });
+
+    function getRandomNum(Min, Max) {
+        var Range = Max - Min;
+        var Rand = Math.random();
+        return (Min + Math.round(Rand * Range));
+    }
+
+    function getCode() {
+        return access_code;
+    }
+</script>
+</body>
+</html>

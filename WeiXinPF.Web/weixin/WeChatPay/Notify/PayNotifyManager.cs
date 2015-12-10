@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using OneGulp.WeChat.MP.TenPayLibV3;
+using OneGulp.WeChat.MP.TenPayLibV3.TenPayV3.Model;
 using WeiXinPF.Infrastructure.DomainDataAccess.Payment;
 
 namespace WeiXinPF.Web.weixin.WeChatPay.Notify
