@@ -372,6 +372,9 @@
 
 
         <div class="tab-content" style="display: none">
+              <div class="alert alert-warning " role="alert" style=" text-align: left;">
+
+                <strong>建议：</strong>为保证图片清晰的显示，建议您上传的图片尺寸为400*200</div>
             <dl>
                 <dt>文字描述：</dt>
                 <dd>
