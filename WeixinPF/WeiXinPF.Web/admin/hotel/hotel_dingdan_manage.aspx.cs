@@ -29,26 +29,57 @@ namespace WeiXinPF.Web.admin.hotel
         protected int orderStatus = -1;
         protected string orderNumber = string.Empty;
         protected string _strWhere = string.Empty;
-        protected string _orderby = string.Empty;
+        protected string _orderby  = "orderTime desc,id desc";
 
 
         protected void Page_Load(object sender, EventArgs e)
         {
-             hotelid = MyCommFun.RequestInt("hotelid", GetHotelId());
-
+            //获取参数
+            GetQueryString();
+            hotelid = MyCommFun.RequestInt("hotelid", GetHotelId());
+           
             if (!Page.IsPostBack)
             {
-                //获取参数
-                GetQueryString();
+               
 
                 this.pageSize = GetPageSize(10); //每页数量
 
-                _strWhere = " hotelid=" + hotelid + " " + _strWhere;
-                _strWhere += CombSqlTxt(keywords);
-                _orderby = "orderTime desc,id desc";
+                GetWhere();
+                 
+               
 
                 BindDropBox();
+                BindControls();
                 RptBind();
+            }
+        }
+
+        private void GetWhere()
+        {
+            _strWhere = " hotelid=" + hotelid + " " + _strWhere;
+            _strWhere += CombSqlTxt(keywords);
+        }
+
+        /// <summary>
+        /// 绑定
+        /// </summary>
+        private void BindControls()
+        {
+            txtbeginDate.Text = this.beginDate;
+            txtendDate.Text = this.endDate;
+            ddlOrderStatus.SelectedValue = this.orderStatus.ToString();
+            if (this.payAmountMin > -1)
+            {
+                txtPayAmountMin.Text = this.payAmountMin.ToString();
+            }
+            this.payAmountMax = MXRequest.GetQueryDecimal("payAmountMax", -1);
+            if (this.payAmountMax > -1)
+            {
+                txtPayAmountMax.Text = this.payAmountMax.ToString();
+            }
+            if (!string.IsNullOrEmpty(orderNumber))
+            {
+                txtOrderNumber.Text = this.orderNumber;
             }
         }
 
@@ -60,35 +91,25 @@ namespace WeiXinPF.Web.admin.hotel
             if (MyCommFun.IsRequestStr("beginDate", MyCommFun.RequestObjType.dateType))
             {
                 this.beginDate = MXRequest.GetQueryString("beginDate");
-                txtbeginDate.Text = this.beginDate;
+               
             }
             if (MyCommFun.IsRequestStr("endDate", MyCommFun.RequestObjType.dateType))
             {
                 this.endDate = MXRequest.GetQueryString("endDate");
-                txtendDate.Text = this.endDate;
+               
 
             }
             if (MyCommFun.IsRequestStr("orderStatus", MyCommFun.RequestObjType.intType))
             {
                 this.orderStatus = MXRequest.GetQueryInt("orderStatus");
-                ddlOrderStatus.SelectedValue = this.orderStatus.ToString();
+                
 
             }
             this.payAmountMin = MXRequest.GetQueryDecimal("payAmountMin", -1);
-            if (this.payAmountMin > -1)
-            {
-                txtPayAmountMin.Text = this.payAmountMin.ToString();
-            }
-            this.payAmountMax = MXRequest.GetQueryDecimal("payAmountMax", -1);
-            if (this.payAmountMax > -1)
-            {
-                txtPayAmountMax.Text = this.payAmountMax.ToString();
-            }
+            
+          
             this.orderNumber = MXRequest.GetQueryString("orderNumber");
-            if (!string.IsNullOrEmpty(orderNumber))
-            {
-                txtOrderNumber.Text = this.orderNumber;
-            }
+           
 
             this.keywords = MXRequest.GetQueryString("keywords");
         }
@@ -361,7 +382,8 @@ namespace WeiXinPF.Web.admin.hotel
         protected void btnExport_OnClick(object sender, EventArgs e)
         {
             try
-                {
+            {
+                GetWhere();
                 var result = GetQueryData();
                 List<string> headerList = new List<string>() { "序号", "订单编号", "订单状态", "是否退单",
                     "商户或门店名称","	预定人","交易日期","商品名称","购买数量","商品价格","入住时间"
@@ -369,9 +391,9 @@ namespace WeiXinPF.Web.admin.hotel
                 List<int> columnIndexList = new List<int>() { 1, 5, 22, 23, 20, 4, 18, 11, 13, 14, 9, 10, 21 };
                 CSVHelper.DownloadAsSCV(Response, "酒店订单管理", result.Tables[0], columnIndexList, headerList);
             }
-            catch 
+            catch (Exception)
             {
-
+                // ignored
             }
         }
 
