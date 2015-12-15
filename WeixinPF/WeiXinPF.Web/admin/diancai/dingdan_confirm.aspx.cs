@@ -59,11 +59,12 @@ namespace WeiXinPF.Web.admin.diancai
                         this.Response.Write(
                             "<script language='javascript' type='text/javascript'>alert('该订单已完成或进行退单处理，不能进行验证！')</script>");
                     }
+                    else
+                    {
+                        Response.Redirect("commodity_detail.aspx?cid=" + identifyingCode.IdentifyingCodeId + "&shopid=" + identifyingCode.ShopId + "&id=" + identifyingCode.OrderId);
+                    }
                 }
-                else
-                {
-                    Response.Redirect("commodity_detail.aspx?cid=" + identifyingCode.IdentifyingCodeId + "&shopid=" + identifyingCode.ShopId + "&id=" + identifyingCode.OrderId);
-                }
+                
             }
         }
 
