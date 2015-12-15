@@ -55,6 +55,31 @@
             line-height: 1.5;
             background-color: #16a0d3;
         }
+
+        .button-success {
+            color: #fff;
+            background-color: #5cb85c;
+            border-color: #4cae4c;
+        }
+
+        .alert-warning {
+            color: #8a6d3b;
+            background-color: #fcf8e3;
+            border-color: #faebcc;
+        }
+
+        .alert-info {
+            color: #31708f;
+            background-color: #d9edf7;
+            border-color: #bce8f1;
+        }
+
+        .alert {
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid transparent;
+            border-radius: 10px;
+        }
     </style>
 </head>
 <body class="mainbody">
@@ -94,7 +119,7 @@
 
                 <strong>请注意!</strong>顾客到店完成验证码的验证并提供服务后，点击【订单完成】按钮。只有执行了订单完成操作的订单方可通过“服务凭据查询”功能与景区结算。
             </div>
-            <asp:Button ID="btnFinish" runat="server" Text="订单完成" CssClass="DingdanButton"
+            <asp:Button ID="btnFinish" runat="server" Text="订单完成" CssClass="DingdanButton button-success"
                 OnClientClick="return ConfirmPostBack('btnFinish', '请确认顾客已到店核销验证码，确定执行【订单完成】操作？');"
                 OnClick="btnFinish_OnClick" />
         </div>
