@@ -11,6 +11,7 @@
     <link href="../skin/default/style.css" rel="stylesheet" type="text/css" />
     <link href="../skin/mystyle.css" rel="stylesheet" type="text/css" />
     <link href="../../css/pagination.css" rel="stylesheet" type="text/css" />
+    <link href="../skin/btn-group.css" rel="stylesheet" type="text/css"/>
     <script type="text/javascript" src="../../scripts/datepicker/WdatePicker.js"></script>
     <script type="text/javascript">
         function parentToIndex(id) {
@@ -112,13 +113,13 @@
             </tr>
             <tr>
                 <td align="right">订单号</td>
-                <td align="right">
+                <td align="left">
                     <asp:TextBox ID="txtOrderNumber" runat="server" CssClass="input normal" datatype="*1-300" sucmsg=" " Text="" /></td>
                 <td align="right">预约人</td>
-                <td align="right">
+                <td align="left">
                     <asp:TextBox ID="txtCustomerName" runat="server" CssClass="input normal" datatype="*1-300" sucmsg=" " Text="" /></td>
                 <td align="right">预约电话</td>
-                <td align="right">
+                <td align="left">
                     <asp:TextBox ID="txtCustomerTel" runat="server" CssClass="input normal" datatype="*1-300" sucmsg=" " Text="" /></td>
             </tr>
         </table>
@@ -186,8 +187,8 @@
                     </td>
                     <td>&yen; <%# Eval("payAmount") %>                        
                     </td>
-                    <td>
-                        <a href='dingdan_deal.aspx?id=<%#Eval("id") %>&shopid=<%=shopid %>'>操作</a>
+                    <td>                        
+                        <a class="btn btn-default" href='dingdan_deal.aspx?id=<%#Eval("id") %>&shopid=<%=shopid %>'>操作</a>
                     </td>
                 </tr>
             </ItemTemplate>
