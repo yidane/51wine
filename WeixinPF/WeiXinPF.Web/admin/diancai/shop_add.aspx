@@ -104,6 +104,12 @@
         </div>
 
         <div class="tab-content">
+        <dl>
+                <dt>商户号：</dt>
+                <dd>
+                    <asp:Label ID="lblShopCode" runat="server" Text="" Font-Bold="true">系统自动生成</asp:Label>
+                </dd>
+            </dl>
             <dl>
                 <dt>商户或门店名称：</dt>
                 <dd>

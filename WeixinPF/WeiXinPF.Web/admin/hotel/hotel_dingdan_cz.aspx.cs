@@ -105,7 +105,7 @@ namespace WeiXinPF.Web.admin.hotel
 
                 var hotelService = new HotelService();
                 tuidan = hotelService.GetModel(dingdan.id, dingdan.hotelid.Value);
-                if (tuidan.operateUser > 0)
+                if (tuidan != null && tuidan.operateUser > 0)
                 {
                     var manager = new BLL.manager().GetModel(tuidan.operateUser);
                     uName = manager.real_name;

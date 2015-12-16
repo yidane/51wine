@@ -147,6 +147,10 @@
     <Compile Include="Migrations\201511260853596_ShortMsg2.Designer.cs">
       <DependentUpon>201511260853596_ShortMsg2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201512160329008_ShortMsgUpdate.cs" />
+    <Compile Include="Migrations\201512160329008_ShortMsgUpdate.Designer.cs">
+      <DependentUpon>201512160329008_ShortMsgUpdate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Payment\PaymentInfo.cs" />
     <Compile Include="Payment\PayNotifyInfo.cs" />
@@ -227,6 +231,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201511260853596_ShortMsg2.resx">
       <DependentUpon>201511260853596_ShortMsg2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201512160329008_ShortMsgUpdate.resx">
+      <DependentUpon>201512160329008_ShortMsgUpdate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

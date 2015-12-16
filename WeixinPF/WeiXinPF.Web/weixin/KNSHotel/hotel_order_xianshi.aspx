@@ -168,15 +168,7 @@
                     <div class="swiper-container silde-center gpd-ablum swiper-container-horizontal">
                         <div class="swiper-wrapper " style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px);" id="swiperContain">
                             <%=VerificationCode %>
-                            <%--                            <div class="swiper-slide">--%>
-                            <%--                                <input type="hidden" value="1" status="1" />--%>
-                            <%--                            </div>--%>
-                            <%--                            <div class="swiper-slide">--%>
-                            <%--                                <input type="hidden" value="2" status="2" />--%>
-                            <%--                            </div>--%>
-                            <%--                            <div class="swiper-slide">--%>
-                            <%--                                <input type="hidden" value="3" status="3" />--%>
-                            <%--                            </div>--%>
+
                         </div>
                         <!-- Add Pagination -->
                         <div class="swiper-pagination" id="swiperFooter">
@@ -313,14 +305,6 @@
 
                 <div class="content gpd-content">
                     <%=UseInstruction %>
-                    <%--                <p>【取票方式】</p>--%>
-                    <%--                <p>喀纳斯景区内所有景点，注：家房屋需单独购票</p>--%>
-                    <%--                <p><span>【购票条件】</span></p>--%>
-                    <%--                <p>特惠半价票，适用于1.2米以下的儿童以及65-70岁老人</p>--%>
-                    <%--                <p>【入园】</p>--%>
-                    <%--                <p>微信购票后凭电子票二维码扫码入园</p>--%>
-                    <%--                <p>【发票】</p>--%>
-                    <%--                <p>微信购票暂不支持开具发票，敬请期待后续优化</p>--%>
                 </div>
             </div>
 
@@ -346,11 +330,6 @@
 
                 <div class="content gpd-content">
                     <%=RefundRule %>
-                    <%--                <p>1、支付成功后，可在票据有效期内申请退票，过期则视为作废不予受理退票</p>--%>
-                    <%--                <p>2、可在我的订单中申请退票，申请后会先审核</p>--%>
-                    <%--                <p>3、工作人员会在1~2个工作日内处理您的退票申请</p>--%>
-                    <%--                <p>4、审核通过后，支付款额会自动退回微信钱包</p>--%>
-                    <%--                <p>5、微信门票一经扫码入园后，不予退票，如二进票入园一次后即不予退票</p>--%>
                 </div>
             </div>
         </div>
@@ -366,12 +345,6 @@
 
 
         <input type="hidden" name="formhash" id="formhash" value="77ee642e" />
-        <%--<ul class="round">
-<li class="title"><span class="none">商家留言</span></li>
-<li>
-<span class="green none"><p class="time">时间：06月17日 16:43</p></span>
-</li>
-</ul>--%>
         <div class="footReturn">
             <% if (BtnShowStatus == 1)
                 {%>
@@ -484,27 +457,39 @@
                     onTransitionEnd: function (swi) {
                         var current = swi.slides[swi.activeIndex];
                         var t = $(current.children[0]);
-                        var code = t.val();
-                        $("#ticketCode").html(code);
-                        setStatus(t.attr('status'));
+                        setCodeVal(t);
                     }
                 });
             }
 
-            function renderQrcode() {
+             function setCodeVal(t) {
+                 var code = '';
+                 if (t.is('img')) {
+                     code = t.attr('value');
+                 } else {
+                     code = t.val();
+                 }
+
+                 $("#ticketCode").html(code);
+                 setStatus(t.attr('status'));
+             }
+
+             function renderQrcode() {
                 $(".swiper-container .swiper-slide").each(function () {
                     var t = $(this).find('input:hidden').val();
                     //                      var t = $(this).html();
-                    $(this).qrcode({
-                        "size": 200,
-                        "color": "#3a3",
-                        "text": t
-                    });
+                    if (t) {
+                        $(this).qrcode({
+                            "size": 200,
+                            "color": "#3a3",
+                            "text": t
+                        });
+                    }
+                   
                 });
-                var first = $(".swiper-container .swiper-slide").eq(0).find('input:hidden');
+                var first = $(".swiper-container .swiper-slide").eq(0).children().first();
 
-                $("#ticketCode").text(first.val());
-                setStatus(first.attr('status'));
+                setCodeVal(first); 
 
             }
 
@@ -520,9 +505,7 @@
                 var status = getStatus(statusid);
                 if (status) {
                     $("#ticket_status").text(status.text);
-                    $("#ticket_status").css('color', status.css);
-                    //$("#ticket_status").removeClass();
-                    //$("#ticket_status").addClass(status.css+' pull-right item-pullleft');
+                    $("#ticket_status").css('color', status.css); 
 
                 }
 
@@ -541,15 +524,7 @@
                     clickedBtn = true;
                 }
 
-                var dingdanidnum = document.getElementById('<%= dingdanidnum.ClientID %>').value;
-                //                 var url = '../WeChatPay/WeChatPay.html?openid='
-                //                    + '  <%=openid%>&hotelid=<%=hotelid%>&roomid=<%=roomid%>' +
-                //             '&dingdanidnum=' + dingdanidnum;
-                //          var scriptsurl = getRootPath() + '/weixin/KNSHotel/js/paycallback.js';
-                //          scriptsurl = scriptsurl.replace(/\//g, "%2F").replace(/\:/g, '%3A');
-                //          url += '&scripts=' + scriptsurl;
-                //
-                //          window.location.href = url;
+                var dingdanidnum = document.getElementById('<%= dingdanidnum.ClientID %>').value; 
 
 
                 var submitData = {
@@ -559,37 +534,16 @@
                 };
                 $.post('hotel_info.ashx', submitData,
                     function (result) {
-                        if (result.IsSuccess) {
-//  document.location.href = 'hotel_order_paycallback.aspx?status=success&dingdanidnum='+dingdanidnum+
-//  '&openid=<%=openid%>&hotelid=<%=hotelid%>&roomid=<%=roomid%>';
+                        if (result.IsSuccess) { 
                       
-                            document.location.href = result.Data;
-                            //if (payResult) {
-                            //    alert(data.content);
-                            //    clearCache();
-                            //}
+                            document.location.href = result.Data; 
                         } else {
                             alert(data.content); }
                     },
                     "json");
 
 
-                //          var submitData = {
-                //
-                //              dingdanidnum: dingdanidnum,
-                //              myact: "dingdanPayed"
-                //          };
-                //          $.post('hotel_info.ashx', submitData,
-                //               function (data) {
-                //                   if (data.ret == "ok") {
-                //                       alert(data.content);
-                //
-                //                       window.location.href = "hotel_order.aspx?openid=<%=openid%>&hotelid=<%=hotelid%>&roomid=<%=roomid%>";
-                //
-                //                          } else { alert(data.content); }
-                //                      },
-                //                "json");
-
+              
                 oLay.style.display = "block";
             }
 

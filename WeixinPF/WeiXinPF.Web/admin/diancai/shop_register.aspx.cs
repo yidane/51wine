@@ -59,6 +59,7 @@ namespace WeiXinPF.Web.admin.diancai
             txtEmail.Text = model.email;
 
             rblRecommend.SelectedValue = model.Recommend.HasValue && model.Recommend.Value ? "1" : "0";
+            this.lblShopCode.Text = model.ShopCode;
         }
 
         private bool DoAdd()

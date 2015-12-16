@@ -189,7 +189,8 @@ namespace WeiXinPF.Application.DomainModules.Message
             }
         }
 
-        public ShortMsgDto GetLastNewMsg(UserManagerDto toUserDto, string fromUserId="")
+        public ShortMsgDto GetLastNewMsg(UserManagerDto toUserDto, string fromUserId="",
+            string type = "", string detailType = "")
         {
             ShortMsgDto result = null;
 
@@ -202,14 +203,18 @@ namespace WeiXinPF.Application.DomainModules.Message
                 {
                     func = c =>
                         c.MsgToUserType == (int)userType && c.IsRead == false &&
-                        (fromUserId == "" || c.FromUserId == fromUserId.ToString());
+                        (string.IsNullOrEmpty(fromUserId) || c.FromUserId == fromUserId)
+                        &&(string.IsNullOrEmpty(type) || c.Type == type)
+                        && (string.IsNullOrEmpty(detailType) || c.DetailType == detailType);
 
                 }
                 else
                 {
                     func = c =>
                         c.ToUserId == toUserDto.UserId && c.IsRead == false &&
-                        (fromUserId == "" || c.FromUserId == fromUserId.ToString());
+                        (string.IsNullOrEmpty(fromUserId) || c.FromUserId == fromUserId.ToString())
+                        && (string.IsNullOrEmpty(type) || c.Type == type)
+                        && (string.IsNullOrEmpty(detailType) || c.DetailType == detailType);
                 }
 
 
@@ -361,7 +366,8 @@ namespace WeiXinPF.Application.DomainModules.Message
                 //现在是如果不是微信用户发的，就按发送人分组
                 //是微信用户发的直接分组
                 var list = msgList.Where(c => (MsgUserType)c.MsgFromUserType
-                != MsgUserType.WeChatCustomer).GroupBy(c => c.FromUserId)
+                != MsgUserType.WeChatCustomer).GroupBy(c => 
+                new { FromUserId = c.FromUserId, Type = c.Type, DetailType = c.DetailType })
                .Select(c =>
                new
                {
@@ -374,7 +380,7 @@ namespace WeiXinPF.Application.DomainModules.Message
                     var listReslut = list.Select(c => new ShortMsgWithCountDto
                     {
                         Count = c.Count,
-                        Msg = GetLastNewMsg(toUserDto, c.Key)
+                        Msg = GetLastNewMsg(toUserDto, c.Key.FromUserId,c.Key.Type,c.Key.DetailType)
                     }).ToList();
 
                     //多个商品在商品描述上加上xx等5件商品
@@ -433,7 +439,7 @@ namespace WeiXinPF.Application.DomainModules.Message
             return result;
         }
 
-
+ 
 
 
         private UserManagerDto GetUser(string userId, MsgUserType msgUserType)
