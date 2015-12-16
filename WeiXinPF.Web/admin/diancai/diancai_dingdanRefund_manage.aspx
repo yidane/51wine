@@ -95,6 +95,7 @@
                 <td>
                     <%--<div class="rule-single-select">--%>
                     <asp:DropDownList runat="server" ID="dboRefundStatus" CssClass="select" Width="293">
+                        <asp:ListItem Text="所有状态" Value="0"></asp:ListItem>
                         <asp:ListItem Text="退款审核中" Value="3"></asp:ListItem>
                         <asp:ListItem Text="已退款" Value="4"></asp:ListItem>
                         <asp:ListItem Text="审核不通过" Value="5"></asp:ListItem>

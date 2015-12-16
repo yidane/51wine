@@ -62,7 +62,7 @@ namespace WeiXinPF.Web.admin.diancai
             if (string.IsNullOrEmpty(refundNumber))
                 this.txtRefundNo.Text = refundNumber;
             if (refundStatus > -1)
-                this.dboRefundStatus.SelectedIndex = refundStatus;
+                this.dboRefundStatus.SelectedValue = refundStatus.ToString();
             this.txtOrderNumber.Text = this.orderNumber;
             this.txtCustomerName.Text = this.customerName;
             this.txtCustomerTel.Text = this.customerTel;
@@ -165,7 +165,7 @@ namespace WeiXinPF.Web.admin.diancai
             if (!string.IsNullOrEmpty(this.txtEndDate.Text))
                 queryStringBuilder.AppendFormat("&endDate={0}", this.txtEndDate.Text);
             if (this.dboRefundStatus.SelectedIndex > -1)
-                queryStringBuilder.AppendFormat("&refundStatus={0}", this.dboRefundStatus.SelectedIndex);
+                queryStringBuilder.AppendFormat("&refundStatus={0}", this.dboRefundStatus.SelectedValue);
             queryStringBuilder.AppendFormat("&orderNumber={0}", this.txtOrderNumber.Text);
             if (!string.IsNullOrEmpty(this.txtCustomerName.Text))
                 queryStringBuilder.AppendFormat("&customerName={0}", this.txtCustomerName.Text);
