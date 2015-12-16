@@ -63,7 +63,8 @@ namespace WeiXinPF.Application.DomainModules.Message
         /// 获取最新消息
         /// </summary> 
         /// <returns></returns>
-        ShortMsgDto GetLastNewMsg(UserManagerDto toUserDto, string fromUserId = "");
+        ShortMsgDto GetLastNewMsg(UserManagerDto toUserDto, string fromUserId = "",
+            string type = "", string detailType = "");
 
         /// <summary>
         /// 阅读所有新信息

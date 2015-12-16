@@ -123,6 +123,12 @@
                 OnClientClick="return ConfirmPostBack('btnFinish', '请确认顾客已到店核销验证码，确定执行【订单完成】操作？');"
                 OnClick="btnFinish_OnClick" />
         </div>
+        
+        
+        
+        
+        
+        
 
         <input type="hidden" name="__EVENTTARGET" value="">
         <input type="hidden" name="__EVENTARGUMENT" value="">

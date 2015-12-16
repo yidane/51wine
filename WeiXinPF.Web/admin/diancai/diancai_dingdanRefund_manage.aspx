@@ -55,7 +55,7 @@
 
         <div class="location">
             <% if (IsWeiXinCode())
-               {%>
+               {%> 
             <a href="#" class="home"><i></i><span>商户或门店列表</span></a>
             <i class="arrow"></i>
             <%}%>
@@ -64,7 +64,7 @@
                {%>
 
             <%} %>
-            <span>订单管理</span>
+            <span>退单管理</span>
         </div>
         <div class="line10"></div>
         <!--/导航栏-->

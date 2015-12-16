@@ -66,9 +66,12 @@
                     <thead>
                         <tr>
                             <th>选择</th>
-                            <th>商家名称</th>
-
-                            <th>类型</th>
+                             <th>编号</th>
+                            <th>名称</th>
+                            <th>运营人</th>
+                            <th>公司电话</th>
+                            <th>公司邮箱</th>
+                            <%--<th>类型</th>--%>
                             <%--<th >查看</th>--%>
                             <th>操作</th>
                         </tr>
@@ -81,13 +84,25 @@
                         <asp:CheckBox ID="chkId" CssClass="checkall" runat="server" Style="vertical-align: middle;" />
                         <asp:HiddenField ID="hidId" Value='<%#Eval("id")%>' runat="server" />
                     </td>
+                     <td>
+                        <%# Eval("ShopCode") %>
+                    </td>
                     <td>
                         <%# Eval("hotelName") %>
                     </td>
-                    <td>
-                        <%# Eval("kcType") %>
-                        
+                     <td>
+                        <%# Eval("Operator") %>
                     </td>
+                     <td>
+                        <%# Eval("tel") %>
+                    </td>
+                     <td>
+                        <%# Eval("email") %>
+                    </td>
+<%--                    <td>--%>
+<%--                        <%# Eval("kcType") %>--%>
+<%--                        --%>
+<%--                    </td>--%>
                     <%--<td>
                      <a href="javascript:;"><%=yuming%>/weixin/diancai/index.aspx?wid=<%=wid %>&shopid=<%#Eval("id") %></a>
                     </td>--%>

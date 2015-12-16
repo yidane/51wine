@@ -27,6 +27,9 @@ namespace WeiXinPF.Infrastructure.DomainDataAccess.Message
         public string Type { get; set; }
 
         [MaxLength(128)]
+        public string DetailType { get; set; }
+
+        [MaxLength(128)]
         public string MenuType { get; set; }
 
         [Required, DefaultValue(false)]

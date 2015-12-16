@@ -201,7 +201,11 @@ namespace WeiXinPF.Web.weixin.KNSHotel
         /// <param name="wxHotelDingdan"></param>
         private void GetVerificationCode(wx_hotel_dingdan wxHotelDingdan)
         {
-            if (wxHotelDingdan.orderStatus == HotelStatusManager.OrderStatus.Payed.StatusId)
+            if (wxHotelDingdan.orderStatus == HotelStatusManager.OrderStatus.Payed.StatusId
+
+               || wxHotelDingdan.orderStatus == HotelStatusManager.OrderStatus.Refunded.StatusId ||
+                 wxHotelDingdan.orderStatus == HotelStatusManager.OrderStatus.Refunding.StatusId
+                )
             {
                 var wxHotelsInfo = new BLL.wx_hotels_info().GetModel(wxHotelDingdan.hotelid.Value);
                 var list=  IdentifyingCodeService.GetIdentifyingCodeInfoByOrderId
@@ -216,9 +220,25 @@ namespace WeiXinPF.Web.weixin.KNSHotel
                         case 0:
                         case 1:
                             showStatus = 1;
+                            if (wxHotelDingdan.orderStatus == HotelStatusManager.OrderStatus.Payed.StatusId)
+                            {
+                                VerificationCode += string.Format(@"<div class='swiper-slide swiper-image'>
+                                  <input type ='hidden' value='{0}' status='{1}' />
+                                   </div>", code.IdentifyingCode, showStatus);
+                            }
+                            else
+                            {
+                                VerificationCode += string.Format(@"<div class='swiper-slide swiper-image'>
+                                 <img class='img-ercode' src='../restaurant/images/orderRefunded.png' value='{0}' status='{1}'>
+                                   </div>", code.IdentifyingCode, showStatus);
+                            }
+                            
                             break;
                         case 2:
                             showStatus = 2;
+                            VerificationCode += string.Format(@"<div class='swiper-slide swiper-image'>
+                                 <img class='img-ercode' src='../restaurant/images/orderUsed.png' value='{0}' status='{1}'>
+                                   </div>", code.IdentifyingCode, showStatus);
                             break;
                         case 3:
                         case 4:
@@ -226,9 +246,11 @@ namespace WeiXinPF.Web.weixin.KNSHotel
                             break;
 
                     }
-                    VerificationCode += string.Format(@"<div class='swiper-slide swiper-image'>
-                                  <input type ='hidden' value='{0}' status='{1}' />
-                                   </div>", code.IdentifyingCode, showStatus);
+
+                   
+
+                   
+                   
                 }
 
                  
@@ -272,7 +294,10 @@ namespace WeiXinPF.Web.weixin.KNSHotel
         /// <param name="orderStatus"></param>
         private void ShowQRCode(int orderStatus)
         {
-            if (orderStatus== HotelStatusManager.OrderStatus.Payed.StatusId)
+            if (orderStatus== HotelStatusManager.OrderStatus.Payed.StatusId||
+                orderStatus== HotelStatusManager.OrderStatus.Refunded.StatusId ||
+                 orderStatus == HotelStatusManager.OrderStatus.Refunding.StatusId
+                )
             {
                 isShowQRCode = true;
             }

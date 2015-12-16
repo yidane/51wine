@@ -229,6 +229,7 @@ namespace WeiXinPF.Web.admin.hotel
                                 Content = String.Format("编号为[{0}]的商品[{1}]已审核通过，可以发布啦！",
                         room.RoomCode, room.roomType),
                                 Type = "HotelRoom",
+                                DetailType = "Agree",
                                 MenuType = "hotel_room",
                                 IsShowButton = true,
                                 ButtonText = "马上去发布",
@@ -298,6 +299,7 @@ namespace WeiXinPF.Web.admin.hotel
         {
             int sucCount = 0;
             int errorCount = 0;
+            var manager = GetAdminInfo();
             for (int i = 0; i < rptList.Items.Count; i++)
             {
                 int id = Convert.ToInt32(((HiddenField)rptList.Items[i].FindControl("hidId")).Value);
@@ -309,8 +311,43 @@ namespace WeiXinPF.Web.admin.hotel
 
                     try
                     {
-                        manageBll.ManageRoom(id, Model.RoomStatus.Refuse, GetAdminInfo().id, "审核不通过", "");
+                        manageBll.ManageRoom(id, Model.RoomStatus.Refuse, manager.id, "审核不通过", "");
                         sucCount += 1;
+
+
+
+                        //发送消息：审核后发送消息
+                        Model.wx_hotel_room room = roomBll.GetModel(id);
+                        BLL.wx_hotel_admin dBll = new BLL.wx_hotel_admin();
+                        Model.wx_hotel_admin hotelAdmin = null;
+                        var users = dBll.GetModelList(String.Format(" HotelId={0}", hotelid));
+                        hotelAdmin = users.FirstOrDefault();
+                        if (hotelAdmin != null)
+                        {
+                            var wxUserweixin = GetWeiXinCode();
+                            //                            var role = new BLL.manager_role().GetModel(manager.role_id);
+                            //                            var hotelsInfo = new BLL.wx_hotels_info().GetModel(hotelid);
+                            var msg = new ShortMsgDto()
+                            {
+                                Title = wxUserweixin.wxName,
+                                Content = String.Format("编号为[{0}]的商品[{1}]审核不通过，请修改后发布！",
+                        room.RoomCode, room.roomType),
+                                Type = "HotelRoom",
+                                DetailType = "Refuse",
+                                MenuType = "hotel_room",
+                                IsShowButton = true,
+                                ButtonText = "马上去修改",
+                                ButtonUrl = String.Format("/admin/hotel/hotel_room_info.aspx?action=Edit&hotelid={0}&roomid={1}",
+                   hotelid, id),
+                                ButtonMutipleUrl = "/admin/hotel/hotel_room.aspx?action=Edit",
+                               
+                                FromUserId = manager.id.ToString(),
+                                ToUserId = hotelAdmin.ManagerId.ToString(),
+                                MsgToUserType = MsgUserType.Hotel,
+                                MsgFromUserType = MsgUserType.Scenic
+                            };
+                            _shortMsgService.SendMsg(msg);
+                        }
                     }
                     catch (Exception ex)
                     {

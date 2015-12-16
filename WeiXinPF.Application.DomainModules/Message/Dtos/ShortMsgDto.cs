@@ -12,7 +12,14 @@ namespace WeiXinPF.Application.DomainModules.Message.Dtos
         public int Id { get; set; }
         public string Title { get; set; }
         public string Content { get; set; }
+        /// <summary>
+        /// 消息类型
+        /// </summary>
         public string Type { get; set; }
+        /// <summary>
+        /// 消息细类（如果有）
+        /// </summary>
+        public string DetailType { get; set; }
         public string MenuType { get; set; }
 
         public string CreateTime { get; set; }

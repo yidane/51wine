@@ -100,6 +100,7 @@ namespace WeiXinPF.Web.admin.diancai
                 this.css.Text = hotel.css;
                 this.mobile.Text = hotel.Mobile;
                 this.manager.Text = hotel.Operator;
+                this.lblShopCode.Text = hotel.ShopCode;
             }
 
             IList<Model.wx_diancai_shoppic> itemlist = iBll.GetModelList("shopid=" + shopid + " order by id asc");
