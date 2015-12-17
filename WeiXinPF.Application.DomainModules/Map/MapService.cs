@@ -120,7 +120,7 @@ namespace WeiXinPF.Application.DomainModules.Map
                     Id = m.Id,
                     Name = m.Name,
                     Introduction = m.Remark,
-                    Logo = "",
+                    Logo = GetScenicLogo(m.ScenicId),
                     Lat = m.Lat,
                     Lng = m.Lng,
                     Url = m.Url,
@@ -129,6 +129,13 @@ namespace WeiXinPF.Application.DomainModules.Map
             }
 
             return null;
+        }
+
+        private string GetScenicLogo(int scenicId)
+        {
+            var bll = new BLL.wx_travel_scenicDetail();
+            var scenic = bll.GetModel(scenicId);
+            return scenic != null ? scenic.Cover : string.Empty;
         }
 
         /// <summary>

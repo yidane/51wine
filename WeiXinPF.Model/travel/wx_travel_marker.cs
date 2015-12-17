@@ -51,5 +51,7 @@ namespace WeiXinPF.Model
         public int? extInt2 { get; set; }
 
         public bool? Recommend { get; set; }
+
+        public int ScenicId { get; set; }
     }
 }

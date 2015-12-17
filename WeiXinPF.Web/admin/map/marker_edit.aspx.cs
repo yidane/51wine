@@ -42,7 +42,8 @@ namespace WeiXinPF.Web.admin.map
                 txtUrl.Text = model.Url;
                 txtDescription.Text = model.Description;
 
-                txtAddress.Text = model.extStr1;
+                //txtAddress.Text = model.extStr1;
+                hfScenicId.Value = model.ScenicId.ToString();
                 txtLatXPoint.Text = model.Lat.ToString();
                 txtLngYPoint.Text = model.Lng.ToString();
 
@@ -66,7 +67,8 @@ namespace WeiXinPF.Web.admin.map
             model.Top = _top;
             model.Left = _left;
 
-            model.extStr1 = txtAddress.Text;
+            model.ScenicId = Convert.ToInt32(hfScenicId.Value);
+            //model.extStr1 = txtAddress.Text;
             model.Lat = Convert.ToDouble(txtLatXPoint.Text);
             model.Lng = Convert.ToDouble(txtLngYPoint.Text);
 
@@ -89,7 +91,8 @@ namespace WeiXinPF.Web.admin.map
             model.Url = txtUrl.Text;
             model.Description = txtDescription.Text;
 
-            model.extStr1 = txtAddress.Text;
+            //model.extStr1 = txtAddress.Text;
+            model.ScenicId = Convert.ToInt32(hfScenicId.Value);
 
             model.Lat = Convert.ToDouble(txtLatXPoint.Text);
             model.Lng = Convert.ToDouble(txtLngYPoint.Text);

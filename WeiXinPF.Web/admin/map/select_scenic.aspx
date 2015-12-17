@@ -81,8 +81,9 @@
                 return false;
             }
 
-            var txt = $.query.get("txt");
-            $("#" + txt, W.document).val(selectedScenic.data("url"));
+            $("#txtUrl", W.document).val(selectedScenic.data("url"));
+            $("#txtName", W.document).val(selectedScenic.data("name"));
+            $("#hfScenicId", W.document).val(selectedScenic.data("id"));
 
             api.close();
             return true;
@@ -96,7 +97,7 @@
                 <ul class="scenic-list">
             </HeaderTemplate>
             <ItemTemplate>
-                <li data-url="<%# string.Format("{0}/weixin/scenic/detail.aspx?id={1}",MyCommFun.getWebSite(), Eval("Id")) %>">
+                <li data-id="<%#Eval("Id") %>" data-name="<%#Eval("Name") %>" data-url="<%# string.Format("{0}/weixin/scenic/detail.aspx?id={1}",MyCommFun.getWebSite(), Eval("Id")) %>">
                     <img src="<%#Eval("Cover") %>" />
                     <span><%#Eval("Name") %></span>
                 </li>
