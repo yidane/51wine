@@ -19,9 +19,9 @@ namespace WeiXinPF.DAL
                 StringBuilder queryBuilder = new StringBuilder();
 
                 queryBuilder.Append("Insert Into dbo.wx_travel_marker");
-                queryBuilder.Append("   (wid,Name,Remark,[Left],[Top],Lng,Lat,Url,Description,extStr1,extStr2,extInt1,extInt2,Recommend)");
+                queryBuilder.Append("   (wid,Name,Remark,[Left],[Top],Lng,Lat,Url,Description,extStr1,extStr2,extInt1,extInt2,Recommend,ScenicId)");
                 queryBuilder.Append("Values ");
-                queryBuilder.Append("   (@wid,@Name,@Remark,@Left,@Top,@Lng,@Lat,@Url,@Description,@extStr1,@extStr2,@extInt1,@extInt2,@Recommend)");
+                queryBuilder.Append("   (@wid,@Name,@Remark,@Left,@Top,@Lng,@Lat,@Url,@Description,@extStr1,@extStr2,@extInt1,@extInt2,@Recommend,@ScenicId)");
                 queryBuilder.Append("Select @Id=Scope_Identity()");
 
                 DynamicParameters dynamicParameters = new DynamicParameters();
@@ -54,6 +54,7 @@ namespace WeiXinPF.DAL
                 queryBuilder.Append("      ,[extInt1] = @extInt1");
                 queryBuilder.Append("      ,[extInt2] = @extInt2");
                 queryBuilder.Append("      ,[Recommend] = @Recommend");
+                queryBuilder.Append("      ,[ScenicId] = @ScenicId");
                 queryBuilder.Append(" Where [Id]=@Id");
 
                 return db.Execute(queryBuilder.ToString(), model) > 0;

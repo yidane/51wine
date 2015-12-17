@@ -61,6 +61,15 @@
         </div>
         <div class="tab-content">
             <dl>
+                <dt>景点</dt>
+                <dd>
+                    <asp:HiddenField ID="hfScenicId" runat="server" />
+                    <asp:TextBox ID="txtUrl" runat="server" datatype="*2-100" CssClass="input normal" />
+                    <input id="txtSelectUrl" type="button" value="选择" class="btn" />
+                    <span class="Validform_checktip">*</span>
+                </dd>
+            </dl>
+            <dl>
                 <dt>名称</dt>
                 <dd>
                     <asp:TextBox ID="txtName" runat="server" CssClass="input normal" datatype="*2-20" sucmsg=" " />
@@ -74,33 +83,24 @@
                     <span class="Validform_checktip">*</span>
                 </dd>
             </dl>
-            <dl>
-                <dt>景点介绍</dt>
-                <dd>
-                    <asp:TextBox ID="txtUrl" runat="server" datatype="*2-100" CssClass="input normal upload-path" />
-                    <input id="txtSelectUrl" type="button" value="选择" class="btn" />
-                    <span class="Validform_checktip">*</span>
-                </dd>
-            </dl>
             <dl style="display: none">
                 <dt>引路说明</dt>
                 <dd>
                     <asp:TextBox ID="txtDescription" TextMode="MultiLine" runat="server" CssClass="input normal" />
-<%--                    <span class="Validform_checktip">*</span>--%>
                 </dd>
             </dl>
             <dl>
-                <dt>地址：</dt>
+                <dt>地图坐标：</dt>
                 <dd>
-                    <asp:TextBox runat="server" ID="txtAddress" CssClass="input normal" sucmsg=" " nullmsg=" " datatype="*1-100"></asp:TextBox>
+                    <%--<asp:TextBox runat="server" ID="txtAddress" CssClass="input normal" sucmsg=" " nullmsg=" " datatype="*1-100"></asp:TextBox>--%>
                     <span class="Validform_checktip">*请在下方地图中输入具体地点，即可获取该地点的具体坐标</span>
                 </dd>
                 <dd>纬度（x）: 
-                 <asp:TextBox ID="txtLatXPoint" runat="server" Width="200px" Text="" CssClass="input small " datatype="*1-20" sucmsg=" " nullmsg=" "></asp:TextBox>
+                    <asp:TextBox ID="txtLatXPoint" runat="server" Width="200px" Text="" CssClass="input small " datatype="*1-20" sucmsg=" " nullmsg=" "></asp:TextBox>
                     <span class="Validform_checktip">*</span>
                 </dd>
                 <dd>经度（y）:
-                      <asp:TextBox ID="txtLngYPoint" runat="server" Width="200px" Text="" CssClass="input small " datatype="*1-20" sucmsg=" " nullmsg=" "></asp:TextBox>
+                    <asp:TextBox ID="txtLngYPoint" runat="server" Width="200px" Text="" CssClass="input small " datatype="*1-20" sucmsg=" " nullmsg=" "></asp:TextBox>
                     <span class="Validform_checktip">*</span>
                 </dd>
                 <dd>
