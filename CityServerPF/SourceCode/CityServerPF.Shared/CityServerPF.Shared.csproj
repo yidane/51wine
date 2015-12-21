@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="CommonConfiguration.cs" />
     <Compile Include="ConfigErrorQueue.cs" />
+    <Compile Include="DebugFlagMutator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

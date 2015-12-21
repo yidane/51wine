@@ -66,7 +66,10 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="LaunchCommands.aspx" />
     <Content Include="packages.config" />
+    <Content Include="WebForm1.aspx" />
+    <Content Include="WebForm2.aspx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -82,11 +85,35 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="LaunchCommands.aspx.cs">
+      <DependentUpon>LaunchCommands.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LaunchCommands.aspx.designer.cs">
+      <DependentUpon>LaunchCommands.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WebForm2.aspx.cs">
+      <DependentUpon>WebForm2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForm2.aspx.designer.cs">
+      <DependentUpon>WebForm2.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CityServerPF.Messages\CityServerPF.Messages.csproj">
+      <Project>{268272fb-9011-4143-ac08-1b1d57aa7aa7}</Project>
+      <Name>CityServerPF.Messages</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CityServerPF.Shared\CityServerPF.Shared.csproj">
+      <Project>{a90d313b-28d5-4178-82b5-b1393db390cd}</Project>
+      <Name>CityServerPF.Shared</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

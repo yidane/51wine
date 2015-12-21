@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1-Client", "1-Client", "{690D6ED3-9C12-48B3-BCE9-C73D71FE9755}"
 EndProject
@@ -30,6 +30,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CityServerPF.Messages", "SourceCode\CityServerPF.Messages\CityServerPF.Messages.csproj", "{268272FB-9011-4143-AC08-1B1D57AA7AA7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CityServerPF.Shared", "SourceCode\CityServerPF.Shared\CityServerPF.Shared.csproj", "{A90D313B-28D5-4178-82B5-B1393DB390CD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Restaurant", "Restaurant", "{850CDC79-8FD8-491D-A314-728745CF2636}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CityServerPF.Server.Restautant", "SourceCode\CityServerPF.Server.Restautant\CityServerPF.Server.Restautant.csproj", "{7187FAAD-6E6F-4B87-9510-A001C309907B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -61,6 +65,10 @@ Global
 		{A90D313B-28D5-4178-82B5-B1393DB390CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A90D313B-28D5-4178-82B5-B1393DB390CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A90D313B-28D5-4178-82B5-B1393DB390CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7187FAAD-6E6F-4B87-9510-A001C309907B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7187FAAD-6E6F-4B87-9510-A001C309907B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7187FAAD-6E6F-4B87-9510-A001C309907B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7187FAAD-6E6F-4B87-9510-A001C309907B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -76,9 +84,11 @@ Global
 		{9F05BF13-D444-49C6-8659-94C2E9518C41} = {85887E06-7CDD-4FAA-B579-5D71BC452875}
 		{268272FB-9011-4143-AC08-1B1D57AA7AA7} = {A050A76D-5984-4AE3-BB63-2E33ED8AEF5A}
 		{A90D313B-28D5-4178-82B5-B1393DB390CD} = {66F360D6-3F40-40A5-BF24-A9548EDDFEBF}
+		{850CDC79-8FD8-491D-A314-728745CF2636} = {F0D2FDCF-DCD6-44D6-96D5-F967ADFE6387}
+		{7187FAAD-6E6F-4B87-9510-A001C309907B} = {850CDC79-8FD8-491D-A314-728745CF2636}
 	EndGlobalSection
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 7
+		SccNumberOfProjects = 8
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs20
 		SccLocalPath0 = .
@@ -106,5 +116,9 @@ Global
 		SccProjectTopLevelParentUniqueName6 = CityServerPF.sln
 		SccProjectName6 = SourceCode/CityServerPF.Shared
 		SccLocalPath6 = SourceCode\\CityServerPF.Shared
+		SccProjectUniqueName7 = SourceCode\\CityServerPF.Server.Restautant\\CityServerPF.Server.Restautant.csproj
+		SccProjectTopLevelParentUniqueName7 = CityServerPF.sln
+		SccProjectName7 = SourceCode/CityServerPF.Server.Restautant
+		SccLocalPath7 = SourceCode\\CityServerPF.Server.Restautant
 	EndGlobalSection
 EndGlobal

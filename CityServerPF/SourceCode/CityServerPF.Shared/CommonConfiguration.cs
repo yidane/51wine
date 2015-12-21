@@ -6,6 +6,7 @@ public static class CommonConfiguration
     {
         configuration.UseTransport<MsmqTransport>();
         configuration.UsePersistence<InMemoryPersistence>();
+        configuration.UseSerialization<JsonSerializer>();
         configuration.Conventions()
             .DefiningCommandsAs(t => t.Namespace != null && t.Namespace.StartsWith("CityServerPF") && t.Namespace.EndsWith("Commands"))
             .DefiningEventsAs(t => t.Namespace != null && t.Namespace.StartsWith("CityServerPF") && t.Namespace.EndsWith("Events"))
