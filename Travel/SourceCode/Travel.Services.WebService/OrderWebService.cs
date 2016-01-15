@@ -85,14 +85,11 @@ namespace Travel.Services.WebService
         }
 
         [WebMethod(EnableSession = true)]
-        public void MyOrders(string code)
+        public void MyOrders(string openId)
         {
-            string openId = string.Empty;
             try
             {
-                openId = GetOpenIDByCodeID(code);
-
-                if (!string.IsNullOrEmpty(openId))
+                if (IsOpenId(openId))
                 {
                     try
                     {
@@ -150,7 +147,7 @@ namespace Travel.Services.WebService
         {
             try
             {
-                var result = new OrderService().GetOrderByOrderID(new Guid(orderId));
+                var result = new OrderService().GetOrderByOrderId(new Guid(orderId));
                 Context.Response.Write(AjaxResult.Success(result));
             }
             catch (Exception exception)
@@ -212,13 +209,11 @@ namespace Travel.Services.WebService
         }
 
         [WebMethod(EnableSession = true)]
-        public void MyRefundTickets(string code)
+        public void MyRefundTickets(string openId)
         {
-            string openId = string.Empty;
             try
             {
-                openId = GetOpenIDByCodeID(code);
-                if (!string.IsNullOrEmpty(openId))
+                if (IsOpenId(openId))
                 {
                     var tickets = new OrderService().MyRefundTickets(openId);
 

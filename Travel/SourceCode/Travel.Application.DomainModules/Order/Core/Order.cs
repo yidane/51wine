@@ -330,6 +330,7 @@ namespace Travel.Application.DomainModules.Order.Core
                              WXOrderCode = string.Empty,
                              CreateTime = DateTime.Now,
                              OpenId = this.OrderRequest.OpenId,
+                             PreUseTime = this.OrderRequest.PreUseTime,
                              ContactPersonName = this.OrderRequest.ContactPersonName,
                              MobilePhoneNumber = this.OrderRequest.MobilePhoneNumber,
                              IdentityCardNumber = this.OrderRequest.IdentityCardNumber,
@@ -642,7 +643,7 @@ namespace Travel.Application.DomainModules.Order.Core
             var exLog = new ExceptionLogEntity()
             {
                 ExceptionLogId = Guid.NewGuid(),
-                Module = this.OrderObj != null ? Enum.GetName(typeof(OrderOperationStep), orderExcepion.OperationStep) + "------" + this.OrderObj.OrderCode 
+                Module = this.OrderObj != null ? Enum.GetName(typeof(OrderOperationStep), orderExcepion.OperationStep) + "------" + this.OrderObj.OrderCode
                                                 : Enum.GetName(typeof(OrderOperationStep), orderExcepion.OperationStep),
                 CreateTime = DateTime.Now,
                 ExceptionType = orderExcepion.GetType().FullName,

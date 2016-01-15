@@ -18,7 +18,7 @@ namespace Travel.Services.WebService
         /// 获取随机优惠券
         /// </summary>
         [WebMethod(EnableSession = true)]
-        public void GetRandomCoupon(string access_code)
+        public void GetRandomCoupon(string openId)
         {
 
 
@@ -26,24 +26,24 @@ namespace Travel.Services.WebService
             {
                 //string strWXUser=Context.Request.QueryString[""];
                 UserInfoDTO user = null;
-                if (!string.IsNullOrEmpty(access_code))
+                if (IsOpenId(openId))
                 {
-                    var openId = GetOpenIDByCodeID(access_code);
                     var weChatService = new WeChatService();
 
                     user = weChatService.GetUserInfo(openId);
                 }
 
-#if DEBUG          
+#if DEBUG
 
                 else
                 {
                     var url = "http://wx.qlogo.cn/mmopen/g3MonUZtNHkdmzicIlibx6iaFqAc56vxLSUfpb6n5WKSYVY0ChQKkiaJSgQ1dZuTOgvLLrhJbERQQ4eMsv84eavHiaiceqxibJxCfHe/0";
-                    url = url.Substring(0, url.LastIndexOf("/") ) + "/64";
-                    user = new UserInfoDTO() {
-                        openid= "obzTsw_PZU5Q5NZqixFi6lB2YHkI",
-                        nickname="金小西",
-                        headimgurl= url
+                    url = url.Substring(0, url.LastIndexOf("/")) + "/64";
+                    user = new UserInfoDTO()
+                    {
+                        openid = "obzTsw_PZU5Q5NZqixFi6lB2YHkI",
+                        nickname = "金小西",
+                        headimgurl = url
                     };
                 }
 #endif
@@ -122,15 +122,14 @@ namespace Travel.Services.WebService
         /// </summary>
         /// <param name="access_code"></param>
         [WebMethod(EnableSession = true)]
-        public void GetCouponList(string access_code)
+        public void GetCouponList(string openId)
         {
             try
             {
                 //string strWXUser=Context.Request.QueryString[""];
                 UserInfoDTO user = null;
-                if (!string.IsNullOrEmpty(access_code))
+                if (IsOpenId(openId))
                 {
-                    var openId = GetOpenIDByCodeID(access_code);
                     var weChatService = new WeChatService();
 
                     user = weChatService.GetUserInfo(openId);
@@ -140,11 +139,12 @@ namespace Travel.Services.WebService
                 else
                 {
                     var url = "http://wx.qlogo.cn/mmopen/g3MonUZtNHkdmzicIlibx6iaFqAc56vxLSUfpb6n5WKSYVY0ChQKkiaJSgQ1dZuTOgvLLrhJbERQQ4eMsv84eavHiaiceqxibJxCfHe/0";
-                    url = url.Substring(0, url.LastIndexOf("/") ) + "/64";
-                    user = new UserInfoDTO() {
-                        openid= "obzTsw_PZU5Q5NZqixFi6lB2YHkI",
-                        nickname="金小西",
-                        headimgurl= url
+                    url = url.Substring(0, url.LastIndexOf("/")) + "/64";
+                    user = new UserInfoDTO()
+                    {
+                        openid = "obzTsw_PZU5Q5NZqixFi6lB2YHkI",
+                        nickname = "金小西",
+                        headimgurl = url
                     };
                 }
 #endif

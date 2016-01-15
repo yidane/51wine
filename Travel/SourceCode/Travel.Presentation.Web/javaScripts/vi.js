@@ -1106,16 +1106,24 @@ VPay.prototype.order = function () {
     //参数校验
     var zName = $('#name');
     var zNameVal = zName.val();
-    if (zNameVal == "") {
+    if (zNameVal === "") {
         VI.goBottom();
         return VI.alert('姓名不能为空！');
     }
     var zPhone = $('#phone');
     var zPhoneVal = zPhone.val();
-    if (zPhoneVal == "") {
+    if (zPhoneVal === "") {
         VI.goBottom();
         return VI.alert('电话不能为空！');
     }
+
+    var preVisitTime = $('#preVisitTime');
+    var preVisitTimeVal = preVisitTime.val();
+    if (preVisitTimeVal === "") {
+        VI.goBottom();
+        return VI.alert('入园日期不能为空！');
+    }
+
     if (!(VI.regPhone.test(zPhoneVal))) {
         VI.goBottom();
         return VI.alert('电话号码错误！');
@@ -1123,7 +1131,7 @@ VPay.prototype.order = function () {
 
     var zIDCard = $('#idcard');
     var zIDCardVal = zIDCard.val();
-    if (zIDCardVal == "") {
+    if (zIDCardVal === "") {
         VI.goBottom();
         return VI.alert('身份证不能为空！');
     }
@@ -1152,7 +1160,7 @@ VPay.prototype.order = function () {
         type: "post",
         url: '../WebService/UserWebService.asmx/SaveContract',
         dataType: 'json',
-        data: { code: GetQueryString('code'), userName: zNameVal, mobile: zPhoneVal, idCard: zIDCardVal },
+        data: { openId: GetQueryString('openId'), userName: zNameVal, mobile: zPhoneVal, idCard: zIDCardVal },
         success: function () {
         }
     });
@@ -1161,7 +1169,7 @@ VPay.prototype.order = function () {
         type: "post",
         url: '../WebService/TicketWebService.asmx/CreateOrder',
         dataType: 'json',
-        data: { code: GetQueryString('code'), ticketCategoryId: ticketId, ticketName: ticketName, ticketCount: zNumVal, couponId: 0, couponCount: 0, orderNo: options.orid, contractName: zNameVal, contractPhone: zPhoneVal, contractIdCard: zIDCardVal },
+        data: { openId: GetQueryString('openId'), ticketCategoryId: ticketId, ticketName: ticketName, ticketCount: zNumVal, couponId: 0, couponCount: 0, orderNo: options.orid, contractName: zNameVal, contractPhone: zPhoneVal, contractIdCard: zIDCardVal, preUseTime: preVisitTimeVal },
         success: function (result) {
             function OrderRelease(orderId) {
                 VI.ajax({

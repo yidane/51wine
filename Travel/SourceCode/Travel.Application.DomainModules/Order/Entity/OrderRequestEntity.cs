@@ -23,5 +23,6 @@ namespace Travel.Application.DomainModules.Order.Entity
 
         public string IdentityCardNumber { get; set; }
 
+        public DateTime PreUseTime { get; set; }
     }
 }

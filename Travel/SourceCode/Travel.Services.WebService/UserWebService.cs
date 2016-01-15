@@ -12,20 +12,27 @@ namespace Travel.Services.WebService
     public class UserWebService : BaseWebService
     {
         [WebMethod(EnableSession = true)]
-        public void GetContract(string code)
+        public void GetContract(string openId)
         {
             try
             {
-                var openId = GetOpenIDByCodeID(code);
-                var contract = new UserService().GetUserContractInfo(openId);
+                if (IsOpenId(openId))
+                {
+                    var contract = new UserService().GetUserContractInfo(openId);
 
-                var result = new
+                    var result = new
                     {
                         HasValue = contract != null,
                         Value = contract
                     };
 
-                Context.Response.Write(AjaxResult.Success(result));
+                    Context.Response.Write(AjaxResult.Success(result));
+                }
+                else
+                {
+                    Context.Response.Write(AjaxResult.Error("异常参数OpenId"));
+                }
+
             }
             catch (Exception exception)
             {
@@ -34,14 +41,13 @@ namespace Travel.Services.WebService
         }
 
         [WebMethod(EnableSession = true)]
-        public void SaveContract(string code, string userName, string mobile, string idCard)
+        public void SaveContract(string openId, string userName, string mobile, string idCard)
         {
             try
             {
                 if (!(string.IsNullOrEmpty(userName) || string.IsNullOrEmpty(mobile) || string.IsNullOrEmpty(idCard)))
                 {
-                    var openId = GetOpenIDByCodeID(code);
-                    if (!string.IsNullOrEmpty(openId))
+                    if (IsOpenId(openId))
                     {
                         var contractInfo = new UserContractInfo()
                         {
@@ -58,6 +64,21 @@ namespace Travel.Services.WebService
             catch (Exception)
             {
                 //不保证每次都需要保存成功
+            }
+        }
+
+        [WebMethod]
+        public void GetOpenIdbyCode(string code)
+        {
+            try
+            {
+                var openId = GetOpenIdByCodeId(code);
+
+                Context.Response.Write(AjaxResult.Success(openId));
+            }
+            catch (Exception exception)
+            {
+                Context.Response.Write(AjaxResult.Error(exception.Message));
             }
         }
     }

@@ -1,48 +1,41 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
 using System.Web;
 using System.Web.Services;
 using Travel.Application.DomainModules.Order.Core;
 using Travel.Application.DomainModules.Order.Entity;
 using Travel.Application.DomainModules.Order.Service;
-using Travel.Application.DomainModules.WeChat;
-using Travel.Application.DomainModules.WeChat.DTOS;
 using Travel.Infrastructure.CommonFunctions.Ajax;
-using Travel.Infrastructure.WeiXin.Advanced.Pay;
-using Travel.Infrastructure.WeiXin.Advanced.Pay.Model;
 
 namespace Travel.Services.WebService
 {
     public class TicketWebService : BaseWebService
     {
         [WebMethod(EnableSession = true)]
-        public void CreateOrder(string code, string ticketCategoryId, string ticketName, int ticketCount, string couponId, int couponCount, string orderNo, string contractName, string contractPhone, string contractIdCard)
+        public void CreateOrder(string openId, string ticketCategoryId, string ticketName, int ticketCount,
+            string couponId, int couponCount, string orderNo, string contractName, string contractPhone,
+            string contractIdCard, DateTime preUseTime)
         {
             try
             {
-                var openID = GetOpenIDByCodeID(code);
-
                 while (ticketName.Contains("%"))
                 {
                     ticketName = HttpUtility.UrlDecode(ticketName);
                 }
 
-                if (!string.IsNullOrEmpty(openID))
+                if (IsOpenId(openId))
                 {
-                    var orderRequestEntity = new OrderRequestEntity()
-                        {
-                            OpenId = openID,
-                            TicketCategory = ticketCategoryId,
-                            TicketName = ticketName,
-                            Count = ticketCount,
-                            CouponId = string.Empty,
-                            ContactPersonName = contractName,
-                            MobilePhoneNumber = contractPhone,
-                            IdentityCardNumber = contractIdCard
-                        };
+                    var orderRequestEntity = new OrderRequestEntity
+                    {
+                        OpenId = openId,
+                        TicketCategory = ticketCategoryId,
+                        TicketName = ticketName,
+                        Count = ticketCount,
+                        CouponId = string.Empty,
+                        ContactPersonName = contractName,
+                        MobilePhoneNumber = contractPhone,
+                        IdentityCardNumber = contractIdCard,
+                        PreUseTime = preUseTime
+                    };
 
                     var otaOrder = new OTAOrder(orderRequestEntity);
 
@@ -54,6 +47,7 @@ namespace Travel.Services.WebService
                     var jsParameter = otaOrder.UnifiedOrderResult.GetJsApiParameters();
 
                     #region Test Code
+
                     //var jsApiPay = new JsApiPay();
                     //var unifiedOrderRequest = new UnifiedOrderRequest
                     //{
@@ -66,17 +60,18 @@ namespace Travel.Services.WebService
 
                     //var result = jsApiPay.GetUnifiedOrderResult(unifiedOrderRequest);
                     //var jsParameter = result.GetJsApiParameters();
+
                     #endregion
 
                     var result = new
-                        {
-                            appId = jsParameter.appId,
-                            timeStamp = jsParameter.timeStamp,
-                            nonceStr = jsParameter.nonceStr,
-                            package = jsParameter.package,
-                            paySign = jsParameter.paySign,
-                            orderId = otaOrder.OrderObj.OrderId
-                        };
+                    {
+                        jsParameter.appId,
+                        jsParameter.timeStamp,
+                        jsParameter.nonceStr,
+                        jsParameter.package,
+                        jsParameter.paySign,
+                        orderId = otaOrder.OrderObj.OrderId
+                    };
 
                     Context.Response.Write(AjaxResult.Success(result));
                 }
@@ -102,7 +97,6 @@ namespace Travel.Services.WebService
             }
             catch (Exception exception)
             {
-
             }
         }
     }

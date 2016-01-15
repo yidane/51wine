@@ -68,7 +68,7 @@ namespace Travel.Infrastructure.WeiXin.Test
         public void TestGetUserInfo()
         {
             var openId = "obzTsw3fdXUtoEsM9Du9LveNp5eE";
-            var result = new UserInfoHelper().GetUserInfoByOpenID(openId);
+            var result = new UserInfoHelper().GetUserInfoByOpenId(openId);
 
             Assert.IsTrue(result != null);
         }

@@ -50,7 +50,7 @@ namespace Travel.Application.DomainModules.WeChat
 
         public UserInfoDTO GetUserInfo(string openId)
         {
-            var result = new UserInfoHelper().GetUserInfoByOpenID(openId);
+            var result = new UserInfoHelper().GetUserInfoByOpenId(openId);
             return result == null ? null : new UserInfoDTO()
                 {
                     subscribe = result.subscribe,

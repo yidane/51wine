@@ -9,21 +9,10 @@ namespace Travel.Infrastructure.WeiXin.User
 {
     public class UserInfoHelper
     {
-        public UserInfo GetUserInfoByOpenID(string openId)
+        public UserInfo GetUserInfoByOpenId(string openId)
         {
-            //var credential = new Credential(WeChatAccountManager.CreateDefaultInstance());
-            //var httpHelper = new HttpHelper(WeChatUrlConfigManager.UserManager.GetUserInfoUrl);
-
-            //var formData = new FormData()
-            //    {
-            //        {"access_token",credential.AccessToken},
-            //        {"openid",openId},
-            //        {"lang","zh_CN"}
-            //    };
-
-            //var result = httpHelper.Get<UserInfo>(formData);
-
-            //return result;
+            if (string.IsNullOrEmpty(openId))
+                return null;
 
             var weChatAccountManager = WeChatAccountManager.CreateDefaultInstance();
             var token = OneGulp.WeChat.MP.CommonAPIs.CommonApi.GetToken(weChatAccountManager.AppId, weChatAccountManager.AppSecret);

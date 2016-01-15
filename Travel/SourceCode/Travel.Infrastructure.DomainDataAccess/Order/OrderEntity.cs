@@ -34,6 +34,11 @@
         public DateTime CreateTime { get; set; }
 
         /// <summary>
+        /// 预计使用时间
+        /// </summary>
+        public DateTime PreUseTime { get; set; }
+
+        /// <summary>
         /// 微信账号
         /// </summary>
         public string OpenId { get; set; }

@@ -257,6 +257,10 @@ namespace Travel.Application.DomainModules.Order.Service
             {
                 return "已使用";
             }
+            else if (order.PreUseTime < DateTime.Now)
+            {
+                return "已作废";
+            }
             else
             {
                 return string.Empty;
@@ -290,31 +294,32 @@ namespace Travel.Application.DomainModules.Order.Service
         /// </summary>
         /// <param name="orderId"></param>
         /// <returns></returns>
-        public OrderWithDetailListDTO GetOrderByOrderID(Guid orderId)
+        public OrderWithDetailListDTO GetOrderByOrderId(Guid orderId)
         {
             var order = OrderEntity.GetOrderByOrderId(orderId);
             var ticketList = TicketEntity.GetTicketsByOrderId(orderId);
-            var orderWithDetailListDTO = new OrderWithDetailListDTO()
+            var orderWithDetailListDto = new OrderWithDetailListDTO()
                 {
                     ContactPersonName = order.ContactPersonName,
                     MobilePhoneNumber = order.MobilePhoneNumber,
                     IdentityCardNumber = order.IdentityCardNumber,
                     OrderCode = order.OrderCode,
                     OrderId = order.OrderId,
-                    TicketCodeList = this.GetTicketCodeWithOrder(ticketList),
+                    TicketCodeList = this.GetTicketCodeWithOrder(ticketList, order),
                     TicketName = ProductCategoryEntity.ProductCategory.FirstOrDefault(item => item.ProductCategoryId.Equals(ticketList.First().TicketCategoryId)).ProductName,
                     PayTime = order.CreateTime.ToShortDateString(),
-                    UseRange = string.Format("{0}至{1}", order.CreateTime.ToShortDateString(), order.CreateTime.AddDays(365).ToShortDateString()),
+                    //UseRange = string.Format("{0}至{1}", order.CreateTime.ToShortDateString(), order.CreateTime.AddDays(365).ToShortDateString()),
+                    UseRange = order.PreUseTime.ToShortDateString(),
                     SinglePrice = ticketList.First().Price.ToString(),
                     TotalPrice = ticketList.Count * ticketList.First().Price
                 };
 
-            return orderWithDetailListDTO;
+            return orderWithDetailListDto;
         }
 
-        private List<TicketCode> GetTicketCodeWithOrder(ICollection<TicketEntity> tickets)
+        private List<TicketCode> GetTicketCodeWithOrder(ICollection<TicketEntity> tickets, OrderEntity orderEntity)
         {
-            var sortList = tickets.Select(GetTicketCode).ToList();
+            var sortList = tickets.Select(item => GetTicketCode(item, orderEntity)).ToList();
 
             //待使用在前
             sortList.Sort(delegate(TicketCode code1, TicketCode code2)
@@ -418,7 +423,7 @@ namespace Travel.Application.DomainModules.Order.Service
             return statusName;
         }
 
-        private TicketCode GetTicketCode(TicketEntity ticket)
+        private TicketCode GetTicketCode(TicketEntity ticket, OrderEntity orderEntity)
         {
             var ticketCode = new TicketCode();
             ticketCode.Code = ticket.ECode;
@@ -453,6 +458,14 @@ namespace Travel.Application.DomainModules.Order.Service
                 default:
                     ticketCode.StatusDesc = "退票失败";
                     break;
+            }
+
+            //判断是否过期
+            if (orderEntity.PreUseTime < DateTime.Now)
+            {
+                ticketCode.StatusDesc = "已过期";
+                ticketCode.Url = "../images/usedTicket.png";
+                ticketCode.Sort = 2;
             }
 
             return ticketCode;

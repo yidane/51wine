@@ -1,4 +1,4 @@
-﻿<!DOCTYPE HTML>
+﻿<!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="content-type" content="text/html;charset=utf-8" />
@@ -302,13 +302,13 @@
 <script src="../javaScripts/swiper.min.js"></script>
 <script src="../javaScripts/Moment.js"></script>
 <script language="javascript">
-    
+
     function GetQueryString(name) {
         var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
         var r = window.location.search.substr(1).match(reg);
         if (r != null) return r[2]; return null;
     }
-    var access_code = GetQueryString('code');
+    var openId = GetQueryString('openId');
     //加载票信息
     $(document).ready(function () {
         //计算票有效期
@@ -377,7 +377,7 @@
     var swiper = new Swiper('.swiper-container', {
         autoplay: 3000,
         loop: true,
-        pagination: '.swiper-pagination',
+        pagination: '.swiper-pagination'
     });
 
     Zepto(function ($) {

@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Travel.Application.DomainModules.WeChat;
+using Travel.Infrastructure.WeiXin.User;
 
 namespace Travel.Services.WebService
 {
     public class BaseWebService : System.Web.Services.WebService
     {
-        protected string GetOpenIDByCodeID(string code)
+        protected string GetOpenIdByCodeId(string code)
         {
             string openId;
             if (Session == null)
@@ -35,6 +36,17 @@ namespace Travel.Services.WebService
                 throw new Exception("获取OpenID失败");
 
             return openId;
+        }
+
+        /// <summary>
+        /// 判断是否OpenId
+        /// </summary>
+        /// <param name="openId"></param>
+        /// <returns></returns>
+        protected bool IsOpenId(string openId)
+        {
+            var userInfo = new UserInfoHelper().GetUserInfoByOpenId(openId);
+            return userInfo != null;
         }
 
         private string GetOpenIDFromWeChat(string code)

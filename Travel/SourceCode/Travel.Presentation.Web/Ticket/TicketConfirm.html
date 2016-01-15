@@ -1,4 +1,4 @@
-﻿<!DOCTYPE HTML>
+﻿<!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="content-type" content="text/html;charset=utf-8" />
@@ -129,6 +129,10 @@
                         <span class="gpd-right gpd-red"><span id="gpdMoney"></span>元</span>
                     </div>
                     <div class="gpd-form-group-right">
+                        <label class="gpd-left">入园日期<span class="gpd-red">*</span></label>
+                        <input type="date" id="preVisitTime" name="preVisitTime" value="" />
+                    </div>
+                    <div class="gpd-form-group-right">
                         <label class="gpd-left">姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名<span class="gpd-red">*</span></label>
                         <input type="text" id="name" name="name" value="" />
                     </div>
@@ -164,9 +168,7 @@
 <script src="../javaScripts/vi.js"></script>
 
 
-    <script type="text/javascript">
-    VI.assets_url = 'http://longmen.qqdyw.cn'; VI.base_url = 'http://longmen.qqdyw.cn'; VI.curr_site_url = 'http://longmen.qqdyw.cn/plugins/goods/front';
-
+<script type="text/javascript">
     function GetQueryString(name) {
         var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
         var r = window.location.search.substr(1).match(reg);
@@ -186,7 +188,7 @@
             url: "../WebService/UserWebService.asmx/GetContract",
             type: "post",
             dataType: "json",
-            data: { code: GetQueryString("code") },
+            data: { openId: GetQueryString("openId") },
             success: function (result) {
                 if (result.IsSuccess) {
                     if (result.Data.HasValue) {

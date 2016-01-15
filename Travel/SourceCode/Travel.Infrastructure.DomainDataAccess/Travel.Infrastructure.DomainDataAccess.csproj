@@ -154,6 +154,10 @@
     <Compile Include="Migrations\201509250321158_yidane11.Designer.cs">
       <DependentUpon>201509250321158_yidane11.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201601150709453_yidane20160115.cs" />
+    <Compile Include="Migrations\201601150709453_yidane20160115.Designer.cs">
+      <DependentUpon>201601150709453_yidane20160115.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Order\DailyProductEntity.cs" />
     <Compile Include="Order\DateTicketEntity.cs" />
@@ -264,6 +268,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201509250321158_yidane11.resx">
       <DependentUpon>201509250321158_yidane11.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601150709453_yidane20160115.resx">
+      <DependentUpon>201601150709453_yidane20160115.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
