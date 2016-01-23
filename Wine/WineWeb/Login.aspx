@@ -88,7 +88,6 @@
 
             .autBtn input {
                 width: 47px;
-                height: 18px;
                 float: left;
                 margin-right: 4px;
                 background: url(Image/button.gif) 0 0 no-repeat;
