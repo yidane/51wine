@@ -112,12 +112,19 @@ namespace Travel.Infrastructure.DomainDataAccess.Order
 
         public static bool IsDailyProductsExists()
         {
-            using (var db = new TravelDBContext())
+            if (_dailyProducts != null && _dailyProducts.Any() && _currentDate.Equals(DateTime.Now.Date))
             {
-                var today = DateTime.Now.Date;
-                var tomorrow = today.AddDays(1);
-                return db.DailyProduct.Any(item => item.SearchDate >= today && item.SearchDate < tomorrow);
+                return true;
             }
+            else
+            {
+                using (var db = new TravelDBContext())
+                {
+                    var today = DateTime.Now.Date;
+                    var tomorrow = today.AddDays(1);
+                    return db.DailyProduct.Any(item => item.SearchDate >= today && item.SearchDate < tomorrow);
+                }
+            }            
         }
 
         public static void SetDailyProducts(IList<DailyProductEntity> dailyProducts)
